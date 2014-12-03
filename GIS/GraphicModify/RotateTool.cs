@@ -161,7 +161,7 @@ namespace GIS
             ESRI.ArcGIS.Geodatabase.ISelectionSet m_selectionSet = m_featureSelection.SelectionSet;//QI到ISelectionSet
             if (m_selectionSet.Count < 1)
             {
-                MessageBox.Show("请选择要旋转的图元。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(@"请选择要旋转的图元。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DataEditCommon.g_pMyMapCtrl.CurrentTool = null;
                 return;
             }

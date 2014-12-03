@@ -185,7 +185,7 @@ namespace GIS.BasicGraphic
             pFeatureLayer = m_pCurrentLayer as IFeatureLayer;
             if (pFeatureLayer == null)
             {
-                MessageBox.Show("请选择绘制图层。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(@"请选择绘制图层。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DataEditCommon.g_pMyMapCtrl.CurrentTool = null;
                 return;
             }
@@ -193,7 +193,7 @@ namespace GIS.BasicGraphic
             {
                 if (pFeatureLayer.FeatureClass.ShapeType != esriGeometryType.esriGeometryPolyline && pFeatureLayer.FeatureClass.ShapeType != esriGeometryType.esriGeometryPolygon || pFeatureLayer.FeatureClass.FeatureType == esriFeatureType.esriFTAnnotation)
                 {
-                    MessageBox.Show("请选择线状或面状图层。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(@"请选择线状或面状图层。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     DataEditCommon.g_pMyMapCtrl.CurrentTool = null;
                     return;
                 }

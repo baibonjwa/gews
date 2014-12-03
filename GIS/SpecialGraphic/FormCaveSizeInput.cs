@@ -30,7 +30,7 @@ namespace GIS
                     CaveHeight = dHeight;
                 else
                 {
-                    MessageBox.Show("输入的高度不是有效数值!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(@"输入的高度不是有效数值!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
@@ -38,7 +38,7 @@ namespace GIS
                     CaveWidth = dWidth;
                 else
                 {
-                    MessageBox.Show("输入的宽度不是有效数值!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(@"输入的宽度不是有效数值!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
             }

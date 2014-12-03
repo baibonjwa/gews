@@ -63,7 +63,7 @@ namespace _3.GeologyMeasure
             _htSelIdxs.Clear();
 
             //调用委托
-            dataPager1.FrmChild_EventHandler += new DataPager.FrmChild_DelegateHandler(FrmParent_EventHandler);
+            dataPager1.FrmChild_EventHandler += FrmParent_EventHandler;
 
             //设置窗体属性
             LibCommon.FormDefaultPropertiesSetter.SetManagementFormDefaultProperties(this, Const_GM.COLLAPSEPILLARE_MANAGEMENT);

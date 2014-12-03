@@ -60,7 +60,7 @@ namespace _5.WarningManagement
             LibCommon.FarpointDefaultPropertiesSetter.SetFpDefaultProperties(this.fpProbeInfo, Const_GE.MANAGE_PROBE_INFO, _iRowDetailStartIndex);
 
             // 调用委托方法 （必须实装）
-            dataPager1.FrmChild_EventHandler += new DataPager.FrmChild_DelegateHandler(FrmParent_EventHandler);
+            dataPager1.FrmChild_EventHandler += FrmParent_EventHandler;
 
             // 加载探头信息
             loadProbeInfo();

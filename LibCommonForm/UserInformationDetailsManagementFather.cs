@@ -41,9 +41,9 @@ namespace LibCommonForm
         {
             //注册事件
             uidm.CloseExternal(true);
-            uidm.OnButtonClickHandle += new UserInformationDetailsManagement.OnOKButtonClick(uidm_OnButtonClickHandle);
-            uidm.OnCancleButtonClickHandle += new UserInformationDetailsManagement.OnCancleButtonClick(uidm_OnButtonClickHandle);
-            uidm.OnExiteClickHandle += new UserInformationDetailsManagement.OnExiteClick(uidm_OnButtonClickHandle);
+            uidm.OnButtonClickHandle += uidm_OnButtonClickHandle;
+            uidm.OnCancleButtonClickHandle += uidm_OnButtonClickHandle;
+            uidm.OnExiteClickHandle += uidm_OnButtonClickHandle;
 
             //设置窗体能否接收子窗体
             this.IsMdiContainer = true;

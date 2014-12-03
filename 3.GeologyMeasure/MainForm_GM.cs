@@ -97,7 +97,7 @@ namespace _3.GeologyMeasure
         {
             if (GIS.Common.DataEditCommon.hasEdit())
             {
-                if (DialogResult.Yes == MessageBox.Show("您有未保存的编辑，确定要退出系统吗?", "系统提示", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                if (DialogResult.Yes == MessageBox.Show(@"您有未保存的编辑，确定要退出系统吗?", "系统提示", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                 {
                     e.Cancel = false;
                 }
@@ -107,7 +107,7 @@ namespace _3.GeologyMeasure
                 }
                 return;
             }
-            if (DialogResult.Yes == MessageBox.Show("您确定要退出系统吗?", "系统提示", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+            if (DialogResult.Yes == MessageBox.Show(@"您确定要退出系统吗?", "系统提示", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
             {
                 e.Cancel = false;
             }

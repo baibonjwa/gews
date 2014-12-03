@@ -484,9 +484,9 @@ namespace LibCommonForm
                             //记录选中的用户组名称
                             _strUserGroupSel.Add(this._fpUserGroupInfo.ActiveSheet.Cells[e.Row, 1].Value.ToString());
                             //判断是否已全选
-                            this._chkSelAll.CheckedChanged -= new System.EventHandler(this.chkSelAll_CheckedChanged);
+                            this._chkSelAll.CheckedChanged -= this.chkSelAll_CheckedChanged;
                             this._chkSelAll.Checked = _strUserGroupSel.Count == UserGroupInformationManagementBLL.GetRecordCountFromTable() ? true : false;
-                            this._chkSelAll.CheckedChanged += new System.EventHandler(this.chkSelAll_CheckedChanged);
+                            this._chkSelAll.CheckedChanged += this.chkSelAll_CheckedChanged;
                         }
                     }
                     else
@@ -494,9 +494,9 @@ namespace LibCommonForm
                         // 移除索引号
                         _strUserGroupSel.Remove(this._fpUserGroupInfo.ActiveSheet.Cells[e.Row, 1].Value.ToString());
                         // 全选/全不选checkbox设为未选中
-                        this._chkSelAll.CheckedChanged -= new System.EventHandler(this.chkSelAll_CheckedChanged);
+                        this._chkSelAll.CheckedChanged -= this.chkSelAll_CheckedChanged;
                         this._chkSelAll.Checked = false;
-                        this._chkSelAll.CheckedChanged += new System.EventHandler(this.chkSelAll_CheckedChanged);
+                        this._chkSelAll.CheckedChanged += this.chkSelAll_CheckedChanged;
                     }
                     // 删除按钮
                     this.tsBtnDel.Enabled = (_strUserGroupSel.Count >= 1) ? true : false;

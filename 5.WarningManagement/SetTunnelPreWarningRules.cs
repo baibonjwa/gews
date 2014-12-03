@@ -79,7 +79,7 @@ namespace _5.WarningManagement
             //_selectTunnel.loadMineName();
 
             //注册事件 
-            this.selectTunnelSimple1.TunnelNameChanged += new LibCommonForm.SelectTunnelSimple.TunnelNameChangedEventHandler(TunnelNameChanged);
+            this.selectTunnelSimple1.TunnelNameChanged += TunnelNameChanged;
         }
 
         private void TunnelNameChanged(object sender, TunnelEventArgs e)
@@ -108,7 +108,7 @@ namespace _5.WarningManagement
                 _preWarningRulesPanel.ApplyParamsValues();
                 if (!_preWarningRulesPanel.UpdateTunnelBindingRuleCodeAndParamsInfo(this.selectTunnelSimple1.ITunnelId))
                 {
-                    MessageBox.Show("更新巷道绑定的规则参数失败！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(@"更新巷道绑定的规则参数失败！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
                 {

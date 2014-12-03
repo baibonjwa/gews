@@ -11,6 +11,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DevExpress.LookAndFeel;
+using DevExpress.XtraBars.Localization;
+using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraPrinting.Localization;
+
 namespace LibCommon
 {
     public class DXSeting
@@ -20,9 +24,9 @@ namespace LibCommon
         /// </summary>
         public static void floatToolsLoadSet()
         {
-            DevExpress.XtraBars.Localization.BarLocalizer.Active = new DevExpress.LocalizationCHS.DevExpressXtraBarsLocalizationCHS();
-            DevExpress.XtraEditors.Controls.Localizer.Active     = new DevExpress.LocalizationCHS.DevExpressXtraEditorsLocalizationCHS();
-            DevExpress.XtraPrinting.Localization.PreviewLocalizer.Active = new DevExpress.LocalizationCHS.DevExpressXtraPrintingLocalizationCHS();
+            DevExpress.XtraBars.Localization.BarLocalizer.Active = new BarLocalizer(); //DevExpress.LocalizationCHS.DevExpressXtraBarsLocalizationCHS();
+            DevExpress.XtraEditors.Controls.Localizer.Active = new EditResLocalizer(); //DevExpress.LocalizationCHS.DevExpressXtraEditorsLocalizationCHS();
+            DevExpress.XtraPrinting.Localization.PreviewLocalizer.Active = new PreviewLocalizer();// DevExpress.LocalizationCHS.DevExpressXtraPrintingLocalizationCHS();
         }
 
         /// <summary>
@@ -50,15 +54,15 @@ namespace LibCommon
 
     static public class DXSkineNames
     {
-        public const string DEV_EXPRESS_STYLE      = "DevExpress Style";
-        public const string OFFICE_2007_BLUE       = "Office 2007 Blue";
-        public const string CARAMEL                = "Caramel";
-        public const string MONEY_TWINS            = "Money Twins";
-        public const string LILIAN                 = "Lilian";
+        public const string DEV_EXPRESS_STYLE = "DevExpress Style";
+        public const string OFFICE_2007_BLUE = "Office 2007 Blue";
+        public const string CARAMEL = "Caramel";
+        public const string MONEY_TWINS = "Money Twins";
+        public const string LILIAN = "Lilian";
         public const string DEV_EXPRESS_DARK_STYLE = "DevExpress Dark Style";
-        public const string I_MAGINARY             = "iMaginary";
-        public const string BLACK                  = "Black";
-        public const string BLUE                   = "Blue";
+        public const string I_MAGINARY = "iMaginary";
+        public const string BLACK = "Black";
+        public const string BLUE = "Blue";
 
         static public string[] GetDXSkinNames()
         {

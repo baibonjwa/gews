@@ -180,7 +180,7 @@ namespace UnderTerminal
             //    return;
             //}
 
-            DialogResult result = MessageBox.Show("确认提交", "井下终端录入系统", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show(@"确认提交", "井下终端录入系统", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             if (result != DialogResult.OK)
             {
                 return;

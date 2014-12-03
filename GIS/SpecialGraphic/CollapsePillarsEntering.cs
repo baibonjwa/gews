@@ -593,7 +593,7 @@ namespace GIS
             IFeatureLayer featureLayer = m_pCurrentLayer as IFeatureLayer;
             if (featureLayer == null)
             {
-                MessageBox.Show("陷落柱图层丢失！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(@"陷落柱图层丢失！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DataEditCommon.g_pMyMapCtrl.CurrentTool = null;
                 return false;
             }
@@ -601,7 +601,7 @@ namespace GIS
             {
                 if (featureLayer.FeatureClass.ShapeType != esriGeometryType.esriGeometryPolygon)
                 {
-                    MessageBox.Show("陷落柱图层丢失！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(@"陷落柱图层丢失！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     DataEditCommon.g_pMyMapCtrl.CurrentTool = null;
                     return false;
                 }

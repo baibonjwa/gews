@@ -570,7 +570,7 @@ namespace LibCommonForm
         /// <param name="e"></param>
         private void tsBtnDel_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("确认要删除部门信息吗？", "提示：", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show(@"确认要删除部门信息吗？", "提示：", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 int n = GetTableRecordCount();//获取表中记录条数
                 for (int i = n - 1; i >= 0; i--)
@@ -624,9 +624,9 @@ namespace LibCommonForm
                         if (!_departmentSel.Contains(this._fpDepartmentInfo.ActiveSheet.Cells[e.Row, 1].Value.ToString()))
                         {
                             _departmentSel.Add(this._fpDepartmentInfo.ActiveSheet.Cells[e.Row, 1].Value.ToString());
-                            this._chkSelAll.CheckedChanged -= new System.EventHandler(this.chkSelAll_CheckedChanged);
+                            this._chkSelAll.CheckedChanged -= this.chkSelAll_CheckedChanged;
                             this._chkSelAll.Checked = _departmentSel.Count == DepartmentInformationManagementBLL.GetRecordCountFromTable() ? true : false;
-                            this._chkSelAll.CheckedChanged += new System.EventHandler(this.chkSelAll_CheckedChanged);
+                            this._chkSelAll.CheckedChanged += this.chkSelAll_CheckedChanged;
                         }
                     }
                     else
@@ -634,9 +634,9 @@ namespace LibCommonForm
                         // 移除索引号
                         _departmentSel.Remove(this._fpDepartmentInfo.ActiveSheet.Cells[e.Row, 1].Value.ToString());
                         // 全选/全不选checkbox设为未选中
-                        this._chkSelAll.CheckedChanged -= new System.EventHandler(this.chkSelAll_CheckedChanged);
+                        this._chkSelAll.CheckedChanged -= this.chkSelAll_CheckedChanged;
                         this._chkSelAll.Checked = false;
-                        this._chkSelAll.CheckedChanged += new System.EventHandler(this.chkSelAll_CheckedChanged);
+                        this._chkSelAll.CheckedChanged += this.chkSelAll_CheckedChanged;
                     }
                 }
                 // 删除按钮

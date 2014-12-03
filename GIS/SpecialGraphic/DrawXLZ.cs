@@ -149,7 +149,7 @@ namespace GIS.SpecialGraphic
             IFeatureLayer featureLayer = m_pCurrentLayer as IFeatureLayer;
             if (featureLayer == null)
             {
-                MessageBox.Show("ÏİÂäÖùÍ¼²ã¶ªÊ§£¡", "ÌáÊ¾", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(@"ÏİÂäÖùÍ¼²ã¶ªÊ§£¡", "ÌáÊ¾", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DataEditCommon.g_pMyMapCtrl.CurrentTool = null;
                 return;
             }
@@ -157,7 +157,7 @@ namespace GIS.SpecialGraphic
             {
                 if (featureLayer.FeatureClass.ShapeType != esriGeometryType.esriGeometryPolygon)
                 {
-                    MessageBox.Show("ÏİÂäÖùÍ¼²ã¶ªÊ§£¡", "ÌáÊ¾", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(@"ÏİÂäÖùÍ¼²ã¶ªÊ§£¡", "ÌáÊ¾", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     DataEditCommon.g_pMyMapCtrl.CurrentTool = null;
                     return;
                 }

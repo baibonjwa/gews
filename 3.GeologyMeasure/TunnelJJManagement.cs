@@ -72,7 +72,7 @@ namespace _3.GeologyMeasure
             this.MainForm = mainFrm;
             InitializeComponent();
 
-            dataPager1.FrmChild_EventHandler += new DataPager.FrmChild_DelegateHandler(FrmParent_EventHandler);
+            dataPager1.FrmChild_EventHandler += FrmParent_EventHandler;
             LibCommon.FormDefaultPropertiesSetter.SetManagementFormDefaultProperties(this, Const_GM.TUNNEL_JJ_MANAGEMENT);
             LibCommon.FarpointDefaultPropertiesSetter.SetFpDefaultProperties(fpTunnelJJInfo,
                 LibCommon.Const_GM.TUNNEL_JJ_FARPOINT_TITLE,

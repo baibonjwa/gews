@@ -84,7 +84,7 @@ namespace _2.MiningScheduling
             this.MainForm = mainFrm;
 
             //分页初始化
-            dataPager1.FrmChild_EventHandler += new DataPager.FrmChild_DelegateHandler(FrmParent_EventHandler);
+            dataPager1.FrmChild_EventHandler += FrmParent_EventHandler;
 
             //窗体属性设置
             LibCommon.FormDefaultPropertiesSetter.SetManagementFormDefaultProperties(this, Const_MS.DAY_REPORT_JJ_MANAGEMENT);
@@ -108,7 +108,7 @@ namespace _2.MiningScheduling
             this.MainForm = mainFrm;
 
             //分页初始化
-            dataPager1.FrmChild_EventHandler += new DataPager.FrmChild_DelegateHandler(FrmParent_EventHandler);
+            dataPager1.FrmChild_EventHandler += FrmParent_EventHandler;
 
             //窗体属性设置
             LibCommon.FormDefaultPropertiesSetter.SetManagementFormDefaultProperties(this, title);

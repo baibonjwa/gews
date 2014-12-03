@@ -65,7 +65,7 @@ namespace _3.GeologyMeasure
             }
             // 注册委托事件
             this.selectTunnelUserControl1.TunnelNameChanged +=
-                new LibCommonForm.SelectTunnelUserControl.TunnelNameChangedEventHandler(InheritTunnelNameChanged);
+                InheritTunnelNameChanged;
         }
 
         /// <summary>

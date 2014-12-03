@@ -133,7 +133,7 @@ namespace GIS
             m_pDongshiFeatureLayer = drawSpecialCom.GetFeatureLayerByName(layerName);
             if (m_pDongshiFeatureLayer == null)
             {
-                MessageBox.Show("当前地图上没有找到硐室图层", "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(@"当前地图上没有找到硐室图层", "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
         }
@@ -155,7 +155,7 @@ namespace GIS
             TestExistPointFeature(m_hookHelper, m_pPoint, pFeatLayer, ref pFeature);
             if (pFeature == null)
             {
-                MessageBox.Show("鼠标点击处没有巷道，请先选择一条巷道边线", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(@"鼠标点击处没有巷道，请先选择一条巷道边线", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             //IPoint hightPoint= Snapping(m_pPoint, pFeatLayer, pFeature);
@@ -186,7 +186,7 @@ namespace GIS
             }
             if (angle == -1)
             {
-                MessageBox.Show("获取巷道边界失败，请重新选择！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(@"获取巷道边界失败，请重新选择！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             //得到相应的中线

@@ -78,7 +78,7 @@ namespace UnderTerminal
             dtp.Visible = false;
             dtp.Format = DateTimePickerFormat.Custom;
             dtp.CustomFormat = Const.DATE_FORMART_H_MM_SS;
-            dtp.TextChanged += new EventHandler(dtp_TextChanged);
+            dtp.TextChanged += dtp_TextChanged;
             dgrdvSValue.Controls.Add(dtp);
         }
 
@@ -176,7 +176,7 @@ namespace UnderTerminal
         /// <param name="e"></param>
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("确认提交", "井下终端录入系统", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show(@"确认提交", "井下终端录入系统", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             if (result != DialogResult.OK)
             {
                 return;

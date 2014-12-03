@@ -59,7 +59,7 @@ namespace _5.WarningManagement
                     //清空Farpoint
                     _preWarningRulesPanel.ClearFarpointCells();
                     _preWarningRulesPanel.FillFarpointCellsWithAllRules();
-                    MessageBox.Show("导入预警规则成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(@"导入预警规则成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     //TODO:ResetTunnelRulesMsg msg = new ResetTunnelRulesMsg(Const.INVALID_ID, this.selectTunnelSimple1.ITunnelId,
                     //UsualForecastDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, DateTime.Now);
                     //this.MainForm.SendMsg2Server(msg);

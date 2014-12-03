@@ -57,7 +57,7 @@ namespace _1.GasEmission
 
             // 注册委托事件
             this.selectTunnelUserControl1.TunnelNameChanged +=
-                new LibCommonForm.SelectTunnelUserControl.TunnelNameChangedEventHandler(InheritTunnelNameChanged);
+                InheritTunnelNameChanged;
         }
 
         /// <summary>
@@ -140,7 +140,7 @@ namespace _1.GasEmission
 
             // 注册委托事件
             this.selectTunnelUserControl1.TunnelNameChanged +=
-                new LibCommonForm.SelectTunnelUserControl.TunnelNameChangedEventHandler(InheritTunnelNameChanged);
+                InheritTunnelNameChanged;
 
         }
 
@@ -228,7 +228,7 @@ namespace _1.GasEmission
 
             // 注册委托事件
             this.selectTunnelUserControl1.TunnelNameChanged +=
-                new LibCommonForm.SelectTunnelUserControl.TunnelNameChangedEventHandler(InheritTunnelNameChanged);
+                InheritTunnelNameChanged;
 
             // 设置瓦斯浓度探头数据
             setGasConcentrationProbeData(strPrimaryKey);

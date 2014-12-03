@@ -42,7 +42,7 @@ namespace _1.GasEmission
         public static string _probeId;
         /** 需要过滤的列索引 **/
         private int[] _filterColunmIdxs = null;
-        MainForm_GE mainWin;
+        MainFormGe mainWin;
         ThreadStart ts;
         Thread t;
         public BadDataDelete(MainFrm mainFrm)
@@ -50,7 +50,7 @@ namespace _1.GasEmission
             this.MainForm = mainFrm;
             InitializeComponent();
             //为了使用上个窗体的坏数据点阈值变量
-            mainWin = (MainForm_GE)mainFrm;
+            mainWin = (MainFormGe)mainFrm;
             //分配用户权限
             if (CurrentUserEnt._curLoginUserInfo.Permission != Permission.管理员.ToString())
             {
@@ -83,7 +83,7 @@ namespace _1.GasEmission
 
             // 注册委托事件
             this.selectTunnelUserControl1.TunnelNameChanged +=
-                new LibCommonForm.SelectTunnelUserControl.TunnelNameChangedEventHandler(InheritTunnelNameChanged);
+                InheritTunnelNameChanged;
 
             // 调用委托方法 （必须实装）
             //dataPager1.FrmChild_EventHandler += new DataPager.FrmChild_DelegateHandler(FrmParent_EventHandler);
@@ -210,7 +210,7 @@ namespace _1.GasEmission
             this.DialogResult = DialogResult.None;
 
             // 加载瓦斯浓度探头数据信息
-            ts = new ThreadStart(loadGasConcentrationProbeDataInfo);
+            ts = loadGasConcentrationProbeDataInfo;
             t = new Thread(ts);
             t.Start();
 
@@ -819,7 +819,7 @@ namespace _1.GasEmission
                     {
                         // 加载瓦斯浓度探头数据信息
                         //loadGasConcentrationProbeDataInfo();
-                        ts = new ThreadStart(loadGasConcentrationProbeDataInfo);
+                        ts = loadGasConcentrationProbeDataInfo;
                         t = new Thread(ts);
                         t.Start();
 

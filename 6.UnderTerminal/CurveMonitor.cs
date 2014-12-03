@@ -313,7 +313,7 @@ namespace UnderTerminal
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("确认退出监控系统", "井下终端录入系统", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show(@"确认退出监控系统", "井下终端录入系统", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             if (result == DialogResult.OK)
             {
                 this.timer1.Enabled = false;

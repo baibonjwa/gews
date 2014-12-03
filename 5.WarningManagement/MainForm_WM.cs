@@ -169,7 +169,7 @@ namespace _5.WarningManagement
         private void MainForm_WM_Load(object sender, EventArgs e)
         {
             //注册更新预警结果事件
-            _clientSocket.OnMsgUpdateWarningResult += new LibSocket.ClientSocket.UpdateWarnigResultHandler(UpdateWarningResultUI);
+            _clientSocket.OnMsgUpdateWarningResult += UpdateWarningResultUI;
             SocketMessage msg = new SocketMessage(COMMAND_ID.REGISTER_WARNING_RESULT_NOTIFICATION_ALL, DateTime.Now);
             SendMsg2Server(msg);
 
@@ -183,7 +183,7 @@ namespace _5.WarningManagement
         {
             if (GIS.Common.DataEditCommon.hasEdit())
             {
-                if (DialogResult.Yes == MessageBox.Show("您有未保存的编辑，确定要退出系统吗?", "系统提示", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                if (DialogResult.Yes == MessageBox.Show(@"您有未保存的编辑，确定要退出系统吗?", "系统提示", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                 {
                     e.Cancel = false;
                 }
@@ -193,7 +193,7 @@ namespace _5.WarningManagement
                 }
                 return;
             }
-            if (DialogResult.Yes == MessageBox.Show("您确定要退出系统吗?", "系统提示", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+            if (DialogResult.Yes == MessageBox.Show(@"您确定要退出系统吗?", "系统提示", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
             {
                 e.Cancel = false;
                 Application.ExitThread();

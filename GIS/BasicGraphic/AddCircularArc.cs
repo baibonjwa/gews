@@ -156,7 +156,7 @@ namespace GIS.BasicGraphic
             IFeatureLayer featureLayer = m_pCurrentLayer as IFeatureLayer;
             if (featureLayer == null)
             {
-                MessageBox.Show("请选择绘制图层。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(@"请选择绘制图层。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DataEditCommon.g_pMyMapCtrl.CurrentTool = null;
                 return;
             }
@@ -164,7 +164,7 @@ namespace GIS.BasicGraphic
             {
                 if (featureLayer.FeatureClass.ShapeType != esriGeometryType.esriGeometryPolyline)
                 {
-                    MessageBox.Show("请选择线状图层。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(@"请选择线状图层。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     DataEditCommon.g_pMyMapCtrl.CurrentTool = null;
                     return;
                 }

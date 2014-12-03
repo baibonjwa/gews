@@ -114,7 +114,7 @@ namespace UnderTerminal
             //ShowWindow(desk, 1);
 
             //屏蔽Ctrl+Del+Alt
-            proc = new HookHandlerDelegate(HookCallback);
+            proc = HookCallback;
             using (System.Diagnostics.Process curPro = System.Diagnostics.Process.GetCurrentProcess())
             using (System.Diagnostics.ProcessModule curMod = curPro.MainModule)
             {

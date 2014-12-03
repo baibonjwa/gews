@@ -257,7 +257,7 @@ namespace _5.WarningManagement
                 //启动语音报警程序
                 if (_chkAddPreWarningVoice.Checked)
                 {
-                    System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(SpeakerThreadFunction));
+                    System.Threading.Thread thread = new System.Threading.Thread(SpeakerThreadFunction);
                     thread.Start();
                 }
             }

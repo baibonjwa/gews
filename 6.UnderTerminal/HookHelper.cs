@@ -130,7 +130,7 @@ namespace UnderTerminal
             {
                 //   创建HookProc实例  
 
-                KeyboardHookProcedure = new HookProc(KeyboardHookProc);
+                KeyboardHookProcedure = KeyboardHookProc;
 
                 hKeyboardHook = SetWindowsHookEx(WH_KEYBOARD,
                                                  KeyboardHookProcedure,

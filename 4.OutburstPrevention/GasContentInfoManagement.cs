@@ -56,7 +56,7 @@ namespace _4.OutburstPrevention
             LibCommon.FarpointDefaultPropertiesSetter.SetFpDefaultProperties(this.fpGasContentInfo, Const_OP.MANAGE_GASCONTENT_INFO, _iRowDetailStartIndex);
 
             // 调用委托方法 （必须实装）
-            dataPager1.FrmChild_EventHandler += new DataPager.FrmChild_DelegateHandler(FrmParent_EventHandler);
+            dataPager1.FrmChild_EventHandler += FrmParent_EventHandler;
 
             // 加载瓦斯含量数据
             loadGasContentInfo();

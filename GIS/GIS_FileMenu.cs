@@ -43,7 +43,7 @@ namespace GIS
         {
             if (m_AxMapControl.LayerCount > 0)
             {
-                DialogResult result = MessageBox.Show("是否保存当前地图？", "警告",
+                DialogResult result = MessageBox.Show(@"是否保存当前地图？", "警告",
                     MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (result == DialogResult.Cancel) return;
                 if (result == DialogResult.Yes) this.Save();
@@ -64,7 +64,7 @@ namespace GIS
         {
             if (this.AxMapControl.LayerCount > 0)
             {
-                DialogResult result = MessageBox.Show("是否保存当前地图？", "警告",
+                DialogResult result = MessageBox.Show(@"是否保存当前地图？", "警告",
                     MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (result == DialogResult.Cancel) return;
                 if (result == DialogResult.Yes) this.Save();
@@ -326,7 +326,7 @@ namespace GIS
 
                     if (export == null)
                     {
-                        MessageBox.Show("请选择输出路径。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show(@"请选择输出路径。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
 
@@ -373,7 +373,7 @@ namespace GIS
             printForm.FileName = this.m_AxMapControl.DocumentFilename;
             if (this.AxMapControl.DocumentFilename == null || this.AxMapControl.DocumentFilename == "")
             {
-                MessageBox.Show("没有打印数据，请加载。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(@"没有打印数据，请加载。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             printForm.Show(); 

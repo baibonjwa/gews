@@ -80,10 +80,10 @@ namespace _1.GasEmission
 
             // 注册委托事件
             this.selectTunnelUserControl1.TunnelNameChanged +=
-                new LibCommonForm.SelectTunnelUserControl.TunnelNameChangedEventHandler(InheritTunnelNameChanged);
+                InheritTunnelNameChanged;
 
             // 调用委托方法 （必须实装）
-            dataPager1.FrmChild_EventHandler += new DataPager.FrmChild_DelegateHandler(FrmParent_EventHandler);
+            dataPager1.FrmChild_EventHandler += FrmParent_EventHandler;
 
             // 设置farpoint默认行数
             this.fpGasConcentrationProbeDataInfo.Sheets[0].Rows.Count = _iRowDetailStartIndex;
@@ -212,7 +212,7 @@ namespace _1.GasEmission
 
             // 加载瓦斯浓度探头数据信息
 
-            ThreadStart ts = new ThreadStart(loadGasConcentrationProbeDataInfo);
+            ThreadStart ts = loadGasConcentrationProbeDataInfo;
             Thread t = new Thread(ts); ;
             t.Start();
             //loadGasConcentrationProbeDataInfo();

@@ -101,7 +101,7 @@ namespace LibCommonForm
                     database.OperateDB(sqlInsert);
                 }
 
-                if (MessageBox.Show("操作成功，是否继续？","提示：",MessageBoxButtons.YesNo,MessageBoxIcon.Question)!=DialogResult.Yes)
+                if (MessageBox.Show(@"操作成功，是否继续？","提示：",MessageBoxButtons.YesNo,MessageBoxIcon.Question)!=DialogResult.Yes)
                 {
                     this.Close();
                 }                

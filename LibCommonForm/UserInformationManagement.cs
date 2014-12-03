@@ -343,9 +343,9 @@ namespace LibCommonForm
                         // 移除索引号
                         _userSel.Remove(this.fpUserInfo.ActiveSheet.Cells[e.Row, 1].Value.ToString());
                         // 全选/全不选checkbox设为未选中
-                        this.chkSelAll.CheckedChanged -= new System.EventHandler(this.chkSelAll_CheckedChanged);
+                        this.chkSelAll.CheckedChanged -= this.chkSelAll_CheckedChanged;
                         this.chkSelAll.Checked = false;
-                        this.chkSelAll.CheckedChanged += new System.EventHandler(this.chkSelAll_CheckedChanged);
+                        this.chkSelAll.CheckedChanged += this.chkSelAll_CheckedChanged;
                     }
                     // 如果保存索引号件数是1，则修改按钮设为可用，否则设为不可用
                     this.tsBtnModify.Enabled = (_userSel.Count == 1) ? true : false;
@@ -716,7 +716,7 @@ namespace LibCommonForm
 
         private void tsBtnDel_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("确认要删除用户信息吗？", "提示：", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show(@"确认要删除用户信息吗？", "提示：", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 int n = GetTableRecordCount("T_USER_INFO_MANAGEMENT");
                 for (int i = n - 1; i >= 0; i--)

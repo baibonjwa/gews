@@ -47,7 +47,7 @@ namespace _3.GeologyMeasure
             LibCommon.FarpointDefaultPropertiesSetter.SetFpDefaultProperties(this.fpProspectingLineInfo, Const_GM.MANAGE_PROSPECTING_LINE_INFO, _iRowDetailStartIndex);
 
             // 调用委托方法 （必须实装）
-            dataPager1.FrmChild_EventHandler += new DataPager.FrmChild_DelegateHandler(FrmParent_EventHandler);
+            dataPager1.FrmChild_EventHandler += FrmParent_EventHandler;
 
             // 加载勘探线信息
             loadProspectingLineInfo();

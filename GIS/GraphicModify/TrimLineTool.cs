@@ -152,7 +152,7 @@ namespace GIS
         {
             if (m_hookHelper.FocusMap.SelectionCount != 1)
             {
-                MessageBox.Show("请先选择一个参考线要素", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(@"请先选择一个参考线要素", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 GIS.GraphicEdit.FeatureSelect featSelectTool = new GraphicEdit.FeatureSelect();
                 featSelectTool.OnCreate(m_hookHelper.Hook);
                 m_pMapControl.CurrentTool = featSelectTool;
@@ -234,7 +234,7 @@ namespace GIS
             if (m_FeatureRef == null)
             {
                 m_FeatureTrim = null;
-                MessageBox.Show("请先选择裁剪线的参考线", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(@"请先选择裁剪线的参考线", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return null;
             }
             else

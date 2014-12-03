@@ -152,7 +152,7 @@ namespace LibSocket
                 {
                     Log.Debug("连接服务器成功！");
                     StopServerMsgThread();
-                    _threadServerMsg = new Thread(new ThreadStart(HandleReceivedData));
+                    _threadServerMsg = new Thread(HandleReceivedData);
                     _threadServerMsg.IsBackground = true;
                     _threadServerMsg.Start();
                 }

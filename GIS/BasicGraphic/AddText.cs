@@ -144,7 +144,7 @@ namespace GIS
             IFeatureClass pFeatureClass = pFeatureLayer.FeatureClass;
             if (pFeatureClass.FeatureType != esriFeatureType.esriFTAnnotation)
             {
-                MessageBox.Show("请选择文字注记(标注)图层。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(@"请选择文字注记(标注)图层。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DataEditCommon.g_pMyMapCtrl.CurrentTool = null;
                 return;
             }

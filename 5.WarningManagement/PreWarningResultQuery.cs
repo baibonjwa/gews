@@ -82,7 +82,7 @@ namespace _5.WarningManagement
             LibCommon.FormDefaultPropertiesSetter.SetManagementFormDefaultProperties(this, LibCommon.Const_WM.PREWARNING_RESULT_QUERY);
 
             // 调用委托方法 （必须实装）
-            dataPager1.FrmChild_EventHandler += new DataPager.FrmChild_DelegateHandler(FrmParent_EventHandler);
+            dataPager1.FrmChild_EventHandler += FrmParent_EventHandler;
 
             #region Farpoint自动过滤功能
             //初始化需要过滤功能的列
@@ -157,12 +157,12 @@ namespace _5.WarningManagement
         private void PreWarningResultQuery_Load(object sender, EventArgs e)
         {
             #region 设定默认的时间
-            this._dtpStartTime.ValueChanged -= new EventHandler(this._dtpStartTime_ValueChanged);
-            this._dtpEndTime.ValueChanged -= new EventHandler(this._dtpStartTime_ValueChanged);
+            this._dtpStartTime.ValueChanged -= this._dtpStartTime_ValueChanged;
+            this._dtpEndTime.ValueChanged -= this._dtpStartTime_ValueChanged;
             _dtpEndTime.Value = DateTime.Now;
             _dtpStartTime.Value = DateTime.Now.AddDays(-1);
-            this._dtpStartTime.ValueChanged += new EventHandler(this._dtpStartTime_ValueChanged);
-            this._dtpEndTime.ValueChanged += new EventHandler(this._dtpStartTime_ValueChanged);
+            this._dtpStartTime.ValueChanged += this._dtpStartTime_ValueChanged;
+            this._dtpEndTime.ValueChanged += this._dtpStartTime_ValueChanged;
             #endregion
 
             //加载预警类型

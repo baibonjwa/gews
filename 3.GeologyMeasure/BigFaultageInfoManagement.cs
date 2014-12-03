@@ -50,7 +50,7 @@ namespace _3.GeologyMeasure
             LibCommon.FarpointDefaultPropertiesSetter.SetFpDefaultProperties(this.fpBigFaultageInfo, Const_GM.MANAGE_BIG_FAULTAGE_INFO, _iRowDetailStartIndex);
 
             // 调用委托方法 （必须实装）
-            dataPager1.FrmChild_EventHandler += new DataPager.FrmChild_DelegateHandler(FrmParent_EventHandler);
+            dataPager1.FrmChild_EventHandler += FrmParent_EventHandler;
 
             // 加载（大）断层信息
             loadBigFaultageInfo();

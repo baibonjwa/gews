@@ -763,7 +763,7 @@ namespace _5.WarningManagement
         // 解除预警
         private void btnLiftWarning_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("确实要执行此项操作吗？", "预警处理",
+            if (MessageBox.Show(@"确实要执行此项操作吗？", "预警处理",
                 MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
                 if (this.sHandleStatus == OPERATION_ACTION)

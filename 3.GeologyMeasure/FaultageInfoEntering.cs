@@ -347,7 +347,7 @@ namespace _3.GeologyMeasure
             double dCoordinateZ = 0;
             if (!double.TryParse(this.txtCoordinateZ.Text.Trim(), out dCoordinateZ))
             {
-                MessageBox.Show("输入的Z坐标不是有效数值，请检查！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(@"输入的Z坐标不是有效数值，请检查！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             centrePt.Z = dCoordinateZ;

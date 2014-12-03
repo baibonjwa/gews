@@ -117,7 +117,7 @@ namespace _4.OutburstPrevention
             dtp.Visible = false;
             dtp.Format = DateTimePickerFormat.Custom;
             dtp.CustomFormat = Const.DATE_FORMART_H_MM_SS;
-            dtp.TextChanged += new EventHandler(dtp_TextChanged);
+            dtp.TextChanged += dtp_TextChanged;
             dgrdvK1Value.Controls.Add(dtp);
         }
 

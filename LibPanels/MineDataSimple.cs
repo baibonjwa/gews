@@ -44,7 +44,7 @@ namespace LibPanels
         {
             this.MainForm = mainFrm;
             InitializeComponent();
-            selectTunnelSimple1.TunnelNameChanged += new SelectTunnelSimple.TunnelNameChangedEventHandler(InheritTunnelNameChanged);
+            selectTunnelSimple1.TunnelNameChanged += InheritTunnelNameChanged;
 
             addInfo();
 

@@ -32,7 +32,7 @@ namespace GIS.Common
                     IPointCollection multipoint = new MultipointClass();
                     if (lstPoint.Count < 2)
                     {
-                        MessageBox.Show("请选择两个及两个以上点数。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(@"请选择两个及两个以上点数。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return;
                     }
                     ISegmentCollection pPath = new PathClass();
@@ -77,7 +77,7 @@ namespace GIS.Common
                 }
                 else
                 {
-                    MessageBox.Show("请选择线图层。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(@"请选择线图层。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch

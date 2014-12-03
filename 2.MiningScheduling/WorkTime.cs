@@ -62,7 +62,7 @@ namespace _2.MiningScheduling
             _dtp.ShowUpDown = true;
 
             //日期改变事件
-            _dtp.TextChanged += new EventHandler(dtp_TextChanged);
+            _dtp.TextChanged += dtp_TextChanged;
             dgrdvWorkTime.Controls.Add(_dtp);
 
             if (WorkTimeBLL.getDefaultWorkTime() == Const_MS.WORK_TIME_38)

@@ -105,7 +105,7 @@ namespace GIS
             set
             {
                 _MsgInfo = value;
-                _MsgInfo.FormClosing += new FormClosingEventHandler(msgInfo_FromClosing);
+                _MsgInfo.FormClosing += msgInfo_FromClosing;
             }
         }
 

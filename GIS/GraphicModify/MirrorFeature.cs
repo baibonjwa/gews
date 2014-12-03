@@ -181,7 +181,7 @@ namespace GIS
             m_selectionSet = m_featureSelection.SelectionSet;//QI到ISelectionSet
             if (m_selectionSet.Count != 1)
             {
-                MessageBox.Show("请选择一个图元再进行镜像。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(@"请选择一个图元再进行镜像。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DataEditCommon.g_pMyMapCtrl.CurrentTool = null;
                 return;
             }
@@ -220,7 +220,7 @@ namespace GIS
 
                 if (m_pFeature == null)
                 {
-                    MessageBox.Show("所选要素为空，请重新选择要素。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(@"所选要素为空，请重新选择要素。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 

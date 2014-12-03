@@ -49,7 +49,7 @@ namespace _3.GeologyMeasure
             LibCommon.FarpointDefaultPropertiesSetter.SetFpDefaultProperties(this.fpPitshaftInfo, Const_GM.MANAGE_PITSHAFT_INFO, _iRowDetailStartIndex);
 
             // 调用委托方法 （必须实装）
-            dataPager1.FrmChild_EventHandler += new DataPager.FrmChild_DelegateHandler(FrmParent_EventHandler);
+            dataPager1.FrmChild_EventHandler += FrmParent_EventHandler;
 
             // 加载井筒信息
             loadPitshaftInfo();

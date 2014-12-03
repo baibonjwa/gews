@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using DevExpress.XtraBars;
 using LibLoginForm;
 using LibCommonForm;
 using LibCommon;
@@ -22,7 +23,7 @@ namespace _1.GasEmission
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 					
-            MainForm_GE mf = new MainForm_GE();
+            MainFormGe mf = new MainFormGe(new BarButtonItem());
             LoginForm lf = new LoginForm(mf);
             Application.Run(lf);
         }

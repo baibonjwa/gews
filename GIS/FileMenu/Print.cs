@@ -149,7 +149,7 @@ namespace GIS.FileMenu
             }
 
             //文档打印页事件
-            this.m_PrintDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(document_PrintPage);
+            this.m_PrintDocument.PrintPage += document_PrintPage;
         }
 
         private void InitializePageSetupDialog()

@@ -27,10 +27,10 @@ namespace GIS.BasicGraphic
             {
                 m_axmap = value;
                 if (m_axmap == null) return;
-                m_axmap.OnMouseMove += new ESRI.ArcGIS.Controls.IMapControlEvents2_Ax_OnMouseMoveEventHandler(m_axmap_OnMouseMove);
-                m_axmap.OnExtentUpdated += new ESRI.ArcGIS.Controls.IMapControlEvents2_Ax_OnExtentUpdatedEventHandler(m_axmap_OnExtentUpdated);
-                m_axmap.OnMouseDown += new ESRI.ArcGIS.Controls.IMapControlEvents2_Ax_OnMouseDownEventHandler(m_axmap_OnMouseDown);
-                m_axmap.OnViewRefreshed += new IMapControlEvents2_Ax_OnViewRefreshedEventHandler(m_axmap_OnViewRefreshed);
+                m_axmap.OnMouseMove += m_axmap_OnMouseMove;
+                m_axmap.OnExtentUpdated += m_axmap_OnExtentUpdated;
+                m_axmap.OnMouseDown += m_axmap_OnMouseDown;
+                m_axmap.OnViewRefreshed += m_axmap_OnViewRefreshed;
                 getsnaptext();
                 angle = Math.Round(m_axmap.Rotation, 0);
                 txtRoate.Text = Math.Round(m_axmap.Rotation, 0).ToString();

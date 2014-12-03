@@ -45,7 +45,7 @@ namespace _4.OutburstPrevention
         {
             InitializeComponent();
             this.MainForm = mainFrm;
-            dataPager1.FrmChild_EventHandler += new DataPager.FrmChild_DelegateHandler(FrmParent_EventHandler);
+            dataPager1.FrmChild_EventHandler += FrmParent_EventHandler;
             LibCommon.FormDefaultPropertiesSetter.SetManagementFormDefaultProperties(this, Const_OP.S_VALUE_MANAGEMENT);
             LibCommon.FarpointDefaultPropertiesSetter.SetFpDefaultProperties(fpSValue, LibCommon.Const_OP.S_VALUE_FARPOINT_TITLE, rowDetailStartIndex);
             _filterColunmIdxs = new int[]

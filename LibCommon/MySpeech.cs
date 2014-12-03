@@ -29,7 +29,7 @@ namespace LibCommon
             try
             {
                 voice = new SpeechLib.SpVoiceClass();
-                voice.EndStream += new SpeechLib._ISpeechVoiceEvents_EndStreamEventHandler(Voice_EndStream);
+                voice.EndStream += Voice_EndStream;
 
                 SpeechLib.ISpeechObjectTokens objTokens = voice.GetVoices("", "");
                 const string useVoice = "ScanSoft Mei-Ling_Full_22kHz";

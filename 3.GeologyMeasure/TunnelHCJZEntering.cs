@@ -71,7 +71,7 @@ namespace _3.GeologyMeasure
                 this.selectWorkingFaceControl1.loadMineName();
             }
             // 注册委托事件
-            this.selectWorkingFaceControl1.WorkingFaceNameChanged += new LibCommonForm.SelectWorkingFaceControl.WorkingFaceNameChangedEventHandler(NameChangeEvent);
+            this.selectWorkingFaceControl1.WorkingFaceNameChanged += NameChangeEvent;
         }
 
         private void NameChangeEvent(object sender, WorkingFaceEventArgs e)

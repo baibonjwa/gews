@@ -43,7 +43,7 @@ namespace _2.MiningScheduling
             InitializeComponent();
 
             //※分页必须
-            dataPager1.FrmChild_EventHandler += new DataPager.FrmChild_DelegateHandler(FrmParent_EventHandler);
+            dataPager1.FrmChild_EventHandler += FrmParent_EventHandler;
 
             //窗体属性设置
             LibCommon.FormDefaultPropertiesSetter.SetManagementFormDefaultProperties(this, Const_MS.TEAM_INFO_MANAGEMENT);

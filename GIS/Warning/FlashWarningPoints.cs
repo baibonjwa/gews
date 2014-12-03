@@ -165,11 +165,11 @@ namespace GIS.Warning
             //set the update timer for the layer
             m_updateTimer = new System.Timers.Timer(60000);
             //m_updateTimer.Enabled = true;//false
-            m_updateTimer.Elapsed += new ElapsedEventHandler(OnLayerUpdateEvent);
+            m_updateTimer.Elapsed += OnLayerUpdateEvent;
 
             m_flashTimer = new System.Windows.Forms.Timer();
             m_flashTimer.Interval = m_nFlashInterval;
-            m_flashTimer.Tick += new System.EventHandler(flashTimer_Tick);
+            m_flashTimer.Tick += flashTimer_Tick;
 
             InitPointLayer();
 

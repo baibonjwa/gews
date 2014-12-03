@@ -87,7 +87,7 @@ namespace LibCommonForm
             //DataTable dt = database.ReturnDS("select * from T_USER_INFO_MANAGEMENT where USER_LOGIN_NAME = '" + name + "'").Tables[0];
             if (name == "" || UserInformationManagementBLL.FindTheSameLoginName(name))
             {
-                MessageBox.Show("登陆名不能为空且不能重复，请重新输入！", "提示：", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(@"登陆名不能为空且不能重复，请重新输入！", "提示：", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 _txtLoginName.Focus();
                 return;
             }
@@ -132,7 +132,7 @@ namespace LibCommonForm
                 return;
             }
 
-            if (MessageBox.Show("添加新用户成功，是否继续添加？", "提示：", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show(@"添加新用户成功，是否继续添加？", "提示：", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 _txtLoginName.Text = "";
                 _txtLoginName.Focus();

@@ -1,6 +1,9 @@
-﻿namespace LibCommonControl
+﻿using System.Windows.Forms;
+using DevExpress.XtraEditors;
+
+namespace LibCommonControl
 {
-    partial class MainFrm
+    partial class MainFrm : XtraForm
     {
         /// <summary>
         /// Required designer variable.

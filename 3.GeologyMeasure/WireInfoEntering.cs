@@ -75,7 +75,7 @@ namespace _3.GeologyMeasure
             }
             // 注册委托事件
             this.selectTunnelUserControl1.TunnelNameChanged +=
-                new LibCommonForm.SelectTunnelUserControl.TunnelNameChangedEventHandler(InheritTunnelNameChanged);
+                InheritTunnelNameChanged;
             ////巷道信息赋值
             //Dictionary<string, string> flds = new Dictionary<string, string>();
             //flds.Add(GIS_Const.FIELD_HDID, _tunnelID.ToString());
@@ -126,7 +126,7 @@ namespace _3.GeologyMeasure
 
             // 注册委托事件
             this.selectTunnelUserControl1.TunnelNameChanged +=
-                new LibCommonForm.SelectTunnelUserControl.TunnelNameChangedEventHandler(InheritTunnelNameChanged);
+                InheritTunnelNameChanged;
 
             //巷道信息赋值
             //Dictionary<string, string> flds = new Dictionary<string, string>();

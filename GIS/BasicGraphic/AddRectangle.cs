@@ -166,7 +166,7 @@ namespace GIS
             IFeatureLayer featureLayer = m_pCurrentLayer as IFeatureLayer;
             if (featureLayer == null)
             {
-                MessageBox.Show("请选择绘制图层。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(@"请选择绘制图层。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DataEditCommon.g_pMyMapCtrl.CurrentTool = null;
                 return;
             }
@@ -174,7 +174,7 @@ namespace GIS
             {
                 if (featureLayer.FeatureClass.ShapeType != esriGeometryType.esriGeometryPolyline && featureLayer.FeatureClass.ShapeType != esriGeometryType.esriGeometryPolygon||featureLayer.FeatureClass.FeatureType==esriFeatureType.esriFTAnnotation)
                 {
-                    MessageBox.Show("请选择线状或面状图层。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(@"请选择线状或面状图层。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     DataEditCommon.g_pMyMapCtrl.CurrentTool = null;
                     return;
                 }

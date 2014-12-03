@@ -154,7 +154,7 @@ namespace GIS.BasicGraphic
             m_featureLayer = DataEditCommon.g_pLayer as IFeatureLayer;
             if (m_featureLayer == null)
             {
-                MessageBox.Show("请选择绘制图层。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(@"请选择绘制图层。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DataEditCommon.g_pMyMapCtrl.CurrentTool = null;
                 return;
             }
@@ -162,7 +162,7 @@ namespace GIS.BasicGraphic
             {
                 if (m_featureLayer.FeatureClass.ShapeType != esriGeometryType.esriGeometryPoint)
                 {
-                    MessageBox.Show("请选择点状图层。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(@"请选择点状图层。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     DataEditCommon.g_pMyMapCtrl.CurrentTool = null;
                     return;
                 }

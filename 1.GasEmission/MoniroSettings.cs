@@ -11,8 +11,8 @@ namespace _1.GasEmission
 {
     public partial class MoniroSettings : Form
     {
-        MainForm_GE mainWin;
-        public MoniroSettings(MainForm_GE win)
+        MainFormGe mainWin;
+        public MoniroSettings(MainFormGe win)
         {
             InitializeComponent();
             mainWin = win;

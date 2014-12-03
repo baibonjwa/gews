@@ -68,7 +68,7 @@ namespace _3.GeologyMeasure
             InitializeComponent();
 
             //分页控件
-            dataPager1.FrmChild_EventHandler += new DataPager.FrmChild_DelegateHandler(FrmParent_EventHandler);
+            dataPager1.FrmChild_EventHandler += FrmParent_EventHandler;
 
             //设置窗体属性
             LibCommon.FormDefaultPropertiesSetter.SetManagementFormDefaultProperties(this, Const_GM.WIRE_INFO_MANAGEMENT);

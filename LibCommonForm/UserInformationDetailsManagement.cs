@@ -317,9 +317,9 @@ namespace LibCommonForm
                         //添加  记录用户信息
                         _userSel.Add((int)this.fpUserInformationDetails.ActiveSheet.Cells[e.Row, 1].Value);
                         //checkbox赋值前，先移除CheckedChanged事件，然后加上
-                        this.chkSelAll.CheckedChanged -= new System.EventHandler(this.chkSelAll_CheckedChanged);
+                        this.chkSelAll.CheckedChanged -= this.chkSelAll_CheckedChanged;
                         chkSelAll.Checked = (_userSel.Count == _fpRowsCount - _fpRowsTitleCount) ? true : false;
-                        this.chkSelAll.CheckedChanged += new System.EventHandler(this.chkSelAll_CheckedChanged);
+                        this.chkSelAll.CheckedChanged += this.chkSelAll_CheckedChanged;
                     }
                 }
                 else
@@ -327,9 +327,9 @@ namespace LibCommonForm
                     // 移除索引号
                     _userSel.Remove((int)this.fpUserInformationDetails.ActiveSheet.Cells[e.Row, 1].Value);
                     // 全选/全不选checkbox设为未选中
-                    this.chkSelAll.CheckedChanged -= new System.EventHandler(this.chkSelAll_CheckedChanged);
+                    this.chkSelAll.CheckedChanged -= this.chkSelAll_CheckedChanged;
                     this.chkSelAll.Checked = false;
-                    this.chkSelAll.CheckedChanged += new System.EventHandler(this.chkSelAll_CheckedChanged);
+                    this.chkSelAll.CheckedChanged += this.chkSelAll_CheckedChanged;
                 }
                 // 如果保存索引号件数是1，则修改按钮设为可用，否则设为不可用
                 this.tsBtnModify.Enabled = (_userSel.Count == 1) ? true : false;

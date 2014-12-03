@@ -59,7 +59,7 @@ namespace _3.GeologyMeasure
 
             LibCommon.FarpointDefaultPropertiesSetter.SetFpDefaultProperties(fpTunnelInfo, LibCommon.Const_GM.TUNNEL_INFO_FARPOINT_TITLE, rowDetailStartIndex);
 
-            dataPager1.FrmChild_EventHandler += new DataPager.FrmChild_DelegateHandler(FrmParent_EventHandler);
+            dataPager1.FrmChild_EventHandler += FrmParent_EventHandler;
 
             _filterColunmIdxs = new int[]
             {

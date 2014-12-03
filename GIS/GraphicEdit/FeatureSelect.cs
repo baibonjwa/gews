@@ -141,7 +141,7 @@ namespace GIS.GraphicEdit
             m_featureLayer = Common.DataEditCommon.g_pLayer as IFeatureLayer;
             if (m_featureLayer == null)
             {
-                MessageBox.Show("请选择图层。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(@"请选择图层。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Common.DataEditCommon.g_pMyMapCtrl.CurrentTool = null;
                 return;
             }

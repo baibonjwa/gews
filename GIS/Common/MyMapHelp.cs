@@ -487,7 +487,7 @@ namespace GIS
 
                 if (export == null)
                 {
-                    MessageBox.Show("请选择输出路径。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(@"请选择输出路径。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 

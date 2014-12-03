@@ -1,7 +1,13 @@
-﻿namespace _1.GasEmission
+﻿using System;
+using System.Data;
+using LibBusiness;
+
+namespace _1.GasEmission
 {
-    partial class MainForm_GE
+    partial class MainFormGe
     {
+        private const string configFileName = "sys.properties";
+
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -30,7 +36,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm_GE));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainFormGe));
             this.stateMonitor1 = new LibCommonControl.StateMonitor();
             this.ss_GE = new System.Windows.Forms.StatusStrip();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
@@ -1352,7 +1358,7 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // MainForm_GE
+            // MainFormGe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -1368,7 +1374,7 @@
             this.LookAndFeel.SkinName = "Office 2007 Blue";
             this.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat;
             this.LookAndFeel.UseDefaultLookAndFeel = false;
-            this.Name = "MainForm_GE";
+            this.Name = "MainFormGe";
             this.Text = "KJGEW110 工作面瓦斯涌出动态特征管理系统";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_GE_FormClosing);
@@ -1469,5 +1475,47 @@
         private DevExpress.XtraBars.BarButtonItem bbiBadDataEdit;
         private System.Windows.Forms.Label _lblLoading;
         private LibCommonControl.StateMonitor stateMonitor1;
+
+        /// <summary>
+        /// 添加T2瓦斯浓度平均增加值
+        /// </summary>
+        /// <param name="tChart"></param>
+        /// <param name="ds"></param>
+        private void addDataToTeeChartT2(Steema.TeeChart.TChart tChart, DataSet ds)
+        {
+            int sqlCnt = ds.Tables[0].Rows.Count;
+            double value = 0;
+            DateTime time = new DateTime();
+            double sumValue = 0;
+
+            double maxVertValue = 0;
+            double minVertValue = 0;
+
+            for (int i = 0; i < sqlCnt; i++)
+            {
+                if ((i + 1) != ds.Tables[0].Rows.Count)
+                {
+                    sumValue = sumValue +
+                               (Convert.ToDouble(ds.Tables[0].Rows[i + 1][GasConcentrationProbeDataDbConstNames.PROBE_VALUE])
+                                - Convert.ToDouble(ds.Tables[0].Rows[i][GasConcentrationProbeDataDbConstNames.PROBE_VALUE]));
+
+                    value = sumValue / (i + 1);
+                    time = Convert.ToDateTime(ds.Tables[0].Rows[i + 1][GasConcentrationProbeDataDbConstNames.RECORD_TIME]);
+
+                    if (value > maxVertValue)
+                    {
+                        maxVertValue = value;
+                    }
+
+                    if (value < minVertValue)
+                    {
+                        minVertValue = value;
+                    }
+
+                    tChart.Series[0].Add(time, value);
+                }
+            }
+            tChart.Series[0].GetVertAxis.SetMinMax(minVertValue - 1, maxVertValue + 1);
+        }
     }
 }

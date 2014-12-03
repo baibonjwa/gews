@@ -41,7 +41,7 @@ namespace UnderTerminal
 
             // 注册委托事件
             this.selectTunnelSimple1.TunnelNameChanged +=
-                new SelectTunnelSimple.TunnelNameChangedEventHandler(InheritTunnelNameChanged);
+                InheritTunnelNameChanged;
 
             lblWarning.Text = string.Empty;
 
@@ -51,16 +51,16 @@ namespace UnderTerminal
             udpServerSocket = new Socket(AddressFamily.InterNetwork,
                 SocketType.Dgram, ProtocolType.Udp);
             udpServerSocket.Bind(ep);
-            udpServerSocket.BeginReceiveFrom(buffer, 0, 1024, SocketFlags.None, ref ep, new AsyncCallback(ReceiveData), udpServerSocket);
+            udpServerSocket.BeginReceiveFrom(buffer, 0, 1024, SocketFlags.None, ref ep, ReceiveData, udpServerSocket);
 
             checkTimer.Interval = 4000;
             checkTimer.AutoReset = true;
-            checkTimer.Elapsed += new System.Timers.ElapsedEventHandler(checkTimer_Elapsed);
+            checkTimer.Elapsed += checkTimer_Elapsed;
             checkTimer.Start();
             //--------end heart beat code.-----------------------------------------------------------------------------------------------
 
             //注册更新预警结果事件
-            _clientSocket.OnMsgUpdateWarningResult += new LibSocket.ClientSocket.UpdateWarnigResultHandler(UpdateWarningResultUI);
+            _clientSocket.OnMsgUpdateWarningResult += UpdateWarningResultUI;
         }
 
         /// <summary>
@@ -214,7 +214,7 @@ namespace UnderTerminal
         {
             if (this.InvokeRequired)
             {
-                ShowDelegate sd = new ShowDelegate(UpdateWarningResultUI);
+                ShowDelegate sd = UpdateWarningResultUI;
                 lblWarning.Invoke(sd, data);
             }
             else
@@ -393,7 +393,7 @@ namespace UnderTerminal
         {
             if (btnServerStatus.InvokeRequired)
             {
-                MyDelegate sd = new MyDelegate(UpdateInfo);
+                MyDelegate sd = UpdateInfo;
                 btnServerStatus.Invoke(sd, text, color);
             }
             else
@@ -464,7 +464,7 @@ namespace UnderTerminal
             // Restart receiving
             if (!this.IsDisposed)
             {
-                udpServerSocket.BeginReceiveFrom(buffer, 0, 1024, SocketFlags.None, ref ep, new AsyncCallback(ReceiveData), udpServerSocket);
+                udpServerSocket.BeginReceiveFrom(buffer, 0, 1024, SocketFlags.None, ref ep, ReceiveData, udpServerSocket);
             }
         }
 

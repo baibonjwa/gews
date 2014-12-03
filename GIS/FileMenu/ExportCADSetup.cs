@@ -126,7 +126,7 @@ namespace GIS.FileMenu
             //设置Output_File属性
             if (this.tbOutputFile.Text == null || this.tbOutputFile.Text == "")
             {
-                MessageBox.Show("请选择输出路径。", "提示", MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                MessageBox.Show(@"请选择输出路径。", "提示", MessageBoxButtons.OK,MessageBoxIcon.Warning);
                 return;
             }
             if (System.IO.File.Exists(this.tbOutputFile.Text))
@@ -174,7 +174,7 @@ namespace GIS.FileMenu
                     }
                 }
                 //GP.Execute(GPExportCAD, null);
-                MessageBox.Show("转换完成！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(@"转换完成！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }
             catch(Exception ex) 

@@ -47,7 +47,7 @@ namespace UnderTerminal
             this.selectTunnelUserControl1.loadMineName();
 
             // 注册委托事件
-            this.selectTunnelUserControl1.TunnelNameChanged += new SelectTunnelUserControl.TunnelNameChangedEventHandler(InheritTunnelNameChanged);
+            this.selectTunnelUserControl1.TunnelNameChanged += InheritTunnelNameChanged;
         }
 
         /// <summary>

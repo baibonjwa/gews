@@ -48,7 +48,7 @@ namespace _4.OutburstPrevention
 
             this.MainForm = mainFrm;
 
-            dataPager1.FrmChild_EventHandler += new DataPager.FrmChild_DelegateHandler(FrmParent_EventHandler);
+            dataPager1.FrmChild_EventHandler += FrmParent_EventHandler;
 
             LibCommon.FormDefaultPropertiesSetter.SetManagementFormDefaultProperties(this, Const_OP.K1_VALUE_MANAGEMENT);
 

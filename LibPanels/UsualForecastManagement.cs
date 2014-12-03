@@ -29,7 +29,7 @@ namespace LibPanels
 
             this.MainForm = mainFrm;
 
-            dataPager1.FrmChild_EventHandler += new DataPager.FrmChild_DelegateHandler(FrmParent_EventHandler);
+            dataPager1.FrmChild_EventHandler += FrmParent_EventHandler;
         }
         //***********************************
 
@@ -351,7 +351,7 @@ namespace LibPanels
 
         private void tsBtnDel_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("确定要删除所选内容吗？", "确定", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show(@"确定要删除所选内容吗？", "确定", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
 
             if (result == DialogResult.OK)
             {

@@ -114,7 +114,7 @@ namespace LibCommonControl
             // Restart receiving
             if (!this.IsDisposed)
             {
-                udpServerSocket.BeginReceiveFrom(buffer, 0, 1024, SocketFlags.None, ref ep, new AsyncCallback(ReceiveData), udpServerSocket);
+                udpServerSocket.BeginReceiveFrom(buffer, 0, 1024, SocketFlags.None, ref ep, ReceiveData, udpServerSocket);
             }
         }
 
@@ -134,11 +134,11 @@ namespace LibCommonControl
             udpServerSocket = new Socket(AddressFamily.InterNetwork,
               SocketType.Dgram, ProtocolType.Udp);
             udpServerSocket.Bind(ep);
-            udpServerSocket.BeginReceiveFrom(buffer, 0, 1024, SocketFlags.None, ref ep, new AsyncCallback(ReceiveData), udpServerSocket);
+            udpServerSocket.BeginReceiveFrom(buffer, 0, 1024, SocketFlags.None, ref ep, ReceiveData, udpServerSocket);
 
             checkTimer.Interval = 4000;
             checkTimer.AutoReset = true;
-            checkTimer.Elapsed += new System.Timers.ElapsedEventHandler(checkTimer_Elapsed);
+            checkTimer.Elapsed += checkTimer_Elapsed;
             checkTimer.Start();
         }
 

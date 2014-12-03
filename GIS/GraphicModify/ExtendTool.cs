@@ -110,7 +110,7 @@ namespace GIS
             m_MouseDownCount = 0;
             if (m_hookHelper.FocusMap.SelectionCount != 1)
             {
-                MessageBox.Show("请先选择一个参考线要素", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(@"请先选择一个参考线要素", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -148,7 +148,7 @@ namespace GIS
                         }
                         else
                         {
-                            MessageBox.Show("无法将当前所选线要素延伸到参考线", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show(@"无法将当前所选线要素延伸到参考线", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                 }
@@ -256,7 +256,7 @@ namespace GIS
             {
                 m_MouseDownCount = 0;
                 m_FeatureExtend = null;
-                MessageBox.Show("请先选择延伸线的参考线", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(@"请先选择延伸线的参考线", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return null;
             }
             else
@@ -270,7 +270,7 @@ namespace GIS
                         return feature;
                     feature = enumFeature.Next();
                 }
-                MessageBox.Show("请选择需要延伸的线要素", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(@"请选择需要延伸的线要素", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return null;
             }
         }

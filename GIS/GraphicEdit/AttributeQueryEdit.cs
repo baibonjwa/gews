@@ -189,7 +189,7 @@ namespace GIS
                 //20140216 lyf 没有选中图元情况处理
                 if (pArray == null)
                 {
-                    MessageBox.Show("未选中当前图层的图元！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(@"未选中当前图层的图元！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     //continue;
                     return;
                 }

@@ -65,7 +65,7 @@ namespace _2.MiningScheduling
             dgrdvDayReportHC.Controls.Add(dtp);   //把时间控件加入DataGridView
             dtp.Visible = false;   //先不让它显示
             dtp.Format = DateTimePickerFormat.Custom;   //设置日期格式为2010-08-05
-            dtp.TextChanged += new EventHandler(dtp_TextChange); //为时间控件加入事件dtp_TextChange
+            dtp.TextChanged += dtp_TextChange; //为时间控件加入事件dtp_TextChange
             this.dgrdvDayReportHC.DataError += delegate(object sender, DataGridViewDataErrorEventArgs e) { };
 
             this.MainForm = frm;
@@ -155,7 +155,7 @@ namespace _2.MiningScheduling
             dgrdvDayReportHC.Controls.Add(dtp);   //把时间控件加入DataGridView
             dtp.Visible = false;   //先不让它显示
             dtp.Format = DateTimePickerFormat.Custom;   //设置日期格式为2010-08-05
-            dtp.TextChanged += new EventHandler(dtp_TextChange); //为时间控件加入事件dtp_TextChange
+            dtp.TextChanged += dtp_TextChange; //为时间控件加入事件dtp_TextChange
             this.dgrdvDayReportHC.DataError += delegate(object sender, DataGridViewDataErrorEventArgs e) { };
         }
 
