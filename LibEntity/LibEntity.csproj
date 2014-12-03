@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{28C303D9-18CB-42B3-B0FA-B9B126503176}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LibEntity</RootNamespace>
+    <AssemblyName>LibEntity</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Debug\LibEntity.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Release\LibEntity.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="1.GasEmmisionEnt\CoalExistenceEntity.cs" />
+    <Compile Include="1.GasEmmisionEnt\MineDataEntity.cs" />
+    <Compile Include="1.GasEmmisionEnt\ProbeTypeEntity.cs" />
+    <Compile Include="1.GasEmmisionEnt\VentilationInfoEntity.cs" />
+    <Compile Include="2.MiningSchedulingEnt\DayReportEntity.cs" />
+    <Compile Include="2.MiningSchedulingEnt\DayReportHCEntity.cs" />
+    <Compile Include="2.MiningSchedulingEnt\GeologySpaceEntity.cs" />
+    <Compile Include="2.MiningSchedulingEnt\JiaZhengEntity.cs" />
+    <Compile Include="2.MiningSchedulingEnt\StopLineEntity.cs" />
+    <Compile Include="2.MiningSchedulingEnt\WorkingTimeEnt.cs" />
+    <Compile Include="3.GeologyMeasureEnt\BoreholeEntity.cs" />
+    <Compile Include="3.GeologyMeasureEnt\BoreholeLithologyEntity.cs" />
+    <Compile Include="3.GeologyMeasureEnt\CollapsePillarsEnt.cs" />
+    <Compile Include="3.GeologyMeasureEnt\CollapsePillarsEntity.cs" />
+    <Compile Include="2.MiningSchedulingEnt\DayReportJJEntity.cs" />
+    <Compile Include="3.GeologyMeasureEnt\CoordinateEntity.cs" />
+    <Compile Include="3.GeologyMeasureEnt\BigFaultagePointEntity.cs" />
+    <Compile Include="3.GeologyMeasureEnt\histogramEnt.cs" />
+    <Compile Include="3.GeologyMeasureEnt\TunnelHChuanEntity.cs" />
+    <Compile Include="4.OutburstPreventionEnt\GeologicStructureEntity.cs" />
+    <Compile Include="5.WaningManagementEnt\EarlyWarningResultEntity.cs" />
+    <Compile Include="5.WaningManagementEnt\PojoEntity.cs" />
+    <Compile Include="5.WaningManagementEnt\PreWarningAnalysisResultEnt.cs" />
+    <Compile Include="5.WaningManagementEnt\PreWarningHistoryResultQueryEnt.cs" />
+    <Compile Include="5.WaningManagementEnt\PreWarningResultQueryEnt.cs" />
+    <Compile Include="5.WaningManagementEnt\PreWarningResultQueryWithWorkingfaceEnt.cs" />
+    <Compile Include="5.WaningManagementEnt\RuleInfo.cs" />
+    <Compile Include="5.WaningManagementEnt\WarningImgEnt.cs" />
+    <Compile Include="5.WaningManagementEnt\WarningResultDetailEntity.cs" />
+    <Compile Include="5.WaningManagementEnt\WarningResultEnt.cs" />
+    <Compile Include="CommonEnt\CoalSeamsEntity.cs" />
+    <Compile Include="3.GeologyMeasureEnt\PitshaftTypeEntity.cs" />
+    <Compile Include="3.GeologyMeasureEnt\PitshaftEntity.cs" />
+    <Compile Include="3.GeologyMeasureEnt\ProspectingLineEntity.cs" />
+    <Compile Include="3.GeologyMeasureEnt\WorkingFaceEntity.cs" />
+    <Compile Include="3.GeologyMeasureEnt\MiningAreaEntity.cs" />
+    <Compile Include="3.GeologyMeasureEnt\HorizontalEntity.cs" />
+    <Compile Include="3.GeologyMeasureEnt\MineEntity.cs" />
+    <Compile Include="3.GeologyMeasureEnt\FaultageEntity.cs" />
+    <Compile Include="1.GasEmmisionEnt\GasConcentrationProbeDataEntity.cs" />
+    <Compile Include="1.GasEmmisionEnt\ProbeManageEntity.cs" />
+    <Compile Include="3.GeologyMeasureEnt\LithologyEntity.cs" />
+    <Compile Include="3.GeologyMeasureEnt\TunnelPointsCalculation.cs" />
+    <Compile Include="4.OutburstPreventionEnt\GasContentEntity.cs" />
+    <Compile Include="4.OutburstPreventionEnt\GasDataEntity.cs" />
+    <Compile Include="4.OutburstPreventionEnt\GasPressureEntity.cs" />
+    <Compile Include="4.OutburstPreventionEnt\ManagementEntity.cs" />
+    <Compile Include="4.OutburstPreventionEnt\GasGushQuantityEntity.cs" />
+    <Compile Include="4.OutburstPreventionEnt\SValueEntity.cs" />
+    <Compile Include="4.OutburstPreventionEnt\UsualForecastEntity.cs" />
+    <Compile Include="4.OutburstPreventionEnt\K1ValueEntity.cs" />
+    <Compile Include="5.WaningManagementEnt\BindingTableEntity.cs" />
+    <Compile Include="CommonEnt\CurrentUserEnt.cs" />
+    <Compile Include="CommonEnt\DepartmentInformationEntity.cs" />
+    <Compile Include="5.WaningManagementEnt\PreWarningResultTableEntityUnit.cs" />
+    <Compile Include="5.WaningManagementEnt\PreWarningResultEntityUserLevel.cs" />
+    <Compile Include="5.WaningManagementEnt\DataTblAndBindingTblInfoEntity.cs" />
+    <Compile Include="5.WaningManagementEnt\PreWarningDataCommonInfoEntity.cs" />
+    <Compile Include="5.WaningManagementEnt\PreWarningResultTableEntity.cs" />
+    <Compile Include="5.WaningManagementEnt\PreWarningResultEntityUserLevelUnit.cs" />
+    <Compile Include="5.WaningManagementEnt\PreWarningReason.cs" />
+    <Compile Include="5.WaningManagementEnt\PreWarningResultEntity.cs" />
+    <Compile Include="5.WaningManagementEnt\PreWarningRulesEntity.cs" />
+    <Compile Include="CommonEnt\PowerCodeEntity.cs" />
+    <Compile Include="CommonEnt\RoleEntity.cs" />
+    <Compile Include="CommonEnt\TunnelDefaultSelectEntity.cs" />
+    <Compile Include="CommonEnt\UserGroupInformationManagementEntity.cs" />
+    <Compile Include="CommonEnt\UserInformationDetailsEnt.cs" />
+    <Compile Include="CommonEnt\UserInformationManagementEntity.cs" />
+    <Compile Include="CommonEnt\UserLoginInformationEnt.cs" />
+    <Compile Include="CommonEnt\WorkingFaceSelectEntity.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="3.GeologyMeasureEnt\TunnelEntity.cs" />
+    <Compile Include="3.GeologyMeasureEnt\WireInfoEntity.cs" />
+    <Compile Include="3.GeologyMeasureEnt\BigFaultageEntity.cs" />
+    <Compile Include="3.GeologyMeasureEnt\WirePointInfoEntity.cs" />
+    <Compile Include="2.MiningSchedulingEnt\TeamMemberInfoEntity.cs" />
+    <Compile Include="TunnelTypeEnum.cs" />
+    <Compile Include="WorkingfaceTypeEnum.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="2.MiningSchedulingEnt\TeamInfoEntity.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LibCommon\LibCommon.csproj">
+      <Project>{2EBCDE4B-A244-4CCA-A1AE-1A884D81772B}</Project>
+      <Name>LibCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LibGeometry\LibGeometry.csproj">
+      <Project>{a55911aa-ac2b-4c4f-aa2a-ce839bd9afba}</Project>
+      <Name>LibGeometry</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
