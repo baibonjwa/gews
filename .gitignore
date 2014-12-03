@@ -19,6 +19,7 @@ build/
 [Tt]est[Rr]esult/
 [Bb]uild[Ll]og.*
 
+internalrefs/
 
 *.mdb  
 *.ldb  
