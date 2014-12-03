@@ -47,16 +47,16 @@ Section "核心文件 (必需)"
   SetOutPath $INSTDIR\sys1
   
   ; Put file there
-  File "sys1\sys1.txt"
+  ; File "rsys1\*.*"
   
   ; Write the installation path into the registry
-  WriteRegStr HKLM SOFTWARE\Gews\sys1 "Install_Dir" "$INSTDIR\sys1"
+  ; WriteRegStr HKLM SOFTWARE\Gews\sys1 "Install_Dir" "$INSTDIR\sys1"
   
   ; Write the uninstall keys for Windows
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Gews" "DisplayName" "Gews"
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Gews" "UninstallString" '"$INSTDIR\uninstall.exe"'
-  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Gews" "NoModify" 1
-  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Gews" "NoRepair" 1
+  ; WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Gews" "DisplayName" "Gews"
+  ; WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Gews" "UninstallString" '"$INSTDIR\uninstall.exe"'
+  ; WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Gews" "NoModify" 1
+  ; WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Gews" "NoRepair" 1
   WriteUninstaller "uninstall.exe"
   
 SectionEnd
@@ -69,7 +69,7 @@ Section "工作面瓦斯涌出动态特征管理系统"
   SetOutPath $INSTDIR\sys1
   
   ; Put file there
-  File "sys1\sys1.txt"
+  File "rsys1\*.*"
   
   ; Write the installation path into the registry
   WriteRegStr HKLM SOFTWARE\Gews\sys1 "Install_Dir" "$INSTDIR\sys1"
@@ -88,10 +88,10 @@ Section "工作面采掘进度管理系统帮助文件"
   ;SectionIn RO
   
   ; Set output path to the installation directory.
-  SetOutPath $INSTDIR\sys1
+  SetOutPath $INSTDIR\sys2
   
   ; Put file there
-  File "sys1\sys1.txt"
+  File "rsys2\*.*"
   
   ; Write the installation path into the registry
   WriteRegStr HKLM SOFTWARE\Gews\sys1 "Install_Dir" "$INSTDIR\sys1"
@@ -110,10 +110,10 @@ Section "工作面地质测量管理系统"
   ;SectionIn RO
   
   ; Set output path to the installation directory.
-  SetOutPath $INSTDIR\sys1
+  SetOutPath $INSTDIR\sys3
   
   ; Put file there
-  File "sys1\sys1.txt"
+  File "rsys3\*.*"
   
   ; Write the installation path into the registry
   WriteRegStr HKLM SOFTWARE\Gews\sys1 "Install_Dir" "$INSTDIR\sys1"
@@ -132,10 +132,10 @@ Section "工作面动态防突管理系统帮助文件"
   ;SectionIn RO
   
   ; Set output path to the installation directory.
-  SetOutPath $INSTDIR\sys1
+  SetOutPath $INSTDIR\sys4
   
   ; Put file there
-  File "sys1\sys1.txt"
+  File "rsys4\*.*"
   
   ; Write the installation path into the registry
   WriteRegStr HKLM SOFTWARE\Gews\sys1 "Install_Dir" "$INSTDIR\sys1"
@@ -154,10 +154,10 @@ Section "瓦斯预警系统管理平台"
   ;SectionIn RO
   
   ; Set output path to the installation directory.
-  SetOutPath $INSTDIR\sys1
+  SetOutPath $INSTDIR\sys5
   
   ; Put file there
-  File "sys1\sys1.txt"
+  File "rsys5\*.*"
   
   ; Write the installation path into the registry
   WriteRegStr HKLM SOFTWARE\Gews\sys1 "Install_Dir" "$INSTDIR\sys1"
