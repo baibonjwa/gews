@@ -1235,22 +1235,25 @@ namespace _1.GasEmission
         /// <returns></returns>
         private DataSet getHistoryData(string probeId, string startTime, string endTime)
         {
-            StringBuilder sqlStr = new StringBuilder();
-            sqlStr.Append("SELECT ");
-            sqlStr.Append("* ");
-            sqlStr.Append("FROM ");
-            sqlStr.Append(GasConcentrationProbeDataDbConstNames.TABLE_NAME + " ");
-            sqlStr.Append("WHERE ");
-            sqlStr.Append(GasConcentrationProbeDataDbConstNames.PROBE_ID + " = " + probeId + " ");
-            sqlStr.Append("AND ");
-            sqlStr.Append(GasConcentrationProbeDataDbConstNames.RECORD_TIME + " >= '" + startTime + "' ");
-            sqlStr.Append("AND ");
-            sqlStr.Append(GasConcentrationProbeDataDbConstNames.RECORD_TIME + " <= '" + endTime + "' ");
-            sqlStr.Append("ORDER BY RECORD_TIME ");
+            DataSet ds = new DataSet();
+            if (!String.IsNullOrEmpty(probeId))
+            {
+                StringBuilder sqlStr = new StringBuilder();
+                sqlStr.Append("SELECT ");
+                sqlStr.Append("* ");
+                sqlStr.Append("FROM ");
+                sqlStr.Append(GasConcentrationProbeDataDbConstNames.TABLE_NAME + " ");
+                sqlStr.Append("WHERE ");
+                sqlStr.Append(GasConcentrationProbeDataDbConstNames.PROBE_ID + " = " + probeId + " ");
+                sqlStr.Append("AND ");
+                sqlStr.Append(GasConcentrationProbeDataDbConstNames.RECORD_TIME + " >= '" + startTime + "' ");
+                sqlStr.Append("AND ");
+                sqlStr.Append(GasConcentrationProbeDataDbConstNames.RECORD_TIME + " <= '" + endTime + "' ");
+                sqlStr.Append("ORDER BY RECORD_TIME ");
 
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GasEmissionDB);
-            DataSet ds = db.ReturnDS(sqlStr.ToString());
-
+                ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GasEmissionDB);
+                ds = db.ReturnDS(sqlStr.ToString());
+            }
             return ds;
         }
 
