@@ -111,9 +111,6 @@
     <Reference Include="DevExpress.Data.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
-    <Reference Include="DevExpress.Localization.v11.1">
-      <HintPath>..\..\internalrefs\DevExpress.Localization.v11.1.dll</HintPath>
-    </Reference>
     <Reference Include="DevExpress.OfficeSkins.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=95fc6c5621878f0a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ResourceFiles\AllRequired\DevExpress.OfficeSkins.v11.1.dll</HintPath>
