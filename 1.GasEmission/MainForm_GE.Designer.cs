@@ -411,7 +411,7 @@
             this.barDockControlTop.CausesValidation = false;
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlTop.Size = new System.Drawing.Size(1356, 53);
+            this.barDockControlTop.Size = new System.Drawing.Size(1356, 55);
             // 
             // barDockControlBottom
             // 
@@ -424,15 +424,15 @@
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.barDockControlLeft.Location = new System.Drawing.Point(0, 53);
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 688);
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 55);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 686);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1356, 53);
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 688);
+            this.barDockControlRight.Location = new System.Drawing.Point(1356, 55);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 686);
             // 
             // imageList1
             // 
@@ -474,7 +474,7 @@
             this.groupBox1.Controls.Add(this._dgvData);
             this.groupBox1.Location = new System.Drawing.Point(17, 446);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(254, 216);
+            this.groupBox1.Size = new System.Drawing.Size(254, 214);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             // 
@@ -504,7 +504,7 @@
             this._dgvData.ReadOnly = true;
             this._dgvData.RowHeadersVisible = false;
             this._dgvData.RowTemplate.Height = 23;
-            this._dgvData.Size = new System.Drawing.Size(248, 195);
+            this._dgvData.Size = new System.Drawing.Size(248, 193);
             this._dgvData.TabIndex = 0;
             // 
             // _Value
@@ -773,9 +773,9 @@
             this.panel1.Controls.Add(this.gbTunnel);
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 53);
+            this.panel1.Location = new System.Drawing.Point(0, 55);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1356, 666);
+            this.panel1.Size = new System.Drawing.Size(1356, 664);
             this.panel1.TabIndex = 2;
             // 
             // _ckbSetMarks3
@@ -809,7 +809,7 @@
             this._ckbSetMarks1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this._ckbSetMarks1.AutoSize = true;
-            this._ckbSetMarks1.Location = new System.Drawing.Point(1242, 492);
+            this._ckbSetMarks1.Location = new System.Drawing.Point(1242, 490);
             this._ckbSetMarks1.Name = "_ckbSetMarks1";
             this._ckbSetMarks1.Size = new System.Drawing.Size(98, 18);
             this._ckbSetMarks1.TabIndex = 27;
