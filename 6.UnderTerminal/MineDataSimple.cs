@@ -283,7 +283,7 @@ namespace UnderTerminal
         private bool submitV()
         {
             //共通实体转化为通风实体
-            viEntity = mineDataEntity.changeToVentilationInfoEntity();
+            viEntity = mineDataEntity.ChangeToVentilationInfoEntity();
             //是否有无风区域
             viEntity.IsNoWindArea = ventilationInfoEntering.ventilationInfoEntity.IsNoWindArea;
             //是否有微风区域
@@ -346,7 +346,7 @@ namespace UnderTerminal
         /// </summary>
         private bool submitG()
         {
-            gdEntity = mineDataEntity.changeToGasDataEntity();
+            gdEntity = mineDataEntity.ChangeToGasDataEntity();
             gdEntity.PowerFailure = gasData.gasDataEntity.PowerFailure;
             gdEntity.DrillTimes = gasData.gasDataEntity.DrillTimes;
             gdEntity.GasTimes = gasData.gasDataEntity.GasTimes;

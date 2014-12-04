@@ -565,7 +565,7 @@ namespace LibPanels
         private bool submitV()
         {
             //共通实体转化为通风实体
-            viEntity = mineDataEntity.changeToVentilationInfoEntity();
+            viEntity = mineDataEntity.ChangeToVentilationInfoEntity();
             //是否有无风区域
             viEntity.IsNoWindArea = ventilationInfoEntering.ventilationInfoEntity.IsNoWindArea;
             //是否有微风区域
@@ -635,7 +635,7 @@ namespace LibPanels
         private bool submitG()
         {
             //共通实体转化为瓦斯实体
-            gdEntity = mineDataEntity.changeToGasDataEntity();
+            gdEntity = mineDataEntity.ChangeToGasDataEntity();
             //瓦斯探头断电次数
             gdEntity.PowerFailure = gasData.gasDataEntity.PowerFailure;
             //吸钻预兆次数

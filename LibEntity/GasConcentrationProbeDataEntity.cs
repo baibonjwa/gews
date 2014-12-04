@@ -16,63 +16,38 @@ namespace LibEntity
     public class GasConcentrationProbeDataEntity
     {
         // 探头数据编号
-        private int probeDataId;
 
         /// <summary>
         /// 探头数据编号
         /// </summary>
-        public int ProbeDataId
-        {
-            get { return probeDataId; }
-            set { probeDataId = value; }
-        }
+        public int ProbeDataId { get; set; }
 
         // 探头编号
-        private string probeId;
 
         /// <summary>
         /// 探头编号
         /// </summary>
-        public string ProbeId
-        {
-            get { return probeId; }
-            set { probeId = value; }
-        }
+        public string ProbeId { get; set; }
 
         // 探头数值
-        private double probeValue;
 
         /// <summary>
         /// 探头数值
         /// </summary>
-        public double ProbeValue
-        {
-            get { return probeValue; }
-            set { probeValue = value; }
-        }
+        public double ProbeValue { get; set; }
 
         // 记录时间
-        private DateTime recordTime;
 
         /// <summary>
         /// 记录时间
         /// </summary>
-        public DateTime RecordTime
-        {
-            get { return recordTime; }
-            set { recordTime = value; }
-        }
+        public DateTime RecordTime { get; set; }
 
         // 记录类型
-        private string recordType;
 
         /// <summary>
         /// 记录类型
         /// </summary>
-        public string RecordType
-        {
-            get { return recordType; }
-            set { recordType = value; }
-        }
+        public string RecordType { get; set; }
     }
 }

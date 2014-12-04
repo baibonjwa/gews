@@ -16,124 +16,74 @@ namespace LibEntity
     public class MineDataEntity
     {
         // ID
-        private int id;
 
         /// <summary>
         /// 设置或获取ID
         /// </summary>
-        public int Id
-        {
-            get { return id; }
-            set { id = value; }
-        }
+        public int Id { get; set; }
 
         // 巷道编号
-        private int tunnelID;
 
         /// <summary>
         /// 设置或获取巷道编号
         /// </summary>
-        public int TunnelID
-        {
-            get { return tunnelID; }
-            set { tunnelID = value; }
-        }
+        public int TunnelID { get; set; }
 
         // 坐标X
-        private double coordinateX;
 
         /// <summary>
         /// 设置或获取坐标X
         /// </summary>
-        public double CoordinateX
-        {
-            get { return coordinateX; }
-            set { coordinateX = value; }
-        }
+        public double CoordinateX { get; set; }
 
         // 坐标Y
-        private double coordinateY;
 
         /// <summary>
         /// 设置或获取坐标Y
         /// </summary>
-        public double CoordinateY
-        {
-            get { return coordinateY; }
-            set { coordinateY = value; }
-        }
+        public double CoordinateY { get; set; }
 
         // 坐标Z
-        private double coordinateZ;
 
         /// <summary>
         /// 设置或获取坐标Z
         /// </summary>
-        public double CoordinateZ
-        {
-            get { return coordinateZ; }
-            set { coordinateZ = value; }
-        }
+        public double CoordinateZ { get; set; }
 
         // 时间
-        private DateTime datetime;
 
         /// <summary>
         /// 设置或获取时间
         /// </summary>
-        public DateTime Datetime
-        {
-            get { return datetime; }
-            set { datetime = value; }
-        }
+        public DateTime Datetime { get; set; }
 
         // 工作制式
-        private string workStyle;
 
         /// <summary>
         /// 设置或获取工作制式
         /// </summary>
-        public string WorkStyle
-        {
-            get { return workStyle; }
-            set { workStyle = value; }
-        }
+        public string WorkStyle { get; set; }
 
         // 班次
-        private string workTime;
 
         /// <summary>
         /// 设置或获取班次
         /// </summary>
-        public string WorkTime
-        {
-            get { return workTime; }
-            set { workTime = value; }
-        }
+        public string WorkTime { get; set; }
 
         // 队别名称
-        private string teamName;
 
         /// <summary>
         /// 设置或获取队别名称
         /// </summary>
-        public string TeamName
-        {
-            get { return teamName; }
-            set { teamName = value; }
-        }
+        public string TeamName { get; set; }
 
         // 填报人
-        private string submitter;
 
         /// <summary>
         /// 设置或获取填报人
         /// </summary>
-        public string Submitter
-        {
-            get { return submitter; }
-            set { submitter = value; }
-        }
+        public string Submitter { get; set; }
 
         /// <summary>
         /// 转换为CoalExistenceEntity
@@ -141,7 +91,7 @@ namespace LibEntity
         /// <returns></returns>
         public CoalExistenceEntity changeToCoalExistenceEntity()
         {
-            CoalExistenceEntity ceEntity = new CoalExistenceEntity();
+            var ceEntity = new CoalExistenceEntity();
             ceEntity.Id = Id;
             ceEntity.TunnelID = TunnelID;
             ceEntity.CoordinateX = CoordinateX;
@@ -159,19 +109,21 @@ namespace LibEntity
         /// 转换为VentilationInfoEntity
         /// </summary>
         /// <returns></returns>
-        public VentilationInfoEntity changeToVentilationInfoEntity()
+        public VentilationInfoEntity ChangeToVentilationInfoEntity()
         {
-            VentilationInfoEntity viEntity = new VentilationInfoEntity();
-            viEntity.Id = Id;
-            viEntity.TunnelID = TunnelID;
-            viEntity.CoordinateX = CoordinateX;
-            viEntity.CoordinateY = CoordinateY;
-            viEntity.CoordinateZ = CoordinateZ;
-            viEntity.Datetime = Datetime;
-            viEntity.WorkStyle = WorkStyle;
-            viEntity.WorkTime = WorkTime;
-            viEntity.TeamName = TeamName;
-            viEntity.Submitter = Submitter;
+            var viEntity = new VentilationInfoEntity
+            {
+                Id = Id,
+                TunnelID = TunnelID,
+                CoordinateX = CoordinateX,
+                CoordinateY = CoordinateY,
+                CoordinateZ = CoordinateZ,
+                Datetime = Datetime,
+                WorkStyle = WorkStyle,
+                WorkTime = WorkTime,
+                TeamName = TeamName,
+                Submitter = Submitter
+            };
             return viEntity;
         }
 
@@ -179,19 +131,21 @@ namespace LibEntity
         /// 转换为GasDataEntity
         /// </summary>
         /// <returns></returns>
-        public GasDataEntity changeToGasDataEntity()
+        public GasDataEntity ChangeToGasDataEntity()
         {
-            GasDataEntity gdEntity = new GasDataEntity();
-            gdEntity.Id = Id;
-            gdEntity.TunnelID = TunnelID;
-            gdEntity.CoordinateX = CoordinateX;
-            gdEntity.CoordinateY = CoordinateY;
-            gdEntity.CoordinateZ = CoordinateZ;
-            gdEntity.Datetime = Datetime;
-            gdEntity.WorkStyle = WorkStyle;
-            gdEntity.WorkTime = WorkTime;
-            gdEntity.TeamName = TeamName;
-            gdEntity.Submitter = Submitter;
+            var gdEntity = new GasDataEntity
+            {
+                Id = Id,
+                TunnelID = TunnelID,
+                CoordinateX = CoordinateX,
+                CoordinateY = CoordinateY,
+                CoordinateZ = CoordinateZ,
+                Datetime = Datetime,
+                WorkStyle = WorkStyle,
+                WorkTime = WorkTime,
+                TeamName = TeamName,
+                Submitter = Submitter
+            };
             return gdEntity;
         }
 
@@ -201,7 +155,7 @@ namespace LibEntity
         /// <returns></returns>
         public ManagementEntity changeToManagementEntity()
         {
-            ManagementEntity mEntity = new ManagementEntity();
+            var mEntity = new ManagementEntity();
             mEntity.Id = Id;
             mEntity.TunnelID = TunnelID;
             mEntity.CoordinateX = CoordinateX;
@@ -221,7 +175,7 @@ namespace LibEntity
         /// <returns></returns>
         public UsualForecastEntity changeToUsualForecastEntity()
         {
-            UsualForecastEntity ufEntity = new UsualForecastEntity();
+            var ufEntity = new UsualForecastEntity();
             ufEntity.Id = Id;
             ufEntity.TunnelID = TunnelID;
             ufEntity.CoordinateX = CoordinateX;
@@ -241,7 +195,7 @@ namespace LibEntity
         /// <returns></returns>
         public GeologicStructureEntity changeToGeologicStructureEntity()
         {
-            GeologicStructureEntity geoLogicStructure = new GeologicStructureEntity();
+            var geoLogicStructure = new GeologicStructureEntity();
             geoLogicStructure.Id = Id;
             geoLogicStructure.TunnelID = TunnelID;
             geoLogicStructure.CoordinateX = CoordinateX;
