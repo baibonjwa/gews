@@ -329,13 +329,14 @@ namespace UnderTerminal
 
 
             bool bResult = false;
-            if (this.Text == new LibPanels(MineDataPanelName.CoalExistence).panelFormName)
+            if (Text == new LibPanels(MineDataPanelName.CoalExistence).panelFormName)
             {
-                bResult = CoalExistenceBLL.insertCoalExistence(ceEntity);
+                ceEntity.SaveAndFlush();
 
                 UpdateWarningDataMsg msg = new UpdateWarningDataMsg(this.mainWin.workingfaceId, this.tunnelId,
                     CoalExistenceDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, dtpDateTime.Value);
                 mainWin.SendMsg2Server(msg);
+                bResult = true;
             }
 
             return bResult;

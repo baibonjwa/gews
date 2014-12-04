@@ -109,35 +109,6 @@ namespace LibBusiness
         }
 
         /// <summary>
-        /// 插入煤层赋存信息
-        /// </summary>
-        /// <param name="m">工作面瓦斯涌出动态特征井下数据实体</param>
-        /// <param name="ceEntity">煤层赋存实体</param>
-        /// <returns>煤层赋存信息</returns>
-        public static bool insertCoalExistence(CoalExistenceEntity ceEntity)
-        {
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GasEmissionDB);
-            StringBuilder sb = new StringBuilder();
-            sb.Append("INSERT INTO " + CoalExistenceDbConstNames.TABLE_NAME + " (");
-            sb.Append(PreWarningDataCommonBLL.sqlFront() + ",");
-            sb.Append(CoalExistenceDbConstNames.IS_LEVEL_DISORDER + ",");
-            sb.Append(CoalExistenceDbConstNames.IS_LEVEL_CHANGE + ",");
-            sb.Append(CoalExistenceDbConstNames.COAL_THICK_CHANGE + ",");
-            sb.Append(CoalExistenceDbConstNames.TECTONIC_COAL_THICK + ",");
-            sb.Append(CoalExistenceDbConstNames.COAL_DISTORY_LEVEL + ",");
-            sb.Append(CoalExistenceDbConstNames.IS_TOWARDS_CHANGE + ") VALUES(");
-            sb.Append(PreWarningDataCommonBLL.sqlBack(ceEntity) + ",");
-            sb.Append(ceEntity.IsLevelDisorder + ",");
-            sb.Append(ceEntity.IsLevelChange + ",");
-            sb.Append(ceEntity.CoalThickChange + ",");
-            sb.Append(ceEntity.TectonicCoalThick + ",'");
-            sb.Append(ceEntity.CoalDistoryLevel + "',");
-            sb.Append(ceEntity.IsTowardsChange + ")");
-            bool bResult = db.OperateDB(sb.ToString());
-            return bResult;
-        }
-
-        /// <summary>
         /// 修改煤层赋存信息
         /// </summary>
         /// <param name="m">工作面瓦斯涌出动态特征井下数据实体</param>
