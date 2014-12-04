@@ -22,7 +22,7 @@ namespace LibPanels
     public partial class GasInfoEntering : Form
     {
         #region ******变量声明******
-        public GasDataEntity gasDataEntity = new GasDataEntity();
+        public GasData gasDataEntity = new GasData();
         double tmpDouble = 0;
         #endregion ******变量声明******
 
@@ -159,7 +159,7 @@ namespace LibPanels
         /// 绑定修改数据
         /// </summary>
         /// <param name="gasDataEntity"></param>
-        public void bindDefaultValue(GasDataEntity gasDataEntity)
+        public void bindDefaultValue(GasData gasDataEntity)
         {
             //瓦斯探头断电次数
             txtPowerFailure.Text = gasDataEntity.PowerFailure.ToString();

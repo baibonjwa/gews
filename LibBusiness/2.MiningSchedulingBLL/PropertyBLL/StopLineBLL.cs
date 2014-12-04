@@ -72,7 +72,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="stopLineEntity">停采线实体</param>
         /// <returns>是否成功添加?true:false</returns>
-        public static bool insertStopLineInfo(StopLineEntity stopLineEntity)
+        public static bool insertStopLineInfo(StopLine stopLineEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
             StringBuilder sb = new StringBuilder();
@@ -103,7 +103,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="stopLineEntity">停采线实体</param>
         /// <returns>是否修改成功?true:false</returns>
-        public static bool updateStopLineInfo(StopLineEntity stopLineEntity)
+        public static bool updateStopLineInfo(StopLine stopLineEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
             StringBuilder sb = new StringBuilder();
@@ -125,7 +125,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="stoplineEntity">停采线实体</param>
         /// <returns>是否成功删除?true:false</returns>
-        public static bool deleteStopLineInfo(StopLineEntity stoplineEntity)
+        public static bool deleteStopLineInfo(StopLine stoplineEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
             string sql = "DELETE FROM " + StopLineDbConstNames.TABLE_NAME + " WHERE " + StopLineDbConstNames.ID + " =" + stoplineEntity.ID;

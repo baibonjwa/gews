@@ -24,7 +24,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="gasContentEntity">【瓦斯含量点】实体</param>
         /// <returns>成功与否：true，false</returns>
-        public static bool insertGasContentInfo(GasContentEntity gasContentEntity)
+        public static bool insertGasContentInfo(GasContent gasContentEntity)
         {
             StringBuilder sqlStr = new StringBuilder();
             sqlStr.Append("INSERT INTO " + GasContentDbConstNames.TABLE_NAME);
@@ -108,7 +108,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="gasContentEntity">【瓦斯含量点】实体</param>
         /// <returns>成功与否：true，false</returns>
-        public static bool updateGasContentInfo(GasContentEntity gasContentEntity)
+        public static bool updateGasContentInfo(GasContent gasContentEntity)
         {
             StringBuilder sqlStr = new StringBuilder();
             sqlStr.Append("UPDATE " + GasContentDbConstNames.TABLE_NAME);

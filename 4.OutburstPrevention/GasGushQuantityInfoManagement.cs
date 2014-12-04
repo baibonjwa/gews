@@ -208,7 +208,7 @@ namespace _4.OutburstPrevention
                     int iCoalSeamsId = 0;
                     if (int.TryParse(ds.Tables[0].Rows[i][GasGushQuantityDbConstNames.COAL_SEAMS_ID].ToString(), out iCoalSeamsId))
                     {
-                        CoalSeamsEntity ent = BasicInfoManager.getInstance().getCoalSeamById(iCoalSeamsId);
+                        CoalSeams ent = BasicInfoManager.getInstance().getCoalSeamById(iCoalSeamsId);
                         cells[_iRowDetailStartIndex + i, index].Text = ent == null ? "" : ent.CoalSeamsName;
                     }
 

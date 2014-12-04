@@ -31,7 +31,7 @@ namespace _5.WarningManagement
         private const int DATA_START_IDX = 1;
         private int DATA_COLUMN_CNT = 9;//可用数据的列数 MARK FIELD
 
-        private PreWarningRulesEntity _srcEnt = null;
+        private PreWarningRules _srcEnt = null;
         private XProps _props = new XProps();
         //规则ID
         XProp _ruleCodeId = new XProp();
@@ -271,7 +271,7 @@ namespace _5.WarningManagement
         /// 设置属性窗口值
         /// </summary>
         /// <param name="ent"></param>
-        public void SetPropertyGridEnt(PreWarningRulesEntity ent)
+        public void SetPropertyGridEnt(PreWarningRules ent)
         {
             if (ent == null)
             {
@@ -337,9 +337,9 @@ namespace _5.WarningManagement
         /// 获取属性窗口值
         /// </summary>
         /// <returns></returns>
-        public PreWarningRulesEntity GetEntFromProperyGrid()
+        public PreWarningRules GetEntFromProperyGrid()
         {
-            PreWarningRulesEntity ret = new PreWarningRulesEntity(Convert.ToInt32(_ruleCodeId.Value));
+            PreWarningRules ret = new PreWarningRules(Convert.ToInt32(_ruleCodeId.Value));
             ret.ModifyDate = Convert.ToDateTime(_dateProp.Value.ToString());
             ret.RuleCode = _ruleCodeProp.Value.ToString();
             ret.RuleType = _ruleType.Value.ToString();
@@ -367,7 +367,7 @@ namespace _5.WarningManagement
         #endregion
 
         #region Farpoint操作
-        public void SetFarpointRowValues(int rowIdx, PreWarningRulesEntity ent)
+        public void SetFarpointRowValues(int rowIdx, PreWarningRules ent)
         {
             //规则编码
             fpRules.Sheets[0].Cells[rowIdx, 1].Text = ent.RuleCode;
@@ -400,9 +400,9 @@ namespace _5.WarningManagement
         /// </summary>
         /// <param name="rowIdx">farpoint所选行，注：此处未考虑rowIdx越界与无值的情况！</param>
         /// <returns></returns>
-        public PreWarningRulesEntity GetEntityFromFarpointRow(int rowIdx)
+        public PreWarningRules GetEntityFromFarpointRow(int rowIdx)
         {
-            PreWarningRulesEntity ret = new PreWarningRulesEntity();
+            PreWarningRules ret = new PreWarningRules();
             try
             {
                 ret.RuleCode = fpRules.Sheets[0].Cells[rowIdx, 1].Value.ToString();
@@ -536,7 +536,7 @@ namespace _5.WarningManagement
                         if (lstRules[j].Id == curRuleInFp)
                         {
                             fpRules.Sheets[0].Cells[i, 0].Value = true;
-                            PreWarningRulesEntity ruleEnt = GetEntityFromFarpointRow(i);//使用该方法速度较快（不用读数据库），不能用：PreWarningRulesBLL.GetPreWarningRulesEntityByRuleCode(curRuleInFp)，速度慢！
+                            PreWarningRules ruleEnt = GetEntityFromFarpointRow(i);//使用该方法速度较快（不用读数据库），不能用：PreWarningRulesBLL.GetPreWarningRulesEntityByRuleCode(curRuleInFp)，速度慢！
                             ruleEnt.UpdateRuleDescriptionByParams(lstRules[j].PreWarningParams);
                             SetFarpointRowValues(i, ruleEnt);
                             lstRules.Remove(lstRules[j]);
@@ -661,7 +661,7 @@ namespace _5.WarningManagement
             {
                 return;
             }
-            PreWarningRulesEntity ent = GetEntityFromFarpointRow(e.Row);
+            PreWarningRules ent = GetEntityFromFarpointRow(e.Row);
 
             SetPropertyGridEnt(ent);
         }
@@ -682,7 +682,7 @@ namespace _5.WarningManagement
             if (!IsPropertyGridValueOK(e.ChangedItem.Value))
             {
                 Alert.alert("输入的预警参数值无效，预警参数未更改！");
-                PreWarningRulesEntity ent = GetEntityFromFarpointRow(fpRules.Sheets[0].GetSelection(0).Row);
+                PreWarningRules ent = GetEntityFromFarpointRow(fpRules.Sheets[0].GetSelection(0).Row);
                 SetPropertyGridEnt(ent);
                 return;
             }
@@ -697,7 +697,7 @@ namespace _5.WarningManagement
                 if (!IsPropertyGridValueOK(_paramProp[i].Value))
                 {
                     Alert.alert("输入的预警参数值无效，预警参数未更改！");
-                    PreWarningRulesEntity ent = GetEntityFromFarpointRow(fpRules.Sheets[0].GetSelection(0).Row);
+                    PreWarningRules ent = GetEntityFromFarpointRow(fpRules.Sheets[0].GetSelection(0).Row);
                     SetPropertyGridEnt(ent);
                     return;
                 }
@@ -710,7 +710,7 @@ namespace _5.WarningManagement
         /// </summary>
         private void UpdateRuleParams2RuleTable()
         {
-            PreWarningRulesEntity newEnt = GetEntFromProperyGrid();
+            PreWarningRules newEnt = GetEntFromProperyGrid();
             newEnt.ModifyDate = DateTime.Now;
             SetFarpointRowValues(fpRules.Sheets[0].ActiveRow.Index, newEnt);
             //更新至预警规则数据库表
@@ -818,7 +818,7 @@ namespace _5.WarningManagement
                     if (lstRules[j].Id == curRuleInFp)
                     {
                         fpRules.Sheets[0].Cells[i, 0].Value = true;
-                        PreWarningRulesEntity ruleEnt = GetEntityFromFarpointRow(i);//使用该方法速度较快（不用读数据库），不能用：PreWarningRulesBLL.GetPreWarningRulesEntityByRuleCode(curRuleInFp)，速度慢！
+                        PreWarningRules ruleEnt = GetEntityFromFarpointRow(i);//使用该方法速度较快（不用读数据库），不能用：PreWarningRulesBLL.GetPreWarningRulesEntityByRuleCode(curRuleInFp)，速度慢！
                         ruleEnt.UpdateRuleDescriptionByParams(lstRules[j].PreWarningParams);
                         SetFarpointRowValues(i, ruleEnt);
                         lstRules.Remove(lstRules[j]);

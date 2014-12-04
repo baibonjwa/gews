@@ -31,15 +31,15 @@ namespace _5.WarningManagement
 
         private MySpeech speaker = MySpeech.Instance();
 
-        private static List<PreWarningResultQueryEnt> WarningRecord = new List<PreWarningResultQueryEnt>();
+        private static List<LibEntity.PreWarningResultQuery> WarningRecord = new List<LibEntity.PreWarningResultQuery>();
 
         //传出结构体，更改时请查找（设置传出值）
-        private static EarlyWarningResultEntity _outInfo = new EarlyWarningResultEntity();
+        private static EarlyWarningResult _outInfo = new EarlyWarningResult();
         /// <summary>
         /// 获取传出的值
         /// </summary>
         /// <returns></returns>
-        public static EarlyWarningResultEntity GetOutInfo()
+        public static EarlyWarningResult GetOutInfo()
         {
             return _outInfo;
         }
@@ -48,8 +48,8 @@ namespace _5.WarningManagement
         string _strPreWarningTxt = "";
 
         //查询的最新结果
-        List<PreWarningResultQueryEnt> _ents1 = new List<PreWarningResultQueryEnt>();
-        List<PreWarningResultQueryEnt> _ents2 = new List<PreWarningResultQueryEnt>();
+        List<LibEntity.PreWarningResultQuery> _ents1 = new List<LibEntity.PreWarningResultQuery>();
+        List<LibEntity.PreWarningResultQuery> _ents2 = new List<LibEntity.PreWarningResultQuery>();
 
         //数据行起始位置
         const int FROZEN_ROW_COUNT = 5;
@@ -178,12 +178,12 @@ namespace _5.WarningManagement
 
 
 
-                WarningRecord = new List<PreWarningResultQueryEnt>(_ents2);
+                WarningRecord = new List<LibEntity.PreWarningResultQuery>(_ents2);
                 //SetShortMessage.Sms_Send(phoneNumber, "预警测试信息");
             }
             else
             {
-                WarningRecord = new List<PreWarningResultQueryEnt>(_ents2);
+                WarningRecord = new List<LibEntity.PreWarningResultQuery>(_ents2);
             }
 
 
@@ -206,7 +206,7 @@ namespace _5.WarningManagement
             //计算时间
             cells[1, 5].Value = strTime;
             //管理员
-            cells[1, 1].Value = CurrentUserEnt.CurLoginUserInfo.LoginName;
+            cells[1, 1].Value = CurrentUser.CurLoginUserInfo.LoginName;
             cells[1, 1].Locked = false;
             //添加计算机名称
             //this._fpPreWaringLastedValue.ActiveSheet.Cells[1, 6].Value = GetComputerName();
@@ -272,7 +272,7 @@ namespace _5.WarningManagement
         /// </summary>
         /// <param name="rowIdx"></param>
         /// <param name="entity"></param>
-        private void addRow2Fp(int rowIdx, PreWarningResultQueryEnt entity)
+        private void addRow2Fp(int rowIdx, LibEntity.PreWarningResultQuery entity)
         {
             this._fpPreWaringLastedValue.ActiveSheet.Rows.Add(rowIdx, 1);
             this._fpPreWaringLastedValue.ActiveSheet.Rows[rowIdx].Height = 40;

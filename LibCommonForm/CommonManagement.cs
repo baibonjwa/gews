@@ -669,7 +669,7 @@ namespace LibCommonForm
 
             for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
             {
-                CoalSeamsEntity coalSeamsEntity = new CoalSeamsEntity();
+                CoalSeams coalSeamsEntity = new CoalSeams();
                 // 煤层编号
                 if (this.dataGridView1.Rows[i].Cells[0].Value != System.DBNull.Value && this.dataGridView1.Rows[i].Cells[0].Value != null)
                 {

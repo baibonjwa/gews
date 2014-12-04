@@ -30,7 +30,7 @@ namespace _5.WarningManagement
         private bool isHistory = false;
 
         //其他窗体传入信息
-        EarlyWarningResultEntity _inInfo;
+        EarlyWarningResult _inInfo;
         string sHandleStatus = ""; // 处理状态
         //定义初始时FarPoint行列数
         const int COULMN_COUNT = 19;
@@ -90,7 +90,7 @@ namespace _5.WarningManagement
         //WAITING_LIFT(2, "待解除"),
         //HANDLED     (3, "评价通过,预警解除");
 
-        private List<WarningResultDetailEntity> warningResultDetails;
+        private List<WarningResultDetail> warningResultDetails;
 
         private string getReadableHandleStatus(string status)
         {
@@ -189,7 +189,7 @@ namespace _5.WarningManagement
         /// </summary>
         /// <param name="inInfo">传入值</param>
         /// <param name="isHistory">是历史数据还是实时数据</param>
-        public PreWarningResultDetailsQuery(EarlyWarningResultEntity inInfo, bool isHistory)
+        public PreWarningResultDetailsQuery(EarlyWarningResult inInfo, bool isHistory)
         {
             InitializeComponent();
 
@@ -250,7 +250,7 @@ namespace _5.WarningManagement
         /// </summary>
         /// <param name="entity"></param>
         /// <param name="rowType"></param>
-        private void addOneRowToFpSpread(int rowIdx, WarningResultDetailEntity entity, FarPoint.Win.Spread.FpSpread fp)
+        private void addOneRowToFpSpread(int rowIdx, WarningResultDetail entity, FarPoint.Win.Spread.FpSpread fp)
         {
             fp.ActiveSheet.Rows.Add(rowIdx, 1);
             fp.ActiveSheet.Rows[rowIdx].Height = 30;
@@ -610,7 +610,7 @@ namespace _5.WarningManagement
 
         //    return null;
         //}
-        public List<WarningResultDetailEntity> getHistoryWarningResultDetails(string sWorkingface,
+        public List<WarningResultDetail> getHistoryWarningResultDetails(string sWorkingface,
                      string sDate, string sShift,
                      string sWarningResult, string sWarningType,
                      string sWarningItem)
@@ -618,7 +618,7 @@ namespace _5.WarningManagement
             return PreWarningDetailsBLL.getHistoryWarningResultDetails(sWorkingface, sDate, sShift, sWarningResult,
                 sWarningType, sWarningItem);
         }
-        public List<WarningResultDetailEntity> getHistoryWarningResultDetails(string warningId)
+        public List<WarningResultDetail> getHistoryWarningResultDetails(string warningId)
         {
             return PreWarningDetailsBLL.getHistoryWarningResultDetails(warningId);
         }
@@ -781,21 +781,21 @@ namespace _5.WarningManagement
         /// </summary>
         /// <param name="ents"></param>
         /// <returns></returns>
-        private ReasonAndRule[] PreWarningAnalysisResultEntForItems(List<PreWarningAnalysisResultEnt> ents)
+        private ReasonAndRule[] PreWarningAnalysisResultEntForItems(List<PreWarningAnalysisResult> ents)
         {
             //定义返回值数组
             ReasonAndRule[] returnEnts = new ReasonAndRule[5];
 
             //定义五个数组，分别对应瓦斯、煤层、地质、通风、管理
-            ReasonAndRule gas = new ReasonAndRule(new List<PreWarningAnalysisResultEnt>());
-            ReasonAndRule coal = new ReasonAndRule(new List<PreWarningAnalysisResultEnt>());
-            ReasonAndRule geology = new ReasonAndRule(new List<PreWarningAnalysisResultEnt>());
-            ReasonAndRule venlation = new ReasonAndRule(new List<PreWarningAnalysisResultEnt>());
-            ReasonAndRule management = new ReasonAndRule(new List<PreWarningAnalysisResultEnt>());
+            ReasonAndRule gas = new ReasonAndRule(new List<PreWarningAnalysisResult>());
+            ReasonAndRule coal = new ReasonAndRule(new List<PreWarningAnalysisResult>());
+            ReasonAndRule geology = new ReasonAndRule(new List<PreWarningAnalysisResult>());
+            ReasonAndRule venlation = new ReasonAndRule(new List<PreWarningAnalysisResult>());
+            ReasonAndRule management = new ReasonAndRule(new List<PreWarningAnalysisResult>());
 
-            foreach (PreWarningAnalysisResultEnt ent in ents)
+            foreach (PreWarningAnalysisResult ent in ents)
             {
-                PreWarningRulesEntity ruleEnt = new PreWarningRulesEntity();
+                PreWarningRules ruleEnt = new PreWarningRules();
                 if (ent.IsSingleRule())
                 {
                     SingleRuleResultEnt singleRule = ent.GetSingleRulesResultEnt();
@@ -852,17 +852,17 @@ namespace _5.WarningManagement
         /// </summary>
         struct ReasonAndRule
         {
-            private List<PreWarningAnalysisResultEnt> _reason;
+            private List<PreWarningAnalysisResult> _reason;
             /// <summary>
             /// 预警原因
             /// </summary>
-            public List<PreWarningAnalysisResultEnt> Reason
+            public List<PreWarningAnalysisResult> Reason
             {
                 get { return _reason; }
                 set { _reason = value; }
             }
 
-            public ReasonAndRule(List<PreWarningAnalysisResultEnt> reason)
+            public ReasonAndRule(List<PreWarningAnalysisResult> reason)
             {
                 _reason = reason;
             }

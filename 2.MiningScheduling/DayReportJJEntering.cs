@@ -32,7 +32,7 @@ namespace _2.MiningScheduling
         /**掘进面实体**/
         private WorkingFace workingFace;
         /**回采日报实体**/
-        DayReportJJEntity _dayReportJJEntity = new DayReportJJEntity();
+        DayReportJJ _dayReportJJEntity = new DayReportJJ();
         /**巷道关联矿井等信息ID集合**/
         int[] _arr;
 
@@ -99,7 +99,7 @@ namespace _2.MiningScheduling
         /// </summary>
         /// <param name="array">巷道编号数组</param>
         /// <param name="dayReportHCEntity">回采进尺日报实体</param>
-        public DayReportJJEntering(int[] array, DayReportJJEntity dayReportJJEntity, MainFrm mainFrm)
+        public DayReportJJEntering(int[] array, DayReportJJ dayReportJJEntity, MainFrm mainFrm)
         {
             this.MainForm = mainFrm;
 
@@ -305,7 +305,7 @@ namespace _2.MiningScheduling
             }
             else
             {
-                TeamInfoEntity teamInfoEntity = new TeamInfoEntity();
+                TeamInfo teamInfoEntity = new TeamInfo();
                 teamInfoEntity.TeamID = Convert.ToInt32(cboTeamName.SelectedValue);
                 teamInfoEntity = TeamBLL.selectTeamInfoByID(teamInfoEntity.TeamID);
                 teamInfoForm = new TeamInfoEntering(teamInfoEntity);
@@ -379,16 +379,16 @@ namespace _2.MiningScheduling
             //巷道掘进的参数
             if (this.Text == Const_MS.DAY_REPORT_JJ_ADD)
             {
-                TunnelDefaultSelect.InsertDefaultTunnel(DayReportJJDbConstNames.TABLE_NAME, workingFace.WorkingFaceID);
+                LibBusiness.TunnelDefaultSelect.InsertDefaultTunnel(DayReportJJDbConstNames.TABLE_NAME, workingFace.WorkingFaceID);
                 insertDayReportJJInfo();
             }
             if (this.Text == Const_MS.DAY_REPORT_JJ_CHANGE)
             {
-                DayReportJJEntity oldDayReportJJEntity = _dayReportJJEntity; //修改之前的实体
-                TunnelDefaultSelect.UpdateDefaultTunnel(DayReportJJDbConstNames.TABLE_NAME, workingFace.WorkingFaceID);
+                DayReportJJ oldDayReportJJEntity = _dayReportJJEntity; //修改之前的实体
+                LibBusiness.TunnelDefaultSelect.UpdateDefaultTunnel(DayReportJJDbConstNames.TABLE_NAME, workingFace.WorkingFaceID);
                 updateDayReportJJInfo();
 
-                DayReportJJEntity newDayReportJJEntity = _dayReportJJEntity; //修改后的掘进信息实体               
+                DayReportJJ newDayReportJJEntity = _dayReportJJEntity; //修改后的掘进信息实体               
             }
         }
 
@@ -401,7 +401,7 @@ namespace _2.MiningScheduling
             IPoint workfacepos = pos[0].geo as IPoint;
             if (workfacepos != null)
             {
-                workingFace.Coordinate = new CoordinateEntity(workfacepos.X, workfacepos.Y, 0.0);
+                workingFace.Coordinate = new Coordinate(workfacepos.X, workfacepos.Y, 0.0);
                 LibBusiness.WorkingFaceBLL.updateWorkingfaceXYZ(workingFace);
             }
             //查询地质结构信息
@@ -415,7 +415,7 @@ namespace _2.MiningScheduling
                 {
                     GeoStruct tmp = geoinfos[i];
 
-                    GeologySpaceEntity geologyspaceEntity = new GeologySpaceEntity();
+                    GeologySpace geologyspaceEntity = new GeologySpace();
                     geologyspaceEntity.WorkSpaceID = workingFace.WorkingFaceID;
                     geologyspaceEntity.TectonicType = Convert.ToInt32(key);
                     geologyspaceEntity.TectonicID = tmp.geoinfos[GIS.GIS_Const.FIELD_BID].ToString();
@@ -444,7 +444,7 @@ namespace _2.MiningScheduling
             pnt.SpatialReference = Global.spatialref;
 
             //修改工作面信息表中对应的X Y Z坐标信息
-            workingFace.Coordinate = new CoordinateEntity(pnt.X, pnt.Y, 0.0);
+            workingFace.Coordinate = new Coordinate(pnt.X, pnt.Y, 0.0);
             LibBusiness.WorkingFaceBLL.updateWorkingfaceXYZ(workingFace);
 
             //查询地质结构信息
@@ -460,7 +460,7 @@ namespace _2.MiningScheduling
                 {
                     GeoStruct tmp = geoinfos[i];
 
-                    GeologySpaceEntity geologyspaceEntity = new GeologySpaceEntity();
+                    GeologySpace geologyspaceEntity = new GeologySpace();
                     geologyspaceEntity.WorkSpaceID = workingFace.WorkingFaceID;
                     geologyspaceEntity.TectonicType = Convert.ToInt32(key);
                     geologyspaceEntity.TectonicID = tmp.geoinfos[GIS.GIS_Const.FIELD_BID].ToString();
@@ -477,11 +477,11 @@ namespace _2.MiningScheduling
         /// </summary>
         private void insertDayReportJJInfo()
         {
-            List<DayReportJJEntity> dayReportJJEntityList = new List<DayReportJJEntity>();
+            List<DayReportJJ> dayReportJJEntityList = new List<DayReportJJ>();
 
             for (int i = 0; i < this.dgrdvDayReportJJ.RowCount; i++)
             {
-                DayReportJJEntity _dayReportJJEntity = new DayReportJJEntity();
+                DayReportJJ _dayReportJJEntity = new DayReportJJ();
                 // 最后一行为空行时，跳出循环
                 if (i == this.dgrdvDayReportJJ.RowCount - 1)
                 {
@@ -543,7 +543,7 @@ namespace _2.MiningScheduling
             Tunnel tunnel = BasicInfoManager.getInstance().getTunnelListByWorkingFaceId(workingFace.WorkingFaceID)[0];
 
             //循环添加
-            foreach (DayReportJJEntity dayReportJJEntity in dayReportJJEntityList)
+            foreach (DayReportJJ dayReportJJEntity in dayReportJJEntityList)
             {
                 //添加回采进尺日报
                 bResult = DayReportJJBLL.insertDayReportJJInfo(dayReportJJEntity);

@@ -27,11 +27,11 @@ namespace LibLoginForm
     public partial class LoginForm : Form
     {
         //获取曾经登录用户的信息
-        private UserLoginInformationEnt[] entsLogined = null;
+        private UserLogin[] entsLogined = null;
 
         //获取所有的用户信息
-        private UserLoginInformationEnt[] ents = null;
-        
+        private UserLogin[] ents = null;
+
         Form _showForm = null;
         /// <summary>
         /// 构造函数
@@ -65,7 +65,7 @@ namespace LibLoginForm
 
             //添加已记录的登录用户
             entsLogined = LoginFormBLL.GetUserLoginedInformation();
-            foreach (UserLoginInformationEnt ent in entsLogined)
+            foreach (UserLogin ent in entsLogined)
             {
                 _cbxUserName.Items.Add(ent.LoginName);
             }
@@ -95,13 +95,13 @@ namespace LibLoginForm
         /// <param name="e"></param>
         private void buttonOk_Click(object sender, EventArgs e)
         {
-            
+
             bool status = false;
 
             string userName = this._cbxUserName.Text;
             string password = this._txtPassword.Text;
 
-            UserLoginInformationEnt[] ents = LoginFormBLL.GetUserLoginInformations();
+            UserLogin[] ents = LoginFormBLL.GetUserLoginInformations();
             //数据库中无用户名及密码信息
             if (ents == null)
             {
@@ -109,12 +109,12 @@ namespace LibLoginForm
                 status = false;
                 Alert.alert(Const.ADD_USER_INFO, Const.LOGIN_FAILED_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                UserLoginInformationEnt ent = new UserLoginInformationEnt();
+                UserLogin ent = new UserLogin();
                 ent.LoginName = _cbxUserName.Text.ToString();
                 ent.PassWord = _txtPassword.Text;
 
                 //显示添加用户信息界面，确定后将新创建的用户名及密码自动填写到相应控件上
-                UserLoginInformationInput ulii = new UserLoginInformationInput(ent,true);
+                UserLoginInformationInput ulii = new UserLoginInformationInput(ent, true);
                 ulii.ShowDialog();
                 if (LibCommon.Const.FIRST_LOGIN_NAME != "")
                 {
@@ -134,7 +134,7 @@ namespace LibLoginForm
                 else
                 {
                     Alert.alert(Const.USER_NAME_OR_PWD_ERROR_MSG, Const.LOGIN_FAILED_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }               
+                }
             }
             if (status)
             {
@@ -154,11 +154,11 @@ namespace LibLoginForm
         private bool LoginSuccess(string userName, string password)
         {
             //定义记录登录成功与否的值
-            bool isLogin = false;            
-            if (LoginFormBLL.LoginSuccess(userName, password)!=null)
+            bool isLogin = false;
+            if (LoginFormBLL.LoginSuccess(userName, password) != null)
             {
                 //set CurrentUser
-                CurrentUserEnt.CurLoginUserInfo = LoginFormBLL.LoginSuccess(userName, password);
+                CurrentUser.CurLoginUserInfo = LoginFormBLL.LoginSuccess(userName, password);
 
                 //记录最后一次登录用户
                 StreamWriter sw = new StreamWriter(Application.StartupPath + "\\DefaultUser", false);
@@ -191,7 +191,7 @@ namespace LibLoginForm
         private void _cbxUserName_SelectedIndexChanged(object sender, EventArgs e)
         {
             string strSelLoginName = _cbxUserName.Text;
-            foreach (UserLoginInformationEnt ent in ents)
+            foreach (UserLogin ent in ents)
             {
                 if (strSelLoginName == ent.LoginName)
                 {

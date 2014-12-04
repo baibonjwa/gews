@@ -61,7 +61,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="geologySpaceEntity"></param>
         /// <returns></returns>
-        public static bool ProcGeologySpaceEntityInfo(GeologySpaceEntity geologySpaceEntity)
+        public static bool ProcGeologySpaceEntityInfo(GeologySpace geologySpaceEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
             StringBuilder sb = new StringBuilder();
@@ -99,7 +99,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="stopLineEntity">停采线实体</param>
         /// <returns>是否成功添加?true:false</returns>
-        public static bool insertGeologySpaceEntityInfo(GeologySpaceEntity geologySpaceEntity)
+        public static bool insertGeologySpaceEntityInfo(GeologySpace geologySpaceEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
             StringBuilder sb = new StringBuilder();
@@ -124,7 +124,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="stopLineEntity">停采线实体</param>
         /// <returns>是否修改成功?true:false</returns>
-        public static bool updateGeologySpaceEntityInfo(GeologySpaceEntity geologySpaceEntity)
+        public static bool updateGeologySpaceEntityInfo(GeologySpace geologySpaceEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
             StringBuilder sb = new StringBuilder();
@@ -140,7 +140,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="stoplineEntity">停采线实体</param>
         /// <returns>是否成功删除?true:false</returns>
-        public static bool deleteGeologySpaceEntityInfo(GeologySpaceEntity geologySpaceEntity)
+        public static bool deleteGeologySpaceEntityInfo(GeologySpace geologySpaceEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
             string sql = "DELETE FROM " + GeologySpaceDbConstNames.TABLE_NAME + " WHERE " +

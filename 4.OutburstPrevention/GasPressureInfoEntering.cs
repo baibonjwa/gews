@@ -146,7 +146,7 @@ namespace _4.OutburstPrevention
             this.DialogResult = DialogResult.OK;
 
             // 创建一个瓦斯压力点实体
-            GasPressureEntity gasPressureEntity = new GasPressureEntity();
+            GasPressure gasPressureEntity = new GasPressure();
             // 坐标X
             double dCoordinateX = 0;
             if (double.TryParse(this.txtCoordinateX.Text.Trim(), out dCoordinateX))
@@ -480,7 +480,7 @@ namespace _4.OutburstPrevention
         /// <summary>
         /// 20140801SDE中添加瓦斯压力点
         /// </summary>
-        private void DrawGasGushQuantityPt(GasPressureEntity gasGushQuantityEntity)
+        private void DrawGasGushQuantityPt(GasPressure gasGushQuantityEntity)
         {
             double dCoordinateX = Convert.ToDouble(this.txtCoordinateX.Text.ToString());
             double dCoordinateY = Convert.ToDouble(this.txtCoordinateY.Text.ToString());

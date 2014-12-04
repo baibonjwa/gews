@@ -35,13 +35,13 @@ namespace LibBusiness
         private Dictionary<int, Tunnel> tunnelList = new Dictionary<int, Tunnel>();
 
         // 煤层
-        private Dictionary<int, CoalSeamsEntity> coalSeamList = new Dictionary<int, CoalSeamsEntity>();
+        private Dictionary<int, CoalSeams> coalSeamList = new Dictionary<int, CoalSeams>();
 
         // 岩性
-        private Dictionary<int, LithologyEntity> lithologyList = new Dictionary<int, LithologyEntity>();
+        private Dictionary<int, Lithology> lithologyList = new Dictionary<int, Lithology>();
 
         // 对别
-        private Dictionary<int, TeamInfoEntity> teamList = new Dictionary<int, TeamInfoEntity>();
+        private Dictionary<int, TeamInfo> teamList = new Dictionary<int, TeamInfo>();
 
         public static BasicInfoManager getInstance()
         {
@@ -217,7 +217,7 @@ namespace LibBusiness
                 double x = dr[WorkingFaceDbConstNames.COORDINATE_X] == DBNull.Value ? 0.0 : Convert.ToDouble(dr[WorkingFaceDbConstNames.COORDINATE_X]);
                 double y = dr[WorkingFaceDbConstNames.COORDINATE_Y] == DBNull.Value ? 0.0 : Convert.ToDouble(dr[WorkingFaceDbConstNames.COORDINATE_Y]);
                 double z = dr[WorkingFaceDbConstNames.COORDINATE_Z] == DBNull.Value ? 0.0 : Convert.ToDouble(dr[WorkingFaceDbConstNames.COORDINATE_Z]);
-                entity.Coordinate = new CoordinateEntity(x, y, z);
+                entity.Coordinate = new Coordinate(x, y, z);
 
                 entity.StartDate = dr[WorkingFaceDbConstNames.START_DATE] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(dr[WorkingFaceDbConstNames.START_DATE].ToString());
                 entity.StopDate = dr[WorkingFaceDbConstNames.STOP_DATE] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(dr[WorkingFaceDbConstNames.STOP_DATE].ToString());
@@ -251,7 +251,7 @@ namespace LibBusiness
                 double x = dr[WorkingFaceDbConstNames.COORDINATE_X] == DBNull.Value ? 0.0 : Convert.ToDouble(dr[WorkingFaceDbConstNames.COORDINATE_X]);
                 double y = dr[WorkingFaceDbConstNames.COORDINATE_Y] == DBNull.Value ? 0.0 : Convert.ToDouble(dr[WorkingFaceDbConstNames.COORDINATE_Y]);
                 double z = dr[WorkingFaceDbConstNames.COORDINATE_Z] == DBNull.Value ? 0.0 : Convert.ToDouble(dr[WorkingFaceDbConstNames.COORDINATE_Z]);
-                entity.Coordinate = new CoordinateEntity(x, y, z);
+                entity.Coordinate = new Coordinate(x, y, z);
 
                 entity.StartDate = dr[WorkingFaceDbConstNames.START_DATE] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(dr[WorkingFaceDbConstNames.START_DATE].ToString());
                 entity.StopDate = dr[WorkingFaceDbConstNames.STOP_DATE] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(dr[WorkingFaceDbConstNames.STOP_DATE].ToString());
@@ -308,14 +308,14 @@ namespace LibBusiness
 
             foreach (DataRow dr in ds.Tables[0].Rows)
             {
-                CoalSeamsEntity entity = new CoalSeamsEntity();
+                CoalSeams entity = new CoalSeams();
                 entity.CoalSeamsId = Convert.ToInt32(dr[CoalSeamsDbConstNames.COAL_SEAMS_ID]);
                 entity.CoalSeamsName = dr[CoalSeamsDbConstNames.COAL_SEAMS_NAME].ToString();
                 coalSeamList.Add(entity.CoalSeamsId, entity);
             }
         }
 
-        public CoalSeamsEntity getCoalSeamById(int coalSeamId)
+        public CoalSeams getCoalSeamById(int coalSeamId)
         {
             try
             {
@@ -331,7 +331,7 @@ namespace LibBusiness
 
         public string getCoalSeamNameById(int coalSeamId)
         {
-            CoalSeamsEntity entity = getCoalSeamById(coalSeamId);
+            CoalSeams entity = getCoalSeamById(coalSeamId);
             if (null != entity)
                 return entity.CoalSeamsName;
             else
@@ -349,14 +349,14 @@ namespace LibBusiness
 
             foreach (DataRow dr in ds.Tables[0].Rows)
             {
-                LithologyEntity entity = new LithologyEntity();
+                Lithology entity = new Lithology();
                 entity.LithologyId = Convert.ToInt32(dr[LithologyDbConstNames.LITHOLOGY_ID]);
                 entity.LithologyName = dr[LithologyDbConstNames.LITHOLOGY_NAME].ToString();
                 lithologyList.Add(entity.LithologyId, entity);
             }
         }
 
-        public LithologyEntity getLithologyById(int lighologyId)
+        public Lithology getLithologyById(int lighologyId)
         {
             try
             {
@@ -371,7 +371,7 @@ namespace LibBusiness
 
         public String getLithologyNameById(int lighologyId)
         {
-            LithologyEntity entity = getLithologyById(lighologyId);
+            Lithology entity = getLithologyById(lighologyId);
 
             if (null == entity)
                 return "";
@@ -531,7 +531,7 @@ namespace LibBusiness
 
             foreach (DataRow dr in ds.Tables[0].Rows)
             {
-                TeamInfoEntity entity = new TeamInfoEntity();
+                TeamInfo entity = new TeamInfo();
                 entity.TeamID = Convert.ToInt32(dr[TeamDbConstNames.ID]);
                 entity.TeamName = dr[TeamDbConstNames.TEAM_NAME].ToString();
                 entity.TeamLeader = dr[TeamDbConstNames.TEAM_LEADER].ToString();
@@ -540,7 +540,7 @@ namespace LibBusiness
             }
         }
 
-        public TeamInfoEntity getTeamInfoByID(int teamId)
+        public TeamInfo getTeamInfoByID(int teamId)
         {
             try
             {
@@ -555,7 +555,7 @@ namespace LibBusiness
 
         public String getTeamNameById(int teamId)
         {
-            TeamInfoEntity entity = getTeamInfoByID(teamId);
+            TeamInfo entity = getTeamInfoByID(teamId);
 
             if (null == entity)
                 return "";

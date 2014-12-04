@@ -22,7 +22,7 @@ namespace LibPanels
     public partial class CoalExistenceInfoEntering : Form
     {
         #region ******变量声明******
-        public CoalExistenceEntity coalExistenceEntity = new CoalExistenceEntity();
+        public CoalExistence coalExistenceEntity = new CoalExistence();
         double tmpDouble = 0;
         #endregion ******变量声明******
 
@@ -149,7 +149,7 @@ namespace LibPanels
         /// <summary>
         /// 调用修改时绑定默认数据
         /// </summary>
-        public void bindDefaultValue(CoalExistenceEntity coalExistenceEntity)
+        public void bindDefaultValue(CoalExistence coalExistenceEntity)
         {
             //是否层理紊乱
             if (coalExistenceEntity.IsLevelDisorder == 1)

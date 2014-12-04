@@ -28,8 +28,8 @@ namespace _3.GeologyMeasure
         int _tmpRowIndex = -1;
         int _itemCount = 0;
         Tunnel _tunnelEntity = new Tunnel();
-        WireInfoEntity wireInfoEntity = new WireInfoEntity();
-        WirePointInfoEntity[] wpiEntity;
+        WireInfo wireInfoEntity = new WireInfo();
+        WirePointInfo[] wpiEntity;
         int[] _arr = new int[5];
         DataSet _dsWirePoint = new DataSet();
         int _tunnelID;
@@ -49,7 +49,7 @@ namespace _3.GeologyMeasure
             //this.selectTunnelUserControl1.init(this.MainForm);
             //自定义控件初始化
             this.selectTunnelUserControl1.setCurSelectedID(_arr);
-            TunnelDefaultSelectEntity tunnelDefaultSelectEntity = TunnelDefaultSelect.selectDefaultTunnel(WireInfoDbConstNames.TABLE_NAME);
+            LibEntity.TunnelDefaultSelect tunnelDefaultSelectEntity = LibBusiness.TunnelDefaultSelect.selectDefaultTunnel(WireInfoDbConstNames.TABLE_NAME);
             if (tunnelDefaultSelectEntity != null)
             {
                 _arr = new int[5];

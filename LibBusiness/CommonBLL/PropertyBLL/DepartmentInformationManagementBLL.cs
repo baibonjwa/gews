@@ -61,7 +61,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="ent"></param>
         /// <returns></returns>
-        public static bool InsertDeptInfoIntoTable(DepartmentInformationEntity ent)
+        public static bool InsertDeptInfoIntoTable(DepartmentInformation ent)
         {
             ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             StringBuilder strSql = new StringBuilder();
@@ -82,7 +82,7 @@ namespace LibBusiness
         /// <param name="ent">部门信息实体</param>
         /// <param name="oldName">部门旧名称</param>
         /// <returns></returns>
-        public static bool UpdateDepartmentInfomationDatabase(DepartmentInformationEntity ent, string oldName)
+        public static bool UpdateDepartmentInfomationDatabase(DepartmentInformation ent, string oldName)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("UPDATE ");

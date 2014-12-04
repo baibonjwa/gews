@@ -32,7 +32,7 @@ namespace _4.OutburstPrevention
         Color rowBackColor = Color.White;
         //需要过滤的列索引
         private int[] _filterColunmIdxs = null;
-        K1ValueEntity k1ValueEntity = new K1ValueEntity();
+        K1Value k1ValueEntity = new K1Value();
         Tunnel tunnelEntity = new Tunnel();
         DataSet ds = new DataSet();
         DataSet dsAll = new DataSet();

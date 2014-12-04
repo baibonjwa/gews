@@ -21,7 +21,7 @@ namespace LibPanels
     public partial class VentilationInfoEntering : Form
     {
         #region ******变量声明******
-        public VentilationInfoEntity ventilationInfoEntity = new VentilationInfoEntity();
+        public VentilationInfo ventilationInfoEntity = new VentilationInfo();
         double tmpDouble = 0;
         #endregion ******变量声明******
 
@@ -167,7 +167,7 @@ namespace LibPanels
         /// 绑定修改数据
         /// </summary>
         /// <param name="ventilationInfoEntity">通风实体</param>
-        public void bindDefaultValue(VentilationInfoEntity ventilationInfoEntity)
+        public void bindDefaultValue(VentilationInfo ventilationInfoEntity)
         {
             //是否有无风区域
             if (ventilationInfoEntity.IsNoWindArea == 1)

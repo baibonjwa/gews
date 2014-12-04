@@ -309,15 +309,15 @@ namespace _2.MiningScheduling
         /// <summary>
         /// 为变量dayReportJJEntity赋值
         /// </summary>
-        private DayReportJJEntity setDayReportJJEntityValue()
+        private DayReportJJ setDayReportJJEntityValue()
         {
-            DayReportJJEntity eReturn = null;
+            DayReportJJ eReturn = null;
             for (int i = 0; i < _rowsCount; i++)
             {
                 if (cells[_rowDetailStartIndex + i, 0].Value != null && (bool)cells[_rowDetailStartIndex + i, 0].Value == true)
                 {
                     _tmpRowIndex = _rowDetailStartIndex + i;
-                    eReturn = new DayReportJJEntity();
+                    eReturn = new DayReportJJ();
                     DataRow dr = _ds.Tables[0].Rows[i];
 
                     //掘进ID
@@ -378,7 +378,7 @@ namespace _2.MiningScheduling
         private void tsBtnModify_Click(object sender, EventArgs e)
         {
             //回采日报实体赋值
-            DayReportJJEntity entity = setDayReportJJEntityValue();
+            DayReportJJ entity = setDayReportJJEntityValue();
 
             WorkingFace ent = BasicInfoManager.getInstance().getWorkingFaceById(entity.WorkingFaceID);
             /**自定义控件用巷道信息数组**/
@@ -425,7 +425,7 @@ namespace _2.MiningScheduling
                         if ((bool)cells[_rowDetailStartIndex + i, 0].Value == true)
                         {
                             DataRow dr = _ds.Tables[0].Rows[i];
-                            DayReportJJEntity entity = new DayReportJJEntity();
+                            DayReportJJ entity = new DayReportJJ();
                             //获取掘进ID
                             entity.ID = (int)dr[DayReportJJDbConstNames.ID];
                             entity.WorkingFaceID = (int)dr[DayReportJJDbConstNames.WORKINGFACE_ID];
@@ -508,7 +508,7 @@ namespace _2.MiningScheduling
                     {
                         GeoStruct tmp = geoinfos[i];
 
-                        GeologySpaceEntity geologyspaceEntity = new GeologySpaceEntity();
+                        GeologySpace geologyspaceEntity = new GeologySpace();
                         geologyspaceEntity.WorkSpaceID = workingfaceid;
                         geologyspaceEntity.TectonicType = Convert.ToInt32(key);
                         geologyspaceEntity.TectonicID = tmp.geoinfos[GIS.GIS_Const.FIELD_BID].ToString();

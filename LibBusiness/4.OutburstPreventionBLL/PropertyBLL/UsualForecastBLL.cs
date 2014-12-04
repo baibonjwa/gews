@@ -54,7 +54,7 @@ namespace LibBusiness
         /// <param name="ufEntity">工作面动态防突井下数据实体</param>
         /// <param name="tunnelEntity">巷道实体</param>
         /// <returns>日常预测信息</returns>
-        public static bool insertUsualForecastInfo(UsualForecastEntity ufEntity)
+        public static bool insertUsualForecastInfo(UsualForecast ufEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
             StringBuilder sb = new StringBuilder();
@@ -75,7 +75,7 @@ namespace LibBusiness
         /// <param name="ufEntity">工作面动态防突井下数据实体</param>
         /// <param name="tunnelEntity">巷道实体</param>
         /// <returns>是否修改成功?true:false</returns>
-        public static bool updateUsualForecastInfo(UsualForecastEntity ufEntity)
+        public static bool updateUsualForecastInfo(UsualForecast ufEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
             StringBuilder sb = new StringBuilder();

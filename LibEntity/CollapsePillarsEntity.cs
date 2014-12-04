@@ -10,13 +10,6 @@ namespace LibEntity
     public class CollapsePillarsEntity
     {
 
-
-
-
-
-
-
-
         /**陷落柱编号**/
         public int CollapsePillarsID { get; set; }
 

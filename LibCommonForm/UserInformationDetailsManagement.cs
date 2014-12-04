@@ -62,7 +62,7 @@ namespace LibCommonForm
             LibCommon.FormDefaultPropertiesSetter.SetMdiChildrenManagementFormDefaultProperties(this, LibCommon.LibFormTitles.USER_INFO_DETAILS_MANMAGEMENT);
             LibCommon.FarpointDefaultPropertiesSetter.SetFpDefaultProperties(fpUserInformationDetails, LibCommon.LibFarpintTiltes.USER_INFO_DETAILS, 2);
             //判断用户权限
-            if (CurrentUserEnt.CurLoginUserInfo.Permission != Permission.管理员.ToString())
+            if (CurrentUser.CurLoginUserInfo.Permission != Permission.管理员.ToString())
             {
                 tsBtnAdd.Visible = false;
                 tsBtnDel.Visible = false;
@@ -174,7 +174,7 @@ namespace LibCommonForm
             }
 
             //定义用户登录信息实体，接收旧值，添加到窗体中。旧值来源于管理界面的选择值。可以直接取值，也可从数据库取值，暂不考虑效率，以下代码从数据库取值。
-            UserInformationDetailsEnt ent = UserInformationDetailsManagementBLL.GetUserLoginInformationByID(_userSel[0]);
+            UserInformationDetails ent = UserInformationDetailsManagementBLL.GetUserLoginInformationByID(_userSel[0]);
 
             //修改
             UserInformationDetailsInput uidi = new UserInformationDetailsInput(ent);
@@ -361,7 +361,7 @@ namespace LibCommonForm
         private void GetUsersInfoDetails()
         {
             //定义接受用户详细信息实体的数组
-            UserInformationDetailsEnt[] ents = UserInformationDetailsManagementBLL.GetUserInformationDetails();
+            UserInformationDetails[] ents = UserInformationDetailsManagementBLL.GetUserInformationDetails();
             //若为空，则返回
             if (ents == null)
             {

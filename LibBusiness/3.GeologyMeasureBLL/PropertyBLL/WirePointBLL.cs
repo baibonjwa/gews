@@ -25,7 +25,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="wirePointInfoEntity">导线点实体</param>
         /// <returns>成功与否：true，false</returns>
-        public static bool insertWirePointInfo(WirePointInfoEntity wirePointInfoEntity)
+        public static bool insertWirePointInfo(WirePointInfo wirePointInfoEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
 
@@ -67,7 +67,7 @@ namespace LibBusiness
         /// <param name="wireInfoEntity"></param>
         /// <param name="wirePointID"></param>
         /// <returns></returns>
-        public static bool updateWirePointInfo(WirePointInfoEntity wirePointInfoEntity,WireInfoEntity wireInfoEntity)
+        public static bool updateWirePointInfo(WirePointInfo wirePointInfoEntity,WireInfo wireInfoEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
 
@@ -95,7 +95,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="wirePointInfoEntity"></param>
         /// <returns></returns>
-        public static bool deleteWirePointInfo(WirePointInfoEntity wirePointInfoEntity)
+        public static bool deleteWirePointInfo(WirePointInfo wirePointInfoEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
             bool bResult = false;
@@ -109,7 +109,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="tunnelEntity"></param>
         /// <returns></returns>
-        public static bool deleteWirePointInfo(WireInfoEntity wireInfoEntity)
+        public static bool deleteWirePointInfo(WireInfo wireInfoEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
             bool bResult = false;
@@ -135,12 +135,12 @@ namespace LibBusiness
         /// 查询导线点信息
         /// </summary>
         /// <returns>DataSet</returns>
-        public static WirePointInfoEntity selectWirePointInfoByWirePointId(int id)
+        public static WirePointInfo selectWirePointInfoByWirePointId(int id)
         {
             string sqlStr = "SELECT * FROM " + WirePointDbConstNames.TABLE_NAME + " WHERE " + WirePointDbConstNames.ID + " = " + id;
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
             DataSet ds = db.ReturnDS(sqlStr);
-            WirePointInfoEntity wirePointInfoEntity = new WirePointInfoEntity();
+            WirePointInfo wirePointInfoEntity = new WirePointInfo();
             if (ds.Tables[0].Rows.Count > 0)
             {
                 wirePointInfoEntity.ID = Convert.ToInt32(ds.Tables[0].Rows[0][WirePointDbConstNames.ID]);
@@ -187,12 +187,12 @@ namespace LibBusiness
         /// </summary>
         /// <param name="wirePointInfoID"></param>
         /// <returns>wirePointInfoEntity</returns>
-        public static WirePointInfoEntity returnWirePointInfo(int id)
+        public static WirePointInfo returnWirePointInfo(int id)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
             string sql = "SELECT * FROM " + WirePointDbConstNames.TABLE_NAME + " WHERE " + WirePointDbConstNames.ID + " = " + id;
             DataSet ds = db.ReturnDS(sql);
-            WirePointInfoEntity wirePointInfoEntity = new WirePointInfoEntity();
+            WirePointInfo wirePointInfoEntity = new WirePointInfo();
             if (ds.Tables[0].Rows.Count > 0)
             {
                 wirePointInfoEntity.ID = Convert.ToInt32(ds.Tables[0].Rows[0][WirePointDbConstNames.ID]);

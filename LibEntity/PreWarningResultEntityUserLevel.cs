@@ -99,7 +99,7 @@ namespace LibEntity
         /// </summary>
         /// <param name="results"></param>
         /// <returns></returns>
-        public static PreWarningResultEntityUserLevel Convert2WarningResultUserLevel(PreWarningResultEntity[] results)
+        public static PreWarningResultEntityUserLevel Convert2WarningResultUserLevel(PreWarningResult[] results)
         {
             var ret = new PreWarningResultEntityUserLevel();
 
@@ -143,7 +143,7 @@ namespace LibEntity
             int nResultCnt = results.Length;
             for (int i = 0; i < nResultCnt; i++)
             {
-                PreWarningResultEntity curPreWarningResultEnt = results[i];
+                PreWarningResult curPreWarningResultEnt = results[i];
 
                 //获取规则编码对应的预警级别
                 WARNING_LEVEL_RESULT curRulesEntWarningLevel =

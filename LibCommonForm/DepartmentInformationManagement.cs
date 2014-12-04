@@ -144,7 +144,7 @@ namespace LibCommonForm
             LibCommon.FormDefaultPropertiesSetter.SetManagementFormDefaultProperties(this, LibCommon.LibFormTitles.DEPARTMENT_MANMAGEMENT);
 
             //判断用户权限
-            if (CurrentUserEnt.CurLoginUserInfo.Permission != Permission.管理员.ToString())
+            if (CurrentUser.CurLoginUserInfo.Permission != Permission.管理员.ToString())
             {
                 tsBtnAdd.Visible = false;
                 tsBtnDel.Visible = false;
@@ -218,7 +218,7 @@ namespace LibCommonForm
             if (FileExport.fileExport(_fpDepartmentInfo, true))
             {
                 Alert.alert(Const.EXPORT_SUCCESS_MSG);
-            }            
+            }
         }
 
         /// <summary>
@@ -309,7 +309,7 @@ namespace LibCommonForm
             int n = this._fpDepartmentInfo.ActiveSheet.ActiveCell.Row.Index;
 
             //当选择空行时,属性框为空
-            if (CurrentUserEnt.CurLoginUserInfo.Permission != Permission.普通用户.ToString())
+            if (CurrentUser.CurLoginUserInfo.Permission != Permission.普通用户.ToString())
             {
                 propertyGrid.Enabled = this._fpDepartmentInfo.ActiveSheet.Cells[n, 1].Value == null ? false : true;
             }
@@ -379,7 +379,7 @@ namespace LibCommonForm
                 //获取fp中修改值的列索引
                 int columnIndex = this._fpDepartmentInfo.ActiveSheet.Columns[ss].Index;
                 //获取修改的值
-                changeValue = e.ChangedItem.Value.ToString();               
+                changeValue = e.ChangedItem.Value.ToString();
 
                 if (ss == _strDeptNameLable)
                 {
@@ -403,7 +403,7 @@ namespace LibCommonForm
                 }
 
                 //验证邮箱
-                if (ss==_strDeptEmailLable)
+                if (ss == _strDeptEmailLable)
                 {
                     //邮箱格式
                     if (!LibCommon.Validator.checkIsEmailAddress(changeValue))
@@ -490,13 +490,13 @@ namespace LibCommonForm
 
                 //旧的 部门名称
                 string oldName = name;
-                if (ss==_strDeptNameLable)
+                if (ss == _strDeptNameLable)
                 {
                     oldName = e.OldValue.ToString();
                 }
 
-                 //定义 部门信息实体 接收新修改的数据
-                DepartmentInformationEntity userDeptInfo = new DepartmentInformationEntity();
+                //定义 部门信息实体 接收新修改的数据
+                LibEntity.DepartmentInformation userDeptInfo = new LibEntity.DepartmentInformation();
                 //部门名称
                 userDeptInfo.Name = name;
                 //人数
@@ -549,7 +549,7 @@ namespace LibCommonForm
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void tsBtnRefresh_Click(object sender, EventArgs e)
-        {                        
+        {
             //加载数据         
             GetDepartmentInfo();
         }
@@ -723,7 +723,7 @@ namespace LibCommonForm
         private void 刷新ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             tsBtnRefresh_Click(sender, e);
-        }               
+        }
 
         /// <summary>
         /// 设置右键菜单

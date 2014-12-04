@@ -96,7 +96,7 @@ namespace LibBusiness
         /// <param name="gdEntity">工作面动态防突井下数据实体</param>
         /// <param name="tunnelEntity">巷道实体</param>
         /// <returns>瓦斯信息</returns>
-        public static bool insertGasDataInfo(GasDataEntity gdEntity)
+        public static bool insertGasDataInfo(GasData gdEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
             StringBuilder sb = new StringBuilder();
@@ -129,7 +129,7 @@ namespace LibBusiness
         /// <param name="gdEntity">工作面动态防突井下数据实体</param>
         /// <param name="tunnelEntity">巷道实体</param>
         /// <returns>是否修改成功?true:false</returns>
-        public static bool updateGasDataInfo(GasDataEntity gdEntity)
+        public static bool updateGasDataInfo(GasData gdEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
             StringBuilder sb = new StringBuilder();

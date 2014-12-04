@@ -27,9 +27,9 @@ namespace LibBusiness
         /// </summary>
         /// <param name="time">查询时间</param>
         /// <returns>返回查询实体的数组</returns>
-        public static List<PreWarningResultQueryEnt> QueryLastedPreWarningResult(string time)
+        public static List<PreWarningResultQuery> QueryLastedPreWarningResult(string time)
         {
-            List<PreWarningResultQueryEnt> lastedResultEnts = new List<PreWarningResultQueryEnt>();
+            List<PreWarningResultQuery> lastedResultEnts = new List<PreWarningResultQuery>();
             StringBuilder strSql = new StringBuilder();
             strSql.Append("SELECT * FROM ");
             strSql.Append(PreWarningResultViewDbConstNames.VIEW_NAME);
@@ -44,12 +44,12 @@ namespace LibBusiness
             if (dt != null)
             {
                 int rowCount = dt.Rows.Count;
-                PreWarningResultQueryEnt ent = null;
+                PreWarningResultQuery ent = null;
                 for (int i = 0; i < rowCount; i++)
                 {
                     //if (i % 2 == 0)
                     //{
-                    ent = new PreWarningResultQueryEnt();
+                    ent = new PreWarningResultQuery();
                     //巷道名称
                     //int tunelId = LibCommon.Const.INVALID_TUNNEL_ID;
                     //int.TryParse(dt.Rows[i][PreWarningResultDBConstNames.TUNNEL_ID].ToString(), out tunelId);
@@ -269,12 +269,12 @@ namespace LibBusiness
         /// 以巷道为单位
         /// </summary>
         /// <returns></returns>
-        public static List<PreWarningResultQueryEnt> QueryHoldWarningResult()
+        public static List<PreWarningResultQuery> QueryHoldWarningResult()
         {
-            List<PreWarningResultQueryEnt> lastedResultEnts = new List<PreWarningResultQueryEnt>();
+            List<PreWarningResultQuery> lastedResultEnts = new List<PreWarningResultQuery>();
 
             // 一条巷道，有的记录有两条“突出和超限”，有的记录只有一条“”，我们把两条的合并成一条
-            Dictionary<int, PreWarningResultQueryEnt> container = new Dictionary<int, PreWarningResultQueryEnt>();
+            Dictionary<int, PreWarningResultQuery> container = new Dictionary<int, PreWarningResultQuery>();
 
             StringBuilder strSql = new StringBuilder();
             strSql.Append("SELECT * FROM ");
@@ -293,7 +293,7 @@ namespace LibBusiness
             if (dt != null)
             {
                 int rowCount = dt.Rows.Count;
-                PreWarningResultQueryEnt ent = null;
+                PreWarningResultQuery ent = null;
                 for (int i = 0; i < rowCount; i++)
                 {
                     //巷道名称
@@ -303,7 +303,7 @@ namespace LibBusiness
                         ent = container[tunelId];// 巷道已经存在字典中
                     else
                     {
-                        ent = new PreWarningResultQueryEnt();
+                        ent = new PreWarningResultQuery();
                         container.Add(tunelId, ent);
                     }
 
@@ -398,7 +398,7 @@ namespace LibBusiness
                     //lastedResultEnts.Add(ent);
                 }
 
-                foreach (KeyValuePair<int, PreWarningResultQueryEnt> kvp in container)
+                foreach (KeyValuePair<int, PreWarningResultQuery> kvp in container)
                 {
                     lastedResultEnts.Add(kvp.Value);
                 }
@@ -455,9 +455,9 @@ namespace LibBusiness
             return tunnelNames[tunnelId] as string;
         }
 
-        public static List<PreWarningResultQueryWithWorkingfaceEnt> MergePreWarningInfo(List<PreWarningResultQueryEnt> list)
+        public static List<PreWarningResultQueryWithWorkingface> MergePreWarningInfo(List<PreWarningResultQuery> list)
         {
-            var result = new List<PreWarningResultQueryWithWorkingfaceEnt>();
+            var result = new List<PreWarningResultQueryWithWorkingface>();
             var workingfaceList = new List<int>();
             foreach (var i in list)
             {
@@ -466,8 +466,8 @@ namespace LibBusiness
             }
             foreach (var i in workingfaceList)
             {
-                List<PreWarningResultQueryEnt> temp = list.Where(u => u.WorkingfaceId == i).ToList();
-                var item = new PreWarningResultQueryWithWorkingfaceEnt();
+                List<PreWarningResultQuery> temp = list.Where(u => u.WorkingfaceId == i).ToList();
+                var item = new PreWarningResultQueryWithWorkingface();
                 item.OutBrustWarningResult = new WarningResultEnt();
                 item.OverLimitWarningResult = new WarningResultEnt();
 

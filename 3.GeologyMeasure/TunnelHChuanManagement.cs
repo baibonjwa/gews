@@ -27,7 +27,7 @@ namespace _3.GeologyMeasure
         int _tmpRowIndex = 0;
         //需要过滤的列索引
         private int[] _filterColunmIdxs = null;
-        TunnelHChuanEntity tunnelHChuanEntity = new TunnelHChuanEntity();
+        TunnelHChuan tunnelHChuanEntity = new TunnelHChuan();
         DataSet _ds = new DataSet();
         int tmpInt = 0;
         private int _BIDIndex = 18;

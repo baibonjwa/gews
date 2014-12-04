@@ -28,14 +28,14 @@ namespace _5.WarningManagement
             InitializeComponent();
         }
 
-        public PreWarningResultTable(PreWarningResultTableEntity preWarningResultTableEntity, int tunnelID)
+        public PreWarningResultTable(LibEntity.PreWarningResultTable preWarningResultTableEntity, int tunnelID)
         {
             InitializeComponent();
             _tunnelID = tunnelID;
             UpdateTableContents(preWarningResultTableEntity, tunnelID);
         }
 
-        public void UpdateTableContents(PreWarningResultTableEntity preWarningResultTableEntity, int tunnelID)
+        public void UpdateTableContents(LibEntity.PreWarningResultTable preWarningResultTableEntity, int tunnelID)
         {
             if (preWarningResultTableEntity != null)
             {

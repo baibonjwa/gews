@@ -43,7 +43,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="wireInfoEntity">导线实体</param>
         /// <returns>成功与否：true，false</returns>
-        public static bool insertWireInfo(WireInfoEntity wireInfoEntity)
+        public static bool insertWireInfo(WireInfo wireInfoEntity)
         {
             StringBuilder sqlStr = new StringBuilder();
             sqlStr.Append("INSERT INTO " + WireInfoDbConstNames.TABLE_NAME + " (" + 
@@ -78,7 +78,7 @@ namespace LibBusiness
         /// <param name="wireInfoEntity">导线实体</param>
         /// <param name="tunnelID">巷道编号</param>
         /// <returns>成功与否：true,false</returns>
-        public static bool updateWireInfo(WireInfoEntity wireInfoEntity,int tunnelID)
+        public static bool updateWireInfo(WireInfo wireInfoEntity,int tunnelID)
         {
             StringBuilder sqlStr = new StringBuilder();
             sqlStr.Append("UPDATE " + WireInfoDbConstNames.TABLE_NAME + " SET " + WireInfoDbConstNames.TUNNEL_ID + " ='");
@@ -164,13 +164,13 @@ namespace LibBusiness
         /// </summary>
         /// <param name="wireInfoID">导线ID</param>
         /// <returns>导线信息</returns>
-        public static WireInfoEntity selectAllWireInfo(int wireInfoID)
+        public static WireInfo selectAllWireInfo(int wireInfoID)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
             string sql = "SELECT * FROM " + WireInfoDbConstNames.TABLE_NAME + " WHERE " + WireInfoDbConstNames.ID + " = " + wireInfoID;
             DataSet ds = db.ReturnDS(sql);
             
-            WireInfoEntity wireInfoEntity = new WireInfoEntity();
+            WireInfo wireInfoEntity = new WireInfo();
             if (ds.Tables[0].Rows.Count > 0)
             {
                 try
@@ -322,7 +322,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="wirePointInfoEntity"></param>
         /// <returns></returns>
-        public static bool deleteWireInfo(WireInfoEntity wireInfoEntity)
+        public static bool deleteWireInfo(WireInfo wireInfoEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
             bool bResult = false;

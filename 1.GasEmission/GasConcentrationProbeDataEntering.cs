@@ -40,7 +40,7 @@ namespace _1.GasEmission
             InitializeComponent();
 
             //分配权限
-            if (CurrentUserEnt.CurLoginUserInfo.Permission != Permission.管理员.ToString())
+            if (CurrentUser.CurLoginUserInfo.Permission != Permission.管理员.ToString())
             {
                 selectTunnelUserControl1.SetButtonEnable(false);
             }
@@ -370,7 +370,7 @@ namespace _1.GasEmission
             this.DialogResult = DialogResult.OK;
 
             // 创建一个瓦斯浓度探头数据实体
-            GasConcentrationProbeDataEntity gasConcentrationProbeDataEntity = new GasConcentrationProbeDataEntity();
+            GasConcentrationProbeData gasConcentrationProbeDataEntity = new GasConcentrationProbeData();
             // 探头编号
             gasConcentrationProbeDataEntity.ProbeId = Convert.ToString(this._lstProbeName.SelectedValue);
             // 探头数值

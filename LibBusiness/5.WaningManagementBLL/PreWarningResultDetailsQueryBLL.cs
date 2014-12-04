@@ -44,9 +44,9 @@ namespace LibBusiness
         /// <param name="date_shift"></param>
         /// <param name="tunnel_ID"></param>
         /// <returns></returns>
-        public static List<PreWarningResultQueryEnt> SelectPreWarningResultInOneDateShift(string date, string date_shift, string tunnel_ID, string warning_type)
+        public static List<PreWarningResultQuery> SelectPreWarningResultInOneDateShift(string date, string date_shift, string tunnel_ID, string warning_type)
         { 
-            List<PreWarningResultQueryEnt> ents = new List<PreWarningResultQueryEnt>();
+            List<PreWarningResultQuery> ents = new List<PreWarningResultQuery>();
             string[] times = GetDateShiftTimes(date_shift, date);
             if (times.Length != 2)
             {
@@ -84,12 +84,12 @@ namespace LibBusiness
                 DataTable dt = ds.Tables[0];
                 if (dt.Rows.Count > 0)
                 {
-                    ents = new List<PreWarningResultQueryEnt>();
+                    ents = new List<PreWarningResultQuery>();
                     int rowCount = dt.Rows.Count;
                     for (int i = 0; i < rowCount; i++)
                     {
                         #region 实体赋值
-                        PreWarningResultQueryEnt ent = new PreWarningResultQueryEnt();
+                        PreWarningResultQuery ent = new PreWarningResultQuery();
                         ent.TunelName = GetTunelNameByTunelID(tunnel_ID);
                         ent.DateTime = dt.Rows[i][PreWarningResultDBConstNames.DATA_TIME].ToString();
                         ent.Date_Shift = dt.Rows[i][PreWarningResultDBConstNames.DATE_SHIFT].ToString();
@@ -324,7 +324,7 @@ namespace LibBusiness
         /// 根据规则ID获取预警规则实体
         /// <param name="ruleId">规则Id</param>
         /// </summary>
-        public static PreWarningRulesEntity GetPreWarningRulesEntityByRuleId(string ruleId)
+        public static PreWarningRules GetPreWarningRulesEntityByRuleId(string ruleId)
         {
             try
             {
@@ -355,7 +355,7 @@ namespace LibBusiness
                 }
                 int iRuleID = -1;
                 int.TryParse(ruleId, out iRuleID);
-                PreWarningRulesEntity ret = new PreWarningRulesEntity(iRuleID);
+                PreWarningRules ret = new PreWarningRules(iRuleID);
                 ret.RuleCode = ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.RULE_CODE].ToString();
                 ret.RuleType = ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.RULE_TYPE].ToString();
                 ret.WarningType = ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.WARNING_TYPE].ToString();
@@ -460,7 +460,7 @@ namespace LibBusiness
                     ret[i] = new RuleInfo(int.Parse(rules[i]));
                     if (warningParams[i] != "")//该规则编码含有参数
                     {
-                        ret[i].PreWarningParams = PreWarningRulesEntity.ParseRuleDescriptionOfOneRuleId(warningParams[i]);
+                        ret[i].PreWarningParams = PreWarningRules.ParseRuleDescriptionOfOneRuleId(warningParams[i]);
                     }
                     else//该规则编码无对应参数
                     {

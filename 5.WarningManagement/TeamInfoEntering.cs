@@ -20,7 +20,7 @@ namespace _5.WarningManagement
     public partial class TeamInfoEntering : Form
     {
         //队别实体
-        TeamInfoEntity teamInfoEntity = new TeamInfoEntity();
+        TeamInfo teamInfoEntity = new TeamInfo();
 
         /// <summary>
         /// 构造方法
@@ -36,7 +36,7 @@ namespace _5.WarningManagement
         /// 构造方法
         /// </summary>
         /// <param name="teamInfoEntity">队别信息实体</param>
-        public TeamInfoEntering(TeamInfoEntity teamInfoEntity)
+        public TeamInfoEntering(TeamInfo teamInfoEntity)
         {
             this.teamInfoEntity = teamInfoEntity;
 

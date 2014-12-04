@@ -46,7 +46,7 @@ namespace _1.GasEmission
             InitializeComponent();
 
             //分配用户权限
-            if (CurrentUserEnt.CurLoginUserInfo.Permission != Permission.管理员.ToString())
+            if (CurrentUser.CurLoginUserInfo.Permission != Permission.管理员.ToString())
             {
                 btnAdd.Visible = false;
                 btnUpdate.Visible = false;
@@ -572,7 +572,7 @@ namespace _1.GasEmission
                 for (int i = 1; i < strs.Length; i++)
                 {
                     string[] line = strs[i].Split(',');
-                    ProbeManageEntity probe = new ProbeManageEntity();
+                    ProbeManage probe = new ProbeManage();
                     probe.ProbeMeasureType = Convert.ToInt16(line[0]);
                     probe.ProbeId = line[1].Substring(3);
                     probe.ProbeDescription = line[2];

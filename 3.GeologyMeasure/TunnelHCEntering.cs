@@ -518,7 +518,7 @@ namespace _3.GeologyMeasure
                 if (pos == null)
                     return;
 
-                workingFace.Coordinate = new CoordinateEntity(pos.X, pos.Y, 0.0);
+                workingFace.Coordinate = new Coordinate(pos.X, pos.Y, 0.0);
 
                 WorkingFaceBLL.updateWorkingFaceInfo(workingFace);
                 //添加地质构造信息到数据库表中
@@ -533,7 +533,7 @@ namespace _3.GeologyMeasure
                         {
                             GeoStruct tmp = geoinfos[i];
 
-                            var geologyspaceEntity = new GeologySpaceEntity();
+                            var geologyspaceEntity = new GeologySpace();
                             geologyspaceEntity.WorkSpaceID = workingFace.WorkingFaceID;
                             geologyspaceEntity.TectonicType = Convert.ToInt32(key);
                             geologyspaceEntity.TectonicID = tmp.geoinfos[GIS_Const.FIELD_BID];
@@ -575,7 +575,7 @@ namespace _3.GeologyMeasure
                 }
 
                 //工作面信息提交
-                workingFace.Coordinate = new CoordinateEntity(pos.X, pos.Y, 0.0);
+                workingFace.Coordinate = new Coordinate(pos.X, pos.Y, 0.0);
 
                 WorkingFaceBLL.updateWorkingFaceInfo(workingFace);
                 //更新地质构造表
@@ -590,7 +590,7 @@ namespace _3.GeologyMeasure
                         {
                             GeoStruct tmp = geoinfos[i];
 
-                            var geologyspaceEntity = new GeologySpaceEntity();
+                            var geologyspaceEntity = new GeologySpace();
                             geologyspaceEntity.WorkSpaceID = workingFace.WorkingFaceID;
                             geologyspaceEntity.TectonicType = Convert.ToInt32(key);
                             geologyspaceEntity.TectonicID = tmp.geoinfos[GIS_Const.FIELD_BID];

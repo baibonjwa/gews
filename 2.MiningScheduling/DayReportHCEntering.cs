@@ -34,7 +34,7 @@ namespace _2.MiningScheduling
     {
         #region ******变量声明******
         /**回采日报实体**/
-        DayReportHCEntity _dayReportHCEntity = new DayReportHCEntity();
+        DayReportHC _dayReportHCEntity = new DayReportHC();
         /**巷道关联矿井等信息ID集合**/
         int[] _arr;
 
@@ -133,7 +133,7 @@ namespace _2.MiningScheduling
         /// </summary>
         /// <param name="array">巷道编号数组</param>
         /// <param name="dayReportHCEntity">回采进尺日报实体</param>
-        public DayReportHCEntering(int[] array, DayReportHCEntity dayReportHCEntity, MainFrm frm)
+        public DayReportHCEntering(int[] array, DayReportHC dayReportHCEntity, MainFrm frm)
         {
             _arr = array;
             this.MainForm = frm;
@@ -347,7 +347,7 @@ namespace _2.MiningScheduling
             }
             else
             {
-                TeamInfoEntity teamInfoEntity = new TeamInfoEntity();
+                TeamInfo teamInfoEntity = new TeamInfo();
                 teamInfoEntity.TeamID = Convert.ToInt32(cboTeamName.SelectedValue);
                 teamInfoEntity = TeamBLL.selectTeamInfoByID(teamInfoEntity.TeamID);
                 teamInfoForm = new TeamInfoEntering(teamInfoEntity);
@@ -410,16 +410,16 @@ namespace _2.MiningScheduling
             }
             if (this.Text == Const_MS.DAY_REPORT_HC_ADD)
             {
-                TunnelDefaultSelect.InsertDefaultTunnel(DayReportHCDbConstNames.TABLE_NAME, selectWorkingfaceSimple1.IWorkingfaceId);
+                LibBusiness.TunnelDefaultSelect.InsertDefaultTunnel(DayReportHCDbConstNames.TABLE_NAME, selectWorkingfaceSimple1.IWorkingfaceId);
                 insertDayReportHCInfo();
             }
             else if (this.Text == Const_MS.DAY_REPORT_HC_CHANGE)
             {
-                DayReportHCEntity oldDayReportHCEntity = _dayReportHCEntity; //修改前实体
-                TunnelDefaultSelect.UpdateDefaultTunnel(DayReportHCDbConstNames.TABLE_NAME, selectWorkingfaceSimple1.IWorkingfaceId);
+                DayReportHC oldDayReportHCEntity = _dayReportHCEntity; //修改前实体
+                LibBusiness.TunnelDefaultSelect.UpdateDefaultTunnel(DayReportHCDbConstNames.TABLE_NAME, selectWorkingfaceSimple1.IWorkingfaceId);
                 updateDayReportHCInfo();
 
-                DayReportHCEntity newDayReportHCEntity = _dayReportHCEntity; //修改后实体
+                DayReportHC newDayReportHCEntity = _dayReportHCEntity; //修改后实体
             }
         }
 
@@ -468,7 +468,7 @@ namespace _2.MiningScheduling
             // 更新工作面信息（预警点坐标）
             if (pos != null)
             {
-                workingFace.Coordinate = new CoordinateEntity(pos.X, pos.Y, 0.0);
+                workingFace.Coordinate = new Coordinate(pos.X, pos.Y, 0.0);
                 LibBusiness.WorkingFaceBLL.updateWorkingfaceXYZ(workingFace);
             }
 
@@ -484,7 +484,7 @@ namespace _2.MiningScheduling
                     {
                         GeoStruct tmp = geoinfos[i];
 
-                        GeologySpaceEntity geologyspaceEntity = new GeologySpaceEntity();
+                        GeologySpace geologyspaceEntity = new GeologySpace();
                         geologyspaceEntity.WorkSpaceID = workingFace.WorkingFaceID;
                         geologyspaceEntity.TectonicType = Convert.ToInt32(key);
                         geologyspaceEntity.TectonicID = tmp.geoinfos[GIS.GIS_Const.FIELD_BID].ToString();
@@ -522,7 +522,7 @@ namespace _2.MiningScheduling
 
             foreach (string key in results_pts.Keys)
             {
-                workingFace.Coordinate = new CoordinateEntity(results_pts[key].X, results_pts[key].Y, results_pts[key].Z);
+                workingFace.Coordinate = new Coordinate(results_pts[key].X, results_pts[key].Y, results_pts[key].Z);
 
                 LibBusiness.WorkingFaceBLL.updateWorkingfaceXYZ(workingFace);
                 if (index == results_pts.Count - 1)
@@ -556,7 +556,7 @@ namespace _2.MiningScheduling
                     {
                         GeoStruct tmp = geoinfos[i];
 
-                        GeologySpaceEntity geologyspaceEntity = new GeologySpaceEntity();
+                        GeologySpace geologyspaceEntity = new GeologySpace();
                         geologyspaceEntity.WorkSpaceID = selectWorkingfaceSimple1.IWorkingfaceId;
                         geologyspaceEntity.TectonicType = Convert.ToInt32(key);
 
@@ -575,10 +575,10 @@ namespace _2.MiningScheduling
         /// </summary>
         private void insertDayReportHCInfo()
         {
-            List<DayReportHCEntity> dayReportHCEntityList = new List<DayReportHCEntity>();
+            List<DayReportHC> dayReportHCEntityList = new List<DayReportHC>();
             for (int i = 0; i < this.dgrdvDayReportHC.RowCount; i++)
             {
-                DayReportHCEntity dayReportHCEntity = new DayReportHCEntity();
+                DayReportHC dayReportHCEntity = new DayReportHC();
                 // 最后一行为空行时，跳出循环
                 if (i == this.dgrdvDayReportHC.RowCount - 1)
                 {
@@ -642,7 +642,7 @@ namespace _2.MiningScheduling
             bool bResult = false;
 
             //循环添加
-            foreach (DayReportHCEntity dayReportHCEntity in dayReportHCEntityList)
+            foreach (DayReportHC dayReportHCEntity in dayReportHCEntityList)
             {
                 //添加回采进尺日报
                 bResult = DayReportHCBLL.insertDayReportHCInfo(dayReportHCEntity);

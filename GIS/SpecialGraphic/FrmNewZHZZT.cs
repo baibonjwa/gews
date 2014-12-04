@@ -259,15 +259,15 @@ namespace GIS.SpecialGraphic
                     bid = IDGenerator.NewBindingID();
                 }
                 //实体赋值
-                histogramEnt historam = new histogramEnt();
+                Histogram historam = new Histogram();
                 historam.HistogramEntName = txtname.Text.Trim();
                 historam.BLC = Convert.ToDouble(txtBlc.Text.Trim());
                 historam.ID = bid;
-                historam.listMY = new List<historgramlist>();
+                historam.listMY = new List<Historgramlist>();
                 double height = 0;
                 for (int i = 0; i < dgrdvZhzzt.RowCount - 1; i++)
                 {
-                    historgramlist hisl = new historgramlist();
+                    Historgramlist hisl = new Historgramlist();
                     hisl.BID = bid;
                     hisl.Index = (i + 1);
                     //煤岩名称
@@ -434,7 +434,7 @@ namespace GIS.SpecialGraphic
                 Application.DoEvents();
 
 
-                List<historgramlist> list = historam.ListMY;
+                List<Historgramlist> list = historam.ListMY;
                 for (int i = 0; i < list.Count; i++)
                 {
                     xmin = xbasic;

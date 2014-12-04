@@ -14,7 +14,7 @@ namespace LibBusiness
     public class WarningImgBLL
     {
         //向某预警信息添加图片
-        public static bool InsertWarningImg(WarningImgEnt ent)
+        public static bool InsertWarningImg(WarningImg ent)
         {
             StringBuilder sb = new StringBuilder();
 

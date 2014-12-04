@@ -25,10 +25,10 @@ namespace _2.MiningScheduling
     public partial class StopLineEntering : Form
     {
         #region ******变量声明******
-        StopLineEntity stopLineEntity = new StopLineEntity();
+        StopLine stopLineEntity = new StopLine();
         #endregion
 
-        StopLineEntity _oldStopLineEntity = null; //更新前的停采线实体
+        StopLine _oldStopLineEntity = null; //更新前的停采线实体
         StopLineManagement frmStop;
         /// <summary>
         /// 构造方法
@@ -45,7 +45,7 @@ namespace _2.MiningScheduling
         /// 构造方法
         /// </summary>
         /// <param name="stopLineEntity">停采线实体</param>
-        public StopLineEntering(StopLineEntity stopLineEntity, StopLineManagement frm)
+        public StopLineEntering(StopLine stopLineEntity, StopLineManagement frm)
         {
             this.stopLineEntity = stopLineEntity;
 
@@ -286,7 +286,7 @@ namespace _2.MiningScheduling
         /// 在地图上绘制一条停采线
         /// </summary>
         /// <param name="stopLineEntity">掘进的起点和终点</param>
-        private bool DrawStopLine(StopLineEntity stopLineEntity)
+        private bool DrawStopLine(StopLine stopLineEntity)
         {
             if (stopLineEntity == null)
                 return false;
@@ -317,7 +317,7 @@ namespace _2.MiningScheduling
         /// <param name="oldEntity">修改前的停采线实体</param>
         /// <param name="newEntity">修改后的停采线实体</param>
         /// <returns>成功返回true</returns>
-        private bool UpdateStopLineOnMap(StopLineEntity oldEntity, StopLineEntity newEntity)
+        private bool UpdateStopLineOnMap(StopLine oldEntity, StopLine newEntity)
         {
             IFeatureLayer featureLayer = GetStopLineFeatureLayer();
             if (featureLayer == null)

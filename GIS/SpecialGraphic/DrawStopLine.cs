@@ -10,7 +10,7 @@ namespace GIS.SpecialGraphic
 {
     public class DrawStopLine
     {
-        public static bool CreateLineFeature(IFeatureLayer featureLayer, IPolyline pStopLine, LibEntity.StopLineEntity stopLineEntity)
+        public static bool CreateLineFeature(IFeatureLayer featureLayer, IPolyline pStopLine, LibEntity.StopLine stopLineEntity)
         {
             if (pStopLine == null || pStopLine.IsEmpty)
             {

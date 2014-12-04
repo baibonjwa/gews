@@ -24,7 +24,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="teamInfoEntity">队别实体</param>
         /// <returns>队别信息</returns>
-        public static bool insertTeamInfo(TeamInfoEntity teamInfoEntity)
+        public static bool insertTeamInfo(TeamInfo teamInfoEntity)
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("INSERT INTO " + TeamDbConstNames.TABLE_NAME + " (");
@@ -58,12 +58,12 @@ namespace LibBusiness
         /// </summary>
         /// <param name="teamID"></param>
         /// <returns></returns>
-        public static TeamInfoEntity selectTeamInfoByID(int teamID)
+        public static TeamInfo selectTeamInfoByID(int teamID)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
             string sql = "SELECT * FROM " + TeamDbConstNames.TABLE_NAME + " WHERE " + TeamDbConstNames.ID + " = " + teamID;
             DataSet ds = db.ReturnDS(sql);
-            TeamInfoEntity teamInfoEntity = new TeamInfoEntity();
+            TeamInfo teamInfoEntity = new TeamInfo();
             if (ds.Tables[0].Rows.Count > 0)
             {
                 teamInfoEntity.TeamID = Convert.ToInt32(ds.Tables[0].Rows[0][TeamDbConstNames.ID].ToString());
@@ -112,7 +112,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="teamInfoEntity">队别实体</param>
         /// <returns></returns>
-        public static bool updateTeamInfo(TeamInfoEntity teamInfoEntity)
+        public static bool updateTeamInfo(TeamInfo teamInfoEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
             StringBuilder sqlStr = new StringBuilder();
@@ -131,7 +131,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="teamInfoEntity">队别实体</param>
         /// <returns></returns>
-        public static bool deleteTeamInfo(TeamInfoEntity teamInfoEntity)
+        public static bool deleteTeamInfo(TeamInfo teamInfoEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
             string sql = "DELETE FROM " + TeamDbConstNames.TABLE_NAME + " WHERE " + TeamDbConstNames.ID + " =" + teamInfoEntity.TeamID;

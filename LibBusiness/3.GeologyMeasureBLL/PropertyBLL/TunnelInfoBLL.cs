@@ -408,7 +408,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="tunnelHCEntity">巷道实体</param>
         /// <returns>是否成功设置巷道为横川巷道？true:false</returns>
-        public static bool setTunnelAsHChuan(TunnelHChuanEntity tunnelHChuanEntity)
+        public static bool setTunnelAsHChuan(TunnelHChuan tunnelHChuanEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
             db.Open();

@@ -34,7 +34,7 @@ namespace LibPanels
         private int[] _filterColunmIdxs = null;
         DataSet ds = new DataSet();
         public static Tunnel tunnelEntity = new Tunnel();
-        public static CoalExistenceEntity ceEntity = new CoalExistenceEntity();
+        public static CoalExistence ceEntity = new CoalExistence();
 
         //***********************************
 
@@ -77,7 +77,7 @@ namespace LibPanels
         /// <param name="e"></param>
         private void MineDataManagement_Load(object sender, EventArgs e)
         {
-            this.bindFpGasEmissionDataWithCondition();
+            bindFpGasEmissionDataWithCondition();
         }
 
         /// <summary>

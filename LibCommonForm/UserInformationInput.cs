@@ -102,7 +102,7 @@ namespace LibCommonForm
             //    + _rtxtRemark.Text.ToString().Trim() + "','"
             //    + _cboPromission.Text.ToString().Trim() + "')";
             //database.OperateDB(sql);
-            UserInformationManagementEntity ent = new UserInformationManagementEntity();
+            UserInformation ent = new UserInformation();
             ent.LoginName = _txtLoginName.Text.ToString().Trim();
             ent.PassWord = _txtPassWord.Text.ToString().Trim();
             ent.Group = _cboGroup.Text.ToString().Trim();

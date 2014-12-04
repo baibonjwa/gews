@@ -36,7 +36,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="boreholeEntity">钻孔实体</param>
         /// <returns>成功与否：true，false</returns>
-        public static bool insertBoreholeInfo(BoreholeEntity boreholeEntity)
+        public static bool insertBoreholeInfo(Borehole boreholeEntity)
         {
             StringBuilder sqlStr = new StringBuilder();
             sqlStr.Append("INSERT INTO " + BoreholeDBConstNames.TABLE_NAME);
@@ -205,10 +205,10 @@ namespace LibBusiness
         /// </summary>
         /// <param name="dr"></param>
         /// <returns></returns>
-        public static BoreholeEntity GetBoreholeEntity(DataRow dr)
+        public static Borehole GetBoreholeEntity(DataRow dr)
         {
-            BoreholeEntity ret = null;
-            ret = new BoreholeEntity();
+            Borehole ret = null;
+            ret = new Borehole();
 
             //钻孔编号
             ret.BoreholeId = int.Parse(dr[BoreholeDBConstNames.BOREHOLE_ID].ToString());
@@ -267,7 +267,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="boreholeEntity">钻孔实体</param>
         /// <returns>成功与否：true，false</returns>
-        public static bool updateBoreholeInfo(BoreholeEntity boreholeEntity)
+        public static bool updateBoreholeInfo(Borehole boreholeEntity)
         {
             StringBuilder sqlStr = new StringBuilder();
             sqlStr.Append("UPDATE " + BoreholeDBConstNames.TABLE_NAME);

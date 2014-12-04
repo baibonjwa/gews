@@ -54,7 +54,7 @@ namespace LibBusiness
             string sqlStr = "SELECT * FROM " + CoalExistenceDbConstNames.TABLE_NAME + " WHERE " + CoalExistenceDbConstNames.ID + " = " + id;
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GasEmissionDB);
             DataSet ds = db.ReturnDS(sqlStr);
-            CoalExistenceEntity cEntity = new CoalExistenceEntity();
+            CoalExistence cEntity = new CoalExistence();
             if (ds.Tables[0].Rows.Count > 0)
             {
                 cEntity.Id = Convert.ToInt32(ds.Tables[0].Rows[0][CoalExistenceDbConstNames.ID].ToString());
@@ -114,7 +114,7 @@ namespace LibBusiness
         /// <param name="m">工作面瓦斯涌出动态特征井下数据实体</param>
         /// <param name="ceEntity">煤层赋存实体</param>
         /// <returns>是否修改成功?true:false</returns>
-        public static bool updateCoalExistence(CoalExistenceEntity ceEntity)
+        public static bool updateCoalExistence(CoalExistence ceEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GasEmissionDB);
             StringBuilder sb = new StringBuilder();

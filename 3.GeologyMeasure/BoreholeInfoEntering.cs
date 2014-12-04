@@ -142,7 +142,7 @@ namespace _3.GeologyMeasure
             DialogResult = DialogResult.OK;
 
             // 创建钻孔实体
-            BoreholeEntity breholeEntity = new BoreholeEntity();
+            Borehole breholeEntity = new Borehole();
 
             // 钻孔编号
             // 添加的时候自动採番，修改的场合使用上层传过来的钻孔编号
@@ -181,7 +181,7 @@ namespace _3.GeologyMeasure
             // 煤层结构
             breholeEntity.CoalSeamsTexture = string.Empty;
 
-            List<BoreholeLithologyEntity> boreholeLithologyEntityList = new List<BoreholeLithologyEntity>();
+            List<BoreholeLithology> boreholeLithologyEntityList = new List<BoreholeLithology>();
             for (int i = 0; i < this.gvCoalSeamsTexture.RowCount; i++)
             {
                 // 最后一行为空行时，跳出循环
@@ -190,7 +190,7 @@ namespace _3.GeologyMeasure
                     break;
                 }
                 // 创建钻孔岩性实体
-                BoreholeLithologyEntity boreholeLithologyEntity = new BoreholeLithologyEntity();
+                BoreholeLithology boreholeLithologyEntity = new BoreholeLithology();
                 // 钻孔编号
                 boreholeLithologyEntity.BoreholeId = this._boreholeId;
                 // 岩性编号
@@ -261,7 +261,7 @@ namespace _3.GeologyMeasure
                 // 钻孔岩性信息登录
                 if (bResult)
                 {
-                    foreach (BoreholeLithologyEntity boreholeLithologyEntity in boreholeLithologyEntityList)
+                    foreach (BoreholeLithology boreholeLithologyEntity in boreholeLithologyEntityList)
                     {
                         bResult = BoreholeLithologyBLL.insertBoreholeLithologyInfo(boreholeLithologyEntity);
                     }
@@ -284,7 +284,7 @@ namespace _3.GeologyMeasure
                     bResult = BoreholeLithologyBLL.deleteBoreholeLithologyInfoByBoreholeId(breholeEntity.BoreholeId);
 
                     // 钻孔岩性信息登录
-                    foreach (BoreholeLithologyEntity boreholeLithologyEntity in boreholeLithologyEntityList)
+                    foreach (BoreholeLithology boreholeLithologyEntity in boreholeLithologyEntityList)
                     {
                         bResult = BoreholeLithologyBLL.insertBoreholeLithologyInfo(boreholeLithologyEntity);
                     }
@@ -368,7 +368,7 @@ namespace _3.GeologyMeasure
         /// </summary>
         /// <param name="breholeEntity">钻孔实体</param>
         /// <param name="boreholeLithologyEntity">钻孔岩性实体</param>
-        private void DrawZuanKong(BoreholeEntity breholeEntity, BoreholeLithologyEntity boreholeLithologyEntity)
+        private void DrawZuanKong(Borehole breholeEntity, BoreholeLithology boreholeLithologyEntity)
         {
             ////1.获得当前编辑图层
             //DrawSpecialCommon drawspecial = new DrawSpecialCommon();
@@ -455,7 +455,7 @@ namespace _3.GeologyMeasure
         /// 未见煤钻孔
         /// </summary>
         /// <param name="breholeEntity">钻孔实体</param>
-        private void DrawZuanKong(BoreholeEntity breholeEntity)
+        private void DrawZuanKong(Borehole breholeEntity)
         {
             ////1.获得当前编辑图层
             //DrawSpecialCommon drawspecial = new DrawSpecialCommon();
@@ -1337,7 +1337,7 @@ namespace _3.GeologyMeasure
                         //    "0");
                         //txtGroundElevation.Text = str[3];
 
-                        BoreholeEntity breholeEntity = new BoreholeEntity();
+                        Borehole breholeEntity = new Borehole();
 
                         breholeEntity.BoreholeId = this.getBoreholeId();
 
@@ -1356,7 +1356,7 @@ namespace _3.GeologyMeasure
                         breholeEntity.CoalSeamsTexture = String.Empty;
 
                         // 创建钻孔岩性实体
-                        BoreholeLithologyEntity boreholeLithologyEntity = new BoreholeLithologyEntity();
+                        BoreholeLithology boreholeLithologyEntity = new BoreholeLithology();
                         // 钻孔编号
                         boreholeLithologyEntity.BoreholeId = breholeEntity.BoreholeId;
                         // 岩性编号

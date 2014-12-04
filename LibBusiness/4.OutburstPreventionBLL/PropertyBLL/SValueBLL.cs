@@ -54,9 +54,9 @@ namespace LibBusiness
         /// </summary>
         /// <param name="SValueEntityID">S值ID</param>
         /// <returns>S值实体</returns>
-        public static SValueEntity selectValueSByID(int ID)
+        public static SValue selectValueSByID(int ID)
         {
-            SValueEntity sValueEntity = new SValueEntity();
+            SValue sValueEntity = new SValue();
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
             string sql = "SELECT * FROM " + SValueDbConstNames.TABLE_NAME + " WHERE " + SValueDbConstNames.ID + " = " + ID;
             DataSet ds = db.ReturnDS(sql);
@@ -96,19 +96,19 @@ namespace LibBusiness
         /// </summary>
         /// <param name="k1ValueID">K1分组ID</param>
         /// <returns>K1实体</returns>
-        public static SValueEntity[] selectValueSBySValueID(int SValueID)
+        public static SValue[] selectValueSBySValueID(int SValueID)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
             string sql = "SELECT * FROM " + SValueDbConstNames.TABLE_NAME + " WHERE " + SValueDbConstNames.VALUE_S_ID + " = " + SValueID;
             DataSet ds = db.ReturnDS(sql);
-            SValueEntity[] sEntity = new SValueEntity[ds.Tables[0].Rows.Count];
+            SValue[] sEntity = new SValue[ds.Tables[0].Rows.Count];
             if (ds.Tables[0].Rows.Count > 0)
             {
                 for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                 {
                     try
                     {
-                        SValueEntity sValueEntity = new SValueEntity();
+                        SValue sValueEntity = new SValue();
                         sValueEntity.ID = Convert.ToInt32(ds.Tables[0].Rows[i][SValueDbConstNames.ID]);
                         sValueEntity.SValueID = Convert.ToInt32(ds.Tables[0].Rows[i][SValueDbConstNames.VALUE_S_ID]);
                         sValueEntity.CoordinateX = Convert.ToDouble(ds.Tables[0].Rows[i][SValueDbConstNames.COORDINATE_X]);
@@ -161,7 +161,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="sValueEntity"></param>
         /// <returns></returns>
-        public static bool insertValueS(SValueEntity sValueEntity)
+        public static bool insertValueS(SValue sValueEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
             StringBuilder sb = new StringBuilder();
@@ -197,7 +197,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="sValueEntity"></param>
         /// <returns></returns>
-        public static bool updateValueS(SValueEntity sValueEntity)
+        public static bool updateValueS(SValue sValueEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
             StringBuilder sb = new StringBuilder();
@@ -222,7 +222,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="sValueEntity"></param>
         /// <returns></returns>
-        public static bool deleteValueS(SValueEntity sValueEntity)
+        public static bool deleteValueS(SValue sValueEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
             string sql = "DELETE FROM " + SValueDbConstNames.TABLE_NAME + " WHERE " + SValueDbConstNames.ID + " = " + sValueEntity.ID;

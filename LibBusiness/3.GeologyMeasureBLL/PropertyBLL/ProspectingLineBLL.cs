@@ -56,7 +56,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="prospectingLineEntity"><勘探线>实体</param>
         /// <returns>成功与否：true，false</returns>
-        public static bool insertProspectingLineInfo(ProspectingLineEntity prospectingLineEntity)
+        public static bool insertProspectingLineInfo(ProspectingLine prospectingLineEntity)
         {
             StringBuilder sqlStr = new StringBuilder();
             sqlStr.Append("INSERT INTO " + ProspectingLineDbConstNames.TABLE_NAME);
@@ -191,7 +191,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="prospectingLineEntity"><勘探线>实体</param>
         /// <returns>成功与否：true，false</returns>
-        public static bool updateProspectingLineInfo(ProspectingLineEntity prospectingLineEntity)
+        public static bool updateProspectingLineInfo(ProspectingLine prospectingLineEntity)
         {
             StringBuilder sqlStr = new StringBuilder();
             sqlStr.Append("UPDATE " + ProspectingLineDbConstNames.TABLE_NAME);

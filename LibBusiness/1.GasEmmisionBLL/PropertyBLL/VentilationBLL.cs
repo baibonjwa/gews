@@ -48,12 +48,12 @@ namespace LibBusiness
         /// 获取某巷道通风信息
         /// </summary>
         /// <returns>通风信息</returns>
-        public static VentilationInfoEntity selectVentilationInfo(int id)
+        public static VentilationInfo selectVentilationInfo(int id)
         {
             string sqlStr = "SELECT * FROM " + VentilationDbConstNames.TABLE_NAME + " WHERE " + VentilationDbConstNames.ID + " = " + id;
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GasEmissionDB);
             DataSet ds = db.ReturnDS(sqlStr);
-            VentilationInfoEntity vEntity = new VentilationInfoEntity();
+            VentilationInfo vEntity = new VentilationInfo();
             if (ds.Tables[0].Rows.Count > 0)
             {
                 vEntity.Id = Convert.ToInt32(ds.Tables[0].Rows[0][VentilationDbConstNames.ID].ToString());
@@ -126,7 +126,7 @@ namespace LibBusiness
         /// <param name="m">工作面瓦斯涌出动态特征井下数据实体</param>
         /// <param name="viEntity">通风实体</param>
         /// <returns>通风信息</returns>
-        public static bool insertVentilationInfo(VentilationInfoEntity viEntity)
+        public static bool insertVentilationInfo(VentilationInfo viEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GasEmissionDB);
             StringBuilder sb = new StringBuilder();
@@ -149,7 +149,7 @@ namespace LibBusiness
         /// <param name="m">工作面瓦斯涌出动态特征井下数据实体</param>
         /// <param name="viEntity">通风实体</param>
         /// <returns>是否修改成功?true:false</returns>
-        public static bool updateVentilationInfo(VentilationInfoEntity viEntity)
+        public static bool updateVentilationInfo(VentilationInfo viEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GasEmissionDB);
             StringBuilder sb = new StringBuilder();

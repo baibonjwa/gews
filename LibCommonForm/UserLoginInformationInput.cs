@@ -25,12 +25,12 @@ namespace LibCommonForm
         //定义字符串，表达添加或修改
         string _strIsAddOrModify = "add";
         //需要修改的实体
-        UserLoginInformationEnt _needModifyEnt = new UserLoginInformationEnt();
+        UserLogin _needModifyEnt = new UserLogin();
 
         /// <summary>
         /// 构造函数
         /// </summary>
-        public UserLoginInformationInput(UserLoginInformationEnt ent,bool isAddNewUser)
+        public UserLoginInformationInput(UserLogin ent,bool isAddNewUser)
         {
             InitializeComponent();
 
@@ -62,7 +62,7 @@ namespace LibCommonForm
         /// 构造函数,传入实体,用以区别添加/修改
         /// </summary>
         /// <param name="ent"></param>
-        public UserLoginInformationInput(UserLoginInformationEnt ent)
+        public UserLoginInformationInput(UserLogin ent)
         {
             //传出需要修改的实体
             _needModifyEnt = ent;
@@ -135,7 +135,7 @@ namespace LibCommonForm
             //添加时查重
             if (_strIsAddOrModify == "add")
             {
-                UserLoginInformationEnt entAdd = LoginFormBLL.GetUserLoginInformationByLoginname(_txtLoginName.Text.ToString().Trim());
+                UserLogin entAdd = LoginFormBLL.GetUserLoginInformationByLoginname(_txtLoginName.Text.ToString().Trim());
                 if (entAdd != null)
                 {
                     if (entAdd.LoginName == _txtLoginName.Text.ToString())
@@ -149,7 +149,7 @@ namespace LibCommonForm
             //修改
             else if (_strIsAddOrModify == "modify")
             {
-                UserLoginInformationEnt entModify = LoginFormBLL.GetUserLoginInformationByIDAndLoginName(_needModifyEnt.ID, _txtLoginName.Text.ToString().Trim());
+                UserLogin entModify = LoginFormBLL.GetUserLoginInformationByIDAndLoginName(_needModifyEnt.ID, _txtLoginName.Text.ToString().Trim());
                 if (entModify != null)
                 {                
                     Alert.alert(LibCommon.Const.LOGIN_NAME_EXIST, LibCommon.Const.NOTES, MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -183,7 +183,7 @@ namespace LibCommonForm
             }
 
             //定义用户实体
-            UserLoginInformationEnt ent = new UserLoginInformationEnt();
+            UserLogin ent = new UserLogin();
             //登录名
             ent.LoginName = loginname;
             //密码

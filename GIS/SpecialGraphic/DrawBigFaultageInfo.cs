@@ -23,7 +23,7 @@ namespace GIS
         /// <param name="faultage"></param>
         /// <param name="faultagePointList"></param>
         /// <returns></returns>
-        public static bool DrawTddc(String title, List<BigFaultagePointEntity> faultagePointList, String bId)
+        public static bool DrawTddc(String title, List<BigFaultagePoint> faultagePointList, String bId)
         {
             List<IPoint> listptS = new List<IPoint>();
             List<IPoint> listptX = new List<IPoint>();

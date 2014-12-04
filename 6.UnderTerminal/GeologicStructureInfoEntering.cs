@@ -21,7 +21,7 @@ namespace UnderTerminal
     public partial class GeologicStructureInfoEntering : Form
     {
         #region ******变量声明******
-        public GeologicStructureEntity geoligicStructureEntity = new GeologicStructureEntity();
+        public GeologicStructure geoligicStructureEntity = new GeologicStructure();
         #endregion#region ******变量声明******
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace UnderTerminal
         /// 绑定修改数据
         /// </summary>
         /// <param name="geologicStructureEntity"></param>
-        public void bindDefaultValue(GeologicStructureEntity geologicStructureEntity)
+        public void bindDefaultValue(GeologicStructure geologicStructureEntity)
         {
             //无计划揭露构造
             chkNoPlanStructure.Checked = (geologicStructureEntity.NoPlanStructure == 1);

@@ -36,7 +36,7 @@ namespace LibEntity
 
         // 坐标
 
-        public CoordinateEntity Coordinate { get; set; }
+        public Coordinate Coordinate { get; set; }
 
         // 开工日期
 

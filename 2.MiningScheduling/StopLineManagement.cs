@@ -38,7 +38,7 @@ namespace _2.MiningScheduling
         /**修改行号（修改时重新设置焦点用）**/
         int _tmpRowIndex = 0;
         /**停采线实体**/
-        StopLineEntity stopLineEntity = new StopLineEntity();
+        StopLine stopLineEntity = new StopLine();
         /**接分页查询数据**/
         DataSet _ds = new DataSet();
         //BID列序号

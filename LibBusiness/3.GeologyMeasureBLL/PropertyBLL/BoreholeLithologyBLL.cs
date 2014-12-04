@@ -23,7 +23,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="boreholeLithologyEntity">钻孔岩性实体</param>
         /// <returns>成功与否：true，false</returns>
-        public static bool insertBoreholeLithologyInfo(BoreholeLithologyEntity boreholeLithologyEntity)
+        public static bool insertBoreholeLithologyInfo(BoreholeLithology boreholeLithologyEntity)
         {
             StringBuilder sqlStr = new StringBuilder();
             sqlStr.Append("INSERT INTO " + BoreholeLithologyDbConstNames.TABLE_NAME);

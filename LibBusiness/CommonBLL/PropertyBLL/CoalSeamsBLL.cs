@@ -36,7 +36,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="coalSeamsEntity"><煤层>实体</param>
         /// <returns>成功与否：true，false</returns>
-        public static bool insertCoalSeamsInfo(CoalSeamsEntity coalSeamsEntity)
+        public static bool insertCoalSeamsInfo(CoalSeams coalSeamsEntity)
         {
             StringBuilder sqlStr = new StringBuilder();
             sqlStr.Append("INSERT INTO " + CoalSeamsDbConstNames.TABLE_NAME);
@@ -56,7 +56,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="mineEntity"><煤层>实体</param>
         /// <returns>成功与否：true，false</returns>
-        public static bool updateCoalSeamsInfo(CoalSeamsEntity coalSeamsEntity)
+        public static bool updateCoalSeamsInfo(CoalSeams coalSeamsEntity)
         {
             StringBuilder sqlStr = new StringBuilder();
             sqlStr.Append("UPDATE " + CoalSeamsDbConstNames.TABLE_NAME);

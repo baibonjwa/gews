@@ -23,10 +23,10 @@ namespace LibBusiness
         /// </summary>
         /// <param name="dr"></param>
         /// <returns></returns>
-        public static FaultageEntity GetFaultageEnt(DataRow dr)
+        public static Faultage GetFaultageEnt(DataRow dr)
         {
-            FaultageEntity ret = null;
-            ret = new FaultageEntity();
+            Faultage ret = null;
+            ret = new Faultage();
 
             //断层ID
             ret.FaultageId = int.Parse(dr[FaultageDbConstNames.FAULTAGE_ID].ToString());
@@ -150,7 +150,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="faultageEntity">【揭露断层】实体</param>
         /// <returns>成功与否：true，false</returns>
-        public static bool insertFaultageInfo(FaultageEntity faultageEntity)
+        public static bool insertFaultageInfo(Faultage faultageEntity)
         {
             StringBuilder sqlStr = new StringBuilder();
             sqlStr.Append("INSERT INTO " + FaultageDbConstNames.TABLE_NAME);
@@ -204,7 +204,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="faultageEntity">【揭露断层】实体</param>
         /// <returns>成功与否：true，false</returns>
-        public static bool updateFaultageInfo(FaultageEntity faultageEntity)
+        public static bool updateFaultageInfo(Faultage faultageEntity)
         {
             StringBuilder sqlStr = new StringBuilder();
             sqlStr.Append("UPDATE " + FaultageDbConstNames.TABLE_NAME);

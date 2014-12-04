@@ -29,7 +29,7 @@ namespace UnderTerminal
         Tunnel _tunnelEntity = new Tunnel();
         UnderMessageWindow mainWin;
         /**回采日报实体**/
-        DayReportHCEntity _dayReportHCEntity = new DayReportHCEntity();
+        DayReportHC _dayReportHCEntity = new DayReportHC();
         /**巷道关联矿井等信息ID集合**/
         int[] _arr;
         int tunnelId = -1;
@@ -55,7 +55,7 @@ namespace UnderTerminal
             addInfo();
             workingfaceId = BasicInfoManager.getInstance().getTunnelByID(tunnelId).WorkingFace.WorkingFaceID;
             //自定义控件初始化
-            TunnelDefaultSelectEntity tunnelDefaultSelectEntity = TunnelDefaultSelect.selectDefaultTunnel(DayReportHCDbConstNames.TABLE_NAME);
+            LibEntity.TunnelDefaultSelect tunnelDefaultSelectEntity = LibBusiness.TunnelDefaultSelect.selectDefaultTunnel(DayReportHCDbConstNames.TABLE_NAME);
 
         }
 
@@ -271,10 +271,10 @@ namespace UnderTerminal
         /// </summary>
         private void insertDayReportHCInfo()
         {
-            List<DayReportHCEntity> dayReportHCEntityList = new List<DayReportHCEntity>();
+            List<DayReportHC> dayReportHCEntityList = new List<DayReportHC>();
             for (int i = 0; i < this.dgrdvDayReportHC.RowCount; i++)
             {
-                DayReportHCEntity dayReportHCEntity = new DayReportHCEntity();
+                DayReportHC dayReportHCEntity = new DayReportHC();
                 // 最后一行为空行时，跳出循环
                 if (i == this.dgrdvDayReportHC.RowCount - 1)
                 {
@@ -335,7 +335,7 @@ namespace UnderTerminal
             bool bResult = false;
 
             //循环添加
-            foreach (DayReportHCEntity dayReportHCEntity in dayReportHCEntityList)
+            foreach (DayReportHC dayReportHCEntity in dayReportHCEntityList)
             {
                 //添加回采进尺日报
                 bResult = DayReportHCBLL.insertDayReportHCInfo(dayReportHCEntity);

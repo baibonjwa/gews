@@ -30,7 +30,7 @@ namespace _2.MiningScheduling
         /**修改行号（修改时重新设置焦点用）**/
         int _tmpRowIndex = 0;
         /**队别实体**/
-        TeamInfoEntity teamInfoEntity = new TeamInfoEntity();
+        TeamInfo teamInfoEntity = new TeamInfo();
         /**接分页查询数据**/
         DataSet _ds = new DataSet();
         #endregion

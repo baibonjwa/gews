@@ -25,14 +25,14 @@ namespace UnderTerminal
         UsualForecast usualForecast = new UsualForecast();              //日常预测
         ManagementInfoEntering management = new ManagementInfoEntering();                    //管理
         Tunnel tunnelEntity = new Tunnel();                 //巷道信息实体
-        VentilationInfoEntity viEntity = new VentilationInfoEntity();   //通风实体
-        CoalExistenceEntity ceEntity = new CoalExistenceEntity();       //煤层赋存实体
-        GasDataEntity gdEntity = new GasDataEntity();       //瓦斯实体
-        UsualForecastEntity ufEntity = new UsualForecastEntity();       //日常预测实体
-        ManagementEntity mEntity = new ManagementEntity();  //管理实体
-        MineDataEntity mineDataEntity = new MineDataEntity();
+        VentilationInfo viEntity = new VentilationInfo();   //通风实体
+        CoalExistence ceEntity = new CoalExistence();       //煤层赋存实体
+        GasData gdEntity = new GasData();       //瓦斯实体
+        LibEntity.UsualForecast ufEntity = new LibEntity.UsualForecast();       //日常预测实体
+        Management mEntity = new Management();  //管理实体
+        MineData mineDataEntity = new MineData();
         GeologicStructureInfoEntering geologicStructure = new GeologicStructureInfoEntering();
-        GeologicStructureEntity geologicStructureEntity = new GeologicStructureEntity();
+        GeologicStructure geologicStructureEntity = new GeologicStructure();
         int[] arr = new int[5];
         object obj = null;
         int formHeight = 247;
@@ -626,7 +626,7 @@ namespace UnderTerminal
         /// <param name="obj"></param>
         private void changeMineCommonValue(object obj)
         {
-            mineDataEntity = (MineDataEntity)obj;
+            mineDataEntity = (MineData)obj;
             txtCoordinateX.Text = mineDataEntity.CoordinateX.ToString();
             txtCoordinateY.Text = mineDataEntity.CoordinateY.ToString();
             txtCoordinateZ.Text = mineDataEntity.CoordinateZ.ToString();

@@ -167,7 +167,7 @@ namespace _3.GeologyMeasure
             DialogResult = DialogResult.OK;
 
             // 创建勘探线实体
-            ProspectingLineEntity prospectingLineEntity = new ProspectingLineEntity();
+            ProspectingLine prospectingLineEntity = new ProspectingLine();
             // 勘探线名称
             prospectingLineEntity.ProspectingLineName = this.txtProspectingLineName.Text.Trim();
             // 勘探线钻孔
@@ -241,7 +241,7 @@ namespace _3.GeologyMeasure
         /// </summary>
         /// <param name="prospectingLineEntity"></param>
         /// <param name="lstProspectingBoreholePts"></param>
-        private void ModifyProspectingLine(ProspectingLineEntity prospectingLineEntity, List<IPoint> lstProspectingBoreholePts)
+        private void ModifyProspectingLine(ProspectingLine prospectingLineEntity, List<IPoint> lstProspectingBoreholePts)
         {
             //1.获得当前编辑图层
             DrawSpecialCommon drawspecial = new DrawSpecialCommon();
@@ -273,7 +273,7 @@ namespace _3.GeologyMeasure
             try
             {
                 DataSet ds = BoreholeBLL.selectBoreholeInfoByBoreholeName(strDisplayName);
-                BoreholeEntity breholeEntity = new BoreholeEntity();
+                Borehole breholeEntity = new Borehole();
                 breholeEntity = BoreholeBLL.GetBoreholeEntity(ds.Tables[0].Rows[0]);
 
                 IPoint pt = new PointClass();
@@ -297,7 +297,7 @@ namespace _3.GeologyMeasure
         /// </summary>
         /// <param name="prospectingLineEntity"></param>
         /// <param name="lstProspectingBoreholePts"></param>
-        private void DrawProspectingLine(ProspectingLineEntity prospectingLineEntity, List<IPoint> lstProspectingBoreholePts)
+        private void DrawProspectingLine(ProspectingLine prospectingLineEntity, List<IPoint> lstProspectingBoreholePts)
         {
             //1.获得当前编辑图层
             DrawSpecialCommon drawspecial = new DrawSpecialCommon();

@@ -29,7 +29,7 @@ namespace LibCommonForm
         /// 传入实体，用于实例化时判断为添加、修改。若实体为空，则认为是添加。
         /// </summary>
         /// <param name="ent">用户详细信息实体</param>
-        public UserInformationDetailsInput(UserInformationDetailsEnt ent)
+        public UserInformationDetailsInput(UserInformationDetails ent)
         {
             InitializeComponent();
 
@@ -133,7 +133,7 @@ namespace LibCommonForm
         private void buttonOK_Click(object sender, EventArgs e)
         {
             //定义接收界面信息的实体
-            UserInformationDetailsEnt ent = new UserInformationDetailsEnt();
+            UserInformationDetails ent = new UserInformationDetails();
             //姓名
             ent.Name = _txtName.Text;
             //手机号码

@@ -12,7 +12,7 @@ namespace LibBusiness
 {
     public class WorkingFaceSelect
     {
-        public static WorkingFaceSelectEntity SelectWorkingFace(string tableName)
+        public static LibEntity.WorkingFaceSelect SelectWorkingFace(string tableName)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
             StringBuilder sb = new StringBuilder();
@@ -28,7 +28,7 @@ namespace LibBusiness
             sb.Append(" AND H." + HorizontalDbConstNames.MINE_ID + " = M." + MineDbConstNames.MINE_ID);
             DataSet ds = db.ReturnDS(sb.ToString());
 
-            WorkingFaceSelectEntity workingFaceSelectEntity = new WorkingFaceSelectEntity();
+            LibEntity.WorkingFaceSelect workingFaceSelectEntity = new LibEntity.WorkingFaceSelect();
             if (ds.Tables[0].Rows.Count > 0)
             {
                 try

@@ -91,7 +91,7 @@ namespace _3.GeologyMeasure
             DialogResult = DialogResult.OK;
 
             // 创建断层实体
-            FaultageEntity faultageEntity = new FaultageEntity();
+            Faultage faultageEntity = new Faultage();
 
             // 断层名称
             faultageEntity.FaultageName = this.txtFaultageName.Text.Trim();
@@ -203,7 +203,7 @@ namespace _3.GeologyMeasure
         /// 修改揭露断层图元
         /// </summary>
         /// <param name="faultageEntity"></param>
-        private void ModifyJLDC(FaultageEntity faultageEntity)
+        private void ModifyJLDC(Faultage faultageEntity)
         {
             //1.获得当前编辑图层
             DrawSpecialCommon drawspecial = new DrawSpecialCommon();
@@ -229,7 +229,7 @@ namespace _3.GeologyMeasure
         /// 绘制揭露断层图元
         /// </summary>
         /// <param name="faultageEntity"></param>
-        private void DrawJLDC(FaultageEntity faultageEntity)
+        private void DrawJLDC(Faultage faultageEntity)
         {
             ////1.获得当前编辑图层
             //DrawSpecialCommon drawspecial = new DrawSpecialCommon();

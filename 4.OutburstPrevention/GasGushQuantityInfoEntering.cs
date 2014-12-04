@@ -151,7 +151,7 @@ namespace _4.OutburstPrevention
             this.DialogResult = DialogResult.OK;
 
             // 创建瓦斯涌出量点实体
-            GasGushQuantityEntity gasGushQuantityEntity = new GasGushQuantityEntity();
+            GasGushQuantity gasGushQuantityEntity = new GasGushQuantity();
             // 坐标X
             double dCoordinateX = 0;
             if (double.TryParse(this.txtCoordinateX.Text.Trim(), out dCoordinateX))
@@ -416,7 +416,7 @@ namespace _4.OutburstPrevention
         /// <summary>
         /// 20140801SDE中添加瓦斯涌出量点
         /// </summary>
-        private void DrawGasGushQuantityPt(GasGushQuantityEntity gasGushQuantityEntity)
+        private void DrawGasGushQuantityPt(GasGushQuantity gasGushQuantityEntity)
         {
             double dCoordinateX = Convert.ToDouble(this.txtCoordinateX.Text.ToString());
             double dCoordinateY = Convert.ToDouble(this.txtCoordinateY.Text.ToString());

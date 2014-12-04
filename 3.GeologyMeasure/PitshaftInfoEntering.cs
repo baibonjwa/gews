@@ -98,7 +98,7 @@ namespace _3.GeologyMeasure
             DialogResult = DialogResult.OK;
 
             // 创建井筒实体
-            PitshaftEntity pitshaftEntity = new PitshaftEntity();
+            Pitshaft pitshaftEntity = new Pitshaft();
             // 井筒名称
             pitshaftEntity.PitshaftName = this.txtPitshaftName.Text.Trim();
             // 井筒类型
@@ -200,7 +200,7 @@ namespace _3.GeologyMeasure
         /// 绘制井筒图元
         /// </summary>
         /// <param name="pitshaftEntity"></param>
-        private void DrawJingTong(PitshaftEntity pitshaftEntity)
+        private void DrawJingTong(Pitshaft pitshaftEntity)
         {
             ////1.获得当前编辑图层
             //DrawSpecialCommon drawspecial = new DrawSpecialCommon();
@@ -310,7 +310,7 @@ namespace _3.GeologyMeasure
         /// 修改井筒
         /// </summary>
         /// <param name="pitshaftEntity"></param>
-        private void ModifyJingTong(PitshaftEntity pitshaftEntity)
+        private void ModifyJingTong(Pitshaft pitshaftEntity)
         {
             //1.获得当前编辑图层
             DrawSpecialCommon drawspecial = new DrawSpecialCommon();

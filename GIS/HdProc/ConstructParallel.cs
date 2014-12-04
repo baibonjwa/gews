@@ -299,7 +299,7 @@ namespace GIS.HdProc
         /// </summary>
         /// <param name="pnts"></param>
         /// <param name="layer"></param>
-        public void AddDxdLines(List<IPoint> pnts, Dictionary<string, string> dics, IFeatureLayer layer, List<LibEntity.WirePointInfoEntity> cols = null)
+        public void AddDxdLines(List<IPoint> pnts, Dictionary<string, string> dics, IFeatureLayer layer, List<LibEntity.WirePointInfo> cols = null)
         {
             try
             {
@@ -347,7 +347,7 @@ namespace GIS.HdProc
         /// <param name="pnts">对象的点串</param>
         /// <param name="dics">属性字段</param>
         /// <param name="hdlayer">添加对象图层</param>
-        public void AddHangdaoToLayer(List<IPoint> pnts, Dictionary<string, string> dics, IFeatureLayer layer, List<LibEntity.WirePointInfoEntity> pntinfos = null)
+        public void AddHangdaoToLayer(List<IPoint> pnts, Dictionary<string, string> dics, IFeatureLayer layer, List<LibEntity.WirePointInfo> pntinfos = null)
         {
             //try
             //{

@@ -31,15 +31,15 @@ namespace LibPanels
         //需要过滤的列索引
         private int[] _filterColunmIdxs = null;
         DataSet ds = new DataSet();
-        public static MineDataEntity mdEntity = new MineDataEntity();
-        public static VentilationInfoEntity viEntity = new VentilationInfoEntity();
+        public static LibEntity.MineData mdEntity = new LibEntity.MineData();
+        public static VentilationInfo viEntity = new VentilationInfo();
         Tunnel tunnelEntity = new Tunnel();
 
         //***********************************
 
         public VentilationInfoManagement(MainFrm mainFrm)
         {
-            this.MainForm = mainFrm;
+            MainForm = mainFrm;
 
             InitializeComponent();
 

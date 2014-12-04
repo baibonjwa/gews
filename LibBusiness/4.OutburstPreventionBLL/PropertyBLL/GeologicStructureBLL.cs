@@ -97,7 +97,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="geologicStructureEntity">地质构造实体</param>
         /// <returns>是否成功插入？true:false</returns>
-        public static bool insertGeologicStructure(GeologicStructureEntity geologicStructureEntity)
+        public static bool insertGeologicStructure(GeologicStructure geologicStructureEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
             StringBuilder sb = new StringBuilder();
@@ -121,7 +121,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="geologicStructureEntity">地质构造实体</param>
         /// <returns>是否修改成功?true:false</returns>
-        public static bool updateGeologicStructure(GeologicStructureEntity geologicStructureEntity)
+        public static bool updateGeologicStructure(GeologicStructure geologicStructureEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
             StringBuilder sb = new StringBuilder();

@@ -33,14 +33,14 @@ namespace LibPanels
         UsualForecast usualForecast = new UsualForecast();              //日常预测
         ManagementInfoEntering management = new ManagementInfoEntering();                    //管理
         Tunnel tunnelEntity = new Tunnel();                 //巷道信息实体
-        VentilationInfoEntity viEntity = new VentilationInfoEntity();   //通风实体
-        CoalExistenceEntity ceEntity = new CoalExistenceEntity();       //煤层赋存实体
-        GasDataEntity gdEntity = new GasDataEntity();       //瓦斯实体
-        UsualForecastEntity ufEntity = new UsualForecastEntity();       //日常预测实体
-        ManagementEntity mEntity = new ManagementEntity();  //管理实体
-        MineDataEntity mineDataEntity = new MineDataEntity();
+        VentilationInfo viEntity = new VentilationInfo();   //通风实体
+        CoalExistence ceEntity = new CoalExistence();       //煤层赋存实体
+        GasData gdEntity = new GasData();       //瓦斯实体
+        LibEntity.UsualForecast ufEntity = new LibEntity.UsualForecast();       //日常预测实体
+        Management mEntity = new Management();  //管理实体
+        LibEntity.MineData mineDataEntity = new LibEntity.MineData();
         GeologicStructureInfoEntering geologicStructure = new GeologicStructureInfoEntering();
-        GeologicStructureEntity geologicStructureEntity = new GeologicStructureEntity();
+        GeologicStructure geologicStructureEntity = new GeologicStructure();
         int[] arr = new int[5];
         object obj = null; int formHeight = 410;
 
@@ -70,7 +70,7 @@ namespace LibPanels
         {
             this.MainForm = mainFrm;
             this.obj = obj;
-            tunnelEntity.TunnelID = ((MineDataEntity)obj).Tunnel.TunnelID;
+            tunnelEntity.TunnelID = ((LibEntity.MineData)obj).Tunnel.TunnelID;
             //tunnelEntity = TunnelInfoBLL.selectTunnelInfoByTunnelID(tunnelEntity.TunnelID);
             if (tunnelEntity == null)
             {
@@ -133,27 +133,27 @@ namespace LibPanels
 
             if (this.Text == new LibPanels(MineDataPanelName.Ventilation_Change).panelFormName)
             {
-                viEntity = (VentilationInfoEntity)obj;
+                viEntity = (VentilationInfo)obj;
             }
             if (this.Text == new LibPanels(MineDataPanelName.CoalExistence_Change).panelFormName)
             {
-                ceEntity = (CoalExistenceEntity)obj;
+                ceEntity = (CoalExistence)obj;
             }
             if (this.Text == new LibPanels(MineDataPanelName.GasData_Change).panelFormName)
             {
-                gdEntity = (GasDataEntity)obj;
+                gdEntity = (GasData)obj;
             }
             if (this.Text == new LibPanels(MineDataPanelName.UsualForecast_Change).panelFormName)
             {
-                ufEntity = (UsualForecastEntity)obj;
+                ufEntity = (LibEntity.UsualForecast)obj;
             }
             if (this.Text == new LibPanels(MineDataPanelName.Management_Change).panelFormName)
             {
-                mEntity = (ManagementEntity)obj;
+                mEntity = (Management)obj;
             }
             if (this.Text == new LibPanels(MineDataPanelName.GeologicStructure_Change).panelFormName)
             {
-                geologicStructureEntity = (GeologicStructureEntity)obj;
+                geologicStructureEntity = (GeologicStructure)obj;
             }
 
             //所有小窗体最小化
@@ -323,7 +323,7 @@ namespace LibPanels
         /// <param name="obj"></param>
         private void changeMineCommonValue(object obj)
         {
-            mineDataEntity = (MineDataEntity)obj;
+            mineDataEntity = (LibEntity.MineData)obj;
             txtCoordinateX.Text = mineDataEntity.CoordinateX.ToString();
             txtCoordinateY.Text = mineDataEntity.CoordinateY.ToString();
             txtCoordinateZ.Text = mineDataEntity.CoordinateZ.ToString();

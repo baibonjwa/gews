@@ -31,8 +31,8 @@ namespace _4.OutburstPrevention
     public partial class K1ValueEntering : BaseForm
     {
         #region ******各种变量定义******
-        K1ValueEntity _k1ValueEntity = new K1ValueEntity();
-        K1ValueEntity[] k1Entitys;
+        K1Value _k1ValueEntity = new K1Value();
+        K1Value[] k1Entitys;
         Tunnel tunnelEntity = new Tunnel();
         //巷道控件用数组
         int[] arr = new int[5];

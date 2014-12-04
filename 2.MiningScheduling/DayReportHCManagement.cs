@@ -280,9 +280,9 @@ namespace _2.MiningScheduling
         /// <summary>
         /// 为变量dayReportHCEntity赋值
         /// </summary>
-        private DayReportHCEntity setDayReportHCEntityValue()
+        private DayReportHC setDayReportHCEntityValue()
         {
-            DayReportHCEntity eReturn = null;
+            DayReportHC eReturn = null;
 
             for (int i = 0; i < _rowsCount; i++)
             {
@@ -291,7 +291,7 @@ namespace _2.MiningScheduling
                 {
                     _tmpRowIndex = _rowDetailStartIndex + i;
                     DataRow dr = _ds.Tables[0].Rows[i];
-                    eReturn = new DayReportHCEntity();
+                    eReturn = new DayReportHC();
 
                     //掘进ID
                     eReturn.ID = (int)dr[DayReportHCDbConstNames.ID];
@@ -350,7 +350,7 @@ namespace _2.MiningScheduling
         /// <param name="e"></param>
         private void tsBtnModify_Click(object sender, EventArgs e)
         {
-            DayReportHCEntity entity = setDayReportHCEntityValue();
+            DayReportHC entity = setDayReportHCEntityValue();
 
             if (null == entity)
             {
@@ -399,7 +399,7 @@ namespace _2.MiningScheduling
                     if (cells[_rowDetailStartIndex + i, 0].Value != null &&
                         (bool)cells[_rowDetailStartIndex + i, 0].Value == true)
                     {
-                        DayReportHCEntity entity = new DayReportHCEntity();
+                        DayReportHC entity = new DayReportHC();
                         //获取掘进ID
                         entity.ID = (int)dr[DayReportHCDbConstNames.ID];
                         entity.WorkingFaceID = Convert.ToInt32(dr[DayReportHCDbConstNames.WORKINGFACE_ID]);
@@ -476,7 +476,7 @@ namespace _2.MiningScheduling
                 double x = results[key].X;
                 double y = results[key].Y;
                 double z = results[key].Z;
-                wfEntity.Coordinate = new CoordinateEntity(x, y, z);
+                wfEntity.Coordinate = new Coordinate(x, y, z);
                 LibBusiness.WorkingFaceBLL.updateWorkingfaceXYZ(wfEntity);
 
                 index += 1;
@@ -489,7 +489,7 @@ namespace _2.MiningScheduling
                 }
             }
             //更新回采进尺表，将isdel设置0
-            LibEntity.DayReportHCEntity entity = new DayReportHCEntity();
+            LibEntity.DayReportHC entity = new DayReportHC();
             entity.BindingID = bid;
             entity.IsDel = 0;
             LibBusiness.DayReportHCBLL.updateDayResportHCInfoByBID(entity);
@@ -513,7 +513,7 @@ namespace _2.MiningScheduling
                     {
                         GeoStruct tmp = geoinfos[j];
 
-                        GeologySpaceEntity geologyspaceEntity = new GeologySpaceEntity();
+                        GeologySpace geologyspaceEntity = new GeologySpace();
                         geologyspaceEntity.WorkSpaceID = wfEntity.WorkingFaceID;
                         geologyspaceEntity.TectonicType = Convert.ToInt32(key);
                         geologyspaceEntity.TectonicID = tmp.geoinfos[GIS.GIS_Const.FIELD_BID].ToString();

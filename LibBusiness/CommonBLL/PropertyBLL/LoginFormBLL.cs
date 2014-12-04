@@ -22,9 +22,9 @@ namespace LibBusiness
         /// 返回曾经成功登录过系统的用户
         /// </summary>
         /// <returns>用户登录信息实体数组</returns>
-        public static UserLoginInformationEnt[] GetUserLoginedInformation()
+        public static UserLogin[] GetUserLoginedInformation()
         {
-            UserLoginInformationEnt[] names = null;
+            UserLogin[] names = null;
             StringBuilder strSql = new StringBuilder();
             strSql.Append("SELECT * FROM ");
             strSql.Append(LoginFormDbConstNames.TABLE_NAME);
@@ -37,10 +37,10 @@ namespace LibBusiness
             if (dt!=null)
             {
                 int n = dt.Rows.Count;
-                names = new UserLoginInformationEnt[n];
+                names = new UserLogin[n];
                 for (int i = 0; i < n;i++ )
                 {
-                    UserLoginInformationEnt name = new UserLoginInformationEnt();
+                    UserLogin name = new UserLogin();
                     name.LoginName = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][1].ToString());
                     name.PassWord = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][2].ToString());
                     name.Permission = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][3].ToString());
@@ -71,7 +71,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="ent">登录用户信息实体</param>
         /// <returns>是否记录成功</returns>
-        public static bool RememberLoginUser(UserLoginInformationEnt ent)
+        public static bool RememberLoginUser(UserLogin ent)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("UPDATE ");
@@ -117,9 +117,9 @@ namespace LibBusiness
         /// 获取所有登录用户信息
         /// </summary>
         /// <returns>用户登录信息实体数组，无用户信息时返回NULL</returns>
-        public static UserLoginInformationEnt[] GetUserLoginInformations()
+        public static UserLogin[] GetUserLoginInformations()
         {
-            UserLoginInformationEnt[] infos = null;
+            UserLogin[] infos = null;
             StringBuilder strSql = new StringBuilder();
             strSql.Append("SELECT * FROM ");
             strSql.Append(LoginFormDbConstNames.TABLE_NAME);            
@@ -130,7 +130,7 @@ namespace LibBusiness
                 int n = dt.Rows.Count;
                 if (n > 0)
                 {
-                    infos = new UserLoginInformationEnt[n];
+                    infos = new UserLogin[n];
                 }
                 else
                 {
@@ -138,7 +138,7 @@ namespace LibBusiness
                 }
                 for (int i = 0; i < n; i++)
                 {
-                    UserLoginInformationEnt info = new UserLoginInformationEnt();
+                    UserLogin info = new UserLogin();
                     info.LoginName = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][1].ToString());
                     info.PassWord = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][2].ToString());
                     info.Permission = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][3].ToString());
@@ -183,7 +183,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="ent">新值</param>
         /// <returns>是否录入成功</returns>
-        public static bool InsertUserLoginInfoIntoTable(UserLoginInformationEnt ent)
+        public static bool InsertUserLoginInfoIntoTable(UserLogin ent)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("INSERT INTO ");
@@ -225,9 +225,9 @@ namespace LibBusiness
         /// 根据用户名，返回用户实体
         /// </summary>
         /// <returns>用户登录信息实体</returns>
-        public static UserLoginInformationEnt GetUserLoginInformationByLoginname(string loginname)
+        public static UserLogin GetUserLoginInformationByLoginname(string loginname)
         {
-            UserLoginInformationEnt name = null;
+            UserLogin name = null;
             StringBuilder strSql = new StringBuilder();
             strSql.Append("SELECT * FROM ");
             strSql.Append(LoginFormDbConstNames.TABLE_NAME);
@@ -242,7 +242,7 @@ namespace LibBusiness
                 int n = dt.Rows.Count;                
                 for (int i = 0; i < n; i++)
                 {
-                    name = new UserLoginInformationEnt();
+                    name = new UserLogin();
                     name.ID = dt.Rows[i][0].ToString() ;
                     name.LoginName = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][1].ToString());
                     name.PassWord =  LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][2].ToString());
@@ -262,9 +262,9 @@ namespace LibBusiness
         /// <param name="loginname"></param>
         /// <param name="passward"></param>
         /// <returns></returns>
-        public static UserLoginInformationEnt LoginSuccess(string loginname, string passward)
+        public static UserLogin LoginSuccess(string loginname, string passward)
         {
-            UserLoginInformationEnt name = null;
+            UserLogin name = null;
             StringBuilder strSql = new StringBuilder();
             strSql.Append("SELECT * FROM ");
             strSql.Append(LoginFormDbConstNames.TABLE_NAME);
@@ -280,7 +280,7 @@ namespace LibBusiness
             DataTable dt = database.ReturnDS(strSql.ToString()).Tables[0];
             if (dt != null && dt.Rows.Count > 0)
             {
-                name = new UserLoginInformationEnt();
+                name = new UserLogin();
                 name.ID = dt.Rows[0][0].ToString();
                 name.LoginName = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[0][1].ToString());
                 name.PassWord = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[0][2].ToString());
@@ -298,9 +298,9 @@ namespace LibBusiness
         /// 根据ID，返回用户实体
         /// </summary>
         /// <returns>用户登录信息实体</returns>
-        public static UserLoginInformationEnt GetUserLoginInformationByIDAndLoginName(string id,string loginname)
+        public static UserLogin GetUserLoginInformationByIDAndLoginName(string id, string loginname)
         {
-            UserLoginInformationEnt name = null;
+            UserLogin name = null;
             StringBuilder strSql = new StringBuilder();
             strSql.Append("SELECT * FROM ");
             strSql.Append(LoginFormDbConstNames.TABLE_NAME);
@@ -319,7 +319,7 @@ namespace LibBusiness
                 int n = dt.Rows.Count;
                 for (int i = 0; i < n; i++)
                 {
-                    name = new UserLoginInformationEnt();
+                    name = new UserLogin();
                     name.ID = dt.Rows[i][0].ToString();
                     name.LoginName = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][1].ToString());
                     name.PassWord = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][2].ToString());
@@ -357,7 +357,7 @@ namespace LibBusiness
         /// <param name="ent">新值</param>
         /// <param name="oldName">旧值的登录名</param>
         /// <returns>更新成功，返回True</returns>
-        public static bool UpdateUserLoginInfomation(UserLoginInformationEnt ent, string oldName)
+        public static bool UpdateUserLoginInfomation(UserLogin ent, string oldName)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("UPDATE ");

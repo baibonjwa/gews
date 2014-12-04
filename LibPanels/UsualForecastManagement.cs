@@ -38,8 +38,8 @@ namespace LibPanels
         int rowsCount = 0;      //数据行数
         int checkCount = 0;     //选择行数
         DataSet dsAll = new DataSet();
-        public static MineDataEntity mdEntity = new MineDataEntity();
-        public static UsualForecastEntity ufEntity = new UsualForecastEntity();
+        public static LibEntity.MineData mdEntity = new LibEntity.MineData();
+        public static LibEntity.UsualForecast ufEntity = new LibEntity.UsualForecast();
         public static Tunnel te = new Tunnel();
 
         //***********************************

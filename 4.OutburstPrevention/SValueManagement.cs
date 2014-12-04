@@ -31,7 +31,7 @@ namespace _4.OutburstPrevention
         int _tmpRowIndex = 0;
         //需要过滤的列索引
         private int[] _filterColunmIdxs = null;
-        SValueEntity sValueEntity = new SValueEntity();
+        SValue sValueEntity = new SValue();
         Tunnel tunnelEntity = new Tunnel();
         DataSet ds = new DataSet();
         DataSet dsAll = new DataSet();

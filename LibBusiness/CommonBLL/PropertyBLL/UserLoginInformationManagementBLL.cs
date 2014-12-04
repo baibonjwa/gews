@@ -22,10 +22,10 @@ namespace LibBusiness
         /// 获取所有登录用户信息
         /// </summary>
         /// <returns>用户登录信息实体数组</returns>
-        public static UserLoginInformationEnt[] GetUserLoginInformations()
+        public static UserLogin[] GetUserLoginInformations()
         {
             //select * from T_USER_INFO_LOGIN_MANAGEMENT
-            UserLoginInformationEnt[] infos = null;
+            UserLogin[] infos = null;
             StringBuilder strSql = new StringBuilder();
             strSql.Append("SELECT * FROM ");
             strSql.Append(LoginFormDbConstNames.TABLE_NAME);
@@ -34,10 +34,10 @@ namespace LibBusiness
             if (dt != null)
             {
                 int n = dt.Rows.Count;
-                infos = new UserLoginInformationEnt[n];
+                infos = new UserLogin[n];
                 for (int i = 0; i < n; i++)
                 {
-                    UserLoginInformationEnt info = new UserLoginInformationEnt();
+                    UserLogin info = new UserLogin();
                     info.LoginName = dt.Rows[i][1].ToString();
                     info.PassWord = dt.Rows[i][2].ToString();
                     info.Permission = dt.Rows[i][3].ToString();

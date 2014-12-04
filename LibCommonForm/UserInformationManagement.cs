@@ -664,7 +664,7 @@ namespace LibCommonForm
                     oldName = e.OldValue.ToString();
                 }
 
-                UserInformationManagementEntity userInfo = new UserInformationManagementEntity();
+                UserInformation userInfo = new UserInformation();
                 userInfo.LoginName = loginname;
                 userInfo.PassWord = password;
                 userInfo.Group = group;

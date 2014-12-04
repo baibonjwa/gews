@@ -142,7 +142,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="pitshaftEntity"><井筒>实体</param>
         /// <returns>成功与否：true，false</returns>
-        public static bool insertPitshaftInfo(PitshaftEntity pitshaftEntity)
+        public static bool insertPitshaftInfo(Pitshaft pitshaftEntity)
         {
             StringBuilder sqlStr = new StringBuilder();
             sqlStr.Append("INSERT INTO " + PitshaftDbConstNames.TABLE_NAME);
@@ -180,7 +180,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="pitshaftEntity"><井筒>实体</param>
         /// <returns>成功与否：true，false</returns>
-        public static bool updatePitshaftInfo(PitshaftEntity pitshaftEntity)
+        public static bool updatePitshaftInfo(Pitshaft pitshaftEntity)
         {
             StringBuilder sqlStr = new StringBuilder();
             sqlStr.Append("UPDATE " + PitshaftDbConstNames.TABLE_NAME);

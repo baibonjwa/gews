@@ -351,7 +351,7 @@ namespace _4.OutburstPrevention
         //部门信息管理
         private void mniDepartmentInfoMana_Click(object sender, EventArgs e)
         {
-            DepartmentInformation di = new DepartmentInformation();
+            LibCommonForm.DepartmentInformation di = new LibCommonForm.DepartmentInformation();
             di.ShowDialog();
         }
         //用户信息管理
@@ -363,7 +363,7 @@ namespace _4.OutburstPrevention
         //用户组信息管理
         private void mniUserGroupInfoMana_Click(object sender, EventArgs e)
         {
-            UserGroupInformationManagement ugm = new UserGroupInformationManagement();
+            LibCommonForm.UserGroupInformationManagement ugm = new LibCommonForm.UserGroupInformationManagement();
             ugm.ShowDialog();
         }
         //帮助文件
@@ -864,7 +864,7 @@ namespace _4.OutburstPrevention
         //部门信息管理
         private void mniDepartmentInfoMana_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            DepartmentInformation di = new DepartmentInformation();
+            LibCommonForm.DepartmentInformation di = new LibCommonForm.DepartmentInformation();
             di.ShowDialog();
         }
 
@@ -878,7 +878,7 @@ namespace _4.OutburstPrevention
         //用户组信息管理
         private void mniUserGroupInfoMana_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            UserGroupInformationManagement ugm = new UserGroupInformationManagement();
+            LibCommonForm.UserGroupInformationManagement ugm = new LibCommonForm.UserGroupInformationManagement();
             ugm.ShowDialog();
         }
         #endregion

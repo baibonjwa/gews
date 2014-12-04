@@ -137,7 +137,7 @@ namespace _5.WarningManagement
                 if (!String.IsNullOrEmpty(fileName))
                 {
                     PreWarningResultDetailsQuery.ImgList.Add(fileName + ".jpg");
-                    WarningImgEnt ent = new WarningImgEnt();
+                    WarningImg ent = new WarningImg();
                     ent.FileName = fileName + ".jpg";
                     ent.Remarks = "";
                     ent.WarningId = _parent.warningId;

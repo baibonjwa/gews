@@ -100,12 +100,12 @@ namespace LibBusiness
         /// </summary>
         /// <param name="tunnelID">巷道ID</param>
         /// <returns>回采日报实体</returns>
-        public static DayReportHCEntity selectDayReportHCByWorkFaceID(int workFaceID)
+        public static DayReportHC selectDayReportHCByWorkFaceID(int workFaceID)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
             string sql = "SELECT * FROM " + DayReportHCDbConstNames.TABLE_NAME + " WHERE " + DayReportHCDbConstNames.WORKINGFACE_ID + " = " + workFaceID;
             DataSet ds = db.ReturnDS(sql);
-            DayReportHCEntity dayReportHCEntity = new DayReportHCEntity();
+            DayReportHC dayReportHCEntity = new DayReportHC();
             if (ds.Tables[0].Rows.Count > 0)
             {
                 dayReportHCEntity.ID = Convert.ToInt32(ds.Tables[0].Rows[0][DayReportHCDbConstNames.ID].ToString());
@@ -179,7 +179,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="dayReportHCEntity">回采进尺实体</param>
         /// <returns>是否成功插入？true:false</returns>
-        public static bool insertDayReportHCInfo(DayReportHCEntity dayReportHCEntity)
+        public static bool insertDayReportHCInfo(DayReportHC dayReportHCEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
             StringBuilder sqlStr = new StringBuilder();
@@ -218,7 +218,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="dayReportHCEntity">回采进尺实体</param>
         /// <returns>是否成功修改？true:false</returns>
-        public static bool updateDayReportHCInfo(DayReportHCEntity dayReportHCEntity)
+        public static bool updateDayReportHCInfo(DayReportHC dayReportHCEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
             StringBuilder sqlStr = new StringBuilder();
@@ -242,7 +242,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="dayReportHCEntity"></param>
         /// <returns></returns>
-        public static bool updateDayResportHCInfoByBID(DayReportHCEntity dayReportHCEntity)
+        public static bool updateDayResportHCInfoByBID(DayReportHC dayReportHCEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
             StringBuilder sqlstr = new StringBuilder();
@@ -260,7 +260,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="dayReportHCEntity">回采进尺实体</param>
         /// <returns>是否成功删除？true:false</returns>
-        public static bool deleteDayReportHCInfo(DayReportHCEntity dayReportHCEntity)
+        public static bool deleteDayReportHCInfo(DayReportHC dayReportHCEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
             string sql = "DELETE FROM " + DayReportHCDbConstNames.TABLE_NAME + " WHERE " + DayReportHCDbConstNames.ID + " =" + dayReportHCEntity.ID;

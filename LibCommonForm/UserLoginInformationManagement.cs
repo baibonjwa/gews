@@ -69,7 +69,7 @@ namespace LibCommonForm
             GetUserLoginInfo();
 
             //判断用户权限
-            if (CurrentUserEnt.CurLoginUserInfo.Permission != Permission.管理员.ToString())
+            if (CurrentUser.CurLoginUserInfo.Permission != Permission.管理员.ToString())
             {
                 tsBtnAdd.Visible = false;
                 tsBtnDel.Visible = false;
@@ -88,7 +88,7 @@ namespace LibCommonForm
         private void GetUserLoginInfo()
         {
             //sql语句,从数据库中获取数据
-            UserLoginInformationEnt[] ents = LibBusiness.LoginFormBLL.GetUserLoginInformations();
+            UserLogin[] ents = LibBusiness.LoginFormBLL.GetUserLoginInformations();
             if (ents==null)
             {
                 return;
@@ -262,7 +262,7 @@ namespace LibCommonForm
             }   
 
             //定义  用户登录信息实体，接受旧值，添加到窗体中。旧值来源于管理界面的选择值。可以直接取值，也可从数据库取值，暂不考虑效率。
-            UserLoginInformationEnt ent = LoginFormBLL.GetUserLoginInformationByLoginname(UserLoginInformationManagement._userSel[0]);
+            UserLogin ent = LoginFormBLL.GetUserLoginInformationByLoginname(UserLoginInformationManagement._userSel[0]);
            
             //修改
             UserLoginInformationInput ulii = new UserLoginInformationInput(ent);

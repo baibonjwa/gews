@@ -36,8 +36,8 @@ namespace LibPanels
         //需要过滤的列索引
         private int[] _filterColunmIdxs = null;
         DataSet _ds = new DataSet();
-        MineDataEntity mdEntity = new MineDataEntity();
-        GeologicStructureEntity geologicStructureEntity = new GeologicStructureEntity();
+        LibEntity.MineData mdEntity = new LibEntity.MineData();
+        GeologicStructure geologicStructureEntity = new GeologicStructure();
         //***********************************
 
         /// <summary>

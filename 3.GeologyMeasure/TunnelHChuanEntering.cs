@@ -25,8 +25,8 @@ namespace _3.GeologyMeasure
     public partial class TunnelHChuanEntering : BaseForm
     {
         /************变量定义*****************/
-        TunnelHChuanEntity tunnelHChuanEntity = new TunnelHChuanEntity();
-        TunnelHChuanEntity tmpTunnelHChuanEntity = new TunnelHChuanEntity();
+        TunnelHChuan tunnelHChuanEntity = new TunnelHChuan();
+        TunnelHChuan tmpTunnelHChuanEntity = new TunnelHChuan();
         Tunnel tunnelEntity = new Tunnel();
         TunnelHChuanManagement frmStop;
         /*************************************/
@@ -58,7 +58,7 @@ namespace _3.GeologyMeasure
             setWorkTimeName();
         }
 
-        public TunnelHChuanEntering(TunnelHChuanEntity tunnelHChuanEntity, MainFrm mainFrm, TunnelHChuanManagement frmhc)
+        public TunnelHChuanEntering(TunnelHChuan tunnelHChuanEntity, MainFrm mainFrm, TunnelHChuanManagement frmhc)
         {
             this.MainForm = mainFrm;
             frmStop = frmhc;
@@ -157,7 +157,7 @@ namespace _3.GeologyMeasure
             return;
         }
 
-        private bool DrawHengChuanPolygon(TunnelHChuanEntity entity)
+        private bool DrawHengChuanPolygon(TunnelHChuan entity)
         {
             //找到导线点图层
             IMap map = new MapClass();
@@ -195,7 +195,7 @@ namespace _3.GeologyMeasure
 
             return feature != null;
         }
-        private bool RedrawHengChuanPolygon(TunnelHChuanEntity entity)
+        private bool RedrawHengChuanPolygon(TunnelHChuan entity)
         {
             //找到导线点图层
             IMap map = new MapClass();
@@ -244,7 +244,7 @@ namespace _3.GeologyMeasure
         /// <summary>
         /// 添加横穿进尺
         /// </summary>
-        private void AddHChuanjc(TunnelHChuanEntity tunnel, List<IPoint> pntcols,double wid)
+        private void AddHChuanjc(TunnelHChuan tunnel, List<IPoint> pntcols,double wid)
         {
             if (this.textBox_Name.Text == "")
             {

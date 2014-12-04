@@ -42,7 +42,7 @@ namespace LibBusiness
                     for (int j = 0; j < dsSheet.Tables[0].Rows.Count; j++)
                     {
                         string errorMsg = "";
-                        PreWarningRulesEntity ent = PreWarningExcelBLL.ConvertExcelDataRow2PreWarningEntity(dsSheet.Tables[0].Rows[j], out errorMsg);
+                        PreWarningRules ent = PreWarningExcelBLL.ConvertExcelDataRow2PreWarningEntity(dsSheet.Tables[0].Rows[j], out errorMsg);
                         if (errorMsg != "")
                         {
                             if (DialogResult.Yes == MessageBox.Show("导入Excel预警规则失败：" + errorMsg + "\r\n是否继续？", "Sheet：" + sheetNames[i] + " 行:" + (j + 1).ToString(), MessageBoxButtons.YesNo))
@@ -121,9 +121,9 @@ namespace LibBusiness
         /// <param name="dr"></param>
         /// <param name="success">是否处理成功</param>
         /// <returns></returns>
-        public static PreWarningRulesEntity ConvertExcelDataRow2PreWarningEntity(DataRow dr, out string errorMsg)
+        public static PreWarningRules ConvertExcelDataRow2PreWarningEntity(DataRow dr, out string errorMsg)
         {
-            PreWarningRulesEntity ret = new PreWarningRulesEntity();
+            PreWarningRules ret = new PreWarningRules();
             errorMsg = "";
             //MARK FIELD注意：由于数据是从Excel中读取出来的，因此不能使用列名，只能使用索引！
             try
@@ -190,7 +190,7 @@ namespace LibBusiness
         /// <param name="ent">预警规则实体</param>
         /// <param name="selectedRowID">选择行编号</param>
         /// <returns>是否插入成功?true:false</returns>
-        public static bool updateInfoToExcelSheet(PreWarningRulesEntity ent, int selectedRowID, string sheetName)
+        public static bool updateInfoToExcelSheet(PreWarningRules ent, int selectedRowID, string sheetName)
         {
             bool ret = false;
             Excel.Application objExcelApp = null;

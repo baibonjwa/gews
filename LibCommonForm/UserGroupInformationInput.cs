@@ -60,7 +60,7 @@ namespace LibCommonForm
             int userCount = _lstSelUserName.Items.Count;
             
             //定义用户组信息实体
-            UserGroupInformationManagementEntity ent = new UserGroupInformationManagementEntity();
+            LibEntity.UserGroup ent = new LibEntity.UserGroup();
             //组名
             ent.GroupName = _txtGroupName.Text.ToString().Trim();
             //人数

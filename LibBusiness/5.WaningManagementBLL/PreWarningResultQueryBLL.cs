@@ -142,9 +142,9 @@ namespace LibBusiness
         //WHERE W.data_time IN (
         //SELECT DISTINCT T.data_time FROM T_EARLY_WARNING_RESULT AS T WHERE T.data_time 
         //BETWEEN '2014-03-08 11:29:55.000' AND '2014-03-08 11:31:00.000') 
-        public static List<PreWarningResultQueryEnt> GetPerWarningResult(string timeStart, string timeEnd)
+        public static List<PreWarningResultQuery> GetPerWarningResult(string timeStart, string timeEnd)
         {
-            List<PreWarningResultQueryEnt> ents = new List<PreWarningResultQueryEnt>();
+            List<PreWarningResultQuery> ents = new List<PreWarningResultQuery>();
             StringBuilder strSql = new StringBuilder();
             strSql.Append("SELECT ROW_NUMBER() OVER (ORDER BY ");
             strSql.Append("W." + PreWarningResultDBConstNames.DATA_TIME + " DESC,");
@@ -172,13 +172,13 @@ namespace LibBusiness
             ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             DataTable dt = database.ReturnDS(strSql.ToString()).Tables[0];
             int iRowCount = dt.Rows.Count;
-            PreWarningResultQueryEnt ent = new PreWarningResultQueryEnt();
+            PreWarningResultQuery ent = new PreWarningResultQuery();
             for (int i = 0; i < iRowCount; i++)
             {
                 string warning_type = dt.Rows[i][PreWarningResultDBConstNames.WARNING_TYPE].ToString();
                 if (i % 2 == 0)
                 {
-                    ent = new PreWarningResultQueryEnt();
+                    ent = new PreWarningResultQuery();
                     ent.TunelName = BasicInfoManager.getInstance().getTunnelByID(Convert.ToInt32(dt.Rows[i][PreWarningResultDBConstNames.TUNNEL_ID].ToString())).TunnelName;
                     ent.DateTime = dt.Rows[i][PreWarningResultDBConstNames.DATA_TIME].ToString();
                     ent.Date_Shift = dt.Rows[i][PreWarningResultDBConstNames.DATE_SHIFT].ToString();

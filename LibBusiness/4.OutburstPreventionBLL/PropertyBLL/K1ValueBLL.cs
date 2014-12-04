@@ -53,9 +53,9 @@ namespace LibBusiness
         /// </summary>
         /// <param name="ID">K1主键ID</param>
         /// <returns>K1实体</returns>
-        public static K1ValueEntity selectValueK1ByID(int ID)
+        public static K1Value selectValueK1ByID(int ID)
         {
-            K1ValueEntity k1ValueEntity = new K1ValueEntity();
+            K1Value k1ValueEntity = new K1Value();
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
             string sql = "SELECT * FROM " + K1ValueDbConstNames.TABLE_NAME + " WHERE " + K1ValueDbConstNames.ID + " = " + ID;
             DataSet ds = db.ReturnDS(sql);
@@ -96,19 +96,19 @@ namespace LibBusiness
         /// </summary>
         /// <param name="k1ValueID">K1分组ID</param>
         /// <returns>K1实体</returns>
-        public static K1ValueEntity[] selectValueK1ByK1ValueID(int k1ValueID)
+        public static K1Value[] selectValueK1ByK1ValueID(int k1ValueID)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
             string sql = "SELECT * FROM " + K1ValueDbConstNames.TABLE_NAME + " WHERE " + K1ValueDbConstNames.VALUE_K1_ID + " = " + k1ValueID;
             DataSet ds = db.ReturnDS(sql);
-            K1ValueEntity[] k1Entity = new K1ValueEntity[ds.Tables[0].Rows.Count];
+            K1Value[] k1Entity = new K1Value[ds.Tables[0].Rows.Count];
             if (ds.Tables[0].Rows.Count > 0)
             {
                 for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                 {
                     try
                     {
-                        K1ValueEntity k1ValueEntity = new K1ValueEntity();
+                        K1Value k1ValueEntity = new K1Value();
                         k1ValueEntity.ID = Convert.ToInt32(ds.Tables[0].Rows[i][K1ValueDbConstNames.ID]);
                         k1ValueEntity.K1ValueID = Convert.ToInt32(ds.Tables[0].Rows[i][K1ValueDbConstNames.VALUE_K1_ID]);
                         k1ValueEntity.CoordinateX = Convert.ToDouble(ds.Tables[0].Rows[i][K1ValueDbConstNames.COORDINATE_X]);
@@ -144,9 +144,9 @@ namespace LibBusiness
         /// </summary>
         /// <param name="tunnelID">巷道ID</param>
         /// <returns>K1实体</returns>
-        public static K1ValueEntity selectValueK1ByTunnelID(int tunnelID)
+        public static K1Value selectValueK1ByTunnelID(int tunnelID)
         {
-            K1ValueEntity k1ValueEntity = new K1ValueEntity();
+            K1Value k1ValueEntity = new K1Value();
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
             string sql = "SELECT * FROM " + K1ValueDbConstNames.TABLE_NAME + " WHERE " + K1ValueDbConstNames.TUNNEL_ID + " = " + tunnelID;
             DataSet ds = db.ReturnDS(sql);
@@ -379,7 +379,7 @@ namespace LibBusiness
         /// <param name="k1ValueEntity">K1Value实体</param>
         /// <param name="count">K1Value分组数</param>
         /// <returns>是否成功插入?true:false</returns>
-        public static bool insertValueK1(K1ValueEntity k1ValueEntity)
+        public static bool insertValueK1(K1Value k1ValueEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
             StringBuilder sb = new StringBuilder();
@@ -420,7 +420,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="k1ValueEntity"></param>
         /// <returns></returns>
-        public static bool updateValueK1(K1ValueEntity k1ValueEntity)
+        public static bool updateValueK1(K1Value k1ValueEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
             StringBuilder sb = new StringBuilder();
@@ -450,7 +450,7 @@ namespace LibBusiness
         /// <param name="k1ValueEntity">K1实体</param>
         /// <param name="deleteType">删除方式：0为删除一条，1为删除该组所有数据</param>
         /// <returns></returns>
-        public static bool deleteK1Value(K1ValueEntity k1ValueEntity, int deleteType)
+        public static bool deleteK1Value(K1Value k1ValueEntity, int deleteType)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
             string sql = "";

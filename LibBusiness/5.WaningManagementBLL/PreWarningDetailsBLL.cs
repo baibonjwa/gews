@@ -11,7 +11,7 @@ namespace LibBusiness
 {
     public class PreWarningDetailsBLL
     {
-        public static List<WarningResultDetailEntity> getHistoryWarningResultDetails(string sWorkingface,
+        public static List<WarningResultDetail> getHistoryWarningResultDetails(string sWorkingface,
             string sDate, string sShift,
             string sWarningResult, string sWarningType,
             string sWarningItem)
@@ -50,7 +50,7 @@ namespace LibBusiness
             return getDetailsListByDataTable(dt);
         }
 
-        public static List<WarningResultDetailEntity> getHistoryWarningResultDetails(string warningId)
+        public static List<WarningResultDetail> getHistoryWarningResultDetails(string warningId)
         {
             string[] ids = warningId.Split(',');
             string sqlStr = "SELECT * FROM " + PreWarningDetailsViewDbConstName.VIEW_NAME;
@@ -65,12 +65,12 @@ namespace LibBusiness
             return getDetailsListByDataTable(dt);
         }
 
-        private static List<WarningResultDetailEntity> getDetailsListByDataTable(DataTable dt)
+        private static List<WarningResultDetail> getDetailsListByDataTable(DataTable dt)
         {
-            List<WarningResultDetailEntity> list = new List<WarningResultDetailEntity>();
+            List<WarningResultDetail> list = new List<WarningResultDetail>();
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-                WarningResultDetailEntity ent = new WarningResultDetailEntity
+                WarningResultDetail ent = new WarningResultDetail
                 {
                     Id = dt.Rows[i][PreWarningDetailsViewDbConstName.ID].ToString(),
                     WarningId = dt.Rows[i][PreWarningDetailsViewDbConstName.WARNING_ID].ToString(),

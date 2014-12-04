@@ -150,7 +150,7 @@ namespace _4.OutburstPrevention
             this.DialogResult = DialogResult.OK;
 
             // 创建一个瓦斯含量点实体
-            GasContentEntity gasContentEntity = new GasContentEntity();
+            GasContent gasContentEntity = new GasContent();
             // 坐标X
             double dCoordinateX = 0;
             if (double.TryParse(this.txtCoordinateX.Text.Trim(), out dCoordinateX))
@@ -464,7 +464,7 @@ namespace _4.OutburstPrevention
         /// <summary>
         /// 20140801SDE中添加瓦斯含量点
         /// </summary>
-        private void DrawGasGushQuantityPt(GasContentEntity gasGushQuantityEntity)
+        private void DrawGasGushQuantityPt(GasContent gasGushQuantityEntity)
         {
             double dCoordinateX = Convert.ToDouble(this.txtCoordinateX.Text.ToString());
             double dCoordinateY = Convert.ToDouble(this.txtCoordinateY.Text.ToString());

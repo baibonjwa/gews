@@ -36,9 +36,9 @@ namespace LibBusiness
         /// 获取所有登录用户信息
         /// </summary>
         /// <returns>用户登录信息实体数组，无用户信息时返回NULL</returns>
-        public static UserInformationDetailsEnt[] GetUserInformationDetails()
+        public static UserInformationDetails[] GetUserInformationDetails()
         {
-            UserInformationDetailsEnt[] infos = null;
+            UserInformationDetails[] infos = null;
             StringBuilder strSql = new StringBuilder();
             strSql.Append("SELECT * FROM ");
             strSql.Append(UserInformationDetailsManagementDbConstNames.TABLE_NAME);
@@ -49,7 +49,7 @@ namespace LibBusiness
                 int n = dt.Rows.Count;
                 if (n > 0)
                 {
-                    infos = new UserInformationDetailsEnt[n];
+                    infos = new UserInformationDetails[n];
                 }
                 else
                 {
@@ -57,7 +57,7 @@ namespace LibBusiness
                 }
                 for (int i = 0; i < n; i++)
                 {
-                    UserInformationDetailsEnt info = new UserInformationDetailsEnt();
+                    UserInformationDetails info = new UserInformationDetails();
                     info.ID = (int)dt.Rows[i][0];
                     info.Name = dt.Rows[i][1].ToString();
                     info.PhoneNumber = dt.Rows[i][2].ToString();
@@ -117,9 +117,9 @@ namespace LibBusiness
         /// </summary>
         /// <param name="name">ID</param>
         /// <returns>若无值，则返回空</returns>
-        public static UserInformationDetailsEnt GetUserLoginInformationByID(int id)
+        public static UserInformationDetails GetUserLoginInformationByID(int id)
         {
-            UserInformationDetailsEnt ent = null;
+            UserInformationDetails ent = null;
             StringBuilder strSql = new StringBuilder();
             strSql.Append("SELECT * FROM ");
             strSql.Append(UserInformationDetailsManagementDbConstNames.TABLE_NAME);
@@ -134,7 +134,7 @@ namespace LibBusiness
                 int n = dt.Rows.Count;
                 for (int i = 0; i < n; i++)
                 {
-                    ent = new UserInformationDetailsEnt();
+                    ent = new UserInformationDetails();
                     ent.ID = (int)dt.Rows[i][0];
                     ent.Name = dt.Rows[i][1].ToString();
                     ent.PhoneNumber = dt.Rows[i][2].ToString();
@@ -180,7 +180,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="ent">新值</param>
         /// <returns>是否录入成功</returns>
-        public static bool InsertUserInformationDetailsIntoTable(UserInformationDetailsEnt ent)
+        public static bool InsertUserInformationDetailsIntoTable(UserInformationDetails ent)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("INSERT INTO ");
@@ -203,7 +203,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="ent">新值</param>
         /// <returns>是否修改成功</returns>
-        public static bool UpdataUserInformationDetails(UserInformationDetailsEnt ent, int id)
+        public static bool UpdataUserInformationDetails(UserInformationDetails ent, int id)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("UPDATE ");

@@ -30,7 +30,7 @@ namespace UnderTerminal
         /**巷道实体**/
         Tunnel _tunnelEntity = new Tunnel();
         /**回采日报实体**/
-        DayReportJJEntity _dayReportJJEntity = new DayReportJJEntity();
+        DayReportJJ _dayReportJJEntity = new DayReportJJ();
         /**巷道关联矿井等信息ID集合**/
         int[] _arr;
         DataSet dsWirePoint = new DataSet();
@@ -64,7 +64,7 @@ namespace UnderTerminal
         /// </summary>
         /// <param name="array">巷道编号数组</param>
         /// <param name="dayReportHCEntity">回采进尺日报实体</param>
-        public DayReportJJEntering(int[] array, DayReportJJEntity dayReportJJEntity)
+        public DayReportJJEntering(int[] array, DayReportJJ dayReportJJEntity)
         {
             _arr = array;
             this._dayReportJJEntity = dayReportJJEntity;
@@ -301,10 +301,10 @@ namespace UnderTerminal
         /// </summary>
         private void insertDayReportJJInfo()
         {
-            List<DayReportJJEntity> dayReportJJEntityList = new List<DayReportJJEntity>();
+            List<DayReportJJ> dayReportJJEntityList = new List<DayReportJJ>();
             for (int i = 0; i < this.dgrdvDayReportJJ.RowCount; i++)
             {
-                DayReportJJEntity _dayReportJJEntity = new DayReportJJEntity();
+                DayReportJJ _dayReportJJEntity = new DayReportJJ();
                 // 最后一行为空行时，跳出循环
                 if (i == this.dgrdvDayReportJJ.RowCount - 1)
                 {
@@ -357,7 +357,7 @@ namespace UnderTerminal
             }
             bool bResult = false;
             //循环添加
-            foreach (DayReportJJEntity dayReportJJEntity in dayReportJJEntityList)
+            foreach (DayReportJJ dayReportJJEntity in dayReportJJEntityList)
             {
                 //添加回采进尺日报
                 bResult = DayReportJJBLL.insertDayReportJJInfo(dayReportJJEntity);
@@ -671,8 +671,8 @@ namespace UnderTerminal
         {
             double distance = 0;
             double distanceFromWirepoint = 0;
-            WirePointInfoEntity wirePointInfoEntityNew = new WirePointInfoEntity();
-            WirePointInfoEntity wirePointInfoEntityOld = new WirePointInfoEntity();
+            LibEntity.WirePointInfo wirePointInfoEntityNew = new LibEntity.WirePointInfo();
+            WirePointInfo wirePointInfoEntityOld = new WirePointInfo();
             wirePointInfoEntityNew.ID = Convert.ToInt32(dgrdvDayReportJJ.CurrentRow.Cells[4].Value);
             wirePointInfoEntityNew = WirePointBLL.selectWirePointInfoByWirePointId(wirePointInfoEntityNew.ID);
             wirePointInfoEntityOld.ID = wirePointID;

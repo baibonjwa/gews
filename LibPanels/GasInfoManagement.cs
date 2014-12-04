@@ -36,8 +36,8 @@ namespace LibPanels
         //需要过滤的列索引
         private int[] _filterColunmIdxs = null;
         DataSet ds = new DataSet();
-        MineDataEntity mdEntity = new MineDataEntity();
-        GasDataEntity gdEntity = new GasDataEntity();
+        LibEntity.MineData mdEntity = new LibEntity.MineData();
+        GasData gdEntity = new GasData();
         //***********************************
 
         /// <summary>

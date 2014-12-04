@@ -310,7 +310,7 @@ namespace _1.GasEmission
             DialogResult = DialogResult.OK;
 
             // 创建探头管理实体
-            ProbeManageEntity probeManageEntity = new ProbeManageEntity();
+            ProbeManage probeManageEntity = new ProbeManage();
 
             // 探头编号
             probeManageEntity.ProbeId = this.txtProbeId.Text.Trim();

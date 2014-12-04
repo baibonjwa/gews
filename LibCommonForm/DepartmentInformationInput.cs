@@ -92,7 +92,7 @@ namespace LibCommonForm
             }
 
             //定义部门信息实体
-            DepartmentInformationEntity ent = new DepartmentInformationEntity();
+            LibEntity.DepartmentInformation ent = new LibEntity.DepartmentInformation();
             //部门名称
             ent.Name = _txtName.Text.ToString().Trim();
             //部门邮箱

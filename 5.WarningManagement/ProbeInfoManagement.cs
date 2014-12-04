@@ -46,7 +46,7 @@ namespace _5.WarningManagement
             InitializeComponent();
 
             //分配用户权限
-            if (CurrentUserEnt.CurLoginUserInfo.Permission != Permission.管理员.ToString())
+            if (CurrentUser.CurLoginUserInfo.Permission != Permission.管理员.ToString())
             {
                 btnAdd.Visible = false;
                 btnUpdate.Visible = false;

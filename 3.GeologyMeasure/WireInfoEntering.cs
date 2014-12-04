@@ -42,8 +42,8 @@ namespace _3.GeologyMeasure
         int _tmpRowIndex = -1;
         int _itemCount = 0;
         Tunnel tunnelEntity = new Tunnel();
-        WireInfoEntity wireInfoEntity = new WireInfoEntity();
-        WirePointInfoEntity[] wpiEntity;
+        WireInfo wireInfoEntity = new WireInfo();
+        WirePointInfo[] wpiEntity;
         int[] _arr = new int[5];
         DataSet _dsWirePoint = new DataSet();
         int _tunnelID;
@@ -59,7 +59,7 @@ namespace _3.GeologyMeasure
             InitializeComponent();
             LibCommon.FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_GM.WIRE_INFO_ADD);
             //自定义控件初始化
-            TunnelDefaultSelectEntity tunnelDefaultSelectEntity = TunnelDefaultSelect.selectDefaultTunnel(WireInfoDbConstNames.TABLE_NAME);
+            LibEntity.TunnelDefaultSelect tunnelDefaultSelectEntity = LibBusiness.TunnelDefaultSelect.selectDefaultTunnel(WireInfoDbConstNames.TABLE_NAME);
             if (tunnelDefaultSelectEntity != null)
             {
                 _arr = new int[5];
@@ -109,7 +109,7 @@ namespace _3.GeologyMeasure
         /// </summary>
         /// <param name="array">矿井信息数组</param>
         /// <param name="wireInfoEntity">导线实体</param>
-        public WireInfoEntering(int[] array, WireInfoEntity wireInfoEntity, MainFrm mainFrm)
+        public WireInfoEntering(int[] array, WireInfo wireInfoEntity, MainFrm mainFrm)
         {
             // 初始化主窗体变量
             this.MainForm = mainFrm;
@@ -172,7 +172,7 @@ namespace _3.GeologyMeasure
             _dsWirePoint = WirePointBLL.selectAllWirePointInfo(wireInfoEntity.WireInfoID);
             if (_dsWirePoint.Tables[0].Rows.Count > 0)
             {
-                wpiEntity = new WirePointInfoEntity[_dsWirePoint.Tables[0].Rows.Count];
+                wpiEntity = new WirePointInfo[_dsWirePoint.Tables[0].Rows.Count];
                 dgrdvWire.RowCount = wpiEntity.Length + 1;
                 for (int i = 0; i < wpiEntity.Length; i++)
                 {
@@ -262,13 +262,13 @@ namespace _3.GeologyMeasure
             }
             DialogResult = DialogResult.OK;
 
-            List<WirePointInfoEntity> lstWirePointInfoEnt;
+            List<WirePointInfo> lstWirePointInfoEnt;
             string sADDorCHANGE = "";
             if (this.Text == Const_GM.WIRE_INFO_ADD)
             {
                 sADDorCHANGE = "ADD";
                 /// 2014.2.26 lyf 绘制导线点和巷道，下同
-                lstWirePointInfoEnt = new List<WirePointInfoEntity>();
+                lstWirePointInfoEnt = new List<WirePointInfo>();
                 lstWirePointInfoEnt = insertWireInfo();
                 if (lstWirePointInfoEnt != null)
                 {
@@ -309,8 +309,8 @@ namespace _3.GeologyMeasure
 
                         // 绘制巷道
                         double hdwid = 0.0;
-                        dics = ConstructDics(dst,out hdwid);
-                        AddHdbyPnts(lstWirePointInfoEnt, dics,hdwid);
+                        dics = ConstructDics(dst, out hdwid);
+                        AddHdbyPnts(lstWirePointInfoEnt, dics, hdwid);
                     }
                 }
             }
@@ -319,11 +319,11 @@ namespace _3.GeologyMeasure
             {
                 sADDorCHANGE = "CHANGE";
                 /// 2014.2.26 lyf
-                WirePointInfoEntity[] wirePointInfoEnt = updateWireInfo();
-                lstWirePointInfoEnt = new List<WirePointInfoEntity>();
+                WirePointInfo[] wirePointInfoEnt = updateWireInfo();
+                lstWirePointInfoEnt = new List<WirePointInfo>();
                 if (wirePointInfoEnt != null)
                 {
-                    lstWirePointInfoEnt = wirePointInfoEnt.ToList<WirePointInfoEntity>();
+                    lstWirePointInfoEnt = wirePointInfoEnt.ToList<WirePointInfo>();
                     DrawWirePoint(lstWirePointInfoEnt, sADDorCHANGE);
 
                     DialogResult dlgResult = MessageBox.Show("是否同时更新巷道图形？", "提示", MessageBoxButtons.YesNo,
@@ -331,9 +331,9 @@ namespace _3.GeologyMeasure
                     if (dlgResult == DialogResult.Yes)
                     {
                         //DrawTunnel(lstWirePointInfoEnt, sADDorCHANGE);
-                        DataSet dst=LibBusiness.TunnelInfoBLL.selectOneTunnelInfoByTunnelID(_tunnelID);
-                        double hdwid=0.0;
-                        dics = ConstructDics(dst,out hdwid);
+                        DataSet dst = LibBusiness.TunnelInfoBLL.selectOneTunnelInfoByTunnelID(_tunnelID);
+                        double hdwid = 0.0;
+                        dics = ConstructDics(dst, out hdwid);
                         if (dst.Tables[0].Rows.Count > 0)
                         {
                             UpdateHdbyPnts(lstWirePointInfoEnt, dics, hdwid);
@@ -344,7 +344,7 @@ namespace _3.GeologyMeasure
             }
         }
 
-        private Dictionary<string, string> ConstructDics(DataSet dst,out double hdwid)
+        private Dictionary<string, string> ConstructDics(DataSet dst, out double hdwid)
         {
             //巷道信息赋值
             hdwid = 0.0;
@@ -383,7 +383,7 @@ namespace _3.GeologyMeasure
         /// <param name="wirepntcols">导线信息列表</param>
         /// <param name="dics">巷道属性</param>
         /// <param name="hdwid">巷道宽度</param>
-        private void AddHdbyPnts(List<WirePointInfoEntity> wirepntcols, Dictionary<string, string> dics, double hdwid)
+        private void AddHdbyPnts(List<WirePointInfo> wirepntcols, Dictionary<string, string> dics, double hdwid)
         {
             List<IPoint> rightresults = null;
             List<IPoint> leftresults = null;
@@ -430,7 +430,7 @@ namespace _3.GeologyMeasure
         /// </summary>
         /// <param name="wirepntcols"></param>
         /// <param name="dics"></param>
-        private void UpdateHdbyPnts(List<WirePointInfoEntity> wirepntcols, Dictionary<string, string> dics, double hdwid)
+        private void UpdateHdbyPnts(List<WirePointInfo> wirepntcols, Dictionary<string, string> dics, double hdwid)
         {
             List<IPoint> rightresults = null;
             List<IPoint> leftresults = null;
@@ -449,7 +449,7 @@ namespace _3.GeologyMeasure
                 pntcols.Add(pnt);
             }
             //清除图层上对应的信息
-            string sql = "\""+GIS.GIS_Const.FIELD_HDID+"\"='" + wireInfoEntity.TunnelID.ToString() + "'";
+            string sql = "\"" + GIS.GIS_Const.FIELD_HDID + "\"='" + wireInfoEntity.TunnelID.ToString() + "'";
             Global.commonclss.DelFeatures(Global.pntlyr, sql);
             Global.commonclss.DelFeatures(Global.pntlinlyr, sql);
             Global.commonclss.DelFeatures(Global.centerlyr, sql);
@@ -491,9 +491,9 @@ namespace _3.GeologyMeasure
         /// 根据坐标绘制导线点
         /// </summary>
         /// <param name="lstWPIE">导线坐标（List）</param>
-        private void DrawWirePoint(List<WirePointInfoEntity> lstWPIE, string addOrChange)
+        private void DrawWirePoint(List<WirePointInfo> lstWPIE, string addOrChange)
         {
-            WirePointInfoEntity wirePtInfo = new WirePointInfoEntity();
+            WirePointInfo wirePtInfo = new WirePointInfo();
             ESRI.ArcGIS.Geometry.IPoint pt = new ESRI.ArcGIS.Geometry.Point();
 
             //找到导线点图层
@@ -535,10 +535,10 @@ namespace _3.GeologyMeasure
         /// 根据导线点坐标绘制巷道
         /// </summary>
         /// <param name="lstWPIE"></param>
-        private void DrawTunnel(List<WirePointInfoEntity> lstWPIE, string addOrChange)
+        private void DrawTunnel(List<WirePointInfo> lstWPIE, string addOrChange)
         {
             ///根据导线点计算巷道边线点
-            WirePointInfoEntity[] arrayWPtInfo = new WirePointInfoEntity[] { };
+            WirePointInfo[] arrayWPtInfo = new WirePointInfo[] { };
             arrayWPtInfo = lstWPIE.ToArray();
             Vector3_DW[] verticesLeftBtmRet = null;
             Vector3_DW[] verticesRightBtmRet = null;
@@ -656,7 +656,7 @@ namespace _3.GeologyMeasure
         /// </summary>
         /// <param name="i">Datagridview行号</param>
         /// <returns>导线点实体</returns>
-        private WirePointInfoEntity setWirePointEntity(int i)
+        private WirePointInfo setWirePointEntity(int i)
         {
             // 最后一行为空行时，跳出循环
             if (i == this.dgrdvWire.RowCount - 1)
@@ -664,7 +664,7 @@ namespace _3.GeologyMeasure
                 return null;
             }
             // 创建导线点实体
-            WirePointInfoEntity wirePointInfoEntity = new WirePointInfoEntity();
+            WirePointInfo wirePointInfoEntity = new WirePointInfo();
             if (this.Text == Const_GM.WIRE_INFO_CHANGE)
             {
                 if (i < wpiEntity.Length)
@@ -750,7 +750,7 @@ namespace _3.GeologyMeasure
         /// 2014.2.26 lyf 修改函数，返回导线点List，为绘制导线点图形
         /// </summary>
         /// <returns>导线点List</returns>
-        private List<WirePointInfoEntity> insertWireInfo()
+        private List<WirePointInfo> insertWireInfo()
         {
             setWireInfoEntity();
 
@@ -760,7 +760,7 @@ namespace _3.GeologyMeasure
             //无导线时插入
             if (WireInfoBLL.selectAllWireInfo(tunnelEntity).Tables[0].Rows.Count == 0)
             {
-                TunnelDefaultSelect.InsertDefaultTunnel(WireInfoDbConstNames.TABLE_NAME, selectTunnelUserControl1.ITunnelId);
+                LibBusiness.TunnelDefaultSelect.InsertDefaultTunnel(WireInfoDbConstNames.TABLE_NAME, selectTunnelUserControl1.ITunnelId);
                 bResult = WireInfoBLL.insertWireInfo(wireInfoEntity);
                 if (bResult)
                 {
@@ -777,10 +777,10 @@ namespace _3.GeologyMeasure
             //导线编号
             wireInfoEntity.WireInfoID = Convert.ToInt32(WireInfoBLL.selectAllWireInfo(BasicInfoManager.getInstance().getTunnelByID(wireInfoEntity.TunnelID)).Tables[0].Rows[0][WireInfoDbConstNames.ID]);
             //导线点信息登陆
-            List<WirePointInfoEntity> wirePointInfoEntityList = new List<WirePointInfoEntity>();
+            List<WirePointInfo> wirePointInfoEntityList = new List<WirePointInfo>();
             for (int i = 0; i < this.dgrdvWire.RowCount; i++)
             {
-                WirePointInfoEntity wirePointInfoEntity = new WirePointInfoEntity();
+                WirePointInfo wirePointInfoEntity = new WirePointInfo();
 
                 wirePointInfoEntity = setWirePointEntity(i);
 
@@ -796,7 +796,7 @@ namespace _3.GeologyMeasure
 
             if (bResult)
             {
-                foreach (WirePointInfoEntity wirePointInfoEntity in wirePointInfoEntityList)
+                foreach (WirePointInfo wirePointInfoEntity in wirePointInfoEntityList)
                 {
                     bResult = WirePointBLL.insertWirePointInfo(wirePointInfoEntity);
                     if (bResult)
@@ -814,15 +814,15 @@ namespace _3.GeologyMeasure
         /// 2014.2.26 lyf 修改函数，返回导线点List，为绘制导线点图形
         /// </summary>
         /// <returns>导线点List</returns>
-        private WirePointInfoEntity[] updateWireInfo()
+        private WirePointInfo[] updateWireInfo()
         {
             setWireInfoEntity();
 
-            WirePointInfoEntity[] wirePointInfoEnt = new WirePointInfoEntity[dgrdvWire.RowCount - 1];
+            WirePointInfo[] wirePointInfoEnt = new WirePointInfo[dgrdvWire.RowCount - 1];
             for (int i = 0; i < dgrdvWire.RowCount - 1; i++)
             {
                 // 创建导线点实体
-                WirePointInfoEntity wirePointInfoEntity = new WirePointInfoEntity();
+                WirePointInfo wirePointInfoEntity = new WirePointInfo();
                 wirePointInfoEntity = setWirePointEntity(i);
                 if (wirePointInfoEntity == null)
                 {
@@ -835,7 +835,7 @@ namespace _3.GeologyMeasure
 
             //导线信息登陆
             _tunnelID = selectTunnelUserControl1.ITunnelId;
-            TunnelDefaultSelect.UpdateDefaultTunnel(WireInfoDbConstNames.TABLE_NAME, selectTunnelUserControl1.ITunnelId);
+            LibBusiness.TunnelDefaultSelect.UpdateDefaultTunnel(WireInfoDbConstNames.TABLE_NAME, selectTunnelUserControl1.ITunnelId);
             bool bResult = WireInfoBLL.updateWireInfo(wireInfoEntity, _tunnelID);
             //导线点信息登陆
             if (bResult)
@@ -872,7 +872,7 @@ namespace _3.GeologyMeasure
                 }
 
                 //导线点实体
-                WirePointInfoEntity wirePointInfoEntity = new WirePointInfoEntity();
+                WirePointInfo wirePointInfoEntity = new WirePointInfo();
                 //当条数少于导线点个数时，多于部分做删除处理
                 if (dgrdvWire.Rows.Count <= _itemCount)
                 {

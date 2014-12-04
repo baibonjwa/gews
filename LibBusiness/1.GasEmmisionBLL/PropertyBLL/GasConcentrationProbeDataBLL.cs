@@ -24,7 +24,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="gasConcentrationProbeDataEntity">【瓦斯浓度探头数据】实体</param>
         /// <returns>成功与否：true，false</returns>
-        public static bool insertGasConcentrationProbeData(GasConcentrationProbeDataEntity gasConcentrationProbeDataEntity)
+        public static bool insertGasConcentrationProbeData(GasConcentrationProbeData gasConcentrationProbeDataEntity)
         {
             StringBuilder sqlStr = new StringBuilder();
             sqlStr.Append("INSERT INTO " + GasConcentrationProbeDataDbConstNames.TABLE_NAME);
@@ -274,7 +274,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="gasConcentrationProbeDataEntity">【瓦斯浓度数据实体】</param>
         /// <returns>成功与否：true，false</returns>
-        public static bool updateGasConcentrationProbeData(GasConcentrationProbeDataEntity gasConcentrationProbeDataEntity)
+        public static bool updateGasConcentrationProbeData(GasConcentrationProbeData gasConcentrationProbeDataEntity)
         {
             StringBuilder sqlStr = new StringBuilder();
             sqlStr.Append("UPDATE " + GasConcentrationProbeDataDbConstNames.TABLE_NAME);

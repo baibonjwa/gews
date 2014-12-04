@@ -48,9 +48,9 @@ namespace LibBusiness
         /// 获取用户信息实体
         /// </summary>
         /// <returns>可能返回null</returns>
-        public static UserInformationManagementEntity[] sqlGetUserInformationEntity()
-        {           
-            UserInformationManagementEntity[] ents=null;
+        public static UserInformation[] sqlGetUserInformationEntity()
+        {
+            UserInformation[] ents = null;
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select ");
             strSql.Append(UserInformationManagementDbConstNames.USER_LOGIN_NAME + ",");
@@ -70,7 +70,7 @@ namespace LibBusiness
             DataTable dt = database.ReturnDS(strSql.ToString()).Tables[0];
             if (dt.Rows.Count > 0)
             {
-                ents = new UserInformationManagementEntity[dt.Rows.Count];
+                ents = new UserInformation[dt.Rows.Count];
             }
             else
             {
@@ -79,7 +79,7 @@ namespace LibBusiness
             int n = dt.Rows.Count;
             for (int i = 0; i < n;i++ )
             {
-                UserInformationManagementEntity ent = new UserInformationManagementEntity();
+                UserInformation ent = new UserInformation();
                 ent.LoginName = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][0].ToString());
                 ent.PassWord = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][1].ToString());
                 ent.Group = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][2].ToString());
@@ -163,7 +163,7 @@ namespace LibBusiness
         }
 
         //通过用户登陆名更新记录
-        public static bool UpdateUserInfomationDatabase(UserInformationManagementEntity ent,string oldName)
+       public static bool UpdateUserInfomationDatabase(UserInformation ent, string oldName)
         {
             //string sqlUpdate = "update T_USER_INFO_MANAGEMENT set USER_LOGIN_NAME = '" + ent.LoginName + "',"
             //        + "USER_PASSWORD = '" + ent.PassWord + "',"
@@ -248,7 +248,7 @@ namespace LibBusiness
         }
 
         //向用户信息记录表中插入新的用户信息
-        public static bool InsertRecordIntoTableUserInformation(UserInformationManagementEntity ent)
+        public static bool InsertRecordIntoTableUserInformation(UserInformation ent)
         {
             //string sql = "insert into T_USER_INFO_MANAGEMENT values ('" + _txtLoginName.Text.ToString().Trim() + "','"
             //    + _txtPassWord.Text.ToString().Trim() + "','"

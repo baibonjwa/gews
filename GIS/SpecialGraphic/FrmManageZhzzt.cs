@@ -32,10 +32,10 @@ namespace GIS.SpecialGraphic
             pFilter.WhereClause = "strtype ='1'";
             IFeatureCursor pCursor = frmzhzzt.pFeatureClass.Search(pFilter, false);
             IFeature pFeature = pCursor.NextFeature();
-            List<histogramEnt> list = new List<histogramEnt>();
+            List<Histogram> list = new List<Histogram>();
             while (pFeature != null)
             {
-                histogramEnt his = new histogramEnt();
+                Histogram his = new Histogram();
                 string id = pFeature.get_Value(pFeature.Fields.FindField("BID")).ToString();
                 string blc = pFeature.get_Value(pFeature.Fields.FindField("bilici")).ToString();
                 string textstr = pFeature.get_Value(pFeature.Fields.FindField("textstr")).ToString();

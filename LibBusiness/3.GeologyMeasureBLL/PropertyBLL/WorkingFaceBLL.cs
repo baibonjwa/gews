@@ -283,7 +283,7 @@ namespace LibBusiness
                     double x = dr[WorkingFaceDbConstNames.COORDINATE_X] == DBNull.Value ? 0.0 : Convert.ToDouble(dr[WorkingFaceDbConstNames.COORDINATE_X]);
                     double y = dr[WorkingFaceDbConstNames.COORDINATE_Y] == DBNull.Value ? 0.0 : Convert.ToDouble(dr[WorkingFaceDbConstNames.COORDINATE_Y]);
                     double z = dr[WorkingFaceDbConstNames.COORDINATE_Z] == DBNull.Value ? 0.0 : Convert.ToDouble(dr[WorkingFaceDbConstNames.COORDINATE_Z]);
-                    workingfaceEntity.Coordinate = new CoordinateEntity(x, y, z);
+                    workingfaceEntity.Coordinate = new Coordinate(x, y, z);
 
                     //workingfaceEntity.MiningAreaID = (int)ds.Tables[0].Rows[0][WorkingFaceDbConstNames.MININGAREA_ID];
                     workingfaceEntity.WorkingFaceID = (int)ds.Tables[0].Rows[0][WorkingFaceDbConstNames.WORKINGFACE_ID];

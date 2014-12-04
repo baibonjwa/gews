@@ -195,7 +195,7 @@ namespace GIS.Warning
         }
 
         //初始化预警点图层
-        List<PreWarningResultQueryEnt> _ents2 = new List<PreWarningResultQueryEnt>();
+        List<PreWarningResultQuery> _ents2 = new List<PreWarningResultQuery>();
         // 巷道ID，工作面信息
         Dictionary<int, WarningPosition> warningPositionList = new Dictionary<int, WarningPosition>();
         double epsilon = 0.001;

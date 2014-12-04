@@ -28,8 +28,8 @@ namespace _3.GeologyMeasure
         int _tmpRowIndex = -1;
         int _itemCount = 0;
         Tunnel _tunnelEntity = new Tunnel();
-        WireInfoEntity wireInfoEntity = new WireInfoEntity();
-        WirePointInfoEntity[] wpiEntity;
+        WireInfo wireInfoEntity = new WireInfo();
+        WirePointInfo[] wpiEntity;
         int[] _arr = new int[5];
         DataSet _dsWirePoint = new DataSet();
         int _tunnelID;
@@ -56,7 +56,7 @@ namespace _3.GeologyMeasure
             //this.selectTunnelUserControl1.setCurSelectedID(_arr);
             //this.selectTunnelUserControl1.setCurSelectedID(_arr);
             //自定义控件初始化
-            WorkingFaceSelectEntity workingFaceSelectEntity = WorkingFaceSelect.SelectWorkingFace(DayReportHCDbConstNames.TABLE_NAME);
+            LibEntity.WorkingFaceSelect workingFaceSelectEntity = LibBusiness.WorkingFaceSelect.SelectWorkingFace(DayReportHCDbConstNames.TABLE_NAME);
             if (workingFaceSelectEntity != null)
             {
                 _arr = new int[5];
@@ -336,14 +336,14 @@ namespace _3.GeologyMeasure
             if (workingFace != null)
             {
 
-                TunnelHcJz(coordinates, tunnelZY.TunnelID.ToString(), tunnelFY.TunnelID.ToString(), tunnelQY.TunnelID.ToString(), workingFace.WorkingFaceID,tunnelZY.TunnelWid,tunnelFY.TunnelWid,tunnelQY.TunnelWid);
+                TunnelHcJz(coordinates, tunnelZY.TunnelID.ToString(), tunnelFY.TunnelID.ToString(), tunnelQY.TunnelID.ToString(), workingFace.WorkingFaceID, tunnelZY.TunnelWid, tunnelFY.TunnelWid, tunnelQY.TunnelWid);
             }
         }
 
         /// <summary>
         /// 巷道回采校正
         /// </summary>
-        private void TunnelHcJz(List<IPoint> pnts,string hd1,string hd2,string hd3,int workingfaceid,double zywid,double fywid,double qywid)
+        private void TunnelHcJz(List<IPoint> pnts, string hd1, string hd2, string hd3, int workingfaceid, double zywid, double fywid, double qywid)
         {
             //查询对应的巷道信息
             Dictionary<string, string> hdids = new Dictionary<string, string>();
@@ -389,7 +389,7 @@ namespace _3.GeologyMeasure
                     bool bres = false;
                     pline3.QueryPointAndDistance(esriSegmentExtension.esriNoExtension, pnt, false, outp, ref distancealong, ref distancefrom, ref bres);
                     //根据距离绘制回采面
-                    pntcol = Global.hcjsclass.GetBackPolygonArea(pline1, pline2, pline3, zywid,fywid,qywid, distancefrom, 0);
+                    pntcol = Global.hcjsclass.GetBackPolygonArea(pline1, pline2, pline3, zywid, fywid, qywid, distancefrom, 0);
                 }
                 else
                 {
@@ -415,7 +415,7 @@ namespace _3.GeologyMeasure
                     bool bres = false;
                     pline3.QueryPointAndDistance(esriSegmentExtension.esriNoExtension, pnt, false, outp, ref distancealong, ref distancefrom, ref bres);
                     //根据距离绘制回采面
-                    pntcol = Global.hcjsclass.GetBackPolygonArea(pline1, pline2, pline3, zywid,fywid,qywid, distancefrom, dirflag);
+                    pntcol = Global.hcjsclass.GetBackPolygonArea(pline1, pline2, pline3, zywid, fywid, qywid, distancefrom, dirflag);
                 }
                 List<IPoint> pnthccols = new List<IPoint>();
                 for (int i = 0; i < pntcol.PointCount - 1; i++)
@@ -432,7 +432,7 @@ namespace _3.GeologyMeasure
                 IPoint prevPnt = pntcol.get_Point(pntcol.PointCount - 1);
                 if (prevPnt != null)
                 {
-                    workingFace.Coordinate = new CoordinateEntity(prevPnt.X, prevPnt.Y, 0.0);
+                    workingFace.Coordinate = new Coordinate(prevPnt.X, prevPnt.Y, 0.0);
                     bool bres = LibBusiness.WorkingFaceBLL.updateWorkingfaceXYZ(workingFace);
                 }
                 //根据点查询60米范围内的地质构造的信息
@@ -451,7 +451,7 @@ namespace _3.GeologyMeasure
                     {
                         GeoStruct tmp = geoinfos[i];
 
-                        GeologySpaceEntity geologyspaceEntity = new GeologySpaceEntity();
+                        GeologySpace geologyspaceEntity = new GeologySpace();
                         geologyspaceEntity.WorkSpaceID = workingFace.WorkingFaceID;
                         geologyspaceEntity.TectonicType = Convert.ToInt32(key);
                         geologyspaceEntity.TectonicID = tmp.geoinfos[GIS.GIS_Const.FIELD_BID].ToString();

@@ -26,8 +26,8 @@ namespace UnderTerminal
     {
         /*******************************/
         UnderMessageWindow mainWin;
-        SValueEntity _sValueEntity = new SValueEntity();
-        SValueEntity[] sEntitys;
+        SValue _sValueEntity = new SValue();
+        SValue[] sEntitys;
         Tunnel tunnelEntity = new Tunnel();
         //巷道控件用数组
         int[] arr = new int[5];

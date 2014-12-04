@@ -21,7 +21,7 @@ namespace LibPanels
     public partial class ManagementInfoEntering : Form
     {
         #region ******变量声明******
-        public ManagementEntity managementEntity = new ManagementEntity();
+        public Management managementEntity = new Management();
         #endregion ******变量声明******
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace LibPanels
         /// 绑定修改数据
         /// </summary>
         /// <param name="managementEntity"></param>
-        public void bindDefaultValue(ManagementEntity managementEntity)
+        public void bindDefaultValue(Management managementEntity)
         {
             //是否存在瓦斯异常不汇报
             if (managementEntity.IsGasErrorNotReport == 1)

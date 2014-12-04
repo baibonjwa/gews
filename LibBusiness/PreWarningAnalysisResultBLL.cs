@@ -16,13 +16,13 @@ namespace LibBusiness
 {
     public class PreWarningAnalysisResultBLL
     {
-        public static List<PreWarningAnalysisResultEnt> AnalysisPreWarningResult(string strPreWarningResult)
+        public static List<PreWarningAnalysisResult> AnalysisPreWarningResult(string strPreWarningResult)
         {            
             if (strPreWarningResult=="")
             {
                 return null;
             }
-            List<PreWarningAnalysisResultEnt> MultiRuleEnts = new List<PreWarningAnalysisResultEnt>();
+            List<PreWarningAnalysisResult> MultiRuleEnts = new List<PreWarningAnalysisResult>();
             string[] values = strPreWarningResult.Split(LibCommon.Const_WM.PRE_WARNING_RULE_CODE_AND_PARAMS_SEPERATOR_MULTI);
             foreach (string value in values)
             {
@@ -89,7 +89,7 @@ namespace LibBusiness
                             }
                         }
                         //单条规则,将单条规则亦写成数组形式，便于与复合规则统一：array[0]
-                        PreWarningAnalysisResultEnt MultiRuleEnt = new PreWarningAnalysisResultEnt();
+                        PreWarningAnalysisResult MultiRuleEnt = new PreWarningAnalysisResult();
                         MultiRuleEnt.MultiRuleCodeID = multiValueNameAndValue[0];
                         MultiRuleEnt.RuleValues = singleEnts;
 
@@ -140,7 +140,7 @@ namespace LibBusiness
                             singleEnts.Add(singleEnt);
 
                             //单条规则,将单条规则亦写成数组形式，便于与复合规则统一：array[0]
-                            PreWarningAnalysisResultEnt MultiRuleEnt = new PreWarningAnalysisResultEnt();
+                            PreWarningAnalysisResult MultiRuleEnt = new PreWarningAnalysisResult();
                             MultiRuleEnt.MultiRuleCodeID = "";
                             MultiRuleEnt.RuleValues = singleEnts;
 

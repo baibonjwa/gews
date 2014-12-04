@@ -97,7 +97,7 @@ namespace LibBusiness
         /// <param name="mEntity">工作面动态防突井下数据实体</param>
         /// <param name="tunnelEntity">巷道实体</param>
         /// <returns>管理信息</returns>
-        public static bool insertManagementInfo(ManagementEntity mEntity)
+        public static bool insertManagementInfo(Management mEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
             StringBuilder sb = new StringBuilder();
@@ -146,7 +146,7 @@ namespace LibBusiness
         /// <param name="mEntity">工作面动态防突井下数据实体</param>
         /// <param name="tunnelEntity">巷道实体</param>
         /// <returns>是否修改成功?true:false</returns>
-        public static bool updateManagementInfo(ManagementEntity mEntity)
+        public static bool updateManagementInfo(Management mEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
             StringBuilder sb = new StringBuilder();

@@ -37,8 +37,8 @@ namespace _3.GeologyMeasure
         int _rowDetailStartIndex = 2;
         Color rowBackColor = Color.White;
         Tunnel tunnelEntity = null;
-        WireInfoEntity wireInfoEntity = new WireInfoEntity();
-        WirePointInfoEntity wirePointInfoEntity = new WirePointInfoEntity();
+        WireInfo wireInfoEntity = new WireInfo();
+        WirePointInfo wirePointInfoEntity = new WirePointInfo();
         DataSet _ds = new DataSet();
         DataSet _dsWirePoint = new DataSet();
         int[] _wirePointPrimaryKey;
@@ -495,7 +495,7 @@ namespace _3.GeologyMeasure
         /// 根据导线点绑定ID删除导线点图元
         /// </summary>
         /// <param name="sfpFaultageBIDArray">要删除导线点的绑定ID</param>
-        private void DeleteWirePtByBID(WirePointInfoEntity wirePointInfoEntity)
+        private void DeleteWirePtByBID(WirePointInfo wirePointInfoEntity)
         {
             if (wirePointInfoEntity.BindingID == "") return;
 
@@ -518,7 +518,7 @@ namespace _3.GeologyMeasure
         /// 根据巷道ID删除巷道图元
         /// </summary>
         /// <param name="sfpFaultageBIDArray">要删除巷道的绑定ID</param>
-        private void DeleteWirePtByBID(WireInfoEntity wireInfoEntity)
+        private void DeleteWirePtByBID(WireInfo wireInfoEntity)
         {
             if (wireInfoEntity.TunnelID.ToString() == "") return;
 

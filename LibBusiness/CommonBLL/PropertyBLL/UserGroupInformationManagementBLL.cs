@@ -61,7 +61,7 @@ namespace LibBusiness
         /// <param name="ent">用户组实体</param>
         /// <param name="oldName">用户组名称</param>
         /// <returns>是否更新成功</returns>
-        public static bool UpdateUserGroupInfomationDatabase(UserGroupInformationManagementEntity ent, string oldName)
+        public static bool UpdateUserGroupInfomationDatabase(UserGroup ent, string oldName)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("UPDATE ");
@@ -131,7 +131,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="ent"></param>
         /// <returns></returns>
-        public static bool InsertRecordIntoTableUserGroupInformation(UserGroupInformationManagementEntity ent)
+        public static bool InsertRecordIntoTableUserGroupInformation(UserGroup ent)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("INSERT INTO ");

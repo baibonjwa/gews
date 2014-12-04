@@ -78,7 +78,7 @@ namespace LibBusiness
         //    bool bResult = db.OperateDB(sqlStr.ToString());
         //    return bResult;
         //}
-        public static bool insertBigFaultageInfo(BigFaultageEntity bigFaultageEntity, List<BigFaultagePointEntity> pointList)
+        public static bool insertBigFaultageInfo(BigFaultage bigFaultageEntity, List<BigFaultagePoint> pointList)
         {
             StringBuilder sqlStr = new StringBuilder();
             sqlStr.Append("BEGIN ");
@@ -214,7 +214,7 @@ namespace LibBusiness
             return true;
         }
 
-        public static void selectBigfaultageId(string id, BigFaultageEntity bigFaultageEntity, List<BigFaultagePointEntity> pointList)
+        public static void selectBigfaultageId(string id, BigFaultage bigFaultageEntity, List<BigFaultagePoint> pointList)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
 
@@ -241,7 +241,7 @@ namespace LibBusiness
 
             for (int i = 0; i < dtFaultagePoint.Rows.Count; i++)
             {
-                BigFaultagePointEntity point = new BigFaultagePointEntity();
+                BigFaultagePoint point = new BigFaultagePoint();
                 point.CoordinateX = Convert.ToDouble(dtFaultagePoint.Rows[i][BigFaultagePointDbConstNames.COORDINATE_X]);
                 point.CoordinateY = Convert.ToDouble(dtFaultagePoint.Rows[i][BigFaultagePointDbConstNames.COORDINATE_Y]);
                 point.CoordinateZ = Convert.ToDouble(dtFaultagePoint.Rows[i][BigFaultagePointDbConstNames.COORDINATE_Z]);
@@ -303,7 +303,7 @@ namespace LibBusiness
         //    bool bResult = db.OperateDB(sqlStr.ToString());
         //    return bResult;
         //}
-        public static bool updateBigFaultageInfo(BigFaultageEntity bigFaultageEntity, List<BigFaultagePointEntity> pointList)
+        public static bool updateBigFaultageInfo(BigFaultage bigFaultageEntity, List<BigFaultagePoint> pointList)
         {
             StringBuilder sqlStr = new StringBuilder();
 

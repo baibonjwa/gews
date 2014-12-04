@@ -19,7 +19,7 @@ namespace LibBusiness
 {
     public class PreWarningRulesBLL
     {
-        public static bool InsertPreWarningRulesInfo(PreWarningRulesEntity ent)
+        public static bool InsertPreWarningRulesInfo(PreWarningRules ent)
         {
             //MARK FIELD
             string sql = "INSERT INTO " + PreWarningRulesDbConstNames.TABLE_NAME + "(" +
@@ -152,7 +152,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="ent"></param>
         /// <returns></returns>
-        public static bool updateWarningRulesInfo(PreWarningRulesEntity ent)
+        public static bool updateWarningRulesInfo(PreWarningRules ent)
         {
             string sql = "UPDATE " + PreWarningRulesDbConstNames.TABLE_NAME + " SET " +
                 PreWarningRulesDbConstNames.RULE_CODE + "='" + ent.RuleCode + "'," +
@@ -256,7 +256,7 @@ namespace LibBusiness
         /// 根据规则ID获取预警规则实体
         /// <param name="ruleId">规则Id</param>
         /// </summary>
-        public static PreWarningRulesEntity GetPreWarningRulesEntityByRuleId(int ruleId)
+        public static PreWarningRules GetPreWarningRulesEntityByRuleId(int ruleId)
         {
             try
             {
@@ -287,7 +287,7 @@ namespace LibBusiness
                     return null;
                 }
 
-                PreWarningRulesEntity ret = new PreWarningRulesEntity(ruleId);
+                PreWarningRules ret = new PreWarningRules(ruleId);
                 ret.RuleCode = ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.RULE_CODE].ToString();
                 ret.RuleType = ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.RULE_TYPE].ToString();
                 ret.WarningType = ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.WARNING_TYPE].ToString();
@@ -311,7 +311,7 @@ namespace LibBusiness
         /// 根据规则ID获取预警规则实体
         /// <param name="ruleId">规则Id</param>
         /// </summary>
-        public static PreWarningRulesEntity GetPreWarningRulesEntityByRuleId(string ruleId)
+        public static PreWarningRules GetPreWarningRulesEntityByRuleId(string ruleId)
         {
             try
             {
@@ -343,7 +343,7 @@ namespace LibBusiness
                 }
                 int iRuleID = -1;
                 int.TryParse(ruleId, out iRuleID);
-                PreWarningRulesEntity ret = new PreWarningRulesEntity(iRuleID);
+                PreWarningRules ret = new PreWarningRules(iRuleID);
                 ret.RuleCode = ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.RULE_CODE].ToString();
                 ret.RuleType = ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.RULE_TYPE].ToString();
                 ret.WarningType = ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.WARNING_TYPE].ToString();
@@ -388,7 +388,7 @@ namespace LibBusiness
                     ret[i] = new RuleInfo(int.Parse(rules[i]));
                     if (warningParams[i] != "")//该规则编码含有参数
                     {
-                        ret[i].PreWarningParams = PreWarningRulesEntity.ParseRuleDescriptionOfOneRuleId(warningParams[i]);
+                        ret[i].PreWarningParams = PreWarningRules.ParseRuleDescriptionOfOneRuleId(warningParams[i]);
                     }
                     else//该规则编码无对应参数
                     {

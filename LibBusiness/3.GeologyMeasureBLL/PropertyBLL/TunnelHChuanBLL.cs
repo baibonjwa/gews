@@ -14,7 +14,7 @@ namespace LibBusiness
         /// 插入横川数据
         /// </summary>
         /// <returns></returns>
-        public static int insertTunnelHChuan(TunnelHChuanEntity tunnelHChuanEntity)
+        public static int insertTunnelHChuan(TunnelHChuan tunnelHChuanEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
             StringBuilder sb = new StringBuilder();
@@ -79,7 +79,7 @@ namespace LibBusiness
         /// 删除回采巷道数据
         /// </summary>
         /// <returns></returns>
-        public static bool deleteTunnelHChuan(TunnelHChuanEntity tunnelHChuanEntity)
+        public static bool deleteTunnelHChuan(TunnelHChuan tunnelHChuanEntity)
         {
 
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
@@ -96,7 +96,7 @@ namespace LibBusiness
         /// 修改掘进巷道数据
         /// </summary>
         /// <returns></returns>
-        public static bool updateTunnelHChuan(TunnelHChuanEntity tunnelHChuanEntity)
+        public static bool updateTunnelHChuan(TunnelHChuan tunnelHChuanEntity)
         {
             clearTunnelTypeOfHChuan(tunnelHChuanEntity.ID);
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
@@ -131,7 +131,7 @@ namespace LibBusiness
 
         private static void clearTunnelTypeOfHChuan(int tunnelHChuanID)
         {
-            TunnelHChuanEntity tunnelHChuanEntity = selectTunnelHChuan(tunnelHChuanID);
+            TunnelHChuan tunnelHChuanEntity = selectTunnelHChuan(tunnelHChuanID);
             if (tunnelHChuanEntity != null)
             {
                 TunnelInfoBLL.clearTunnelType(tunnelHChuanEntity.TunnelID1);
@@ -149,12 +149,12 @@ namespace LibBusiness
             DataSet ds = db.ReturnDS(sql);
             return ds;
         }
-        private static TunnelHChuanEntity selectTunnelHChuan(int tunnelHChuanID)
+        private static TunnelHChuan selectTunnelHChuan(int tunnelHChuanID)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
             string sql = "SELECT * FROM " + TunnelHChuanDbConstNames.TABLE_NAME + " WHERE " + TunnelHChuanDbConstNames.ID + " = " + tunnelHChuanID;
             DataSet ds = db.ReturnDS(sql);
-            TunnelHChuanEntity tunnelHChuanEntity = new TunnelHChuanEntity();
+            TunnelHChuan tunnelHChuanEntity = new TunnelHChuan();
             if (ds.Tables[0].Rows.Count > 0)
             {
                 try

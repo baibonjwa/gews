@@ -14,7 +14,7 @@ namespace UnderTerminal
 {
     public partial class LoginPopup : Form
     {
-        private UserLoginInformationEnt[] ents = null;
+        private UserLogin[] ents = null;
         
         public LoginPopup(string title)
         {
@@ -45,7 +45,7 @@ namespace UnderTerminal
                 //验证帐号密码是否正确
                 if (ents[i].LoginName == userName && ents[i].PassWord == password)
                 {
-                    CurrentUserEnt.CurLoginUserInfo = ents[i];
+                    CurrentUser.CurLoginUserInfo = ents[i];
                     //记录最后一次登录用户
                     StreamWriter sw = new StreamWriter(Application.StartupPath + "\\DefaultUser.txt", false);
                     sw.WriteLine(userName);

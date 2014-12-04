@@ -36,8 +36,8 @@ namespace _3.GeologyMeasure
         /** 业务逻辑类型：添加/修改  **/
         private string _bllType = "add";
 
-        private BigFaultageEntity bigFaultageEntity = new BigFaultageEntity();
-        private List<BigFaultagePointEntity> pointList = new List<BigFaultagePointEntity>();
+        private BigFaultage bigFaultageEntity = new BigFaultage();
+        private List<BigFaultagePoint> pointList = new List<BigFaultagePoint>();
         private BigFaultageInfoManagement form;
 
         /// <summary>
@@ -164,8 +164,8 @@ namespace _3.GeologyMeasure
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            BigFaultageEntity bigFaultage = new BigFaultageEntity();
-            List<BigFaultagePointEntity> bigFaultagePoingList = new List<BigFaultagePointEntity>();
+            BigFaultage bigFaultage = new BigFaultage();
+            List<BigFaultagePoint> bigFaultagePoingList = new List<BigFaultagePoint>();
             bool bResult = false;
             if (_bllType == "add")
             {
@@ -178,7 +178,7 @@ namespace _3.GeologyMeasure
                     IDGenerator.NewBindingID();
                 for (int i = 0; i < dgrdvUp.Rows.Count; i++)
                 {
-                    BigFaultagePointEntity point = new BigFaultagePointEntity();
+                    BigFaultagePoint point = new BigFaultagePoint();
                     point.UpOrDown = "上盘";
                     if (dgrdvUp.Rows[i].Cells[0].Value != null)
                     {
@@ -192,7 +192,7 @@ namespace _3.GeologyMeasure
 
                 for (int i = 0; i < dgrdvDown.Rows.Count; i++)
                 {
-                    BigFaultagePointEntity point = new BigFaultagePointEntity();
+                    BigFaultagePoint point = new BigFaultagePoint();
                     if (dgrdvDown.Rows[i].Cells[0].Value != null)
                     {
                         point.UpOrDown = "下盘";

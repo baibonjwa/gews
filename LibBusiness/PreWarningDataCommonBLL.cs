@@ -39,7 +39,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="mdEntity"></param>
         /// <returns></returns>
-        public static string sqlBack(MineDataEntity mdEntity)
+        public static string sqlBack(MineData mdEntity)
         {
             string sql = mdEntity.Tunnel.TunnelID + "," +
                 mdEntity.CoordinateX + "," +
@@ -58,7 +58,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="mdEntity"></param>
         /// <returns></returns>
-        public static string sqlUpdate(MineDataEntity mdEntity)
+        public static string sqlUpdate(MineData mdEntity)
         {
             string sql = PreWarningDataDbConstNames.TUNNEL_ID + "=" + mdEntity.Tunnel.TunnelID + "," +
                 PreWarningDataDbConstNames.COORDINATE_X + "=" + mdEntity.CoordinateX + "," +

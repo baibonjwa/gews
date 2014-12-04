@@ -141,7 +141,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="dayReportJJEntity">掘进进尺实体</param>
         /// <returns>是否成功插入？true:false</returns>
-        public static bool insertDayReportJJInfo(DayReportJJEntity dayReportJJEntity)
+        public static bool insertDayReportJJInfo(DayReportJJ dayReportJJEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
             StringBuilder sb = new StringBuilder();
@@ -181,7 +181,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="dayReportJJEntity">回采进尺日报实体</param>
         /// <returns></returns>
-        public static bool updateDayReportJJInfo(DayReportJJEntity dayReportJJEntity)
+        public static bool updateDayReportJJInfo(DayReportJJ dayReportJJEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
             StringBuilder sqlStr = new StringBuilder();
@@ -208,7 +208,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="dayReportJJEntity">回采进尺日报实体(含主键)</param>
         /// <returns></returns>
-        public static bool deleteDayReportJJInfo(DayReportJJEntity dayReportJJEntity)
+        public static bool deleteDayReportJJInfo(DayReportJJ dayReportJJEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
             string sql = "DELETE FROM " + DayReportJJDbConstNames.TABLE_NAME + " WHERE " + DayReportJJDbConstNames.ID + " =" + dayReportJJEntity.ID;
@@ -221,9 +221,9 @@ namespace LibBusiness
         /// </summary>
         /// <param name="tunnelID"></param>
         /// <returns></returns>
-        public static DayReportJJEntity returnMaxRowDistanceFromWirepoint(int tunnelID)
+        public static DayReportJJ returnMaxRowDistanceFromWirepoint(int tunnelID)
         {
-            DayReportJJEntity dayReportJJEntity = new DayReportJJEntity();
+            DayReportJJ dayReportJJEntity = new DayReportJJ();
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
             StringBuilder sb = new StringBuilder();
             sb.Append("SELECT * FROM " + DayReportJJDbConstNames.TABLE_NAME);

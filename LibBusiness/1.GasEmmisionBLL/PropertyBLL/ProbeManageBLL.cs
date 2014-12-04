@@ -56,7 +56,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="probeManageEntity">【探头实体】</param>
         /// <returns>成功与否：true，false</returns>
-        public static bool insertProbeManageInfo(ProbeManageEntity probeManageEntity)
+        public static bool insertProbeManageInfo(ProbeManage probeManageEntity)
         {
             StringBuilder sqlStr = new StringBuilder();
             sqlStr.Append("INSERT INTO " + ProbeManageDbConstNames.TABLE_NAME);
@@ -264,7 +264,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="probeManageEntity">【探头实体】</param>
         /// <returns>成功与否：true，false</returns>
-        public static bool updateProbeManageInfo(ProbeManageEntity probeManageEntity)
+        public static bool updateProbeManageInfo(ProbeManage probeManageEntity)
         {
             StringBuilder sqlStr = new StringBuilder();
             sqlStr.Append("UPDATE " + ProbeManageDbConstNames.TABLE_NAME);

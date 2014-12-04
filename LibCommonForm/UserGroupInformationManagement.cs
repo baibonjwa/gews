@@ -141,7 +141,7 @@ namespace LibCommonForm
             LibCommon.FormDefaultPropertiesSetter.SetManagementFormDefaultProperties(this, LibCommon.LibFormTitles.USER_GROUP_INFO_MANMAGEMENT);
             
             //判断用户权限
-            if (CurrentUserEnt.CurLoginUserInfo.Permission != Permission.管理员.ToString())
+            if (CurrentUser.CurLoginUserInfo.Permission != Permission.管理员.ToString())
             {
                 //不具备管理员权限是，隐藏按钮
                 tsBtnAdd.Visible = false;
@@ -393,7 +393,7 @@ namespace LibCommonForm
             int n = this._fpUserGroupInfo.ActiveSheet.ActiveCell.Row.Index;
 
             //设定属性窗口是否启用,当选择的单元格所在行,无用户组名称时,不启用
-            if (CurrentUserEnt.CurLoginUserInfo.Permission != Permission.普通用户.ToString())
+            if (CurrentUser.CurLoginUserInfo.Permission != Permission.普通用户.ToString())
             {
                 _propInfo.Enabled = this._fpUserGroupInfo.ActiveSheet.Cells[n, 1].Value == null ? false : true;
             }
@@ -635,7 +635,7 @@ namespace LibCommonForm
                 this._fpUserGroupInfo.ActiveSheet.Cells[n, columnIndex].Text = changeValue;          
 
                  //定义用户组信息实体,接收新值
-                UserGroupInformationManagementEntity userGroupInfo = new UserGroupInformationManagementEntity();
+                LibEntity.UserGroup userGroupInfo = new LibEntity.UserGroup();
                 userGroupInfo.GroupName = groupName;
                 userGroupInfo.UserCount = userCount;
                 userGroupInfo.Remark = remark;     
