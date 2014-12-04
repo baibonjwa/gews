@@ -156,7 +156,6 @@
             this.barBtnManagementAnalysis = new DevExpress.XtraBars.BarButtonItem();
             this.barBtnWarningLift = new DevExpress.XtraBars.BarButtonItem();
             this.axLicenseControl1 = new ESRI.ArcGIS.Controls.AxLicenseControl();
-            this.stateMonitor1 = new LibCommonControl.StateMonitor();
             ((System.ComponentModel.ISupportInitialize)(this.toolBar_WM)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tocControl_WM)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mapControl_WM)).BeginInit();
@@ -167,7 +166,7 @@
             // toolBar_WM
             // 
             this.toolBar_WM.Dock = System.Windows.Forms.DockStyle.Top;
-            this.toolBar_WM.Location = new System.Drawing.Point(0, 105);
+            this.toolBar_WM.Location = new System.Drawing.Point(0, 117);
             this.toolBar_WM.Name = "toolBar_WM";
             this.toolBar_WM.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("toolBar_WM.OcxState")));
             this.toolBar_WM.Size = new System.Drawing.Size(1240, 28);
@@ -176,20 +175,20 @@
             // tocControl_WM
             // 
             this.tocControl_WM.Dock = System.Windows.Forms.DockStyle.Left;
-            this.tocControl_WM.Location = new System.Drawing.Point(0, 133);
+            this.tocControl_WM.Location = new System.Drawing.Point(0, 145);
             this.tocControl_WM.Name = "tocControl_WM";
             this.tocControl_WM.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("tocControl_WM.OcxState")));
-            this.tocControl_WM.Size = new System.Drawing.Size(265, 451);
+            this.tocControl_WM.Size = new System.Drawing.Size(265, 439);
             this.tocControl_WM.TabIndex = 2;
             this.tocControl_WM.OnMouseDown += new ESRI.ArcGIS.Controls.ITOCControlEvents_Ax_OnMouseDownEventHandler(this.tocControl_WM_OnMouseDown);
             // 
             // mapControl_WM
             // 
             this.mapControl_WM.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mapControl_WM.Location = new System.Drawing.Point(268, 133);
+            this.mapControl_WM.Location = new System.Drawing.Point(268, 145);
             this.mapControl_WM.Name = "mapControl_WM";
             this.mapControl_WM.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("mapControl_WM.OcxState")));
-            this.mapControl_WM.Size = new System.Drawing.Size(972, 451);
+            this.mapControl_WM.Size = new System.Drawing.Size(972, 439);
             this.mapControl_WM.TabIndex = 3;
             // 
             // toolStrip1
@@ -205,9 +204,9 @@
             // 
             // splitter1
             // 
-            this.splitter1.Location = new System.Drawing.Point(265, 133);
+            this.splitter1.Location = new System.Drawing.Point(265, 145);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 451);
+            this.splitter1.Size = new System.Drawing.Size(3, 439);
             this.splitter1.TabIndex = 5;
             this.splitter1.TabStop = false;
             // 
@@ -1228,7 +1227,7 @@
             this.barDockControlTop.CausesValidation = false;
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlTop.Size = new System.Drawing.Size(1240, 105);
+            this.barDockControlTop.Size = new System.Drawing.Size(1240, 117);
             // 
             // barDockControlBottom
             // 
@@ -1241,15 +1240,15 @@
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.barDockControlLeft.Location = new System.Drawing.Point(0, 105);
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 501);
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 117);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 489);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1240, 105);
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 501);
+            this.barDockControlRight.Location = new System.Drawing.Point(1240, 117);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 489);
             // 
             // imageList1
             // 
@@ -1433,25 +1432,11 @@
             this.axLicenseControl1.Size = new System.Drawing.Size(32, 32);
             this.axLicenseControl1.TabIndex = 10;
             // 
-            // stateMonitor1
-            // 
-            this.stateMonitor1.BackColor = System.Drawing.Color.Transparent;
-            this.stateMonitor1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.stateMonitor1.Location = new System.Drawing.Point(0, 28);
-            this.stateMonitor1.Name = "stateMonitor1";
-            this.stateMonitor1.Size = new System.Drawing.Size(170, 19);
-            this.stateMonitor1.TabIndex = 0;
-            this.stateMonitor1.Type = LibCommonControl.StateMonitor.LocationType.UpperLeft;
-            this.stateMonitor1.Visible = false;
-            this.stateMonitor1.X = 0;
-            this.stateMonitor1.Y = 0;
-            // 
             // MainForm_WM
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1240, 606);
-            this.Controls.Add(this.stateMonitor1);
             this.Controls.Add(this.axLicenseControl1);
             this.Controls.Add(this.mapControl_WM);
             this.Controls.Add(this.splitter1);
@@ -1606,7 +1591,6 @@
         private DevExpress.XtraBars.BarButtonItem barBtnManagementAnalysis;
         private ESRI.ArcGIS.Controls.AxLicenseControl axLicenseControl1;
         private DevExpress.XtraBars.BarButtonItem barBtnWarningLift;
-        private LibCommonControl.StateMonitor stateMonitor1;
         private DevExpress.XtraBars.BarButtonItem mniDCShape;
     }
 }

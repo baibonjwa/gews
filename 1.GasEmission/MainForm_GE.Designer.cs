@@ -37,7 +37,6 @@ namespace _1.GasEmission
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainFormGe));
-            this.stateMonitor1 = new LibCommonControl.StateMonitor();
             this.ss_GE = new System.Windows.Forms.StatusStrip();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
@@ -121,19 +120,6 @@ namespace _1.GasEmission
             ((System.ComponentModel.ISupportInitialize)(this.picBoxLogo)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // stateMonitor1
-            // 
-            this.stateMonitor1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.stateMonitor1.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.stateMonitor1.Location = new System.Drawing.Point(4, 724);
-            this.stateMonitor1.Name = "stateMonitor1";
-            this.stateMonitor1.Size = new System.Drawing.Size(208, 21);
-            this.stateMonitor1.TabIndex = 8;
-            this.stateMonitor1.Type = LibCommonControl.StateMonitor.LocationType.UpperLeft;
-            this.stateMonitor1.Visible = false;
-            this.stateMonitor1.X = 0;
-            this.stateMonitor1.Y = 0;
             // 
             // ss_GE
             // 
@@ -1363,7 +1349,6 @@ namespace _1.GasEmission
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1356, 741);
-            this.Controls.Add(this.stateMonitor1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.ss_GE);
             this.Controls.Add(this.barDockControlLeft);
@@ -1474,7 +1459,6 @@ namespace _1.GasEmission
         private DevExpress.XtraBars.BarSubItem barSubItem5;
         private DevExpress.XtraBars.BarButtonItem bbiBadDataEdit;
         private System.Windows.Forms.Label _lblLoading;
-        private LibCommonControl.StateMonitor stateMonitor1;
 
         /// <summary>
         /// 添加T2瓦斯浓度平均增加值

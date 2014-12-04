@@ -30,6 +30,7 @@ namespace _4.OutburstPrevention
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm_OP));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsBtnWSYLD = new System.Windows.Forms.ToolStripButton();
@@ -45,8 +46,8 @@ namespace _4.OutburstPrevention
             this.mapControl_OP = new ESRI.ArcGIS.Controls.AxMapControl();
             this.tocControl_OP = new ESRI.ArcGIS.Controls.AxTOCControl();
             this.toolbar_OP = new ESRI.ArcGIS.Controls.AxToolbarControl();
-            this.imageList1 = new System.Windows.Forms.ImageList();
-            this.barManager1 = new DevExpress.XtraBars.BarManager();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar1 = new DevExpress.XtraBars.Bar();
             this.mniOpenMineMapFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniSaveFloat = new DevExpress.XtraBars.BarButtonItem();
@@ -147,7 +148,6 @@ namespace _4.OutburstPrevention
             this.barButtonItem5 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
             this.axLicenseControl2 = new ESRI.ArcGIS.Controls.AxLicenseControl();
-            this.stateMonitor1 = new LibCommonControl.StateMonitor();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.axLicenseControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mapControl_OP)).BeginInit();
@@ -1324,24 +1324,11 @@ namespace _4.OutburstPrevention
             this.axLicenseControl2.Size = new System.Drawing.Size(32, 32);
             this.axLicenseControl2.TabIndex = 17;
             // 
-            // stateMonitor1
-            // 
-            this.stateMonitor1.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.stateMonitor1.Location = new System.Drawing.Point(0, 15);
-            this.stateMonitor1.Name = "stateMonitor1";
-            this.stateMonitor1.Size = new System.Drawing.Size(205, 19);
-            this.stateMonitor1.TabIndex = 22;
-            this.stateMonitor1.Type = LibCommonControl.StateMonitor.LocationType.UpperLeft;
-            this.stateMonitor1.Visible = false;
-            this.stateMonitor1.X = 0;
-            this.stateMonitor1.Y = 0;
-            // 
             // MainForm_OP
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1053, 642);
-            this.Controls.Add(this.stateMonitor1);
             this.Controls.Add(this.axLicenseControl2);
             this.Controls.Add(this.mapControl_OP);
             this.Controls.Add(this.axLicenseControl1);
@@ -1488,7 +1475,6 @@ namespace _4.OutburstPrevention
         private DevExpress.XtraBars.BarButtonItem mniWSCFGJFloat;
         private DevExpress.XtraBars.BarButtonItem mniCFBXXFloat;
         private ESRI.ArcGIS.Controls.AxLicenseControl axLicenseControl2;
-        private StateMonitor stateMonitor1;
         private System.Windows.Forms.ToolStripStatusLabel toolLabelBLC;
         private DevExpress.XtraBars.BarButtonItem barButtonItem1;
         private DevExpress.XtraBars.BarButtonItem barButtonItem5;

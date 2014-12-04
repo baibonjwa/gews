@@ -52,12 +52,6 @@ namespace _3.GeologyMeasure
             statusStrip1.AxMap = mapControl_GM;
             m_FileMenu.AxMapControl = this.mapControl_GM; //传入MapControl控件                      
 
-            //stateMonitor1.doInitialization(this);
-            //stateMonitor1.Start();
-            //stateMonitor1.Type = StateMonitor.LocationType.BottomRight;
-            //stateMonitor1.X = 5;
-            //stateMonitor1.Y = 2;
-
             ///加载数据   
             IMapControl3 mapControl = (IMapControl3)this.mapControl_GM.Object;
             IToolbarControl toolbarControl = (IToolbarControl)toolBar_GM.Object;

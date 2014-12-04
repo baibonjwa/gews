@@ -102,11 +102,6 @@ namespace _1.GasEmission
             //checkTimer.AutoReset = true;
             //checkTimer.Elapsed += new System.Timers.ElapsedEventHandler(checkTimer_Elapsed);
             //checkTimer.Start();
-            stateMonitor1.doInitialization(this);
-            stateMonitor1.Start();
-            stateMonitor1.Type = StateMonitor.LocationType.BottomLeft;
-            stateMonitor1.X = 2;
-            stateMonitor1.Y = 0;
 
             // 注册事件（巷道选择自定义控件必须实装代码）
             selectTunnelSimple1.TunnelNameChanged += TunnelNameChanged;

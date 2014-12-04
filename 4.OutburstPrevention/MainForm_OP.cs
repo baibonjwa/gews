@@ -62,14 +62,6 @@ namespace _4.OutburstPrevention
             this.statusStrip1.AxMap = mapControl_OP;
             m_FileMenu.AxMapControl = this.mapControl_OP; //传入MapControl控件    
 
-            stateMonitor1.doInitialization(this);
-            stateMonitor1.Start();
-            stateMonitor1.Type = StateMonitor.LocationType.BottomRight;
-            stateMonitor1.X = 5;
-            stateMonitor1.Y = 2;
-
-            //stateMonitor1.Start();
-            //////////////////////////////////////////////////////
             ///绘制基本图元工具条
             ///加载测试数据   
             IMapControl3 mapControl = (IMapControl3)this.mapControl_OP.Object;

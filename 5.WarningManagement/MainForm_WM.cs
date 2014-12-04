@@ -89,12 +89,6 @@ namespace _5.WarningManagement
             toolStrip1.AxMap = mapControl_WM;
             m_FileMenu.AxMapControl = this.mapControl_WM; //传入MapControl控件   
 
-            stateMonitor1.doInitialization(this);
-            stateMonitor1.Start();
-            stateMonitor1.Type = StateMonitor.LocationType.BottomRight;
-            stateMonitor1.X = 5;
-            stateMonitor1.Y = 2;
-
 
             //////////////////////////////////////////////////////
             ///绘制基本图元工具条
