@@ -15,6 +15,7 @@ namespace LibEntity
     public class MineDataEntity : ActiveRecordBase
     {
         private Tunnel _tunnel = new Tunnel();// ID
+        private DateTime _datetime;
 
         /// <summary>
         ///     设置或获取ID
@@ -60,13 +61,19 @@ namespace LibEntity
         /// <summary>
         ///     设置或获取时间
         /// </summary>
-        public DateTime Datetime { get; set; }
+        [Property("DATETIME")]
+        public DateTime Datetime
+        {
+            get { return _datetime; }
+            set { _datetime = value; }
+        }
 
         // 工作制式
 
         /// <summary>
         ///     设置或获取工作制式
         /// </summary>
+        [Property("WORK_STYLE")]
         public string WorkStyle { get; set; }
 
         // 班次
@@ -74,6 +81,7 @@ namespace LibEntity
         /// <summary>
         ///     设置或获取班次
         /// </summary>
+        [Property("WORK_TIME")]
         public string WorkTime { get; set; }
 
         // 队别名称
@@ -81,6 +89,7 @@ namespace LibEntity
         /// <summary>
         ///     设置或获取队别名称
         /// </summary>
+        [Property("TEAM_NAME")]
         public string TeamName { get; set; }
 
         // 填报人
@@ -88,6 +97,7 @@ namespace LibEntity
         /// <summary>
         ///     设置或获取填报人
         /// </summary>
+        [Property("SUBMITTER")]
         public string Submitter { get; set; }
 
         /// <summary>

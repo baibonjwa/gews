@@ -81,6 +81,7 @@ namespace LibCommonControl
             if (cs != null)
             {
                 string errMsg = cs.SendSocketMsg2Server(msg);
+                Log.Debug("Send message " + msg);
                 if (errMsg != "")
                 {
                     Log.Error(Const.SEND_MSG_FAILED + Const.CONNECT_ARROW + msg.ToString());

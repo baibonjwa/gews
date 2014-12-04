@@ -332,31 +332,21 @@ namespace LibPanels
             ceEntity.IsTowardsChange = coalExistence.coalExistenceEntity.IsTowardsChange;
             ceEntity.IsCoalMerge = coalExistence.coalExistenceEntity.IsCoalMerge;
             ceEntity.IsCoalSoft = coalExistence.coalExistenceEntity.IsCoalSoft;
-
-
-            bool bResult = false;
-            //if (this.Text == new LibPanels(MineDataPanelName.CoalExistence).panelFormName)
-            //{
-            //    //bResult = CoalExistenceBLL.insertCoalExistence(ceEntity);
-
-            //    Log.Debug("发送添加煤层赋存信息的Socket信息");
-            //    UpdateWarningDataMsg msg = new UpdateWarningDataMsg(Const.INVALID_ID, this.selectTunnelSimple1.ITunnelId,
-            //        CoalExistenceDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, dtpDateTime.Value);
-            //    this.MainForm.SendMsg2Server(msg);
-            //    Log.Debug("发送添加煤层赋存信息的Socket信息完成");
-            //}
-            //else if (this.Text == new LibPanels(MineDataPanelName.CoalExistence_Change).panelFormName)
-            //{
-            //    bResult = CoalExistenceBLL.updateCoalExistence(ceEntity);
-            //    Log.Debug("发送修改煤层赋存信息的Socket信息");
-            //    UpdateWarningDataMsg msg = new UpdateWarningDataMsg(Const.INVALID_ID, this.selectTunnelSimple1.ITunnelId,
-            //         CoalExistenceDbConstNames.TABLE_NAME, OPERATION_TYPE.UPDATE, dtpDateTime.Value);
-            //    this.MainForm.SendMsg2Server(msg);
-            //    Log.Debug("发送修改煤层赋存信息的Socket信息完成");
-            //}
             try
             {
                 ceEntity.SaveAndFlush();
+                if (Text == new LibPanels(MineDataPanelName.CoalExistence).panelFormName)
+                {
+                    UpdateWarningDataMsg msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.ITunnelId,
+                        CoalExistenceDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, dtpDateTime.Value);
+                    MainForm.SendMsg2Server(msg);
+                }
+                else if (Text == new LibPanels(MineDataPanelName.CoalExistence_Change).panelFormName)
+                {
+                    UpdateWarningDataMsg msg = new UpdateWarningDataMsg(Const.INVALID_ID, this.selectTunnelSimple1.ITunnelId,
+                         CoalExistenceDbConstNames.TABLE_NAME, OPERATION_TYPE.UPDATE, dtpDateTime.Value);
+                    MainForm.SendMsg2Server(msg);
+                }
                 return true;
             }
             catch (Exception ex)

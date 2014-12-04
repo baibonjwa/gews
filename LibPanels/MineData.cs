@@ -20,6 +20,7 @@ using LibCommon;
 using LibPanels;
 using LibSocket;
 using LibCommonControl;
+using NHibernate.Tuple.Entity;
 
 namespace LibPanels
 {
@@ -615,6 +616,9 @@ namespace LibPanels
             ceEntity.IsCoalMerge = coalExistence.coalExistenceEntity.IsCoalMerge;
             //煤层是否松软
             ceEntity.IsCoalSoft = coalExistence.coalExistenceEntity.IsCoalSoft;
+
+            ceEntity.Datetime = DateTime.Now;
+
             try
             {
                 ceEntity.SaveAndFlush();
