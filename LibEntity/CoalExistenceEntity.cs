@@ -14,7 +14,10 @@ namespace LibEntity
     [ActiveRecord("T_COAL_EXISTENCE")]
     public class CoalExistenceEntity : MineDataEntity
     {
+        private string _coalDistoryLevel = "";
+        private int _isTowardsChange = 0;
 
+        //是否层理紊乱
         /// <summary>
         ///     设置或获取是否层理紊乱
         /// </summary>
@@ -51,7 +54,11 @@ namespace LibEntity
         ///     设置或获取煤体破坏类型
         /// </summary>
         [Property("COAL_DISTORY_LEVEL")]
-        public string CoalDistoryLevel { get; set; }
+        public string CoalDistoryLevel
+        {
+            get { return _coalDistoryLevel; }
+            set { _coalDistoryLevel = value; }
+        }
 
         // 是否煤层走向、倾角突然急剧变化
 
@@ -59,7 +66,11 @@ namespace LibEntity
         ///     设置或获取是否煤层走向、倾角突然急剧变化
         /// </summary>
         [Property("IS_TOWARDS_CHANGE")]
-        public int IsTowardsChange { get; set; }
+        public int IsTowardsChange
+        {
+            get { return _isTowardsChange; }
+            set { _isTowardsChange = value; }
+        }
 
         // 工作面煤层是否处于分叉、合层状态
 

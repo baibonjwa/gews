@@ -335,25 +335,35 @@ namespace LibPanels
 
 
             bool bResult = false;
-            if (this.Text == new LibPanels(MineDataPanelName.CoalExistence).panelFormName)
+            //if (this.Text == new LibPanels(MineDataPanelName.CoalExistence).panelFormName)
+            //{
+            //    //bResult = CoalExistenceBLL.insertCoalExistence(ceEntity);
+
+            //    Log.Debug("发送添加煤层赋存信息的Socket信息");
+            //    UpdateWarningDataMsg msg = new UpdateWarningDataMsg(Const.INVALID_ID, this.selectTunnelSimple1.ITunnelId,
+            //        CoalExistenceDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, dtpDateTime.Value);
+            //    this.MainForm.SendMsg2Server(msg);
+            //    Log.Debug("发送添加煤层赋存信息的Socket信息完成");
+            //}
+            //else if (this.Text == new LibPanels(MineDataPanelName.CoalExistence_Change).panelFormName)
+            //{
+            //    bResult = CoalExistenceBLL.updateCoalExistence(ceEntity);
+            //    Log.Debug("发送修改煤层赋存信息的Socket信息");
+            //    UpdateWarningDataMsg msg = new UpdateWarningDataMsg(Const.INVALID_ID, this.selectTunnelSimple1.ITunnelId,
+            //         CoalExistenceDbConstNames.TABLE_NAME, OPERATION_TYPE.UPDATE, dtpDateTime.Value);
+            //    this.MainForm.SendMsg2Server(msg);
+            //    Log.Debug("发送修改煤层赋存信息的Socket信息完成");
+            //}
+            try
             {
-                bResult = CoalExistenceBLL.insertCoalExistence(ceEntity);
-                Log.Debug("发送添加煤层赋存信息的Socket信息");
-                UpdateWarningDataMsg msg = new UpdateWarningDataMsg(Const.INVALID_ID, this.selectTunnelSimple1.ITunnelId,
-                    CoalExistenceDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, dtpDateTime.Value);
-                this.MainForm.SendMsg2Server(msg);
-                Log.Debug("发送添加煤层赋存信息的Socket信息完成");
+                ceEntity.SaveAndFlush();
+                return true;
             }
-            else if (this.Text == new LibPanels(MineDataPanelName.CoalExistence_Change).panelFormName)
+            catch (Exception ex)
             {
-                bResult = CoalExistenceBLL.updateCoalExistence(ceEntity);
-                Log.Debug("发送修改煤层赋存信息的Socket信息");
-                UpdateWarningDataMsg msg = new UpdateWarningDataMsg(Const.INVALID_ID, this.selectTunnelSimple1.ITunnelId,
-                     CoalExistenceDbConstNames.TABLE_NAME, OPERATION_TYPE.UPDATE, dtpDateTime.Value);
-                this.MainForm.SendMsg2Server(msg);
-                Log.Debug("发送修改煤层赋存信息的Socket信息完成");
+                Alert.alert(ex.ToString());
+                return false;
             }
-            return bResult;
         }
 
         /// <summary>
