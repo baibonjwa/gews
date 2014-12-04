@@ -17,7 +17,7 @@ using LibCommonControl;
 
 namespace LibPanels
 {
-    public partial class MineDataSimple : BaseForm
+    public partial class MineDataSimple
     {
         //******定义变量***********
         VentilationInfoEntering ventilationInfoEntering = new VentilationInfoEntering();      //通风

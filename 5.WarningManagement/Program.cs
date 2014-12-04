@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
+using Castle.ActiveRecord;
+using Castle.ActiveRecord.Framework;
+using Castle.ActiveRecord.Framework.Config;
 using ESRI.ArcGIS.esriSystem;
 using LibCommon;
 using LibLoginForm;
@@ -17,12 +21,16 @@ namespace _5.WarningManagement
         [STAThread]
         static void Main()
         {
+            IConfigurationSource config = new XmlConfigurationSource("ARConfig.xml");
+
+            Assembly asm = Assembly.Load("LibEntity");
+            
+            ActiveRecordStarter.Initialize(asm, config);
             Log.Debug("[WM]....Starting...");
             ESRI.ArcGIS.RuntimeManager.Bind(ESRI.ArcGIS.ProductCode.EngineOrDesktop);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
             MainForm_WM mf = new MainForm_WM();
             Log.Debug("[WM]....Main Form Construction Finished...");
             LoginForm lf = new LoginForm(mf);

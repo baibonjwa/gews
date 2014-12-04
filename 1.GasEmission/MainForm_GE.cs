@@ -94,12 +94,10 @@ namespace _1.GasEmission
 
             //udpServerSocket = new Socket(AddressFamily.InterNetwork,
             //  SocketType.Dgram, ProtocolType.Udp);
-            //udpServerSocket.Bind(ep);
-            //udpServerSocket.BeginReceiveFrom(buffer, 0, 1024, SocketFlags.None, ref ep, new AsyncCallback(ReceiveData), udpServerSocket);
+            //udpServerSocket.Bind(ep);//udpServerSocket.BeginReceiveFrom(buffer, 0, 1024, SocketFlags.None, ref ep, new AsyncCallback(ReceiveData), udpServerSocket);
 
             //stateMonitor1.
-            //checkTimer.Interval = 4000;
-            //checkTimer.AutoReset = true;
+            //checkTimer.Interval = 4000;//checkTimer.AutoReset = true;
             //checkTimer.Elapsed += new System.Timers.ElapsedEventHandler(checkTimer_Elapsed);
             //checkTimer.Start();
 
@@ -1216,47 +1214,5 @@ namespace _1.GasEmission
 
             StartRealTimeCurveMonitoring();
         }
-
-
-        ///// <summary>
-        ///// TeeChart鼠标滚轮事件
-        ///// 当e.Delta > 0时鼠标滚轮是向上滚动，e.Delta < 0时鼠标滚轮向下滚动。
-        ///// </summary>
-        ///// <param name="sender"></param>
-        ///// <param name="e"></param>
-        //public void TeeChart_MouseWheel(object sender, MouseEventArgs e)
-        //{
-        //    Steema.TeeChart.TChart tChart = sender as Steema.TeeChart.TChart;
-        //    double minHorizValue = tChart.Series[0].GetHorizAxis.MinXValue;
-        //    double maxHorizValue = tChart.Series[0].GetHorizAxis.MaxXValue;
-
-        //    DateTime startTime = DateTime.FromOADate(minHorizValue);
-        //    DateTime endTime = DateTime.FromOADate(maxHorizValue);
-
-        //    if (e.Delta > 0) //鼠标滚轮是向上滚动
-        //    {
-        //        // 滚轮向上放大ZoomIn
-        //        startTime.AddSeconds(-1200);
-        //        endTime.AddSeconds(1200);
-        //    }
-        //    else if (e.Delta < 0) // 鼠标滚轮向下滚动
-        //    {
-        //        // 滚轮向下缩小ZoomOut
-        //        startTime.AddSeconds(1200);
-        //        endTime.AddSeconds(-1200);
-        //    }
-
-        //    tChart.Series[0].GetHorizAxis.SetMinMax
-        //    (
-        //        startTime.ToOADate(),
-        //        endTime.ToOADate()
-        //    );
-        //}
-
-        //// 鼠标滚轮事件要在空间获得焦点时才能实现，所以最好添加如下代码：
-        //private void tChartM_MouseEnter(object sender, EventArgs e)
-        //{
-        //    this.tChartM.Focus();
-        //}
     }
 }

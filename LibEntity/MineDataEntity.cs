@@ -12,9 +12,9 @@ using Castle.ActiveRecord;
 
 namespace LibEntity
 {
-    public class MineDataEntity
+    public class MineDataEntity : ActiveRecordBase
     {
-        // ID
+        private Tunnel _tunnel = new Tunnel();// ID
 
         /// <summary>
         ///     设置或获取ID
@@ -28,7 +28,11 @@ namespace LibEntity
         ///     设置或获取巷道编号
         /// </summary>
         [BelongsTo("TUNNEL_ID")]
-        public Tunnel Tunnel { get; set; }
+        public Tunnel Tunnel
+        {
+            get { return _tunnel; }
+            set { _tunnel = value; }
+        }
 
         // 坐标X
 

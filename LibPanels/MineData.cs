@@ -23,7 +23,7 @@ using LibCommonControl;
 
 namespace LibPanels
 {
-    public partial class MineData : BaseForm
+    public partial class MineData
     {
         //******定义变量***********
         VentilationInfoEntering ventilationInfoEntering = new VentilationInfoEntering();      //通风
@@ -41,8 +41,7 @@ namespace LibPanels
         GeologicStructureInfoEntering geologicStructure = new GeologicStructureInfoEntering();
         GeologicStructureEntity geologicStructureEntity = new GeologicStructureEntity();
         int[] arr = new int[5];
-        object obj = null;
-        int formHeight = 410;
+        object obj = null; int formHeight = 410;
 
         //客户端
         public static ClientSocket _clientSocket = null;
@@ -616,17 +615,16 @@ namespace LibPanels
             ceEntity.IsCoalMerge = coalExistence.coalExistenceEntity.IsCoalMerge;
             //煤层是否松软
             ceEntity.IsCoalSoft = coalExistence.coalExistenceEntity.IsCoalSoft;
-
-            bool bResult = false;
-            if (this.Text == new LibPanels(MineDataPanelName.CoalExistence).panelFormName)
+            try
             {
-                bResult = CoalExistenceBLL.insertCoalExistence(ceEntity);
+                ceEntity.SaveAndFlush();
+                return true;
             }
-            else if (this.Text == new LibPanels(MineDataPanelName.CoalExistence_Change).panelFormName)
+            catch (Exception ex)
             {
-                bResult = CoalExistenceBLL.updateCoalExistence(ceEntity);
+                Alert.alert(ex.ToString());
+                return false;
             }
-            return bResult;
         }
 
         /// <summary>

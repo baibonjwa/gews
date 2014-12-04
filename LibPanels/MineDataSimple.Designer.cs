@@ -1,8 +1,9 @@
-﻿using LibCommonForm;
+﻿using LibCommonControl;
+using LibCommonForm;
 
 namespace LibPanels
 {
-    partial class MineDataSimple
+    partial class MineDataSimple : BaseForm
     {
         /// <summary>
         /// Required designer variable.

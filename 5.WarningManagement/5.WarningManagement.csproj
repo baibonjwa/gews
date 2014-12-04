@@ -450,6 +450,9 @@
     </EmbeddedResource>
     <None Include="5.WarningManagement_TemporaryKey.pfx" />
     <None Include="app.config" />
+    <Content Include="ARConfig.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Config.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

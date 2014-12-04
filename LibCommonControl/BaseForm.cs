@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace LibCommonControl
 {
-    public partial class BaseForm : Form
+    public partial class BaseForm : MainFrm
     {
         private MainFrm mainForm;
 
