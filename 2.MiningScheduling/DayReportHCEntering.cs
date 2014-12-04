@@ -41,10 +41,10 @@ namespace _2.MiningScheduling
         DateTimePicker dtp = new DateTimePicker();   //这里实例化一个DateTimePicker控件
         Rectangle _Rectangle;
 
-        WorkingFaceEntity workingFace = null; // 工作面
-        TunnelEntity tunnelZY = null;  // 主运
-        TunnelEntity tunnelFY = null;  // 辅运顺槽
-        TunnelEntity tunnelQY = null; // 切眼
+        WorkingFace workingFace = null; // 工作面
+        Tunnel tunnelZY = null;  // 主运
+        Tunnel tunnelFY = null;  // 辅运顺槽
+        Tunnel tunnelQY = null; // 切眼
 
         //各列索引
         const int C_DATE = 0;     // 选择日期
@@ -107,7 +107,7 @@ namespace _2.MiningScheduling
                 workingFace.tunnelSet =
                     BasicInfoManager.getInstance()
                         .getTunnelSetByDataSet(TunnelInfoBLL.selectTunnelByWorkingFaceId(workingFace.WorkingFaceID));
-                Dictionary<TunnelTypeEnum, TunnelEntity> tList = TunnelUtils.getTunnelDict(workingFace);
+                Dictionary<TunnelTypeEnum, Tunnel> tList = TunnelUtils.getTunnelDict(workingFace);
                 if (tList.Count == 0)
                     return;
                 if (tList.Count >= 3)
@@ -171,7 +171,7 @@ namespace _2.MiningScheduling
 
 
                 workingFace.tunnelSet = BasicInfoManager.getInstance().getTunnelSetByDataSet(TunnelInfoBLL.selectTunnelByWorkingFaceId(workingFace.WorkingFaceID));
-                Dictionary<TunnelTypeEnum, TunnelEntity> tList = TunnelUtils.getTunnelDict(workingFace);
+                Dictionary<TunnelTypeEnum, Tunnel> tList = TunnelUtils.getTunnelDict(workingFace);
                 if (tList.Count >= 3)
                 {
                     tunnelZY = tList[TunnelTypeEnum.STOPING_ZY];

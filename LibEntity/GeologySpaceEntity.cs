@@ -6,86 +6,48 @@
 // 版本信息：
 // V1.0 新建
 // ******************************************************************
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace LibEntity
 {
     public class GeologySpaceEntity
     {
         // 主键
-        private int iD;
 
         /// <summary>
-        /// 设置或获取主键
+        ///     设置或获取主键
         /// </summary>
-        public int ID
-        {
-            get { return iD; }
-            set { iD = value; }
-        }
+        public int ID { get; set; }
 
         // 工作面ID
-        private int workFaceId;
 
         /// <summary>
-        /// 
         /// </summary>
-        public int WorkSpaceID
-        {
-            get { return workFaceId; }
-            set { workFaceId = value; }
-        }
+        public int WorkSpaceID { get; set; }
 
         // 距离
-        private string tectonicID;
 
         /// <summary>
-        /// 
         /// </summary>
-        public string TectonicID
-        {
-            get { return tectonicID; }
-            set { tectonicID = value; }
-        }
+        public string TectonicID { get; set; }
 
         // 起点坐标Y
-        private double distance;
 
         /// <summary>
-        /// 设置或获取起点坐标Y
+        ///     设置或获取起点坐标Y
         /// </summary>
-        public double Distance
-        {
-            get { return distance; }
-            set { distance = value; }
-        }
+        public double Distance { get; set; }
 
         // 类型
-        private int tectonicType;
 
         /// <summary>
-        /// 类型
+        ///     类型
         /// </summary>
-        public int TectonicType
-        {
-            get { return tectonicType; }
-            set { tectonicType = value; }
-        }
+        public int TectonicType { get; set; }
 
         //时间 
 
-        private string ondatetime;
-
         /// <summary>
-        /// 
         /// </summary>
-        public string onDateTime
-        {
-            get { return ondatetime; }
-            set { ondatetime = value; }
-        }
+        public string onDateTime { get; set; }
     }
 }

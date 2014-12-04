@@ -6,74 +6,39 @@
 // 版本信息:
 // V1.0 新建
 // ******************************************************************
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace LibEntity
 {
     public class DepartmentInformationEntity
     {
-
-        private string _name;
         /// <summary>
-        /// 获取、设置部门名称
+        ///     获取、设置部门名称
         /// </summary>
-        public string Name
-        {
-            get { return _name; }
-            set { _name = value; }
-        }
+        public string Name { get; set; }
 
-        private string _tel;
         /// <summary>
-        /// 获取、设置电话
+        ///     获取、设置电话
         /// </summary>
-        public string Tel
-        {
-            get { return _tel; }
-            set { _tel = value; }
-        }
+        public string Tel { get; set; }
 
-        private string _email;
         /// <summary>
-        /// 获取、设置邮箱
+        ///     获取、设置邮箱
         /// </summary>
-        public string Email
-        {
-            get { return _email; }
-            set { _email = value; }
-        }
+        public string Email { get; set; }
 
-        private string _staff;
         /// <summary>
-        /// 获取设置用户人数
+        ///     获取设置用户人数
         /// </summary>
-        public string Staff
-        {
-            get { return _staff; }
-            set { _staff = value; }
-        }
+        public string Staff { get; set; }
 
-        private string _remark;
         /// <summary>
-        /// 获取、设置备注
+        ///     获取、设置备注
         /// </summary>
-        public string Remark
-        {
-            get { return _remark; }
-            set { _remark = value; }
-        }
+        public string Remark { get; set; }
 
-        private string _id;
         /// <summary>
-        /// 获取、设置ID
+        ///     获取、设置ID
         /// </summary>
-        public string ID
-        {
-            get { return _id; }
-            set { _id = value; }
-        }
+        public string ID { get; set; }
     }
 }

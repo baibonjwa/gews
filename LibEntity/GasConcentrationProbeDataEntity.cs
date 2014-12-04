@@ -6,10 +6,8 @@
 // 版本信息：
 // V1.0 新建
 // ******************************************************************
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace LibEntity
 {
@@ -18,35 +16,35 @@ namespace LibEntity
         // 探头数据编号
 
         /// <summary>
-        /// 探头数据编号
+        ///     探头数据编号
         /// </summary>
         public int ProbeDataId { get; set; }
 
         // 探头编号
 
         /// <summary>
-        /// 探头编号
+        ///     探头编号
         /// </summary>
         public string ProbeId { get; set; }
 
         // 探头数值
 
         /// <summary>
-        /// 探头数值
+        ///     探头数值
         /// </summary>
         public double ProbeValue { get; set; }
 
         // 记录时间
 
         /// <summary>
-        /// 记录时间
+        ///     记录时间
         /// </summary>
         public DateTime RecordTime { get; set; }
 
         // 记录类型
 
         /// <summary>
-        /// 记录类型
+        ///     记录类型
         /// </summary>
         public string RecordType { get; set; }
     }

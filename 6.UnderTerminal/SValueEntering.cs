@@ -28,7 +28,7 @@ namespace UnderTerminal
         UnderMessageWindow mainWin;
         SValueEntity _sValueEntity = new SValueEntity();
         SValueEntity[] sEntitys;
-        TunnelEntity tunnelEntity = new TunnelEntity();
+        Tunnel tunnelEntity = new Tunnel();
         //巷道控件用数组
         int[] arr = new int[5];
         /** K1Value分组数 **/
@@ -57,7 +57,7 @@ namespace UnderTerminal
             this.Text = tunnelName;
             this.mainWin = win;
 
-            TunnelEntity entTunnel = BasicInfoManager.getInstance().getTunnelByID(tunnelId);
+            Tunnel entTunnel = BasicInfoManager.getInstance().getTunnelByID(tunnelId);
             //WorkingFaceEntity entWorkingFace = WorkingFaceBLL.selectWorkingFaceInfoByID(entTunnel.WorkingFace.WorkingFaceID);
 
             X = entTunnel.WorkingFace.Coordinate.X.ToString();

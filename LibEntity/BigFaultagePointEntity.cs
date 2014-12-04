@@ -5,8 +5,6 @@
 // 版本号：1.0
 // ******************************************************************
 
-using System;
-
 namespace LibEntity
 {
     public class BigFaultagePointEntity
@@ -14,7 +12,7 @@ namespace LibEntity
         private BigFaultageEntity _bigFaultage = new BigFaultageEntity();
 
         /// <summary>
-        /// 断层编号
+        ///     断层编号
         /// </summary>
         public int Id { get; set; }
 
@@ -34,6 +32,5 @@ namespace LibEntity
         }
 
         public string Bid { get; set; }
-
     }
 }

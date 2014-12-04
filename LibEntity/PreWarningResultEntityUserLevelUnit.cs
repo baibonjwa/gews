@@ -4,15 +4,37 @@
 // 创建日期：2013/12/29
 // 版本号：1.0
 // ******************************************************************
-using System;
+
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace LibEntity
 {
     public class PreWarningResultEntityUserLevelUnit
     {
+        //规则类别
+
+        public string RuleType { get; set; }
+
+        /// <summary>
+        ///     超限预警
+        /// </summary>
+        public string OutOfLimitResult { get; set; }
+
+        /// <summary>
+        ///     超限预警-说明
+        /// </summary>
+        public string OutOfLimitNotes { get; set; }
+
+        /// <summary>
+        ///     突出预警
+        /// </summary>
+        public string OutburstResult { get; set; }
+
+        /// <summary>
+        ///     突出预警-说明
+        /// </summary>
+        public string OutburstNotes { get; set; }
+
         public static string ConvertWarningDetails2UserStr(List<PreWarningReasonUnit> units)
         {
             string ret = "";
@@ -36,7 +58,7 @@ namespace LibEntity
         public static string ConvertWarningLevel2UserStr(WARNING_LEVEL_RESULT warningLevel)
         {
             string ret = "";
-            switch(warningLevel)
+            switch (warningLevel)
             {
                 case WARNING_LEVEL_RESULT.NODATA:
                     ret = "正常";
@@ -54,71 +76,6 @@ namespace LibEntity
                     break;
             }
             return ret;
-        }
-
-        //规则类别
-        private string _ruleType;
-
-        public string RuleType
-        {
-            get { return _ruleType; }
-            set { _ruleType = value; }
-        }
-
-        /// <summary>
-        /// 超限预警
-        /// </summary>
-        private string _outOfLimitResult;
-
-        /// <summary>
-        /// 超限预警
-        /// </summary>
-        public string OutOfLimitResult
-        {
-            get { return _outOfLimitResult; }
-            set { _outOfLimitResult = value; }
-        }
-
-        /// <summary>
-        /// 超限预警-说明
-        /// </summary>
-        private string _outOfLimitNotes;
-
-        /// <summary>
-        /// 超限预警-说明
-        /// </summary>
-        public string OutOfLimitNotes
-        {
-            get { return _outOfLimitNotes; }
-            set { _outOfLimitNotes = value; }
-        }
-
-        /// <summary>
-        /// 突出预警
-        /// </summary>
-        private string _outburstResult;
-
-        /// <summary>
-        /// 突出预警
-        /// </summary>
-        public string OutburstResult
-        {
-            get { return _outburstResult; }
-            set { _outburstResult = value; }
-        }
-
-        /// <summary>
-        /// 突出预警-说明
-        /// </summary>
-        private string _outburstNotes;
-
-        /// <summary>
-        /// 突出预警-说明
-        /// </summary>
-        public string OutburstNotes
-        {
-            get { return _outburstNotes; }
-            set { _outburstNotes = value; }
         }
     }
 }

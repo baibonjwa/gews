@@ -6,19 +6,25 @@
 // 版本信息:
 // V1.0 新建
 // ******************************************************************
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+
 using LibCommon;
 
 namespace LibEntity
 {
     public class WarningResultEnt
     {
-        private string _strID = LibCommon.Const.INVALID_ID.ToString();
+        private int _iOther = 4;
+        private int _strCoal = 4;
+        private int _strGas = 4;
+        private int _strGeology = 4;
+        private string _strID = Const.INVALID_ID.ToString();
+        private int _strManagement = 4;
+        private int _strVentilation = 4;
+
+        private int _strWaringResult = 4;
+
         /// <summary>
-        /// 数据库中的主键ID
+        ///     数据库中的主键ID
         /// </summary>
         public string ID
         {
@@ -26,9 +32,8 @@ namespace LibEntity
             set { _strID = value; }
         }
 
-        private int _strWaringResult = 4;
         /// <summary>
-        /// 预警结果
+        ///     预警结果
         /// </summary>
         public int WarningResult
         {
@@ -36,9 +41,8 @@ namespace LibEntity
             set { _strWaringResult = value; }
         }
 
-        private int _strGas = 4;
         /// <summary>
-        /// 瓦斯
+        ///     瓦斯
         /// </summary>
         public int Gas
         {
@@ -46,9 +50,8 @@ namespace LibEntity
             set { _strGas = value; }
         }
 
-        private int _strCoal = 4;
         /// <summary>
-        /// 煤层
+        ///     煤层
         /// </summary>
         public int Coal
         {
@@ -56,9 +59,8 @@ namespace LibEntity
             set { _strCoal = value; }
         }
 
-        private int _strGeology = 4;
         /// <summary>
-        /// 地质
+        ///     地质
         /// </summary>
         public int Geology
         {
@@ -66,9 +68,8 @@ namespace LibEntity
             set { _strGeology = value; }
         }
 
-        private int _strVentilation = 4;
         /// <summary>
-        /// 通风
+        ///     通风
         /// </summary>
         public int Ventilation
         {
@@ -76,9 +77,8 @@ namespace LibEntity
             set { _strVentilation = value; }
         }
 
-        private int _strManagement = 4;
         /// <summary>
-        /// 管理
+        ///     管理
         /// </summary>
         public int Management
         {
@@ -86,9 +86,8 @@ namespace LibEntity
             set { _strManagement = value; }
         }
 
-        private int _iOther = 4;
         /// <summary>
-        /// 其他
+        ///     其他
         /// </summary>
         public int Other
         {
@@ -96,14 +95,9 @@ namespace LibEntity
             set { _iOther = value; }
         }
 
-        string _strHandleStatus;
         /// <summary>
-        /// 处理状态
+        ///     处理状态
         /// </summary>
-        public string HandleStatus
-        {
-            set { _strHandleStatus = value; }
-            get { return _strHandleStatus; }
-        }
+        public string HandleStatus { get; set; }
     }
 }

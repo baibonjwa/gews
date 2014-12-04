@@ -202,7 +202,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="tunnelEntity"></param>
         /// <returns></returns>
-        public static DataSet selectAllWireInfo(TunnelEntity tunnelEntity)
+        public static DataSet selectAllWireInfo(Tunnel tunnelEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
             string sql = "SELECT * FROM " + WireInfoDbConstNames.TABLE_NAME+" WHERE "+WireInfoDbConstNames.TUNNEL_ID+" = "+tunnelEntity.TunnelID;

@@ -70,7 +70,7 @@ namespace LibCommonForm
 
         }
 
-        TunnelEntity tunnelEntity = new TunnelEntity();
+        Tunnel tunnelEntity = new Tunnel();
         int workingFaceID = 0;
         int[] arr;
         int formHeight = 0;
@@ -92,7 +92,7 @@ namespace LibCommonForm
                 workingFaceID = arr[3];
             }
             //创建巷道实体
-            TunnelEntity tunnelEntity = new TunnelEntity();
+            Tunnel tunnelEntity = new Tunnel();
 
             //巷道名称
             tunnelEntity.TunnelName = this.txtTunnelName.Text;
@@ -506,7 +506,7 @@ namespace LibCommonForm
 
         private void bindInfo(int tunnelID)
         {
-            TunnelEntity tEntity = BasicInfoManager.getInstance().getTunnelByID(tunnelID);
+            Tunnel tEntity = BasicInfoManager.getInstance().getTunnelByID(tunnelID);
             tunnelEntity = tEntity;
             txtTunnelName.Text = tunnelEntity.TunnelName;
             cboSupportPattern.Text = tunnelEntity.TunnelSupportPattern;

@@ -164,7 +164,7 @@ namespace LibCommonForm
         /// 设置控件中选中内容，数组大小为5,元素内容为对应的ID
         /// </summary>
         /// <param name="intArr">存储所选矿井编号，水平编号，采区编号，工作面编号的数组</param>
-        public void setCurSelectedID(TunnelEntity tunnelEntity)
+        public void setCurSelectedID(Tunnel tunnelEntity)
         {
             // 加载矿井信息
             loadMineName();

@@ -49,7 +49,7 @@ namespace _1.GasEmission
             InitializeComponent();
 
             //分配用户权限
-            if (CurrentUserEnt._curLoginUserInfo.Permission != Permission.管理员.ToString())
+            if (CurrentUserEnt.CurLoginUserInfo.Permission != Permission.管理员.ToString())
             {
                 btnAdd.Visible = false;
                 btnUpdate.Visible = false;

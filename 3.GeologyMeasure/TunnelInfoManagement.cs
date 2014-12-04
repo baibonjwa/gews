@@ -42,7 +42,7 @@ namespace _3.GeologyMeasure
         private int _BIDIndex = 16;
         /** 保存所有用户选中的行的索引 **/
         private Hashtable _htSelIdxs = new Hashtable();
-        TunnelEntity tunnelEntity = new TunnelEntity();
+        Tunnel tunnelEntity = new Tunnel();
 
         FarPoint.Win.Spread.Cells cells;
         //****************************************
@@ -145,7 +145,7 @@ namespace _3.GeologyMeasure
 
             int columnCount = fpTunnelInfo_Sheet1.ColumnCount - 9;
 
-            List<TunnelEntity> tunnelList = BasicInfoManager.getInstance().getTunnelListByDataSet(ds);
+            List<Tunnel> tunnelList = BasicInfoManager.getInstance().getTunnelListByDataSet(ds);
 
             FarPoint.Win.Spread.CellType.CheckBoxCellType ckbxcell = new FarPoint.Win.Spread.CellType.CheckBoxCellType();
 
@@ -155,7 +155,7 @@ namespace _3.GeologyMeasure
 
             ckbxcell.ThreeState = false;
             int i = 0; // Processed row count.
-            foreach (TunnelEntity entity in tunnelList)
+            foreach (Tunnel entity in tunnelList)
             {
                 int index = 0; // column index.
 

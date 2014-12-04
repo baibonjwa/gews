@@ -6,92 +6,61 @@
 // 版本信息：
 // V1.0 新建
 // ******************************************************************
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace LibEntity
 {
     public class GasPressureEntity
     {
         /** 编号 **/
-        private int primaryKey;
 
-        /// <summary>
-        /// 编号
-        /// </summary>
-        public int PrimaryKey
-        {
-            get { return primaryKey; }
-            set { primaryKey = value; }
-        }
-
-        /** 坐标X **/
-        private double coordinateX;
-
-        /// <summary>
-        /// 坐标X
-        /// </summary>
-        public double CoordinateX
-        {
-            get { return coordinateX; }
-            set { coordinateX = value; }
-        }
-
-        /** 坐标Y **/
-        private double coordinateY;
-
-        /// <summary>
-        ///  坐标Y
-        /// </summary>
-        public double CoordinateY
-        {
-            get { return coordinateY; }
-            set { coordinateY = value; }
-        }
-
-        /** 坐标Z **/
-        private double coordinateZ;
-
-        /// <summary>
-        ///  坐标Z
-        /// </summary>
-        public double CoordinateZ
-        {
-            get { return coordinateZ; }
-            set { coordinateZ = value; }
-        }
-
-        /** 埋深 **/
-        private double depth;
-
-        /// <summary>
-        /// 埋深 
-        /// </summary>
-        public double Depth
-        {
-            get { return depth; }
-            set { depth = value; }
-        }
-
-        /** 瓦斯压力值 **/
-        private double gasPressureValue;
-
-        /// <summary>
-        /// 瓦斯压力值
-        /// </summary>
-        public double GasPressureValue
-        {
-            get { return gasPressureValue; }
-            set { gasPressureValue = value; }
-        }
-
-        /** 测定时间 **/
         private DateTime measureDateTime;
 
         /// <summary>
-        /// 测定时间
+        ///     编号
+        /// </summary>
+        public int PrimaryKey { get; set; }
+
+        /** 坐标X **/
+
+        /// <summary>
+        ///     坐标X
+        /// </summary>
+        public double CoordinateX { get; set; }
+
+        /** 坐标Y **/
+
+        /// <summary>
+        ///     坐标Y
+        /// </summary>
+        public double CoordinateY { get; set; }
+
+        /** 坐标Z **/
+
+        /// <summary>
+        ///     坐标Z
+        /// </summary>
+        public double CoordinateZ { get; set; }
+
+        /** 埋深 **/
+
+        /// <summary>
+        ///     埋深
+        /// </summary>
+        public double Depth { get; set; }
+
+        /** 瓦斯压力值 **/
+
+        /// <summary>
+        ///     瓦斯压力值
+        /// </summary>
+        public double GasPressureValue { get; set; }
+
+        /** 测定时间 **/
+
+        /// <summary>
+        ///     测定时间
         /// </summary>
         public DateTime MeasureDateTime
         {
@@ -100,39 +69,24 @@ namespace LibEntity
         }
 
         // 巷道编号
-        private int tunnelID;
 
         /// <summary>
-        /// 巷道编号
+        ///     巷道编号
         /// </summary>
-        public int TunnelID
-        {
-            get { return tunnelID; }
-            set { tunnelID = value; }
-        }
+        public int TunnelID { get; set; }
 
         // 煤层编号
-        private int coalSeamsId;
 
         /// <summary>
-        /// 煤层编号
+        ///     煤层编号
         /// </summary>
-        public int CoalSeamsId
-        {
-            get { return coalSeamsId; }
-            set { coalSeamsId = value; }
-        }
+        public int CoalSeamsId { get; set; }
 
         /** BID **/
-        private string bindingId;
 
         /// <summary>
-        /// BID
+        ///     BID
         /// </summary>
-        public string BindingId
-        {
-            get { return bindingId; }
-            set { bindingId = value; }
-        }
+        public string BindingId { get; set; }
     }
 }

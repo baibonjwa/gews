@@ -67,7 +67,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="horizontalEntity">水平实体</param>
         /// <returns>成功与否：true，false</returns>
-        public static bool insertHorizontalInfo(HorizontalEntity horizontalEntity)
+        public static bool insertHorizontalInfo(Horizontal horizontalEntity)
         {
             StringBuilder sqlStr = new StringBuilder();
             sqlStr.Append("INSERT INTO " + HorizontalDbConstNames.TABLE_NAME);
@@ -89,7 +89,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="horizontalEntity">水平实体</param>
         /// <returns>成功与否：true，false</returns>
-        public static bool updateHorizontalInfo(HorizontalEntity horizontalEntity)
+        public static bool updateHorizontalInfo(Horizontal horizontalEntity)
         {
             StringBuilder sqlStr = new StringBuilder();
             sqlStr.Append("UPDATE " + HorizontalDbConstNames.TABLE_NAME);

@@ -158,7 +158,7 @@ namespace LibLoginForm
             if (LoginFormBLL.LoginSuccess(userName, password)!=null)
             {
                 //set CurrentUser
-                CurrentUserEnt._curLoginUserInfo = LoginFormBLL.LoginSuccess(userName, password);
+                CurrentUserEnt.CurLoginUserInfo = LoginFormBLL.LoginSuccess(userName, password);
 
                 //记录最后一次登录用户
                 StreamWriter sw = new StreamWriter(Application.StartupPath + "\\DefaultUser", false);

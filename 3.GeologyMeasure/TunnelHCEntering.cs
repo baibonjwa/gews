@@ -27,16 +27,17 @@ namespace _3.GeologyMeasure
     {
         #region ******变量声明******;
         // 主运
-        TunnelEntity tunnelZY = null;
+        Tunnel tunnelZY = null;
         // 辅运
-        TunnelEntity tunnelFY = null;
+        Tunnel tunnelFY = null;
         // 切眼
-        TunnelEntity tunnelQY = null;
-        HashSet<TunnelEntity> tunnelSet = new HashSet<TunnelEntity>();
+        Tunnel tunnelQY = null;
 
-        List<TunnelEntity> otherTunnelList = new List<TunnelEntity>();
+        HashSet<Tunnel> tunnelSet = new HashSet<Tunnel>();
 
-        WorkingFaceEntity workingFace = null;
+        List<Tunnel> otherTunnelList = new List<Tunnel>();
+
+        WorkingFace workingFace = null;
 
         int[] intArr = new int[5];
 
@@ -77,10 +78,10 @@ namespace _3.GeologyMeasure
         /// 构造方法
         /// </summary>
         /// <param name="tunnelHCEntity">回采面实体</param>
-        public TunnelHCEntering(WorkingFaceEntity tunnelHCEntity, MainFrm mainFrm)
+        public TunnelHCEntering(WorkingFace tunnelHCEntity, MainFrm mainFrm)
         {
             this.MainForm = mainFrm;
-            this.workingFace = LibCommon.ObjectCopier.Clone<WorkingFaceEntity>(tunnelHCEntity);
+            this.workingFace = LibCommon.ObjectCopier.Clone<WorkingFace>(tunnelHCEntity);
             this.Text = Const_GM.TUNNEL_HC_CHANGE;
             InitializeComponent();
 
@@ -142,7 +143,7 @@ namespace _3.GeologyMeasure
             intArr[3] = workingFace.WorkingFaceID;
 
             string otherTunnel = "";
-            foreach (TunnelEntity tunnel in workingFace.tunnelSet)
+            foreach (Tunnel tunnel in workingFace.tunnelSet)
             {
                 if (tunnel.TunnelType == TunnelTypeEnum.STOPING_ZY)
                     tunnelZY = tunnel;//主运顺槽
@@ -289,7 +290,7 @@ namespace _3.GeologyMeasure
             {
                 if (tunnelZY != null)
                 {
-                    TunnelEntity ent = BasicInfoManager.getInstance().getTunnelByID(tunnelZY.TunnelID);
+                    Tunnel ent = BasicInfoManager.getInstance().getTunnelByID(tunnelZY.TunnelID);
                     ent.TunnelType = TunnelTypeEnum.OTHER;
                     tunnelSet.Add(ent);
                 }
@@ -327,7 +328,7 @@ namespace _3.GeologyMeasure
             {
                 if (tunnelFY != null)
                 {
-                    TunnelEntity ent = BasicInfoManager.getInstance().getTunnelByID(tunnelFY.TunnelID);
+                    Tunnel ent = BasicInfoManager.getInstance().getTunnelByID(tunnelFY.TunnelID);
                     ent.TunnelType = TunnelTypeEnum.OTHER;
                     tunnelSet.Add(ent);
                 }
@@ -366,7 +367,7 @@ namespace _3.GeologyMeasure
             {
                 if (tunnelQY != null)
                 {
-                    TunnelEntity ent = BasicInfoManager.getInstance().getTunnelByID(tunnelQY.TunnelID);
+                    Tunnel ent = BasicInfoManager.getInstance().getTunnelByID(tunnelQY.TunnelID);
                     ent.TunnelType = TunnelTypeEnum.OTHER;
                     tunnelSet.Add(ent);
                 }
@@ -739,7 +740,7 @@ namespace _3.GeologyMeasure
                 //添加信息到listBox
                 TunnelSimple ts = new TunnelSimple(tunnelChoose.tunnelId, tunnelChoose.tunnelName);
                 listBox_Browse.Items.Add(ts);
-                TunnelEntity ent = BasicInfoManager.getInstance().getTunnelByID(tunnelChoose.tunnelId);
+                Tunnel ent = BasicInfoManager.getInstance().getTunnelByID(tunnelChoose.tunnelId);
                 if (ent != null)
                 {
                     ent.TunnelType = TunnelTypeEnum.STOPING_OTHER;
@@ -752,7 +753,7 @@ namespace _3.GeologyMeasure
         {
             if (e.KeyCode == Keys.Delete)
             {
-                TunnelEntity ent = BasicInfoManager.getInstance().getTunnelByID(Convert.ToInt32(((TunnelSimple)listBox_Browse.SelectedItem).Id));
+                Tunnel ent = BasicInfoManager.getInstance().getTunnelByID(Convert.ToInt32(((TunnelSimple)listBox_Browse.SelectedItem).Id));
                 ent.TunnelType = TunnelTypeEnum.OTHER;
                 tunnelSet.Add(ent);
 

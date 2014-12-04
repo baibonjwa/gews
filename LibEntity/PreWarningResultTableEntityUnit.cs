@@ -4,15 +4,33 @@
 // 创建日期：2013/12/29
 // 版本号：1.0
 // ******************************************************************
-using System;
+
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace LibEntity
 {
     public class PreWarningResultTableEntityUnit
     {
+        /// <summary>
+        ///     超限预警
+        /// </summary>
+        public string UltralimitPreWarning { get; set; }
+
+        /// <summary>
+        ///     超限预警-说明
+        /// </summary>
+        public string UltralimitPreWarningEX { get; set; }
+
+        /// <summary>
+        ///     突出预警
+        /// </summary>
+        public string OutburstPreWarning { get; set; }
+
+        /// <summary>
+        ///     突出预警-说明
+        /// </summary>
+        public string OutburstPreWarningEX { get; set; }
+
         public static string ConvertWarningDetails2UserStr(List<PreWarningReasonUnit> units)
         {
             string ret = "";
@@ -36,7 +54,7 @@ namespace LibEntity
         public static string ConvertWarningLevel2UserStr(WARNING_LEVEL_RESULT warningLevel)
         {
             string ret = "";
-            switch(warningLevel)
+            switch (warningLevel)
             {
                 case WARNING_LEVEL_RESULT.NODATA:
                     ret = "正常";
@@ -54,61 +72,6 @@ namespace LibEntity
                     break;
             }
             return ret;
-        }
-        /// <summary>
-        /// 超限预警
-        /// </summary>
-        private string _ultralimitPreWarning;
-
-        /// <summary>
-        /// 超限预警
-        /// </summary>
-        public string UltralimitPreWarning
-        {
-            get { return _ultralimitPreWarning; }
-            set { _ultralimitPreWarning = value; }
-        }
-
-        /// <summary>
-        /// 超限预警-说明
-        /// </summary>
-        private string _ultralimitPreWarningEX;
-
-        /// <summary>
-        /// 超限预警-说明
-        /// </summary>
-        public string UltralimitPreWarningEX
-        {
-            get { return _ultralimitPreWarningEX; }
-            set { _ultralimitPreWarningEX = value; }
-        }
-
-        /// <summary>
-        /// 突出预警
-        /// </summary>
-        private string _outburstPreWarning;
-
-        /// <summary>
-        /// 突出预警
-        /// </summary>
-        public string OutburstPreWarning
-        {
-            get { return _outburstPreWarning; }
-            set { _outburstPreWarning = value; }
-        }
-
-        /// <summary>
-        /// 突出预警-说明
-        /// </summary>
-        private string _outburstPreWarningEX;
-
-        /// <summary>
-        /// 突出预警-说明
-        /// </summary>
-        public string OutburstPreWarningEX
-        {
-            get { return _outburstPreWarningEX; }
-            set { _outburstPreWarningEX = value; }
         }
     }
 }

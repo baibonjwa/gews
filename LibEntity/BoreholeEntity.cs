@@ -4,110 +4,66 @@
 // 创建日期：2013/11/26
 // 版本号：1.0
 // ******************************************************************
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace LibEntity
 {
     public class BoreholeEntity
     {
         /** 钻孔编号（主键） **/
-        private int boreholeId;
 
         /// <summary>
-        /// 钻孔编号
+        ///     钻孔编号
         /// </summary>
-        public int BoreholeId
-        {
-            get { return boreholeId; }
-            set { boreholeId = value; }
-        }
+        public int BoreholeId { get; set; }
 
         /** 孔号 **/
-        private string boreholeNumber;
 
         /// <summary>
-        /// 孔号
+        ///     孔号
         /// </summary>
-        public string BoreholeNumber
-        {
-            get { return boreholeNumber; }
-            set { boreholeNumber = value; }
-        }
+        public string BoreholeNumber { get; set; }
 
         /** 地面标高 **/
-        private double groundElevation;
 
         /// <summary>
-        /// 地面标高
+        ///     地面标高
         /// </summary>
-        public double GroundElevation
-        {
-            get { return groundElevation; }
-            set { groundElevation = value; }
-        }
+        public double GroundElevation { get; set; }
 
         /** 坐标X **/
-        private double coordinateX;
 
         /// <summary>
-        /// 坐标X
+        ///     坐标X
         /// </summary>
-        public double CoordinateX
-        {
-            get { return coordinateX; }
-            set { coordinateX = value; }
-        }
+        public double CoordinateX { get; set; }
 
         /** 坐标Y **/
-        private double coordinateY;
 
         /// <summary>
-        ///  坐标Y
+        ///     坐标Y
         /// </summary>
-        public double CoordinateY
-        {
-            get { return coordinateY; }
-            set { coordinateY = value; }
-        }
+        public double CoordinateY { get; set; }
 
         /** 坐标Z **/
-        private double coordinateZ;
 
         /// <summary>
-        ///  坐标Z
+        ///     坐标Z
         /// </summary>
-        public double CoordinateZ
-        {
-            get { return coordinateZ; }
-            set { coordinateZ = value; }
-        }
+        public double CoordinateZ { get; set; }
 
         /** 煤层结构 **/
-        private string coalSeamsTexture;
 
         /// <summary>
-        /// 煤层结构
+        ///     煤层结构
         /// </summary>
-        public string CoalSeamsTexture
-        {
-            get { return coalSeamsTexture; }
-            set { coalSeamsTexture = value; }
-        }
+        public string CoalSeamsTexture { get; set; }
 
         /** BID **/
-        private string bindingId;
 
         /// <summary>
-        /// BID
+        ///     BID
         /// </summary>
-        public string BindingId
-        {
-            get { return bindingId; }
-            set { bindingId = value; }
-        }
+        public string BindingId { get; set; }
 
         // 以下代码暂时保留
         //static BoreholeEntity _emptyEntity;

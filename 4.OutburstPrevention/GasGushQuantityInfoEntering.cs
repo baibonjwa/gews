@@ -374,7 +374,7 @@ namespace _4.OutburstPrevention
                 int iTunnelID = 0;
                 if (int.TryParse(ds.Tables[0].Rows[0][GasGushQuantityDbConstNames.TUNNEL_ID].ToString(), out iTunnelID))
                 {
-                    TunnelEntity tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(iTunnelID);// TunnelInfoBLL.selectTunnelInfoByTunnelID(iTunnelID);
+                    Tunnel tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(iTunnelID);// TunnelInfoBLL.selectTunnelInfoByTunnelID(iTunnelID);
                     TunnelSimple ts = new TunnelSimple(tunnelEntity.TunnelID, tunnelEntity.TunnelName);
                     selectTunnelSimple1.SelectTunnelItemWithoutHistory(ts);
 

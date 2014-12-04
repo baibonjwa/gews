@@ -60,7 +60,7 @@ namespace LibCommonForm
         /// 构造方法
         /// </summary>
         /// <param name="tEntity">巷道实体</param>
-        public SelectTunnelDlg(TunnelEntity tEntity, MainFrm mainFrm)
+        public SelectTunnelDlg(Tunnel tEntity, MainFrm mainFrm)
         {
             this.MainForm = mainFrm;
             InitializeComponent();

@@ -25,7 +25,7 @@ namespace LibBusiness
         /// <returns>全部日常预测信息</returns>
         public static DataSet selectUsualForecast()
         {
-            string sqlStr = "SELECT * FROM "+UsualForecastDbConstNames.TABLE_NAME;
+            string sqlStr = "SELECT * FROM " + UsualForecastDbConstNames.TABLE_NAME;
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
             DataSet ds = db.ReturnDS(sqlStr);
             return ds;
@@ -41,7 +41,7 @@ namespace LibBusiness
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
             StringBuilder sb = new StringBuilder();
             sb.Append("SELECT * FROM ( ");
-            sb.Append("SELECT ROW_NUMBER() OVER(ORDER BY "+UsualForecastDbConstNames.ID+") AS rowid, * ");
+            sb.Append("SELECT ROW_NUMBER() OVER(ORDER BY " + UsualForecastDbConstNames.ID + ") AS rowid, * ");
             sb.Append("FROM " + UsualForecastDbConstNames.TABLE_NAME + " ) AS TB ");
             sb.Append("WHERE rowid >= " + iStartIndex);
             sb.Append("AND rowid <= " + iEndIndex);
@@ -58,7 +58,7 @@ namespace LibBusiness
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
             StringBuilder sb = new StringBuilder();
-            sb.Append("INSERT INTO " + UsualForecastDbConstNames.TABLE_NAME + " (" + PreWarningDataCommonBLL.sqlFront()+ "," + UsualForecastDbConstNames.IS_ROOF_DOWN + "," + UsualForecastDbConstNames.IS_SUPPORT_BROKEN + "," + UsualForecastDbConstNames.IS_COAL_WALL_DROP + "," + UsualForecastDbConstNames.IS_PART_ROOF_FALL + "," + UsualForecastDbConstNames.IS_BIG_ROOF_FALL + ") VALUES(");
+            sb.Append("INSERT INTO " + UsualForecastDbConstNames.TABLE_NAME + " (" + PreWarningDataCommonBLL.sqlFront() + "," + UsualForecastDbConstNames.IS_ROOF_DOWN + "," + UsualForecastDbConstNames.IS_SUPPORT_BROKEN + "," + UsualForecastDbConstNames.IS_COAL_WALL_DROP + "," + UsualForecastDbConstNames.IS_PART_ROOF_FALL + "," + UsualForecastDbConstNames.IS_BIG_ROOF_FALL + ") VALUES(");
             sb.Append(PreWarningDataCommonBLL.sqlBack(ufEntity) + ",");
             sb.Append(ufEntity.IsRoofDown + ",");
             sb.Append(ufEntity.IsSupportBroken + ",");
@@ -80,7 +80,7 @@ namespace LibBusiness
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
             StringBuilder sb = new StringBuilder();
             sb.Append("UPDATE " + UsualForecastDbConstNames.TABLE_NAME + " SET " + UsualForecastDbConstNames.TUNNEL_ID + "=");
-            sb.Append(ufEntity.TunnelID + "," + UsualForecastDbConstNames.X + "=");
+            sb.Append(ufEntity.Tunnel.TunnelID + "," + UsualForecastDbConstNames.X + "=");
             sb.Append(ufEntity.CoordinateX + "," + UsualForecastDbConstNames.Y + "=");
             sb.Append(ufEntity.CoordinateY + "," + UsualForecastDbConstNames.Z + "=");
             sb.Append(ufEntity.CoordinateZ + "," + UsualForecastDbConstNames.DATETIME + "='");

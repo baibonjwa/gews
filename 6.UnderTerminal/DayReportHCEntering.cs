@@ -26,7 +26,7 @@ namespace UnderTerminal
     {
         #region ******变量声明******
         /**巷道实体**/
-        TunnelEntity _tunnelEntity = new TunnelEntity();
+        Tunnel _tunnelEntity = new Tunnel();
         UnderMessageWindow mainWin;
         /**回采日报实体**/
         DayReportHCEntity _dayReportHCEntity = new DayReportHCEntity();

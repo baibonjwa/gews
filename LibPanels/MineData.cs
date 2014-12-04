@@ -31,7 +31,7 @@ namespace LibPanels
         GasInfoEntering gasData = new GasInfoEntering();                          //瓦斯
         UsualForecast usualForecast = new UsualForecast();              //日常预测
         ManagementInfoEntering management = new ManagementInfoEntering();                    //管理
-        TunnelEntity tunnelEntity = new TunnelEntity();                 //巷道信息实体
+        Tunnel tunnelEntity = new Tunnel();                 //巷道信息实体
         VentilationInfoEntity viEntity = new VentilationInfoEntity();   //通风实体
         CoalExistenceEntity ceEntity = new CoalExistenceEntity();       //煤层赋存实体
         GasDataEntity gdEntity = new GasDataEntity();       //瓦斯实体
@@ -70,7 +70,7 @@ namespace LibPanels
         {
             this.MainForm = mainFrm;
             this.obj = obj;
-            tunnelEntity.TunnelID = ((MineDataEntity)obj).TunnelID;
+            tunnelEntity.TunnelID = ((MineDataEntity)obj).Tunnel.TunnelID;
             //tunnelEntity = TunnelInfoBLL.selectTunnelInfoByTunnelID(tunnelEntity.TunnelID);
             if (tunnelEntity == null)
             {
@@ -474,7 +474,7 @@ namespace LibPanels
 
             //通用信息
             //巷道ID
-            mineDataEntity.TunnelID = selectTunnelUserControl1.ITunnelId;
+            mineDataEntity.Tunnel.TunnelID = selectTunnelUserControl1.ITunnelId;
             //坐标X
             if (txtCoordinateX.Text == "")
             {

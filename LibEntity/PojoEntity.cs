@@ -1,74 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace LibEntity
 {
     public class PojoWarningDetail
     {
-        private string _sId;
-        public string Id
-        {
-            get { return this._sId; }
-            set { this._sId = value; }
-        }
+        public string Id { get; set; }
 
-        private string _sActions;
-        public string Actions
-        {
-            get { return this._sActions; }
-            set { this._sActions = value; }
-        }
+        public string Actions { get; set; }
 
-        private string _sActionsDateTime;
-        public string ActionsDateTime
-        {
-            get { return this._sActionsDateTime; }
-            set { this._sActionsDateTime = value; }
-        }
+        public string ActionsDateTime { get; set; }
 
-        private string _sActionsPerson;
-        public string ActionsPerson
-        {
-            get { return this._sActionsPerson; }
-            set { this._sActionsPerson = value; }
-        }
+        public string ActionsPerson { get; set; }
 
-        private string _sComments;
-        public string Comments
-        {
-            get { return this._sComments; }
-            set { this._sComments = value; }
-        }
+        public string Comments { get; set; }
 
-        private string _sCommentsDateTime;
-        public string CommentsDateTime
-        {
-            get { return this._sCommentsDateTime; }
-            set { this._sCommentsDateTime = value; }
-        }
+        public string CommentsDateTime { get; set; }
 
-        private string _sCommentsPerson;
-        public string CommentsPerson
-        {
-            get { return this._sCommentsPerson; }
-            set { this._sCommentsPerson = value; }
-        }
+        public string CommentsPerson { get; set; }
 
-        private string _sLiftPerson;
-        public string LiftPerson
-        {
-            get { return this._sLiftPerson; }
-            set { this._sLiftPerson = value; }
-        }
+        public string LiftPerson { get; set; }
 
-        private string _sLiftDateTime;
-        public string LiftDateTime
-        {
-            get { return this._sLiftDateTime; }
-            set { this._sLiftDateTime = value; }
-        }
+        public string LiftDateTime { get; set; }
 
         public string RuleId { get; set; }
 
@@ -77,44 +29,33 @@ namespace LibEntity
 
     public class PojoWarning
     {
-        private string _sWarningId;
-        public string WarningId
-        {
-            get { return this._sWarningId; }
-            set { this._sWarningId = value; }
-        }
+        private readonly List<PojoWarningDetail> details = new List<PojoWarningDetail>();
+        public string WarningId { get; set; }
 
-        List<PojoWarningDetail> details = new List<PojoWarningDetail>();
         public List<PojoWarningDetail> WarningDetails
         {
-            get { return this.details; }
+            get { return details; }
         }
 
         public void addDetail(PojoWarningDetail warningDetail)
         {
-            this.details.Add(warningDetail);
+            details.Add(warningDetail);
         }
     }
 
     public class PojoWarningContainer
     {
-        private string _sTunnelId;
-        public string TunnelId
-        {
-            get { return this._sTunnelId; }
-            set { this._sTunnelId = value; }
-        }
+        private readonly List<PojoWarning> warningList = new List<PojoWarning>();
+        public string TunnelId { get; set; }
 
-
-        List<PojoWarning> warningList = new List<PojoWarning>();
         public List<PojoWarning> WarningList
         {
-            get { return this.warningList; }
+            get { return warningList; }
         }
 
         public void addWarning(PojoWarning warning)
         {
-            this.warningList.Add(warning);
+            warningList.Add(warning);
         }
     }
 }

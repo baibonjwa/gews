@@ -33,7 +33,7 @@ namespace _4.OutburstPrevention
         //需要过滤的列索引
         private int[] _filterColunmIdxs = null;
         K1ValueEntity k1ValueEntity = new K1ValueEntity();
-        TunnelEntity tunnelEntity = new TunnelEntity();
+        Tunnel tunnelEntity = new Tunnel();
         DataSet ds = new DataSet();
         DataSet dsAll = new DataSet();
         int[] arr = new int[5];

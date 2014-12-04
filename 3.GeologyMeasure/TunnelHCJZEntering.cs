@@ -27,7 +27,7 @@ namespace _3.GeologyMeasure
         int doing = 0;
         int _tmpRowIndex = -1;
         int _itemCount = 0;
-        TunnelEntity _tunnelEntity = new TunnelEntity();
+        Tunnel _tunnelEntity = new Tunnel();
         WireInfoEntity wireInfoEntity = new WireInfoEntity();
         WirePointInfoEntity[] wpiEntity;
         int[] _arr = new int[5];
@@ -35,10 +35,10 @@ namespace _3.GeologyMeasure
         int _tunnelID;
         double _tmpDouble = 0;
 
-        WorkingFaceEntity workingFace = null; // 工作面
-        TunnelEntity tunnelZY = null;  // 主运
-        TunnelEntity tunnelFY = null;  // 辅运顺槽
-        TunnelEntity tunnelQY = null; // 切眼
+        WorkingFace workingFace = null; // 工作面
+        Tunnel tunnelZY = null;  // 主运
+        Tunnel tunnelFY = null;  // 辅运顺槽
+        Tunnel tunnelQY = null; // 切眼
         /*****************************/
         public TunnelHCJZEntering()
         {
@@ -84,7 +84,7 @@ namespace _3.GeologyMeasure
             workingFace = BasicInfoManager.getInstance().getWorkingFaceById(workingFaceId);
 
             workingFace.tunnelSet = BasicInfoManager.getInstance().getTunnelSetByDataSet(TunnelInfoBLL.selectTunnelByWorkingFaceId(workingFace.WorkingFaceID));
-            Dictionary<TunnelTypeEnum, TunnelEntity> tList = TunnelUtils.getTunnelDict(workingFace);
+            Dictionary<TunnelTypeEnum, Tunnel> tList = TunnelUtils.getTunnelDict(workingFace);
             if (tList.Count < 1)
                 return;
             tunnelZY = tList[TunnelTypeEnum.STOPING_ZY];

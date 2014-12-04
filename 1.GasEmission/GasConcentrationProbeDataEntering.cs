@@ -40,7 +40,7 @@ namespace _1.GasEmission
             InitializeComponent();
 
             //分配权限
-            if (CurrentUserEnt._curLoginUserInfo.Permission != Permission.管理员.ToString())
+            if (CurrentUserEnt.CurLoginUserInfo.Permission != Permission.管理员.ToString())
             {
                 selectTunnelUserControl1.SetButtonEnable(false);
             }

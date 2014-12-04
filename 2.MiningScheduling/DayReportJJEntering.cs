@@ -30,7 +30,7 @@ namespace _2.MiningScheduling
     {
         #region ******变量声明******
         /**掘进面实体**/
-        private WorkingFaceEntity workingFace;
+        private WorkingFace workingFace;
         /**回采日报实体**/
         DayReportJJEntity _dayReportJJEntity = new DayReportJJEntity();
         /**巷道关联矿井等信息ID集合**/
@@ -540,7 +540,7 @@ namespace _2.MiningScheduling
             }
 
             bool bResult = false;
-            TunnelEntity tunnel = BasicInfoManager.getInstance().getTunnelListByWorkingFaceId(workingFace.WorkingFaceID)[0];
+            Tunnel tunnel = BasicInfoManager.getInstance().getTunnelListByWorkingFaceId(workingFace.WorkingFaceID)[0];
 
             //循环添加
             foreach (DayReportJJEntity dayReportJJEntity in dayReportJJEntityList)
@@ -632,7 +632,7 @@ namespace _2.MiningScheduling
             if (bResult)
             {
                 // 获取该工作面对应的巷道
-                TunnelEntity tunnel = BasicInfoManager.getInstance().getTunnelListByWorkingFaceId(workingFace.WorkingFaceID)[0];
+                Tunnel tunnel = BasicInfoManager.getInstance().getTunnelListByWorkingFaceId(workingFace.WorkingFaceID)[0];
                 //在库中查询对应的bid值，获得对应的图形对象进行修改
                 string hdid = tunnel.TunnelID.ToString();
                 string bid = _dayReportJJEntity.BindingID;

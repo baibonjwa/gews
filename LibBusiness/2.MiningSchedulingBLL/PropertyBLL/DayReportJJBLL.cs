@@ -69,7 +69,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="tunnelEntity">巷道实体（必须包含巷道必填条件）</param>
         /// <returns>是否已在掘进进尺日报中被选择？true:false</returns>
-        public static bool selectDayReportJJInfoTunnelInfo(TunnelEntity tunnelEntity)
+        public static bool selectDayReportJJInfoTunnelInfo(Tunnel tunnelEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
             StringBuilder sb = new StringBuilder();

@@ -1,63 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace LibEntity
 {
     /// <summary>
-    /// 预警结果
+    ///     预警结果
     /// </summary>
     public class EarlyWarningResultEntity
     {
-        string _strWorkingFaceName;
         /// <summary>
-        /// 工作面名称
+        ///     工作面名称
         /// </summary>
-        public string WarkingFaceName
-        {
-            set { _strWorkingFaceName = value; }
-            get { return _strWorkingFaceName; }
-        }
+        public string WarkingFaceName { get; set; }
 
-        List<string> _warningIDList;
         /// <summary>
-        /// 预警ID--对应预警结果表中的ID（主键）
+        ///     预警ID--对应预警结果表中的ID（主键）
         /// </summary>
-        public List<string> WarningIDList
-        {
-            set { _warningIDList = value; }
-            get { return _warningIDList; }
-        }
+        public List<string> WarningIDList { get; set; }
 
-        string _strTunnelID;
         /// <summary>
-        /// 巷道ID
+        ///     巷道ID
         /// </summary>
-        public string TunnelID
-        {
-            set { _strTunnelID = value; }
-            get { return _strTunnelID; }
-        }
+        public string TunnelID { get; set; }
 
-        string _strDateTime;
         /// <summary>
-        /// 日期
+        ///     日期
         /// </summary>
-        public string DateTime
-        {
-            set { _strDateTime = value; }
-            get { return _strDateTime; }
-        }
+        public string DateTime { get; set; }
 
-        string _strDateShift;
         /// <summary>
-        /// 班次
+        ///     班次
         /// </summary>
-        public string DateShift
-        {
-            set { _strDateShift = value; }
-            get { return _strDateShift; }
-        }
+        public string DateShift { get; set; }
     }
 }

@@ -428,7 +428,7 @@ namespace LibCommonForm
 
             for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
             {
-                MineEntity mineEntity = new MineEntity();
+                Mine mineEntity = new Mine();
                 // 矿井编号
                 if (this.dataGridView1.Rows[i].Cells[0].Value != System.DBNull.Value && this.dataGridView1.Rows[i].Cells[0].Value != null)
                 {
@@ -479,7 +479,7 @@ namespace LibCommonForm
 
             for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
             {
-                HorizontalEntity horizontalEntity = new HorizontalEntity();
+                Horizontal horizontalEntity = new Horizontal();
                 // 水平编号
                 if (this.dataGridView1.Rows[i].Cells[0].Value != System.DBNull.Value && this.dataGridView1.Rows[i].Cells[0].Value != null)
                 {
@@ -891,7 +891,7 @@ namespace LibCommonForm
                                 && this.dataGridView1.Rows[this.dataGridView1.CurrentRow.Index].Cells[0].Value != null)
                             {
                                 int iWorkingFaceId = Convert.ToInt32(this.dataGridView1.Rows[this.dataGridView1.CurrentRow.Index].Cells[0].Value);
-                                List<TunnelEntity> list = BasicInfoManager.getInstance().getTunnelListByWorkingFaceId(iWorkingFaceId);
+                                List<Tunnel> list = BasicInfoManager.getInstance().getTunnelListByWorkingFaceId(iWorkingFaceId);
                                 if (list != null && list.Count > 0)
                                 {
                                     Alert.alert("工作面有关联的巷道，请首先解除关联");

@@ -33,14 +33,14 @@ namespace LibPanels
         }
         //***********************************
 
-        
+
         private int _iRecordCount = 0;
         int rowsCount = 0;      //数据行数
         int checkCount = 0;     //选择行数
         DataSet dsAll = new DataSet();
         public static MineDataEntity mdEntity = new MineDataEntity();
         public static UsualForecastEntity ufEntity = new UsualForecastEntity();
-        public static TunnelEntity te = new TunnelEntity();
+        public static Tunnel te = new Tunnel();
 
         //***********************************
 
@@ -221,12 +221,12 @@ namespace LibPanels
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btnChange_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void setMineDataEntityValue()
@@ -241,7 +241,7 @@ namespace LibPanels
                     //te = TunnelInfoBLL.selectTunnelInfoByTunnelID(te.TunnelID);
 
                     ufEntity.Id = Convert.ToInt32(dsAll.Tables[0].Rows[i][UsualForecastDbConstNames.ID]);
-                    ufEntity.TunnelID = te.TunnelID;
+                    ufEntity.Tunnel.TunnelID = te.TunnelID;
                     mdEntity.CoordinateX = Convert.ToDouble(dsAll.Tables[0].Rows[i][UsualForecastDbConstNames.X]);
                     ufEntity.CoordinateY = Convert.ToDouble(dsAll.Tables[0].Rows[i][UsualForecastDbConstNames.Y]);
                     ufEntity.CoordinateZ = Convert.ToDouble(dsAll.Tables[0].Rows[i][UsualForecastDbConstNames.Z]);
@@ -261,7 +261,7 @@ namespace LibPanels
 
         private void btnDel_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         /// <summary>
@@ -341,7 +341,7 @@ namespace LibPanels
         {
             setMineDataEntityValue();
             MineData m = new MineData(ufEntity, this.MainForm);
-            
+
             m.Text = new LibPanels(MineDataPanelName.UsualForecast_Change).panelFormName;
             if (DialogResult.OK == m.ShowDialog())
             {
@@ -398,7 +398,7 @@ namespace LibPanels
             if (FileExport.fileExport(fpGasData, true))
             {
                 Alert.alert(Const.EXPORT_SUCCESS_MSG);
-            }            
+            }
         }
     }
 }

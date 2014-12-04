@@ -152,7 +152,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="collapsePillarsEntity">巷道实体</param>
         /// <returns>成功与否：true，false</returns>
-        public static bool insertTunnelInfo(TunnelEntity tunnelEntity)
+        public static bool insertTunnelInfo(Tunnel tunnelEntity)
         {
             StringBuilder sqlStr = new StringBuilder();
             sqlStr.Append("INSERT INTO " + TunnelInfoDbConstNames.TABLE_NAME + " (" +
@@ -187,7 +187,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="tunnelEntity">巷道实体</param>
         /// <returns></returns>
-        public static bool updateTunnelInfo(TunnelEntity tunnelEntity)
+        public static bool updateTunnelInfo(Tunnel tunnelEntity)
         {
             StringBuilder sqlStr = new StringBuilder();
             sqlStr.Append("UPDATE " + TunnelInfoDbConstNames.TABLE_NAME + " SET " + TunnelInfoDbConstNames.TUNNEL_NAME + " ='");
@@ -262,7 +262,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="tunnelEntity">巷道实体</param>
         /// <returns>是否成功删除？true:false</returns>
-        public static bool deleteTunnelInfo(TunnelEntity tunnelEntity)
+        public static bool deleteTunnelInfo(Tunnel tunnelEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
             string sql = "DELETE FROM " + TunnelInfoDbConstNames.TABLE_NAME + " WHERE " + TunnelInfoDbConstNames.ID + " =" + tunnelEntity.TunnelID;
@@ -275,7 +275,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="tunnelEntity">巷道实体</param>
         /// <returns>是否为掘进巷道？true:false</returns>
-        public static bool isTunnelJJ(TunnelEntity tunnelEntity)
+        public static bool isTunnelJJ(Tunnel tunnelEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
             string sql = "SELECT " +
@@ -312,7 +312,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="tunnelEntity">巷道实体</param>
         /// <returns>是否为回采巷道？true:false</returns>
-        public static bool isTunnelHC(TunnelEntity tunnelEntity)
+        public static bool isTunnelHC(Tunnel tunnelEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
             string sql = "SELECT * FROM " + TunnelInfoDbConstNames.TABLE_NAME + " WHERE " +
@@ -334,7 +334,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="tunnelJJEntity">掘进巷道实体</param>
         /// <returns>是否成功设置巷道为掘进巷道？true:false</returns>
-        public static bool setTunnelAsJJ(WorkingFaceEntity wfEntity, TunnelEntity tunnelEntity)
+        public static bool setTunnelAsJJ(WorkingFace wfEntity, Tunnel tunnelEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
 
@@ -370,7 +370,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="tunnelHCEntity">巷道实体</param>
         /// <returns>是否成功设置巷道为回采巷道？true:false</returns>
-        public static bool setTunnelAsHC(WorkingFaceEntity wfEntity, HashSet<TunnelEntity> tunnelSet)
+        public static bool setTunnelAsHC(WorkingFace wfEntity, HashSet<Tunnel> tunnelSet)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
             db.Open();
@@ -387,7 +387,7 @@ namespace LibBusiness
               WorkingFaceDbConstNames.TEAM_NAME_ID + "=" + wfEntity.TeamNameID +
               " WHERE " + WorkingFaceDbConstNames.WORKINGFACE_ID + "= " + wfEntity.WorkingFaceID;
 
-            foreach (TunnelEntity entity in tunnelSet)
+            foreach (Tunnel entity in tunnelSet)
             {
                 sql += " UPDATE " + TunnelInfoDbConstNames.TABLE_NAME +
                 " SET " +
@@ -452,7 +452,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="tunnelEntity">巷道实体</param>
         /// <returns>是否成功删除掘进或回采巷道信息</returns>
-        public static void deleteJJHCTunnelInfo(TunnelEntity tunnelEntity)
+        public static void deleteJJHCTunnelInfo(Tunnel tunnelEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
             db.Open();
@@ -470,7 +470,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="tunnelEntity">巷道实体</param>
         /// <returns>是否成功删除导线信息</returns>
-        public static bool deleteWireInfoBindingTunnelID(TunnelEntity tunnelEntity)
+        public static bool deleteWireInfoBindingTunnelID(Tunnel tunnelEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
             string sql = "SELECT * FROM " + WireInfoDbConstNames.TABLE_NAME +
@@ -494,7 +494,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="tunnelEntity">巷道实体</param>
         /// <returns>是否成功删除？true:false</returns>
-        public static bool deleteDayReportJJBindingTunnelID(TunnelEntity tunnelEntity)
+        public static bool deleteDayReportJJBindingTunnelID(Tunnel tunnelEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
             string sql = "DELETE FROM " + DayReportJJDbConstNames.TABLE_NAME +
@@ -508,7 +508,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="tunnelEntity"></param>
         /// <returns></returns>
-        public static bool deleteDayReportHCBindingTunnelID(TunnelEntity tunnelEntity)
+        public static bool deleteDayReportHCBindingTunnelID(Tunnel tunnelEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
             string sql = "DELETE FROM " + DayReportHCDbConstNames.TABLE_NAME +

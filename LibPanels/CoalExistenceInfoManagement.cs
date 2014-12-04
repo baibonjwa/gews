@@ -33,7 +33,7 @@ namespace LibPanels
         //需要过滤的列索引
         private int[] _filterColunmIdxs = null;
         DataSet ds = new DataSet();
-        public static TunnelEntity tunnelEntity = new TunnelEntity();
+        public static Tunnel tunnelEntity = new Tunnel();
         public static CoalExistenceEntity ceEntity = new CoalExistenceEntity();
 
         //***********************************
@@ -334,7 +334,7 @@ namespace LibPanels
                 if (fpCoalExistence.Sheets[0].Cells[rowDetailStartIndex + i, 0].Value != null && (bool)fpCoalExistence.Sheets[0].Cells[rowDetailStartIndex + i, 0].Value == true)
                 {
                     ceEntity.Id = Convert.ToInt32(ds.Tables[0].Rows[i][CoalExistenceDbConstNames.ID]);
-                    ceEntity.TunnelID = Convert.ToInt32(ds.Tables[0].Rows[i][CoalExistenceDbConstNames.TUNNEL_ID]);
+                    ceEntity.Tunnel.TunnelID = Convert.ToInt32(ds.Tables[0].Rows[i][CoalExistenceDbConstNames.TUNNEL_ID]);
                     ceEntity.CoordinateX = Convert.ToDouble(ds.Tables[0].Rows[i][CoalExistenceDbConstNames.COORDINATE_X]);
                     ceEntity.CoordinateY = Convert.ToDouble(ds.Tables[0].Rows[i][CoalExistenceDbConstNames.COORDINATE_Y]);
                     ceEntity.CoordinateZ = Convert.ToDouble(ds.Tables[0].Rows[i][CoalExistenceDbConstNames.COORDINATE_Z]);

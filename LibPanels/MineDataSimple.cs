@@ -25,7 +25,7 @@ namespace LibPanels
         GasInfoEntering gasData = new GasInfoEntering();                          //瓦斯
         UsualForecast usualForecast = new UsualForecast();              //日常预测
         ManagementInfoEntering management = new ManagementInfoEntering();                    //管理
-        TunnelEntity tunnelEntity = new TunnelEntity();                 //巷道信息实体
+        Tunnel tunnelEntity = new Tunnel();                 //巷道信息实体
         VentilationInfoEntity viEntity = new VentilationInfoEntity();   //通风实体
         CoalExistenceEntity ceEntity = new CoalExistenceEntity();       //煤层赋存实体
         GasDataEntity gdEntity = new GasDataEntity();       //瓦斯实体
@@ -55,8 +55,8 @@ namespace LibPanels
 
         private void InheritTunnelNameChanged(object sender, TunnelEventArgs e)
         {
-            TunnelEntity entTunnel = BasicInfoManager.getInstance().getTunnelByID(selectTunnelSimple1.ITunnelId);
-            WorkingFaceEntity entWorkingFace =
+            Tunnel entTunnel = BasicInfoManager.getInstance().getTunnelByID(selectTunnelSimple1.ITunnelId);
+            WorkingFace entWorkingFace =
                 BasicInfoManager.getInstance().getWorkingFaceById(entTunnel.WorkingFace.WorkingFaceID); //WorkingFaceBLL.selectWorkingFaceInfoByID(entTunnel.WorkingFace.WorkingFaceID);
             txtCoordinateX.Text = entWorkingFace.Coordinate.X.ToString();
             txtCoordinateY.Text = entWorkingFace.Coordinate.Y.ToString();
@@ -192,7 +192,7 @@ namespace LibPanels
             DialogResult = DialogResult.OK;
 
             //通用信息
-            mineDataEntity.TunnelID = this.selectTunnelSimple1.ITunnelId;
+            mineDataEntity.Tunnel.TunnelID = this.selectTunnelSimple1.ITunnelId;
             if (txtCoordinateX.Text == "")
             {
                 mineDataEntity.CoordinateX = 0;
@@ -448,7 +448,7 @@ namespace LibPanels
             bool bResult = false;
             if (this.Text == new LibPanels(MineDataPanelName.Management).panelFormName)
             {
-                
+
                 bResult = ManagementBLL.insertManagementInfo(mEntity);
                 Log.Debug("发送添加管理信息的Socket信息");
                 UpdateWarningDataMsg msg = new UpdateWarningDataMsg(Const.INVALID_ID, this.selectTunnelSimple1.ITunnelId,

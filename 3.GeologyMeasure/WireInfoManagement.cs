@@ -36,7 +36,7 @@ namespace _3.GeologyMeasure
         int _checkCount = 0;     //选择行数
         int _rowDetailStartIndex = 2;
         Color rowBackColor = Color.White;
-        TunnelEntity tunnelEntity = null;
+        Tunnel tunnelEntity = null;
         WireInfoEntity wireInfoEntity = new WireInfoEntity();
         WirePointInfoEntity wirePointInfoEntity = new WirePointInfoEntity();
         DataSet _ds = new DataSet();

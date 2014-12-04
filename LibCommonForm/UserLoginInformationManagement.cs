@@ -69,7 +69,7 @@ namespace LibCommonForm
             GetUserLoginInfo();
 
             //判断用户权限
-            if (CurrentUserEnt._curLoginUserInfo.Permission != Permission.管理员.ToString())
+            if (CurrentUserEnt.CurLoginUserInfo.Permission != Permission.管理员.ToString())
             {
                 tsBtnAdd.Visible = false;
                 tsBtnDel.Visible = false;

@@ -93,7 +93,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="workingFaceEntity"><工作面>实体</param>
         /// <returns>成功与否：true，false</returns>
-        public static bool insertWorkingFaceInfo(WorkingFaceEntity workingFaceEntity)
+        public static bool insertWorkingFaceInfo(WorkingFace workingFaceEntity)
         {
             StringBuilder sqlStr = new StringBuilder();
             sqlStr.Append("INSERT INTO " + WorkingFaceDbConstNames.TABLE_NAME);
@@ -151,7 +151,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="workingFaceEntity"><工作面>实体</param>
         /// <returns>成功与否：true，false</returns>
-        public static bool updateWorkingfaceXYZ(WorkingFaceEntity workingFaceEntity)
+        public static bool updateWorkingfaceXYZ(WorkingFace workingFaceEntity)
         {
             StringBuilder sqlStr = new StringBuilder();
             sqlStr.Append("UPDATE " + WorkingFaceDbConstNames.TABLE_NAME);
@@ -191,7 +191,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="workingFaceEntity"><工作面>实体</param>
         /// <returns>成功与否：true，false</returns>
-        public static bool updateWorkingFaceInfo(WorkingFaceEntity workingFaceEntity)
+        public static bool updateWorkingFaceInfo(WorkingFace workingFaceEntity)
         {
             StringBuilder sqlStr = new StringBuilder();
             sqlStr.Append("UPDATE " + WorkingFaceDbConstNames.TABLE_NAME);
@@ -265,7 +265,7 @@ namespace LibBusiness
         /// 通过<工作面>，获取<工作面>信息
         /// </summary>
         /// <returns><工作面>信息</returns>
-        public static WorkingFaceEntity selectWorkingFaceInfoByWksId(int iWorkingFaceId)
+        public static WorkingFace selectWorkingFaceInfoByWksId(int iWorkingFaceId)
         {
             StringBuilder sqlStr = new StringBuilder();
             sqlStr.Append("SELECT * FROM " + WorkingFaceDbConstNames.TABLE_NAME);
@@ -273,13 +273,13 @@ namespace LibBusiness
 
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
             DataSet ds = db.ReturnDS(sqlStr.ToString());
-            WorkingFaceEntity workingfaceEntity = null;
+            WorkingFace workingfaceEntity = null;
             if (ds.Tables[0].Rows.Count > 0)
             {
                 try
                 {
                     DataRow dr = ds.Tables[0].Rows[0];
-                    workingfaceEntity = new WorkingFaceEntity();
+                    workingfaceEntity = new WorkingFace();
                     double x = dr[WorkingFaceDbConstNames.COORDINATE_X] == DBNull.Value ? 0.0 : Convert.ToDouble(dr[WorkingFaceDbConstNames.COORDINATE_X]);
                     double y = dr[WorkingFaceDbConstNames.COORDINATE_Y] == DBNull.Value ? 0.0 : Convert.ToDouble(dr[WorkingFaceDbConstNames.COORDINATE_Y]);
                     double z = dr[WorkingFaceDbConstNames.COORDINATE_Z] == DBNull.Value ? 0.0 : Convert.ToDouble(dr[WorkingFaceDbConstNames.COORDINATE_Z]);
@@ -329,11 +329,11 @@ namespace LibBusiness
         /// </summary>
         /// <param name="bid">bid键值</param>
         /// <returns></returns>
-        public static bool deleteHCWorkingFace(WorkingFaceEntity entity)
+        public static bool deleteHCWorkingFace(WorkingFace entity)
         {
             string sql = " BEGIN ";
 
-            foreach (TunnelEntity tEntity in entity.tunnelSet)
+            foreach (Tunnel tEntity in entity.tunnelSet)
             {
                 sql += "UPDATE " + TunnelInfoDbConstNames.TABLE_NAME +
                       " SET TUNNEL_TYPE=" + (int)TunnelTypeEnum.OTHER + " WHERE " + TunnelInfoDbConstNames.ID + " = " + tEntity.TunnelID;

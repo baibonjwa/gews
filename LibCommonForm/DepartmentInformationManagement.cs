@@ -144,7 +144,7 @@ namespace LibCommonForm
             LibCommon.FormDefaultPropertiesSetter.SetManagementFormDefaultProperties(this, LibCommon.LibFormTitles.DEPARTMENT_MANMAGEMENT);
 
             //判断用户权限
-            if (CurrentUserEnt._curLoginUserInfo.Permission != Permission.管理员.ToString())
+            if (CurrentUserEnt.CurLoginUserInfo.Permission != Permission.管理员.ToString())
             {
                 tsBtnAdd.Visible = false;
                 tsBtnDel.Visible = false;
@@ -309,7 +309,7 @@ namespace LibCommonForm
             int n = this._fpDepartmentInfo.ActiveSheet.ActiveCell.Row.Index;
 
             //当选择空行时,属性框为空
-            if (CurrentUserEnt._curLoginUserInfo.Permission != Permission.普通用户.ToString())
+            if (CurrentUserEnt.CurLoginUserInfo.Permission != Permission.普通用户.ToString())
             {
                 propertyGrid.Enabled = this._fpDepartmentInfo.ActiveSheet.Cells[n, 1].Value == null ? false : true;
             }

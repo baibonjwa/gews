@@ -41,7 +41,7 @@ namespace _3.GeologyMeasure
         int doing = 0;
         int _tmpRowIndex = -1;
         int _itemCount = 0;
-        TunnelEntity tunnelEntity = new TunnelEntity();
+        Tunnel tunnelEntity = new Tunnel();
         WireInfoEntity wireInfoEntity = new WireInfoEntity();
         WirePointInfoEntity[] wpiEntity;
         int[] _arr = new int[5];

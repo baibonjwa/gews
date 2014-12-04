@@ -358,7 +358,7 @@ namespace _2.MiningScheduling
                 return;
             }
 
-            WorkingFaceEntity ent = BasicInfoManager.getInstance().getWorkingFaceById(entity.WorkingFaceID);
+            WorkingFace ent = BasicInfoManager.getInstance().getWorkingFaceById(entity.WorkingFaceID);
             /**自定义控件用巷道信息数组**/
             int[] _arr = new int[5];
             _arr[0] = ent.MiningArea.Horizontal.Mine.MineId;
@@ -406,16 +406,16 @@ namespace _2.MiningScheduling
                         entity.BindingID = dr[DayReportHCDbConstNames.BINDINGID].ToString();
 
                         // 回采面对象
-                        WorkingFaceEntity hjEntity = BasicInfoManager.getInstance().getWorkingFaceById(entity.WorkingFaceID);
+                        WorkingFace hjEntity = BasicInfoManager.getInstance().getWorkingFaceById(entity.WorkingFaceID);
                         if (hjEntity != null)
                             hjEntity.tunnelSet = BasicInfoManager.getInstance().getTunnelSetByDataSet(TunnelInfoBLL.selectTunnelByWorkingFaceId(hjEntity.WorkingFaceID));
-                        Dictionary<TunnelTypeEnum, TunnelEntity> tDict = TunnelUtils.getTunnelDict(hjEntity);
+                        Dictionary<TunnelTypeEnum, Tunnel> tDict = TunnelUtils.getTunnelDict(hjEntity);
 
                         if (tDict.Count > 0)
                         {
-                            TunnelEntity tunnelZY = tDict[TunnelTypeEnum.STOPING_ZY];
-                            TunnelEntity tunnelFY = tDict[TunnelTypeEnum.STOPING_FY];
-                            TunnelEntity tunnelQY = tDict[TunnelTypeEnum.STOPING_QY];
+                            Tunnel tunnelZY = tDict[TunnelTypeEnum.STOPING_ZY];
+                            Tunnel tunnelFY = tDict[TunnelTypeEnum.STOPING_FY];
+                            Tunnel tunnelQY = tDict[TunnelTypeEnum.STOPING_QY];
                             // 删除GIS图形上的回采进尺
                             DelHcjc(tunnelZY.TunnelID, tunnelFY.TunnelID, tunnelQY.TunnelID, entity.BindingID, hjEntity, tunnelZY.TunnelWid, tunnelFY.TunnelWid, tunnelQY.TunnelWid);
                         }
@@ -460,7 +460,7 @@ namespace _2.MiningScheduling
         /// <param name="qy">切眼id</param>
         /// <param name="bid">回采进尺的BindingID</param>
         /// <param name="wfEntity">回采面实体</param>
-        private void DelHcjc(int hd1, int hd2, int qy, string bid, WorkingFaceEntity wfEntity, double zywid, double fywid, double qywid)
+        private void DelHcjc(int hd1, int hd2, int qy, string bid, WorkingFace wfEntity, double zywid, double fywid, double qywid)
         {
             //删除对应的回采进尺图形和数据表中的记录信息
             Dictionary<string, IPoint> results = Global.cons.DelHCCD(hd1.ToString(), hd2.ToString(), qy.ToString(), bid, zywid, fywid, Global.searchlen);

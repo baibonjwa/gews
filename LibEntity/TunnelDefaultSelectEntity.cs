@@ -1,50 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace LibEntity
+﻿namespace LibEntity
 {
     public class TunnelDefaultSelectEntity
     {
-        private string tableName;
+        public string TableName { get; set; }
 
-        public string TableName
-        {
-            get { return tableName; }
-            set { tableName = value; }
-        }
+        public int MineID { get; set; }
 
-        private int mineID;
+        public int HorizontalID { get; set; }
 
-        public int MineID
-        {
-            get { return mineID; }
-            set { mineID = value; }
-        }
+        public int MiningAreaID { get; set; }
 
-        private int horizontalID;
-
-        public int HorizontalID
-        {
-            get { return horizontalID; }
-            set { horizontalID = value; }
-        }
-
-        private int miningAreaID;
-
-        public int MiningAreaID
-        {
-            get { return miningAreaID; }
-            set { miningAreaID = value; }
-        }
-
-        private int workingFaceID;
-
-        public int WorkingFaceID
-        {
-            get { return workingFaceID; }
-            set { workingFaceID = value; }
-        }
+        public int WorkingFaceID { get; set; }
     }
 }

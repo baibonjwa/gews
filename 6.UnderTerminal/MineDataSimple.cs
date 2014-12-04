@@ -24,7 +24,7 @@ namespace UnderTerminal
         GasInfoEntering gasData = new GasInfoEntering();                          //瓦斯
         UsualForecast usualForecast = new UsualForecast();              //日常预测
         ManagementInfoEntering management = new ManagementInfoEntering();                    //管理
-        TunnelEntity tunnelEntity = new TunnelEntity();                 //巷道信息实体
+        Tunnel tunnelEntity = new Tunnel();                 //巷道信息实体
         VentilationInfoEntity viEntity = new VentilationInfoEntity();   //通风实体
         CoalExistenceEntity ceEntity = new CoalExistenceEntity();       //煤层赋存实体
         GasDataEntity gdEntity = new GasDataEntity();       //瓦斯实体
@@ -43,8 +43,8 @@ namespace UnderTerminal
             InitializeComponent();
             this.tunnelId = tunnelId;
             //this.Text += "-" + tunnelName;
-            TunnelEntity entTunnel = BasicInfoManager.getInstance().getTunnelByID(tunnelId);
-            WorkingFaceEntity entWorkingFace =
+            Tunnel entTunnel = BasicInfoManager.getInstance().getTunnelByID(tunnelId);
+            WorkingFace entWorkingFace =
                 BasicInfoManager.getInstance().getWorkingFaceById(entTunnel.WorkingFace.WorkingFaceID); //WorkingFaceBLL.selectWorkingFaceInfoByID(entTunnel.WorkingFace.WorkingFaceID);
             txtCoordinateX.Text = entWorkingFace.Coordinate.X.ToString();
             txtCoordinateY.Text = entWorkingFace.Coordinate.Y.ToString();
@@ -195,7 +195,7 @@ namespace UnderTerminal
             DialogResult = DialogResult.OK;
 
             //通用信息
-            mineDataEntity.TunnelID = this.tunnelId;
+            mineDataEntity.Tunnel.TunnelID = this.tunnelId;
             if (txtCoordinateX.Text == "")
             {
                 mineDataEntity.CoordinateX = 0;

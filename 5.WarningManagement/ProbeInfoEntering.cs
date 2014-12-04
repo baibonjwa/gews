@@ -387,7 +387,7 @@ namespace _5.WarningManagement
                 int iTunnelID = 0;
                 if (int.TryParse(dsProbeInfo.Tables[0].Rows[0][ProbeManageDbConstNames.TUNNEL_ID].ToString(), out iTunnelID))
                 {
-                    TunnelEntity tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(iTunnelID);
+                    Tunnel tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(iTunnelID);
                     oldTunnelId = tunnelEntity.TunnelID;
 
                     if (tunnelEntity != null)

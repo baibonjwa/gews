@@ -6,65 +6,43 @@
 // 版本信息:
 // V1.0 新建
 // ******************************************************************
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace LibEntity
 {
     public class UserGroupInformationManagementEntity
     {
         //用户组名称
-        private string _groupname;
+
         /// <summary>
-        /// 获取、设置用户组名称
+        ///     获取、设置用户组名称
         /// </summary>
-        public string GroupName
-        {
-            get { return _groupname; }
-            set { _groupname = value; }
-        }
+        public string GroupName { get; set; }
 
         //用户人数
-        private string _usercount;
+
         /// <summary>
-        /// 获取、设置用户人数
+        ///     获取、设置用户人数
         /// </summary>
-        public string UserCount
-        {
-            get { return _usercount; }
-            set { _usercount = value; }
-        }
+        public string UserCount { get; set; }
 
         //备注
-        private string _remark;
+
         /// <summary>
-        /// 获取、设置备注
+        ///     获取、设置备注
         /// </summary>
-        public string Remark
-        {
-            get { return _remark; }
-            set { _remark = value; }
-        }
+        public string Remark { get; set; }
 
         //用户组ID
-        private string _Id;
+
         /// <summary>
-        /// 获取、设置用户组ID
+        ///     获取、设置用户组ID
         /// </summary>
-        public string ID
-        {
-            get { return _Id; }
-            set { _Id = value; }
-        }
+        public string ID { get; set; }
 
         //用户组权限
         /// <summary>
-        /// 获取、设置用户组ID
+        ///     获取、设置用户组ID
         /// </summary>
         public string Permission { get; set; }
-     
-
     }
 }

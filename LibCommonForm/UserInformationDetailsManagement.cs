@@ -62,7 +62,7 @@ namespace LibCommonForm
             LibCommon.FormDefaultPropertiesSetter.SetMdiChildrenManagementFormDefaultProperties(this, LibCommon.LibFormTitles.USER_INFO_DETAILS_MANMAGEMENT);
             LibCommon.FarpointDefaultPropertiesSetter.SetFpDefaultProperties(fpUserInformationDetails, LibCommon.LibFarpintTiltes.USER_INFO_DETAILS, 2);
             //判断用户权限
-            if (CurrentUserEnt._curLoginUserInfo.Permission != Permission.管理员.ToString())
+            if (CurrentUserEnt.CurLoginUserInfo.Permission != Permission.管理员.ToString())
             {
                 tsBtnAdd.Visible = false;
                 tsBtnDel.Visible = false;

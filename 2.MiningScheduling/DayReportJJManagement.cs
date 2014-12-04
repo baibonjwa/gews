@@ -380,7 +380,7 @@ namespace _2.MiningScheduling
             //回采日报实体赋值
             DayReportJJEntity entity = setDayReportJJEntityValue();
 
-            WorkingFaceEntity ent = BasicInfoManager.getInstance().getWorkingFaceById(entity.WorkingFaceID);
+            WorkingFace ent = BasicInfoManager.getInstance().getWorkingFaceById(entity.WorkingFaceID);
             /**自定义控件用巷道信息数组**/
             int[] _arr = new int[5];
             _arr[0] = ent.MiningArea.Horizontal.Mine.MineId;
@@ -432,7 +432,7 @@ namespace _2.MiningScheduling
                             entity.BindingID = dr[DayReportJJDbConstNames.BINDINGID].ToString();
 
                             // 掘进工作面，只有一条巷道
-                            TunnelEntity tEntity = BasicInfoManager.getInstance().getTunnelListByWorkingFaceId(entity.WorkingFaceID)[0];
+                            Tunnel tEntity = BasicInfoManager.getInstance().getTunnelListByWorkingFaceId(entity.WorkingFaceID)[0];
 
                             //删除操作
                             bResult = DayReportJJBLL.deleteDayReportJJInfo(entity);

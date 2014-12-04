@@ -34,8 +34,8 @@ namespace _3.GeologyMeasure
         int _tmpRowIndex = 0;
         //需要过滤的列索引
         private int[] _filterColunmIdxs = null;
-        public static WorkingFaceEntity jjWorkFaceEntity = null;
-        public static TunnelEntity tunnelEntity = null;
+        public static WorkingFace jjWorkFaceEntity = null;
+        public static Tunnel tunnelEntity = null;
         // 分页时用
         DataSet ds = new DataSet();
         // 数据库中全部数据
@@ -143,7 +143,7 @@ namespace _3.GeologyMeasure
                 return;
             }
 
-            List<TunnelEntity> tunnelList = BasicInfoManager.getInstance().getTunnelListByDataSet(ds);
+            List<Tunnel> tunnelList = BasicInfoManager.getInstance().getTunnelListByDataSet(ds);
 
             rowsCount = ds.Tables[0].Rows.Count;
             FarPointOperate.farPointReAdd(fpTunnelJJInfo, rowDetailStartIndex, rowsCount);
@@ -152,7 +152,7 @@ namespace _3.GeologyMeasure
                 FarPoint.Win.Spread.CellType.CheckBoxCellType ckbxcell = new FarPoint.Win.Spread.CellType.CheckBoxCellType();
                 ckbxcell.ThreeState = false;
                 int i = 0;
-                foreach (TunnelEntity entity in tunnelList)
+                foreach (Tunnel entity in tunnelList)
                 {
                     cells[rowDetailStartIndex + i, COLUMN_INDEX_CHOOSE_BUTTON].CellType = ckbxcell;
                     //矿井名称

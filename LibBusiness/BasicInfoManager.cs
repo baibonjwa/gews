@@ -21,18 +21,18 @@ namespace LibBusiness
         private BasicInfoManager() { }
         private static BasicInfoManager instance = null;
         // 矿井
-        public Dictionary<int, MineEntity> mineList = new Dictionary<int, MineEntity>();
+        public Dictionary<int, Mine> mineList = new Dictionary<int, Mine>();
         // 水平
-        private Dictionary<int, HorizontalEntity> horizList = new Dictionary<int, HorizontalEntity>();
+        private Dictionary<int, Horizontal> horizList = new Dictionary<int, Horizontal>();
 
         // 采区
-        private Dictionary<int, MiningAreaEntity> maList = new Dictionary<int, MiningAreaEntity>();
+        private Dictionary<int, MiningArea> maList = new Dictionary<int, MiningArea>();
 
         // 工作面
-        private Dictionary<int, WorkingFaceEntity> wfList = new Dictionary<int, WorkingFaceEntity>();
+        private Dictionary<int, WorkingFace> wfList = new Dictionary<int, WorkingFace>();
 
         // 巷道
-        private Dictionary<int, TunnelEntity> tunnelList = new Dictionary<int, TunnelEntity>();
+        private Dictionary<int, Tunnel> tunnelList = new Dictionary<int, Tunnel>();
 
         // 煤层
         private Dictionary<int, CoalSeamsEntity> coalSeamList = new Dictionary<int, CoalSeamsEntity>();
@@ -78,14 +78,14 @@ namespace LibBusiness
             DataSet ds = MineBLL.selectAllMineInfo();
             foreach (DataRow dr in ds.Tables[0].Rows)
             {
-                MineEntity entity = new MineEntity();
+                Mine entity = new Mine();
                 entity.MineId = Convert.ToInt32(dr[MineDbConstNames.MINE_ID]);
                 entity.MineName = dr[MineDbConstNames.MINE_NAME].ToString();
                 mineList.Add(entity.MineId, entity);
             }
         }
 
-        public MineEntity getMineById(int mineId)
+        public Mine getMineById(int mineId)
         {
             try
             {
@@ -100,7 +100,7 @@ namespace LibBusiness
 
         public string getMineNameById(int mineId)
         {
-            MineEntity entity = getMineById(mineId);
+            Mine entity = getMineById(mineId);
             if (null != entity)
                 return entity.MineName;
             else
@@ -117,7 +117,7 @@ namespace LibBusiness
             DataSet ds = HorizontalBLL.selectAllHorizontalInfo();
             foreach (DataRow dr in ds.Tables[0].Rows)
             {
-                HorizontalEntity entity = new HorizontalEntity();
+                Horizontal entity = new Horizontal();
                 entity.HorizontalId = Convert.ToInt32(dr[HorizontalDbConstNames.HORIZONTAL_ID]);
                 entity.HorizontalName = dr[HorizontalDbConstNames.HORIZONTAL_NAME].ToString();
                 entity.Mine = getMineById(Convert.ToInt32(dr[HorizontalDbConstNames.MINE_ID]));
@@ -127,14 +127,14 @@ namespace LibBusiness
 
         public string getHorizontalNameById(int horizontalId)
         {
-            HorizontalEntity entity = getHorizontalById(horizontalId);
+            Horizontal entity = getHorizontalById(horizontalId);
             if (null != entity)
                 return entity.HorizontalName;
             else
                 return string.Empty;
         }
 
-        public HorizontalEntity getHorizontalById(int horizontalId)
+        public Horizontal getHorizontalById(int horizontalId)
         {
             try
             {
@@ -157,7 +157,7 @@ namespace LibBusiness
             DataSet ds = MiningAreaBLL.selectAllMiningAreaInfo();
             foreach (DataRow dr in ds.Tables[0].Rows)
             {
-                MiningAreaEntity entity = new MiningAreaEntity();
+                MiningArea entity = new MiningArea();
                 entity.MiningAreaId = Convert.ToInt32(dr[MiningAreaDbConstNames.MININGAREA_ID]);
                 entity.MiningAreaName = dr[MiningAreaDbConstNames.MININGAREA_NAME].ToString();
                 entity.Horizontal = getHorizontalById(Convert.ToInt32(dr[MiningAreaDbConstNames.HORIZONTAL_ID]));
@@ -172,7 +172,7 @@ namespace LibBusiness
         /// <returns></returns>
         public string getMiningAreaNameById(int miningAreaId)
         {
-            MiningAreaEntity entity = getMiningAreaById(miningAreaId);
+            MiningArea entity = getMiningAreaById(miningAreaId);
             if (null != entity)
                 return entity.MiningAreaName;
             else
@@ -184,7 +184,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="miningAreaId"></param>
         /// <returns></returns>
-        public MiningAreaEntity getMiningAreaById(int miningAreaId)
+        public MiningArea getMiningAreaById(int miningAreaId)
         {
             try
             {
@@ -200,7 +200,7 @@ namespace LibBusiness
         /// <summary>
         /// 更新指定工作面信息
         /// </summary>
-        public void refreshWorkingFaceInfo(WorkingFaceEntity entity)
+        public void refreshWorkingFaceInfo(WorkingFace entity)
         {
             // 加载工作面信息
             DataSet ds = WorkingFaceBLL.selectWorkingFaceInfoByWorkingFaceId(entity.WorkingFaceID);
@@ -238,7 +238,7 @@ namespace LibBusiness
 
             foreach (DataRow dr in ds.Tables[0].Rows)
             {
-                WorkingFaceEntity entity = new WorkingFaceEntity();
+                WorkingFace entity = new WorkingFace();
 
                 entity.WorkingFaceID = dr[WorkingFaceDbConstNames.WORKINGFACE_ID] == DBNull.Value ? Const.INVALID_ID : Convert.ToInt32(dr[WorkingFaceDbConstNames.WORKINGFACE_ID].ToString());
                 entity.WorkingFaceName = dr[WorkingFaceDbConstNames.WORKINGFACE_NAME] == DBNull.Value ? string.Empty : dr[WorkingFaceDbConstNames.WORKINGFACE_NAME].ToString();
@@ -268,7 +268,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="workingFaceId">工作面id</param>
         /// <returns>工作面实体</returns>
-        public WorkingFaceEntity getWorkingFaceById(int workingFaceId)
+        public WorkingFace getWorkingFaceById(int workingFaceId)
         {
             try
             {
@@ -286,9 +286,9 @@ namespace LibBusiness
         /// </summary>
         /// <param name="workingFaceName"></param>
         /// <returns></returns>
-        public WorkingFaceEntity getWorkingFaceByName(string workingFaceName)
+        public WorkingFace getWorkingFaceByName(string workingFaceName)
         {
-            foreach (WorkingFaceEntity entity in wfList.Values)
+            foreach (WorkingFace entity in wfList.Values)
             {
                 if (string.Equals(entity.WorkingFaceName, workingFaceName))
                     return entity;
@@ -383,7 +383,7 @@ namespace LibBusiness
         /// 根据巷道Id， 更新巷道信息
         /// </summary>
         /// <param name="tunnelId">巷道id</param>
-        public TunnelEntity refreshTunnelInfo(int tunnelId)
+        public Tunnel refreshTunnelInfo(int tunnelId)
         {
             if (-1 == tunnelId)
                 return null;
@@ -393,7 +393,7 @@ namespace LibBusiness
             if (ds.Tables[0].Rows.Count > 0)
             {
                 DataRow dr = ds.Tables[0].Rows[0];
-                TunnelEntity entity = getTunnelEntityByDataRow(dr);
+                Tunnel entity = getTunnelEntityByDataRow(dr);
                 return entity;
             }
 
@@ -405,7 +405,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="ds"></param>
         /// <returns></returns>
-        public List<TunnelEntity> getTunnelListByDataSet(DataSet ds)
+        public List<Tunnel> getTunnelListByDataSet(DataSet ds)
         {
             if (ds.Tables.Count == 0 || ds.Tables[0].Rows.Count <= 0)
             {
@@ -413,10 +413,10 @@ namespace LibBusiness
                 return null;
             }
 
-            List<TunnelEntity> lReturn = new List<TunnelEntity>();
+            List<Tunnel> lReturn = new List<Tunnel>();
             foreach (DataRow dr in ds.Tables[0].Rows)
             {
-                TunnelEntity entity = getTunnelEntityByDataRow(dr);
+                Tunnel entity = getTunnelEntityByDataRow(dr);
                 lReturn.Add(entity);
             }
 
@@ -428,7 +428,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="ds"></param>
         /// <returns></returns>
-        public HashSet<TunnelEntity> getTunnelSetByDataSet(DataSet ds)
+        public HashSet<Tunnel> getTunnelSetByDataSet(DataSet ds)
         {
             if (ds.Tables.Count == 0 || ds.Tables[0].Rows.Count <= 0)
             {
@@ -436,10 +436,10 @@ namespace LibBusiness
                 return null;
             }
 
-            HashSet<TunnelEntity> lReturn = new HashSet<TunnelEntity>();
+            HashSet<Tunnel> lReturn = new HashSet<Tunnel>();
             foreach (DataRow dr in ds.Tables[0].Rows)
             {
-                TunnelEntity entity = getTunnelEntityByDataRow(dr);
+                Tunnel entity = getTunnelEntityByDataRow(dr);
                 lReturn.Add(entity);
             }
 
@@ -451,9 +451,9 @@ namespace LibBusiness
         /// </summary>
         /// <param name="dr"></param>
         /// <returns></returns>
-        private TunnelEntity getTunnelEntityByDataRow(DataRow dr)
+        private Tunnel getTunnelEntityByDataRow(DataRow dr)
         {
-            TunnelEntity entity = new TunnelEntity();
+            Tunnel entity = new Tunnel();
             // 巷道id
             entity.TunnelID = Convert.ToInt32(dr[TunnelInfoDbConstNames.ID]);
             // 巷道名称
@@ -500,9 +500,9 @@ namespace LibBusiness
         /// </summary>
         /// <param name="tunnelId">巷道id</param>
         /// <returns>巷道实体</returns>
-        public TunnelEntity getTunnelByID(int tunnelId)
+        public Tunnel getTunnelByID(int tunnelId)
         {
-            TunnelEntity entity = null;
+            Tunnel entity = null;
 
             try
             {
@@ -563,7 +563,7 @@ namespace LibBusiness
                 return entity.TeamName;
         }
 
-        public List<TunnelEntity> getTunnelListByWorkingFaceId(int wfId)
+        public List<Tunnel> getTunnelListByWorkingFaceId(int wfId)
         {
             DataSet ds = TunnelInfoBLL.selectTunnelByWorkingFaceId(wfId);
             return getTunnelListByDataSet(ds);

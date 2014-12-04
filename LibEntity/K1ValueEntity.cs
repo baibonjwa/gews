@@ -6,121 +6,90 @@
 // 版本信息：
 // V1.0 新建
 // ******************************************************************
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace LibEntity
 {
     public class K1ValueEntity
     {
         //主键ID
-        private int iD;
+
+        private DateTime time;
+        private DateTime typeInTime;
+
         /// <summary>
-        /// 主键ID
+        ///     主键ID
         /// </summary>
-        public int ID
-        {
-            get { return iD; }
-            set { iD = value; }
-        }
+        public int ID { get; set; }
 
         //K1值分组ID
-        private int k1ValueID;
+
         /// <summary>
-        /// K1值分组ID
+        ///     K1值分组ID
         /// </summary>
-        public int K1ValueID
-        {
-            get { return k1ValueID; }
-            set { k1ValueID = value; }
-        }
+        public int K1ValueID { get; set; }
 
         //坐标X
-        private double coordinateX;
+
         /// <summary>
-        /// 坐标X
+        ///     坐标X
         /// </summary>
-        public double CoordinateX
-        {
-            get { return coordinateX; }
-            set { coordinateX = value; }
-        }
+        public double CoordinateX { get; set; }
 
         //坐标Y
-        private double coordinateY;
+
         /// <summary>
-        /// 坐标Y
+        ///     坐标Y
         /// </summary>
-        public double CoordinateY
-        {
-            get { return coordinateY; }
-            set { coordinateY = value; }
-        }
+        public double CoordinateY { get; set; }
 
         //坐标Z
-        private double coordinateZ;
+
         /// <summary>
-        /// 坐标Z
+        ///     坐标Z
         /// </summary>
-        public double CoordinateZ
-        {
-            get { return coordinateZ; }
-            set { coordinateZ = value; }
-        }
+        public double CoordinateZ { get; set; }
 
         //干煤K1值
-        private double valueK1Dry;
+
         /// <summary>
-        /// K1值
+        ///     K1值
         /// </summary>
-        public double ValueK1Dry
-        {
-            get { return valueK1Dry; }
-            set { valueK1Dry = value; }
-        }
+        public double ValueK1Dry { get; set; }
 
         //湿煤K1值
-        private double valueK1Wet;
-        /// <summary>
-        /// 湿煤K1值
-        /// </summary>
-        public double ValueK1Wet
-        {
-            get { return valueK1Wet; }
-            set { valueK1Wet = value; }
-        }
 
         /// <summary>
-        /// Sv值
+        ///     湿煤K1值
+        /// </summary>
+        public double ValueK1Wet { get; set; }
+
+        /// <summary>
+        ///     Sv值
         /// </summary>
         public double Sv { get; set; }
 
         /// <summary>
-        /// Sg值
+        ///     Sg值
         /// </summary>
         public double Sg { get; set; }
 
         /// <summary>
-        /// Q值
+        ///     Q值
         /// </summary>
         public double Q { get; set; }
 
 
-        private double boreholeDeep;
         /// <summary>
-        /// 孔深
+        ///     孔深
         /// </summary>
-        public double BoreholeDeep
-        {
-            get { return boreholeDeep; }
-            set { boreholeDeep = value; }
-        }
+        public double BoreholeDeep { get; set; }
+
         //记录时间
-        private DateTime time;
+
         /// <summary>
-        /// 记录时间
+        ///     记录时间
         /// </summary>
         public DateTime Time
         {
@@ -129,9 +98,9 @@ namespace LibEntity
         }
 
         //录入时间
-        private DateTime typeInTime;
+
         /// <summary>
-        /// 录入时间
+        ///     录入时间
         /// </summary>
         public DateTime TypeInTime
         {
@@ -140,14 +109,10 @@ namespace LibEntity
         }
 
         //绑定巷道ID
-        private int tunnelID;
+
         /// <summary>
-        /// 绑定巷道ID
+        ///     绑定巷道ID
         /// </summary>
-        public int TunnelID
-        {
-            get { return tunnelID; }
-            set { tunnelID = value; }
-        }
+        public int TunnelID { get; set; }
     }
 }

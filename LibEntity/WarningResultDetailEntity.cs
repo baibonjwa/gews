@@ -1,146 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace LibEntity
+﻿namespace LibEntity
 {
     public class WarningResultDetailEntity
     {
         // 应当对应数T_EARLY_WARNING_DETAIL据库表中的主键ID
-        private string _sId;
-        public string Id
-        {
-            get { return this._sId; }
-            set { this._sId = value; }
-        }
+        public string Id { get; set; }
 
-        private string _sWarningId;
-        public string WarningId
-        {
-            get { return this._sWarningId; }
-            set { this._sWarningId = value; }
-        }
+        public string WarningId { get; set; }
 
-        private string _sHandleStatus;
-        public string HandleStatus
-        {
-            get { return this._sHandleStatus; }
-            set { this._sHandleStatus = value; }
-        }
+        public string HandleStatus { get; set; }
 
-        private string _sDateTime;
-        public string DateTime
-        {
-            get { return this._sDateTime; }
-            set { this._sDateTime = value; }
-        }
+        public string DateTime { get; set; }
 
-        private string _sWarningType;
-        public string WarningType
-        {
-            get { return this._sWarningType; }
-            set { this._sWarningType = value; }
-        }
+        public string WarningType { get; set; }
 
-        private string _sWarningLevel;
-        public string WarningLevel
-        {
-            get { return this._sWarningLevel; }
-            set { this._sWarningLevel = value; }
-        }
+        public string WarningLevel { get; set; }
 
-        private string _sRuleCode;
-        public string RuleCode
-        {
-            get { return this._sRuleCode; }
-            set { this._sRuleCode = value; }
-        }
+        public string RuleCode { get; set; }
 
         // 规则类型：瓦斯，地质构造，管理因素，煤层赋存，通风，其他
-        private string _sRuleType;
-        public string RuleType
-        {
-            get { return this._sRuleType; }
-            set { this._sRuleType = value; }
-        }
+        public string RuleType { get; set; }
 
-        private string _sRuleDescription;
-        public string RuleDescription
-        {
-            get { return this._sRuleDescription; }
-            set { this._sRuleDescription = value; }
-        }
+        public string RuleDescription { get; set; }
 
-        private string _sThreshold;
-        public string Threshold
-        {
-            get { return this._sThreshold; }
-            set { this._sThreshold = value; }
-        }
+        public string Threshold { get; set; }
 
-        private string _sActualValue;
-        public string ActualValue
-        {
-            get { return this._sActualValue; }
-            set { this._sActualValue = value; }
-        }
+        public string ActualValue { get; set; }
 
-        private string _sActions;  // 措施
-        public string Actions
-        {
-            get { return this._sActions; }
-            set { this._sActions = value; }
-        }
+        public string Actions { get; set; }
 
-        private string _sActionsPerson;  // 措施录入人
-        public string ActionsPerson
-        {
-            get { return this._sActionsPerson; }
-            set { this._sActionsPerson = value; }
-        }
+        public string ActionsPerson { get; set; }
 
-        private string _sActionsDateTime; // 措施录入日期
-        public string ActionsDateTime
-        {
-            get { return this._sActionsDateTime; }
-            set { this._sActionsDateTime = value; }
-        }
+        public string ActionsDateTime { get; set; }
 
-        private string _sComments;  // 措施评价
-        public string Comments
-        {
-            get { return this._sComments; }
-            set { this._sComments = value; }
-        }
+        public string Comments { get; set; }
 
-        private string _sCommentsPerson;  // 评价人
-        public string CommentsPerson
-        {
-            get { return this._sCommentsPerson; }
-            set { this._sCommentsPerson = value; }
-        }
+        public string CommentsPerson { get; set; }
 
-        private string _sCommentsDateTime;  // 评价日期
-        public string CommentsDateTime
-        {
-            get { return this._sCommentsDateTime; }
-            set { this._sCommentsDateTime = value; }
-        }
+        public string CommentsDateTime { get; set; }
 
-        private string _sLiftPerson;  // 预警解除人
-        public string LiftPerson
-        {
-            get { return this._sLiftPerson; }
-            set { this._sLiftPerson = value; }
-        }
+        public string LiftPerson { get; set; }
 
-        private string _sLiftDateTIme; // 预警解除日期
-        public string LiftDateTime
-        {
-            get { return this._sLiftDateTIme; }
-            set { this._sLiftDateTIme = value; }
-        }
+        public string LiftDateTime { get; set; }
 
         public string RuleId { get; set; }
 

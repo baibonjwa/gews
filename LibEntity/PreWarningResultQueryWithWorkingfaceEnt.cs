@@ -6,24 +6,27 @@
 // 版本信息:
 // V1.0 新建
 // ******************************************************************
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using LibCommon;
 
 namespace LibEntity
 {
-
     public class PreWarningResultQueryWithWorkingfaceEnt
     {
+        private string _strDateShift = "";
+        private string _strDateTime = "";
+        private WarningResultEnt _strOutBrustWarningResult = new WarningResultEnt();
+        private WarningResultEnt _strOverLimitWarningResult = new WarningResultEnt();
+        private int _workingfaceID = Const.INVALID_ID;
+
         /// <summary>
-        /// 工作面名称
+        ///     工作面名称
         /// </summary>
         public string WorkingfaceName { get; set; }
 
-        private int _workingfaceID = LibCommon.Const.INVALID_ID;
         /// <summary>
-        /// 工作面ID
+        ///     工作面ID
         /// </summary>
         public int WorkingfaceID
         {
@@ -32,19 +35,18 @@ namespace LibEntity
         }
 
         /// <summary>
-        /// 巷道ID
+        ///     巷道ID
         /// </summary>
         public int TunnelId { get; set; }
 
         /// <summary>
-        /// 巷道名称
+        ///     巷道名称
         /// </summary>
         public String TunnelName { get; set; }
 
 
-        private string _strDateShift = "";
         /// <summary>
-        /// 班次
+        ///     班次
         /// </summary>
         public string Date_Shift
         {
@@ -52,9 +54,8 @@ namespace LibEntity
             set { _strDateShift = value; }
         }
 
-        private string _strDateTime = "";
         /// <summary>
-        /// 日期
+        ///     日期
         /// </summary>
         public string DateTime
         {
@@ -62,9 +63,8 @@ namespace LibEntity
             set { _strDateTime = value; }
         }
 
-        private WarningResultEnt _strOverLimitWarningResult = new WarningResultEnt();
         /// <summary>
-        /// 超限预警
+        ///     超限预警
         /// </summary>
         public WarningResultEnt OverLimitWarningResult
         {
@@ -72,9 +72,8 @@ namespace LibEntity
             set { _strOverLimitWarningResult = value; }
         }
 
-        private WarningResultEnt _strOutBrustWarningResult = new WarningResultEnt();
         /// <summary>
-        /// 突出预警
+        ///     突出预警
         /// </summary>
         public WarningResultEnt OutBrustWarningResult
         {

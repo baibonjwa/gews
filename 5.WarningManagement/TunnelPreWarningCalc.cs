@@ -63,7 +63,7 @@ namespace _5.WarningManagement
             //_table.UpdateTableContents(tblEnt, tunnelID);
         }
 
-        TunnelEntity tunnelEntity = new TunnelEntity();
+        Tunnel tunnelEntity = new Tunnel();
 
         private void cboMineName_SelectedIndexChanged(object sender, EventArgs e)
         {

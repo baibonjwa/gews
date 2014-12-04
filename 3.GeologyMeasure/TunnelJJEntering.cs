@@ -28,9 +28,9 @@ namespace _3.GeologyMeasure
     {
         /************变量定义*****************/
         // 掘进面
-        WorkingFaceEntity jjWorkFaceEntity = null;
+        WorkingFace jjWorkFaceEntity = null;
         // 巷道
-        TunnelEntity tunnelEntity = null;
+        Tunnel tunnelEntity = null;
         /*************************************/
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace _3.GeologyMeasure
         /// 构造方法
         /// </summary>
         /// <param name="tunnelJJEntity">掘进巷道实体</param>
-        public TunnelJJEntering(WorkingFaceEntity wfEntity, TunnelEntity tunnelEntity, MainFrm mainFrm)
+        public TunnelJJEntering(WorkingFace wfEntity, Tunnel tunnelEntity, MainFrm mainFrm)
         {
             this.MainForm = mainFrm;
 

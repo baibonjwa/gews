@@ -6,18 +6,19 @@
 // 版本信息:
 // V1.0 新建
 // ******************************************************************
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace LibEntity
 {
     public class PreWarningHistoryResultEnt : PreWarningResultQueryEnt
     {
+        private string _coal = "";
         private string _gas = "";
+        private string _geology = "";
+        private string _management = "";
+        private string _ventilation = "";
+
         /// <summary>
-        /// 瓦斯
+        ///     瓦斯
         /// </summary>
         public string Gas
         {
@@ -25,9 +26,8 @@ namespace LibEntity
             set { _gas = value; }
         }
 
-        private string _coal = "";
         /// <summary>
-        /// 煤层
+        ///     煤层
         /// </summary>
         public string Coal
         {
@@ -35,9 +35,8 @@ namespace LibEntity
             set { _coal = value; }
         }
 
-        private string _geology = "";
         /// <summary>
-        /// 地质
+        ///     地质
         /// </summary>
         public string Geology
         {
@@ -45,9 +44,8 @@ namespace LibEntity
             set { _geology = value; }
         }
 
-        private string _ventilation = "";
         /// <summary>
-        /// 通风
+        ///     通风
         /// </summary>
         public string Ventilation
         {
@@ -55,23 +53,26 @@ namespace LibEntity
             set { _ventilation = value; }
         }
 
-        private string _management = "";
         /// <summary>
-        /// 管理
+        ///     管理
         /// </summary>
         public string Management
         {
             get { return _management; }
             set { _management = value; }
         }
-
     }
 
     public class PreWarningHistoryResultWithWorkingfaceEnt : PreWarningResultQueryWithWorkingfaceEnt
     {
+        private string _coal = "";
         private string _gas = "";
+        private string _geology = "";
+        private string _management = "";
+        private string _ventilation = "";
+
         /// <summary>
-        /// 瓦斯
+        ///     瓦斯
         /// </summary>
         public string Gas
         {
@@ -79,9 +80,8 @@ namespace LibEntity
             set { _gas = value; }
         }
 
-        private string _coal = "";
         /// <summary>
-        /// 煤层
+        ///     煤层
         /// </summary>
         public string Coal
         {
@@ -89,9 +89,8 @@ namespace LibEntity
             set { _coal = value; }
         }
 
-        private string _geology = "";
         /// <summary>
-        /// 地质
+        ///     地质
         /// </summary>
         public string Geology
         {
@@ -99,9 +98,8 @@ namespace LibEntity
             set { _geology = value; }
         }
 
-        private string _ventilation = "";
         /// <summary>
-        /// 通风
+        ///     通风
         /// </summary>
         public string Ventilation
         {
@@ -109,16 +107,13 @@ namespace LibEntity
             set { _ventilation = value; }
         }
 
-        private string _management = "";
         /// <summary>
-        /// 管理
+        ///     管理
         /// </summary>
         public string Management
         {
             get { return _management; }
             set { _management = value; }
         }
-
     }
-
 }

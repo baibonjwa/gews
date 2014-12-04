@@ -52,7 +52,7 @@ namespace _1.GasEmission
             //为了使用上个窗体的坏数据点阈值变量
             mainWin = (MainFormGe)mainFrm;
             //分配用户权限
-            if (CurrentUserEnt._curLoginUserInfo.Permission != Permission.管理员.ToString())
+            if (CurrentUserEnt.CurLoginUserInfo.Permission != Permission.管理员.ToString())
             {
                 //btnAdd.Visible = false;
                 //btnUpdate.Visible = false;

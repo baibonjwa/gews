@@ -46,7 +46,7 @@ namespace _1.GasEmission
             InitializeComponent();
 
             //分配用户权限
-            if (CurrentUserEnt._curLoginUserInfo.Permission != Permission.管理员.ToString())
+            if (CurrentUserEnt.CurLoginUserInfo.Permission != Permission.管理员.ToString())
             {
                 btnAdd.Visible = false;
                 btnUpdate.Visible = false;
@@ -209,7 +209,7 @@ namespace _1.GasEmission
                     int iTunnelID = 0;
                     if (int.TryParse(ds.Tables[0].Rows[i][GasGushQuantityDbConstNames.TUNNEL_ID].ToString(), out iTunnelID))
                     {
-                        TunnelEntity tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(iTunnelID);
+                        Tunnel tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(iTunnelID);
                         if (tunnelEntity != null)
                         {
                             // 矿井名称

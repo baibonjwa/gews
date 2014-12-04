@@ -38,7 +38,7 @@ namespace LibPanels
         DataSet ds = new DataSet();
         public static MineDataEntity mdEntity = new MineDataEntity();
         public static ManagementEntity mEntity = new ManagementEntity();
-        public static TunnelEntity te = new TunnelEntity();
+        public static Tunnel te = new Tunnel();
         //***********************************
 
         /// <summary>
@@ -251,7 +251,7 @@ namespace LibPanels
                     //绑定巷道ID
                     if (int.TryParse(ds.Tables[0].Rows[i][ManagementDbConstNames.TUNNEL_ID].ToString(), out tmpInt))
                     {
-                        mEntity.TunnelID = tmpInt;
+                        mEntity.Tunnel.TunnelID = tmpInt;
                         tmpInt = 0;
                     }
                     //坐标X

@@ -26,7 +26,7 @@ namespace _4.OutburstPrevention
         /*******************************/
         SValueEntity _sValueEntity = new SValueEntity();
         SValueEntity[] sEntitys;
-        TunnelEntity tunnelEntity = new TunnelEntity();
+        Tunnel tunnelEntity = new Tunnel();
         //巷道控件用数组
         int[] arr = new int[5];
         /** K1Value分组数 **/

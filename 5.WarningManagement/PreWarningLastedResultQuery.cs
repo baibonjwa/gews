@@ -206,7 +206,7 @@ namespace _5.WarningManagement
             //计算时间
             cells[1, 5].Value = strTime;
             //管理员
-            cells[1, 1].Value = CurrentUserEnt._curLoginUserInfo.LoginName;
+            cells[1, 1].Value = CurrentUserEnt.CurLoginUserInfo.LoginName;
             cells[1, 1].Locked = false;
             //添加计算机名称
             //this._fpPreWaringLastedValue.ActiveSheet.Cells[1, 6].Value = GetComputerName();

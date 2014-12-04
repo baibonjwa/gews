@@ -307,7 +307,7 @@ namespace LibPanels
                     //绑定巷道ID
                     if (int.TryParse(ds.Tables[0].Rows[i][GasDataDbConstNames.TUNNEL_ID].ToString(), out tmpInt))
                     {
-                        gdEntity.TunnelID = tmpInt;
+                        gdEntity.Tunnel.TunnelID = tmpInt;
                         tmpInt = 0;
                     }
                     //坐标X

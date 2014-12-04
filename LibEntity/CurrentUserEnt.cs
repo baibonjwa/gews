@@ -17,6 +17,6 @@ namespace LibEntity
     public static class CurrentUserEnt
     {
         //当前登录的用户信息
-        static public UserLoginInformationEnt _curLoginUserInfo = new UserLoginInformationEnt(Permission.普通用户.ToString());        
+        static public UserLoginInformationEnt CurLoginUserInfo = new UserLoginInformationEnt(Permission.普通用户.ToString());        
     }
 }

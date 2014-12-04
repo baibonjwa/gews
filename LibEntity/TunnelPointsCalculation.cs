@@ -4,20 +4,18 @@
 // 创建日期：2013/12/24
 // 版本号：1.0
 // ******************************************************************
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using LibGeometry;
 
+using System.Collections.Generic;
+using LibGeometry;
 
 namespace LibEntity
 {
     public class TunnelPointsCalculation
     {
         #region Functions
+
         /// <summary>
-        /// 计算仅含两个导线点的巷道的左右邦点
+        ///     计算仅含两个导线点的巷道的左右邦点
         /// </summary>
         /// <param name="wirePts"></param>
         /// <param name="verticesLeftRet"></param>
@@ -25,7 +23,8 @@ namespace LibEntity
         /// <param name="leftDirRet">计算左邦的方向</param>
         /// <param name="rightDirRet">计算右邦的方向</param>
         /// <returns></returns>
-        private bool CalcLeftAndRightVerticsWith2TraverPoints(WirePointInfoEntity[] wirePts, ref Vector3_DW[] verticesLeftRet, ref Vector3_DW[] verticesRightRet)
+        private bool CalcLeftAndRightVerticsWith2TraverPoints(WirePointInfoEntity[] wirePts,
+            ref Vector3_DW[] verticesLeftRet, ref Vector3_DW[] verticesRightRet)
         {
             if (wirePts == null)
             {
@@ -41,8 +40,8 @@ namespace LibEntity
             //仅含两个导线点
             if (nTraversePtCnt == 2)
             {
-                Vector2_DW ptPre = new Vector2_DW(wirePts[0].CoordinateX, wirePts[0].CoordinateY);
-                Vector2_DW ptNext = new Vector2_DW(wirePts[1].CoordinateX, wirePts[1].CoordinateY);
+                var ptPre = new Vector2_DW(wirePts[0].CoordinateX, wirePts[0].CoordinateY);
+                var ptNext = new Vector2_DW(wirePts[1].CoordinateX, wirePts[1].CoordinateY);
 
                 Vector2_DW vecForwardDir = (ptNext - ptPre).Normalize();
                 /*根据法线方向判断巷道左右邦. 
@@ -54,9 +53,10 @@ namespace LibEntity
                  *叉积 aXb=|a|*|b|*sin(w)=(x1*z2-z1*y2)x^+(z1*x2-z1*y2)y^+(x1*y2-y1*x2)z^(右手螺旋定则)=0 -->二维的表示平行四边形的面积
                  *混合积 (aXb)●c = |aXb|*|c|*cos(aXb,c) -->平行六面体的体积
                  */
-                Vector2_DW vecPerpendicularLeft = new Vector2_DW(vecForwardDir.Y, -vecForwardDir.X);
+                var vecPerpendicularLeft = new Vector2_DW(vecForwardDir.Y, -vecForwardDir.X);
                 Vector2_DW vecPerpendicularRight = -vecPerpendicularLeft;
-                Vector3_DW vecNormal = Vector3_DW.Cross(new Vector3_DW(vecForwardDir.X, vecForwardDir.Y, 0), new Vector3_DW(vecPerpendicularLeft.X, vecPerpendicularLeft.Y, 0));
+                Vector3_DW vecNormal = Vector3_DW.Cross(new Vector3_DW(vecForwardDir.X, vecForwardDir.Y, 0),
+                    new Vector3_DW(vecPerpendicularLeft.X, vecPerpendicularLeft.Y, 0));
                 if (vecNormal.Z < 0)
                 {
                     Vector2_DW vecSwap = vecPerpendicularLeft;
@@ -64,13 +64,13 @@ namespace LibEntity
                     vecPerpendicularRight = vecSwap;
                 }
 
-                List<Vector3_DW> leftVertices = new List<Vector3_DW>();
-                List<Vector3_DW> rightVertices = new List<Vector3_DW>();
+                var leftVertices = new List<Vector3_DW>();
+                var rightVertices = new List<Vector3_DW>();
 
-                Vector2_DW ptLeftPre = ptPre + vecPerpendicularLeft * wirePts[0].LeftDis;
-                Vector2_DW ptLeftNext = ptNext + vecPerpendicularLeft * wirePts[1].LeftDis;
-                Vector2_DW ptRightPre = ptPre + vecPerpendicularRight * wirePts[0].RightDis;
-                Vector2_DW ptRightNext = ptNext + vecPerpendicularRight * wirePts[1].RightDis;
+                Vector2_DW ptLeftPre = ptPre + vecPerpendicularLeft*wirePts[0].LeftDis;
+                Vector2_DW ptLeftNext = ptNext + vecPerpendicularLeft*wirePts[1].LeftDis;
+                Vector2_DW ptRightPre = ptPre + vecPerpendicularRight*wirePts[0].RightDis;
+                Vector2_DW ptRightNext = ptNext + vecPerpendicularRight*wirePts[1].RightDis;
 
                 leftVertices.Add(new Vector3_DW(ptLeftPre.X, ptLeftPre.Y, wirePts[0].CoordinateZ));
                 leftVertices.Add(new Vector3_DW(ptLeftNext.X, ptLeftNext.Y, wirePts[1].CoordinateZ));
@@ -84,14 +84,15 @@ namespace LibEntity
         }
 
         /// <summary>
-        /// 根据导线点计算巷道左右帮的点
-        /// 前后两个导线点坐标一样的情况未处理，传入的导线点数据需要保证不重复.
+        ///     根据导线点计算巷道左右帮的点
+        ///     前后两个导线点坐标一样的情况未处理，传入的导线点数据需要保证不重复.
         /// </summary>
         /// <param name="wirePts">导线点实体</param>
         /// <param name="verticesLeftBtmRet">out，根据导线点计算出的巷道左帮所有点</param>
         /// <param name="verticesRightBtmRet">out，根据导线点计算出的巷道右帮所有点</param>
         /// <returns></returns>
-        public bool CalcLeftAndRightVertics(WirePointInfoEntity[] wirePts, ref Vector3_DW[] verticesLeftBtmRet, ref Vector3_DW[] verticesRightBtmRet)
+        public bool CalcLeftAndRightVertics(WirePointInfoEntity[] wirePts, ref Vector3_DW[] verticesLeftBtmRet,
+            ref Vector3_DW[] verticesRightBtmRet)
         {
             if (wirePts == null)
             {
@@ -105,55 +106,66 @@ namespace LibEntity
             }
 
             #region 仅含两个导线点
+
             if (nTraversePtCnt == 2)
             {
-                bool bRet = CalcLeftAndRightVerticsWith2TraverPoints(wirePts, ref verticesLeftBtmRet, ref verticesRightBtmRet);
+                bool bRet = CalcLeftAndRightVerticsWith2TraverPoints(wirePts, ref verticesLeftBtmRet,
+                    ref verticesRightBtmRet);
                 if (bRet == false)
                 {
                     return false;
                 }
             }
-            #endregion
-            #region 大于等于三个点
+                #endregion
+                #region 大于等于三个点
+
             else
             {
-                List<Vector3_DW> lstLeftBtmVertices = new List<Vector3_DW>();
-                List<Vector3_DW> lstRightBtmVertices = new List<Vector3_DW>();
+                var lstLeftBtmVertices = new List<Vector3_DW>();
+                var lstRightBtmVertices = new List<Vector3_DW>();
 
                 #region For loop
+
                 for (int i = 0; i < nTraversePtCnt - 2; i++)
                 {
-                    WirePointInfoEntity[] lwDatasPreTmp = new WirePointInfoEntity[2]
+                    var lwDatasPreTmp = new WirePointInfoEntity[2]
                     {
                         new WirePointInfoEntity(wirePts[i]),
-                        new WirePointInfoEntity(wirePts[i+1])
+                        new WirePointInfoEntity(wirePts[i + 1])
                     };
-                       
-                    WirePointInfoEntity[] lwDatasNextTmp = new WirePointInfoEntity[2]
+
+                    var lwDatasNextTmp = new WirePointInfoEntity[2]
                     {
-                        new WirePointInfoEntity(wirePts[i+1]),
-                        new WirePointInfoEntity(wirePts[i+2])
+                        new WirePointInfoEntity(wirePts[i + 1]),
+                        new WirePointInfoEntity(wirePts[i + 2])
                     };
 
                     Vector3_DW[] verticesLeftPreTmp = null;
                     Vector3_DW[] verticesRightPreTmp = null;
-                    if (false == CalcLeftAndRightVerticsWith2TraverPoints(lwDatasPreTmp, ref verticesLeftPreTmp, ref verticesRightPreTmp))
+                    if (false ==
+                        CalcLeftAndRightVerticsWith2TraverPoints(lwDatasPreTmp, ref verticesLeftPreTmp,
+                            ref verticesRightPreTmp))
                     {
                         return false;
                     }
                     Vector3_DW[] verticesLeftNextTmp = null;
                     Vector3_DW[] verticesRightNextTmp = null;
-                    if (false == CalcLeftAndRightVerticsWith2TraverPoints(lwDatasNextTmp, ref verticesLeftNextTmp, ref verticesRightNextTmp))
+                    if (false ==
+                        CalcLeftAndRightVerticsWith2TraverPoints(lwDatasNextTmp, ref verticesLeftNextTmp,
+                            ref verticesRightNextTmp))
                     {
                         return false;
                     }
-                    Vector2_DW vertexMid2d = new Vector2_DW();
-                    Vector3_DW vertexLeftMid = new Vector3_DW();
-                    Vector3_DW vertexRightMid = new Vector3_DW();
+                    var vertexMid2d = new Vector2_DW();
+                    var vertexLeftMid = new Vector3_DW();
+                    var vertexRightMid = new Vector3_DW();
                     //左邦中间的点
-                    LineIntersectType lit = ToolsMath_DW.LineXLine(new Vector2_DW(verticesLeftPreTmp[0].X, verticesLeftPreTmp[0].Y), new Vector2_DW(verticesLeftPreTmp[1].X, verticesLeftPreTmp[1].Y),
-                        new Vector2_DW(verticesLeftNextTmp[0].X, verticesLeftNextTmp[0].Y), new Vector2_DW(verticesLeftNextTmp[1].X, verticesLeftNextTmp[1].Y), ref  vertexMid2d);
-                    if (lit == LineIntersectType.None)//有重复点,可能是这种情况eg:p0(0, 0), p1(2, 0),p2(1, 0), p3(4, 0)
+                    LineIntersectType lit =
+                        ToolsMath_DW.LineXLine(new Vector2_DW(verticesLeftPreTmp[0].X, verticesLeftPreTmp[0].Y),
+                            new Vector2_DW(verticesLeftPreTmp[1].X, verticesLeftPreTmp[1].Y),
+                            new Vector2_DW(verticesLeftNextTmp[0].X, verticesLeftNextTmp[0].Y),
+                            new Vector2_DW(verticesLeftNextTmp[1].X, verticesLeftNextTmp[1].Y), ref vertexMid2d);
+                    if (lit == LineIntersectType.None) //有重复点,可能是这种情况eg:p0(0, 0), p1(2, 0),p2(1, 0), p3(4, 0)
                     {
                         vertexLeftMid.X = verticesLeftPreTmp[1].X;
                         vertexLeftMid.Y = verticesLeftPreTmp[1].Y;
@@ -166,9 +178,11 @@ namespace LibEntity
                         vertexLeftMid.Z = lwDatasPreTmp[1].CoordinateZ;
                     }
                     //右邦中间的点
-                    lit = ToolsMath_DW.LineXLine(new Vector2_DW(verticesRightPreTmp[0].X, verticesRightPreTmp[0].Y), new Vector2_DW(verticesRightPreTmp[1].X, verticesRightPreTmp[1].Y),
-                        new Vector2_DW(verticesRightNextTmp[0].X, verticesRightNextTmp[0].Y), new Vector2_DW(verticesRightNextTmp[1].X, verticesRightNextTmp[1].Y), ref  vertexMid2d);
-                    if (lit == LineIntersectType.None)//有重复点,可能是这种情况eg:p0(0, 0), p1(2, 0),p2(1, 0), p3(4, 0)
+                    lit = ToolsMath_DW.LineXLine(new Vector2_DW(verticesRightPreTmp[0].X, verticesRightPreTmp[0].Y),
+                        new Vector2_DW(verticesRightPreTmp[1].X, verticesRightPreTmp[1].Y),
+                        new Vector2_DW(verticesRightNextTmp[0].X, verticesRightNextTmp[0].Y),
+                        new Vector2_DW(verticesRightNextTmp[1].X, verticesRightNextTmp[1].Y), ref vertexMid2d);
+                    if (lit == LineIntersectType.None) //有重复点,可能是这种情况eg:p0(0, 0), p1(2, 0),p2(1, 0), p3(4, 0)
                     {
                         vertexRightMid.X = verticesRightPreTmp[1].X;
                         vertexRightMid.Y = verticesRightPreTmp[1].Y;
@@ -196,12 +210,14 @@ namespace LibEntity
                         lstLeftBtmVertices.Add(verticesLeftNextTmp[1]);
                         lstRightBtmVertices.Add(verticesRightNextTmp[1]);
                     }
-                }//end for 
+                } //end for 
+
                 #endregion
 
                 verticesLeftBtmRet = lstLeftBtmVertices.ToArray();
                 verticesRightBtmRet = lstRightBtmVertices.ToArray();
             }
+
             #endregion
 
             return true;

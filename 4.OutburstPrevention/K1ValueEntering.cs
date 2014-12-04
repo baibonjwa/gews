@@ -33,7 +33,7 @@ namespace _4.OutburstPrevention
         #region ******各种变量定义******
         K1ValueEntity _k1ValueEntity = new K1ValueEntity();
         K1ValueEntity[] k1Entitys;
-        TunnelEntity tunnelEntity = new TunnelEntity();
+        Tunnel tunnelEntity = new Tunnel();
         //巷道控件用数组
         int[] arr = new int[5];
         /// <summary>
@@ -72,7 +72,7 @@ namespace _4.OutburstPrevention
 
         private void BindCoordinate(object sender, TunnelEventArgs e)
         {
-            TunnelEntity tunnel = BasicInfoManager.getInstance().getTunnelByID(selectTunnelSimple1.ITunnelId);
+            Tunnel tunnel = BasicInfoManager.getInstance().getTunnelByID(selectTunnelSimple1.ITunnelId);
             tbCoordinateX.Text = tunnel.WorkingFace.Coordinate.X.ToString(CultureInfo.InvariantCulture);
             tbCoordinateY.Text = tunnel.WorkingFace.Coordinate.Y.ToString(CultureInfo.InvariantCulture);
             tbCoordinateZ.Text = tunnel.WorkingFace.Coordinate.Z.ToString(CultureInfo.InvariantCulture);
@@ -176,7 +176,7 @@ namespace _4.OutburstPrevention
                 {
                     dgrdvK1Value.Rows[i].Selected = true;
                 }
-                TunnelEntity tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(k1Entitys[i].TunnelID); // TunnelInfoBLL.selectTunnelInfoByTunnelID(iTunnelID);
+                Tunnel tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(k1Entitys[i].TunnelID); // TunnelInfoBLL.selectTunnelInfoByTunnelID(iTunnelID);
                 TunnelSimple ts = new TunnelSimple(tunnelEntity.TunnelID, tunnelEntity.TunnelName);
                 selectTunnelSimple1.SelectTunnelItemWithoutHistory(ts);
 

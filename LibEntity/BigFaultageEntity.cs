@@ -4,86 +4,52 @@
 // 创建日期：2013/11/30
 // 版本号：1.0
 // ******************************************************************
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace LibEntity
 {
     public class BigFaultageEntity
     {
         /** 断层编号 **/
-        private int faultageId;
 
         /// <summary>
-        /// 断层编号
+        ///     断层编号
         /// </summary>
-        public int FaultageId
-        {
-            get { return faultageId; }
-            set { faultageId = value; }
-        }
+        public int FaultageId { get; set; }
 
         /** 断层名称 **/
-        private string faultageName;
 
         /// <summary>
-        /// 断层名称
+        ///     断层名称
         /// </summary>
-        public string FaultageName
-        {
-            get { return faultageName; }
-            set { faultageName = value; }
-        }
+        public string FaultageName { get; set; }
 
         /** 落差 **/
-        private String gap;
 
         /// <summary>
-        /// 落差
+        ///     落差
         /// </summary>
-        public String Gap
-        {
-            get { return gap; }
-            set { gap = value; }
-        }
+        public string Gap { get; set; }
 
         /** 倾角 **/
-        private string angle;
 
         /// <summary>
-        /// 倾角
+        ///     倾角
         /// </summary>
-        public string Angle
-        {
-            get { return angle; }
-            set { angle = value; }
-        }
+        public string Angle { get; set; }
 
         /** 类型 **/
-        private string type;
 
         /// <summary>
-        /// 类型
+        ///     类型
         /// </summary>
-        public string Type
-        {
-            get { return type; }
-            set { type = value; }
-        }
+        public string Type { get; set; }
 
         /** 走向 **/
-        private String trend;
 
         /// <summary>
-        /// 走向
+        ///     走向
         /// </summary>
-        public String Trend
-        {
-            get { return trend; }
-            set { trend = value; }
-        }
+        public string Trend { get; set; }
 
         /** 类型 **/
         //private string type;
@@ -113,7 +79,7 @@ namespace LibEntity
         //private string bindingId;
 
         /// <summary>
-        /// BID
+        ///     BID
         /// </summary>
         public string BindingId { get; set; }
     }

@@ -44,7 +44,7 @@ namespace UnderTerminal
                 //验证帐号密码是否正确
                 if (ents[i].LoginName == userName && ents[i].PassWord == password)
                 {
-                    CurrentUserEnt._curLoginUserInfo = ents[i];
+                    CurrentUserEnt.CurLoginUserInfo = ents[i];
                     //记录最后一次登录用户
                     StreamWriter sw = new StreamWriter(Application.StartupPath + "\\DefaultUser.txt", false);
                     sw.WriteLine(userName);

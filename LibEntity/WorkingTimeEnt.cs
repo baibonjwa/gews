@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace LibEntity
+﻿namespace LibEntity
 {
     /// <summary>
-    /// 工作时间类
+    ///     工作时间类
     /// </summary>
     public class WorkingTime
     {
+        private string _strWorkTimeFrom = "";
         private string _strWorkTimeName = "";
+        private string _strWorkTimeTo = "";
+
         /// <summary>
-        /// 获取设置工作制名称
+        ///     获取设置工作制名称
         /// </summary>
         public string WorkTimeName
         {
@@ -20,9 +18,8 @@ namespace LibEntity
             set { _strWorkTimeName = value; }
         }
 
-        private string _strWorkTimeFrom = "";
         /// <summary>
-        /// 获取设置工作起始时间
+        ///     获取设置工作起始时间
         /// </summary>
         public string WorkTimeFrom
         {
@@ -30,9 +27,8 @@ namespace LibEntity
             set { _strWorkTimeFrom = value; }
         }
 
-        private string _strWorkTimeTo = "";
         /// <summary>
-        /// 获取设置工作终止时间
+        ///     获取设置工作终止时间
         /// </summary>
         public string WorkTimeTo
         {

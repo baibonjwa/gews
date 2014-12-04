@@ -62,15 +62,15 @@ namespace LibBusiness
             return false;
         }
 
-        public static Dictionary<TunnelTypeEnum, TunnelEntity> getTunnelDict(WorkingFaceEntity wf)
+        public static Dictionary<TunnelTypeEnum, Tunnel> getTunnelDict(WorkingFace wf)
         {
-            Dictionary<TunnelTypeEnum, TunnelEntity> dReturn = new Dictionary<TunnelTypeEnum, TunnelEntity>();
+            Dictionary<TunnelTypeEnum, Tunnel> dReturn = new Dictionary<TunnelTypeEnum, Tunnel>();
             BasicInfoManager.getInstance().getTunnelListByWorkingFaceId(wf.WorkingFaceID);
             wf.tunnelSet = BasicInfoManager.getInstance().getTunnelSetByDataSet(TunnelInfoBLL.selectTunnelByWorkingFaceId(wf.WorkingFaceID));
 
             if (wf.tunnelSet != null)
             {
-                foreach (TunnelEntity entity in wf.tunnelSet)
+                foreach (Tunnel entity in wf.tunnelSet)
                 {
                     if (entity.TunnelType == TunnelTypeEnum.STOPING_ZY) //主运
                         dReturn.Add(TunnelTypeEnum.STOPING_ZY, entity);

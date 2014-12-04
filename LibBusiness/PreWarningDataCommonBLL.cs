@@ -23,11 +23,11 @@ namespace LibBusiness
         /// <returns></returns>
         public static string sqlFront()
         {
-            string sql = PreWarningDataDbConstNames.TUNNEL_ID + "," 
-                + PreWarningDataDbConstNames.COORDINATE_X + "," 
-                + PreWarningDataDbConstNames.COORDINATE_Y + "," 
-                + PreWarningDataDbConstNames.COORDINATE_Z + "," 
-                + PreWarningDataDbConstNames.WORK_STYLE + "," 
+            string sql = PreWarningDataDbConstNames.TUNNEL_ID + ","
+                + PreWarningDataDbConstNames.COORDINATE_X + ","
+                + PreWarningDataDbConstNames.COORDINATE_Y + ","
+                + PreWarningDataDbConstNames.COORDINATE_Z + ","
+                + PreWarningDataDbConstNames.WORK_STYLE + ","
                 + PreWarningDataDbConstNames.WORK_TIME + ","
                 + PreWarningDataDbConstNames.TEAM_NAME + ","
                 + PreWarningDataDbConstNames.SUBMITTER + ","
@@ -41,14 +41,14 @@ namespace LibBusiness
         /// <returns></returns>
         public static string sqlBack(MineDataEntity mdEntity)
         {
-            string sql = mdEntity.TunnelID + "," + 
-                mdEntity.CoordinateX + "," + 
-                mdEntity.CoordinateY + "," + 
-                mdEntity.CoordinateZ + ",'" + 
-                mdEntity.WorkStyle + "','" + 
+            string sql = mdEntity.Tunnel.TunnelID + "," +
+                mdEntity.CoordinateX + "," +
+                mdEntity.CoordinateY + "," +
+                mdEntity.CoordinateZ + ",'" +
+                mdEntity.WorkStyle + "','" +
                 mdEntity.WorkTime + "','" +
-                mdEntity.TeamName + "','" + 
-                mdEntity.Submitter + "','" + 
+                mdEntity.TeamName + "','" +
+                mdEntity.Submitter + "','" +
                 mdEntity.Datetime + "'";
             return sql;
 
@@ -60,7 +60,7 @@ namespace LibBusiness
         /// <returns></returns>
         public static string sqlUpdate(MineDataEntity mdEntity)
         {
-            string sql = PreWarningDataDbConstNames.TUNNEL_ID + "=" + mdEntity.TunnelID + "," +
+            string sql = PreWarningDataDbConstNames.TUNNEL_ID + "=" + mdEntity.Tunnel.TunnelID + "," +
                 PreWarningDataDbConstNames.COORDINATE_X + "=" + mdEntity.CoordinateX + "," +
                 PreWarningDataDbConstNames.COORDINATE_Y + "=" + mdEntity.CoordinateY + "," +
                 PreWarningDataDbConstNames.COORDINATE_Z + "=" + mdEntity.CoordinateZ + "," +

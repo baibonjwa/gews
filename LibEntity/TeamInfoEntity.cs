@@ -6,62 +6,37 @@
 // 版本信息：
 // V1.0 新建
 // ******************************************************************
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace LibEntity
 {
     public class TeamInfoEntity
     {
         // 队别ID
-        private int teamID;
 
         /// <summary>
-        /// 队别ID
+        ///     队别ID
         /// </summary>
-        public int TeamID
-        {
-            get { return teamID; }
-            set { teamID = value; }
-        }
+        public int TeamID { get; set; }
 
         // 队别名称
-        private string teamName;
 
         /// <summary>
-        /// 队别名称
+        ///     队别名称
         /// </summary>
-        public string TeamName
-        {
-            get { return teamName; }
-            set { teamName = value; }
-        }
+        public string TeamName { get; set; }
 
         // 队长姓名
-        private string teamLeader;
 
         /// <summary>
-        /// 队长姓名
+        ///     队长姓名
         /// </summary>
-        public string TeamLeader
-        {
-            get { return teamLeader; }
-            set { teamLeader = value; }
-        }
+        public string TeamLeader { get; set; }
 
         // 队员姓名
-        private string teamMember;
 
         /// <summary>
-        /// 队员姓名
+        ///     队员姓名
         /// </summary>
-        public string TeamMember
-        {
-            get { return teamMember; }
-            set { teamMember = value; }
-        }
-
+        public string TeamMember { get; set; }
     }
 }

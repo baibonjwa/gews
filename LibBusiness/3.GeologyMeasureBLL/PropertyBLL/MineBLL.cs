@@ -67,7 +67,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="mineEntity">矿井实体</param>
         /// <returns>成功与否：true，false</returns>
-        public static bool insertMineInfo(MineEntity mineEntity)
+        public static bool insertMineInfo(Mine mineEntity)
         {
             StringBuilder sqlStr = new StringBuilder();
             sqlStr.Append("INSERT INTO " + MineDbConstNames.TABLE_NAME);
@@ -87,7 +87,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="mineEntity">矿井实体</param>
         /// <returns>成功与否：true，false</returns>
-        public static bool updateMineInfo(MineEntity mineEntity)
+        public static bool updateMineInfo(Mine mineEntity)
         {
             StringBuilder sqlStr = new StringBuilder();
             sqlStr.Append("UPDATE " + MineDbConstNames.TABLE_NAME);

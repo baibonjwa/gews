@@ -33,7 +33,7 @@ namespace LibPanels
         DataSet ds = new DataSet();
         public static MineDataEntity mdEntity = new MineDataEntity();
         public static VentilationInfoEntity viEntity = new VentilationInfoEntity();
-        TunnelEntity tunnelEntity = new TunnelEntity();
+        Tunnel tunnelEntity = new Tunnel();
 
         //***********************************
 

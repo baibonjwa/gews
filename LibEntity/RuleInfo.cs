@@ -4,30 +4,32 @@
 // 创建日期：2013/12/23
 // 版本号：1.0
 // ******************************************************************
-using System;
-using System.Collections;
 
+using System.Collections;
 
 namespace LibEntity
 {
-   
     public class RuleInfo
     {
-        private int _ruleId;
+        private string _paramsInfoStr = "";
+        private string _ruleIdsStr = "";
 
-        public RuleInfo() { }
+        public RuleInfo()
+        {
+            PreWarningParams = null;
+        }
 
         /// <summary>
-        /// 构造方法
+        ///     构造方法
         /// </summary>
         /// <param name="ruleId">规则ID</param>
         public RuleInfo(int ruleId)
         {
-            _ruleId = ruleId;
+            PreWarningParams = null;
+            Id = ruleId;
         }
 
         //规则编码字符串
-        private string _ruleIdsStr = "";
 
         public string RuleCodesStr
         {
@@ -36,13 +38,9 @@ namespace LibEntity
         }
 
         /// <summary>
-        /// 规则ID
+        ///     规则ID
         /// </summary>
-        public int Id
-        {
-            get { return _ruleId; }
-            set { _ruleId = value; }
-        }
+        public int Id { get; set; }
 
         //////规则编码
         //private string _ruleCode;
@@ -54,16 +52,10 @@ namespace LibEntity
         //}
 
         //预警参数（用户自定义的）
-        private Hashtable _preWarningParams = null;
 
-        public Hashtable PreWarningParams
-        {
-            get { return _preWarningParams; }
-            set { _preWarningParams = value; }
-        }
+        public Hashtable PreWarningParams { get; set; }
 
         //所有规则编码对应的所有参数字符串
-        private string _paramsInfoStr = "";
 
         public string ParamsInfoStr
         {

@@ -6,122 +6,72 @@
 // 版本信息：
 // V1.0 新建
 // ******************************************************************
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace LibEntity
 {
     public class StopLineEntity
     {
         // 主键
-        private int iD;
 
         /// <summary>
-        /// 设置或获取主键
+        ///     设置或获取主键
         /// </summary>
-        public int ID
-        {
-            get { return iD; }
-            set { iD = value; }
-        }
+        public int ID { get; set; }
 
         // 停采线名称
-        private string stopLineName;
 
         /// <summary>
-        /// 设置或获取停采线名称
+        ///     设置或获取停采线名称
         /// </summary>
-        public string StopLineName
-        {
-            get { return stopLineName; }
-            set { stopLineName = value; }
-        }
+        public string StopLineName { get; set; }
 
         // 起点坐标X
-        private double sCoordinateX;
 
         /// <summary>
-        /// 设置或获取起点坐标X
+        ///     设置或获取起点坐标X
         /// </summary>
-        public double SCoordinateX
-        {
-            get { return sCoordinateX; }
-            set { sCoordinateX = value; }
-        }
+        public double SCoordinateX { get; set; }
 
         // 起点坐标Y
-        private double sCoordinateY;
 
         /// <summary>
-        /// 设置或获取起点坐标Y
+        ///     设置或获取起点坐标Y
         /// </summary>
-        public double SCoordinateY
-        {
-            get { return sCoordinateY; }
-            set { sCoordinateY = value; }
-        }
+        public double SCoordinateY { get; set; }
 
         // 起点坐标Z
-        private double sCoordinateZ;
 
         /// <summary>
-        /// 设置或获取起点坐标Z
+        ///     设置或获取起点坐标Z
         /// </summary>
-        public double SCoordinateZ
-        {
-            get { return sCoordinateZ; }
-            set { sCoordinateZ = value; }
-        }
+        public double SCoordinateZ { get; set; }
 
         // 终点坐标X
-        private double fCoordinateX;
 
         /// <summary>
-        /// 设置或获取终点坐标X
+        ///     设置或获取终点坐标X
         /// </summary>
-        public double FCoordinateX
-        {
-            get { return fCoordinateX; }
-            set { fCoordinateX = value; }
-        }
+        public double FCoordinateX { get; set; }
 
         // 终点坐标Y
-        private double fCoordinateY;
 
         /// <summary>
-        /// 设置或获取终点坐标Y
+        ///     设置或获取终点坐标Y
         /// </summary>
-        public double FCoordinateY
-        {
-            get { return fCoordinateY; }
-            set { fCoordinateY = value; }
-        }
+        public double FCoordinateY { get; set; }
 
         // 终点坐标Z
-        private double fCoordinateZ;
 
         /// <summary>
-        /// 设置或获取终点坐标Z
+        ///     设置或获取终点坐标Z
         /// </summary>
-        public double FCoordinateZ
-        {
-            get { return fCoordinateZ; }
-            set { fCoordinateZ = value; }
-        }
+        public double FCoordinateZ { get; set; }
 
         // BID
-        private string bindingID;
 
         /// <summary>
-        /// BID
+        ///     BID
         /// </summary>
-        public string BindingID
-        {
-            get { return bindingID; }
-            set { bindingID = value; }
-        }
-
+        public string BindingID { get; set; }
     }
 }

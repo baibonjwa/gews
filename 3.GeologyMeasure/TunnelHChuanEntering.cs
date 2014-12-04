@@ -27,7 +27,7 @@ namespace _3.GeologyMeasure
         /************变量定义*****************/
         TunnelHChuanEntity tunnelHChuanEntity = new TunnelHChuanEntity();
         TunnelHChuanEntity tmpTunnelHChuanEntity = new TunnelHChuanEntity();
-        TunnelEntity tunnelEntity = new TunnelEntity();
+        Tunnel tunnelEntity = new Tunnel();
         TunnelHChuanManagement frmStop;
         /*************************************/
 

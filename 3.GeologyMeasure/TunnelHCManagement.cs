@@ -37,7 +37,7 @@ namespace _3.GeologyMeasure
         int _tmpRowIndex = 0;
         //需要过滤的列索引
         private int[] _filterColunmIdxs = null;
-        WorkingFaceEntity tunnelHCEntity = new WorkingFaceEntity();
+        WorkingFace tunnelHCEntity = new WorkingFace();
         DataSet _ds = new DataSet();
         int tmpInt = 0;
 
@@ -157,13 +157,13 @@ namespace _3.GeologyMeasure
                 {
                     DataRow dr = _ds.Tables[0].Rows[i];
                     int workingFaceId = Convert.ToInt32(dr[WorkingFaceDbConstNames.WORKINGFACE_ID]);
-                    WorkingFaceEntity entity = BasicInfoManager.getInstance().getWorkingFaceById(workingFaceId);
+                    WorkingFace entity = BasicInfoManager.getInstance().getWorkingFaceById(workingFaceId);
 
                     entity.tunnelSet = BasicInfoManager.getInstance().getTunnelSetByDataSet(TunnelInfoBLL.selectTunnelByWorkingFaceId(entity.WorkingFaceID));
 
-                    TunnelEntity tunnelZY = null, tunnelFY = null, tunnelQY = null;
+                    Tunnel tunnelZY = null, tunnelFY = null, tunnelQY = null;
                     string otherTunnel = "";
-                    foreach (TunnelEntity tunnel in entity.tunnelSet)
+                    foreach (Tunnel tunnel in entity.tunnelSet)
                     {
                         if (tunnel.TunnelType == TunnelTypeEnum.STOPING_ZY)
                             tunnelZY = tunnel;//主运顺槽
@@ -361,12 +361,12 @@ namespace _3.GeologyMeasure
                 }
                 if (bResult)
                 {
-                    TunnelEntity tunnelZY = null;
-                    TunnelEntity tunnelFY = null;
-                    TunnelEntity tunnelQY = null;
+                    Tunnel tunnelZY = null;
+                    Tunnel tunnelFY = null;
+                    Tunnel tunnelQY = null;
 
-                    HashSet<TunnelEntity> tSet = tunnelHCEntity.tunnelSet;
-                    foreach (TunnelEntity entity in tSet)
+                    HashSet<Tunnel> tSet = tunnelHCEntity.tunnelSet;
+                    foreach (Tunnel entity in tSet)
                     {
                         if (entity.TunnelType == TunnelTypeEnum.STOPING_ZY) //主运
                             tunnelZY = entity;

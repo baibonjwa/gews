@@ -493,7 +493,7 @@ namespace _1.GasEmission
                 string id = dsProbeInfo.Tables[0].Rows[0][ProbeManageDbConstNames.TUNNEL_ID].ToString();
                 if (int.TryParse(dsProbeInfo.Tables[0].Rows[0][ProbeManageDbConstNames.TUNNEL_ID].ToString(), out iTunnelID))
                 {
-                    TunnelEntity tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(iTunnelID);
+                    Tunnel tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(iTunnelID);
                     if (tunnelEntity != null)
                     {
                         oldTunnelId = tunnelEntity.TunnelID;
