@@ -119,7 +119,7 @@ namespace UnderTerminal
             }
             this.DialogResult = DialogResult.OK;
 
-            tunnelEntity.TunnelID = this.tunnelId;
+            tunnelEntity.TunnelId = this.tunnelId;
             tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(tunnelId);
             //添加
             //if (this.Text == Const_OP.K1_VALUE_ADD)
@@ -213,7 +213,7 @@ namespace UnderTerminal
                 //录入时间
                 _k1ValueEntity.TypeInTime = dgrdvK1Value[7, i].Value != null ? Convert.ToDateTime(dgrdvK1Value[7, i].Value) : DateTime.Now;
                 //巷道ID
-                _k1ValueEntity.TunnelID = tunnelEntity.TunnelID;
+                _k1ValueEntity.TunnelID = tunnelEntity.TunnelId;
                 //添加
                 bResult = K1ValueBLL.insertValueK1(_k1ValueEntity);
                 if (bResult)

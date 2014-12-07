@@ -310,7 +310,7 @@ namespace LibPanels
                     //绑定巷道ID
                     if (int.TryParse(_ds.Tables[0].Rows[i][GasDataDbConstNames.TUNNEL_ID].ToString(), out tmpInt))
                     {
-                        geologicStructureEntity.Tunnel.TunnelID = tmpInt;
+                        geologicStructureEntity.Tunnel.TunnelId = tmpInt;
                         tmpInt = 0;
                     }
                     //坐标X

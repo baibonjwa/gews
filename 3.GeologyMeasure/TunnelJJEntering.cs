@@ -361,7 +361,7 @@ namespace _3.GeologyMeasure
             }
 
             //巷道是否选择
-            if (tunnelEntity.TunnelID == 0)
+            if (tunnelEntity.TunnelId == 0)
             {
                 Alert.alert(Const.MSG_PLEASE_CHOOSE + Const_GM.TUNNEL + Const.SIGN_EXCLAMATION_MARK);
                 return false;

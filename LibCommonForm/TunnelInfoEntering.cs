@@ -497,7 +497,7 @@ namespace LibCommonForm
 
             if (this.Text == Const_GM.TUNNEL_INFO_CHANGE)
             {
-                bindInfo(tunnelEntity.TunnelID);
+                bindInfo(tunnelEntity.TunnelId);
             }
 
 

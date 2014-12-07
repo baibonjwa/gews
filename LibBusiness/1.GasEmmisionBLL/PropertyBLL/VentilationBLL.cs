@@ -57,7 +57,7 @@ namespace LibBusiness
             if (ds.Tables[0].Rows.Count > 0)
             {
                 vEntity.Id = Convert.ToInt32(ds.Tables[0].Rows[0][VentilationDbConstNames.ID].ToString());
-                vEntity.Tunnel.TunnelID = Convert.ToInt32(ds.Tables[0].Rows[0][VentilationDbConstNames.TUNNEL_ID].ToString());
+                vEntity.Tunnel.TunnelId = Convert.ToInt32(ds.Tables[0].Rows[0][VentilationDbConstNames.TUNNEL_ID].ToString());
                 string str = ds.Tables[0].Rows[0][VentilationDbConstNames.FAULTAGE_AREA].ToString();
                 vEntity.CoordinateX = Convert.ToDouble(ds.Tables[0].Rows[0][VentilationDbConstNames.COORDINATE_X].ToString());
                 vEntity.CoordinateY = Convert.ToDouble(ds.Tables[0].Rows[0][VentilationDbConstNames.COORDINATE_Y].ToString());
@@ -154,7 +154,7 @@ namespace LibBusiness
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GasEmissionDB);
             StringBuilder sb = new StringBuilder();
             sb.Append("UPDATE " + VentilationDbConstNames.TABLE_NAME + " SET " + VentilationDbConstNames.TUNNEL_ID + "=");
-            sb.Append(viEntity.Tunnel.TunnelID + "," + VentilationDbConstNames.COORDINATE_X + "=");
+            sb.Append(viEntity.Tunnel.TunnelId + "," + VentilationDbConstNames.COORDINATE_X + "=");
             sb.Append(viEntity.CoordinateX + "," + VentilationDbConstNames.COORDINATE_Y + "=");
             sb.Append(viEntity.CoordinateY + "," + VentilationDbConstNames.COORDINATE_Z + "=");
             sb.Append(viEntity.CoordinateZ + "," + VentilationDbConstNames.DATETIME + "='");

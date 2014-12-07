@@ -336,7 +336,7 @@ namespace LibBusiness
             foreach (Tunnel tEntity in entity.tunnelSet)
             {
                 sql += "UPDATE " + TunnelInfoDbConstNames.TABLE_NAME +
-                      " SET TUNNEL_TYPE=" + (int)TunnelTypeEnum.OTHER + " WHERE " + TunnelInfoDbConstNames.ID + " = " + tEntity.TunnelID;
+                      " SET TUNNEL_TYPE=" + (int)TunnelTypeEnum.OTHER + " WHERE " + TunnelInfoDbConstNames.ID + " = " + tEntity.TunnelId;
             }
             sql += " END ";
 

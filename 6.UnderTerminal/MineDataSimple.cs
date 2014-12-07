@@ -195,7 +195,7 @@ namespace UnderTerminal
             DialogResult = DialogResult.OK;
 
             //通用信息
-            mineDataEntity.Tunnel.TunnelID = this.tunnelId;
+            mineDataEntity.Tunnel.TunnelId = this.tunnelId;
             if (txtCoordinateX.Text == "")
             {
                 mineDataEntity.CoordinateX = 0;

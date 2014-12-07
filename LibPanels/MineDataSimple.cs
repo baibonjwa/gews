@@ -192,7 +192,7 @@ namespace LibPanels
             DialogResult = DialogResult.OK;
 
             //通用信息
-            mineDataEntity.Tunnel.TunnelID = this.selectTunnelSimple1.ITunnelId;
+            mineDataEntity.Tunnel.TunnelId = this.selectTunnelSimple1.ITunnelId;
             if (txtCoordinateX.Text == "")
             {
                 mineDataEntity.CoordinateX = 0;

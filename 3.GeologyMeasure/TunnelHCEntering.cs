@@ -165,7 +165,7 @@ namespace _3.GeologyMeasure
 
             foreach (Tunnel i in otherTunnelList)
             {
-                listBox_Browse.Items.Add(new TunnelSimple(i.TunnelID, i.TunnelName));
+                listBox_Browse.Items.Add(new TunnelSimple(i.TunnelId, i.TunnelName));
             }
             listBox_Browse.DisplayMember = "Name";
             listBox_Browse.ValueMember = "Id";
@@ -282,7 +282,7 @@ namespace _3.GeologyMeasure
             {
                 if (tunnelZY != null)
                 {
-                    Tunnel ent = BasicInfoManager.getInstance().getTunnelByID(tunnelZY.TunnelID);
+                    Tunnel ent = BasicInfoManager.getInstance().getTunnelByID(tunnelZY.TunnelId);
                     ent.TunnelType = TunnelTypeEnum.OTHER;
                     tunnelSet.Add(ent);
                 }
@@ -320,7 +320,7 @@ namespace _3.GeologyMeasure
             {
                 if (tunnelFY != null)
                 {
-                    Tunnel ent = BasicInfoManager.getInstance().getTunnelByID(tunnelFY.TunnelID);
+                    Tunnel ent = BasicInfoManager.getInstance().getTunnelByID(tunnelFY.TunnelId);
                     ent.TunnelType = TunnelTypeEnum.OTHER;
                     tunnelSet.Add(ent);
                 }
@@ -359,7 +359,7 @@ namespace _3.GeologyMeasure
             {
                 if (tunnelQY != null)
                 {
-                    Tunnel ent = BasicInfoManager.getInstance().getTunnelByID(tunnelQY.TunnelID);
+                    Tunnel ent = BasicInfoManager.getInstance().getTunnelByID(tunnelQY.TunnelId);
                     ent.TunnelType = TunnelTypeEnum.OTHER;
                     tunnelSet.Add(ent);
                 }
@@ -469,7 +469,7 @@ namespace _3.GeologyMeasure
                 if (Text == Const_GM.TUNNEL_HC_ADD && bResult)
                 {
                     //添加回采进尺图上显示信息
-                    AddHcjc(tunnelZY.TunnelID, tunnelFY.TunnelID, tunnelQY.TunnelID, tunnelZY.TunnelWid,
+                    AddHcjc(tunnelZY.TunnelId, tunnelFY.TunnelId, tunnelQY.TunnelId, tunnelZY.TunnelWid,
                         tunnelFY.TunnelWid, tunnelQY.TunnelWid);
                 }
 
@@ -477,7 +477,7 @@ namespace _3.GeologyMeasure
                 if (Text == Const_GM.TUNNEL_HC_CHANGE && bResult)
                 {
                     //修改回采进尺图上显示信息，更新工作面信息表
-                    UpdateHcjc(tunnelZY.TunnelID, tunnelFY.TunnelID, tunnelQY.TunnelID, tunnelFY.TunnelWid,
+                    UpdateHcjc(tunnelZY.TunnelId, tunnelFY.TunnelId, tunnelQY.TunnelId, tunnelFY.TunnelWid,
                         tunnelFY.TunnelWid, tunnelQY.TunnelWid);
                 }
 

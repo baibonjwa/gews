@@ -70,7 +70,7 @@ namespace LibPanels
         {
             this.MainForm = mainFrm;
             this.obj = obj;
-            tunnelEntity.TunnelID = ((LibEntity.MineData)obj).Tunnel.TunnelID;
+            tunnelEntity.TunnelId = ((LibEntity.MineData)obj).Tunnel.TunnelId;
             //tunnelEntity = TunnelInfoBLL.selectTunnelInfoByTunnelID(tunnelEntity.TunnelID);
             if (tunnelEntity == null)
             {
@@ -79,7 +79,7 @@ namespace LibPanels
             }
             else
             {
-                setArrValue(tunnelEntity.TunnelID);
+                setArrValue(tunnelEntity.TunnelId);
                 InitializeComponent();
                 this.selectTunnelUserControl1.setCurSelectedID(arr);
             }
@@ -99,7 +99,7 @@ namespace LibPanels
             arr[1] = tunnelEntity.WorkingFace.MiningArea.Horizontal.HorizontalId;//HorizontalID;
             arr[2] = tunnelEntity.WorkingFace.MiningArea.MiningAreaId;//MiningAreaID;
             arr[3] = tunnelEntity.WorkingFace.WorkingFaceID;//WorkingFaceID;
-            arr[4] = tunnelEntity.TunnelID;
+            arr[4] = tunnelEntity.TunnelId;
         }
 
         /// <summary>
@@ -474,7 +474,7 @@ namespace LibPanels
 
             //通用信息
             //巷道ID
-            mineDataEntity.Tunnel.TunnelID = selectTunnelUserControl1.ITunnelId;
+            mineDataEntity.Tunnel.TunnelId = selectTunnelUserControl1.ITunnelId;
             //坐标X
             if (txtCoordinateX.Text == "")
             {

@@ -193,7 +193,7 @@ namespace LibCommonForm
             // 加载巷道信息
             loadTunnelName();
             // 设置默认
-            this.lstTunnelName.SelectedValue = tunnelEntity.TunnelID;
+            this.lstTunnelName.SelectedValue = tunnelEntity.TunnelId;
         }
 
         /// <summary>

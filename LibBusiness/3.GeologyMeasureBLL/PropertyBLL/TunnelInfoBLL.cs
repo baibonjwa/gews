@@ -201,7 +201,7 @@ namespace LibBusiness
             sqlStr.Append(tunnelEntity.CoalOrStone + "'," + TunnelInfoDbConstNames.COAL_LAYER_ID + " = ");
             sqlStr.Append(tunnelEntity.CoalLayerID + "," + TunnelInfoDbConstNames.WORKINGFACE_ID + " = ");
             sqlStr.Append(tunnelEntity.WorkingFace.WorkingFaceID + "," + TunnelInfoDbConstNames.TUNNEL_WID + " = " + tunnelEntity.TunnelWid + " WHERE " + TunnelInfoDbConstNames.ID + " =");
-            sqlStr.Append(tunnelEntity.TunnelID);
+            sqlStr.Append(tunnelEntity.TunnelId);
 
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
             bool bResult = db.OperateDB(sqlStr.ToString());
@@ -265,7 +265,7 @@ namespace LibBusiness
         public static bool deleteTunnelInfo(Tunnel tunnelEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
-            string sql = "DELETE FROM " + TunnelInfoDbConstNames.TABLE_NAME + " WHERE " + TunnelInfoDbConstNames.ID + " =" + tunnelEntity.TunnelID;
+            string sql = "DELETE FROM " + TunnelInfoDbConstNames.TABLE_NAME + " WHERE " + TunnelInfoDbConstNames.ID + " =" + tunnelEntity.TunnelId;
             bool bResult = db.OperateDB(sql);
             return bResult;
         }
@@ -285,7 +285,7 @@ namespace LibBusiness
                 TunnelInfoDbConstNames.TABLE_NAME + " AS A, " +
                 WorkingFaceDbConstNames.TABLE_NAME + " AS B" +
                 " WHERE " +
-                "A." + TunnelInfoDbConstNames.ID + " = " + tunnelEntity.TunnelID +
+                "A." + TunnelInfoDbConstNames.ID + " = " + tunnelEntity.TunnelId +
                 " AND " +
                 "A." + TunnelInfoDbConstNames.TUNNEL_TYPE + " = " + (int)TunnelTypeEnum.TUNNELLING +
                  " AND " +
@@ -316,7 +316,7 @@ namespace LibBusiness
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
             string sql = "SELECT * FROM " + TunnelInfoDbConstNames.TABLE_NAME + " WHERE " +
-                TunnelInfoDbConstNames.ID + " = " + tunnelEntity.TunnelID + " AND " +
+                TunnelInfoDbConstNames.ID + " = " + tunnelEntity.TunnelId + " AND " +
                 TunnelInfoDbConstNames.TUNNEL_TYPE + " = '" + (int)TunnelTypeEnum.STOPING_FY + "'";
             DataSet ds = db.ReturnDS(sql);
             if (ds.Tables[0].Rows.Count > 0)
@@ -346,7 +346,7 @@ namespace LibBusiness
                 " SET " +
                 TunnelInfoDbConstNames.TUNNEL_TYPE + "=" + (int)TunnelTypeEnum.TUNNELLING + ", " +
                 TunnelInfoDbConstNames.WORKINGFACE_ID + "=" + wfEntity.WorkingFaceID +
-                " WHERE " + TunnelInfoDbConstNames.ID + " = " + tunnelEntity.TunnelID + ";";
+                " WHERE " + TunnelInfoDbConstNames.ID + " = " + tunnelEntity.TunnelId + ";";
 
             sql += " UPDATE " + WorkingFaceDbConstNames.TABLE_NAME +
                 " SET " +
@@ -393,7 +393,7 @@ namespace LibBusiness
                 " SET " +
                 TunnelInfoDbConstNames.TUNNEL_TYPE + " = " + (int)entity.TunnelType + ", " +
                 TunnelInfoDbConstNames.WORKINGFACE_ID + "=" + entity.WorkingFace.WorkingFaceID +
-                " WHERE " + TunnelInfoDbConstNames.ID + " = " + entity.TunnelID + ";";
+                " WHERE " + TunnelInfoDbConstNames.ID + " = " + entity.TunnelId + ";";
             }
             sql += " END ";
 
@@ -459,7 +459,7 @@ namespace LibBusiness
 
             string sql = "UPDATE " + TunnelInfoDbConstNames.TABLE_NAME + " SET " +
                 TunnelInfoDbConstNames.TUNNEL_TYPE + " = " + (int)TunnelTypeEnum.OTHER +
-                " WHERE " + TunnelInfoDbConstNames.ID + " = " + tunnelEntity.TunnelID;
+                " WHERE " + TunnelInfoDbConstNames.ID + " = " + tunnelEntity.TunnelId;
             db.OperateDBNotOpenAndClose(sql);
 
             db.Close();
@@ -474,7 +474,7 @@ namespace LibBusiness
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
             string sql = "SELECT * FROM " + WireInfoDbConstNames.TABLE_NAME +
-                " WHERE " + WireInfoDbConstNames.TUNNEL_ID + " = " + tunnelEntity.TunnelID;
+                " WHERE " + WireInfoDbConstNames.TUNNEL_ID + " = " + tunnelEntity.TunnelId;
             DataSet ds = db.ReturnDSNotOpenAndClose(sql);
             int wireInfoID = 0;
             if (ds.Tables[0].Rows.Count > 0)
@@ -483,7 +483,7 @@ namespace LibBusiness
             }
             sql = "DELETE FROM " + WirePointDbConstNames.TABLE_NAME + "WHERE " + WirePointDbConstNames.WIRE_INFO_ID + " = " + wireInfoID;
             bool bResult = db.OperateDBNotOpenAndClose(sql);
-            sql = "DELETE FROM " + WireInfoDbConstNames.TABLE_NAME + " WHERE " + WireInfoDbConstNames.TUNNEL_ID + " = " + tunnelEntity.TunnelID;
+            sql = "DELETE FROM " + WireInfoDbConstNames.TABLE_NAME + " WHERE " + WireInfoDbConstNames.TUNNEL_ID + " = " + tunnelEntity.TunnelId;
             bResult = db.OperateDBNotOpenAndClose(sql);
             db.Close();
             return bResult;
@@ -498,7 +498,7 @@ namespace LibBusiness
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
             string sql = "DELETE FROM " + DayReportJJDbConstNames.TABLE_NAME +
-                " WHERE " + DayReportJJDbConstNames.WORKINGFACE_ID + " = " + tunnelEntity.TunnelID;
+                " WHERE " + DayReportJJDbConstNames.WORKINGFACE_ID + " = " + tunnelEntity.TunnelId;
             bool bResult = db.OperateDB(sql);
             return bResult;
         }
@@ -512,7 +512,7 @@ namespace LibBusiness
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
             string sql = "DELETE FROM " + DayReportHCDbConstNames.TABLE_NAME +
-                " WHERE " + DayReportHCDbConstNames.WORKINGFACE_ID + " = " + tunnelEntity.TunnelID;
+                " WHERE " + DayReportHCDbConstNames.WORKINGFACE_ID + " = " + tunnelEntity.TunnelId;
             bool bResult = db.OperateDB(sql);
             return bResult;
         }

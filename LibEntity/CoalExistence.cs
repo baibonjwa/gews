@@ -7,7 +7,14 @@
 // V1.0 新建
 // ******************************************************************
 
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Globalization;
 using Castle.ActiveRecord;
+using NHibernate.Criterion;
+using NHibernate.Id;
+using NHibernate.Impl;
 
 namespace LibEntity
 {
@@ -23,6 +30,8 @@ namespace LibEntity
         /// </summary>
         [Property("IS_LEVEL_DISORDER")]
         public int IsLevelDisorder { get; set; }
+
+
 
         // 煤厚变化
 
@@ -87,5 +96,32 @@ namespace LibEntity
         /// </summary>
         [Property("IS_COAL_SOFT")]
         public int IsCoalSoft { get; set; }
+
+
+        public static void DeleteByIds(IEnumerable ids)
+        {
+            DeleteAll(typeof(CoalExistence), ids);
+        }
+
+        public static void FindById(int id)
+        {
+            FindByPrimaryKey(typeof(CoalExistence), id);
+        }
+
+        public static CoalExistence[] SlicedFindByCondition(int firstResult, int maxResult, int tunnelId,
+            DateTime startTime, DateTime endTime)
+        {
+            CoalExistence[] results;
+            var criterion = new List<ICriterion> { Restrictions.Eq("Tunnel.TunnelId", tunnelId) };
+            if (startTime != DateTime.MinValue && endTime != DateTime.MinValue)
+            {
+                criterion.Add(Restrictions.Between("Datetime", startTime, endTime));
+            }
+            results = (CoalExistence[])SlicedFindAll(typeof(CoalExistence), firstResult, maxResult, criterion.ToArray());
+            return results;
+        }
+
+
+
     }
 }

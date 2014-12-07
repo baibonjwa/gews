@@ -388,7 +388,7 @@ namespace _5.WarningManagement
                 if (int.TryParse(dsProbeInfo.Tables[0].Rows[0][ProbeManageDbConstNames.TUNNEL_ID].ToString(), out iTunnelID))
                 {
                     Tunnel tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(iTunnelID);
-                    oldTunnelId = tunnelEntity.TunnelID;
+                    oldTunnelId = tunnelEntity.TunnelId;
 
                     if (tunnelEntity != null)
                     {
@@ -397,7 +397,7 @@ namespace _5.WarningManagement
                         intArr[1] = tunnelEntity.WorkingFace.MiningArea.Horizontal.HorizontalId;
                         intArr[2] = tunnelEntity.WorkingFace.MiningArea.MiningAreaId;
                         intArr[3] = tunnelEntity.WorkingFace.WorkingFaceID;
-                        intArr[4] = tunnelEntity.TunnelID;
+                        intArr[4] = tunnelEntity.TunnelId;
                         _intArr = intArr;
                     }
                 }

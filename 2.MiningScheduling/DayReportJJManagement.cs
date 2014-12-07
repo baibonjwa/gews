@@ -438,7 +438,7 @@ namespace _2.MiningScheduling
                             bResult = DayReportJJBLL.deleteDayReportJJInfo(entity);
                             if (bResult)
                             {
-                                DelJJCD(tEntity.TunnelID.ToString(), entity.BindingID,entity.WorkingFaceID);
+                                DelJJCD(tEntity.TunnelId.ToString(), entity.BindingID,entity.WorkingFaceID);
 
                                 // 向server端发送更新预警数据
                                 UpdateWarningDataMsg msg = new UpdateWarningDataMsg(entity.WorkingFaceID,

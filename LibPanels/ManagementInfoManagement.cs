@@ -251,7 +251,7 @@ namespace LibPanels
                     //绑定巷道ID
                     if (int.TryParse(ds.Tables[0].Rows[i][ManagementDbConstNames.TUNNEL_ID].ToString(), out tmpInt))
                     {
-                        mEntity.Tunnel.TunnelID = tmpInt;
+                        mEntity.Tunnel.TunnelId = tmpInt;
                         tmpInt = 0;
                     }
                     //坐标X

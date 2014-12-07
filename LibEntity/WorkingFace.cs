@@ -22,8 +22,7 @@ namespace LibEntity
         /// <summary>
         ///     工作面编号
         /// </summary>
-        [PrimaryKey]
-        [Property("WORKINGFACE_ID")]
+        [PrimaryKey(PrimaryKeyType.Identity, "WORKINGFACE_ID")]
         public int WorkingFaceID { get; set; }
 
         /** 工作面名称 **/

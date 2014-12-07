@@ -80,7 +80,7 @@ namespace LibBusiness
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
             StringBuilder sb = new StringBuilder();
             sb.Append("UPDATE " + UsualForecastDbConstNames.TABLE_NAME + " SET " + UsualForecastDbConstNames.TUNNEL_ID + "=");
-            sb.Append(ufEntity.Tunnel.TunnelID + "," + UsualForecastDbConstNames.X + "=");
+            sb.Append(ufEntity.Tunnel.TunnelId + "," + UsualForecastDbConstNames.X + "=");
             sb.Append(ufEntity.CoordinateX + "," + UsualForecastDbConstNames.Y + "=");
             sb.Append(ufEntity.CoordinateY + "," + UsualForecastDbConstNames.Z + "=");
             sb.Append(ufEntity.CoordinateZ + "," + UsualForecastDbConstNames.DATETIME + "='");

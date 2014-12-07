@@ -41,7 +41,7 @@ namespace LibBusiness
         /// <returns></returns>
         public static string sqlBack(MineData mdEntity)
         {
-            string sql = mdEntity.Tunnel.TunnelID + "," +
+            string sql = mdEntity.Tunnel.TunnelId + "," +
                 mdEntity.CoordinateX + "," +
                 mdEntity.CoordinateY + "," +
                 mdEntity.CoordinateZ + ",'" +
@@ -60,7 +60,7 @@ namespace LibBusiness
         /// <returns></returns>
         public static string sqlUpdate(MineData mdEntity)
         {
-            string sql = PreWarningDataDbConstNames.TUNNEL_ID + "=" + mdEntity.Tunnel.TunnelID + "," +
+            string sql = PreWarningDataDbConstNames.TUNNEL_ID + "=" + mdEntity.Tunnel.TunnelId + "," +
                 PreWarningDataDbConstNames.COORDINATE_X + "=" + mdEntity.CoordinateX + "," +
                 PreWarningDataDbConstNames.COORDINATE_Y + "=" + mdEntity.CoordinateY + "," +
                 PreWarningDataDbConstNames.COORDINATE_Z + "=" + mdEntity.CoordinateZ + "," +

@@ -117,7 +117,7 @@ namespace UnderTerminal
         private void bindInfo()
         {
             //巷道ID
-            _tunnelEntity.TunnelID = _arr[4];
+            _tunnelEntity.TunnelId = _arr[4];
 
             //巷道实体
             _tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(tunnelId);
@@ -244,7 +244,7 @@ namespace UnderTerminal
                 return;
             }
             DialogResult = DialogResult.OK;
-            _tunnelEntity.TunnelID =
+            _tunnelEntity.TunnelId =
                 workingfaceId;
             _tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(tunnelId);
             //if (this.Text == Const_MS.DAY_REPORT_HC_ADD)

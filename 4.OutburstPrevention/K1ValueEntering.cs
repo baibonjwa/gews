@@ -177,7 +177,7 @@ namespace _4.OutburstPrevention
                     dgrdvK1Value.Rows[i].Selected = true;
                 }
                 Tunnel tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(k1Entitys[i].TunnelID); // TunnelInfoBLL.selectTunnelInfoByTunnelID(iTunnelID);
-                TunnelSimple ts = new TunnelSimple(tunnelEntity.TunnelID, tunnelEntity.TunnelName);
+                TunnelSimple ts = new TunnelSimple(tunnelEntity.TunnelId, tunnelEntity.TunnelName);
                 selectTunnelSimple1.SelectTunnelItemWithoutHistory(ts);
 
             }
@@ -293,13 +293,13 @@ namespace _4.OutburstPrevention
                 //录入时间
                 _k1ValueEntity.TypeInTime = dgrdvK1Value[7, i].Value != null ? Convert.ToDateTime(dgrdvK1Value[7, i].Value) : DateTime.Now;
                 //巷道ID
-                _k1ValueEntity.TunnelID = tunnelEntity.TunnelID;
+                _k1ValueEntity.TunnelID = tunnelEntity.TunnelId;
                 //添加
                 bResult = K1ValueBLL.insertValueK1(_k1ValueEntity);
                 if (bResult)
                 {
                     //TODO:添加成功
-                    UpdateWarningDataMsg msg = new UpdateWarningDataMsg(tunnelEntity.WorkingFace.WorkingFaceID, tunnelEntity.TunnelID, K1ValueDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, DateTime.Now);
+                    UpdateWarningDataMsg msg = new UpdateWarningDataMsg(tunnelEntity.WorkingFace.WorkingFaceID, tunnelEntity.TunnelId, K1ValueDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, DateTime.Now);
                     this.MainForm.SendMsg2Server(msg);
                     DrawGasGushQuantityPt();
                 }
@@ -382,7 +382,7 @@ namespace _4.OutburstPrevention
                 //录入时间
                 _k1ValueEntity.TypeInTime = dgrdvK1Value[7, i].Value != null ? Convert.ToDateTime(dgrdvK1Value[7, i].Value) : DateTime.Now;
                 //巷道ID
-                _k1ValueEntity.TunnelID = tunnelEntity.TunnelID;
+                _k1ValueEntity.TunnelID = tunnelEntity.TunnelId;
                 //添加
 
                 if (i < k1Entitys.Length)
@@ -394,7 +394,7 @@ namespace _4.OutburstPrevention
                     if (bResult)
                     {
                         //TODO:修改成功
-                        UpdateWarningDataMsg msg = new UpdateWarningDataMsg(tunnelEntity.WorkingFace.WorkingFaceID, tunnelEntity.TunnelID, K1ValueDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, DateTime.Now);
+                        UpdateWarningDataMsg msg = new UpdateWarningDataMsg(tunnelEntity.WorkingFace.WorkingFaceID, tunnelEntity.TunnelId, K1ValueDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, DateTime.Now);
                         this.MainForm.SendMsg2Server(msg);
                         DelGasGushQuantityPt("", "");
                         DrawGasGushQuantityPt();

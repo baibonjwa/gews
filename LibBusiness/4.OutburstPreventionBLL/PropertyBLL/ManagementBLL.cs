@@ -151,7 +151,7 @@ namespace LibBusiness
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
             StringBuilder sb = new StringBuilder();
             sb.Append("UPDATE " + ManagementDbConstNames.TABLE_NAME + " SET " + ManagementDbConstNames.TUNNEL_ID + "=");
-            sb.Append(mEntity.Tunnel.TunnelID + "," + ManagementDbConstNames.X + "=");
+            sb.Append(mEntity.Tunnel.TunnelId + "," + ManagementDbConstNames.X + "=");
             sb.Append(mEntity.CoordinateX + "," + ManagementDbConstNames.Y + "=");
             sb.Append(mEntity.CoordinateY + "," + ManagementDbConstNames.Z + "=");
             sb.Append(mEntity.CoordinateZ + "," + ManagementDbConstNames.DATETIME + "='");

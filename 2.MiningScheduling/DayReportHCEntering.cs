@@ -653,7 +653,7 @@ namespace _2.MiningScheduling
                     double hcjc = dayReportHCEntity.JinChi;
                     string bid = dayReportHCEntity.BindingID;
 
-                    AddHcjc(tunnelZY.TunnelID, tunnelFY.TunnelID, tunnelQY.TunnelID, tunnelZY.TunnelWid, tunnelFY.TunnelWid, tunnelQY.TunnelWid,
+                    AddHcjc(tunnelZY.TunnelId, tunnelFY.TunnelId, tunnelQY.TunnelId, tunnelZY.TunnelWid, tunnelFY.TunnelWid, tunnelQY.TunnelWid,
                         hcjc, bid);
                 }
                 else
@@ -744,7 +744,7 @@ namespace _2.MiningScheduling
             double hcjc = _dayReportHCEntity.JinChi;
             string bid = _dayReportHCEntity.BindingID;
 
-            UpdateHcjc(tunnelZY.TunnelID, tunnelFY.TunnelID, tunnelQY.TunnelID, hcjc, bid, tunnelZY.TunnelWid, tunnelFY.TunnelWid, tunnelQY.TunnelWid);
+            UpdateHcjc(tunnelZY.TunnelId, tunnelFY.TunnelId, tunnelQY.TunnelId, hcjc, bid, tunnelZY.TunnelWid, tunnelFY.TunnelWid, tunnelQY.TunnelWid);
 
             //修改成功
             if (bResult)
@@ -753,7 +753,7 @@ namespace _2.MiningScheduling
                 BasicInfoManager.getInstance().refreshWorkingFaceInfo(workingFace);
 
                 // 通知服务器数据已经修改
-                UpdateWarningDataMsg msg = new UpdateWarningDataMsg(workingFace.WorkingFaceID, tunnelQY.TunnelID,
+                UpdateWarningDataMsg msg = new UpdateWarningDataMsg(workingFace.WorkingFaceID, tunnelQY.TunnelId,
                     DayReportHCDbConstNames.TABLE_NAME, OPERATION_TYPE.UPDATE, DateTime.Now);
                 this.MainForm.SendMsg2Server(msg);
             }

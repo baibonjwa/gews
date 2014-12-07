@@ -17,9 +17,8 @@ namespace LibEntity
         /// <summary>
         ///     巷道编号
         /// </summary>
-        [PrimaryKey]
-        [Property("TUNNEL_ID")]
-        public int TunnelID { get; set; }
+        [PrimaryKey(PrimaryKeyType.Identity, "TUNNEL_ID")]
+        public int TunnelId { get; set; }
 
         /// <summary>
         ///     巷道名称

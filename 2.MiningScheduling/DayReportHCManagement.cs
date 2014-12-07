@@ -417,7 +417,7 @@ namespace _2.MiningScheduling
                             Tunnel tunnelFY = tDict[TunnelTypeEnum.STOPING_FY];
                             Tunnel tunnelQY = tDict[TunnelTypeEnum.STOPING_QY];
                             // 删除GIS图形上的回采进尺
-                            DelHcjc(tunnelZY.TunnelID, tunnelFY.TunnelID, tunnelQY.TunnelID, entity.BindingID, hjEntity, tunnelZY.TunnelWid, tunnelFY.TunnelWid, tunnelQY.TunnelWid);
+                            DelHcjc(tunnelZY.TunnelId, tunnelFY.TunnelId, tunnelQY.TunnelId, entity.BindingID, hjEntity, tunnelZY.TunnelWid, tunnelFY.TunnelWid, tunnelQY.TunnelWid);
                         }
 
                         // 从数据库中删除对应的进尺信息

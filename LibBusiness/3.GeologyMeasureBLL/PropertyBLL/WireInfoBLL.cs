@@ -205,7 +205,7 @@ namespace LibBusiness
         public static DataSet selectAllWireInfo(Tunnel tunnelEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
-            string sql = "SELECT * FROM " + WireInfoDbConstNames.TABLE_NAME+" WHERE "+WireInfoDbConstNames.TUNNEL_ID+" = "+tunnelEntity.TunnelID;
+            string sql = "SELECT * FROM " + WireInfoDbConstNames.TABLE_NAME+" WHERE "+WireInfoDbConstNames.TUNNEL_ID+" = "+tunnelEntity.TunnelId;
             DataSet ds = db.ReturnDS(sql);
             return ds;
         }

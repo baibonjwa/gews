@@ -17,8 +17,7 @@ namespace LibEntity
         /// <summary>
         ///     采区编号
         /// </summary>
-        [PrimaryKey]
-        [Property("MININGAREA_ID")]
+        [PrimaryKey(PrimaryKeyType.Identity, "MININGAREA_ID")]
         public int MiningAreaId { get; set; }
 
         /** 采区名称 **/

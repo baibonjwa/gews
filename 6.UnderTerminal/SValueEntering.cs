@@ -189,7 +189,7 @@ namespace UnderTerminal
                 return;
             }
             this.DialogResult = DialogResult.OK;
-            tunnelEntity.TunnelID = this.tunnelId;
+            tunnelEntity.TunnelId = this.tunnelId;
             tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(tunnelId);
             //添加
             //if (this.Text == Const_OP.S_VALUE_ADD)
@@ -281,7 +281,7 @@ namespace UnderTerminal
                 //录入时间
                 _sValueEntity.TypeInTime = dgrdvSValue[8, i].Value != null ? Convert.ToDateTime(dgrdvSValue[7, i].Value) : DateTime.Now;
                 //巷道ID
-                _sValueEntity.TunnelID = tunnelEntity.TunnelID;
+                _sValueEntity.TunnelID = tunnelEntity.TunnelId;
                 //添加
                 bResult = SValueBLL.insertValueS(_sValueEntity);
                 if (bResult)
@@ -321,7 +321,7 @@ namespace UnderTerminal
                 //录入时间
                 _sValueEntity.TypeInTime = Convert.ToDateTime(dgrdvSValue[8, i].Value);
                 //巷道ID
-                _sValueEntity.TunnelID = tunnelEntity.TunnelID;
+                _sValueEntity.TunnelID = tunnelEntity.TunnelId;
                 //修改
                 if (i < sEntitys.Length)
                 {

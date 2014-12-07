@@ -220,7 +220,7 @@ namespace _3.GeologyMeasure
 
                 //cells[rowDetailStartIndex + i, ++index].Text = entity.BindingID;
 
-                cells[rowDetailStartIndex + i, ++index].Text = entity.TunnelID.ToString();
+                cells[rowDetailStartIndex + i, ++index].Text = entity.TunnelId.ToString();
 
                 i++;
             }
@@ -311,9 +311,9 @@ namespace _3.GeologyMeasure
                     (bool)cells[rowDetailStartIndex + i, 0].Value == true)
                 {
                     //巷道编号
-                    tunnelEntity.TunnelID = (int)ds.Tables[0].Rows[i][TunnelInfoDbConstNames.ID];
+                    tunnelEntity.TunnelId = (int)ds.Tables[0].Rows[i][TunnelInfoDbConstNames.ID];
                     //巷道实体
-                    tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(tunnelEntity.TunnelID);
+                    tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(tunnelEntity.TunnelId);
 
                     activeRow = rowDetailStartIndex + i;
                 }
@@ -358,7 +358,7 @@ namespace _3.GeologyMeasure
                 tunnelEntity.WorkingFace.WorkingFaceID
             };
 
-            LibCommonForm.TunnelInfoEntering d = new LibCommonForm.TunnelInfoEntering(tunnelEntity.TunnelID, arr, this.MainForm);
+            LibCommonForm.TunnelInfoEntering d = new LibCommonForm.TunnelInfoEntering(tunnelEntity.TunnelId, arr, this.MainForm);
             if (DialogResult.OK == d.ShowDialog())
             {
                 //绑定巷道信息
@@ -384,7 +384,7 @@ namespace _3.GeologyMeasure
                         (bool)cells[rowDetailStartIndex + i, 0].Value == true)
                     {
                         //掘进ID
-                        tunnelEntity.TunnelID = (int)ds.Tables[0].Rows[i][TunnelInfoDbConstNames.ID];
+                        tunnelEntity.TunnelId = (int)ds.Tables[0].Rows[i][TunnelInfoDbConstNames.ID];
                         //巷道类型为掘进或回采巷道
                         if (TunnelInfoBLL.isTunnelJJ(tunnelEntity) || TunnelInfoBLL.isTunnelHC(tunnelEntity))
                         {

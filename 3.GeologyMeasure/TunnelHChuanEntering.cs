@@ -376,11 +376,11 @@ namespace _3.GeologyMeasure
             //关联巷道1
             if (this.Text == Const_GM.TUNNEL_HCHUAN_ADD)
             {
-                tunnelEntity.TunnelID = tunnelHChuanEntity.TunnelID1;
+                tunnelEntity.TunnelId = tunnelHChuanEntity.TunnelID1;
             }
             if (this.Text == Const_GM.TUNNEL_HCHUAN_CHANGE)
             {
-                tunnelEntity.TunnelID = tmpTunnelHChuanEntity.TunnelID1;
+                tunnelEntity.TunnelId = tmpTunnelHChuanEntity.TunnelID1;
             }
             if (tmpTunnelHChuanEntity.TunnelID1 != tunnelHChuanEntity.TunnelID1)
             {
@@ -400,11 +400,11 @@ namespace _3.GeologyMeasure
             //关联巷道2
             if (this.Text == Const_GM.TUNNEL_HCHUAN_ADD)
             {
-                tunnelEntity.TunnelID = tunnelHChuanEntity.TunnelID2;
+                tunnelEntity.TunnelId = tunnelHChuanEntity.TunnelID2;
             }
             if (this.Text == Const_GM.TUNNEL_HCHUAN_CHANGE)
             {
-                tunnelEntity.TunnelID = tmpTunnelHChuanEntity.TunnelID2;
+                tunnelEntity.TunnelId = tmpTunnelHChuanEntity.TunnelID2;
             }
             if (tmpTunnelHChuanEntity.TunnelID2 != tunnelHChuanEntity.TunnelID2)
             {
@@ -584,11 +584,11 @@ namespace _3.GeologyMeasure
             //第一次选择巷道时给巷道实体赋值，用于下条巷道选择时的控件选择定位
             if (tunnelHChuanEntity.TunnelID2 != 0)
             {
-                tunnelEntity.TunnelID = tunnelHChuanEntity.TunnelID2;
+                tunnelEntity.TunnelId = tunnelHChuanEntity.TunnelID2;
                 //tunnelEntity = TunnelInfoBLL.selectTunnelInfoByTunnelID(tunnelEntity.TunnelID);
             }
             //第一次选择巷道
-            if (tunnelEntity.TunnelID == 0)
+            if (tunnelEntity.TunnelId == 0)
             {
                 tunnelChoose = new SelectTunnelDlg(this.MainForm);
             }
@@ -708,7 +708,7 @@ namespace _3.GeologyMeasure
             textBox_Z2.Text = Convert.ToString(tunnelHChuanEntity.Z_2);
             textBox_Azimuth.Text = Convert.ToString(tunnelHChuanEntity.Azimuth);
 
-            tunnelEntity.TunnelID = tunnelHChuanEntity.TunnelID1;
+            tunnelEntity.TunnelId = tunnelHChuanEntity.TunnelID1;
             //队别名称
             cboTeamName.Text = TeamBLL.selectTeamInfoByID(tunnelHChuanEntity.TeamNameID).TeamName;
 
@@ -771,11 +771,11 @@ namespace _3.GeologyMeasure
             //第一次选择巷道时给巷道实体赋值，用于下条巷道选择时的控件选择定位
             if (tunnelHChuanEntity.TunnelID1 != 0)
             {
-                tunnelEntity.TunnelID = tunnelHChuanEntity.TunnelID1;
+                tunnelEntity.TunnelId = tunnelHChuanEntity.TunnelID1;
                 //tunnelEntity = TunnelInfoBLL.selectTunnelInfoByTunnelID(tunnelEntity.TunnelID);
             }
             //第一次选择巷道
-            if (tunnelEntity.TunnelID == 0)
+            if (tunnelEntity.TunnelId == 0)
             {
                 tunnelChoose = new SelectTunnelDlg(this.MainForm);
             }

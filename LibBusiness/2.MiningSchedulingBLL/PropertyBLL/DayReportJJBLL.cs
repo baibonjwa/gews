@@ -76,7 +76,7 @@ namespace LibBusiness
             sb.Append("SELECT * FROM ");
             sb.Append(DayReportJJDbConstNames.TABLE_NAME);
             sb.Append(" WHERE ");
-            sb.Append(DayReportJJDbConstNames.WORKINGFACE_ID + " =  " + tunnelEntity.TunnelID);
+            sb.Append(DayReportJJDbConstNames.WORKINGFACE_ID + " =  " + tunnelEntity.TunnelId);
             DataSet ds = db.ReturnDS(sb.ToString());
             bool bResult;
             if (ds.Tables[0].Rows.Count > 0)

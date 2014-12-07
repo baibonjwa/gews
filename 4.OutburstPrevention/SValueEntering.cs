@@ -199,7 +199,7 @@ namespace _4.OutburstPrevention
                 return;
             }
             this.DialogResult = DialogResult.OK;
-            tunnelEntity.TunnelID = selectTunnelUserControl1.ITunnelId;
+            tunnelEntity.TunnelId = selectTunnelUserControl1.ITunnelId;
             //tunnelEntity = TunnelInfoBLL.selectTunnelInfoByTunnelID(tunnelEntity.TunnelID);
             //添加
             if (this.Text == Const_OP.S_VALUE_ADD)
@@ -290,7 +290,7 @@ namespace _4.OutburstPrevention
                 //录入时间
                 _sValueEntity.TypeInTime = Convert.ToDateTime(dgrdvSValue[8, i].Value);
                 //巷道ID
-                _sValueEntity.TunnelID = tunnelEntity.TunnelID;
+                _sValueEntity.TunnelID = tunnelEntity.TunnelId;
                 //添加
                 bResult = SValueBLL.insertValueS(_sValueEntity);
                 if (bResult)
@@ -331,7 +331,7 @@ namespace _4.OutburstPrevention
                 //录入时间
                 _sValueEntity.TypeInTime = Convert.ToDateTime(dgrdvSValue[8, i].Value);
                 //巷道ID
-                _sValueEntity.TunnelID = tunnelEntity.TunnelID;
+                _sValueEntity.TunnelID = tunnelEntity.TunnelId;
                 //修改
                 if (i < sEntitys.Length)
                 {

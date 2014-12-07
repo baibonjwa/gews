@@ -237,7 +237,7 @@ namespace _3.GeologyMeasure
             {
                 DataSet ds = new DataSet();
                 //获取巷道ID
-                tunnelEntity.TunnelID = selectTunnelUserControl1.ITunnelId;
+                tunnelEntity.TunnelId = selectTunnelUserControl1.ITunnelId;
                 //获取巷道对应导线信息
                 ds = WireInfoBLL.selectAllWireInfo(tunnelEntity);
                 if (ds.Tables[0].Rows.Count > 0)
@@ -349,7 +349,7 @@ namespace _3.GeologyMeasure
             //巷道信息赋值
             hdwid = 0.0;
             Dictionary<string, string> flds = new Dictionary<string, string>();
-            flds.Add(GIS_Const.FIELD_HDID, tunnelEntity.TunnelID.ToString());
+            flds.Add(GIS_Const.FIELD_HDID, tunnelEntity.TunnelId.ToString());
             List<Tuple<IFeature, IGeometry, Dictionary<string, string>>> selobjs = Global.commonclss.SearchFeaturesByGeoAndText(Global.centerfdlyr, flds);
 
             int xh = 0;
@@ -363,7 +363,7 @@ namespace _3.GeologyMeasure
                 hdwid = Convert.ToDouble(dst.Tables[0].Rows[0][LibBusiness.TunnelInfoDbConstNames.TUNNEL_WID]);
             }
             dics.Clear();
-            dics.Add(GIS_Const.FIELD_HDID, tunnelEntity.TunnelID.ToString());
+            dics.Add(GIS_Const.FIELD_HDID, tunnelEntity.TunnelId.ToString());
             dics.Add(GIS_Const.FIELD_ID, "0");
             dics.Add(GIS_Const.FIELD_BS, "1");
             dics.Add(GIS.GIS_Const.FIELD_BID, bid);
@@ -1296,7 +1296,7 @@ namespace _3.GeologyMeasure
         {
             DataSet ds = new DataSet();
             //获取巷道ID
-            tunnelEntity.TunnelID = selectTunnelUserControl1.ITunnelId;
+            tunnelEntity.TunnelId = selectTunnelUserControl1.ITunnelId;
             //获取巷道对应导线信息
             ds = WireInfoBLL.selectAllWireInfo(tunnelEntity);
             if (ds.Tables[0].Rows.Count > 0)
@@ -1324,7 +1324,7 @@ namespace _3.GeologyMeasure
                         }
                         dgrdvWire.Rows.Clear();
                         //巷道信息
-                        tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(tunnelEntity.TunnelID);
+                        tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(tunnelEntity.TunnelId);
                         //导线ID
                         wireInfoEntity.WireInfoID = Convert.ToInt32(WireInfoBLL.selectAllWireInfo(tunnelEntity).Tables[0].Rows[0][WireInfoDbConstNames.ID]);
                         //导线信息
@@ -1333,7 +1333,7 @@ namespace _3.GeologyMeasure
                         _arr[1] = tunnelEntity.WorkingFace.MiningArea.Horizontal.HorizontalId;
                         _arr[2] = tunnelEntity.WorkingFace.MiningArea.MiningAreaId;
                         _arr[3] = tunnelEntity.WorkingFace.WorkingFaceID;
-                        _arr[4] = tunnelEntity.TunnelID;
+                        _arr[4] = tunnelEntity.TunnelId;
                         //绑定修改信息
                         loadWireInfoData();
 

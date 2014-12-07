@@ -15,8 +15,7 @@ namespace LibEntity
         /// <summary>
         ///     矿井编号
         /// </summary>
-        [PrimaryKey]
-        [Property("MINE_ID")]
+        [PrimaryKey(PrimaryKeyType.Identity, "MINE_ID")]
         public int MineId { get; set; }
 
         /// <summary>

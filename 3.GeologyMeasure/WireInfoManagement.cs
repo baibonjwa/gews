@@ -377,7 +377,7 @@ namespace _3.GeologyMeasure
                 tunnelEntity.WorkingFace.MiningArea.Horizontal.HorizontalId, 
                 tunnelEntity.WorkingFace.MiningArea.MiningAreaId, 
                 tunnelEntity.WorkingFace.WorkingFaceID, 
-                tunnelEntity.TunnelID,
+                tunnelEntity.TunnelId,
             };
 
             //导线修改界面
@@ -453,7 +453,7 @@ namespace _3.GeologyMeasure
                         if (dlgResult == DialogResult.Yes)
                         {
                             //DeleteWirePtByBID(wirePointInfoEntity);
-                            DelHdByHdId(tunnelEntity.TunnelID.ToString());
+                            DelHdByHdId(tunnelEntity.TunnelId.ToString());
 
                             //wireInfoEntity.TunnelID
                         }

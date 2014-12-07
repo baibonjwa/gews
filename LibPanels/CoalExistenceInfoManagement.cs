@@ -172,6 +172,7 @@ namespace LibPanels
             checkCount = 0;
             chkSelAll.Checked = false;
 
+
             // ※分页必须
             _iRecordCount = CoalExistenceBLL.selectCoalExistenceWithCondition(_queryConditions.TunnelId, _queryConditions.DefaultStartTime, _queryConditions.DefaultEndTime).Tables[0].Rows.Count;
 
@@ -179,14 +180,18 @@ namespace LibPanels
             dataPager1.PageControlInit(_iRecordCount);
             int iStartIndex = dataPager1.getStartIndex();
             int iEndIndex = dataPager1.getEndIndex();
-            ds = CoalExistenceBLL.selectCoalExistenceWithCondition(iStartIndex, iEndIndex, _queryConditions.TunnelId, _queryConditions.DefaultStartTime, _queryConditions.DefaultEndTime);
-            rowsCount = ds.Tables[0].Rows.Count;
+            //ds = CoalExistenceBLL.selectCoalExistenceWithCondition(iStartIndex, iEndIndex, _queryConditions.TunnelId, _queryConditions.DefaultStartTime, _queryConditions.DefaultEndTime);
+
+            CoalExistence[] coalExistences = CoalExistence.SlicedFindByCondition(iStartIndex, iEndIndex, _queryConditions.TunnelId, Convert.ToDateTime(_queryConditions.DefaultStartTime),
+    Convert.ToDateTime(_queryConditions.DefaultEndTime));
+
+            rowsCount = coalExistences.Length;
             FarPointOperate.farPointReAdd(fpCoalExistence, rowDetailStartIndex, rowsCount);
             if (rowsCount > 0)
             {
                 FarPoint.Win.Spread.CellType.CheckBoxCellType ckbxcell = new FarPoint.Win.Spread.CellType.CheckBoxCellType();
                 ckbxcell.ThreeState = false;
-                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                for (int i = 0; i < coalExistences.Length; i++)
                 {
                     int index = 0;
                     this.fpCoalExistence.Sheets[0].Cells[rowDetailStartIndex + i, index].CellType = ckbxcell;
@@ -199,23 +204,28 @@ namespace LibPanels
                     //{
                     //    this.fpCoalExistence.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = TunnelInfoBLL.selectTunnelInfoByTunnelID(Convert.ToInt32(ds.Tables[0].Rows[i][CoalExistenceDbConstNames.TUNNEL_ID])).TunnelName;
                     //}
-                    this.fpCoalExistence.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
-                     BasicInfoManager.getInstance().getTunnelByID(_queryConditions.TunnelId).TunnelName;
-                    if (LibPanels.checkCoordinate(ds.Tables[0].Rows[i][CoalExistenceDbConstNames.COORDINATE_X].ToString(), ds.Tables[0].Rows[i][CoalExistenceDbConstNames.COORDINATE_Y].ToString(), ds.Tables[0].Rows[i][CoalExistenceDbConstNames.COORDINATE_Z].ToString()))
+                    fpCoalExistence.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        coalExistences[i].Tunnel.TunnelName;
+
+                    if (LibPanels.checkCoordinate(coalExistences[i].CoordinateX, coalExistences[i].CoordinateY, coalExistences[i].CoordinateZ))
                     {
                         //坐标X
-                        this.fpCoalExistence.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = ds.Tables[0].Rows[i][CoalExistenceDbConstNames.COORDINATE_X].ToString();
+                        fpCoalExistence.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                            coalExistences[i].CoordinateX.ToString();
                         //坐标Y
-                        this.fpCoalExistence.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = ds.Tables[0].Rows[i][CoalExistenceDbConstNames.COORDINATE_Y].ToString();
+                        this.fpCoalExistence.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                            coalExistences[i].CoordinateY.ToString();
                         //坐标Z
-                        this.fpCoalExistence.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = ds.Tables[0].Rows[i][CoalExistenceDbConstNames.COORDINATE_Z].ToString();
+                        this.fpCoalExistence.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                            coalExistences[i].CoordinateZ.ToString();
                     }
                     else
                     {
                         index = index + 3;
                     }
                     //时间
-                    this.fpCoalExistence.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = ds.Tables[0].Rows[i][CoalExistenceDbConstNames.DATETIME].ToString().Substring(0, ds.Tables[0].Rows[i][CoalExistenceDbConstNames.DATETIME].ToString().IndexOf(' '));
+                    this.fpCoalExistence.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        coalExistences[i].Datetime.ToString();
                     //是否层理紊乱
                     this.fpCoalExistence.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(ds.Tables[0].Rows[i][CoalExistenceDbConstNames.IS_LEVEL_DISORDER].ToString());
                     //煤厚变化
@@ -334,7 +344,7 @@ namespace LibPanels
                 if (fpCoalExistence.Sheets[0].Cells[rowDetailStartIndex + i, 0].Value != null && (bool)fpCoalExistence.Sheets[0].Cells[rowDetailStartIndex + i, 0].Value == true)
                 {
                     ceEntity.Id = Convert.ToInt32(ds.Tables[0].Rows[i][CoalExistenceDbConstNames.ID]);
-                    ceEntity.Tunnel.TunnelID = Convert.ToInt32(ds.Tables[0].Rows[i][CoalExistenceDbConstNames.TUNNEL_ID]);
+                    ceEntity.Tunnel.TunnelId = Convert.ToInt32(ds.Tables[0].Rows[i][CoalExistenceDbConstNames.TUNNEL_ID]);
                     ceEntity.CoordinateX = Convert.ToDouble(ds.Tables[0].Rows[i][CoalExistenceDbConstNames.COORDINATE_X]);
                     ceEntity.CoordinateY = Convert.ToDouble(ds.Tables[0].Rows[i][CoalExistenceDbConstNames.COORDINATE_Y]);
                     ceEntity.CoordinateZ = Convert.ToDouble(ds.Tables[0].Rows[i][CoalExistenceDbConstNames.COORDINATE_Z]);

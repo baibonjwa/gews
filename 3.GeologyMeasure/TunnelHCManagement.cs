@@ -378,7 +378,7 @@ namespace _3.GeologyMeasure
 
                     //TODO:删除后事件
                     //将图层中对应的信息删除
-                    DelHcjc(tunnelZY.TunnelID, tunnelFY.TunnelID, tunnelQY.TunnelID);
+                    DelHcjc(tunnelZY.TunnelId, tunnelFY.TunnelId, tunnelQY.TunnelId);
                     //删除工作面中对应的回采信息
                     /////Mark
 

@@ -68,7 +68,7 @@ namespace UnderTerminal
         {
             _arr = array;
             this._dayReportJJEntity = dayReportJJEntity;
-            _tunnelEntity.TunnelID = array[4];
+            _tunnelEntity.TunnelId = array[4];
             InitializeComponent();
             //修改初始化
             changeInfo();
@@ -156,7 +156,7 @@ namespace UnderTerminal
         private void bindInfo()
         {
             //巷道ID
-            _tunnelEntity.TunnelID = _arr[4];
+            _tunnelEntity.TunnelId = _arr[4];
 
             //巷道实体
             _tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(tunnelId);
@@ -273,7 +273,7 @@ namespace UnderTerminal
                 return;
             }
 
-            _tunnelEntity.TunnelID = this.tunnelId;
+            _tunnelEntity.TunnelId = this.tunnelId;
             _tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(tunnelId);
             // 验证
             if (!this.check())
@@ -315,7 +315,7 @@ namespace UnderTerminal
                 //队别名称
                 _dayReportJJEntity.TeamNameID = Convert.ToInt32(cboTeamName.SelectedValue);
                 //绑定巷道编号
-                _dayReportJJEntity.WorkingFaceID = BasicInfoManager.getInstance().getTunnelByID(_tunnelEntity.TunnelID).WorkingFace.WorkingFaceID;
+                _dayReportJJEntity.WorkingFaceID = BasicInfoManager.getInstance().getTunnelByID(_tunnelEntity.TunnelId).WorkingFace.WorkingFaceID;
                 //日期
                 _dayReportJJEntity.DateTime = dtpDate.Value;
                 //填报人

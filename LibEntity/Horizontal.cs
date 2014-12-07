@@ -16,8 +16,7 @@ namespace LibEntity
         /// <summary>
         ///     水平编号
         /// </summary>
-        [PrimaryKey]
-        [Property("HORIZONTAL_ID")]
+        [PrimaryKey(PrimaryKeyType.Identity, "HORIZONTAL_ID")]
         public int HorizontalId { get; set; }
 
         /// <summary>

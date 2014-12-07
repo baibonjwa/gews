@@ -328,7 +328,7 @@ namespace _4.OutburstPrevention
                     arr[1] = tunnelEntity.WorkingFace.MiningArea.Horizontal.HorizontalId;
                     arr[2] = tunnelEntity.WorkingFace.MiningArea.MiningAreaId;
                     arr[3] = tunnelEntity.WorkingFace.WorkingFaceID;
-                    arr[4] = tunnelEntity.TunnelID;
+                    arr[4] = tunnelEntity.TunnelId;
                 }
             }
         }

@@ -496,9 +496,9 @@ namespace _1.GasEmission
                     Tunnel tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(iTunnelID);
                     if (tunnelEntity != null)
                     {
-                        oldTunnelId = tunnelEntity.TunnelID;
+                        oldTunnelId = tunnelEntity.TunnelId;
                         //if(
-                        TunnelSimple ts = new TunnelSimple(tunnelEntity.TunnelID, tunnelEntity.TunnelName);
+                        TunnelSimple ts = new TunnelSimple(tunnelEntity.TunnelId, tunnelEntity.TunnelName);
                         selectTunnelSimple1.SelectTunnelItemWithoutHistory(ts);
                     }
                     //if (tunnelEntity != null)

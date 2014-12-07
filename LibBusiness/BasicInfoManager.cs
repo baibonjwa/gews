@@ -455,7 +455,7 @@ namespace LibBusiness
         {
             Tunnel entity = new Tunnel();
             // 巷道id
-            entity.TunnelID = Convert.ToInt32(dr[TunnelInfoDbConstNames.ID]);
+            entity.TunnelId = Convert.ToInt32(dr[TunnelInfoDbConstNames.ID]);
             // 巷道名称
             entity.TunnelName = dr[TunnelInfoDbConstNames.TUNNEL_NAME].ToString();
             // 巷道类型

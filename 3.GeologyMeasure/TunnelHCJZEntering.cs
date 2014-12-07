@@ -336,7 +336,7 @@ namespace _3.GeologyMeasure
             if (workingFace != null)
             {
 
-                TunnelHcJz(coordinates, tunnelZY.TunnelID.ToString(), tunnelFY.TunnelID.ToString(), tunnelQY.TunnelID.ToString(), workingFace.WorkingFaceID, tunnelZY.TunnelWid, tunnelFY.TunnelWid, tunnelQY.TunnelWid);
+                TunnelHcJz(coordinates, tunnelZY.TunnelId.ToString(), tunnelFY.TunnelId.ToString(), tunnelQY.TunnelId.ToString(), workingFace.WorkingFaceID, tunnelZY.TunnelWid, tunnelFY.TunnelWid, tunnelQY.TunnelWid);
             }
         }
 

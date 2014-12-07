@@ -58,7 +58,7 @@ namespace LibBusiness
             if (ds.Tables[0].Rows.Count > 0)
             {
                 cEntity.Id = Convert.ToInt32(ds.Tables[0].Rows[0][CoalExistenceDbConstNames.ID].ToString());
-                cEntity.Tunnel.TunnelID = Convert.ToInt32(ds.Tables[0].Rows[0][CoalExistenceDbConstNames.TUNNEL_ID].ToString());
+                cEntity.Tunnel.TunnelId = Convert.ToInt32(ds.Tables[0].Rows[0][CoalExistenceDbConstNames.TUNNEL_ID].ToString());
                 cEntity.CoordinateX = Convert.ToDouble(ds.Tables[0].Rows[0][CoalExistenceDbConstNames.COORDINATE_X].ToString());
                 cEntity.CoordinateY = Convert.ToDouble(ds.Tables[0].Rows[0][CoalExistenceDbConstNames.COORDINATE_Y].ToString());
                 cEntity.CoordinateZ = Convert.ToDouble(ds.Tables[0].Rows[0][CoalExistenceDbConstNames.COORDINATE_Z].ToString());

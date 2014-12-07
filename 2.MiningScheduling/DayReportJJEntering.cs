@@ -551,7 +551,7 @@ namespace _2.MiningScheduling
                 double dist = dayReportJJEntity.JinChi;
 
                 // 巷道id                
-                string hdid = tunnel.TunnelID.ToString();
+                string hdid = tunnel.TunnelId.ToString();
                 string bid = dayReportJJEntity.BindingID;
                 if (bResult)
                     addHdJc(hdid, dist, bid, tunnel.TunnelWid);
@@ -567,7 +567,7 @@ namespace _2.MiningScheduling
             {
                 Log.Debug("添加进尺数据发送Socket消息");
                 // 通知服务器掘进进尺已经更新
-                UpdateWarningDataMsg msg = new UpdateWarningDataMsg(workingFace.WorkingFaceID, tunnel.TunnelID,
+                UpdateWarningDataMsg msg = new UpdateWarningDataMsg(workingFace.WorkingFaceID, tunnel.TunnelId,
                     DayReportJJDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, DateTime.Now);
                 this.MainForm.SendMsg2Server(msg);
                 Log.Debug("添加进尺数据Socket消息发送完成");
@@ -634,13 +634,13 @@ namespace _2.MiningScheduling
                 // 获取该工作面对应的巷道
                 Tunnel tunnel = BasicInfoManager.getInstance().getTunnelListByWorkingFaceId(workingFace.WorkingFaceID)[0];
                 //在库中查询对应的bid值，获得对应的图形对象进行修改
-                string hdid = tunnel.TunnelID.ToString();
+                string hdid = tunnel.TunnelId.ToString();
                 string bid = _dayReportJJEntity.BindingID;
                 double dist = _dayReportJJEntity.JinChi;
                 UpdateHdJc(hdid, bid, dist);
 
                 UpdateWarningDataMsg msg = new UpdateWarningDataMsg(workingFace.WorkingFaceID,
-                    tunnel.TunnelID,
+                    tunnel.TunnelId,
                     DayReportJJDbConstNames.TABLE_NAME, OPERATION_TYPE.UPDATE, DateTime.Now
                     );
                 this.MainForm.SendMsg2Server(msg);
