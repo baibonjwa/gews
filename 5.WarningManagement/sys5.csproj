@@ -8,8 +8,8 @@
     <ProjectGuid>{02BE8DB6-57BF-4585-B96A-ACEE3BBE0454}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>_5.WarningManagement</RootNamespace>
-    <AssemblyName>5.WarningManagement</AssemblyName>
+    <RootNamespace>sys5</RootNamespace>
+    <AssemblyName>sys5</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -534,9 +534,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\2.MiningScheduling\2.MiningScheduling.csproj">
+    <ProjectReference Include="..\2.MiningScheduling\sys2.csproj">
       <Project>{354D7147-356B-4453-B86A-B113A47271A2}</Project>
-      <Name>2.MiningScheduling</Name>
+      <Name>sys2</Name>
     </ProjectReference>
     <ProjectReference Include="..\GIS\GIS.csproj">
       <Project>{7FF2375E-9594-4EE8-A3CD-40CF245E47FA}</Project>

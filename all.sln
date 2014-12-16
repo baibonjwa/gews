@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "5.WarningManagement", "5.WarningManagement\5.WarningManagement.csproj", "{02BE8DB6-57BF-4585-B96A-ACEE3BBE0454}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sys5", "5.WarningManagement\sys5.csproj", "{02BE8DB6-57BF-4585-B96A-ACEE3BBE0454}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2.MiningScheduling", "2.MiningScheduling\2.MiningScheduling.csproj", "{354D7147-356B-4453-B86A-B113A47271A2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sys2", "2.MiningScheduling\sys2.csproj", "{354D7147-356B-4453-B86A-B113A47271A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3.GeologyMeasure", "3.GeologyMeasure\3.GeologyMeasure.csproj", "{59209FCC-CFF7-4056-A256-CB71293225B1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sys3", "3.GeologyMeasure\sys3.csproj", "{59209FCC-CFF7-4056-A256-CB71293225B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4.OutburstPrevention", "4.OutburstPrevention\4.OutburstPrevention.csproj", "{FDABDFA6-E751-452C-9658-5963162784B0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sys4", "4.OutburstPrevention\sys4.csproj", "{FDABDFA6-E751-452C-9658-5963162784B0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibAbout", "LibAbout\LibAbout.csproj", "{9EC74138-A934-432D-A3B6-42EC84052FF8}"
 EndProject
@@ -33,7 +33,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibSocket", "LibSocket\LibS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GIS", "GIS\GIS.csproj", "{7FF2375E-9594-4EE8-A3CD-40CF245E47FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1.GasEmission", "1.GasEmission\1.GasEmission.csproj", "{F8ECD77C-0D70-4832-9BF2-F94EE3137E40}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sys1", "1.GasEmission\sys1.csproj", "{F8ECD77C-0D70-4832-9BF2-F94EE3137E40}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibEncryptDecrypt", "LibEncryptDecrypt\LibEncryptDecrypt.csproj", "{123585D4-B4A2-4694-81E8-DF9CDCCC487F}"
 EndProject
@@ -43,7 +43,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyHttpClient", "LibHttpClie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeeChartWrapper", "TeeChartWrapper\TeeChartWrapper.csproj", "{B074F430-12B3-4751-96AE-3949FE73EBB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "6.UnderTerminal", "6.UnderTerminal\6.UnderTerminal.csproj", "{831751D1-28D6-43F8-8D17-4DF765D6885C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sys6", "6.UnderTerminal\sys6.csproj", "{831751D1-28D6-43F8-8D17-4DF765D6885C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibXPorperty", "LibXPorperty\LibXPorperty.csproj", "{1238B891-86AD-4851-97A2-0C0302E24BD8}"
 EndProject

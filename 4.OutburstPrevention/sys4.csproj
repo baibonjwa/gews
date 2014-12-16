@@ -5,17 +5,17 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{59209FCC-CFF7-4056-A256-CB71293225B1}</ProjectGuid>
+    <ProjectGuid>{FDABDFA6-E751-452C-9658-5963162784B0}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>_3.GeologyMeasure</RootNamespace>
-    <AssemblyName>3.GeologyMeasure</AssemblyName>
+    <RootNamespace>sys4</RootNamespace>
+    <AssemblyName>sys4</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>D:\GewsPublish\sys3\</PublishUrl>
+    <PublishUrl>D:\GewsPublish\sys4\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -24,12 +24,13 @@
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <UpdateUrl>\\192.168.1.119\publish\sys3\</UpdateUrl>
-    <ProductName>sys3-工作面地质测量管理系统</ProductName>
+    <MapFileExtensions>false</MapFileExtensions>
+    <UpdateUrl>\\192.168.1.119\publish\sys4\</UpdateUrl>
+    <ProductName>sys4-工作面动态防突管理系统</ProductName>
     <PublisherName>沈阳煤科院</PublisherName>
     <SuiteName>预警系统</SuiteName>
-    <ApplicationRevision>13</ApplicationRevision>
+    <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
+    <ApplicationRevision>12</ApplicationRevision>
     <ApplicationVersion>0.10.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -64,7 +65,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
-    <CodeAnalysisLogFile>bin\Debug\3.GeologyMeasure.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisLogFile>bin\Debug\4.OutburstPrevention.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
     <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
     <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
     <ErrorReport>prompt</ErrorReport>
@@ -81,7 +82,7 @@
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x64</PlatformTarget>
-    <CodeAnalysisLogFile>bin\Release\3.GeologyMeasure.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisLogFile>bin\Release\4.OutburstPrevention.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
     <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
     <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
     <ErrorReport>prompt</ErrorReport>
@@ -90,10 +91,10 @@
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>29A94DFF9BBCC5DA501B035A19DDBBCDF560D3C7</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>03E577ECDBA02271B76C05DC77604E3F91BA4FEA</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>3.GeologyMeasure_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>4.OutburstPrevention_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -121,8 +122,15 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Castle.Core.2.5.1\lib\NET35\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.BonusSkins.v13.2, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.BonusSkins.v13.2, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="DevExpress.Data.v13.2, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Printing.v13.2.Core, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <Private>True</Private>
     </Reference>
     <Reference Include="DevExpress.Utils.v13.2, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
@@ -134,27 +142,46 @@
     <Reference Include="DevExpress.XtraEditors.v13.2, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
+    <Reference Include="DevExpress.XtraNavBar.v13.2, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="DevExpress.XtraScheduler.v13.2.Core, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
-    <Reference Include="ESRI.ArcGIS.ADF.Connection.Local, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+    <Reference Include="ESRI.ArcGIS.3DAnalyst, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
       <Private>True</Private>
     </Reference>
     <Reference Include="ESRI.ArcGIS.ADF.Local, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Analyst3DTools, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
     <Reference Include="ESRI.ArcGIS.AxControls, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
-    <Reference Include="ESRI.ArcGIS.Carto, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86">
+    <Reference Include="ESRI.ArcGIS.Carto, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
       <EmbedInteropTypes>False</EmbedInteropTypes>
       <Private>True</Private>
     </Reference>
-    <Reference Include="ESRI.ArcGIS.Controls, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86">
+    <Reference Include="ESRI.ArcGIS.Controls, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
       <EmbedInteropTypes>False</EmbedInteropTypes>
       <Private>True</Private>
     </Reference>
-    <Reference Include="ESRI.ArcGIS.Display, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86">
+    <Reference Include="ESRI.ArcGIS.ConversionTools, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.DataSourcesGDB, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Display, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.DisplayUI, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
       <EmbedInteropTypes>False</EmbedInteropTypes>
       <Private>True</Private>
     </Reference>
@@ -162,24 +189,44 @@
       <EmbedInteropTypes>False</EmbedInteropTypes>
       <Private>True</Private>
     </Reference>
-    <Reference Include="ESRI.ArcGIS.Geometry, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86">
+    <Reference Include="ESRI.ArcGIS.Geometry, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
       <EmbedInteropTypes>False</EmbedInteropTypes>
       <Private>True</Private>
     </Reference>
     <Reference Include="ESRI.ArcGIS.Geoprocessor, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
-    <Reference Include="ESRI.ArcGIS.System, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86">
+    <Reference Include="ESRI.ArcGIS.System, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>False</EmbedInteropTypes>
       <Private>True</Private>
     </Reference>
-    <Reference Include="ESRI.ArcGIS.SystemUI, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86">
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference>
-    <Reference Include="ESRI.ArcGIS.Version, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86">
+    <Reference Include="ESRI.ArcGIS.SystemUI, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
       <Private>True</Private>
     </Reference>
-    <Reference Include="FarPoint.Win, Version=5.0.3518.2008, Culture=neutral, PublicKeyToken=327c3516b1b18457">
+    <Reference Include="ESRI.ArcGIS.Version, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Windows\assembly\GAC_MSIL\ESRI.ArcGIS.Version\10.1.0.0__8fc3cc631e44ad86\ESRI.ArcGIS.Version.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FarPoint.CalcEngine, Version=5.0.3518.2008, Culture=neutral, PublicKeyToken=327c3516b1b18457, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FarPoint.Excel, Version=5.0.3518.2008, Culture=neutral, PublicKeyToken=327c3516b1b18457, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FarPoint.PDF, Version=5.0.3518.2008, Culture=neutral, PublicKeyToken=327c3516b1b18457, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FarPoint.PluginCalendar.WinForms, Version=5.0.3518.2008, Culture=neutral, PublicKeyToken=327c3516b1b18457, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FarPoint.Win, Version=5.0.3518.2008, Culture=neutral, PublicKeyToken=327c3516b1b18457, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FarPoint.Win.Chart, Version=5.0.3518.2008, Culture=neutral, PublicKeyToken=327c3516b1b18457, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
     <Reference Include="FarPoint.Win.Spread, Version=5.0.3518.2008, Culture=neutral, PublicKeyToken=327c3516b1b18457, processorArchitecture=MSIL">
@@ -188,11 +235,6 @@
     <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Iesi.Collections.1.0.1\lib\Iesi.Collections.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-      <HintPath>..\internalrefs\Microsoft.Office.Interop.Excel.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate, Version=3.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -210,242 +252,117 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NHibernate.3.0.0.4000\lib\Remotion.Data.Linq.dll</HintPath>
     </Reference>
-    <Reference Include="stdole, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BigFaultageInfoEntering.cs">
+    <Compile Include="GasContentInfoEntering.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BigFaultageInfoEntering.Designer.cs">
-      <DependentUpon>BigFaultageInfoEntering.cs</DependentUpon>
+    <Compile Include="GasContentInfoEntering.Designer.cs">
+      <DependentUpon>GasContentInfoEntering.cs</DependentUpon>
     </Compile>
-    <Compile Include="BigFaultageInfoManagement.cs">
+    <Compile Include="GasContentInfoManagement.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BigFaultageInfoManagement.Designer.cs">
-      <DependentUpon>BigFaultageInfoManagement.cs</DependentUpon>
+    <Compile Include="GasContentInfoManagement.Designer.cs">
+      <DependentUpon>GasContentInfoManagement.cs</DependentUpon>
     </Compile>
-    <Compile Include="BoreholeInfoEntering.cs">
+    <Compile Include="GasPressureInfoEntering.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BoreholeInfoEntering.Designer.cs">
-      <DependentUpon>BoreholeInfoEntering.cs</DependentUpon>
+    <Compile Include="GasPressureInfoEntering.Designer.cs">
+      <DependentUpon>GasPressureInfoEntering.cs</DependentUpon>
     </Compile>
-    <Compile Include="BoreholeInfoManagement.cs">
+    <Compile Include="GasPressureInfoManagement.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BoreholeInfoManagement.Designer.cs">
-      <DependentUpon>BoreholeInfoManagement.cs</DependentUpon>
+    <Compile Include="GasPressureInfoManagement.Designer.cs">
+      <DependentUpon>GasPressureInfoManagement.cs</DependentUpon>
     </Compile>
-    <Compile Include="CollapsePillarsEntering.cs">
+    <Compile Include="K1DeleteMessageBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CollapsePillarsEntering.Designer.cs">
-      <DependentUpon>CollapsePillarsEntering.cs</DependentUpon>
+    <Compile Include="K1DeleteMessageBox.Designer.cs">
+      <DependentUpon>K1DeleteMessageBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="CollapsePillarsInfoEntering.cs">
+    <Compile Include="K1ValueEntering.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CollapsePillarsInfoEntering.Designer.cs">
-      <DependentUpon>CollapsePillarsInfoEntering.cs</DependentUpon>
+    <Compile Include="K1ValueEntering.Designer.cs">
+      <DependentUpon>K1ValueEntering.cs</DependentUpon>
     </Compile>
-    <Compile Include="CollapsePillarsManagement.cs">
+    <Compile Include="K1ValueManagement.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CollapsePillarsManagement.Designer.cs">
-      <DependentUpon>CollapsePillarsManagement.cs</DependentUpon>
+    <Compile Include="K1ValueManagement.Designer.cs">
+      <DependentUpon>K1ValueManagement.cs</DependentUpon>
     </Compile>
-    <Compile Include="TunnelHCEntering.cs">
+    <Compile Include="MainForm_OP.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TunnelHCEntering.Designer.cs">
-      <DependentUpon>TunnelHCEntering.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PitshaftInfoManagement.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PitshaftInfoManagement.Designer.cs">
-      <DependentUpon>PitshaftInfoManagement.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PitshaftInfoEntering.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PitshaftInfoEntering.Designer.cs">
-      <DependentUpon>PitshaftInfoEntering.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ProspectingLineInfoManagement.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ProspectingLineInfoManagement.Designer.cs">
-      <DependentUpon>ProspectingLineInfoManagement.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ProspectingLineInfoEntering.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ProspectingLineInfoEntering.Designer.cs">
-      <DependentUpon>ProspectingLineInfoEntering.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FaultageInfoManagement.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FaultageInfoManagement.Designer.cs">
-      <DependentUpon>FaultageInfoManagement.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MainForm_GM.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MainForm_GM.Designer.cs">
-      <DependentUpon>MainForm_GM.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TunnelHChuanEntering.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TunnelHChuanEntering.Designer.cs">
-      <DependentUpon>TunnelHChuanEntering.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TunnelHCJZEntering.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TunnelHCJZEntering.Designer.cs">
-      <DependentUpon>TunnelHCJZEntering.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TunnelHCManagement.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TunnelHCManagement.Designer.cs">
-      <DependentUpon>TunnelHCManagement.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TunnelInfoManagement.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TunnelInfoManagement.Designer.cs">
-      <DependentUpon>TunnelInfoManagement.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TunnelJJEntering.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TunnelJJEntering.Designer.cs">
-      <DependentUpon>TunnelJJEntering.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TunnelJJManagement.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TunnelJJManagement.Designer.cs">
-      <DependentUpon>TunnelJJManagement.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TunnelJZEntering.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TunnelJZEntering.Designer.cs">
-      <DependentUpon>TunnelJZEntering.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TunnelHChuanManagement.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TunnelHChuanManagement.Designer.cs">
-      <DependentUpon>TunnelHChuanManagement.cs</DependentUpon>
-    </Compile>
-    <Compile Include="WireInfoEntering.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WireInfoEntering.Designer.cs">
-      <DependentUpon>WireInfoEntering.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FaultageInfoEntering.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FaultageInfoEntering.Designer.cs">
-      <DependentUpon>FaultageInfoEntering.cs</DependentUpon>
+    <Compile Include="MainForm_OP.Designer.cs">
+      <DependentUpon>MainForm_OP.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WireInfoManagement.cs">
+    <Compile Include="GasGushQuantityInfoEntering.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WireInfoManagement.Designer.cs">
-      <DependentUpon>WireInfoManagement.cs</DependentUpon>
+    <Compile Include="GasGushQuantityInfoEntering.Designer.cs">
+      <DependentUpon>GasGushQuantityInfoEntering.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="BigFaultageInfoEntering.resx">
-      <DependentUpon>BigFaultageInfoEntering.cs</DependentUpon>
+    <Compile Include="GasGushQuantityInfoManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GasGushQuantityInfoManagement.Designer.cs">
+      <DependentUpon>GasGushQuantityInfoManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SValueEntering.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SValueEntering.Designer.cs">
+      <DependentUpon>SValueEntering.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SValueManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SValueManagement.Designer.cs">
+      <DependentUpon>SValueManagement.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="GasContentInfoEntering.resx">
+      <DependentUpon>GasContentInfoEntering.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="BigFaultageInfoManagement.resx">
-      <DependentUpon>BigFaultageInfoManagement.cs</DependentUpon>
+    <EmbeddedResource Include="GasContentInfoManagement.resx">
+      <DependentUpon>GasContentInfoManagement.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="BoreholeInfoEntering.resx">
-      <DependentUpon>BoreholeInfoEntering.cs</DependentUpon>
+    <EmbeddedResource Include="GasPressureInfoEntering.resx">
+      <DependentUpon>GasPressureInfoEntering.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="BoreholeInfoManagement.resx">
-      <DependentUpon>BoreholeInfoManagement.cs</DependentUpon>
+    <EmbeddedResource Include="GasPressureInfoManagement.resx">
+      <DependentUpon>GasPressureInfoManagement.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CollapsePillarsEntering.resx">
-      <DependentUpon>CollapsePillarsEntering.cs</DependentUpon>
+    <EmbeddedResource Include="K1DeleteMessageBox.resx">
+      <DependentUpon>K1DeleteMessageBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CollapsePillarsInfoEntering.resx">
-      <DependentUpon>CollapsePillarsInfoEntering.cs</DependentUpon>
+    <EmbeddedResource Include="K1ValueEntering.resx">
+      <DependentUpon>K1ValueEntering.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CollapsePillarsManagement.resx">
-      <DependentUpon>CollapsePillarsManagement.cs</DependentUpon>
+    <EmbeddedResource Include="K1ValueManagement.resx">
+      <DependentUpon>K1ValueManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm_OP.resx">
+      <DependentUpon>MainForm_OP.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
-    <EmbeddedResource Include="TunnelHCEntering.resx">
-      <DependentUpon>TunnelHCEntering.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PitshaftInfoManagement.resx">
-      <DependentUpon>PitshaftInfoManagement.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PitshaftInfoEntering.resx">
-      <DependentUpon>PitshaftInfoEntering.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ProspectingLineInfoManagement.resx">
-      <DependentUpon>ProspectingLineInfoManagement.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ProspectingLineInfoEntering.resx">
-      <DependentUpon>ProspectingLineInfoEntering.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FaultageInfoManagement.resx">
-      <DependentUpon>FaultageInfoManagement.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MainForm_GM.resx">
-      <DependentUpon>MainForm_GM.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TunnelHChuanEntering.resx">
-      <DependentUpon>TunnelHChuanEntering.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TunnelHChuanManagement.resx">
-      <DependentUpon>TunnelHChuanManagement.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TunnelHCJZEntering.resx">
-      <DependentUpon>TunnelHCJZEntering.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TunnelHCManagement.resx">
-      <DependentUpon>TunnelHCManagement.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TunnelInfoManagement.resx">
-      <DependentUpon>TunnelInfoManagement.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TunnelJJEntering.resx">
-      <DependentUpon>TunnelJJEntering.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TunnelJJManagement.resx">
-      <DependentUpon>TunnelJJManagement.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TunnelJZEntering.resx">
-      <DependentUpon>TunnelJZEntering.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WireInfoEntering.resx">
-      <DependentUpon>WireInfoEntering.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FaultageInfoEntering.resx">
-      <DependentUpon>FaultageInfoEntering.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -456,10 +373,19 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="WireInfoManagement.resx">
-      <DependentUpon>WireInfoManagement.cs</DependentUpon>
+    <EmbeddedResource Include="GasGushQuantityInfoEntering.resx">
+      <DependentUpon>GasGushQuantityInfoEntering.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="3.GeologyMeasure_TemporaryKey.pfx" />
+    <EmbeddedResource Include="GasGushQuantityInfoManagement.resx">
+      <DependentUpon>GasGushQuantityInfoManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SValueEntering.resx">
+      <DependentUpon>SValueEntering.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SValueManagement.resx">
+      <DependentUpon>SValueManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="4.OutburstPrevention_TemporaryKey.pfx" />
     <None Include="app.config" />
     <Content Include="Config.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -492,7 +418,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Content Include="工作面地质测量管理系统帮助文件.chm">
+    <Content Include="工作面动态防突管理系统帮助文件.chm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="symbol.ServerStyle">
@@ -502,6 +428,39 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="综合柱状图.mxd" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GIS\GIS.csproj">
@@ -528,6 +487,10 @@
       <Project>{2EBCDE4B-A244-4CCA-A1AE-1A884D81772B}</Project>
       <Name>LibCommon</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LibConfig\LibConfig.csproj">
+      <Project>{697EED3C-3244-494D-B663-296CC80D4022}</Project>
+      <Name>LibConfig</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LibDatabase\LibDatabase.csproj">
       <Project>{38B3BE6B-BD0C-4108-9414-A728F5990A0C}</Project>
       <Name>LibDatabase</Name>
@@ -544,38 +507,23 @@
       <Project>{ED482A03-E8D9-4A16-856F-BE8F56B454C0}</Project>
       <Name>LibLoginForm</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LibPanels\LibPanels.csproj">
+      <Project>{FC8D5CE1-F721-401B-BAC2-C265D6FCC13D}</Project>
+      <Name>LibPanels</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LibSocket\LibSocket.csproj">
       <Project>{93547539-03E2-49C3-88FC-3CCD81942D5F}</Project>
       <Name>LibSocket</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
-      <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
-      <Visible>False</Visible>
-      <ProductName>Windows Installer 4.5</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="LoginBackground.bmp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="系统三关于图片.jpg">
+    <Content Include="系统四关于图片.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

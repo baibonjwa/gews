@@ -26,7 +26,7 @@ using System.Threading;
 
 namespace _1.GasEmission
 {
-    public partial class MainFormGe : MainFrm
+    public partial class MainFormGe 
     {
         private int _updateFrequency; // 10s
 
