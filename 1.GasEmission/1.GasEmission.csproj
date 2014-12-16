@@ -154,9 +154,7 @@
     <Compile Include="GasConcentrationProbeDataManamement.Designer.cs">
       <DependentUpon>GasConcentrationProbeDataManamement.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForm_GE.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="MainForm_GE.cs" />
     <Compile Include="MainForm_GE.Designer.cs">
       <DependentUpon>MainForm_GE.cs</DependentUpon>
     </Compile>

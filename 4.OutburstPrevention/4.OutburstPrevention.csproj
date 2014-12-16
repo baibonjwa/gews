@@ -274,9 +274,7 @@
     <Compile Include="K1ValueManagement.Designer.cs">
       <DependentUpon>K1ValueManagement.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForm_OP.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="MainForm_OP.cs" />
     <Compile Include="MainForm_OP.Designer.cs">
       <DependentUpon>MainForm_OP.cs</DependentUpon>
     </Compile>

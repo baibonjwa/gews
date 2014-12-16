@@ -207,21 +207,15 @@
     <Compile Include="BoreholeInfoManagement.Designer.cs">
       <DependentUpon>BoreholeInfoManagement.cs</DependentUpon>
     </Compile>
-    <Compile Include="CollapsePillarsEntering.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="CollapsePillarsEntering.cs" />
     <Compile Include="CollapsePillarsEntering.Designer.cs">
       <DependentUpon>CollapsePillarsEntering.cs</DependentUpon>
     </Compile>
-    <Compile Include="CollapsePillarsInfoEntering.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="CollapsePillarsInfoEntering.cs" />
     <Compile Include="CollapsePillarsInfoEntering.Designer.cs">
       <DependentUpon>CollapsePillarsInfoEntering.cs</DependentUpon>
     </Compile>
-    <Compile Include="CollapsePillarsManagement.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="CollapsePillarsManagement.cs" />
     <Compile Include="CollapsePillarsManagement.Designer.cs">
       <DependentUpon>CollapsePillarsManagement.cs</DependentUpon>
     </Compile>
@@ -255,15 +249,11 @@
     <Compile Include="ProspectingLineInfoEntering.Designer.cs">
       <DependentUpon>ProspectingLineInfoEntering.cs</DependentUpon>
     </Compile>
-    <Compile Include="FaultageInfoManagement.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="FaultageInfoManagement.cs" />
     <Compile Include="FaultageInfoManagement.Designer.cs">
       <DependentUpon>FaultageInfoManagement.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForm_GM.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="MainForm_GM.cs" />
     <Compile Include="MainForm_GM.Designer.cs">
       <DependentUpon>MainForm_GM.cs</DependentUpon>
     </Compile>
@@ -321,9 +311,7 @@
     <Compile Include="WireInfoEntering.Designer.cs">
       <DependentUpon>WireInfoEntering.cs</DependentUpon>
     </Compile>
-    <Compile Include="FaultageInfoEntering.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="FaultageInfoEntering.cs" />
     <Compile Include="FaultageInfoEntering.Designer.cs">
       <DependentUpon>FaultageInfoEntering.cs</DependentUpon>
     </Compile>
