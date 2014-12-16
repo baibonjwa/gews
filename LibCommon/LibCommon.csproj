@@ -141,6 +141,7 @@
     <Compile Include="Alert.cs" />
     <Compile Include="AuthorizeInterceptor.cs" />
     <Compile Include="Check.cs" />
+    <Compile Include="ConstTable.cs" />
     <Compile Include="DateTimeUtil.cs" />
     <Compile Include="DXSeting.cs" />
     <Compile Include="Const.cs" />

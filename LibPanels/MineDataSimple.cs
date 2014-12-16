@@ -337,14 +337,14 @@ namespace LibPanels
                 ceEntity.SaveAndFlush();
                 if (Text == new LibPanels(MineDataPanelName.CoalExistence).panelFormName)
                 {
-                    UpdateWarningDataMsg msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.ITunnelId,
-                        CoalExistenceDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, dtpDateTime.Value);
+                    var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.ITunnelId,
+                        CoalExistence.TableName, OPERATION_TYPE.ADD, dtpDateTime.Value);
                     MainForm.SendMsg2Server(msg);
                 }
                 else if (Text == new LibPanels(MineDataPanelName.CoalExistence_Change).panelFormName)
                 {
                     UpdateWarningDataMsg msg = new UpdateWarningDataMsg(Const.INVALID_ID, this.selectTunnelSimple1.ITunnelId,
-                         CoalExistenceDbConstNames.TABLE_NAME, OPERATION_TYPE.UPDATE, dtpDateTime.Value);
+                         CoalExistence.TableName, OPERATION_TYPE.UPDATE, dtpDateTime.Value);
                     MainForm.SendMsg2Server(msg);
                 }
                 return true;

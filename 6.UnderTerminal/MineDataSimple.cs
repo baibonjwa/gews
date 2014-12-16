@@ -334,7 +334,7 @@ namespace UnderTerminal
                 ceEntity.SaveAndFlush();
 
                 UpdateWarningDataMsg msg = new UpdateWarningDataMsg(this.mainWin.workingfaceId, this.tunnelId,
-                    CoalExistenceDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, dtpDateTime.Value);
+                   CoalExistence.TableName, OPERATION_TYPE.ADD, dtpDateTime.Value);
                 mainWin.SendMsg2Server(msg);
                 bResult = true;
             }

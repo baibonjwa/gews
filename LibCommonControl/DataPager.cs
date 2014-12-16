@@ -189,7 +189,7 @@ namespace LibCommonControl
                 // 获取当前显示页数
                 int currentPage = Convert.ToInt32(this.txtCurrentPage.Text);
 
-                return pageSize * (currentPage - 1) + 1;
+                return pageSize * (currentPage - 1);
             }
 
         }
