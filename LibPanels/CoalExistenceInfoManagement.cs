@@ -7,12 +7,6 @@
 // V1.0 新建
 // ******************************************************************
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using LibCommonControl;
 using LibBusiness;
@@ -258,35 +252,6 @@ namespace LibPanels
         }
 
         /// <summary>
-        /// 煤层赋存实体赋值
-        /// </summary>
-        //private void setMineDataEntityValue()
-        //{
-        //    for (int i = 0; i < rowsCount; i++)
-        //    {
-        //        if (fpCoalExistence.Sheets[0].Cells[rowDetailStartIndex + i, 0].Value != null && (bool)fpCoalExistence.Sheets[0].Cells[rowDetailStartIndex + i, 0].Value == true)
-        //        {
-        //            ceEntity.Id = Convert.ToInt32(ds.Tables[0].Rows[i][CoalExistenceDbConstNames.ID]);
-        //            ceEntity.Tunnel.TunnelId = Convert.ToInt32(ds.Tables[0].Rows[i][CoalExistenceDbConstNames.TUNNEL_ID]);
-        //            ceEntity.CoordinateX = Convert.ToDouble(ds.Tables[0].Rows[i][CoalExistenceDbConstNames.COORDINATE_X]);
-        //            ceEntity.CoordinateY = Convert.ToDouble(ds.Tables[0].Rows[i][CoalExistenceDbConstNames.COORDINATE_Y]);
-        //            ceEntity.CoordinateZ = Convert.ToDouble(ds.Tables[0].Rows[i][CoalExistenceDbConstNames.COORDINATE_Z]);
-        //            ceEntity.WorkStyle = ds.Tables[0].Rows[i][GasDataDbConstNames.WORK_STYLE].ToString();
-        //            ceEntity.WorkTime = ds.Tables[0].Rows[i][GasDataDbConstNames.WORK_TIME].ToString();
-        //            ceEntity.TeamName = ds.Tables[0].Rows[i][GasDataDbConstNames.TEAM_NAME].ToString();
-        //            ceEntity.Submitter = ds.Tables[0].Rows[i][GasDataDbConstNames.SUBMITTER].ToString();
-        //            ceEntity.Datetime = Convert.ToDateTime(ds.Tables[0].Rows[i][GasDataDbConstNames.DATETIME]);
-        //            ceEntity.IsLevelDisorder = Convert.ToInt32(ds.Tables[0].Rows[i][CoalExistenceDbConstNames.IS_LEVEL_DISORDER]);
-        //            ceEntity.CoalThickChange = Convert.ToDouble(ds.Tables[0].Rows[i][CoalExistenceDbConstNames.COAL_THICK_CHANGE]);
-        //            ceEntity.TectonicCoalThick = Convert.ToDouble(ds.Tables[0].Rows[i][CoalExistenceDbConstNames.TECTONIC_COAL_THICK]);
-        //            ceEntity.IsLevelChange = Convert.ToInt32(ds.Tables[0].Rows[i][CoalExistenceDbConstNames.IS_LEVEL_CHANGE]);
-        //            ceEntity.CoalDistoryLevel = ds.Tables[0].Rows[i][CoalExistenceDbConstNames.COAL_DISTORY_LEVEL].ToString();
-        //            ceEntity.IsTowardsChange = Convert.ToInt32(ds.Tables[0].Rows[i][CoalExistenceDbConstNames.IS_TOWARDS_CHANGE].ToString());
-        //        }
-        //    }
-        //}
-
-        /// <summary>
         ///  添加按钮事件
         /// </summary>
         /// <param name="sender"></param>
@@ -319,8 +284,9 @@ namespace LibPanels
                     ceEntity = coalExistences[i];
                 }
             }
-            MineData m = new MineData(ceEntity, this.MainForm);
+            var m = new MineData(ceEntity, this.MainForm);
             _tmpRowIndex = fpCoalExistence.ActiveSheet.ActiveRowIndex;
+
             m.Text = new LibPanels(MineDataPanelName.CoalExistence_Change).panelFormName;
             if (DialogResult.OK == m.ShowDialog())
             {
@@ -374,59 +340,6 @@ namespace LibPanels
         {
             this.Close();
         }
-
-        /******************用于Farpoint删除选择列，暂时保留******************
-        private void removeColumn()
-        {
-            int searchCount = rowsCount+2;
-            if (searchCount > 0)
-            {
-                for (int i = 0; i < searchCount; i++)
-                {
-                    if (rowDetailStartIndex == 3)
-                    {
-                        continue;
-                    }
-                    this.fpCoalExistence.Sheets[0].Cells[rowDetailStartIndex + i, 0].CellType = new FarPoint.Win.Spread.CellType.TextCellType();
-                    this.fpCoalExistence.Sheets[0].Cells[rowDetailStartIndex + i, 0].ResetText();
-                    this.fpCoalExistence.Sheets[0].Cells[rowDetailStartIndex + i, 0].Text = this.fpCoalExistence.Sheets[0].Cells[rowDetailStartIndex + i, 1].Text;
-                    this.fpCoalExistence.Sheets[0].Cells[rowDetailStartIndex + i, 1].ResetText();
-                }
-                fpCoalExistence.Sheets[0].Columns[0].Width = 115;
-                fpCoalExistence.Sheets[0].Columns[1].Remove();
-            }
-        }
-
-        private void addColumn()
-        {
-            fpCoalExistence.Sheets[0].Columns[1].Add();
-            int searchCount = rowsCount+2;
-            if (searchCount > 0)
-            {
-                int rowDetailStartIndex = 2;
-                for (int i = 0; i < searchCount; i++)
-                {
-                    if (rowDetailStartIndex == 3)
-                    {
-                        continue;
-                    }
-                    this.fpCoalExistence.Sheets[0].Cells[rowDetailStartIndex + i, 1].Text = this.fpCoalExistence.Sheets[0].Cells[rowDetailStartIndex + i, 0].Text;
-                    this.fpCoalExistence.Sheets[0].Cells[rowDetailStartIndex + i, 0].ResetText();
-                    if (rowDetailStartIndex == 2)
-                    {
-                        this.fpCoalExistence.Sheets[0].Cells[rowDetailStartIndex + i, 0].Text = "选择";
-                        continue;
-                    }
-                    this.fpCoalExistence.Sheets[0].Cells[rowDetailStartIndex + i, 0].CellType = new FarPoint.Win.Spread.CellType.CheckBoxCellType();
-                }
-                this.fpCoalExistence.Sheets[0].AddSpanCell(2, 1, 2, 1);
-                this.fpCoalExistence.Sheets[0].Cells[2, 1].Border = this.fpCoalExistence.Sheets[0].Cells[2, 0].Border;
-                this.fpCoalExistence.Sheets[0].Columns[1].Width = 115;
-                this.fpCoalExistence.Sheets[0].Columns[0].Width = 36;
-                bindFpGasEmissionData();
-            }
-        }
-        **********************************************************/
 
         /// <summary>
         /// 导出按钮事件

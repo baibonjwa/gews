@@ -1,13 +1,4 @@
-﻿// ******************************************************************
-// 概  述：
-// 作  者：
-// 日  期：
-// 版本号：V1.0
-// 版本信息：
-// V1.0 新建
-// ******************************************************************
-
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using Castle.ActiveRecord;

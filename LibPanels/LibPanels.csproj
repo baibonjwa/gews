@@ -162,11 +162,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CoalExistenceInfo.cs">
+    <Compile Include="CoalExistenceInfoEntering.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CoalExistenceInfo.Designer.cs">
-      <DependentUpon>CoalExistenceInfo.cs</DependentUpon>
+    <Compile Include="CoalExistenceInfoEntering.Designer.cs">
+      <DependentUpon>CoalExistenceInfoEntering.cs</DependentUpon>
     </Compile>
     <Compile Include="CoalExistenceInfoManagement.cs">
       <SubType>Form</SubType>
@@ -266,8 +266,8 @@
     <Compile Include="VentilationInfoManagement.Designer.cs">
       <DependentUpon>VentilationInfoManagement.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="CoalExistenceInfo.resx">
-      <DependentUpon>CoalExistenceInfo.cs</DependentUpon>
+    <EmbeddedResource Include="CoalExistenceInfoEntering.resx">
+      <DependentUpon>CoalExistenceInfoEntering.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CoalExistenceInfoManagement.resx">
       <DependentUpon>CoalExistenceInfoManagement.cs</DependentUpon>

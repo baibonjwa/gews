@@ -1,95 +1,86 @@
-﻿// ******************************************************************
-// 概  述：井下数据瓦斯信息实体
-// 作  者：宋英杰
-// 创建日期：2014/4/15
-// 版本号：V1.0
-// 版本信息：
-// V1.0 新建
-// ******************************************************************
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Castle.ActiveRecord;
+using NHibernate.Criterion;
 
 namespace LibEntity
 {
-    public class GasData:MineData
+    [ActiveRecord("T_COAL_EXISTENCE")]
+    public class GasData : MineData
     {
-        //瓦斯探头断电次数
-        private double powerFailure;
         /// <summary>
-        /// 设置或获取瓦斯探头断电次数
+        ///     设置或获取瓦斯探头断电次数
         /// </summary>
-        public double PowerFailure
-        {
-            get { return powerFailure; }
-            set { powerFailure = value; }
-        }
-        //吸钻预兆次数
-        private double drillTimes;
-        /// <summary>
-        /// 设置或获取吸钻预兆次数
-        /// </summary>
-        public double DrillTimes
-        {
-            get { return drillTimes; }
-            set { drillTimes = value; }
-        }
-        //瓦斯忽大忽小预兆次数
-        private double gasTimes;
-        //设置或获取瓦斯忽大忽小预兆次数
-        public double GasTimes
-        {
-            get { return gasTimes; }
-            set { gasTimes = value; }
-        }
-        //气温下降预兆次数
-        private double tempDownTimes;
-        /// <summary>
-        /// 设置或获取气温下降预兆次数
-        /// </summary>
-        public double TempDownTimes
-        {
-            get { return tempDownTimes; }
-            set { tempDownTimes = value; }
-        }
-        //煤炮频繁预兆次数
-        private double coalBangTimes;
-        //设置或获取煤炮频繁预兆次数
-        public double CoalBangTimes
-        {
-            get { return coalBangTimes; }
-            set { coalBangTimes = value; }
-        }
-        //喷孔次数
-        private double craterTimes;
-        //设置或获取喷孔次数
-        public double CraterTimes
-        {
-            get { return craterTimes; }
-            set { craterTimes = value; }
-        }
-        //顶钻次数
-        private double stoperTimes;
-        /// <summary>
-        /// 设置或获取顶钻次数
-        /// </summary>
-        public double StoperTimes
-        {
-            get { return stoperTimes; }
-            set { stoperTimes = value; }
-        }
-
-        //瓦斯浓度
-        private double gasThickness;
+        [Property("POWER_FALIURE")]
+        public double PowerFailure { get; set; }
 
         /// <summary>
-        /// 瓦斯浓度
+        ///     设置或获取吸钻预兆次数
         /// </summary>
-        public double GasThickness
+        [Property("DRILL_TIMES")]
+        public double DrillTimes { get; set; }
+
+        /// <summary>
+        ///     设置或获取瓦斯忽大忽小预兆次数
+        /// </summary>
+        [Property("GAS_TIMES")]
+        public double GasTimes { get; set; }
+
+        /// <summary>
+        ///     设置或获取气温下降预兆次数
+        /// </summary>
+        [Property("TEMP_DOWN_TIMES")]
+        public double TempDownTimes { get; set; }
+
+        /// <summary>
+        ///     设置或获取煤炮频繁预兆次数
+        /// </summary>
+        [Property("COAL_BANG_TIMES")]
+        public double CoalBangTimes { get; set; }
+
+        /// <summary>
+        ///     设置或获取喷孔次数
+        /// </summary>
+        [Property("CRATER_TIMES")]
+        public double CraterTimes { get; set; }
+
+        /// <summary>
+        ///     设置或获取顶钻次数
+        /// </summary>
+        [Property("STOPER_TIMES")]
+        public double StoperTimes { get; set; }
+
+        /// <summary>
+        ///     瓦斯浓度
+        /// </summary>
+        [Property("GAS_THICKNESS")]
+        public double GasThickness { get; set; }
+
+        public static void FindById(int id)
         {
-            get { return gasThickness; }
-            set { gasThickness = value; }
+            FindByPrimaryKey(typeof(GasData), id);
         }
+
+        public static int GetRecordCount()
+        {
+            return FindAll(typeof(GasData)).Length;
+        }
+
+
+        public static GasData[] SlicedFindByCondition(int firstResult, int maxResult, int tunnelId,
+            DateTime startTime, DateTime endTime)
+        {
+            GasData[] results;
+            var criterion = new List<ICriterion> { Restrictions.Eq("Tunnel.TunnelId", tunnelId) };
+            if (startTime != DateTime.MinValue && endTime != DateTime.MinValue)
+            {
+                criterion.Add(Restrictions.Between("Datetime", startTime, endTime));
+            }
+            results = (GasData[])SlicedFindAll(typeof(GasData), firstResult, maxResult, criterion.ToArray());
+            return results;
+        }
+
     }
+
+
 }

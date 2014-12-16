@@ -22,7 +22,7 @@ namespace LibPanels
     public partial class GasInfoEntering : Form
     {
         #region ******变量声明******
-        public GasData gasDataEntity = new GasData();
+        public GasData GasDataEntity = new GasData();
         double tmpDouble = 0;
         #endregion ******变量声明******
 
@@ -53,7 +53,7 @@ namespace LibPanels
         {
             if (double.TryParse(txtPowerFailure.Text, out tmpDouble))
             {
-                gasDataEntity.PowerFailure = tmpDouble;
+                GasDataEntity.PowerFailure = tmpDouble;
                 tmpDouble = 0;
             }
         }
@@ -67,7 +67,7 @@ namespace LibPanels
         {
             if (double.TryParse(txtDrillTimes.Text, out tmpDouble))
             {
-                gasDataEntity.DrillTimes = tmpDouble;
+                GasDataEntity.DrillTimes = tmpDouble;
                 tmpDouble = 0;
             }
         }
@@ -81,7 +81,7 @@ namespace LibPanels
         {
             if (double.TryParse(txtGasTimes.Text, out tmpDouble))
             {
-                gasDataEntity.GasTimes = tmpDouble;
+                GasDataEntity.GasTimes = tmpDouble;
                 tmpDouble = 0;
             }
         }
@@ -95,7 +95,7 @@ namespace LibPanels
         {
             if (double.TryParse(txtTempDownTimes.Text, out tmpDouble))
             {
-                gasDataEntity.TempDownTimes = tmpDouble;
+                GasDataEntity.TempDownTimes = tmpDouble;
                 tmpDouble = 0;
             }
         }
@@ -109,7 +109,7 @@ namespace LibPanels
         {
             if (double.TryParse(txtCoalBangTimes.Text, out tmpDouble))
             {
-                gasDataEntity.CoalBangTimes = tmpDouble;
+                GasDataEntity.CoalBangTimes = tmpDouble;
                 tmpDouble = 0;
             }
         }
@@ -123,7 +123,7 @@ namespace LibPanels
         {
             if (double.TryParse(txtCraterTimes.Text, out tmpDouble))
             {
-                gasDataEntity.CraterTimes = tmpDouble;
+                GasDataEntity.CraterTimes = tmpDouble;
                 tmpDouble = 0;
             }
         }
@@ -137,7 +137,7 @@ namespace LibPanels
         {
             if (double.TryParse(txtStoperTimes.Text, out tmpDouble))
             {
-                gasDataEntity.StoperTimes = tmpDouble;
+                GasDataEntity.StoperTimes = tmpDouble;
                 tmpDouble = 0;
             }
         }
@@ -151,7 +151,7 @@ namespace LibPanels
         {
             if (double.TryParse(txtGasThickness.Text, out tmpDouble))
             {
-                gasDataEntity.GasThickness = tmpDouble;
+                GasDataEntity.GasThickness = tmpDouble;
                 tmpDouble = 0;
             }
         }

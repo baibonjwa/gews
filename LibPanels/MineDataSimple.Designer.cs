@@ -52,7 +52,7 @@ namespace LibPanels
             this.labCoordinateY = new System.Windows.Forms.Label();
             this.labCoordinateX = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.selectTunnelSimple1 = new LibCommonForm.SelectTunnelSimple(this.MainForm);
+            this.selectTunnelSimple1 = new LibCommonForm.SelectTunnelSimple();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -64,17 +64,17 @@ namespace LibPanels
             // 
             // txtCoordinateZ
             // 
-            this.txtCoordinateZ.Location = new System.Drawing.Point(52, 72);
+            this.txtCoordinateZ.Location = new System.Drawing.Point(61, 84);
             this.txtCoordinateZ.Name = "txtCoordinateZ";
-            this.txtCoordinateZ.Size = new System.Drawing.Size(90, 21);
+            this.txtCoordinateZ.Size = new System.Drawing.Size(104, 22);
             this.txtCoordinateZ.TabIndex = 5;
             this.txtCoordinateZ.Text = "0";
             // 
             // txtCoordinateY
             // 
-            this.txtCoordinateY.Location = new System.Drawing.Point(52, 45);
+            this.txtCoordinateY.Location = new System.Drawing.Point(61, 52);
             this.txtCoordinateY.Name = "txtCoordinateY";
-            this.txtCoordinateY.Size = new System.Drawing.Size(90, 21);
+            this.txtCoordinateY.Size = new System.Drawing.Size(104, 22);
             this.txtCoordinateY.TabIndex = 4;
             this.txtCoordinateY.Text = "0";
             // 
@@ -82,34 +82,34 @@ namespace LibPanels
             // 
             this.lblWorkStyle.AutoSize = true;
             this.lblWorkStyle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblWorkStyle.Location = new System.Drawing.Point(6, 19);
+            this.lblWorkStyle.Location = new System.Drawing.Point(7, 22);
             this.lblWorkStyle.Name = "lblWorkStyle";
-            this.lblWorkStyle.Size = new System.Drawing.Size(53, 12);
+            this.lblWorkStyle.Size = new System.Drawing.Size(55, 14);
             this.lblWorkStyle.TabIndex = 31;
             this.lblWorkStyle.Text = "工作制式";
             // 
             // txtCoordinateX
             // 
-            this.txtCoordinateX.Location = new System.Drawing.Point(52, 18);
+            this.txtCoordinateX.Location = new System.Drawing.Point(61, 21);
             this.txtCoordinateX.Name = "txtCoordinateX";
-            this.txtCoordinateX.Size = new System.Drawing.Size(90, 21);
+            this.txtCoordinateX.Size = new System.Drawing.Size(104, 22);
             this.txtCoordinateX.TabIndex = 3;
             this.txtCoordinateX.Text = "0";
             // 
             // cboSubmitter
             // 
             this.cboSubmitter.FormattingEnabled = true;
-            this.cboSubmitter.Location = new System.Drawing.Point(68, 65);
+            this.cboSubmitter.Location = new System.Drawing.Point(79, 76);
             this.cboSubmitter.Name = "cboSubmitter";
-            this.cboSubmitter.Size = new System.Drawing.Size(94, 20);
+            this.cboSubmitter.Size = new System.Drawing.Size(109, 22);
             this.cboSubmitter.TabIndex = 36;
             // 
             // labCoordinateZ
             // 
             this.labCoordinateZ.AutoSize = true;
-            this.labCoordinateZ.Location = new System.Drawing.Point(31, 76);
+            this.labCoordinateZ.Location = new System.Drawing.Point(36, 89);
             this.labCoordinateZ.Name = "labCoordinateZ";
-            this.labCoordinateZ.Size = new System.Drawing.Size(11, 12);
+            this.labCoordinateZ.Size = new System.Drawing.Size(14, 14);
             this.labCoordinateZ.TabIndex = 2;
             this.labCoordinateZ.Text = "Z";
             // 
@@ -117,9 +117,9 @@ namespace LibPanels
             // 
             this.lblWorkTime.AutoSize = true;
             this.lblWorkTime.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblWorkTime.Location = new System.Drawing.Point(5, 71);
+            this.lblWorkTime.Location = new System.Drawing.Point(6, 83);
             this.lblWorkTime.Name = "lblWorkTime";
-            this.lblWorkTime.Size = new System.Drawing.Size(53, 12);
+            this.lblWorkTime.Size = new System.Drawing.Size(47, 14);
             this.lblWorkTime.TabIndex = 0;
             this.lblWorkTime.Text = "班    次";
             // 
@@ -128,9 +128,9 @@ namespace LibPanels
             this.lblSubmiter.AutoSize = true;
             this.lblSubmiter.BackColor = System.Drawing.Color.Transparent;
             this.lblSubmiter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblSubmiter.Location = new System.Drawing.Point(7, 68);
+            this.lblSubmiter.Location = new System.Drawing.Point(8, 79);
             this.lblSubmiter.Name = "lblSubmiter";
-            this.lblSubmiter.Size = new System.Drawing.Size(41, 12);
+            this.lblSubmiter.Size = new System.Drawing.Size(43, 14);
             this.lblSubmiter.TabIndex = 35;
             this.lblSubmiter.Text = "填报人";
             // 
@@ -138,9 +138,9 @@ namespace LibPanels
             // 
             this.rbtn38.AutoSize = true;
             this.rbtn38.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rbtn38.Location = new System.Drawing.Point(86, 17);
+            this.rbtn38.Location = new System.Drawing.Point(100, 20);
             this.rbtn38.Name = "rbtn38";
-            this.rbtn38.Size = new System.Drawing.Size(58, 16);
+            this.rbtn38.Size = new System.Drawing.Size(60, 18);
             this.rbtn38.TabIndex = 32;
             this.rbtn38.TabStop = true;
             this.rbtn38.Text = "三八制";
@@ -150,9 +150,9 @@ namespace LibPanels
             // cboTeamName
             // 
             this.cboTeamName.FormattingEnabled = true;
-            this.cboTeamName.Location = new System.Drawing.Point(68, 20);
+            this.cboTeamName.Location = new System.Drawing.Point(79, 23);
             this.cboTeamName.Name = "cboTeamName";
-            this.cboTeamName.Size = new System.Drawing.Size(93, 20);
+            this.cboTeamName.Size = new System.Drawing.Size(108, 22);
             this.cboTeamName.TabIndex = 40;
             this.cboTeamName.SelectedIndexChanged += new System.EventHandler(this.cboTeamName_SelectedIndexChanged);
             // 
@@ -160,9 +160,9 @@ namespace LibPanels
             // 
             this.rbtn46.AutoSize = true;
             this.rbtn46.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rbtn46.Location = new System.Drawing.Point(86, 47);
+            this.rbtn46.Location = new System.Drawing.Point(100, 55);
             this.rbtn46.Name = "rbtn46";
-            this.rbtn46.Size = new System.Drawing.Size(58, 16);
+            this.rbtn46.Size = new System.Drawing.Size(60, 18);
             this.rbtn46.TabIndex = 33;
             this.rbtn46.TabStop = true;
             this.rbtn46.Text = "四六制";
@@ -173,17 +173,17 @@ namespace LibPanels
             this.lblTeam.AutoSize = true;
             this.lblTeam.BackColor = System.Drawing.Color.Transparent;
             this.lblTeam.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblTeam.Location = new System.Drawing.Point(11, 23);
+            this.lblTeam.Location = new System.Drawing.Point(13, 27);
             this.lblTeam.Name = "lblTeam";
-            this.lblTeam.Size = new System.Drawing.Size(29, 12);
+            this.lblTeam.Size = new System.Drawing.Size(31, 14);
             this.lblTeam.TabIndex = 39;
             this.lblTeam.Text = "队别";
             // 
             // dtpDateTime
             // 
-            this.dtpDateTime.Location = new System.Drawing.Point(434, 12);
+            this.dtpDateTime.Location = new System.Drawing.Point(506, 14);
             this.dtpDateTime.Name = "dtpDateTime";
-            this.dtpDateTime.Size = new System.Drawing.Size(134, 21);
+            this.dtpDateTime.Size = new System.Drawing.Size(156, 22);
             this.dtpDateTime.TabIndex = 38;
             // 
             // lblDateTime
@@ -191,27 +191,27 @@ namespace LibPanels
             this.lblDateTime.AutoSize = true;
             this.lblDateTime.BackColor = System.Drawing.Color.Transparent;
             this.lblDateTime.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblDateTime.Location = new System.Drawing.Point(376, 18);
+            this.lblDateTime.Location = new System.Drawing.Point(439, 21);
             this.lblDateTime.Name = "lblDateTime";
-            this.lblDateTime.Size = new System.Drawing.Size(53, 12);
+            this.lblDateTime.Size = new System.Drawing.Size(55, 14);
             this.lblDateTime.TabIndex = 37;
             this.lblDateTime.Text = "提交日期";
             // 
             // cboWorkTime
             // 
             this.cboWorkTime.FormattingEnabled = true;
-            this.cboWorkTime.Location = new System.Drawing.Point(66, 68);
+            this.cboWorkTime.Location = new System.Drawing.Point(77, 79);
             this.cboWorkTime.Name = "cboWorkTime";
-            this.cboWorkTime.Size = new System.Drawing.Size(88, 20);
+            this.cboWorkTime.Size = new System.Drawing.Size(102, 22);
             this.cboWorkTime.TabIndex = 34;
             // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(466, 177);
+            this.btnCancel.Location = new System.Drawing.Point(544, 290);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(103, 23);
+            this.btnCancel.Size = new System.Drawing.Size(120, 27);
             this.btnCancel.TabIndex = 30;
             this.btnCancel.Text = "取消";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -219,9 +219,9 @@ namespace LibPanels
             // btnSubmit
             // 
             this.btnSubmit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSubmit.Location = new System.Drawing.Point(347, 177);
+            this.btnSubmit.Location = new System.Drawing.Point(405, 290);
             this.btnSubmit.Name = "btnSubmit";
-            this.btnSubmit.Size = new System.Drawing.Size(103, 23);
+            this.btnSubmit.Size = new System.Drawing.Size(120, 27);
             this.btnSubmit.TabIndex = 29;
             this.btnSubmit.Text = "提交";
             this.btnSubmit.UseVisualStyleBackColor = true;
@@ -237,10 +237,10 @@ namespace LibPanels
             this.gbxCoordinate.Controls.Add(this.labCoordinateY);
             this.gbxCoordinate.Controls.Add(this.labCoordinateX);
             this.gbxCoordinate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.gbxCoordinate.Location = new System.Drawing.Point(12, 54);
+            this.gbxCoordinate.Location = new System.Drawing.Point(14, 63);
             this.gbxCoordinate.Name = "gbxCoordinate";
             this.gbxCoordinate.Padding = new System.Windows.Forms.Padding(1);
-            this.gbxCoordinate.Size = new System.Drawing.Size(175, 100);
+            this.gbxCoordinate.Size = new System.Drawing.Size(204, 117);
             this.gbxCoordinate.TabIndex = 24;
             this.gbxCoordinate.TabStop = false;
             this.gbxCoordinate.Text = "坐标";
@@ -248,18 +248,18 @@ namespace LibPanels
             // labCoordinateY
             // 
             this.labCoordinateY.AutoSize = true;
-            this.labCoordinateY.Location = new System.Drawing.Point(31, 49);
+            this.labCoordinateY.Location = new System.Drawing.Point(36, 57);
             this.labCoordinateY.Name = "labCoordinateY";
-            this.labCoordinateY.Size = new System.Drawing.Size(11, 12);
+            this.labCoordinateY.Size = new System.Drawing.Size(15, 14);
             this.labCoordinateY.TabIndex = 1;
             this.labCoordinateY.Text = "Y";
             // 
             // labCoordinateX
             // 
             this.labCoordinateX.AutoSize = true;
-            this.labCoordinateX.Location = new System.Drawing.Point(31, 22);
+            this.labCoordinateX.Location = new System.Drawing.Point(36, 26);
             this.labCoordinateX.Name = "labCoordinateX";
-            this.labCoordinateX.Size = new System.Drawing.Size(11, 12);
+            this.labCoordinateX.Size = new System.Drawing.Size(14, 14);
             this.labCoordinateX.TabIndex = 0;
             this.labCoordinateX.Text = "X";
             // 
@@ -277,16 +277,16 @@ namespace LibPanels
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(581, 212);
+            this.panel1.Size = new System.Drawing.Size(678, 331);
             this.panel1.TabIndex = 42;
             // 
             // selectTunnelSimple1
             // 
             this.selectTunnelSimple1.ITunnelId = 0;
-            this.selectTunnelSimple1.Location = new System.Drawing.Point(12, 10);
+            this.selectTunnelSimple1.Location = new System.Drawing.Point(14, 12);
             this.selectTunnelSimple1.MainForm = null;
             this.selectTunnelSimple1.Name = "selectTunnelSimple1";
-            this.selectTunnelSimple1.Size = new System.Drawing.Size(259, 33);
+            this.selectTunnelSimple1.Size = new System.Drawing.Size(302, 38);
             this.selectTunnelSimple1.TabIndex = 44;
             // 
             // groupBox2
@@ -295,9 +295,9 @@ namespace LibPanels
             this.groupBox2.Controls.Add(this.lblTeam);
             this.groupBox2.Controls.Add(this.cboSubmitter);
             this.groupBox2.Controls.Add(this.lblSubmiter);
-            this.groupBox2.Location = new System.Drawing.Point(390, 54);
+            this.groupBox2.Location = new System.Drawing.Point(455, 63);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(175, 100);
+            this.groupBox2.Size = new System.Drawing.Size(204, 117);
             this.groupBox2.TabIndex = 43;
             this.groupBox2.TabStop = false;
             // 
@@ -308,27 +308,27 @@ namespace LibPanels
             this.groupBox1.Controls.Add(this.rbtn38);
             this.groupBox1.Controls.Add(this.lblWorkTime);
             this.groupBox1.Controls.Add(this.rbtn46);
-            this.groupBox1.Location = new System.Drawing.Point(201, 54);
+            this.groupBox1.Location = new System.Drawing.Point(234, 63);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(175, 100);
+            this.groupBox1.Size = new System.Drawing.Size(204, 117);
             this.groupBox1.TabIndex = 35;
             this.groupBox1.TabStop = false;
             // 
             // panel2
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel2.Location = new System.Drawing.Point(11, 166);
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Location = new System.Drawing.Point(13, 194);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(557, 0);
+            this.panel2.Size = new System.Drawing.Size(650, 84);
             this.panel2.TabIndex = 42;
             // 
             // MineDataSimple
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(581, 212);
+            this.ClientSize = new System.Drawing.Size(678, 331);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.IsMdiContainer = true;

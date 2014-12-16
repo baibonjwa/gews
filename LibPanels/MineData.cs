@@ -258,7 +258,7 @@ namespace LibPanels
                 panel2.Height = gasData.Height;
                 changeMineCommonValue(gdEntity);
 
-                gasData.gasDataEntity = gdEntity;
+                gasData.GasDataEntity = gdEntity;
                 gasData.bindDefaultValue(gdEntity);
 
                 gasData.WindowState = FormWindowState.Maximized;
@@ -639,21 +639,21 @@ namespace LibPanels
             //共通实体转化为瓦斯实体
             gdEntity = mineDataEntity.ChangeToGasDataEntity();
             //瓦斯探头断电次数
-            gdEntity.PowerFailure = gasData.gasDataEntity.PowerFailure;
+            gdEntity.PowerFailure = gasData.GasDataEntity.PowerFailure;
             //吸钻预兆次数
-            gdEntity.DrillTimes = gasData.gasDataEntity.DrillTimes;
+            gdEntity.DrillTimes = gasData.GasDataEntity.DrillTimes;
             //瓦斯忽大忽小预兆次数
-            gdEntity.GasTimes = gasData.gasDataEntity.GasTimes;
+            gdEntity.GasTimes = gasData.GasDataEntity.GasTimes;
             //气温下降预兆次数
-            gdEntity.TempDownTimes = gasData.gasDataEntity.TempDownTimes;
+            gdEntity.TempDownTimes = gasData.GasDataEntity.TempDownTimes;
             //煤炮频繁预兆次数
-            gdEntity.CoalBangTimes = gasData.gasDataEntity.CoalBangTimes;
+            gdEntity.CoalBangTimes = gasData.GasDataEntity.CoalBangTimes;
             //喷孔次数
-            gdEntity.CraterTimes = gasData.gasDataEntity.CraterTimes;
+            gdEntity.CraterTimes = gasData.GasDataEntity.CraterTimes;
             //顶钻次数
-            gdEntity.StoperTimes = gasData.gasDataEntity.StoperTimes;
+            gdEntity.StoperTimes = gasData.GasDataEntity.StoperTimes;
             //瓦斯浓度
-            gdEntity.GasThickness = gasData.gasDataEntity.GasThickness;
+            gdEntity.GasThickness = gasData.GasDataEntity.GasThickness;
             bool bResult = false;
             //添加
             if (this.Text == new LibPanels(MineDataPanelName.GasData).panelFormName)
