@@ -223,7 +223,9 @@
     <Compile Include="DayReportJJManagement.Designer.cs">
       <DependentUpon>DayReportJJManagement.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForm_MS.cs" />
+    <Compile Include="MainForm_MS.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="MainForm_MS.Designer.cs">
       <DependentUpon>MainForm_MS.cs</DependentUpon>
     </Compile>
@@ -235,7 +237,9 @@
     <Compile Include="StopLineEntering.Designer.cs">
       <DependentUpon>StopLineEntering.cs</DependentUpon>
     </Compile>
-    <Compile Include="StopLineManagement.cs" />
+    <Compile Include="StopLineManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="StopLineManagement.Designer.cs">
       <DependentUpon>StopLineManagement.cs</DependentUpon>
     </Compile>

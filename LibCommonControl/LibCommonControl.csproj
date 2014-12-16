@@ -112,7 +112,9 @@
     <Compile Include="FarpointFilter.Designer.cs">
       <DependentUpon>FarpointFilter.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainFrm.cs" />
+    <Compile Include="MainFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="MainFrm.designer.cs">
       <DependentUpon>MainFrm.cs</DependentUpon>
     </Compile>
