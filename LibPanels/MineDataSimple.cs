@@ -465,19 +465,21 @@ namespace LibPanels
             bool bResult = false;
             if (Text == new LibPanels(MineDataPanelName.GeologicStructure).panelFormName)
             {
-                bResult = GeologicStructureBLL.insertGeologicStructure(_geologicStructureEntity);
+                _geologicStructureEntity.SaveAndFlush();
+                bResult = true;
                 Log.Debug("发送添加地址构造信息的Socket信息");
                 var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.ITunnelId,
-                    GeologicStructureDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, dtpDateTime.Value);
+                     GeologicStructure.TableName, OPERATION_TYPE.ADD, dtpDateTime.Value);
                 MainForm.SendMsg2Server(msg);
                 Log.Debug("发送添加地址构造信息的Socket信息完成");
             }
             else if (Text == new LibPanels(MineDataPanelName.GeologicStructure_Change).panelFormName)
             {
-                bResult = GeologicStructureBLL.updateGeologicStructure(_geologicStructureEntity);
+                _geologicStructureEntity.SaveAndFlush();
+                bResult = true;
                 Log.Debug("发送修改地址构造信息的Socket信息");
                 var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.ITunnelId,
-                    GeologicStructureDbConstNames.TABLE_NAME, OPERATION_TYPE.UPDATE, dtpDateTime.Value);
+                     GeologicStructure.TableName, OPERATION_TYPE.UPDATE, dtpDateTime.Value);
                 MainForm.SendMsg2Server(msg);
                 Log.Debug("发送修改地址构造信息的Socket信息完成");
             }

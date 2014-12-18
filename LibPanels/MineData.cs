@@ -777,12 +777,14 @@ namespace LibPanels
             //添加
             if (this.Text == new LibPanels(MineDataPanelName.GeologicStructure).panelFormName)
             {
-                bResult = GeologicStructureBLL.insertGeologicStructure(geologicStructureEntity);
+                geologicStructureEntity.SaveAndFlush();
+                bResult = true;
             }
             //修改
             else if (this.Text == new LibPanels(MineDataPanelName.GeologicStructure_Change).panelFormName)
             {
-                bResult = GeologicStructureBLL.updateGeologicStructure(geologicStructureEntity);
+                geologicStructureEntity.SaveAndFlush();
+                bResult = true;
             }
             return bResult;
         }

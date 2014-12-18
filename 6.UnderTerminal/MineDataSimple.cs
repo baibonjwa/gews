@@ -447,10 +447,11 @@ namespace UnderTerminal
             bool bResult = false;
             if (this.Text == new LibPanels(MineDataPanelName.GeologicStructure).panelFormName)
             {
-                bResult = GeologicStructureBLL.insertGeologicStructure(geologicStructureEntity);
+                geologicStructureEntity.SaveAndFlush();
+                bResult = true;
 
                 UpdateWarningDataMsg msg = new UpdateWarningDataMsg(this.mainWin.workingfaceId, this.tunnelId,
-                    GeologicStructureDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, dtpDateTime.Value);
+                  GeologicStructure.TableName, OPERATION_TYPE.ADD, dtpDateTime.Value);
                 mainWin.SendMsg2Server(msg);
             }
 

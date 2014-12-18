@@ -15,6 +15,8 @@ namespace LibEntity
     [ActiveRecord("T_GEOLOGIC_STRUCTURE")]
     public class GeologicStructure : MineData
     {
+        public const String TableName = "T_GEOLOGIC_STRUCTURE";
+
         /// <summary>
         ///     无计划揭露构造
         /// </summary>

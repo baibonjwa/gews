@@ -217,7 +217,6 @@
     <Compile Include="3.GeologyMeasureBLL\PropertyBLL\WireInfoBLL.cs" />
     <Compile Include="3.GeologyMeasureBLL\PropertyBLL\WirePointBLL.cs" />
     <Compile Include="4.OutburstPreventionBLL\DbConstNames\GeologicStructureDbConstNames.cs" />
-    <Compile Include="4.OutburstPreventionBLL\PropertyBLL\GeologicStructureBLL.cs" />
     <Compile Include="4.OutburstPreventionBLL\SaveDBXyz2Txt.cs" />
     <Compile Include="4.OutburstPreventionBLL\DbConstNames\GasContentDbConstNames.cs" />
     <Compile Include="4.OutburstPreventionBLL\DbConstNames\GasDataDbConstNames.cs" />

@@ -37,8 +37,8 @@ namespace LibBusiness
         public static DataSet selectManagementWithCondition(int iTunnelId, string startTime, string endTime)
         {
             string sqlStr = "SELECT * FROM " + ManagementDbConstNames.TABLE_NAME;
-            sqlStr += " WHERE " + GasDataDbConstNames.TUNNEL_ID + " = " + iTunnelId;
-            sqlStr += " AND " + GasDataDbConstNames.DATETIME + " BETWEEN '" + startTime + "' AND '" + endTime + "'";
+            sqlStr += " WHERE " + ManagementDbConstNames.TUNNEL_ID + " = " + iTunnelId;
+            sqlStr += " AND " + ManagementDbConstNames.DATETIME + " BETWEEN '" + startTime + "' AND '" + endTime + "'";
 
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
             DataSet ds = db.ReturnDS(sqlStr);
@@ -79,8 +79,8 @@ namespace LibBusiness
             sb.Append("SELECT ROW_NUMBER() OVER(ORDER BY " + ManagementDbConstNames.ID + ") AS rowid, * ");
             sb.Append("FROM " + ManagementDbConstNames.TABLE_NAME);
 
-            sb.Append(" WHERE " + GeologicStructureDbConstNames.TUNNEL_ID + " = " + iTunnelId);
-            sb.Append(" AND " + GeologicStructureDbConstNames.DATETIME + " BETWEEN '" + startTime + "' AND '" + endTime + "'");
+            sb.Append(" WHERE " + ManagementDbConstNames.TUNNEL_ID + " = " + iTunnelId);
+            sb.Append(" AND " + ManagementDbConstNames.DATETIME + " BETWEEN '" + startTime + "' AND '" + endTime + "'");
 
             sb.Append(" ) AS TB ");
             sb.Append("WHERE rowid >= " + iStartIndex);
