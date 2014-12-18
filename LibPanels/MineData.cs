@@ -738,15 +738,17 @@ namespace LibPanels
             //添加
             if (this.Text == new LibPanels(MineDataPanelName.Management).panelFormName)
             {
-                bResult = ManagementBLL.insertManagementInfo(mEntity);
+                mEntity.SaveAndFlush();
+                bResult = true;
                 UpdateWarningDataMsg msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.ITunnelId,
-                    ManagementDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, mEntity.Datetime);
+                    Management.TableName, OPERATION_TYPE.ADD, mEntity.Datetime);
                 this.MainForm.SendMsg2Server(msg);
             }
             //修改
             else if (this.Text == new LibPanels(MineDataPanelName.Management_Change).panelFormName)
             {
-                bResult = ManagementBLL.updateManagementInfo(mEntity);
+                mEntity.Save();
+                bResult = true;
             }
             return bResult;
         }

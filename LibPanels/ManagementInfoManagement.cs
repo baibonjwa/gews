@@ -35,10 +35,10 @@ namespace LibPanels
         DateTime tmpDtp = DateTime.Now;
         //需要过滤的列索引
         private int[] _filterColunmIdxs = null;
-        DataSet ds = new DataSet();
         public static LibEntity.MineData mdEntity = new LibEntity.MineData();
         public static Management mEntity = new Management();
         public static Tunnel te = new Tunnel();
+        private Management[] managements;
         //***********************************
 
         /// <summary>
@@ -102,79 +102,107 @@ namespace LibPanels
             checkCount = 0;
             chkSelAll.Checked = false;
             // ※分页必须
-            _iRecordCount = ManagementBLL.selectManagementWithCondition(_queryConditions.TunnelId, _queryConditions.DefaultStartTime, _queryConditions.DefaultEndTime).Tables[0].Rows.Count;
+            _iRecordCount = Management.GetRecordCount();
 
             // ※分页必须
             dataPager1.PageControlInit(_iRecordCount);
             int iStartIndex = dataPager1.getStartIndex();
             int iEndIndex = dataPager1.getEndIndex();
-            ds = ManagementBLL.selectManagementWithCondition(iStartIndex, iEndIndex, _queryConditions.TunnelId, _queryConditions.DefaultStartTime, _queryConditions.DefaultEndTime);
-            rowsCount = ds.Tables[0].Rows.Count;
+            managements = Management.SlicedFindByCondition(iStartIndex, iEndIndex, _queryConditions.TunnelId,
+                Convert.ToDateTime(_queryConditions.DefaultStartTime),
+                Convert.ToDateTime(_queryConditions.DefaultEndTime));
+            rowsCount = managements.Length;
             FarPointOperate.farPointReAdd(fpManagement, rowDetailStartIndex, rowsCount);
             if (rowsCount > 0)
             {
-                FarPoint.Win.Spread.CellType.CheckBoxCellType ckbxcell = new FarPoint.Win.Spread.CellType.CheckBoxCellType();
+                FarPoint.Win.Spread.CellType.CheckBoxCellType ckbxcell =
+                    new FarPoint.Win.Spread.CellType.CheckBoxCellType();
                 ckbxcell.ThreeState = false;
-                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                for (int i = 0; i < managements.Length; i++)
                 {
                     int index = 0;
                     this.fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, index].CellType = ckbxcell;
                     //巷道名称
                     this.fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
-                        BasicInfoManager.getInstance().getTunnelByID(_queryConditions.TunnelId).TunnelName;// TunnelInfoBLL.selectTunnelInfoByTunnelID(Convert.ToInt32(ds.Tables[0].Rows[i]["TUNNEL_ID"])).TunnelName;
-                    if (LibPanels.checkCoordinate(ds.Tables[0].Rows[i][ManagementDbConstNames.X].ToString(), ds.Tables[0].Rows[i][ManagementDbConstNames.Y].ToString(), ds.Tables[0].Rows[i][ManagementDbConstNames.Z].ToString()))
+                        BasicInfoManager.getInstance().getTunnelByID(_queryConditions.TunnelId).TunnelName;
+                    // TunnelInfoBLL.selectTunnelInfoByTunnelID(Convert.ToInt32(ds.Tables[0].Rows[i]["TUNNEL_ID"])).TunnelName;
+                    if (LibPanels.checkCoordinate(managements[i].CoordinateX, managements[i].CoordinateY,
+                        managements[i].CoordinateZ))
                     {
                         //坐标X
-                        this.fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = ds.Tables[0].Rows[i][ManagementDbConstNames.X].ToString();
+                        fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                            managements[i].CoordinateX.ToString();
                         //坐标Y
-                        this.fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = ds.Tables[0].Rows[i][ManagementDbConstNames.Y].ToString();
+                        fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                            managements[i].CoordinateY.ToString();
                         //坐标Z
-                        this.fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = ds.Tables[0].Rows[i][ManagementDbConstNames.Z].ToString();
+                        fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                            managements[i].CoordinateZ.ToString();
                     }
                     else
                     {
                         index = index + 3;
                     }
                     //时间
-                    this.fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = ds.Tables[0].Rows[i][ManagementDbConstNames.DATETIME].ToString().Substring(0, ds.Tables[0].Rows[i][ManagementDbConstNames.DATETIME].ToString().IndexOf(' '));
+                    fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        managements[i].Datetime.ToString("yyyy-MM-dd hh:mm:ss");
                     //是否存在瓦斯异常不汇报
-                    this.fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(ds.Tables[0].Rows[i][ManagementDbConstNames.IS_GAS_ERROR_NOT_REPORT].ToString());
+                    fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        LibPanels.DataChangeYesNo(managements[i].IsGasErrorNotReport);
                     //是否存在工作面出现地质构造不汇报
-                    this.fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(ds.Tables[0].Rows[i][ManagementDbConstNames.IS_WF_NOT_REPORT].ToString());
+                    fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        LibPanels.DataChangeYesNo(managements[i].IsWFNotReport);
                     //是否存在强化瓦斯措施执行不到位
-                    this.fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(ds.Tables[0].Rows[i][ManagementDbConstNames.IS_STRGAS_NOT_DO_WELL].ToString());
+                    fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        LibPanels.DataChangeYesNo(managements[i].IsStrgasNotDoWell);
                     //是否存在进回风巷隅角、尾巷管理不到位
-                    this.fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(ds.Tables[0].Rows[i][ManagementDbConstNames.IS_RWMANAGEMENT_NOT_DO_WELL].ToString());
+                    fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        LibPanels.DataChangeYesNo(managements[i].IsRwmanagementNotDoWell);
                     //是否存在通风设施人为损坏
-                    this.fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(ds.Tables[0].Rows[i][ManagementDbConstNames.IS_VF_BROKEN_BY_PEOPLE].ToString());
+                    fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        LibPanels.DataChangeYesNo(managements[i].IsVFBrokenByPeople);
                     //是否存在甲烷传感器位置不当、误差大、调校超过规定
-                    this.fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(ds.Tables[0].Rows[i][ManagementDbConstNames.IS_ELEMENT_PLACE_NOT_GOOD].ToString());
+                    fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        LibPanels.DataChangeYesNo(managements[i].IsElementPlaceNotGood);
                     //是否存在瓦检员空漏假检
-                    this.fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(ds.Tables[0].Rows[i][ManagementDbConstNames.IS_REPORTER_FALSE_DATA].ToString());
+                    fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        LibPanels.DataChangeYesNo(managements[i].IsReporterFalseData);
                     //钻孔未按设计施工次数
-                    this.fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(ds.Tables[0].Rows[i][ManagementDbConstNames.IS_DRILL_WRONG_BUILD].ToString());
+                    fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        LibPanels.DataChangeYesNo(managements[i].IsDrillWrongBuild);
                     //钻孔施工不到位次数
-                    this.fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(ds.Tables[0].Rows[i][ManagementDbConstNames.IS_DRILL_NOT_DO_WELL].ToString());
+                    fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        LibPanels.DataChangeYesNo(managements[i].IsDrillNotDoWell);
                     //防突措施执行不到位次数
-                    this.fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(ds.Tables[0].Rows[i][ManagementDbConstNames.IS_OP_NOT_DO_WELL].ToString());
+                    fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        LibPanels.DataChangeYesNo(managements[i].IsOPNotDoWell);
                     //防突异常情况未汇报次数
-                    this.fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(ds.Tables[0].Rows[i][ManagementDbConstNames.IS_OP_ERROR_NOT_REPORT].ToString());
+                    fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        LibPanels.DataChangeYesNo(managements[i].IsOPErrorNotReport);
                     //是否存在局部通风机单回路供电或不能正常切换
-                    this.fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(ds.Tables[0].Rows[i][ManagementDbConstNames.IS_PART_WIND_SWITCH_ERROR].ToString());
+                    fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        LibPanels.DataChangeYesNo(managements[i].IsPartWindSwitchError);
                     //是否存在安全监测监控系统未及时安装
-                    this.fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(ds.Tables[0].Rows[i][ManagementDbConstNames.IS_SAFE_CTRL_UNINSTALL].ToString());
+                    fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        LibPanels.DataChangeYesNo(managements[i].IsSafeCtrlUninstall);
                     //是否存在监测监控停运
-                    this.fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(ds.Tables[0].Rows[i][ManagementDbConstNames.IS_CTRL_STOP].ToString());
+                    fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        LibPanels.DataChangeYesNo(managements[i].IsCtrlStop);
                     //是否存在不执行瓦斯治理措施、破坏通风设施
-                    this.fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(ds.Tables[0].Rows[i][ManagementDbConstNames.IS_GAS_NOT_DO_WELL].ToString());
+                    fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        LibPanels.DataChangeYesNo(managements[i].IsGasNotDowWell);
                     //是否高、突矿井工作面无专职瓦斯检查员
-                    this.fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(ds.Tables[0].Rows[i][ManagementDbConstNames.IS_MINE_NO_CHECKER].ToString());
+                    fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        LibPanels.DataChangeYesNo(managements[i].IsMineNoChecker);
                     //工作制式
-                    this.fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = ds.Tables[0].Rows[i][ManagementDbConstNames.WORK_STYLE].ToString();
+                    fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        managements[i].WorkStyle;
                     //班次
-                    this.fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = ds.Tables[0].Rows[i][ManagementDbConstNames.WORK_TIME].ToString();
+                    fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        managements[i].WorkTime;
                     //填报人
-                    this.fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = ds.Tables[0].Rows[i][ManagementDbConstNames.SUBMITTER].ToString();
+                    fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        managements[i].Submitter;
                 }
             }
             setButtenEnable();
@@ -234,159 +262,6 @@ namespace LibPanels
         }
 
         /// <summary>
-        /// 管理实体赋值
-        /// </summary>
-        private void setMineDataEntityValue()
-        {
-            for (int i = 0; i < rowsCount; i++)
-            {
-                if (fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, 0].Value != null && (bool)fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, 0].Value == true)
-                {
-                    //ID
-                    if (int.TryParse(ds.Tables[0].Rows[i][ManagementDbConstNames.ID].ToString(), out tmpInt))
-                    {
-                        mEntity.Id = tmpInt;
-                        tmpInt = 0;
-                    }
-                    //绑定巷道ID
-                    if (int.TryParse(ds.Tables[0].Rows[i][ManagementDbConstNames.TUNNEL_ID].ToString(), out tmpInt))
-                    {
-                        mEntity.Tunnel.TunnelId = tmpInt;
-                        tmpInt = 0;
-                    }
-                    //坐标X
-                    if (double.TryParse(ds.Tables[0].Rows[i][ManagementDbConstNames.X].ToString(), out tmpDouble))
-                    {
-                        mEntity.CoordinateX = tmpDouble;
-                        tmpDouble = 0;
-                    }
-                    //坐标Y
-                    if (double.TryParse(ds.Tables[0].Rows[i][ManagementDbConstNames.Y].ToString(), out tmpDouble))
-                    {
-                        mEntity.CoordinateY = tmpDouble;
-                        tmpDouble = 0;
-                    }
-                    //坐标Z
-                    if (double.TryParse(ds.Tables[0].Rows[i][ManagementDbConstNames.Z].ToString(), out tmpDouble))
-                    {
-                        mEntity.CoordinateZ = tmpDouble;
-                        tmpDouble = 0;
-                    }
-                    //工作制式
-                    mEntity.WorkStyle = ds.Tables[0].Rows[i][ManagementDbConstNames.WORK_STYLE].ToString();
-                    //班次
-                    mEntity.WorkTime = ds.Tables[0].Rows[i][ManagementDbConstNames.WORK_TIME].ToString();
-                    //队别名称
-                    mEntity.TeamName = ds.Tables[0].Rows[i][ManagementDbConstNames.TEAM_NAME].ToString();
-                    //填报人
-                    mEntity.Submitter = ds.Tables[0].Rows[i][ManagementDbConstNames.SUBMITTER].ToString();
-                    //提交日期
-                    if (DateTime.TryParse(ds.Tables[0].Rows[i][ManagementDbConstNames.DATETIME].ToString(), out tmpDtp))
-                    {
-                        mEntity.Datetime = tmpDtp;
-                        tmpDtp = DateTime.Now;
-                    }
-                    //是否存在瓦斯异常不汇报
-                    if (int.TryParse(ds.Tables[0].Rows[i][ManagementDbConstNames.IS_GAS_ERROR_NOT_REPORT].ToString(), out tmpInt))
-                    {
-                        mEntity.IsGasErrorNotReport = tmpInt;
-                        tmpInt = 0;
-                    }
-                    //是否存在工作面出现地质构造不汇报
-                    if (int.TryParse(ds.Tables[0].Rows[i][ManagementDbConstNames.IS_WF_NOT_REPORT].ToString(), out tmpInt))
-                    {
-                        mEntity.IsWFNotReport = tmpInt;
-                        tmpInt = 0;
-                    }
-                    //是否存在强化瓦斯措施执行不到位
-                    if (int.TryParse(ds.Tables[0].Rows[i][ManagementDbConstNames.IS_STRGAS_NOT_DO_WELL].ToString(), out tmpInt))
-                    {
-                        mEntity.IsStrgasNotDoWell = tmpInt;
-                        tmpInt = 0;
-                    }
-                    //是否存在进回风巷隅角、尾巷管理不到位
-                    if (int.TryParse(ds.Tables[0].Rows[i][ManagementDbConstNames.IS_RWMANAGEMENT_NOT_DO_WELL].ToString(), out tmpInt))
-                    {
-                        mEntity.IsRwmanagementNotDoWell = tmpInt;
-                        tmpInt = 0;
-                    }
-                    //是否存在通风设施人为损坏
-                    if (int.TryParse(ds.Tables[0].Rows[i][ManagementDbConstNames.IS_VF_BROKEN_BY_PEOPLE].ToString(), out tmpInt))
-                    {
-                        mEntity.IsVFBrokenByPeople = tmpInt;
-                        tmpInt = 0;
-                    }
-                    //是否存在甲烷传感器位置不当、误差大、调校超过规定
-                    if (int.TryParse(ds.Tables[0].Rows[i][ManagementDbConstNames.IS_ELEMENT_PLACE_NOT_GOOD].ToString(), out tmpInt))
-                    {
-                        mEntity.IsElementPlaceNotGood = tmpInt;
-                        tmpInt = 0;
-                    }
-                    //是否存在瓦检员空漏假检
-                    if (int.TryParse(ds.Tables[0].Rows[i][ManagementDbConstNames.IS_REPORTER_FALSE_DATA].ToString(), out tmpInt))
-                    {
-                        mEntity.IsReporterFalseData = tmpInt;
-                        tmpInt = 0;
-                    }
-                    //钻孔未按设计施工次数
-                    if (int.TryParse(ds.Tables[0].Rows[i][ManagementDbConstNames.IS_DRILL_WRONG_BUILD].ToString(), out tmpInt))
-                    {
-                        mEntity.IsDrillWrongBuild = tmpInt;
-                        tmpInt = 0;
-                    }
-                    //钻孔施工不到位次数
-                    if (int.TryParse(ds.Tables[0].Rows[i][ManagementDbConstNames.IS_DRILL_NOT_DO_WELL].ToString(), out tmpInt))
-                    {
-                        mEntity.IsDrillNotDoWell = tmpInt;
-                        tmpInt = 0;
-                    }
-                    //防突措施执行不到位次数
-                    if (int.TryParse(ds.Tables[0].Rows[i][ManagementDbConstNames.IS_OP_NOT_DO_WELL].ToString(), out tmpInt))
-                    {
-                        mEntity.IsOPNotDoWell = tmpInt;
-                        tmpInt = 0;
-                    }
-                    //防突异常情况未汇报次数
-                    if (int.TryParse(ds.Tables[0].Rows[i][ManagementDbConstNames.IS_OP_ERROR_NOT_REPORT].ToString(), out tmpInt))
-                    {
-                        mEntity.IsOPErrorNotReport = tmpInt;
-                        tmpInt = 0;
-                    }
-                    //是否存在局部通风机单回路供电或不能正常切换
-                    if (int.TryParse(ds.Tables[0].Rows[i][ManagementDbConstNames.IS_PART_WIND_SWITCH_ERROR].ToString(), out tmpInt))
-                    {
-                        mEntity.IsPartWindSwitchError = tmpInt;
-                        tmpInt = 0;
-                    }
-                    //是否存在安全监测监控系统未及时安装
-                    if (int.TryParse(ds.Tables[0].Rows[i][ManagementDbConstNames.IS_SAFE_CTRL_UNINSTALL].ToString(), out tmpInt))
-                    {
-                        mEntity.IsSafeCtrlUninstall = tmpInt;
-                        tmpInt = 0;
-                    }
-                    //是否存在监测监控停运
-                    if (int.TryParse(ds.Tables[0].Rows[i][ManagementDbConstNames.IS_CTRL_STOP].ToString(), out tmpInt))
-                    {
-                        mEntity.IsCtrlStop = tmpInt;
-                        tmpInt = 0;
-                    }
-                    //是否存在不执行瓦斯治理措施、破坏通风设施
-                    if (int.TryParse(ds.Tables[0].Rows[i][ManagementDbConstNames.IS_GAS_NOT_DO_WELL].ToString(), out tmpInt))
-                    {
-                        mEntity.IsGasNotDowWell = tmpInt;
-                        tmpInt = 0;
-                    }
-                    //是否高、突矿井工作面无专职瓦斯检查员
-                    if (int.TryParse(ds.Tables[0].Rows[i][ManagementDbConstNames.IS_MINE_NO_CHECKER].ToString(), out tmpInt))
-                    {
-                        mEntity.IsMineNoChecker = tmpInt;
-                        tmpInt = 0;
-                    }
-                }
-            }
-        }
-
-        /// <summary>
         /// 全选反选
         /// </summary>
         /// <param name="sender"></param>
@@ -403,7 +278,7 @@ namespace LibPanels
                     if (chkSelAll.Checked)
                     {
                         this.fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, 0].Value = ((CheckBox)sender).Checked;
-                        checkCount = ds.Tables[0].Rows.Count;
+                        checkCount = managements.Length;
                     }
                     //checkbox未选中
                     else
@@ -442,7 +317,14 @@ namespace LibPanels
         /// <param name="e"></param>
         private void tsBtnModify_Click(object sender, EventArgs e)
         {
-            setMineDataEntityValue();
+            for (int i = 0; i < rowsCount; i++)
+            {
+                if (fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, 0].Value != null &&
+                    (bool)fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, 0].Value == true)
+                {
+                    mEntity = managements[i];
+                }
+            }
             MineData m = new MineData(mEntity, this.MainForm);
 
             m.Text = new LibPanels(MineDataPanelName.Management_Change).panelFormName;
@@ -468,8 +350,8 @@ namespace LibPanels
                 {
                     if (fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, 0].Value != null && (bool)fpManagement.Sheets[0].Cells[rowDetailStartIndex + i, 0].Value == true)
                     {
-                        int id = (int)ds.Tables[0].Rows[i][ManagementDbConstNames.ID];
-                        bResult = ManagementBLL.deleteManagementInfo(id);
+                        managements[i].DeleteAndFlush();
+                        bResult = true;
                     }
                 }
                 if (bResult)

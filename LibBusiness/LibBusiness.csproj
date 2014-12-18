@@ -217,7 +217,6 @@
     <Compile Include="4.OutburstPreventionBLL\SaveDBXyz2Txt.cs" />
     <Compile Include="4.OutburstPreventionBLL\DbConstNames\GasContentDbConstNames.cs" />
     <Compile Include="4.OutburstPreventionBLL\DbConstNames\GasPressureDbConstNames.cs" />
-    <Compile Include="4.OutburstPreventionBLL\DbConstNames\ManagementDbConstNames.cs" />
     <Compile Include="4.OutburstPreventionBLL\DbConstNames\GasGushQuantityDbConstNames.cs" />
     <Compile Include="4.OutburstPreventionBLL\DbConstNames\SValueDbConstNames.cs" />
     <Compile Include="4.OutburstPreventionBLL\DbConstNames\UsualForecastDbConstNames.cs" />
@@ -229,7 +228,6 @@
     <Compile Include="4.OutburstPreventionBLL\PropertyBLL\K1ValueBLL.cs" />
     <Compile Include="4.OutburstPreventionBLL\PropertyBLL\SValueBLL.cs" />
     <Compile Include="4.OutburstPreventionBLL\PropertyBLL\UsualForecastBLL.cs" />
-    <Compile Include="4.OutburstPreventionBLL\PropertyBLL\ManagementBLL.cs" />
     <Compile Include="5.WaningManagementBLL\DbConstNames\PreWarningDetailsViewDbConstName.cs" />
     <Compile Include="5.WaningManagementBLL\DbConstNames\PreWarningHistroyResultQueryDBConstNames.cs" />
     <Compile Include="5.WaningManagementBLL\DbConstNames\PreWarningResultDBConstNames.cs" />

@@ -429,19 +429,21 @@ namespace LibPanels
             bool bResult = false;
             if (Text == new LibPanels(MineDataPanelName.Management).panelFormName)
             {
-                bResult = ManagementBLL.insertManagementInfo(mEntity);
+                mEntity.SaveAndFlush();
+                bResult = true;
                 Log.Debug("发送添加管理信息的Socket信息");
                 var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.ITunnelId,
-                    ManagementDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, dtpDateTime.Value);
+                    Management.TableName, OPERATION_TYPE.ADD, dtpDateTime.Value);
                 MainForm.SendMsg2Server(msg);
                 Log.Debug("发送添加管理信息的Socket信息完成");
             }
             else if (Text == new LibPanels(MineDataPanelName.Management_Change).panelFormName)
             {
-                bResult = ManagementBLL.updateManagementInfo(mEntity);
+                mEntity.SaveAndFlush();
+                bResult = true;
                 Log.Debug("发送修改管理信息的Socket信息");
                 var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.ITunnelId,
-                    ManagementDbConstNames.TABLE_NAME, OPERATION_TYPE.UPDATE, mEntity.Datetime);
+                    Management.TableName, OPERATION_TYPE.UPDATE, mEntity.Datetime);
                 MainForm.SendMsg2Server(msg);
                 Log.Debug("发送修改管理信息的Socket信息完成");
             }

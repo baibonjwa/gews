@@ -421,9 +421,10 @@ namespace UnderTerminal
             bool bResult = false;
             if (this.Text == new LibPanels(MineDataPanelName.Management).panelFormName)
             {
-                bResult = ManagementBLL.insertManagementInfo(mEntity);
+                mEntity.SaveAndFlush();
+                bResult = true;
                 UpdateWarningDataMsg msg = new UpdateWarningDataMsg(this.mainWin.workingfaceId, this.tunnelId,
-                    ManagementDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, dtpDateTime.Value);
+                    Management.TableName, OPERATION_TYPE.ADD, dtpDateTime.Value);
                 mainWin.SendMsg2Server(msg);
             }
 
