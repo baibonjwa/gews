@@ -17,6 +17,8 @@ namespace LibEntity
     [ActiveRecord("T_VENTILATION_INFO")]
     public class VentilationInfo : MineData
     {
+        public const String TableName = "T_VENTILATION_INFO";
+
         /// <summary>
         ///     设置或获取是否有无风区域
         /// </summary>

@@ -264,19 +264,21 @@ namespace LibPanels
             bool bResult = false;
             if (Text == new LibPanels(MineDataPanelName.Ventilation).panelFormName)
             {
-                bResult = VentilationBLL.insertVentilationInfo(viEntity);
+                viEntity.SaveAndFlush();
+                bResult = true;
                 Log.Debug("发送添加通风信息的Socket信息");
                 var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.ITunnelId,
-                    VentilationDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, dtpDateTime.Value);
+                    VentilationInfo.TableName, OPERATION_TYPE.ADD, dtpDateTime.Value);
                 MainForm.SendMsg2Server(msg);
                 Log.Debug("发送添加通风信息的Socket信息完成");
             }
             else if (Text == new LibPanels(MineDataPanelName.Ventilation_Change).panelFormName)
             {
-                bResult = VentilationBLL.updateVentilationInfo(viEntity);
+                viEntity.SaveAndFlush();
+                bResult = true;
                 Log.Debug("发送修改通风信息的Socket信息");
                 var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.ITunnelId,
-                    VentilationDbConstNames.TABLE_NAME, OPERATION_TYPE.UPDATE, dtpDateTime.Value);
+                    VentilationInfo.TableName, OPERATION_TYPE.UPDATE, dtpDateTime.Value);
                 MainForm.SendMsg2Server(msg);
                 Log.Debug("发送修改通风信息的Socket信息完成");
             }

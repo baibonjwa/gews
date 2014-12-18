@@ -30,9 +30,9 @@ namespace LibPanels
         int rowDetailStartIndex = 4;
         //需要过滤的列索引
         private int[] _filterColunmIdxs = null;
-        DataSet ds = new DataSet();
         public static LibEntity.MineData mdEntity = new LibEntity.MineData();
         public static VentilationInfo viEntity = new VentilationInfo();
+        private VentilationInfo[] ventilationInfos;
         Tunnel tunnelEntity = new Tunnel();
 
         //***********************************
@@ -87,139 +87,84 @@ namespace LibPanels
             bindFpGasEmissionDataWithCondition();
         }
 
-        /// <summary>
-        /// farpoint数据绑定
-        /// </summary>
-        //private void bindFpGasEmissionData()
-        //{
-        //    FarPointOperate.farPointClear(fpVentilation, rowDetailStartIndex, rowsCount);
-        //    checkCount = 0;
-        //    chkSelAll.Checked = false;
-        //    // ※分页必须
-        //    _iRecordCount = VentilationBLL.selectVentilationInfo().Tables[0].Rows.Count;
-
-        //    // ※分页必须
-        //    dataPager1.PageControlInit(_iRecordCount);
-        //    int iStartIndex = dataPager1.getStartIndex();
-        //    int iEndIndex = dataPager1.getEndIndex();
-        //    ds = VentilationBLL.selectVentilationInfo(iStartIndex, iEndIndex);
-        //    rowsCount = ds.Tables[0].Rows.Count;
-        //    FarPointOperate.farPointReAdd(fpVentilation, rowDetailStartIndex, rowsCount);
-
-        //    if (rowsCount > 0)
-        //    {
-        //        FarPoint.Win.Spread.CellType.CheckBoxCellType ckbxcell = new FarPoint.Win.Spread.CellType.CheckBoxCellType();
-        //        ckbxcell.ThreeState = false;
-        //        for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-        //        {
-        //            int index = 0;
-        //            this.fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, index].CellType = ckbxcell;
-        //            //巷道名称
-        //            if (TunnelInfoBLL.selectTunnelInfoByTunnelID(Convert.ToInt32(ds.Tables[0].Rows[i][VentilationDbConstNames.TUNNEL_ID])) != null)
-        //                this.fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = TunnelInfoBLL.selectTunnelInfoByTunnelID(Convert.ToInt32(ds.Tables[0].Rows[i][VentilationDbConstNames.TUNNEL_ID])).TunnelName;
-        //            if (LibPanels.checkCoordinate(ds.Tables[0].Rows[i][VentilationDbConstNames.COORDINATE_X].ToString(), ds.Tables[0].Rows[i][VentilationDbConstNames.COORDINATE_Y].ToString(), ds.Tables[0].Rows[i][VentilationDbConstNames.COORDINATE_Z].ToString()))
-        //            {
-        //                //坐标X
-        //                this.fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = ds.Tables[0].Rows[i][VentilationDbConstNames.COORDINATE_X].ToString();
-        //                //坐标Y
-        //                this.fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = ds.Tables[0].Rows[i][VentilationDbConstNames.COORDINATE_Y].ToString();
-        //                //坐标Z
-        //                this.fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = ds.Tables[0].Rows[i][VentilationDbConstNames.COORDINATE_Z].ToString();
-        //            }
-        //            else
-        //            {
-        //                index = index + 3;
-        //            }
-        //            //时间
-        //            this.fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = ds.Tables[0].Rows[i][VentilationDbConstNames.DATETIME].ToString().Substring(0, ds.Tables[0].Rows[i][VentilationDbConstNames.DATETIME].ToString().IndexOf(' '));
-        //            //是否有停风区域
-        //            this.fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(ds.Tables[0].Rows[i][VentilationDbConstNames.IS_NO_WIND_AREA].ToString());
-        //            //是否有微风区域
-        //            this.fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(ds.Tables[0].Rows[i][VentilationDbConstNames.IS_LIGHT_WIND_AREA].ToString());
-        //            //是否有风流反向区域
-        //            this.fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(ds.Tables[0].Rows[i][VentilationDbConstNames.IS_RETURN_WIND_AREA].ToString());
-        //            //是否通风断面小于设计断面的2/3
-        //            this.fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(ds.Tables[0].Rows[i][VentilationDbConstNames.IS_SMALL].ToString());
-        //            //是否工作面风量低于计划风量，风速与《煤矿安全规程》规定不符
-        //            this.fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(ds.Tables[0].Rows[i][VentilationDbConstNames.IS_FOLLOW_RULE].ToString());
-        //            //是否通风断面小于设计断面的2/3
-        //            this.fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = ds.Tables[0].Rows[i][VentilationDbConstNames.FAULTAGE_AREA].ToString();
-        //            //是否工作面风量低于计划风量，风速与《煤矿安全规程》规定不符
-        //            this.fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = ds.Tables[0].Rows[i][VentilationDbConstNames.AIR_FLOW].ToString();
-        //            //工作制式
-        //            this.fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = ds.Tables[0].Rows[i][VentilationDbConstNames.WORK_STYLE].ToString();
-        //            //班次
-        //            this.fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = ds.Tables[0].Rows[i][VentilationDbConstNames.WORK_TIME].ToString();
-        //            //填报人
-        //            this.fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = ds.Tables[0].Rows[i][VentilationDbConstNames.SUBMITTER].ToString();
-        //        }
-        //    }
-        //    setButtenEnable();
-        //}
-
         private void bindFpGasEmissionDataWithCondition()
         {
             FarPointOperate.farPointClear(fpVentilation, rowDetailStartIndex, rowsCount);
             checkCount = 0;
             chkSelAll.Checked = false;
             // ※分页必须
-            _iRecordCount = VentilationBLL.selectVentilationInfoWithCondition(_queryConditions.TunnelId, _queryConditions.DefaultStartTime, _queryConditions.DefaultEndTime).Tables[0].Rows.Count;
+            _iRecordCount = VentilationInfo.GetRecordCount();
 
             // ※分页必须
             dataPager1.PageControlInit(_iRecordCount);
             int iStartIndex = dataPager1.getStartIndex();
             int iEndIndex = dataPager1.getEndIndex();
-            ds = VentilationBLL.selectVentilationInfoWithCondition(iStartIndex, iEndIndex, _queryConditions.TunnelId, _queryConditions.DefaultStartTime, _queryConditions.DefaultEndTime);
-            rowsCount = ds.Tables[0].Rows.Count;
+            ventilationInfos = VentilationInfo.SlicedFindByCondition(iStartIndex, iEndIndex, _queryConditions.TunnelId, Convert.ToDateTime(_queryConditions.DefaultStartTime), Convert.ToDateTime(_queryConditions.DefaultEndTime));
+            rowsCount = ventilationInfos.Length;
             FarPointOperate.farPointReAdd(fpVentilation, rowDetailStartIndex, rowsCount);
 
             if (rowsCount > 0)
             {
                 FarPoint.Win.Spread.CellType.CheckBoxCellType ckbxcell = new FarPoint.Win.Spread.CellType.CheckBoxCellType();
                 ckbxcell.ThreeState = false;
-                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                for (int i = 0; i < ventilationInfos.Length; i++)
                 {
                     int index = 0;
-                    this.fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, index].CellType = ckbxcell;
+                    fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, index].CellType = ckbxcell;
                     //巷道名称
 
-                    this.fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                    fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
                      BasicInfoManager.getInstance().getTunnelByID(_queryConditions.TunnelId).TunnelName;
-                    if (LibPanels.checkCoordinate(ds.Tables[0].Rows[i][VentilationDbConstNames.COORDINATE_X].ToString(), ds.Tables[0].Rows[i][VentilationDbConstNames.COORDINATE_Y].ToString(), ds.Tables[0].Rows[i][VentilationDbConstNames.COORDINATE_Z].ToString()))
+                    if (LibPanels.checkCoordinate(ventilationInfos[i].CoordinateX, ventilationInfos[i].CoordinateY, ventilationInfos[i].CoordinateZ))
                     {
+
                         //坐标X
-                        this.fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = ds.Tables[0].Rows[i][VentilationDbConstNames.COORDINATE_X].ToString();
+                        fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                            ventilationInfos[i].CoordinateX.ToString();
                         //坐标Y
-                        this.fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = ds.Tables[0].Rows[i][VentilationDbConstNames.COORDINATE_Y].ToString();
+                        fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                            ventilationInfos[i].CoordinateY.ToString();
                         //坐标Z
-                        this.fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = ds.Tables[0].Rows[i][VentilationDbConstNames.COORDINATE_Z].ToString();
+                        fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                            ventilationInfos[i].CoordinateZ.ToString();
                     }
                     else
                     {
                         index = index + 3;
                     }
                     //时间
-                    this.fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = ds.Tables[0].Rows[i][VentilationDbConstNames.DATETIME].ToString().Substring(0, ds.Tables[0].Rows[i][VentilationDbConstNames.DATETIME].ToString().IndexOf(' '));
+                    fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        ventilationInfos[i].Datetime.ToString("yyyy-MM-dd hh:mm:ss");
                     //是否有停风区域
-                    this.fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(ds.Tables[0].Rows[i][VentilationDbConstNames.IS_NO_WIND_AREA].ToString());
+                    fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        LibPanels.DataChangeYesNo(ventilationInfos[i].IsNoWindArea);
                     //是否有微风区域
-                    this.fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(ds.Tables[0].Rows[i][VentilationDbConstNames.IS_LIGHT_WIND_AREA].ToString());
+                    fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        LibPanels.DataChangeYesNo(ventilationInfos[i].IsLightWindArea);
                     //是否有风流反向区域
-                    this.fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(ds.Tables[0].Rows[i][VentilationDbConstNames.IS_RETURN_WIND_AREA].ToString());
+                    fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        LibPanels.DataChangeYesNo(ventilationInfos[i].IsReturnWindArea);
                     //是否通风断面小于设计断面的2/3
-                    this.fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(ds.Tables[0].Rows[i][VentilationDbConstNames.IS_SMALL].ToString());
+                    fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        LibPanels.DataChangeYesNo(ventilationInfos[i].IsSmall);
                     //是否工作面风量低于计划风量，风速与《煤矿安全规程》规定不符
-                    this.fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(ds.Tables[0].Rows[i][VentilationDbConstNames.IS_FOLLOW_RULE].ToString());
+                    fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        LibPanels.DataChangeYesNo(ventilationInfos[i].IsFollowRule);
                     //是否通风断面小于设计断面的2/3
-                    this.fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = ds.Tables[0].Rows[i][VentilationDbConstNames.FAULTAGE_AREA].ToString();
+                    fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        ventilationInfos[i].FaultageArea.ToString();
                     //是否工作面风量低于计划风量，风速与《煤矿安全规程》规定不符
-                    this.fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = ds.Tables[0].Rows[i][VentilationDbConstNames.AIR_FLOW].ToString();
+                    fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        ventilationInfos[i].AirFlow.ToString();
                     //工作制式
-                    this.fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = ds.Tables[0].Rows[i][VentilationDbConstNames.WORK_STYLE].ToString();
+                    fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        ventilationInfos[i].WorkStyle;
                     //班次
-                    this.fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = ds.Tables[0].Rows[i][VentilationDbConstNames.WORK_TIME].ToString();
+                    fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        ventilationInfos[i].WorkTime;
                     //填报人
-                    this.fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = ds.Tables[0].Rows[i][VentilationDbConstNames.SUBMITTER].ToString();
+                    fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        ventilationInfos[i].Submitter;
                 }
             }
             setButtenEnable();
@@ -295,7 +240,7 @@ namespace LibPanels
                     if (chkSelAll.Checked)
                     {
                         fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, 0].Value = ((CheckBox)sender).Checked;
-                        checkCount = ds.Tables[0].Rows.Count;
+                        checkCount = ventilationInfos.Length;
                     }
                     //checkbox未选中
                     else
@@ -306,22 +251,6 @@ namespace LibPanels
                 }
             }
             setButtenEnable();
-        }
-
-        /// <summary>
-        /// 实体赋值
-        /// </summary>
-        private void setMineDataEntityValue()
-        {
-            int searchCount = rowsCount;
-            for (int i = 0; i < rowsCount; i++)
-            {
-                if (fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, 0].Text == "True")
-                {
-                    viEntity.Id = Convert.ToInt32(ds.Tables[0].Rows[i][VentilationDbConstNames.ID]);
-                    viEntity = VentilationBLL.selectVentilationInfo(viEntity.Id);
-                }
-            }
         }
 
         /// <summary>
@@ -348,7 +277,14 @@ namespace LibPanels
         /// <param name="e"></param>
         private void tsBtnModify_Click(object sender, EventArgs e)
         {
-            setMineDataEntityValue();
+            for (int i = 0; i < rowsCount; i++)
+            {
+                if (fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, 0].Value != null &&
+                    (bool)fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, 0].Value == true)
+                {
+                    viEntity = ventilationInfos[i];
+                }
+            }
             MineData m = new MineData(viEntity, this.MainForm);
 
             m.Text = new LibPanels(MineDataPanelName.Ventilation_Change).panelFormName;
@@ -360,7 +296,7 @@ namespace LibPanels
 
         /// <summary>
         /// 删除按钮事件
-        /// </summary>
+        /// </summary>d
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void tsBtnDel_Click(object sender, EventArgs e)
@@ -372,8 +308,8 @@ namespace LibPanels
                 {
                     if (fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, 0].Value != null && (bool)fpVentilation.Sheets[0].Cells[rowDetailStartIndex + i, 0].Value == true)
                     {
-                        int id = (int)ds.Tables[0].Rows[i][VentilationDbConstNames.ID];
-                        bResult = VentilationBLL.deleteVentilationInfo(id);
+                        ventilationInfos[i].Delete();
+                        bResult = true;
                     }
                 }
                 if (bResult)

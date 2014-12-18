@@ -584,11 +584,13 @@ namespace LibPanels
             bool bResult = false;
             if (this.Text == new LibPanels(MineDataPanelName.Ventilation).panelFormName)
             {
-                bResult = VentilationBLL.insertVentilationInfo(viEntity);
+                viEntity.SaveAndFlush();
+                bResult = true;
             }
             else if (this.Text == new LibPanels(MineDataPanelName.Ventilation_Change).panelFormName)
             {
-                bResult = VentilationBLL.updateVentilationInfo(viEntity);
+                viEntity.SaveAndFlush();
+                bResult = true;
             }
             return bResult;
         }

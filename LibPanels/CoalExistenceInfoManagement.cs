@@ -45,10 +45,10 @@ namespace LibPanels
             dataPager1.FrmChild_EventHandler += FrmParent_EventHandler;
 
             //窗体属性设置
-            LibCommon.FormDefaultPropertiesSetter.SetManagementFormDefaultProperties(this, Const_GE.COAL_EXISTENCE_MANAGEMENT);
+            FormDefaultPropertiesSetter.SetManagementFormDefaultProperties(this, Const_GE.COAL_EXISTENCE_MANAGEMENT);
 
             //Farpoint属性设置
-            LibCommon.FarpointDefaultPropertiesSetter.SetFpDefaultProperties(this.fpCoalExistence, LibCommon.Const_GE.COAL_EXISTENCE_FARPOINT, rowDetailStartIndex);
+            FarpointDefaultPropertiesSetter.SetFpDefaultProperties(this.fpCoalExistence, LibCommon.Const_GE.COAL_EXISTENCE_FARPOINT, rowDetailStartIndex);
 
             _filterColunmIdxs = new int[]
             {

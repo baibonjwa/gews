@@ -302,10 +302,11 @@ namespace UnderTerminal
             bool bResult = false;
             if (this.Text == new LibPanels(MineDataPanelName.Ventilation).panelFormName)
             {
-                bResult = VentilationBLL.insertVentilationInfo(viEntity);
+                viEntity.SaveAndFlush();
+                bResult = true;
 
                 UpdateWarningDataMsg msg = new UpdateWarningDataMsg(this.mainWin.workingfaceId, this.tunnelId,
-                    VentilationDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, dtpDateTime.Value);
+                    VentilationInfo.TableName, OPERATION_TYPE.ADD, dtpDateTime.Value);
                 mainWin.SendMsg2Server(msg);
             }
 
