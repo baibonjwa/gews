@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -35,9 +36,9 @@ namespace LibPanels
         DateTime tmpDtp = DateTime.Now;
         //需要过滤的列索引
         private int[] _filterColunmIdxs = null;
-        DataSet _ds = new DataSet();
         LibEntity.MineData mdEntity = new LibEntity.MineData();
         GeologicStructure geologicStructureEntity = new GeologicStructure();
+        private GeologicStructure[] geologicStructures;
         //***********************************
 
         /// <summary>
@@ -94,79 +95,6 @@ namespace LibPanels
         }
 
         /// <summary>
-        /// farpoint数据绑定
-        /// </summary>
-        //private void bindFpGeologicStructure()
-        //{
-        //    FarPointOperate.farPointClear(fpGeologicStructure, rowDetailStartIndex, rowsCount);
-        //    checkCount = 0;
-        //    chkSelAll.Checked = false;
-        //    // ※分页必须
-        //    _iRecordCount = GeologicStructureBLL.selectGeologicStructure().Tables[0].Rows.Count;
-
-        //    // ※分页必须
-        //    dataPager1.PageControlInit(_iRecordCount);
-        //    int iStartIndex = dataPager1.getStartIndex();
-        //    int iEndIndex = dataPager1.getEndIndex();
-        //    _ds = GeologicStructureBLL.selectGeologicStructure(iStartIndex, iEndIndex);
-        //    rowsCount = _ds.Tables[0].Rows.Count;
-        //    FarPointOperate.farPointReAdd(fpGeologicStructure, rowDetailStartIndex, rowsCount);
-        //    if (rowsCount > 0)
-        //    {
-        //        FarPoint.Win.Spread.CellType.CheckBoxCellType ckbxcell = new FarPoint.Win.Spread.CellType.CheckBoxCellType();
-        //        ckbxcell.ThreeState = false;
-        //        for (int i = 0; i < _ds.Tables[0].Rows.Count; i++)
-        //        {
-        //            int index = 0;
-        //            this.fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, index].CellType = ckbxcell;
-        //            //巷道名称
-        //            this.fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = TunnelInfoBLL.selectTunnelInfoByTunnelID(Convert.ToInt32(_ds.Tables[0].Rows[i][GeologicStructureDbConstNames.TUNNEL_ID])).TunnelName;
-        //            if (LibPanels.checkCoordinate(_ds.Tables[0].Rows[i][GeologicStructureDbConstNames.X].ToString(), _ds.Tables[0].Rows[i][GeologicStructureDbConstNames.Y].ToString(), _ds.Tables[0].Rows[i][GeologicStructureDbConstNames.Z].ToString()))
-        //            {
-        //                //坐标X
-        //                this.fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = _ds.Tables[0].Rows[i][GeologicStructureDbConstNames.X].ToString();
-        //                //坐标Y
-        //                this.fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = _ds.Tables[0].Rows[i][GeologicStructureDbConstNames.Y].ToString();
-        //                //坐标Z
-        //                this.fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = _ds.Tables[0].Rows[i][GeologicStructureDbConstNames.Z].ToString();
-        //            }
-        //            else
-        //            {
-        //                index = index + 3;
-        //            }
-        //            //时间
-        //            this.fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = _ds.Tables[0].Rows[i][GeologicStructureDbConstNames.DATETIME].ToString().Substring(0, _ds.Tables[0].Rows[i][GeologicStructureDbConstNames.DATETIME].ToString().IndexOf(' '));
-        //            //无计划揭露构造
-        //            this.fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(_ds.Tables[0].Rows[i][GeologicStructureDbConstNames.NO_PLAN_STRUCTURE].ToString());
-        //            //过构造时措施无效
-        //            this.fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(_ds.Tables[0].Rows[i][GeologicStructureDbConstNames.PASSED_STRUCTURE_RULE_INVALID].ToString());
-        //            //黄色预警措施无效
-        //            this.fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(_ds.Tables[0].Rows[i][GeologicStructureDbConstNames.YELLOW_RULE_INVALID].ToString());
-        //            //顶板破碎
-        //            this.fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(_ds.Tables[0].Rows[i][GeologicStructureDbConstNames.ROOF_BROKEN].ToString());
-        //            //煤层松软
-        //            this.fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(_ds.Tables[0].Rows[i][GeologicStructureDbConstNames.COAL_SEAM_SOFT].ToString());
-        //            //工作面煤层处于分叉、合层状态
-        //            this.fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(_ds.Tables[0].Rows[i][GeologicStructureDbConstNames.COAL_SEAM_BRANCH].ToString());
-        //            //顶板条件发生变化
-        //            this.fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(_ds.Tables[0].Rows[i][GeologicStructureDbConstNames.ROOF_CHANGE].ToString());
-        //            //工作面夹矸突然变薄或消失
-        //            this.fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(_ds.Tables[0].Rows[i][GeologicStructureDbConstNames.GANGUE_DISAPPEAR].ToString());
-        //            //夹矸位置急剧变化
-        //            this.fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(_ds.Tables[0].Rows[i][GeologicStructureDbConstNames.GANGUE_LOCATION_CHANGE].ToString());
-        //            //工作制式
-        //            this.fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = _ds.Tables[0].Rows[i][GeologicStructureDbConstNames.WORK_STYLE].ToString();
-        //            //班次
-        //            this.fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = _ds.Tables[0].Rows[i][GeologicStructureDbConstNames.WORK_TIME].ToString();
-        //            //填报人
-        //            this.fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = _ds.Tables[0].Rows[i][GeologicStructureDbConstNames.SUBMITTER].ToString();
-        //        }
-        //    }
-        //    setButtenEnable();
-        //}
-
-
-        /// <summary>
         /// farpoint数据绑定带条件
         /// </summary>
         private void bindFpGeologicStructureWithCondition()
@@ -175,66 +103,83 @@ namespace LibPanels
             checkCount = 0;
             chkSelAll.Checked = false;
             // ※分页必须
-            _iRecordCount = GeologicStructureBLL.selectGeologicStructureWithCondition(_queryConditions.TunnelId, _queryConditions.DefaultStartTime, _queryConditions.DefaultEndTime).Tables[0].Rows.Count;
+            _iRecordCount = GeologicStructure.GetRecordCount();
 
             // ※分页必须
             dataPager1.PageControlInit(_iRecordCount);
             int iStartIndex = dataPager1.getStartIndex();
             int iEndIndex = dataPager1.getEndIndex();
-            _ds = GeologicStructureBLL.selectGeologicStructureWithCondition(iStartIndex, iEndIndex, _queryConditions.TunnelId, _queryConditions.DefaultStartTime, _queryConditions.DefaultEndTime);
-            rowsCount = _ds.Tables[0].Rows.Count;
+            geologicStructures = GeologicStructure.SlicedFindByCondition(iStartIndex, iEndIndex, _queryConditions.TunnelId, Convert.ToDateTime(_queryConditions.DefaultStartTime), Convert.ToDateTime(_queryConditions.DefaultEndTime));
+            rowsCount = geologicStructures.Length; ;
+
             FarPointOperate.farPointReAdd(fpGeologicStructure, rowDetailStartIndex, rowsCount);
             if (rowsCount > 0)
             {
                 FarPoint.Win.Spread.CellType.CheckBoxCellType ckbxcell = new FarPoint.Win.Spread.CellType.CheckBoxCellType();
                 ckbxcell.ThreeState = false;
-                for (int i = 0; i < _ds.Tables[0].Rows.Count; i++)
+                for (int i = 0; i < geologicStructures.Length; i++)
                 {
                     int index = 0;
                     this.fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, index].CellType = ckbxcell;
                     //巷道名称
                     this.fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
-                        BasicInfoManager.getInstance().getTunnelByID(_queryConditions.TunnelId).TunnelName;
+                        geologicStructures[i].Tunnel.TunnelName;
                     // TunnelInfoBLL.selectTunnelInfoByTunnelID(Convert.ToInt32(_ds.Tables[0].Rows[i][GeologicStructureDbConstNames.TUNNEL_ID])).TunnelName;
-                    if (LibPanels.checkCoordinate(_ds.Tables[0].Rows[i][GeologicStructureDbConstNames.X].ToString(), _ds.Tables[0].Rows[i][GeologicStructureDbConstNames.Y].ToString(), _ds.Tables[0].Rows[i][GeologicStructureDbConstNames.Z].ToString()))
+                    if (LibPanels.checkCoordinate(geologicStructures[i].CoordinateX, geologicStructures[i].CoordinateY, geologicStructures[i].CoordinateZ))
                     {
                         //坐标X
-                        this.fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = _ds.Tables[0].Rows[i][GeologicStructureDbConstNames.X].ToString();
+                        fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                            geologicStructures[i].CoordinateX.ToString();
                         //坐标Y
-                        this.fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = _ds.Tables[0].Rows[i][GeologicStructureDbConstNames.Y].ToString();
+                        fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                            geologicStructures[i].CoordinateY.ToString();
                         //坐标Z
-                        this.fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = _ds.Tables[0].Rows[i][GeologicStructureDbConstNames.Z].ToString();
+                        fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                            geologicStructures[i].CoordinateZ.ToString();
                     }
                     else
                     {
                         index = index + 3;
                     }
                     //时间
-                    this.fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = _ds.Tables[0].Rows[i][GeologicStructureDbConstNames.DATETIME].ToString().Substring(0, _ds.Tables[0].Rows[i][GeologicStructureDbConstNames.DATETIME].ToString().IndexOf(' '));
+                    fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        geologicStructures[i].Datetime.ToString("yyyy-MM-dd hh:mm:ss");
                     //无计划揭露构造
-                    this.fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(_ds.Tables[0].Rows[i][GeologicStructureDbConstNames.NO_PLAN_STRUCTURE].ToString());
+                    fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        geologicStructures[i].NoPlanStructure.ToString();
                     //过构造时措施无效
-                    this.fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(_ds.Tables[0].Rows[i][GeologicStructureDbConstNames.PASSED_STRUCTURE_RULE_INVALID].ToString());
+                    fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        geologicStructures[i].PassedStructureRuleInvalid.ToString();
                     //黄色预警措施无效
-                    this.fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(_ds.Tables[0].Rows[i][GeologicStructureDbConstNames.YELLOW_RULE_INVALID].ToString());
+                    fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        geologicStructures[i].YellowRuleInvalid.ToString();
                     //顶板破碎
-                    this.fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(_ds.Tables[0].Rows[i][GeologicStructureDbConstNames.ROOF_BROKEN].ToString());
+                    fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        geologicStructures[i].RoofBroken.ToString();
                     //煤层松软
-                    this.fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(_ds.Tables[0].Rows[i][GeologicStructureDbConstNames.COAL_SEAM_SOFT].ToString());
+                    fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        geologicStructures[i].CoalSeamSoft.ToString();
                     //工作面煤层处于分叉、合层状态
-                    this.fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(_ds.Tables[0].Rows[i][GeologicStructureDbConstNames.COAL_SEAM_BRANCH].ToString());
+                    fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        geologicStructures[i].CoalSeamBranch.ToString();
                     //顶板条件发生变化
-                    this.fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(_ds.Tables[0].Rows[i][GeologicStructureDbConstNames.ROOF_CHANGE].ToString());
+                    fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        geologicStructures[i].RoofChange.ToString();
                     //工作面夹矸突然变薄或消失
-                    this.fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(_ds.Tables[0].Rows[i][GeologicStructureDbConstNames.GANGUE_DISAPPEAR].ToString());
+                    fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        geologicStructures[i].GangueDisappear.ToString();
                     //夹矸位置急剧变化
-                    this.fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = LibPanels.DataChangeYesNo(_ds.Tables[0].Rows[i][GeologicStructureDbConstNames.GANGUE_LOCATION_CHANGE].ToString());
+                    fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        geologicStructures[i].GangueLocationChange.ToString();
                     //工作制式
-                    this.fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = _ds.Tables[0].Rows[i][GeologicStructureDbConstNames.WORK_STYLE].ToString();
+                    fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        geologicStructures[i].WorkStyle;
                     //班次
-                    this.fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = _ds.Tables[0].Rows[i][GeologicStructureDbConstNames.WORK_TIME].ToString();
+                    fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        geologicStructures[i].WorkTime;
                     //填报人
-                    this.fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text = _ds.Tables[0].Rows[i][GeologicStructureDbConstNames.SUBMITTER].ToString();
+                    fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, ++index].Text =
+                        geologicStructures[i].Submitter;
                 }
             }
             setButtenEnable();
@@ -295,114 +240,6 @@ namespace LibPanels
             }
         }
 
-        private void setMineDataEntityValue()
-        {
-            for (int i = 0; i < rowsCount; i++)
-            {
-                if (fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, 0].Value != null && (bool)fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, 0].Value == true)
-                {
-                    //主键
-                    if (int.TryParse(_ds.Tables[0].Rows[i][GasDataDbConstNames.ID].ToString(), out tmpInt))
-                    {
-                        geologicStructureEntity.Id = tmpInt;
-                        tmpInt = 0;
-                    }
-                    //绑定巷道ID
-                    if (int.TryParse(_ds.Tables[0].Rows[i][GasDataDbConstNames.TUNNEL_ID].ToString(), out tmpInt))
-                    {
-                        geologicStructureEntity.Tunnel.TunnelId = tmpInt;
-                        tmpInt = 0;
-                    }
-                    //坐标X
-                    if (double.TryParse(_ds.Tables[0].Rows[i][GasDataDbConstNames.X].ToString(), out tmpDouble))
-                    {
-                        geologicStructureEntity.CoordinateX = tmpDouble;
-                        tmpDouble = 0;
-                    }
-                    //坐标Y
-                    if (double.TryParse(_ds.Tables[0].Rows[i][GasDataDbConstNames.Y].ToString(), out tmpDouble))
-                    {
-                        geologicStructureEntity.CoordinateY = tmpDouble;
-                        tmpDouble = 0;
-                    }
-                    //坐标Z
-                    if (double.TryParse(_ds.Tables[0].Rows[i][GasDataDbConstNames.Z].ToString(), out tmpDouble))
-                    {
-                        geologicStructureEntity.CoordinateZ = tmpDouble;
-                        tmpDouble = 0;
-                    }
-                    //工作制式
-                    geologicStructureEntity.WorkStyle = _ds.Tables[0].Rows[i][GasDataDbConstNames.WORK_STYLE].ToString();
-                    //班次
-                    geologicStructureEntity.WorkTime = _ds.Tables[0].Rows[i][GasDataDbConstNames.WORK_TIME].ToString();
-                    //队别名称
-                    geologicStructureEntity.TeamName = _ds.Tables[0].Rows[i][GasDataDbConstNames.TEAM_NAME].ToString();
-                    //填报人
-                    geologicStructureEntity.Submitter = _ds.Tables[0].Rows[i][GasDataDbConstNames.SUBMITTER].ToString();
-                    //提交日期
-                    if (DateTime.TryParse(_ds.Tables[0].Rows[i][GasDataDbConstNames.DATETIME].ToString(), out tmpDtp))
-                    {
-                        geologicStructureEntity.Datetime = tmpDtp;
-                        tmpDtp = DateTime.Now;
-                    }
-                    //无计划揭露构造
-                    if (int.TryParse(_ds.Tables[0].Rows[i][GeologicStructureDbConstNames.NO_PLAN_STRUCTURE].ToString(), out tmpInt))
-                    {
-                        geologicStructureEntity.NoPlanStructure = tmpInt;
-                        tmpInt = 0;
-                    }
-                    //过构造时措施无效
-                    if (int.TryParse(_ds.Tables[0].Rows[i][GeologicStructureDbConstNames.PASSED_STRUCTURE_RULE_INVALID].ToString(), out tmpInt))
-                    {
-                        geologicStructureEntity.PassedStructureRuleInvalid = tmpInt;
-                        tmpInt = 0;
-                    }
-                    //黄色预警措施无效
-                    if (int.TryParse(_ds.Tables[0].Rows[i][GeologicStructureDbConstNames.YELLOW_RULE_INVALID].ToString(), out tmpInt))
-                    {
-                        geologicStructureEntity.YellowRuleInvalid = tmpInt;
-                        tmpInt = 0;
-                    }
-                    //顶板破碎
-                    if (int.TryParse(_ds.Tables[0].Rows[i][GeologicStructureDbConstNames.ROOF_BROKEN].ToString(), out tmpInt))
-                    {
-                        geologicStructureEntity.RoofBroken = tmpInt;
-                        tmpInt = 0;
-                    }
-                    //煤层松软
-                    if (int.TryParse(_ds.Tables[0].Rows[i][GeologicStructureDbConstNames.COAL_SEAM_SOFT].ToString(), out tmpInt))
-                    {
-                        geologicStructureEntity.CoalSeamSoft = tmpInt;
-                        tmpInt = 0;
-                    }
-                    //工作面煤层处于分叉、合层状态
-                    if (int.TryParse(_ds.Tables[0].Rows[i][GeologicStructureDbConstNames.COAL_SEAM_BRANCH].ToString(), out tmpInt))
-                    {
-                        geologicStructureEntity.CoalSeamBranch = tmpInt;
-                        tmpInt = 0;
-                    }
-                    //顶板条件发生变化
-                    if (int.TryParse(_ds.Tables[0].Rows[i][GeologicStructureDbConstNames.ROOF_CHANGE].ToString(), out tmpInt))
-                    {
-                        geologicStructureEntity.RoofChange = tmpInt;
-                        tmpInt = 0;
-                    }
-                    //工作面夹矸突然变薄或消失
-                    if (int.TryParse(_ds.Tables[0].Rows[i][GeologicStructureDbConstNames.GANGUE_DISAPPEAR].ToString(), out tmpInt))
-                    {
-                        geologicStructureEntity.GangueDisappear = tmpInt;
-                        tmpInt = 0;
-                    }
-                    //夹矸位置急剧变化
-                    if (int.TryParse(_ds.Tables[0].Rows[i][GeologicStructureDbConstNames.GANGUE_LOCATION_CHANGE].ToString(), out tmpInt))
-                    {
-                        geologicStructureEntity.GangueLocationChange = tmpInt;
-                        tmpInt = 0;
-                    }
-                }
-            }
-        }
-
         /// <summary>
         /// 全选反选
         /// </summary>
@@ -420,7 +257,7 @@ namespace LibPanels
                     if (chkSelAll.Checked)
                     {
                         this.fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, 0].Value = ((CheckBox)sender).Checked;
-                        checkCount = _ds.Tables[0].Rows.Count;
+                        checkCount = geologicStructures.Length;
                     }
                     //checkbox未选中
                     else
@@ -462,7 +299,14 @@ namespace LibPanels
         private void tsBtnModify_Click(object sender, EventArgs e)
         {
             //实体赋值
-            setMineDataEntityValue();
+            for (int i = 0; i < rowsCount; i++)
+            {
+                if (fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, 0].Value != null &&
+                    (bool)fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, 0].Value == true)
+                {
+                    geologicStructureEntity = geologicStructures[i];
+                }
+            }
             //记录修改行号
             _tmpRowIndex = fpGeologicStructure.ActiveSheet.ActiveRowIndex;
             MineData m = new MineData(geologicStructureEntity, this.MainForm);
@@ -492,9 +336,8 @@ namespace LibPanels
                     if (fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, 0].Value != null && (bool)fpGeologicStructure.Sheets[0].Cells[rowDetailStartIndex + i, 0].Value == true)
                     {
                         _tmpRowIndex = fpGeologicStructure.ActiveSheet.ActiveRowIndex;
-                        int id = (int)_ds.Tables[0].Rows[i][GeologicStructureDbConstNames.ID];
-                        //删除
-                        bResult = GeologicStructureBLL.deleteGeologicStructure(id);
+                        geologicStructures[i].Delete();
+                        bResult = true;
                     }
                 }
                 //删除成功
