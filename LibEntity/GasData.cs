@@ -5,7 +5,7 @@ using NHibernate.Criterion;
 
 namespace LibEntity
 {
-    [ActiveRecord("T_COAL_EXISTENCE")]
+    [ActiveRecord("T_GASDATA")]
     public class GasData : MineData
     {
         /// <summary>
