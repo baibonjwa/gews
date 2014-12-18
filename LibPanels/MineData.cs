@@ -658,12 +658,14 @@ namespace LibPanels
             //添加
             if (this.Text == new LibPanels(MineDataPanelName.GasData).panelFormName)
             {
-                bResult = GasDataBLL.insertGasDataInfo(gdEntity);
+                gdEntity.SaveAndFlush();
+                bResult = true;
             }
             //修改
             else if (this.Text == new LibPanels(MineDataPanelName.GasData_Change).panelFormName)
             {
-                bResult = GasDataBLL.updateGasDataInfo(gdEntity);
+                gdEntity.SaveAndFlush();
+                bResult = true;
             }
             return bResult;
         }

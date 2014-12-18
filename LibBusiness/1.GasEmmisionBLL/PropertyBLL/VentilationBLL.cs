@@ -62,10 +62,10 @@ namespace LibBusiness
                 vEntity.CoordinateX = Convert.ToDouble(ds.Tables[0].Rows[0][VentilationDbConstNames.COORDINATE_X].ToString());
                 vEntity.CoordinateY = Convert.ToDouble(ds.Tables[0].Rows[0][VentilationDbConstNames.COORDINATE_Y].ToString());
                 vEntity.CoordinateZ = Convert.ToDouble(ds.Tables[0].Rows[0][VentilationDbConstNames.COORDINATE_Z].ToString());
-                vEntity.WorkStyle = ds.Tables[0].Rows[0][GasDataDbConstNames.WORK_STYLE].ToString();
-                vEntity.WorkTime = ds.Tables[0].Rows[0][GasDataDbConstNames.WORK_TIME].ToString();
-                vEntity.TeamName = ds.Tables[0].Rows[0][GasDataDbConstNames.TEAM_NAME].ToString();
-                vEntity.Submitter = ds.Tables[0].Rows[0][GasDataDbConstNames.SUBMITTER].ToString();
+                vEntity.WorkStyle = ds.Tables[0].Rows[0][VentilationDbConstNames.WORK_STYLE].ToString();
+                vEntity.WorkTime = ds.Tables[0].Rows[0][VentilationDbConstNames.WORK_TIME].ToString();
+                vEntity.TeamName = ds.Tables[0].Rows[0][VentilationDbConstNames.TEAM_NAME].ToString();
+                vEntity.Submitter = ds.Tables[0].Rows[0][VentilationDbConstNames.SUBMITTER].ToString();
                 vEntity.Datetime = Convert.ToDateTime(ds.Tables[0].Rows[0][VentilationDbConstNames.DATETIME].ToString());
                 vEntity.IsNoWindArea = Convert.ToInt32(ds.Tables[0].Rows[0][VentilationDbConstNames.IS_NO_WIND_AREA].ToString());
                 vEntity.IsLightWindArea = Convert.ToInt32(ds.Tables[0].Rows[0][VentilationDbConstNames.IS_LIGHT_WIND_AREA].ToString());

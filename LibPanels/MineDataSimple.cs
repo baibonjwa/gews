@@ -352,10 +352,11 @@ namespace LibPanels
             bool bResult = false;
             if (Text == new LibPanels(MineDataPanelName.GasData).panelFormName)
             {
-                bResult = GasDataBLL.insertGasDataInfo(gdEntity);
+                gdEntity.SaveAndFlush();
+                bResult = true;
                 Log.Debug("发送添加瓦斯信息的Socket信息");
                 var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.ITunnelId,
-                    GasDataDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, dtpDateTime.Value);
+                    GasData.TableName, OPERATION_TYPE.ADD, dtpDateTime.Value);
                 MainForm.SendMsg2Server(msg);
                 Log.Debug("发送添加瓦斯信息的Socket信息完成");
             }
@@ -363,9 +364,10 @@ namespace LibPanels
             {
                 Log.Debug("发送修改瓦斯信息的Socket信息");
                 var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.ITunnelId,
-                    GasDataDbConstNames.TABLE_NAME, OPERATION_TYPE.UPDATE, dtpDateTime.Value);
+                    GasData.TableName, OPERATION_TYPE.UPDATE, dtpDateTime.Value);
                 MainForm.SendMsg2Server(msg);
-                bResult = GasDataBLL.updateGasDataInfo(gdEntity);
+                gdEntity.SaveAndFlush();
+                bResult = true;
                 Log.Debug("发送修改瓦斯信息的Socket信息完成");
             }
             return bResult;

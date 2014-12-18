@@ -360,10 +360,11 @@ namespace UnderTerminal
             bool bResult = false;
             if (this.Text == new LibPanels(MineDataPanelName.GasData).panelFormName)
             {
-                bResult = GasDataBLL.insertGasDataInfo(gdEntity);
+                gdEntity.SaveAndFlush();
+                bResult = true;
 
                 UpdateWarningDataMsg msg = new UpdateWarningDataMsg(this.mainWin.workingfaceId, this.tunnelId,
-                    GasDataDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, dtpDateTime.Value);
+                    GasData.TableName, OPERATION_TYPE.ADD, dtpDateTime.Value);
                 mainWin.SendMsg2Server(msg);
             }
 

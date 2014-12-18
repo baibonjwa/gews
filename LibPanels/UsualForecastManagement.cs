@@ -245,11 +245,11 @@ namespace LibPanels
                     mdEntity.CoordinateX = Convert.ToDouble(dsAll.Tables[0].Rows[i][UsualForecastDbConstNames.X]);
                     ufEntity.CoordinateY = Convert.ToDouble(dsAll.Tables[0].Rows[i][UsualForecastDbConstNames.Y]);
                     ufEntity.CoordinateZ = Convert.ToDouble(dsAll.Tables[0].Rows[i][UsualForecastDbConstNames.Z]);
-                    ufEntity.WorkStyle = dsAll.Tables[0].Rows[i][GasDataDbConstNames.WORK_STYLE].ToString();
-                    ufEntity.WorkTime = dsAll.Tables[0].Rows[i][GasDataDbConstNames.WORK_TIME].ToString();
-                    ufEntity.TeamName = dsAll.Tables[0].Rows[i][GasDataDbConstNames.TEAM_NAME].ToString();
-                    ufEntity.Submitter = dsAll.Tables[0].Rows[i][GasDataDbConstNames.SUBMITTER].ToString();
-                    ufEntity.Datetime = Convert.ToDateTime(dsAll.Tables[0].Rows[i][GasDataDbConstNames.DATETIME]);
+                    ufEntity.WorkStyle = dsAll.Tables[0].Rows[i][UsualForecastDbConstNames.WORK_STYLE].ToString();
+                    ufEntity.WorkTime = dsAll.Tables[0].Rows[i][UsualForecastDbConstNames.WORK_TIME].ToString();
+                    ufEntity.TeamName = dsAll.Tables[0].Rows[i][UsualForecastDbConstNames.TEAM_NAME].ToString();
+                    ufEntity.Submitter = dsAll.Tables[0].Rows[i][UsualForecastDbConstNames.SUBMITTER].ToString();
+                    ufEntity.Datetime = Convert.ToDateTime(dsAll.Tables[0].Rows[i][UsualForecastDbConstNames.DATETIME]);
                     ufEntity.IsRoofDown = Convert.ToInt32(dsAll.Tables[0].Rows[i][UsualForecastDbConstNames.IS_ROOF_DOWN]);
                     ufEntity.IsSupportBroken = Convert.ToInt32(dsAll.Tables[0].Rows[i][UsualForecastDbConstNames.IS_SUPPORT_BROKEN]);
                     ufEntity.IsCoalWallDrop = Convert.ToInt32(dsAll.Tables[0].Rows[i][UsualForecastDbConstNames.IS_COAL_WALL_DROP]);

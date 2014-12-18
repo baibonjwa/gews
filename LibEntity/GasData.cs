@@ -8,6 +8,8 @@ namespace LibEntity
     [ActiveRecord("T_GASDATA")]
     public class GasData : MineData
     {
+        public const String TableName = "T_GASDATA";
+
         /// <summary>
         ///     设置或获取瓦斯探头断电次数
         /// </summary>

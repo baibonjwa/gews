@@ -216,17 +216,14 @@
     <Compile Include="3.GeologyMeasureBLL\PropertyBLL\TunnelInfoBLL.cs" />
     <Compile Include="3.GeologyMeasureBLL\PropertyBLL\WireInfoBLL.cs" />
     <Compile Include="3.GeologyMeasureBLL\PropertyBLL\WirePointBLL.cs" />
-    <Compile Include="4.OutburstPreventionBLL\DbConstNames\GeologicStructureDbConstNames.cs" />
     <Compile Include="4.OutburstPreventionBLL\SaveDBXyz2Txt.cs" />
     <Compile Include="4.OutburstPreventionBLL\DbConstNames\GasContentDbConstNames.cs" />
-    <Compile Include="4.OutburstPreventionBLL\DbConstNames\GasDataDbConstNames.cs" />
     <Compile Include="4.OutburstPreventionBLL\DbConstNames\GasPressureDbConstNames.cs" />
     <Compile Include="4.OutburstPreventionBLL\DbConstNames\ManagementDbConstNames.cs" />
     <Compile Include="4.OutburstPreventionBLL\DbConstNames\GasGushQuantityDbConstNames.cs" />
     <Compile Include="4.OutburstPreventionBLL\DbConstNames\SValueDbConstNames.cs" />
     <Compile Include="4.OutburstPreventionBLL\DbConstNames\UsualForecastDbConstNames.cs" />
     <Compile Include="4.OutburstPreventionBLL\DbConstNames\K1ValueDbConstNames.cs" />
-    <Compile Include="4.OutburstPreventionBLL\PropertyBLL\GasDataBLL.cs" />
     <Compile Include="4.OutburstPreventionBLL\PropertyBLL\GasContentBLL.cs" />
     <Compile Include="4.OutburstPreventionBLL\PropertyBLL\GasPressureBLL.cs" />
     <Compile Include="4.OutburstPreventionBLL\GraphicBLL\GasPressureGraphicDbConstNames.cs" />
