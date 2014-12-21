@@ -810,7 +810,7 @@ namespace _1.GasEmission
         //    GasConcentrationProbeDataEntity gasConcentrationProbeDataEntity = new GasConcentrationProbeDataEntity();
 
         //    // 探头编号
-        //    gasConcentrationProbeDataEntity.ProbeId = "001";
+        //    gasConcentrationProbeDataEntity.Probe = "001";
         //    // 数值
         //    gasConcentrationProbeDataEntity.ProbeValue = value / 100;
         //    // 时间

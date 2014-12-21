@@ -199,7 +199,7 @@ namespace _5.WarningManagement
                     //队别ID
                     int id = 0;
                     int.TryParse(_ds.Tables[0].Rows[i][TeamDbConstNames.ID].ToString(), out id);
-                    teamInfoEntity.TeamID = id;
+                    teamInfoEntity.TeamId = id;
                     //队别名称
                     teamInfoEntity.TeamName = this.fpTeam.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text;
                     //队长姓名
@@ -270,7 +270,7 @@ namespace _5.WarningManagement
                     if (fpTeam.Sheets[0].Cells[_rowDetailStartIndex + i, 0].Value != null && (bool)fpTeam.Sheets[0].Cells[_rowDetailStartIndex + i, 0].Value == true)
                     {
                         //掘进ID
-                        teamInfoEntity.TeamID = (int)_ds.Tables[0].Rows[i][TeamDbConstNames.ID];
+                        teamInfoEntity.TeamId = (int)_ds.Tables[0].Rows[i][TeamDbConstNames.ID];
                         //删除操作
                         bResult = TeamBLL.deleteTeamInfo(teamInfoEntity);
                     }

@@ -141,7 +141,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="dayReportJJEntity">掘进进尺实体</param>
         /// <returns>是否成功插入？true:false</returns>
-        public static bool insertDayReportJJInfo(DayReportJJ dayReportJJEntity)
+        public static bool insertDayReportJJInfo(DayReportJj dayReportJJEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
             StringBuilder sb = new StringBuilder();
@@ -160,8 +160,8 @@ namespace LibBusiness
             sb.Append(DayReportJJDbConstNames.BINDINGID);
 
             sb.Append(") VALUES ('");
-            sb.Append(dayReportJJEntity.TeamNameID + "','");
-            sb.Append(dayReportJJEntity.WorkingFaceID + "','");
+            sb.Append(dayReportJJEntity.TeamInfo + "','");
+            sb.Append(dayReportJJEntity.WorkingFace + "','");
             sb.Append(dayReportJJEntity.WorkTime + "','");
             sb.Append(dayReportJJEntity.WorkTimeStyle + "','");
             sb.Append(dayReportJJEntity.WorkInfo + "','");
@@ -171,7 +171,7 @@ namespace LibBusiness
             sb.Append(dayReportJJEntity.Other + "','");
             sb.Append(0 + "','");
             sb.Append(0 + "','");
-            sb.Append(dayReportJJEntity.BindingID + "')");
+            sb.Append(dayReportJJEntity.BindingId + "')");
             bool bResult = db.OperateDB(sb.ToString());
             return bResult;
         }
@@ -181,13 +181,13 @@ namespace LibBusiness
         /// </summary>
         /// <param name="dayReportJJEntity">回采进尺日报实体</param>
         /// <returns></returns>
-        public static bool updateDayReportJJInfo(DayReportJJ dayReportJJEntity)
+        public static bool updateDayReportJJInfo(DayReportJj dayReportJJEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
             StringBuilder sqlStr = new StringBuilder();
             sqlStr.Append("UPDATE " + DayReportJJDbConstNames.TABLE_NAME + " SET " + DayReportJJDbConstNames.TEAM_NAME_ID + "='");
-            sqlStr.Append(dayReportJJEntity.TeamNameID + "'," +
-                DayReportJJDbConstNames.WORKINGFACE_ID + " = " + dayReportJJEntity.WorkingFaceID + ",");
+            sqlStr.Append(dayReportJJEntity.TeamInfo + "'," +
+                DayReportJJDbConstNames.WORKINGFACE_ID + " = " + dayReportJJEntity.WorkingFace + ",");
             sqlStr.Append(DayReportJJDbConstNames.WORK_TIME + " = '");
             sqlStr.Append(dayReportJJEntity.WorkTime + "'," + DayReportJJDbConstNames.WORK_TIME_SYTLE + "= '");
             sqlStr.Append(dayReportJJEntity.WorkTimeStyle + "'," + DayReportJJDbConstNames.WORK_INFO + " ='");
@@ -198,7 +198,7 @@ namespace LibBusiness
             sqlStr.Append(dayReportJJEntity.Other + "'," + DayReportJJDbConstNames.DISTANCE_FROM_WIREPOINT + " = '");
             sqlStr.Append(dayReportJJEntity.DistanceFromWirepoint + "'," + DayReportJJDbConstNames.CONSULT_WIREPOINT_ID + " = '");
             sqlStr.Append(dayReportJJEntity.ConsultWirepoint + "' WHERE " + DayReportJJDbConstNames.ID + " = ");
-            sqlStr.Append(dayReportJJEntity.ID);
+            sqlStr.Append(dayReportJJEntity.Id);
             bool bResult = db.OperateDB(sqlStr.ToString());
             return bResult;
         }
@@ -208,10 +208,10 @@ namespace LibBusiness
         /// </summary>
         /// <param name="dayReportJJEntity">回采进尺日报实体(含主键)</param>
         /// <returns></returns>
-        public static bool deleteDayReportJJInfo(DayReportJJ dayReportJJEntity)
+        public static bool deleteDayReportJJInfo(DayReportJj dayReportJJEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
-            string sql = "DELETE FROM " + DayReportJJDbConstNames.TABLE_NAME + " WHERE " + DayReportJJDbConstNames.ID + " =" + dayReportJJEntity.ID;
+            string sql = "DELETE FROM " + DayReportJJDbConstNames.TABLE_NAME + " WHERE " + DayReportJJDbConstNames.ID + " =" + dayReportJJEntity.Id;
             bool bResult = db.OperateDB(sql);
             return bResult;
         }
@@ -221,9 +221,9 @@ namespace LibBusiness
         /// </summary>
         /// <param name="tunnelID"></param>
         /// <returns></returns>
-        public static DayReportJJ returnMaxRowDistanceFromWirepoint(int tunnelID)
+        public static DayReportJj returnMaxRowDistanceFromWirepoint(int tunnelID)
         {
-            DayReportJJ dayReportJJEntity = new DayReportJJ();
+            DayReportJj dayReportJJEntity = new DayReportJj();
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
             StringBuilder sb = new StringBuilder();
             sb.Append("SELECT * FROM " + DayReportJJDbConstNames.TABLE_NAME);

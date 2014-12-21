@@ -29,7 +29,7 @@ namespace UnderTerminal
         Tunnel _tunnelEntity = new Tunnel();
         UnderMessageWindow mainWin;
         /**回采日报实体**/
-        DayReportHC _dayReportHCEntity = new DayReportHC();
+        DayReportHc _dayReportHCEntity = new DayReportHc();
         /**巷道关联矿井等信息ID集合**/
         int[] _arr;
         int tunnelId = -1;
@@ -136,7 +136,7 @@ namespace UnderTerminal
             }
 
             //队别
-            cboTeamName.SelectedValue = _dayReportHCEntity.TeamNameID;
+            cboTeamName.SelectedValue = _dayReportHCEntity.TeamInfo;
 
             //绑定队别成员
             this.bindTeamMember();
@@ -271,10 +271,10 @@ namespace UnderTerminal
         /// </summary>
         private void insertDayReportHCInfo()
         {
-            List<DayReportHC> dayReportHCEntityList = new List<DayReportHC>();
+            List<DayReportHc> dayReportHCEntityList = new List<DayReportHc>();
             for (int i = 0; i < this.dgrdvDayReportHC.RowCount; i++)
             {
-                DayReportHC dayReportHCEntity = new DayReportHC();
+                DayReportHc dayReportHCEntity = new DayReportHc();
                 // 最后一行为空行时，跳出循环
                 if (i == this.dgrdvDayReportHC.RowCount - 1)
                 {
@@ -283,9 +283,11 @@ namespace UnderTerminal
 
                 /**回采日报实体赋值**/
                 //队别名称
-                dayReportHCEntity.TeamNameID = Convert.ToInt32(cboTeamName.SelectedValue);
+                //TODO:
+                dayReportHCEntity.TeamInfo = null;
                 //绑定巷道编号
-                dayReportHCEntity.WorkingFaceID = workingfaceId;
+                //TODO:
+                dayReportHCEntity.WorkingFace = null;
                 //日期
                 dayReportHCEntity.DateTime = dtpDate.Value;
                 //填报人
@@ -326,7 +328,7 @@ namespace UnderTerminal
                     dayReportHCEntity.Other = this.dgrdvDayReportHC.Rows[i].Cells[C_COMMENTS].Value.ToString();
                 }
                 //BID
-                dayReportHCEntity.BindingID = IDGenerator.NewBindingID();
+                dayReportHCEntity.BindingId = IDGenerator.NewBindingID();
 
                 //添加到dayReportHCEntityList中
                 dayReportHCEntityList.Add(dayReportHCEntity);
@@ -335,7 +337,7 @@ namespace UnderTerminal
             bool bResult = false;
 
             //循环添加
-            foreach (DayReportHC dayReportHCEntity in dayReportHCEntityList)
+            foreach (DayReportHc dayReportHCEntity in dayReportHCEntityList)
             {
                 //添加回采进尺日报
                 bResult = DayReportHCBLL.insertDayReportHCInfo(dayReportHCEntity);

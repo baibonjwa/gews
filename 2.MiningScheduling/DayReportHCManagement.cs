@@ -280,9 +280,9 @@ namespace _2.MiningScheduling
         /// <summary>
         /// 为变量dayReportHCEntity赋值
         /// </summary>
-        private DayReportHC setDayReportHCEntityValue()
+        private DayReportHc setDayReportHCEntityValue()
         {
-            DayReportHC eReturn = null;
+            DayReportHc eReturn = null;
 
             for (int i = 0; i < _rowsCount; i++)
             {
@@ -291,14 +291,14 @@ namespace _2.MiningScheduling
                 {
                     _tmpRowIndex = _rowDetailStartIndex + i;
                     DataRow dr = _ds.Tables[0].Rows[i];
-                    eReturn = new DayReportHC();
+                    eReturn = new DayReportHc();
 
                     //掘进ID
-                    eReturn.ID = (int)dr[DayReportHCDbConstNames.ID];
+                    eReturn.Id = (int)dr[DayReportHCDbConstNames.ID];
                     //队别名称
-                    eReturn.TeamNameID = (int)dr[DayReportHCDbConstNames.TEAM_NAME_ID];
+                    eReturn.TeamInfo.TeamId = (int)dr[DayReportHCDbConstNames.TEAM_NAME_ID];
                     //工作面ID
-                    eReturn.WorkingFaceID = Convert.ToInt32(dr[DayReportHCDbConstNames.WORKINGFACE_ID]);
+                    eReturn.WorkingFace.WorkingFaceID = Convert.ToInt32(dr[DayReportHCDbConstNames.WORKINGFACE_ID]);
                     //班次
                     eReturn.WorkTime = cells[_rowDetailStartIndex + i, C_WORK_TIME].Text;
                     //工作制式
@@ -314,7 +314,7 @@ namespace _2.MiningScheduling
                     //备注
                     eReturn.Other = cells[_rowDetailStartIndex + i, C_COMMENTS].Text;
                     //BID
-                    eReturn.BindingID = dr[DayReportHCDbConstNames.BINDINGID].ToString();
+                    eReturn.BindingId = dr[DayReportHCDbConstNames.BINDINGID].ToString();
                     break;
                 }
             }
@@ -350,7 +350,7 @@ namespace _2.MiningScheduling
         /// <param name="e"></param>
         private void tsBtnModify_Click(object sender, EventArgs e)
         {
-            DayReportHC entity = setDayReportHCEntityValue();
+            DayReportHc entity = setDayReportHCEntityValue();
 
             if (null == entity)
             {
@@ -358,7 +358,7 @@ namespace _2.MiningScheduling
                 return;
             }
 
-            WorkingFace ent = BasicInfoManager.getInstance().getWorkingFaceById(entity.WorkingFaceID);
+            WorkingFace ent = BasicInfoManager.getInstance().getWorkingFaceById(entity.WorkingFace.WorkingFaceID);
             /**自定义控件用巷道信息数组**/
             int[] _arr = new int[5];
             _arr[0] = ent.MiningArea.Horizontal.Mine.MineId;
@@ -399,14 +399,14 @@ namespace _2.MiningScheduling
                     if (cells[_rowDetailStartIndex + i, 0].Value != null &&
                         (bool)cells[_rowDetailStartIndex + i, 0].Value == true)
                     {
-                        DayReportHC entity = new DayReportHC();
+                        DayReportHc entity = new DayReportHc();
                         //获取掘进ID
-                        entity.ID = (int)dr[DayReportHCDbConstNames.ID];
-                        entity.WorkingFaceID = Convert.ToInt32(dr[DayReportHCDbConstNames.WORKINGFACE_ID]);
-                        entity.BindingID = dr[DayReportHCDbConstNames.BINDINGID].ToString();
+                        entity.Id = (int)dr[DayReportHCDbConstNames.ID];
+                        entity.WorkingFace.WorkingFaceID = Convert.ToInt32(dr[DayReportHCDbConstNames.WORKINGFACE_ID]);
+                        entity.BindingId = dr[DayReportHCDbConstNames.BINDINGID].ToString();
 
                         // 回采面对象
-                        WorkingFace hjEntity = BasicInfoManager.getInstance().getWorkingFaceById(entity.WorkingFaceID);
+                        WorkingFace hjEntity = BasicInfoManager.getInstance().getWorkingFaceById(entity.WorkingFace.WorkingFaceID);
                         if (hjEntity != null)
                             hjEntity.tunnelSet = BasicInfoManager.getInstance().getTunnelSetByDataSet(TunnelInfoBLL.selectTunnelByWorkingFaceId(hjEntity.WorkingFaceID));
                         Dictionary<TunnelTypeEnum, Tunnel> tDict = TunnelUtils.getTunnelDict(hjEntity);
@@ -417,7 +417,7 @@ namespace _2.MiningScheduling
                             Tunnel tunnelFY = tDict[TunnelTypeEnum.STOPING_FY];
                             Tunnel tunnelQY = tDict[TunnelTypeEnum.STOPING_QY];
                             // 删除GIS图形上的回采进尺
-                            DelHcjc(tunnelZY.TunnelId, tunnelFY.TunnelId, tunnelQY.TunnelId, entity.BindingID, hjEntity, tunnelZY.TunnelWid, tunnelFY.TunnelWid, tunnelQY.TunnelWid);
+                            DelHcjc(tunnelZY.TunnelId, tunnelFY.TunnelId, tunnelQY.TunnelId, entity.BindingId, hjEntity, tunnelZY.TunnelWid, tunnelFY.TunnelWid, tunnelQY.TunnelWid);
                         }
 
                         // 从数据库中删除对应的进尺信息
@@ -427,7 +427,7 @@ namespace _2.MiningScheduling
                             BasicInfoManager.getInstance().refreshWorkingFaceInfo(hjEntity);
 
                             #region 通知服务器预警数据已更新
-                            UpdateWarningDataMsg msg = new UpdateWarningDataMsg(entity.WorkingFaceID,
+                            UpdateWarningDataMsg msg = new UpdateWarningDataMsg(entity.WorkingFace.WorkingFaceID,
                                 Const.INVALID_ID,
                                 DayReportHCDbConstNames.TABLE_NAME, OPERATION_TYPE.DELETE, DateTime.Now);
                             this.MainForm.SendMsg2Server(msg);
@@ -489,8 +489,8 @@ namespace _2.MiningScheduling
                 }
             }
             //更新回采进尺表，将isdel设置0
-            LibEntity.DayReportHC entity = new DayReportHC();
-            entity.BindingID = bid;
+            LibEntity.DayReportHc entity = new DayReportHc();
+            entity.BindingId = bid;
             entity.IsDel = 0;
             LibBusiness.DayReportHCBLL.updateDayResportHCInfoByBID(entity);
 

@@ -1,13 +1,4 @@
-﻿// ******************************************************************
-// 概  述：
-// 作  者：
-// 日  期：
-// 版本号：V1.0
-// 版本信息：
-// V1.0 新建
-// ******************************************************************
-
-using System;
+﻿using System;
 using Castle.ActiveRecord;
 
 namespace LibEntity
@@ -40,6 +31,7 @@ namespace LibEntity
         /// <summary>
         ///     设置或获取坐标X
         /// </summary>
+        [Property("COORDINATE_X")]
         public double CoordinateX { get; set; }
 
         // 坐标Y
@@ -47,6 +39,7 @@ namespace LibEntity
         /// <summary>
         ///     设置或获取坐标Y
         /// </summary>
+        [Property("COORDINATE_Y")]
         public double CoordinateY { get; set; }
 
         // 坐标Z
@@ -54,6 +47,7 @@ namespace LibEntity
         /// <summary>
         ///     设置或获取坐标Z
         /// </summary>
+        [Property("COORDINATE_Z")]
         public double CoordinateZ { get; set; }
 
         // 时间

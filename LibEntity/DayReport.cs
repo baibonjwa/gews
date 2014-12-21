@@ -1,33 +1,37 @@
 ﻿using System;
+using Castle.ActiveRecord;
 
 namespace LibEntity
 {
     /// <summary>
     ///     回采和掘进日报的基类
     /// </summary>
-    public class DayReport
+    public class DayReport : ActiveRecordBase
     {
         // 记录ID
 
-        private DateTime dateTime;
+        private DateTime _dateTime;
 
         /// <summary>
         ///     记录ID
         /// </summary>
-        public int ID { get; set; }
+        [PrimaryKey(PrimaryKeyType.Identity, "OBJECTID")]
+        public int Id { get; set; }
 
         // 队别名称
 
         /// <summary>
         ///     队别名称
         /// </summary>
-        public int TeamNameID { get; set; }
+        [BelongsTo("TEAM_NAME_ID")]
+        public TeamInfo TeamInfo { get; set; }
 
         // 班次
 
         /// <summary>
         ///     班次
         /// </summary>
+        [Property("WORK_TIME")]
         public string WorkTime { get; set; }
 
         // 工作制式
@@ -35,6 +39,7 @@ namespace LibEntity
         /// <summary>
         ///     工作制式
         /// </summary>
+        [Property("WORK_TIME_SYTLE")]
         public string WorkTimeStyle { get; set; }
 
         // 工作内容
@@ -42,6 +47,7 @@ namespace LibEntity
         /// <summary>
         ///     工作内容
         /// </summary>
+        [Property("WORK_INFO")]
         public string WorkInfo { get; set; }
 
         // 进尺
@@ -49,6 +55,7 @@ namespace LibEntity
         /// <summary>
         ///     进尺
         /// </summary>
+        [Property("JIN_CHI")]
         public double JinChi { get; set; }
 
         // 工作面编号
@@ -56,17 +63,19 @@ namespace LibEntity
         /// <summary>
         ///     工作面编号
         /// </summary>
-        public int WorkingFaceID { get; set; }
+        [BelongsTo("WORKINGFACE_ID")]
+        public WorkingFace WorkingFace { get; set; }
 
         // 日期
 
         /// <summary>
         ///     日期
         /// </summary>
+        [Property("DATETIME")]
         public DateTime DateTime
         {
-            get { return dateTime; }
-            set { dateTime = value; }
+            get { return _dateTime; }
+            set { _dateTime = value; }
         }
 
         // 填报人
@@ -74,6 +83,7 @@ namespace LibEntity
         /// <summary>
         ///     填报人
         /// </summary>
+        [Property("SUBMITTER")]
         public string Submitter { get; set; }
 
         // 备注
@@ -81,6 +91,7 @@ namespace LibEntity
         /// <summary>
         ///     备注
         /// </summary>
+        [Property("OTHER")]
         public string Other { get; set; }
 
         // BID
@@ -88,6 +99,7 @@ namespace LibEntity
         /// <summary>
         ///     BID
         /// </summary>
-        public string BindingID { get; set; }
+        [Property("BINDINGID")]
+        public string BindingId { get; set; }
     }
 }

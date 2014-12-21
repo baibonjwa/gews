@@ -177,7 +177,7 @@ namespace LibBusiness
             sqlStr.Append(collapsePillarsEnt.CollapsePillarsName + "',"+CollapsePillarsInfoDbConstNames.DISCRIBE+" = '");
             sqlStr.Append(collapsePillarsEnt.Discribe + "' WHERE ");
             sqlStr.Append(CollapsePillarsInfoDbConstNames.ID + " = ");
-            sqlStr.Append(collapsePillarsEnt.ID);
+            sqlStr.Append(collapsePillarsEnt.Id);
             bool bResult = db.OperateDBNotOpenAndClose(sqlStr.ToString());
             StringBuilder sb = new StringBuilder();
             sb.Append("UPDATE " + CollapsePillarsPointDbConstNames.TABLE_NAME + " SET " + CollapsePillarsPointDbConstNames.COORDINATE_X + " = ");
@@ -185,7 +185,7 @@ namespace LibBusiness
             sb.Append(collapsePillarsEnt.CoordinateY + "," + CollapsePillarsPointDbConstNames.COORDINATE_Z + " = ");
             sb.Append(collapsePillarsEnt.CoordinateZ+" WHERE ");
             sb.Append(CollapsePillarsPointDbConstNames.ID + " = ");
-            sb.Append(collapsePillarsEnt.PointID);
+            sb.Append(collapsePillarsEnt.PointId);
             bResult = db.OperateDBNotOpenAndClose(sb.ToString());
             db.Close();
             return bResult;
@@ -204,7 +204,7 @@ namespace LibBusiness
             sb.Append(collapsePillars.CoordinateX + "','");
             sb.Append(collapsePillars.CoordinateY + "','");
             sb.Append(collapsePillars.CoordinateZ + "','");
-            sb.Append(collapsePillars.ID + "','");
+            sb.Append(collapsePillars.Id + "','");
             sb.Append(collapsePillars.BindingID + "')");
             bool bResult = db.OperateDB(sb.ToString());
             return bResult;
@@ -219,9 +219,9 @@ namespace LibBusiness
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
             db.Open();
-            string sql = "DELETE FROM " + CollapsePillarsInfoDbConstNames.TABLE_NAME + " WHERE " + CollapsePillarsInfoDbConstNames.ID + " = " + collapsePillarsEnt.ID;
+            string sql = "DELETE FROM " + CollapsePillarsInfoDbConstNames.TABLE_NAME + " WHERE " + CollapsePillarsInfoDbConstNames.ID + " = " + collapsePillarsEnt.Id;
             bool bResult = db.OperateDBNotOpenAndClose(sql);
-            sql = "DELETE FROM " + CollapsePillarsPointDbConstNames.TABLE_NAME + " WHERE " + CollapsePillarsPointDbConstNames.COLLAPSE_PILLARS_ID + " = " + collapsePillarsEnt.ID;
+            sql = "DELETE FROM " + CollapsePillarsPointDbConstNames.TABLE_NAME + " WHERE " + CollapsePillarsPointDbConstNames.COLLAPSE_PILLARS_ID + " = " + collapsePillarsEnt.Id;
             bResult = db.OperateDBNotOpenAndClose(sql);
             db.Close();
             return bResult;
@@ -235,7 +235,7 @@ namespace LibBusiness
         public static bool deleteCollapsePillarsPoint(CollapsePillarsEnt collapsePillarsEnt)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
-            string sql = "DELETE FROM " + CollapsePillarsPointDbConstNames.TABLE_NAME + " WHERE " + CollapsePillarsPointDbConstNames.ID + " = " + collapsePillarsEnt.PointID;
+            string sql = "DELETE FROM " + CollapsePillarsPointDbConstNames.TABLE_NAME + " WHERE " + CollapsePillarsPointDbConstNames.ID + " = " + collapsePillarsEnt.PointId;
             bool bResult = db.OperateDB(sql);
             return bResult;
         }

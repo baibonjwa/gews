@@ -37,8 +37,8 @@ namespace LibBusiness
             sqlStr.Append(", " + BoreholeLithologyDbConstNames.COORDINATE_Z);
             sqlStr.Append(" )");
             sqlStr.Append(" VALUES (");
-            sqlStr.Append("  '" + boreholeLithologyEntity.BoreholeId + "'");
-            sqlStr.Append(", '" + boreholeLithologyEntity.LithologyId + "'");
+            sqlStr.Append("  '" + boreholeLithologyEntity.Borehole + "'");
+            sqlStr.Append(", '" + boreholeLithologyEntity.Lithology + "'");
             sqlStr.Append(",  " + boreholeLithologyEntity.FloorElevation + "");
             sqlStr.Append(",  " + boreholeLithologyEntity.Thickness + "");
             sqlStr.Append(", '" + boreholeLithologyEntity.CoalSeamsName + "'");

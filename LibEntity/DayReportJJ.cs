@@ -7,22 +7,23 @@
 // V1.0 新建
 // ******************************************************************
 
+using Castle.ActiveRecord;
+
 namespace LibEntity
 {
-    public class DayReportJJ : DayReport
+    [ActiveRecord("T_DAYREPORT_HC")]
+    public class DayReportJj : DayReport
     {
-        //距参考导线点距离
-
         /// <summary>
         ///     距参考导线点距离
         /// </summary>
+        [Property("DISTANCE_FROM_WIREPOINT")]
         public double DistanceFromWirepoint { get; set; }
-
-        //参考导线点ID
 
         /// <summary>
         ///     参考导线点ID
         /// </summary>
+        [Property("CONSULT_WIREPOINT_ID")]
         public int ConsultWirepoint { get; set; }
     }
 }

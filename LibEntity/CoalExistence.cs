@@ -75,9 +75,9 @@ namespace LibEntity
             DeleteAll(typeof(CoalExistence), ids);
         }
 
-        public static void FindById(int id)
+        public CoalExistence FindById(int id)
         {
-            FindByPrimaryKey(typeof(CoalExistence), id);
+            return (CoalExistence)FindByPrimaryKey(typeof(CoalExistence), id);
         }
 
         public static int GetRecordCount()

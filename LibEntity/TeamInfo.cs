@@ -7,22 +7,24 @@
 // V1.0 新建
 // ******************************************************************
 
+using Castle.ActiveRecord;
+
 namespace LibEntity
 {
-    public class TeamInfo
+    public class TeamInfo : ActiveRecordBase
     {
-        // 队别ID
-
         /// <summary>
         ///     队别ID
         /// </summary>
-        public int TeamID { get; set; }
+        [PrimaryKey(PrimaryKeyType.Identity, "TEAM_ID")]
+        public int TeamId { get; set; }
 
         // 队别名称
 
         /// <summary>
         ///     队别名称
         /// </summary>
+        [Property("TEAM_NAME")]
         public string TeamName { get; set; }
 
         // 队长姓名
@@ -30,6 +32,7 @@ namespace LibEntity
         /// <summary>
         ///     队长姓名
         /// </summary>
+        [Property("TEAM_LEADER")]
         public string TeamLeader { get; set; }
 
         // 队员姓名
@@ -37,6 +40,12 @@ namespace LibEntity
         /// <summary>
         ///     队员姓名
         /// </summary>
+        [Property("TEAM_MEMBER")]
         public string TeamMember { get; set; }
+
+        public static TeamInfo FindById(int id)
+        {
+            return (TeamInfo)FindByPrimaryKey(typeof(TeamInfo), id);
+        }
     }
 }

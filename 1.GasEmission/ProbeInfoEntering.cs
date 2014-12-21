@@ -310,82 +310,82 @@ namespace _1.GasEmission
             DialogResult = DialogResult.OK;
 
             // 创建探头管理实体
-            ProbeManage probeManageEntity = new ProbeManage();
+            Probe probeEntity = new Probe();
 
             // 探头编号
-            probeManageEntity.ProbeId = this.txtProbeId.Text.Trim();
+            probeEntity.ProbeId = this.txtProbeId.Text.Trim();
 
             // 探头名称
-            probeManageEntity.ProbeName = this.cmbProbeName.Text.Trim();
+            probeEntity.ProbeName = this.cmbProbeName.Text.Trim();
 
             // 探头类型编号
             int iProbeTypeId = 0;
             if (int.TryParse(Convert.ToString(this.cboProbeType.SelectedValue), out iProbeTypeId))
             {
-                probeManageEntity.ProbeTypeId = iProbeTypeId;
+                probeEntity.ProbeTypeId = iProbeTypeId;
             }
 
             // 2014/5/29 add by wuxin Start
             // 探头类型名
-            probeManageEntity.ProbeTypeDisplayName = this.cboProbeType.Text;
+            probeEntity.ProbeTypeDisplayName = this.cboProbeType.Text;
             // 2014/5/29 add by wuxin End
 
             // 是否自动位移如果选择是的话
             if (this.rbtnYes.Checked == true)
             {
                 // 是否自动位移
-                probeManageEntity.IsMove = 1;
+                probeEntity.IsMove = 1;
                 // 距迎头距离
                 double dFarFromFrontal = 0;
                 double.TryParse(this.txtM.Text.Trim(), out dFarFromFrontal);
-                probeManageEntity.FarFromFrontal = dFarFromFrontal;
+                probeEntity.FarFromFrontal = dFarFromFrontal;
             }
             else
             {   // 是否自动位移
-                probeManageEntity.IsMove = 0;
+                probeEntity.IsMove = 0;
             }
 
             // 巷道编号
-            probeManageEntity.TunnelId = this.selectTunnelSimple1.ITunnelId;
+            probeEntity.TunnelId = this.selectTunnelSimple1.ITunnelId;
 
             // 探头位置坐标X
             double dProbeLocationX = 0;
             if (double.TryParse(this.txtProbeLocationX.Text.Trim(), out dProbeLocationX))
             {
-                probeManageEntity.ProbeLocationX = dProbeLocationX;
+                probeEntity.ProbeLocationX = dProbeLocationX;
             }
 
             // 探头位置坐标Y
             double dProbeLocationY = 0;
             if (double.TryParse(this.txtProbeLocationY.Text.Trim(), out dProbeLocationY))
             {
-                probeManageEntity.ProbeLocationY = dProbeLocationY;
+                probeEntity.ProbeLocationY = dProbeLocationY;
             }
 
             // 探头位置坐标Z
             double dProbeLocationZ = 0;
             if (double.TryParse(this.txtProbeLocationZ.Text.Trim(), out dProbeLocationZ))
             {
-                probeManageEntity.ProbeLocationZ = dProbeLocationZ;
+                probeEntity.ProbeLocationZ = dProbeLocationZ;
             }
 
             // 探头描述
-            probeManageEntity.ProbeDescription = this.txtProbeDescription.Text.Trim();
+            probeEntity.ProbeDescription = this.txtProbeDescription.Text.Trim();
             OPERATION_TYPE opType;
 
             bool bResult = false;
             if (this._bllType == "add")
             {
                 // 探头管理信息登录
-                bResult = ProbeManageBLL.insertProbeManageInfo(probeManageEntity);
+                bResult = ProbeManageBLL.insertProbeManageInfo(probeEntity);
                 opType = OPERATION_TYPE.ADD;
             }
             else
             {
                 // 主键
-                probeManageEntity.ProbeId = this._iPK;
+                probeEntity.ProbeId = this._iPK;
                 // 探头管理信息修改
-                bResult = ProbeManageBLL.updateProbeManageInfo(probeManageEntity);
+                bResult = ProbeManageBLL.updateProbeManageInfo(probeEntity);
                 opType = OPERATION_TYPE.UPDATE;
             }
 
@@ -396,16 +396,16 @@ namespace _1.GasEmission
                 //通知服务器探头数据已更新
                 // Added by jhou, 2014/3/24
                 var workingfaceEnt =
-                    BasicInfoManager.getInstance().getTunnelByID(probeManageEntity.TunnelId).WorkingFace;
+                    BasicInfoManager.getInstance().getTunnelByID(probeEntity.TunnelId).WorkingFace;
 
                 if (oldTunnelId != 0)
                 {
-                    UpdateWarningDataMsg msgUpdate = new UpdateWarningDataMsg(workingfaceEnt.WorkingFaceID, probeManageEntity.TunnelId,
+                    UpdateWarningDataMsg msgUpdate = new UpdateWarningDataMsg(workingfaceEnt.WorkingFaceID, probeEntity.TunnelId,
                         ProbeManageDbConstNames.TABLE_NAME, opType, DateTime.Now);
                     this.MainForm.SendMsg2Server(msgUpdate);
                 }
 
-                UpdateWarningDataMsg msg = new UpdateWarningDataMsg(workingfaceEnt.WorkingFaceID, probeManageEntity.TunnelId,
+                UpdateWarningDataMsg msg = new UpdateWarningDataMsg(workingfaceEnt.WorkingFaceID, probeEntity.TunnelId,
                     ProbeManageDbConstNames.TABLE_NAME, opType, DateTime.Now);
                 this.MainForm.SendMsg2Server(msg);
             }

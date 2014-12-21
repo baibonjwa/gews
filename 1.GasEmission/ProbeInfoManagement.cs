@@ -572,7 +572,7 @@ namespace _1.GasEmission
                 for (int i = 1; i < strs.Length; i++)
                 {
                     string[] line = strs[i].Split(',');
-                    ProbeManage probe = new ProbeManage();
+                    Probe probe = new Probe();
                     probe.ProbeMeasureType = Convert.ToInt16(line[0]);
                     probe.ProbeId = line[1].Substring(3);
                     probe.ProbeDescription = line[2];

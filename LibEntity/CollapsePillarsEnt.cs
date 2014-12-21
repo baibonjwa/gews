@@ -1,26 +1,29 @@
-﻿namespace LibEntity
-{
-    public class CollapsePillarsEnt
-    {
-        //主键
+﻿using Castle.ActiveRecord;
 
+namespace LibEntity
+{
+    [ActiveRecord("T_COLLAPSE_PILLARS_INFO")]
+    public class CollapsePillarsEnt : ActiveRecordBase<CollapsePillarsEnt>
+    {
         /// <summary>
         ///     设置或获取主键
         /// </summary>
-        public int ID { get; set; }
+        [PrimaryKey(PrimaryKeyType.Identity, "ID")]
+        public int Id { get; set; }
 
         //关键点ID
 
         /// <summary>
         ///     关键点ID
         /// </summary>
-        public int PointID { get; set; }
+        public int PointId { get; set; }
 
         //陷落柱名称
 
         /// <summary>
         ///     设置或获取陷落柱名称
         /// </summary>
+        [Property("COLLAPSE_PILLARS")]
         public string CollapsePillarsName { get; set; }
 
         //关键点坐标X
@@ -49,6 +52,7 @@
         /// <summary>
         ///     设置或获取描述
         /// </summary>
+        [Property("DISCRIBE")]
         public string Discribe { get; set; }
 
         //BID
@@ -70,27 +74,26 @@
     ///     20140531 lyf
     ///     陷落柱关键点实体
     /// </summary>
-    public class CollapsePillarsKeyPointEnt
+    public class CollapsePillarsKeyPointEnt : ActiveRecordBase
     {
-        //关键点ID
-
         /// <summary>
         ///     关键点ID
         /// </summary>
-        public int PointID { get; set; }
-
-        //陷落柱ID
+        [PrimaryKey(PrimaryKeyType.Identity, "ID")]
+        public int PointId { get; set; }
 
         /// <summary>
         ///     设置或获取陷落柱ID
         /// </summary>
-        public int CollapsePillarsID { get; set; }
+        [BelongsTo("ID")]
+        public CollapsePillarsEnt CollapsePillars { get; set; }
 
         //关键点坐标X
 
         /// <summary>
         ///     设置或获取关键点坐标X
         /// </summary>
+        [Property("COORDINATE_X")]
         public double CoordinateX { get; set; }
 
         //关键点坐标Y
@@ -98,6 +101,7 @@
         /// <summary>
         ///     设置或获取关键点坐标Y
         /// </summary>
+        [Property("COORDINATE_Y")]
         public double CoordinateY { get; set; }
 
         //关键点坐标Z
@@ -105,6 +109,7 @@
         /// <summary>
         ///     设置或获取关键点坐标Z
         /// </summary>
+        [Property("COORDINATE_Z")]
         public double CoordinateZ { get; set; }
 
         //BID
@@ -112,6 +117,7 @@
         /// <summary>
         ///     绑定ID
         /// </summary>
-        public string BindingID { get; set; }
+        [Property("BINDINGID")]
+        public string BindingId { get; set; }
     }
 }

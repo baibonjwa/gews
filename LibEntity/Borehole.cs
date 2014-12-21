@@ -1,33 +1,26 @@
-﻿// ******************************************************************
-// 概  述：钻孔实体
-// 作  者：伍鑫
-// 创建日期：2013/11/26
-// 版本号：1.0
-// ******************************************************************
+﻿using Castle.ActiveRecord;
 
 namespace LibEntity
 {
-    public class Borehole
+    [ActiveRecord("T_BOREHOLE")]
+    public class Borehole : ActiveRecordBase<Borehole>
     {
-        /** 钻孔编号（主键） **/
-
         /// <summary>
         ///     钻孔编号
         /// </summary>
+        [PrimaryKey(PrimaryKeyType.Identity, "BOREHOLE_ID")]
         public int BoreholeId { get; set; }
-
-        /** 孔号 **/
 
         /// <summary>
         ///     孔号
         /// </summary>
+        [Property("BOREHOLE_NUMBER")]
         public string BoreholeNumber { get; set; }
-
-        /** 地面标高 **/
 
         /// <summary>
         ///     地面标高
         /// </summary>
+        [Property("GROUND_ELEVATION")]
         public double GroundElevation { get; set; }
 
         /** 坐标X **/
@@ -35,6 +28,7 @@ namespace LibEntity
         /// <summary>
         ///     坐标X
         /// </summary>
+        [Property("COORDINATE_X")]
         public double CoordinateX { get; set; }
 
         /** 坐标Y **/
@@ -42,6 +36,7 @@ namespace LibEntity
         /// <summary>
         ///     坐标Y
         /// </summary>
+        [Property("COORDINATE_Y")]
         public double CoordinateY { get; set; }
 
         /** 坐标Z **/
@@ -49,6 +44,7 @@ namespace LibEntity
         /// <summary>
         ///     坐标Z
         /// </summary>
+        [Property("COORDINATE_Z")]
         public double CoordinateZ { get; set; }
 
         /** 煤层结构 **/
@@ -56,6 +52,7 @@ namespace LibEntity
         /// <summary>
         ///     煤层结构
         /// </summary>
+        [Property("COAL_SEAMS_TEXTURE")]
         public string CoalSeamsTexture { get; set; }
 
         /** BID **/
@@ -63,25 +60,7 @@ namespace LibEntity
         /// <summary>
         ///     BID
         /// </summary>
+        [Property("BID")]
         public string BindingId { get; set; }
-
-        // 以下代码暂时保留
-        //static BoreholeEntity _emptyEntity;
-
-        //static public BoreholeEntity EMPTY
-        //{
-        //    get
-        //    {
-        //        if (_emptyEntity == null)
-        //        {
-        //            _emptyEntity = new BoreholeEntity();
-        //            _emptyEntity.BoreholeId = -1;
-        //            _emptyEntity.BoreholeNumber = "-1";
-        //            _emptyEntity.GroundElevation = "-1";
-        //            _emptyEntity.CoalSeamsTexture = "-1";
-        //        }
-        //        return _emptyEntity;
-        //    }
-        //}
     }
 }

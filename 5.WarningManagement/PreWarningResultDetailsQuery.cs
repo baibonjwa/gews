@@ -218,7 +218,7 @@ namespace _5.WarningManagement
             this._fpPreWarningResultDetials.ActiveSheet.Columns.Count = COULMN_COUNT;
 
             // 加载预警结果详细信息。
-            LoadWarningResultDetail(_inInfo.WarningIDList);
+            LoadWarningResultDetail(_inInfo.WarningIdList);
 
             _txtDateShift.Text = _inInfo.DateShift;       // 班次
             _txtDateTime.Text = _inInfo.DateTime;        // 日期时间
@@ -525,7 +525,7 @@ namespace _5.WarningManagement
             //提取传入值
             string date = _inInfo.DateTime;
             string date_shift = _inInfo.DateShift;
-            string tunnelID = _inInfo.TunnelID;
+            string tunnelID = _inInfo.TunnelId;
 
             this.warningResultDetails = getHistoryWarningResultDetails(warningIds);
             // 向farpoint spread中添加数据。
@@ -984,9 +984,9 @@ namespace _5.WarningManagement
             {
                 if (_inInfo != null)
                 {
-                    for (int i = 0; i < _inInfo.WarningIDList.Count; i++)
+                    for (int i = 0; i < _inInfo.WarningIdList.Count; i++)
                     {
-                        warningId += _inInfo.WarningIDList[i] + ",";
+                        warningId += _inInfo.WarningIdList[i] + ",";
                     }
                     if (!String.IsNullOrEmpty(warningId))
                     {
@@ -1032,7 +1032,7 @@ namespace _5.WarningManagement
         private void doSubmit(String submitType, String emptyString, String statusString)
         {
             PojoWarningContainer container = new PojoWarningContainer();
-            container.TunnelId = _inInfo.TunnelID;
+            container.TunnelId = _inInfo.TunnelId;
 
 
             Dictionary<string, PojoWarning> warnings = new Dictionary<string, PojoWarning>();
@@ -1120,7 +1120,7 @@ namespace _5.WarningManagement
             }
 
             CodeScales.Http.HttpClient client1 = new CodeScales.Http.HttpClient();
-            HttpPost postMethod = new HttpPost(new Uri("http://" + serverIp + ":" + restPort + "/rest/tunnels/" + _inInfo.TunnelID + "/warninglift"));
+            HttpPost postMethod = new HttpPost(new Uri("http://" + serverIp + ":" + restPort + "/rest/tunnels/" + _inInfo.TunnelId + "/warninglift"));
             List<NameValuePair> nameValuePairList = new List<NameValuePair>();
             switch (submitType)
             {

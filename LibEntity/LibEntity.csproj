@@ -151,7 +151,7 @@
     <Compile Include="Mine.cs" />
     <Compile Include="Faultage.cs" />
     <Compile Include="GasConcentrationProbeData.cs" />
-    <Compile Include="ProbeManage.cs" />
+    <Compile Include="Probe.cs" />
     <Compile Include="Lithology.cs" />
     <Compile Include="TunnelPointsCalculation.cs" />
     <Compile Include="GasContent.cs" />

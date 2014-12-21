@@ -7,15 +7,19 @@
 // V1.0 新建
 // ******************************************************************
 
+using Castle.ActiveRecord;
+
 namespace LibEntity
 {
-    public class ProbeManage
+    [ActiveRecord("T_GAS_CONCENTRATION_PROBE_DATA")]
+    public class Probe : ActiveRecordBase<Probe>
     {
         /** 探头编号 **/
 
         /// <summary>
         ///     探头编号
         /// </summary>
+        [PrimaryKey(PrimaryKeyType.Native, "PROBE_DATA_ID")]
         public string ProbeId { get; set; }
 
         /** 探头名称 **/
@@ -23,6 +27,7 @@ namespace LibEntity
         /// <summary>
         ///     探头名称
         /// </summary>
+        [Property("PROBE_NAME")]
         public string ProbeName { get; set; }
 
         /** 探头类型编号 **/
@@ -30,6 +35,7 @@ namespace LibEntity
         /// <summary>
         ///     探头类型编号
         /// </summary>
+        [BelongsTo("PROBE_NAME")]
         public int ProbeTypeId { get; set; }
 
         /// <summary>

@@ -241,62 +241,62 @@ namespace _5.WarningManagement
             DialogResult = DialogResult.OK;
 
             // 创建探头管理实体
-            ProbeManage probeManageEntity = new ProbeManage();
+            Probe probeEntity = new Probe();
 
             // 探头编号
-            probeManageEntity.ProbeId = this.txtProbeId.Text.Trim();
+            probeEntity.ProbeId = this.txtProbeId.Text.Trim();
 
             // 探头名称
-            probeManageEntity.ProbeName = this.txtProbeName.Text.Trim();
+            probeEntity.ProbeName = this.txtProbeName.Text.Trim();
 
             // 探头类型编号
             int iProbeTypeId = 0;
             if (int.TryParse(Convert.ToString(this.cboProbeType.SelectedValue), out iProbeTypeId))
             {
-                probeManageEntity.ProbeTypeId = iProbeTypeId;
+                probeEntity.ProbeTypeId = iProbeTypeId;
             }
 
             // 巷道编号
-            probeManageEntity.TunnelId = this.selectTunnelUserControl1.ITunnelId;
+            probeEntity.TunnelId = this.selectTunnelUserControl1.ITunnelId;
 
             // 探头位置坐标X
             double dProbeLocationX = 0;
             if (double.TryParse(this.txtProbeLocationX.Text.Trim(), out dProbeLocationX))
             {
-                probeManageEntity.ProbeLocationX = dProbeLocationX;
+                probeEntity.ProbeLocationX = dProbeLocationX;
             }
 
             // 探头位置坐标Y
             double dProbeLocationY = 0;
             if (double.TryParse(this.txtProbeLocationY.Text.Trim(), out dProbeLocationY))
             {
-                probeManageEntity.ProbeLocationY = dProbeLocationY;
+                probeEntity.ProbeLocationY = dProbeLocationY;
             }
 
             // 探头位置坐标Z
             double dProbeLocationZ = 0;
             if (double.TryParse(this.txtProbeLocationZ.Text.Trim(), out dProbeLocationZ))
             {
-                probeManageEntity.ProbeLocationZ = dProbeLocationZ;
+                probeEntity.ProbeLocationZ = dProbeLocationZ;
             }
 
             // 探头描述
-            probeManageEntity.ProbeDescription = this.txtProbeDescription.Text.Trim();
+            probeEntity.ProbeDescription = this.txtProbeDescription.Text.Trim();
             OPERATION_TYPE opType;
 
             bool bResult = false;
             if (this._bllType == "add")
             {
                 // 探头管理信息登录
-                bResult = ProbeManageBLL.insertProbeManageInfo(probeManageEntity);
+                bResult = ProbeManageBLL.insertProbeManageInfo(probeEntity);
                 opType = OPERATION_TYPE.ADD;
             }
             else
             {
                 // 主键
-                probeManageEntity.ProbeId = this._iPK;
+                probeEntity.ProbeId = this._iPK;
                 // 探头管理信息修改
-                bResult = ProbeManageBLL.updateProbeManageInfo(probeManageEntity);
+                bResult = ProbeManageBLL.updateProbeManageInfo(probeEntity);
                 opType = OPERATION_TYPE.UPDATE;
             }
 
@@ -305,7 +305,7 @@ namespace _5.WarningManagement
             {
                 //通知服务器探头数据已更新
                 var workingfaceEnt =
-                    BasicInfoManager.getInstance().getTunnelByID(probeManageEntity.TunnelId).WorkingFace;
+                    BasicInfoManager.getInstance().getTunnelByID(probeEntity.TunnelId).WorkingFace;
 
                 if (oldTunnelId != 0)
                 {
@@ -314,7 +314,7 @@ namespace _5.WarningManagement
                     this.MainForm.SendMsg2Server(msgUpdate);
                 }
 
-                UpdateWarningDataMsg msg = new UpdateWarningDataMsg(workingfaceEnt.WorkingFaceID, probeManageEntity.TunnelId,
+                UpdateWarningDataMsg msg = new UpdateWarningDataMsg(workingfaceEnt.WorkingFaceID, probeEntity.TunnelId,
                     ProbeManageDbConstNames.TABLE_NAME, opType, DateTime.Now);
                 this.MainForm.SendMsg2Server(msg);
             }

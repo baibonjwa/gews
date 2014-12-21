@@ -10,6 +10,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Castle.ActiveRecord;
 using LibCommon;
 
 namespace LibEntity
@@ -18,7 +19,8 @@ namespace LibEntity
     ///     预警规则实体，Excel原始预警规则表中数据格式要求：
     ///     参数值全部能够转换为double，定性指标参数值为0或1
     /// </summary>
-    public class PreWarningRules
+    [ActiveRecord("T_PRE_WARNING_RULES")]
+    public class PreWarningRules : ActiveRecordBase
     {
         private DateTime _modifyDate;
         private string _strBindingSingleRuleName;
@@ -27,6 +29,7 @@ namespace LibEntity
         ///     构造函数
         /// </summary>
         /// <param name="ruleId">规则ID</param>
+
         public PreWarningRules(int ruleId)
         {
             IsMultiRules = false;
@@ -40,43 +43,44 @@ namespace LibEntity
         }
 
         //规则ID（唯一标识）
-
+        [Property("RULE_ID")]
         public int RuleId { get; set; }
 
         //规则编码，唯一标识（规则编码不会有重复内容）
-
+        [Property("RULE_CODE")]
         public string RuleCode { get; set; }
 
         //规则类别
-
+        [Property("RULE_TYPE")]
         public string RuleType { get; set; }
 
         //预警类型
-
+        [Property("WARNING_TYPE")]
         public string WarningType { get; set; }
 
         //预警级别
-
+        [Property("WARNING_LEVEL")]
         public string WarningLevel { get; set; }
 
         //适用位置
-
+        [Property("SUITABLE_LOCATION")]
         public string SuitableLocation { get; set; }
 
         //规则描述
+        [Property("RULE_DESCRIPTION")]
         public string RuleDescription { get; set; }
 
         //指标类型
-
+        [Property("INDICATOR_TYPE")]
         public string IndicatorType { get; set; }
 
 
         //比较符(数据库中读取出来的原始比较符字符串，多个比较符间用逗号分隔)
-
+        [Property("OPERATOR")]
         public string Operator { get; set; }
 
         //修改日期
-
+        [Property("MODIFY_DATE")]
         public DateTime ModifyDate
         {
             get { return _modifyDate; }
@@ -84,20 +88,23 @@ namespace LibEntity
         }
 
         //备注
-
+        [Property("REMARKS")]
         public string Remarks { get; set; }
 
         // 绑定数据库表
+        [Property("BINDING_TABLE_NAME")]
         public string BindingTableName { get; set; }
 
         // 绑定数据库表字段
+        [Property("BINDING_COLUMN_NAME")]
         public string BindingColumnName { get; set; }
 
         // 字段使用方式
+        [Property("USE_TYPE")]
         public string UseType { get; set; }
 
         //组合规则绑定的单一规则编码
-
+        [Property("BINDING_SINGLERULES")]
         public string StrBindingSingleRuleName
         {
             get { return _strBindingSingleRuleName; }

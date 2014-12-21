@@ -5,22 +5,23 @@
 // 版本号：1.0
 // ******************************************************************
 
+using Castle.ActiveRecord;
+
 namespace LibEntity
 {
-    public class CoalSeams
+    [ActiveRecord("T_COAL_SEAMS_INFO")]
+    public class CoalSeams : ActiveRecordBase<CoalSeams>
     {
-        /** 煤层编号 **/
-
         /// <summary>
         ///     煤层编号
         /// </summary>
+        [PrimaryKey(PrimaryKeyType.Identity, "COAL_SEAMS_ID")]
         public int CoalSeamsId { get; set; }
-
-        /** 煤层名称 **/
 
         /// <summary>
         ///     煤层名称
         /// </summary>
+        [Property("FLOOR_ELEVATION")]
         public string CoalSeamsName { get; set; }
     }
 }

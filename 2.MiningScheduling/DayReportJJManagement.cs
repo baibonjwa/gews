@@ -174,7 +174,7 @@ namespace _2.MiningScheduling
             }
             else
             {
-                 _iRecordCount = DayReportJJBLL.selectDayReportJJInfo().Tables[0].Rows.Count;
+                _iRecordCount = DayReportJJBLL.selectDayReportJJInfo().Tables[0].Rows.Count;
             }
 
             // ※分页必须
@@ -309,23 +309,23 @@ namespace _2.MiningScheduling
         /// <summary>
         /// 为变量dayReportJJEntity赋值
         /// </summary>
-        private DayReportJJ setDayReportJJEntityValue()
+        private DayReportJj setDayReportJJEntityValue()
         {
-            DayReportJJ eReturn = null;
+            DayReportJj eReturn = null;
             for (int i = 0; i < _rowsCount; i++)
             {
                 if (cells[_rowDetailStartIndex + i, 0].Value != null && (bool)cells[_rowDetailStartIndex + i, 0].Value == true)
                 {
                     _tmpRowIndex = _rowDetailStartIndex + i;
-                    eReturn = new DayReportJJ();
+                    eReturn = new DayReportJj();
                     DataRow dr = _ds.Tables[0].Rows[i];
 
                     //掘进ID
-                    eReturn.ID = (int)dr[DayReportJJDbConstNames.ID];
+                    eReturn.Id = (int)dr[DayReportJJDbConstNames.ID];
                     //队别ID
-                    eReturn.TeamNameID = (int)dr[DayReportJJDbConstNames.TEAM_NAME_ID];
+                    eReturn.TeamInfo.TeamId = (int)dr[DayReportJJDbConstNames.TEAM_NAME_ID];
                     //工作面ID
-                    eReturn.WorkingFaceID = Convert.ToInt32(dr[DayReportJJDbConstNames.WORKINGFACE_ID]);
+                    eReturn.WorkingFace.WorkingFaceID = Convert.ToInt32(dr[DayReportJJDbConstNames.WORKINGFACE_ID]);
                     //班次
                     eReturn.WorkTime = cells[_rowDetailStartIndex + i, C_WORK_TIME].Text;
                     //工作制式
@@ -342,7 +342,7 @@ namespace _2.MiningScheduling
                     //备注
                     eReturn.Other = cells[_rowDetailStartIndex + i, C_COMMENTS].Text;
                     //BID
-                    eReturn.BindingID = dr[DayReportJJDbConstNames.BINDINGID].ToString();
+                    eReturn.BindingId = dr[DayReportJJDbConstNames.BINDINGID].ToString();
                 }
             }
 
@@ -378,9 +378,9 @@ namespace _2.MiningScheduling
         private void tsBtnModify_Click(object sender, EventArgs e)
         {
             //回采日报实体赋值
-            DayReportJJ entity = setDayReportJJEntityValue();
+            DayReportJj entity = setDayReportJJEntityValue();
 
-            WorkingFace ent = BasicInfoManager.getInstance().getWorkingFaceById(entity.WorkingFaceID);
+            WorkingFace ent = BasicInfoManager.getInstance().getWorkingFaceById(entity.WorkingFace.WorkingFaceID);
             /**自定义控件用巷道信息数组**/
             int[] _arr = new int[5];
             _arr[0] = ent.MiningArea.Horizontal.Mine.MineId;
@@ -425,23 +425,23 @@ namespace _2.MiningScheduling
                         if ((bool)cells[_rowDetailStartIndex + i, 0].Value == true)
                         {
                             DataRow dr = _ds.Tables[0].Rows[i];
-                            DayReportJJ entity = new DayReportJJ();
+                            DayReportJj entity = new DayReportJj();
                             //获取掘进ID
-                            entity.ID = (int)dr[DayReportJJDbConstNames.ID];
-                            entity.WorkingFaceID = (int)dr[DayReportJJDbConstNames.WORKINGFACE_ID];
-                            entity.BindingID = dr[DayReportJJDbConstNames.BINDINGID].ToString();
+                            entity.Id = (int)dr[DayReportJJDbConstNames.ID];
+                            entity.WorkingFace.WorkingFaceID = (int)dr[DayReportJJDbConstNames.WORKINGFACE_ID];
+                            entity.BindingId = dr[DayReportJJDbConstNames.BINDINGID].ToString();
 
                             // 掘进工作面，只有一条巷道
-                            Tunnel tEntity = BasicInfoManager.getInstance().getTunnelListByWorkingFaceId(entity.WorkingFaceID)[0];
+                            Tunnel tEntity = BasicInfoManager.getInstance().getTunnelListByWorkingFaceId(entity.WorkingFace.WorkingFaceID)[0];
 
                             //删除操作
                             bResult = DayReportJJBLL.deleteDayReportJJInfo(entity);
                             if (bResult)
                             {
-                                DelJJCD(tEntity.TunnelId.ToString(), entity.BindingID,entity.WorkingFaceID);
+                                DelJJCD(tEntity.TunnelId.ToString(), entity.BindingId, entity.WorkingFace.WorkingFaceID);
 
                                 // 向server端发送更新预警数据
-                                UpdateWarningDataMsg msg = new UpdateWarningDataMsg(entity.WorkingFaceID,
+                                UpdateWarningDataMsg msg = new UpdateWarningDataMsg(entity.WorkingFace.WorkingFaceID,
                                     Const.INVALID_ID,
                                     DayReportJJDbConstNames.TABLE_NAME, OPERATION_TYPE.DELETE, DateTime.Now);
                                 this.MainForm.SendMsg2Server(msg);
@@ -471,35 +471,35 @@ namespace _2.MiningScheduling
         /// </summary>
         /// <param name="hdid">巷道ID</param>
         /// <param name="bid">绑定ID</param>
-        private void DelJJCD(string hdid, string bid,int workingfaceid)
+        private void DelJJCD(string hdid, string bid, int workingfaceid)
         {
             Global.cons.DelJJCD(hdid, bid);
             //计算地质构造距离
             string sql = "\"" + GIS.GIS_Const.FIELD_HDID + "\"='" + hdid + "'";
-            Dictionary<string,string> dics=new Dictionary<string,string>();
-            dics.Add(GIS.GIS_Const.FIELD_HDID,hdid);
-            List<Tuple<ESRI.ArcGIS.Geodatabase.IFeature, ESRI.ArcGIS.Geometry.IGeometry, Dictionary<string, string>>> objs= Global.commonclss.SearchFeaturesByGeoAndText(Global.hdfdlyr, dics);
-            if(objs.Count>0)
+            Dictionary<string, string> dics = new Dictionary<string, string>();
+            dics.Add(GIS.GIS_Const.FIELD_HDID, hdid);
+            List<Tuple<ESRI.ArcGIS.Geodatabase.IFeature, ESRI.ArcGIS.Geometry.IGeometry, Dictionary<string, string>>> objs = Global.commonclss.SearchFeaturesByGeoAndText(Global.hdfdlyr, dics);
+            if (objs.Count > 0)
             {
                 ESRI.ArcGIS.Geometry.IPointCollection poly0 = objs[0].Item2 as ESRI.ArcGIS.Geometry.IPointCollection;
                 ESRI.ArcGIS.Geometry.IPointCollection poly1 = objs[1].Item2 as ESRI.ArcGIS.Geometry.IPointCollection;
                 ESRI.ArcGIS.Geometry.IPoint pline = new ESRI.ArcGIS.Geometry.PointClass();
                 if (poly0.get_Point(0).X - poly0.get_Point(1).X > 0)//向右掘进
                 {
-                    pline.X=(poly0.get_Point(0).X+poly0.get_Point(3).X)/2;
-                    pline.Y=(poly0.get_Point(0).Y+poly0.get_Point(3).Y)/2;
+                    pline.X = (poly0.get_Point(0).X + poly0.get_Point(3).X) / 2;
+                    pline.Y = (poly0.get_Point(0).Y + poly0.get_Point(3).Y) / 2;
                 }
                 else//向左掘进
                 {
-                    pline.X=(poly0.get_Point(1).X+poly0.get_Point(2).X)/2;
-                    pline.Y=(poly0.get_Point(1).Y+poly0.get_Point(2).Y)/2;
+                    pline.X = (poly0.get_Point(1).X + poly0.get_Point(2).X) / 2;
+                    pline.Y = (poly0.get_Point(1).Y + poly0.get_Point(2).Y) / 2;
                 }
                 //查询地质构造信息
-                List<int> hdids=new List<int>();
+                List<int> hdids = new List<int>();
                 hdids.Add(Convert.ToInt32(hdid));
                 Dictionary<string, List<GeoStruct>> dzxlist = Global.commonclss.GetStructsInfosNew(pline, hdids);
                 GeologySpaceBLL.deleteGeologySpaceEntityInfos(workingfaceid);//删除工作面ID对应的地质构造信息
-                
+
                 foreach (string key in dzxlist.Keys)
                 {
                     List<GeoStruct> geoinfos = dzxlist[key];
@@ -518,8 +518,8 @@ namespace _2.MiningScheduling
 
                         GeologySpaceBLL.insertGeologySpaceEntityInfo(geologyspaceEntity);
                     }
-                    }
-               
+                }
+
             }
         }
 

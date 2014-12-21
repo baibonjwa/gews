@@ -11,7 +11,7 @@ namespace LibEntity
     {
 
         /**陷落柱编号**/
-        public int CollapsePillarsID { get; set; }
+        public int CollapsePillarsId { get; set; }
 
         /**陷落柱名称**/
         public string CollapsePillarsName { get; set; }

@@ -30,7 +30,7 @@ namespace UnderTerminal
         /**巷道实体**/
         Tunnel _tunnelEntity = new Tunnel();
         /**回采日报实体**/
-        DayReportJJ _dayReportJJEntity = new DayReportJJ();
+        DayReportJj _dayReportJJEntity = new DayReportJj();
         /**巷道关联矿井等信息ID集合**/
         int[] _arr;
         DataSet dsWirePoint = new DataSet();
@@ -64,7 +64,7 @@ namespace UnderTerminal
         /// </summary>
         /// <param name="array">巷道编号数组</param>
         /// <param name="dayReportHCEntity">回采进尺日报实体</param>
-        public DayReportJJEntering(int[] array, DayReportJJ dayReportJJEntity)
+        public DayReportJJEntering(int[] array, DayReportJj dayReportJJEntity)
         {
             _arr = array;
             this._dayReportJJEntity = dayReportJJEntity;
@@ -175,7 +175,7 @@ namespace UnderTerminal
             }
 
             //队别
-            cboTeamName.Text = TeamBLL.selectTeamInfoByID(_dayReportJJEntity.TeamNameID).TeamName;
+            cboTeamName.Text = TeamBLL.selectTeamInfoByID(_dayReportJJEntity.TeamInfo.TeamId).TeamName;
 
             //绑定队别成员
             this.bindTeamMember();
@@ -301,10 +301,10 @@ namespace UnderTerminal
         /// </summary>
         private void insertDayReportJJInfo()
         {
-            List<DayReportJJ> dayReportJJEntityList = new List<DayReportJJ>();
+            List<DayReportJj> dayReportJJEntityList = new List<DayReportJj>();
             for (int i = 0; i < this.dgrdvDayReportJJ.RowCount; i++)
             {
-                DayReportJJ _dayReportJJEntity = new DayReportJJ();
+                DayReportJj _dayReportJJEntity = new DayReportJj();
                 // 最后一行为空行时，跳出循环
                 if (i == this.dgrdvDayReportJJ.RowCount - 1)
                 {
@@ -313,9 +313,9 @@ namespace UnderTerminal
 
                 /**回采日报实体赋值**/
                 //队别名称
-                _dayReportJJEntity.TeamNameID = Convert.ToInt32(cboTeamName.SelectedValue);
+                _dayReportJJEntity.TeamInfo.TeamId = Convert.ToInt32(cboTeamName.SelectedValue);
                 //绑定巷道编号
-                _dayReportJJEntity.WorkingFaceID = BasicInfoManager.getInstance().getTunnelByID(_tunnelEntity.TunnelId).WorkingFace.WorkingFaceID;
+                _dayReportJJEntity.WorkingFace.WorkingFaceID = BasicInfoManager.getInstance().getTunnelByID(_tunnelEntity.TunnelId).WorkingFace.WorkingFaceID;
                 //日期
                 _dayReportJJEntity.DateTime = dtpDate.Value;
                 //填报人
@@ -350,14 +350,14 @@ namespace UnderTerminal
                     _dayReportJJEntity.Other = this.dgrdvDayReportJJ.Rows[i].Cells[C_COMMENTS].Value.ToString();
                 }
                 //BID
-                _dayReportJJEntity.BindingID = IDGenerator.NewBindingID();
+                _dayReportJJEntity.BindingId = IDGenerator.NewBindingID();
 
                 //添加到dayReportHCEntityList中
                 dayReportJJEntityList.Add(_dayReportJJEntity);
             }
             bool bResult = false;
             //循环添加
-            foreach (DayReportJJ dayReportJJEntity in dayReportJJEntityList)
+            foreach (DayReportJj dayReportJJEntity in dayReportJJEntityList)
             {
                 //添加回采进尺日报
                 bResult = DayReportJJBLL.insertDayReportJJInfo(dayReportJJEntity);
@@ -382,9 +382,9 @@ namespace UnderTerminal
         private void updateDayReportJJInfo()
         {
             //绑定巷道编号
-            _dayReportJJEntity.WorkingFaceID = this.tunnelId;
+            _dayReportJJEntity.WorkingFace.WorkingFaceID = this.tunnelId;
             //队别名称
-            _dayReportJJEntity.TeamNameID = Convert.ToInt32(cboTeamName.SelectedValue);
+            _dayReportJJEntity.TeamInfo.TeamId = Convert.ToInt32(cboTeamName.SelectedValue);
             //日期
             _dayReportJJEntity.DateTime = dtpDate.Value;
             //填报人

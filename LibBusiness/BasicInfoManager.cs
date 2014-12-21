@@ -532,11 +532,11 @@ namespace LibBusiness
             foreach (DataRow dr in ds.Tables[0].Rows)
             {
                 TeamInfo entity = new TeamInfo();
-                entity.TeamID = Convert.ToInt32(dr[TeamDbConstNames.ID]);
+                entity.TeamId = Convert.ToInt32(dr[TeamDbConstNames.ID]);
                 entity.TeamName = dr[TeamDbConstNames.TEAM_NAME].ToString();
                 entity.TeamLeader = dr[TeamDbConstNames.TEAM_LEADER].ToString();
                 entity.TeamMember = dr[TeamDbConstNames.TEAM_MEMBER].ToString();
-                teamList.Add(entity.TeamID, entity);
+                teamList.Add(entity.TeamId, entity);
             }
         }
 

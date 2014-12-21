@@ -192,7 +192,7 @@ namespace _3.GeologyMeasure
                 // 创建钻孔岩性实体
                 BoreholeLithology boreholeLithologyEntity = new BoreholeLithology();
                 // 钻孔编号
-                boreholeLithologyEntity.BoreholeId = this._boreholeId;
+                boreholeLithologyEntity.Borehole.BoreholeId = this._boreholeId;
                 // 岩性编号
                 DataGridViewComboBoxCell cell0 = this.gvCoalSeamsTexture.Rows[i].Cells[0] as DataGridViewComboBoxCell;
                 if (cell0 != null && cell0.Value != null)
@@ -204,7 +204,7 @@ namespace _3.GeologyMeasure
                         if (int.TryParse(ds.Tables[0].Rows[0][LithologyDbConstNames.LITHOLOGY_ID].ToString(),
                             out iLithologyId))
                         {
-                            boreholeLithologyEntity.LithologyId = iLithologyId;
+                            boreholeLithologyEntity.Lithology.LithologyId = iLithologyId;
                         }
                     }
                 }
@@ -1358,7 +1358,7 @@ namespace _3.GeologyMeasure
                         // 创建钻孔岩性实体
                         BoreholeLithology boreholeLithologyEntity = new BoreholeLithology();
                         // 钻孔编号
-                        boreholeLithologyEntity.BoreholeId = breholeEntity.BoreholeId;
+                        boreholeLithologyEntity.Borehole.BoreholeId = breholeEntity.BoreholeId;
                         // 岩性编号
                         DataSet ds = LithologyBLL.selectLithologyInfoByLithologyName("煤层");
                         if (ds.Tables[0].Rows.Count > 0)
@@ -1367,7 +1367,7 @@ namespace _3.GeologyMeasure
                             if (int.TryParse(ds.Tables[0].Rows[0][LithologyDbConstNames.LITHOLOGY_ID].ToString(),
                                 out iLithologyId))
                             {
-                                boreholeLithologyEntity.LithologyId = iLithologyId;
+                                boreholeLithologyEntity.Lithology.LithologyId = iLithologyId;
                             }
                         }
                         // 底板标高

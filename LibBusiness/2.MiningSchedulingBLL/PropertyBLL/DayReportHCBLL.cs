@@ -100,17 +100,17 @@ namespace LibBusiness
         /// </summary>
         /// <param name="tunnelID">巷道ID</param>
         /// <returns>回采日报实体</returns>
-        public static DayReportHC selectDayReportHCByWorkFaceID(int workFaceID)
+        public static DayReportHc selectDayReportHCByWorkFaceID(int workFaceID)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
             string sql = "SELECT * FROM " + DayReportHCDbConstNames.TABLE_NAME + " WHERE " + DayReportHCDbConstNames.WORKINGFACE_ID + " = " + workFaceID;
             DataSet ds = db.ReturnDS(sql);
-            DayReportHC dayReportHCEntity = new DayReportHC();
+            DayReportHc dayReportHCEntity = new DayReportHc();
             if (ds.Tables[0].Rows.Count > 0)
             {
-                dayReportHCEntity.ID = Convert.ToInt32(ds.Tables[0].Rows[0][DayReportHCDbConstNames.ID].ToString());
-                dayReportHCEntity.TeamNameID = Convert.ToInt32(ds.Tables[0].Rows[0][DayReportHCDbConstNames.TEAM_NAME_ID].ToString());
-                dayReportHCEntity.WorkingFaceID = Convert.ToInt32(ds.Tables[0].Rows[0][DayReportHCDbConstNames.WORKINGFACE_ID].ToString());
+                dayReportHCEntity.Id = Convert.ToInt32(ds.Tables[0].Rows[0][DayReportHCDbConstNames.ID].ToString());
+                dayReportHCEntity.TeamInfo = TeamInfo.FindById(Convert.ToInt32(ds.Tables[0].Rows[0][DayReportHCDbConstNames.TEAM_NAME_ID].ToString()));
+                dayReportHCEntity.WorkingFace.WorkingFaceID = Convert.ToInt32(ds.Tables[0].Rows[0][DayReportHCDbConstNames.WORKINGFACE_ID].ToString());
                 dayReportHCEntity.WorkTime = ds.Tables[0].Rows[0][DayReportHCDbConstNames.WORK_TIME].ToString();
                 dayReportHCEntity.WorkTimeStyle = ds.Tables[0].Rows[0][DayReportHCDbConstNames.WORK_TIME_SYTLE].ToString();
                 dayReportHCEntity.WorkInfo = ds.Tables[0].Rows[0][DayReportHCDbConstNames.WORK_INFO].ToString();
@@ -179,7 +179,7 @@ namespace LibBusiness
         /// </summary>
         /// <param name="dayReportHCEntity">回采进尺实体</param>
         /// <returns>是否成功插入？true:false</returns>
-        public static bool insertDayReportHCInfo(DayReportHC dayReportHCEntity)
+        public static bool insertDayReportHCInfo(DayReportHc dayReportHCEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
             StringBuilder sqlStr = new StringBuilder();
@@ -196,8 +196,8 @@ namespace LibBusiness
             sqlStr.Append(DayReportHCDbConstNames.OTHER + ", ");
             sqlStr.Append(DayReportHCDbConstNames.BINDINGID);
             sqlStr.Append(") VALUES ('");
-            sqlStr.Append(dayReportHCEntity.TeamNameID + "',");
-            sqlStr.Append(dayReportHCEntity.WorkingFaceID + ",'");
+            sqlStr.Append(dayReportHCEntity.TeamInfo + "',");
+            sqlStr.Append(dayReportHCEntity.WorkingFace + ",'");
             sqlStr.Append(dayReportHCEntity.WorkTime + "','");
             sqlStr.Append(dayReportHCEntity.WorkTimeStyle + "','");
             sqlStr.Append(dayReportHCEntity.WorkInfo + "',");
@@ -206,7 +206,7 @@ namespace LibBusiness
             sqlStr.Append(dayReportHCEntity.DateTime + "','");
             sqlStr.Append(dayReportHCEntity.Submitter + "','");
             sqlStr.Append(dayReportHCEntity.Other + "','");
-            sqlStr.Append(dayReportHCEntity.BindingID + "')");
+            sqlStr.Append(dayReportHCEntity.BindingId + "')");
             bool bResult = db.OperateDB(sqlStr.ToString());
             return bResult;
         }
@@ -218,13 +218,13 @@ namespace LibBusiness
         /// </summary>
         /// <param name="dayReportHCEntity">回采进尺实体</param>
         /// <returns>是否成功修改？true:false</returns>
-        public static bool updateDayReportHCInfo(DayReportHC dayReportHCEntity)
+        public static bool updateDayReportHCInfo(DayReportHc dayReportHCEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
             StringBuilder sqlStr = new StringBuilder();
             sqlStr.Append("UPDATE " + DayReportHCDbConstNames.TABLE_NAME + " SET " + DayReportHCDbConstNames.TEAM_NAME_ID + "='");
-            sqlStr.Append(dayReportHCEntity.TeamNameID + "'," + DayReportHCDbConstNames.WORKINGFACE_ID + " = ");
-            sqlStr.Append(dayReportHCEntity.WorkingFaceID + "," + DayReportHCDbConstNames.WORK_TIME + " = '");
+            sqlStr.Append(dayReportHCEntity.TeamInfo + "'," + DayReportHCDbConstNames.WORKINGFACE_ID + " = ");
+            sqlStr.Append(dayReportHCEntity.WorkingFace + "," + DayReportHCDbConstNames.WORK_TIME + " = '");
             sqlStr.Append(dayReportHCEntity.WorkTime + "'," + DayReportHCDbConstNames.WORK_TIME_SYTLE + "= '");
             sqlStr.Append(dayReportHCEntity.WorkTimeStyle + "'," + DayReportHCDbConstNames.WORK_INFO + " ='");
             sqlStr.Append(dayReportHCEntity.WorkInfo + "'," + DayReportHCDbConstNames.JIN_CHI + " = " + dayReportHCEntity.JinChi + ",");
@@ -232,7 +232,7 @@ namespace LibBusiness
             sqlStr.Append(dayReportHCEntity.DateTime + "'," + DayReportHCDbConstNames.SUBMITTER + " = '");
             sqlStr.Append(dayReportHCEntity.Submitter + "'," + DayReportHCDbConstNames.OTHER + " = '");
             sqlStr.Append(dayReportHCEntity.Other + "' WHERE " + DayReportHCDbConstNames.ID + " = ");
-            sqlStr.Append(dayReportHCEntity.ID);
+            sqlStr.Append(dayReportHCEntity.Id);
             bool bResult = db.OperateDB(sqlStr.ToString());
             return bResult;
         }
@@ -242,12 +242,12 @@ namespace LibBusiness
         /// </summary>
         /// <param name="dayReportHCEntity"></param>
         /// <returns></returns>
-        public static bool updateDayResportHCInfoByBID(DayReportHC dayReportHCEntity)
+        public static bool updateDayResportHCInfoByBID(DayReportHc dayReportHCEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
             StringBuilder sqlstr = new StringBuilder();
             sqlstr.Append("UPDATE " + DayReportHCDbConstNames.TABLE_NAME + " SET ISDEL=");
-            sqlstr.Append(dayReportHCEntity.IsDel + " WHERE " + DayReportHCDbConstNames.BINDINGID + "='" + dayReportHCEntity.BindingID + "'");
+            sqlstr.Append(dayReportHCEntity.IsDel + " WHERE " + DayReportHCDbConstNames.BINDINGID + "='" + dayReportHCEntity.BindingId + "'");
             bool bResult = db.OperateDB(sqlstr.ToString());
             return bResult;
 
@@ -260,10 +260,10 @@ namespace LibBusiness
         /// </summary>
         /// <param name="dayReportHCEntity">回采进尺实体</param>
         /// <returns>是否成功删除？true:false</returns>
-        public static bool deleteDayReportHCInfo(DayReportHC dayReportHCEntity)
+        public static bool deleteDayReportHCInfo(DayReportHc dayReportHCEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
-            string sql = "DELETE FROM " + DayReportHCDbConstNames.TABLE_NAME + " WHERE " + DayReportHCDbConstNames.ID + " =" + dayReportHCEntity.ID;
+            string sql = "DELETE FROM " + DayReportHCDbConstNames.TABLE_NAME + " WHERE " + DayReportHCDbConstNames.ID + " =" + dayReportHCEntity.Id;
             bool bResult = db.OperateDB(sql);
             return bResult;
         }

@@ -32,7 +32,7 @@ namespace _2.MiningScheduling
         /**掘进面实体**/
         private WorkingFace workingFace;
         /**回采日报实体**/
-        DayReportJJ _dayReportJJEntity = new DayReportJJ();
+        DayReportJj _dayReportJJEntity = new DayReportJj();
         /**巷道关联矿井等信息ID集合**/
         int[] _arr;
 
@@ -99,7 +99,7 @@ namespace _2.MiningScheduling
         /// </summary>
         /// <param name="array">巷道编号数组</param>
         /// <param name="dayReportHCEntity">回采进尺日报实体</param>
-        public DayReportJJEntering(int[] array, DayReportJJ dayReportJJEntity, MainFrm mainFrm)
+        public DayReportJJEntering(int[] array, DayReportJj dayReportJJEntity, MainFrm mainFrm)
         {
             this.MainForm = mainFrm;
 
@@ -232,7 +232,7 @@ namespace _2.MiningScheduling
             }
 
             //队别
-            cboTeamName.Text = TeamBLL.selectTeamInfoByID(_dayReportJJEntity.TeamNameID).TeamName;
+            cboTeamName.Text = TeamBLL.selectTeamInfoByID(_dayReportJJEntity.TeamInfo.TeamId).TeamName;
 
             //绑定队别成员
             this.bindTeamMember();
@@ -306,8 +306,8 @@ namespace _2.MiningScheduling
             else
             {
                 TeamInfo teamInfoEntity = new TeamInfo();
-                teamInfoEntity.TeamID = Convert.ToInt32(cboTeamName.SelectedValue);
-                teamInfoEntity = TeamBLL.selectTeamInfoByID(teamInfoEntity.TeamID);
+                teamInfoEntity.TeamId = Convert.ToInt32(cboTeamName.SelectedValue);
+                teamInfoEntity = TeamBLL.selectTeamInfoByID(teamInfoEntity.TeamId);
                 teamInfoForm = new TeamInfoEntering(teamInfoEntity);
             }
 
@@ -384,11 +384,11 @@ namespace _2.MiningScheduling
             }
             if (this.Text == Const_MS.DAY_REPORT_JJ_CHANGE)
             {
-                DayReportJJ oldDayReportJJEntity = _dayReportJJEntity; //修改之前的实体
+                DayReportJj oldDayReportJJEntity = _dayReportJJEntity; //修改之前的实体
                 LibBusiness.TunnelDefaultSelect.UpdateDefaultTunnel(DayReportJJDbConstNames.TABLE_NAME, workingFace.WorkingFaceID);
                 updateDayReportJJInfo();
 
-                DayReportJJ newDayReportJJEntity = _dayReportJJEntity; //修改后的掘进信息实体               
+                DayReportJj newDayReportJJEntity = _dayReportJJEntity; //修改后的掘进信息实体               
             }
         }
 
@@ -477,11 +477,11 @@ namespace _2.MiningScheduling
         /// </summary>
         private void insertDayReportJJInfo()
         {
-            List<DayReportJJ> dayReportJJEntityList = new List<DayReportJJ>();
+            List<DayReportJj> dayReportJJEntityList = new List<DayReportJj>();
 
             for (int i = 0; i < this.dgrdvDayReportJJ.RowCount; i++)
             {
-                DayReportJJ _dayReportJJEntity = new DayReportJJ();
+                DayReportJj _dayReportJJEntity = new DayReportJj();
                 // 最后一行为空行时，跳出循环
                 if (i == this.dgrdvDayReportJJ.RowCount - 1)
                 {
@@ -490,9 +490,9 @@ namespace _2.MiningScheduling
 
                 /**回采日报实体赋值**/
                 //队别名称
-                _dayReportJJEntity.TeamNameID = Convert.ToInt32(cboTeamName.SelectedValue);
+                _dayReportJJEntity.TeamInfo.TeamId = Convert.ToInt32(cboTeamName.SelectedValue);
                 //绑定巷道编号
-                _dayReportJJEntity.WorkingFaceID = workingFace.WorkingFaceID;
+                _dayReportJJEntity.WorkingFace.WorkingFaceID = workingFace.WorkingFaceID;
 
                 DataGridViewCellCollection cells = this.dgrdvDayReportJJ.Rows[i].Cells;
                 //日期
@@ -533,7 +533,7 @@ namespace _2.MiningScheduling
                     _dayReportJJEntity.Other = cells[C_COMMENTS].Value.ToString();
                 }
                 //BID
-                _dayReportJJEntity.BindingID = IDGenerator.NewBindingID();
+                _dayReportJJEntity.BindingId = IDGenerator.NewBindingID();
 
                 //添加到dayReportHCEntityList中
                 dayReportJJEntityList.Add(_dayReportJJEntity);
@@ -543,7 +543,7 @@ namespace _2.MiningScheduling
             Tunnel tunnel = BasicInfoManager.getInstance().getTunnelListByWorkingFaceId(workingFace.WorkingFaceID)[0];
 
             //循环添加
-            foreach (DayReportJJ dayReportJJEntity in dayReportJJEntityList)
+            foreach (DayReportJj dayReportJJEntity in dayReportJJEntityList)
             {
                 //添加回采进尺日报
                 bResult = DayReportJJBLL.insertDayReportJJInfo(dayReportJJEntity);
@@ -552,7 +552,7 @@ namespace _2.MiningScheduling
 
                 // 巷道id                
                 string hdid = tunnel.TunnelId.ToString();
-                string bid = dayReportJJEntity.BindingID;
+                string bid = dayReportJJEntity.BindingId;
                 if (bResult)
                     addHdJc(hdid, dist, bid, tunnel.TunnelWid);
             }
@@ -580,9 +580,9 @@ namespace _2.MiningScheduling
         private void updateDayReportJJInfo()
         {
             //绑定巷道编号
-            _dayReportJJEntity.WorkingFaceID = this.selectWorkingfaceSimple1.IWorkingfaceId;
+            _dayReportJJEntity.WorkingFace.WorkingFaceID = this.selectWorkingfaceSimple1.IWorkingfaceId;
             //队别名称
-            _dayReportJJEntity.TeamNameID = Convert.ToInt32(cboTeamName.SelectedValue);
+            _dayReportJJEntity.TeamInfo.TeamId = Convert.ToInt32(cboTeamName.SelectedValue);
 
             //填报人
             _dayReportJJEntity.Submitter = cboSubmitter.Text;
@@ -635,7 +635,7 @@ namespace _2.MiningScheduling
                 Tunnel tunnel = BasicInfoManager.getInstance().getTunnelListByWorkingFaceId(workingFace.WorkingFaceID)[0];
                 //在库中查询对应的bid值，获得对应的图形对象进行修改
                 string hdid = tunnel.TunnelId.ToString();
-                string bid = _dayReportJJEntity.BindingID;
+                string bid = _dayReportJJEntity.BindingId;
                 double dist = _dayReportJJEntity.JinChi;
                 UpdateHdJc(hdid, bid, dist);
 

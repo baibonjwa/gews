@@ -325,7 +325,7 @@ namespace _3.GeologyMeasure
                     _tmpRowIndex = _rowDetailStartIndex + i;
                     int index = 0;
                     //主键
-                    collapsePillarsEnt.ID = Convert.ToInt32(CollapsePillarsBLL.selectCollapsePillarsPointByPointID(_collapsePillarsPointPrimaryKey[i]).Tables[0].Rows[0][CollapsePillarsPointDbConstNames.COLLAPSE_PILLARS_ID].ToString());
+                    collapsePillarsEnt.Id = Convert.ToInt32(CollapsePillarsBLL.selectCollapsePillarsPointByPointID(_collapsePillarsPointPrimaryKey[i]).Tables[0].Rows[0][CollapsePillarsPointDbConstNames.COLLAPSE_PILLARS_ID].ToString());
                     //陷落柱名称
                     collapsePillarsEnt.CollapsePillarsName = this.fpCollapsePillarsInfo.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text;
                     //关键点坐标X
@@ -395,14 +395,14 @@ namespace _3.GeologyMeasure
                     if (fpCollapsePillarsInfo.Sheets[0].Cells[_rowDetailStartIndex + i, 0].Value != null && (bool)fpCollapsePillarsInfo.Sheets[0].Cells[_rowDetailStartIndex + i, 0].Value == true)
                     {
                         //陷落柱ID
-                        collapsePillarsEnt.ID = Convert.ToInt32(CollapsePillarsBLL.selectCollapsePillarsPointByPointID(_collapsePillarsPointPrimaryKey[i]).Tables[0].Rows[0][CollapsePillarsPointDbConstNames.COLLAPSE_PILLARS_ID].ToString());
+                        collapsePillarsEnt.Id = Convert.ToInt32(CollapsePillarsBLL.selectCollapsePillarsPointByPointID(_collapsePillarsPointPrimaryKey[i]).Tables[0].Rows[0][CollapsePillarsPointDbConstNames.COLLAPSE_PILLARS_ID].ToString());
                         //关键点ID
-                        collapsePillarsEnt.PointID = _collapsePillarsPointPrimaryKey[i];
+                        collapsePillarsEnt.PointId = _collapsePillarsPointPrimaryKey[i];
                         //删除
                         bResult = CollapsePillarsBLL.deleteCollapsePillars(collapsePillarsEnt);
 
                         //20140511 lyf
-                        sCollapseID = collapsePillarsEnt.ID.ToString();
+                        sCollapseID = collapsePillarsEnt.Id.ToString();
                         if (bResult && sCollapseID != "")
                         {
                             DeleteyXLZ(sCollapseID);

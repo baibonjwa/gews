@@ -54,9 +54,9 @@ namespace LibBusiness
         /// <summary>
         /// 【探头信息】登录
         /// </summary>
-        /// <param name="probeManageEntity">【探头实体】</param>
+        /// <param name="probeEntity">【探头实体】</param>
         /// <returns>成功与否：true，false</returns>
-        public static bool insertProbeManageInfo(ProbeManage probeManageEntity)
+        public static bool insertProbeManageInfo(Probe probeEntity)
         {
             StringBuilder sqlStr = new StringBuilder();
             sqlStr.Append("INSERT INTO " + ProbeManageDbConstNames.TABLE_NAME);
@@ -75,19 +75,19 @@ namespace LibBusiness
             sqlStr.Append(", " + ProbeManageDbConstNames.FAR_FROM_FRONTAL);
             sqlStr.Append(" )");
             sqlStr.Append(" VALUES (");
-            sqlStr.Append("  '" + probeManageEntity.ProbeId + "'");
-            sqlStr.Append(", '" + probeManageEntity.ProbeName + "'");
-            sqlStr.Append(", '" + probeManageEntity.ProbeTypeId + "'");
+            sqlStr.Append("  '" + probeEntity.ProbeId + "'");
+            sqlStr.Append(", '" + probeEntity.ProbeName + "'");
+            sqlStr.Append(", '" + probeEntity.ProbeTypeId + "'");
             // 2014/5/29 add by wuxin Start
-            sqlStr.Append(", '" + probeManageEntity.ProbeTypeDisplayName + "'");
+            sqlStr.Append(", '" + probeEntity.ProbeTypeDisplayName + "'");
             // 2014/5/29 add by wuxin End
-            sqlStr.Append(", '" + probeManageEntity.TunnelId + "'");
-            sqlStr.Append(", '" + probeManageEntity.ProbeLocationX + "'");
-            sqlStr.Append(", '" + probeManageEntity.ProbeLocationY + "'");
-            sqlStr.Append(", '" + probeManageEntity.ProbeLocationZ + "'");
-            sqlStr.Append(", '" + probeManageEntity.ProbeDescription + "'");
-            sqlStr.Append(", '" + probeManageEntity.IsMove + "'");
-            sqlStr.Append(", '" + probeManageEntity.FarFromFrontal + "'");
+            sqlStr.Append(", '" + probeEntity.TunnelId + "'");
+            sqlStr.Append(", '" + probeEntity.ProbeLocationX + "'");
+            sqlStr.Append(", '" + probeEntity.ProbeLocationY + "'");
+            sqlStr.Append(", '" + probeEntity.ProbeLocationZ + "'");
+            sqlStr.Append(", '" + probeEntity.ProbeDescription + "'");
+            sqlStr.Append(", '" + probeEntity.IsMove + "'");
+            sqlStr.Append(", '" + probeEntity.FarFromFrontal + "'");
             sqlStr.Append(" )");
 
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GasEmissionDB);
@@ -262,26 +262,26 @@ namespace LibBusiness
         /// <summary>
         /// 【探头信息】修改
         /// </summary>
-        /// <param name="probeManageEntity">【探头实体】</param>
+        /// <param name="probeEntity">【探头实体】</param>
         /// <returns>成功与否：true，false</returns>
-        public static bool updateProbeManageInfo(ProbeManage probeManageEntity)
+        public static bool updateProbeManageInfo(Probe probeEntity)
         {
             StringBuilder sqlStr = new StringBuilder();
             sqlStr.Append("UPDATE " + ProbeManageDbConstNames.TABLE_NAME);
             sqlStr.Append(" SET");
-            sqlStr.Append("  " + ProbeManageDbConstNames.PROBE_NAME + " = '" + probeManageEntity.ProbeName + "'");
-            sqlStr.Append(", " + ProbeManageDbConstNames.PROBE_TYPE_ID + " = '" + probeManageEntity.ProbeTypeId + "'");
+            sqlStr.Append("  " + ProbeManageDbConstNames.PROBE_NAME + " = '" + probeEntity.ProbeName + "'");
+            sqlStr.Append(", " + ProbeManageDbConstNames.PROBE_TYPE_ID + " = '" + probeEntity.ProbeTypeId + "'");
             // 2014/5/29 add by wuxin Start
-            sqlStr.Append(", " + ProbeManageDbConstNames.PROBE_TYPE_DISPLAY_NAME + " = '" + probeManageEntity.ProbeTypeDisplayName + "'");
+            sqlStr.Append(", " + ProbeManageDbConstNames.PROBE_TYPE_DISPLAY_NAME + " = '" + probeEntity.ProbeTypeDisplayName + "'");
             // 2014/5/29 add by wuxin End
-            sqlStr.Append(", " + ProbeManageDbConstNames.TUNNEL_ID + " = '" + probeManageEntity.TunnelId + "'");
-            sqlStr.Append(", " + ProbeManageDbConstNames.PROBE_LOCATION_X + " = '" + probeManageEntity.ProbeLocationX + "'");
-            sqlStr.Append(", " + ProbeManageDbConstNames.PROBE_LOCATION_Y + " = '" + probeManageEntity.ProbeLocationY + "'");
-            sqlStr.Append(", " + ProbeManageDbConstNames.PROBE_LOCATION_Z + " = '" + probeManageEntity.ProbeLocationZ + "'");
-            sqlStr.Append(", " + ProbeManageDbConstNames.PROBE_DESCRIPTION + " = '" + probeManageEntity.ProbeDescription + "'");
-            sqlStr.Append(", " + ProbeManageDbConstNames.IS_MOVE + " = '" + probeManageEntity.IsMove + "'");
-            sqlStr.Append(", " + ProbeManageDbConstNames.FAR_FROM_FRONTAL + " = '" + probeManageEntity.FarFromFrontal + "'");
-            sqlStr.Append(" WHERE " + ProbeManageDbConstNames.PROBE_ID + " = '" + probeManageEntity.ProbeId + "'");
+            sqlStr.Append(", " + ProbeManageDbConstNames.TUNNEL_ID + " = '" + probeEntity.TunnelId + "'");
+            sqlStr.Append(", " + ProbeManageDbConstNames.PROBE_LOCATION_X + " = '" + probeEntity.ProbeLocationX + "'");
+            sqlStr.Append(", " + ProbeManageDbConstNames.PROBE_LOCATION_Y + " = '" + probeEntity.ProbeLocationY + "'");
+            sqlStr.Append(", " + ProbeManageDbConstNames.PROBE_LOCATION_Z + " = '" + probeEntity.ProbeLocationZ + "'");
+            sqlStr.Append(", " + ProbeManageDbConstNames.PROBE_DESCRIPTION + " = '" + probeEntity.ProbeDescription + "'");
+            sqlStr.Append(", " + ProbeManageDbConstNames.IS_MOVE + " = '" + probeEntity.IsMove + "'");
+            sqlStr.Append(", " + ProbeManageDbConstNames.FAR_FROM_FRONTAL + " = '" + probeEntity.FarFromFrontal + "'");
+            sqlStr.Append(" WHERE " + ProbeManageDbConstNames.PROBE_ID + " = '" + probeEntity.ProbeId + "'");
 
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GasEmissionDB);
             bool bResult = db.OperateDB(sqlStr.ToString());

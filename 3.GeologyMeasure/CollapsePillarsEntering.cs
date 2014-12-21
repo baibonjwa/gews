@@ -81,7 +81,7 @@ namespace _3.GeologyMeasure
 
             txtCollapsePillarsName.Text = collapsePillarsEnt.CollapsePillarsName;
 
-            _dsCollapsePillarsPoint = CollapsePillarsBLL.selectCollapsePillarsPoint(collapsePillarsEnt.ID);
+            _dsCollapsePillarsPoint = CollapsePillarsBLL.selectCollapsePillarsPoint(collapsePillarsEnt.Id);
 
             _rowsCount = _dsCollapsePillarsPoint.Tables[0].Rows.Count;
             dgrdvCoordinate.RowCount = _rowsCount + 1;
@@ -163,7 +163,7 @@ namespace _3.GeologyMeasure
                     if (i < _dsCollapsePillarsPoint.Tables[0].Rows.Count)
                     {
                         //关键点ID
-                        collapse.PointID = Convert.ToInt32(_dsCollapsePillarsPoint.Tables[0].Rows[i][CollapsePillarsPointDbConstNames.ID].ToString());
+                        collapse.PointId = Convert.ToInt32(_dsCollapsePillarsPoint.Tables[0].Rows[i][CollapsePillarsPointDbConstNames.ID].ToString());
                     }
                 }
                 //X
@@ -177,7 +177,7 @@ namespace _3.GeologyMeasure
                 {
                     collapse.BindingID = IDGenerator.NewBindingID();
 
-                    collapse.ID = Convert.ToInt32(CollapsePillarsBLL.selectMaxCollapsePillars().Tables[0].Rows[0][CollapsePillarsInfoDbConstNames.ID].ToString());
+                    collapse.Id = Convert.ToInt32(CollapsePillarsBLL.selectMaxCollapsePillars().Tables[0].Rows[0][CollapsePillarsInfoDbConstNames.ID].ToString());
                     bResult = CollapsePillarsBLL.insertCollapsePillarsPoint(collapse);
                 }
                 //如果添加未成功，删除添加的关键点与陷落柱
@@ -188,7 +188,7 @@ namespace _3.GeologyMeasure
                 //修改
                 if (this.Text == Const_GM.COLLAPSEPILLARE_CHANGE)
                 {
-                    if (i < CollapsePillarsBLL.selectCollapsePillarsPoint(collapse.ID).Tables[0].Rows.Count)
+                    if (i < CollapsePillarsBLL.selectCollapsePillarsPoint(collapse.Id).Tables[0].Rows.Count)
                     {
                         bResult = CollapsePillarsBLL.updateCollapsePillars(collapse);
                     }
@@ -210,7 +210,7 @@ namespace _3.GeologyMeasure
             {
                 for (int i = dgrdvCoordinate.Rows.Count - 1; i < _itemCount; i++)
                 {
-                    collapse.PointID = Convert.ToInt32(_dsCollapsePillarsPoint.Tables[0].Rows[i][CollapsePillarsPointDbConstNames.ID].ToString());
+                    collapse.PointId = Convert.ToInt32(_dsCollapsePillarsPoint.Tables[0].Rows[i][CollapsePillarsPointDbConstNames.ID].ToString());
                     if (dgrdvCoordinate.Rows.Count == 1)
                     {
                         bResult = CollapsePillarsBLL.deleteCollapsePillars(collapse);

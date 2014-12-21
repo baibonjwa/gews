@@ -372,7 +372,7 @@ namespace _1.GasEmission
             // 创建一个瓦斯浓度探头数据实体
             GasConcentrationProbeData gasConcentrationProbeDataEntity = new GasConcentrationProbeData();
             // 探头编号
-            gasConcentrationProbeDataEntity.ProbeId = Convert.ToString(this._lstProbeName.SelectedValue);
+            gasConcentrationProbeDataEntity.Probe.ProbeId = Convert.ToString(this._lstProbeName.SelectedValue);
             // 探头数值
             double dProbeValue = 0;
             if (double.TryParse(this.txtProbeValue.Text.Trim(), out dProbeValue))

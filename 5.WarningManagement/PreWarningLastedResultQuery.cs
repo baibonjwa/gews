@@ -558,9 +558,9 @@ namespace _5.WarningManagement
                 //班次
                 _outInfo.DateShift = shift;
                 //巷道ID
-                _outInfo.TunnelID = tunnelId;
+                _outInfo.TunnelId = tunnelId;
 
-                _outInfo.WarningIDList = warningIdList;
+                _outInfo.WarningIdList = warningIdList;
 
                 PreWarningResultDetailsQuery pwrdq = new PreWarningResultDetailsQuery(_outInfo, false);
                 pwrdq.ShowDialog();

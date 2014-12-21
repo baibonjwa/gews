@@ -34,7 +34,7 @@ namespace LibBusiness
             sqlStr.Append(", " + GasConcentrationProbeDataDbConstNames.RECORD_TYPE);
             sqlStr.Append(" )");
             sqlStr.Append(" VALUES (");
-            sqlStr.Append("  '" + gasConcentrationProbeDataEntity.ProbeId + "'");
+            sqlStr.Append("  '" + gasConcentrationProbeDataEntity.Probe + "'");
             sqlStr.Append(", '" + gasConcentrationProbeDataEntity.ProbeValue + "'");
             sqlStr.Append(", '" + gasConcentrationProbeDataEntity.RecordTime + "'");
             sqlStr.Append(", '" + gasConcentrationProbeDataEntity.RecordType + "'");
@@ -279,7 +279,7 @@ namespace LibBusiness
             StringBuilder sqlStr = new StringBuilder();
             sqlStr.Append("UPDATE " + GasConcentrationProbeDataDbConstNames.TABLE_NAME);
             sqlStr.Append(" SET");
-            sqlStr.Append("  " + GasConcentrationProbeDataDbConstNames.PROBE_ID + " = '" + gasConcentrationProbeDataEntity.ProbeId + "'");
+            sqlStr.Append("  " + GasConcentrationProbeDataDbConstNames.PROBE_ID + " = '" + gasConcentrationProbeDataEntity.Probe + "'");
             sqlStr.Append(", " + GasConcentrationProbeDataDbConstNames.PROBE_VALUE + " = '" + gasConcentrationProbeDataEntity.ProbeValue + "'");
             sqlStr.Append(", " + GasConcentrationProbeDataDbConstNames.RECORD_TIME + " = '" + gasConcentrationProbeDataEntity.RecordTime + "'");
             sqlStr.Append(" WHERE " + GasConcentrationProbeDataDbConstNames.PROBE_DATA_ID + " = " + gasConcentrationProbeDataEntity.ProbeDataId);

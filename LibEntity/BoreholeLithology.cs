@@ -1,68 +1,62 @@
-﻿// ******************************************************************
-// 概  述：钻孔岩性实体
-// 作  者：伍鑫
-// 创建日期：2013/11/26
-// 版本号：1.0
-// ******************************************************************
+﻿using Castle.ActiveRecord;
 
 namespace LibEntity
 {
-    public class BoreholeLithology
+    [ActiveRecord("T_BOREHOLE_LITHOLOGY")]
+    public class BoreholeLithology : ActiveRecordBase<BoreholeLithology>
     {
-        /** 钻孔编号 **/
+        /// <summary>
+        ///     编号
+        /// </summary>
+        [PrimaryKey(PrimaryKeyType.Identity, "BOREHOLE_LITHOLOGY_ID")]
+        public int BoreholeLithhologyId { get; set; }
 
         /// <summary>
         ///     钻孔编号
         /// </summary>
-        public int BoreholeId { get; set; }
-
-        /** 岩性编号 **/
+        [BelongsTo("BOREHOLE_ID")]
+        public Borehole Borehole { get; set; }
 
         /// <summary>
         ///     岩性编号
         /// </summary>
-        public int LithologyId { get; set; }
-
-        /** 底板标高 **/
+        [BelongsTo("LITHOLOGY_ID")]
+        public Lithology Lithology { get; set; }
 
         /// <summary>
         ///     底板标高
         /// </summary>
+        [Property("FLOOR_ELEVATION")]
         public double FloorElevation { get; set; }
-
-        /** 厚度 **/
 
         /// <summary>
         ///     厚度
         /// </summary>
+        [Property("THICKNESS")]
         public double Thickness { get; set; }
-
-        /** 煤层名称 **/
 
         /// <summary>
         ///     煤层名称
         /// </summary>
+        [Property("COAL_SEAMS_NAME")]
         public string CoalSeamsName { get; set; }
-
-        /** 坐标X **/
 
         /// <summary>
         ///     坐标X
         /// </summary>
+        [Property("COORDINATE_X")]
         public double CoordinateX { get; set; }
-
-        /** 坐标Y **/
 
         /// <summary>
         ///     坐标Y
         /// </summary>
+        [Property("COORDINATE_Y")]
         public double CoordinateY { get; set; }
-
-        /** 坐标Z **/
 
         /// <summary>
         ///     坐标Z
         /// </summary>
+        [Property("COORDINATE_Z")]
         public double CoordinateZ { get; set; }
     }
 }
