@@ -68,15 +68,15 @@ namespace LibBusiness
             sb.Append("SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;");
             sb.Append("BEGIN TRANSACTION;");
             sb.Append("IF EXISTS( SELECT * FROM T_GEOLOGY_SPACE WHERE ");
-            sb.Append(GeologySpaceDbConstNames.WORKFACE_ID + "=" + geologySpaceEntity.WorkSpaceID);
-            sb.Append(" AND " + GeologySpaceDbConstNames.TECTONIC_ID + "='" + geologySpaceEntity.TectonicID + "'");
+            sb.Append(GeologySpaceDbConstNames.WORKFACE_ID + "=" + geologySpaceEntity.WorkingFace);
+            sb.Append(" AND " + GeologySpaceDbConstNames.TECTONIC_ID + "='" + geologySpaceEntity.TectonicId + "'");
             sb.Append(" AND " + GeologySpaceDbConstNames.TECTONIC_TYPE + "=" + geologySpaceEntity.TectonicType+")");
             sb.Append(" BEGIN ");
             sb.Append(" UPDATE " + GeologySpaceDbConstNames.TABLE_NAME + " SET ");
             sb.Append(GeologySpaceDbConstNames.TECTONIC_DISTANCE + "=" + geologySpaceEntity.Distance);
-            sb.Append("," + GeologySpaceDbConstNames.DATE_TIME + "=" + geologySpaceEntity.onDateTime);
-            sb.Append(" WHERE " + GeologySpaceDbConstNames.WORKFACE_ID + "=" + geologySpaceEntity.WorkSpaceID);
-            sb.Append(" AND " + GeologySpaceDbConstNames.TECTONIC_ID + "='" + geologySpaceEntity.TectonicID + "'");
+            sb.Append("," + GeologySpaceDbConstNames.DATE_TIME + "=" + geologySpaceEntity.OnDateTime);
+            sb.Append(" WHERE " + GeologySpaceDbConstNames.WORKFACE_ID + "=" + geologySpaceEntity.WorkingFace);
+            sb.Append(" AND " + GeologySpaceDbConstNames.TECTONIC_ID + "='" + geologySpaceEntity.TectonicId + "'");
             sb.Append(" AND " + GeologySpaceDbConstNames.TECTONIC_TYPE + "=" + geologySpaceEntity.TectonicType + ";");
             sb.Append(" END ");
             sb.Append(" ELSE ");
@@ -84,8 +84,8 @@ namespace LibBusiness
             sb.Append("INSERT INTO " + GeologySpaceDbConstNames.TABLE_NAME + "(" + GeologySpaceDbConstNames.WORKFACE_ID + ","
                 + GeologySpaceDbConstNames.TECTONIC_ID + "," + GeologySpaceDbConstNames.TECTONIC_TYPE + ","
                 + GeologySpaceDbConstNames.TECTONIC_DISTANCE + "," + GeologySpaceDbConstNames.DATE_TIME + ")VALUES(");
-            sb.Append(geologySpaceEntity.WorkSpaceID + ",'" + geologySpaceEntity.TectonicID + "'," + geologySpaceEntity.TectonicType + "," +
-                geologySpaceEntity.Distance + ",'" + geologySpaceEntity.onDateTime + "');");
+            sb.Append(geologySpaceEntity.WorkingFace + ",'" + geologySpaceEntity.TectonicId + "'," + geologySpaceEntity.TectonicType + "," +
+                geologySpaceEntity.Distance + ",'" + geologySpaceEntity.OnDateTime + "');");
             sb.Append(" END ");
             sb.Append("COMMIT TRANSACTION;");
 
@@ -110,11 +110,11 @@ namespace LibBusiness
             sb.Append(GeologySpaceDbConstNames.TECTONIC_TYPE + ", ");
             sb.Append(GeologySpaceDbConstNames.DATE_TIME);
             sb.Append(") VALUES (");
-            sb.Append(geologySpaceEntity.WorkSpaceID + ",'");
-            sb.Append(geologySpaceEntity.TectonicID + "',");
+            sb.Append(geologySpaceEntity.WorkingFace + ",'");
+            sb.Append(geologySpaceEntity.TectonicId + "',");
             sb.Append(geologySpaceEntity.Distance + ",");
             sb.Append(geologySpaceEntity.TectonicType + ",'");
-            sb.Append(geologySpaceEntity.onDateTime + "')");
+            sb.Append(geologySpaceEntity.OnDateTime + "')");
             bool bResult = db.OperateDB(sb.ToString());
             return bResult;
         }
@@ -129,7 +129,7 @@ namespace LibBusiness
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
             StringBuilder sb = new StringBuilder();
             sb.Append("UPDATE " + GeologySpaceDbConstNames.TABLE_NAME + " SET " + GeologySpaceDbConstNames.TECTONIC_DISTANCE + " = '");
-            sb.Append(geologySpaceEntity.Distance + " WHERE "+GeologySpaceDbConstNames.TECTONIC_ID+"="+geologySpaceEntity.TectonicID+
+            sb.Append(geologySpaceEntity.Distance + " WHERE "+GeologySpaceDbConstNames.TECTONIC_ID+"="+geologySpaceEntity.TectonicId+
                 " AND "+GeologySpaceDbConstNames.TECTONIC_TYPE+"="+geologySpaceEntity.TectonicType);
             bool bResult = db.OperateDB(sb.ToString());
             return bResult;
@@ -144,7 +144,7 @@ namespace LibBusiness
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
             string sql = "DELETE FROM " + GeologySpaceDbConstNames.TABLE_NAME + " WHERE " +
-                GeologySpaceDbConstNames.TECTONIC_ID + " =" + geologySpaceEntity.TectonicID+
+                GeologySpaceDbConstNames.TECTONIC_ID + " =" + geologySpaceEntity.TectonicId+
                 " AND "+GeologySpaceDbConstNames.TECTONIC_TYPE+"="+geologySpaceEntity.TectonicType;
 
             bool bResult = db.OperateDB(sql);

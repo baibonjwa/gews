@@ -184,13 +184,13 @@ namespace _4.OutburstPrevention
             // 测定时间
             gasContentEntity.MeasureDateTime = this.dtpMeasureDateTime.Value;
             // 巷道编号
-            gasContentEntity.TunnelID = this.selectTunnelSimple1.ITunnelId;
+            gasContentEntity.Tunnel.TunnelId = this.selectTunnelSimple1.ITunnelId;
             // 煤层编号
             int iCoalSeamsId = 0;
-            string mc = gasContentEntity.CoalSeamsId.ToString();//修改时用到改前的信息删除feature
+            string mc = gasContentEntity.CoalSeams.ToString();//修改时用到改前的信息删除feature
             if (int.TryParse(Convert.ToString(this.cboCoalSeams.SelectedValue), out iCoalSeamsId))
             {
-                gasContentEntity.CoalSeamsId = iCoalSeamsId;
+                gasContentEntity.CoalSeams.CoalSeamsId = iCoalSeamsId;
             }
 
             if (this._bllType == "add")
@@ -356,7 +356,7 @@ namespace _4.OutburstPrevention
                     //    intArr[1] = tunnelEntity.WorkingFace.MiningArea.Horizontal.HorizontalId;
                     //    intArr[2] = tunnelEntity.WorkingFace.MiningArea.MiningAreaId;
                     //    intArr[3] = tunnelEntity.WorkingFace.WorkingFaceID;
-                    //    intArr[4] = tunnelEntity.TunnelID;
+                    //    intArr[4] = tunnelEntity.Tunnel;
                     //    _intArr = intArr;
                     //}
                 }
@@ -483,7 +483,7 @@ namespace _4.OutburstPrevention
             IGeometry geometry = pt;
             List<ziduan> list = new List<ziduan>();
             list.Add(new ziduan("bid", gasGushQuantityEntity.BindingId));
-            list.Add(new ziduan("mc", gasGushQuantityEntity.CoalSeamsId.ToString()));
+            list.Add(new ziduan("mc", gasGushQuantityEntity.CoalSeams.ToString()));
             list.Add(new ziduan("addtime", DateTime.Now.ToString()));
             string wshl = gasGushQuantityEntity.GasContentValue.ToString(); // 瓦斯含量
             string cdbg = gasGushQuantityEntity.CoordinateZ.ToString();

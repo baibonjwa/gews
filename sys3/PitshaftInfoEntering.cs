@@ -50,7 +50,7 @@ namespace _3.GeologyMeasure
         /// 带参数的构造方法
         /// </summary>
         /// <param name="strPrimaryKey">主键</param>
-        public PitshaftInfoEntering(string strPrimaryKey, string strTitle,PitshaftInfoManagement form)
+        public PitshaftInfoEntering(string strPrimaryKey, string strTitle, PitshaftInfoManagement form)
         {
             frm = form;
             InitializeComponent();
@@ -75,9 +75,9 @@ namespace _3.GeologyMeasure
 
             if (ds.Tables[0].Rows.Count > 0)
             {
-                this.cobPitshaftType.DataSource    = ds.Tables[0];
+                this.cobPitshaftType.DataSource = ds.Tables[0];
                 this.cobPitshaftType.DisplayMember = PitshaftTypeDbConstNames.PITSHAFT_TYPE_NAME;
-                this.cobPitshaftType.ValueMember   = PitshaftTypeDbConstNames.PITSHAFT_TYPE_ID;
+                this.cobPitshaftType.ValueMember = PitshaftTypeDbConstNames.PITSHAFT_TYPE_ID;
                 this.cobPitshaftType.SelectedIndex = -1;
             }
         }
@@ -105,7 +105,7 @@ namespace _3.GeologyMeasure
             int iPitshaftTypeId = 0;
             if (int.TryParse(Convert.ToString(this.cobPitshaftType.SelectedValue), out iPitshaftTypeId))
             {
-                pitshaftEntity.PitshaftTypeId = iPitshaftTypeId;
+                pitshaftEntity.PitshaftType.PitshaftTypeId = iPitshaftTypeId;
             }
             // 井口标高
             double dWellheadElevation = 0;
@@ -123,25 +123,25 @@ namespace _3.GeologyMeasure
             double dPitshaftCoordinateX = 0;
             if (double.TryParse(this.txtPitshaftCoordinateX.Text.Trim(), out dPitshaftCoordinateX))
             {
-                pitshaftEntity.PitshaftCoordinateX = Math.Round(dPitshaftCoordinateX,3);
+                pitshaftEntity.PitshaftCoordinateX = Math.Round(dPitshaftCoordinateX, 3);
             }
             // 井筒坐标Y
             double dPitshaftCoordinateY = 0;
             if (double.TryParse(this.txtPitshaftCoordinateY.Text.Trim(), out dPitshaftCoordinateY))
             {
-                pitshaftEntity.PitshaftCoordinateY = Math.Round(dPitshaftCoordinateY,3);
+                pitshaftEntity.PitshaftCoordinateY = Math.Round(dPitshaftCoordinateY, 3);
             }
             // 图形坐标X
             double dFigureCoordinateX = 0;
             if (double.TryParse(this.txtFigureCoordinateX.Text.Trim(), out dFigureCoordinateX))
             {
-                pitshaftEntity.FigureCoordinateX = Math.Round(dFigureCoordinateX,3);
+                pitshaftEntity.FigureCoordinateX = Math.Round(dFigureCoordinateX, 3);
             }
             // 图形坐标Y
             double dFigureCoordinateY = 0;
             if (double.TryParse(this.txtFigureCoordinateY.Text.Trim(), out dFigureCoordinateY))
             {
-                pitshaftEntity.FigureCoordinateY = Math.Round(dFigureCoordinateY,3);
+                pitshaftEntity.FigureCoordinateY = Math.Round(dFigureCoordinateY, 3);
             }
             // 图形坐标Z
             double dFigureCoordinateZ = 0;
@@ -149,7 +149,7 @@ namespace _3.GeologyMeasure
             {
                 pitshaftEntity.FigureCoordinateZ = dFigureCoordinateZ;
             }
-  
+
             bool bResult = false;
             if (this._bllType == "add")
             {
@@ -158,7 +158,7 @@ namespace _3.GeologyMeasure
 
                 //井筒信息插入
                 bResult = PitshaftBLL.insertPitshaftInfo(pitshaftEntity);
-                
+
                 //绘制井筒
                 if (bResult)
                 {
@@ -254,7 +254,7 @@ namespace _3.GeologyMeasure
             //DataEditCommon.g_CurWorkspaceEdit.StopEditOperation();
             //string strValue = feature.get_Value(feature.Fields.FindField(GIS_Const.FIELD_OBJECTID)).ToString();
             //DataEditCommon.SpecialPointRenderer(featureLayer, GIS_Const.FIELD_OBJECTID, strValue, drawJT.m_Bitmap);
-            
+
             /////3.显示井筒图层
             //if (featureLayer.Visible == false)
             //    featureLayer.Visible = true;
@@ -323,7 +323,7 @@ namespace _3.GeologyMeasure
             }
 
             //2.删除原来图元，重新绘制新图元
-            bool bIsDeleteOldFeature = DataEditCommon.DeleteFeatureByWhereClause(featureLayer, "BID='"+pitshaftEntity.BindingId+"'");
+            bool bIsDeleteOldFeature = DataEditCommon.DeleteFeatureByWhereClause(featureLayer, "BID='" + pitshaftEntity.BindingId + "'");
             //if (bIsDeleteOldFeature)
             {
                 //绘制井筒

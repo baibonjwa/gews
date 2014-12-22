@@ -1,42 +1,33 @@
-﻿// ******************************************************************
-// 概  述：井筒实体
-// 作  者：伍鑫
-// 创建日期：2014/03/06
-// 版本号：V1.0
-// 版本信息：
-// V1.0 新建
-// ******************************************************************
+﻿using Castle.ActiveRecord;
 
 namespace LibEntity
 {
-    public class Pitshaft
+    public class Pitshaft : ActiveRecordBase<Pitshaft>
     {
-        /** 井筒编号 **/
-
         /// <summary>
         ///     井筒编号
         /// </summary>
+        [PrimaryKey(PrimaryKeyType.Identity, "PITSHAFT_ID")]
         public int PitshaftId { get; set; }
-
-        /** 井筒名称 **/
 
         /// <summary>
         ///     井筒名称
         /// </summary>
+        [Property("PITSHAFT_NAME")]
         public string PitshaftName { get; set; }
-
-        /** 井筒类型 **/
 
         /// <summary>
         ///     井筒类型
         /// </summary>
-        public int PitshaftTypeId { get; set; }
+        [BelongsTo("PITSHAFT_TYPE_ID")]
+        public PitshaftType PitshaftType { get; set; }
 
         /** 井口标高 **/
 
         /// <summary>
         ///     井口标高
         /// </summary>
+        [Property("WELLHEAD_ELEVATION")]
         public double WellheadElevation { get; set; }
 
         /** 井底标高 **/
@@ -44,6 +35,7 @@ namespace LibEntity
         /// <summary>
         ///     井底标高
         /// </summary>
+        [Property("WELLBOTTOM_ELEVATION")]
         public double WellbottomElevation { get; set; }
 
         /** 井筒坐标X **/
@@ -51,6 +43,7 @@ namespace LibEntity
         /// <summary>
         ///     井筒坐标X
         /// </summary>
+        [Property("PITSHAFT_COORDINATE_X")]
         public double PitshaftCoordinateX { get; set; }
 
         /** 井筒坐标Y **/
@@ -58,6 +51,7 @@ namespace LibEntity
         /// <summary>
         ///     井筒坐标Y
         /// </summary>
+        [Property("PITSHAFT_COORDINATE_Y")]
         public double PitshaftCoordinateY { get; set; }
 
         /** 图形坐标X **/
@@ -65,6 +59,7 @@ namespace LibEntity
         /// <summary>
         ///     图形坐标X
         /// </summary>
+        [Property("FIGURE_COORDINATE_X")]
         public double FigureCoordinateX { get; set; }
 
         /** 图形坐标Y **/
@@ -72,6 +67,7 @@ namespace LibEntity
         /// <summary>
         ///     图形坐标Y
         /// </summary>
+        [Property("FIGURE_COORDINATE_Y")]
         public double FigureCoordinateY { get; set; }
 
         /** 图形坐标Z **/
@@ -79,6 +75,7 @@ namespace LibEntity
         /// <summary>
         ///     图形坐标ZZ
         /// </summary>
+        [Property("FIGURE_COORDINATE_Z")]
         public double FigureCoordinateZ { get; set; }
 
         /** BID **/
@@ -86,6 +83,7 @@ namespace LibEntity
         /// <summary>
         ///     BID
         /// </summary>
+        [Property("BID")]
         public string BindingId { get; set; }
     }
 }

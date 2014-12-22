@@ -238,7 +238,7 @@ namespace LibPanels
                 if (fpGasData.Sheets[0].Cells[rowDetailStartIndex + i, 0].Text == "True")
                 {
                     te.TunnelId = Convert.ToInt32(dsAll.Tables[0].Rows[i][UsualForecastDbConstNames.TUNNEL_ID]);
-                    //te = TunnelInfoBLL.selectTunnelInfoByTunnelID(te.TunnelID);
+                    //te = TunnelInfoBLL.selectTunnelInfoByTunnelID(te.Tunnel);
 
                     ufEntity.Id = Convert.ToInt32(dsAll.Tables[0].Rows[i][UsualForecastDbConstNames.ID]);
                     ufEntity.Tunnel.TunnelId = te.TunnelId;

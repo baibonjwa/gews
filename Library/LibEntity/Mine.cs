@@ -10,7 +10,7 @@ using Castle.ActiveRecord;
 namespace LibEntity
 {
     [ActiveRecord("T_MINE_INFO")]
-    public class Mine : ActiveRecordBase
+    public class Mine : ActiveRecordBase<Mine>
     {
         /// <summary>
         ///     矿井编号

@@ -8,33 +8,38 @@
 // ******************************************************************
 
 using System;
+using Castle.ActiveRecord;
 
 namespace LibEntity
 {
-    public class K1Value
+    [ActiveRecord("T_VALUE_K1")]
+    public class K1Value : ActiveRecordBase<K1Value>
     {
         //主键ID
 
-        private DateTime time;
-        private DateTime typeInTime;
+        private DateTime _time;
+        private DateTime _typeInTime;
 
         /// <summary>
         ///     主键ID
         /// </summary>
-        public int ID { get; set; }
+        [PrimaryKey(PrimaryKeyType.Identity)]
+        public int Id { get; set; }
 
         //K1值分组ID
 
         /// <summary>
         ///     K1值分组ID
         /// </summary>
-        public int K1ValueID { get; set; }
+        [Property("VALUE_K1_ID")]
+        public int K1ValueId { get; set; }
 
         //坐标X
 
         /// <summary>
         ///     坐标X
         /// </summary>
+        [Property("COORDINATE_X")]
         public double CoordinateX { get; set; }
 
         //坐标Y
@@ -42,6 +47,7 @@ namespace LibEntity
         /// <summary>
         ///     坐标Y
         /// </summary>
+        [Property("COORDINATE_Y")]
         public double CoordinateY { get; set; }
 
         //坐标Z
@@ -49,6 +55,7 @@ namespace LibEntity
         /// <summary>
         ///     坐标Z
         /// </summary>
+        [Property("COORDINATE_Z")]
         public double CoordinateZ { get; set; }
 
         //干煤K1值
@@ -56,6 +63,7 @@ namespace LibEntity
         /// <summary>
         ///     K1值
         /// </summary>
+        [Property("VALUE_K1_DRY")]
         public double ValueK1Dry { get; set; }
 
         //湿煤K1值
@@ -63,27 +71,32 @@ namespace LibEntity
         /// <summary>
         ///     湿煤K1值
         /// </summary>
+        [Property("VALUE_K1_WET")]
         public double ValueK1Wet { get; set; }
 
         /// <summary>
         ///     Sv值
         /// </summary>
+        [Property("VALUE_SV")]
         public double Sv { get; set; }
 
         /// <summary>
         ///     Sg值
         /// </summary>
+        [Property("VALUE_SG")]
         public double Sg { get; set; }
 
         /// <summary>
         ///     Q值
         /// </summary>
+        [Property("VALUE_Q")]
         public double Q { get; set; }
 
 
         /// <summary>
         ///     孔深
         /// </summary>
+        [Property("BOREHOLE_DEEP")]
         public double BoreholeDeep { get; set; }
 
         //记录时间
@@ -91,10 +104,11 @@ namespace LibEntity
         /// <summary>
         ///     记录时间
         /// </summary>
+        [Property("TIME")]
         public DateTime Time
         {
-            get { return time; }
-            set { time = value; }
+            get { return _time; }
+            set { _time = value; }
         }
 
         //录入时间
@@ -102,10 +116,11 @@ namespace LibEntity
         /// <summary>
         ///     录入时间
         /// </summary>
+        [Property("TYPE_IN_TIME")]
         public DateTime TypeInTime
         {
-            get { return typeInTime; }
-            set { typeInTime = value; }
+            get { return _typeInTime; }
+            set { _typeInTime = value; }
         }
 
         //绑定巷道ID
@@ -113,6 +128,7 @@ namespace LibEntity
         /// <summary>
         ///     绑定巷道ID
         /// </summary>
-        public int TunnelID { get; set; }
+        [BelongsTo("TUNNEL_ID")]
+        public Tunnel Tunnel { get; set; }
     }
 }

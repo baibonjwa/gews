@@ -323,7 +323,7 @@ namespace _4.OutburstPrevention
                         tmpDt = DateTime.Now;
                     }
                     //巷道实体
-                    //tunnelEntity = TunnelInfoBLL.selectTunnelInfoByTunnelID(sValueEntity.TunnelID);
+                    //tunnelEntity = TunnelInfoBLL.selectTunnelInfoByTunnelID(sValueEntity.Tunnel);
                     arr[0] = tunnelEntity.WorkingFace.MiningArea.Horizontal.Mine.MineId;
                     arr[1] = tunnelEntity.WorkingFace.MiningArea.Horizontal.HorizontalId;
                     arr[2] = tunnelEntity.WorkingFace.MiningArea.MiningAreaId;

@@ -171,7 +171,7 @@ namespace _3.GeologyMeasure
             listBox_Browse.ValueMember = "Id";
             //其它巷道
             //string[] sArray = new string[10];
-            //sArray = SplitString(tunnelHCEntity.TunnelID);
+            //sArray = SplitString(tunnelHCEntity.Tunnel);
             //foreach (string i in sArray)
             //{
             //    if ((i != "") && (i != null))
@@ -534,11 +534,11 @@ namespace _3.GeologyMeasure
                             GeoStruct tmp = geoinfos[i];
 
                             var geologyspaceEntity = new GeologySpace();
-                            geologyspaceEntity.WorkSpaceID = workingFace.WorkingFaceID;
+                            geologyspaceEntity.WorkingFace = workingFace;
                             geologyspaceEntity.TectonicType = Convert.ToInt32(key);
-                            geologyspaceEntity.TectonicID = tmp.geoinfos[GIS_Const.FIELD_BID];
+                            geologyspaceEntity.TectonicId = tmp.geoinfos[GIS_Const.FIELD_BID];
                             geologyspaceEntity.Distance = tmp.dist;
-                            geologyspaceEntity.onDateTime = DateTime.Now.ToShortDateString();
+                            geologyspaceEntity.OnDateTime = DateTime.Now.ToShortDateString();
 
                             GeologySpaceBLL.insertGeologySpaceEntityInfo(geologyspaceEntity);
                         }
@@ -591,11 +591,11 @@ namespace _3.GeologyMeasure
                             GeoStruct tmp = geoinfos[i];
 
                             var geologyspaceEntity = new GeologySpace();
-                            geologyspaceEntity.WorkSpaceID = workingFace.WorkingFaceID;
+                            geologyspaceEntity.WorkingFace = workingFace;
                             geologyspaceEntity.TectonicType = Convert.ToInt32(key);
-                            geologyspaceEntity.TectonicID = tmp.geoinfos[GIS_Const.FIELD_BID];
+                            geologyspaceEntity.TectonicId = tmp.geoinfos[GIS_Const.FIELD_BID];
                             geologyspaceEntity.Distance = tmp.dist;
-                            geologyspaceEntity.onDateTime = DateTime.Now.ToShortDateString();
+                            geologyspaceEntity.OnDateTime = DateTime.Now.ToShortDateString();
 
                             GeologySpaceBLL.insertGeologySpaceEntityInfo(geologyspaceEntity);
                         }

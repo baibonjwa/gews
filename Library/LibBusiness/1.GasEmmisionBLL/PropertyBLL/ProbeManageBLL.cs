@@ -77,11 +77,11 @@ namespace LibBusiness
             sqlStr.Append(" VALUES (");
             sqlStr.Append("  '" + probeEntity.ProbeId + "'");
             sqlStr.Append(", '" + probeEntity.ProbeName + "'");
-            sqlStr.Append(", '" + probeEntity.ProbeTypeId + "'");
+            sqlStr.Append(", '" + probeEntity.ProbeType + "'");
             // 2014/5/29 add by wuxin Start
             sqlStr.Append(", '" + probeEntity.ProbeTypeDisplayName + "'");
             // 2014/5/29 add by wuxin End
-            sqlStr.Append(", '" + probeEntity.TunnelId + "'");
+            sqlStr.Append(", '" + probeEntity.Tunnel + "'");
             sqlStr.Append(", '" + probeEntity.ProbeLocationX + "'");
             sqlStr.Append(", '" + probeEntity.ProbeLocationY + "'");
             sqlStr.Append(", '" + probeEntity.ProbeLocationZ + "'");
@@ -270,11 +270,11 @@ namespace LibBusiness
             sqlStr.Append("UPDATE " + ProbeManageDbConstNames.TABLE_NAME);
             sqlStr.Append(" SET");
             sqlStr.Append("  " + ProbeManageDbConstNames.PROBE_NAME + " = '" + probeEntity.ProbeName + "'");
-            sqlStr.Append(", " + ProbeManageDbConstNames.PROBE_TYPE_ID + " = '" + probeEntity.ProbeTypeId + "'");
+            sqlStr.Append(", " + ProbeManageDbConstNames.PROBE_TYPE_ID + " = '" + probeEntity.ProbeType + "'");
             // 2014/5/29 add by wuxin Start
             sqlStr.Append(", " + ProbeManageDbConstNames.PROBE_TYPE_DISPLAY_NAME + " = '" + probeEntity.ProbeTypeDisplayName + "'");
             // 2014/5/29 add by wuxin End
-            sqlStr.Append(", " + ProbeManageDbConstNames.TUNNEL_ID + " = '" + probeEntity.TunnelId + "'");
+            sqlStr.Append(", " + ProbeManageDbConstNames.TUNNEL_ID + " = '" + probeEntity.Tunnel + "'");
             sqlStr.Append(", " + ProbeManageDbConstNames.PROBE_LOCATION_X + " = '" + probeEntity.ProbeLocationX + "'");
             sqlStr.Append(", " + ProbeManageDbConstNames.PROBE_LOCATION_Y + " = '" + probeEntity.ProbeLocationY + "'");
             sqlStr.Append(", " + ProbeManageDbConstNames.PROBE_LOCATION_Z + " = '" + probeEntity.ProbeLocationZ + "'");

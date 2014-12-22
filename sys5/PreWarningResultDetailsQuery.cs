@@ -587,7 +587,7 @@ namespace _5.WarningManagement
         //{
         //    HttpPost postMethod = new HttpPost(new Uri("http://" + serverIp + ":" + restPort + "/rest/warnings/history"));
         //    List<NameValuePair> nameValuePairList = new List<NameValuePair>();
-        //    nameValuePairList.Add(new NameValuePair("TunnelId", sTunnelId));
+        //    nameValuePairList.Add(new NameValuePair("Tunnel", sTunnelId));
         //    nameValuePairList.Add(new NameValuePair("Date", sDate));
         //    nameValuePairList.Add(new NameValuePair("Shift", sShift));        //班次
         //    nameValuePairList.Add(new NameValuePair("WarningResult", sWarningResult)); // 预警结果
@@ -660,7 +660,7 @@ namespace _5.WarningManagement
         {
 
             //PojoWarningContainer container = new PojoWarningContainer();
-            //container.TunnelId = _inInfo.TunnelID;
+            //container.Tunnel = _inInfo.Tunnel;
 
             //Dictionary<string, PojoWarning> warnings = new Dictionary<string, PojoWarning>();
 
@@ -721,7 +721,7 @@ namespace _5.WarningManagement
             doSubmit("WarningLift", "请填写每一条的预警解除措施以及措施评价", "预警解除");
 
             //PojoWarningContainer container = new PojoWarningContainer();
-            //container.TunnelId = _inInfo.TunnelID;
+            //container.Tunnel = _inInfo.Tunnel;
 
 
             //Dictionary<string, PojoWarning> warnings = new Dictionary<string, PojoWarning>();

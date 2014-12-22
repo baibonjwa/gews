@@ -322,7 +322,7 @@ namespace _1.GasEmission
             int iProbeTypeId = 0;
             if (int.TryParse(Convert.ToString(this.cboProbeType.SelectedValue), out iProbeTypeId))
             {
-                probeEntity.ProbeTypeId = iProbeTypeId;
+                probeEntity.ProbeType.ProbeTypeId = iProbeTypeId;
             }
 
             // 2014/5/29 add by wuxin Start
@@ -346,7 +346,7 @@ namespace _1.GasEmission
             }
 
             // 巷道编号
-            probeEntity.TunnelId = this.selectTunnelSimple1.ITunnelId;
+            probeEntity.Tunnel.TunnelId = this.selectTunnelSimple1.ITunnelId;
 
             // 探头位置坐标X
             double dProbeLocationX = 0;
@@ -396,16 +396,16 @@ namespace _1.GasEmission
                 //通知服务器探头数据已更新
                 // Added by jhou, 2014/3/24
                 var workingfaceEnt =
-                    BasicInfoManager.getInstance().getTunnelByID(probeEntity.TunnelId).WorkingFace;
+                    BasicInfoManager.getInstance().getTunnelByID(probeEntity.Tunnel.TunnelId).WorkingFace;
 
                 if (oldTunnelId != 0)
                 {
-                    UpdateWarningDataMsg msgUpdate = new UpdateWarningDataMsg(workingfaceEnt.WorkingFaceID, probeEntity.TunnelId,
+                    UpdateWarningDataMsg msgUpdate = new UpdateWarningDataMsg(workingfaceEnt.WorkingFaceID, probeEntity.Tunnel.TunnelId,
                         ProbeManageDbConstNames.TABLE_NAME, opType, DateTime.Now);
                     this.MainForm.SendMsg2Server(msgUpdate);
                 }
 
-                UpdateWarningDataMsg msg = new UpdateWarningDataMsg(workingfaceEnt.WorkingFaceID, probeEntity.TunnelId,
+                UpdateWarningDataMsg msg = new UpdateWarningDataMsg(workingfaceEnt.WorkingFaceID, probeEntity.Tunnel.TunnelId,
                     ProbeManageDbConstNames.TABLE_NAME, opType, DateTime.Now);
                 this.MainForm.SendMsg2Server(msg);
             }
@@ -508,7 +508,7 @@ namespace _1.GasEmission
                     //    intArr[1] = tunnelEntity.WorkingFace.MiningArea.Horizontal.HorizontalId; //tunnelEntity.HorizontalID;
                     //    intArr[2] = tunnelEntity.WorkingFace.MiningArea.MiningAreaId;
                     //    intArr[3] = tunnelEntity.WorkingFace.WorkingFaceID; //tunnelEntity.WorkingFaceID;
-                    //    intArr[4] = tunnelEntity.TunnelID;
+                    //    intArr[4] = tunnelEntity.Tunnel;
                     //    _intArr = intArr;
                     //}
                 }

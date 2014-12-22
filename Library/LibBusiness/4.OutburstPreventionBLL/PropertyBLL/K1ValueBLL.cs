@@ -63,8 +63,8 @@ namespace LibBusiness
             {
                 try
                 {
-                    k1ValueEntity.ID = Convert.ToInt32(ds.Tables[0].Rows[0][K1ValueDbConstNames.ID]);
-                    k1ValueEntity.K1ValueID = Convert.ToInt32(ds.Tables[0].Rows[0][K1ValueDbConstNames.VALUE_K1_ID]);
+                    k1ValueEntity.Id = Convert.ToInt32(ds.Tables[0].Rows[0][K1ValueDbConstNames.ID]);
+                    k1ValueEntity.K1ValueId = Convert.ToInt32(ds.Tables[0].Rows[0][K1ValueDbConstNames.VALUE_K1_ID]);
                     k1ValueEntity.CoordinateX = Convert.ToDouble(ds.Tables[0].Rows[0][K1ValueDbConstNames.COORDINATE_X]);
                     k1ValueEntity.CoordinateY = Convert.ToDouble(ds.Tables[0].Rows[0][K1ValueDbConstNames.COORDINATE_Y]);
                     k1ValueEntity.CoordinateZ = Convert.ToDouble(ds.Tables[0].Rows[0][K1ValueDbConstNames.COORDINATE_Z]);
@@ -76,7 +76,7 @@ namespace LibBusiness
                     k1ValueEntity.BoreholeDeep = Convert.ToDouble(ds.Tables[0].Rows[0][K1ValueDbConstNames.BOREHOLE_DEEP]);
                     k1ValueEntity.Time = Convert.ToDateTime(ds.Tables[0].Rows[0][K1ValueDbConstNames.TIME].ToString());
                     k1ValueEntity.TypeInTime = Convert.ToDateTime(ds.Tables[0].Rows[0][K1ValueDbConstNames.TYPE_IN_TIME].ToString());
-                    k1ValueEntity.TunnelID = Convert.ToInt32(ds.Tables[0].Rows[0][K1ValueDbConstNames.TUNNEL_ID]);
+                    k1ValueEntity.Tunnel.TunnelId = Convert.ToInt32(ds.Tables[0].Rows[0][K1ValueDbConstNames.TUNNEL_ID]);
 
                 }
                 catch
@@ -109,8 +109,8 @@ namespace LibBusiness
                     try
                     {
                         K1Value k1ValueEntity = new K1Value();
-                        k1ValueEntity.ID = Convert.ToInt32(ds.Tables[0].Rows[i][K1ValueDbConstNames.ID]);
-                        k1ValueEntity.K1ValueID = Convert.ToInt32(ds.Tables[0].Rows[i][K1ValueDbConstNames.VALUE_K1_ID]);
+                        k1ValueEntity.Id = Convert.ToInt32(ds.Tables[0].Rows[i][K1ValueDbConstNames.ID]);
+                        k1ValueEntity.K1ValueId = Convert.ToInt32(ds.Tables[0].Rows[i][K1ValueDbConstNames.VALUE_K1_ID]);
                         k1ValueEntity.CoordinateX = Convert.ToDouble(ds.Tables[0].Rows[i][K1ValueDbConstNames.COORDINATE_X]);
                         k1ValueEntity.CoordinateY = Convert.ToDouble(ds.Tables[0].Rows[i][K1ValueDbConstNames.COORDINATE_Y]);
                         k1ValueEntity.CoordinateZ = Convert.ToDouble(ds.Tables[0].Rows[i][K1ValueDbConstNames.COORDINATE_Z]);
@@ -122,7 +122,7 @@ namespace LibBusiness
                         k1ValueEntity.BoreholeDeep = Convert.ToDouble(ds.Tables[0].Rows[i][K1ValueDbConstNames.BOREHOLE_DEEP]);
                         k1ValueEntity.Time = Convert.ToDateTime(ds.Tables[0].Rows[i][K1ValueDbConstNames.TIME].ToString());
                         k1ValueEntity.TypeInTime = Convert.ToDateTime(ds.Tables[0].Rows[i][K1ValueDbConstNames.TYPE_IN_TIME].ToString());
-                        k1ValueEntity.TunnelID = Convert.ToInt32(ds.Tables[0].Rows[i][K1ValueDbConstNames.TUNNEL_ID]);
+                        k1ValueEntity.Tunnel.TunnelId = Convert.ToInt32(ds.Tables[0].Rows[i][K1ValueDbConstNames.TUNNEL_ID]);
                         k1Entity[i] = k1ValueEntity;
 
                     }
@@ -155,8 +155,8 @@ namespace LibBusiness
                 try
                 {
 
-                    k1ValueEntity.ID = Convert.ToInt32(ds.Tables[0].Rows[0][K1ValueDbConstNames.ID]);
-                    k1ValueEntity.K1ValueID = Convert.ToInt32(ds.Tables[0].Rows[0][K1ValueDbConstNames.VALUE_K1_ID]);
+                    k1ValueEntity.Id = Convert.ToInt32(ds.Tables[0].Rows[0][K1ValueDbConstNames.ID]);
+                    k1ValueEntity.K1ValueId = Convert.ToInt32(ds.Tables[0].Rows[0][K1ValueDbConstNames.VALUE_K1_ID]);
                     k1ValueEntity.CoordinateX = Convert.ToDouble(ds.Tables[0].Rows[0][K1ValueDbConstNames.COORDINATE_X]);
                     k1ValueEntity.CoordinateY = Convert.ToDouble(ds.Tables[0].Rows[0][K1ValueDbConstNames.COORDINATE_Y]);
                     k1ValueEntity.CoordinateZ = Convert.ToDouble(ds.Tables[0].Rows[0][K1ValueDbConstNames.COORDINATE_Z]);
@@ -165,7 +165,7 @@ namespace LibBusiness
                     k1ValueEntity.BoreholeDeep = Convert.ToDouble(ds.Tables[0].Rows[0][K1ValueDbConstNames.BOREHOLE_DEEP]);
                     k1ValueEntity.Time = Convert.ToDateTime(ds.Tables[0].Rows[0][K1ValueDbConstNames.TIME].ToString());
                     k1ValueEntity.TypeInTime = Convert.ToDateTime(ds.Tables[0].Rows[0][K1ValueDbConstNames.TYPE_IN_TIME].ToString());
-                    k1ValueEntity.TunnelID = Convert.ToInt32(ds.Tables[0].Rows[0][K1ValueDbConstNames.TUNNEL_ID]);
+                    k1ValueEntity.Tunnel.TunnelId = Convert.ToInt32(ds.Tables[0].Rows[0][K1ValueDbConstNames.TUNNEL_ID]);
 
                 }
                 catch
@@ -397,7 +397,7 @@ namespace LibBusiness
             sb.Append(K1ValueDbConstNames.TIME + ",");
             sb.Append(K1ValueDbConstNames.TYPE_IN_TIME + ",");
             sb.Append(K1ValueDbConstNames.TUNNEL_ID + ") VALUES (");
-            sb.Append(k1ValueEntity.K1ValueID + ",");
+            sb.Append(k1ValueEntity.K1ValueId + ",");
             sb.Append(k1ValueEntity.CoordinateX + ",");
             sb.Append(k1ValueEntity.CoordinateY + ",");
             sb.Append(k1ValueEntity.CoordinateZ + ",");
@@ -409,7 +409,7 @@ namespace LibBusiness
             sb.Append(k1ValueEntity.BoreholeDeep + ",'");
             sb.Append(k1ValueEntity.Time + "','");
             sb.Append(k1ValueEntity.TypeInTime + "',");
-            sb.Append(k1ValueEntity.TunnelID + ")");
+            sb.Append(k1ValueEntity.Tunnel + ")");
 
             bool bResult = db.OperateDB(sb.ToString());
             return bResult;
@@ -436,8 +436,8 @@ namespace LibBusiness
             sb.Append(K1ValueDbConstNames.BOREHOLE_DEEP + " = " + k1ValueEntity.BoreholeDeep + ",");
             sb.Append(K1ValueDbConstNames.TIME + " = '" + k1ValueEntity.Time + "',");
             sb.Append(K1ValueDbConstNames.TYPE_IN_TIME + " = '" + k1ValueEntity.TypeInTime + "',");
-            sb.Append(K1ValueDbConstNames.TUNNEL_ID + " = " + k1ValueEntity.TunnelID + " WHERE ");
-            sb.Append(K1ValueDbConstNames.ID + " = " + k1ValueEntity.ID);
+            sb.Append(K1ValueDbConstNames.TUNNEL_ID + " = " + k1ValueEntity.Tunnel + " WHERE ");
+            sb.Append(K1ValueDbConstNames.ID + " = " + k1ValueEntity.Id);
 
             bool bResult = db.OperateDB(sb.ToString());
             return bResult;
@@ -456,11 +456,11 @@ namespace LibBusiness
             string sql = "";
             if (deleteType == 0)
             {
-                sql = "DELETE FROM " + K1ValueDbConstNames.TABLE_NAME + " WHERE " + K1ValueDbConstNames.ID + " = " + k1ValueEntity.ID;
+                sql = "DELETE FROM " + K1ValueDbConstNames.TABLE_NAME + " WHERE " + K1ValueDbConstNames.ID + " = " + k1ValueEntity.Id;
             }
             if (deleteType == 1)
             {
-                sql = "DELETE FROM " + K1ValueDbConstNames.TABLE_NAME + " WHERE " + K1ValueDbConstNames.VALUE_K1_ID + " = " + k1ValueEntity.K1ValueID;
+                sql = "DELETE FROM " + K1ValueDbConstNames.TABLE_NAME + " WHERE " + K1ValueDbConstNames.VALUE_K1_ID + " = " + k1ValueEntity.K1ValueId;
             }
             bool bResult = db.OperateDB(sql);
             return bResult;

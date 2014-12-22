@@ -118,7 +118,7 @@ namespace _4.OutburstPrevention
             setK1ValueEntity();
             //记录当前选定单元格
             _tmpRowIndex = fpK1Value.ActiveSheet.ActiveRowIndex;
-            K1ValueEntering k1value = new K1ValueEntering(arr, k1ValueEntity.ID, this.MainForm);
+            K1ValueEntering k1value = new K1ValueEntering(arr, k1ValueEntity.Id, this.MainForm);
             //添加成功
             if (DialogResult.OK == k1value.ShowDialog())
             {
@@ -160,17 +160,17 @@ namespace _4.OutburstPrevention
                     //矿井编号
                     if (int.TryParse(ds.Tables[0].Rows[i][K1ValueDbConstNames.TUNNEL_ID].ToString(), out tmpInt))
                     {
-                        k1ValueEntity.TunnelID = tmpInt;
+                        k1ValueEntity.Tunnel.TunnelId = tmpInt;
                         tmpInt = 0;
                     }
                     //当干煤最大与湿煤最大为一条数据时，只做一次删除操作
                     if (int.TryParse(ds.Tables[0].Rows[i][K1ValueDbConstNames.ID].ToString(), out tmpInt))
                     {
-                        k1ValueEntity.ID = tmpInt;
+                        k1ValueEntity.Id = tmpInt;
                         //主键对应数据是否已被删除
                         for (int j = 0; j < tmpID.Length; j++)
                         {
-                            if (k1ValueEntity.ID == tmpID[j])
+                            if (k1ValueEntity.Id == tmpID[j])
                             {
                                 deletedID = true;
                                 break;
@@ -187,7 +187,7 @@ namespace _4.OutburstPrevention
 
                     if (int.TryParse(ds.Tables[0].Rows[i][K1ValueDbConstNames.VALUE_K1_ID].ToString(), out tmpInt))
                     {
-                        k1ValueEntity.K1ValueID = tmpInt;
+                        k1ValueEntity.K1ValueId = tmpInt;
                         tmpInt = 0;
                     }
                     //删除
@@ -304,19 +304,19 @@ namespace _4.OutburstPrevention
                     //矿井编号
                     if (int.TryParse(ds.Tables[0].Rows[i][K1ValueDbConstNames.TUNNEL_ID].ToString(), out tmpInt))
                     {
-                        k1ValueEntity.TunnelID = tmpInt;
+                        k1ValueEntity.Tunnel.TunnelId = tmpInt;
                         tmpInt = 0;
                     }
                     //ID
                     if (int.TryParse(ds.Tables[0].Rows[i][K1ValueDbConstNames.ID].ToString(), out tmpInt))
                     {
-                        k1ValueEntity.ID = tmpInt;
+                        k1ValueEntity.Id = tmpInt;
                         tmpInt = 0;
                     }
                     //K1分组ID
                     if (int.TryParse(ds.Tables[0].Rows[i][K1ValueDbConstNames.VALUE_K1_ID].ToString(), out tmpInt))
                     {
-                        k1ValueEntity.K1ValueID = tmpInt;
+                        k1ValueEntity.K1ValueId = tmpInt;
                         tmpInt = 0;
                     }
                     //坐标X
@@ -368,7 +368,7 @@ namespace _4.OutburstPrevention
                         tmpDt = DateTime.Now;
                     }
                     //巷道实体
-                    //tunnelEntity = TunnelInfoBLL.selectTunnelInfoByTunnelID(k1ValueEntity.TunnelID);
+                    //tunnelEntity = TunnelInfoBLL.selectTunnelInfoByTunnelID(k1ValueEntity.Tunnel);
                     arr[0] = tunnelEntity.WorkingFace.MiningArea.Horizontal.Mine.MineId;
                     arr[1] = tunnelEntity.WorkingFace.MiningArea.Horizontal.HorizontalId;
                     arr[2] = tunnelEntity.WorkingFace.MiningArea.MiningAreaId;

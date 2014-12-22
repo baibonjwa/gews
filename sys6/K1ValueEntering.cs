@@ -139,7 +139,7 @@ namespace UnderTerminal
             for (int i = 0; i < rowCount; i++)
             {
 
-                _k1ValueEntity.K1ValueID = groupCount + 1;
+                _k1ValueEntity.K1ValueId = groupCount + 1;
 
                 if (!String.IsNullOrEmpty(tbCoordinateX.Text))
                     _k1ValueEntity.CoordinateX = Convert.ToDouble(tbCoordinateX.Text);
@@ -213,7 +213,7 @@ namespace UnderTerminal
                 //录入时间
                 _k1ValueEntity.TypeInTime = dgrdvK1Value[7, i].Value != null ? Convert.ToDateTime(dgrdvK1Value[7, i].Value) : DateTime.Now;
                 //巷道ID
-                _k1ValueEntity.TunnelID = tunnelEntity.TunnelId;
+                _k1ValueEntity.Tunnel.TunnelId = tunnelEntity.TunnelId;
                 //添加
                 bResult = K1ValueBLL.insertValueK1(_k1ValueEntity);
                 if (bResult)

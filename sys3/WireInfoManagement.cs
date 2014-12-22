@@ -455,7 +455,7 @@ namespace _3.GeologyMeasure
                             //DeleteWirePtByBID(wirePointInfoEntity);
                             DelHdByHdId(tunnelEntity.TunnelId.ToString());
 
-                            //wireInfoEntity.TunnelID
+                            //wireInfoEntity.Tunnel
                         }
                     }
                 }

@@ -106,7 +106,6 @@
     <Compile Include="DayReport.cs" />
     <Compile Include="DayReportHC.cs" />
     <Compile Include="GeologySpace.cs" />
-    <Compile Include="JiaoZheng.cs" />
     <Compile Include="StopLine.cs" />
     <Compile Include="WorkingTime.cs" />
     <Compile Include="Borehole.cs" />

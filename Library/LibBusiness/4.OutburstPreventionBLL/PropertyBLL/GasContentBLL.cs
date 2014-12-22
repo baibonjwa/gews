@@ -45,8 +45,8 @@ namespace LibBusiness
             sqlStr.Append(", '" + gasContentEntity.Depth + "'");
             sqlStr.Append(", '" + gasContentEntity.GasContentValue + "'");
             sqlStr.Append(", '" + gasContentEntity.MeasureDateTime.ToString("yyyy-MM-dd hh:mm:ss") + "'");
-            sqlStr.Append(", '" + gasContentEntity.TunnelID + "'");
-            sqlStr.Append(", '" + gasContentEntity.CoalSeamsId + "'");
+            sqlStr.Append(", '" + gasContentEntity.Tunnel + "'");
+            sqlStr.Append(", '" + gasContentEntity.CoalSeams + "'");
             sqlStr.Append(", '" + gasContentEntity.BindingId + "'");
             sqlStr.Append(" )");
 
@@ -119,8 +119,8 @@ namespace LibBusiness
             sqlStr.Append(", " + GasContentDbConstNames.DEPTH + " = '" + gasContentEntity.Depth + "'");
             sqlStr.Append(", " + GasContentDbConstNames.GAS_CONTENT_VALUE + " = '" + gasContentEntity.GasContentValue + "'");
             sqlStr.Append(", " + GasContentDbConstNames.MEASURE_DATE_TIME + " = '" + gasContentEntity.MeasureDateTime + "'");
-            sqlStr.Append(", " + GasContentDbConstNames.TUNNEL_ID + " = '" + gasContentEntity.TunnelID + "'");
-            sqlStr.Append(", " + GasContentDbConstNames.COAL_SEAMS_ID + " = '" + gasContentEntity.CoalSeamsId + "'");
+            sqlStr.Append(", " + GasContentDbConstNames.TUNNEL_ID + " = '" + gasContentEntity.Tunnel + "'");
+            sqlStr.Append(", " + GasContentDbConstNames.COAL_SEAMS_ID + " = '" + gasContentEntity.CoalSeams + "'");
             sqlStr.Append(" WHERE " + GasContentDbConstNames.ID + " = '" + gasContentEntity.PrimaryKey + "'");
 
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);

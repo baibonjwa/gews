@@ -118,7 +118,7 @@ namespace GIS.SpecialGraphic
             try
             {
                 IQueryFilter queryFilter = new QueryFilterClass();
-                queryFilter.WhereClause = string.Format("TunnelID='{0}'", bindingID);
+                queryFilter.WhereClause = string.Format("Tunnel='{0}'", bindingID);
                 //Get table and row
                 ITable esriTable = (ITable)featureLayer.FeatureClass;
                 esriTable.DeleteSearchedRows(queryFilter);

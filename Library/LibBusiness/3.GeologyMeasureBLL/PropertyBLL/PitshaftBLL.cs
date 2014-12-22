@@ -159,7 +159,7 @@ namespace LibBusiness
             sqlStr.Append(" )");
             sqlStr.Append(" VALUES (");
             sqlStr.Append("  '" + pitshaftEntity.PitshaftName + "'");
-            sqlStr.Append(", '" + pitshaftEntity.PitshaftTypeId + "'");
+            sqlStr.Append(", '" + pitshaftEntity.PitshaftType + "'");
             sqlStr.Append(", '" + pitshaftEntity.WellheadElevation + "'");
             sqlStr.Append(", '" + pitshaftEntity.WellbottomElevation + "'");
             sqlStr.Append(", '" + pitshaftEntity.PitshaftCoordinateX + "'");
@@ -186,7 +186,7 @@ namespace LibBusiness
             sqlStr.Append("UPDATE " + PitshaftDbConstNames.TABLE_NAME);
             sqlStr.Append(" SET");
             sqlStr.Append("  " + PitshaftDbConstNames.PITSHAFT_NAME + " = '" + pitshaftEntity.PitshaftName + "'");
-            sqlStr.Append(", " + PitshaftDbConstNames.PITSHAFT_TYPE_ID + " = '" + pitshaftEntity.PitshaftTypeId + "'");
+            sqlStr.Append(", " + PitshaftDbConstNames.PITSHAFT_TYPE_ID + " = '" + pitshaftEntity.PitshaftType + "'");
             sqlStr.Append(", " + PitshaftDbConstNames.WELLHEAD_ELEVATION + " = '" + pitshaftEntity.WellheadElevation + "'");
             sqlStr.Append(", " + PitshaftDbConstNames.WELLBOTTOM_ELEVATION + " = '" + pitshaftEntity.WellbottomElevation + "'");
             sqlStr.Append(", " + PitshaftDbConstNames.PITSHAFT_COORDINATE_X + " = '" + pitshaftEntity.PitshaftCoordinateX + "'");

@@ -200,7 +200,7 @@ namespace _4.OutburstPrevention
             }
             this.DialogResult = DialogResult.OK;
             tunnelEntity.TunnelId = selectTunnelUserControl1.ITunnelId;
-            //tunnelEntity = TunnelInfoBLL.selectTunnelInfoByTunnelID(tunnelEntity.TunnelID);
+            //tunnelEntity = TunnelInfoBLL.selectTunnelInfoByTunnelID(tunnelEntity.Tunnel);
             //添加
             if (this.Text == Const_OP.S_VALUE_ADD)
             {
@@ -696,7 +696,7 @@ namespace _4.OutburstPrevention
             //IGeometry geometry = pt;
             //List<ziduan> list = new List<ziduan>();
             //list.Add(new ziduan("bid", _k1ValueEntity.K1ValueID.ToString()));
-            ////list.Add(new ziduan("mc", gasGushQuantityEntity.CoalSeamsId.ToString()));
+            ////list.Add(new ziduan("mc", gasGushQuantityEntity.CoalSeams.ToString()));
             ////list.Add(new ziduan("addtime", DateTime.Now.ToString()));
 
 

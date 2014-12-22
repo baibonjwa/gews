@@ -313,8 +313,8 @@ namespace _3.GeologyMeasure
                 return;
             }
             DialogResult = DialogResult.OK;
-            //_tunnelEntity.TunnelID = selectTunnelUserControl1.ITunnelId;
-            //_tunnelEntity = TunnelInfoBLL.selectTunnelInfoByTunnelID(_tunnelEntity.TunnelID);
+            //_tunnelEntity.Tunnel = selectTunnelUserControl1.ITunnelId;
+            //_tunnelEntity = TunnelInfoBLL.selectTunnelInfoByTunnelID(_tunnelEntity.Tunnel);
             //验证
             if (!check())
             {
@@ -452,11 +452,11 @@ namespace _3.GeologyMeasure
                         GeoStruct tmp = geoinfos[i];
 
                         GeologySpace geologyspaceEntity = new GeologySpace();
-                        geologyspaceEntity.WorkSpaceID = workingFace.WorkingFaceID;
+                        geologyspaceEntity.WorkingFace =  workingFace;
                         geologyspaceEntity.TectonicType = Convert.ToInt32(key);
-                        geologyspaceEntity.TectonicID = tmp.geoinfos[GIS.GIS_Const.FIELD_BID].ToString();
+                        geologyspaceEntity.TectonicId = tmp.geoinfos[GIS.GIS_Const.FIELD_BID].ToString();
                         geologyspaceEntity.Distance = tmp.dist;
-                        geologyspaceEntity.onDateTime = DateTime.Now.ToShortDateString();
+                        geologyspaceEntity.OnDateTime = DateTime.Now.ToShortDateString();
 
                         GeologySpaceBLL.insertGeologySpaceEntityInfo(geologyspaceEntity);
                     }

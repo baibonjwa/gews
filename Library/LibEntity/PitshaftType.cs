@@ -7,22 +7,22 @@
 // V1.0 新建
 // ******************************************************************
 
+using Castle.ActiveRecord;
+
 namespace LibEntity
 {
-    public class PitshaftType
+    public class PitshaftType : ActiveRecordBase<PitshaftType>
     {
-        /** 井筒类型编号 **/
-
         /// <summary>
         ///     井筒类型编号
         /// </summary>
+        [PrimaryKey(PrimaryKeyType.Identity, "PITSHAFT_TYPE_ID")]
         public int PitshaftTypeId { get; set; }
-
-        /** 井筒类型名称 **/
 
         /// <summary>
         ///     井筒类型名称
         /// </summary>
+        [Property("PITSHAFT_TYPE_NAME")]
         public string PitshaftTypeName { get; set; }
     }
 }

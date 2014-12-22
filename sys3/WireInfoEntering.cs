@@ -282,7 +282,7 @@ namespace _3.GeologyMeasure
                         //DrawTunnel(lstWirePointInfoEnt, sADDorCHANGE);
                         //巷道信息赋值
                         //Dictionary<string, string> flds = new Dictionary<string, string>();
-                        //flds.Add(GIS_Const.FIELD_HDID, tunnelEntity.TunnelID.ToString());
+                        //flds.Add(GIS_Const.FIELD_HDID, tunnelEntity.Tunnel.ToString());
                         //List<Tuple<IFeature, IGeometry, Dictionary<string, string>>> selobjs = Global.commonclss.SearchFeaturesByGeoAndText(Global.centerfdlyr, flds);
 
                         //// 序号
@@ -300,7 +300,7 @@ namespace _3.GeologyMeasure
                         //    hdwid = Convert.ToDouble(dst.Tables[0].Rows[0][LibBusiness.TunnelInfoDbConstNames.TUNNEL_WID]);
                         //}
                         //dics.Clear();
-                        //dics.Add(GIS_Const.FIELD_HDID, tunnelEntity.TunnelID.ToString());
+                        //dics.Add(GIS_Const.FIELD_HDID, tunnelEntity.Tunnel.ToString());
                         //dics.Add(GIS_Const.FIELD_ID, "0");
                         //dics.Add(GIS_Const.FIELD_BS, "1");
                         //dics.Add(GIS.GIS_Const.FIELD_BID, bid);
@@ -629,7 +629,7 @@ namespace _3.GeologyMeasure
         private void setWireInfoEntity()
         {
             wireInfoEntity.TunnelID = selectTunnelUserControl1.ITunnelId; ;
-            //tunnelEntity = TunnelInfoBLL.selectTunnelInfoByTunnelID(wireInfoEntity.TunnelID);
+            //tunnelEntity = TunnelInfoBLL.selectTunnelInfoByTunnelID(wireInfoEntity.Tunnel);
             //导线名称
             wireInfoEntity.WireName = txtWireName.Text;
             //导线级别

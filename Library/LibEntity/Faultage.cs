@@ -11,7 +11,7 @@ using Castle.ActiveRecord;
 
 namespace LibEntity
 {
-    [ActiveRecord("T_DAYREPORT_JJ")]
+    [ActiveRecord("T_FAULTAGE")]
     public class Faultage : ActiveRecordBase<Faultage>
     {
         /** 断层编号 **/

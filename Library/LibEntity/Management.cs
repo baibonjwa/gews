@@ -136,7 +136,7 @@ namespace LibEntity
             DateTime startTime, DateTime endTime)
         {
             Management[] results;
-            var criterion = new List<ICriterion> { Restrictions.Eq("Tunnel.TunnelId", tunnelId) };
+            var criterion = new List<ICriterion> { Restrictions.Eq("Tunnel.Tunnel", tunnelId) };
             if (startTime != DateTime.MinValue && endTime != DateTime.MinValue)
             {
                 criterion.Add(Restrictions.Between("Datetime", startTime, endTime));

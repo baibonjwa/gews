@@ -392,7 +392,7 @@ namespace _5.WarningManagement
         //    //突出预警记录的ID  列号16
         //    cells[rowIdx, COLUMN_INDEX_HIDE_OUTBURST_WARNING_ID].Value = entity.OutBrustWarningResult.ID;
         //    //巷道ID  列号17                                            
-        //    cells[rowIdx, COLUMN_INDEX_HIDE_TUNNEL_ID].Value = entity.TunnelId;
+        //    cells[rowIdx, COLUMN_INDEX_HIDE_TUNNEL_ID].Value = entity.Tunnel;
         //    //日期  列号18                                              
         //    cells[rowIdx, COLUMN_INDEX_HIDE_DATETIME].Value = entity.DateTime;
         //    //班次  列号19                                              

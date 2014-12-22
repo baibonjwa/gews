@@ -253,11 +253,11 @@ namespace _5.WarningManagement
             int iProbeTypeId = 0;
             if (int.TryParse(Convert.ToString(this.cboProbeType.SelectedValue), out iProbeTypeId))
             {
-                probeEntity.ProbeTypeId = iProbeTypeId;
+                probeEntity.ProbeType.ProbeTypeId = iProbeTypeId;
             }
 
             // 巷道编号
-            probeEntity.TunnelId = this.selectTunnelUserControl1.ITunnelId;
+            probeEntity.Tunnel.TunnelId = this.selectTunnelUserControl1.ITunnelId;
 
             // 探头位置坐标X
             double dProbeLocationX = 0;
@@ -305,7 +305,7 @@ namespace _5.WarningManagement
             {
                 //通知服务器探头数据已更新
                 var workingfaceEnt =
-                    BasicInfoManager.getInstance().getTunnelByID(probeEntity.TunnelId).WorkingFace;
+                    BasicInfoManager.getInstance().getTunnelByID(probeEntity.Tunnel.TunnelId).WorkingFace;
 
                 if (oldTunnelId != 0)
                 {
@@ -314,7 +314,7 @@ namespace _5.WarningManagement
                     this.MainForm.SendMsg2Server(msgUpdate);
                 }
 
-                UpdateWarningDataMsg msg = new UpdateWarningDataMsg(workingfaceEnt.WorkingFaceID, probeEntity.TunnelId,
+                UpdateWarningDataMsg msg = new UpdateWarningDataMsg(workingfaceEnt.WorkingFaceID, probeEntity.Tunnel.TunnelId,
                     ProbeManageDbConstNames.TABLE_NAME, opType, DateTime.Now);
                 this.MainForm.SendMsg2Server(msg);
             }

@@ -180,13 +180,13 @@ namespace _4.OutburstPrevention
             // 测定时间
             gasPressureEntity.MeasureDateTime = this.dtpMeasureDateTime.Value;
             // 巷道编号
-            gasPressureEntity.TunnelID = this.selectTunnelSimple1.ITunnelId;
+            gasPressureEntity.Tunnel.TunnelId = this.selectTunnelSimple1.ITunnelId;
             // 煤层编号
             int iCoalSeamsId = 0;
-            string mc = gasPressureEntity.CoalSeamsId.ToString();//修改时用到改前的信息删除feature
+            string mc = gasPressureEntity.CoalSeams.ToString();//修改时用到改前的信息删除feature
             if (int.TryParse(Convert.ToString(this.cboCoalSeams.SelectedValue), out iCoalSeamsId))
             {
-                gasPressureEntity.CoalSeamsId = iCoalSeamsId;
+                gasPressureEntity.CoalSeams.CoalSeamsId = iCoalSeamsId;
             }
 
             // SQL执行结果
@@ -222,7 +222,7 @@ namespace _4.OutburstPrevention
             //if (bResult)
             //{
             //    // 20140309 lyf
-            //    string sCoalseamNO = Convert.ToString(gasPressureEntity.CoalSeamsId);//煤层号
+            //    string sCoalseamNO = Convert.ToString(gasPressureEntity.CoalSeams);//煤层号
             //    DrawGasPressurePt(sCoalseamNO);//绘制瓦斯压力点图元
             //}
         }
@@ -368,7 +368,7 @@ namespace _4.OutburstPrevention
                     //    intArr[1] = tunnelEntity.WorkingFace.MiningArea.Horizontal.HorizontalId;
                     //    intArr[2] = tunnelEntity.WorkingFace.MiningArea.MiningAreaId;
                     //    intArr[3] = tunnelEntity.WorkingFace.WorkingFaceID;
-                    //    intArr[4] = tunnelEntity.TunnelID;
+                    //    intArr[4] = tunnelEntity.Tunnel;
                     //    _intArr = intArr;
                     //}
                 }
@@ -499,7 +499,7 @@ namespace _4.OutburstPrevention
             IGeometry geometry = pt;
             List<ziduan> list = new List<ziduan>();
             list.Add(new ziduan("bid", gasGushQuantityEntity.BindingId));
-            list.Add(new ziduan("mc", gasGushQuantityEntity.CoalSeamsId.ToString()));
+            list.Add(new ziduan("mc", gasGushQuantityEntity.CoalSeams.ToString()));
             list.Add(new ziduan("addtime", DateTime.Now.ToString()));
             string wsyl = gasGushQuantityEntity.GasPressureValue.ToString();
             string cdbg = gasGushQuantityEntity.CoordinateZ.ToString();

@@ -514,11 +514,11 @@ namespace _2.MiningScheduling
                         GeoStruct tmp = geoinfos[j];
 
                         GeologySpace geologyspaceEntity = new GeologySpace();
-                        geologyspaceEntity.WorkSpaceID = wfEntity.WorkingFaceID;
+                        geologyspaceEntity.WorkingFace = wfEntity;
                         geologyspaceEntity.TectonicType = Convert.ToInt32(key);
-                        geologyspaceEntity.TectonicID = tmp.geoinfos[GIS.GIS_Const.FIELD_BID].ToString();
+                        geologyspaceEntity.TectonicId = tmp.geoinfos[GIS.GIS_Const.FIELD_BID].ToString();
                         geologyspaceEntity.Distance = tmp.dist;
-                        geologyspaceEntity.onDateTime = DateTime.Now.ToShortDateString();
+                        geologyspaceEntity.OnDateTime = DateTime.Now.ToShortDateString();
 
                         GeologySpaceBLL.insertGeologySpaceEntityInfo(geologyspaceEntity);
                     }

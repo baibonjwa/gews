@@ -8,10 +8,12 @@
 // ******************************************************************
 
 using System;
+using Castle.ActiveRecord;
 
 namespace LibEntity
 {
-    public class GasContent
+    [ActiveRecord("T_GAS_CONTENT")]
+    public class GasContent : ActiveRecordBase<GasContent>
     {
         /** 编号 **/
 
@@ -20,6 +22,7 @@ namespace LibEntity
         /// <summary>
         ///     编号
         /// </summary>
+        [PrimaryKey(PrimaryKeyType.Native, "PRIMARY_KEY")]
         public int PrimaryKey { get; set; }
 
         /** 坐标X **/
@@ -27,6 +30,7 @@ namespace LibEntity
         /// <summary>
         ///     坐标X
         /// </summary>
+        [Property("COORDINATE_X")]
         public double CoordinateX { get; set; }
 
         /** 坐标Y **/
@@ -34,6 +38,7 @@ namespace LibEntity
         /// <summary>
         ///     坐标Y
         /// </summary>
+        [Property("COORDINATE_Y")]
         public double CoordinateY { get; set; }
 
         /** 坐标Z **/
@@ -41,6 +46,7 @@ namespace LibEntity
         /// <summary>
         ///     坐标Z
         /// </summary>
+        [Property("COORDINATE_Z")]
         public double CoordinateZ { get; set; }
 
         /** 埋深 **/
@@ -48,6 +54,7 @@ namespace LibEntity
         /// <summary>
         ///     埋深
         /// </summary>
+        [Property("DEPTH")]
         public double Depth { get; set; }
 
         /** 瓦斯含量值 **/
@@ -55,6 +62,7 @@ namespace LibEntity
         /// <summary>
         ///     瓦斯含量值
         /// </summary>
+        [Property("GAS_CONTENT_VALUE")]
         public double GasContentValue { get; set; }
 
         /** 测定时间 **/
@@ -62,31 +70,33 @@ namespace LibEntity
         /// <summary>
         ///     测定时间
         /// </summary>
+        [Property("MEASURE_DATE_TIME")]
         public DateTime MeasureDateTime
         {
             get { return measureDateTime; }
             set { measureDateTime = value; }
         }
 
-        // 巷道编号
-
         /// <summary>
         ///     巷道编号
         /// </summary>
-        public int TunnelID { get; set; }
+        [BelongsTo("TUNNEL_ID")]
+        public Tunnel Tunnel { get; set; }
 
         // 煤层编号
 
         /// <summary>
         ///     煤层编号
         /// </summary>
-        public int CoalSeamsId { get; set; }
+        [BelongsTo("COAL_SEAMS_ID")]
+        public CoalSeams CoalSeams { get; set; }
 
         /** BID **/
 
         /// <summary>
         ///     BID
         /// </summary>
+        [Property("BID")]
         public string BindingId { get; set; }
     }
 }

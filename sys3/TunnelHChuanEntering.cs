@@ -585,7 +585,7 @@ namespace _3.GeologyMeasure
             if (tunnelHChuanEntity.TunnelID2 != 0)
             {
                 tunnelEntity.TunnelId = tunnelHChuanEntity.TunnelID2;
-                //tunnelEntity = TunnelInfoBLL.selectTunnelInfoByTunnelID(tunnelEntity.TunnelID);
+                //tunnelEntity = TunnelInfoBLL.selectTunnelInfoByTunnelID(tunnelEntity.Tunnel);
             }
             //第一次选择巷道
             if (tunnelEntity.TunnelId == 0)
@@ -772,7 +772,7 @@ namespace _3.GeologyMeasure
             if (tunnelHChuanEntity.TunnelID1 != 0)
             {
                 tunnelEntity.TunnelId = tunnelHChuanEntity.TunnelID1;
-                //tunnelEntity = TunnelInfoBLL.selectTunnelInfoByTunnelID(tunnelEntity.TunnelID);
+                //tunnelEntity = TunnelInfoBLL.selectTunnelInfoByTunnelID(tunnelEntity.Tunnel);
             }
             //第一次选择巷道
             if (tunnelEntity.TunnelId == 0)

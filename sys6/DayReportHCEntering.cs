@@ -261,7 +261,7 @@ namespace UnderTerminal
 
             #region 通知服务器预警数据已更新
             //外层函数已执行通知服务器操作
-            //UpdateWarningDataMsg msg = new UpdateWarningDataMsg(_tunnelEntity.TunnelID, DayReportHCDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, dtpDate.Value);
+            //UpdateWarningDataMsg msg = new UpdateWarningDataMsg(_tunnelEntity.Tunnel, DayReportHCDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, dtpDate.Value);
             //mainWin.SendMsg2Server(msg);
             #endregion
         }

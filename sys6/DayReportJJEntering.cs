@@ -91,7 +91,7 @@ namespace UnderTerminal
         //{
         //    if (this.Text == Const_MS.DAY_REPORT_JJ_ADD)
         //    {
-        //        _tunnelEntity.TunnelID = this.tunnelId;
+        //        _tunnelEntity.Tunnel = this.tunnelId;
         //    }
         //    DataSet dsWireInfo = WireInfoBLL.selectAllWireInfo(_tunnelEntity);
         //    if (dsWireInfo.Tables[0].Rows.Count > 0)

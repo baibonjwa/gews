@@ -87,7 +87,7 @@ namespace _4.OutburstPrevention
             this.MainForm = mainFrm;
 
             arr = array;
-            _k1ValueEntity.ID = id;
+            _k1ValueEntity.Id = id;
 
             InitializeComponent();
 
@@ -127,9 +127,9 @@ namespace _4.OutburstPrevention
         private void change()
         {
             //实体赋值
-            _k1ValueEntity = K1ValueBLL.selectValueK1ByID(_k1ValueEntity.ID);
+            _k1ValueEntity = K1ValueBLL.selectValueK1ByID(_k1ValueEntity.Id);
             //K1值实体组
-            k1Entitys = K1ValueBLL.selectValueK1ByK1ValueID(_k1ValueEntity.K1ValueID);
+            k1Entitys = K1ValueBLL.selectValueK1ByK1ValueID(_k1ValueEntity.K1ValueId);
 
             for (int i = 0; i < k1Entitys.Length; i++)
             {
@@ -172,11 +172,11 @@ namespace _4.OutburstPrevention
                     dgrdvK1Value[7, dgrdvK1Value.Rows.Count - 1].Value = null;
                 }
                 //修改列为选中状态
-                if (k1Entitys[i].ID == _k1ValueEntity.ID)
+                if (k1Entitys[i].Id == _k1ValueEntity.Id)
                 {
                     dgrdvK1Value.Rows[i].Selected = true;
                 }
-                Tunnel tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(k1Entitys[i].TunnelID); // TunnelInfoBLL.selectTunnelInfoByTunnelID(iTunnelID);
+                Tunnel tunnelEntity = k1Entitys[i].Tunnel; // TunnelInfoBLL.selectTunnelInfoByTunnelID(iTunnelID);
                 TunnelSimple ts = new TunnelSimple(tunnelEntity.TunnelId, tunnelEntity.TunnelName);
                 selectTunnelSimple1.SelectTunnelItemWithoutHistory(ts);
 
@@ -210,9 +210,9 @@ namespace _4.OutburstPrevention
             }
             this.DialogResult = DialogResult.OK;
 
-            //tunnelEntity.TunnelID = selectTunnelSimple1.ITunnelId;
+            //tunnelEntity.Tunnel = selectTunnelSimple1.ITunnelId;
             tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(selectTunnelSimple1.ITunnelId);
-            //TunnelInfoBLL.selectTunnelInfoByTunnelID(tunnelEntity.TunnelID);
+            //TunnelInfoBLL.selectTunnelInfoByTunnelID(tunnelEntity.Tunnel);
             //添加
             if (this.Text == Const_OP.K1_VALUE_ADD)
             {
@@ -236,7 +236,7 @@ namespace _4.OutburstPrevention
             for (int i = 0; i < rowCount; i++)
             {
                 //K1分组ID
-                _k1ValueEntity.K1ValueID = groupCount + 1;
+                _k1ValueEntity.K1ValueId = groupCount + 1;
                 //拾取点X
                 if (double.TryParse(tbCoordinateX.Text, out tmpDouble))
                 {
@@ -293,7 +293,7 @@ namespace _4.OutburstPrevention
                 //录入时间
                 _k1ValueEntity.TypeInTime = dgrdvK1Value[7, i].Value != null ? Convert.ToDateTime(dgrdvK1Value[7, i].Value) : DateTime.Now;
                 //巷道ID
-                _k1ValueEntity.TunnelID = tunnelEntity.TunnelId;
+                _k1ValueEntity.Tunnel = tunnelEntity;
                 //添加
                 bResult = K1ValueBLL.insertValueK1(_k1ValueEntity);
                 if (bResult)
@@ -325,7 +325,7 @@ namespace _4.OutburstPrevention
             for (int i = 0; i < rowCount; i++)
             {
                 //K1分组ID
-                _k1ValueEntity.K1ValueID = groupCount + 1;
+                _k1ValueEntity.K1ValueId = groupCount + 1;
                 //拾取点X
                 if (double.TryParse(tbCoordinateX.Text, out tmpDouble))
                 {
@@ -382,13 +382,13 @@ namespace _4.OutburstPrevention
                 //录入时间
                 _k1ValueEntity.TypeInTime = dgrdvK1Value[7, i].Value != null ? Convert.ToDateTime(dgrdvK1Value[7, i].Value) : DateTime.Now;
                 //巷道ID
-                _k1ValueEntity.TunnelID = tunnelEntity.TunnelId;
+                _k1ValueEntity.Tunnel.TunnelId = tunnelEntity.TunnelId;
                 //添加
 
                 if (i < k1Entitys.Length)
                 {
                     //K1Value编号
-                    _k1ValueEntity.ID = k1Entitys[i].ID;
+                    _k1ValueEntity.Id = k1Entitys[i].Id;
                     //修改
                     bResult = K1ValueBLL.updateValueK1(_k1ValueEntity);
                     if (bResult)
@@ -422,7 +422,7 @@ namespace _4.OutburstPrevention
                 for (int i = rowCount; i < k1Entitys.Length; i++)
                 {
                     //K1Value编号
-                    _k1ValueEntity.ID = k1Entitys[i].ID;
+                    _k1ValueEntity.Id = k1Entitys[i].Id;
                     //删除
                     bResult = K1ValueBLL.deleteK1Value(_k1ValueEntity, 0);
                     if (bResult)
@@ -765,7 +765,7 @@ namespace _4.OutburstPrevention
             //IGeometry geometry = pt;
             //List<ziduan> list = new List<ziduan>();
             //list.Add(new ziduan("bid", _k1ValueEntity.K1ValueID.ToString()));
-            ////list.Add(new ziduan("mc", gasGushQuantityEntity.CoalSeamsId.ToString()));
+            ////list.Add(new ziduan("mc", gasGushQuantityEntity.CoalSeams.ToString()));
             ////list.Add(new ziduan("addtime", DateTime.Now.ToString()));
 
 

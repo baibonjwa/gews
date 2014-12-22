@@ -46,8 +46,8 @@ namespace LibBusiness
             sqlStr.Append(", '" + gasGushQuantityEntity.RelativeGasGushQuantity + "'");
             sqlStr.Append(", '" + gasGushQuantityEntity.WorkingFaceDayOutput + "'");
             sqlStr.Append(", '" + gasGushQuantityEntity.StopeDate + "'");
-            sqlStr.Append(", '" + gasGushQuantityEntity.TunnelID + "'");
-            sqlStr.Append(", '" + gasGushQuantityEntity.CoalSeamsId + "'");
+            sqlStr.Append(", '" + gasGushQuantityEntity.Tunnel + "'");
+            sqlStr.Append(", '" + gasGushQuantityEntity.CoalSeams + "'");
             sqlStr.Append(", '" + gasGushQuantityEntity.BindingId + "'");
             sqlStr.Append(" )");
 
@@ -121,8 +121,8 @@ namespace LibBusiness
             sqlStr.Append(", " + GasGushQuantityDbConstNames.RELATIVE_GAS_GUSH_QUANTITY + " = '" + gasGushQuantityEntity.RelativeGasGushQuantity + "'");
             sqlStr.Append(", " + GasGushQuantityDbConstNames.WORKING_FACE_DAY_OUTPUT + " = '" + gasGushQuantityEntity.WorkingFaceDayOutput + "'");
             sqlStr.Append(", " + GasGushQuantityDbConstNames.STOPE_DATE + " = '" + gasGushQuantityEntity.StopeDate + "'");
-            sqlStr.Append(", " + GasGushQuantityDbConstNames.TUNNEL_ID + " = '" + gasGushQuantityEntity.TunnelID + "'");
-            sqlStr.Append(", " + GasGushQuantityDbConstNames.COAL_SEAMS_ID + " = '" + gasGushQuantityEntity.CoalSeamsId + "'");
+            sqlStr.Append(", " + GasGushQuantityDbConstNames.TUNNEL_ID + " = '" + gasGushQuantityEntity.Tunnel + "'");
+            sqlStr.Append(", " + GasGushQuantityDbConstNames.COAL_SEAMS_ID + " = '" + gasGushQuantityEntity.CoalSeams + "'");
             sqlStr.Append(" WHERE " + GasGushQuantityDbConstNames.ID + " = " + gasGushQuantityEntity.PrimaryKey);
 
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);

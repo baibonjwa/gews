@@ -548,7 +548,7 @@ namespace LibBusiness
         //    //共同属性
         //    int value;
         //    int.TryParse(tunnelID, out value);
-        //    ent.TunnelID = value;
+        //    ent.Tunnel = value;
 
         //    string startTime = date + " " + fromTime;
         //    string endTime = date + " " + toTime;
@@ -629,7 +629,7 @@ namespace LibBusiness
         //    //共同属性
         //    //int value;
         //    //int.TryParse(tunnelID, out value);
-        //    //ent.TunnelID = value;
+        //    //ent.Tunnel = value;
 
         //    string startTime = date + " " + fromTime;
         //    string endTime = date + " " + toTime;
@@ -720,7 +720,7 @@ namespace LibBusiness
             //共同属性
             //int value;
             //int.TryParse(tunnelID, out value);
-            //ent.TunnelID = value;
+            //ent.Tunnel = value;
 
             string startTime = date + " " + fromTime;
             string endTime = date + " " + toTime;
@@ -1108,7 +1108,7 @@ namespace LibBusiness
         //    strSql.Append("INSERT INTO ");
         //    strSql.Append(PreWarningResultDBConstNames.TABLE_NAME_TEMP);
         //    strSql.Append(" VALUES(");
-        //    strSql.Append("'" + ent.TunnelID + "',");
+        //    strSql.Append("'" + ent.Tunnel + "',");
         //    strSql.Append("'" + ent.TunelName.TrimEnd() + "',");
         //    strSql.Append("'" + ent.Date_Shift + "',");
         //    strSql.Append("'" + ent.DateTime + "',");

@@ -71,7 +71,7 @@ namespace LibPanels
             this.MainForm = mainFrm;
             this.obj = obj;
             tunnelEntity.TunnelId = ((LibEntity.MineData)obj).Tunnel.TunnelId;
-            //tunnelEntity = TunnelInfoBLL.selectTunnelInfoByTunnelID(tunnelEntity.TunnelID);
+            //tunnelEntity = TunnelInfoBLL.selectTunnelInfoByTunnelID(tunnelEntity.Tunnel);
             if (tunnelEntity == null)
             {
                 InitializeComponent();
@@ -92,9 +92,9 @@ namespace LibPanels
         /// <param name="tunnelID"></param>
         private void setArrValue(int tunnelID)
         {
-            //tunnelEntity.TunnelID = tunnelID;
+            //tunnelEntity.Tunnel = tunnelID;
             tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(tunnelID);
-            //tunnelEntity = TunnelInfoBLL.selectTunnelInfoByTunnelID(tunnelEntity.TunnelID);
+            //tunnelEntity = TunnelInfoBLL.selectTunnelInfoByTunnelID(tunnelEntity.Tunnel);
             arr[0] = tunnelEntity.WorkingFace.MiningArea.Horizontal.Mine.MineId;
             arr[1] = tunnelEntity.WorkingFace.MiningArea.Horizontal.HorizontalId;//HorizontalID;
             arr[2] = tunnelEntity.WorkingFace.MiningArea.MiningAreaId;//MiningAreaID;
