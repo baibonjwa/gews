@@ -309,9 +309,9 @@ namespace LibBusiness
 
                     ent.TunnelID = tunelId;
 
-                    //TunnelEntity entTunnel = BasicInfoManager.getInstance().getTunnelByID(tunelId);
-                    //ent.TunelName = entTunnel.WorkingFace.WorkingfaceTypeEnum == WorkingfaceTypeEnum.JJ ? entTunnel.WorkingFace.WorkingFaceName : entTunnel.WorkingFace.WorkingFaceName + " - " + entTunnel.TunnelName;
-                    ent.TunelName = GetTunelNameByTunelID(tunelId);
+                    Tunnel entTunnel = BasicInfoManager.getInstance().getTunnelByID(tunelId);
+                    ent.TunelName = entTunnel.WorkingFace.WorkingfaceTypeEnum == WorkingfaceTypeEnum.JJ ? entTunnel.WorkingFace.WorkingFaceName : entTunnel.WorkingFace.WorkingFaceName + " - " + entTunnel.TunnelName;
+                    //ent.TunelName = GetTunelNameByTunelID(tunelId);
                     ent.WorkingfaceId = dt.Rows[i][WorkingFaceDbConstNames.WORKINGFACE_ID] != DBNull.Value ? Convert.ToInt32(dt.Rows[i][WorkingFaceDbConstNames.WORKINGFACE_ID]) : 0;
                     ent.WorkingfaceName = dt.Rows[i][WorkingFaceDbConstNames.WORKINGFACE_ID] != DBNull.Value ? dt.Rows[i][WorkingFaceDbConstNames.WORKINGFACE_NAME].ToString() : "";
 
