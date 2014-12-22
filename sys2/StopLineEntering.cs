@@ -116,7 +116,7 @@ namespace _2.MiningScheduling
             if (this.Text == Const_MS.STOP_LINE_ADD)
             {
                 //BID
-                stopLineEntity.BindingID = IDGenerator.NewBindingID();
+                stopLineEntity.BindingId = IDGenerator.NewBindingID();
                 //添加
                 addStopLineInfo();
             }
@@ -324,7 +324,7 @@ namespace _2.MiningScheduling
                 return false;
 
             //先删除原有的线要素
-            GIS.SpecialGraphic.DrawStopLine.DeleteLineFeature(featureLayer, oldEntity.BindingID);
+            GIS.SpecialGraphic.DrawStopLine.DeleteLineFeature(featureLayer, oldEntity.BindingId);
 
             //重新绘制一条新的停采线
             bool bSuccess = DrawStopLine(newEntity);

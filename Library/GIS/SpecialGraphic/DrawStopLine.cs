@@ -36,7 +36,7 @@ namespace GIS.SpecialGraphic
                     //编号
                     int iFieldID = feature.Fields.FindField("BID");
                     if (iFieldID > -1)
-                        feature.Value[iFieldID] = stopLineEntity.BindingID;
+                        feature.Value[iFieldID] = stopLineEntity.BindingId;
 
                     //名称
                     iFieldID = feature.Fields.FindField("NAME");

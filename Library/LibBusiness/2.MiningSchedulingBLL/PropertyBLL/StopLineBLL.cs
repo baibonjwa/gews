@@ -93,7 +93,7 @@ namespace LibBusiness
             sb.Append(stopLineEntity.FCoordinateX + ",");
             sb.Append(stopLineEntity.FCoordinateY + ",");
             sb.Append(stopLineEntity.FCoordinateZ + ",'");
-            sb.Append(stopLineEntity.BindingID + "')");
+            sb.Append(stopLineEntity.BindingId + "')");
             bool bResult = db.OperateDB(sb.ToString());
             return bResult;
         }
@@ -115,7 +115,7 @@ namespace LibBusiness
             sb.Append(stopLineEntity.FCoordinateX + "," + StopLineDbConstNames.F_COORDINATE_Y + " = ");
             sb.Append(stopLineEntity.FCoordinateY + "," + StopLineDbConstNames.F_COORDINATE_Z + " = ");
             sb.Append(stopLineEntity.FCoordinateZ + " WHERE ");
-            sb.Append(StopLineDbConstNames.ID + " = " + stopLineEntity.ID);
+            sb.Append(StopLineDbConstNames.ID + " = " + stopLineEntity.Id);
             bool bResult = db.OperateDB(sb.ToString());
             return bResult;
         }
@@ -128,7 +128,7 @@ namespace LibBusiness
         public static bool deleteStopLineInfo(StopLine stoplineEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
-            string sql = "DELETE FROM " + StopLineDbConstNames.TABLE_NAME + " WHERE " + StopLineDbConstNames.ID + " =" + stoplineEntity.ID;
+            string sql = "DELETE FROM " + StopLineDbConstNames.TABLE_NAME + " WHERE " + StopLineDbConstNames.ID + " =" + stoplineEntity.Id;
             bool bResult = db.OperateDB(sql);
             return bResult;
         }

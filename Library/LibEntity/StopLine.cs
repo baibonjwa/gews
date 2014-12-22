@@ -7,71 +7,64 @@
 // V1.0 新建
 // ******************************************************************
 
+using Castle.ActiveRecord;
+
 namespace LibEntity
 {
-    public class StopLine
+    public class StopLine : ActiveRecordBase<StopLine>
     {
-        // 主键
-
         /// <summary>
         ///     设置或获取主键
         /// </summary>
-        public int ID { get; set; }
-
-        // 停采线名称
+        [PrimaryKey(PrimaryKeyType.Identity, "OBJECTID")]
+        public int Id { get; set; }
 
         /// <summary>
         ///     设置或获取停采线名称
         /// </summary>
+        [Property("STOP_LINE_NAME")]
         public string StopLineName { get; set; }
-
-        // 起点坐标X
 
         /// <summary>
         ///     设置或获取起点坐标X
         /// </summary>
+        [Property("S_COORDINATE_X")]
         public double SCoordinateX { get; set; }
-
-        // 起点坐标Y
 
         /// <summary>
         ///     设置或获取起点坐标Y
         /// </summary>
+        [Property("S_COORDINATE_Y")]
         public double SCoordinateY { get; set; }
-
-        // 起点坐标Z
 
         /// <summary>
         ///     设置或获取起点坐标Z
         /// </summary>
+        [Property("S_COORDINATE_Z")]
         public double SCoordinateZ { get; set; }
-
-        // 终点坐标X
 
         /// <summary>
         ///     设置或获取终点坐标X
         /// </summary>
+        [Property("F_COORDINATE_X")]
         public double FCoordinateX { get; set; }
-
-        // 终点坐标Y
 
         /// <summary>
         ///     设置或获取终点坐标Y
         /// </summary>
+        [Property("F_COORDINATE_Y")]
         public double FCoordinateY { get; set; }
-
-        // 终点坐标Z
 
         /// <summary>
         ///     设置或获取终点坐标Z
         /// </summary>
+        [Property("F_COORDINATE_Z")]
         public double FCoordinateZ { get; set; }
-
-        // BID
 
         /// <summary>
         ///     BID
         /// </summary>
-        public string BindingID { get; set; }
+        [Property("BINDINGID")]
+        public string BindingId { get; set; }
     }
 }

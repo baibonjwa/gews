@@ -228,7 +228,7 @@ namespace _2.MiningScheduling
 
                     int index = 0;
                     //主键
-                    stopLineEntity.ID = (int)_ds.Tables[0].Rows[i][StopLineDbConstNames.ID];
+                    stopLineEntity.Id = (int)_ds.Tables[0].Rows[i][StopLineDbConstNames.ID];
                     //停采线名称
                     stopLineEntity.StopLineName = this.fpStopLineInfo.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text;
                     //起点坐标X
@@ -243,7 +243,7 @@ namespace _2.MiningScheduling
                     stopLineEntity.FCoordinateY = Convert.ToDouble(this.fpStopLineInfo.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text);
                     //终点坐标Z
                     stopLineEntity.FCoordinateZ = Convert.ToDouble(this.fpStopLineInfo.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text);
-                    stopLineEntity.BindingID = this.fpStopLineInfo.Sheets[0].Cells[_rowDetailStartIndex + i, 8].Text;
+                    stopLineEntity.BindingId = this.fpStopLineInfo.Sheets[0].Cells[_rowDetailStartIndex + i, 8].Text;
                 }
             }
         }
@@ -313,12 +313,12 @@ namespace _2.MiningScheduling
                         if ((bool)fpStopLineInfo.Sheets[0].Cells[_rowDetailStartIndex + i, 0].Value == true)
                         {
                             //获取掘进ID
-                            stopLineEntity.ID = (int)_ds.Tables[0].Rows[i][StopLineDbConstNames.ID];
+                            stopLineEntity.Id = (int)_ds.Tables[0].Rows[i][StopLineDbConstNames.ID];
                             //删除操作
                             bResult = StopLineBLL.deleteStopLineInfo(stopLineEntity);
 
                             if (bResult && featureLayer != null)
-                                GIS.SpecialGraphic.DrawStopLine.DeleteLineFeature(featureLayer, stopLineEntity.BindingID); //删除对应的停采线要素
+                                GIS.SpecialGraphic.DrawStopLine.DeleteLineFeature(featureLayer, stopLineEntity.BindingId); //删除对应的停采线要素
                         }
                     }
                 }
