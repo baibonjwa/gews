@@ -414,11 +414,11 @@ namespace LibBusiness
             db.Open();
             string sql = "UPDATE " + TunnelInfoDbConstNames.TABLE_NAME + " SET " +
                 TunnelInfoDbConstNames.TUNNEL_TYPE + " = '" + "HENGCHUAN" +
-                "' WHERE " + TunnelInfoDbConstNames.ID + " = " + tunnelHChuanEntity.TunnelID1;
+                "' WHERE " + TunnelInfoDbConstNames.ID + " = " + tunnelHChuanEntity.TunnelId1;
             bool bResult = db.OperateDBNotOpenAndClose(sql);
             sql = "UPDATE " + TunnelInfoDbConstNames.TABLE_NAME + " SET " +
                 TunnelInfoDbConstNames.TUNNEL_TYPE + " = '" + "HENGCHUAN" +
-                "' WHERE " + TunnelInfoDbConstNames.ID + " = " + tunnelHChuanEntity.TunnelID2;
+                "' WHERE " + TunnelInfoDbConstNames.ID + " = " + tunnelHChuanEntity.TunnelId2;
             if (bResult)
             {
                 bResult = db.OperateDBNotOpenAndClose(sql);

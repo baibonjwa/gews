@@ -9,6 +9,7 @@ using Castle.ActiveRecord;
 
 namespace LibEntity
 {
+    [ActiveRecord("T_PROSPECTING_LINE_INFO")]
     public class ProspectingLine : ActiveRecordBase<ProspectingLine>
     {
         /// <summary>

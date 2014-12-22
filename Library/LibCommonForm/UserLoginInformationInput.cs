@@ -149,7 +149,7 @@ namespace LibCommonForm
             //修改
             else if (_strIsAddOrModify == "modify")
             {
-                UserLogin entModify = LoginFormBLL.GetUserLoginInformationByIDAndLoginName(_needModifyEnt.ID, _txtLoginName.Text.ToString().Trim());
+                UserLogin entModify = LoginFormBLL.GetUserLoginInformationByIDAndLoginName(_needModifyEnt.Id, _txtLoginName.Text.ToString().Trim());
                 if (entModify != null)
                 {                
                     Alert.alert(LibCommon.Const.LOGIN_NAME_EXIST, LibCommon.Const.NOTES, MessageBoxButtons.OK, MessageBoxIcon.Warning);

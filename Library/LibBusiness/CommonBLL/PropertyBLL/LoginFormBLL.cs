@@ -243,7 +243,7 @@ namespace LibBusiness
                 for (int i = 0; i < n; i++)
                 {
                     name = new UserLogin();
-                    name.ID = dt.Rows[i][0].ToString() ;
+                    name.Id = dt.Rows[i][0].ToString() ;
                     name.LoginName = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][1].ToString());
                     name.PassWord =  LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][2].ToString());
                     name.Permission =  LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][3].ToString());
@@ -281,7 +281,7 @@ namespace LibBusiness
             if (dt != null && dt.Rows.Count > 0)
             {
                 name = new UserLogin();
-                name.ID = dt.Rows[0][0].ToString();
+                name.Id = dt.Rows[0][0].ToString();
                 name.LoginName = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[0][1].ToString());
                 name.PassWord = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[0][2].ToString());
                 name.Permission = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[0][3].ToString());
@@ -320,7 +320,7 @@ namespace LibBusiness
                 for (int i = 0; i < n; i++)
                 {
                     name = new UserLogin();
-                    name.ID = dt.Rows[i][0].ToString();
+                    name.Id = dt.Rows[i][0].ToString();
                     name.LoginName = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][1].ToString());
                     name.PassWord = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][2].ToString());
                     name.Permission = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][3].ToString());

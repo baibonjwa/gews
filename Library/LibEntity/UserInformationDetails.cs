@@ -1,89 +1,53 @@
-﻿// ******************************************************************
-// 概  述：用户详细信息实体
-// 作  者：秦凯
-// 创建日期：2014/03/10
-// 版本号：V1.0
-// 版本信息:
-// V1.0 新建
-// ******************************************************************
+﻿using Castle.ActiveRecord;
 
 namespace LibEntity
 {
-    public class UserInformationDetails
+    [ActiveRecord("T_USER_INFO_DETAILS_MANAGEMENT")]
+    public class UserInformationDetails : ActiveRecordBase<UserInformationDetails>
     {
-        //ID
-
-        //姓名
-        private string _userDepratment = "";
-        private string _userEmail = "";
-        private string _userName = "";
-
-        //手机号码
-        private string _userPhoneNumber = "";
-        private string _userPosition = "";
-        private string _userRemarks = "";
-
-        //电话号码
-        private string _userTelePhoneNumber = "";
-
         public UserInformationDetails()
         {
-            ID = 0;
+            Remarks = "";
+            Position = "";
+            Depratment = "";
+            Email = "";
+            TelePhoneNumber = "";
+            PhoneNumber = "";
+            Name = "";
+            Id = 0;
         }
 
-        public int ID { get; set; }
-
-        public string Name
-        {
-            get { return _userName; }
-            set { _userName = value; }
-        }
-
-        public string PhoneNumber
-        {
-            get { return _userPhoneNumber; }
-            set { _userPhoneNumber = value; }
-        }
-
-        public string TelePhoneNumber
-        {
-            get { return _userTelePhoneNumber; }
-            set { _userTelePhoneNumber = value; }
-        }
+        //编号
+        [PrimaryKey(PrimaryKeyType.Identity, "USER_ID")]
+        public int Id { get; set; }
+        //姓名
+        [Property("USER_NAME")]
+        public string Name { get; set; }
+        //手机号码
+        [Property("USER_PHONENUMBER")]
+        public string PhoneNumber { get; set; }
+        //电话号码
+        [Property("USER_TELEPHONE")]
+        public string TelePhoneNumber { get; set; }
 
         //用户邮箱
-
-        public string Email
-        {
-            get { return _userEmail; }
-            set { _userEmail = value; }
-        }
+        [Property("USER_EMAIL")]
+        public string Email { get; set; }
 
         //所属部门
-
-        public string Depratment
-        {
-            get { return _userDepratment; }
-            set { _userDepratment = value; }
-        }
+        [Property("USER_DEPARTMENT")]
+        public string Depratment { get; set; }
 
         //职位
-
-        public string Position
-        {
-            get { return _userPosition; }
-            set { _userPosition = value; }
-        }
+        [Property("USER_POSITION")]
+        public string Position { get; set; }
 
         //备注
-
-        public string Remarks
-        {
-            get { return _userRemarks; }
-            set { _userRemarks = value; }
-        }
+        [Property("USER_REMARKS")]
+        public string Remarks { get; set; }
 
         //是否通知预警信息
+        [Property("USER_ISINFORM")]
         public int IsInform { get; set; }
     }
 }

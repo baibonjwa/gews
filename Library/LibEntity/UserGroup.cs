@@ -7,42 +7,42 @@
 // V1.0 新建
 // ******************************************************************
 
+using Castle.ActiveRecord;
+
 namespace LibEntity
 {
-    public class UserGroup
+    [ActiveRecord("T_USER_GROUP_INFO_MANAGEMENT")]
+    public class UserGroup : ActiveRecordBase<UserGroup>
     {
-        //用户组名称
-
         /// <summary>
         ///     获取、设置用户组名称
         /// </summary>
+        [Property("USER_GROUP_NAME")]
         public string GroupName { get; set; }
-
-        //用户人数
 
         /// <summary>
         ///     获取、设置用户人数
         /// </summary>
+        [Property("USER_GROUP_STAFF_COUNT")]
         public string UserCount { get; set; }
-
-        //备注
 
         /// <summary>
         ///     获取、设置备注
         /// </summary>
+        [Property("USER_GROUP_REMARKS")]
         public string Remark { get; set; }
-
-        //用户组ID
 
         /// <summary>
         ///     获取、设置用户组ID
         /// </summary>
-        public string ID { get; set; }
+        [PrimaryKey(PrimaryKeyType.Identity, "USER_GROUP_Id")]
+        public string Id { get; set; }
 
         //用户组权限
         /// <summary>
         ///     获取、设置用户组ID
         /// </summary>
+        [Property("USER_GROUP_PERMISSION")]
         public string Permission { get; set; }
     }
 }

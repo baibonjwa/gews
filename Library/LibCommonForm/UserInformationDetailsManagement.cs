@@ -380,7 +380,7 @@ namespace LibCommonForm
                 this.fpUserInformationDetails.ActiveSheet.Cells[i + 2, 0].HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
                 this.fpUserInformationDetails.ActiveSheet.Cells[i + 2, 0].VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
                 //ID
-                this.fpUserInformationDetails.ActiveSheet.Cells[i + 2, 1].Text = ents[i].ID.ToString();
+                this.fpUserInformationDetails.ActiveSheet.Cells[i + 2, 1].Text = ents[i].Id.ToString();
                 //姓名
                 this.fpUserInformationDetails.ActiveSheet.Cells[i + 2, 2].Text = ents[i].Name;
                 //手机号码

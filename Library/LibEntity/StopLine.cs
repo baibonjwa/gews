@@ -11,6 +11,7 @@ using Castle.ActiveRecord;
 
 namespace LibEntity
 {
+    [ActiveRecord("T_STOP_LINE_INFO")]
     public class StopLine : ActiveRecordBase<StopLine>
     {
         /// <summary>

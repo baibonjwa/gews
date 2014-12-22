@@ -31,16 +31,16 @@ namespace LibBusiness
                 WorkingFaceDbConstNames.WORK_TIME + "," + TunnelHChuanDbConstNames.TUNNEL_STATE + "," + TunnelHChuanDbConstNames.TUNNEL_WIDTH + ") VALUES(");
             sb.Append("'");
             sb.Append(tunnelHChuanEntity.NameHChuan + "',");
-            sb.Append(tunnelHChuanEntity.TunnelID1 + ",");
-            sb.Append(tunnelHChuanEntity.TunnelID2 + ",");
-            sb.Append(tunnelHChuanEntity.X_1 + ",");
-            sb.Append(tunnelHChuanEntity.Y_1 + ",");
-            sb.Append(tunnelHChuanEntity.Z_1 + ",");
-            sb.Append(tunnelHChuanEntity.X_2 + ",");
-            sb.Append(tunnelHChuanEntity.Y_2 + ",");
-            sb.Append(tunnelHChuanEntity.Z_2 + ",");
+            sb.Append(tunnelHChuanEntity.TunnelId1 + ",");
+            sb.Append(tunnelHChuanEntity.TunnelId2 + ",");
+            sb.Append(tunnelHChuanEntity.X1 + ",");
+            sb.Append(tunnelHChuanEntity.Y1 + ",");
+            sb.Append(tunnelHChuanEntity.Z1 + ",");
+            sb.Append(tunnelHChuanEntity.X2 + ",");
+            sb.Append(tunnelHChuanEntity.Y2 + ",");
+            sb.Append(tunnelHChuanEntity.Z2 + ",");
             sb.Append(tunnelHChuanEntity.Azimuth + ",");
-            sb.Append(tunnelHChuanEntity.TeamNameID + ",'");
+            sb.Append(tunnelHChuanEntity.TeamInfo + ",'");
             sb.Append(tunnelHChuanEntity.StartDate + "',");
             sb.Append(tunnelHChuanEntity.IsFinish + ",'");
             sb.Append(tunnelHChuanEntity.StopDate + "','");
@@ -83,11 +83,11 @@ namespace LibBusiness
         {
 
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
-            string sql = "DELETE FROM " + TunnelHChuanDbConstNames.TABLE_NAME + " WHERE " + TunnelHChuanDbConstNames.ID + " = " + tunnelHChuanEntity.ID;
+            string sql = "DELETE FROM " + TunnelHChuanDbConstNames.TABLE_NAME + " WHERE " + TunnelHChuanDbConstNames.ID + " = " + tunnelHChuanEntity.Id;
             bool bResult = db.OperateDB(sql);
             if (bResult)
             {
-                clearTunnelTypeOfHChuan(tunnelHChuanEntity.ID);
+                clearTunnelTypeOfHChuan(tunnelHChuanEntity.Id);
             }
             return bResult;
         }
@@ -98,21 +98,21 @@ namespace LibBusiness
         /// <returns></returns>
         public static bool updateTunnelHChuan(TunnelHChuan tunnelHChuanEntity)
         {
-            clearTunnelTypeOfHChuan(tunnelHChuanEntity.ID);
+            clearTunnelTypeOfHChuan(tunnelHChuanEntity.Id);
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
             StringBuilder sb = new StringBuilder();
             sb.Append("UPDATE " + TunnelHChuanDbConstNames.TABLE_NAME + " SET " + TunnelHChuanDbConstNames.NAME_HCHUAN + " = '");
             sb.Append(tunnelHChuanEntity.NameHChuan + "'," + TunnelHChuanDbConstNames.TUNNEL_ID1 + " = ");
-            sb.Append(tunnelHChuanEntity.TunnelID1 + "," + TunnelHChuanDbConstNames.TUNNEL_ID2 + " = ");
-            sb.Append(tunnelHChuanEntity.TunnelID2 + "," + TunnelHChuanDbConstNames.TUNNEL_X1 + " = ");
-            sb.Append(tunnelHChuanEntity.X_1 + "," + TunnelHChuanDbConstNames.TUNNEL_Y1 + " = ");
-            sb.Append(tunnelHChuanEntity.Y_1 + "," + TunnelHChuanDbConstNames.TUNNEL_Z1 + " = ");
-            sb.Append(tunnelHChuanEntity.Z_1 + "," + TunnelHChuanDbConstNames.TUNNEL_X2 + " = ");
-            sb.Append(tunnelHChuanEntity.X_2 + "," + TunnelHChuanDbConstNames.TUNNEL_Y2 + " = ");
-            sb.Append(tunnelHChuanEntity.Y_2 + "," + TunnelHChuanDbConstNames.TUNNEL_Z2 + " = ");
-            sb.Append(tunnelHChuanEntity.Z_2 + "," + TunnelHChuanDbConstNames.TUNNEL_AZIMUTH + " = ");
+            sb.Append(tunnelHChuanEntity.TunnelId1 + "," + TunnelHChuanDbConstNames.TUNNEL_ID2 + " = ");
+            sb.Append(tunnelHChuanEntity.TunnelId2 + "," + TunnelHChuanDbConstNames.TUNNEL_X1 + " = ");
+            sb.Append(tunnelHChuanEntity.X1 + "," + TunnelHChuanDbConstNames.TUNNEL_Y1 + " = ");
+            sb.Append(tunnelHChuanEntity.Y1 + "," + TunnelHChuanDbConstNames.TUNNEL_Z1 + " = ");
+            sb.Append(tunnelHChuanEntity.Z1 + "," + TunnelHChuanDbConstNames.TUNNEL_X2 + " = ");
+            sb.Append(tunnelHChuanEntity.X2 + "," + TunnelHChuanDbConstNames.TUNNEL_Y2 + " = ");
+            sb.Append(tunnelHChuanEntity.Y2 + "," + TunnelHChuanDbConstNames.TUNNEL_Z2 + " = ");
+            sb.Append(tunnelHChuanEntity.Z2 + "," + TunnelHChuanDbConstNames.TUNNEL_AZIMUTH + " = ");
             sb.Append(tunnelHChuanEntity.Azimuth + "," + TunnelHChuanDbConstNames.TEAM_NAME_ID + " = ");
-            sb.Append(tunnelHChuanEntity.TeamNameID + "," + TunnelHChuanDbConstNames.START_DATE + "='");
+            sb.Append(tunnelHChuanEntity.TeamInfo + "," + TunnelHChuanDbConstNames.START_DATE + "='");
             sb.Append(tunnelHChuanEntity.StartDate + "'," + TunnelHChuanDbConstNames.IS_FINISH + "=");
             sb.Append(tunnelHChuanEntity.IsFinish + "," + TunnelHChuanDbConstNames.STOP_DATE + "='");
             sb.Append(tunnelHChuanEntity.StopDate + "'," + TunnelHChuanDbConstNames.WORK_STYLE + "='");
@@ -120,7 +120,7 @@ namespace LibBusiness
             sb.Append(tunnelHChuanEntity.WorkTime + "'," + TunnelHChuanDbConstNames.TUNNEL_STATE + " = '");
             sb.Append(tunnelHChuanEntity.State + "'," + TunnelHChuanDbConstNames.TUNNEL_WIDTH + " = '");
             sb.Append(tunnelHChuanEntity.Width + "' WHERE " + TunnelHChuanDbConstNames.ID + "=");
-            sb.Append(tunnelHChuanEntity.ID);
+            sb.Append(tunnelHChuanEntity.Id);
 
             bool bResult = db.OperateDB(sb.ToString());
             //setTunnelAsHChuan(tunnelHChuanEntity.TunnelID1);
@@ -134,8 +134,8 @@ namespace LibBusiness
             TunnelHChuan tunnelHChuanEntity = selectTunnelHChuan(tunnelHChuanID);
             if (tunnelHChuanEntity != null)
             {
-                TunnelInfoBLL.clearTunnelType(tunnelHChuanEntity.TunnelID1);
-                TunnelInfoBLL.clearTunnelType(tunnelHChuanEntity.TunnelID2);
+                TunnelInfoBLL.clearTunnelType(tunnelHChuanEntity.TunnelId1);
+                TunnelInfoBLL.clearTunnelType(tunnelHChuanEntity.TunnelId2);
             }
         }
         /// <summary>
@@ -159,17 +159,17 @@ namespace LibBusiness
             {
                 try
                 {
-                    tunnelHChuanEntity.ID = (int)ds.Tables[0].Rows[0][TunnelHChuanDbConstNames.ID];
-                    tunnelHChuanEntity.TunnelID1 = (int)ds.Tables[0].Rows[0][TunnelHChuanDbConstNames.TUNNEL_ID1];
-                    tunnelHChuanEntity.TunnelID2 = (int)ds.Tables[0].Rows[0][TunnelHChuanDbConstNames.TUNNEL_ID2];
-                    tunnelHChuanEntity.X_1 = (double)ds.Tables[0].Rows[0][TunnelHChuanDbConstNames.TUNNEL_X1];
-                    tunnelHChuanEntity.Y_1 = (double)ds.Tables[0].Rows[0][TunnelHChuanDbConstNames.TUNNEL_Y1];
-                    tunnelHChuanEntity.Z_1 = (double)ds.Tables[0].Rows[0][TunnelHChuanDbConstNames.TUNNEL_Z1];
-                    tunnelHChuanEntity.X_2 = (double)ds.Tables[0].Rows[0][TunnelHChuanDbConstNames.TUNNEL_X2];
-                    tunnelHChuanEntity.Y_2 = (double)ds.Tables[0].Rows[0][TunnelHChuanDbConstNames.TUNNEL_Y2];
-                    tunnelHChuanEntity.Z_2 = (double)ds.Tables[0].Rows[0][TunnelHChuanDbConstNames.TUNNEL_Z2];
+                    tunnelHChuanEntity.Id = (int)ds.Tables[0].Rows[0][TunnelHChuanDbConstNames.ID];
+                    tunnelHChuanEntity.TunnelId1 = (int)ds.Tables[0].Rows[0][TunnelHChuanDbConstNames.TUNNEL_ID1];
+                    tunnelHChuanEntity.TunnelId2 = (int)ds.Tables[0].Rows[0][TunnelHChuanDbConstNames.TUNNEL_ID2];
+                    tunnelHChuanEntity.X1 = (double)ds.Tables[0].Rows[0][TunnelHChuanDbConstNames.TUNNEL_X1];
+                    tunnelHChuanEntity.Y1 = (double)ds.Tables[0].Rows[0][TunnelHChuanDbConstNames.TUNNEL_Y1];
+                    tunnelHChuanEntity.Z1 = (double)ds.Tables[0].Rows[0][TunnelHChuanDbConstNames.TUNNEL_Z1];
+                    tunnelHChuanEntity.X2 = (double)ds.Tables[0].Rows[0][TunnelHChuanDbConstNames.TUNNEL_X2];
+                    tunnelHChuanEntity.Y2 = (double)ds.Tables[0].Rows[0][TunnelHChuanDbConstNames.TUNNEL_Y2];
+                    tunnelHChuanEntity.Z2 = (double)ds.Tables[0].Rows[0][TunnelHChuanDbConstNames.TUNNEL_Z2];
                     tunnelHChuanEntity.Azimuth = (double)ds.Tables[0].Rows[0][TunnelHChuanDbConstNames.TUNNEL_AZIMUTH];
-                    tunnelHChuanEntity.TeamNameID = (int)ds.Tables[0].Rows[0][TunnelHChuanDbConstNames.TEAM_NAME_ID];
+                    tunnelHChuanEntity.TeamInfo.TeamId = (int)ds.Tables[0].Rows[0][TunnelHChuanDbConstNames.TEAM_NAME_ID];
                     tunnelHChuanEntity.StartDate = Convert.ToDateTime(ds.Tables[0].Rows[0][TunnelHChuanDbConstNames.START_DATE]);
                     tunnelHChuanEntity.IsFinish = (int)ds.Tables[0].Rows[0][TunnelHChuanDbConstNames.IS_FINISH];
                     tunnelHChuanEntity.StopDate = Convert.ToDateTime(ds.Tables[0].Rows[0][TunnelHChuanDbConstNames.STOP_DATE]);

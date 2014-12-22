@@ -181,41 +181,41 @@ namespace _3.GeologyMeasure
                     int index = 14;
                     int tmp = 0;
                     //主键
-                    tunnelHChuanEntity.ID = Convert.ToInt32(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.ID]);
+                    tunnelHChuanEntity.Id = Convert.ToInt32(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.ID]);
                     var HChuanName = _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.NAME_HCHUAN];
                     tunnelHChuanEntity.NameHChuan = HChuanName == null ? "" : HChuanName.ToString();
                     tunnelHChuanEntity.Width = Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_WIDTH]);
                     //关联巷道1
                     if (int.TryParse(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_ID1].ToString(), out tmp))
                     {
-                        tunnelHChuanEntity.TunnelID1 = tmp;
+                        tunnelHChuanEntity.TunnelId1 = tmp;
                         tmp = 0;
                     }
                     //关联巷道2
                     if (int.TryParse(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_ID2].ToString(), out tmp))
                     {
-                        tunnelHChuanEntity.TunnelID2 = tmp;
+                        tunnelHChuanEntity.TunnelId2 = tmp;
                         tmp = 0;
                     }
                     //x1
-                    tunnelHChuanEntity.X_1 = Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_X1].ToString());
+                    tunnelHChuanEntity.X1 = Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_X1].ToString());
                     //y1
-                    tunnelHChuanEntity.Y_1 = Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_Y1].ToString());
+                    tunnelHChuanEntity.Y1 = Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_Y1].ToString());
                     //z1
-                    tunnelHChuanEntity.Z_1 = Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_Z1].ToString());
+                    tunnelHChuanEntity.Z1 = Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_Z1].ToString());
                     //x2
-                    tunnelHChuanEntity.X_2 = Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_X2].ToString());
+                    tunnelHChuanEntity.X2 = Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_X2].ToString());
                     //y2
-                    tunnelHChuanEntity.Y_2 = Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_Y2].ToString());
+                    tunnelHChuanEntity.Y2 = Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_Y2].ToString());
                     //z2
-                    tunnelHChuanEntity.Z_2 = Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_Z2].ToString());
+                    tunnelHChuanEntity.Z2 = Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_Z2].ToString());
                     //azimuth
                     tunnelHChuanEntity.Azimuth = Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_AZIMUTH].ToString());
 
                     //队别
                     if (int.TryParse(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TEAM_NAME_ID].ToString(), out tmp))
                     {
-                        tunnelHChuanEntity.TeamNameID = tmp;
+                        tunnelHChuanEntity.TeamInfo.TeamId = tmp;
                         tmp = 0;
                     }
                     DateTime _dateTime;
@@ -265,7 +265,7 @@ namespace _3.GeologyMeasure
 
         private void tsBtnAdd_Click(object sender, EventArgs e)
         {
-            TunnelHChuanEntering tunnelHCForm = new TunnelHChuanEntering(this.MainForm,this);
+            TunnelHChuanEntering tunnelHCForm = new TunnelHChuanEntering(this.MainForm, this);
             tunnelHCForm.Show(this);
         }
         public void refreshAdd()
@@ -395,24 +395,24 @@ namespace _3.GeologyMeasure
                     if (fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, 0].Value != null && (bool)fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, 0].Value == true)
                     {
                         //主键
-                        tunnelHChuanEntity.ID = Convert.ToInt32(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.ID]);
+                        tunnelHChuanEntity.Id = Convert.ToInt32(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.ID]);
                         int tmp = 0;
                         //主运顺槽
                         if (int.TryParse(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_ID1].ToString(), out tmp))
                         {
-                            tunnelHChuanEntity.TunnelID1 = tmp;
+                            tunnelHChuanEntity.TunnelId1 = tmp;
                             tmp = 0;
                         }
                         //辅运顺槽
                         if (int.TryParse(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_ID2].ToString(), out tmp))
                         {
-                            tunnelHChuanEntity.TunnelID2 = tmp;
+                            tunnelHChuanEntity.TunnelId2 = tmp;
                             tmp = 0;
                         }
 
                         //重设巷道类型
-                        TunnelInfoBLL.clearTunnelType(tunnelHChuanEntity.TunnelID1);
-                        TunnelInfoBLL.clearTunnelType(tunnelHChuanEntity.TunnelID2);
+                        TunnelInfoBLL.clearTunnelType(tunnelHChuanEntity.TunnelId1);
+                        TunnelInfoBLL.clearTunnelType(tunnelHChuanEntity.TunnelId2);
 
                         //删除回采巷道信息
                         bResult = TunnelHChuanBLL.deleteTunnelHChuan(tunnelHChuanEntity);
@@ -422,7 +422,7 @@ namespace _3.GeologyMeasure
                 {
                     //TODO:删除后事件
                     //将图层中对应的信息删除
-                    DelHChuanjc(tunnelHChuanEntity.TunnelID1, tunnelHChuanEntity.TunnelID2);
+                    DelHChuanjc(tunnelHChuanEntity.TunnelId1, tunnelHChuanEntity.TunnelId2);
                     //删除工作面中对应的回采信息
                     /////Mark
 
@@ -470,7 +470,7 @@ namespace _3.GeologyMeasure
             DataEditCommon.DeleteFeatureByWhereClause(Global.hdfdlyr, str);
             //if (DataEditCommon.DeleteFeatureByWhereClause(pFeatureLayer, str))
             //{
-                DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewBackground,null,null);
+            DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewBackground, null, null);
             //}
         }
 
@@ -530,7 +530,7 @@ namespace _3.GeologyMeasure
         {
             setTunnelHCEntityValue();
 
-            TunnelHChuanEntering tunnelHChuanForm = new TunnelHChuanEntering(tunnelHChuanEntity, this.MainForm,this);
+            TunnelHChuanEntering tunnelHChuanForm = new TunnelHChuanEntering(tunnelHChuanEntity, this.MainForm, this);
             tunnelHChuanForm.Show(this);
         }
         public void refreshUpdate()

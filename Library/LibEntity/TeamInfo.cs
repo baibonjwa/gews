@@ -11,6 +11,7 @@ using Castle.ActiveRecord;
 
 namespace LibEntity
 {
+    [ActiveRecord("T_TEAM_INFO")]
     public class TeamInfo : ActiveRecordBase
     {
         /// <summary>

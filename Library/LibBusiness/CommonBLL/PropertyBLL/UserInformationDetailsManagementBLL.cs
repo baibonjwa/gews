@@ -58,7 +58,7 @@ namespace LibBusiness
                 for (int i = 0; i < n; i++)
                 {
                     UserInformationDetails info = new UserInformationDetails();
-                    info.ID = (int)dt.Rows[i][0];
+                    info.Id = (int)dt.Rows[i][0];
                     info.Name = dt.Rows[i][1].ToString();
                     info.PhoneNumber = dt.Rows[i][2].ToString();
                     info.TelePhoneNumber = dt.Rows[i][3].ToString();
@@ -135,7 +135,7 @@ namespace LibBusiness
                 for (int i = 0; i < n; i++)
                 {
                     ent = new UserInformationDetails();
-                    ent.ID = (int)dt.Rows[i][0];
+                    ent.Id = (int)dt.Rows[i][0];
                     ent.Name = dt.Rows[i][1].ToString();
                     ent.PhoneNumber = dt.Rows[i][2].ToString();
                     ent.TelePhoneNumber = dt.Rows[i][3].ToString();
