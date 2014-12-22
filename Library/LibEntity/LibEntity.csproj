@@ -146,7 +146,6 @@
     <Compile Include="GasPressure.cs" />
     <Compile Include="Management.cs" />
     <Compile Include="GasGushQuantity.cs" />
-    <Compile Include="SValue.cs" />
     <Compile Include="UsualForecast.cs" />
     <Compile Include="K1Value.cs" />
     <Compile Include="BindingTable.cs" />

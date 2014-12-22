@@ -993,14 +993,6 @@ namespace _4.OutburstPrevention
             this.mniK1Float.Name = "mniK1Float";
             this.mniK1Float.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniK1Float_ItemClick);
             // 
-            // mniSFloat
-            // 
-            this.mniSFloat.Caption = "S值";
-            this.mniSFloat.Id = 59;
-            this.mniSFloat.ImageIndex = 1;
-            this.mniSFloat.Name = "mniSFloat";
-            this.mniSFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniSFloat_ItemClick);
-            // 
             // bar4
             // 
             this.bar4.BarName = "绘图";
@@ -1281,16 +1273,7 @@ namespace _4.OutburstPrevention
             this.mniExport3.Id = 10;
             this.mniExport3.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E));
             this.mniExport3.Name = "mniExport3";
-            this.mniExport3.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniExport_ItemClick);
-            // 
-            // mniS
-            // 
-            this.mniS.Caption = "S值(&S)...";
-            this.mniS.Id = 17;
-            this.mniS.ImageIndex = 1;
-            this.mniS.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D1));
-            this.mniS.Name = "mniS";
-            this.mniS.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniS_ItemClick);
+            this.mniExport3.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniExport_ItemClick); 
             // 
             // barButtonItem1
             // 

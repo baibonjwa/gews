@@ -326,18 +326,6 @@
     <Compile Include="GasGushQuantityInfoManagement.Designer.cs">
       <DependentUpon>GasGushQuantityInfoManagement.cs</DependentUpon>
     </Compile>
-    <Compile Include="SValueEntering.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SValueEntering.Designer.cs">
-      <DependentUpon>SValueEntering.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SValueManagement.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SValueManagement.Designer.cs">
-      <DependentUpon>SValueManagement.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="GasContentInfoEntering.resx">
       <DependentUpon>GasContentInfoEntering.cs</DependentUpon>
     </EmbeddedResource>
@@ -378,12 +366,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GasGushQuantityInfoManagement.resx">
       <DependentUpon>GasGushQuantityInfoManagement.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SValueEntering.resx">
-      <DependentUpon>SValueEntering.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SValueManagement.resx">
-      <DependentUpon>SValueManagement.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="4.OutburstPrevention_TemporaryKey.pfx" />
     <None Include="app.config" />

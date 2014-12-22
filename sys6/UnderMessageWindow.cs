@@ -139,19 +139,6 @@ namespace UnderTerminal
             k.ShowDialog();
         }
 
-        // S 值
-        private void btnS_Click(object sender, EventArgs e)
-        {
-            if (this.tunnelId <= 0)
-            {
-                MessageBox.Show("请选择巷道!");
-                return;
-            }
-
-            SValueEntering s = new SValueEntering(this.tunnelId, this.tunnelName, this);
-            s.ShowDialog();
-        }
-
         // 弹出管理界面
         private void button1_Click(object sender, EventArgs e)
         {

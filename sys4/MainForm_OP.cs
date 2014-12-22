@@ -247,14 +247,6 @@ namespace _4.OutburstPrevention
             K1ValueManagement k1ValueManagement = new K1ValueManagement(this);
             k1ValueManagement.Show();
         }
-        //S值
-        private void mniS_Click(object sender, EventArgs e)
-        {
-            m_currentButton = 0;
-
-            SValueManagement sValueManagement = new SValueManagement(this);
-            sValueManagement.Show();
-        }
         //瓦斯压力等值线绘制
         private void mniWSYLDZXHZ_Click(object sender, EventArgs e)
         {
@@ -673,14 +665,6 @@ namespace _4.OutburstPrevention
             k1ValueManagement.Show();
         }
 
-        //S值
-        private void mniS_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            m_currentButton = 0;
-
-            SValueManagement sValueManagement = new SValueManagement(this);
-            sValueManagement.Show();
-        }
         #endregion
         #region ******绘图******
 
@@ -948,12 +932,6 @@ namespace _4.OutburstPrevention
         private void mniK1Float_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             this.mniK1_ItemClick(null, null);
-        }
-
-        //S值
-        private void mniSFloat_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            this.mniS_ItemClick(null, null);
         }
         #endregion
         #region ******绘图浮动工具条******

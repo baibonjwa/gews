@@ -294,12 +294,6 @@
     <Compile Include="SetDefaultValue.Designer.cs">
       <DependentUpon>SetDefaultValue.cs</DependentUpon>
     </Compile>
-    <Compile Include="SValueEntering.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SValueEntering.designer.cs">
-      <DependentUpon>SValueEntering.cs</DependentUpon>
-    </Compile>
     <Compile Include="SysHelper.cs" />
     <Compile Include="SysMgr.cs">
       <SubType>Form</SubType>
@@ -385,9 +379,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SetDefaultValue.resx">
       <DependentUpon>SetDefaultValue.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SValueEntering.resx">
-      <DependentUpon>SValueEntering.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SysMgr.resx">
       <DependentUpon>SysMgr.cs</DependentUpon>
