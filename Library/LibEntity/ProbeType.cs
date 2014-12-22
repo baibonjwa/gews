@@ -3,14 +3,14 @@
 namespace LibEntity
 {
     [ActiveRecord("T_PROBE_TYPE")]
-    public class ProbeType
+    public class ProbeType : ActiveRecordBase<ProbeType>
     {
         /** 探头类型编号 **/
 
         /// <summary>
         ///     探头类型编号
         /// </summary>
-        [PrimaryKey(PrimaryKeyType.Identity,"PROBE_TYPE_ID")]
+        [PrimaryKey(PrimaryKeyType.Identity, "PROBE_TYPE_ID")]
         public int ProbeTypeId { get; set; }
 
         /** 探头类型名称 **/

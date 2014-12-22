@@ -5,36 +5,34 @@
 // 版本号：1.0
 // ******************************************************************
 
+using Castle.ActiveRecord;
+
 namespace LibEntity
 {
-    public class ProspectingLine
+    public class ProspectingLine : ActiveRecordBase<ProspectingLine>
     {
-        /**  勘探线编号 **/
-
         /// <summary>
         ///     勘探线编号
         /// </summary>
+        [PrimaryKey(PrimaryKeyType.Identity, "PROSPECTING_LINE_ID")]
         public int ProspectingLineId { get; set; }
-
-        /**  勘探线名称 **/
 
         /// <summary>
         ///     勘探线名称
         /// </summary>
+        [Property("PROSPECTING_LINE_NAME")]
         public string ProspectingLineName { get; set; }
-
-        /** 勘探钻孔 **/
 
         /// <summary>
         ///     勘探钻孔
         /// </summary>
+        [Property("PROSPECTING_BOREHOLE")]
         public string ProspectingBorehole { get; set; }
-
-        /** BID **/
 
         /// <summary>
         ///     BID
         /// </summary>
+        [Property("BID")]
         public string BindingId { get; set; }
     }
 }
