@@ -1,0 +1,311 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4586C1E2-10A4-47AF-8867-B1B32B0CDEE5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LibBusiness</RootNamespace>
+    <AssemblyName>LibBusiness</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Debug\LibBusiness.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Release\LibBusiness.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Debug\LibBusiness.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Release\LibBusiness.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\..\packages\Antlr.3.1.3.42154\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.ActiveRecord">
+      <HintPath>..\..\packages\Castle.Activerecord.3.0.0.1\lib\Net40\Castle.ActiveRecord.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.ActiveRecord.Web">
+      <HintPath>..\packages\Castle.Activerecord.3.0.0.1\lib\Net40\Castle.ActiveRecord.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Components.Validator, Version=2.5.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Castle.Components.Validator.2.5.0\lib\NET40\Castle.Components.Validator.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core, Version=2.5.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Castle.Core.2.5.1\lib\NET35\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\..\packages\Iesi.Collections.1.0.1\lib\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="LibConfig">
+      <HintPath>..\LibConfig\bin\Debug\LibConfig.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\ResourceFiles\AllRequired\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=3.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NHibernate.3.0.0.4000\lib\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.ByteCode.Castle">
+      <HintPath>..\..\packages\NHibernate.3.0.0.4000\lib\NHibernate.ByteCode.Castle.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.Search, Version=0.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Castle.Activerecord.3.0.0.1\lib\Net40\NHibernate.Search.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="1.GasEmmisionBLL\DbConstNames\GasConcentrationProbeDataDbConstNames.cs" />
+    <Compile Include="1.GasEmmisionBLL\DbConstNames\ProbeManageDbConstNames.cs" />
+    <Compile Include="1.GasEmmisionBLL\DbConstNames\ProbeTypeDbConstNames.cs" />
+    <Compile Include="1.GasEmmisionBLL\PropertyBLL\GasConcentrationProbeDataBLL.cs" />
+    <Compile Include="1.GasEmmisionBLL\PropertyBLL\ProbeManageBLL.cs" />
+    <Compile Include="1.GasEmmisionBLL\PropertyBLL\ProbeTypeBLL.cs" />
+    <Compile Include="2.MiningSchedulingBLL\DbConstNames\DayReportHCDbConstNames.cs" />
+    <Compile Include="2.MiningSchedulingBLL\DbConstNames\DayReportJJDbConstNames.cs" />
+    <Compile Include="2.MiningSchedulingBLL\DbConstNames\GeologySpaceDbConstNames.cs" />
+    <Compile Include="2.MiningSchedulingBLL\DbConstNames\StopLineDbConstNames.cs" />
+    <Compile Include="2.MiningSchedulingBLL\DbConstNames\TeamDbConstNames.cs" />
+    <Compile Include="2.MiningSchedulingBLL\DbConstNames\WorkTimeDbConstNames.cs" />
+    <Compile Include="2.MiningSchedulingBLL\DbConstNames\WorkTimeDefaultDbConstNames.cs" />
+    <Compile Include="2.MiningSchedulingBLL\PropertyBLL\DayReportJJBLL.cs" />
+    <Compile Include="2.MiningSchedulingBLL\PropertyBLL\GeologySpaceBLL.cs" />
+    <Compile Include="2.MiningSchedulingBLL\PropertyBLL\StopLineBLL.cs" />
+    <Compile Include="2.MiningSchedulingBLL\PropertyBLL\TeamBLL.cs" />
+    <Compile Include="2.MiningSchedulingBLL\PropertyBLL\WorkTimeBLL.cs" />
+    <Compile Include="2.MiningSchedulingBLL\PropertyBLL\DayReportHCBLL.cs" />
+    <Compile Include="3.GeologyMeasureBLL\DbConstNames\BigFaultageDbConstNames.cs" />
+    <Compile Include="3.GeologyMeasureBLL\DbConstNames\BoreholeDBConstNames.cs" />
+    <Compile Include="3.GeologyMeasureBLL\DbConstNames\BoreholeLithologyDbConstNames.cs" />
+    <Compile Include="3.GeologyMeasureBLL\DbConstNames\CollapsePillarsDbConstNames.cs" />
+    <Compile Include="3.GeologyMeasureBLL\DbConstNames\CollapsePillarsInfoDbConstNames.cs" />
+    <Compile Include="3.GeologyMeasureBLL\DbConstNames\BigFaultagePointDbConstNames.cs" />
+    <Compile Include="3.GeologyMeasureBLL\DbConstNames\PitshaftDbConstNames.cs" />
+    <Compile Include="3.GeologyMeasureBLL\DbConstNames\PitshaftTypeDbConstNames.cs" />
+    <Compile Include="3.GeologyMeasureBLL\DbConstNames\ProspectingLineDbConstNames.cs" />
+    <Compile Include="3.GeologyMeasureBLL\DbConstNames\WorkingFaceDbConstNames.cs" />
+    <Compile Include="3.GeologyMeasureBLL\DbConstNames\MiningAreaDbConstNames.cs" />
+    <Compile Include="3.GeologyMeasureBLL\DbConstNames\HorizontalDbConstNames.cs" />
+    <Compile Include="3.GeologyMeasureBLL\DbConstNames\MineDbConstNames.cs" />
+    <Compile Include="3.GeologyMeasureBLL\DbConstNames\FaultageDbConstNames.cs" />
+    <Compile Include="3.GeologyMeasureBLL\DbConstNames\LithologyDbConstNames.cs" />
+    <Compile Include="3.GeologyMeasureBLL\DbConstNames\TunnelInfoDbConstNames.cs" />
+    <Compile Include="3.GeologyMeasureBLL\DbConstNames\WireInfoDbConstNames.cs" />
+    <Compile Include="3.GeologyMeasureBLL\DbConstNames\WirePointDbConstNames.cs" />
+    <Compile Include="3.GeologyMeasureBLL\DbConstNames\CollapsePillarsPointDbConstNames.cs" />
+    <Compile Include="3.GeologyMeasureBLL\PropertyBLL\BigFaultageBLL.cs" />
+    <Compile Include="3.GeologyMeasureBLL\PropertyBLL\BoreholeBLL.cs" />
+    <Compile Include="3.GeologyMeasureBLL\PropertyBLL\BoreholeLithologyBLL.cs" />
+    <Compile Include="3.GeologyMeasureBLL\PropertyBLL\CollapsePillarsBLL.cs" />
+    <Compile Include="3.GeologyMeasureBLL\PropertyBLL\CollapsePillarsInfoEnteringBLL.cs" />
+    <Compile Include="3.GeologyMeasureBLL\PropertyBLL\PitshaftBLL.cs" />
+    <Compile Include="3.GeologyMeasureBLL\PropertyBLL\PitshaftTypeBLL.cs" />
+    <Compile Include="3.GeologyMeasureBLL\PropertyBLL\ProspectingLineBLL.cs" />
+    <Compile Include="3.GeologyMeasureBLL\PropertyBLL\WorkingFaceBLL.cs" />
+    <Compile Include="3.GeologyMeasureBLL\PropertyBLL\MiningAreaBLL.cs" />
+    <Compile Include="3.GeologyMeasureBLL\PropertyBLL\HorizontalBLL.cs" />
+    <Compile Include="3.GeologyMeasureBLL\PropertyBLL\MineBLL.cs" />
+    <Compile Include="3.GeologyMeasureBLL\PropertyBLL\FaultageBLL.cs" />
+    <Compile Include="3.GeologyMeasureBLL\PropertyBLL\LithologyBLL.cs" />
+    <Compile Include="3.GeologyMeasureBLL\PropertyBLL\TunnelInfoBLL.cs" />
+    <Compile Include="3.GeologyMeasureBLL\PropertyBLL\WireInfoBLL.cs" />
+    <Compile Include="3.GeologyMeasureBLL\PropertyBLL\WirePointBLL.cs" />
+    <Compile Include="4.OutburstPreventionBLL\SaveDBXyz2Txt.cs" />
+    <Compile Include="4.OutburstPreventionBLL\DbConstNames\GasContentDbConstNames.cs" />
+    <Compile Include="4.OutburstPreventionBLL\DbConstNames\GasPressureDbConstNames.cs" />
+    <Compile Include="4.OutburstPreventionBLL\DbConstNames\GasGushQuantityDbConstNames.cs" />
+    <Compile Include="4.OutburstPreventionBLL\DbConstNames\SValueDbConstNames.cs" />
+    <Compile Include="4.OutburstPreventionBLL\DbConstNames\UsualForecastDbConstNames.cs" />
+    <Compile Include="4.OutburstPreventionBLL\DbConstNames\K1ValueDbConstNames.cs" />
+    <Compile Include="4.OutburstPreventionBLL\PropertyBLL\GasContentBLL.cs" />
+    <Compile Include="4.OutburstPreventionBLL\PropertyBLL\GasPressureBLL.cs" />
+    <Compile Include="4.OutburstPreventionBLL\GraphicBLL\GasPressureGraphicDbConstNames.cs" />
+    <Compile Include="4.OutburstPreventionBLL\PropertyBLL\GasGushQuantityBLL.cs" />
+    <Compile Include="4.OutburstPreventionBLL\PropertyBLL\K1ValueBLL.cs" />
+    <Compile Include="4.OutburstPreventionBLL\PropertyBLL\SValueBLL.cs" />
+    <Compile Include="4.OutburstPreventionBLL\PropertyBLL\UsualForecastBLL.cs" />
+    <Compile Include="5.WaningManagementBLL\DbConstNames\PreWarningDetailsViewDbConstName.cs" />
+    <Compile Include="5.WaningManagementBLL\DbConstNames\PreWarningHistroyResultQueryDBConstNames.cs" />
+    <Compile Include="5.WaningManagementBLL\DbConstNames\PreWarningResultDBConstNames.cs" />
+    <Compile Include="5.WaningManagementBLL\DbConstNames\PreWarningResultViewDbConstNames.cs" />
+    <Compile Include="5.WaningManagementBLL\DbConstNames\WarningDataTableManagementDbConstNames.cs" />
+    <Compile Include="5.WaningManagementBLL\DbConstNames\WarningDataBindingTableCommonDbConstNames.cs" />
+    <Compile Include="5.WaningManagementBLL\DbConstNames\WarningDatasCommonDbConstNames.cs" />
+    <Compile Include="5.WaningManagementBLL\DbConstNames\PreWarningRulesDbConstNames.cs" />
+    <Compile Include="5.WaningManagementBLL\DbConstNames\WarningImgDbConstNames.cs" />
+    <Compile Include="5.WaningManagementBLL\PreWarningDetailsBLL.cs" />
+    <Compile Include="5.WaningManagementBLL\PreWarningResultDetailsQueryBLL.cs" />
+    <Compile Include="5.WaningManagementBLL\PreWarningResultQueryBLL.cs" />
+    <Compile Include="5.WaningManagementBLL\PreWarningRulesBLL.cs" />
+    <Compile Include="5.WaningManagementBLL\PreWarningExcelBLL.cs" />
+    <Compile Include="5.WaningManagementBLL\WarningImgBLL.cs" />
+    <Compile Include="5.WaningManagementBLL\WarningResultsQuery.cs" />
+    <Compile Include="BasicInfoManager.cs" />
+    <Compile Include="CommonBLL\DbConstNames\CoalSeamsDbConstNames.cs" />
+    <Compile Include="CommonBLL\DbConstNames\CommonDbConsts.cs" />
+    <Compile Include="CommonBLL\DbConstNames\DepartmentInformationManagemetDbConstNames.cs" />
+    <Compile Include="CommonBLL\DbConstNames\LoginFormDbConstNames.cs" />
+    <Compile Include="CommonBLL\DbConstNames\MineDataSimpleDbConstNames.cs" />
+    <Compile Include="CommonBLL\DbConstNames\TunnelDefaultSelectDbConstNames.cs" />
+    <Compile Include="CommonBLL\DbConstNames\UserGroupInformationMangementDbConstNames.cs" />
+    <Compile Include="CommonBLL\DbConstNames\UserInformationDetailsManagementDbConstNames.cs" />
+    <Compile Include="CommonBLL\DbConstNames\UserInformationManagementDbConstNames.cs" />
+    <Compile Include="CommonBLL\DbConstNames\UserLoginInformationManagementDbConstNames.cs" />
+    <Compile Include="CommonBLL\PropertyBLL\MineDataSimpleBLL.cs" />
+    <Compile Include="CommonBLL\PropertyBLL\CoalSeamsBLL.cs" />
+    <Compile Include="CommonBLL\PropertyBLL\DepartmentInformationManagementBLL.cs" />
+    <Compile Include="CommonBLL\PropertyBLL\LoginFormBLL.cs" />
+    <Compile Include="5.WaningManagementBLL\PreWarningLastedResultQueryBLL.cs" />
+    <Compile Include="CommonBLL\PropertyBLL\TunnelDefaultSelect.cs" />
+    <Compile Include="CommonBLL\PropertyBLL\UserGroupInformationManagementBLL.cs" />
+    <Compile Include="CommonBLL\PropertyBLL\UserInformationDetailsManagementBLL.cs" />
+    <Compile Include="CommonBLL\PropertyBLL\UserInformationManagementBLL.cs" />
+    <Compile Include="CommonBLL\PropertyBLL\UserLoginInformationManagementBLL.cs" />
+    <Compile Include="CommonBLL\PropertyBLL\WorkingFaceSelect.cs" />
+    <Compile Include="PreWarningAnalysisResultBLL.cs" />
+    <Compile Include="PreWarningDataCommonBLL.cs" />
+    <Compile Include="PreWarningDataDbConstNames.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="3.GeologyMeasureBLL\PropertyBLL\TunnelHChuanBLL.cs" />
+    <Compile Include="3.GeologyMeasureBLL\DbConstNames\TunnelHChuanDbConstNames.cs" />
+    <Compile Include="TunnelUtils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="1.GasEmmisionBLL\GraphicBLL\" />
+    <Folder Include="2.MiningSchedulingBLL\GraphicBLL\" />
+    <Folder Include="3.GeologyMeasureBLL\GraphicBLL\" />
+    <Folder Include="5.WaningManagementBLL\GraphicBLL\" />
+    <Folder Include="5.WaningManagementBLL\PropertyBLL\" />
+    <Folder Include="CommonBLL\GraphicBLL\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LibCommon\LibCommon.csproj">
+      <Project>{2ebcde4b-a244-4cca-a1ae-1a884d81772b}</Project>
+      <Name>LibCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LibDatabase\LibDatabase.csproj">
+      <Project>{38b3be6b-bd0c-4108-9414-a728f5990a0c}</Project>
+      <Name>LibDatabase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LibEncryptDecrypt\LibEncryptDecrypt.csproj">
+      <Project>{123585d4-b4a2-4694-81e8-df9cdccc487f}</Project>
+      <Name>LibEncryptDecrypt</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LibEntity\LibEntity.csproj">
+      <Project>{28c303d9-18cb-42b3-b0fa-b9b126503176}</Project>
+      <Name>LibEntity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LibSocket\LibSocket.csproj">
+      <Project>{93547539-03e2-49c3-88fc-3ccd81942d5f}</Project>
+      <Name>LibSocket</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

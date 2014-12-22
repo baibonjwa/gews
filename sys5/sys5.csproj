@@ -1,0 +1,681 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{02BE8DB6-57BF-4585-B96A-ACEE3BBE0454}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>sys5</RootNamespace>
+    <AssemblyName>sys5</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>D:\GewsPublish\sys5\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>false</MapFileExtensions>
+    <UpdateUrl>\\192.168.1.119\publish\sys5\</UpdateUrl>
+    <ProductName>sys5-瓦斯预警系统管理平台</ProductName>
+    <PublisherName>沈阳煤科院</PublisherName>
+    <SuiteName>预警系统</SuiteName>
+    <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
+    <ApplicationRevision>14</ApplicationRevision>
+    <ApplicationVersion>0.10.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Debug\5.WarningManagement.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Release\5.WarningManagement.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>D2FA1188223AC8CE543469062BBF0110D2E51D95</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>5.WarningManagement_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.1.3.42154, Culture=neutral, PublicKeyToken=3a9cab8f8d22bfb7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Antlr.3.1.3.42154\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.ActiveRecord, Version=3.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Castle.Activerecord.3.0.0.1\lib\Net40\Castle.ActiveRecord.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.ActiveRecord.Web">
+      <HintPath>..\packages\Castle.Activerecord.3.0.0.1\lib\Net40\Castle.ActiveRecord.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Components.Validator, Version=2.5.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Castle.Components.Validator.2.5.0\lib\NET40\Castle.Components.Validator.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages\Castle.Core.3.3.1\lib\net40-client\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.BonusSkins.v13.2, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Data.v13.2, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Printing.v13.2.Core, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v13.2, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraBars.v13.2, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v13.2, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraScheduler.v13.2.Core, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="ESRI.ArcGIS.3DAnalyst, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.ADF.Local, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL" />
+    <Reference Include="ESRI.ArcGIS.Analyst3DTools, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL" />
+    <Reference Include="ESRI.ArcGIS.AxControls, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL" />
+    <Reference Include="ESRI.ArcGIS.Carto, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Controls, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.ConversionTools, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL" />
+    <Reference Include="ESRI.ArcGIS.DataSourcesFile, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.DataSourcesGDB, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Display, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.DisplayUI, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Geodatabase, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Geometry, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Geoprocessing, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Geoprocessor, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL" />
+    <Reference Include="ESRI.ArcGIS.GlobeCore, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Output, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.System, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.SystemUI, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Version, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="FarPoint.CalcEngine, Version=5.0.3518.2008, Culture=neutral, PublicKeyToken=327c3516b1b18457" />
+    <Reference Include="FarPoint.Excel, Version=5.0.3518.2008, Culture=neutral, PublicKeyToken=327c3516b1b18457" />
+    <Reference Include="FarPoint.PDF, Version=5.0.3518.2008, Culture=neutral, PublicKeyToken=327c3516b1b18457" />
+    <Reference Include="FarPoint.PluginCalendar.WinForms, Version=5.0.3518.2008, Culture=neutral, PublicKeyToken=327c3516b1b18457" />
+    <Reference Include="FarPoint.Win, Version=5.0.3518.2008, Culture=neutral, PublicKeyToken=327c3516b1b18457" />
+    <Reference Include="FarPoint.Win.Chart, Version=5.0.3518.2008, Culture=neutral, PublicKeyToken=327c3516b1b18457" />
+    <Reference Include="FarPoint.Win.Spread, Version=5.0.3518.2008, Culture=neutral, PublicKeyToken=327c3516b1b18457, processorArchitecture=MSIL" />
+    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Iesi.Collections.1.0.1\lib\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.Microsoft.Office.Core">
+      <HintPath>..\internalrefs\Interop.Microsoft.Office.Core.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Interop.SpeechLib, Version=5.4.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\internalrefs\Interop.SpeechLib.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\internalrefs\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\internalrefs\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\internalrefs\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=3.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NHibernate.3.0.0.4000\lib\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.ByteCode.Castle, Version=3.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NHibernate.3.0.0.4000\lib\NHibernate.ByteCode.Castle.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.Search, Version=0.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Castle.Activerecord.3.0.0.1\lib\Net40\NHibernate.Search.dll</HintPath>
+    </Reference>
+    <Reference Include="nini">
+      <HintPath>..\internalrefs\nini.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Data.Linq, Version=1.13.41.2, Culture=neutral, PublicKeyToken=cab60358ab4081ea, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NHibernate.3.0.0.4000\lib\Remotion.Data.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="stdole, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ImgPreview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImgPreview.Designer.cs">
+      <DependentUpon>ImgPreview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm_WM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm_WM.Designer.cs">
+      <DependentUpon>MainForm_WM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PreWarningLastedResultQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PreWarningLastedResultQuery.Designer.cs">
+      <DependentUpon>PreWarningLastedResultQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PreWarningResultDetailsQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PreWarningResultDetailsQuery.Designer.cs">
+      <DependentUpon>PreWarningResultDetailsQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PreWarningResultManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PreWarningResultManagement.Designer.cs">
+      <DependentUpon>PreWarningResultManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PreWarningResultQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PreWarningResultQuery.Designer.cs">
+      <DependentUpon>PreWarningResultQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PreWarningResultTable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PreWarningResultTable.Designer.cs">
+      <DependentUpon>PreWarningResultTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PreWarningResultTotalTable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PreWarningResultTotalTable.Designer.cs">
+      <DependentUpon>PreWarningResultTotalTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PreWarningRulesPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PreWarningRulesPanel.Designer.cs">
+      <DependentUpon>PreWarningRulesPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PreWarningRulesManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PreWarningRulesManagement.Designer.cs">
+      <DependentUpon>PreWarningRulesManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProbeInfoEntering.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProbeInfoEntering.Designer.cs">
+      <DependentUpon>ProbeInfoEntering.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProbeInfoManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProbeInfoManagement.Designer.cs">
+      <DependentUpon>ProbeInfoManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SetTunnelPreWarningRules.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SetTunnelPreWarningRules.Designer.cs">
+      <DependentUpon>SetTunnelPreWarningRules.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ShortMessage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShortMessage.Designer.cs">
+      <DependentUpon>ShortMessage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TeamInfoEntering.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TeamInfoEntering.Designer.cs">
+      <DependentUpon>TeamInfoEntering.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TeamManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TeamManagement.Designer.cs">
+      <DependentUpon>TeamManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TunnelPreWarningCalc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TunnelPreWarningCalc.Designer.cs">
+      <DependentUpon>TunnelPreWarningCalc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UploadImg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UploadImg.Designer.cs">
+      <DependentUpon>UploadImg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WarningResultAnalysis.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WarningResultAnalysis.Designer.cs">
+      <DependentUpon>WarningResultAnalysis.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="ImgPreview.resx">
+      <DependentUpon>ImgPreview.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm_WM.resx">
+      <DependentUpon>MainForm_WM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PreWarningLastedResultQuery.resx">
+      <DependentUpon>PreWarningLastedResultQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PreWarningResultDetailsQuery.resx">
+      <DependentUpon>PreWarningResultDetailsQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PreWarningResultManagement.resx">
+      <DependentUpon>PreWarningResultManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PreWarningResultQuery.resx">
+      <DependentUpon>PreWarningResultQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PreWarningResultTable.resx">
+      <DependentUpon>PreWarningResultTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PreWarningResultTotalTable.resx">
+      <DependentUpon>PreWarningResultTotalTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PreWarningRulesPanel.resx">
+      <DependentUpon>PreWarningRulesPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PreWarningRulesManagement.resx">
+      <DependentUpon>PreWarningRulesManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProbeInfoEntering.resx">
+      <DependentUpon>ProbeInfoEntering.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProbeInfoManagement.resx">
+      <DependentUpon>ProbeInfoManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="SetTunnelPreWarningRules.resx">
+      <DependentUpon>SetTunnelPreWarningRules.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ShortMessage.resx">
+      <DependentUpon>ShortMessage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TeamInfoEntering.resx">
+      <DependentUpon>TeamInfoEntering.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TeamManagement.resx">
+      <DependentUpon>TeamManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TunnelPreWarningCalc.resx">
+      <DependentUpon>TunnelPreWarningCalc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UploadImg.resx">
+      <DependentUpon>UploadImg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WarningResultAnalysis.resx">
+      <DependentUpon>WarningResultAnalysis.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="5.WarningManagement_TemporaryKey.pfx" />
+    <None Include="app.config" />
+    <Content Include="ARConfig.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ConfigDatabaseGIS.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="default.mxd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DefaultUser">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="FlashPoint\FlashPoint.dbf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="FlashPoint\FlashPoint.prj">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="FlashPoint\FlashPoint.sbn">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="FlashPoint\FlashPoint.sbx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="FlashPoint\FlashPoint.shp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="FlashPoint\FlashPoint.shp.LYF.12516.13204.sr.lock">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="FlashPoint\FlashPoint.shx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Interop.SpeechLib.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LibCommon.dll.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="local.mxd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="packages.config" />
+    <Content Include="FlashPoint\FlashPoint.shp.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PreWarningRules.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PanelFormName.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Content Include="sms.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="VedioCapture.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="瓦斯预警系统管理平台帮助文件.chm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="symbol.ServerStyle">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="UserInfo.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="综合柱状图.mxd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Library\GIS\GIS.csproj">
+      <Project>{7ff2375e-9594-4ee8-a3cd-40cf245e47fa}</Project>
+      <Name>GIS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Library\LibAbout\LibAbout.csproj">
+      <Project>{9ec74138-a934-432d-a3b6-42ec84052ff8}</Project>
+      <Name>LibAbout</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Library\LibBusiness\LibBusiness.csproj">
+      <Project>{4586c1e2-10a4-47af-8867-b1b32b0cdee5}</Project>
+      <Name>LibBusiness</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Library\LibCommonControl\LibCommonControl.csproj">
+      <Project>{c98cb9d1-8567-4539-b30f-79bf7654727e}</Project>
+      <Name>LibCommonControl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Library\LibCommonForm\LibCommonForm.csproj">
+      <Project>{e0db63e3-2420-4b72-99f8-776f8ed1d3ef}</Project>
+      <Name>LibCommonForm</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Library\LibCommon\LibCommon.csproj">
+      <Project>{2ebcde4b-a244-4cca-a1ae-1a884d81772b}</Project>
+      <Name>LibCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Library\LibConfig\LibConfig.csproj">
+      <Project>{697eed3c-3244-494d-b663-296cc80d4022}</Project>
+      <Name>LibConfig</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Library\LibDatabase\LibDatabase.csproj">
+      <Project>{38b3be6b-bd0c-4108-9414-a728f5990a0c}</Project>
+      <Name>LibDatabase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Library\LibEncryptDecrypt\LibEncryptDecrypt.csproj">
+      <Project>{123585d4-b4a2-4694-81e8-df9cdccc487f}</Project>
+      <Name>LibEncryptDecrypt</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Library\LibEntity\LibEntity.csproj">
+      <Project>{28c303d9-18cb-42b3-b0fa-b9b126503176}</Project>
+      <Name>LibEntity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Library\LibGeometry\LibGeometry.csproj">
+      <Project>{a55911aa-ac2b-4c4f-aa2a-ce839bd9afba}</Project>
+      <Name>LibGeometry</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Library\LibHttpClient\MyHttpClient.csproj">
+      <Project>{9e2955f4-17e0-433b-b966-616e671378a4}</Project>
+      <Name>MyHttpClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Library\LibLoginForm\LibLoginForm.csproj">
+      <Project>{ed482a03-e8d9-4a16-856f-be8f56b454c0}</Project>
+      <Name>LibLoginForm</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Library\LibPanels\LibPanels.csproj">
+      <Project>{fc8d5ce1-f721-401b-bac2-c265d6fcc13d}</Project>
+      <Name>LibPanels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Library\LibSocket\LibSocket.csproj">
+      <Project>{93547539-03e2-49c3-88fc-3ccd81942d5f}</Project>
+      <Name>LibSocket</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Library\LibXPorperty\LibXPorperty.csproj">
+      <Project>{1238b891-86ad-4851-97a2-0c0302e24bd8}</Project>
+      <Name>LibXPorperty</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\sys2\sys2.csproj">
+      <Project>{354D7147-356B-4453-B86A-B113A47271A2}</Project>
+      <Name>sys2</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="green.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Grey.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LoginBackground.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NoticeTxt.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="orange.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="red.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sys5.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="系统五关于图片.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <PublishFile Include="Microsoft.Office.Interop.Excel">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>call $(ProjectDir)CopyResourceFile.bat</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
