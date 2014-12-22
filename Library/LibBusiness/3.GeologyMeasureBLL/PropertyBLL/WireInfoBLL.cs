@@ -65,7 +65,7 @@ namespace LibBusiness
             sqlStr.Append(wireInfoEntity.CountDate + "','");
             sqlStr.Append(wireInfoEntity.Checker + "','");
             sqlStr.Append(wireInfoEntity.CheckDate + "','");
-            sqlStr.Append(wireInfoEntity.TunnelID+"')" );
+            sqlStr.Append(wireInfoEntity.Tunnel+"')" );
 
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
             bool bResult = db.OperateDB(sqlStr.ToString());
@@ -82,7 +82,7 @@ namespace LibBusiness
         {
             StringBuilder sqlStr = new StringBuilder();
             sqlStr.Append("UPDATE " + WireInfoDbConstNames.TABLE_NAME + " SET " + WireInfoDbConstNames.TUNNEL_ID + " ='");
-            sqlStr.Append(wireInfoEntity.TunnelID + "'," + WireInfoDbConstNames.WIRE_NAME + " = '");
+            sqlStr.Append(wireInfoEntity.Tunnel + "'," + WireInfoDbConstNames.WIRE_NAME + " = '");
             sqlStr.Append(wireInfoEntity.WireName + "',"  + WireInfoDbConstNames.WIRE_LEVEL + " = '");
             sqlStr.Append(wireInfoEntity.WireLevel + "'," + WireInfoDbConstNames.MEASURE_DATE + " = '");
             sqlStr.Append(wireInfoEntity.MeasureDate + "'," + WireInfoDbConstNames.VOBSERVER + " ='");
@@ -94,7 +94,7 @@ namespace LibBusiness
             //sqlStr.Append(tunnelID);
             //Fixed by Yanger_xy 2014.05.29
             sqlStr.Append(wireInfoEntity.CheckDate + "' WHERE " + WireInfoDbConstNames.ID + "=");
-            sqlStr.Append(wireInfoEntity.WireInfoID);
+            sqlStr.Append(wireInfoEntity.WireInfoId);
 
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
             bool bResult = db.OperateDB(sqlStr.ToString());
@@ -175,7 +175,7 @@ namespace LibBusiness
             {
                 try
                 {
-                    wireInfoEntity.WireInfoID = wireInfoID;
+                    wireInfoEntity.WireInfoId = wireInfoID;
                     wireInfoEntity.WireName = ds.Tables[0].Rows[0][WireInfoDbConstNames.WIRE_NAME].ToString();
                     wireInfoEntity.WireLevel = ds.Tables[0].Rows[0][WireInfoDbConstNames.WIRE_LEVEL].ToString();
                     wireInfoEntity.Vobserver = ds.Tables[0].Rows[0][WireInfoDbConstNames.VOBSERVER].ToString();
@@ -326,7 +326,7 @@ namespace LibBusiness
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
             bool bResult = false;
-            string sql = "DELETE FROM " + WireInfoDbConstNames.TABLE_NAME + " WHERE " + WireInfoDbConstNames.ID + " ='" + wireInfoEntity.WireInfoID + "'";
+            string sql = "DELETE FROM " + WireInfoDbConstNames.TABLE_NAME + " WHERE " + WireInfoDbConstNames.ID + " ='" + wireInfoEntity.WireInfoId + "'";
             bResult = db.OperateDB(sql);
             return bResult;
         }

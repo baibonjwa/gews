@@ -673,14 +673,14 @@ namespace UnderTerminal
             double distanceFromWirepoint = 0;
             LibEntity.WirePointInfo wirePointInfoEntityNew = new LibEntity.WirePointInfo();
             WirePointInfo wirePointInfoEntityOld = new WirePointInfo();
-            wirePointInfoEntityNew.ID = Convert.ToInt32(dgrdvDayReportJJ.CurrentRow.Cells[4].Value);
-            wirePointInfoEntityNew = WirePointBLL.selectWirePointInfoByWirePointId(wirePointInfoEntityNew.ID);
-            wirePointInfoEntityOld.ID = wirePointID;
-            wirePointInfoEntityOld = WirePointBLL.selectWirePointInfoByWirePointId(wirePointInfoEntityOld.ID);
+            wirePointInfoEntityNew.Id = Convert.ToInt32(dgrdvDayReportJJ.CurrentRow.Cells[4].Value);
+            wirePointInfoEntityNew = WirePointBLL.selectWirePointInfoByWirePointId(wirePointInfoEntityNew.Id);
+            wirePointInfoEntityOld.Id = wirePointID;
+            wirePointInfoEntityOld = WirePointBLL.selectWirePointInfoByWirePointId(wirePointInfoEntityOld.Id);
             if (wirePointID != 0)
             {
                 distance = Math.Sqrt(Math.Pow((wirePointInfoEntityNew.CoordinateX - wirePointInfoEntityOld.CoordinateX), 2) + Math.Pow((wirePointInfoEntityNew.CoordinateY - wirePointInfoEntityOld.CoordinateY), 2));
-                if (wirePointInfoEntityNew.ID < wirePointInfoEntityOld.ID)
+                if (wirePointInfoEntityNew.Id < wirePointInfoEntityOld.Id)
                 {
                     distanceFromWirepoint = jjjc + lastDistanceFromWirepoint + distance;
                 }
@@ -701,8 +701,8 @@ namespace UnderTerminal
                 {
                     if (int.TryParse(ds.Tables[0].Rows[0][DayReportJJDbConstNames.ID].ToString(), out minWirepoint))
                     {
-                        wirePointInfoEntityOld.ID = minWirepoint;
-                        wirePointInfoEntityOld = WirePointBLL.selectWirePointInfoByWirePointId(wirePointInfoEntityOld.ID);
+                        wirePointInfoEntityOld.Id = minWirepoint;
+                        wirePointInfoEntityOld = WirePointBLL.selectWirePointInfoByWirePointId(wirePointInfoEntityOld.Id);
                     }
                     distance = Math.Sqrt(Math.Pow((wirePointInfoEntityNew.CoordinateX - wirePointInfoEntityOld.CoordinateX), 2) + Math.Pow((wirePointInfoEntityNew.CoordinateY - wirePointInfoEntityOld.CoordinateY), 2));
                 }

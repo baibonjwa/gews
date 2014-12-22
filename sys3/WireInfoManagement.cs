@@ -367,7 +367,7 @@ namespace _3.GeologyMeasure
             //实体赋值
             setWireInfoEntityValue();
 
-            int tunnelID = WireInfoBLL.selectTunnelIDByWireInfoID(wireInfoEntity.WireInfoID);
+            int tunnelID = WireInfoBLL.selectTunnelIDByWireInfoID(wireInfoEntity.WireInfoId);
             tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(tunnelID);
 
             //自定义用控件用矿井信息编号
@@ -399,16 +399,16 @@ namespace _3.GeologyMeasure
                     (bool)cells[_rowDetailStartIndex + i, 0].Value == true)
                 {
                     //导线点ID
-                    wirePointInfoEntity.ID = _wirePointPrimaryKey[i];
+                    wirePointInfoEntity.Id = _wirePointPrimaryKey[i];
 
                     //导线点实体
-                    wirePointInfoEntity = WirePointBLL.selectWirePointInfoByWirePointId(wirePointInfoEntity.ID);
+                    wirePointInfoEntity = WirePointBLL.selectWirePointInfoByWirePointId(wirePointInfoEntity.Id);
 
                     //矿井编号
-                    wireInfoEntity.WireInfoID = wirePointInfoEntity.WireInfoID;
+                    wireInfoEntity = wirePointInfoEntity.WireInfo;
 
                     //巷道实体
-                    wireInfoEntity = WireInfoBLL.selectAllWireInfo(wireInfoEntity.WireInfoID);
+                    wireInfoEntity = WireInfoBLL.selectAllWireInfo(wireInfoEntity.WireInfoId);
                 }
             }
         }
@@ -430,17 +430,17 @@ namespace _3.GeologyMeasure
                     if (cells[_rowDetailStartIndex + i, 0].Value != null && (bool)cells[_rowDetailStartIndex + i, 0].Value == true)
                     {
                         //导线点ID
-                        wirePointInfoEntity.ID = _wirePointPrimaryKey[i];
+                        wirePointInfoEntity.Id = _wirePointPrimaryKey[i];
 
                         //导线点实体
-                        wirePointInfoEntity = WirePointBLL.selectWirePointInfoByWirePointId(wirePointInfoEntity.ID);
+                        wirePointInfoEntity = WirePointBLL.selectWirePointInfoByWirePointId(wirePointInfoEntity.Id);
 
                         //矿井编号
-                        wireInfoEntity.WireInfoID = wirePointInfoEntity.WireInfoID;
+                        wireInfoEntity = wirePointInfoEntity.WireInfo;
 
                         //导线实体
-                        wireInfoEntity = WireInfoBLL.selectAllWireInfo(wireInfoEntity.WireInfoID);
-                        DataSet ds = WirePointBLL.selectAllWirePointInfo(wireInfoEntity.WireInfoID);
+                        wireInfoEntity = WireInfoBLL.selectAllWireInfo(wireInfoEntity.WireInfoId);
+                        DataSet ds = WirePointBLL.selectAllWirePointInfo(wireInfoEntity.WireInfoId);
                         if (ds.Tables[0].Rows.Count > 0)
                         {
                             bResult = WirePointBLL.deleteWirePointInfo(wireInfoEntity);
@@ -497,7 +497,7 @@ namespace _3.GeologyMeasure
         /// <param name="sfpFaultageBIDArray">要删除导线点的绑定ID</param>
         private void DeleteWirePtByBID(WirePointInfo wirePointInfoEntity)
         {
-            if (wirePointInfoEntity.BindingID == "") return;
+            if (wirePointInfoEntity.BindingId == "") return;
 
             //1.获得当前编辑图层
             DrawSpecialCommon drawspecial = new DrawSpecialCommon();
@@ -510,7 +510,7 @@ namespace _3.GeologyMeasure
             }
 
             //2.删除导线点图元
-            DataEditCommon.DeleteFeatureByBId(featureLayer, wirePointInfoEntity.BindingID);
+            DataEditCommon.DeleteFeatureByBId(featureLayer, wirePointInfoEntity.BindingId);
         }
 
 
@@ -520,7 +520,7 @@ namespace _3.GeologyMeasure
         /// <param name="sfpFaultageBIDArray">要删除巷道的绑定ID</param>
         private void DeleteWirePtByBID(WireInfo wireInfoEntity)
         {
-            if (wireInfoEntity.TunnelID.ToString() == "") return;
+            if (wireInfoEntity.Tunnel.ToString() == "") return;
 
             //1.获得当前编辑图层
             DrawSpecialCommon drawspecial = new DrawSpecialCommon();
@@ -533,7 +533,7 @@ namespace _3.GeologyMeasure
             }
 
             //2.删除巷道图元
-            DataEditCommon.DeleteFeatureByBId(featureLayer, wireInfoEntity.TunnelID.ToString());
+            DataEditCommon.DeleteFeatureByBId(featureLayer, wireInfoEntity.Tunnel.ToString());
         }
 
         #endregion

@@ -5,18 +5,14 @@
 // 版本号：1.0
 // ******************************************************************
 
+using Castle.ActiveRecord;
+
 namespace LibEntity
 {
-    public class WirePointInfo
+    [ActiveRecord("T_WIRE_POINT")]
+    public class WirePointInfo : ActiveRecordBase<WirePointInfo>
     {
-        //导线点编号
-        //坐标X
-        //坐标Y
-        //坐标Z
-        //距左帮距离
-        //距右帮距离
-        //绑定导线编号
-        private int wireInfoID;
+        private WireInfo _wireInfo;
 
         /// <summary>
         ///     构造方法
@@ -31,83 +27,79 @@ namespace LibEntity
         /// <param name="src">导线点实体</param>
         public WirePointInfo(WirePointInfo src)
         {
-            WirePointID = src.WirePointID;
+            WirePointId = src.WirePointId;
             CoordinateX = src.CoordinateX;
             CoordinateY = src.CoordinateY;
             CoordinateZ = src.CoordinateZ;
             LeftDis = src.LeftDis;
             RightDis = src.RightDis;
-            wireInfoID = src.wireInfoID;
+            _wireInfo = src._wireInfo;
         }
 
-        //巷道ID
-        //距顶板距离
-        //距底板距离
+        /// <summary>
+        ///     主键
+        /// </summary>
+        [PrimaryKey(PrimaryKeyType.Identity, "ID")]
+        public int Id { get; set; }
+
+        public string WirePointId { get; set; }
 
         /// <summary>
         ///     距底板距离
         /// </summary>
+        [Property("DISTANCE_FROM_BOTTOM")]
         public double BottomDis { get; set; }
 
         /// <summary>
         ///     距顶板距离
         /// </summary>
+        [Property("DISTANCE_FROM_TOP")]
         public double TopDis { get; set; }
-
-        /// <summary>
-        ///     巷道ID
-        /// </summary>
-        public int TunnelID { get; set; }
-
-        /// <summary>
-        ///     主键
-        /// </summary>
-        public int ID { get; set; }
 
         /// <summary>
         ///     绑定导线编号
         /// </summary>
-        public int WireInfoID
+        [BelongsTo("WIRE_INFO_ID")]
+        public WireInfo WireInfo
         {
-            get { return wireInfoID; }
-            set { wireInfoID = value; }
+            get { return _wireInfo; }
+            set { _wireInfo = value; }
         }
-
-        //BID
-
-        /// <summary>
-        ///     导线点编号
-        /// </summary>
-        public string WirePointID { get; set; }
 
         /// <summary>
         ///     坐标X
         /// </summary>
+        [Property("COORDINATE_X")]
         public double CoordinateX { get; set; }
 
         /// <summary>
         ///     坐标Y
         /// </summary>
+        [Property("COORDINATE_Y")]
         public double CoordinateY { get; set; }
 
         /// <summary>
         ///     坐标Z
         /// </summary>
+        [Property("COORDINATE_Z")]
         public double CoordinateZ { get; set; }
 
         /// <summary>
         ///     距左帮距离
         /// </summary>
+        [Property("DISTANCE_FROM_THE_LEFT")]
         public double LeftDis { get; set; }
 
         /// <summary>
         ///     距右帮距离
         /// </summary>
+        [Property("DISTANCE_FROM_THE_RIGHT")]
         public double RightDis { get; set; }
 
         /// <summary>
         ///     绑定ID
         /// </summary>
-        public string BindingID { get; set; }
+        [Property("BINDINGID")]
+        public string BindingId { get; set; }
     }
 }

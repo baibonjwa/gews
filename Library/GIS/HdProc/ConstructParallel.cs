@@ -317,7 +317,7 @@ namespace GIS.HdProc
                     fealin.Shape = plin;
                     if (cols != null)
                     {
-                        string name = cols[i].WirePointID;
+                        string name = cols[i].WirePointId;
                         int NamePos = fealin.Fields.FindField(GIS_Const.FIELD_NAME);
                         fealin.set_Value(NamePos, name);
                     }
@@ -462,7 +462,7 @@ namespace GIS.HdProc
                         feapnt.Shape = pnts[i];
                         if (pntinfos != null)
                         {
-                            string name = pntinfos[i].WirePointID;
+                            string name = pntinfos[i].WirePointId;
                             int NamePos = feapnt.Fields.FindField(GIS_Const.FIELD_NAME);
                             feapnt.set_Value(NamePos, name);
                         }

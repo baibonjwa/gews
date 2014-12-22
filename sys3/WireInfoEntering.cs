@@ -169,7 +169,7 @@ namespace _3.GeologyMeasure
         {
             addInfo();
             _itemCount = 0;
-            _dsWirePoint = WirePointBLL.selectAllWirePointInfo(wireInfoEntity.WireInfoID);
+            _dsWirePoint = WirePointBLL.selectAllWirePointInfo(wireInfoEntity.WireInfoId);
             if (_dsWirePoint.Tables[0].Rows.Count > 0)
             {
                 wpiEntity = new WirePointInfo[_dsWirePoint.Tables[0].Rows.Count];
@@ -179,7 +179,7 @@ namespace _3.GeologyMeasure
                     int wpiID = Convert.ToInt32(_dsWirePoint.Tables[0].Rows[i][WirePointDbConstNames.ID].ToString());
                     wpiEntity[i] = WirePointBLL.returnWirePointInfo(wpiID);
 
-                    dgrdvWire[0, i].Value = wpiEntity[i].WirePointID;
+                    dgrdvWire[0, i].Value = wpiEntity[i].WirePointId;
                     dgrdvWire[1, i].Value = wpiEntity[i].CoordinateX;
                     dgrdvWire[2, i].Value = wpiEntity[i].CoordinateY;
                     dgrdvWire[3, i].Value = wpiEntity[i].CoordinateZ;
@@ -449,7 +449,7 @@ namespace _3.GeologyMeasure
                 pntcols.Add(pnt);
             }
             //清除图层上对应的信息
-            string sql = "\"" + GIS.GIS_Const.FIELD_HDID + "\"='" + wireInfoEntity.TunnelID.ToString() + "'";
+            string sql = "\"" + GIS.GIS_Const.FIELD_HDID + "\"='" + wireInfoEntity.Tunnel.ToString() + "'";
             Global.commonclss.DelFeatures(Global.pntlyr, sql);
             Global.commonclss.DelFeatures(Global.pntlinlyr, sql);
             Global.commonclss.DelFeatures(Global.centerlyr, sql);
@@ -516,7 +516,7 @@ namespace _3.GeologyMeasure
                 for (int i = 0; i < lstWPIE.Count; i++)
                 {
                     wirePtInfo = lstWPIE[i];
-                    DataEditCommon.DeleteFeatureByBId(featureLayer, wirePtInfo.BindingID);
+                    DataEditCommon.DeleteFeatureByBId(featureLayer, wirePtInfo.BindingId);
                 }
             }
 
@@ -527,7 +527,7 @@ namespace _3.GeologyMeasure
                 pt.Y = wirePtInfo.CoordinateY;
                 pt.Z = wirePtInfo.CoordinateZ;
 
-                drawWirePt.CreatePoint(featureLayer, pt, wirePtInfo.BindingID);///绘制点
+                drawWirePt.CreatePoint(featureLayer, pt, wirePtInfo.BindingId);///绘制点
             }
         }
 
@@ -628,7 +628,7 @@ namespace _3.GeologyMeasure
         /// </summary>
         private void setWireInfoEntity()
         {
-            wireInfoEntity.TunnelID = selectTunnelUserControl1.ITunnelId; ;
+            wireInfoEntity.Tunnel.TunnelId = selectTunnelUserControl1.ITunnelId; ;
             //tunnelEntity = TunnelInfoBLL.selectTunnelInfoByTunnelID(wireInfoEntity.Tunnel);
             //导线名称
             wireInfoEntity.WireName = txtWireName.Text;
@@ -669,14 +669,14 @@ namespace _3.GeologyMeasure
             {
                 if (i < wpiEntity.Length)
                 {
-                    wirePointInfoEntity.ID = wpiEntity[i].ID;
+                    wirePointInfoEntity.Id = wpiEntity[i].Id;
                 }
             }
 
             //导线点编号
             if (this.dgrdvWire.Rows[i].Cells[0] != null)
             {
-                wirePointInfoEntity.WirePointID = this.dgrdvWire.Rows[i].Cells[0].Value.ToString();
+                wirePointInfoEntity.WirePointId = this.dgrdvWire.Rows[i].Cells[0].Value.ToString();
             }
             //坐标X
             if (this.dgrdvWire.Rows[i].Cells[1].Value != null)
@@ -741,7 +741,7 @@ namespace _3.GeologyMeasure
                     _tmpDouble = 0;
                 }
             }
-            wirePointInfoEntity.WireInfoID = wireInfoEntity.WireInfoID;
+            wirePointInfoEntity.WireInfo.WireInfoId = wireInfoEntity.WireInfoId;
 
             return wirePointInfoEntity;
         }
@@ -775,7 +775,7 @@ namespace _3.GeologyMeasure
                 bResult = true;
             }
             //导线编号
-            wireInfoEntity.WireInfoID = Convert.ToInt32(WireInfoBLL.selectAllWireInfo(BasicInfoManager.getInstance().getTunnelByID(wireInfoEntity.TunnelID)).Tables[0].Rows[0][WireInfoDbConstNames.ID]);
+            wireInfoEntity.WireInfoId = Convert.ToInt32(WireInfoBLL.selectAllWireInfo(BasicInfoManager.getInstance().getTunnelByID(wireInfoEntity.Tunnel.TunnelId)).Tables[0].Rows[0][WireInfoDbConstNames.ID]);
             //导线点信息登陆
             List<WirePointInfo> wirePointInfoEntityList = new List<WirePointInfo>();
             for (int i = 0; i < this.dgrdvWire.RowCount; i++)
@@ -789,7 +789,7 @@ namespace _3.GeologyMeasure
                     break;
                 }
 
-                wirePointInfoEntity.BindingID = IDGenerator.NewBindingID();
+                wirePointInfoEntity.BindingId = IDGenerator.NewBindingID();
 
                 wirePointInfoEntityList.Add(wirePointInfoEntity);
             }
@@ -858,7 +858,7 @@ namespace _3.GeologyMeasure
                     {
                         //超出数量部分做添加操作
                         //BindingID
-                        wirePointInfoEnt[j].BindingID = IDGenerator.NewBindingID();
+                        wirePointInfoEnt[j].BindingId = IDGenerator.NewBindingID();
                         //添加导线点
                         bResult = WirePointBLL.insertWirePointInfo(wirePointInfoEnt[j]);
                         //socket
@@ -878,8 +878,8 @@ namespace _3.GeologyMeasure
                 {
                     for (int i = dgrdvWire.Rows.Count - 1; i < _itemCount; i++)
                     {
-                        wirePointInfoEntity.ID = Convert.ToInt32(_dsWirePoint.Tables[0].Rows[i][WirePointDbConstNames.ID].ToString());
-                        wireInfoEntity.WireInfoID = Convert.ToInt32(_dsWirePoint.Tables[0].Rows[i][WirePointDbConstNames.WIRE_INFO_ID].ToString());
+                        wirePointInfoEntity.Id = Convert.ToInt32(_dsWirePoint.Tables[0].Rows[i][WirePointDbConstNames.ID].ToString());
+                        wireInfoEntity.WireInfoId = Convert.ToInt32(_dsWirePoint.Tables[0].Rows[i][WirePointDbConstNames.WIRE_INFO_ID].ToString());
                         //只剩一个空行时，即所有导线点信息全被删除时
                         //删除导线，导线点
                         if (dgrdvWire.Rows.Count == 1)
@@ -976,7 +976,7 @@ namespace _3.GeologyMeasure
                 if (this.Text == Const_GM.WIRE_INFO_ADD)
                 {
                     //导线点是否存在
-                    if (new WireInfoBLL().isWirePointExist(dgrdvWire.Rows[i].Cells[0].Value.ToString(), wireInfoEntity.WireInfoID))
+                    if (new WireInfoBLL().isWirePointExist(dgrdvWire.Rows[i].Cells[0].Value.ToString(), wireInfoEntity.WireInfoId))
                     {
                         cell.Style.BackColor = Const.ERROR_FIELD_COLOR;
                         Alert.alert(Const_GM.WIRE_POINT_ID + Const.MSG_ALREADY_HAVE + Const.SIGN_EXCLAMATION_MARK);
@@ -1326,9 +1326,9 @@ namespace _3.GeologyMeasure
                         //巷道信息
                         tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(tunnelEntity.TunnelId);
                         //导线ID
-                        wireInfoEntity.WireInfoID = Convert.ToInt32(WireInfoBLL.selectAllWireInfo(tunnelEntity).Tables[0].Rows[0][WireInfoDbConstNames.ID]);
+                        wireInfoEntity.WireInfoId = Convert.ToInt32(WireInfoBLL.selectAllWireInfo(tunnelEntity).Tables[0].Rows[0][WireInfoDbConstNames.ID]);
                         //导线信息
-                        wireInfoEntity = WireInfoBLL.selectAllWireInfo(wireInfoEntity.WireInfoID);
+                        wireInfoEntity = WireInfoBLL.selectAllWireInfo(wireInfoEntity.WireInfoId);
                         _arr[0] = tunnelEntity.WorkingFace.MiningArea.Horizontal.Mine.MineId;
                         _arr[1] = tunnelEntity.WorkingFace.MiningArea.Horizontal.HorizontalId;
                         _arr[2] = tunnelEntity.WorkingFace.MiningArea.MiningAreaId;

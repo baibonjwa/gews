@@ -1,39 +1,48 @@
-﻿namespace LibEntity
+﻿using Castle.ActiveRecord;
+
+namespace LibEntity
 {
     /// <summary>
     ///     工作时间类
     /// </summary>
-    public class WorkingTime
+    [ActiveRecord("T_WORK_TIME")]
+    public class WorkingTime : ActiveRecordBase<WorkingTime>
     {
-        private string _strWorkTimeFrom = "";
-        private string _strWorkTimeName = "";
-        private string _strWorkTimeTo = "";
+        public WorkingTime()
+        {
+            WorkTimeTo = "";
+            WorkTimeFrom = "";
+            WorkTimeName = "";
+        }
+
+        /// <summary>
+        ///     获取设置工作制Id
+        /// </summary>
+        [PrimaryKey(PrimaryKeyType.Identity, "WORK_TIME_ID")]
+        public string Id { get; set; }
+
+        /// <summary>
+        ///     获取设置工作制制式类别
+        /// </summary>
+        [Property("WORK_TIME_GROUP_ID")]
+        public string WorkTimeGroupId { get; set; }
 
         /// <summary>
         ///     获取设置工作制名称
         /// </summary>
-        public string WorkTimeName
-        {
-            get { return _strWorkTimeName; }
-            set { _strWorkTimeName = value; }
-        }
+        [Property("WORK_TIME_NAME")]
+        public string WorkTimeName { get; set; }
 
         /// <summary>
         ///     获取设置工作起始时间
         /// </summary>
-        public string WorkTimeFrom
-        {
-            get { return _strWorkTimeFrom; }
-            set { _strWorkTimeFrom = value; }
-        }
+        [Property("WORK_TIME_FROM")]
+        public string WorkTimeFrom { get; set; }
 
         /// <summary>
         ///     获取设置工作终止时间
         /// </summary>
-        public string WorkTimeTo
-        {
-            get { return _strWorkTimeTo; }
-            set { _strWorkTimeTo = value; }
-        }
+        [Property("WORK_TIME_TO")]
+        public string WorkTimeTo { get; set; }
     }
 }
