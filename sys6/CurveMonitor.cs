@@ -97,7 +97,7 @@ namespace UnderTerminal
         public int TunnelId
         {
             get { return this.tunnelId; }
-            set { this.tunnelId = value;}
+            set { this.tunnelId = value; }
         }
 
         public string TunnelName
@@ -206,17 +206,17 @@ namespace UnderTerminal
         /// </summary>
         /// <param name="iProbeId"></param>
         /// <returns></returns>
-        public static DataSet getLatest2RowsData(string iProbeId)
-        {
-            StringBuilder sqlStr = new StringBuilder();
-            sqlStr.Append("SELECT TOP 2 * FROM " + GasConcentrationProbeDataDbConstNames.TABLE_NAME);
-            sqlStr.Append(" WHERE " + GasConcentrationProbeDataDbConstNames.PROBE_ID + " = " + iProbeId);
-            sqlStr.Append(" ORDER BY " + GasConcentrationProbeDataDbConstNames.PROBE_DATA_ID + " DESC");
+        //public static DataSet getLatest2RowsData(string iProbeId)
+        //{
+        //    StringBuilder sqlStr = new StringBuilder();
+        //    sqlStr.Append("SELECT TOP 2 * FROM " + GasConcentrationProbeDataDbConstNames.TABLE_NAME);
+        //    sqlStr.Append(" WHERE " + GasConcentrationProbeDataDbConstNames.PROBE_ID + " = " + iProbeId);
+        //    sqlStr.Append(" ORDER BY " + GasConcentrationProbeDataDbConstNames.PROBE_DATA_ID + " DESC");
 
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GasEmissionDB);
-            DataSet ds = db.ReturnDS(sqlStr.ToString());
-            return ds;
-        }
+        //    ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GasEmissionDB);
+        //    DataSet ds = db.ReturnDS(sqlStr.ToString());
+        //    return ds;
+        //}
 
         private void updateT2Data()
         {
@@ -226,11 +226,10 @@ namespace UnderTerminal
                 return;
             }
 
-            DataSet ds = getLatest2RowsData(_T2Id);
-            DateTime time = Convert.ToDateTime(ds.Tables[0].Rows[0][GasConcentrationProbeDataDbConstNames.RECORD_TIME].ToString());
-            double value0 = Convert.ToDouble(ds.Tables[0].Rows[0][GasConcentrationProbeDataDbConstNames.PROBE_VALUE].ToString());
-            double value1 = Convert.ToDouble(ds.Tables[0].Rows[1][GasConcentrationProbeDataDbConstNames.PROBE_VALUE].ToString());
-
+            GasConcentrationProbeData[] datas = GasConcentrationProbeData.FindNewRealData(_T2Id, 2);
+            DateTime time = datas[0].RecordTime;
+            double value0 = datas[0].ProbeValue;
+            double value1 = datas[1].ProbeValue;
             // 判断是否是最新数据
             if (time != this._LastTimeT2)
             {
@@ -247,11 +246,11 @@ namespace UnderTerminal
         // 同一工序下，瓦斯浓度变化值N
         private void updateMNData()
         {
-            DataSet ds = getLatest2RowsData(this.currentProbeId);
-            DateTime time = Convert.ToDateTime(ds.Tables[0].Rows[0][GasConcentrationProbeDataDbConstNames.RECORD_TIME].ToString());
-            DateTime time1 = Convert.ToDateTime(ds.Tables[0].Rows[1][GasConcentrationProbeDataDbConstNames.RECORD_TIME].ToString());
-            double value = Convert.ToDouble(ds.Tables[0].Rows[0][GasConcentrationProbeDataDbConstNames.PROBE_VALUE].ToString());
-            double value1 = Convert.ToDouble(ds.Tables[0].Rows[1][GasConcentrationProbeDataDbConstNames.PROBE_VALUE].ToString());
+            GasConcentrationProbeData[] datas = GasConcentrationProbeData.FindNewRealData(currentProbeId, 2);
+            DateTime time = datas[0].RecordTime;
+            DateTime time1 = datas[1].RecordTime;
+            double value = datas[0].ProbeValue;
+            double value1 = datas[1].ProbeValue;
 
             double valueN = value - value1;
 
@@ -284,32 +283,6 @@ namespace UnderTerminal
         }
 
         #endregion
-
-
-        /// <summary>
-        /// 获取瓦斯浓度数据
-        /// </summary>
-        /// <returns></returns>
-        private DataSet getData()
-        {
-            StringBuilder sqlStr = new StringBuilder();
-            sqlStr.Append("SELECT ");
-            sqlStr.Append("* ");
-            sqlStr.Append("FROM ");
-            sqlStr.Append(GasConcentrationProbeDataDbConstNames.TABLE_NAME + " ");
-            sqlStr.Append("WHERE ");
-            sqlStr.Append(GasConcentrationProbeDataDbConstNames.PROBE_ID + " = " + this.cbxSensors.SelectedValue + " ");
-            //sqlStr.Append("AND ");
-            //sqlStr.Append(GasConcentrationProbeDataDbConstNames.RECORD_TIME + " >= '" + this._dateTimeStart.Text + "' ");
-            //sqlStr.Append("AND ");
-            //sqlStr.Append(GasConcentrationProbeDataDbConstNames.RECORD_TIME + " <= '" + this._dateTimeEnd.Text + "' ");
-            sqlStr.Append("ORDER BY RECORD_TIME ");
-
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GasEmissionDB);
-            DataSet ds = db.ReturnDS(sqlStr.ToString());
-
-            return ds;
-        }
 
         private void btnExit_Click(object sender, EventArgs e)
         {

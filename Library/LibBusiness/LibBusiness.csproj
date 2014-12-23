@@ -151,10 +151,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="1.GasEmmisionBLL\DbConstNames\GasConcentrationProbeDataDbConstNames.cs" />
     <Compile Include="1.GasEmmisionBLL\DbConstNames\ProbeManageDbConstNames.cs" />
     <Compile Include="1.GasEmmisionBLL\DbConstNames\ProbeTypeDbConstNames.cs" />
-    <Compile Include="1.GasEmmisionBLL\PropertyBLL\GasConcentrationProbeDataBLL.cs" />
     <Compile Include="1.GasEmmisionBLL\PropertyBLL\ProbeManageBLL.cs" />
     <Compile Include="1.GasEmmisionBLL\PropertyBLL\ProbeTypeBLL.cs" />
     <Compile Include="2.MiningSchedulingBLL\DbConstNames\DayReportHCDbConstNames.cs" />

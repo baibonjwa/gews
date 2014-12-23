@@ -86,11 +86,11 @@ namespace LibEntity
         }
 
 
-        public static CoalExistence[] SlicedFindByCondition(int firstResult, int maxResult, int tunnelId,
+        public static CoalExistence[] SlicedFindByTunnelIdAndTime(int firstResult, int maxResult, int tunnelId,
             DateTime startTime, DateTime endTime)
         {
             CoalExistence[] results;
-            var criterion = new List<ICriterion> { Restrictions.Eq("Tunnel.Tunnel", tunnelId) };
+            var criterion = new List<ICriterion> { Restrictions.Eq("Tunnel.TunnelId", tunnelId) };
             if (startTime != DateTime.MinValue && endTime != DateTime.MinValue)
             {
                 criterion.Add(Restrictions.Between("Datetime", startTime, endTime));

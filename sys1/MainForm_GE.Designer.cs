@@ -2,6 +2,7 @@
 using System.Data;
 using LibBusiness;
 using LibCommonControl;
+using LibEntity;
 
 namespace _1.GasEmission
 {
@@ -1461,46 +1462,5 @@ namespace _1.GasEmission
         private DevExpress.XtraBars.BarButtonItem bbiBadDataEdit;
         private System.Windows.Forms.Label _lblLoading;
 
-        /// <summary>
-        /// 添加T2瓦斯浓度平均增加值
-        /// </summary>
-        /// <param name="tChart"></param>
-        /// <param name="ds"></param>
-        private void addDataToTeeChartT2(Steema.TeeChart.TChart tChart, DataSet ds)
-        {
-            int sqlCnt = ds.Tables[0].Rows.Count;
-            double value = 0;
-            DateTime time = new DateTime();
-            double sumValue = 0;
-
-            double maxVertValue = 0;
-            double minVertValue = 0;
-
-            for (int i = 0; i < sqlCnt; i++)
-            {
-                if ((i + 1) != ds.Tables[0].Rows.Count)
-                {
-                    sumValue = sumValue +
-                               (Convert.ToDouble(ds.Tables[0].Rows[i + 1][GasConcentrationProbeDataDbConstNames.PROBE_VALUE])
-                                - Convert.ToDouble(ds.Tables[0].Rows[i][GasConcentrationProbeDataDbConstNames.PROBE_VALUE]));
-
-                    value = sumValue / (i + 1);
-                    time = Convert.ToDateTime(ds.Tables[0].Rows[i + 1][GasConcentrationProbeDataDbConstNames.RECORD_TIME]);
-
-                    if (value > maxVertValue)
-                    {
-                        maxVertValue = value;
-                    }
-
-                    if (value < minVertValue)
-                    {
-                        minVertValue = value;
-                    }
-
-                    tChart.Series[0].Add(time, value);
-                }
-            }
-            tChart.Series[0].GetVertAxis.SetMinMax(minVertValue - 1, maxVertValue + 1);
-        }
     }
 }

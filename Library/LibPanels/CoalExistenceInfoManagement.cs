@@ -98,7 +98,7 @@ namespace LibPanels
             int iStartIndex = dataPager1.getStartIndex();
             int iEndIndex = dataPager1.getEndIndex();
 
-            coalExistences = CoalExistence.SlicedFindByCondition(iStartIndex, iEndIndex, _queryConditions.TunnelId, Convert.ToDateTime(_queryConditions.DefaultStartTime),
+            coalExistences = CoalExistence.SlicedFindByTunnelIdAndTime(iStartIndex, iEndIndex, _queryConditions.TunnelId, Convert.ToDateTime(_queryConditions.DefaultStartTime),
    Convert.ToDateTime(_queryConditions.DefaultEndTime));
 
             rowsCount = coalExistences.Length;

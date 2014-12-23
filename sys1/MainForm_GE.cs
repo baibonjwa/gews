@@ -20,13 +20,15 @@ using LibCommon;
 using LibBusiness;
 using LibDatabase;
 using LibAbout;
+using LibEntity;
 using Steema.TeeChart;
 using TeeChartWrapper;
 using System.Threading;
+using DepartmentInformation = LibCommonForm.DepartmentInformation;
 
 namespace _1.GasEmission
 {
-    public partial class MainFormGe 
+    public partial class MainFormGe
     {
         private int _updateFrequency; // 10s
 
@@ -306,12 +308,12 @@ namespace _1.GasEmission
             _dgvData.Rows.Clear();
 
             // 获取指定探头的旧数据 ----------用来填充曲线。
-            var dsData = GetOldDataByProbeId(_currentProbeId);
+            var dsData = GasConcentrationProbeData.FindHistaryData(_currentProbeId);
             AddDataSet2TeeChart(tChartM, dsData, "M");
             AddDataSet2TeeChart(tChartN, dsData, "N");
             if (!String.IsNullOrEmpty(_t2Id))
             {
-                var ds = GetOldDataByProbeId(_t2Id);
+                var ds = GasConcentrationProbeData.FindHistaryData(_t2Id);
                 AddDataSet2TeeChart(tChartT2, ds, "T2");
             }
 
@@ -350,10 +352,10 @@ namespace _1.GasEmission
         {
             if (_t2Id == string.Empty)
                 return;
-            var ds = GetLatest2RowsData(_t2Id);
-            var time = Convert.ToDateTime(ds.Tables[0].Rows[0][GasConcentrationProbeDataDbConstNames.RECORD_TIME].ToString());
-            var value0 = Convert.ToDouble(ds.Tables[0].Rows[0][GasConcentrationProbeDataDbConstNames.PROBE_VALUE].ToString());
-            var value1 = Convert.ToDouble(ds.Tables[0].Rows[1][GasConcentrationProbeDataDbConstNames.PROBE_VALUE].ToString());
+            var datas = GasConcentrationProbeData.FindNewRealData(_t2Id, 2);
+            var time = datas[0].RecordTime;
+            var value0 = datas[0].ProbeValue;
+            var value1 = datas[1].ProbeValue;
 
             // 判断是否是最新数据
             if (time == _lastTimeT2) return;
@@ -367,10 +369,10 @@ namespace _1.GasEmission
         // 同一工序下，瓦斯浓度变化值N
         private void UpdateMnData()
         {
-            DataSet ds = GetLatest2RowsData(_currentProbeId);
-            DateTime time = Convert.ToDateTime(ds.Tables[0].Rows[0][GasConcentrationProbeDataDbConstNames.RECORD_TIME].ToString());
-            double value = Convert.ToDouble(ds.Tables[0].Rows[0][GasConcentrationProbeDataDbConstNames.PROBE_VALUE].ToString());
-            double value1 = Convert.ToDouble(ds.Tables[0].Rows[1][GasConcentrationProbeDataDbConstNames.PROBE_VALUE].ToString());
+            var datas = GasConcentrationProbeData.FindNewRealData(_currentProbeId, 2);
+            DateTime time = datas[0].RecordTime;
+            double value = datas[0].ProbeValue;
+            double value1 = datas[1].ProbeValue;
 
             double valueN = value - value1;
 
@@ -406,13 +408,13 @@ namespace _1.GasEmission
             }
         }
 
-        private void AddDataSet2TeeChart(TChart tChart, DataSet ds, string type)
+        private void AddDataSet2TeeChart(TChart tChart, GasConcentrationProbeData[] datas, string type)
         {
             bool bReturn = false;
 
-            if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            if (datas.Length > 0)
             {
-                int sqlCnt = ds.Tables[0].Rows.Count;
+                int sqlCnt = datas.Length;
                 // 禁止自动生成列(※位置不可变)
                 _dgvData.AutoGenerateColumns = false;
                 tChart.Series[0].Clear();
@@ -428,8 +430,8 @@ namespace _1.GasEmission
 
                 // 重新设置X轴的最大值和最小值
                 // 如果数据量非常大的时候，一屏的数据将会非常密集，影响观察效果，因此需要设置合适的时间轴范围。
-                DateTime startTime = Convert.ToDateTime(ds.Tables[0].Rows[0][GasConcentrationProbeDataDbConstNames.RECORD_TIME]);
-                DateTime endTime = Convert.ToDateTime(ds.Tables[0].Rows[sqlCnt - 1][GasConcentrationProbeDataDbConstNames.RECORD_TIME]);
+                DateTime startTime = datas[0].RecordTime;
+                DateTime endTime = datas[sqlCnt - 1].RecordTime;
 
                 var ts1 = new TimeSpan(startTime.Ticks);
                 var ts2 = new TimeSpan(endTime.Ticks);
@@ -460,7 +462,7 @@ namespace _1.GasEmission
                 //// 设置Y轴间距
                 tChart.Axes.Left.Increment = 0.1;
 
-                AddDataToTeeChart(tChart, ds, type);
+                AddDataToTeeChart(tChart, datas, type);
 
                 // 重绘
                 tChart.AutoRepaint = true;
@@ -475,19 +477,19 @@ namespace _1.GasEmission
             }
         }
 
-        private void AddDataToTeeChart(TChart tChart, DataSet ds, string type)
+        private void AddDataToTeeChart(TChart tChart, GasConcentrationProbeData[] datas, string type)
         {
             if (type == "M")
             {
-                AddDataToTeeChartM(tChart, ds);
+                AddDataToTeeChartM(tChart, datas);
             }
             else if (type == "N")
             {
-                addDataToTeeChartN(tChart, ds);
+                addDataToTeeChartN(tChart, datas);
             }
             else if (type == "T2")
             {
-                addDataToTeeChartT2(tChart, ds);
+                addDataToTeeChartT2(tChart, datas);
             }
         }
 
@@ -497,9 +499,9 @@ namespace _1.GasEmission
         /// </summary>
         /// <param name="tChart">TeeChart图表</param>
         /// <param name="ds">数据集</param>
-        private void AddDataToTeeChartM(TChart tChart, DataSet ds)
+        private void AddDataToTeeChartM(TChart tChart, GasConcentrationProbeData[] datas)
         {
-            int sqlCnt = ds.Tables[0].Rows.Count;
+            int sqlCnt = datas.Length;
 
             double maxVertValue = 0;
             double minVertValue = 0;
@@ -507,8 +509,8 @@ namespace _1.GasEmission
             for (int i = sqlCnt - 1; i >= 0; i--)
             {
 
-                double value = Convert.ToDouble(ds.Tables[0].Rows[i][GasConcentrationProbeDataDbConstNames.PROBE_VALUE]);
-                DateTime time = Convert.ToDateTime(ds.Tables[0].Rows[i][GasConcentrationProbeDataDbConstNames.RECORD_TIME]);
+                double value = datas[i].ProbeValue;
+                DateTime time = datas[i].RecordTime;
 
                 if (value > maxVertValue)
                 {
@@ -554,23 +556,19 @@ namespace _1.GasEmission
         /// </summary>
         /// <param name="tChart"></param>
         /// <param name="ds"></param>
-        private void addDataToTeeChartN(TChart tChart, DataSet ds)
+        private void addDataToTeeChartN(TChart tChart, GasConcentrationProbeData[] datas)
         {
-            int sqlCnt = ds.Tables[0].Rows.Count;
+            int sqlCnt = datas.Length;
 
             double maxVertValue = 0;
             double minVertValue = 0;
 
             for (int i = 0; i < sqlCnt; i++)
             {
-                if ((i + 1) != ds.Tables[0].Rows.Count)
+                if ((i + 1) != datas.Length)
                 {
-                    double value = Convert.ToDouble(
-                        ds.Tables[0].Rows[i + 1][GasConcentrationProbeDataDbConstNames.PROBE_VALUE])
-                                   -
-                                   Convert.ToDouble(ds.Tables[0].Rows[i][GasConcentrationProbeDataDbConstNames.PROBE_VALUE]
-                                       );
-                    DateTime time = Convert.ToDateTime(ds.Tables[0].Rows[i + 1][GasConcentrationProbeDataDbConstNames.RECORD_TIME]);
+                    double value = datas[i + 1].ProbeValue - datas[i].ProbeValue;
+                    DateTime time = datas[i + 1].RecordTime;
 
                     if (value > maxVertValue)
                     {
@@ -665,16 +663,12 @@ namespace _1.GasEmission
                 _rbtnRealtime.Enabled = false;
                 _rbtnHistory.Enabled = false;
             }));
-            DataSet ds = getHistoryData(
-                            probeName,
-                            dateTimeStart,
-                            datetimeEnd
-                            );
+            GasConcentrationProbeData[] datas = GasConcentrationProbeData.FindHistaryData(probeName, dateTimeStart, datetimeEnd);
 
             // load监控系统原始数据M历史数据
-            LoadHistoryDataM(tChartM, ds);
+            LoadHistoryDataM(tChartM, datas);
             // load同一工序条件下瓦斯浓度变化值N历史数据
-            LoadHistoryDataN(tChartN, ds);
+            LoadHistoryDataN(tChartN, datas);
             // loadT2瓦斯浓度平均增加值Q历史数据
             LoadHistoryDataT2(tChartT2);
 
@@ -694,14 +688,14 @@ namespace _1.GasEmission
         /// <summary>
         /// load瓦斯浓度历史数据--监控系统原始数据M
         /// </summary>
-        private void LoadHistoryDataM(TChart tChart, DataSet ds)
+        private void LoadHistoryDataM(TChart tChart, GasConcentrationProbeData[] datas)
         {
-            int sqlCnt = ds.Tables[0].Rows.Count;
+            int sqlCnt = datas.Length;
 
             if (sqlCnt > 0)
             {
                 tChart.Header.Text = "监控系统原始数据M";
-                AddDataSet2TeeChart(tChartM, ds, "M");
+                AddDataSet2TeeChart(tChartM, datas, "M");
             }
             else
             {
@@ -715,20 +709,20 @@ namespace _1.GasEmission
         /// </summary>
         private void LoadHistoryDataT2(TChart tChart)
         {
-            DataSet ds = getHistoryData(
-              _t2Id,
-               _dateTimeStart.Text,
-               _dateTimeEnd.Text
-               );
+            GasConcentrationProbeData[] datas = GasConcentrationProbeData.FindHistaryData(
+                _t2Id,
+                _dateTimeStart.Text,
+                _dateTimeEnd.Text
+                );
             int sqlCnt = 0;
-            if (ds.Tables.Count > 0)
+            if (datas.Length > 0)
             {
-                sqlCnt = ds.Tables[0].Rows.Count;
+                sqlCnt = datas.Length;
             }
             if (sqlCnt > 0)
             {
                 tChart.Header.Text = "T2瓦斯浓度平均增加值Q";
-                AddDataSet2TeeChart(tChart, ds, "T2");
+                AddDataSet2TeeChart(tChart, datas, "T2");
             }
             else
             {
@@ -741,14 +735,14 @@ namespace _1.GasEmission
         /// <summary>
         /// 同一工序条件下瓦斯浓度变化值N
         /// </summary>
-        private void LoadHistoryDataN(TChart tChart, DataSet ds)
+        private void LoadHistoryDataN(TChart tChart, GasConcentrationProbeData[] datas)
         {
-            int sqlCnt = ds.Tables[0].Rows.Count;
+            int sqlCnt = datas.Length;
 
             if (sqlCnt > 0)
             {
                 tChart.Header.Text = "同一工序条件下瓦斯浓度变化值N";
-                AddDataSet2TeeChart(tChart, ds, "N");
+                AddDataSet2TeeChart(tChart, datas, "N");
             }
             else
             {
@@ -953,19 +947,19 @@ namespace _1.GasEmission
         /// <param name="strProbeId">探头编号</param>
         /// <param name="dtStartTime">开始时间</param>
         /// <returns>特定探头和特定时间段内的【瓦斯浓度探头数据】</returns>
-        public static DataSet SelectAllGasDataByProbeIdAndStartTime(string strProbeId, DateTime dtStartTime)
-        {
-            var sqlStr = new StringBuilder();
-            sqlStr.Append("SELECT * FROM " + GasConcentrationProbeDataDbConstNames.TABLE_NAME);
-            sqlStr.Append(" WHERE ");
-            sqlStr.Append(GasConcentrationProbeDataDbConstNames.PROBE_ID + " ='" + strProbeId + "'");
-            sqlStr.Append(" AND ");
-            sqlStr.Append(GasConcentrationProbeDataDbConstNames.RECORD_TIME + " >= '" + dtStartTime + "'");
+        //public static DataSet SelectAllGasDataByProbeIdAndStartTime(string strProbeId, DateTime dtStartTime)
+        //{
+        //    var sqlStr = new StringBuilder();
+        //    sqlStr.Append("SELECT * FROM " + GasConcentrationProbeDataDbConstNames.TABLE_NAME);
+        //    sqlStr.Append(" WHERE ");
+        //    sqlStr.Append(GasConcentrationProbeDataDbConstNames.PROBE_ID + " ='" + strProbeId + "'");
+        //    sqlStr.Append(" AND ");
+        //    sqlStr.Append(GasConcentrationProbeDataDbConstNames.RECORD_TIME + " >= '" + dtStartTime + "'");
 
-            var db = new ManageDataBase(DATABASE_TYPE.GasEmissionDB);
-            var ds = db.ReturnDS(sqlStr.ToString());
-            return ds;
-        }
+        //    var db = new ManageDataBase(DATABASE_TYPE.GasEmissionDB);
+        //    var ds = db.ReturnDS(sqlStr.ToString());
+        //    return ds;
+        //}
 
         // Database Operation
         /// <summary>
@@ -990,17 +984,17 @@ namespace _1.GasEmission
         /// </summary>
         /// <param name="iProbeId"></param>
         /// <returns></returns>
-        public static DataSet GetLatest2RowsData(string iProbeId)
-        {
-            var sqlStr = new StringBuilder();
-            sqlStr.Append("SELECT TOP 2 * FROM " + GasConcentrationProbeDataDbConstNames.TABLE_NAME);
-            sqlStr.Append(" WHERE " + GasConcentrationProbeDataDbConstNames.PROBE_ID + " = " + iProbeId);
-            sqlStr.Append(" ORDER BY " + GasConcentrationProbeDataDbConstNames.PROBE_DATA_ID + " DESC");
+        //public static DataSet GetLatest2RowsData(string iProbeId)
+        //{
+        //    var sqlStr = new StringBuilder();
+        //    sqlStr.Append("SELECT TOP 2 * FROM " + GasConcentrationProbeDataDbConstNames.TABLE_NAME);
+        //    sqlStr.Append(" WHERE " + GasConcentrationProbeDataDbConstNames.PROBE_ID + " = " + iProbeId);
+        //    sqlStr.Append(" ORDER BY " + GasConcentrationProbeDataDbConstNames.PROBE_DATA_ID + " DESC");
 
-            var db = new ManageDataBase(DATABASE_TYPE.GasEmissionDB);
-            var ds = db.ReturnDS(sqlStr.ToString());
-            return ds;
-        }
+        //    var db = new ManageDataBase(DATABASE_TYPE.GasEmissionDB);
+        //    var ds = db.ReturnDS(sqlStr.ToString());
+        //    return ds;
+        //}
 
         /// <summary>
         /// 获取瓦斯浓度数据
@@ -1009,53 +1003,53 @@ namespace _1.GasEmission
         /// @param endTime - 结束时间
         /// </summary>
         /// <returns></returns>
-        private DataSet getHistoryData(string probeId, string startTime, string endTime)
-        {
-            var ds = new DataSet();
-            if (String.IsNullOrEmpty(probeId)) return ds;
-            var sqlStr = new StringBuilder();
-            sqlStr.Append("SELECT ");
-            sqlStr.Append("* ");
-            sqlStr.Append("FROM ");
-            sqlStr.Append(GasConcentrationProbeDataDbConstNames.TABLE_NAME + " ");
-            sqlStr.Append("WHERE ");
-            sqlStr.Append(GasConcentrationProbeDataDbConstNames.PROBE_ID + " = " + probeId + " ");
-            sqlStr.Append("AND ");
-            sqlStr.Append(GasConcentrationProbeDataDbConstNames.RECORD_TIME + " >= '" + startTime + "' ");
-            sqlStr.Append("AND ");
-            sqlStr.Append(GasConcentrationProbeDataDbConstNames.RECORD_TIME + " <= '" + endTime + "' ");
-            sqlStr.Append("ORDER BY RECORD_TIME ");
+        //private DataSet getHistoryData(string probeId, string startTime, string endTime)
+        //{
+        //    var ds = new DataSet();
+        //    if (String.IsNullOrEmpty(probeId)) return ds;
+        //    var sqlStr = new StringBuilder();
+        //    sqlStr.Append("SELECT ");
+        //    sqlStr.Append("* ");
+        //    sqlStr.Append("FROM ");
+        //    sqlStr.Append(GasConcentrationProbeDataDbConstNames.TABLE_NAME + " ");
+        //    sqlStr.Append("WHERE ");
+        //    sqlStr.Append(GasConcentrationProbeDataDbConstNames.PROBE_ID + " = " + probeId + " ");
+        //    sqlStr.Append("AND ");
+        //    sqlStr.Append(GasConcentrationProbeDataDbConstNames.RECORD_TIME + " >= '" + startTime + "' ");
+        //    sqlStr.Append("AND ");
+        //    sqlStr.Append(GasConcentrationProbeDataDbConstNames.RECORD_TIME + " <= '" + endTime + "' ");
+        //    sqlStr.Append("ORDER BY RECORD_TIME ");
 
-            var db = new ManageDataBase(DATABASE_TYPE.GasEmissionDB);
-            ds = db.ReturnDS(sqlStr.ToString());
-            return ds;
-        }
+        //    var db = new ManageDataBase(DATABASE_TYPE.GasEmissionDB);
+        //    ds = db.ReturnDS(sqlStr.ToString());
+        //    return ds;
+        //}
 
         /// <summary>
         /// 获取指定探头过去一段时间的若干数据
         /// </summary>
         /// <param name="probeId">探头Id</param>
         /// <returns></returns>
-        private DataSet GetOldDataByProbeId(string probeId)
-        {
-            var sqlStr = new StringBuilder();
-            sqlStr.Append("SELECT ");
-            sqlStr.Append("TOP " + (DataCountPerFrame - 1) + "* ");
-            sqlStr.Append("FROM ");
-            sqlStr.Append(GasConcentrationProbeDataDbConstNames.TABLE_NAME + " ");
-            sqlStr.Append("WHERE ");
-            sqlStr.Append(GasConcentrationProbeDataDbConstNames.PROBE_ID + " = " + probeId + " ");
-            sqlStr.Append("AND ");
-            //sqlStr.Append(GasConcentrationProbeDataDbConstNames.RECORD_TIME + " >= '" + this._dateTimeStart.Text + "' ");
-            //sqlStr.Append("AND ");
-            sqlStr.Append(GasConcentrationProbeDataDbConstNames.RECORD_TIME + " <= '" + DateTime.Now.ToString(CultureInfo.InvariantCulture) + "' ");
-            sqlStr.Append("ORDER BY RECORD_TIME DESC");
+        //private DataSet GetOldDataByProbeId(string probeId)
+        //{
+        //    var sqlStr = new StringBuilder();
+        //    sqlStr.Append("SELECT ");
+        //    sqlStr.Append("TOP " + (DataCountPerFrame - 1) + "* ");
+        //    sqlStr.Append("FROM ");
+        //    sqlStr.Append(GasConcentrationProbeDataDbConstNames.TABLE_NAME + " ");
+        //    sqlStr.Append("WHERE ");
+        //    sqlStr.Append(GasConcentrationProbeDataDbConstNames.PROBE_ID + " = " + probeId + " ");
+        //    sqlStr.Append("AND ");
+        //    //sqlStr.Append(GasConcentrationProbeDataDbConstNames.RECORD_TIME + " >= '" + this._dateTimeStart.Text + "' ");
+        //    //sqlStr.Append("AND ");
+        //    sqlStr.Append(GasConcentrationProbeDataDbConstNames.RECORD_TIME + " <= '" + DateTime.Now.ToString(CultureInfo.InvariantCulture) + "' ");
+        //    sqlStr.Append("ORDER BY RECORD_TIME DESC");
 
-            var db = new ManageDataBase(DATABASE_TYPE.GasEmissionDB);
-            var ds = db.ReturnDS(sqlStr.ToString());
+        //    var db = new ManageDataBase(DATABASE_TYPE.GasEmissionDB);
+        //    var ds = db.ReturnDS(sqlStr.ToString());
 
-            return ds;
-        }
+        //    return ds;
+        //}
 
         // 监控系统参数设置
         private void bbiMonitorSetting_ItemClick(object sender, ItemClickEventArgs e)
@@ -1213,6 +1207,45 @@ namespace _1.GasEmission
             _btnQuery.Enabled = false;
 
             StartRealTimeCurveMonitoring();
+        }
+
+        /// <summary>
+        /// 添加T2瓦斯浓度平均增加值
+        /// </summary>
+        /// <param name="tChart"></param>
+        /// <param name="ds"></param>
+        private void addDataToTeeChartT2(TChart tChart, GasConcentrationProbeData[] datas)
+        {
+            int sqlCnt = datas.Length;
+            double value = 0;
+            DateTime time = new DateTime();
+            double sumValue = 0;
+
+            double maxVertValue = 0;
+            double minVertValue = 0;
+
+            for (int i = 0; i < sqlCnt; i++)
+            {
+                if ((i + 1) != datas.Length)
+                {
+                    sumValue = sumValue + datas[i + 1].ProbeValue - datas[i].ProbeValue;
+                    value = sumValue / (i + 1);
+                    time = datas[i + 1].RecordTime;
+
+                    if (value > maxVertValue)
+                    {
+                        maxVertValue = value;
+                    }
+
+                    if (value < minVertValue)
+                    {
+                        minVertValue = value;
+                    }
+
+                    tChart.Series[0].Add(time, value);
+                }
+            }
+            tChart.Series[0].GetVertAxis.SetMinMax(minVertValue - 1, maxVertValue + 1);
         }
     }
 }
