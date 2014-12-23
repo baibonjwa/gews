@@ -1,13 +1,7 @@
-﻿// ******************************************************************
-// 概  述：探头管理实体
-// 作  者：伍鑫
-// 日  期：2013/12/01
-// 版本号：V1.0
-// 版本信息：
-// V1.0 新建
-// ******************************************************************
-
+﻿
+using System.Collections.Generic;
 using Castle.ActiveRecord;
+using NHibernate.Criterion;
 
 namespace LibEntity
 {
@@ -117,5 +111,45 @@ namespace LibEntity
         /// </summary>
         [Property("FAR_FROM_FRONTAL")]
         public double FarFromFrontal { get; set; }
+
+        /// <summary>
+        /// 判断【探头编号】是否存在
+        /// </summary>
+        /// <param name="strProbeId">【探头编号】</param>
+        /// <returns>存在与否：true存在，false不存在</returns>
+        public static bool IsProbeIdExist(string strProbeId)
+        {
+            var probe = FindByPrimaryKey(strProbeId, false);
+            return probe != null;
+        }
+
+
+        /// <summary>
+        /// 判断【探头名称】是否存在
+        /// </summary>
+        /// <param name="strProbeName">【探头名称】</param>
+        /// <returns>存在与否：true存在，false不存在</returns>
+        public static bool IsProbeNameExist(string strProbeId)
+        {
+            var criterion = new List<ICriterion> { Restrictions.Eq("ProbeName", strProbeId) };
+            var probe = FindFirst(criterion.ToArray());
+            return probe != null;
+        }
+
+        /// <summary>
+        /// 获取指定【巷道】下，指定【探头类型】的探头信息
+        /// </summary>
+        /// <param name="iProbeTypeId">【探头类型】</param>
+        /// <param name="iTunnelId">【巷道】</param>
+        /// <returns>探头信息</returns>
+        //public static Probe FindFirstByProbeTypeIdAndTunnelId(int iProbeTypeId, int iTunnelId)
+        //{
+        //    var criterion = new List<ICriterion>
+        //    {
+        //        Restrictions.Eq("Tunnel.TunnelId", iTunnelId),
+        //        Restrictions.Eq("ProbeType.ProbeTypeId", iProbeTypeId)
+        //    };
+        //    return FindFirst(criterion.ToArray());
+        //}
     }
 }

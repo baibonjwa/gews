@@ -120,8 +120,8 @@ namespace _1.GasEmission
             if (this._bllType == "add")
             {
                 // 判断探头编号是否存在
-                if (!Check.isExist(this.txtProbeId, Const_GE.PROBE_ID,
-                    ProbeManageBLL.isProbeIdExist(this.txtProbeId.Text.Trim())))
+                if (!Check.isExist(txtProbeId, Const_GE.PROBE_ID,
+                    Probe.IsProbeIdExist(txtProbeId.Text.Trim())))
                 {
                     return false;
                 }
@@ -377,7 +377,8 @@ namespace _1.GasEmission
             if (this._bllType == "add")
             {
                 // 探头管理信息登录
-                bResult = ProbeManageBLL.insertProbeManageInfo(probeEntity);
+                probeEntity.SaveAndFlush();
+                bResult = true;
                 opType = OPERATION_TYPE.ADD;
             }
             else

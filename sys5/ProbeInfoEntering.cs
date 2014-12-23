@@ -120,51 +120,24 @@ namespace _5.WarningManagement
             if (this._bllType == "add")
             {
                 // 判断探头编号是否存在
-                if (!Check.isExist(this.txtProbeId, Const_GE.PROBE_ID,
-                    ProbeManageBLL.isProbeIdExist(this.txtProbeId.Text.Trim())))
+                if (!Check.isExist(txtProbeId, Const_GE.PROBE_ID,
+                     Probe.IsProbeIdExist(txtProbeId.Text.Trim())))
                 {
                     return false;
                 }
             }
 
             // 判断探头名称是否录入
-            if (!Check.isEmpty(this.txtProbeName, Const_GE.PROBE_NAME))
+            if (!Check.isEmpty(txtProbeName, Const_GE.PROBE_NAME))
             {
                 return false;
             }
 
             // 判断探头名称是否包含特殊字符判断
-            if (!Check.checkSpecialCharacters(this.txtProbeName, Const_GE.PROBE_NAME))
+            if (!Check.checkSpecialCharacters(txtProbeName, Const_GE.PROBE_NAME))
             {
                 return false;
             }
-
-            // TODO:探头名称是否重新不做判断,下面代码暂不删除。
-            //// 数据录入
-            //if (this._bllType == "add")
-            //{
-            //    // 判断探头名称是否存在
-            //    if (!Check.isExist(this.txtProbeName, Const_GE.PROBE_NAME,
-            //        ProbeManageBLL.isProbeNameExist(this.txtProbeName.Text.Trim())))
-            //    {
-            //        return false;
-            //    }
-            //}
-            //// 数据修改
-            //else
-            //{
-            //    /* 修改的时候，首先要获取UI输入的探头名称到DB中去检索，
-            //    如果检索件数 > 0 并且该探头ID还不是传过来的主键，那么视为输入了已存在的探头名称 */
-            //    DataSet ds = ProbeManageBLL.selectProbeManageInfoByProbeName(this.txtProbeName.Text.Trim());
-            //    if (ds.Tables[0].Rows.Count > 0 && !ds.Tables[0].Rows[0][ProbeManageDbConstNames.PROBE_ID].ToString().Equals(_iPK.ToString()))
-            //    {
-            //        this.txtProbeName.BackColor = Const.ERROR_FIELD_COLOR;
-            //        Alert.alert(Const_GE.PROBE_NAME_EXIST_MSG); // 探头名称已存在，请重新录入！
-            //        this.txtProbeName.Focus();
-            //        return false;
-            //    }
-
-            //}
 
             // 判断探头类型是否选择
             if (!Check.isEmpty(this.cboProbeType, Const_GE.PROBE_TYPE))
@@ -288,7 +261,8 @@ namespace _5.WarningManagement
             if (this._bllType == "add")
             {
                 // 探头管理信息登录
-                bResult = ProbeManageBLL.insertProbeManageInfo(probeEntity);
+                probeEntity.SaveAndFlush();
+                bResult = true;
                 opType = OPERATION_TYPE.ADD;
             }
             else
