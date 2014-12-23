@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
+using Castle.ActiveRecord;
+using Castle.ActiveRecord.Framework;
+using Castle.ActiveRecord.Framework.Config;
 using DevExpress.XtraBars;
 using LibLoginForm;
 using LibCommonForm;
@@ -18,6 +22,13 @@ namespace _1.GasEmission
         static void Main()
         {
             //窗体风格
+
+            IConfigurationSource config = new XmlConfigurationSource("ARConfig.xml");
+
+            Assembly asm = Assembly.Load("LibEntity");
+
+            ActiveRecordStarter.Initialize(asm, config);
+
             DXSeting.formSkinsSet();
 
             Application.EnableVisualStyles();

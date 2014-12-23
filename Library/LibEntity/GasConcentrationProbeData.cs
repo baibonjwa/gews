@@ -56,7 +56,7 @@ namespace LibEntity
             var criterion = new List<ICriterion> { Restrictions.Eq("Probe.ProbeId", probeId) };
             if (startTime != DateTime.MinValue && endTime != DateTime.MinValue)
             {
-                criterion.Add(Restrictions.Between("Datetime", startTime, endTime));
+                criterion.Add(Restrictions.Between("RecordTime", startTime, endTime));
             }
             return FindAll(criterion.ToArray());
         }
@@ -68,7 +68,7 @@ namespace LibEntity
             var criterion = new List<ICriterion> { Restrictions.Eq("Probe.ProbeId", probeId) };
             if (startTime != DateTime.MinValue && endTime != DateTime.MinValue)
             {
-                criterion.Add(Restrictions.Between("Datetime", startTime, endTime));
+                criterion.Add(Restrictions.Between("RecordTime", startTime, endTime));
             }
             return SlicedFindAll(firstResult, maxResult, criterion.ToArray());
         }
@@ -102,27 +102,27 @@ namespace LibEntity
             var criterion = new List<ICriterion>
             {
                 Restrictions.Eq("Probe.ProbeId", probeId),
-                Restrictions.Le("Datetime", DateTime.Now)
+                Restrictions.Le("RecordTime", DateTime.Now)
             };
             return FindAll(criterion.ToArray());
         }
 
-        public static GasConcentrationProbeData[] FindHistaryData(string probeId, string startTime, string endTime)
+        public static GasConcentrationProbeData[] FindHistaryData(string probeId, DateTime startTime, DateTime endTime)
         {
             var criterion = new List<ICriterion>
             {
                 Restrictions.Eq("Probe.ProbeId", probeId),
-                Restrictions.Between("Datetime", startTime, endTime)
+                Restrictions.Between("RecordTime", startTime, endTime)
             };
             return FindAll(criterion.ToArray());
         }
 
-        public static GasConcentrationProbeData[] FindHistaryData(string probeId, string startTime)
+        public static GasConcentrationProbeData[] FindHistaryData(string probeId, DateTime startTime)
         {
             var criterion = new List<ICriterion>
             {
                 Restrictions.Eq("Probe.ProbeId", probeId),
-                Restrictions.Gt("Datetime", startTime)
+                Restrictions.Gt("RecordTime", startTime)
             };
             return FindAll(criterion.ToArray());
         }

@@ -43,7 +43,7 @@ namespace LibEntity
         }
 
         //规则ID（唯一标识）
-        [Property("RULE_ID")]
+        [PrimaryKey(PrimaryKeyType.Identity, "RULE_ID")]
         public int RuleId { get; set; }
 
         //规则编码，唯一标识（规则编码不会有重复内容）

@@ -1,22 +1,17 @@
-﻿// ******************************************************************
-// 概  述：岩性实体
-// 作  者：伍鑫
-// 创建日期：2013/11/26
-// 版本号：1.0
-// ******************************************************************
+﻿using Castle.ActiveRecord;
 
 namespace LibEntity
 {
-    public class Lithology
+    [ActiveRecord("T_LITHOLOGY")]
+    public class Lithology : ActiveRecordBase<Lithology>
     {
-        /** 岩性编号 **/
-        /** 岩性名 **/
-        /** 岩性描述 **/
-
+        [PrimaryKey(PrimaryKeyType.Identity, "LITHOLOGY_ID")]
         public int LithologyId { get; set; }
 
+        [Property("LITHOLOGY_NAME")]
         public string LithologyName { get; set; }
 
+        [Property("LITHOLOGY_DESCRIBE")]
         public string LithologyDescribe { get; set; }
     }
 }

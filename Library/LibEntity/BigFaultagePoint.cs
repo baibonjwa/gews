@@ -11,29 +11,29 @@ namespace LibEntity
         ///     断层编号
         /// </summary>
         [PrimaryKey(PrimaryKeyType.Identity, "ID")]
-        public int Id { get; set; }
+        public virtual int Id { get; set; }
 
         /** 断层名称 **/
         [Property("UPORDOWN")]
-        public string UpOrDown { get; set; }
+        public virtual string UpOrDown { get; set; }
 
         [Property("COORDINATE_X")]
-        public double CoordinateX { get; set; }
+        public virtual double CoordinateX { get; set; }
 
         [Property("COORDINATE_Y")]
-        public double CoordinateY { get; set; }
+        public virtual double CoordinateY { get; set; }
 
         [Property("COORDINATE_Z")]
-        public double CoordinateZ { get; set; }
+        public virtual double CoordinateZ { get; set; }
 
         [BelongsTo("FAULTAGE_ID")]
-        public BigFaultage BigFaultage
+        public virtual BigFaultage BigFaultage
         {
             get { return _bigFaultage; }
             set { _bigFaultage = value; }
         }
 
         [Property("BINDINGID")]
-        public string Bid { get; set; }
+        public virtual string Bid { get; set; }
     }
 }

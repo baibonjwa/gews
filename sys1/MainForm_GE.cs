@@ -648,8 +648,8 @@ namespace _1.GasEmission
         private void LoadAllHistoryData()
         {
             String probeName = "";
-            String dateTimeStart = "";
-            String datetimeEnd = "";
+            DateTime dateTimeStart = new DateTime();
+            DateTime datetimeEnd = new DateTime();
             _lstProbeName.MouseUp -= _lstProbeName_SelectedIndexChanged;
 
             Invoke(new MethodInvoker(delegate
@@ -658,8 +658,8 @@ namespace _1.GasEmission
                 _btnQuery.Text = @"查询中...";
                 _btnQuery.Enabled = false;
                 probeName = _lstProbeName.SelectedValue.ToString();
-                dateTimeStart = _dateTimeStart.Text;
-                datetimeEnd = _dateTimeEnd.Text;
+                dateTimeStart = Convert.ToDateTime(_dateTimeStart.Text);
+                datetimeEnd = Convert.ToDateTime(_dateTimeEnd.Text);
                 _rbtnRealtime.Enabled = false;
                 _rbtnHistory.Enabled = false;
             }));
@@ -711,8 +711,8 @@ namespace _1.GasEmission
         {
             GasConcentrationProbeData[] datas = GasConcentrationProbeData.FindHistaryData(
                 _t2Id,
-                _dateTimeStart.Text,
-                _dateTimeEnd.Text
+                Convert.ToDateTime(_dateTimeStart.Text),
+                Convert.ToDateTime(_dateTimeEnd.Text)
                 );
             int sqlCnt = 0;
             if (datas.Length > 0)
@@ -745,13 +745,7 @@ namespace _1.GasEmission
                 AddDataSet2TeeChart(tChart, datas, "N");
             }
             else
-            {
-                //Alert.alert("没有瓦斯浓度数据N！");
-                tChart.Header.Text = "没有瓦斯浓度数据N！";
-            }
-        }
 
-        /// <summary>
         /// 设置曲线1的Marks显示与否
         /// </summary>
         /// <param name="sender"></param>
@@ -789,37 +783,6 @@ namespace _1.GasEmission
         }
 
         #endregion
-
-        ///// <summary>
-        ///// 模拟实时往数据库传输数据/测试时使用，功能完成后要删除
-        ///// </summary>
-        ///// <param name="sender"></param>
-        ///// <param name="e"></param>
-        //private void timer2_Tick(object sender, EventArgs e)
-        //{
-        //    DateTime time = DateTime.Now;
-        //    double value = rnd.Next(200);
-        //    if (Math.Abs(value) > 1.0e+4) value = 0.0;
-
-        //    GasConcentrationProbeDataEntity gasConcentrationProbeDataEntity = new GasConcentrationProbeDataEntity();
-
-        //    // 探头编号
-        //    gasConcentrationProbeDataEntity.Probe = "001";
-        //    // 数值
-        //    gasConcentrationProbeDataEntity.ProbeValue = value / 100;
-        //    // 时间
-        //    gasConcentrationProbeDataEntity.RecordTime = time;
-        //    // 类型(矿监控系统读取)
-        //    gasConcentrationProbeDataEntity.RecordType = Const_GE.RECORDTYPE_COMPUTER;
-
-        //    bool result = GasConcentrationProbeDataBLL.insertGasConcentrationProbeData(gasConcentrationProbeDataEntity);
-
-        //    // 添加失败的场合
-        //    if (!result)
-        //    {
-        //    }
-
-        //}
 
         /// <summary>
         /// 后一天
