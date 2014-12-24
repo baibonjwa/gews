@@ -258,18 +258,14 @@ namespace _5.WarningManagement
                     iPkIdxsArr[i] = iPk;
                 }
 
-                // 探头数据删除
-                bool bResult = ProbeManageBLL.deleteProbeManageInfo(iPkIdxsArr);
-
+                Probe.DeleteAll(iPkIdxsArr);
                 // 删除成功的场合
-                if (bResult)
-                {
-                    // 加载探头信息
-                    loadProbeInfo();
 
-                    // 设置farpoint焦点（必须实装）
-                    fpProbeInfo.Sheets[0].SetActiveCell(iSelIdxsArr[0], 0);
-                }
+                // 加载探头信息
+                loadProbeInfo();
+
+                // 设置farpoint焦点（必须实装）
+                fpProbeInfo.Sheets[0].SetActiveCell(iSelIdxsArr[0], 0);
             }
         }
 
@@ -298,7 +294,7 @@ namespace _5.WarningManagement
             // 判断点击的空间类型是否是.FpCheckBox)
             if (e.EditingControl is FpCheckBox)
             {
-                var fpChk = (FpCheckBox) e.EditingControl;
+                var fpChk = (FpCheckBox)e.EditingControl;
                 // 判断是否被选中
                 if (fpChk.Checked)
                 {
@@ -345,21 +341,21 @@ namespace _5.WarningManagement
                 for (int i = 0; i < _iRowCount; i++)
                 {
                     // 将所有明细的checkbox设为未选中
-                    fpProbeInfo.Sheets[0].Cells[_iRowDetailStartIndex + i, 0].Value = ((CheckBox) sender).Checked;
+                    fpProbeInfo.Sheets[0].Cells[_iRowDetailStartIndex + i, 0].Value = ((CheckBox)sender).Checked;
                     // 将存有选中项目的数组清空
                     _htSelIdxs.Remove(_iRowDetailStartIndex + i);
                 }
                 // 删除按钮设为不可用
                 btnDelete.Enabled = false;
             }
-                // 全选的情况下
+            // 全选的情况下
             else
             {
                 // 循环明细
                 for (int i = 0; i < _iRowCount; i++)
                 {
                     // 将所有明细设为全选中
-                    fpProbeInfo.Sheets[0].Cells[_iRowDetailStartIndex + i, 0].Value = ((CheckBox) sender).Checked;
+                    fpProbeInfo.Sheets[0].Cells[_iRowDetailStartIndex + i, 0].Value = ((CheckBox)sender).Checked;
                     // 将选中明细的索引添加到数组中，如果已经存在不要二次添加
                     if (!_htSelIdxs.Contains(_iRowDetailStartIndex + i))
                     {
@@ -383,7 +379,7 @@ namespace _5.WarningManagement
         /// <param name="arg"></param>
         private void farpointFilter1_OnCheckFilterChanged(object sender, EventArgs arg)
         {
-            var chk = (CheckBox) sender;
+            var chk = (CheckBox)sender;
             //当Checkbox选中时，筛选过程中则将不符合条件的数据隐藏
             if (chk.Checked)
             {
@@ -392,7 +388,7 @@ namespace _5.WarningManagement
                 //设置自动隐藏过滤条件
                 FarpointDefaultPropertiesSetter.SetFpFilterHideProperties(fpProbeInfo, _filterColunmIdxs);
             }
-                //未选中时，根据用户自定义的颜色进行分类显示
+            //未选中时，根据用户自定义的颜色进行分类显示
             else
             {
                 //启用选择颜色相关控件

@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.Generic;
 using Castle.ActiveRecord;
 using NHibernate.Criterion;
@@ -8,8 +9,7 @@ namespace LibEntity
     [ActiveRecord("T_PROBE_MANAGE")]
     public class Probe : ActiveRecordBase<Probe>
     {
-        /** 探头编号 **/
-
+        public const String TableName = "T_PROBE_MANAGE";
         /// <summary>
         ///     探头编号
         /// </summary>
@@ -112,44 +112,68 @@ namespace LibEntity
         [Property("FAR_FROM_FRONTAL")]
         public double FarFromFrontal { get; set; }
 
-        /// <summary>
-        /// 判断【探头编号】是否存在
-        /// </summary>
-        /// <param name="strProbeId">【探头编号】</param>
-        /// <returns>存在与否：true存在，false不存在</returns>
-        public static bool IsProbeIdExist(string strProbeId)
-        {
-            var probe = FindByPrimaryKey(strProbeId, false);
-            return probe != null;
-        }
-
 
         /// <summary>
         /// 判断【探头名称】是否存在
         /// </summary>
-        /// <param name="strProbeName">【探头名称】</param>
+        /// <param name="iProbeTypeId"></param>
+        /// <param name="sProbeName"></param>
+        /// <param name="iTunnelId"></param>
         /// <returns>存在与否：true存在，false不存在</returns>
-        public static bool IsProbeNameExist(string strProbeId)
+        public static Probe FindFirstByProbeTypeIdAndProbeNameAndTunnelId(int iProbeTypeId, string sProbeName, int iTunnelId)
         {
-            var criterion = new List<ICriterion> { Restrictions.Eq("ProbeName", strProbeId) };
-            var probe = FindFirst(criterion.ToArray());
-            return probe != null;
+            var criterion = new List<ICriterion>
+            {
+                Restrictions.Eq("ProbeName", sProbeName),
+                Restrictions.Eq("ProbeType.ProbeTypeId", iProbeTypeId),
+                Restrictions.Eq("Tunnel.TunnelId", iTunnelId)
+            };
+            return FindFirst(criterion.ToArray());
         }
 
         /// <summary>
-        /// 获取指定【巷道】下，指定【探头类型】的探头信息
+        /// 根据巷道编号和探头类型编号,获取全部探头信息
         /// </summary>
-        /// <param name="iProbeTypeId">【探头类型】</param>
-        /// <param name="iTunnelId">【巷道】</param>
+        /// <param name="iTunnelId">巷道编号</param>
+        /// <param name="iProbeTypeId">探头类型编号</param>
         /// <returns>探头信息</returns>
-        //public static Probe FindFirstByProbeTypeIdAndTunnelId(int iProbeTypeId, int iTunnelId)
-        //{
-        //    var criterion = new List<ICriterion>
-        //    {
-        //        Restrictions.Eq("Tunnel.TunnelId", iTunnelId),
-        //        Restrictions.Eq("ProbeType.ProbeTypeId", iProbeTypeId)
-        //    };
-        //    return FindFirst(criterion.ToArray());
-        //}
+        public static Probe[] FindAllByTunnelIdAndProbeTypeId(int iTunnelId, int iProbeTypeId)
+        {
+            var criterion = new List<ICriterion>
+            {
+                Restrictions.Eq("Tunnel.TunnelId", iTunnelId),
+                Restrictions.Eq("ProbeType.ProbeTypeId", iProbeTypeId)
+            };
+            return FindAll(criterion.ToArray());
+        }
+
+        /// <summary>
+        /// 根据巷道编号编号,获取全部探头信息
+        /// </summary>
+        /// <param name="iTunnelId">巷道编号</param>
+        /// <returns>探头信息</returns>
+        public static Probe[] FindAllByTunnelId(int iTunnelId)
+        {
+            var criterion = new List<ICriterion>
+            {
+                Restrictions.Eq("Tunnel.TunnelId", iTunnelId)
+            };
+            return FindAll(criterion.ToArray());
+        }
+
+        /// <summary>
+        /// 获取指定探头的最新实时数据
+        /// </summary>
+        /// <param name="iTunnelId"></param>
+        /// <returns></returns>
+        public static string GetT2Id(int iTunnelId)
+        {
+            var criterion = new List<ICriterion>
+            {
+                Restrictions.Eq("Tunnel.TunnelId", iTunnelId),
+                 Restrictions.Eq("PROBE_NAME", "T2"),
+            };
+            return FindFirst(criterion.ToArray()).ProbeId;
+        }
     }
 }

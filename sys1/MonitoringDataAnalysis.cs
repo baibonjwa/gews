@@ -69,14 +69,14 @@ namespace _1.GasEmission
         /// </summary>
         private void loadProbeTypeInfo()
         {
-            DataSet ds = ProbeTypeBLL.selectAllProbeTypeInfo();
-            if (ds.Tables[0].Rows.Count > 0)
+            ProbeType[] probeTypes = ProbeType.FindAll();
+            if (probeTypes.Length > 0)
             {
-                this._lstProbeStyle.DataSource = ds.Tables[0];
-                this._lstProbeStyle.DisplayMember = ProbeTypeDbConstNames.PROBE_TYPE_NAME;
-                this._lstProbeStyle.ValueMember = ProbeTypeDbConstNames.PROBE_TYPE_ID;
+                _lstProbeStyle.DataSource = probeTypes;
+                _lstProbeStyle.DisplayMember = "ProbeTypeName";
+                _lstProbeStyle.ValueMember = "ProbeTypeId";
 
-                this._lstProbeStyle.SelectedIndex = -1;
+                _lstProbeStyle.SelectedIndex = -1;
             }
         }
 
@@ -97,17 +97,17 @@ namespace _1.GasEmission
             else
             {
                 // 根据巷道编号和探头类型编号获取探头信息
-                DataSet ds = ProbeManageBLL.selectProbeManageInfoByTunnelIDAndProbeType(this.selectTunnelUserControl1.ITunnelId,
+                Probe[] probes = Probe.FindAllByTunnelIdAndProbeTypeId(selectTunnelUserControl1.ITunnelId,
                     Convert.ToInt32(this._lstProbeStyle.SelectedValue));
 
-                if (ds.Tables[0].Rows.Count > 0)
+                for (int i = 0; i < probes.Length; i++)
                 {
-                    this._lstProbeName.DataSource = ds.Tables[0];
-                    this._lstProbeName.DisplayMember = ProbeManageDbConstNames.PROBE_NAME;
-                    this._lstProbeName.ValueMember = ProbeManageDbConstNames.PROBE_ID;
-
-                    this._lstProbeName.SelectedIndex = -1;
+                    _lstProbeName.Items.Add(probes);
                 }
+                _lstProbeName.DisplayMember = "ProbeName";
+                _lstProbeName.ValueMember = "ProbeId";
+
+                _lstProbeName.SelectedIndex = -1;
             }
         }
 

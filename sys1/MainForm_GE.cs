@@ -273,7 +273,7 @@ namespace _1.GasEmission
         {
             _lstProbeName.DataSource = null;
             _currentTunnelId = selectTunnelSimple1.ITunnelId;
-            _t2Id = GetT2Id(_currentTunnelId);
+            _t2Id = Probe.GetT2Id(_currentTunnelId);
         }
 
         /// <summary>
@@ -281,12 +281,15 @@ namespace _1.GasEmission
         /// </summary>
         private void LoadProbeTypeInfo()
         {
-            var ds = ProbeTypeBLL.selectAllProbeTypeInfo();
-            if (ds.Tables[0].Rows.Count <= 0) return;
-            _lstProbeStyle.DataSource = ds.Tables[0];
-            _lstProbeStyle.DisplayMember = ProbeTypeDbConstNames.PROBE_TYPE_NAME;
-            _lstProbeStyle.ValueMember = ProbeTypeDbConstNames.PROBE_TYPE_ID;
-            _lstProbeStyle.SelectedIndex = -1;
+            ProbeType[] probeTypes = ProbeType.FindAll();
+            if (probeTypes.Length > 0)
+            {
+                _lstProbeStyle.DataSource = probeTypes;
+                _lstProbeStyle.DisplayMember = "ProbeTypeName";
+                _lstProbeStyle.ValueMember = "ProbeTypeId";
+
+                _lstProbeStyle.SelectedIndex = -1;
+            }
         }
 
         /// <summary>
@@ -966,18 +969,18 @@ namespace _1.GasEmission
         /// 获取指定探头的最新实时数据
         /// </summary>
         /// <returns></returns>
-        public static string GetT2Id(int tunnelId)
-        {
-            var sqlStr = new StringBuilder();
-            sqlStr.Append("SELECT [PROBE_ID] FROM " + ProbeManageDbConstNames.TABLE_NAME);
-            sqlStr.Append(" WHERE ");
-            sqlStr.Append("TUNNEL_ID = " + tunnelId);
-            sqlStr.Append(" AND [PROBE_NAME]='T2'");
+        //public static string GetT2Id(int tunnelId)
+        //{
+        //    var sqlStr = new StringBuilder();
+        //    sqlStr.Append("SELECT [PROBE_ID] FROM " + ProbeManageDbConstNames.TABLE_NAME);
+        //    sqlStr.Append(" WHERE ");
+        //    sqlStr.Append("TUNNEL_ID = " + tunnelId);
+        //    sqlStr.Append(" AND [PROBE_NAME]='T2'");
 
-            var db = new ManageDataBase(DATABASE_TYPE.GasEmissionDB);
-            var ds = db.ReturnDS(sqlStr.ToString());
-            return ds.Tables[0].Rows.Count <= 0 ? string.Empty : ds.Tables[0].Rows[0][0].ToString();
-        }
+        //    var db = new ManageDataBase(DATABASE_TYPE.GasEmissionDB);
+        //    var ds = db.ReturnDS(sqlStr.ToString());
+        //    return ds.Tables[0].Rows.Count <= 0 ? string.Empty : ds.Tables[0].Rows[0][0].ToString();
+        //}
 
         /// <summary>
         /// 获取指定探头的最新2行实时数据
@@ -1170,18 +1173,17 @@ namespace _1.GasEmission
             else
             {
                 // 根据巷道编号和探头类型编号获取探头信息
-                DataSet ds = ProbeManageBLL.selectProbeManageInfoByTunnelIDAndProbeType(
-                    _currentTunnelId,
-                    Convert.ToInt32(_lstProbeStyle.SelectedValue));
+                Probe[] probes = Probe.FindAllByTunnelIdAndProbeTypeId(_currentTunnelId,
+                Convert.ToInt32(this._lstProbeStyle.SelectedValue));
 
-                if (ds.Tables[0].Rows.Count > 0)
+                for (int i = 0; i < probes.Length; i++)
                 {
-                    _lstProbeName.DataSource = ds.Tables[0];
-                    _lstProbeName.DisplayMember = ProbeManageDbConstNames.PROBE_NAME;
-                    _lstProbeName.ValueMember = ProbeManageDbConstNames.PROBE_ID;
-
-                    _lstProbeName.SelectedIndex = -1;
+                    _lstProbeName.Items.Add(probes);
                 }
+                _lstProbeName.DisplayMember = "ProbeName";
+                _lstProbeName.ValueMember = "ProbeId";
+
+                _lstProbeName.SelectedIndex = -1;
             }
         }
 

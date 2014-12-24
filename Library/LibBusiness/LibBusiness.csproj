@@ -151,10 +151,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="1.GasEmmisionBLL\DbConstNames\ProbeManageDbConstNames.cs" />
-    <Compile Include="1.GasEmmisionBLL\DbConstNames\ProbeTypeDbConstNames.cs" />
-    <Compile Include="1.GasEmmisionBLL\PropertyBLL\ProbeManageBLL.cs" />
-    <Compile Include="1.GasEmmisionBLL\PropertyBLL\ProbeTypeBLL.cs" />
     <Compile Include="2.MiningSchedulingBLL\DbConstNames\DayReportHCDbConstNames.cs" />
     <Compile Include="2.MiningSchedulingBLL\DbConstNames\DayReportJJDbConstNames.cs" />
     <Compile Include="2.MiningSchedulingBLL\DbConstNames\GeologySpaceDbConstNames.cs" />
@@ -263,7 +259,6 @@
     <Compile Include="TunnelUtils.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="1.GasEmmisionBLL\GraphicBLL\" />
     <Folder Include="2.MiningSchedulingBLL\GraphicBLL\" />
     <Folder Include="3.GeologyMeasureBLL\GraphicBLL\" />
     <Folder Include="5.WaningManagementBLL\GraphicBLL\" />

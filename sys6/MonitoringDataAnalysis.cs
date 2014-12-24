@@ -42,7 +42,7 @@ namespace UnderTerminal
         public MonitoringDataAnalysis()
         {
             InitializeComponent();
-            
+
             // 调用选择巷道控件时需要调用的方法
             this.selectTunnelUserControl1.loadMineName();
 
@@ -68,14 +68,14 @@ namespace UnderTerminal
         /// </summary>
         private void loadProbeTypeInfo()
         {
-            DataSet ds = ProbeTypeBLL.selectAllProbeTypeInfo();
-            if (ds.Tables[0].Rows.Count > 0)
+            ProbeType[] probeTypes = ProbeType.FindAll();
+            if (probeTypes.Length > 0)
             {
-                this._lstProbeStyle.DataSource = ds.Tables[0];
-                this._lstProbeStyle.DisplayMember = ProbeTypeDbConstNames.PROBE_TYPE_NAME;
-                this._lstProbeStyle.ValueMember = ProbeTypeDbConstNames.PROBE_TYPE_ID;
+                _lstProbeStyle.DataSource = probeTypes;
+                _lstProbeStyle.DisplayMember = "ProbeTypeName";
+                _lstProbeStyle.ValueMember = "ProbeTypeId";
 
-                this._lstProbeStyle.SelectedIndex = -1;
+                _lstProbeStyle.SelectedIndex = -1;
             }
         }
 
@@ -96,17 +96,17 @@ namespace UnderTerminal
             else
             {
                 // 根据巷道编号和探头类型编号获取探头信息
-                DataSet ds = ProbeManageBLL.selectProbeManageInfoByTunnelIDAndProbeType(this.selectTunnelUserControl1.ITunnelId, 
-                    Convert.ToInt32(this._lstProbeStyle.SelectedValue));
+                Probe[] probes = Probe.FindAllByTunnelIdAndProbeTypeId(selectTunnelUserControl1.ITunnelId,
+                     Convert.ToInt32(_lstProbeStyle.SelectedValue));
 
-                if (ds.Tables[0].Rows.Count > 0)
+                for (int i = 0; i < probes.Length; i++)
                 {
-                    this._lstProbeName.DataSource = ds.Tables[0];
-                    this._lstProbeName.DisplayMember = ProbeManageDbConstNames.PROBE_NAME;
-                    this._lstProbeName.ValueMember = ProbeManageDbConstNames.PROBE_ID;
-
-                    this._lstProbeName.SelectedIndex = -1;
+                    _lstProbeName.Items.Add(probes);
                 }
+                _lstProbeName.DisplayMember = "ProbeName";
+                _lstProbeName.ValueMember = "ProbeId";
+
+                _lstProbeName.SelectedIndex = -1;
             }
         }
 
@@ -250,7 +250,7 @@ namespace UnderTerminal
             // 重绘
             this.tChart1.AutoRepaint = false;
 
-            string sqlStr = "SELECT * FROM T_GAS_CONCENTRATION_PROBE_DATA WHERE RECORD_TIME > '" + 
+            string sqlStr = "SELECT * FROM T_GAS_CONCENTRATION_PROBE_DATA WHERE RECORD_TIME > '" +
             this._dateTimeStart.Text + "' AND RECORD_TIME < '" + this._dateTimeEnd.Text + "' ORDER BY RECORD_TIME";
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GasEmissionDB);
             DataSet ds = db.ReturnDS(sqlStr);
@@ -260,7 +260,8 @@ namespace UnderTerminal
 
             int sqlCnt = ds.Tables[0].Rows.Count;
 
-            if (sqlCnt > 0) {
+            if (sqlCnt > 0)
+            {
 
                 // 重新设置X轴的最大值和最小值
                 fastLine1.GetHorizAxis.SetMinMax(Convert.ToDateTime(ds.Tables[0].Rows[0]["RECORD_TIME"]).ToOADate(),
@@ -350,7 +351,7 @@ namespace UnderTerminal
                 return;
             }
 
-            if (this.selectTunnelUserControl1.ITunnelId != Const.INVALID_ID 
+            if (this.selectTunnelUserControl1.ITunnelId != Const.INVALID_ID
                 && this._lstProbeName.SelectedItems.Count > 0)
             {
 
