@@ -158,7 +158,7 @@ namespace GIS.FileMenu
                             progressBar1.Value++;
                             continue;
                         }
-                        string fileName = (list[i] as IDataset).BrowseName;
+                        string fileName = (list[i] as IDataset).Name;
                         string name = fileName.Substring(fileName.LastIndexOf('.') + 1);
                         string fullFileName = outpath + name + ".shp";
                         fullFileName = fullFileName.Replace(@"//", @"/");
