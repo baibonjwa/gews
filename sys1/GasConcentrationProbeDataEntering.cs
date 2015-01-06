@@ -8,7 +8,6 @@
 // ******************************************************************
 
 using System;
-using System.Data;
 using System.Windows.Forms;
 using LibBusiness;
 using LibCommon;
@@ -16,8 +15,9 @@ using LibCommonControl;
 using LibCommonForm;
 using LibEntity;
 using LibSocket;
+using _1.GasEmission;
 
-namespace _1.GasEmission
+namespace sys1
 {
     public partial class GasConcentrationProbeDataEntering : BaseForm
     {

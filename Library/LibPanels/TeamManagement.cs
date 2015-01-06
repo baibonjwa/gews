@@ -12,10 +12,9 @@ using System.Data;
 using System.Windows.Forms;
 using LibBusiness;
 using LibCommon;
-using LibCommonControl;
 using LibEntity;
 
-namespace _2.MiningScheduling
+namespace LibPanels
 {
     public partial class TeamManagement : Form
     {
@@ -88,7 +87,7 @@ namespace _2.MiningScheduling
             chkSelAll.Checked = false;
 
             //※分页必须
-            _iRecordCount = TeamBLL.selectAllTeamInfo().Tables[0].Rows.Count;
+            _iRecordCount = TeamInfo.GetTotalCount();
 
             // ※分页必须
             dataPager1.PageControlInit(_iRecordCount);
@@ -96,7 +95,7 @@ namespace _2.MiningScheduling
             int iStartIndex = dataPager1.getStartIndex();
             int iEndIndex = dataPager1.getEndIndex();
 
-            _ds = TeamBLL.selectAllTeamInfo(iStartIndex, iEndIndex);
+            _ds = TeamBll.selectAllTeamInfo(iStartIndex, iEndIndex);
             _rowsCount = _ds.Tables[0].Rows.Count;
 
             //Farpoint重新绘制
@@ -272,7 +271,7 @@ namespace _2.MiningScheduling
                         //掘进ID
                         teamInfoEntity.TeamId = (int)_ds.Tables[0].Rows[i][TeamDbConstNames.ID];
                         //删除操作
-                        bResult = TeamBLL.deleteTeamInfo(teamInfoEntity);
+                        bResult = TeamBll.deleteTeamInfo(teamInfoEntity);
                     }
                 }
                 if (bResult)

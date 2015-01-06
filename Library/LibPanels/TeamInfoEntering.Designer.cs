@@ -1,4 +1,4 @@
-﻿namespace _2.MiningScheduling
+﻿namespace LibPanels
 {
     partial class TeamInfoEntering
     {

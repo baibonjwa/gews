@@ -213,18 +213,6 @@
     <Compile Include="MonitoringDataAnalysis.Designer.cs">
       <DependentUpon>MonitoringDataAnalysis.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProbeInfoEntering.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ProbeInfoEntering.Designer.cs">
-      <DependentUpon>ProbeInfoEntering.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ProbeInfoManagement.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ProbeInfoManagement.Designer.cs">
-      <DependentUpon>ProbeInfoManagement.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TimeUtil.cs" />
@@ -249,12 +237,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MonitoringDataAnalysis.resx">
       <DependentUpon>MonitoringDataAnalysis.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ProbeInfoEntering.resx">
-      <DependentUpon>ProbeInfoEntering.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ProbeInfoManagement.resx">
-      <DependentUpon>ProbeInfoManagement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -430,6 +412,10 @@
     <ProjectReference Include="..\Library\LibLoginForm\LibLoginForm.csproj">
       <Project>{ed482a03-e8d9-4a16-856f-be8f56b454c0}</Project>
       <Name>LibLoginForm</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Library\LibPanels\LibPanels.csproj">
+      <Project>{fc8d5ce1-f721-401b-bac2-c265d6fcc13d}</Project>
+      <Name>LibPanels</Name>
     </ProjectReference>
     <ProjectReference Include="..\Library\LibSocket\LibSocket.csproj">
       <Project>{93547539-03e2-49c3-88fc-3ccd81942d5f}</Project>

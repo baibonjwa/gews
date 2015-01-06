@@ -399,26 +399,15 @@ namespace LibPanels
         }
 
         /// <summary>
-        /// 绑定队别名称
+        ///     绑定队别名称
         /// </summary>
         private void bindTeamInfo()
         {
-            //cboTeamName.Items.Clear();
-            //DataSet ds = TeamBLL.selectTeamInfo();
-            //for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-            //{
-            //    cboTeamName.Items.Add(ds.Tables[0].Rows[i][TeamDbConstNames.TEAM_NAME].ToString());
-            //}
-            cboTeamName.DataSource = null;
-
-            DataSet ds = TeamBLL.selectTeamInfo();
-
-            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            cboTeamName.Items.Clear();
+            TeamInfo[] teamInfos = TeamInfo.FindAll();
+            foreach (TeamInfo t in teamInfos)
             {
-                cboTeamName.DataSource = ds.Tables[0];
-                cboTeamName.DisplayMember = TeamDbConstNames.TEAM_NAME;
-                cboTeamName.ValueMember = TeamDbConstNames.ID;
-                cboTeamName.SelectedIndex = -1;
+                cboTeamName.Items.Add(t.TeamName);
             }
         }
 
@@ -447,7 +436,7 @@ namespace LibPanels
         {
             cboSubmitter.Items.Clear();
             cboSubmitter.Text = "";
-            DataSet ds = TeamBLL.selectTeamInfoByTeamName(cboTeamName.Text);
+            DataSet ds = TeamBll.selectTeamInfoByTeamName(cboTeamName.Text);
             string teamLeader = ds.Tables[0].Rows[0][TeamDbConstNames.TEAM_LEADER].ToString();
             string[] teamMember = ds.Tables[0].Rows[0][TeamDbConstNames.TEAM_MEMBER].ToString().Split(',');
             cboSubmitter.Items.Add(teamLeader);

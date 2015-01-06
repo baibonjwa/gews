@@ -12,7 +12,7 @@ using Castle.ActiveRecord;
 namespace LibEntity
 {
     [ActiveRecord("T_TEAM_INFO")]
-    public class TeamInfo : ActiveRecordBase
+    public class TeamInfo : ActiveRecordBase<TeamInfo>
     {
         /// <summary>
         ///     队别ID
@@ -48,5 +48,12 @@ namespace LibEntity
         {
             return (TeamInfo)FindByPrimaryKey(typeof(TeamInfo), id);
         }
+
+        public static int GetTotalCount()
+        {
+            return Count();
+        }
+
+
     }
 }

@@ -10,19 +10,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
 using System.Threading;
 using System.Windows.Forms;
 using FarPoint.Win;
 using FarPoint.Win.Spread;
 using FarPoint.Win.Spread.CellType;
-using LibBusiness;
 using LibCommon;
 using LibCommonControl;
 using LibCommonForm;
 using LibEntity;
 
-namespace _1.GasEmission
+namespace sys1
 {
     public partial class GasConcentrationProbeDataManamement : BaseForm
     {

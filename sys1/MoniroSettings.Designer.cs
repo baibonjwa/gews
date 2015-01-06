@@ -1,4 +1,4 @@
-﻿namespace _1.GasEmission
+﻿namespace sys1
 {
     partial class MoniroSettings
     {

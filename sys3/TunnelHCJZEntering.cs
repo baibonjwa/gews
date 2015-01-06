@@ -442,7 +442,7 @@ namespace _3.GeologyMeasure
                 hd_ids.Add(Convert.ToInt16(hd3));
                 Dictionary<string, List<GeoStruct>> geostructs = Global.commonclss.GetStructsInfos(prevPnt, hd_ids);
                 if (geostructs == null) return;
-                GeologySpaceBLL.deleteGeologySpaceEntityInfos(workingFace.WorkingFaceID);//删除对应工作面ID的地质构造信息
+                GeologySpaceBll.DeleteGeologySpaceEntityInfos(workingFace.WorkingFaceID);//删除对应工作面ID的地质构造信息
                 foreach (string key in geostructs.Keys)
                 {
                     List<GeoStruct> geoinfos = geostructs[key];
@@ -458,7 +458,7 @@ namespace _3.GeologyMeasure
                         geologyspaceEntity.Distance = tmp.dist;
                         geologyspaceEntity.OnDateTime = DateTime.Now.ToShortDateString();
 
-                        GeologySpaceBLL.insertGeologySpaceEntityInfo(geologyspaceEntity);
+                        geologyspaceEntity.Save();
                     }
                 }
             }

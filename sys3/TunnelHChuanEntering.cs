@@ -746,10 +746,11 @@ namespace _3.GeologyMeasure
         private void bindTeamInfo()
         {
             cboTeamName.Items.Clear();
-            DataSet ds = TeamBLL.selectTeamInfo();
-            cboTeamName.DataSource = ds.Tables[0];
-            cboTeamName.DisplayMember = TeamDbConstNames.TEAM_NAME;
-            cboTeamName.ValueMember = TeamDbConstNames.ID;
+            TeamInfo[] teamInfos = TeamInfo.FindAll();
+            foreach (TeamInfo t in teamInfos)
+            {
+                cboTeamName.Items.Add(t.TeamName);
+            }
         }
 
         private void rbtnHChuanY_CheckedChanged(object sender, EventArgs e)

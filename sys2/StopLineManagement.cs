@@ -6,23 +6,19 @@
 // 版本信息：
 // V1.0 新建
 // ******************************************************************
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
-using LibEntity;
+using ESRI.ArcGIS.Carto;
 using LibBusiness;
 using LibCommon;
-using LibCommonControl;
-using ESRI.ArcGIS.Carto;
+using LibEntity;
 
-namespace _2.MiningScheduling
+namespace sys2
 {
     public partial class StopLineManagement : XtraForm
     {
@@ -190,7 +186,7 @@ namespace _2.MiningScheduling
                     _checkCount++;
                 }
                 else
-                { 
+                {
                     // 移除索引号
                     _htSelIdxs.Remove(e.Row);
 
@@ -264,7 +260,7 @@ namespace _2.MiningScheduling
         { //绑定数据
             bindFpStopLineInfo();
             //跳转到最后一页
-            this.dataPager1.btnLastPage_Click(null,null);
+            this.dataPager1.btnLastPage_Click(null, null);
             //添加后重设farpoint焦点
             FarPointOperate.farPointFocusSetAdd(fpStopLineInfo, _rowDetailStartIndex, _rowsCount);
         }
@@ -277,7 +273,7 @@ namespace _2.MiningScheduling
         {
             //停采线实体赋值
             setStopLineEntityValue();
-            StopLineEntering stopLineForm = new StopLineEntering(stopLineEntity,this);
+            StopLineEntering stopLineForm = new StopLineEntering(stopLineEntity, this);
             stopLineForm.Show(this);
         }
         public void refreshUpdate()
@@ -315,9 +311,9 @@ namespace _2.MiningScheduling
                             //获取掘进ID
                             stopLineEntity.Id = (int)_ds.Tables[0].Rows[i][StopLineDbConstNames.ID];
                             //删除操作
-                            bResult = StopLineBLL.deleteStopLineInfo(stopLineEntity);
+                            stopLineEntity.Delete();
 
-                            if (bResult && featureLayer != null)
+                            if (featureLayer != null)
                                 GIS.SpecialGraphic.DrawStopLine.DeleteLineFeature(featureLayer, stopLineEntity.BindingId); //删除对应的停采线要素
                         }
                     }

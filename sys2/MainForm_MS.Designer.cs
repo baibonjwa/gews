@@ -1,4 +1,4 @@
-﻿namespace _2.MiningScheduling
+﻿namespace sys2
 {
     partial class MainForm_MS
     {

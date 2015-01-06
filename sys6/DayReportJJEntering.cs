@@ -6,19 +6,16 @@
 // 版本信息：
 // V1.0 新建
 // ******************************************************************
+
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+using System.Diagnostics;
 using System.Windows.Forms;
 using LibBusiness;
 using LibBusiness.CommonBLL;
-using LibCommonForm;
-using LibEntity;
 using LibCommon;
+using LibEntity;
 using LibSocket;
 
 namespace UnderTerminal
@@ -26,60 +23,64 @@ namespace UnderTerminal
     public partial class DayReportJJEntering : Form
     {
         #region ******变量声明******
-        UnderMessageWindow mainWin;
+
+        private readonly int[] _arr;
+        private readonly UnderMessageWindow mainWin;
+        private readonly int tunnelId = -1;
         /**巷道实体**/
-        Tunnel _tunnelEntity = new Tunnel();
         /**回采日报实体**/
-        DayReportJj _dayReportJJEntity = new DayReportJj();
+        private DayReportJj _dayReportJJEntity = new DayReportJj();
+        private Tunnel _tunnelEntity = new Tunnel();
         /**巷道关联矿井等信息ID集合**/
-        int[] _arr;
-        DataSet dsWirePoint = new DataSet();
-        int tunnelId = -1;
+        private DataSet dsWirePoint = new DataSet();
+
         #endregion ******变量声明******
 
         #region
+
         //各列索引
-        const int C_WORK_TIME = 0;     // 班次
-        const int C_WORK_CONTENT = 1;     // 工作内容
-        const int C_WORK_PROGRESS = 2;     // 进尺
-        const int C_COMMENTS = 3;     // 备注
+        private const int C_WORK_TIME = 0; // 班次
+        private const int C_WORK_CONTENT = 1; // 工作内容
+        private const int C_WORK_PROGRESS = 2; // 进尺
+        private const int C_COMMENTS = 3; // 备注
+
         #endregion
 
         /// <summary>
-        /// 构造方法
+        ///     构造方法
         /// </summary>
         public DayReportJJEntering(int tunnelId, string tunnelName, UnderMessageWindow win)
         {
             InitializeComponent();
 
             this.tunnelId = tunnelId;
-            this.Text = tunnelName;
-            this.mainWin = win;
+            Text = tunnelName;
+            mainWin = win;
 
             addInfo();
         }
 
         /// <summary>
-        /// 构造方法
+        ///     构造方法
         /// </summary>
         /// <param name="array">巷道编号数组</param>
         /// <param name="dayReportHCEntity">回采进尺日报实体</param>
         public DayReportJJEntering(int[] array, DayReportJj dayReportJJEntity)
         {
             _arr = array;
-            this._dayReportJJEntity = dayReportJJEntity;
+            _dayReportJJEntity = dayReportJJEntity;
             _tunnelEntity.TunnelId = array[4];
             InitializeComponent();
             //修改初始化
             changeInfo();
             //设置窗体格式
-            LibCommon.FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_MS.DAY_REPORT_JJ_CHANGE);
+            FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_MS.DAY_REPORT_JJ_CHANGE);
 
             dgrdvDayReportJJ.AllowUserToAddRows = false;
         }
 
         /// <summary>
-        /// 委托事件
+        ///     委托事件
         /// </summary>
         /// <param name="sender"></param>
         private void InheritTunnelNameChanged(object sender, TunnelEventArgs e)
@@ -112,14 +113,14 @@ namespace UnderTerminal
         //}
 
         /// <summary>
-        /// 添加时加载初始化设置
+        ///     添加时加载初始化设置
         /// </summary>
         private void addInfo()
         {
             //日期
             dtpDate.Value = DateTime.Now.Date;
             //绑定队别名称
-            this.bindTeamInfo();
+            bindTeamInfo();
             //初始化班次
             //this.bindWorkTimeFirstTime();
             //设置为默认工作制式
@@ -134,13 +135,14 @@ namespace UnderTerminal
 
             setWorkTimeName();
             //设置班次为当前时间对应的班次
-            dgrdvDayReportJJ[0, 0].Value = Utils.returnSysWorkTime(rbtn38.Checked ? Const_MS.WORK_TIME_38 : Const_MS.WORK_TIME_46);
+            dgrdvDayReportJJ[0, 0].Value =
+                Utils.returnSysWorkTime(rbtn38.Checked ? Const_MS.WORK_TIME_38 : Const_MS.WORK_TIME_46);
 
             dgrdvDayReportJJ[1, 0].Value = Const_MS.JJ;
         }
 
         /// <summary>
-        /// 修改时加载初始化设置
+        ///     修改时加载初始化设置
         /// </summary>
         private void changeInfo()
         {
@@ -151,7 +153,7 @@ namespace UnderTerminal
         }
 
         /// <summary>
-        /// datagridview绑定信息
+        ///     datagridview绑定信息
         /// </summary>
         private void bindInfo()
         {
@@ -167,7 +169,8 @@ namespace UnderTerminal
             //工作制式
             if (_dayReportJJEntity.WorkTimeStyle == Const_MS.WORK_TIME_38)
             {
-                rbtn38.Checked = true; ;
+                rbtn38.Checked = true;
+                ;
             }
             if (_dayReportJJEntity.WorkTimeStyle == Const_MS.WORK_TIME_46)
             {
@@ -175,13 +178,12 @@ namespace UnderTerminal
             }
 
             //队别
-            cboTeamName.Text = TeamBLL.selectTeamInfoByID(_dayReportJJEntity.TeamInfo.TeamId).TeamName;
+            cboTeamName.Text = TeamBll.selectTeamInfoByID(_dayReportJJEntity.TeamInfo.TeamId).TeamName;
 
             //绑定队别成员
-            this.bindTeamMember();
+            bindTeamMember();
 
             //bindDistanceFromWirePoint();
-
 
 
             //填报人
@@ -196,23 +198,18 @@ namespace UnderTerminal
         }
 
         /// <summary>
-        /// 绑定队别名称
+        ///     绑定队别名称
         /// </summary>
         private void bindTeamInfo()
         {
-            cboTeamName.DataSource = null;
-
-            DataSet ds = TeamBLL.selectTeamInfo();
-
-            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            cboTeamName.Items.Clear();
+            TeamInfo[] teamInfos = TeamInfo.FindAll();
+            foreach (TeamInfo t in teamInfos)
             {
-                //cboTeamName.Items.Add(ds.Tables[0].Rows[i][TeamDbConstNames.TEAM_NAME].ToString());
-                cboTeamName.DataSource = ds.Tables[0];
-                cboTeamName.DisplayMember = TeamDbConstNames.TEAM_NAME;
-                cboTeamName.ValueMember = TeamDbConstNames.ID;
-                cboTeamName.SelectedIndex = -1;
+                cboTeamName.Items.Add(t.TeamName);
             }
         }
+
 
         //绑定填报人
         private void bindTeamMember()
@@ -222,7 +219,7 @@ namespace UnderTerminal
             cboSubmitter.Text = "";
 
             //获取队别成员姓名
-            DataSet ds = TeamBLL.selectTeamInfoByTeamName(cboTeamName.Text);
+            DataSet ds = TeamBll.selectTeamInfoByTeamName(cboTeamName.Text);
             string teamLeader;
             string[] teamMember;
             if (ds.Tables[0].Rows.Count > 0)
@@ -240,7 +237,7 @@ namespace UnderTerminal
         }
 
         /// <summary>
-        /// 队别选择事件（根据队别绑定队员）
+        ///     队别选择事件（根据队别绑定队员）
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -250,33 +247,34 @@ namespace UnderTerminal
         }
 
         /// <summary>
-        /// 取消按钮事件
+        ///     取消按钮事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnCancel_Click(object sender, EventArgs e)
         {
             //关闭窗体
-            this.Close();
+            Close();
         }
 
         /// <summary>
-        /// 提交按钮事件
+        ///     提交按钮事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show(@"确认提交", "井下终端录入系统", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show(@"确认提交", "井下终端录入系统", MessageBoxButtons.OKCancel,
+                MessageBoxIcon.Question);
             if (result != DialogResult.OK)
             {
                 return;
             }
 
-            _tunnelEntity.TunnelId = this.tunnelId;
+            _tunnelEntity.TunnelId = tunnelId;
             _tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(tunnelId);
             // 验证
-            if (!this.check())
+            if (!check())
             {
                 DialogResult = DialogResult.None;
                 return;
@@ -297,16 +295,16 @@ namespace UnderTerminal
         }
 
         /// <summary>
-        /// 添加回采日报
+        ///     添加回采日报
         /// </summary>
         private void insertDayReportJJInfo()
         {
-            List<DayReportJj> dayReportJJEntityList = new List<DayReportJj>();
-            for (int i = 0; i < this.dgrdvDayReportJJ.RowCount; i++)
+            var dayReportJJEntityList = new List<DayReportJj>();
+            for (int i = 0; i < dgrdvDayReportJJ.RowCount; i++)
             {
-                DayReportJj _dayReportJJEntity = new DayReportJj();
+                var _dayReportJJEntity = new DayReportJj();
                 // 最后一行为空行时，跳出循环
-                if (i == this.dgrdvDayReportJJ.RowCount - 1)
+                if (i == dgrdvDayReportJJ.RowCount - 1)
                 {
                     break;
                 }
@@ -315,7 +313,8 @@ namespace UnderTerminal
                 //队别名称
                 _dayReportJJEntity.TeamInfo.TeamId = Convert.ToInt32(cboTeamName.SelectedValue);
                 //绑定巷道编号
-                _dayReportJJEntity.WorkingFace.WorkingFaceID = BasicInfoManager.getInstance().getTunnelByID(_tunnelEntity.TunnelId).WorkingFace.WorkingFaceID;
+                _dayReportJJEntity.WorkingFace.WorkingFaceID =
+                    BasicInfoManager.getInstance().getTunnelByID(_tunnelEntity.TunnelId).WorkingFace.WorkingFaceID;
                 //日期
                 _dayReportJJEntity.DateTime = dtpDate.Value;
                 //填报人
@@ -330,24 +329,24 @@ namespace UnderTerminal
                     _dayReportJJEntity.WorkTimeStyle = rbtn46.Text;
                 }
                 //班次
-                if (this.dgrdvDayReportJJ.Rows[i].Cells[C_WORK_TIME].Value != null)
+                if (dgrdvDayReportJJ.Rows[i].Cells[C_WORK_TIME].Value != null)
                 {
-                    _dayReportJJEntity.WorkTime = this.dgrdvDayReportJJ.Rows[i].Cells[C_WORK_TIME].Value.ToString();
+                    _dayReportJJEntity.WorkTime = dgrdvDayReportJJ.Rows[i].Cells[C_WORK_TIME].Value.ToString();
                 }
                 //工作内容
-                if (this.dgrdvDayReportJJ.Rows[i].Cells[C_WORK_CONTENT].Value != null)
+                if (dgrdvDayReportJJ.Rows[i].Cells[C_WORK_CONTENT].Value != null)
                 {
-                    _dayReportJJEntity.WorkInfo = this.dgrdvDayReportJJ.Rows[i].Cells[C_WORK_CONTENT].Value.ToString();
+                    _dayReportJJEntity.WorkInfo = dgrdvDayReportJJ.Rows[i].Cells[C_WORK_CONTENT].Value.ToString();
                 }
                 //掘进进尺
-                if (this.dgrdvDayReportJJ.Rows[i].Cells[C_WORK_PROGRESS].Value != null)
+                if (dgrdvDayReportJJ.Rows[i].Cells[C_WORK_PROGRESS].Value != null)
                 {
-                    _dayReportJJEntity.JinChi = Convert.ToDouble(this.dgrdvDayReportJJ.Rows[i].Cells[C_WORK_PROGRESS].Value);
+                    _dayReportJJEntity.JinChi = Convert.ToDouble(dgrdvDayReportJJ.Rows[i].Cells[C_WORK_PROGRESS].Value);
                 }
                 //备注
-                if (this.dgrdvDayReportJJ.Rows[i].Cells[C_COMMENTS].Value != null)
+                if (dgrdvDayReportJJ.Rows[i].Cells[C_COMMENTS].Value != null)
                 {
-                    _dayReportJJEntity.Other = this.dgrdvDayReportJJ.Rows[i].Cells[C_COMMENTS].Value.ToString();
+                    _dayReportJJEntity.Other = dgrdvDayReportJJ.Rows[i].Cells[C_COMMENTS].Value.ToString();
                 }
                 //BID
                 _dayReportJJEntity.BindingId = IDGenerator.NewBindingID();
@@ -360,29 +359,21 @@ namespace UnderTerminal
             foreach (DayReportJj dayReportJJEntity in dayReportJJEntityList)
             {
                 //添加回采进尺日报
-                bResult = DayReportJJBLL.insertDayReportJJInfo(dayReportJJEntity);
-                if (bResult)
-                {
-                    UpdateWarningDataMsg msg = new UpdateWarningDataMsg(this.mainWin.workingfaceId, this.tunnelId, DayReportJJDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, DateTime.Now);
-                    mainWin.SendMsg2Server(msg);
-                }
-            }
+                dayReportJJEntity.SaveAndFlush();
 
-            //添加失败
-            if (!bResult)
-            {
-                Alert.alert(Const_MS.MSG_UPDATE_FAILURE);
-                return;
+                var msg = new UpdateWarningDataMsg(mainWin.workingfaceId, tunnelId, DayReportJJDbConstNames.TABLE_NAME,
+                    OPERATION_TYPE.ADD, DateTime.Now);
+                mainWin.SendMsg2Server(msg);
             }
         }
 
         /// <summary>
-        /// 修改回采日报信息
+        ///     修改回采日报信息
         /// </summary>
         private void updateDayReportJJInfo()
         {
             //绑定巷道编号
-            _dayReportJJEntity.WorkingFace.WorkingFaceID = this.tunnelId;
+            _dayReportJJEntity.WorkingFace.WorkingFaceID = tunnelId;
             //队别名称
             _dayReportJJEntity.TeamInfo.TeamId = Convert.ToInt32(cboTeamName.SelectedValue);
             //日期
@@ -399,58 +390,57 @@ namespace UnderTerminal
                 _dayReportJJEntity.WorkTimeStyle = rbtn46.Text;
             }
             //班次
-            if (this.dgrdvDayReportJJ.Rows[0].Cells[0].Value != null)
+            if (dgrdvDayReportJJ.Rows[0].Cells[0].Value != null)
             {
-                _dayReportJJEntity.WorkTime = this.dgrdvDayReportJJ.Rows[0].Cells[0].Value.ToString();
+                _dayReportJJEntity.WorkTime = dgrdvDayReportJJ.Rows[0].Cells[0].Value.ToString();
             }
             //工作内容
-            if (this.dgrdvDayReportJJ.Rows[0].Cells[1].Value != null)
+            if (dgrdvDayReportJJ.Rows[0].Cells[1].Value != null)
             {
-                _dayReportJJEntity.WorkInfo = this.dgrdvDayReportJJ.Rows[0].Cells[1].Value.ToString();
+                _dayReportJJEntity.WorkInfo = dgrdvDayReportJJ.Rows[0].Cells[1].Value.ToString();
             }
             //掘进进尺
-            if (this.dgrdvDayReportJJ.Rows[0].Cells[2].Value != null)
+            if (dgrdvDayReportJJ.Rows[0].Cells[2].Value != null)
             {
-                _dayReportJJEntity.JinChi = Convert.ToDouble(this.dgrdvDayReportJJ.Rows[0].Cells[2].Value);
+                _dayReportJJEntity.JinChi = Convert.ToDouble(dgrdvDayReportJJ.Rows[0].Cells[2].Value);
             }
             //备注
-            if (this.dgrdvDayReportJJ.Rows[0].Cells[5].Value != null)
+            if (dgrdvDayReportJJ.Rows[0].Cells[5].Value != null)
             {
-                _dayReportJJEntity.Other = this.dgrdvDayReportJJ.Rows[0].Cells[5].Value.ToString();
-            }
-
-            //备注
-            if (this.dgrdvDayReportJJ.Rows[0].Cells[3].Value != null)
-            {
-                _dayReportJJEntity.DistanceFromWirepoint = Convert.ToDouble(this.dgrdvDayReportJJ.Rows[0].Cells[3].Value.ToString());
+                _dayReportJJEntity.Other = dgrdvDayReportJJ.Rows[0].Cells[5].Value.ToString();
             }
 
             //备注
-            if (this.dgrdvDayReportJJ.Rows[0].Cells[4].Value != null)
+            if (dgrdvDayReportJJ.Rows[0].Cells[3].Value != null)
             {
-                _dayReportJJEntity.ConsultWirepoint = Convert.ToInt32(this.dgrdvDayReportJJ.Rows[0].Cells[4].Value.ToString());
+                _dayReportJJEntity.DistanceFromWirepoint =
+                    Convert.ToDouble(dgrdvDayReportJJ.Rows[0].Cells[3].Value.ToString());
+            }
+
+            //备注
+            if (dgrdvDayReportJJ.Rows[0].Cells[4].Value != null)
+            {
+                _dayReportJJEntity.ConsultWirepoint = Convert.ToInt32(dgrdvDayReportJJ.Rows[0].Cells[4].Value.ToString());
             }
 
             bool bResult = false;
             //提交修改
-            bResult = DayReportJJBLL.updateDayReportJJInfo(_dayReportJJEntity);
+            _dayReportJJEntity.SaveAndFlush();
 
             //修改成功
-            if (bResult)
-            {
-                UpdateWarningDataMsg msg = new UpdateWarningDataMsg(this.mainWin.workingfaceId, this.tunnelId, DayReportJJDbConstNames.TABLE_NAME, OPERATION_TYPE.UPDATE, dtpDate.Value);
-                mainWin.SendMsg2Server(msg);
-            }
+            var msg = new UpdateWarningDataMsg(mainWin.workingfaceId, tunnelId, DayReportJJDbConstNames.TABLE_NAME,
+                OPERATION_TYPE.UPDATE, dtpDate.Value);
+            mainWin.SendMsg2Server(msg);
         }
 
         /// <summary>
-        /// 设置班次名称
+        ///     设置班次名称
         /// </summary>
         private void setWorkTimeName()
         {
             string strWorkTimeName = "";
             string sysDateTime = DateTime.Now.ToLongTimeString();
-            if (this.rbtn38.Checked == true)
+            if (rbtn38.Checked)
             {
                 strWorkTimeName = MineDataSimpleBLL.selectWorkTimeNameByWorkTimeGroupIdAndSysTime(1, sysDateTime);
             }
@@ -466,7 +456,7 @@ namespace UnderTerminal
         }
 
         /// <summary>
-        /// 三八制选择事件
+        ///     三八制选择事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -523,19 +513,19 @@ namespace UnderTerminal
         }
 
         /// <summary>
-        /// 验证
+        ///     验证
         /// </summary>
         /// <returns></returns>
         private bool check()
         {
             //巷道是否选择
-            if (this.tunnelId <= 0)
+            if (tunnelId <= 0)
             {
                 Alert.alert(Const.MSG_PLEASE_CHOOSE + Const_MS.TUNNEL + Const.SIGN_EXCLAMATION_MARK);
                 return false;
             }
             //队别为空
-            if (Validator.IsEmpty(this.cboTeamName.Text))
+            if (Validator.IsEmpty(cboTeamName.Text))
             {
                 Alert.alert(Const.MSG_PLEASE_TYPE_IN + Const_MS.TEAM_NAME + Const.SIGN_EXCLAMATION_MARK);
                 return false;
@@ -554,10 +544,10 @@ namespace UnderTerminal
             }
             //datagridview验证
             //只有一条数据时
-            if (this.dgrdvDayReportJJ.Rows.Count - 1 == 0)
+            if (dgrdvDayReportJJ.Rows.Count - 1 == 0)
             {
                 //添加时判断为未录入进尺
-                if (this.Text == Const_MS.DAY_REPORT_JJ_ADD)
+                if (Text == Const_MS.DAY_REPORT_JJ_ADD)
                 {
                     Alert.alert(Const.MSG_PLEASE_TYPE_IN + Const_MS.JC + Const.SIGN_EXCLAMATION_MARK);
                     return false;
@@ -586,14 +576,14 @@ namespace UnderTerminal
                 //    }
                 //}
             }
-            for (int i = 0; i < this.dgrdvDayReportJJ.RowCount; i++)
+            for (int i = 0; i < dgrdvDayReportJJ.RowCount; i++)
             {
                 // 最后一行为空行时，跳出循环
                 if (i == dgrdvDayReportJJ.RowCount - 1)
                 {
                     break;
                 }
-                DataGridViewTextBoxCell cell = dgrdvDayReportJJ.Rows[i].Cells[C_WORK_PROGRESS] as DataGridViewTextBoxCell;
+                var cell = dgrdvDayReportJJ.Rows[i].Cells[C_WORK_PROGRESS] as DataGridViewTextBoxCell;
                 //进尺为空
                 if (cell.Value == null)
                 {
@@ -603,10 +593,7 @@ namespace UnderTerminal
                         Alert.alert(Const_MS.JC + Const.MSG_NOT_NULL + Const.SIGN_EXCLAMATION_MARK);
                         return false;
                     }
-                    else
-                    {
-                        cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                    }
+                    cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
                 }
                 else
                 {
@@ -619,10 +606,7 @@ namespace UnderTerminal
                     Alert.alert(Const_MS.JC + Const.MSG_MUST_NUMBER + Const.SIGN_EXCLAMATION_MARK);
                     return false;
                 }
-                else
-                {
-                    cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                }
+                cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
                 cell = dgrdvDayReportJJ.Rows[i].Cells[C_COMMENTS] as DataGridViewTextBoxCell;
                 //备注不能含特殊字符
                 if (cell.Value != null)
@@ -633,10 +617,7 @@ namespace UnderTerminal
                         Alert.alert(Const_MS.OTHER + Const.MSG_SP_CHAR + Const.SIGN_EXCLAMATION_MARK);
                         return false;
                     }
-                    else
-                    {
-                        cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                    }
+                    cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
                 }
             }
             //验证成功
@@ -652,16 +633,13 @@ namespace UnderTerminal
                     bindTeamMember();
                     break;
                 }
-                else
-                {
-                    cboSubmitter.Items.Clear();
-                    cboSubmitter.Text = "";
-                }
+                cboSubmitter.Items.Clear();
+                cboSubmitter.Text = "";
             }
         }
 
         /// <summary>
-        /// 自动计算距参考导线点距离
+        ///     自动计算距参考导线点距离
         /// </summary>
         /// <param name="lastDistanceFromWirepoint">上次距参考导线点距离</param>
         /// <param name="jjjc">掘进进尺</param>
@@ -671,15 +649,17 @@ namespace UnderTerminal
         {
             double distance = 0;
             double distanceFromWirepoint = 0;
-            LibEntity.WirePointInfo wirePointInfoEntityNew = new LibEntity.WirePointInfo();
-            WirePointInfo wirePointInfoEntityOld = new WirePointInfo();
+            var wirePointInfoEntityNew = new WirePointInfo();
+            var wirePointInfoEntityOld = new WirePointInfo();
             wirePointInfoEntityNew.Id = Convert.ToInt32(dgrdvDayReportJJ.CurrentRow.Cells[4].Value);
             wirePointInfoEntityNew = WirePointBLL.selectWirePointInfoByWirePointId(wirePointInfoEntityNew.Id);
             wirePointInfoEntityOld.Id = wirePointID;
             wirePointInfoEntityOld = WirePointBLL.selectWirePointInfoByWirePointId(wirePointInfoEntityOld.Id);
             if (wirePointID != 0)
             {
-                distance = Math.Sqrt(Math.Pow((wirePointInfoEntityNew.CoordinateX - wirePointInfoEntityOld.CoordinateX), 2) + Math.Pow((wirePointInfoEntityNew.CoordinateY - wirePointInfoEntityOld.CoordinateY), 2));
+                distance =
+                    Math.Sqrt(Math.Pow((wirePointInfoEntityNew.CoordinateX - wirePointInfoEntityOld.CoordinateX), 2) +
+                              Math.Pow((wirePointInfoEntityNew.CoordinateY - wirePointInfoEntityOld.CoordinateY), 2));
                 if (wirePointInfoEntityNew.Id < wirePointInfoEntityOld.Id)
                 {
                     distanceFromWirepoint = jjjc + lastDistanceFromWirepoint + distance;
@@ -695,7 +675,7 @@ namespace UnderTerminal
             }
             else
             {
-                DataSet ds = DayReportJJBLL.selectDayReportJJInfo(this.tunnelId);
+                DataSet ds = DayReportJJBLL.selectDayReportJJInfo(tunnelId);
                 int minWirepoint = 0;
                 if (ds.Tables[0].Rows.Count > 0)
                 {
@@ -704,7 +684,10 @@ namespace UnderTerminal
                         wirePointInfoEntityOld.Id = minWirepoint;
                         wirePointInfoEntityOld = WirePointBLL.selectWirePointInfoByWirePointId(wirePointInfoEntityOld.Id);
                     }
-                    distance = Math.Sqrt(Math.Pow((wirePointInfoEntityNew.CoordinateX - wirePointInfoEntityOld.CoordinateX), 2) + Math.Pow((wirePointInfoEntityNew.CoordinateY - wirePointInfoEntityOld.CoordinateY), 2));
+                    distance =
+                        Math.Sqrt(
+                            Math.Pow((wirePointInfoEntityNew.CoordinateX - wirePointInfoEntityOld.CoordinateX), 2) +
+                            Math.Pow((wirePointInfoEntityNew.CoordinateY - wirePointInfoEntityOld.CoordinateY), 2));
                 }
                 else
                 {
@@ -717,7 +700,6 @@ namespace UnderTerminal
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -736,18 +718,23 @@ namespace UnderTerminal
                         if (Validator.IsNumeric(dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value.ToString()))
                         {
                             //添加时计算方式
-                            if (this.Text == Const_MS.DAY_REPORT_JJ_ADD)
+                            if (Text == Const_MS.DAY_REPORT_JJ_ADD)
                             {
-                                if (this.tunnelId > 0)
+                                if (tunnelId > 0)
                                 {
-                                    _dayReportJJEntity = DayReportJJBLL.returnMaxRowDistanceFromWirepoint(this.tunnelId);
-                                    dgrdvDayReportJJ[e.ColumnIndex + 1, e.RowIndex].Value = autoDistanceFromWirepoint(_dayReportJJEntity.DistanceFromWirepoint, Convert.ToDouble(dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value), _dayReportJJEntity.ConsultWirepoint);
+                                    _dayReportJJEntity = DayReportJJBLL.returnMaxRowDistanceFromWirepoint(tunnelId);
+                                    dgrdvDayReportJJ[e.ColumnIndex + 1, e.RowIndex].Value =
+                                        autoDistanceFromWirepoint(_dayReportJJEntity.DistanceFromWirepoint,
+                                            Convert.ToDouble(dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value),
+                                            _dayReportJJEntity.ConsultWirepoint);
                                 }
                             }
                             //修改时计算方式
                             else
                             {
-                                dgrdvDayReportJJ[e.ColumnIndex + 1, e.RowIndex].Value = Convert.ToDouble(dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value) - _dayReportJJEntity.JinChi + _dayReportJJEntity.DistanceFromWirepoint;
+                                dgrdvDayReportJJ[e.ColumnIndex + 1, e.RowIndex].Value =
+                                    Convert.ToDouble(dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value) -
+                                    _dayReportJJEntity.JinChi + _dayReportJJEntity.DistanceFromWirepoint;
                             }
                         }
                         //不是数字时
@@ -756,7 +743,7 @@ namespace UnderTerminal
                             Alert.alert(Const_MS.JC + Const.MSG_MUST_NUMBER + Const_MS.SIGN_EXCLAMATION_MARK);
                             //错误处理
                             //添加时处理方式
-                            if (this.Text == Const_MS.DAY_REPORT_JJ_ADD)
+                            if (Text == Const_MS.DAY_REPORT_JJ_ADD)
                             {
                                 dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value = null;
                                 dgrdvDayReportJJ[e.ColumnIndex + 1, e.RowIndex].Value = null;
@@ -765,7 +752,8 @@ namespace UnderTerminal
                             else
                             {
                                 dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value = _dayReportJJEntity.JinChi;
-                                dgrdvDayReportJJ[e.ColumnIndex + 1, e.RowIndex].Value = _dayReportJJEntity.DistanceFromWirepoint;
+                                dgrdvDayReportJJ[e.ColumnIndex + 1, e.RowIndex].Value =
+                                    _dayReportJJEntity.DistanceFromWirepoint;
                             }
                         }
                     }
@@ -774,23 +762,28 @@ namespace UnderTerminal
                 if (e.ColumnIndex == 3)
                 {
                     //为空
-                    if (dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value == null || dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value.ToString().Trim() == "")
+                    if (dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value == null ||
+                        dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value.ToString().Trim() == "")
                     {
                         Alert.alert(Const_MS.OFC + Const.MSG_NOT_NULL);
                         //添加时计算方式
-                        if (this.Text == Const_MS.DAY_REPORT_JJ_ADD)
+                        if (Text == Const_MS.DAY_REPORT_JJ_ADD)
                         {
-                            if (this.tunnelId > 0)
+                            if (tunnelId > 0)
                             {
-                                dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value = autoDistanceFromWirepoint(_dayReportJJEntity.DistanceFromWirepoint, Convert.ToDouble(dgrdvDayReportJJ[e.ColumnIndex - 1, e.RowIndex].Value), _dayReportJJEntity.ConsultWirepoint);
+                                dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value =
+                                    autoDistanceFromWirepoint(_dayReportJJEntity.DistanceFromWirepoint,
+                                        Convert.ToDouble(dgrdvDayReportJJ[e.ColumnIndex - 1, e.RowIndex].Value),
+                                        _dayReportJJEntity.ConsultWirepoint);
                             }
                         }
                         //修改时计算方式
                         else
                         {
-                            dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value = Convert.ToDouble(dgrdvDayReportJJ[e.ColumnIndex - 1, e.RowIndex].Value) - _dayReportJJEntity.JinChi + _dayReportJJEntity.DistanceFromWirepoint;
+                            dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value =
+                                Convert.ToDouble(dgrdvDayReportJJ[e.ColumnIndex - 1, e.RowIndex].Value) -
+                                _dayReportJJEntity.JinChi + _dayReportJJEntity.DistanceFromWirepoint;
                         }
-
                     }
                 }
             }
@@ -807,9 +800,13 @@ namespace UnderTerminal
                         if (Validator.IsNumeric(dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value.ToString()))
                         {
                             //添加时计算方式
-                            if (this.Text == Const_MS.DAY_REPORT_JJ_ADD)
+                            if (Text == Const_MS.DAY_REPORT_JJ_ADD)
                             {
-                                dgrdvDayReportJJ[e.ColumnIndex + 1, e.RowIndex].Value = autoDistanceFromWirepoint(Convert.ToDouble(dgrdvDayReportJJ[e.ColumnIndex + 1, e.RowIndex - 1].Value), Convert.ToDouble(dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value), Convert.ToInt32(dgrdvDayReportJJ[4, dgrdvDayReportJJ.CurrentRow.Index - 1].Value));
+                                dgrdvDayReportJJ[e.ColumnIndex + 1, e.RowIndex].Value =
+                                    autoDistanceFromWirepoint(
+                                        Convert.ToDouble(dgrdvDayReportJJ[e.ColumnIndex + 1, e.RowIndex - 1].Value),
+                                        Convert.ToDouble(dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value),
+                                        Convert.ToInt32(dgrdvDayReportJJ[4, dgrdvDayReportJJ.CurrentRow.Index - 1].Value));
                             }
                         }
                         //不是数字时
@@ -818,7 +815,7 @@ namespace UnderTerminal
                             Alert.alert(Const_MS.JC + Const.MSG_MUST_NUMBER + Const_MS.SIGN_EXCLAMATION_MARK);
                             //错误处理
                             //添加时处理方式
-                            if (this.Text == Const_MS.DAY_REPORT_HC_ADD)
+                            if (Text == Const_MS.DAY_REPORT_HC_ADD)
                             {
                                 dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value = null;
                                 dgrdvDayReportJJ[e.ColumnIndex + 1, e.RowIndex].Value = null;
@@ -830,23 +827,28 @@ namespace UnderTerminal
                 if (e.ColumnIndex == 3)
                 {
                     //为空
-                    if (dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value == null || dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value.ToString().Trim() == "")
+                    if (dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value == null ||
+                        dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value.ToString().Trim() == "")
                     {
                         Alert.alert(Const_MS.DFW + Const.MSG_NOT_NULL);
                         //添加时计算方式
-                        if (this.Text == Const_MS.DAY_REPORT_JJ_ADD)
+                        if (Text == Const_MS.DAY_REPORT_JJ_ADD)
                         {
-                            if (this.tunnelId > 0)
+                            if (tunnelId > 0)
                             {
-                                dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value = autoDistanceFromWirepoint(_dayReportJJEntity.DistanceFromWirepoint, Convert.ToDouble(dgrdvDayReportJJ[e.ColumnIndex - 1, e.RowIndex].Value), _dayReportJJEntity.ConsultWirepoint);
+                                dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value =
+                                    autoDistanceFromWirepoint(_dayReportJJEntity.DistanceFromWirepoint,
+                                        Convert.ToDouble(dgrdvDayReportJJ[e.ColumnIndex - 1, e.RowIndex].Value),
+                                        _dayReportJJEntity.ConsultWirepoint);
                             }
                         }
                         //修改时计算方式
                         else
                         {
-                            dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value = Convert.ToDouble(dgrdvDayReportJJ[e.ColumnIndex - 1, e.RowIndex].Value) - _dayReportJJEntity.JinChi + _dayReportJJEntity.DistanceFromWirepoint;
+                            dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value =
+                                Convert.ToDouble(dgrdvDayReportJJ[e.ColumnIndex - 1, e.RowIndex].Value) -
+                                _dayReportJJEntity.JinChi + _dayReportJJEntity.DistanceFromWirepoint;
                         }
-
                     }
                 }
             }
@@ -863,14 +865,16 @@ namespace UnderTerminal
 
         private void dgrdvDayReportJJ_RowLeave(object sender, DataGridViewCellEventArgs e)
         {
-            if (dgrdvDayReportJJ[0, e.RowIndex].Value == null && dgrdvDayReportJJ[2, e.RowIndex].Value == null && dgrdvDayReportJJ[3, e.RowIndex].Value == null && dgrdvDayReportJJ[4, e.RowIndex].Value == null && dgrdvDayReportJJ[5, e.RowIndex].Value == null)
+            if (dgrdvDayReportJJ[0, e.RowIndex].Value == null && dgrdvDayReportJJ[2, e.RowIndex].Value == null &&
+                dgrdvDayReportJJ[3, e.RowIndex].Value == null && dgrdvDayReportJJ[4, e.RowIndex].Value == null &&
+                dgrdvDayReportJJ[5, e.RowIndex].Value == null)
             {
                 dgrdvDayReportJJ[1, e.RowIndex].Value = null;
             }
         }
 
         /// <summary>
-        /// 获取参考导线点的下一个导线点
+        ///     获取参考导线点的下一个导线点
         /// </summary>
         /// <param name="refPointID">参考导线点ID</param>
         /// <returns>下一个点的ID</returns>
@@ -882,7 +886,9 @@ namespace UnderTerminal
                 if (dsWireInfo.Tables[0].Rows.Count > 0)
                 {
                     //获取导线上的所有导线点信息
-                    dsWirePoint = WirePointBLL.selectAllWirePointInfo(Convert.ToInt32(dsWireInfo.Tables[0].Rows[0][WireInfoDbConstNames.ID].ToString()));
+                    dsWirePoint =
+                        WirePointBLL.selectAllWirePointInfo(
+                            Convert.ToInt32(dsWireInfo.Tables[0].Rows[0][WireInfoDbConstNames.ID].ToString()));
                     DataTable dt = dsWirePoint.Tables[0];
                     if (dt.Rows.Count < 2)
                         return -1;
@@ -891,7 +897,7 @@ namespace UnderTerminal
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {
                         wirePointID = Convert.ToInt32(dt.Rows[i][WirePointDbConstNames.ID]);
-                        if (wirePointID == refPointID + 1)   //参考导线点的下一个点
+                        if (wirePointID == refPointID + 1) //参考导线点的下一个点
                             return wirePointID;
                     }
                 }
@@ -899,7 +905,7 @@ namespace UnderTerminal
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Trace.WriteLine("获取参考导线点下一个点ID出错:" + ex.Message);
+                Trace.WriteLine("获取参考导线点下一个点ID出错:" + ex.Message);
                 return -1;
             }
         }

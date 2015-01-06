@@ -14,7 +14,7 @@ using LibCommonForm;
 using LibDatabase;
 using LibPanels;
 
-namespace _2.MiningScheduling
+namespace sys2
 {
     public partial class MainForm_MS : MainFrm
     {

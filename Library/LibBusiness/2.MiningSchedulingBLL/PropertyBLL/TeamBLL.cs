@@ -17,41 +17,21 @@ using LibCommon;
 
 namespace LibBusiness
 {
-    public class TeamBLL
+    public class TeamBll
     {
-        /// <summary>
-        /// 登入队别信息
-        /// </summary>
-        /// <param name="teamInfoEntity">队别实体</param>
-        /// <returns>队别信息</returns>
-        public static bool insertTeamInfo(TeamInfo teamInfoEntity)
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("INSERT INTO " + TeamDbConstNames.TABLE_NAME + " (");
-            sb.Append(TeamDbConstNames.TEAM_NAME + ",");
-            sb.Append(TeamDbConstNames.TEAM_LEADER + ",");
-            sb.Append(TeamDbConstNames.TEAM_MEMBER);
-            sb.Append(") VALUES ('");
-            sb.Append(teamInfoEntity.TeamName + "','");
-            sb.Append(teamInfoEntity.TeamLeader +"','");
-            sb.Append(teamInfoEntity.TeamMember + "')");
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
-            bool bResult = db.OperateDB(sb.ToString());
-            return bResult;
-        }
 
         /// <summary>
         /// 查询队别名称（去重）
         /// </summary>
         /// <returns>队别名</returns>
-        public static DataSet selectTeamInfo()
-        {
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
-            StringBuilder sqlStr = new StringBuilder();
-            sqlStr.Append("SELECT DISTINCT * FROM " + TeamDbConstNames.TABLE_NAME);
-            DataSet ds = db.ReturnDS(sqlStr.ToString());
-            return ds;
-        }
+        //public static DataSet SelectTeamInfo()
+        //{
+        //    ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
+        //    StringBuilder sqlStr = new StringBuilder();
+        //    sqlStr.Append("SELECT DISTINCT * FROM " + TeamDbConstNames.TABLE_NAME);
+        //    DataSet ds = db.ReturnDS(sqlStr.ToString());
+        //    return ds;
+        //}
 
         /// <summary>
         /// 查询某巷道信息
@@ -148,7 +128,7 @@ namespace LibBusiness
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
             StringBuilder sqlStr = new StringBuilder();
-            sqlStr.Append("SELECT * FROM " + TeamDbConstNames.TABLE_NAME );
+            sqlStr.Append("SELECT * FROM " + TeamDbConstNames.TABLE_NAME);
             sqlStr.Append(" WHERE ");
             sqlStr.Append(TeamDbConstNames.TEAM_NAME + " = '");
             sqlStr.Append(teamName + "'");

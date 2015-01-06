@@ -1,36 +1,23 @@
-﻿// ******************************************************************
-// 概  述：回采日报添加修改
-// 作  者：宋英杰
-// 创建日期：2014/3/11
-// 版本号：V1.0
-// 版本信息：
-// V1.0 新建
-// ******************************************************************
-
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using LibBusiness;
-using LibEntity;
-using LibCommon;
-using LibPanels;
-using LibCommonControl;
-using LibSocket;
-using ESRI.ArcGIS.Carto;
-using ESRI.ArcGIS.Geometry;
 using ESRI.ArcGIS.Geodatabase;
-using LibBusiness.CommonBLL;
-using LibCommonForm;
+using ESRI.ArcGIS.Geometry;
 using GIS.HdProc;
+using LibBusiness;
+using LibBusiness.CommonBLL;
+using LibCommon;
+using LibCommonControl;
+using LibCommonForm;
+using LibEntity;
+using LibPanels;
+using LibSocket;
 
-namespace _2.MiningScheduling
+namespace sys2
 {
-    public partial class DayReportHCEntering : BaseForm
+    public partial class DayReportHcEntering : BaseForm
     {
         #region ******变量声明******
         /**回采日报实体**/
@@ -58,7 +45,7 @@ namespace _2.MiningScheduling
         /// <summary>
         /// 构造方法
         /// </summary>
-        public DayReportHCEntering(MainFrm frm)
+        public DayReportHcEntering(MainFrm frm)
         {
             InitializeComponent();
 
@@ -73,24 +60,6 @@ namespace _2.MiningScheduling
             addInfo();
             //设置窗体格式
             LibCommon.FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_MS.DAY_REPORT_HC_ADD);
-
-            //自定义控件初始化
-            //WorkingFaceSelectEntity workingFaceSelectEntity = WorkingFaceSelect.SelectWorkingFace(DayReportHCDbConstNames.TABLE_NAME);
-            //if (workingFaceSelectEntity != null)
-            //{
-            //    _arr = new int[5];
-            //    _arr[0] = workingFaceSelectEntity.MineID;
-            //    _arr[1] = workingFaceSelectEntity.HorizontalID;
-            //    _arr[2] = workingFaceSelectEntity.MiningAreaID;
-
-            //    this.selectWorkingFaceControl1.setCurSelectedID(_arr);
-            //}
-            //else
-            //{
-            //this.selectWorkingFaceControl1.loadMineName();
-
-
-            //注册事件 
         }
 
         private void NameChangeEvent(object sender, WorkingFaceEventArgs e)
@@ -133,7 +102,7 @@ namespace _2.MiningScheduling
         /// </summary>
         /// <param name="array">巷道编号数组</param>
         /// <param name="dayReportHCEntity">回采进尺日报实体</param>
-        public DayReportHCEntering(int[] array, DayReportHc dayReportHCEntity, MainFrm frm)
+        public DayReportHcEntering(int[] array, DayReportHc dayReportHCEntity, MainFrm frm)
         {
             _arr = array;
             this.MainForm = frm;
@@ -292,17 +261,11 @@ namespace _2.MiningScheduling
         /// </summary>
         private void bindTeamInfo()
         {
-            cboTeamName.DataSource = null;
-
-            DataSet ds = TeamBLL.selectTeamInfo();
-
-            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            cboTeamName.Items.Clear();
+            TeamInfo[] teamInfos = TeamInfo.FindAll();
+            foreach (TeamInfo t in teamInfos)
             {
-                //cboTeamName.Items.Add(ds.Tables[0].Rows[i][TeamDbConstNames.TEAM_NAME].ToString());
-                cboTeamName.DataSource = ds.Tables[0];
-                cboTeamName.DisplayMember = TeamDbConstNames.TEAM_NAME;
-                cboTeamName.ValueMember = TeamDbConstNames.ID;
-                cboTeamName.SelectedIndex = -1;
+                cboTeamName.Items.Add(t.TeamName);
             }
         }
 
@@ -316,7 +279,7 @@ namespace _2.MiningScheduling
             cboSubmitter.Text = "";
 
             //获取队别成员姓名
-            DataSet ds = TeamBLL.selectTeamInfoByTeamName(cboTeamName.Text);
+            DataSet ds = TeamBll.selectTeamInfoByTeamName(cboTeamName.Text);
             string teamLeader;
             string[] teamMember;
             if (ds.Tables[0].Rows.Count > 0)
@@ -349,7 +312,7 @@ namespace _2.MiningScheduling
             {
                 TeamInfo teamInfoEntity = new TeamInfo();
                 teamInfoEntity.TeamId = Convert.ToInt32(cboTeamName.SelectedValue);
-                teamInfoEntity = TeamBLL.selectTeamInfoByID(teamInfoEntity.TeamId);
+                teamInfoEntity = TeamBll.selectTeamInfoByID(teamInfoEntity.TeamId);
                 teamInfoForm = new TeamInfoEntering(teamInfoEntity);
             }
 
@@ -358,7 +321,7 @@ namespace _2.MiningScheduling
                 this.bindTeamInfo();
                 cboTeamName.Text = teamInfoForm.returnTeamName();
                 DataSet ds = new DataSet();
-                ds = TeamBLL.selectTeamInfoByTeamName(teamInfoForm.returnTeamName());
+                ds = TeamBll.selectTeamInfoByTeamName(teamInfoForm.returnTeamName());
                 if (ds.Tables[0].Rows.Count > 0)
                 {
                     cboSubmitter.Items.Add(ds.Tables[0].Rows[0].ToString());
@@ -475,7 +438,7 @@ namespace _2.MiningScheduling
             //更新地质构造表
             if (null != dzxlist && dzxlist.Count > 0)
             {
-                GeologySpaceBLL.deleteGeologySpaceEntityInfos(workingFace.WorkingFaceID);//删除工作面ID对应的地质构造信息
+                GeologySpaceBll.DeleteGeologySpaceEntityInfos(workingFace.WorkingFaceID);//删除工作面ID对应的地质构造信息
                 foreach (string key in dzxlist.Keys)
                 {
                     List<GeoStruct> geoinfos = dzxlist[key];
@@ -491,7 +454,7 @@ namespace _2.MiningScheduling
                         geologyspaceEntity.Distance = tmp.dist;
                         geologyspaceEntity.OnDateTime = DateTime.Now.ToShortDateString();
 
-                        GeologySpaceBLL.insertGeologySpaceEntityInfo(geologyspaceEntity);
+                        geologyspaceEntity.Save();
                     }
                 }
             }
@@ -547,7 +510,7 @@ namespace _2.MiningScheduling
             Dictionary<string, List<GeoStruct>> geostructsinfos = Global.commonclss.GetStructsInfos(pnt, hd_ids);
             if (geostructsinfos.Count > 0)
             {
-                GeologySpaceBLL.deleteGeologySpaceEntityInfos(workingFace.WorkingFaceID);//删除工作面ID对应的地质构造信息
+                GeologySpaceBll.DeleteGeologySpaceEntityInfos(workingFace.WorkingFaceID);//删除工作面ID对应的地质构造信息
                 foreach (string key in geostructsinfos.Keys)
                 {
                     List<GeoStruct> geoinfos = geostructsinfos[key];
@@ -564,7 +527,7 @@ namespace _2.MiningScheduling
                         geologyspaceEntity.Distance = tmp.dist;
                         geologyspaceEntity.OnDateTime = DateTime.Now.ToShortDateString();
 
-                        GeologySpaceBLL.insertGeologySpaceEntityInfo(geologyspaceEntity);
+                        geologyspaceEntity.Save();
                     }
                 }
             }
@@ -645,7 +608,8 @@ namespace _2.MiningScheduling
             foreach (DayReportHc dayReportHCEntity in dayReportHCEntityList)
             {
                 //添加回采进尺日报
-                bResult = DayReportHCBLL.insertDayReportHCInfo(dayReportHCEntity);
+                dayReportHCEntity.SaveAndFlush();
+                bResult = true;
 
                 // 在图中绘制回采进尺
                 if (workingFace != null)
@@ -738,7 +702,8 @@ namespace _2.MiningScheduling
             }
 
             //提交修改
-            bool bResult = DayReportHCBLL.updateDayReportHCInfo(_dayReportHCEntity);
+            _dayReportHCEntity.SaveAndFlush();
+            bool bResult = true;
 
             //绘制回采进尺图形
             double hcjc = _dayReportHCEntity.JinChi;

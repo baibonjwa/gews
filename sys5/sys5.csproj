@@ -323,18 +323,6 @@
     <Compile Include="PreWarningRulesManagement.Designer.cs">
       <DependentUpon>PreWarningRulesManagement.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProbeInfoEntering.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ProbeInfoEntering.Designer.cs">
-      <DependentUpon>ProbeInfoEntering.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ProbeInfoManagement.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ProbeInfoManagement.Designer.cs">
-      <DependentUpon>ProbeInfoManagement.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SetTunnelPreWarningRules.cs">
@@ -409,12 +397,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PreWarningRulesManagement.resx">
       <DependentUpon>PreWarningRulesManagement.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ProbeInfoEntering.resx">
-      <DependentUpon>ProbeInfoEntering.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ProbeInfoManagement.resx">
-      <DependentUpon>ProbeInfoManagement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">

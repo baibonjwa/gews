@@ -6,23 +6,17 @@
 // 版本信息：
 // V1.0 新建
 // ******************************************************************
+
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using LibBusiness;
 using LibCommon;
-using LibEntity;
-using LibPanels;
-using LibSocket;
-using LibCommonForm;
 using LibCommonControl;
+using LibSocket;
 
-namespace _2.MiningScheduling
+namespace LibPanels
 {
     public partial class WorkTime : BaseForm
     {

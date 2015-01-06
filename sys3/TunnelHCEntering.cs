@@ -185,7 +185,7 @@ namespace _3.GeologyMeasure
             cboTeamName.Text = BasicInfoManager.getInstance().getTeamNameById(workingFace.TeamNameID);
 
             //开始日期
-            dtpStartDate.Value = DateTimeUtil.validateDTPDateTime((DateTime) workingFace.StartDate);
+            dtpStartDate.Value = DateTimeUtil.validateDTPDateTime((DateTime)workingFace.StartDate);
 
             //是否回采完毕
             if (workingFace.IsFinish == 1)
@@ -199,7 +199,7 @@ namespace _3.GeologyMeasure
             //停工日期
             if (workingFace.IsFinish == 1)
             {
-                dtpStopDate.Value = (DateTime) workingFace.StopDate;
+                dtpStopDate.Value = (DateTime)workingFace.StopDate;
             }
             //工作制式
             if (workingFace.WorkStyle == rbtn38.Text)
@@ -420,10 +420,11 @@ namespace _3.GeologyMeasure
         private void bindTeamInfo()
         {
             cboTeamName.Items.Clear();
-            DataSet ds = TeamBLL.selectTeamInfo();
-            cboTeamName.DataSource = ds.Tables[0];
-            cboTeamName.DisplayMember = TeamDbConstNames.TEAM_NAME;
-            cboTeamName.ValueMember = TeamDbConstNames.ID;
+            TeamInfo[] teamInfos = TeamInfo.FindAll();
+            foreach (TeamInfo t in teamInfos)
+            {
+                cboTeamName.Items.Add(t.TeamName);
+            }
         }
 
         /// <summary>
@@ -524,7 +525,7 @@ namespace _3.GeologyMeasure
                 //添加地质构造信息到数据库表中
                 if (dzxlist.Count > 0)
                 {
-                    GeologySpaceBLL.deleteGeologySpaceEntityInfos(workingFace.WorkingFaceID); //删除工作面ID对应的地质构造信息
+                    GeologySpaceBll.DeleteGeologySpaceEntityInfos(workingFace.WorkingFaceID); //删除工作面ID对应的地质构造信息
                     foreach (string key in dzxlist.Keys)
                     {
                         List<GeoStruct> geoinfos = dzxlist[key];
@@ -540,7 +541,7 @@ namespace _3.GeologyMeasure
                             geologyspaceEntity.Distance = tmp.dist;
                             geologyspaceEntity.OnDateTime = DateTime.Now.ToShortDateString();
 
-                            GeologySpaceBLL.insertGeologySpaceEntityInfo(geologyspaceEntity);
+                            geologyspaceEntity.Save();
                         }
                     }
                 }
@@ -581,7 +582,7 @@ namespace _3.GeologyMeasure
                 //更新地质构造表
                 if (dzxlist.Count > 0)
                 {
-                    GeologySpaceBLL.deleteGeologySpaceEntityInfos(workingFace.WorkingFaceID); //删除对应工作面ID的地质构造信息
+                    GeologySpaceBll.DeleteGeologySpaceEntityInfos(workingFace.WorkingFaceID); //删除对应工作面ID的地质构造信息
                     foreach (string key in dzxlist.Keys)
                     {
                         List<GeoStruct> geoinfos = dzxlist[key];
@@ -597,7 +598,7 @@ namespace _3.GeologyMeasure
                             geologyspaceEntity.Distance = tmp.dist;
                             geologyspaceEntity.OnDateTime = DateTime.Now.ToShortDateString();
 
-                            GeologySpaceBLL.insertGeologySpaceEntityInfo(geologyspaceEntity);
+                            geologyspaceEntity.Save();
                         }
                     }
                 }
@@ -745,7 +746,7 @@ namespace _3.GeologyMeasure
             {
                 Tunnel ent =
                     BasicInfoManager.getInstance()
-                        .getTunnelByID(Convert.ToInt32(((TunnelSimple) listBox_Browse.SelectedItem).Id));
+                        .getTunnelByID(Convert.ToInt32(((TunnelSimple)listBox_Browse.SelectedItem).Id));
                 ent.TunnelType = TunnelTypeEnum.OTHER;
                 tunnelSet.Add(ent);
 

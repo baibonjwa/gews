@@ -6,43 +6,43 @@
 // 版本信息：
 // V1.0 新建
 // ******************************************************************
+
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using LibBusiness;
-using LibEntity;
-using LibCommon;
 using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Geometry;
+using GIS;
+using GIS.Common;
+using LibBusiness;
+using LibCommon;
+using LibEntity;
 
-namespace _2.MiningScheduling
+namespace sys2
 {
     public partial class StopLineEntering : Form
     {
         #region ******变量声明******
-        StopLine stopLineEntity = new StopLine();
+
+        private readonly StopLine stopLineEntity = new StopLine();
+
         #endregion
 
-        StopLine _oldStopLineEntity = null; //更新前的停采线实体
-        StopLineManagement frmStop;
+        private readonly StopLineManagement frmStop;
+        private StopLine _oldStopLineEntity; //更新前的停采线实体
+
         /// <summary>
-        /// 构造方法
+        ///     构造方法
         /// </summary>
         public StopLineEntering(StopLineManagement frm)
         {
             InitializeComponent();
             //窗体属性设置
             frmStop = frm;
-            LibCommon.FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_MS.STOP_LINE_ADD);
+            FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_MS.STOP_LINE_ADD);
         }
 
         /// <summary>
-        /// 构造方法
+        ///     构造方法
         /// </summary>
         /// <param name="stopLineEntity">停采线实体</param>
         public StopLineEntering(StopLine stopLineEntity, StopLineManagement frm)
@@ -55,34 +55,34 @@ namespace _2.MiningScheduling
             updateInfo();
 
             //窗体属性设置
-            LibCommon.FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_MS.STOP_LINE_CHANGE);
+            FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_MS.STOP_LINE_CHANGE);
         }
 
         /// <summary>
-        /// 修改初始信息绑定
+        ///     修改初始信息绑定
         /// </summary>
         private void updateInfo()
         {
             //停采线名称
-            this.txtStopLineName.Text = stopLineEntity.StopLineName;
+            txtStopLineName.Text = stopLineEntity.StopLineName;
 
             //起点坐标X
-            this.txtSCoordinateX.Text = stopLineEntity.SCoordinateX.ToString();
+            txtSCoordinateX.Text = stopLineEntity.SCoordinateX.ToString();
 
             //起点坐标Y
-            this.txtSCoordinateY.Text = stopLineEntity.SCoordinateY.ToString();
+            txtSCoordinateY.Text = stopLineEntity.SCoordinateY.ToString();
 
             //起点坐标Z
-            this.txtSCoordinateZ.Text = stopLineEntity.SCoordinateZ.ToString();
+            txtSCoordinateZ.Text = stopLineEntity.SCoordinateZ.ToString();
 
             //终点坐标X
-            this.txtFCoordinateX.Text = stopLineEntity.FCoordinateX.ToString();
+            txtFCoordinateX.Text = stopLineEntity.FCoordinateX.ToString();
 
             //终点坐标Y
-            this.txtFCoordinateY.Text = stopLineEntity.FCoordinateY.ToString();
+            txtFCoordinateY.Text = stopLineEntity.FCoordinateY.ToString();
 
             //终点坐标Z
-            this.txtFCoordinateZ.Text = stopLineEntity.FCoordinateZ.ToString();
+            txtFCoordinateZ.Text = stopLineEntity.FCoordinateZ.ToString();
 
             _oldStopLineEntity = stopLineEntity; //记录修改前的实体
         }
@@ -90,7 +90,7 @@ namespace _2.MiningScheduling
         private void btnSubmint_Click(object sender, EventArgs e)
         {
             // 验证
-            if (!this.check())
+            if (!check())
             {
                 //DialogResult = DialogResult.None;
                 return;
@@ -113,7 +113,7 @@ namespace _2.MiningScheduling
             stopLineEntity.FCoordinateZ = Convert.ToDouble(txtFCoordinateZ.Text);
 
             //添加
-            if (this.Text == Const_MS.STOP_LINE_ADD)
+            if (Text == Const_MS.STOP_LINE_ADD)
             {
                 //BID
                 stopLineEntity.BindingId = IDGenerator.NewBindingID();
@@ -121,7 +121,7 @@ namespace _2.MiningScheduling
                 addStopLineInfo();
             }
             //修改
-            if (this.Text == Const_MS.STOP_LINE_CHANGE)
+            if (Text == Const_MS.STOP_LINE_CHANGE)
             {
                 //修改
                 updateStopLineInfo();
@@ -129,23 +129,21 @@ namespace _2.MiningScheduling
         }
 
         /// <summary>
-        /// 添加
+        ///     添加
         /// </summary>
         private void addStopLineInfo()
         {
             //添加操作
-            bool bResult = StopLineBLL.insertStopLineInfo(stopLineEntity);
-            if (bResult)
-            {
-                //TODO:添加成功
-                frmStop.refreshAdd();
-                DrawStopLine(stopLineEntity); //在地图上绘制停采线
-                this.Close();
-            }
+            stopLineEntity.Save();
+
+            //TODO:添加成功
+            frmStop.refreshAdd();
+            DrawStopLine(stopLineEntity); //在地图上绘制停采线
+            Close();
         }
 
         /// <summary>
-        /// 修改
+        ///     修改
         /// </summary>
         private void updateStopLineInfo()
         {
@@ -156,23 +154,23 @@ namespace _2.MiningScheduling
                 //TODO:修改成功
                 frmStop.refreshUpdate();
                 UpdateStopLineOnMap(_oldStopLineEntity, stopLineEntity); //更新地图上的停采线 
-                this.Close();
+                Close();
             }
         }
 
         /// <summary>
-        /// 取消按钮事件
+        ///     取消按钮事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnCancel_Click(object sender, EventArgs e)
         {
             //窗体关闭
-            this.Close();
+            Close();
         }
 
         /// <summary>
-        /// 验证
+        ///     验证
         /// </summary>
         /// <returns></returns>
         private bool check()
@@ -260,15 +258,15 @@ namespace _2.MiningScheduling
         }
 
         /// <summary>
-        /// 获取停采线图层
+        ///     获取停采线图层
         /// </summary>
         /// <returns>矢量图层</returns>
         private IFeatureLayer GetStopLineFeatureLayer()
         {
             //找到图层
-            IMap map = GIS.Common.DataEditCommon.g_pMap;
-            string layerName = GIS.LayerNames.STOP_LINE; //“停采线”图层
-            GIS.Common.DrawSpecialCommon drawSpecialCom = new GIS.Common.DrawSpecialCommon();
+            IMap map = DataEditCommon.g_pMap;
+            string layerName = LayerNames.STOP_LINE; //“停采线”图层
+            var drawSpecialCom = new DrawSpecialCommon();
             IFeatureLayer featureLayer = drawSpecialCom.GetFeatureLayerByName(layerName);
 
             //ILayer layer = GIS.Common.DataEditCommon.GetLayerByName(map, layerName);///获得图层IFeatureLayer featureLayer 
@@ -283,7 +281,7 @@ namespace _2.MiningScheduling
         }
 
         /// <summary>
-        /// 在地图上绘制一条停采线
+        ///     在地图上绘制一条停采线
         /// </summary>
         /// <param name="stopLineEntity">掘进的起点和终点</param>
         private bool DrawStopLine(StopLine stopLineEntity)
@@ -303,7 +301,7 @@ namespace _2.MiningScheduling
             endPoint.PutCoords(stopLineEntity.FCoordinateX, stopLineEntity.FCoordinateY);
             endPoint.Z = stopLineEntity.FCoordinateZ;
 
-            IPolyline polyline = new ESRI.ArcGIS.Geometry.PolylineClass();
+            IPolyline polyline = new PolylineClass();
             polyline.FromPoint = startPoint;
             polyline.ToPoint = endPoint;
 
@@ -312,7 +310,7 @@ namespace _2.MiningScheduling
         }
 
         /// <summary>
-        /// 更新地图上的停采线
+        ///     更新地图上的停采线
         /// </summary>
         /// <param name="oldEntity">修改前的停采线实体</param>
         /// <param name="newEntity">修改后的停采线实体</param>
@@ -333,12 +331,12 @@ namespace _2.MiningScheduling
 
         private void btnQD_Click(object sender, EventArgs e)
         {
-            GIS.Common.DataEditCommon.PickUpPoint(txtSCoordinateX,txtSCoordinateY);
+            DataEditCommon.PickUpPoint(txtSCoordinateX, txtSCoordinateY);
         }
 
         private void btnZD_Click(object sender, EventArgs e)
         {
-            GIS.Common.DataEditCommon.PickUpPoint(txtFCoordinateX, txtFCoordinateY);
+            DataEditCommon.PickUpPoint(txtFCoordinateX, txtFCoordinateY);
         }
     }
 }

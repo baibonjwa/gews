@@ -88,8 +88,23 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Castle.Core.2.5.1\lib\NET35\Castle.Core.dll</HintPath>
     </Reference>
+    <Reference Include="DevExpress.Charts.v13.2.Core, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Data.v13.2, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Office.v13.2.Core, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Printing.v13.2.Core, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.RichEdit.v13.2.Core, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Spreadsheet.v13.2.Core, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Utils.v13.2, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraBars.v13.2, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraCharts.v13.2, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraEditors.v13.2, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraGrid.v13.2, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraLayout.v13.2, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraNavBar.v13.2, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraPrinting.v13.2, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraRichEdit.v13.2, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraSpreadsheet.v13.2, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraTreeList.v13.2, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="ESRI.ArcGIS.AxControls, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files (x86)\ArcGIS\DeveloperKit10.1\DotNet\ESRI.ArcGIS.AxControls.dll</HintPath>
@@ -235,12 +250,36 @@
     <Compile Include="MineDataSimple.Designer.cs">
       <DependentUpon>MineDataSimple.cs</DependentUpon>
     </Compile>
+    <Compile Include="ProbeInfoEntering.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProbeInfoEntering.Designer.cs">
+      <DependentUpon>ProbeInfoEntering.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProbeInfoManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProbeInfoManagement.Designer.cs">
+      <DependentUpon>ProbeInfoManagement.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SelectTunnel.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SelectTunnel.Designer.cs">
       <DependentUpon>SelectTunnel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TeamInfoEntering.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TeamInfoEntering.Designer.cs">
+      <DependentUpon>TeamInfoEntering.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TeamManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TeamManagement.Designer.cs">
+      <DependentUpon>TeamManagement.cs</DependentUpon>
     </Compile>
     <Compile Include="UsualForecast.cs">
       <SubType>Form</SubType>
@@ -265,6 +304,12 @@
     </Compile>
     <Compile Include="VentilationInfoManagement.Designer.cs">
       <DependentUpon>VentilationInfoManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WorkTime.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WorkTime.Designer.cs">
+      <DependentUpon>WorkTime.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="CoalExistenceInfoEntering.resx">
       <DependentUpon>CoalExistenceInfoEntering.cs</DependentUpon>
@@ -302,6 +347,12 @@
     <EmbeddedResource Include="MineDataSimple.resx">
       <DependentUpon>MineDataSimple.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ProbeInfoEntering.resx">
+      <DependentUpon>ProbeInfoEntering.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProbeInfoManagement.resx">
+      <DependentUpon>ProbeInfoManagement.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -316,6 +367,12 @@
     <EmbeddedResource Include="SelectTunnel.resx">
       <DependentUpon>SelectTunnel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TeamInfoEntering.resx">
+      <DependentUpon>TeamInfoEntering.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TeamManagement.resx">
+      <DependentUpon>TeamManagement.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UsualForecast.resx">
       <DependentUpon>UsualForecast.cs</DependentUpon>
     </EmbeddedResource>
@@ -327,6 +384,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="VentilationInfoManagement.resx">
       <DependentUpon>VentilationInfoManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WorkTime.resx">
+      <DependentUpon>WorkTime.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="packages.config" />

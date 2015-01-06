@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
-namespace _2.MiningScheduling
+namespace sys2
 {
     public partial class DayReport : Form
     {
@@ -19,7 +13,7 @@ namespace _2.MiningScheduling
         private void btnCancle_Click(object sender, EventArgs e)
         {
             //关闭窗体
-            this.Close();
+            Close();
         }
     }
 }

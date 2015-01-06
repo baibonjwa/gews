@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
+using _1.GasEmission;
 
-namespace _1.GasEmission
+namespace sys1
 {
     public partial class MoniroSettings : Form
     {
@@ -31,11 +26,11 @@ namespace _1.GasEmission
         private void btnOK_Click(object sender, EventArgs e)
         {
             FileProperties fp = new FileProperties(mainWin.ConfigFileName);
-            fp.set("redthreshold", tbRedThreshold.Text);
-            fp.set("yellowthreshold", tbYellowThreshold.Text);
-            fp.set("countperframe", tbDataCountPerFrame.Text);
-            fp.set("baddatathreshold", tbBadDataThreshold.Text);
-            fp.set("updatefrequency", _cmbFrequency.SelectedItem);
+            fp.Set("redthreshold", tbRedThreshold.Text);
+            fp.Set("yellowthreshold", tbYellowThreshold.Text);
+            fp.Set("countperframe", tbDataCountPerFrame.Text);
+            fp.Set("baddatathreshold", tbBadDataThreshold.Text);
+            fp.Set("updatefrequency", _cmbFrequency.SelectedItem);
             fp.Save();
 
             int iValue;

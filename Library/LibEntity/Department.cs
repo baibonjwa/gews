@@ -1,18 +1,9 @@
-﻿// ******************************************************************
-// 概  述：部门信息实体
-// 作  者：秦凯
-// 创建日期：2014/03/07
-// 版本号：V1.0
-// 版本信息:
-// V1.0 新建
-// ******************************************************************
-
-using Castle.ActiveRecord;
+﻿using Castle.ActiveRecord;
 
 namespace LibEntity
 {
     [ActiveRecord("T_DEPT_INFO_MANAGEMENT")]
-    public class DepartmentInformation : ActiveRecordBase<DepartmentInformation>
+    public class Department : ActiveRecordBase<Department>
     {
         /// <summary>
         ///     获取、设置ID

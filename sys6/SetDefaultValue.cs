@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using LibBusiness;
 using LibCommon;
+using LibEntity;
 using Steema.TeeChart.Functions;
 
 namespace UnderTerminal
@@ -48,10 +49,10 @@ namespace UnderTerminal
         private void bindTeamInfo()
         {
             cboTeamName.Items.Clear();
-            DataSet ds = TeamBLL.selectTeamInfo();
-            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            TeamInfo[] teamInfos = TeamInfo.FindAll();
+            foreach (TeamInfo t in teamInfos)
             {
-                cboTeamName.Items.Add(ds.Tables[0].Rows[i][TeamDbConstNames.TEAM_NAME].ToString());
+                cboTeamName.Items.Add(t.TeamName);
             }
         }
 
@@ -110,7 +111,7 @@ namespace UnderTerminal
         {
             cboSubmitter.Items.Clear();
             cboSubmitter.Text = "";
-            DataSet ds = TeamBLL.selectTeamInfoByTeamName(cboTeamName.Text);
+            DataSet ds = TeamBll.selectTeamInfoByTeamName(cboTeamName.Text);
             string teamLeader = ds.Tables[0].Rows[0][TeamDbConstNames.TEAM_LEADER].ToString();
             string[] teamMember = ds.Tables[0].Rows[0][TeamDbConstNames.TEAM_MEMBER].ToString().Split(',');
             cboSubmitter.Items.Add(teamLeader);

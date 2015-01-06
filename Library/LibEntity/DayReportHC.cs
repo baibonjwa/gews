@@ -7,7 +7,11 @@
 // V1.0 新建
 // ******************************************************************
 
+using System;
+using System.Collections.Generic;
 using Castle.ActiveRecord;
+using NHibernate.Criterion;
+
 
 namespace LibEntity
 {
@@ -22,6 +26,47 @@ namespace LibEntity
         /// </summary>
         [Property("ISDEL")]
         public int IsDel { get; set; }
+
+        public static DayReportHc FindByBid(string bid)
+        {
+            var criterion = new List<ICriterion>
+            {
+                Restrictions.Eq("Bid", bid)
+            };
+            return (DayReportHc)FindFirst(typeof(DayReportHc), criterion.ToArray());
+        }
+
+        public static int GetTotalCount()
+        {
+            return Count(typeof(DayReportHc));
+        }
+
+        public static DayReportHc[] FindAllByDatetime(DateTime dtFrom, DateTime dtTo)
+        {
+            var criterion = new List<ICriterion>
+            {
+                Restrictions.Between("DateTime", dtFrom,dtTo)
+            };
+            return (DayReportHc[])FindAll(typeof(DayReportHc), criterion.ToArray());
+        }
+
+
+        public static DayReportHc[] SlicedFindByDatetime(int firstResult, int maxResult,
+            DateTime startTime, DateTime endTime)
+        {
+            var criterion = new List<ICriterion>
+            {
+                Restrictions.Between("Datetime", startTime, endTime)
+            };
+            var results = (DayReportHc[])SlicedFindAll(typeof(DayReportHc), firstResult, maxResult, criterion.ToArray());
+            return results;
+        }
+
+        public static DayReportHc[] SlicedFind(int firstResult, int maxResult)
+        {
+            var results = (DayReportHc[])SlicedFindAll(typeof(DayReportHc), firstResult, maxResult);
+            return results;
+        }
 
     }
 }

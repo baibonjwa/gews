@@ -11,23 +11,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using LibCommon;
-using LibBusiness;
-using LibEntity;
-using System.Threading;
-using LibCommonControl;
-using LibSocket;
 using ESRI.ArcGIS.Carto;
-using LibCommonForm;
 using GIS.HdProc;
+using LibBusiness;
+using LibCommon;
+using LibCommonControl;
+using LibEntity;
+using LibSocket;
 
-namespace _2.MiningScheduling
+namespace sys2
 {
     public partial class DayReportJJManagement : BaseForm
     {
@@ -175,7 +169,7 @@ namespace _2.MiningScheduling
             }
             else
             {
-                _iRecordCount = DayReportJJBLL.selectDayReportJJInfo().Tables[0].Rows.Count;
+                _iRecordCount = DayReportJj.GetTotalCount();
             }
 
             // ※分页必须
@@ -436,17 +430,15 @@ namespace _2.MiningScheduling
                             Tunnel tEntity = BasicInfoManager.getInstance().getTunnelListByWorkingFaceId(entity.WorkingFace.WorkingFaceID)[0];
 
                             //删除操作
-                            bResult = DayReportJJBLL.deleteDayReportJJInfo(entity);
-                            if (bResult)
-                            {
-                                DelJJCD(tEntity.TunnelId.ToString(), entity.BindingId, entity.WorkingFace.WorkingFaceID);
+                            entity.Delete();
 
-                                // 向server端发送更新预警数据
-                                UpdateWarningDataMsg msg = new UpdateWarningDataMsg(entity.WorkingFace.WorkingFaceID,
-                                    Const.INVALID_ID,
-                                    DayReportJJDbConstNames.TABLE_NAME, OPERATION_TYPE.DELETE, DateTime.Now);
-                                this.MainForm.SendMsg2Server(msg);
-                            }
+                            DelJJCD(tEntity.TunnelId.ToString(), entity.BindingId, entity.WorkingFace.WorkingFaceID);
+
+                            // 向server端发送更新预警数据
+                            UpdateWarningDataMsg msg = new UpdateWarningDataMsg(entity.WorkingFace.WorkingFaceID,
+                                Const.INVALID_ID,
+                                DayReportJJDbConstNames.TABLE_NAME, OPERATION_TYPE.DELETE, DateTime.Now);
+                            this.MainForm.SendMsg2Server(msg);
                         }
                     }
                 }
@@ -499,7 +491,7 @@ namespace _2.MiningScheduling
                 List<int> hdids = new List<int>();
                 hdids.Add(Convert.ToInt32(hdid));
                 Dictionary<string, List<GeoStruct>> dzxlist = Global.commonclss.GetStructsInfosNew(pline, hdids);
-                GeologySpaceBLL.deleteGeologySpaceEntityInfos(workingfaceid);//删除工作面ID对应的地质构造信息
+                GeologySpaceBll.DeleteGeologySpaceEntityInfos(workingfaceid);//删除工作面ID对应的地质构造信息
 
                 foreach (string key in dzxlist.Keys)
                 {
@@ -510,14 +502,13 @@ namespace _2.MiningScheduling
                         GeoStruct tmp = geoinfos[i];
 
                         GeologySpace geologyspaceEntity = new GeologySpace();
-                        geologyspaceEntity.WorkingFace =  BasicInfoManager.getInstance().getWorkingFaceById(workingfaceid);
+                        geologyspaceEntity.WorkingFace = BasicInfoManager.getInstance().getWorkingFaceById(workingfaceid);
                         geologyspaceEntity.TectonicType = Convert.ToInt32(key);
                         geologyspaceEntity.TectonicId = tmp.geoinfos[GIS.GIS_Const.FIELD_BID].ToString();
                         geologyspaceEntity.Distance = tmp.dist;
                         geologyspaceEntity.OnDateTime = DateTime.Now.ToShortDateString();
 
-
-                        GeologySpaceBLL.insertGeologySpaceEntityInfo(geologyspaceEntity);
+                        geologyspaceEntity.Save();
                     }
                 }
 

@@ -31,6 +31,7 @@ using DevExpress.LookAndFeel;
 using DevExpress.UserSkins;
 using DevExpress.XtraEditors;
 using LibPanels;
+using sys2;
 using _2.MiningScheduling;
 using LibSocket;
 using ESRI.ArcGIS.esriSystem;

@@ -1,8 +1,8 @@
 ﻿using LibEntity;
 
-namespace _2.MiningScheduling
+namespace sys2
 {
-    partial class DayReportHCEntering
+    partial class DayReportHcEntering
     {
         /// <summary>
         /// Required designer variable.
@@ -299,7 +299,7 @@ namespace _2.MiningScheduling
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "DayReportHCEntering";
+            this.Name = "DayReportHcEntering";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "回采日报";

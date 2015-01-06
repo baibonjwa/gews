@@ -496,7 +496,7 @@ namespace LibCommonForm
                 }
 
                 //定义 部门信息实体 接收新修改的数据
-                LibEntity.DepartmentInformation userDeptInfo = new LibEntity.DepartmentInformation();
+                LibEntity.Department userDeptInfo = new LibEntity.Department();
                 //部门名称
                 userDeptInfo.Name = name;
                 //人数

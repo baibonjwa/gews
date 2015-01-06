@@ -16,7 +16,7 @@ using LibCommonForm;
 using LibEntity;
 using LibSocket;
 
-namespace _1.GasEmission
+namespace LibPanels
 {
     public partial class ProbeInfoEntering : BaseForm
     {

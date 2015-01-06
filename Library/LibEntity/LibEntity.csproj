@@ -150,7 +150,7 @@
     <Compile Include="K1Value.cs" />
     <Compile Include="BindingTable.cs" />
     <Compile Include="CurrentUser.cs" />
-    <Compile Include="DepartmentInformation.cs" />
+    <Compile Include="Department.cs" />
     <Compile Include="PreWarningResultTableUnit.cs" />
     <Compile Include="PreWarningResultEntityUserLevel.cs" />
     <Compile Include="DataTblAndBindingTblInfo.cs" />

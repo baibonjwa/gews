@@ -527,15 +527,15 @@ namespace LibBusiness
         {
             teamList.Clear();
 
-            DataSet ds = TeamBLL.selectTeamInfo();
+            TeamInfo[] teamInfos = TeamInfo.FindAll();
 
-            foreach (DataRow dr in ds.Tables[0].Rows)
+            foreach (TeamInfo teamInfo in teamInfos)
             {
                 TeamInfo entity = new TeamInfo();
-                entity.TeamId = Convert.ToInt32(dr[TeamDbConstNames.ID]);
-                entity.TeamName = dr[TeamDbConstNames.TEAM_NAME].ToString();
-                entity.TeamLeader = dr[TeamDbConstNames.TEAM_LEADER].ToString();
-                entity.TeamMember = dr[TeamDbConstNames.TEAM_MEMBER].ToString();
+                entity.TeamId = teamInfo.TeamId;
+                entity.TeamName = teamInfo.TeamName;
+                entity.TeamLeader = teamInfo.TeamLeader;
+                entity.TeamMember = teamInfo.TeamMember;
                 teamList.Add(entity.TeamId, entity);
             }
         }

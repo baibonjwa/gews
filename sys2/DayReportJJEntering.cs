@@ -12,19 +12,19 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using LibBusiness;
-using LibEntity;
-using LibCommon;
-using LibSocket;
 using ESRI.ArcGIS.Geometry;
-using LibBusiness.CommonBLL;
-using LibCommonForm;
-using LibCommonControl;
 using GIS.HdProc;
+using LibBusiness;
+using LibBusiness.CommonBLL;
+using LibCommon;
+using LibCommonControl;
+using LibCommonForm;
+using LibEntity;
+using LibPanels;
+using LibSocket;
 
-namespace _2.MiningScheduling
+namespace sys2
 {
     public partial class DayReportJJEntering : BaseForm
     {
@@ -232,7 +232,7 @@ namespace _2.MiningScheduling
             }
 
             //队别
-            cboTeamName.Text = TeamBLL.selectTeamInfoByID(_dayReportJJEntity.TeamInfo.TeamId).TeamName;
+            cboTeamName.Text = TeamBll.selectTeamInfoByID(_dayReportJJEntity.TeamInfo.TeamId).TeamName;
 
             //绑定队别成员
             this.bindTeamMember();
@@ -248,21 +248,15 @@ namespace _2.MiningScheduling
         }
 
         /// <summary>
-        /// 绑定队别名称
+        ///     绑定队别名称
         /// </summary>
         private void bindTeamInfo()
         {
-            cboTeamName.DataSource = null;
-
-            DataSet ds = TeamBLL.selectTeamInfo();
-
-            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            cboTeamName.Items.Clear();
+            TeamInfo[] teamInfos = TeamInfo.FindAll();
+            foreach (TeamInfo t in teamInfos)
             {
-                //cboTeamName.Items.Add(ds.Tables[0].Rows[i][TeamDbConstNames.TEAM_NAME].ToString());
-                cboTeamName.DataSource = ds.Tables[0];
-                cboTeamName.DisplayMember = TeamDbConstNames.TEAM_NAME;
-                cboTeamName.ValueMember = TeamDbConstNames.ID;
-                cboTeamName.SelectedIndex = -1;
+                cboTeamName.Items.Add(t.TeamName);
             }
         }
 
@@ -274,7 +268,7 @@ namespace _2.MiningScheduling
             cboSubmitter.Text = "";
 
             //获取队别成员姓名
-            DataSet ds = TeamBLL.selectTeamInfoByTeamName(cboTeamName.Text);
+            DataSet ds = TeamBll.selectTeamInfoByTeamName(cboTeamName.Text);
             string teamLeader;
             string[] teamMember;
             if (ds.Tables[0].Rows.Count > 0)
@@ -307,7 +301,7 @@ namespace _2.MiningScheduling
             {
                 TeamInfo teamInfoEntity = new TeamInfo();
                 teamInfoEntity.TeamId = Convert.ToInt32(cboTeamName.SelectedValue);
-                teamInfoEntity = TeamBLL.selectTeamInfoByID(teamInfoEntity.TeamId);
+                teamInfoEntity = TeamBll.selectTeamInfoByID(teamInfoEntity.TeamId);
                 teamInfoForm = new TeamInfoEntering(teamInfoEntity);
             }
 
@@ -316,7 +310,7 @@ namespace _2.MiningScheduling
                 this.bindTeamInfo();
                 cboTeamName.Text = teamInfoForm.returnTeamName();
                 DataSet ds = new DataSet();
-                ds = TeamBLL.selectTeamInfoByTeamName(teamInfoForm.returnTeamName());
+                ds = TeamBll.selectTeamInfoByTeamName(teamInfoForm.returnTeamName());
                 if (ds.Tables[0].Rows.Count > 0)
                 {
                     cboSubmitter.Items.Add(ds.Tables[0].Rows[0].ToString());
@@ -386,8 +380,6 @@ namespace _2.MiningScheduling
             {
                 DayReportJj oldDayReportJJEntity = _dayReportJJEntity; //修改之前的实体
                 LibBusiness.TunnelDefaultSelect.UpdateDefaultTunnel(DayReportJJDbConstNames.TABLE_NAME, workingFace.WorkingFaceID);
-                updateDayReportJJInfo();
-
                 DayReportJj newDayReportJJEntity = _dayReportJJEntity; //修改后的掘进信息实体               
             }
         }
@@ -406,7 +398,7 @@ namespace _2.MiningScheduling
             }
             //查询地质结构信息
             geostructsinfos.Remove("LAST");
-            GeologySpaceBLL.deleteGeologySpaceEntityInfos(workingFace.WorkingFaceID);//删除工作面ID对应的地质构造信息
+            GeologySpaceBll.DeleteGeologySpaceEntityInfos(workingFace.WorkingFaceID);//删除工作面ID对应的地质构造信息
             foreach (string key in geostructsinfos.Keys)
             {
                 List<GeoStruct> geoinfos = geostructsinfos[key];
@@ -422,7 +414,7 @@ namespace _2.MiningScheduling
                     geologyspaceEntity.Distance = tmp.dist;
                     geologyspaceEntity.OnDateTime = DateTime.Now.ToShortDateString();
 
-                    GeologySpaceBLL.insertGeologySpaceEntityInfo(geologyspaceEntity);
+                    geologyspaceEntity.Save();
                 }
             }
 
@@ -451,7 +443,7 @@ namespace _2.MiningScheduling
             List<int> hd_ids = new List<int>();
             hd_ids.Add(Convert.ToInt16(hdid));
             Dictionary<string, List<GeoStruct>> geostructsinfos = Global.commonclss.GetStructsInfos(pnt, hd_ids);
-            GeologySpaceBLL.deleteGeologySpaceEntityInfos(workingFace.WorkingFaceID);//删除对应工作面ID的地质构造信息
+            GeologySpaceBll.DeleteGeologySpaceEntityInfos(workingFace.WorkingFaceID);//删除对应工作面ID的地质构造信息
             foreach (string key in geostructsinfos.Keys)
             {
                 List<GeoStruct> geoinfos = geostructsinfos[key];
@@ -467,7 +459,7 @@ namespace _2.MiningScheduling
                     geologyspaceEntity.Distance = tmp.dist;
                     geologyspaceEntity.OnDateTime = DateTime.Now.ToShortDateString();
 
-                    GeologySpaceBLL.insertGeologySpaceEntityInfo(geologyspaceEntity);
+                    geologyspaceEntity.Save();
                 }
             }
         }
@@ -546,129 +538,25 @@ namespace _2.MiningScheduling
             foreach (DayReportJj dayReportJJEntity in dayReportJJEntityList)
             {
                 //添加回采进尺日报
-                bResult = DayReportJJBLL.insertDayReportJJInfo(dayReportJJEntity);
+                dayReportJJEntity.SaveAndFlush();
+
                 //巷道掘进绘图
                 double dist = dayReportJJEntity.JinChi;
 
                 // 巷道id                
                 string hdid = tunnel.TunnelId.ToString();
                 string bid = dayReportJJEntity.BindingId;
-                if (bResult)
-                    addHdJc(hdid, dist, bid, tunnel.TunnelWid);
+
+                addHdJc(hdid, dist, bid, tunnel.TunnelWid);
             }
 
-            //添加失败
-            if (!bResult)
-            {
-                Alert.alert(Const_MS.MSG_UPDATE_FAILURE);
-                return;
-            }
-            else
-            {
-                Log.Debug("添加进尺数据发送Socket消息");
-                // 通知服务器掘进进尺已经更新
-                UpdateWarningDataMsg msg = new UpdateWarningDataMsg(workingFace.WorkingFaceID, tunnel.TunnelId,
-                    DayReportJJDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, DateTime.Now);
-                this.MainForm.SendMsg2Server(msg);
-                Log.Debug("添加进尺数据Socket消息发送完成");
-            }
+            Log.Debug("添加进尺数据发送Socket消息");
+            // 通知服务器掘进进尺已经更新
+            UpdateWarningDataMsg msg = new UpdateWarningDataMsg(workingFace.WorkingFaceID, tunnel.TunnelId,
+                DayReportJJDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, DateTime.Now);
+            this.MainForm.SendMsg2Server(msg);
+            Log.Debug("添加进尺数据Socket消息发送完成");
         }
-
-        /// <summary>
-        /// 修改回采日报信息
-        /// </summary>
-        private void updateDayReportJJInfo()
-        {
-            //绑定巷道编号
-            _dayReportJJEntity.WorkingFace.WorkingFaceID = this.selectWorkingfaceSimple1.IWorkingfaceId;
-            //队别名称
-            _dayReportJJEntity.TeamInfo.TeamId = Convert.ToInt32(cboTeamName.SelectedValue);
-
-            //填报人
-            _dayReportJJEntity.Submitter = cboSubmitter.Text;
-            //工作制式
-            if (rbtn38.Checked)
-            {
-                _dayReportJJEntity.WorkTimeStyle = rbtn38.Text;
-            }
-            if (rbtn46.Checked)
-            {
-                _dayReportJJEntity.WorkTimeStyle = rbtn46.Text;
-            }
-
-            DataGridViewCellCollection cells = this.dgrdvDayReportJJ.Rows[0].Cells;
-
-            //创建日期
-            if (cells[C_DATE].Value != null)
-            {
-                _dayReportJJEntity.DateTime = Convert.ToDateTime(cells[C_DATE].Value.ToString());
-            }
-
-            //班次
-            if (cells[C_WORK_TIME].Value != null)
-            {
-                _dayReportJJEntity.WorkTime = cells[C_WORK_TIME].Value.ToString();
-            }
-            //工作内容
-            if (cells[C_WORK_CONTENT].Value != null)
-            {
-                _dayReportJJEntity.WorkInfo = cells[C_WORK_CONTENT].Value.ToString();
-            }
-            //掘进进尺
-            if (cells[C_WORK_PROGRESS].Value != null)
-            {
-                _dayReportJJEntity.JinChi = Convert.ToDouble(cells[C_WORK_PROGRESS].Value);
-            }
-            //备注
-            if (cells[C_COMMENTS].Value != null)
-            {
-                _dayReportJJEntity.Other = cells[C_COMMENTS].Value.ToString();
-            }
-
-            //提交修改
-            bool bResult = DayReportJJBLL.updateDayReportJJInfo(_dayReportJJEntity);
-
-            //修改成功
-            if (bResult)
-            {
-                // 获取该工作面对应的巷道
-                Tunnel tunnel = BasicInfoManager.getInstance().getTunnelListByWorkingFaceId(workingFace.WorkingFaceID)[0];
-                //在库中查询对应的bid值，获得对应的图形对象进行修改
-                string hdid = tunnel.TunnelId.ToString();
-                string bid = _dayReportJJEntity.BindingId;
-                double dist = _dayReportJJEntity.JinChi;
-                UpdateHdJc(hdid, bid, dist);
-
-                UpdateWarningDataMsg msg = new UpdateWarningDataMsg(workingFace.WorkingFaceID,
-                    tunnel.TunnelId,
-                    DayReportJJDbConstNames.TABLE_NAME, OPERATION_TYPE.UPDATE, DateTime.Now
-                    );
-                this.MainForm.SendMsg2Server(msg);
-            }
-        }
-
-        ///// <summary>
-        ///// 初始化班次
-        ///// </summary>
-        //private void bindWorkTimeFirstTime()
-        //{
-        //    DataSet dsWorkTime;
-        //    //获取三八制班次
-        //    if (rbtn38.Checked)
-        //    {
-        //        dsWorkTime = WorkTimeBLL.returnWorkTime(rbtn38.Text);
-        //    }
-        //    //获取四六制班次
-        //    else
-        //    {
-        //        dsWorkTime = WorkTimeBLL.returnWorkTime(rbtn46.Text);
-        //    }
-        //    //向combobox里插入数据
-        //    for (int i = 0; i < dsWorkTime.Tables[0].Rows.Count; i++)
-        //    {
-        //        cboWorkTime.Items.Add(dsWorkTime.Tables[0].Rows[i][WorkTimeDbConstNames.WORK_TIME_NAME].ToString());
-        //    }
-        //}
 
         /// <summary>
         /// 三八制选择事件

@@ -1,35 +1,14 @@
-﻿// ******************************************************************
-// 概  述：掘进进尺日报业务逻辑
-// 作  者：宋英杰
-// 创建日期：2014/3/11
-// 版本号：V1.0
-// 版本信息：
-// V1.0 新建
-// ******************************************************************
+﻿
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Data;
 using LibDatabase;
 using LibEntity;
-using LibCommon;
 
 namespace LibBusiness
 {
     public class DayReportJJBLL
     {
-        /// <summary>
-        /// 查询所有掘进进尺信息
-        /// </summary>
-        /// <returns>进尺信息</returns>
-        public static DataSet selectDayReportJJInfo()
-        {
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
-            string sql = "SELECT * FROM " + DayReportJJDbConstNames.TABLE_NAME;
-            DataSet ds = db.ReturnDS(sql);
-            return ds;
-        }
 
         /// <summary>
         /// 查询掘进管理信息
@@ -137,84 +116,17 @@ namespace LibBusiness
         }
 
         /// <summary>
-        /// 插入掘进进尺信息
-        /// </summary>
-        /// <param name="dayReportJJEntity">掘进进尺实体</param>
-        /// <returns>是否成功插入？true:false</returns>
-        public static bool insertDayReportJJInfo(DayReportJj dayReportJJEntity)
-        {
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
-            StringBuilder sb = new StringBuilder();
-            sb.Append("INSERT INTO " + DayReportJJDbConstNames.TABLE_NAME + " (");
-            sb.Append(DayReportJJDbConstNames.TEAM_NAME_ID + ", ");
-            sb.Append(DayReportJJDbConstNames.WORKINGFACE_ID + ", ");
-            sb.Append(DayReportJJDbConstNames.WORK_TIME + ", ");
-            sb.Append(DayReportJJDbConstNames.WORK_TIME_SYTLE + ", ");
-            sb.Append(DayReportJJDbConstNames.WORK_INFO + ", ");
-            sb.Append(DayReportJJDbConstNames.JIN_CHI + ",");
-            sb.Append(DayReportJJDbConstNames.DATETIME + ", ");
-            sb.Append(DayReportJJDbConstNames.SUBMITTER + ", ");
-            sb.Append(DayReportJJDbConstNames.OTHER + ", ");
-            sb.Append(DayReportJJDbConstNames.DISTANCE_FROM_WIREPOINT + ", ");
-            sb.Append(DayReportJJDbConstNames.CONSULT_WIREPOINT_ID + ", ");
-            sb.Append(DayReportJJDbConstNames.BINDINGID);
-
-            sb.Append(") VALUES ('");
-            sb.Append(dayReportJJEntity.TeamInfo + "','");
-            sb.Append(dayReportJJEntity.WorkingFace + "','");
-            sb.Append(dayReportJJEntity.WorkTime + "','");
-            sb.Append(dayReportJJEntity.WorkTimeStyle + "','");
-            sb.Append(dayReportJJEntity.WorkInfo + "','");
-            sb.Append(dayReportJJEntity.JinChi + "','");
-            sb.Append(dayReportJJEntity.DateTime + "','");
-            sb.Append(dayReportJJEntity.Submitter + "','");
-            sb.Append(dayReportJJEntity.Other + "','");
-            sb.Append(0 + "','");
-            sb.Append(0 + "','");
-            sb.Append(dayReportJJEntity.BindingId + "')");
-            bool bResult = db.OperateDB(sb.ToString());
-            return bResult;
-        }
-
-        /// <summary>
-        /// 修改回采进尺日报信息
-        /// </summary>
-        /// <param name="dayReportJJEntity">回采进尺日报实体</param>
-        /// <returns></returns>
-        public static bool updateDayReportJJInfo(DayReportJj dayReportJJEntity)
-        {
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
-            StringBuilder sqlStr = new StringBuilder();
-            sqlStr.Append("UPDATE " + DayReportJJDbConstNames.TABLE_NAME + " SET " + DayReportJJDbConstNames.TEAM_NAME_ID + "='");
-            sqlStr.Append(dayReportJJEntity.TeamInfo + "'," +
-                DayReportJJDbConstNames.WORKINGFACE_ID + " = " + dayReportJJEntity.WorkingFace + ",");
-            sqlStr.Append(DayReportJJDbConstNames.WORK_TIME + " = '");
-            sqlStr.Append(dayReportJJEntity.WorkTime + "'," + DayReportJJDbConstNames.WORK_TIME_SYTLE + "= '");
-            sqlStr.Append(dayReportJJEntity.WorkTimeStyle + "'," + DayReportJJDbConstNames.WORK_INFO + " ='");
-            sqlStr.Append(dayReportJJEntity.WorkInfo + "',");
-            sqlStr.Append(DayReportJJDbConstNames.JIN_CHI + " = '" + dayReportJJEntity.JinChi + "'," + DayReportJJDbConstNames.DATETIME + " = '");
-            sqlStr.Append(dayReportJJEntity.DateTime + "'," + DayReportJJDbConstNames.SUBMITTER + " = '");
-            sqlStr.Append(dayReportJJEntity.Submitter + "'," + DayReportJJDbConstNames.OTHER + " = '");
-            sqlStr.Append(dayReportJJEntity.Other + "'," + DayReportJJDbConstNames.DISTANCE_FROM_WIREPOINT + " = '");
-            sqlStr.Append(dayReportJJEntity.DistanceFromWirepoint + "'," + DayReportJJDbConstNames.CONSULT_WIREPOINT_ID + " = '");
-            sqlStr.Append(dayReportJJEntity.ConsultWirepoint + "' WHERE " + DayReportJJDbConstNames.ID + " = ");
-            sqlStr.Append(dayReportJJEntity.Id);
-            bool bResult = db.OperateDB(sqlStr.ToString());
-            return bResult;
-        }
-
-        /// <summary>
         /// 删除回采进尺日报信息
         /// </summary>
         /// <param name="dayReportJJEntity">回采进尺日报实体(含主键)</param>
         /// <returns></returns>
-        public static bool deleteDayReportJJInfo(DayReportJj dayReportJJEntity)
-        {
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
-            string sql = "DELETE FROM " + DayReportJJDbConstNames.TABLE_NAME + " WHERE " + DayReportJJDbConstNames.ID + " =" + dayReportJJEntity.Id;
-            bool bResult = db.OperateDB(sql);
-            return bResult;
-        }
+        //public static bool deleteDayReportJJInfo(DayReportJj dayReportJJEntity)
+        //{
+        //    ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
+        //    string sql = "DELETE FROM " + DayReportJJDbConstNames.TABLE_NAME + " WHERE " + DayReportJJDbConstNames.ID + " =" + dayReportJJEntity.Id;
+        //    bool bResult = db.OperateDB(sql);
+        //    return bResult;
+        //}
 
         /// <summary>
         /// 返回最新一条数据的距参考导线点距离

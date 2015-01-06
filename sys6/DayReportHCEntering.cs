@@ -157,17 +157,11 @@ namespace UnderTerminal
         /// </summary>
         private void bindTeamInfo()
         {
-            cboTeamName.DataSource = null;
-
-            DataSet ds = TeamBLL.selectTeamInfo();
-
-            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            cboTeamName.Items.Clear();
+            TeamInfo[] teamInfos = TeamInfo.FindAll();
+            foreach (TeamInfo t in teamInfos)
             {
-                //cboTeamName.Items.Add(ds.Tables[0].Rows[i][TeamDbConstNames.TEAM_NAME].ToString());
-                cboTeamName.DataSource = ds.Tables[0];
-                cboTeamName.DisplayMember = TeamDbConstNames.TEAM_NAME;
-                cboTeamName.ValueMember = TeamDbConstNames.ID;
-                cboTeamName.SelectedIndex = -1;
+                cboTeamName.Items.Add(t.TeamName);
             }
         }
 
@@ -181,7 +175,7 @@ namespace UnderTerminal
             cboSubmitter.Text = "";
 
             //获取队别成员姓名
-            DataSet ds = TeamBLL.selectTeamInfoByTeamName(cboTeamName.Text);
+            DataSet ds = TeamBll.selectTeamInfoByTeamName(cboTeamName.Text);
             string teamLeader;
             string[] teamMember;
             if (ds.Tables[0].Rows.Count > 0)
@@ -340,7 +334,8 @@ namespace UnderTerminal
             foreach (DayReportHc dayReportHCEntity in dayReportHCEntityList)
             {
                 //添加回采进尺日报
-                bResult = DayReportHCBLL.insertDayReportHCInfo(dayReportHCEntity);
+                dayReportHCEntity.SaveAndFlush();
+                bResult = true;
                 if (bResult)
                 {
                     var msg = new UpdateWarningDataMsg(this.mainWin.workingfaceId, tunnelId, DayReportHCDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, dtpDate.Value);

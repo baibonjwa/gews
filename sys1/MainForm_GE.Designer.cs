@@ -1,10 +1,6 @@
-﻿using System;
-using System.Data;
-using LibBusiness;
-using LibCommonControl;
-using LibEntity;
+﻿using LibCommonControl;
 
-namespace _1.GasEmission
+namespace sys1
 {
     partial class MainFormGe : MainFrm
     {
@@ -463,7 +459,7 @@ namespace _1.GasEmission
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBox1.Controls.Add(this._dgvData);
             this.groupBox1.Location = new System.Drawing.Point(17, 446);
@@ -743,7 +739,7 @@ namespace _1.GasEmission
             // 
             // picBoxLogo
             // 
-            this.picBoxLogo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.picBoxLogo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.picBoxLogo.Image = ((System.Drawing.Image)(resources.GetObject("picBoxLogo.Image")));
             this.picBoxLogo.Location = new System.Drawing.Point(3, 3);
@@ -774,7 +770,7 @@ namespace _1.GasEmission
             // 
             // _ckbSetMarks3
             // 
-            this._ckbSetMarks3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this._ckbSetMarks3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this._ckbSetMarks3.AutoSize = true;
             this._ckbSetMarks3.Location = new System.Drawing.Point(1242, 277);
@@ -787,7 +783,7 @@ namespace _1.GasEmission
             // 
             // _ckbSetMarks2
             // 
-            this._ckbSetMarks2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this._ckbSetMarks2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this._ckbSetMarks2.AutoSize = true;
             this._ckbSetMarks2.Location = new System.Drawing.Point(1242, 87);
@@ -800,7 +796,7 @@ namespace _1.GasEmission
             // 
             // _ckbSetMarks1
             // 
-            this._ckbSetMarks1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            this._ckbSetMarks1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this._ckbSetMarks1.AutoSize = true;
             this._ckbSetMarks1.Location = new System.Drawing.Point(1242, 490);
@@ -813,7 +809,7 @@ namespace _1.GasEmission
             // 
             // tChartN
             // 
-            this.tChartN.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.tChartN.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             // 
             // 
@@ -970,7 +966,7 @@ namespace _1.GasEmission
             // 
             // tChartT2
             // 
-            this.tChartT2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.tChartT2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             // 
             // 
@@ -1180,7 +1176,7 @@ namespace _1.GasEmission
             // 
             // tChartM
             // 
-            this.tChartM.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.tChartM.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             // 
             // 

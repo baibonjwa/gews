@@ -10,6 +10,7 @@ using DevExpress.XtraBars;
 using LibLoginForm;
 using LibCommonForm;
 using LibCommon;
+using sys1;
 
 namespace _1.GasEmission
 {
@@ -29,11 +30,6 @@ namespace _1.GasEmission
 
             ActiveRecordStarter.Initialize(asm, config);
 
-            DXSeting.formSkinsSet();
-
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-					
             MainFormGe mf = new MainFormGe(new BarButtonItem());
             LoginForm lf = new LoginForm(mf);
             Application.Run(lf);

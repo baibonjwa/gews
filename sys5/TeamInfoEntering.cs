@@ -85,12 +85,10 @@ namespace _5.WarningManagement
             }
             //删除队员姓名是后一个(,)
             teamInfoEntity.TeamMember = teamInfoEntity.TeamMember.Remove(teamInfoEntity.TeamMember.Length - 1);
-            bool bResult = TeamBLL.insertTeamInfo(teamInfoEntity);
-            if (!bResult)
-            {
-                Alert.alert(Const_MS.MSG_UPDATE_FAILURE);
-                return;
-            }
+
+            teamInfoEntity.Save();
+
+            Alert.alert(Const_MS.MSG_UPDATE_FAILURE);
         }
 
         /// <summary>
@@ -112,7 +110,7 @@ namespace _5.WarningManagement
             teamMember = teamMember.Remove(teamMember.Length - 1);
             teamInfoEntity.TeamMember = teamMember;
             //修改操作
-            TeamBLL.updateTeamInfo(teamInfoEntity);
+            TeamBll.updateTeamInfo(teamInfoEntity);
         }
 
         /// <summary>
@@ -201,7 +199,7 @@ namespace _5.WarningManagement
             if (this.Text == Const_MS.TEAM_INFO_ADD)
             {
                 DataSet ds = new DataSet();
-                ds = TeamBLL.selectTeamInfoByTeamName(txtTeamName.Text);
+                ds = TeamBll.selectTeamInfoByTeamName(txtTeamName.Text);
                 if (ds.Tables[0].Rows.Count > 0)
                 {
                     Alert.alert(Const_MS.TEAM_INFO_MSG_TEAM_NAME_EXIST);
@@ -214,7 +212,7 @@ namespace _5.WarningManagement
                 if (this.txtTeamName.Text != teamInfoEntity.TeamName)
                 {
                     DataSet ds = new DataSet();
-                    ds = TeamBLL.selectTeamInfoByTeamName(txtTeamName.Text);
+                    ds = TeamBll.selectTeamInfoByTeamName(txtTeamName.Text);
                     if (ds.Tables[0].Rows.Count > 0)
                     {
                         Alert.alert(Const_MS.TEAM_INFO_MSG_TEAM_NAME_EXIST);

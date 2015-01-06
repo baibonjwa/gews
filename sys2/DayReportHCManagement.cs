@@ -9,25 +9,15 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using LibCommon;
-using LibBusiness;
-using LibEntity;
-using System.Threading;
-using LibCommonControl;
-using LibSocket;
-using ESRI.ArcGIS.Carto;
-using LibCommonForm;
-using ESRI.ArcGIS.Geodatabase;
 using ESRI.ArcGIS.Geometry;
 using GIS.HdProc;
+using LibBusiness;
+using LibCommon;
+using LibCommonControl;
+using LibEntity;
 
-namespace _2.MiningScheduling
+namespace sys2
 {
     /// <summary>
     /// 回采进尺管理
@@ -48,7 +38,8 @@ namespace _2.MiningScheduling
         int _tmpRowIndex = 0;
 
         /**接分页查询数据**/
-        DataSet _ds = new DataSet();
+        private DayReportHc[] dayReportHcs;
+
         //需要过滤的列索引
         private int[] _filterColunmIdxs = null;
         /**开始日期**/
@@ -157,11 +148,11 @@ namespace _2.MiningScheduling
             // ※分页必须
             if (chkSearch.Checked == true)
             {
-                _iRecordCount = DayReportHCBLL.selectDayReportHCInfo(dtFrom, dtTo).Tables[0].Rows.Count;
+                _iRecordCount = DayReportHc.FindAllByDatetime(dtFrom, dtTo).Length;
             }
             else
             {
-                _iRecordCount = DayReportHCBLL.selectDayReportHCInfo().Tables[0].Rows.Count;
+                _iRecordCount = DayReportHc.GetTotalCount();
             }
 
             // ※分页必须
@@ -174,16 +165,16 @@ namespace _2.MiningScheduling
             if (chkSearch.Checked == true)
             {
                 //按时间查询
-                _ds = DayReportHCBLL.selectDayReportHCInfo(iStartIndex, iEndIndex, dtFrom, dtTo);
+                dayReportHcs = DayReportHc.SlicedFindByDatetime(iStartIndex, iEndIndex, dtFrom, dtTo);
             }
             else
             {
                 //查询全部
-                _ds = DayReportHCBLL.selectDayReportHCInfo(iStartIndex, iEndIndex);
+                dayReportHcs = DayReportHc.SlicedFind(iStartIndex, iEndIndex);
             }
 
             //数据行数
-            _rowsCount = _ds.Tables[0].Rows.Count;
+            _rowsCount = dayReportHcs.Length;
 
             //farpoint重新绘制
             FarPointOperate.farPointReAdd(fpDayReportHC, _rowDetailStartIndex, _rowsCount);
@@ -195,44 +186,37 @@ namespace _2.MiningScheduling
                 ckbxcell.ThreeState = false;
 
                 //绑定farpoint数据
-                for (int i = 0; i < _ds.Tables[0].Rows.Count; i++)
+                for (int i = 0; i < dayReportHcs.Length; i++)
                 {
-                    DataRow dr = _ds.Tables[0].Rows[i];
                     //选择
                     cells[_rowDetailStartIndex + i, C_CHOOSE_BUTTON].CellType = ckbxcell;
 
                     //队别名称
-                    if (int.TryParse(dr[DayReportHCDbConstNames.TEAM_NAME_ID].ToString(), out tmpInt))
-                    {
-                        cells[_rowDetailStartIndex + i, C_TEAM_NAME].Text = BasicInfoManager.getInstance().getTeamNameById(tmpInt);
-                        tmpInt = 0;
-                    }
+                    cells[_rowDetailStartIndex + i, C_TEAM_NAME].Text = dayReportHcs[i].TeamInfo.TeamName;
+
                     //工作面名称
-                    if (int.TryParse(dr[DayReportHCDbConstNames.WORKINGFACE_ID].ToString(), out tmpInt))
-                    {
-                        cells[_rowDetailStartIndex + i, C_WORKING_FACE_NAME].Text =
-                            BasicInfoManager.getInstance().getWorkingFaceById(tmpInt).WorkingFaceName;
-                        tmpInt = 0;
-                    }
+                    cells[_rowDetailStartIndex + i, C_WORKING_FACE_NAME].Text =
+                        dayReportHcs[i].WorkingFace.WorkingFaceName;
+
 
                     //班次
-                    cells[_rowDetailStartIndex + i, C_WORK_TIME].Text = dr[DayReportHCDbConstNames.WORK_TIME].ToString();
+                    cells[_rowDetailStartIndex + i, C_WORK_TIME].Text = dayReportHcs[i].WorkTime;
                     //工作制式
-                    cells[_rowDetailStartIndex + i, C_WORK_STYLE].Text = dr[DayReportHCDbConstNames.WORK_TIME_SYTLE].ToString();
+                    cells[_rowDetailStartIndex + i, C_WORK_STYLE].Text = dayReportHcs[i].WorkTimeStyle;
                     //工作内容
-                    cells[_rowDetailStartIndex + i, C_WORK_CONTENT].Text = dr[DayReportHCDbConstNames.WORK_INFO].ToString();
+                    cells[_rowDetailStartIndex + i, C_WORK_CONTENT].Text = dayReportHcs[i].WorkInfo;
                     //进尺
-                    cells[_rowDetailStartIndex + i, C_WORK_PROGRESS].Text = dr[DayReportHCDbConstNames.JIN_CHI].ToString();
+                    cells[_rowDetailStartIndex + i, C_WORK_PROGRESS].Text = dayReportHcs[i].JinChi.ToString();
                     //日期
-                    cells[_rowDetailStartIndex + i, C_DATE].Text = dr[DayReportHCDbConstNames.DATETIME].ToString().Substring(0, dr[DayReportHCDbConstNames.DATETIME].ToString().IndexOf(' '));
+                    cells[_rowDetailStartIndex + i, C_DATE].Text = dayReportHcs[i].DateTime.ToString();
                     //填报人
-                    cells[_rowDetailStartIndex + i, C_SUBMITTER].Text = dr[DayReportHCDbConstNames.SUBMITTER].ToString();
+                    cells[_rowDetailStartIndex + i, C_SUBMITTER].Text = dayReportHcs[i].Submitter;
                     //备注
-                    cells[_rowDetailStartIndex + i, C_COMMENTS].Text = dr[DayReportHCDbConstNames.OTHER].ToString();
+                    cells[_rowDetailStartIndex + i, C_COMMENTS].Text = dayReportHcs[i].Other;
 
                     // 隐藏列
                     // 工作面ID
-                    cells[_rowDetailStartIndex + i, C_WORKING_FACE_ID].Text = dr[DayReportHCDbConstNames.WORKINGFACE_ID].ToString();
+                    cells[_rowDetailStartIndex + i, C_WORKING_FACE_ID].Text = dayReportHcs[i].WorkingFace.WorkingFaceID.ToString();
                 }
                 //设置按钮可操作性
                 setButtenEnable();
@@ -276,53 +260,6 @@ namespace _2.MiningScheduling
         }
         #endregion
 
-        #region ******实体赋值******
-        /// <summary>
-        /// 为变量dayReportHCEntity赋值
-        /// </summary>
-        private DayReportHc setDayReportHCEntityValue()
-        {
-            DayReportHc eReturn = null;
-
-            for (int i = 0; i < _rowsCount; i++)
-            {
-                if (cells[_rowDetailStartIndex + i, 0].Value != null &&
-                    (bool)cells[_rowDetailStartIndex + i, 0].Value == true)
-                {
-                    _tmpRowIndex = _rowDetailStartIndex + i;
-                    DataRow dr = _ds.Tables[0].Rows[i];
-                    eReturn = new DayReportHc();
-
-                    //掘进ID
-                    eReturn.Id = (int)dr[DayReportHCDbConstNames.ID];
-                    //队别名称
-                    eReturn.TeamInfo.TeamId = (int)dr[DayReportHCDbConstNames.TEAM_NAME_ID];
-                    //工作面ID
-                    eReturn.WorkingFace.WorkingFaceID = Convert.ToInt32(dr[DayReportHCDbConstNames.WORKINGFACE_ID]);
-                    //班次
-                    eReturn.WorkTime = cells[_rowDetailStartIndex + i, C_WORK_TIME].Text;
-                    //工作制式
-                    eReturn.WorkTimeStyle = cells[_rowDetailStartIndex + i, C_WORK_STYLE].Text;
-                    //工作内容
-                    eReturn.WorkInfo = cells[_rowDetailStartIndex + i, C_WORK_CONTENT].Text;
-                    //进尺
-                    eReturn.JinChi = Convert.ToDouble(cells[_rowDetailStartIndex + i, C_WORK_PROGRESS].Text);
-                    //日期
-                    eReturn.DateTime = DateTime.Parse(cells[_rowDetailStartIndex + i, C_DATE].Text);
-                    //填报人
-                    eReturn.Submitter = cells[_rowDetailStartIndex + i, C_SUBMITTER].Text;
-                    //备注
-                    eReturn.Other = cells[_rowDetailStartIndex + i, C_COMMENTS].Text;
-                    //BID
-                    eReturn.BindingId = dr[DayReportHCDbConstNames.BINDINGID].ToString();
-                    break;
-                }
-            }
-
-            return eReturn;
-        }
-        #endregion
-
         #region ******按钮点击事件******
         /// <summary>
         /// 添加按钮事件
@@ -331,7 +268,7 @@ namespace _2.MiningScheduling
         /// <param name="e"></param>
         private void tsBtnAdd_Click(object sender, EventArgs e)
         {
-            DayReportHCEntering dayReportHCForm = new DayReportHCEntering(this.MainForm);
+            DayReportHcEntering dayReportHCForm = new DayReportHcEntering(this.MainForm);
             if (DialogResult.OK == dayReportHCForm.ShowDialog())
             {
                 //绑定数据
@@ -350,7 +287,15 @@ namespace _2.MiningScheduling
         /// <param name="e"></param>
         private void tsBtnModify_Click(object sender, EventArgs e)
         {
-            DayReportHc entity = setDayReportHCEntityValue();
+            var entity = new DayReportHc();
+            for (int i = 0; i < dayReportHcs.Length; i++)
+            {
+                if (fpDayReportHC.Sheets[0].Cells[i + 1, 0].Value != null &&
+                    (bool)fpDayReportHC.Sheets[0].Cells[i + 1, 0].Value == true)
+                {
+                    entity = dayReportHcs[i];
+                }
+            }
 
             if (null == entity)
             {
@@ -365,7 +310,7 @@ namespace _2.MiningScheduling
             _arr[1] = ent.MiningArea.Horizontal.HorizontalId;
             _arr[2] = ent.MiningArea.MiningAreaId;
             _arr[3] = ent.WorkingFaceID;
-            DayReportHCEntering dayReportHCForm = new DayReportHCEntering(_arr, entity, this.MainForm);
+            DayReportHcEntering dayReportHCForm = new DayReportHcEntering(_arr, entity, this.MainForm);
             if (DialogResult.OK == dayReportHCForm.ShowDialog())
             {
                 //绑定数据
@@ -390,64 +335,62 @@ namespace _2.MiningScheduling
                 bool bResult = true;
 
                 //获取当前farpoint选中焦点
-                _tmpRowIndex = fpDayReportHC.Sheets[0].ActiveRowIndex;
-                for (int i = 0; i < _rowsCount; i++)
-                {
-                    DataRow dr = _ds.Tables[0].Rows[i];
-                    //选择为null时，该选择框没有被选择过,与未选中同样效果
-                    //选择框被选择
-                    if (cells[_rowDetailStartIndex + i, 0].Value != null &&
-                        (bool)cells[_rowDetailStartIndex + i, 0].Value == true)
-                    {
-                        DayReportHc entity = new DayReportHc();
-                        //获取掘进ID
-                        entity.Id = (int)dr[DayReportHCDbConstNames.ID];
-                        entity.WorkingFace.WorkingFaceID = Convert.ToInt32(dr[DayReportHCDbConstNames.WORKINGFACE_ID]);
-                        entity.BindingId = dr[DayReportHCDbConstNames.BINDINGID].ToString();
+                //    _tmpRowIndex = fpDayReportHC.Sheets[0].ActiveRowIndex;
+                //    for (int i = 0; i < _rowsCount; i++)
+                //    {
+                //        //选择为null时，该选择框没有被选择过,与未选中同样效果
+                //        //选择框被选择
+                //        if (cells[_rowDetailStartIndex + i, 0].Value != null &&
+                //            (bool)cells[_rowDetailStartIndex + i, 0].Value == true)
+                //        {
+                //            DayReportHc entity = new DayReportHc();
+                //            //获取掘进ID
+                //            entity.Id = (int)dr[DayReportHCDbConstNames.ID];
+                //            entity.WorkingFace.WorkingFaceID = Convert.ToInt32(dr[DayReportHCDbConstNames.WORKINGFACE_ID]);
+                //            entity.BindingId = dr[DayReportHCDbConstNames.BINDINGID].ToString();
 
-                        // 回采面对象
-                        WorkingFace hjEntity = BasicInfoManager.getInstance().getWorkingFaceById(entity.WorkingFace.WorkingFaceID);
-                        if (hjEntity != null)
-                            hjEntity.tunnelSet = BasicInfoManager.getInstance().getTunnelSetByDataSet(TunnelInfoBLL.selectTunnelByWorkingFaceId(hjEntity.WorkingFaceID));
-                        Dictionary<TunnelTypeEnum, Tunnel> tDict = TunnelUtils.getTunnelDict(hjEntity);
+                //            // 回采面对象
+                //            WorkingFace hjEntity = BasicInfoManager.getInstance().getWorkingFaceById(entity.WorkingFace.WorkingFaceID);
+                //            if (hjEntity != null)
+                //                hjEntity.tunnelSet = BasicInfoManager.getInstance().getTunnelSetByDataSet(TunnelInfoBLL.selectTunnelByWorkingFaceId(hjEntity.WorkingFaceID));
+                //            Dictionary<TunnelTypeEnum, Tunnel> tDict = TunnelUtils.getTunnelDict(hjEntity);
 
-                        if (tDict.Count > 0)
-                        {
-                            Tunnel tunnelZY = tDict[TunnelTypeEnum.STOPING_ZY];
-                            Tunnel tunnelFY = tDict[TunnelTypeEnum.STOPING_FY];
-                            Tunnel tunnelQY = tDict[TunnelTypeEnum.STOPING_QY];
-                            // 删除GIS图形上的回采进尺
-                            DelHcjc(tunnelZY.TunnelId, tunnelFY.TunnelId, tunnelQY.TunnelId, entity.BindingId, hjEntity, tunnelZY.TunnelWid, tunnelFY.TunnelWid, tunnelQY.TunnelWid);
-                        }
+                //            if (tDict.Count > 0)
+                //            {
+                //                Tunnel tunnelZY = tDict[TunnelTypeEnum.STOPING_ZY];
+                //                Tunnel tunnelFY = tDict[TunnelTypeEnum.STOPING_FY];
+                //                Tunnel tunnelQY = tDict[TunnelTypeEnum.STOPING_QY];
+                //                // 删除GIS图形上的回采进尺
+                //                DelHcjc(tunnelZY.TunnelId, tunnelFY.TunnelId, tunnelQY.TunnelId, entity.BindingId, hjEntity, tunnelZY.TunnelWid, tunnelFY.TunnelWid, tunnelQY.TunnelWid);
+                //            }
 
-                        // 从数据库中删除对应的进尺信息
-                        bResult &= DayReportHCBLL.deleteDayReportHCInfo(entity);
-                        if (bResult == true)
-                        {
-                            BasicInfoManager.getInstance().refreshWorkingFaceInfo(hjEntity);
+                //            // 从数据库中删除对应的进尺信息
+                //            entity.DeleteAndFlush();
 
-                            #region 通知服务器预警数据已更新
-                            UpdateWarningDataMsg msg = new UpdateWarningDataMsg(entity.WorkingFace.WorkingFaceID,
-                                Const.INVALID_ID,
-                                DayReportHCDbConstNames.TABLE_NAME, OPERATION_TYPE.DELETE, DateTime.Now);
-                            this.MainForm.SendMsg2Server(msg);
-                            #endregion
-                        }
-                    }
-                }
-                //删除成功
-                if (bResult)
-                {
-                    //绑定数据
-                    bindDayReportHC();
-                    //删除后重设Farpoint焦点
-                    FarPointOperate.farPointFocusSetDel(fpDayReportHC, _tmpRowIndex);
-                }
-                //删除失败
-                else
-                {
-                    Alert.alert(Const_MS.MSG_DELETE_FAILURE);
-                }
+                //            BasicInfoManager.getInstance().refreshWorkingFaceInfo(hjEntity);
+
+                //            #region 通知服务器预警数据已更新
+                //            UpdateWarningDataMsg msg = new UpdateWarningDataMsg(entity.WorkingFace.WorkingFaceID,
+                //                Const.INVALID_ID,
+                //                DayReportHCDbConstNames.TABLE_NAME, OPERATION_TYPE.DELETE, DateTime.Now);
+                //            this.MainForm.SendMsg2Server(msg);
+                //            #endregion
+                //        }
+                //    }
+                //    //删除成功
+                //    if (bResult)
+                //    {
+                //        //绑定数据
+                //        bindDayReportHC();
+                //        //删除后重设Farpoint焦点
+                //        FarPointOperate.farPointFocusSetDel(fpDayReportHC, _tmpRowIndex);
+                //    }
+                //    //删除失败
+                //    else
+                //    {
+                //        Alert.alert(Const_MS.MSG_DELETE_FAILURE);
+                //    }
+                //}
             }
             return;
         }
@@ -489,10 +432,11 @@ namespace _2.MiningScheduling
                 }
             }
             //更新回采进尺表，将isdel设置0
-            LibEntity.DayReportHc entity = new DayReportHc();
-            entity.BindingId = bid;
+            DayReportHc entity = new DayReportHc();
+            entity = DayReportHc.FindByBid(bid);
             entity.IsDel = 0;
-            LibBusiness.DayReportHCBLL.updateDayResportHCInfoByBID(entity);
+            entity.SaveAndFlush();
+
 
             //更新地质构造表中的信息
             if (posnew == null)
@@ -504,7 +448,7 @@ namespace _2.MiningScheduling
             Dictionary<string, List<GeoStruct>> dzxlist = Global.commonclss.GetStructsInfos(posnew, hd_ids);
             if (dzxlist.Count > 0)
             {
-                GeologySpaceBLL.deleteGeologySpaceEntityInfos(wfEntity.WorkingFaceID);//删除工作面ID对应的地质构造信息
+                GeologySpaceBll.DeleteGeologySpaceEntityInfos(wfEntity.WorkingFaceID);//删除工作面ID对应的地质构造信息
                 foreach (string key in dzxlist.Keys)
                 {
                     List<GeoStruct> geoinfos = dzxlist[key];
@@ -520,7 +464,7 @@ namespace _2.MiningScheduling
                         geologyspaceEntity.Distance = tmp.dist;
                         geologyspaceEntity.OnDateTime = DateTime.Now.ToShortDateString();
 
-                        GeologySpaceBLL.insertGeologySpaceEntityInfo(geologyspaceEntity);
+                        geologyspaceEntity.Save();
                     }
                 }
             }
@@ -641,7 +585,7 @@ namespace _2.MiningScheduling
                     if (chkSelectAll.Checked)
                     {
                         fpDayReportHC.Sheets[0].Cells[_rowDetailStartIndex + i, 0].Value = ((CheckBox)sender).Checked;
-                        _checkCount = _ds.Tables[0].Rows.Count;
+                        //_checkCount = _ds.Tables[0].Rows.Count;
                     }
                     //checkbox未选中
                     else

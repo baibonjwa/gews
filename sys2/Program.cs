@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using LibLoginForm;
 using LibCommon;
+using sys2;
 
 namespace _2.MiningScheduling
 {

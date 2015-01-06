@@ -88,7 +88,7 @@ namespace _5.WarningManagement
             chkSelAll.Checked = false;
 
             //※分页必须
-            _iRecordCount = TeamBLL.selectAllTeamInfo().Tables[0].Rows.Count;
+            _iRecordCount = TeamBll.selectAllTeamInfo().Tables[0].Rows.Count;
 
             // ※分页必须
             dataPager1.PageControlInit(_iRecordCount);
@@ -96,7 +96,7 @@ namespace _5.WarningManagement
             int iStartIndex = dataPager1.getStartIndex();
             int iEndIndex = dataPager1.getEndIndex();
 
-            _ds = TeamBLL.selectAllTeamInfo(iStartIndex, iEndIndex);
+            _ds = TeamBll.selectAllTeamInfo(iStartIndex, iEndIndex);
             _rowsCount = _ds.Tables[0].Rows.Count;
 
             //Farpoint重新绘制
@@ -272,7 +272,7 @@ namespace _5.WarningManagement
                         //掘进ID
                         teamInfoEntity.TeamId = (int)_ds.Tables[0].Rows[i][TeamDbConstNames.ID];
                         //删除操作
-                        bResult = TeamBLL.deleteTeamInfo(teamInfoEntity);
+                        bResult = TeamBll.deleteTeamInfo(teamInfoEntity);
                     }
                 }
                 if (bResult)

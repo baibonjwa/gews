@@ -15,12 +15,11 @@ using System.Windows.Forms;
 using FarPoint.Win;
 using FarPoint.Win.Spread;
 using FarPoint.Win.Spread.CellType;
-using LibBusiness;
 using LibCommon;
 using LibCommonControl;
 using LibEntity;
 
-namespace _1.GasEmission
+namespace LibPanels
 {
     public partial class ProbeInfoManagement : BaseForm
     {
@@ -76,8 +75,6 @@ namespace _1.GasEmission
                 11,
                 12
             };
-            //禁用选择颜色相关控件
-            farpointFilter1.EnableChooseColorCtrls(false);
             //设置自动隐藏过滤条件
             FarpointDefaultPropertiesSetter.SetFpFilterHideProperties(fpProbeInfo, _filterColunmIdxs);
 
@@ -409,90 +406,6 @@ namespace _1.GasEmission
             btnUpdate.Enabled = (_htSelIdxs.Count == 1) ? true : false;
             // 删除按钮
             btnDelete.Enabled = (_htSelIdxs.Count >= 1) ? true : false;
-        }
-
-        /// <summary>
-        ///     farpointFilter1的OnCheckFilterChanged方法
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="arg"></param>
-        private void farpointFilter1_OnCheckFilterChanged(object sender, EventArgs arg)
-        {
-            var chk = (CheckBox)sender;
-            //当Checkbox选中时，筛选过程中则将不符合条件的数据隐藏
-            if (chk.Checked)
-            {
-                //禁用选择颜色相关控件
-                farpointFilter1.EnableChooseColorCtrls(false);
-                //设置自动隐藏过滤条件
-                FarpointDefaultPropertiesSetter.SetFpFilterHideProperties(fpProbeInfo, _filterColunmIdxs);
-            }
-            //未选中时，根据用户自定义的颜色进行分类显示
-            else
-            {
-                //启用选择颜色相关控件
-                farpointFilter1.EnableChooseColorCtrls(true);
-                //设置自定义过滤条件
-                FarpointDefaultPropertiesSetter.SetFpCustomFilterProperties(fpProbeInfo,
-                    farpointFilter1.GetSelectedFitColor(), farpointFilter1.GetSelectedNotFitColor(), _filterColunmIdxs);
-            }
-        }
-
-        /// <summary>
-        ///     清空过滤条件
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="arg"></param>
-        private void farpointFilter1_OnClickClearFilterBtn(object sender, EventArgs arg)
-        {
-            //清空过滤条件
-            fpProbeInfo.ActiveSheet.RowFilter.ResetFilter();
-        }
-
-        /// <summary>
-        ///     根据新的颜色值设置自动隐藏过滤条件
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="arg"></param>
-        private void farpointFilter1_OnClickFitColorBtnOK(object sender, EventArgs arg)
-        {
-            //根据新的颜色值设置自动隐藏过滤条件
-            FarpointDefaultPropertiesSetter.SetFpCustomFilterProperties(fpProbeInfo,
-                farpointFilter1.GetSelectedFitColor(), farpointFilter1.GetSelectedNotFitColor(), _filterColunmIdxs);
-        }
-
-        /// <summary>
-        ///     根据新的颜色值设置自动隐藏过滤条件
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="arg"></param>
-        private void farpointFilter1_OnClickNotFitColorBtnOK(object sender, EventArgs arg)
-        {
-            //根据新的颜色值设置自动隐藏过滤条件
-            FarpointDefaultPropertiesSetter.SetFpCustomFilterProperties(fpProbeInfo,
-                farpointFilter1.GetSelectedFitColor(), farpointFilter1.GetSelectedNotFitColor(), _filterColunmIdxs);
-        }
-
-        /// <summary>
-        ///     确定
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnOK_Click(object sender, EventArgs e)
-        {
-            // 关闭窗口
-            Close();
-        }
-
-        /// <summary>
-        ///     取消
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            // 关闭窗口
-            Close();
         }
 
         /// <summary>

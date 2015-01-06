@@ -610,7 +610,7 @@
             this._chkSelAll.UseVisualStyleBackColor = true;
             this._chkSelAll.CheckedChanged += new System.EventHandler(this.chkSelAll_CheckedChanged);
             // 
-            // DepartmentInformation
+            // Department
             // 
             this.AcceptButton = this._btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);

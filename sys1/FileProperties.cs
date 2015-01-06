@@ -1,88 +1,73 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Collections;
-using System.IO;
 
-//
-//Sample use:
-////load
-//FileProperties config = new FileProperties(fileConfig);
-////get value whith default value
-//com_port.Text = config.get("com_port", "1");
-////set value
-//config.set("com_port", com_port.Text);
-////save
-//config.Save()
-//
-namespace _1.GasEmission
+namespace sys1
 {
     public class FileProperties
     {
-        private Dictionary<String, String> list;
-        private String filename;
+        private Dictionary<String, String> _list;
+        private String _filename;
 
         public FileProperties(String file)
         {
-            reload(file);
+            Reload(file);
         }
 
-        public String get(String field, String defValue)
+        public String Get(String field, String defValue)
         {
-            return (get(field) == null) ? (defValue) : (get(field));
+            return (Get(field) == null) ? (defValue) : (Get(field));
         }
-        public String get(String field)
+        public String Get(String field)
         {
-            return (list.ContainsKey(field)) ? (list[field]) : (null);
+            return (_list.ContainsKey(field)) ? (_list[field]) : (null);
         }
 
-        public void set(String field, Object value)
+        public void Set(String field, Object value)
         {
-            if (!list.ContainsKey(field))
-                list.Add(field, value.ToString());
+            if (!_list.ContainsKey(field))
+                _list.Add(field, value.ToString());
             else
-                list[field] = value.ToString();
+                _list[field] = value.ToString();
         }
 
         public void Save()
         {
-            Save(this.filename);
+            Save(_filename);
         }
 
         public void Save(String filename)
         {
-            this.filename = filename;
+            _filename = filename;
 
             if (!System.IO.File.Exists(filename))
                 System.IO.File.Create(filename);
 
-            System.IO.StreamWriter file = new System.IO.StreamWriter(filename);
+            var file = new System.IO.StreamWriter(filename);
 
-            foreach (String prop in list.Keys.ToArray())
-                if (!String.IsNullOrWhiteSpace(list[prop]))
-                    file.WriteLine(prop + "=" + list[prop]);
+            foreach (var prop in _list.Keys.ToArray().Where(prop => !String.IsNullOrWhiteSpace(_list[prop])))
+                file.WriteLine(prop + "=" + _list[prop]);
 
             file.Close();
         }
 
-        public void reload()
+        public void Reload()
         {
-            reload(this.filename);
+            Reload(_filename);
         }
 
-        public void reload(String filename)
+        public void Reload(String filename)
         {
-            this.filename = filename;
-            list = new Dictionary<String, String>();
+            _filename = filename;
+            _list = new Dictionary<String, String>();
 
             if (System.IO.File.Exists(filename))
-                loadFromFile(filename);
+                LoadFromFile(filename);
             else
                 System.IO.File.Create(filename);
         }
 
-        private void loadFromFile(String file)
+        private void LoadFromFile(String file)
         {
             foreach (String line in System.IO.File.ReadAllLines(file))
             {
@@ -105,9 +90,9 @@ namespace _1.GasEmission
                     try
                     {
                         //ignore dublicates
-                        list.Add(key, value);
+                        _list.Add(key, value);
                     }
-                    catch 
+                    catch (Exception)
                     {
                     }
                 }

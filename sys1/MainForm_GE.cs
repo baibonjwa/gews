@@ -6,27 +6,24 @@
 // 版本信息：
 // V1.0 新建
 // ******************************************************************
+
 using System;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
-using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 using DevExpress.XtraBars;
-using LibCommonControl;
-using LibCommonForm;
-using LibCommon;
-using LibBusiness;
-using LibDatabase;
 using LibAbout;
+using LibCommon;
+using LibCommonForm;
+using LibDatabase;
 using LibEntity;
+using LibPanels;
 using Steema.TeeChart;
 using TeeChartWrapper;
-using System.Threading;
-using DepartmentInformation = LibCommonForm.DepartmentInformation;
 
-namespace _1.GasEmission
+namespace sys1
 {
     public partial class MainFormGe
     {
@@ -80,15 +77,15 @@ namespace _1.GasEmission
 
             int iValue;
             double dValue;
-            int.TryParse(fp.get("countperframe"), out iValue);
+            int.TryParse(fp.Get("countperframe"), out iValue);
             DataCountPerFrame = iValue;
-            int.TryParse(fp.get("updatefrequency"), out iValue);
+            int.TryParse(fp.Get("updatefrequency"), out iValue);
             _updateFrequency = iValue;
-            double.TryParse(fp.get("redthreshold"), out dValue);
+            double.TryParse(fp.Get("redthreshold"), out dValue);
             RedDataThreshold = dValue;
-            double.TryParse(fp.get("yellowthreshold"), out dValue);
+            double.TryParse(fp.Get("yellowthreshold"), out dValue);
             YellowDataThreshold = dValue;
-            double.TryParse(fp.get("baddatathreshold"), out dValue);
+            double.TryParse(fp.Get("baddatathreshold"), out dValue);
             BadDataThreshold = dValue;
 
             //初始化客户端Socket
@@ -154,7 +151,7 @@ namespace _1.GasEmission
         //传感器管理
         private void mniSensorManagement_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var probeInfoManagementForm = new ProbeInfoManagement(this);
+            var probeInfoManagementForm = new  ProbeInfoManagement(this);
             probeInfoManagementForm.Show();
         }
 

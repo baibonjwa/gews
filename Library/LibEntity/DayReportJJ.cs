@@ -7,7 +7,9 @@
 // V1.0 新建
 // ******************************************************************
 
+using System.Collections.Generic;
 using Castle.ActiveRecord;
+using NHibernate.Criterion;
 
 namespace LibEntity
 {
@@ -25,5 +27,19 @@ namespace LibEntity
         /// </summary>
         [Property("CONSULT_WIREPOINT_ID")]
         public int ConsultWirepoint { get; set; }
+
+        public static DayReportHc FindByBid(string bid)
+        {
+            var criterion = new List<ICriterion>
+            {
+                Restrictions.Eq("Bid", bid)
+            };
+            return (DayReportHc)FindFirst(typeof(DayReportHc), criterion.ToArray());
+        }
+
+        public static int GetTotalCount()
+        {
+            return Count(typeof(DayReportHc));
+        }
     }
 }
