@@ -435,7 +435,7 @@ namespace _5.WarningManagement
         //掘进面传感器管理
         private void mniJJMCGQGL_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            ProbeInfoManagement probeInfoManagement = new ProbeInfoManagement(this);
+            ProbeInfoManagement probeInfoManagement = new ProbeInfoManagement();
             probeInfoManagement.Show();
 
         }
@@ -443,14 +443,14 @@ namespace _5.WarningManagement
         //回采面传感器管理
         private void mniHCMCGQGL_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            ProbeInfoManagement probeInfoManagement = new ProbeInfoManagement(this);
+            ProbeInfoManagement probeInfoManagement = new ProbeInfoManagement();
             probeInfoManagement.Show();
         }
 
         //其它地点传感器管理
         private void mniQTDDCGQGL_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            ProbeInfoManagement probeInfoManagement = new ProbeInfoManagement(this);
+            ProbeInfoManagement probeInfoManagement = new ProbeInfoManagement();
             probeInfoManagement.Show();
         }
         #endregion

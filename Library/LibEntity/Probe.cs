@@ -61,7 +61,7 @@ namespace LibEntity
         /// <summary>
         ///     所在巷道编号
         /// </summary>
-        [BelongsTo("TUNNEL_ID")]
+        [BelongsTo("TUNNEL_ID", NotNull = true)]
         public Tunnel Tunnel { get; set; }
 
         /** 探头位置坐标X **/

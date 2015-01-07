@@ -151,7 +151,7 @@ namespace sys1
         //传感器管理
         private void mniSensorManagement_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var probeInfoManagementForm = new  ProbeInfoManagement(this);
+            var probeInfoManagementForm = new  ProbeInfoManagement();
             probeInfoManagementForm.Show();
         }
 
