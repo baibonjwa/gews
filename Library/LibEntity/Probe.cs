@@ -61,32 +61,8 @@ namespace LibEntity
         /// <summary>
         ///     所在巷道编号
         /// </summary>
-        [BelongsTo("TUNNEL_ID", NotNull = true)]
+        [BelongsTo("TUNNEL_ID")]
         public Tunnel Tunnel { get; set; }
-
-        /** 探头位置坐标X **/
-
-        /// <summary>
-        ///     探头位置坐标X
-        /// </summary>
-        [Property("PROBE_LOCATION_X")]
-        public double ProbeLocationX { get; set; }
-
-        /** 探头位置坐标Y **/
-
-        /// <summary>
-        ///     探头位置坐标Y
-        /// </summary>
-        [Property("PROBE_LOCATION_Y")]
-        public double ProbeLocationY { get; set; }
-
-        /** 探头位置坐标Z **/
-
-        /// <summary>
-        ///     探头位置坐标Z
-        /// </summary>
-        [Property("PROBE_LOCATION_Z")]
-        public double ProbeLocationZ { get; set; }
 
         /** 探头描述 **/
 
@@ -157,6 +133,16 @@ namespace LibEntity
             var criterion = new List<ICriterion>
             {
                 Restrictions.Eq("Tunnel.TunnelId", iTunnelId)
+            };
+            return FindAll(criterion.ToArray());
+        }
+
+        public static Probe[] FindAllWithGasOrVentilation()
+        {
+            var criterion = new List<ICriterion>
+            {
+                Restrictions.Or(Restrictions.Like("ProbeTypeDisplayName", "风速", MatchMode.Anywhere),
+                    Restrictions.Like("ProbeTypeDisplayName", "CH4", MatchMode.Anywhere))
             };
             return FindAll(criterion.ToArray());
         }

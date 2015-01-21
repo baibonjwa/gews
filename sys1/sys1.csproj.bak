@@ -5,17 +5,17 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{354D7147-356B-4453-B86A-B113A47271A2}</ProjectGuid>
+    <ProjectGuid>{F8ECD77C-0D70-4832-9BF2-F94EE3137E40}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>sys2</RootNamespace>
-    <AssemblyName>sys2</AssemblyName>
+    <RootNamespace>sys1</RootNamespace>
+    <AssemblyName>sys1</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>D:\GewsPublish\sys2\</PublishUrl>
+    <PublishUrl>D:\GewsPublish\sys1\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -25,12 +25,13 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>false</MapFileExtensions>
-    <UpdateUrl>\\192.168.1.119\publish\sys2\</UpdateUrl>
-    <ProductName>sys2-工作面采掘进度管理系统</ProductName>
+    <UpdateUrl>\\192.168.1.119\publish\sys1\</UpdateUrl>
+    <ProductName>sys1-工作面瓦斯涌出动态特征管理系统</ProductName>
     <PublisherName>沈阳煤科院</PublisherName>
     <SuiteName>预警系统</SuiteName>
+    <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>17</ApplicationRevision>
+    <ApplicationRevision>51</ApplicationRevision>
     <ApplicationVersion>0.10.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -49,7 +50,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
-    <DebugType>none</DebugType>
+    <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
@@ -65,16 +66,13 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
-    <CodeAnalysisLogFile>bin\Debug\2.MiningScheduling.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisLogFile>bin\Debug\1.GasEmission.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
     <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
     <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
-    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
-    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
-    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>bin\x64\Release\</OutputPath>
@@ -82,29 +80,34 @@
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x64</PlatformTarget>
-    <CodeAnalysisLogFile>bin\Release\2.MiningScheduling.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisLogFile>bin\Release\1.GasEmission.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
     <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
     <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
-    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
-    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
-    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>28F7396FACA9CC2D1A55EBCAF7FD768AC202ADB7</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>1.GasEmission_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>5BEC2C725293791BF10F5CD5E262160B485A63BB</ManifestCertificateThumbprint>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>2.MiningScheduling_TemporaryKey.pfx</ManifestKeyFile>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup />
   <ItemGroup>
     <Reference Include="Antlr3.Runtime, Version=3.1.3.42154, Culture=neutral, PublicKeyToken=3a9cab8f8d22bfb7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -123,78 +126,13 @@
     </Reference>
     <Reference Include="Castle.Core, Version=2.5.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Castle.Core.2.5.1\lib\NET35\Castle.Core.dll</HintPath>
+      <HintPath>..\packages\Castle.Core.3.3.1\lib\net40-client\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Data.v14.1, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="DevExpress.Utils.v14.1, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="DevExpress.XtraBars.v14.1, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="DevExpress.XtraEditors.v14.1, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="ESRI.ArcGIS.3DAnalyst, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86">
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="ESRI.ArcGIS.ADF.Local, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="ESRI.ArcGIS.AxControls, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="ESRI.ArcGIS.Carto, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86">
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="ESRI.ArcGIS.Controls, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86">
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="ESRI.ArcGIS.DisplayUI, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="ESRI.ArcGIS.Geodatabase, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="ESRI.ArcGIS.Geometry, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="ESRI.ArcGIS.GlobeCore, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86">
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="ESRI.ArcGIS.Output, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86">
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="ESRI.ArcGIS.Version, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="FarPoint.CalcEngine, Version=5.0.3518.2008, Culture=neutral, PublicKeyToken=327c3516b1b18457">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="FarPoint.Excel, Version=5.0.3518.2008, Culture=neutral, PublicKeyToken=327c3516b1b18457">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="FarPoint.PDF, Version=5.0.3518.2008, Culture=neutral, PublicKeyToken=327c3516b1b18457">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="FarPoint.PluginCalendar.WinForms, Version=5.0.3518.2008, Culture=neutral, PublicKeyToken=327c3516b1b18457">
-      <Private>True</Private>
-    </Reference>
+    <Reference Include="DevExpress.Data.v13.2, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Utils.v13.2, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraBars.v13.2, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraEditors.v13.2, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="FarPoint.Win, Version=5.0.3518.2008, Culture=neutral, PublicKeyToken=327c3516b1b18457">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="FarPoint.Win.Chart, Version=5.0.3518.2008, Culture=neutral, PublicKeyToken=327c3516b1b18457">
       <Private>True</Private>
     </Reference>
     <Reference Include="FarPoint.Win.Spread, Version=5.0.3518.2008, Culture=neutral, PublicKeyToken=327c3516b1b18457, processorArchitecture=MSIL">
@@ -220,87 +158,86 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NHibernate.3.0.0.4000\lib\Remotion.Data.Linq.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
+    <Reference Include="System">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="TeeChart, Version=4.2.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\internalrefs\TeeChart.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DayReport.cs">
+    <Compile Include="FileProperties.cs" />
+    <Compile Include="GasConcentrationProbeDataEntering.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DayReport.Designer.cs">
-      <DependentUpon>DayReport.cs</DependentUpon>
+    <Compile Include="GasConcentrationProbeDataEntering.Designer.cs">
+      <DependentUpon>GasConcentrationProbeDataEntering.cs</DependentUpon>
     </Compile>
-    <Compile Include="DayReportHCEntering.cs">
+    <Compile Include="GasConcentrationProbeDataManamement.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DayReportHCEntering.Designer.cs">
-      <DependentUpon>DayReportHCEntering.cs</DependentUpon>
+    <Compile Include="GasConcentrationProbeDataManamement.Designer.cs">
+      <DependentUpon>GasConcentrationProbeDataManamement.cs</DependentUpon>
     </Compile>
-    <Compile Include="DayReportHCManagement.cs">
+    <Compile Include="MainForm_GE.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DayReportHCManagement.Designer.cs">
-      <DependentUpon>DayReportHCManagement.cs</DependentUpon>
+    <Compile Include="MainForm_GE.Designer.cs">
+      <DependentUpon>MainForm_GE.cs</DependentUpon>
     </Compile>
-    <Compile Include="DayReportJJEntering.cs">
+    <Compile Include="MoniroSettings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DayReportJJEntering.Designer.cs">
-      <DependentUpon>DayReportJJEntering.cs</DependentUpon>
+    <Compile Include="MoniroSettings.Designer.cs">
+      <DependentUpon>MoniroSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="DayReportJJManagement.cs">
+    <Compile Include="MonitoringDataAnalysis.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DayReportJJManagement.Designer.cs">
-      <DependentUpon>DayReportJJManagement.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MainForm_MS.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MainForm_MS.Designer.cs">
-      <DependentUpon>MainForm_MS.cs</DependentUpon>
+    <Compile Include="MonitoringDataAnalysis.Designer.cs">
+      <DependentUpon>MonitoringDataAnalysis.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StopLineEntering.cs">
+    <Compile Include="TimeUtil.cs" />
+    <Compile Include="BadDataDelete.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="StopLineEntering.Designer.cs">
-      <DependentUpon>StopLineEntering.cs</DependentUpon>
+    <Compile Include="BadDataDelete.Designer.cs">
+      <DependentUpon>BadDataDelete.cs</DependentUpon>
     </Compile>
-    <Compile Include="StopLineManagement.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="StopLineManagement.Designer.cs">
-      <DependentUpon>StopLineManagement.cs</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="DayReport.resx">
-      <DependentUpon>DayReport.cs</DependentUpon>
+    <EmbeddedResource Include="GasConcentrationProbeDataEntering.resx">
+      <DependentUpon>GasConcentrationProbeDataEntering.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DayReportHCEntering.resx">
-      <DependentUpon>DayReportHCEntering.cs</DependentUpon>
+    <EmbeddedResource Include="GasConcentrationProbeDataManamement.resx">
+      <DependentUpon>GasConcentrationProbeDataManamement.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DayReportHCManagement.resx">
-      <DependentUpon>DayReportHCManagement.cs</DependentUpon>
+    <EmbeddedResource Include="MainForm_GE.resx">
+      <DependentUpon>MainForm_GE.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="DayReportJJEntering.resx">
-      <DependentUpon>DayReportJJEntering.cs</DependentUpon>
+    <EmbeddedResource Include="MoniroSettings.resx">
+      <DependentUpon>MoniroSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DayReportJJManagement.resx">
-      <DependentUpon>DayReportJJManagement.cs</DependentUpon>
+    <EmbeddedResource Include="MonitoringDataAnalysis.resx">
+      <DependentUpon>MonitoringDataAnalysis.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm_MS.resx">
-      <DependentUpon>MainForm_MS.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -311,33 +248,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="StopLineEntering.resx">
-      <DependentUpon>StopLineEntering.cs</DependentUpon>
+    <EmbeddedResource Include="BadDataDelete.resx">
+      <DependentUpon>BadDataDelete.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="StopLineManagement.resx">
-      <DependentUpon>StopLineManagement.cs</DependentUpon>
-    </EmbeddedResource>
-    <None Include="2.MiningScheduling_TemporaryKey.pfx" />
     <None Include="app.config" />
-    <Content Include="Config.ini">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ConfigDatabaseGIS.ini">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="default.mxd">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DefaultUser">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <None Include="LibCommon.dll.config" />
-    <Content Include="local.mxd">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="PanelFormName.ini">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -348,95 +262,70 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="symbol.ServerStyle" />
+    <Content Include="ARConfig.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LoginBackground.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PanelFormName.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="symbol.ServerStyle">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="UserInfo.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="工作面采掘进度管理系统帮助文件.chm">
+    <Content Include="系统一关于图片.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="综合柱状图.mxd">
+    <Content Include="工作面瓦斯涌出动态特征管理系统帮助文件.chm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sys.properties">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="esriDataSourcesGDB">
-      <Guid>{4A037613-879A-484D-AF82-0802947C627B}</Guid>
-      <VersionMajor>10</VersionMajor>
-      <VersionMinor>1</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="esriDisplay">
-      <Guid>{59FCCD31-434C-4017-BDEF-DB4B7EDC9CE0}</Guid>
-      <VersionMajor>10</VersionMajor>
-      <VersionMinor>1</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="esriFramework">
-      <Guid>{866AE5D3-530C-11D2-A2BD-0000F8774FB5}</Guid>
-      <VersionMajor>10</VersionMajor>
-      <VersionMinor>1</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="esriGeoDatabaseUI">
-      <Guid>{4A9C9ED7-F7DB-4614-B480-A5D265C961FC}</Guid>
-      <VersionMajor>10</VersionMajor>
-      <VersionMinor>1</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="esriServer">
-      <Guid>{18F2FC71-6B30-45B9-B101-037A8B868B66}</Guid>
-      <VersionMajor>10</VersionMajor>
-      <VersionMinor>1</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="esriSystem">
-      <Guid>{5E1F7BC3-67C5-4AEE-8EC6-C4B73AAC42ED}</Guid>
-      <VersionMajor>10</VersionMajor>
-      <VersionMinor>1</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="esriSystemUI">
-      <Guid>{4ECCA6E2-B16B-4ACA-BD17-E74CAE4C150A}</Guid>
-      <VersionMajor>10</VersionMajor>
-      <VersionMinor>1</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="stdole1">
-      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
-      <VersionMajor>2</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
+    <Content Include="Config.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ConfigDatabaseGIS.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DefaultUser">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\FileAdd.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FileExit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FileOpen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FileSave.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FileSaveAs.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="LibCommon.dll.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\logo.jpg" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -456,14 +345,27 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="LoginBackground.bmp" />
-    <Content Include="系统二关于图片.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <PublishFile Include="EnvDTE">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="System.Web.Mvc">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="VSLangProj">
       <Visible>False</Visible>
       <Group>
       </Group>
@@ -475,10 +377,9 @@
     </PublishFile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Library\GIS\GIS.csproj">
-      <Project>{7ff2375e-9594-4ee8-a3cd-40cf245e47fa}</Project>
-      <Name>GIS</Name>
-    </ProjectReference>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Library\LibAbout\LibAbout.csproj">
       <Project>{9ec74138-a934-432d-a3b6-42ec84052ff8}</Project>
       <Name>LibAbout</Name>
@@ -519,14 +420,14 @@
       <Project>{93547539-03e2-49c3-88fc-3ccd81942d5f}</Project>
       <Name>LibSocket</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Library\TeeChartWrapper\TeeChartWrapper.csproj">
+      <Project>{b074f430-12b3-4751-96ae-3949fe73ebb5}</Project>
+      <Name>TeeChartWrapper</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>call $(ProjectDir)CopyResourceFile.bat</PostBuildEvent>
-  </PropertyGroup>
-  <PropertyGroup>
-    <PreBuildEvent>
-    </PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

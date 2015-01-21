@@ -85,9 +85,29 @@
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DevExpress.Utils.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraBars.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraEditors.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="Antlr3.Runtime, Version=3.1.3.42154, Culture=neutral, PublicKeyToken=3a9cab8f8d22bfb7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Antlr.3.1.3.42154\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.ActiveRecord, Version=3.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Castle.Activerecord.3.0.0.1\lib\Net40\Castle.ActiveRecord.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.ActiveRecord.Web">
+      <HintPath>..\packages\Castle.Activerecord.3.0.0.1\lib\Net40\Castle.ActiveRecord.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Components.Validator, Version=2.5.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Castle.Components.Validator.2.5.0\lib\NET40\Castle.Components.Validator.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core, Version=2.5.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Castle.Core.2.5.1\lib\NET35\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Data.v13.2, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Utils.v13.2, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraBars.v13.2, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraEditors.v13.2, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="FarPoint.CalcEngine, Version=5.0.3518.2008, Culture=neutral, PublicKeyToken=327c3516b1b18457, processorArchitecture=MSIL" />
     <Reference Include="FarPoint.Excel, Version=5.0.3518.2008, Culture=neutral, PublicKeyToken=327c3516b1b18457, processorArchitecture=MSIL" />
     <Reference Include="FarPoint.PDF, Version=5.0.3518.2008, Culture=neutral, PublicKeyToken=327c3516b1b18457" />
@@ -95,6 +115,26 @@
     <Reference Include="FarPoint.Win, Version=5.0.3518.2008, Culture=neutral, PublicKeyToken=327c3516b1b18457, processorArchitecture=MSIL" />
     <Reference Include="FarPoint.Win.Chart, Version=5.0.3518.2008, Culture=neutral, PublicKeyToken=327c3516b1b18457" />
     <Reference Include="FarPoint.Win.Spread, Version=5.0.3518.2008, Culture=neutral, PublicKeyToken=327c3516b1b18457, processorArchitecture=MSIL" />
+    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Iesi.Collections.1.0.1\lib\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=3.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NHibernate.3.0.0.4000\lib\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.ByteCode.Castle, Version=3.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NHibernate.3.0.0.4000\lib\NHibernate.ByteCode.Castle.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.Search, Version=0.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Castle.Activerecord.3.0.0.1\lib\Net40\NHibernate.Search.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Data.Linq, Version=1.13.41.2, Culture=neutral, PublicKeyToken=cab60358ab4081ea, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NHibernate.3.0.0.4000\lib\Remotion.Data.Linq.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -364,6 +404,8 @@
     <EmbeddedResource Include="SelectWorkingfaceSimple.resx">
       <DependentUpon>SelectWorkingfaceSimple.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -409,10 +451,6 @@
       <Project>{2EBCDE4B-A244-4CCA-A1AE-1A884D81772B}</Project>
       <Name>LibCommon</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LibConfig\LibConfig.csproj">
-      <Project>{697eed3c-3244-494d-b663-296cc80d4022}</Project>
-      <Name>LibConfig</Name>
-    </ProjectReference>
     <ProjectReference Include="..\LibDatabase\LibDatabase.csproj">
       <Project>{38b3be6b-bd0c-4108-9414-a728f5990a0c}</Project>
       <Name>LibDatabase</Name>
@@ -422,12 +460,8 @@
       <Name>LibEncryptDecrypt</Name>
     </ProjectReference>
     <ProjectReference Include="..\LibEntity\LibEntity.csproj">
-      <Project>{28C303D9-18CB-42B3-B0FA-B9B126503176}</Project>
+      <Project>{28c303d9-18cb-42b3-b0fa-b9b126503176}</Project>
       <Name>LibEntity</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LibSocket\LibSocket.csproj">
-      <Project>{93547539-03e2-49c3-88fc-3ccd81942d5f}</Project>
-      <Name>LibSocket</Name>
     </ProjectReference>
     <ProjectReference Include="..\LibXPorperty\LibXPorperty.csproj">
       <Project>{1238b891-86ad-4851-97a2-0c0302e24bd8}</Project>

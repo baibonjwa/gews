@@ -380,23 +380,10 @@ namespace sys1
                             fpGasConcentrationProbeDataInfo.Sheets[0].Cells[_iRowDetailStartIndex + i, ++index].Text =
                                 datas[i].Probe.ProbeType.ProbeTypeName;
 
-                            // 探头位置坐标X
-                            fpGasConcentrationProbeDataInfo.Sheets[0].Cells[_iRowDetailStartIndex + i, ++index].Text =
-                                datas[i].Probe.ProbeLocationX.ToString();
-
-                            // 探头位置坐标Y
-                            fpGasConcentrationProbeDataInfo.Sheets[0].Cells[_iRowDetailStartIndex + i, ++index].Text =
-                                datas[i].Probe.ProbeLocationY.ToString();
-
-                            // 探头位置坐标Z
-                            fpGasConcentrationProbeDataInfo.Sheets[0].Cells[_iRowDetailStartIndex + i, ++index].Text =
-                                datas[i].Probe.ProbeLocationZ.ToString();
-
                             // 探头描述
                             fpGasConcentrationProbeDataInfo.Sheets[0].Cells[_iRowDetailStartIndex + i, ++index].Text =
                                 datas[i].Probe.ProbeDescription;
 
-                            // 巷道信息
                             // 矿井名称
                             if (datas[i].Probe.Tunnel != null)
                             {

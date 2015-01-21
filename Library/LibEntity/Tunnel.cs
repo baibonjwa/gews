@@ -12,7 +12,7 @@ using Castle.ActiveRecord;
 namespace LibEntity
 {
     [ActiveRecord("T_TUNNEL_INFO")]
-    public class Tunnel : ActiveRecordBase
+    public class Tunnel : ActiveRecordBase<Tunnel>
     {
         /// <summary>
         ///     巷道编号

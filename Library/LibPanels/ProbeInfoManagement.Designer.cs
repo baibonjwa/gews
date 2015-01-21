@@ -2,7 +2,7 @@
 
 namespace LibPanels
 {
-    partial class ProbeInfoManagement : BaseForm
+    partial class ProbeInfoManagement 
     {
         /// <summary>
         /// Required designer variable.
@@ -34,10 +34,15 @@ namespace LibPanels
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProbeInfoManagement));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsBtnPrint = new System.Windows.Forms.ToolStripButton();
-            this.tsBtnExport = new System.Windows.Forms.ToolStripButton();
+            this.tsExport = new System.Windows.Forms.ToolStripButton();
+            this.tsBtnAdd = new System.Windows.Forms.ToolStripButton();
+            this.tsBtnModify = new System.Windows.Forms.ToolStripButton();
+            this.tsBtnDel = new System.Windows.Forms.ToolStripButton();
+            this.tsBtnRefresh = new System.Windows.Forms.ToolStripButton();
+            this.tsBtnExit = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.btnProbeImport = new System.Windows.Forms.Button();
             this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -48,10 +53,9 @@ namespace LibPanels
             this.gcProbe = new DevExpress.XtraGrid.GridControl();
             this.bandedGridView1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridView();
             this.gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.bandedGridColumn1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.bandedGridColumn11 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn12 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn13 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn14 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn20 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
@@ -61,22 +65,30 @@ namespace LibPanels
             this.bandedGridColumn17 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn18 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn19 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.checkEdit1 = new DevExpress.XtraEditors.CheckEdit();
+            this.sbtnUpdateProbe = new DevExpress.XtraEditors.SimpleButton();
+            this.checkButton1 = new DevExpress.XtraEditors.CheckButton();
+            this.cbtnAll = new DevExpress.XtraEditors.CheckButton();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcProbe)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bandedGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsBtnPrint,
-            this.tsBtnExport});
+            this.tsExport,
+            this.tsBtnAdd,
+            this.tsBtnModify,
+            this.tsBtnDel,
+            this.tsBtnRefresh,
+            this.tsBtnExit,
+            this.toolStripButton1});
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -94,34 +106,73 @@ namespace LibPanels
             this.tsBtnPrint.Text = "打印";
             this.tsBtnPrint.Click += new System.EventHandler(this.tsBtnPrint_Click);
             // 
-            // tsBtnExport
+            // tsExport
             // 
-            this.tsBtnExport.Image = ((System.Drawing.Image)(resources.GetObject("tsBtnExport.Image")));
-            this.tsBtnExport.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsBtnExport.Name = "tsBtnExport";
-            this.tsBtnExport.Size = new System.Drawing.Size(52, 21);
-            this.tsBtnExport.Text = "导出";
-            this.tsBtnExport.Click += new System.EventHandler(this.tsBtnExport_Click);
+            this.tsExport.Image = ((System.Drawing.Image)(resources.GetObject("tsExport.Image")));
+            this.tsExport.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsExport.Name = "tsExport";
+            this.tsExport.Size = new System.Drawing.Size(52, 21);
+            this.tsExport.Text = "导出";
+            this.tsExport.Click += new System.EventHandler(this.tsExport_Click);
+            // 
+            // tsBtnAdd
+            // 
+            this.tsBtnAdd.Image = ((System.Drawing.Image)(resources.GetObject("tsBtnAdd.Image")));
+            this.tsBtnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsBtnAdd.Name = "tsBtnAdd";
+            this.tsBtnAdd.Size = new System.Drawing.Size(52, 21);
+            this.tsBtnAdd.Text = "添加";
+            this.tsBtnAdd.Visible = false;
+            // 
+            // tsBtnModify
+            // 
+            this.tsBtnModify.Image = ((System.Drawing.Image)(resources.GetObject("tsBtnModify.Image")));
+            this.tsBtnModify.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsBtnModify.Name = "tsBtnModify";
+            this.tsBtnModify.Size = new System.Drawing.Size(52, 21);
+            this.tsBtnModify.Text = "修改";
+            this.tsBtnModify.Click += new System.EventHandler(this.tsBtnModify_Click);
+            // 
+            // tsBtnDel
+            // 
+            this.tsBtnDel.Image = ((System.Drawing.Image)(resources.GetObject("tsBtnDel.Image")));
+            this.tsBtnDel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsBtnDel.Name = "tsBtnDel";
+            this.tsBtnDel.Size = new System.Drawing.Size(76, 21);
+            this.tsBtnDel.Text = "清除绑定";
+            this.tsBtnDel.Click += new System.EventHandler(this.tsBtnDel_Click);
+            // 
+            // tsBtnRefresh
+            // 
+            this.tsBtnRefresh.Image = ((System.Drawing.Image)(resources.GetObject("tsBtnRefresh.Image")));
+            this.tsBtnRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsBtnRefresh.Name = "tsBtnRefresh";
+            this.tsBtnRefresh.Size = new System.Drawing.Size(52, 21);
+            this.tsBtnRefresh.Text = "刷新";
+            this.tsBtnRefresh.Click += new System.EventHandler(this.tsBtnRefresh_Click);
+            // 
+            // tsBtnExit
+            // 
+            this.tsBtnExit.Image = ((System.Drawing.Image)(resources.GetObject("tsBtnExit.Image")));
+            this.tsBtnExit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsBtnExit.Name = "tsBtnExit";
+            this.tsBtnExit.Size = new System.Drawing.Size(52, 21);
+            this.tsBtnExit.Text = "退出";
+            this.tsBtnExit.Click += new System.EventHandler(this.tsBtnExit_Click);
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(23, 4);
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 649);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 695);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
             this.statusStrip1.Size = new System.Drawing.Size(1486, 22);
             this.statusStrip1.TabIndex = 6;
             this.statusStrip1.Text = "statusStrip1";
-            // 
-            // btnProbeImport
-            // 
-            this.btnProbeImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnProbeImport.Location = new System.Drawing.Point(567, 602);
-            this.btnProbeImport.Name = "btnProbeImport";
-            this.btnProbeImport.Size = new System.Drawing.Size(129, 27);
-            this.btnProbeImport.TabIndex = 8;
-            this.btnProbeImport.Text = "传感器信息导入";
-            this.btnProbeImport.UseVisualStyleBackColor = true;
-            this.btnProbeImport.Click += new System.EventHandler(this.btnProbeImport_Click);
             // 
             // gridColumn1
             // 
@@ -160,7 +211,8 @@ namespace LibPanels
             // 
             // controlNavigator1
             // 
-            this.controlNavigator1.Location = new System.Drawing.Point(5, 566);
+            this.controlNavigator1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.controlNavigator1.Location = new System.Drawing.Point(12, 663);
             this.controlNavigator1.Name = "controlNavigator1";
             this.controlNavigator1.NavigatableControl = this.gcProbe;
             this.controlNavigator1.Size = new System.Drawing.Size(311, 24);
@@ -171,12 +223,14 @@ namespace LibPanels
             // 
             // gcProbe
             // 
-            this.gcProbe.Location = new System.Drawing.Point(5, 5);
+            this.gcProbe.Cursor = System.Windows.Forms.Cursors.Default;
+            this.gcProbe.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gcProbe.Location = new System.Drawing.Point(2, 2);
             this.gcProbe.MainView = this.bandedGridView1;
             this.gcProbe.Name = "gcProbe";
             this.gcProbe.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemCheckEdit1});
-            this.gcProbe.Size = new System.Drawing.Size(1319, 509);
+            this.gcProbe.Size = new System.Drawing.Size(1458, 616);
             this.gcProbe.TabIndex = 9;
             this.gcProbe.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.bandedGridView1});
@@ -187,9 +241,9 @@ namespace LibPanels
             this.gridBand1,
             this.gridBand2});
             this.bandedGridView1.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] {
-            this.bandedGridColumn1,
             this.bandedGridColumn11,
             this.bandedGridColumn12,
+            this.bandedGridColumn1,
             this.bandedGridColumn13,
             this.bandedGridColumn14,
             this.bandedGridColumn15,
@@ -202,35 +256,22 @@ namespace LibPanels
             this.bandedGridView1.Name = "bandedGridView1";
             this.bandedGridView1.OptionsSelection.MultiSelect = true;
             this.bandedGridView1.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
+            this.bandedGridView1.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.bandedGridView1_CustomColumnDisplayText);
             // 
             // gridBand1
             // 
             this.gridBand1.AppearanceHeader.Options.UseTextOptions = true;
             this.gridBand1.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridBand1.Caption = "传感器基本信息";
-            this.gridBand1.Columns.Add(this.bandedGridColumn1);
             this.gridBand1.Columns.Add(this.bandedGridColumn11);
             this.gridBand1.Columns.Add(this.bandedGridColumn12);
+            this.gridBand1.Columns.Add(this.bandedGridColumn1);
             this.gridBand1.Columns.Add(this.bandedGridColumn13);
             this.gridBand1.Columns.Add(this.bandedGridColumn14);
             this.gridBand1.Columns.Add(this.bandedGridColumn20);
             this.gridBand1.Name = "gridBand1";
             this.gridBand1.VisibleIndex = 0;
-            this.gridBand1.Width = 888;
-            // 
-            // bandedGridColumn1
-            // 
-            this.bandedGridColumn1.ColumnEdit = this.repositoryItemCheckEdit1;
-            this.bandedGridColumn1.FieldName = "bandedGridColumn1";
-            this.bandedGridColumn1.Name = "bandedGridColumn1";
-            this.bandedGridColumn1.Visible = true;
-            this.bandedGridColumn1.Width = 38;
-            // 
-            // repositoryItemCheckEdit1
-            // 
-            this.repositoryItemCheckEdit1.AutoHeight = false;
-            this.repositoryItemCheckEdit1.Caption = "Check";
-            this.repositoryItemCheckEdit1.Name = "repositoryItemCheckEdit1";
+            this.gridBand1.Width = 925;
             // 
             // bandedGridColumn11
             // 
@@ -253,9 +294,16 @@ namespace LibPanels
             this.bandedGridColumn12.Visible = true;
             this.bandedGridColumn12.Width = 88;
             // 
+            // bandedGridColumn1
+            // 
+            this.bandedGridColumn1.Caption = "传感器类型";
+            this.bandedGridColumn1.FieldName = "ProbeType.ProbeTypeName";
+            this.bandedGridColumn1.Name = "bandedGridColumn1";
+            this.bandedGridColumn1.Visible = true;
+            // 
             // bandedGridColumn13
             // 
-            this.bandedGridColumn13.Caption = "传感器类型";
+            this.bandedGridColumn13.Caption = "传感器原始类型";
             this.bandedGridColumn13.FieldName = "ProbeTypeDisplayName";
             this.bandedGridColumn13.Name = "bandedGridColumn13";
             this.bandedGridColumn13.Visible = true;
@@ -331,32 +379,62 @@ namespace LibPanels
             this.bandedGridColumn19.Visible = true;
             this.bandedGridColumn19.Width = 64;
             // 
+            // repositoryItemCheckEdit1
+            // 
+            this.repositoryItemCheckEdit1.AutoHeight = false;
+            this.repositoryItemCheckEdit1.Caption = "Check";
+            this.repositoryItemCheckEdit1.Name = "repositoryItemCheckEdit1";
+            // 
             // panelControl1
             // 
-            this.panelControl1.Controls.Add(this.checkEdit1);
-            this.panelControl1.Controls.Add(this.controlNavigator1);
+            this.panelControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panelControl1.Controls.Add(this.gcProbe);
             this.panelControl1.Location = new System.Drawing.Point(12, 39);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1474, 620);
+            this.panelControl1.Size = new System.Drawing.Size(1462, 620);
             this.panelControl1.TabIndex = 12;
             // 
-            // checkEdit1
+            // sbtnUpdateProbe
             // 
-            this.checkEdit1.Location = new System.Drawing.Point(31, 61);
-            this.checkEdit1.MinimumSize = new System.Drawing.Size(20, 20);
-            this.checkEdit1.Name = "checkEdit1";
-            this.checkEdit1.Properties.Caption = "";
-            this.checkEdit1.Size = new System.Drawing.Size(20, 20);
-            this.checkEdit1.TabIndex = 12;
+            this.sbtnUpdateProbe.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.sbtnUpdateProbe.Location = new System.Drawing.Point(329, 663);
+            this.sbtnUpdateProbe.Name = "sbtnUpdateProbe";
+            this.sbtnUpdateProbe.Size = new System.Drawing.Size(75, 23);
+            this.sbtnUpdateProbe.TabIndex = 13;
+            this.sbtnUpdateProbe.Text = "更新传感器";
+            this.sbtnUpdateProbe.Click += new System.EventHandler(this.sbtnUpdateProbe_Click);
+            // 
+            // checkButton1
+            // 
+            this.checkButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.checkButton1.Location = new System.Drawing.Point(410, 663);
+            this.checkButton1.Name = "checkButton1";
+            this.checkButton1.Size = new System.Drawing.Size(96, 23);
+            this.checkButton1.TabIndex = 14;
+            this.checkButton1.Text = "调校全部传感器";
+            // 
+            // cbtnAll
+            // 
+            this.cbtnAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cbtnAll.Location = new System.Drawing.Point(513, 663);
+            this.cbtnAll.Name = "cbtnAll";
+            this.cbtnAll.Size = new System.Drawing.Size(96, 23);
+            this.cbtnAll.TabIndex = 15;
+            this.cbtnAll.Text = "查看全部传感器";
+            this.cbtnAll.CheckedChanged += new System.EventHandler(this.cbtnAll_CheckedChanged);
             // 
             // ProbeInfoManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1486, 671);
-            this.Controls.Add(this.btnProbeImport);
+            this.ClientSize = new System.Drawing.Size(1486, 717);
+            this.Controls.Add(this.cbtnAll);
+            this.Controls.Add(this.checkButton1);
+            this.Controls.Add(this.sbtnUpdateProbe);
             this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.controlNavigator1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.panelControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -372,7 +450,6 @@ namespace LibPanels
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -384,7 +461,6 @@ namespace LibPanels
         private System.Windows.Forms.ToolStripButton tsBtnPrint;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
-        private System.Windows.Forms.Button btnProbeImport;
         private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
@@ -392,25 +468,33 @@ namespace LibPanels
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
         private DevExpress.XtraEditors.ControlNavigator controlNavigator1;
-        private System.Windows.Forms.ToolStripButton tsBtnExport;
         private DevExpress.XtraEditors.PanelControl panelControl1;
         private DevExpress.XtraGrid.GridControl gcProbe;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit1;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridView bandedGridView1;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
-        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn1;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn11;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn12;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn13;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn14;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn20;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand2;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn15;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn16;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn17;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn18;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn19;
-        private DevExpress.XtraEditors.CheckEdit checkEdit1;
+        private DevExpress.XtraEditors.SimpleButton sbtnUpdateProbe;
+        private DevExpress.XtraEditors.CheckButton checkButton1;
+        private DevExpress.XtraEditors.CheckButton cbtnAll;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton tsExport;
+        private System.Windows.Forms.ToolStripButton tsBtnAdd;
+        private System.Windows.Forms.ToolStripButton tsBtnModify;
+        private System.Windows.Forms.ToolStripButton tsBtnDel;
+        private System.Windows.Forms.ToolStripButton tsBtnRefresh;
+        private System.Windows.Forms.ToolStripButton tsBtnExit;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn1;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand2;
 
 
     }

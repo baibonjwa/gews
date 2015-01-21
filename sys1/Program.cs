@@ -22,7 +22,12 @@ namespace _1.GasEmission
         [STAThread]
         static void Main()
         {
-            //窗体风格
+            System.Threading.Thread.CurrentThread.CurrentUICulture =
+                new System.Globalization.CultureInfo("zh-Hans");
+
+            // The following line provides localization for data formats. 
+            System.Threading.Thread.CurrentThread.CurrentCulture =
+                new System.Globalization.CultureInfo("zh-Hans");
 
             IConfigurationSource config = new XmlConfigurationSource("ARConfig.xml");
 

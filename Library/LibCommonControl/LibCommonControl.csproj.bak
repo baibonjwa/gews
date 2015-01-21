@@ -74,9 +74,9 @@
     <OutputPath>bin\Release\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DevExpress.Data.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Utils.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraEditors.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Data.v13.2, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Utils.v13.2, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraEditors.v13.2, Version=13.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="nini">
       <HintPath>..\internalrefs\nini.dll</HintPath>
     </Reference>
@@ -181,14 +181,17 @@
       <Project>{697eed3c-3244-494d-b663-296cc80d4022}</Project>
       <Name>LibConfig</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LibEntity\LibEntity.csproj">
-      <Project>{28c303d9-18cb-42b3-b0fa-b9b126503176}</Project>
-      <Name>LibEntity</Name>
+    <ProjectReference Include="..\LibHttpClient\MyHttpClient.csproj">
+      <Project>{9e2955f4-17e0-433b-b966-616e671378a4}</Project>
+      <Name>MyHttpClient</Name>
     </ProjectReference>
     <ProjectReference Include="..\LibSocket\LibSocket.csproj">
       <Project>{93547539-03e2-49c3-88fc-3ccd81942d5f}</Project>
       <Name>LibSocket</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
