@@ -36,7 +36,7 @@ namespace LibPanels
         /// <param name="e"></param>
         private void MineDataManagement_Load(object sender, EventArgs e)
         {
-
+            gcCoalExistence.DataSource = CoalExistence.FindAll();
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace LibPanels
         private void tsBtnModify_Click(object sender, EventArgs e)
         {
 
-            var m = new MineData(MainForm) {Text = new LibPanels(MineDataPanelName.CoalExistence_Change).panelFormName};
+            var m = new MineData(MainForm) { Text = new LibPanels(MineDataPanelName.CoalExistence_Change).panelFormName };
 
             if (DialogResult.OK == m.ShowDialog())
             {

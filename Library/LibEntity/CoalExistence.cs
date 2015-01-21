@@ -96,7 +96,13 @@ namespace LibEntity
                 criterion.Add(Restrictions.Between("Datetime", startTime, endTime));
             }
             results = (CoalExistence[])SlicedFindAll(typeof(CoalExistence), firstResult, maxResult, criterion.ToArray());
+
             return results;
+        }
+
+        public static CoalExistence[] FindAll()
+        {
+            return (CoalExistence[])FindAll(typeof(CoalExistence));
         }
 
 

@@ -21,6 +21,14 @@ namespace _5.WarningManagement
         [STAThread]
         static void Main()
         {
+            System.Threading.Thread.CurrentThread.CurrentUICulture =
+              new System.Globalization.CultureInfo("zh-Hans");
+
+            // The following line provides localization for data formats. 
+            System.Threading.Thread.CurrentThread.CurrentCulture =
+                new System.Globalization.CultureInfo("zh-Hans");
+
+
             IConfigurationSource config = new XmlConfigurationSource("ARConfig.xml");
 
             Assembly asm = Assembly.Load("LibEntity");
