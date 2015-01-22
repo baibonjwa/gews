@@ -10,7 +10,12 @@ namespace LibEntity
     public class CoalExistence : MineData
     {
         private string _coalDistoryLevel = "";
-        private int _isTowardsChange = 0;
+
+        public CoalExistence()
+        {
+            IsTowardsChange = 0;
+        }
+
         public const String TableName = "T_COAL_EXISTENCE";
 
         /// <summary>
@@ -52,11 +57,7 @@ namespace LibEntity
         ///     设置或获取是否煤层走向、倾角突然急剧变化
         /// </summary>
         [Property("IS_TOWARDS_CHANGE")]
-        public int IsTowardsChange
-        {
-            get { return _isTowardsChange; }
-            set { _isTowardsChange = value; }
-        }
+        public int IsTowardsChange { get; set; }
 
         /// <summary>
         ///     设置或获取工作面煤层是否处于分叉、合层状态

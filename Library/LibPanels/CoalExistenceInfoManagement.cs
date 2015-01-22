@@ -97,5 +97,24 @@ namespace LibPanels
         {
             Close();
         }
+
+        private void bandedGridView1_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
+        {
+            if (e.Column.FieldName == "IsLevelDisorder" || e.Column.FieldName == "IsLevelChange" ||
+                e.Column.FieldName == "IsTowardsChange" || e.Column.FieldName == "IsCoalMerge" ||
+                e.Column.FieldName == "IsCoalSoft")
+            {
+                switch (e.DisplayText)
+                {
+                    case "0":
+                        e.DisplayText = "否";
+                        break;
+                    case "1":
+                        e.DisplayText = "是";
+                        break;
+                }
+            }
+
+        }
     }
 }
