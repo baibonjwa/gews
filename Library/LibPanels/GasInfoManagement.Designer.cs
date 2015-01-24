@@ -30,87 +30,7 @@ namespace LibPanels
         /// </summary>
         private void InitializeComponent()
         {
-            FarPoint.Win.ComplexBorder complexBorder1 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.Spread.CellType.TextCellType textCellType1 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.ComplexBorder complexBorder2 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThickLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThickLine));
-            FarPoint.Win.ComplexBorder complexBorder3 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThickLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThickLine));
-            FarPoint.Win.ComplexBorder complexBorder4 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None));
-            FarPoint.Win.ComplexBorder complexBorder5 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None));
-            FarPoint.Win.ComplexBorder complexBorder6 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThickLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThickLine));
-            FarPoint.Win.ComplexBorder complexBorder7 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None));
-            FarPoint.Win.ComplexBorder complexBorder8 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None));
-            FarPoint.Win.ComplexBorder complexBorder9 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None));
-            FarPoint.Win.ComplexBorder complexBorder10 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None));
-            FarPoint.Win.ComplexBorder complexBorder11 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None));
-            FarPoint.Win.ComplexBorder complexBorder12 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None));
-            FarPoint.Win.ComplexBorder complexBorder13 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None));
-            FarPoint.Win.ComplexBorder complexBorder14 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None));
-            FarPoint.Win.ComplexBorder complexBorder15 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None));
-            FarPoint.Win.ComplexBorder complexBorder16 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None));
-            FarPoint.Win.ComplexBorder complexBorder17 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThickLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder18 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThickLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder19 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThickLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder20 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder21 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder22 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThickLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder23 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder24 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder25 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder26 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder27 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder28 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder29 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder30 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder31 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder32 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder33 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.Spread.CellType.TextCellType textCellType2 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.ComplexBorder complexBorder34 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder35 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder36 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder37 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder38 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder39 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder40 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder41 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder42 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder43 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder44 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder45 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder46 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder47 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder48 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder49 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder50 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.Spread.CellType.TextCellType textCellType3 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.ComplexBorder complexBorder51 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder52 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder53 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder54 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder55 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder56 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder57 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder58 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder59 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder60 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder61 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder62 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder63 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder64 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder65 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder66 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.Spread.CellType.TextCellType textCellType4 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.Spread.CellType.TextCellType textCellType5 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.Spread.CellType.TextCellType textCellType6 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.Spread.CellType.TextCellType textCellType7 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.Spread.CellType.TextCellType textCellType8 = new FarPoint.Win.Spread.CellType.TextCellType();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GasInfoManagement));
-            this.dataPager1 = new LibCommonControl.DataPager();
-            this.chkSelAll = new System.Windows.Forms.CheckBox();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.btnOK = new System.Windows.Forms.Button();
-            this.fpGasData = new FarPoint.Win.Spread.FpSpread();
-            this.fpGasData_Sheet1 = new FarPoint.Win.Spread.SheetView();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsBtnPrint = new System.Windows.Forms.ToolStripButton();
@@ -120,321 +40,43 @@ namespace LibPanels
             this.tsBtnDel = new System.Windows.Forms.ToolStripButton();
             this.tsBtnRefresh = new System.Windows.Forms.ToolStripButton();
             this.tsBtnExit = new System.Windows.Forms.ToolStripButton();
-            this.farpointFilter1 = new LibCommonControl.FarpointFilter();
-            this._queryConditions = new QueryConditions(this.MainForm);
-            ((System.ComponentModel.ISupportInitialize)(this.fpGasData)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fpGasData_Sheet1)).BeginInit();
+            this.gcGasData = new DevExpress.XtraGrid.GridControl();
+            this.bandedGridView1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridView();
+            this.bandedGridColumn12 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridColumn1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridColumn2 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridColumn3 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridColumn4 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridColumn6 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn6 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn4 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn5 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn2 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn7 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn3 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridColumn5 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn9 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn8 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn10 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn11 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.bandedGridColumn13 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.gridBand4 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.gridBand2 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.gridBand3 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gcGasData)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bandedGridView1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // dataPager1
-            // 
-            this.dataPager1.Location = new System.Drawing.Point(14, 75);
-            this.dataPager1.Name = "dataPager1";
-            this.dataPager1.Size = new System.Drawing.Size(926, 37);
-            this.dataPager1.TabIndex = 12;
-            this.dataPager1.Load += new System.EventHandler(this.dataPager1_Load);
-            // 
-            // chkSelAll
-            // 
-            this.chkSelAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkSelAll.AutoSize = true;
-            this.chkSelAll.Location = new System.Drawing.Point(58, 645);
-            this.chkSelAll.Name = "chkSelAll";
-            this.chkSelAll.Size = new System.Drawing.Size(78, 16);
-            this.chkSelAll.TabIndex = 11;
-            this.chkSelAll.Text = "全选/不选";
-            this.chkSelAll.UseVisualStyleBackColor = true;
-            this.chkSelAll.Click += new System.EventHandler(this.chkSelAll_Click);
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(857, 641);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 9;
-            this.btnCancel.Text = "取消";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // btnOK
-            // 
-            this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOK.Location = new System.Drawing.Point(776, 641);
-            this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(75, 23);
-            this.btnOK.TabIndex = 6;
-            this.btnOK.Text = "确定";
-            this.btnOK.UseVisualStyleBackColor = true;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
-            // 
-            // fpGasData
-            // 
-            this.fpGasData.AccessibleDescription = "fpGasData, Sheet1, Row 0, Column 0, 井下数据-瓦斯";
-            this.fpGasData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.fpGasData.BorderCollapse = FarPoint.Win.Spread.BorderCollapse.Collapse;
-            this.fpGasData.ColumnSplitBoxPolicy = FarPoint.Win.Spread.SplitBoxPolicy.Never;
-            this.fpGasData.HorizontalScrollBarPolicy = FarPoint.Win.Spread.ScrollBarPolicy.AsNeeded;
-            this.fpGasData.Location = new System.Drawing.Point(12, 118);
-            this.fpGasData.Name = "fpGasData";
-            this.fpGasData.RowSplitBoxPolicy = FarPoint.Win.Spread.SplitBoxPolicy.Never;
-            this.fpGasData.Sheets.AddRange(new FarPoint.Win.Spread.SheetView[] {
-            this.fpGasData_Sheet1});
-            this.fpGasData.Size = new System.Drawing.Size(920, 514);
-            this.fpGasData.TabIndex = 75;
-            this.fpGasData.VerticalScrollBarPolicy = FarPoint.Win.Spread.ScrollBarPolicy.AsNeeded;
-            this.fpGasData.ButtonClicked += new FarPoint.Win.Spread.EditorNotifyEventHandler(this.fpGasEmissionData_ButtonClicked);
-            this.fpGasData.SetViewportTopRow(0, 0, 4);
-            this.fpGasData.SetActiveViewport(0, -1, 0);
-            // 
-            // fpGasData_Sheet1
-            // 
-            this.fpGasData_Sheet1.Reset();
-            fpGasData_Sheet1.SheetName = "Sheet1";
-            // Formulas and custom names must be loaded with R1C1 reference style
-            this.fpGasData_Sheet1.ReferenceStyle = FarPoint.Win.Spread.Model.ReferenceStyle.R1C1;
-            fpGasData_Sheet1.ColumnCount = 29;
-            fpGasData_Sheet1.RowCount = 50;
-            this.fpGasData_Sheet1.Cells.Get(0, 0).Border = complexBorder1;
-            this.fpGasData_Sheet1.Cells.Get(0, 0).CellType = textCellType1;
-            this.fpGasData_Sheet1.Cells.Get(0, 0).ColumnSpan = 17;
-            this.fpGasData_Sheet1.Cells.Get(0, 0).Font = new System.Drawing.Font("宋体", 16F, System.Drawing.FontStyle.Bold);
-            this.fpGasData_Sheet1.Cells.Get(0, 0).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpGasData_Sheet1.Cells.Get(0, 0).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(0, 0).RowSpan = 2;
-            this.fpGasData_Sheet1.Cells.Get(0, 0).Value = "井下数据-瓦斯";
-            this.fpGasData_Sheet1.Cells.Get(0, 0).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpGasData_Sheet1.Cells.Get(0, 1).Border = complexBorder2;
-            this.fpGasData_Sheet1.Cells.Get(0, 1).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(0, 2).Border = complexBorder3;
-            this.fpGasData_Sheet1.Cells.Get(0, 2).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(0, 3).Border = complexBorder4;
-            this.fpGasData_Sheet1.Cells.Get(0, 3).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(0, 4).Border = complexBorder5;
-            this.fpGasData_Sheet1.Cells.Get(0, 4).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(0, 5).Border = complexBorder6;
-            this.fpGasData_Sheet1.Cells.Get(0, 5).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(0, 6).Border = complexBorder7;
-            this.fpGasData_Sheet1.Cells.Get(0, 6).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(0, 7).Border = complexBorder8;
-            this.fpGasData_Sheet1.Cells.Get(0, 7).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(0, 8).Border = complexBorder9;
-            this.fpGasData_Sheet1.Cells.Get(0, 8).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(0, 9).Border = complexBorder10;
-            this.fpGasData_Sheet1.Cells.Get(0, 9).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(0, 10).Border = complexBorder11;
-            this.fpGasData_Sheet1.Cells.Get(0, 10).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(0, 11).Border = complexBorder12;
-            this.fpGasData_Sheet1.Cells.Get(0, 11).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(0, 12).Border = complexBorder13;
-            this.fpGasData_Sheet1.Cells.Get(0, 12).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(0, 14).Border = complexBorder14;
-            this.fpGasData_Sheet1.Cells.Get(0, 14).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(0, 15).Border = complexBorder15;
-            this.fpGasData_Sheet1.Cells.Get(0, 15).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(0, 16).Border = complexBorder16;
-            this.fpGasData_Sheet1.Cells.Get(0, 16).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(1, 0).Border = complexBorder17;
-            this.fpGasData_Sheet1.Cells.Get(1, 0).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(1, 1).Border = complexBorder18;
-            this.fpGasData_Sheet1.Cells.Get(1, 1).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(1, 2).Border = complexBorder19;
-            this.fpGasData_Sheet1.Cells.Get(1, 2).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(1, 3).Border = complexBorder20;
-            this.fpGasData_Sheet1.Cells.Get(1, 3).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(1, 4).Border = complexBorder21;
-            this.fpGasData_Sheet1.Cells.Get(1, 4).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(1, 5).Border = complexBorder22;
-            this.fpGasData_Sheet1.Cells.Get(1, 5).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(1, 6).Border = complexBorder23;
-            this.fpGasData_Sheet1.Cells.Get(1, 6).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(1, 7).Border = complexBorder24;
-            this.fpGasData_Sheet1.Cells.Get(1, 7).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(1, 8).Border = complexBorder25;
-            this.fpGasData_Sheet1.Cells.Get(1, 8).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(1, 9).Border = complexBorder26;
-            this.fpGasData_Sheet1.Cells.Get(1, 9).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(1, 10).Border = complexBorder27;
-            this.fpGasData_Sheet1.Cells.Get(1, 10).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(1, 11).Border = complexBorder28;
-            this.fpGasData_Sheet1.Cells.Get(1, 11).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(1, 12).Border = complexBorder29;
-            this.fpGasData_Sheet1.Cells.Get(1, 12).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(1, 14).Border = complexBorder30;
-            this.fpGasData_Sheet1.Cells.Get(1, 14).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(1, 15).Border = complexBorder31;
-            this.fpGasData_Sheet1.Cells.Get(1, 15).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(1, 16).Border = complexBorder32;
-            this.fpGasData_Sheet1.Cells.Get(1, 16).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(2, 0).Border = complexBorder33;
-            this.fpGasData_Sheet1.Cells.Get(2, 0).CellType = textCellType2;
-            this.fpGasData_Sheet1.Cells.Get(2, 0).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpGasData_Sheet1.Cells.Get(2, 0).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(2, 0).RowSpan = 2;
-            this.fpGasData_Sheet1.Cells.Get(2, 0).Value = "选择";
-            this.fpGasData_Sheet1.Cells.Get(2, 0).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpGasData_Sheet1.Cells.Get(2, 1).Border = complexBorder34;
-            this.fpGasData_Sheet1.Cells.Get(2, 1).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpGasData_Sheet1.Cells.Get(2, 1).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(2, 1).RowSpan = 2;
-            this.fpGasData_Sheet1.Cells.Get(2, 1).Value = "巷道名称";
-            this.fpGasData_Sheet1.Cells.Get(2, 1).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpGasData_Sheet1.Cells.Get(2, 2).Border = complexBorder35;
-            this.fpGasData_Sheet1.Cells.Get(2, 2).ColumnSpan = 3;
-            this.fpGasData_Sheet1.Cells.Get(2, 2).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpGasData_Sheet1.Cells.Get(2, 2).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(2, 2).Value = "坐标";
-            this.fpGasData_Sheet1.Cells.Get(2, 2).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpGasData_Sheet1.Cells.Get(2, 3).Border = complexBorder36;
-            this.fpGasData_Sheet1.Cells.Get(2, 3).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(2, 4).Border = complexBorder37;
-            this.fpGasData_Sheet1.Cells.Get(2, 4).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(2, 5).Border = complexBorder38;
-            this.fpGasData_Sheet1.Cells.Get(2, 5).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpGasData_Sheet1.Cells.Get(2, 5).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(2, 5).RowSpan = 2;
-            this.fpGasData_Sheet1.Cells.Get(2, 5).Value = "提交日期";
-            this.fpGasData_Sheet1.Cells.Get(2, 5).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpGasData_Sheet1.Cells.Get(2, 6).Border = complexBorder39;
-            this.fpGasData_Sheet1.Cells.Get(2, 6).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify;
-            this.fpGasData_Sheet1.Cells.Get(2, 6).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(2, 6).RowSpan = 2;
-            this.fpGasData_Sheet1.Cells.Get(2, 6).Value = "瓦斯探头断电次数";
-            this.fpGasData_Sheet1.Cells.Get(2, 7).Border = complexBorder40;
-            this.fpGasData_Sheet1.Cells.Get(2, 7).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpGasData_Sheet1.Cells.Get(2, 7).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(2, 7).RowSpan = 2;
-            this.fpGasData_Sheet1.Cells.Get(2, 7).Value = "吸钻预兆次数";
-            this.fpGasData_Sheet1.Cells.Get(2, 8).Border = complexBorder41;
-            this.fpGasData_Sheet1.Cells.Get(2, 8).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify;
-            this.fpGasData_Sheet1.Cells.Get(2, 8).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(2, 8).RowSpan = 2;
-            this.fpGasData_Sheet1.Cells.Get(2, 8).Value = "瓦斯忽大忽小预兆次数";
-            this.fpGasData_Sheet1.Cells.Get(2, 9).Border = complexBorder42;
-            this.fpGasData_Sheet1.Cells.Get(2, 9).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify;
-            this.fpGasData_Sheet1.Cells.Get(2, 9).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(2, 9).RowSpan = 2;
-            this.fpGasData_Sheet1.Cells.Get(2, 9).Value = "气温下降预兆次数";
-            this.fpGasData_Sheet1.Cells.Get(2, 10).Border = complexBorder43;
-            this.fpGasData_Sheet1.Cells.Get(2, 10).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify;
-            this.fpGasData_Sheet1.Cells.Get(2, 10).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(2, 10).RowSpan = 2;
-            this.fpGasData_Sheet1.Cells.Get(2, 10).Value = "煤炮频繁预兆次数";
-            this.fpGasData_Sheet1.Cells.Get(2, 11).Border = complexBorder44;
-            this.fpGasData_Sheet1.Cells.Get(2, 11).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpGasData_Sheet1.Cells.Get(2, 11).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(2, 11).RowSpan = 2;
-            this.fpGasData_Sheet1.Cells.Get(2, 11).Value = "喷孔次数";
-            this.fpGasData_Sheet1.Cells.Get(2, 12).Border = complexBorder45;
-            this.fpGasData_Sheet1.Cells.Get(2, 12).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpGasData_Sheet1.Cells.Get(2, 12).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(2, 12).RowSpan = 2;
-            this.fpGasData_Sheet1.Cells.Get(2, 12).Value = "顶钻次数";
-            this.fpGasData_Sheet1.Cells.Get(2, 13).Border = complexBorder46;
-            this.fpGasData_Sheet1.Cells.Get(2, 13).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpGasData_Sheet1.Cells.Get(2, 13).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(2, 13).RowSpan = 2;
-            this.fpGasData_Sheet1.Cells.Get(2, 13).Value = "瓦斯浓度";
-            this.fpGasData_Sheet1.Cells.Get(2, 14).Border = complexBorder47;
-            this.fpGasData_Sheet1.Cells.Get(2, 14).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpGasData_Sheet1.Cells.Get(2, 14).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(2, 14).RowSpan = 2;
-            this.fpGasData_Sheet1.Cells.Get(2, 14).Value = "工作制式";
-            this.fpGasData_Sheet1.Cells.Get(2, 14).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpGasData_Sheet1.Cells.Get(2, 15).Border = complexBorder48;
-            this.fpGasData_Sheet1.Cells.Get(2, 15).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpGasData_Sheet1.Cells.Get(2, 15).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(2, 15).RowSpan = 2;
-            this.fpGasData_Sheet1.Cells.Get(2, 15).Value = "班次";
-            this.fpGasData_Sheet1.Cells.Get(2, 15).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpGasData_Sheet1.Cells.Get(2, 16).Border = complexBorder49;
-            this.fpGasData_Sheet1.Cells.Get(2, 16).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpGasData_Sheet1.Cells.Get(2, 16).Locked = true;
-            this.fpGasData_Sheet1.Cells.Get(2, 16).RowSpan = 2;
-            this.fpGasData_Sheet1.Cells.Get(2, 16).Value = "填报人";
-            this.fpGasData_Sheet1.Cells.Get(2, 16).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpGasData_Sheet1.Cells.Get(3, 0).Border = complexBorder50;
-            this.fpGasData_Sheet1.Cells.Get(3, 0).CellType = textCellType3;
-            this.fpGasData_Sheet1.Cells.Get(3, 0).Locked = false;
-            this.fpGasData_Sheet1.Cells.Get(3, 1).Border = complexBorder51;
-            this.fpGasData_Sheet1.Cells.Get(3, 1).Locked = false;
-            this.fpGasData_Sheet1.Cells.Get(3, 2).Border = complexBorder52;
-            this.fpGasData_Sheet1.Cells.Get(3, 2).Locked = false;
-            this.fpGasData_Sheet1.Cells.Get(3, 2).Value = "X";
-            this.fpGasData_Sheet1.Cells.Get(3, 3).Border = complexBorder53;
-            this.fpGasData_Sheet1.Cells.Get(3, 3).Locked = false;
-            this.fpGasData_Sheet1.Cells.Get(3, 3).Value = "Y";
-            this.fpGasData_Sheet1.Cells.Get(3, 4).Border = complexBorder54;
-            this.fpGasData_Sheet1.Cells.Get(3, 4).Locked = false;
-            this.fpGasData_Sheet1.Cells.Get(3, 4).Value = "Z";
-            this.fpGasData_Sheet1.Cells.Get(3, 5).Border = complexBorder55;
-            this.fpGasData_Sheet1.Cells.Get(3, 5).Locked = false;
-            this.fpGasData_Sheet1.Cells.Get(3, 6).Border = complexBorder56;
-            this.fpGasData_Sheet1.Cells.Get(3, 6).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify;
-            this.fpGasData_Sheet1.Cells.Get(3, 6).Locked = false;
-            this.fpGasData_Sheet1.Cells.Get(3, 7).Border = complexBorder57;
-            this.fpGasData_Sheet1.Cells.Get(3, 7).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify;
-            this.fpGasData_Sheet1.Cells.Get(3, 7).Locked = false;
-            this.fpGasData_Sheet1.Cells.Get(3, 8).Border = complexBorder58;
-            this.fpGasData_Sheet1.Cells.Get(3, 8).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify;
-            this.fpGasData_Sheet1.Cells.Get(3, 8).Locked = false;
-            this.fpGasData_Sheet1.Cells.Get(3, 9).Border = complexBorder59;
-            this.fpGasData_Sheet1.Cells.Get(3, 9).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify;
-            this.fpGasData_Sheet1.Cells.Get(3, 9).Locked = false;
-            this.fpGasData_Sheet1.Cells.Get(3, 10).Border = complexBorder60;
-            this.fpGasData_Sheet1.Cells.Get(3, 10).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify;
-            this.fpGasData_Sheet1.Cells.Get(3, 10).Locked = false;
-            this.fpGasData_Sheet1.Cells.Get(3, 11).Border = complexBorder61;
-            this.fpGasData_Sheet1.Cells.Get(3, 11).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify;
-            this.fpGasData_Sheet1.Cells.Get(3, 11).Locked = false;
-            this.fpGasData_Sheet1.Cells.Get(3, 12).Border = complexBorder62;
-            this.fpGasData_Sheet1.Cells.Get(3, 12).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify;
-            this.fpGasData_Sheet1.Cells.Get(3, 12).Locked = false;
-            this.fpGasData_Sheet1.Cells.Get(3, 13).Border = complexBorder63;
-            this.fpGasData_Sheet1.Cells.Get(3, 14).Border = complexBorder64;
-            this.fpGasData_Sheet1.Cells.Get(3, 14).Locked = false;
-            this.fpGasData_Sheet1.Cells.Get(3, 15).Border = complexBorder65;
-            this.fpGasData_Sheet1.Cells.Get(3, 15).Locked = false;
-            this.fpGasData_Sheet1.Cells.Get(3, 16).Border = complexBorder66;
-            this.fpGasData_Sheet1.Cells.Get(3, 16).Locked = false;
-            this.fpGasData_Sheet1.Columns.Get(0).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpGasData_Sheet1.Columns.Get(0).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpGasData_Sheet1.Columns.Get(0).Width = 36F;
-            this.fpGasData_Sheet1.Columns.Get(1).CellType = textCellType4;
-            this.fpGasData_Sheet1.Columns.Get(1).Width = 115F;
-            this.fpGasData_Sheet1.Columns.Get(5).CellType = textCellType5;
-            this.fpGasData_Sheet1.Columns.Get(5).Width = 122F;
-            this.fpGasData_Sheet1.Columns.Get(6).Width = 80F;
-            this.fpGasData_Sheet1.Columns.Get(7).Width = 80F;
-            this.fpGasData_Sheet1.Columns.Get(8).Width = 80F;
-            this.fpGasData_Sheet1.Columns.Get(9).Width = 80F;
-            this.fpGasData_Sheet1.Columns.Get(10).Width = 80F;
-            this.fpGasData_Sheet1.Columns.Get(11).Width = 80F;
-            this.fpGasData_Sheet1.Columns.Get(12).Width = 80F;
-            this.fpGasData_Sheet1.Columns.Get(13).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpGasData_Sheet1.Columns.Get(14).CellType = textCellType6;
-            this.fpGasData_Sheet1.Columns.Get(14).Width = 65F;
-            this.fpGasData_Sheet1.Columns.Get(15).CellType = textCellType7;
-            this.fpGasData_Sheet1.Columns.Get(15).Width = 65F;
-            this.fpGasData_Sheet1.Columns.Get(16).CellType = textCellType8;
-            this.fpGasData_Sheet1.Columns.Get(16).Width = 65F;
-            this.fpGasData_Sheet1.DefaultStyle.HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpGasData_Sheet1.DefaultStyle.NoteIndicatorColor = System.Drawing.Color.Red;
-            this.fpGasData_Sheet1.DefaultStyle.Parent = "DataAreaDefault";
-            this.fpGasData_Sheet1.DefaultStyle.VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpGasData_Sheet1.FrozenRowCount = 4;
-            this.fpGasData_Sheet1.RowHeader.Columns.Default.Resizable = false;
-            this.fpGasData_Sheet1.ReferenceStyle = FarPoint.Win.Spread.Model.ReferenceStyle.A1;
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 671);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 786);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(944, 22);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(1101, 22);
             this.statusStrip1.TabIndex = 79;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -451,7 +93,7 @@ namespace LibPanels
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(944, 24);
+            this.toolStrip1.Size = new System.Drawing.Size(1101, 24);
             this.toolStrip1.TabIndex = 80;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -462,6 +104,7 @@ namespace LibPanels
             this.tsBtnPrint.Name = "tsBtnPrint";
             this.tsBtnPrint.Size = new System.Drawing.Size(52, 21);
             this.tsBtnPrint.Text = "打印";
+            this.tsBtnPrint.Click += new System.EventHandler(this.tsBtnPrint_Click);
             // 
             // tsBtnExport
             // 
@@ -517,56 +160,273 @@ namespace LibPanels
             this.tsBtnExit.Text = "退出";
             this.tsBtnExit.Click += new System.EventHandler(this.tsBtnExit_Click);
             // 
-            // farpointFilter1
+            // gcGasData
             // 
-            this.farpointFilter1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.farpointFilter1.BackColor = System.Drawing.Color.Transparent;
-            this.farpointFilter1.Location = new System.Drawing.Point(271, 639);
-            this.farpointFilter1.Name = "farpointFilter1";
-            this.farpointFilter1.Size = new System.Drawing.Size(499, 25);
-            this.farpointFilter1.TabIndex = 81;
-            this.farpointFilter1.OnCheckFilterChanged += new LibCommonControl.FarpointFilter.CheckHideEventHandler(this.farpointFilter1_OnCheckFilterChanged);
-            this.farpointFilter1.OnClickFitColorBtnOK += new LibCommonControl.FarpointFilter.ClickFitColorBtnEventHandler(this.farpointFilter1_OnClickFitColorBtnOK);
-            this.farpointFilter1.OnClickNotFitColorBtnOK += new LibCommonControl.FarpointFilter.ClickFitColorBtnEventHandler(this.farpointFilter1_OnClickNotFitColorBtnOK);
-            this.farpointFilter1.OnClickClearFilterBtn += new LibCommonControl.FarpointFilter.ClickClearFilterBtnEventHandler(this.farpointFilter1_OnClickClearFilterBtn);
+            this.gcGasData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gcGasData.Cursor = System.Windows.Forms.Cursors.Default;
+            this.gcGasData.Location = new System.Drawing.Point(14, 27);
+            this.gcGasData.MainView = this.bandedGridView1;
+            this.gcGasData.Name = "gcGasData";
+            this.gcGasData.Size = new System.Drawing.Size(1075, 756);
+            this.gcGasData.TabIndex = 81;
+            this.gcGasData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.bandedGridView1});
             // 
-            // _queryConditions
+            // bandedGridView1
             // 
-            this._queryConditions.DefaultEndTime = "";
-            this._queryConditions.DefaultStartTime = "";
-            this._queryConditions.Location = new System.Drawing.Point(14, 26);
-            this._queryConditions.MainForm = null;
-            this._queryConditions.Name = "_queryConditions";
-            this._queryConditions.Show = null;
-            this._queryConditions.Size = new System.Drawing.Size(812, 43);
-            this._queryConditions.TabIndex = 82;
-            this._queryConditions.TunnelId = 0;
+            this.bandedGridView1.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
+            this.gridBand1,
+            this.gridBand4,
+            this.gridBand2,
+            this.gridBand3});
+            this.bandedGridView1.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] {
+            this.gridColumn1,
+            this.gridColumn2,
+            this.gridColumn3,
+            this.gridColumn4,
+            this.gridColumn5,
+            this.gridColumn6,
+            this.bandedGridColumn1,
+            this.bandedGridColumn2,
+            this.bandedGridColumn3,
+            this.bandedGridColumn4,
+            this.bandedGridColumn5,
+            this.bandedGridColumn6,
+            this.bandedGridColumn7,
+            this.bandedGridColumn8,
+            this.bandedGridColumn9,
+            this.bandedGridColumn10,
+            this.bandedGridColumn11,
+            this.bandedGridColumn12,
+            this.bandedGridColumn13});
+            this.bandedGridView1.GridControl = this.gcGasData;
+            this.bandedGridView1.Name = "bandedGridView1";
+            // 
+            // bandedGridColumn12
+            // 
+            this.bandedGridColumn12.Caption = "工作面名称";
+            this.bandedGridColumn12.FieldName = "Tunnel.WorkingFace.WorkingFaceName";
+            this.bandedGridColumn12.Name = "bandedGridColumn12";
+            this.bandedGridColumn12.Visible = true;
+            this.bandedGridColumn12.Width = 64;
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "巷道名称";
+            this.gridColumn1.FieldName = "Tunnel.TunnelName";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.Width = 64;
+            // 
+            // gridColumn2
+            // 
+            this.gridColumn2.Caption = "X";
+            this.gridColumn2.FieldName = "CoordinateX";
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.Width = 20;
+            // 
+            // gridColumn3
+            // 
+            this.gridColumn3.Caption = "Y";
+            this.gridColumn3.FieldName = "CoordinateY";
+            this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.Visible = true;
+            this.gridColumn3.Width = 31;
+            // 
+            // gridColumn4
+            // 
+            this.gridColumn4.Caption = "Z";
+            this.gridColumn4.FieldName = "CoordinateZ";
+            this.gridColumn4.Name = "gridColumn4";
+            this.gridColumn4.Visible = true;
+            this.gridColumn4.Width = 43;
+            // 
+            // gridColumn6
+            // 
+            this.gridColumn6.Caption = "瓦斯探头断电次数";
+            this.gridColumn6.FieldName = "PowerFailure";
+            this.gridColumn6.Name = "gridColumn6";
+            this.gridColumn6.Visible = true;
+            this.gridColumn6.Width = 64;
+            // 
+            // bandedGridColumn6
+            // 
+            this.bandedGridColumn6.Caption = "顶钻次数";
+            this.bandedGridColumn6.FieldName = "StoperTimes";
+            this.bandedGridColumn6.Name = "bandedGridColumn6";
+            this.bandedGridColumn6.Visible = true;
+            this.bandedGridColumn6.Width = 64;
+            // 
+            // bandedGridColumn4
+            // 
+            this.bandedGridColumn4.Caption = "煤炮频繁预兆次数";
+            this.bandedGridColumn4.FieldName = "CoalBangTimes";
+            this.bandedGridColumn4.Name = "bandedGridColumn4";
+            this.bandedGridColumn4.Visible = true;
+            this.bandedGridColumn4.Width = 64;
+            // 
+            // bandedGridColumn5
+            // 
+            this.bandedGridColumn5.Caption = "喷孔次数";
+            this.bandedGridColumn5.FieldName = "CraterTimes";
+            this.bandedGridColumn5.Name = "bandedGridColumn5";
+            this.bandedGridColumn5.Visible = true;
+            this.bandedGridColumn5.Width = 64;
+            // 
+            // bandedGridColumn2
+            // 
+            this.bandedGridColumn2.Caption = "瓦斯忽大忽小预兆次数";
+            this.bandedGridColumn2.FieldName = "GasTimes";
+            this.bandedGridColumn2.Name = "bandedGridColumn2";
+            this.bandedGridColumn2.Visible = true;
+            this.bandedGridColumn2.Width = 66;
+            // 
+            // bandedGridColumn7
+            // 
+            this.bandedGridColumn7.Caption = "瓦斯浓度";
+            this.bandedGridColumn7.FieldName = "GasThickness";
+            this.bandedGridColumn7.Name = "bandedGridColumn7";
+            this.bandedGridColumn7.Visible = true;
+            this.bandedGridColumn7.Width = 64;
+            // 
+            // bandedGridColumn1
+            // 
+            this.bandedGridColumn1.Caption = "吸钻预兆次数";
+            this.bandedGridColumn1.FieldName = "DrillTimes";
+            this.bandedGridColumn1.Name = "bandedGridColumn1";
+            this.bandedGridColumn1.Visible = true;
+            this.bandedGridColumn1.Width = 64;
+            // 
+            // bandedGridColumn3
+            // 
+            this.bandedGridColumn3.Caption = "气温下降预兆次数";
+            this.bandedGridColumn3.FieldName = "TempDownTimes";
+            this.bandedGridColumn3.Name = "bandedGridColumn3";
+            this.bandedGridColumn3.Visible = true;
+            this.bandedGridColumn3.Width = 65;
+            // 
+            // gridColumn5
+            // 
+            this.gridColumn5.Caption = "提交日期";
+            this.gridColumn5.FieldName = "Datetime";
+            this.gridColumn5.Name = "gridColumn5";
+            this.gridColumn5.Visible = true;
+            this.gridColumn5.Width = 63;
+            // 
+            // bandedGridColumn9
+            // 
+            this.bandedGridColumn9.Caption = "填报人";
+            this.bandedGridColumn9.FieldName = "Submitter";
+            this.bandedGridColumn9.Name = "bandedGridColumn9";
+            this.bandedGridColumn9.Visible = true;
+            this.bandedGridColumn9.Width = 63;
+            // 
+            // bandedGridColumn8
+            // 
+            this.bandedGridColumn8.Caption = "工作制式";
+            this.bandedGridColumn8.FieldName = "WorkStyle";
+            this.bandedGridColumn8.Name = "bandedGridColumn8";
+            this.bandedGridColumn8.Visible = true;
+            this.bandedGridColumn8.Width = 63;
+            // 
+            // bandedGridColumn10
+            // 
+            this.bandedGridColumn10.Caption = "班次";
+            this.bandedGridColumn10.FieldName = "WorkTime";
+            this.bandedGridColumn10.Name = "bandedGridColumn10";
+            this.bandedGridColumn10.Visible = true;
+            this.bandedGridColumn10.Width = 63;
+            // 
+            // bandedGridColumn11
+            // 
+            this.bandedGridColumn11.Caption = "队别";
+            this.bandedGridColumn11.FieldName = "TeamName";
+            this.bandedGridColumn11.Name = "bandedGridColumn11";
+            this.bandedGridColumn11.Visible = true;
+            this.bandedGridColumn11.Width = 68;
+            // 
+            // bandedGridColumn13
+            // 
+            this.bandedGridColumn13.Caption = "备注";
+            this.bandedGridColumn13.Name = "bandedGridColumn13";
+            this.bandedGridColumn13.Visible = true;
+            // 
+            // gridBand1
+            // 
+            this.gridBand1.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridBand1.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridBand1.Caption = "巷道信息";
+            this.gridBand1.Columns.Add(this.bandedGridColumn12);
+            this.gridBand1.Columns.Add(this.gridColumn1);
+            this.gridBand1.Name = "gridBand1";
+            this.gridBand1.VisibleIndex = 0;
+            this.gridBand1.Width = 128;
+            // 
+            // gridBand4
+            // 
+            this.gridBand4.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridBand4.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridBand4.Caption = "坐标";
+            this.gridBand4.Columns.Add(this.gridColumn2);
+            this.gridBand4.Columns.Add(this.gridColumn3);
+            this.gridBand4.Columns.Add(this.gridColumn4);
+            this.gridBand4.Name = "gridBand4";
+            this.gridBand4.VisibleIndex = 1;
+            this.gridBand4.Width = 94;
+            // 
+            // gridBand2
+            // 
+            this.gridBand2.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridBand2.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridBand2.Caption = "瓦斯预警指标";
+            this.gridBand2.Columns.Add(this.gridColumn6);
+            this.gridBand2.Columns.Add(this.bandedGridColumn6);
+            this.gridBand2.Columns.Add(this.bandedGridColumn4);
+            this.gridBand2.Columns.Add(this.bandedGridColumn5);
+            this.gridBand2.Columns.Add(this.bandedGridColumn2);
+            this.gridBand2.Columns.Add(this.bandedGridColumn7);
+            this.gridBand2.Columns.Add(this.bandedGridColumn1);
+            this.gridBand2.Columns.Add(this.bandedGridColumn3);
+            this.gridBand2.Columns.Add(this.bandedGridColumn13);
+            this.gridBand2.Name = "gridBand2";
+            this.gridBand2.VisibleIndex = 2;
+            this.gridBand2.Width = 590;
+            // 
+            // gridBand3
+            // 
+            this.gridBand3.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridBand3.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridBand3.Caption = "提交信息";
+            this.gridBand3.Columns.Add(this.gridColumn5);
+            this.gridBand3.Columns.Add(this.bandedGridColumn11);
+            this.gridBand3.Columns.Add(this.bandedGridColumn9);
+            this.gridBand3.Columns.Add(this.bandedGridColumn10);
+            this.gridBand3.Columns.Add(this.bandedGridColumn8);
+            this.gridBand3.Name = "gridBand3";
+            this.gridBand3.VisibleIndex = 3;
+            this.gridBand3.Width = 320;
             // 
             // GasInfoManagement
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(944, 693);
-            this.Controls.Add(this._queryConditions);
-            this.Controls.Add(this.farpointFilter1);
+            this.ClientSize = new System.Drawing.Size(1101, 808);
+            this.Controls.Add(this.gcGasData);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.fpGasData);
-            this.Controls.Add(this.dataPager1);
-            this.Controls.Add(this.chkSelAll);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnOK);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "GasInfoManagement";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "井下数据瓦斯管理";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.MineDataManagement_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.fpGasData)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fpGasData_Sheet1)).EndInit();
+            this.Load += new System.EventHandler(this.GasInfoManagement_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gcGasData)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bandedGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -574,12 +434,6 @@ namespace LibPanels
 
         #endregion
 
-        private LibCommonControl.DataPager dataPager1;
-        private System.Windows.Forms.CheckBox chkSelAll;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnOK;
-        private FarPoint.Win.Spread.FpSpread fpGasData;
-        private FarPoint.Win.Spread.SheetView fpGasData_Sheet1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton tsBtnPrint;
@@ -589,7 +443,31 @@ namespace LibPanels
         private System.Windows.Forms.ToolStripButton tsBtnDel;
         private System.Windows.Forms.ToolStripButton tsBtnRefresh;
         private System.Windows.Forms.ToolStripButton tsBtnExit;
-        private LibCommonControl.FarpointFilter farpointFilter1;
-        private LibCommonForm.QueryConditions _queryConditions;
+        private DevExpress.XtraGrid.GridControl gcGasData;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridView bandedGridView1;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridColumn1;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridColumn2;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridColumn3;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridColumn4;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridColumn5;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridColumn6;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn1;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn2;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn3;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn4;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn5;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn6;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn7;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn8;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn9;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn10;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn11;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn12;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand4;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand2;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn13;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand3;
     }
 }

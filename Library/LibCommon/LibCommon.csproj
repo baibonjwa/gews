@@ -92,6 +92,8 @@
     <Reference Include="DevExpress.XtraEditors.v14.1, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="DevExpress.XtraGrid.v14.1, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraPrinting.v14.1, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="FarPoint.CalcEngine">
       <HintPath>..\ResourceFiles\AllRequired\FarPoint.CalcEngine.dll</HintPath>
     </Reference>
@@ -143,6 +145,7 @@
     <Compile Include="Check.cs" />
     <Compile Include="ConstTable.cs" />
     <Compile Include="DateTimeUtil.cs" />
+    <Compile Include="DevUtil.cs" />
     <Compile Include="DXSeting.cs" />
     <Compile Include="Const.cs" />
     <Compile Include="EnumUtils.cs" />

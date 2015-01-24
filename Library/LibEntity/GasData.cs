@@ -63,9 +63,9 @@ namespace LibEntity
             FindByPrimaryKey(typeof(GasData), id);
         }
 
-        public static int GetRecordCount()
+        public static GasData[] FindAll()
         {
-            return FindAll(typeof(GasData)).Length;
+            return (GasData[])FindAll(typeof(GasData));
         }
 
 

@@ -25,10 +25,13 @@ namespace LibPanels
         public CoalExistenceInfoManagement(MainFrm mainFrm)
         {
             MainForm = mainFrm;
-
             InitializeComponent();
         }
 
+        private void RefreshData()
+        {
+            gcCoalExistence.DataSource = CoalExistence.FindAll();
+        }
         /// <summary>
         /// 初始化
         /// </summary>
@@ -36,7 +39,7 @@ namespace LibPanels
         /// <param name="e"></param>
         private void MineDataManagement_Load(object sender, EventArgs e)
         {
-            gcCoalExistence.DataSource = CoalExistence.FindAll();
+            RefreshData();
         }
 
         /// <summary>
@@ -53,7 +56,7 @@ namespace LibPanels
             };
             if (DialogResult.OK == m.ShowDialog())
             {
-
+                RefreshData();
             }
         }
 
@@ -69,7 +72,7 @@ namespace LibPanels
 
             if (DialogResult.OK == m.ShowDialog())
             {
-
+                RefreshData();
             }
         }
 
@@ -80,7 +83,10 @@ namespace LibPanels
         /// <param name="e"></param>
         private void tsBtnDel_Click(object sender, EventArgs e)
         {
-
+            if (!Alert.confirm("确认删除数据吗？")) return;
+            var coalExistence = (CoalExistence)bandedGridView1.GetFocusedRow();
+            coalExistence.Delete();
+            RefreshData();
         }
 
         /// <summary>
@@ -90,7 +96,10 @@ namespace LibPanels
         /// <param name="e"></param>
         private void tsBtnExport_Click(object sender, EventArgs e)
         {
-
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                gcCoalExistence.ExportToXls(saveFileDialog1.FileName);
+            }
         }
 
         private void tsBtnExit_Click_1(object sender, EventArgs e)
@@ -115,6 +124,16 @@ namespace LibPanels
                 }
             }
 
+        }
+
+        private void tsBtnPrint_Click(object sender, EventArgs e)
+        {
+            DevUtil.DevPrint(gcCoalExistence, "煤层赋存预警信息报表");
+        }
+
+        private void tsBtnRefresh_Click(object sender, EventArgs e)
+        {
+            RefreshData();
         }
     }
 }

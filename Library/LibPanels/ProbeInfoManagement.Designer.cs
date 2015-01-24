@@ -42,7 +42,6 @@ namespace LibPanels
             this.tsBtnExit = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -70,6 +69,7 @@ namespace LibPanels
             this.sbtnUpdateProbe = new DevExpress.XtraEditors.SimpleButton();
             this.checkButton1 = new DevExpress.XtraEditors.CheckButton();
             this.cbtnAll = new DevExpress.XtraEditors.CheckButton();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcProbe)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bandedGridView1)).BeginInit();
@@ -460,7 +460,6 @@ namespace LibPanels
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton tsBtnPrint;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
@@ -495,6 +494,7 @@ namespace LibPanels
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn1;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand2;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
 
 
     }

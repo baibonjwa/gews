@@ -39,7 +39,6 @@ namespace LibPanels
                 var probes = Probe.FindAllWithGasOrVentilation();
                 gcProbe.DataSource = probes;
             }
-
         }
 
         private void ProbeInfoManagement_Load(object sender, EventArgs e)
@@ -55,24 +54,7 @@ namespace LibPanels
         /// <param name="e"></param>
         private void tsBtnPrint_Click(object sender, EventArgs e)
         {
-            var ps = new PrintingSystem();
-
-            var link = new PrintableComponentLink(ps);
-            ps.Links.Add(link);
-
-            link.Component = gcProbe;//这里可以是可打印的部件
-            const string printHeader = "传感器数据报表";
-            var phf = link.PageHeaderFooter as PageHeaderFooter;
-            if (phf != null)
-            {
-                phf.Header.Content.Clear();
-                phf.Header.Content.AddRange(new[] { "", printHeader, "" });
-                phf.Header.Font = new System.Drawing.Font("宋体", 14, System.Drawing.FontStyle.Bold);
-                phf.Header.LineAlignment = BrickAlignment.Center;
-            }
-            link.CreateDocument(); //建立文档
-
-            ps.PreviewFormEx.Show();
+            DevUtil.DevPrint(gcProbe, "传感器数据报表");
         }
 
         private void bandedGridView1_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)

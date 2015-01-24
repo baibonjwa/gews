@@ -50,20 +50,21 @@ namespace LibPanels
             this.bandedGridColumn19 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn20 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.gridBand7 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.bandedGridColumn24 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn22 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn23 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn24 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn26 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn25 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn27 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.bandedGridColumn22 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn32 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.gridBand15 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.bandedGridColumn21 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn30 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn31 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn29 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn28 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.bandedGridColumn32 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.controlNavigator1 = new DevExpress.XtraEditors.ControlNavigator();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcCoalExistence)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bandedGridView1)).BeginInit();
@@ -102,6 +103,7 @@ namespace LibPanels
             this.tsBtnPrint.Name = "tsBtnPrint";
             this.tsBtnPrint.Size = new System.Drawing.Size(52, 21);
             this.tsBtnPrint.Text = "打印";
+            this.tsBtnPrint.Click += new System.EventHandler(this.tsBtnPrint_Click);
             // 
             // tsBtnExport
             // 
@@ -146,6 +148,7 @@ namespace LibPanels
             this.tsBtnRefresh.Name = "tsBtnRefresh";
             this.tsBtnRefresh.Size = new System.Drawing.Size(52, 21);
             this.tsBtnRefresh.Text = "刷新";
+            this.tsBtnRefresh.Click += new System.EventHandler(this.tsBtnRefresh_Click);
             // 
             // tsBtnExit
             // 
@@ -208,7 +211,7 @@ namespace LibPanels
             this.gridBand1.Columns.Add(this.bandedGridColumn17);
             this.gridBand1.Name = "gridBand1";
             this.gridBand1.VisibleIndex = 0;
-            this.gridBand1.Width = 160;
+            this.gridBand1.Width = 145;
             // 
             // bandedGridColumn1
             // 
@@ -216,6 +219,7 @@ namespace LibPanels
             this.bandedGridColumn1.FieldName = "Tunnel.WorkingFace.WorkingFaceName";
             this.bandedGridColumn1.Name = "bandedGridColumn1";
             this.bandedGridColumn1.Visible = true;
+            this.bandedGridColumn1.Width = 67;
             // 
             // bandedGridColumn17
             // 
@@ -223,7 +227,7 @@ namespace LibPanels
             this.bandedGridColumn17.FieldName = "Tunnel.TunnelName";
             this.bandedGridColumn17.Name = "bandedGridColumn17";
             this.bandedGridColumn17.Visible = true;
-            this.bandedGridColumn17.Width = 85;
+            this.bandedGridColumn17.Width = 78;
             // 
             // gridBand2
             // 
@@ -235,7 +239,7 @@ namespace LibPanels
             this.gridBand2.Columns.Add(this.bandedGridColumn20);
             this.gridBand2.Name = "gridBand2";
             this.gridBand2.VisibleIndex = 1;
-            this.gridBand2.Width = 117;
+            this.gridBand2.Width = 106;
             // 
             // bandedGridColumn18
             // 
@@ -243,7 +247,7 @@ namespace LibPanels
             this.bandedGridColumn18.FieldName = "CoordinateX";
             this.bandedGridColumn18.Name = "bandedGridColumn18";
             this.bandedGridColumn18.Visible = true;
-            this.bandedGridColumn18.Width = 32;
+            this.bandedGridColumn18.Width = 28;
             // 
             // bandedGridColumn19
             // 
@@ -251,7 +255,7 @@ namespace LibPanels
             this.bandedGridColumn19.FieldName = "CoordinateY";
             this.bandedGridColumn19.Name = "bandedGridColumn19";
             this.bandedGridColumn19.Visible = true;
-            this.bandedGridColumn19.Width = 32;
+            this.bandedGridColumn19.Width = 28;
             // 
             // bandedGridColumn20
             // 
@@ -259,62 +263,23 @@ namespace LibPanels
             this.bandedGridColumn20.FieldName = "CoordinateZ";
             this.bandedGridColumn20.Name = "bandedGridColumn20";
             this.bandedGridColumn20.Visible = true;
-            this.bandedGridColumn20.Width = 53;
+            this.bandedGridColumn20.Width = 50;
             // 
             // gridBand7
             // 
             this.gridBand7.AppearanceHeader.Options.UseTextOptions = true;
             this.gridBand7.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridBand7.Caption = "煤层赋存预警指标";
-            this.gridBand7.Columns.Add(this.bandedGridColumn24);
+            this.gridBand7.Columns.Add(this.bandedGridColumn22);
             this.gridBand7.Columns.Add(this.bandedGridColumn23);
+            this.gridBand7.Columns.Add(this.bandedGridColumn24);
             this.gridBand7.Columns.Add(this.bandedGridColumn26);
             this.gridBand7.Columns.Add(this.bandedGridColumn25);
             this.gridBand7.Columns.Add(this.bandedGridColumn27);
-            this.gridBand7.Columns.Add(this.bandedGridColumn22);
+            this.gridBand7.Columns.Add(this.bandedGridColumn32);
             this.gridBand7.Name = "gridBand7";
             this.gridBand7.VisibleIndex = 2;
-            this.gridBand7.Width = 733;
-            // 
-            // bandedGridColumn24
-            // 
-            this.bandedGridColumn24.Caption = "煤层走向倾角突然急剧变化";
-            this.bandedGridColumn24.FieldName = "IsTowardsChange";
-            this.bandedGridColumn24.Name = "bandedGridColumn24";
-            this.bandedGridColumn24.Visible = true;
-            this.bandedGridColumn24.Width = 164;
-            // 
-            // bandedGridColumn23
-            // 
-            this.bandedGridColumn23.Caption = "软分层（构造煤）层位是否发生变化";
-            this.bandedGridColumn23.FieldName = "IsLevelChange";
-            this.bandedGridColumn23.Name = "bandedGridColumn23";
-            this.bandedGridColumn23.Visible = true;
-            this.bandedGridColumn23.Width = 217;
-            // 
-            // bandedGridColumn26
-            // 
-            this.bandedGridColumn26.Caption = "软分层（构造煤）厚度";
-            this.bandedGridColumn26.FieldName = "TectonicCoalThick";
-            this.bandedGridColumn26.Name = "bandedGridColumn26";
-            this.bandedGridColumn26.Visible = true;
-            this.bandedGridColumn26.Width = 134;
-            // 
-            // bandedGridColumn25
-            // 
-            this.bandedGridColumn25.Caption = "煤厚变化";
-            this.bandedGridColumn25.FieldName = "CoalThickChange";
-            this.bandedGridColumn25.Name = "bandedGridColumn25";
-            this.bandedGridColumn25.Visible = true;
-            this.bandedGridColumn25.Width = 78;
-            // 
-            // bandedGridColumn27
-            // 
-            this.bandedGridColumn27.Caption = "煤体破坏类型";
-            this.bandedGridColumn27.FieldName = "CoalDistoryLevel";
-            this.bandedGridColumn27.Name = "bandedGridColumn27";
-            this.bandedGridColumn27.Visible = true;
-            this.bandedGridColumn27.Width = 83;
+            this.gridBand7.Width = 665;
             // 
             // bandedGridColumn22
             // 
@@ -322,7 +287,54 @@ namespace LibPanels
             this.bandedGridColumn22.FieldName = "IsLevelDisorder";
             this.bandedGridColumn22.Name = "bandedGridColumn22";
             this.bandedGridColumn22.Visible = true;
-            this.bandedGridColumn22.Width = 57;
+            this.bandedGridColumn22.Width = 51;
+            // 
+            // bandedGridColumn23
+            // 
+            this.bandedGridColumn23.Caption = "软分层（构造煤）层位是否发生变化";
+            this.bandedGridColumn23.FieldName = "IsLevelChange";
+            this.bandedGridColumn23.Name = "bandedGridColumn23";
+            this.bandedGridColumn23.Visible = true;
+            this.bandedGridColumn23.Width = 197;
+            // 
+            // bandedGridColumn24
+            // 
+            this.bandedGridColumn24.Caption = "煤层走向倾角突然急剧变化";
+            this.bandedGridColumn24.FieldName = "IsTowardsChange";
+            this.bandedGridColumn24.Name = "bandedGridColumn24";
+            this.bandedGridColumn24.Visible = true;
+            this.bandedGridColumn24.Width = 120;
+            // 
+            // bandedGridColumn26
+            // 
+            this.bandedGridColumn26.Caption = "软分层（构造煤）厚度";
+            this.bandedGridColumn26.FieldName = "TectonicCoalThick";
+            this.bandedGridColumn26.Name = "bandedGridColumn26";
+            this.bandedGridColumn26.Visible = true;
+            this.bandedGridColumn26.Width = 122;
+            // 
+            // bandedGridColumn25
+            // 
+            this.bandedGridColumn25.Caption = "煤厚变化";
+            this.bandedGridColumn25.FieldName = "CoalThickChange";
+            this.bandedGridColumn25.Name = "bandedGridColumn25";
+            this.bandedGridColumn25.Visible = true;
+            this.bandedGridColumn25.Width = 70;
+            // 
+            // bandedGridColumn27
+            // 
+            this.bandedGridColumn27.Caption = "煤体破坏类型";
+            this.bandedGridColumn27.FieldName = "CoalDistoryLevel";
+            this.bandedGridColumn27.Name = "bandedGridColumn27";
+            this.bandedGridColumn27.Visible = true;
+            this.bandedGridColumn27.Width = 80;
+            // 
+            // bandedGridColumn32
+            // 
+            this.bandedGridColumn32.Caption = "备注";
+            this.bandedGridColumn32.Name = "bandedGridColumn32";
+            this.bandedGridColumn32.Visible = true;
+            this.bandedGridColumn32.Width = 25;
             // 
             // gridBand15
             // 
@@ -336,7 +348,7 @@ namespace LibPanels
             this.gridBand15.Columns.Add(this.bandedGridColumn28);
             this.gridBand15.Name = "gridBand15";
             this.gridBand15.VisibleIndex = 3;
-            this.gridBand15.Width = 154;
+            this.gridBand15.Width = 178;
             // 
             // bandedGridColumn21
             // 
@@ -345,7 +357,7 @@ namespace LibPanels
             this.bandedGridColumn21.Name = "bandedGridColumn21";
             this.bandedGridColumn21.RowCount = 2;
             this.bandedGridColumn21.Visible = true;
-            this.bandedGridColumn21.Width = 74;
+            this.bandedGridColumn21.Width = 35;
             // 
             // bandedGridColumn30
             // 
@@ -353,7 +365,7 @@ namespace LibPanels
             this.bandedGridColumn30.FieldName = "TeamName";
             this.bandedGridColumn30.Name = "bandedGridColumn30";
             this.bandedGridColumn30.Visible = true;
-            this.bandedGridColumn30.Width = 20;
+            this.bandedGridColumn30.Width = 35;
             // 
             // bandedGridColumn31
             // 
@@ -361,7 +373,7 @@ namespace LibPanels
             this.bandedGridColumn31.FieldName = "Submitter";
             this.bandedGridColumn31.Name = "bandedGridColumn31";
             this.bandedGridColumn31.Visible = true;
-            this.bandedGridColumn31.Width = 20;
+            this.bandedGridColumn31.Width = 35;
             // 
             // bandedGridColumn29
             // 
@@ -369,7 +381,7 @@ namespace LibPanels
             this.bandedGridColumn29.FieldName = "WorkTime";
             this.bandedGridColumn29.Name = "bandedGridColumn29";
             this.bandedGridColumn29.Visible = true;
-            this.bandedGridColumn29.Width = 20;
+            this.bandedGridColumn29.Width = 35;
             // 
             // bandedGridColumn28
             // 
@@ -377,14 +389,7 @@ namespace LibPanels
             this.bandedGridColumn28.FieldName = "WorkStyle";
             this.bandedGridColumn28.Name = "bandedGridColumn28";
             this.bandedGridColumn28.Visible = true;
-            this.bandedGridColumn28.Width = 20;
-            // 
-            // bandedGridColumn32
-            // 
-            this.bandedGridColumn32.Caption = "备注";
-            this.bandedGridColumn32.Name = "bandedGridColumn32";
-            this.bandedGridColumn32.Visible = true;
-            this.bandedGridColumn32.Width = 25;
+            this.bandedGridColumn28.Width = 38;
             // 
             // controlNavigator1
             // 
@@ -452,10 +457,11 @@ namespace LibPanels
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn29;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn31;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn32;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn1;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand2;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand7;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand15;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
