@@ -403,16 +403,16 @@ namespace UnderTerminal
         {
             mEntity = mineDataEntity.changeToManagementEntity();
             mEntity.IsGasErrorNotReport = management.managementEntity.IsGasErrorNotReport;
-            mEntity.IsWFNotReport = management.managementEntity.IsWFNotReport;
+            mEntity.IsWfNotReport = management.managementEntity.IsWfNotReport;
             mEntity.IsStrgasNotDoWell = management.managementEntity.IsStrgasNotDoWell;
             mEntity.IsRwmanagementNotDoWell = management.managementEntity.IsRwmanagementNotDoWell;
-            mEntity.IsVFBrokenByPeople = management.managementEntity.IsVFBrokenByPeople;
+            mEntity.IsVfBrokenByPeople = management.managementEntity.IsVfBrokenByPeople;
             mEntity.IsElementPlaceNotGood = management.managementEntity.IsElementPlaceNotGood;
             mEntity.IsReporterFalseData = management.managementEntity.IsReporterFalseData;
             mEntity.IsDrillWrongBuild = management.managementEntity.IsDrillWrongBuild;
             mEntity.IsDrillNotDoWell = management.managementEntity.IsDrillNotDoWell;
-            mEntity.IsOPNotDoWell = management.managementEntity.IsOPNotDoWell;
-            mEntity.IsOPErrorNotReport = management.managementEntity.IsOPErrorNotReport;
+            mEntity.IsOpNotDoWell = management.managementEntity.IsOpNotDoWell;
+            mEntity.IsOpErrorNotReport = management.managementEntity.IsOpErrorNotReport;
             mEntity.IsPartWindSwitchError = management.managementEntity.IsPartWindSwitchError;
             mEntity.IsSafeCtrlUninstall = management.managementEntity.IsSafeCtrlUninstall;
             mEntity.IsCtrlStop = management.managementEntity.IsCtrlStop;

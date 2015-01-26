@@ -694,13 +694,13 @@ namespace LibPanels
             //是否存在瓦斯异常不汇报
             mEntity.IsGasErrorNotReport = management.managementEntity.IsGasErrorNotReport;
             //是否存在工作面出现地质构造不汇报
-            mEntity.IsWFNotReport = management.managementEntity.IsWFNotReport;
+            mEntity.IsWfNotReport = management.managementEntity.IsWfNotReport;
             //是否存在强化瓦斯措施执行不到位
             mEntity.IsStrgasNotDoWell = management.managementEntity.IsStrgasNotDoWell;
             //是否存在进回风巷隅角、尾巷管理不到位
             mEntity.IsRwmanagementNotDoWell = management.managementEntity.IsRwmanagementNotDoWell;
             //是否存在通风设施人为损坏
-            mEntity.IsVFBrokenByPeople = management.managementEntity.IsVFBrokenByPeople;
+            mEntity.IsVfBrokenByPeople = management.managementEntity.IsVfBrokenByPeople;
             //是否存在甲烷传感器位置不当、误差大、调校超过规定
             mEntity.IsElementPlaceNotGood = management.managementEntity.IsElementPlaceNotGood;
             //是否存在瓦检员空漏假检
@@ -710,9 +710,9 @@ namespace LibPanels
             //钻孔施工不到位次数
             mEntity.IsDrillNotDoWell = management.managementEntity.IsDrillNotDoWell;
             //防突措施执行不到位次数
-            mEntity.IsOPNotDoWell = management.managementEntity.IsOPNotDoWell;
+            mEntity.IsOpNotDoWell = management.managementEntity.IsOpNotDoWell;
             //防突异常情况未汇报次数
-            mEntity.IsOPErrorNotReport = management.managementEntity.IsOPErrorNotReport;
+            mEntity.IsOpErrorNotReport = management.managementEntity.IsOpErrorNotReport;
             //是否存在局部通风机单回路供电或不能正常切换
             mEntity.IsPartWindSwitchError = management.managementEntity.IsPartWindSwitchError;
             //是否存在安全监测监控系统未及时安装

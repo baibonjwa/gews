@@ -64,9 +64,9 @@ namespace LibPanels
             this.gridBand4 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.bandedGridColumn6 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn19 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.bandedGridColumn17 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn20 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn18 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn17 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.controlNavigator1 = new DevExpress.XtraEditors.ControlNavigator();
             this.toolStrip1.SuspendLayout();
@@ -270,7 +270,7 @@ namespace LibPanels
             // bandedGridColumn5
             // 
             this.bandedGridColumn5.Caption = "Z";
-            this.bandedGridColumn5.FieldName = "CoordinateZ";
+            this.bandedGridColumn5.FieldName = "CoordinateY";
             this.bandedGridColumn5.Name = "bandedGridColumn5";
             this.bandedGridColumn5.Visible = true;
             this.bandedGridColumn5.Width = 55;
@@ -380,9 +380,9 @@ namespace LibPanels
             this.gridBand4.Caption = "录入信息";
             this.gridBand4.Columns.Add(this.bandedGridColumn6);
             this.gridBand4.Columns.Add(this.bandedGridColumn19);
+            this.gridBand4.Columns.Add(this.bandedGridColumn17);
             this.gridBand4.Columns.Add(this.bandedGridColumn20);
             this.gridBand4.Columns.Add(this.bandedGridColumn18);
-            this.gridBand4.Columns.Add(this.bandedGridColumn17);
             this.gridBand4.Name = "gridBand4";
             this.gridBand4.VisibleIndex = 3;
             this.gridBand4.Width = 266;
@@ -403,14 +403,6 @@ namespace LibPanels
             this.bandedGridColumn19.Visible = true;
             this.bandedGridColumn19.Width = 52;
             // 
-            // bandedGridColumn17
-            // 
-            this.bandedGridColumn17.Caption = "工作制式";
-            this.bandedGridColumn17.FieldName = "WorkStyle";
-            this.bandedGridColumn17.Name = "bandedGridColumn17";
-            this.bandedGridColumn17.Visible = true;
-            this.bandedGridColumn17.Width = 52;
-            // 
             // bandedGridColumn20
             // 
             this.bandedGridColumn20.Caption = "队别";
@@ -426,6 +418,14 @@ namespace LibPanels
             this.bandedGridColumn18.Name = "bandedGridColumn18";
             this.bandedGridColumn18.Visible = true;
             this.bandedGridColumn18.Width = 58;
+            // 
+            // bandedGridColumn17
+            // 
+            this.bandedGridColumn17.Caption = "工作制式";
+            this.bandedGridColumn17.FieldName = "WorkStyle";
+            this.bandedGridColumn17.Name = "bandedGridColumn17";
+            this.bandedGridColumn17.Visible = true;
+            this.bandedGridColumn17.Width = 52;
             // 
             // controlNavigator1
             // 

@@ -48,7 +48,7 @@ namespace LibPanels
                 chkIsGasErrorNotReport.Checked = false;
             }
             //是否存在工作面出现地质构造不汇报
-            if (managementEntity.IsWFNotReport == 1)
+            if (managementEntity.IsWfNotReport == 1)
             {
                 chkIsWFNotReport.Checked = true;
             }
@@ -75,7 +75,7 @@ namespace LibPanels
                 chkIsRWManagementnotDoWell.Checked = false;
             }
             //是否存在通风设施人为损坏
-            if (managementEntity.IsVFBrokenByPeople == 1)
+            if (managementEntity.IsVfBrokenByPeople == 1)
             {
                 chkIsVFBrokenByPeople.Checked = true;
             }
@@ -120,7 +120,7 @@ namespace LibPanels
                 chkIsDrillNotDoWell.Checked = false;
             }
             //防突措施执行不到位
-            if (managementEntity.IsOPNotDoWell == 1)
+            if (managementEntity.IsOpNotDoWell == 1)
             {
                 chkIsOPNotDoWellTimes.Checked = true;
             }
@@ -129,7 +129,7 @@ namespace LibPanels
                 chkIsOPNotDoWellTimes.Checked = false;
             }
             //防突异常情况未汇报
-            if (managementEntity.IsOPErrorNotReport == 1)
+            if (managementEntity.IsOpErrorNotReport == 1)
             {
                 chkIsOPErrorNotReport.Checked = true;
             }
@@ -241,7 +241,7 @@ namespace LibPanels
         /// <param name="e"></param>
         private void chkIsOPNotDoWellTimes_CheckedChanged(object sender, EventArgs e)
         {
-            managementEntity.IsOPNotDoWell = chkIsOPNotDoWellTimes.Checked ? 1 : 0;
+            managementEntity.IsOpNotDoWell = chkIsOPNotDoWellTimes.Checked ? 1 : 0;
         }
 
         /// <summary>
@@ -251,7 +251,7 @@ namespace LibPanels
         /// <param name="e"></param>
         private void chkIsWFNotReport_CheckedChanged(object sender, EventArgs e)
         {
-            managementEntity.IsWFNotReport = chkIsWFNotReport.Checked ? 1 : 0;
+            managementEntity.IsWfNotReport = chkIsWFNotReport.Checked ? 1 : 0;
         }
 
         /// <summary>
@@ -261,7 +261,7 @@ namespace LibPanels
         /// <param name="e"></param>
         private void chkIsVFBrokenByPeople_CheckedChanged(object sender, EventArgs e)
         {
-            managementEntity.IsVFBrokenByPeople = chkIsVFBrokenByPeople.Checked ? 1 : 0;
+            managementEntity.IsVfBrokenByPeople = chkIsVFBrokenByPeople.Checked ? 1 : 0;
         }
 
         /// <summary>
@@ -301,7 +301,7 @@ namespace LibPanels
         /// <param name="e"></param>
         private void chkIsOPErrorNotReport_CheckedChanged(object sender, EventArgs e)
         {
-            managementEntity.IsOPErrorNotReport = chkIsOPErrorNotReport.Checked ? 1 : 0;
+            managementEntity.IsOpErrorNotReport = chkIsOPErrorNotReport.Checked ? 1 : 0;
         }
 
         /// <summary>

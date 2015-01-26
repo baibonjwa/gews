@@ -30,7 +30,7 @@ namespace LibEntity
         ///     设置或获取是否存在工作面出现地质构造不汇报
         /// </summary>
         [Property("IS_WF_NOT_REPORT")]
-        public int IsWFNotReport { get; set; }
+        public int IsWfNotReport { get; set; }
 
         /// <summary>
         ///     设置或获取是否存在强化瓦斯措施执行不到位
@@ -48,7 +48,7 @@ namespace LibEntity
         ///     设置或获取是否存在通风设施人为损坏
         /// </summary>
         [Property("IS_VF_BROKEN_BY_PEOPLE")]
-        public int IsVFBrokenByPeople { get; set; }
+        public int IsVfBrokenByPeople { get; set; }
 
         /// <summary>
         ///     设置或获取是否存在甲烷传感器位置不当、误差大、调校超过规定
@@ -78,13 +78,13 @@ namespace LibEntity
         ///     设置或获取防突措施执行不到位次数
         /// </summary>
         [Property("IS_OP_NOT_DO_WELL")]
-        public int IsOPNotDoWell { get; set; }
+        public int IsOpNotDoWell { get; set; }
 
         /// <summary>
         ///     设置或获取防突异常情况未汇报次数
         /// </summary>
         [Property("IS_OP_ERROR_NOT_REPORT")]
-        public int IsOPErrorNotReport { get; set; }
+        public int IsOpErrorNotReport { get; set; }
 
         /// <summary>
         ///     设置或获取是否存在局部通风机单回路供电或不能正常切换
@@ -126,23 +126,9 @@ namespace LibEntity
             FindByPrimaryKey(typeof(Management), id);
         }
 
-        public static int GetRecordCount()
+        public static Management[] FindAll()
         {
-            return FindAll(typeof(Management)).Length;
-        }
-
-
-        public static Management[] SlicedFindByCondition(int firstResult, int maxResult, int tunnelId,
-            DateTime startTime, DateTime endTime)
-        {
-            Management[] results;
-            var criterion = new List<ICriterion> { Restrictions.Eq("Tunnel.Tunnel", tunnelId) };
-            if (startTime != DateTime.MinValue && endTime != DateTime.MinValue)
-            {
-                criterion.Add(Restrictions.Between("Datetime", startTime, endTime));
-            }
-            results = (Management[])SlicedFindAll(typeof(Management), firstResult, maxResult, criterion.ToArray());
-            return results;
+            return (Management[])FindAll(typeof(Management));
         }
 
     }

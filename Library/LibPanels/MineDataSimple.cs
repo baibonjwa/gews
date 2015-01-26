@@ -411,16 +411,16 @@ namespace LibPanels
         {
             mEntity = mineDataEntity.changeToManagementEntity();
             mEntity.IsGasErrorNotReport = _management.managementEntity.IsGasErrorNotReport;
-            mEntity.IsWFNotReport = _management.managementEntity.IsWFNotReport;
+            mEntity.IsWfNotReport = _management.managementEntity.IsWfNotReport;
             mEntity.IsStrgasNotDoWell = _management.managementEntity.IsStrgasNotDoWell;
             mEntity.IsRwmanagementNotDoWell = _management.managementEntity.IsRwmanagementNotDoWell;
-            mEntity.IsVFBrokenByPeople = _management.managementEntity.IsVFBrokenByPeople;
+            mEntity.IsVfBrokenByPeople = _management.managementEntity.IsVfBrokenByPeople;
             mEntity.IsElementPlaceNotGood = _management.managementEntity.IsElementPlaceNotGood;
             mEntity.IsReporterFalseData = _management.managementEntity.IsReporterFalseData;
             mEntity.IsDrillWrongBuild = _management.managementEntity.IsDrillWrongBuild;
             mEntity.IsDrillNotDoWell = _management.managementEntity.IsDrillNotDoWell;
-            mEntity.IsOPNotDoWell = _management.managementEntity.IsOPNotDoWell;
-            mEntity.IsOPErrorNotReport = _management.managementEntity.IsOPErrorNotReport;
+            mEntity.IsOpNotDoWell = _management.managementEntity.IsOpNotDoWell;
+            mEntity.IsOpErrorNotReport = _management.managementEntity.IsOpErrorNotReport;
             mEntity.IsPartWindSwitchError = _management.managementEntity.IsPartWindSwitchError;
             mEntity.IsSafeCtrlUninstall = _management.managementEntity.IsSafeCtrlUninstall;
             mEntity.IsCtrlStop = _management.managementEntity.IsCtrlStop;
