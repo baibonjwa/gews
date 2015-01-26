@@ -78,23 +78,11 @@ namespace LibEntity
             FindByPrimaryKey(typeof(GeologicStructure), id);
         }
 
-        public static int GetRecordCount()
+        public static GeologicStructure[] FindAll()
         {
-            return FindAll(typeof(GeologicStructure)).Length;
+            return (GeologicStructure[])FindAll(typeof(GeologicStructure));
         }
 
 
-        public static GeologicStructure[] SlicedFindByCondition(int firstResult, int maxResult, int tunnelId,
-            DateTime startTime, DateTime endTime)
-        {
-            GeologicStructure[] results;
-            var criterion = new List<ICriterion> { Restrictions.Eq("Tunnel.Tunnel", tunnelId) };
-            if (startTime != DateTime.MinValue && endTime != DateTime.MinValue)
-            {
-                criterion.Add(Restrictions.Between("Datetime", startTime, endTime));
-            }
-            results = (GeologicStructure[])SlicedFindAll(typeof(GeologicStructure), firstResult, maxResult, criterion.ToArray());
-            return results;
-        }
     }
 }

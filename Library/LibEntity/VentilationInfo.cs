@@ -79,23 +79,9 @@ namespace LibEntity
             FindByPrimaryKey(typeof(VentilationInfo), id);
         }
 
-        public static int GetRecordCount()
+        public static VentilationInfo[] FindAll()
         {
-            return FindAll(typeof(VentilationInfo)).Length;
-        }
-
-
-        public static VentilationInfo[] SlicedFindByCondition(int firstResult, int maxResult, int tunnelId,
-            DateTime startTime, DateTime endTime)
-        {
-            VentilationInfo[] results;
-            var criterion = new List<ICriterion> { Restrictions.Eq("Tunnel.Tunnel", tunnelId) };
-            if (startTime != DateTime.MinValue && endTime != DateTime.MinValue)
-            {
-                criterion.Add(Restrictions.Between("Datetime", startTime, endTime));
-            }
-            results = (VentilationInfo[])SlicedFindAll(typeof(VentilationInfo), firstResult, maxResult, criterion.ToArray());
-            return results;
+            return (VentilationInfo[])FindAll(typeof(VentilationInfo));
         }
     }
 }

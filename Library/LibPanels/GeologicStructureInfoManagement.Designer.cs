@@ -30,96 +30,8 @@ namespace LibPanels
         /// </summary>
         private void InitializeComponent()
         {
-            FarPoint.Win.ComplexBorder complexBorder1 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.Spread.CellType.TextCellType textCellType1 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.ComplexBorder complexBorder2 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThickLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThickLine));
-            FarPoint.Win.ComplexBorder complexBorder3 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThickLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThickLine));
-            FarPoint.Win.ComplexBorder complexBorder4 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None));
-            FarPoint.Win.ComplexBorder complexBorder5 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None));
-            FarPoint.Win.ComplexBorder complexBorder6 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThickLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThickLine));
-            FarPoint.Win.ComplexBorder complexBorder7 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None));
-            FarPoint.Win.ComplexBorder complexBorder8 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None));
-            FarPoint.Win.ComplexBorder complexBorder9 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None));
-            FarPoint.Win.ComplexBorder complexBorder10 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None));
-            FarPoint.Win.ComplexBorder complexBorder11 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None));
-            FarPoint.Win.ComplexBorder complexBorder12 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None));
-            FarPoint.Win.ComplexBorder complexBorder13 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None));
-            FarPoint.Win.ComplexBorder complexBorder14 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None));
-            FarPoint.Win.ComplexBorder complexBorder15 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None));
-            FarPoint.Win.ComplexBorder complexBorder16 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThickLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder17 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThickLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder18 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThickLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder19 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder20 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder21 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThickLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder22 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder23 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder24 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder25 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder26 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder27 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder28 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder29 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder30 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder31 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.Spread.CellType.TextCellType textCellType2 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.ComplexBorder complexBorder32 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder33 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder34 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder35 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder36 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder37 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder38 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder39 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder40 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder41 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder42 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder43 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder44 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder45 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder46 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder47 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder48 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder49 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.Spread.CellType.TextCellType textCellType3 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.ComplexBorder complexBorder50 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder51 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder52 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder53 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder54 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder55 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder56 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder57 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder58 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder59 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder60 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder61 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder62 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder63 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder64 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder65 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder66 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.Spread.CellType.TextCellType textCellType4 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.Spread.CellType.TextCellType textCellType5 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.Spread.CellType.TextCellType textCellType6 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.Spread.CellType.TextCellType textCellType7 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.Spread.CellType.TextCellType textCellType8 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.Spread.CellType.TextCellType textCellType9 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.Spread.CellType.TextCellType textCellType10 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.Spread.CellType.TextCellType textCellType11 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.Spread.CellType.TextCellType textCellType12 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.Spread.CellType.TextCellType textCellType13 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.Spread.CellType.TextCellType textCellType14 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.Spread.CellType.TextCellType textCellType15 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.Spread.CellType.TextCellType textCellType16 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.Spread.CellType.TextCellType textCellType17 = new FarPoint.Win.Spread.CellType.TextCellType();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GeologicStructureInfoManagement));
-            this.dataPager1 = new LibCommonControl.DataPager();
-            this.chkSelAll = new System.Windows.Forms.CheckBox();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.btnOK = new System.Windows.Forms.Button();
-            this.fpGeologicStructure = new FarPoint.Win.Spread.FpSpread();
-            this.fpGeologicStructure_Sheet1 = new FarPoint.Win.Spread.SheetView();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsBtnPrint = new System.Windows.Forms.ToolStripButton();
@@ -129,366 +41,45 @@ namespace LibPanels
             this.tsBtnDel = new System.Windows.Forms.ToolStripButton();
             this.tsBtnRefresh = new System.Windows.Forms.ToolStripButton();
             this.tsBtnExit = new System.Windows.Forms.ToolStripButton();
-            this.farpointFilter1 = new LibCommonControl.FarpointFilter();
-            this._queryConditions = new QueryConditions(this.MainForm);
-            ((System.ComponentModel.ISupportInitialize)(this.fpGeologicStructure)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fpGeologicStructure_Sheet1)).BeginInit();
+            this.gcGeologicStructure = new DevExpress.XtraGrid.GridControl();
+            this.bandedGridView1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridView();
+            this.gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.bandedGridColumn2 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridBand2 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.bandedGridColumn3 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn4 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn5 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridBand3 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.bandedGridColumn10 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn13 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn7 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn11 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn15 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn9 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn8 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn12 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn14 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn16 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridBand4 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.bandedGridColumn6 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn19 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn17 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn20 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn18 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.controlNavigator1 = new DevExpress.XtraEditors.ControlNavigator();
             this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gcGeologicStructure)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bandedGridView1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // dataPager1
-            // 
-            this.dataPager1.Location = new System.Drawing.Point(14, 75);
-            this.dataPager1.Name = "dataPager1";
-            this.dataPager1.Size = new System.Drawing.Size(926, 37);
-            this.dataPager1.TabIndex = 12;
-            // 
-            // chkSelAll
-            // 
-            this.chkSelAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkSelAll.AutoSize = true;
-            this.chkSelAll.Location = new System.Drawing.Point(58, 518);
-            this.chkSelAll.Name = "chkSelAll";
-            this.chkSelAll.Size = new System.Drawing.Size(78, 16);
-            this.chkSelAll.TabIndex = 11;
-            this.chkSelAll.Text = "全选/不选";
-            this.chkSelAll.UseVisualStyleBackColor = true;
-            this.chkSelAll.Click += new System.EventHandler(this.chkSelAll_Click);
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(857, 514);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 9;
-            this.btnCancel.Text = "取消";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // btnOK
-            // 
-            this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOK.Location = new System.Drawing.Point(776, 514);
-            this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(75, 23);
-            this.btnOK.TabIndex = 6;
-            this.btnOK.Text = "确定";
-            this.btnOK.UseVisualStyleBackColor = true;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
-            // 
-            // fpGeologicStructure
-            // 
-            this.fpGeologicStructure.AccessibleDescription = "fpGeologicStructure, Sheet1, Row 0, Column 0, 井下数据-地质构造";
-            this.fpGeologicStructure.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.fpGeologicStructure.BorderCollapse = FarPoint.Win.Spread.BorderCollapse.Collapse;
-            this.fpGeologicStructure.ColumnSplitBoxPolicy = FarPoint.Win.Spread.SplitBoxPolicy.Never;
-            this.fpGeologicStructure.HorizontalScrollBarPolicy = FarPoint.Win.Spread.ScrollBarPolicy.AsNeeded;
-            this.fpGeologicStructure.Location = new System.Drawing.Point(12, 118);
-            this.fpGeologicStructure.Name = "fpGeologicStructure";
-            this.fpGeologicStructure.RowSplitBoxPolicy = FarPoint.Win.Spread.SplitBoxPolicy.Never;
-            this.fpGeologicStructure.Sheets.AddRange(new FarPoint.Win.Spread.SheetView[] {
-            this.fpGeologicStructure_Sheet1});
-            this.fpGeologicStructure.Size = new System.Drawing.Size(920, 390);
-            this.fpGeologicStructure.TabIndex = 75;
-            this.fpGeologicStructure.VerticalScrollBarPolicy = FarPoint.Win.Spread.ScrollBarPolicy.AsNeeded;
-            this.fpGeologicStructure.ButtonClicked += new FarPoint.Win.Spread.EditorNotifyEventHandler(this.fpGasEmissionData_ButtonClicked);
-            this.fpGeologicStructure.SetViewportTopRow(0, 0, 4);
-            this.fpGeologicStructure.SetActiveViewport(0, -1, 0);
-            // 
-            // fpGeologicStructure_Sheet1
-            // 
-            this.fpGeologicStructure_Sheet1.Reset();
-            fpGeologicStructure_Sheet1.SheetName = "Sheet1";
-            // Formulas and custom names must be loaded with R1C1 reference style
-            this.fpGeologicStructure_Sheet1.ReferenceStyle = FarPoint.Win.Spread.Model.ReferenceStyle.R1C1;
-            fpGeologicStructure_Sheet1.ColumnCount = 18;
-            fpGeologicStructure_Sheet1.RowCount = 50;
-            this.fpGeologicStructure_Sheet1.Cells.Get(0, 0).Border = complexBorder1;
-            this.fpGeologicStructure_Sheet1.Cells.Get(0, 0).CellType = textCellType1;
-            this.fpGeologicStructure_Sheet1.Cells.Get(0, 0).ColumnSpan = 18;
-            this.fpGeologicStructure_Sheet1.Cells.Get(0, 0).Font = new System.Drawing.Font("宋体", 16F, System.Drawing.FontStyle.Bold);
-            this.fpGeologicStructure_Sheet1.Cells.Get(0, 0).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.Cells.Get(0, 0).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(0, 0).RowSpan = 2;
-            this.fpGeologicStructure_Sheet1.Cells.Get(0, 0).Value = "井下数据-地质构造";
-            this.fpGeologicStructure_Sheet1.Cells.Get(0, 0).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.Cells.Get(0, 1).Border = complexBorder2;
-            this.fpGeologicStructure_Sheet1.Cells.Get(0, 1).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(0, 2).Border = complexBorder3;
-            this.fpGeologicStructure_Sheet1.Cells.Get(0, 2).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(0, 3).Border = complexBorder4;
-            this.fpGeologicStructure_Sheet1.Cells.Get(0, 3).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(0, 4).Border = complexBorder5;
-            this.fpGeologicStructure_Sheet1.Cells.Get(0, 4).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(0, 5).Border = complexBorder6;
-            this.fpGeologicStructure_Sheet1.Cells.Get(0, 5).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(0, 6).Border = complexBorder7;
-            this.fpGeologicStructure_Sheet1.Cells.Get(0, 6).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(0, 7).Border = complexBorder8;
-            this.fpGeologicStructure_Sheet1.Cells.Get(0, 7).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(0, 8).Border = complexBorder9;
-            this.fpGeologicStructure_Sheet1.Cells.Get(0, 8).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(0, 9).Border = complexBorder10;
-            this.fpGeologicStructure_Sheet1.Cells.Get(0, 9).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(0, 10).Border = complexBorder11;
-            this.fpGeologicStructure_Sheet1.Cells.Get(0, 10).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(0, 11).Border = complexBorder12;
-            this.fpGeologicStructure_Sheet1.Cells.Get(0, 11).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(0, 12).Border = complexBorder13;
-            this.fpGeologicStructure_Sheet1.Cells.Get(0, 12).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(0, 13).Border = complexBorder14;
-            this.fpGeologicStructure_Sheet1.Cells.Get(0, 13).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(0, 14).Border = complexBorder15;
-            this.fpGeologicStructure_Sheet1.Cells.Get(0, 14).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(1, 0).Border = complexBorder16;
-            this.fpGeologicStructure_Sheet1.Cells.Get(1, 0).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(1, 1).Border = complexBorder17;
-            this.fpGeologicStructure_Sheet1.Cells.Get(1, 1).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(1, 2).Border = complexBorder18;
-            this.fpGeologicStructure_Sheet1.Cells.Get(1, 2).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(1, 3).Border = complexBorder19;
-            this.fpGeologicStructure_Sheet1.Cells.Get(1, 3).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(1, 4).Border = complexBorder20;
-            this.fpGeologicStructure_Sheet1.Cells.Get(1, 4).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(1, 5).Border = complexBorder21;
-            this.fpGeologicStructure_Sheet1.Cells.Get(1, 5).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(1, 6).Border = complexBorder22;
-            this.fpGeologicStructure_Sheet1.Cells.Get(1, 6).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(1, 7).Border = complexBorder23;
-            this.fpGeologicStructure_Sheet1.Cells.Get(1, 7).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(1, 8).Border = complexBorder24;
-            this.fpGeologicStructure_Sheet1.Cells.Get(1, 8).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(1, 9).Border = complexBorder25;
-            this.fpGeologicStructure_Sheet1.Cells.Get(1, 9).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(1, 10).Border = complexBorder26;
-            this.fpGeologicStructure_Sheet1.Cells.Get(1, 10).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(1, 11).Border = complexBorder27;
-            this.fpGeologicStructure_Sheet1.Cells.Get(1, 11).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(1, 12).Border = complexBorder28;
-            this.fpGeologicStructure_Sheet1.Cells.Get(1, 12).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(1, 13).Border = complexBorder29;
-            this.fpGeologicStructure_Sheet1.Cells.Get(1, 13).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(1, 14).Border = complexBorder30;
-            this.fpGeologicStructure_Sheet1.Cells.Get(1, 14).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 0).Border = complexBorder31;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 0).CellType = textCellType2;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 0).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 0).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 0).RowSpan = 2;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 0).Value = "选择";
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 0).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 1).Border = complexBorder32;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 1).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 1).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 1).RowSpan = 2;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 1).Value = "巷道名称";
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 1).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 2).Border = complexBorder33;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 2).ColumnSpan = 3;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 2).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 2).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 2).Value = "坐标";
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 2).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 3).Border = complexBorder34;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 3).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 3).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 4).Border = complexBorder35;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 4).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 4).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 5).Border = complexBorder36;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 5).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 5).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 5).RowSpan = 2;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 5).Value = "提交日期";
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 5).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 6).Border = complexBorder37;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 6).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 6).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 6).RowSpan = 2;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 6).Value = "无计划揭露构造";
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 7).Border = complexBorder38;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 7).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 7).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 7).RowSpan = 2;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 7).Value = "过构造时措施无效";
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 8).Border = complexBorder39;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 8).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 8).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 8).RowSpan = 2;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 8).Value = "黄色预警措施无效";
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 9).Border = complexBorder40;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 9).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 9).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 9).RowSpan = 2;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 9).Value = "顶板破碎";
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 10).Border = complexBorder41;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 10).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 10).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 10).RowSpan = 2;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 10).Value = "煤层松软";
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 11).Border = complexBorder42;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 11).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 11).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 11).RowSpan = 2;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 11).Value = "工作面煤层处于分叉、合层状态";
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 12).Border = complexBorder43;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 12).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 12).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 12).RowSpan = 2;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 12).Value = "顶板条件发生变化";
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 13).Border = complexBorder44;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 13).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 13).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 13).RowSpan = 2;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 13).Value = "工作面夹矸突然变薄或消失";
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 14).Border = complexBorder45;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 14).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 14).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 14).RowSpan = 2;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 14).Value = "夹矸位置急剧变化";
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 15).Border = complexBorder46;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 15).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 15).RowSpan = 2;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 15).Value = "工作制式";
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 16).Border = complexBorder47;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 16).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 16).RowSpan = 2;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 16).Value = "班次";
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 17).Border = complexBorder48;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 17).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 17).RowSpan = 2;
-            this.fpGeologicStructure_Sheet1.Cells.Get(2, 17).Value = "填报人";
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 0).Border = complexBorder49;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 0).CellType = textCellType3;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 0).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 0).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 1).Border = complexBorder50;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 1).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 1).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 2).Border = complexBorder51;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 2).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 2).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 2).Value = "X";
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 3).Border = complexBorder52;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 3).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 3).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 3).Value = "Y";
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 4).Border = complexBorder53;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 4).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 4).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 4).Value = "Z";
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 5).Border = complexBorder54;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 5).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 5).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 6).Border = complexBorder55;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 6).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 6).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 7).Border = complexBorder56;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 7).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 7).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 8).Border = complexBorder57;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 8).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 8).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 9).Border = complexBorder58;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 9).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 9).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 10).Border = complexBorder59;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 10).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 10).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 11).Border = complexBorder60;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 11).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 11).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 12).Border = complexBorder61;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 12).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 12).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 13).Border = complexBorder62;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 13).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 13).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 14).Border = complexBorder63;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 14).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Justify;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 14).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 15).Border = complexBorder64;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 15).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 16).Border = complexBorder65;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 16).Locked = true;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 17).Border = complexBorder66;
-            this.fpGeologicStructure_Sheet1.Cells.Get(3, 17).Locked = true;
-            this.fpGeologicStructure_Sheet1.Columns.Get(0).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.Columns.Get(0).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.Columns.Get(0).Width = 36F;
-            this.fpGeologicStructure_Sheet1.Columns.Get(1).CellType = textCellType4;
-            this.fpGeologicStructure_Sheet1.Columns.Get(1).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpGeologicStructure_Sheet1.Columns.Get(1).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.Columns.Get(1).Width = 115F;
-            this.fpGeologicStructure_Sheet1.Columns.Get(2).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpGeologicStructure_Sheet1.Columns.Get(2).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.Columns.Get(3).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpGeologicStructure_Sheet1.Columns.Get(3).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.Columns.Get(4).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpGeologicStructure_Sheet1.Columns.Get(4).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.Columns.Get(5).CellType = textCellType5;
-            this.fpGeologicStructure_Sheet1.Columns.Get(5).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpGeologicStructure_Sheet1.Columns.Get(5).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.Columns.Get(5).Width = 122F;
-            this.fpGeologicStructure_Sheet1.Columns.Get(6).CellType = textCellType6;
-            this.fpGeologicStructure_Sheet1.Columns.Get(6).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpGeologicStructure_Sheet1.Columns.Get(6).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.Columns.Get(6).Width = 100F;
-            this.fpGeologicStructure_Sheet1.Columns.Get(7).CellType = textCellType7;
-            this.fpGeologicStructure_Sheet1.Columns.Get(7).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpGeologicStructure_Sheet1.Columns.Get(7).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.Columns.Get(7).Width = 100F;
-            this.fpGeologicStructure_Sheet1.Columns.Get(8).CellType = textCellType8;
-            this.fpGeologicStructure_Sheet1.Columns.Get(8).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpGeologicStructure_Sheet1.Columns.Get(8).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.Columns.Get(8).Width = 100F;
-            this.fpGeologicStructure_Sheet1.Columns.Get(9).CellType = textCellType9;
-            this.fpGeologicStructure_Sheet1.Columns.Get(9).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpGeologicStructure_Sheet1.Columns.Get(9).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.Columns.Get(9).Width = 100F;
-            this.fpGeologicStructure_Sheet1.Columns.Get(10).CellType = textCellType10;
-            this.fpGeologicStructure_Sheet1.Columns.Get(10).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpGeologicStructure_Sheet1.Columns.Get(10).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.Columns.Get(10).Width = 100F;
-            this.fpGeologicStructure_Sheet1.Columns.Get(11).CellType = textCellType11;
-            this.fpGeologicStructure_Sheet1.Columns.Get(11).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpGeologicStructure_Sheet1.Columns.Get(11).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.Columns.Get(11).Width = 100F;
-            this.fpGeologicStructure_Sheet1.Columns.Get(12).CellType = textCellType12;
-            this.fpGeologicStructure_Sheet1.Columns.Get(12).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpGeologicStructure_Sheet1.Columns.Get(12).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.Columns.Get(12).Width = 100F;
-            this.fpGeologicStructure_Sheet1.Columns.Get(13).CellType = textCellType13;
-            this.fpGeologicStructure_Sheet1.Columns.Get(13).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpGeologicStructure_Sheet1.Columns.Get(13).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.Columns.Get(13).Width = 100F;
-            this.fpGeologicStructure_Sheet1.Columns.Get(14).CellType = textCellType14;
-            this.fpGeologicStructure_Sheet1.Columns.Get(14).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpGeologicStructure_Sheet1.Columns.Get(14).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.Columns.Get(14).Width = 100F;
-            this.fpGeologicStructure_Sheet1.Columns.Get(15).CellType = textCellType15;
-            this.fpGeologicStructure_Sheet1.Columns.Get(15).Width = 65F;
-            this.fpGeologicStructure_Sheet1.Columns.Get(16).CellType = textCellType16;
-            this.fpGeologicStructure_Sheet1.Columns.Get(16).Width = 63F;
-            this.fpGeologicStructure_Sheet1.Columns.Get(17).CellType = textCellType17;
-            this.fpGeologicStructure_Sheet1.Columns.Get(17).Width = 57F;
-            this.fpGeologicStructure_Sheet1.DefaultStyle.HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.DefaultStyle.NoteIndicatorColor = System.Drawing.Color.Red;
-            this.fpGeologicStructure_Sheet1.DefaultStyle.Parent = "DataAreaDefault";
-            this.fpGeologicStructure_Sheet1.DefaultStyle.VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpGeologicStructure_Sheet1.FrozenRowCount = 4;
-            this.fpGeologicStructure_Sheet1.RowHeader.Columns.Default.Resizable = false;
-            this.fpGeologicStructure_Sheet1.ReferenceStyle = FarPoint.Win.Spread.Model.ReferenceStyle.A1;
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 544);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 638);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(944, 22);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(1101, 22);
             this.statusStrip1.TabIndex = 79;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -505,7 +96,7 @@ namespace LibPanels
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(944, 24);
+            this.toolStrip1.Size = new System.Drawing.Size(1101, 24);
             this.toolStrip1.TabIndex = 80;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -516,6 +107,7 @@ namespace LibPanels
             this.tsBtnPrint.Name = "tsBtnPrint";
             this.tsBtnPrint.Size = new System.Drawing.Size(52, 21);
             this.tsBtnPrint.Text = "打印";
+            this.tsBtnPrint.Click += new System.EventHandler(this.tsBtnPrint_Click);
             // 
             // tsBtnExport
             // 
@@ -571,56 +163,301 @@ namespace LibPanels
             this.tsBtnExit.Text = "退出";
             this.tsBtnExit.Click += new System.EventHandler(this.tsBtnExit_Click);
             // 
-            // farpointFilter1
+            // gcGeologicStructure
             // 
-            this.farpointFilter1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.farpointFilter1.BackColor = System.Drawing.Color.Transparent;
-            this.farpointFilter1.Location = new System.Drawing.Point(271, 512);
-            this.farpointFilter1.Name = "farpointFilter1";
-            this.farpointFilter1.Size = new System.Drawing.Size(499, 25);
-            this.farpointFilter1.TabIndex = 81;
-            this.farpointFilter1.OnCheckFilterChanged += new LibCommonControl.FarpointFilter.CheckHideEventHandler(this.farpointFilter1_OnCheckFilterChanged);
-            this.farpointFilter1.OnClickFitColorBtnOK += new LibCommonControl.FarpointFilter.ClickFitColorBtnEventHandler(this.farpointFilter1_OnClickFitColorBtnOK);
-            this.farpointFilter1.OnClickNotFitColorBtnOK += new LibCommonControl.FarpointFilter.ClickFitColorBtnEventHandler(this.farpointFilter1_OnClickNotFitColorBtnOK);
-            this.farpointFilter1.OnClickClearFilterBtn += new LibCommonControl.FarpointFilter.ClickClearFilterBtnEventHandler(this.farpointFilter1_OnClickClearFilterBtn);
+            this.gcGeologicStructure.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gcGeologicStructure.Cursor = System.Windows.Forms.Cursors.Default;
+            gridLevelNode1.RelationName = "Level1";
+            this.gcGeologicStructure.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
+            gridLevelNode1});
+            this.gcGeologicStructure.Location = new System.Drawing.Point(12, 27);
+            this.gcGeologicStructure.MainView = this.bandedGridView1;
+            this.gcGeologicStructure.Name = "gcGeologicStructure";
+            this.gcGeologicStructure.Size = new System.Drawing.Size(1077, 578);
+            this.gcGeologicStructure.TabIndex = 81;
+            this.gcGeologicStructure.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.bandedGridView1});
             // 
-            // _queryConditions
+            // bandedGridView1
             // 
-            this._queryConditions.DefaultEndTime = "";
-            this._queryConditions.DefaultStartTime = "";
-            this._queryConditions.Location = new System.Drawing.Point(21, 26);
-            this._queryConditions.MainForm = null;
-            this._queryConditions.Name = "_queryConditions";
-            this._queryConditions.Show = null;
-            this._queryConditions.Size = new System.Drawing.Size(812, 43);
-            this._queryConditions.TabIndex = 83;
-            this._queryConditions.TunnelId = 0;
+            this.bandedGridView1.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
+            this.gridBand1,
+            this.gridBand2,
+            this.gridBand3,
+            this.gridBand4});
+            this.bandedGridView1.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] {
+            this.bandedGridColumn2,
+            this.bandedGridColumn1,
+            this.bandedGridColumn3,
+            this.bandedGridColumn4,
+            this.bandedGridColumn5,
+            this.bandedGridColumn6,
+            this.bandedGridColumn7,
+            this.bandedGridColumn8,
+            this.bandedGridColumn9,
+            this.bandedGridColumn10,
+            this.bandedGridColumn11,
+            this.bandedGridColumn12,
+            this.bandedGridColumn13,
+            this.bandedGridColumn14,
+            this.bandedGridColumn15,
+            this.bandedGridColumn16,
+            this.bandedGridColumn17,
+            this.bandedGridColumn18,
+            this.bandedGridColumn19,
+            this.bandedGridColumn20});
+            this.bandedGridView1.GridControl = this.gcGeologicStructure;
+            this.bandedGridView1.Name = "bandedGridView1";
+            this.bandedGridView1.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.bandedGridView1_CustomColumnDisplayText);
+            // 
+            // gridBand1
+            // 
+            this.gridBand1.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridBand1.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridBand1.Caption = "巷道信息";
+            this.gridBand1.Columns.Add(this.bandedGridColumn2);
+            this.gridBand1.Columns.Add(this.bandedGridColumn1);
+            this.gridBand1.Name = "gridBand1";
+            this.gridBand1.VisibleIndex = 0;
+            this.gridBand1.Width = 110;
+            // 
+            // bandedGridColumn2
+            // 
+            this.bandedGridColumn2.Caption = "工作面名称";
+            this.bandedGridColumn2.FieldName = "Tunnel.WorkingFace.WorkingFaceName";
+            this.bandedGridColumn2.Name = "bandedGridColumn2";
+            this.bandedGridColumn2.Visible = true;
+            this.bandedGridColumn2.Width = 54;
+            // 
+            // bandedGridColumn1
+            // 
+            this.bandedGridColumn1.Caption = "巷道名称";
+            this.bandedGridColumn1.FieldName = "Tunnel.TunnelName";
+            this.bandedGridColumn1.Name = "bandedGridColumn1";
+            this.bandedGridColumn1.Visible = true;
+            this.bandedGridColumn1.Width = 56;
+            // 
+            // gridBand2
+            // 
+            this.gridBand2.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridBand2.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridBand2.Caption = "坐标";
+            this.gridBand2.Columns.Add(this.bandedGridColumn3);
+            this.gridBand2.Columns.Add(this.bandedGridColumn4);
+            this.gridBand2.Columns.Add(this.bandedGridColumn5);
+            this.gridBand2.Name = "gridBand2";
+            this.gridBand2.VisibleIndex = 1;
+            this.gridBand2.Width = 157;
+            // 
+            // bandedGridColumn3
+            // 
+            this.bandedGridColumn3.Caption = "X";
+            this.bandedGridColumn3.FieldName = "CoordinateX";
+            this.bandedGridColumn3.Name = "bandedGridColumn3";
+            this.bandedGridColumn3.Visible = true;
+            this.bandedGridColumn3.Width = 51;
+            // 
+            // bandedGridColumn4
+            // 
+            this.bandedGridColumn4.Caption = "Y";
+            this.bandedGridColumn4.FieldName = "CoordinateY";
+            this.bandedGridColumn4.Name = "bandedGridColumn4";
+            this.bandedGridColumn4.Visible = true;
+            this.bandedGridColumn4.Width = 51;
+            // 
+            // bandedGridColumn5
+            // 
+            this.bandedGridColumn5.Caption = "Z";
+            this.bandedGridColumn5.FieldName = "CoordinateZ";
+            this.bandedGridColumn5.Name = "bandedGridColumn5";
+            this.bandedGridColumn5.Visible = true;
+            this.bandedGridColumn5.Width = 55;
+            // 
+            // gridBand3
+            // 
+            this.gridBand3.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridBand3.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridBand3.Caption = "地质构造预警指标";
+            this.gridBand3.Columns.Add(this.bandedGridColumn10);
+            this.gridBand3.Columns.Add(this.bandedGridColumn13);
+            this.gridBand3.Columns.Add(this.bandedGridColumn7);
+            this.gridBand3.Columns.Add(this.bandedGridColumn11);
+            this.gridBand3.Columns.Add(this.bandedGridColumn15);
+            this.gridBand3.Columns.Add(this.bandedGridColumn9);
+            this.gridBand3.Columns.Add(this.bandedGridColumn8);
+            this.gridBand3.Columns.Add(this.bandedGridColumn12);
+            this.gridBand3.Columns.Add(this.bandedGridColumn14);
+            this.gridBand3.Columns.Add(this.bandedGridColumn16);
+            this.gridBand3.Name = "gridBand3";
+            this.gridBand3.VisibleIndex = 2;
+            this.gridBand3.Width = 526;
+            // 
+            // bandedGridColumn10
+            // 
+            this.bandedGridColumn10.Caption = "顶板破碎";
+            this.bandedGridColumn10.FieldName = "RoofBroken";
+            this.bandedGridColumn10.Name = "bandedGridColumn10";
+            this.bandedGridColumn10.Visible = true;
+            this.bandedGridColumn10.Width = 51;
+            // 
+            // bandedGridColumn13
+            // 
+            this.bandedGridColumn13.Caption = "顶板条件发生变化";
+            this.bandedGridColumn13.FieldName = "RoofChange";
+            this.bandedGridColumn13.Name = "bandedGridColumn13";
+            this.bandedGridColumn13.Visible = true;
+            this.bandedGridColumn13.Width = 51;
+            // 
+            // bandedGridColumn7
+            // 
+            this.bandedGridColumn7.Caption = "无计划揭露构造";
+            this.bandedGridColumn7.FieldName = "NoPlanStructure";
+            this.bandedGridColumn7.Name = "bandedGridColumn7";
+            this.bandedGridColumn7.Visible = true;
+            this.bandedGridColumn7.Width = 51;
+            // 
+            // bandedGridColumn11
+            // 
+            this.bandedGridColumn11.Caption = "煤层松软";
+            this.bandedGridColumn11.FieldName = "CoalSeamSoft";
+            this.bandedGridColumn11.Name = "bandedGridColumn11";
+            this.bandedGridColumn11.Visible = true;
+            this.bandedGridColumn11.Width = 51;
+            // 
+            // bandedGridColumn15
+            // 
+            this.bandedGridColumn15.Caption = "夹矸位置急剧变化";
+            this.bandedGridColumn15.FieldName = "GangueLocationChange";
+            this.bandedGridColumn15.Name = "bandedGridColumn15";
+            this.bandedGridColumn15.Visible = true;
+            this.bandedGridColumn15.Width = 51;
+            // 
+            // bandedGridColumn9
+            // 
+            this.bandedGridColumn9.Caption = "黄色预警措施无效";
+            this.bandedGridColumn9.FieldName = "YellowRuleInvalid";
+            this.bandedGridColumn9.Name = "bandedGridColumn9";
+            this.bandedGridColumn9.Visible = true;
+            this.bandedGridColumn9.Width = 51;
+            // 
+            // bandedGridColumn8
+            // 
+            this.bandedGridColumn8.Caption = "过构造时措施无效";
+            this.bandedGridColumn8.FieldName = "PassedStructureRuleInvalid";
+            this.bandedGridColumn8.Name = "bandedGridColumn8";
+            this.bandedGridColumn8.Visible = true;
+            this.bandedGridColumn8.Width = 51;
+            // 
+            // bandedGridColumn12
+            // 
+            this.bandedGridColumn12.Caption = "工作面煤层处于分叉、合层状态";
+            this.bandedGridColumn12.FieldName = "CoalSeamBranch";
+            this.bandedGridColumn12.Name = "bandedGridColumn12";
+            this.bandedGridColumn12.Visible = true;
+            this.bandedGridColumn12.Width = 51;
+            // 
+            // bandedGridColumn14
+            // 
+            this.bandedGridColumn14.Caption = "工作面夹矸突然变薄或消失";
+            this.bandedGridColumn14.FieldName = "GangueDisappear";
+            this.bandedGridColumn14.Name = "bandedGridColumn14";
+            this.bandedGridColumn14.Visible = true;
+            this.bandedGridColumn14.Width = 51;
+            // 
+            // bandedGridColumn16
+            // 
+            this.bandedGridColumn16.Caption = "备注";
+            this.bandedGridColumn16.Name = "bandedGridColumn16";
+            this.bandedGridColumn16.Visible = true;
+            this.bandedGridColumn16.Width = 67;
+            // 
+            // gridBand4
+            // 
+            this.gridBand4.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridBand4.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridBand4.Caption = "录入信息";
+            this.gridBand4.Columns.Add(this.bandedGridColumn6);
+            this.gridBand4.Columns.Add(this.bandedGridColumn19);
+            this.gridBand4.Columns.Add(this.bandedGridColumn20);
+            this.gridBand4.Columns.Add(this.bandedGridColumn18);
+            this.gridBand4.Columns.Add(this.bandedGridColumn17);
+            this.gridBand4.Name = "gridBand4";
+            this.gridBand4.VisibleIndex = 3;
+            this.gridBand4.Width = 266;
+            // 
+            // bandedGridColumn6
+            // 
+            this.bandedGridColumn6.Caption = "提交日期";
+            this.bandedGridColumn6.FieldName = "Datetime";
+            this.bandedGridColumn6.Name = "bandedGridColumn6";
+            this.bandedGridColumn6.Visible = true;
+            this.bandedGridColumn6.Width = 52;
+            // 
+            // bandedGridColumn19
+            // 
+            this.bandedGridColumn19.Caption = "填报人";
+            this.bandedGridColumn19.FieldName = "Submitter";
+            this.bandedGridColumn19.Name = "bandedGridColumn19";
+            this.bandedGridColumn19.Visible = true;
+            this.bandedGridColumn19.Width = 52;
+            // 
+            // bandedGridColumn17
+            // 
+            this.bandedGridColumn17.Caption = "工作制式";
+            this.bandedGridColumn17.FieldName = "WorkStyle";
+            this.bandedGridColumn17.Name = "bandedGridColumn17";
+            this.bandedGridColumn17.Visible = true;
+            this.bandedGridColumn17.Width = 52;
+            // 
+            // bandedGridColumn20
+            // 
+            this.bandedGridColumn20.Caption = "队别";
+            this.bandedGridColumn20.FieldName = "TeamName";
+            this.bandedGridColumn20.Name = "bandedGridColumn20";
+            this.bandedGridColumn20.Visible = true;
+            this.bandedGridColumn20.Width = 52;
+            // 
+            // bandedGridColumn18
+            // 
+            this.bandedGridColumn18.Caption = "班次";
+            this.bandedGridColumn18.FieldName = "WorkTime";
+            this.bandedGridColumn18.Name = "bandedGridColumn18";
+            this.bandedGridColumn18.Visible = true;
+            this.bandedGridColumn18.Width = 58;
+            // 
+            // controlNavigator1
+            // 
+            this.controlNavigator1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.controlNavigator1.Location = new System.Drawing.Point(12, 611);
+            this.controlNavigator1.Name = "controlNavigator1";
+            this.controlNavigator1.NavigatableControl = this.gcGeologicStructure;
+            this.controlNavigator1.Size = new System.Drawing.Size(311, 24);
+            this.controlNavigator1.TabIndex = 84;
+            this.controlNavigator1.Text = "controlNavigator1";
+            this.controlNavigator1.TextLocation = DevExpress.XtraEditors.NavigatorButtonsTextLocation.Center;
+            this.controlNavigator1.TextStringFormat = "记录 {0} / {1}";
             // 
             // GeologicStructureInfoManagement
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(944, 566);
-            this.Controls.Add(this._queryConditions);
-            this.Controls.Add(this.farpointFilter1);
+            this.ClientSize = new System.Drawing.Size(1101, 660);
+            this.Controls.Add(this.controlNavigator1);
+            this.Controls.Add(this.gcGeologicStructure);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.fpGeologicStructure);
-            this.Controls.Add(this.dataPager1);
-            this.Controls.Add(this.chkSelAll);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnOK);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "GeologicStructureInfoManagement";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "井下数据瓦斯管理";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.MineDataManagement_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.fpGeologicStructure)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fpGeologicStructure_Sheet1)).EndInit();
+            this.Load += new System.EventHandler(this.GeologicStructureInfoManagement_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gcGeologicStructure)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bandedGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -628,12 +465,6 @@ namespace LibPanels
 
         #endregion
 
-        private LibCommonControl.DataPager dataPager1;
-        private System.Windows.Forms.CheckBox chkSelAll;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnOK;
-        private FarPoint.Win.Spread.FpSpread fpGeologicStructure;
-        private FarPoint.Win.Spread.SheetView fpGeologicStructure_Sheet1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton tsBtnPrint;
@@ -643,7 +474,33 @@ namespace LibPanels
         private System.Windows.Forms.ToolStripButton tsBtnDel;
         private System.Windows.Forms.ToolStripButton tsBtnRefresh;
         private System.Windows.Forms.ToolStripButton tsBtnExit;
-        private LibCommonControl.FarpointFilter farpointFilter1;
-        private LibCommonForm.QueryConditions _queryConditions;
+        private DevExpress.XtraGrid.GridControl gcGeologicStructure;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridView bandedGridView1;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn2;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn1;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn3;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn4;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn5;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn10;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn13;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn7;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn11;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn15;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn9;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn8;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn12;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn14;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn16;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn6;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn19;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn17;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn20;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn18;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand2;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand3;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand4;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private DevExpress.XtraEditors.ControlNavigator controlNavigator1;
     }
 }
