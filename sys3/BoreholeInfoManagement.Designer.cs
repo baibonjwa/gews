@@ -28,52 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            FarPoint.Win.ComplexBorder complexBorder1 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.Spread.CellType.TextCellType textCellType1 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.ComplexBorder complexBorder2 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.Spread.CellType.TextCellType textCellType2 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.ComplexBorder complexBorder3 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.Spread.CellType.TextCellType textCellType3 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.ComplexBorder complexBorder4 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.Spread.CellType.TextCellType textCellType4 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.ComplexBorder complexBorder5 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.Spread.CellType.TextCellType textCellType5 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.ComplexBorder complexBorder6 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.Spread.CellType.TextCellType textCellType6 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.ComplexBorder complexBorder7 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.Spread.CellType.TextCellType textCellType7 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.ComplexBorder complexBorder8 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.Spread.CellType.TextCellType textCellType8 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.ComplexBorder complexBorder9 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.Spread.CellType.TextCellType textCellType9 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.ComplexBorder complexBorder10 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.Spread.CellType.TextCellType textCellType10 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.ComplexBorder complexBorder11 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.Spread.CellType.GeneralCellType generalCellType1 = new FarPoint.Win.Spread.CellType.GeneralCellType();
-            FarPoint.Win.ComplexBorder complexBorder12 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder13 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder14 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder15 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder16 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder17 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder18 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder19 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.Spread.CellType.GeneralCellType generalCellType2 = new FarPoint.Win.Spread.CellType.GeneralCellType();
-            FarPoint.Win.ComplexBorder complexBorder20 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder21 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder22 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder23 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder24 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder25 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder26 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder27 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder28 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder29 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder30 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.Spread.CellType.TextCellType textCellType11 = new FarPoint.Win.Spread.CellType.TextCellType();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BoreholeInfoManagement));
-            this.fpBoreholeInfo = new FarPoint.Win.Spread.FpSpread();
-            this.fpBoreholeInfo_Sheet1 = new FarPoint.Win.Spread.SheetView();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsBtnPrint = new System.Windows.Forms.ToolStripButton();
             this.tsBtnExport = new System.Windows.Forms.ToolStripButton();
@@ -84,205 +39,20 @@
             this.btnMap = new System.Windows.Forms.ToolStripButton();
             this.btnExit = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            ((System.ComponentModel.ISupportInitialize)(this.fpBoreholeInfo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fpBoreholeInfo_Sheet1)).BeginInit();
+            this.gcBorehole = new DevExpress.XtraGrid.GridControl();
+            this.bandedGridView1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridView();
+            this.gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.bandedGridColumn1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn2 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn3 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn4 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn5 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.controlNavigator1 = new DevExpress.XtraEditors.ControlNavigator();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gcBorehole)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bandedGridView1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // fpBoreholeInfo
-            // 
-            this.fpBoreholeInfo.AccessibleDescription = "fpBoreholeInfo, Sheet1, Row 4, Column 0, ";
-            this.fpBoreholeInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.fpBoreholeInfo.BorderCollapse = FarPoint.Win.Spread.BorderCollapse.Collapse;
-            this.fpBoreholeInfo.ColumnSplitBoxPolicy = FarPoint.Win.Spread.SplitBoxPolicy.Never;
-            this.fpBoreholeInfo.HorizontalScrollBarPolicy = FarPoint.Win.Spread.ScrollBarPolicy.AsNeeded;
-            this.fpBoreholeInfo.Location = new System.Drawing.Point(12, 70);
-            this.fpBoreholeInfo.Name = "fpBoreholeInfo";
-            this.fpBoreholeInfo.RowSplitBoxPolicy = FarPoint.Win.Spread.SplitBoxPolicy.Never;
-            this.fpBoreholeInfo.Sheets.AddRange(new FarPoint.Win.Spread.SheetView[] {
-            this.fpBoreholeInfo_Sheet1});
-            this.fpBoreholeInfo.Size = new System.Drawing.Size(1259, 441);
-            this.fpBoreholeInfo.TabIndex = 2;
-            this.fpBoreholeInfo.VerticalScrollBarPolicy = FarPoint.Win.Spread.ScrollBarPolicy.AsNeeded;
-            this.fpBoreholeInfo.ButtonClicked += new FarPoint.Win.Spread.EditorNotifyEventHandler(this.fpBoreholeInfo_ButtonClicked);
-            this.fpBoreholeInfo.SetViewportTopRow(0, 0, 4);
-            this.fpBoreholeInfo.SetActiveViewport(0, -1, 0);
-            // 
-            // fpBoreholeInfo_Sheet1
-            // 
-            this.fpBoreholeInfo_Sheet1.Reset();
-            fpBoreholeInfo_Sheet1.SheetName = "Sheet1";
-            // Formulas and custom names must be loaded with R1C1 reference style
-            this.fpBoreholeInfo_Sheet1.ReferenceStyle = FarPoint.Win.Spread.Model.ReferenceStyle.R1C1;
-            fpBoreholeInfo_Sheet1.ColumnCount = 29;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(0, 0).Border = complexBorder1;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(0, 0).CellType = textCellType1;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(0, 0).ColumnSpan = 13;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(0, 0).Font = new System.Drawing.Font("SimSun", 16F, System.Drawing.FontStyle.Bold);
-            this.fpBoreholeInfo_Sheet1.Cells.Get(0, 0).ForeColor = System.Drawing.Color.Black;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(0, 0).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(0, 0).Locked = true;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(0, 0).RowSpan = 2;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(0, 0).Value = "勘探钻孔数据一览";
-            this.fpBoreholeInfo_Sheet1.Cells.Get(0, 0).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(0, 1).Border = complexBorder2;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(0, 1).CellType = textCellType2;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(0, 6).Border = complexBorder3;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(0, 6).CellType = textCellType3;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(0, 7).Border = complexBorder4;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(0, 7).CellType = textCellType4;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(0, 8).Border = complexBorder5;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(0, 8).CellType = textCellType5;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(1, 0).Border = complexBorder6;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(1, 0).CellType = textCellType6;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(1, 1).Border = complexBorder7;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(1, 1).CellType = textCellType7;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(1, 6).Border = complexBorder8;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(1, 6).CellType = textCellType8;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(1, 7).Border = complexBorder9;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(1, 7).CellType = textCellType9;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(1, 8).Border = complexBorder10;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(1, 8).CellType = textCellType10;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 0).Border = complexBorder11;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 0).CellType = generalCellType1;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 0).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 0).Locked = true;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 0).RowSpan = 2;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 0).Value = "选择";
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 0).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 1).Border = complexBorder12;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 1).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 1).Locked = true;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 1).RowSpan = 2;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 1).Value = "孔号";
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 1).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 2).Border = complexBorder13;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 2).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 2).Locked = true;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 2).RowSpan = 2;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 2).Value = "地面标高";
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 2).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 3).Border = complexBorder14;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 3).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 3).Locked = true;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 3).RowSpan = 2;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 3).Value = "勘探钻孔坐标X";
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 3).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 4).Border = complexBorder15;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 4).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 4).Locked = true;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 4).RowSpan = 2;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 4).Value = "勘探钻孔坐标Y";
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 4).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 5).Border = complexBorder16;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 5).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 5).Locked = true;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 5).RowSpan = 2;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 5).Value = "勘探钻孔坐标Z";
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 5).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 6).Border = complexBorder17;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 6).ColumnSpan = 7;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 6).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 6).Locked = true;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 6).Value = "煤层结构";
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 6).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 7).Border = complexBorder18;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 7).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 7).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 8).Border = complexBorder19;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 8).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(2, 8).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(3, 0).CellType = generalCellType2;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(3, 2).Border = complexBorder20;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(3, 3).Border = complexBorder21;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(3, 4).Border = complexBorder22;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(3, 5).Border = complexBorder23;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(3, 6).Border = complexBorder24;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(3, 6).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(3, 6).Locked = true;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(3, 6).Value = "岩性";
-            this.fpBoreholeInfo_Sheet1.Cells.Get(3, 6).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(3, 7).Border = complexBorder25;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(3, 7).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(3, 7).Locked = true;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(3, 7).Value = "底板标高";
-            this.fpBoreholeInfo_Sheet1.Cells.Get(3, 7).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(3, 8).Border = complexBorder26;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(3, 8).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(3, 8).Locked = true;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(3, 8).Value = "厚度";
-            this.fpBoreholeInfo_Sheet1.Cells.Get(3, 8).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(3, 9).Border = complexBorder27;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(3, 9).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(3, 9).Locked = true;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(3, 9).Value = "煤层名称";
-            this.fpBoreholeInfo_Sheet1.Cells.Get(3, 10).Border = complexBorder28;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(3, 10).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(3, 10).Locked = true;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(3, 10).Value = "坐标X";
-            this.fpBoreholeInfo_Sheet1.Cells.Get(3, 10).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(3, 11).Border = complexBorder29;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(3, 11).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(3, 11).Locked = true;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(3, 11).Value = "坐标Y";
-            this.fpBoreholeInfo_Sheet1.Cells.Get(3, 11).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(3, 12).Border = complexBorder30;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(3, 12).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(3, 12).Locked = true;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(3, 12).Value = "坐标Z";
-            this.fpBoreholeInfo_Sheet1.Cells.Get(3, 12).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(4, 0).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Cells.Get(4, 0).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Columns.Get(0).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Columns.Get(0).Locked = false;
-            this.fpBoreholeInfo_Sheet1.Columns.Get(0).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Columns.Get(0).VisualStyles = FarPoint.Win.VisualStyles.Auto;
-            this.fpBoreholeInfo_Sheet1.Columns.Get(0).Width = 40F;
-            this.fpBoreholeInfo_Sheet1.Columns.Get(1).CellType = textCellType11;
-            this.fpBoreholeInfo_Sheet1.Columns.Get(1).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpBoreholeInfo_Sheet1.Columns.Get(1).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Columns.Get(1).Width = 85F;
-            this.fpBoreholeInfo_Sheet1.Columns.Get(2).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpBoreholeInfo_Sheet1.Columns.Get(2).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Columns.Get(2).Width = 93F;
-            this.fpBoreholeInfo_Sheet1.Columns.Get(3).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpBoreholeInfo_Sheet1.Columns.Get(3).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Columns.Get(3).Width = 93F;
-            this.fpBoreholeInfo_Sheet1.Columns.Get(4).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpBoreholeInfo_Sheet1.Columns.Get(4).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Columns.Get(4).Width = 93F;
-            this.fpBoreholeInfo_Sheet1.Columns.Get(5).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpBoreholeInfo_Sheet1.Columns.Get(5).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Columns.Get(5).Width = 93F;
-            this.fpBoreholeInfo_Sheet1.Columns.Get(6).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpBoreholeInfo_Sheet1.Columns.Get(6).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Columns.Get(6).Width = 96F;
-            this.fpBoreholeInfo_Sheet1.Columns.Get(7).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpBoreholeInfo_Sheet1.Columns.Get(7).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Columns.Get(7).Width = 96F;
-            this.fpBoreholeInfo_Sheet1.Columns.Get(8).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpBoreholeInfo_Sheet1.Columns.Get(8).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Columns.Get(8).Width = 96F;
-            this.fpBoreholeInfo_Sheet1.Columns.Get(9).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpBoreholeInfo_Sheet1.Columns.Get(9).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Columns.Get(9).Width = 96F;
-            this.fpBoreholeInfo_Sheet1.Columns.Get(10).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpBoreholeInfo_Sheet1.Columns.Get(10).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Columns.Get(10).Width = 96F;
-            this.fpBoreholeInfo_Sheet1.Columns.Get(11).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpBoreholeInfo_Sheet1.Columns.Get(11).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Columns.Get(11).Width = 96F;
-            this.fpBoreholeInfo_Sheet1.Columns.Get(12).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpBoreholeInfo_Sheet1.Columns.Get(12).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpBoreholeInfo_Sheet1.Columns.Get(12).Width = 96F;
-            this.fpBoreholeInfo_Sheet1.DefaultStyle.Locked = true;
-            this.fpBoreholeInfo_Sheet1.DefaultStyle.NoteIndicatorColor = System.Drawing.Color.Red;
-            this.fpBoreholeInfo_Sheet1.DefaultStyle.Parent = "DataAreaDefault";
-            this.fpBoreholeInfo_Sheet1.FrozenRowCount = 4;
-            this.fpBoreholeInfo_Sheet1.RowHeader.Columns.Default.Resizable = false;
-            this.fpBoreholeInfo_Sheet1.ReferenceStyle = FarPoint.Win.Spread.Model.ReferenceStyle.A1;
             // 
             // toolStrip1
             // 
@@ -299,7 +69,7 @@
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(417, 24);
+            this.toolStrip1.Size = new System.Drawing.Size(448, 24);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.TabStop = true;
             this.toolStrip1.Text = "toolStrip1";
@@ -333,7 +103,6 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Enabled = false;
             this.btnUpdate.Image = ((System.Drawing.Image)(resources.GetObject("btnUpdate.Image")));
             this.btnUpdate.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnUpdate.Name = "btnUpdate";
@@ -343,7 +112,6 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Enabled = false;
             this.btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDelete.Name = "btnDelete";
@@ -386,23 +154,111 @@
             this.statusStrip1.TabIndex = 6;
             this.statusStrip1.Text = "statusStrip1";
             // 
+            // gcBorehole
+            // 
+            this.gcBorehole.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gcBorehole.Cursor = System.Windows.Forms.Cursors.Default;
+            this.gcBorehole.Location = new System.Drawing.Point(12, 27);
+            this.gcBorehole.MainView = this.bandedGridView1;
+            this.gcBorehole.Name = "gcBorehole";
+            this.gcBorehole.Size = new System.Drawing.Size(1259, 495);
+            this.gcBorehole.TabIndex = 7;
+            this.gcBorehole.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.bandedGridView1});
+            // 
+            // bandedGridView1
+            // 
+            this.bandedGridView1.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
+            this.gridBand1});
+            this.bandedGridView1.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] {
+            this.bandedGridColumn1,
+            this.bandedGridColumn2,
+            this.bandedGridColumn3,
+            this.bandedGridColumn4,
+            this.bandedGridColumn5});
+            this.bandedGridView1.GridControl = this.gcBorehole;
+            this.bandedGridView1.Name = "bandedGridView1";
+            // 
+            // gridBand1
+            // 
+            this.gridBand1.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridBand1.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridBand1.Caption = "钻孔信息";
+            this.gridBand1.Columns.Add(this.bandedGridColumn1);
+            this.gridBand1.Columns.Add(this.bandedGridColumn2);
+            this.gridBand1.Columns.Add(this.bandedGridColumn3);
+            this.gridBand1.Columns.Add(this.bandedGridColumn4);
+            this.gridBand1.Columns.Add(this.bandedGridColumn5);
+            this.gridBand1.Name = "gridBand1";
+            this.gridBand1.VisibleIndex = 0;
+            this.gridBand1.Width = 375;
+            // 
+            // bandedGridColumn1
+            // 
+            this.bandedGridColumn1.Caption = "孔号";
+            this.bandedGridColumn1.FieldName = "BoreholeNumber";
+            this.bandedGridColumn1.Name = "bandedGridColumn1";
+            this.bandedGridColumn1.Visible = true;
+            // 
+            // bandedGridColumn2
+            // 
+            this.bandedGridColumn2.Caption = "地面标高";
+            this.bandedGridColumn2.FieldName = "GroundElevation";
+            this.bandedGridColumn2.Name = "bandedGridColumn2";
+            this.bandedGridColumn2.Visible = true;
+            // 
+            // bandedGridColumn3
+            // 
+            this.bandedGridColumn3.Caption = "勘探钻孔坐标X";
+            this.bandedGridColumn3.FieldName = "CoordinateX";
+            this.bandedGridColumn3.Name = "bandedGridColumn3";
+            this.bandedGridColumn3.Visible = true;
+            // 
+            // bandedGridColumn4
+            // 
+            this.bandedGridColumn4.Caption = "勘探钻孔坐标Y";
+            this.bandedGridColumn4.FieldName = "CoordinateY";
+            this.bandedGridColumn4.Name = "bandedGridColumn4";
+            this.bandedGridColumn4.Visible = true;
+            // 
+            // bandedGridColumn5
+            // 
+            this.bandedGridColumn5.Caption = "勘探钻孔坐标Z";
+            this.bandedGridColumn5.Name = "bandedGridColumn5";
+            this.bandedGridColumn5.Visible = true;
+            // 
+            // controlNavigator1
+            // 
+            this.controlNavigator1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.controlNavigator1.Location = new System.Drawing.Point(12, 528);
+            this.controlNavigator1.Name = "controlNavigator1";
+            this.controlNavigator1.Size = new System.Drawing.Size(311, 24);
+            this.controlNavigator1.TabIndex = 85;
+            this.controlNavigator1.Text = "controlNavigator1";
+            this.controlNavigator1.TextLocation = DevExpress.XtraEditors.NavigatorButtonsTextLocation.Center;
+            this.controlNavigator1.TextStringFormat = "记录 {0} / {1}";
+            // 
             // BoreholeInfoManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1283, 577);
+            this.Controls.Add(this.controlNavigator1);
+            this.Controls.Add(this.gcBorehole);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.fpBoreholeInfo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "BoreholeInfoManagement";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "勘探钻孔数据管理";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            ((System.ComponentModel.ISupportInitialize)(this.fpBoreholeInfo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fpBoreholeInfo_Sheet1)).EndInit();
+            this.Load += new System.EventHandler(this.BoreholeInfoManagement_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gcBorehole)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bandedGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -410,8 +266,6 @@
 
         #endregion
 
-        private FarPoint.Win.Spread.FpSpread fpBoreholeInfo;
-        private FarPoint.Win.Spread.SheetView fpBoreholeInfo_Sheet1;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton tsBtnPrint;
         private System.Windows.Forms.ToolStripButton tsBtnExport;
@@ -422,5 +276,15 @@
         private System.Windows.Forms.ToolStripButton btnExit;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripButton btnMap;
+        private DevExpress.XtraGrid.GridControl gcBorehole;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridView bandedGridView1;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn1;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn2;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn3;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn4;
+        private DevExpress.XtraEditors.ControlNavigator controlNavigator1;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn5;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }

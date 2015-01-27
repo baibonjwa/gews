@@ -31,14 +31,12 @@ namespace sys3
         /** 业务逻辑类型：添加、修改  **/
         private string _bllType = "add";
         private string BID = "";
-        private BoreholeInfoManagement frm;
 
         /// <summary>
         /// 构造方法
         /// </summary>
-        public BoreholeInfoEntering(BoreholeInfoManagement form)
+        public BoreholeInfoEntering()
         {
-            frm = form;
             InitializeComponent();
 
             // 设置窗体默认属性
@@ -68,9 +66,8 @@ namespace sys3
         /// 带参数的构造方法
         /// </summary>
         /// <param name="boreholeId">钻孔编号</param>
-        public BoreholeInfoEntering(int boreholeId, BoreholeInfoManagement form)
+        public BoreholeInfoEntering(int boreholeId)
         {
-            frm = form;
             InitializeComponent();
 
             // 设置窗体默认属性

@@ -1,4 +1,6 @@
-﻿using Castle.ActiveRecord;
+﻿using System.Collections.Generic;
+using Castle.ActiveRecord;
+using NHibernate.Criterion;
 
 namespace LibEntity
 {
@@ -58,5 +60,11 @@ namespace LibEntity
         /// </summary>
         [Property("COORDINATE_Z")]
         public double CoordinateZ { get; set; }
+
+        public static BoreholeLithology[] FindAllByBoreholeId(int boreholeId)
+        {
+            var criterion = new List<ICriterion> { Restrictions.Eq("Borehole.BoreholeId", boreholeId) };
+            return FindAll(criterion.ToArray());
+        }
     }
 }

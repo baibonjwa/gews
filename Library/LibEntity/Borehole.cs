@@ -1,4 +1,5 @@
-﻿using Castle.ActiveRecord;
+﻿using System.Linq;
+using Castle.ActiveRecord;
 
 namespace LibEntity
 {
@@ -62,5 +63,12 @@ namespace LibEntity
         /// </summary>
         [Property("BID")]
         public string BindingId { get; set; }
+
+        public override void Delete()
+        {
+            var boreholeLithology = BoreholeLithology.FindAllByBoreholeId(BoreholeId);
+            BigFaultagePoint.DeleteAll(boreholeLithology.Select(u => u.BoreholeLithhologyId));
+            base.Delete();
+        }
     }
 }

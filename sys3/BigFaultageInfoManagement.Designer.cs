@@ -222,6 +222,7 @@
             this.controlNavigator1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.controlNavigator1.Location = new System.Drawing.Point(12, 528);
             this.controlNavigator1.Name = "controlNavigator1";
+            this.controlNavigator1.NavigatableControl = this.gcBigFaultage;
             this.controlNavigator1.Size = new System.Drawing.Size(311, 24);
             this.controlNavigator1.TabIndex = 84;
             this.controlNavigator1.Text = "controlNavigator1";
