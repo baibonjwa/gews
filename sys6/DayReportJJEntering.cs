@@ -313,8 +313,8 @@ namespace UnderTerminal
                 //队别名称
                 _dayReportJJEntity.TeamInfo.TeamId = Convert.ToInt32(cboTeamName.SelectedValue);
                 //绑定巷道编号
-                _dayReportJJEntity.WorkingFace.WorkingFaceID =
-                    BasicInfoManager.getInstance().getTunnelByID(_tunnelEntity.TunnelId).WorkingFace.WorkingFaceID;
+                _dayReportJJEntity.WorkingFace.WorkingFaceId =
+                    BasicInfoManager.getInstance().getTunnelByID(_tunnelEntity.TunnelId).WorkingFace.WorkingFaceId;
                 //日期
                 _dayReportJJEntity.DateTime = dtpDate.Value;
                 //填报人
@@ -373,7 +373,7 @@ namespace UnderTerminal
         private void updateDayReportJJInfo()
         {
             //绑定巷道编号
-            _dayReportJJEntity.WorkingFace.WorkingFaceID = tunnelId;
+            _dayReportJJEntity.WorkingFace.WorkingFaceId = tunnelId;
             //队别名称
             _dayReportJJEntity.TeamInfo.TeamId = Convert.ToInt32(cboTeamName.SelectedValue);
             //日期

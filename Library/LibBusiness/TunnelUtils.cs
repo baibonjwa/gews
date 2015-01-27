@@ -65,12 +65,12 @@ namespace LibBusiness
         public static Dictionary<TunnelTypeEnum, Tunnel> getTunnelDict(WorkingFace wf)
         {
             Dictionary<TunnelTypeEnum, Tunnel> dReturn = new Dictionary<TunnelTypeEnum, Tunnel>();
-            BasicInfoManager.getInstance().getTunnelListByWorkingFaceId(wf.WorkingFaceID);
-            wf.tunnelSet = BasicInfoManager.getInstance().getTunnelSetByDataSet(TunnelInfoBLL.selectTunnelByWorkingFaceId(wf.WorkingFaceID));
+            BasicInfoManager.getInstance().getTunnelListByWorkingFaceId(wf.WorkingFaceId);
+            wf.TunnelSet = BasicInfoManager.getInstance().getTunnelSetByDataSet(TunnelInfoBLL.selectTunnelByWorkingFaceId(wf.WorkingFaceId));
 
-            if (wf.tunnelSet != null)
+            if (wf.TunnelSet != null)
             {
-                foreach (Tunnel entity in wf.tunnelSet)
+                foreach (Tunnel entity in wf.TunnelSet)
                 {
                     if (entity.TunnelType == TunnelTypeEnum.STOPING_ZY) //主运
                         dReturn.Add(TunnelTypeEnum.STOPING_ZY, entity);

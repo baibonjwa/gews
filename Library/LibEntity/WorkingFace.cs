@@ -1,11 +1,4 @@
-﻿// ******************************************************************
-// 概  述：工作面实体
-// 作  者：伍鑫
-// 创建日期：2014/02/25
-// 版本号：1.0
-// ******************************************************************
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Castle.ActiveRecord;
 
@@ -15,15 +8,15 @@ namespace LibEntity
     public class WorkingFace : ActiveRecordBase
     {
         /** 工作面编号 **/
-        private DateTime? startDate;
-        private DateTime? stopDate;
-        public HashSet<Tunnel> tunnelSet;
+        private DateTime? _startDate;
+        private DateTime? _stopDate;
+        public HashSet<Tunnel> TunnelSet;
 
         /// <summary>
         ///     工作面编号
         /// </summary>
         [PrimaryKey(PrimaryKeyType.Identity, "WORKINGFACE_ID")]
-        public int WorkingFaceID { get; set; }
+        public int WorkingFaceId { get; set; }
 
         /** 工作面名称 **/
 
@@ -45,8 +38,8 @@ namespace LibEntity
         [Property("START_DATE")]
         public DateTime? StartDate
         {
-            get { return startDate; }
-            set { startDate = value; }
+            get { return _startDate; }
+            set { _startDate = value; }
         }
 
         // 是否掘进完毕
@@ -65,8 +58,8 @@ namespace LibEntity
         [Property("STOP_DATE")]
         public DateTime? StopDate
         {
-            get { return stopDate; }
-            set { stopDate = value; }
+            get { return _stopDate; }
+            set { _stopDate = value; }
         }
 
         // 队别编号
@@ -75,7 +68,7 @@ namespace LibEntity
         ///     设置或获取队别编号
         /// </summary>
         [Property("TEAM_NAME_ID")]
-        public int TeamNameID { get; set; }
+        public int TeamNameId { get; set; }
 
         // 采区
         [BelongsTo("MININGAREA_ID")]

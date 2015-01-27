@@ -166,7 +166,7 @@ namespace _3.GeologyMeasure
                     //巷道名称
                     cells[rowDetailStartIndex + i, COLUMN_INDEX_TUNNEL_NAME].Text = entity.TunnelName;
                     //队别
-                    cells[rowDetailStartIndex + i, COLUMN_INDEX_TEAM_NAME].Text = BasicInfoManager.getInstance().getTeamNameById(entity.WorkingFace.TeamNameID);
+                    cells[rowDetailStartIndex + i, COLUMN_INDEX_TEAM_NAME].Text = BasicInfoManager.getInstance().getTeamNameById(entity.WorkingFace.TeamNameId);
                     //开工日期
                     cells[rowDetailStartIndex + i, COLUMN_INDEX_START_DATE].Text = String.Format("{0:yyyy-MM-dd}", entity.WorkingFace.StartDate);
                     //是否掘进完毕
@@ -182,7 +182,7 @@ namespace _3.GeologyMeasure
 
                     // 隐藏列，
                     cells[rowDetailStartIndex + i, COLUMN_INDEX_TUNNEL_ID].Text = entity.TunnelId.ToString();
-                    cells[rowDetailStartIndex + i, COLUMN_INDEX_WORKING_FACE_ID].Text = entity.WorkingFace.WorkingFaceID.ToString();
+                    cells[rowDetailStartIndex + i, COLUMN_INDEX_WORKING_FACE_ID].Text = entity.WorkingFace.WorkingFaceId.ToString();
 
                     cells[rowDetailStartIndex + i, _BIDIndex].Text = entity.BindingID;
                     

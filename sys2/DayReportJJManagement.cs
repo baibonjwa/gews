@@ -320,7 +320,7 @@ namespace sys2
                     //队别ID
                     eReturn.TeamInfo.TeamId = (int)dr[DayReportJJDbConstNames.TEAM_NAME_ID];
                     //工作面ID
-                    eReturn.WorkingFace.WorkingFaceID = Convert.ToInt32(dr[DayReportJJDbConstNames.WORKINGFACE_ID]);
+                    eReturn.WorkingFace.WorkingFaceId = Convert.ToInt32(dr[DayReportJJDbConstNames.WORKINGFACE_ID]);
                     //班次
                     eReturn.WorkTime = cells[_rowDetailStartIndex + i, C_WORK_TIME].Text;
                     //工作制式
@@ -375,13 +375,13 @@ namespace sys2
             //回采日报实体赋值
             DayReportJj entity = setDayReportJJEntityValue();
 
-            WorkingFace ent = BasicInfoManager.getInstance().getWorkingFaceById(entity.WorkingFace.WorkingFaceID);
+            WorkingFace ent = BasicInfoManager.getInstance().getWorkingFaceById(entity.WorkingFace.WorkingFaceId);
             /**自定义控件用巷道信息数组**/
             int[] _arr = new int[5];
             _arr[0] = ent.MiningArea.Horizontal.Mine.MineId;
             _arr[1] = ent.MiningArea.Horizontal.HorizontalId;
             _arr[2] = ent.MiningArea.MiningAreaId;
-            _arr[3] = ent.WorkingFaceID;
+            _arr[3] = ent.WorkingFaceId;
 
             DayReportJJEntering dayReportJJForm = new DayReportJJEntering(_arr, entity, this.MainForm);
             if (DialogResult.OK == dayReportJJForm.ShowDialog())
@@ -423,19 +423,19 @@ namespace sys2
                             DayReportJj entity = new DayReportJj();
                             //获取掘进ID
                             entity.Id = (int)dr[DayReportJJDbConstNames.ID];
-                            entity.WorkingFace.WorkingFaceID = (int)dr[DayReportJJDbConstNames.WORKINGFACE_ID];
+                            entity.WorkingFace.WorkingFaceId = (int)dr[DayReportJJDbConstNames.WORKINGFACE_ID];
                             entity.BindingId = dr[DayReportJJDbConstNames.BINDINGID].ToString();
 
                             // 掘进工作面，只有一条巷道
-                            Tunnel tEntity = BasicInfoManager.getInstance().getTunnelListByWorkingFaceId(entity.WorkingFace.WorkingFaceID)[0];
+                            Tunnel tEntity = BasicInfoManager.getInstance().getTunnelListByWorkingFaceId(entity.WorkingFace.WorkingFaceId)[0];
 
                             //删除操作
                             entity.Delete();
 
-                            DelJJCD(tEntity.TunnelId.ToString(), entity.BindingId, entity.WorkingFace.WorkingFaceID);
+                            DelJJCD(tEntity.TunnelId.ToString(), entity.BindingId, entity.WorkingFace.WorkingFaceId);
 
                             // 向server端发送更新预警数据
-                            UpdateWarningDataMsg msg = new UpdateWarningDataMsg(entity.WorkingFace.WorkingFaceID,
+                            UpdateWarningDataMsg msg = new UpdateWarningDataMsg(entity.WorkingFace.WorkingFaceId,
                                 Const.INVALID_ID,
                                 DayReportJJDbConstNames.TABLE_NAME, OPERATION_TYPE.DELETE, DateTime.Now);
                             this.MainForm.SendMsg2Server(msg);

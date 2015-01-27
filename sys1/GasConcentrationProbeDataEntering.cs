@@ -393,7 +393,7 @@ namespace sys1
 
                     WorkingFace workingfaceEnt =
                         BasicInfoManager.getInstance().getTunnelByID(selectTunnelUserControl1.ITunnelId).WorkingFace;
-                    var msg = new UpdateWarningDataMsg(workingfaceEnt.WorkingFaceID, selectTunnelUserControl1.ITunnelId,
+                    var msg = new UpdateWarningDataMsg(workingfaceEnt.WorkingFaceId, selectTunnelUserControl1.ITunnelId,
                         DayReportHCDbConstNames.TABLE_NAME, opType, gasConcentrationProbeDataEntity.RecordTime);
                     MainForm.SendMsg2Server(msg);
 
@@ -412,7 +412,7 @@ namespace sys1
 
                 WorkingFace workingfaceEnt =
                     BasicInfoManager.getInstance().getTunnelByID(selectTunnelUserControl1.ITunnelId).WorkingFace;
-                var msg = new UpdateWarningDataMsg(workingfaceEnt.WorkingFaceID, selectTunnelUserControl1.ITunnelId,
+                var msg = new UpdateWarningDataMsg(workingfaceEnt.WorkingFaceId, selectTunnelUserControl1.ITunnelId,
                     DayReportHCDbConstNames.TABLE_NAME, opType, gasConcentrationProbeDataEntity.RecordTime);
                 MainForm.SendMsg2Server(msg);
 

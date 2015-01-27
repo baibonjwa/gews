@@ -83,7 +83,7 @@ namespace _3.GeologyMeasure
         {
             workingFace = BasicInfoManager.getInstance().getWorkingFaceById(workingFaceId);
 
-            workingFace.tunnelSet = BasicInfoManager.getInstance().getTunnelSetByDataSet(TunnelInfoBLL.selectTunnelByWorkingFaceId(workingFace.WorkingFaceID));
+            workingFace.TunnelSet = BasicInfoManager.getInstance().getTunnelSetByDataSet(TunnelInfoBLL.selectTunnelByWorkingFaceId(workingFace.WorkingFaceId));
             Dictionary<TunnelTypeEnum, Tunnel> tList = TunnelUtils.getTunnelDict(workingFace);
             if (tList.Count < 1)
                 return;
@@ -336,7 +336,7 @@ namespace _3.GeologyMeasure
             if (workingFace != null)
             {
 
-                TunnelHcJz(coordinates, tunnelZY.TunnelId.ToString(), tunnelFY.TunnelId.ToString(), tunnelQY.TunnelId.ToString(), workingFace.WorkingFaceID, tunnelZY.TunnelWid, tunnelFY.TunnelWid, tunnelQY.TunnelWid);
+                TunnelHcJz(coordinates, tunnelZY.TunnelId.ToString(), tunnelFY.TunnelId.ToString(), tunnelQY.TunnelId.ToString(), workingFace.WorkingFaceId, tunnelZY.TunnelWid, tunnelFY.TunnelWid, tunnelQY.TunnelWid);
             }
         }
 
@@ -442,7 +442,7 @@ namespace _3.GeologyMeasure
                 hd_ids.Add(Convert.ToInt16(hd3));
                 Dictionary<string, List<GeoStruct>> geostructs = Global.commonclss.GetStructsInfos(prevPnt, hd_ids);
                 if (geostructs == null) return;
-                GeologySpaceBll.DeleteGeologySpaceEntityInfos(workingFace.WorkingFaceID);//删除对应工作面ID的地质构造信息
+                GeologySpaceBll.DeleteGeologySpaceEntityInfos(workingFace.WorkingFaceId);//删除对应工作面ID的地质构造信息
                 foreach (string key in geostructs.Keys)
                 {
                     List<GeoStruct> geoinfos = geostructs[key];

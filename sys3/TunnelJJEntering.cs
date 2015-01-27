@@ -137,7 +137,7 @@ namespace _3.GeologyMeasure
             btnChooseTunnel.Text = tunnelEntity.TunnelName;
 
             //队别
-            cboTeamName.Text = BasicInfoManager.getInstance().getTeamNameById(jjWorkFaceEntity.TeamNameID);
+            cboTeamName.Text = BasicInfoManager.getInstance().getTeamNameById(jjWorkFaceEntity.TeamNameId);
 
             //开工日期
             dtpStartDate.Value = DateTimeUtil.validateDTPDateTime((System.DateTime)this.jjWorkFaceEntity.StartDate);
@@ -181,7 +181,7 @@ namespace _3.GeologyMeasure
                 return;
             }
 
-            jjWorkFaceEntity.TeamNameID = Convert.ToInt32(cboTeamName.SelectedValue);
+            jjWorkFaceEntity.TeamNameId = Convert.ToInt32(cboTeamName.SelectedValue);
             jjWorkFaceEntity.StartDate = dtpStartDate.Value;
             if (rbtnJJY.Checked)
             {

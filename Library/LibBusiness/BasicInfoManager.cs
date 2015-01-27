@@ -203,7 +203,7 @@ namespace LibBusiness
         public void refreshWorkingFaceInfo(WorkingFace entity)
         {
             // 加载工作面信息
-            DataSet ds = WorkingFaceBLL.selectWorkingFaceInfoByWorkingFaceId(entity.WorkingFaceID);
+            DataSet ds = WorkingFaceBLL.selectWorkingFaceInfoByWorkingFaceId(entity.WorkingFaceId);
 
             foreach (DataRow dr in ds.Tables[0].Rows)
             {
@@ -222,7 +222,7 @@ namespace LibBusiness
                 entity.StartDate = dr[WorkingFaceDbConstNames.START_DATE] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(dr[WorkingFaceDbConstNames.START_DATE].ToString());
                 entity.StopDate = dr[WorkingFaceDbConstNames.STOP_DATE] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(dr[WorkingFaceDbConstNames.STOP_DATE].ToString());
                 entity.IsFinish = dr[WorkingFaceDbConstNames.IS_FINISH] == DBNull.Value ? 0 : Convert.ToInt32(dr[WorkingFaceDbConstNames.IS_FINISH]);
-                entity.TeamNameID = dr[WorkingFaceDbConstNames.TEAM_NAME_ID] == DBNull.Value ? Const.INVALID_ID : Convert.ToInt32(dr[WorkingFaceDbConstNames.TEAM_NAME_ID].ToString());
+                entity.TeamNameId = dr[WorkingFaceDbConstNames.TEAM_NAME_ID] == DBNull.Value ? Const.INVALID_ID : Convert.ToInt32(dr[WorkingFaceDbConstNames.TEAM_NAME_ID].ToString());
             }
         }
 
@@ -240,7 +240,7 @@ namespace LibBusiness
             {
                 WorkingFace entity = new WorkingFace();
 
-                entity.WorkingFaceID = dr[WorkingFaceDbConstNames.WORKINGFACE_ID] == DBNull.Value ? Const.INVALID_ID : Convert.ToInt32(dr[WorkingFaceDbConstNames.WORKINGFACE_ID].ToString());
+                entity.WorkingFaceId = dr[WorkingFaceDbConstNames.WORKINGFACE_ID] == DBNull.Value ? Const.INVALID_ID : Convert.ToInt32(dr[WorkingFaceDbConstNames.WORKINGFACE_ID].ToString());
                 entity.WorkingFaceName = dr[WorkingFaceDbConstNames.WORKINGFACE_NAME] == DBNull.Value ? string.Empty : dr[WorkingFaceDbConstNames.WORKINGFACE_NAME].ToString();
 
                 // 采区
@@ -256,10 +256,10 @@ namespace LibBusiness
                 entity.StartDate = dr[WorkingFaceDbConstNames.START_DATE] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(dr[WorkingFaceDbConstNames.START_DATE].ToString());
                 entity.StopDate = dr[WorkingFaceDbConstNames.STOP_DATE] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(dr[WorkingFaceDbConstNames.STOP_DATE].ToString());
                 entity.IsFinish = dr[WorkingFaceDbConstNames.IS_FINISH] == DBNull.Value ? 0 : Convert.ToInt32(dr[WorkingFaceDbConstNames.IS_FINISH]);
-                entity.TeamNameID = dr[WorkingFaceDbConstNames.TEAM_NAME_ID] == DBNull.Value ? Const.INVALID_ID : Convert.ToInt32(dr[WorkingFaceDbConstNames.TEAM_NAME_ID].ToString());
+                entity.TeamNameId = dr[WorkingFaceDbConstNames.TEAM_NAME_ID] == DBNull.Value ? Const.INVALID_ID : Convert.ToInt32(dr[WorkingFaceDbConstNames.TEAM_NAME_ID].ToString());
                 entity.WorkingfaceTypeEnum = dr[WorkingFaceDbConstNames.WORKINGFACE_TYPE] == DBNull.Value ? WorkingfaceTypeEnum.OTHER : (WorkingfaceTypeEnum)dr[WorkingFaceDbConstNames.WORKINGFACE_TYPE];
 
-                wfList.Add(entity.WorkingFaceID, entity);
+                wfList.Add(entity.WorkingFaceId, entity);
             }
         }
 

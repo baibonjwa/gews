@@ -53,7 +53,7 @@ namespace UnderTerminal
             this.Text += "-" + tunnelName;
             this.mainWin = win;
             addInfo();
-            workingfaceId = BasicInfoManager.getInstance().getTunnelByID(tunnelId).WorkingFace.WorkingFaceID;
+            workingfaceId = BasicInfoManager.getInstance().getTunnelByID(tunnelId).WorkingFace.WorkingFaceId;
             //自定义控件初始化
             LibEntity.TunnelDefaultSelect tunnelDefaultSelectEntity = LibBusiness.TunnelDefaultSelect.selectDefaultTunnel(DayReportHCDbConstNames.TABLE_NAME);
 

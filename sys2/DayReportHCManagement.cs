@@ -216,7 +216,7 @@ namespace sys2
 
                     // 隐藏列
                     // 工作面ID
-                    cells[_rowDetailStartIndex + i, C_WORKING_FACE_ID].Text = dayReportHcs[i].WorkingFace.WorkingFaceID.ToString();
+                    cells[_rowDetailStartIndex + i, C_WORKING_FACE_ID].Text = dayReportHcs[i].WorkingFace.WorkingFaceId.ToString();
                 }
                 //设置按钮可操作性
                 setButtenEnable();
@@ -303,13 +303,13 @@ namespace sys2
                 return;
             }
 
-            WorkingFace ent = BasicInfoManager.getInstance().getWorkingFaceById(entity.WorkingFace.WorkingFaceID);
+            WorkingFace ent = BasicInfoManager.getInstance().getWorkingFaceById(entity.WorkingFace.WorkingFaceId);
             /**自定义控件用巷道信息数组**/
             int[] _arr = new int[5];
             _arr[0] = ent.MiningArea.Horizontal.Mine.MineId;
             _arr[1] = ent.MiningArea.Horizontal.HorizontalId;
             _arr[2] = ent.MiningArea.MiningAreaId;
-            _arr[3] = ent.WorkingFaceID;
+            _arr[3] = ent.WorkingFaceId;
             DayReportHcEntering dayReportHCForm = new DayReportHcEntering(_arr, entity, this.MainForm);
             if (DialogResult.OK == dayReportHCForm.ShowDialog())
             {
@@ -448,7 +448,7 @@ namespace sys2
             Dictionary<string, List<GeoStruct>> dzxlist = Global.commonclss.GetStructsInfos(posnew, hd_ids);
             if (dzxlist.Count > 0)
             {
-                GeologySpaceBll.DeleteGeologySpaceEntityInfos(wfEntity.WorkingFaceID);//删除工作面ID对应的地质构造信息
+                GeologySpaceBll.DeleteGeologySpaceEntityInfos(wfEntity.WorkingFaceId);//删除工作面ID对应的地质构造信息
                 foreach (string key in dzxlist.Keys)
                 {
                     List<GeoStruct> geoinfos = dzxlist[key];

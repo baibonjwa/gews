@@ -45,7 +45,7 @@ namespace UnderTerminal
             //this.Text += "-" + tunnelName;
             Tunnel entTunnel = BasicInfoManager.getInstance().getTunnelByID(tunnelId);
             WorkingFace entWorkingFace =
-                BasicInfoManager.getInstance().getWorkingFaceById(entTunnel.WorkingFace.WorkingFaceID); //WorkingFaceBLL.selectWorkingFaceInfoByID(entTunnel.WorkingFace.WorkingFaceID);
+                BasicInfoManager.getInstance().getWorkingFaceById(entTunnel.WorkingFace.WorkingFaceId); //WorkingFaceBLL.selectWorkingFaceInfoByID(entTunnel.WorkingFace.WorkingFaceID);
             txtCoordinateX.Text = entWorkingFace.Coordinate.X.ToString();
             txtCoordinateY.Text = entWorkingFace.Coordinate.Y.ToString();
             txtCoordinateZ.Text = entWorkingFace.Coordinate.Z.ToString();

@@ -1332,7 +1332,7 @@ namespace _3.GeologyMeasure
                         _arr[0] = tunnelEntity.WorkingFace.MiningArea.Horizontal.Mine.MineId;
                         _arr[1] = tunnelEntity.WorkingFace.MiningArea.Horizontal.HorizontalId;
                         _arr[2] = tunnelEntity.WorkingFace.MiningArea.MiningAreaId;
-                        _arr[3] = tunnelEntity.WorkingFace.WorkingFaceID;
+                        _arr[3] = tunnelEntity.WorkingFace.WorkingFaceId;
                         _arr[4] = tunnelEntity.TunnelId;
                         //绑定修改信息
                         loadWireInfoData();

@@ -6,26 +6,23 @@
 // 版本信息：
 // V1.0 新建
 // ******************************************************************
+
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using ESRI.ArcGIS.esriSystem;
-using LibEntity;
+using ESRI.ArcGIS.Carto;
+using ESRI.ArcGIS.Geodatabase;
+using ESRI.ArcGIS.Geometry;
+using GIS;
+using GIS.Common;
 using LibBusiness;
 using LibCommon;
-using GIS.Common;
-using ESRI.ArcGIS.Carto;
-using ESRI.ArcGIS.Geometry;
-using ESRI.ArcGIS.Geodatabase;
-using GIS;
+using LibEntity;
 
-namespace _3.GeologyMeasure
+namespace sys3
 {
     public partial class BoreholeInfoEntering : Form
     {
@@ -265,7 +262,6 @@ namespace _3.GeologyMeasure
                     {
                         bResult = BoreholeLithologyBLL.insertBoreholeLithologyInfo(boreholeLithologyEntity);
                     }
-                    frm.refreshAdd();
                 }
             }
             else
@@ -288,7 +284,6 @@ namespace _3.GeologyMeasure
                     {
                         bResult = BoreholeLithologyBLL.insertBoreholeLithologyInfo(boreholeLithologyEntity);
                     }
-                    frm.refreshUpdate();
                 }
             }
 

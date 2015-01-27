@@ -126,16 +126,16 @@ namespace _3.GeologyMeasure
         /// </summary>
         private void bindInfo()
         {
-            workingFace.tunnelSet =
+            workingFace.TunnelSet =
                 BasicInfoManager.getInstance()
-                    .getTunnelSetByDataSet(TunnelInfoBLL.selectTunnelByWorkingFaceId(workingFace.WorkingFaceID));
+                    .getTunnelSetByDataSet(TunnelInfoBLL.selectTunnelByWorkingFaceId(workingFace.WorkingFaceId));
             intArr[0] = workingFace.MiningArea.Horizontal.Mine.MineId;
             intArr[1] = workingFace.MiningArea.Horizontal.HorizontalId;
             intArr[2] = workingFace.MiningArea.MiningAreaId;
-            intArr[3] = workingFace.WorkingFaceID;
+            intArr[3] = workingFace.WorkingFaceId;
 
             string otherTunnel = "";
-            foreach (Tunnel tunnel in workingFace.tunnelSet)
+            foreach (Tunnel tunnel in workingFace.TunnelSet)
             {
                 if (tunnel.TunnelType == TunnelTypeEnum.STOPING_ZY)
                     tunnelZY = tunnel; //主运顺槽
@@ -182,7 +182,7 @@ namespace _3.GeologyMeasure
             //}
 
             //队别名称
-            cboTeamName.Text = BasicInfoManager.getInstance().getTeamNameById(workingFace.TeamNameID);
+            cboTeamName.Text = BasicInfoManager.getInstance().getTeamNameById(workingFace.TeamNameId);
 
             //开始日期
             dtpStartDate.Value = DateTimeUtil.validateDTPDateTime((DateTime)workingFace.StartDate);
@@ -258,7 +258,7 @@ namespace _3.GeologyMeasure
                 intArr[0] = workingFace.MiningArea.Horizontal.Mine.MineId;
                 intArr[1] = workingFace.MiningArea.Horizontal.HorizontalId;
                 intArr[2] = workingFace.MiningArea.MiningAreaId;
-                intArr[3] = workingFace.WorkingFaceID;
+                intArr[3] = workingFace.WorkingFaceId;
             }
         }
 
@@ -384,7 +384,7 @@ namespace _3.GeologyMeasure
             if (workingFace == null) return;
 
             //队别
-            workingFace.TeamNameID = Convert.ToInt32(cboTeamName.SelectedValue);
+            workingFace.TeamNameId = Convert.ToInt32(cboTeamName.SelectedValue);
             //开工日期
             workingFace.StartDate = dtpStartDate.Value;
             //是否停工
@@ -525,7 +525,7 @@ namespace _3.GeologyMeasure
                 //添加地质构造信息到数据库表中
                 if (dzxlist.Count > 0)
                 {
-                    GeologySpaceBll.DeleteGeologySpaceEntityInfos(workingFace.WorkingFaceID); //删除工作面ID对应的地质构造信息
+                    GeologySpaceBll.DeleteGeologySpaceEntityInfos(workingFace.WorkingFaceId); //删除工作面ID对应的地质构造信息
                     foreach (string key in dzxlist.Keys)
                     {
                         List<GeoStruct> geoinfos = dzxlist[key];
@@ -582,7 +582,7 @@ namespace _3.GeologyMeasure
                 //更新地质构造表
                 if (dzxlist.Count > 0)
                 {
-                    GeologySpaceBll.DeleteGeologySpaceEntityInfos(workingFace.WorkingFaceID); //删除对应工作面ID的地质构造信息
+                    GeologySpaceBll.DeleteGeologySpaceEntityInfos(workingFace.WorkingFaceId); //删除对应工作面ID的地质构造信息
                     foreach (string key in dzxlist.Keys)
                     {
                         List<GeoStruct> geoinfos = dzxlist[key];

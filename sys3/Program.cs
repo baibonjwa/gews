@@ -1,11 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
-using LibLoginForm;
+using Castle.ActiveRecord;
+using Castle.ActiveRecord.Framework;
+using Castle.ActiveRecord.Framework.Config;
 using LibCommon;
+using LibLoginForm;
 
-namespace _3.GeologyMeasure
+namespace sys3
 {
     static class Program
     {
@@ -15,19 +17,26 @@ namespace _3.GeologyMeasure
         [STAThread]
         static void Main()
         {
+            System.Threading.Thread.CurrentThread.CurrentUICulture =
+              new System.Globalization.CultureInfo("zh-Hans");
+
+            // The following line provides localization for data formats. 
+            System.Threading.Thread.CurrentThread.CurrentCulture =
+                new System.Globalization.CultureInfo("zh-Hans");
+
+            IConfigurationSource config = new XmlConfigurationSource("ARConfig.xml");
+
+            Assembly asm = Assembly.Load("LibEntity");
+
+            ActiveRecordStarter.Initialize(asm, config);
             Log.Debug("Starting ......");
             ESRI.ArcGIS.RuntimeManager.Bind(ESRI.ArcGIS.ProductCode.EngineOrDesktop);//RuntimeManager.Bind
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            DevExpress.UserSkins.BonusSkins.Register();
-            DevExpress.UserSkins.OfficeSkins.Register();
-            //窗体风格改变
-            //DXSeting.formSkinsSet();
-            DXSeting.SetFormSkin(DXSkineNames.LILIAN);
 
             Log.Debug("[GM] ......Constructing Main Form....");
-            MainForm_GM mf = new MainForm_GM();
-            LoginForm lf = new LoginForm(mf);
+            var mf = new MainForm_GM();
+            var lf = new LoginForm(mf);
             Log.Debug("Logging ......");
             Application.Run(lf);
         }

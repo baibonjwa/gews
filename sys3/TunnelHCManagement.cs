@@ -159,11 +159,11 @@ namespace _3.GeologyMeasure
                     int workingFaceId = Convert.ToInt32(dr[WorkingFaceDbConstNames.WORKINGFACE_ID]);
                     WorkingFace entity = BasicInfoManager.getInstance().getWorkingFaceById(workingFaceId);
 
-                    entity.tunnelSet = BasicInfoManager.getInstance().getTunnelSetByDataSet(TunnelInfoBLL.selectTunnelByWorkingFaceId(entity.WorkingFaceID));
+                    entity.TunnelSet = BasicInfoManager.getInstance().getTunnelSetByDataSet(TunnelInfoBLL.selectTunnelByWorkingFaceId(entity.WorkingFaceId));
 
                     Tunnel tunnelZY = null, tunnelFY = null, tunnelQY = null;
                     string otherTunnel = "";
-                    foreach (Tunnel tunnel in entity.tunnelSet)
+                    foreach (Tunnel tunnel in entity.TunnelSet)
                     {
                         if (tunnel.TunnelType == TunnelTypeEnum.STOPING_ZY)
                             tunnelZY = tunnel;//主运顺槽
@@ -200,7 +200,7 @@ namespace _3.GeologyMeasure
                     //其他关联
                     cells[_rowDetailStartIndex + i, COLUMN_INDEX_TUNNEL_OTHER].Text = otherTunnel;
                     //队别
-                    cells[_rowDetailStartIndex + i, COLUMN_INDEX_TEAM_NAME].Text = BasicInfoManager.getInstance().getTeamNameById(entity.TeamNameID);
+                    cells[_rowDetailStartIndex + i, COLUMN_INDEX_TEAM_NAME].Text = BasicInfoManager.getInstance().getTeamNameById(entity.TeamNameId);
 
                     //开工日期
                     cells[_rowDetailStartIndex + i, COLUMN_INDEX_START_DATE].Text = string.Format("{0:YYYY-MM-dd}", entity.StartDate);
@@ -220,7 +220,7 @@ namespace _3.GeologyMeasure
 
                     // 隐藏列，
                     cells[_rowDetailStartIndex + i, COLUMN_INDEX_TUNNEL_ID].Text = "1";
-                    cells[_rowDetailStartIndex + i, COLUMN_INDEX_WORKING_FACE_ID].Text = entity.WorkingFaceID.ToString();
+                    cells[_rowDetailStartIndex + i, COLUMN_INDEX_WORKING_FACE_ID].Text = entity.WorkingFaceId.ToString();
                 }
             }
             //设置按钮可操作性
@@ -365,7 +365,7 @@ namespace _3.GeologyMeasure
                     Tunnel tunnelFY = null;
                     Tunnel tunnelQY = null;
 
-                    HashSet<Tunnel> tSet = tunnelHCEntity.tunnelSet;
+                    HashSet<Tunnel> tSet = tunnelHCEntity.TunnelSet;
                     foreach (Tunnel entity in tSet)
                     {
                         if (entity.TunnelType == TunnelTypeEnum.STOPING_ZY) //主运

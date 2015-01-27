@@ -3,7 +3,7 @@ using LibCommonForm;
 
 namespace LibPanels
 {
-    partial class MineDataSimple : BaseForm
+    partial class MineDataSimple
     {
         /// <summary>
         /// Required designer variable.

@@ -73,9 +73,9 @@ namespace sys2
             {
                 workingFace = BasicInfoManager.getInstance().getWorkingFaceById(workingFaceId);
 
-                workingFace.tunnelSet =
+                workingFace.TunnelSet =
                     BasicInfoManager.getInstance()
-                        .getTunnelSetByDataSet(TunnelInfoBLL.selectTunnelByWorkingFaceId(workingFace.WorkingFaceID));
+                        .getTunnelSetByDataSet(TunnelInfoBLL.selectTunnelByWorkingFaceId(workingFace.WorkingFaceId));
                 Dictionary<TunnelTypeEnum, Tunnel> tList = TunnelUtils.getTunnelDict(workingFace);
                 if (tList.Count == 0)
                     return;
@@ -109,7 +109,7 @@ namespace sys2
 
             this._dayReportHCEntity = dayReportHCEntity;
 
-            updateWorkingFaceInfo(dayReportHCEntity.WorkingFace.WorkingFaceID);
+            updateWorkingFaceInfo(dayReportHCEntity.WorkingFace.WorkingFaceId);
 
             InitializeComponent();
             //修改初始化
@@ -133,13 +133,13 @@ namespace sys2
             this.selectWorkingfaceSimple1.WorkingfaceNameChanged += NameChangeEvent;
             if (workingFace != null)
             {
-                WorkingfaceSimple ws = new WorkingfaceSimple(workingFace.WorkingFaceID, workingFace.WorkingFaceName,
+                WorkingfaceSimple ws = new WorkingfaceSimple(workingFace.WorkingFaceId, workingFace.WorkingFaceName,
                     workingFace.WorkingfaceTypeEnum);
                 this.selectWorkingfaceSimple1.SelectTunnelItemWithoutHistory(ws);
 
 
 
-                workingFace.tunnelSet = BasicInfoManager.getInstance().getTunnelSetByDataSet(TunnelInfoBLL.selectTunnelByWorkingFaceId(workingFace.WorkingFaceID));
+                workingFace.TunnelSet = BasicInfoManager.getInstance().getTunnelSetByDataSet(TunnelInfoBLL.selectTunnelByWorkingFaceId(workingFace.WorkingFaceId));
                 Dictionary<TunnelTypeEnum, Tunnel> tList = TunnelUtils.getTunnelDict(workingFace);
                 if (tList.Count >= 3)
                 {
@@ -394,7 +394,7 @@ namespace sys2
             Dictionary<string, string> dics = new Dictionary<string, string>();
             IPoint prevPnt = null;
 
-            workingFace = WorkingFaceBLL.selectWorkingFaceInfoByWksId(workingFace.WorkingFaceID);
+            workingFace = WorkingFaceBLL.selectWorkingFaceInfoByWksId(workingFace.WorkingFaceId);
 
             if (workingFace != null)
             {
@@ -438,7 +438,7 @@ namespace sys2
             //更新地质构造表
             if (null != dzxlist && dzxlist.Count > 0)
             {
-                GeologySpaceBll.DeleteGeologySpaceEntityInfos(workingFace.WorkingFaceID);//删除工作面ID对应的地质构造信息
+                GeologySpaceBll.DeleteGeologySpaceEntityInfos(workingFace.WorkingFaceId);//删除工作面ID对应的地质构造信息
                 foreach (string key in dzxlist.Keys)
                 {
                     List<GeoStruct> geoinfos = dzxlist[key];
@@ -510,7 +510,7 @@ namespace sys2
             Dictionary<string, List<GeoStruct>> geostructsinfos = Global.commonclss.GetStructsInfos(pnt, hd_ids);
             if (geostructsinfos.Count > 0)
             {
-                GeologySpaceBll.DeleteGeologySpaceEntityInfos(workingFace.WorkingFaceID);//删除工作面ID对应的地质构造信息
+                GeologySpaceBll.DeleteGeologySpaceEntityInfos(workingFace.WorkingFaceId);//删除工作面ID对应的地质构造信息
                 foreach (string key in geostructsinfos.Keys)
                 {
                     List<GeoStruct> geoinfos = geostructsinfos[key];
@@ -552,7 +552,7 @@ namespace sys2
                 //队别名称
                 dayReportHCEntity.TeamInfo = TeamInfo.FindById(Convert.ToInt32(cboTeamName.SelectedValue));
                 //绑定回采面编号
-                dayReportHCEntity.WorkingFace.WorkingFaceID = selectWorkingfaceSimple1.IWorkingfaceId;
+                dayReportHCEntity.WorkingFace.WorkingFaceId = selectWorkingfaceSimple1.IWorkingfaceId;
 
                 DataGridViewCellCollection cells = this.dgrdvDayReportHC.Rows[i].Cells;
 
@@ -653,7 +653,7 @@ namespace sys2
         private void updateDayReportHCInfo()
         {
             //绑定回采面编号
-            _dayReportHCEntity.WorkingFace.WorkingFaceID = selectWorkingfaceSimple1.IWorkingfaceId;
+            _dayReportHCEntity.WorkingFace.WorkingFaceId = selectWorkingfaceSimple1.IWorkingfaceId;
             //队别名称
             _dayReportHCEntity.TeamInfo.TeamId = Convert.ToInt32(cboTeamName.SelectedValue);
             //日期
@@ -718,7 +718,7 @@ namespace sys2
                 BasicInfoManager.getInstance().refreshWorkingFaceInfo(workingFace);
 
                 // 通知服务器数据已经修改
-                UpdateWarningDataMsg msg = new UpdateWarningDataMsg(workingFace.WorkingFaceID, tunnelQY.TunnelId,
+                UpdateWarningDataMsg msg = new UpdateWarningDataMsg(workingFace.WorkingFaceId, tunnelQY.TunnelId,
                     DayReportHCDbConstNames.TABLE_NAME, OPERATION_TYPE.UPDATE, DateTime.Now);
                 this.MainForm.SendMsg2Server(msg);
             }

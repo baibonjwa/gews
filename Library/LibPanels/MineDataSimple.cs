@@ -11,7 +11,7 @@ using LibSocket;
 
 namespace LibPanels
 {
-    public partial class MineDataSimple
+    public partial class MineDataSimple : BaseForm
     {
         //******定义变量***********
         private GasInfoEntering _gasData = new GasInfoEntering(); //瓦斯
@@ -50,7 +50,7 @@ namespace LibPanels
         {
             Tunnel entTunnel = BasicInfoManager.getInstance().getTunnelByID(selectTunnelSimple1.ITunnelId);
             WorkingFace entWorkingFace =
-                BasicInfoManager.getInstance().getWorkingFaceById(entTunnel.WorkingFace.WorkingFaceID);
+                BasicInfoManager.getInstance().getWorkingFaceById(entTunnel.WorkingFace.WorkingFaceId);
             //WorkingFaceBLL.selectWorkingFaceInfoByID(entTunnel.WorkingFace.WorkingFaceID);
             txtCoordinateX.Text = entWorkingFace.Coordinate.X.ToString();
             txtCoordinateY.Text = entWorkingFace.Coordinate.Y.ToString();

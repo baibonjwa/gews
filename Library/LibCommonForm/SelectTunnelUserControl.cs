@@ -187,8 +187,8 @@ namespace LibCommonForm
             // 加载工作面信息
             loadWorkingFaceName();
             // 设置默认
-            this.lstWorkingFaceName.SelectedValue = tunnelEntity.WorkingFace.WorkingFaceID;
-            _iWorkingFaceId = tunnelEntity.WorkingFace.WorkingFaceID;
+            this.lstWorkingFaceName.SelectedValue = tunnelEntity.WorkingFace.WorkingFaceId;
+            _iWorkingFaceId = tunnelEntity.WorkingFace.WorkingFaceId;
 
             // 加载巷道信息
             loadTunnelName();

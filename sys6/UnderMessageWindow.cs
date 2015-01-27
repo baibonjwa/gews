@@ -71,7 +71,7 @@ namespace UnderTerminal
         {
             this.tunnelId = this.selectTunnelSimple1.ITunnelId;
             this.tunnelName = this.selectTunnelSimple1.ITunnelName;
-            workingfaceId = BasicInfoManager.getInstance().getTunnelByID(tunnelId).WorkingFace.WorkingFaceID;
+            workingfaceId = BasicInfoManager.getInstance().getTunnelByID(tunnelId).WorkingFace.WorkingFaceId;
         }
 
         private void btnUnderManage_Click(object sender, EventArgs e)

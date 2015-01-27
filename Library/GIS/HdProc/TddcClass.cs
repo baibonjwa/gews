@@ -8,6 +8,8 @@ using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Geodatabase;
 using System.Runtime.InteropServices;
 using GIS.HdProc;
+using LibEntity;
+
 namespace GIS.HdProc
 {
     //推断断层绘制类
@@ -30,7 +32,7 @@ namespace GIS.HdProc
         /// <summary>
         /// 修改推断断层的符号
         /// </summary>
-        public void UpdateTdLyr(string collapsePoints,string bid)
+        public void UpdateTdLyr(string collapsePoints, string bid)
         {
             //首先删除对应BID的推断断层信息
             string sql = GIS.GIS_Const.FIELD_BID + "='" + bid + "'";
@@ -42,11 +44,11 @@ namespace GIS.HdProc
         /// 添加推断断层符号
         /// </summary>
         /// <param name="collapsePoints"></param>
-        public void AddTdLyr(string collapsePoints,string bid)
+        public void AddTdLyr(string collapsePoints, string bid)
         {
             BID = bid;
             string param = ConstructStr(collapsePoints);
-            string sql = LibBusiness.BigFaultageDbConstNames.FAULTAGE_NAME + " IN (" + param + ")";
+            string sql = BigFaultage.CFaultageName + " IN (" + param + ")";
             IFeatureCursor feacursors = Global.commonclss.PropertySearch(sql, Global.jllyr);
             IFeature fea = feacursors.NextFeature();
             List<IPolyline> plines = new List<IPolyline>();

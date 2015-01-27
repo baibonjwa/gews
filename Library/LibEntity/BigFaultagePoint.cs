@@ -1,11 +1,12 @@
-﻿using Castle.ActiveRecord;
+﻿using System.Collections.Generic;
+using Castle.ActiveRecord;
+using NHibernate.Criterion;
 
 namespace LibEntity
 {
-    [ActiveRecord("T_BIG_FAULTAGE_POINT", Lazy = true)]
+    [ActiveRecord("T_BIG_FAULTAGE_POINT")]
     public class BigFaultagePoint : ActiveRecordBase<BigFaultagePoint>
     {
-        private BigFaultage _bigFaultage = new BigFaultage();
 
         /// <summary>
         ///     断层编号
@@ -26,14 +27,16 @@ namespace LibEntity
         [Property("COORDINATE_Z")]
         public virtual double CoordinateZ { get; set; }
 
-        [BelongsTo("FAULTAGE_ID")]
-        public virtual BigFaultage BigFaultage
-        {
-            get { return _bigFaultage; }
-            set { _bigFaultage = value; }
-        }
+        [BelongsTo("BIG_FAULTAGE_ID")]
+        public BigFaultage BigFaultage { get; set; }
 
         [Property("BINDINGID")]
         public virtual string Bid { get; set; }
+
+        public static BigFaultagePoint[] FindAllByFaultageId(int bigFaultageId)
+        {
+            var criterion = new List<ICriterion> { Restrictions.Eq("BigFaultage.FaultageId", bigFaultageId) };
+            return FindAll(criterion.ToArray());
+        }
     }
 }

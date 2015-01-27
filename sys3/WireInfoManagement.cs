@@ -376,7 +376,7 @@ namespace _3.GeologyMeasure
                 tunnelEntity.WorkingFace.MiningArea.Horizontal.Mine.MineId, 
                 tunnelEntity.WorkingFace.MiningArea.Horizontal.HorizontalId, 
                 tunnelEntity.WorkingFace.MiningArea.MiningAreaId, 
-                tunnelEntity.WorkingFace.WorkingFaceID, 
+                tunnelEntity.WorkingFace.WorkingFaceId, 
                 tunnelEntity.TunnelId,
             };
 

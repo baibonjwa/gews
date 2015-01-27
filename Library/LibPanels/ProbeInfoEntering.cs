@@ -221,13 +221,13 @@ namespace LibPanels
 
             if (_oldTunnelId != 0)
             {
-                var msgUpdate = new UpdateWarningDataMsg(workingfaceEnt.WorkingFaceID,
+                var msgUpdate = new UpdateWarningDataMsg(workingfaceEnt.WorkingFaceId,
                     _probe.Tunnel.TunnelId,
                     Probe.TableName, opType, DateTime.Now);
                 MainForm.SendMsg2Server(msgUpdate);
             }
 
-            var msg = new UpdateWarningDataMsg(workingfaceEnt.WorkingFaceID,
+            var msg = new UpdateWarningDataMsg(workingfaceEnt.WorkingFaceId,
                 _probe.Tunnel.TunnelId,
                 Probe.TableName, opType, DateTime.Now);
             MainForm.SendMsg2Server(msg);

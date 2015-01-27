@@ -159,7 +159,7 @@ namespace LibBusiness
             sqlStr.Append(WorkingFaceDbConstNames.COORDINATE_X + " = '" + workingFaceEntity.Coordinate.X + "'");
             sqlStr.Append(", " + WorkingFaceDbConstNames.COORDINATE_Y + " = '" + workingFaceEntity.Coordinate.Y + "'");
             sqlStr.Append(", " + WorkingFaceDbConstNames.COORDINATE_Z + " = '" + workingFaceEntity.Coordinate.Z + "'");
-            sqlStr.Append(" WHERE " + WorkingFaceDbConstNames.WORKINGFACE_ID + " = " + workingFaceEntity.WorkingFaceID);
+            sqlStr.Append(" WHERE " + WorkingFaceDbConstNames.WORKINGFACE_ID + " = " + workingFaceEntity.WorkingFaceId);
 
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
             bool bResult = db.OperateDB(sqlStr.ToString());
@@ -201,7 +201,7 @@ namespace LibBusiness
             sqlStr.Append(" , " + WorkingFaceDbConstNames.COORDINATE_X + " = " + workingFaceEntity.Coordinate == null ? Const.DOUBLE_ZERO : workingFaceEntity.Coordinate.X);
             sqlStr.Append(" , " + WorkingFaceDbConstNames.COORDINATE_Y + " = " + workingFaceEntity.Coordinate == null ? Const.DOUBLE_ZERO : workingFaceEntity.Coordinate.Y);
             sqlStr.Append(" , " + WorkingFaceDbConstNames.COORDINATE_Z + " = " + workingFaceEntity.Coordinate == null ? Const.DOUBLE_ZERO : workingFaceEntity.Coordinate.Z);
-            sqlStr.Append(" WHERE " + WorkingFaceDbConstNames.WORKINGFACE_ID + " = " + workingFaceEntity.WorkingFaceID);
+            sqlStr.Append(" WHERE " + WorkingFaceDbConstNames.WORKINGFACE_ID + " = " + workingFaceEntity.WorkingFaceId);
 
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
             bool bResult = db.OperateDB(sqlStr.ToString());
@@ -286,7 +286,7 @@ namespace LibBusiness
                     workingfaceEntity.Coordinate = new Coordinate(x, y, z);
 
                     //workingfaceEntity.MiningAreaID = (int)ds.Tables[0].Rows[0][WorkingFaceDbConstNames.MININGAREA_ID];
-                    workingfaceEntity.WorkingFaceID = (int)ds.Tables[0].Rows[0][WorkingFaceDbConstNames.WORKINGFACE_ID];
+                    workingfaceEntity.WorkingFaceId = (int)ds.Tables[0].Rows[0][WorkingFaceDbConstNames.WORKINGFACE_ID];
                     workingfaceEntity.WorkingFaceName = ds.Tables[0].Rows[0][WorkingFaceDbConstNames.WORKINGFACE_NAME].ToString();
                 }
                 catch
@@ -333,7 +333,7 @@ namespace LibBusiness
         {
             string sql = " BEGIN ";
 
-            foreach (Tunnel tEntity in entity.tunnelSet)
+            foreach (Tunnel tEntity in entity.TunnelSet)
             {
                 sql += "UPDATE " + TunnelInfoDbConstNames.TABLE_NAME +
                       " SET TUNNEL_TYPE=" + (int)TunnelTypeEnum.OTHER + " WHERE " + TunnelInfoDbConstNames.ID + " = " + tEntity.TunnelId;

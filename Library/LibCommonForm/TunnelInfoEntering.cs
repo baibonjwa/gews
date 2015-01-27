@@ -175,7 +175,7 @@ namespace LibCommonForm
                 return;
             }
             this.DialogResult = DialogResult.OK;
-            tunnelEntity.WorkingFace.WorkingFaceID = PanelForTunnelEntering.IWorkingFaceId;
+            tunnelEntity.WorkingFace.WorkingFaceId = PanelForTunnelEntering.IWorkingFaceId;
             //巷道名称
             tunnelEntity.TunnelName = this.txtTunnelName.Text;
             //支护方式

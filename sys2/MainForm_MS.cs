@@ -41,12 +41,6 @@ namespace sys2
             statusStrip1.AxMap = mapControl_MS;
             m_FileMenu.AxMapControl = this.mapControl_MS; //传入MapControl控件  
 
-            stateMonitor1.doInitialization(this);
-            stateMonitor1.Start();
-            stateMonitor1.Type = StateMonitor.LocationType.BottomRight;
-            stateMonitor1.X = 5;
-            stateMonitor1.Y = 2;
-
             //////////////////////////////////////////////////////
             ///绘制基本图元工具条
             ///加载测试数据   

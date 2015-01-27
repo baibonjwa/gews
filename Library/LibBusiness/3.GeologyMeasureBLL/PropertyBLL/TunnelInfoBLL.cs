@@ -174,7 +174,7 @@ namespace LibBusiness
             sqlStr.Append(tunnelEntity.CoalOrStone + "',");
             sqlStr.Append(tunnelEntity.CoalLayerID + ",'");
             sqlStr.Append(tunnelEntity.BindingID + "',");
-            sqlStr.Append(tunnelEntity.WorkingFace.WorkingFaceID + ",");
+            sqlStr.Append(tunnelEntity.WorkingFace.WorkingFaceId + ",");
             sqlStr.Append(tunnelEntity.TunnelWid + ")");
             //Alert.alert(sqlStr.ToString());
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
@@ -200,7 +200,7 @@ namespace LibBusiness
             sqlStr.Append(tunnelEntity.TunnelDesignArea + "," + TunnelInfoDbConstNames.COAL_OR_STONE + " = '");
             sqlStr.Append(tunnelEntity.CoalOrStone + "'," + TunnelInfoDbConstNames.COAL_LAYER_ID + " = ");
             sqlStr.Append(tunnelEntity.CoalLayerID + "," + TunnelInfoDbConstNames.WORKINGFACE_ID + " = ");
-            sqlStr.Append(tunnelEntity.WorkingFace.WorkingFaceID + "," + TunnelInfoDbConstNames.TUNNEL_WID + " = " + tunnelEntity.TunnelWid + " WHERE " + TunnelInfoDbConstNames.ID + " =");
+            sqlStr.Append(tunnelEntity.WorkingFace.WorkingFaceId + "," + TunnelInfoDbConstNames.TUNNEL_WID + " = " + tunnelEntity.TunnelWid + " WHERE " + TunnelInfoDbConstNames.ID + " =");
             sqlStr.Append(tunnelEntity.TunnelId);
 
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
@@ -345,7 +345,7 @@ namespace LibBusiness
                 "UPDATE " + TunnelInfoDbConstNames.TABLE_NAME +
                 " SET " +
                 TunnelInfoDbConstNames.TUNNEL_TYPE + "=" + (int)TunnelTypeEnum.TUNNELLING + ", " +
-                TunnelInfoDbConstNames.WORKINGFACE_ID + "=" + wfEntity.WorkingFaceID +
+                TunnelInfoDbConstNames.WORKINGFACE_ID + "=" + wfEntity.WorkingFaceId +
                 " WHERE " + TunnelInfoDbConstNames.ID + " = " + tunnelEntity.TunnelId + ";";
 
             sql += " UPDATE " + WorkingFaceDbConstNames.TABLE_NAME +
@@ -355,8 +355,8 @@ namespace LibBusiness
                 WorkingFaceDbConstNames.STOP_DATE + "='" + wfEntity.StopDate.ToString() + "'," +
                 WorkingFaceDbConstNames.WORK_STYLE + "='" + wfEntity.WorkStyle + "'," +
                 WorkingFaceDbConstNames.IS_FINISH + "=" + wfEntity.IsFinish + "," +
-                WorkingFaceDbConstNames.TEAM_NAME_ID + "=" + wfEntity.TeamNameID +
-                " WHERE " + WorkingFaceDbConstNames.WORKINGFACE_ID + "= " + wfEntity.WorkingFaceID;
+                WorkingFaceDbConstNames.TEAM_NAME_ID + "=" + wfEntity.TeamNameId +
+                " WHERE " + WorkingFaceDbConstNames.WORKINGFACE_ID + "= " + wfEntity.WorkingFaceId;
 
             sql += " END ";
             sql += "COMMIT TRANSACTION;";
@@ -384,15 +384,15 @@ namespace LibBusiness
               WorkingFaceDbConstNames.STOP_DATE + "='" + wfEntity.StopDate.ToString() + "'," +
               WorkingFaceDbConstNames.WORK_STYLE + "='" + wfEntity.WorkStyle + "'," +
               WorkingFaceDbConstNames.IS_FINISH + "=" + wfEntity.IsFinish + "," +
-              WorkingFaceDbConstNames.TEAM_NAME_ID + "=" + wfEntity.TeamNameID +
-              " WHERE " + WorkingFaceDbConstNames.WORKINGFACE_ID + "= " + wfEntity.WorkingFaceID;
+              WorkingFaceDbConstNames.TEAM_NAME_ID + "=" + wfEntity.TeamNameId +
+              " WHERE " + WorkingFaceDbConstNames.WORKINGFACE_ID + "= " + wfEntity.WorkingFaceId;
 
             foreach (Tunnel entity in tunnelSet)
             {
                 sql += " UPDATE " + TunnelInfoDbConstNames.TABLE_NAME +
                 " SET " +
                 TunnelInfoDbConstNames.TUNNEL_TYPE + " = " + (int)entity.TunnelType + ", " +
-                TunnelInfoDbConstNames.WORKINGFACE_ID + "=" + entity.WorkingFace.WorkingFaceID +
+                TunnelInfoDbConstNames.WORKINGFACE_ID + "=" + entity.WorkingFace.WorkingFaceId +
                 " WHERE " + TunnelInfoDbConstNames.ID + " = " + entity.TunnelId + ";";
             }
             sql += " END ";

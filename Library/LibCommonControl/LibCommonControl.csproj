@@ -132,12 +132,6 @@
     <Compile Include="SelectRuleUserControl.Designer.cs">
       <DependentUpon>SelectRuleUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="StateMonitor.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="StateMonitor.Designer.cs">
-      <DependentUpon>StateMonitor.cs</DependentUpon>
-    </Compile>
     <Compile Include="TextBoxMustFill.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -160,9 +154,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SelectRuleUserControl.resx">
       <DependentUpon>SelectRuleUserControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="StateMonitor.resx">
-      <DependentUpon>StateMonitor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TextBoxMustFill.resx">
       <DependentUpon>TextBoxMustFill.cs</DependentUpon>

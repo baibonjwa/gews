@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm_MS));
-            this.stateMonitor1 = new LibCommonControl.StateMonitor();
             this.toolBar_MS = new ESRI.ArcGIS.Controls.AxToolbarControl();
             this.barManager2 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar1 = new DevExpress.XtraBars.Bar();
@@ -109,19 +108,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.tocControl_MS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mapControl_MS)).BeginInit();
             this.SuspendLayout();
-            // 
-            // stateMonitor1
-            // 
-            this.stateMonitor1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.stateMonitor1.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.stateMonitor1.Location = new System.Drawing.Point(0, 0);
-            this.stateMonitor1.Name = "stateMonitor1";
-            this.stateMonitor1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 100);
-            this.stateMonitor1.Size = new System.Drawing.Size(170, 19);
-            this.stateMonitor1.TabIndex = 23;
-            this.stateMonitor1.Type = LibCommonControl.StateMonitor.LocationType.UpperLeft;
-            this.stateMonitor1.X = 0;
-            this.stateMonitor1.Y = 0;
             // 
             // toolBar_MS
             // 
@@ -940,7 +926,6 @@
         private ESRI.ArcGIS.Controls.AxMapControl mapControl_MS;
         private System.Windows.Forms.Splitter splitter1;
         private ESRI.ArcGIS.Controls.AxTOCControl tocControl_MS;
-        private LibCommonControl.StateMonitor stateMonitor1;
         private DevExpress.XtraBars.BarButtonItem mniDCShape;
     }
 }

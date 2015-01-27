@@ -98,7 +98,7 @@ namespace LibPanels
             arr[0] = tunnelEntity.WorkingFace.MiningArea.Horizontal.Mine.MineId;
             arr[1] = tunnelEntity.WorkingFace.MiningArea.Horizontal.HorizontalId;//HorizontalID;
             arr[2] = tunnelEntity.WorkingFace.MiningArea.MiningAreaId;//MiningAreaID;
-            arr[3] = tunnelEntity.WorkingFace.WorkingFaceID;//WorkingFaceID;
+            arr[3] = tunnelEntity.WorkingFace.WorkingFaceId;//WorkingFaceID;
             arr[4] = tunnelEntity.TunnelId;
         }
 

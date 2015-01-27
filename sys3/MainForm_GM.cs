@@ -1,27 +1,23 @@
 ﻿#region
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
-using LibCommonForm;
-using ESRI.ArcGIS.Controls;
-using ESRI.ArcGIS.Geodatabase;
-using GIS;
-using ESRI.ArcGIS.SystemUI;
 using ESRI.ArcGIS.Carto;
-using ESRI.ArcGIS.Display;
+using ESRI.ArcGIS.Controls;
+using ESRI.ArcGIS.esriSystem;
+using ESRI.ArcGIS.SystemUI;
+using GIS;
 using GIS.Common;
-using GIS.FileMenu;
-using LibCommon;
-using LibSocket;
-using DevExpress.XtraEditors;
+using GIS.HdProc;
 using GIS.View;
 using LibAbout;
+using LibCommon;
 using LibCommonControl;
-using ESRI.ArcGIS.esriSystem;
-using GIS.HdProc;
+using LibCommonForm;
+using _3.GeologyMeasure;
+
 #endregion
-namespace _3.GeologyMeasure
+namespace sys3
 {
     public partial class MainForm_GM : MainFrm
     {

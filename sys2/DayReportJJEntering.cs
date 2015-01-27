@@ -150,7 +150,7 @@ namespace sys2
             this.selectWorkingfaceSimple1.WorkingfaceNameChanged += NameChangeEvent;
             if (workingFace != null)
             {
-                WorkingfaceSimple ws = new WorkingfaceSimple(workingFace.WorkingFaceID, workingFace.WorkingFaceName, workingFace.WorkingfaceTypeEnum);
+                WorkingfaceSimple ws = new WorkingfaceSimple(workingFace.WorkingFaceId, workingFace.WorkingFaceName, workingFace.WorkingfaceTypeEnum);
                 this.selectWorkingfaceSimple1.SelectTunnelItemWithoutHistory(ws);
             }
 
@@ -373,13 +373,13 @@ namespace sys2
             //巷道掘进的参数
             if (this.Text == Const_MS.DAY_REPORT_JJ_ADD)
             {
-                LibBusiness.TunnelDefaultSelect.InsertDefaultTunnel(DayReportJJDbConstNames.TABLE_NAME, workingFace.WorkingFaceID);
+                LibBusiness.TunnelDefaultSelect.InsertDefaultTunnel(DayReportJJDbConstNames.TABLE_NAME, workingFace.WorkingFaceId);
                 insertDayReportJJInfo();
             }
             if (this.Text == Const_MS.DAY_REPORT_JJ_CHANGE)
             {
                 DayReportJj oldDayReportJJEntity = _dayReportJJEntity; //修改之前的实体
-                LibBusiness.TunnelDefaultSelect.UpdateDefaultTunnel(DayReportJJDbConstNames.TABLE_NAME, workingFace.WorkingFaceID);
+                LibBusiness.TunnelDefaultSelect.UpdateDefaultTunnel(DayReportJJDbConstNames.TABLE_NAME, workingFace.WorkingFaceId);
                 DayReportJj newDayReportJJEntity = _dayReportJJEntity; //修改后的掘进信息实体               
             }
         }
@@ -398,7 +398,7 @@ namespace sys2
             }
             //查询地质结构信息
             geostructsinfos.Remove("LAST");
-            GeologySpaceBll.DeleteGeologySpaceEntityInfos(workingFace.WorkingFaceID);//删除工作面ID对应的地质构造信息
+            GeologySpaceBll.DeleteGeologySpaceEntityInfos(workingFace.WorkingFaceId);//删除工作面ID对应的地质构造信息
             foreach (string key in geostructsinfos.Keys)
             {
                 List<GeoStruct> geoinfos = geostructsinfos[key];
@@ -443,7 +443,7 @@ namespace sys2
             List<int> hd_ids = new List<int>();
             hd_ids.Add(Convert.ToInt16(hdid));
             Dictionary<string, List<GeoStruct>> geostructsinfos = Global.commonclss.GetStructsInfos(pnt, hd_ids);
-            GeologySpaceBll.DeleteGeologySpaceEntityInfos(workingFace.WorkingFaceID);//删除对应工作面ID的地质构造信息
+            GeologySpaceBll.DeleteGeologySpaceEntityInfos(workingFace.WorkingFaceId);//删除对应工作面ID的地质构造信息
             foreach (string key in geostructsinfos.Keys)
             {
                 List<GeoStruct> geoinfos = geostructsinfos[key];
@@ -484,7 +484,7 @@ namespace sys2
                 //队别名称
                 _dayReportJJEntity.TeamInfo.TeamId = Convert.ToInt32(cboTeamName.SelectedValue);
                 //绑定巷道编号
-                _dayReportJJEntity.WorkingFace.WorkingFaceID = workingFace.WorkingFaceID;
+                _dayReportJJEntity.WorkingFace.WorkingFaceId = workingFace.WorkingFaceId;
 
                 DataGridViewCellCollection cells = this.dgrdvDayReportJJ.Rows[i].Cells;
                 //日期
@@ -532,7 +532,7 @@ namespace sys2
             }
 
             bool bResult = false;
-            Tunnel tunnel = BasicInfoManager.getInstance().getTunnelListByWorkingFaceId(workingFace.WorkingFaceID)[0];
+            Tunnel tunnel = BasicInfoManager.getInstance().getTunnelListByWorkingFaceId(workingFace.WorkingFaceId)[0];
 
             //循环添加
             foreach (DayReportJj dayReportJJEntity in dayReportJJEntityList)
@@ -552,7 +552,7 @@ namespace sys2
 
             Log.Debug("添加进尺数据发送Socket消息");
             // 通知服务器掘进进尺已经更新
-            UpdateWarningDataMsg msg = new UpdateWarningDataMsg(workingFace.WorkingFaceID, tunnel.TunnelId,
+            UpdateWarningDataMsg msg = new UpdateWarningDataMsg(workingFace.WorkingFaceId, tunnel.TunnelId,
                 DayReportJJDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, DateTime.Now);
             this.MainForm.SendMsg2Server(msg);
             Log.Debug("添加进尺数据Socket消息发送完成");

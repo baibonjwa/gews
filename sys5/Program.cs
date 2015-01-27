@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using Castle.ActiveRecord;
 using Castle.ActiveRecord.Framework;
 using Castle.ActiveRecord.Framework.Config;
-using ESRI.ArcGIS.esriSystem;
 using LibCommon;
 using LibLoginForm;
-using LibConfig;
+using _5.WarningManagement;
 
-namespace _5.WarningManagement
+namespace sys5
 {
     static class Program
     {
@@ -32,16 +29,16 @@ namespace _5.WarningManagement
             IConfigurationSource config = new XmlConfigurationSource("ARConfig.xml");
 
             Assembly asm = Assembly.Load("LibEntity");
-            
+
             ActiveRecordStarter.Initialize(asm, config);
             Log.Debug("[WM]....Starting...");
             ESRI.ArcGIS.RuntimeManager.Bind(ESRI.ArcGIS.ProductCode.EngineOrDesktop);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            MainForm_WM mf = new MainForm_WM();
+            var mf = new MainForm_WM();
             Log.Debug("[WM]....Main Form Construction Finished...");
-            LoginForm lf = new LoginForm(mf);
+            var lf = new LoginForm(mf);
             Application.Run(lf);
         }
     }

@@ -1,10 +1,15 @@
-﻿using Castle.ActiveRecord;
+﻿using System;
+using System.Linq;
+using Castle.ActiveRecord;
 
 namespace LibEntity
 {
     [ActiveRecord("T_BIG_FAULTAGE")]
     public class BigFaultage : ActiveRecordBase<BigFaultage>
     {
+
+        public const String TableName = "T_BIG_FAULTAGE";
+        public const String CFaultageName = "FaultageName";
 
         /// <summary>
         ///     断层编号
@@ -47,5 +52,12 @@ namespace LibEntity
         /// </summary>
         [Property("BID")]
         public string BindingId { get; set; }
+
+        public override void Delete()
+        {
+            var bigFaultagePoints = BigFaultagePoint.FindAllByFaultageId(FaultageId);
+            BigFaultagePoint.DeleteAll(bigFaultagePoints.Select(u => u.Id));
+            base.Delete();
+        }
     }
 }

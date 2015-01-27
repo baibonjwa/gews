@@ -299,7 +299,7 @@ namespace _4.OutburstPrevention
                 if (bResult)
                 {
                     //TODO:添加成功
-                    UpdateWarningDataMsg msg = new UpdateWarningDataMsg(tunnelEntity.WorkingFace.WorkingFaceID, tunnelEntity.TunnelId, K1ValueDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, DateTime.Now);
+                    UpdateWarningDataMsg msg = new UpdateWarningDataMsg(tunnelEntity.WorkingFace.WorkingFaceId, tunnelEntity.TunnelId, K1ValueDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, DateTime.Now);
                     this.MainForm.SendMsg2Server(msg);
                     DrawGasGushQuantityPt();
                 }
@@ -394,7 +394,7 @@ namespace _4.OutburstPrevention
                     if (bResult)
                     {
                         //TODO:修改成功
-                        UpdateWarningDataMsg msg = new UpdateWarningDataMsg(tunnelEntity.WorkingFace.WorkingFaceID, tunnelEntity.TunnelId, K1ValueDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, DateTime.Now);
+                        UpdateWarningDataMsg msg = new UpdateWarningDataMsg(tunnelEntity.WorkingFace.WorkingFaceId, tunnelEntity.TunnelId, K1ValueDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, DateTime.Now);
                         this.MainForm.SendMsg2Server(msg);
                         DelGasGushQuantityPt("", "");
                         DrawGasGushQuantityPt();
