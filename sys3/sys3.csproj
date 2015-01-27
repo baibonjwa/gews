@@ -255,12 +255,6 @@
     <Compile Include="CollapsePillarsEntering.Designer.cs">
       <DependentUpon>CollapsePillarsEntering.cs</DependentUpon>
     </Compile>
-    <Compile Include="CollapsePillarsInfoEntering.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CollapsePillarsInfoEntering.Designer.cs">
-      <DependentUpon>CollapsePillarsInfoEntering.cs</DependentUpon>
-    </Compile>
     <Compile Include="CollapsePillarsManagement.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -391,9 +385,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CollapsePillarsEntering.resx">
       <DependentUpon>CollapsePillarsEntering.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CollapsePillarsInfoEntering.resx">
-      <DependentUpon>CollapsePillarsInfoEntering.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CollapsePillarsManagement.resx">
       <DependentUpon>CollapsePillarsManagement.cs</DependentUpon>

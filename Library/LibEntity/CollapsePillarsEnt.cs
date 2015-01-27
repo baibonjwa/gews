@@ -60,7 +60,7 @@ namespace LibEntity
         /// <summary>
         ///     bindingID
         /// </summary>
-        public string BindingID { get; set; }
+        public string BindingId { get; set; }
 
         //类别
 

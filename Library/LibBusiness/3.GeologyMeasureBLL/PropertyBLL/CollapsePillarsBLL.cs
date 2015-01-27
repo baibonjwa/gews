@@ -205,7 +205,7 @@ namespace LibBusiness
             sb.Append(collapsePillars.CoordinateY + "','");
             sb.Append(collapsePillars.CoordinateZ + "','");
             sb.Append(collapsePillars.Id + "','");
-            sb.Append(collapsePillars.BindingID + "')");
+            sb.Append(collapsePillars.BindingId + "')");
             bool bResult = db.OperateDB(sb.ToString());
             return bResult;
         }

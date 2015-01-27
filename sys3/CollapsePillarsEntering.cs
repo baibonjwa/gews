@@ -175,7 +175,7 @@ namespace _3.GeologyMeasure
 
                 if (this.Text == Const_GM.COLLAPSEPILLARE_ADD)
                 {
-                    collapse.BindingID = IDGenerator.NewBindingID();
+                    collapse.BindingId = IDGenerator.NewBindingID();
 
                     collapse.Id = Convert.ToInt32(CollapsePillarsBLL.selectMaxCollapsePillars().Tables[0].Rows[0][CollapsePillarsInfoDbConstNames.ID].ToString());
                     bResult = CollapsePillarsBLL.insertCollapsePillarsPoint(collapse);
@@ -194,9 +194,9 @@ namespace _3.GeologyMeasure
                     }
                     else
                     {
-                        collapse.BindingID = IDGenerator.NewBindingID();
+                        collapse.BindingId = IDGenerator.NewBindingID();
                         bResult = CollapsePillarsBLL.insertCollapsePillarsPoint(collapse);
-                        collapse.BindingID = null;
+                        collapse.BindingId = null;
                     }
                 }
 
