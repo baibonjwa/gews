@@ -164,10 +164,6 @@
     <Compile Include="2.MiningSchedulingBLL\PropertyBLL\TeamBLL.cs" />
     <Compile Include="2.MiningSchedulingBLL\PropertyBLL\WorkTimeBLL.cs" />
     <Compile Include="2.MiningSchedulingBLL\PropertyBLL\DayReportHCBLL.cs" />
-    <Compile Include="3.GeologyMeasureBLL\DbConstNames\BoreholeDBConstNames.cs" />
-    <Compile Include="3.GeologyMeasureBLL\DbConstNames\BoreholeLithologyDbConstNames.cs" />
-    <Compile Include="3.GeologyMeasureBLL\DbConstNames\CollapsePillarsDbConstNames.cs" />
-    <Compile Include="3.GeologyMeasureBLL\DbConstNames\CollapsePillarsInfoDbConstNames.cs" />
     <Compile Include="3.GeologyMeasureBLL\DbConstNames\PitshaftDbConstNames.cs" />
     <Compile Include="3.GeologyMeasureBLL\DbConstNames\PitshaftTypeDbConstNames.cs" />
     <Compile Include="3.GeologyMeasureBLL\DbConstNames\ProspectingLineDbConstNames.cs" />
@@ -180,11 +176,6 @@
     <Compile Include="3.GeologyMeasureBLL\DbConstNames\TunnelInfoDbConstNames.cs" />
     <Compile Include="3.GeologyMeasureBLL\DbConstNames\WireInfoDbConstNames.cs" />
     <Compile Include="3.GeologyMeasureBLL\DbConstNames\WirePointDbConstNames.cs" />
-    <Compile Include="3.GeologyMeasureBLL\DbConstNames\CollapsePillarsPointDbConstNames.cs" />
-    <Compile Include="3.GeologyMeasureBLL\PropertyBLL\BoreholeBLL.cs" />
-    <Compile Include="3.GeologyMeasureBLL\PropertyBLL\BoreholeLithologyBLL.cs" />
-    <Compile Include="3.GeologyMeasureBLL\PropertyBLL\CollapsePillarsBLL.cs" />
-    <Compile Include="3.GeologyMeasureBLL\PropertyBLL\CollapsePillarsInfoEnteringBLL.cs" />
     <Compile Include="3.GeologyMeasureBLL\PropertyBLL\PitshaftBLL.cs" />
     <Compile Include="3.GeologyMeasureBLL\PropertyBLL\PitshaftTypeBLL.cs" />
     <Compile Include="3.GeologyMeasureBLL\PropertyBLL\ProspectingLineBLL.cs" />

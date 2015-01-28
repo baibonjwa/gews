@@ -249,12 +249,6 @@
     <Compile Include="BoreholeInfoManagement.Designer.cs">
       <DependentUpon>BoreholeInfoManagement.cs</DependentUpon>
     </Compile>
-    <Compile Include="CollapsePillarsEntering.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CollapsePillarsEntering.Designer.cs">
-      <DependentUpon>CollapsePillarsEntering.cs</DependentUpon>
-    </Compile>
     <Compile Include="CollapsePillarsManagement.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -382,9 +376,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="BoreholeInfoManagement.resx">
       <DependentUpon>BoreholeInfoManagement.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CollapsePillarsEntering.resx">
-      <DependentUpon>CollapsePillarsEntering.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CollapsePillarsManagement.resx">
       <DependentUpon>CollapsePillarsManagement.cs</DependentUpon>

@@ -1,15 +1,8 @@
-﻿// ******************************************************************
-// 概  述：钻孔数据录入
-// 作  者：伍鑫
-// 创建日期：2013/11/26
-// 版本号：V1.0
-// 版本信息：
-// V1.0 新建
-// ******************************************************************
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
@@ -27,13 +20,14 @@ namespace sys3
     public partial class BoreholeInfoEntering : Form
     {
         /** 钻孔编号 **/
-        private int _boreholeId;
         /** 业务逻辑类型：添加、修改  **/
-        private string _bllType = "add";
+        private readonly string _bllType = "add";
+        private readonly int _boreholeId;
         private string BID = "";
+        private object[] _objArrRowData = new object[7];
 
         /// <summary>
-        /// 构造方法
+        ///     构造方法
         /// </summary>
         public BoreholeInfoEntering()
         {
@@ -63,7 +57,7 @@ namespace sys3
         }
 
         /// <summary>
-        /// 带参数的构造方法
+        ///     带参数的构造方法
         /// </summary>
         /// <param name="boreholeId">钻孔编号</param>
         public BoreholeInfoEntering(int boreholeId)
@@ -84,7 +78,7 @@ namespace sys3
         }
 
         /// <summary>
-        /// 加载岩性信息
+        ///     加载岩性信息
         /// </summary>
         private void loadLithologyInfo()
         {
@@ -94,41 +88,20 @@ namespace sys3
             {
                 for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                 {
-                    this.LITHOLOGY.Items.Add(ds.Tables[0].Rows[i][LithologyDbConstNames.LITHOLOGY_NAME].ToString());
+                    LITHOLOGY.Items.Add(ds.Tables[0].Rows[i][LithologyDbConstNames.LITHOLOGY_NAME].ToString());
                 }
             }
         }
 
-        // TODO:当前修改后用的是load方法，此方法暂时保留
-        ///// <summary>
-        ///// 获取修改后的钻孔实体
-        ///// </summary>
-        ///// <returns></returns>
-        //public BoreholeEntity getInputEntiyParams()
-        //{
-        //    BoreholeEntity boreholeEntity = new BoreholeEntity();
-
-        //    boreholeEntity.BoreholeNumber = txtBoreholeNumber.Text;
-        //    int tmpId = -1;
-        //    if (!BoreholeBLL.selectBoreholeIdByBoreholeNum(boreholeEntity.BoreholeNumber, out tmpId))
-        //    {
-        //        Alert.alert("无法根据孔号获取钻孔ID！");
-        //    }
-        //    boreholeEntity.BoreholeId = tmpId;
-        //    //mark
-        //    boreholeEntity.GroundElevation = txtGroundElevation.Text;
-        //    return boreholeEntity;
-        //}
-
         /// <summary>
-        /// 提  交
+        ///     提  交
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnSubmit_Click(object sender, EventArgs e)
         {
             // 验证
-            if (!this.check())
+            if (!check())
             {
                 DialogResult = DialogResult.None;
                 return;
@@ -136,47 +109,44 @@ namespace sys3
             DialogResult = DialogResult.OK;
 
             // 创建钻孔实体
-            Borehole breholeEntity = new Borehole();
+            var breholeEntity = new Borehole();
 
             // 钻孔编号
             // 添加的时候自动採番，修改的场合使用上层传过来的钻孔编号
-            if (this._bllType == "add")
-            {
-                this._boreholeId = this.getBoreholeId();
-            }
-            breholeEntity.BoreholeId = this._boreholeId;
+
+            breholeEntity.BoreholeId = _boreholeId;
 
             // 孔号
-            breholeEntity.BoreholeNumber = this.txtBoreholeNumber.Text.Trim();
+            breholeEntity.BoreholeNumber = txtBoreholeNumber.Text.Trim();
             // 地面标高
             double dGroundElevation = 0;
-            if (double.TryParse(Convert.ToString(this.txtGroundElevation.Text.Trim()), out dGroundElevation))
+            if (double.TryParse(Convert.ToString(txtGroundElevation.Text.Trim()), out dGroundElevation))
             {
                 breholeEntity.GroundElevation = dGroundElevation;
             }
             // X坐标
             double dCoordinateX = 0;
-            if (double.TryParse(Convert.ToString(this.txtCoordinateX.Text.Trim()), out dCoordinateX))
+            if (double.TryParse(Convert.ToString(txtCoordinateX.Text.Trim()), out dCoordinateX))
             {
                 breholeEntity.CoordinateX = dCoordinateX;
             }
             // Y坐标
             double dCoordinateY = 0;
-            if (double.TryParse(Convert.ToString(this.txtCoordinateY.Text.Trim()), out dCoordinateY))
+            if (double.TryParse(Convert.ToString(txtCoordinateY.Text.Trim()), out dCoordinateY))
             {
                 breholeEntity.CoordinateY = dCoordinateY;
             }
             // Z坐标
             double dCoordinateZ = 0;
-            if (double.TryParse(Convert.ToString(this.txtCoordinateZ.Text.Trim()), out dCoordinateZ))
+            if (double.TryParse(Convert.ToString(txtCoordinateZ.Text.Trim()), out dCoordinateZ))
             {
                 breholeEntity.CoordinateZ = dCoordinateZ;
             }
             // 煤层结构
             breholeEntity.CoalSeamsTexture = string.Empty;
 
-            List<BoreholeLithology> boreholeLithologyEntityList = new List<BoreholeLithology>();
-            for (int i = 0; i < this.gvCoalSeamsTexture.RowCount; i++)
+            var boreholeLithologyEntityList = new List<BoreholeLithology>();
+            for (int i = 0; i < gvCoalSeamsTexture.RowCount; i++)
             {
                 // 最后一行为空行时，跳出循环
                 if (i == gvCoalSeamsTexture.RowCount - 1)
@@ -184,11 +154,11 @@ namespace sys3
                     break;
                 }
                 // 创建钻孔岩性实体
-                BoreholeLithology boreholeLithologyEntity = new BoreholeLithology();
+                var boreholeLithologyEntity = new BoreholeLithology();
                 // 钻孔编号
-                boreholeLithologyEntity.Borehole.BoreholeId = this._boreholeId;
+                boreholeLithologyEntity.Borehole.BoreholeId = _boreholeId;
                 // 岩性编号
-                DataGridViewComboBoxCell cell0 = this.gvCoalSeamsTexture.Rows[i].Cells[0] as DataGridViewComboBoxCell;
+                var cell0 = gvCoalSeamsTexture.Rows[i].Cells[0] as DataGridViewComboBoxCell;
                 if (cell0 != null && cell0.Value != null)
                 {
                     DataSet ds = LithologyBLL.selectLithologyInfoByLithologyName(cell0.Value.ToString());
@@ -204,38 +174,38 @@ namespace sys3
                 }
                 // 底板标高
                 double dFloorElevation = 0;
-                if (double.TryParse(Convert.ToString(this.gvCoalSeamsTexture.Rows[i].Cells[1].Value),
+                if (double.TryParse(Convert.ToString(gvCoalSeamsTexture.Rows[i].Cells[1].Value),
                     out dFloorElevation))
                 {
                     boreholeLithologyEntity.FloorElevation = dFloorElevation;
                 }
                 // 厚度
                 double dThickness = 0;
-                if (double.TryParse(Convert.ToString(this.gvCoalSeamsTexture.Rows[i].Cells[2].Value), out dThickness))
+                if (double.TryParse(Convert.ToString(gvCoalSeamsTexture.Rows[i].Cells[2].Value), out dThickness))
                 {
                     boreholeLithologyEntity.Thickness = dThickness;
                 }
                 // 煤层名称
-                if (!Validator.IsEmpty(Convert.ToString(this.gvCoalSeamsTexture.Rows[i].Cells[3].Value)))
+                if (!Validator.IsEmpty(Convert.ToString(gvCoalSeamsTexture.Rows[i].Cells[3].Value)))
                 {
                     boreholeLithologyEntity.CoalSeamsName =
-                        this.gvCoalSeamsTexture.Rows[i].Cells[3].Value.ToString().Trim();
+                        gvCoalSeamsTexture.Rows[i].Cells[3].Value.ToString().Trim();
                 }
                 // 坐标X
                 double dCoordinateX1 = 0;
-                if (double.TryParse(Convert.ToString(this.gvCoalSeamsTexture.Rows[i].Cells[4].Value), out dCoordinateX1))
+                if (double.TryParse(Convert.ToString(gvCoalSeamsTexture.Rows[i].Cells[4].Value), out dCoordinateX1))
                 {
                     boreholeLithologyEntity.CoordinateX = dCoordinateX1;
                 }
                 // 坐标Y
                 double dCoordinateY1 = 0;
-                if (double.TryParse(Convert.ToString(this.gvCoalSeamsTexture.Rows[i].Cells[5].Value), out dCoordinateY1))
+                if (double.TryParse(Convert.ToString(gvCoalSeamsTexture.Rows[i].Cells[5].Value), out dCoordinateY1))
                 {
                     boreholeLithologyEntity.CoordinateY = dCoordinateY1;
                 }
                 // 坐标Z
                 double dCoordinateZ1 = 0;
-                if (double.TryParse(Convert.ToString(this.gvCoalSeamsTexture.Rows[i].Cells[6].Value), out dCoordinateZ1))
+                if (double.TryParse(Convert.ToString(gvCoalSeamsTexture.Rows[i].Cells[6].Value), out dCoordinateZ1))
                 {
                     boreholeLithologyEntity.CoordinateZ = dCoordinateZ1;
                 }
@@ -246,18 +216,19 @@ namespace sys3
             // 执行结果
             bool bResult = false;
             // 只有当添加新钻孔信息的时候才去判断孔号是否重复
-            if (this._bllType == "add")
+            if (_bllType == "add")
             {
                 breholeEntity.BindingId = IDGenerator.NewBindingID();
 
                 // 钻孔信息登录
-                bResult = BoreholeBLL.insertBoreholeInfo(breholeEntity);
+                breholeEntity.Save();
+
                 // 钻孔岩性信息登录
                 if (bResult)
                 {
                     foreach (BoreholeLithology boreholeLithologyEntity in boreholeLithologyEntityList)
                     {
-                        bResult = BoreholeLithologyBLL.insertBoreholeLithologyInfo(boreholeLithologyEntity);
+                        boreholeLithologyEntity.Save();
                     }
                 }
             }
@@ -268,19 +239,16 @@ namespace sys3
                 //BoreholeBLL.selectBoreholeBIDByBoreholeNum(breholeEntity.BoreholeNumber, out sBID);
                 breholeEntity.BindingId = BID;
 
-                // 钻孔信息修改
-                bResult = BoreholeBLL.updateBoreholeInfo(breholeEntity);
-                // 钻孔岩性信息修改
-                if (bResult)
-                {
-                    // 钻孔岩性信息删除
-                    bResult = BoreholeLithologyBLL.deleteBoreholeLithologyInfoByBoreholeId(breholeEntity.BoreholeId);
+                breholeEntity.Save();
 
-                    // 钻孔岩性信息登录
-                    foreach (BoreholeLithology boreholeLithologyEntity in boreholeLithologyEntityList)
-                    {
-                        bResult = BoreholeLithologyBLL.insertBoreholeLithologyInfo(boreholeLithologyEntity);
-                    }
+                // 钻孔岩性信息删除
+
+                BoreholeLithology.DeleteAllByBoreholeId(breholeEntity.BoreholeId);
+
+                // 钻孔岩性信息登录
+                foreach (var boreholeLithologyEntity in boreholeLithologyEntityList)
+                {
+                    boreholeLithologyEntity.Save();
                 }
             }
 
@@ -291,7 +259,7 @@ namespace sys3
                 // TODO:
 
                 if (breholeEntity.BindingId == null || breholeEntity.BindingId == "") return; //若BID值为空，则不绘制钻孔
-                if (this._bllType == "add")
+                if (_bllType == "add")
                 {
                     DialogResult dlgResult = MessageBox.Show("是：见煤钻孔，否：未见煤钻孔，取消：不绘制钻孔", "绘制钻孔",
                         MessageBoxButtons.YesNoCancel);
@@ -312,8 +280,8 @@ namespace sys3
                 else
                 {
                     //1.获得当前编辑图层
-                    DrawSpecialCommon drawspecial = new DrawSpecialCommon();
-                    string sLayerAliasName = GIS.LayerNames.DEFALUT_BOREHOLE; //“默认_钻孔”图层
+                    var drawspecial = new DrawSpecialCommon();
+                    string sLayerAliasName = LayerNames.DEFALUT_BOREHOLE; //“默认_钻孔”图层
                     IFeatureLayer featureLayer = drawspecial.GetFeatureLayerByName(sLayerAliasName);
                     if (featureLayer == null)
                     {
@@ -325,7 +293,6 @@ namespace sys3
 
                     if (bIsDeleteOldFeature)
                     {
-
                         DialogResult dlgResult = MessageBox.Show("是：见煤钻孔，否：未见煤钻孔，取消：不绘制钻孔",
                             "绘制钻孔", MessageBoxButtons.YesNoCancel);
 
@@ -346,311 +313,94 @@ namespace sys3
                     {
                         return;
                     }
-
                 }
-                this.Close();
+                Close();
             }
-
         }
-
-        #region 绘制钻孔
 
         /// <summary>
-        /// 见煤钻孔
-        /// </summary>
-        /// <param name="breholeEntity">钻孔实体</param>
-        /// <param name="boreholeLithologyEntity">钻孔岩性实体</param>
-        private void DrawZuanKong(Borehole breholeEntity, BoreholeLithology boreholeLithologyEntity)
-        {
-            ////1.获得当前编辑图层
-            //DrawSpecialCommon drawspecial = new DrawSpecialCommon();
-            //string sLayerAliasName = LibCommon.LibLayerNames.DEFALUT_BOREHOLE;//“默认_钻孔”图层
-            //IFeatureLayer featureLayer = drawspecial.GetFeatureLayerByName(sLayerAliasName);
-            //if (featureLayer == null)
-            //{
-            //    MessageBox.Show("未找到" + sLayerAliasName + "图层,无法绘制钻孔图元。");
-            //    return;
-            //}
-
-            ////2.绘制图元
-            //IPoint pt = new PointClass();
-            //pt.X = breholeEntity.CoordinateX;
-            //pt.Y = breholeEntity.CoordinateY;
-            //pt.Z = breholeEntity.CoordinateZ;
-
-            ////标注内容
-            //string strH = breholeEntity.GroundElevation.ToString();//地面标高
-            //string strName = breholeEntity.BoreholeNumber.ToString();//孔号（名称）
-            //string strDBBG = boreholeLithologyEntity.FloorElevation.ToString();//底板标高
-            //string strMCHD = boreholeLithologyEntity.Thickness.ToString();//煤层厚度
-
-            //GIS.SpecialGraphic.DrawZK1 drawZK1 = new GIS.SpecialGraphic.DrawZK1(strName, strH, strDBBG, strMCHD);
-            //DataEditCommon.g_CurWorkspaceEdit.StartEditing(false);
-            //DataEditCommon.g_CurWorkspaceEdit.StartEditOperation();
-            //IFeature feature = featureLayer.FeatureClass.CreateFeature();
-
-            //IGeometry geometry = pt;
-            //DataEditCommon.ZMValue(feature, geometry);   //几何图形Z值处理
-            ////drawspecial.ZMValue(feature, geometry);//几何图形Z值处理
-            //feature.Shape = pt;//要素形状
-            ////要素ID字段赋值（对应属性表中BindingID）
-            //int iFieldID = feature.Fields.FindField("BID");
-            //feature.Value[iFieldID] =breholeEntity.BindingId.ToString();
-            //feature.Store();//存储要素
-            //DataEditCommon.g_CurWorkspaceEdit.StopEditOperation();
-            //DataEditCommon.g_CurWorkspaceEdit.StopEditing(true);
-            //string strValue = feature.get_Value(feature.Fields.FindField("OBJECTID")).ToString();
-            //DataEditCommon.SpecialPointRenderer(featureLayer, "OBJECTID", strValue, drawZK1.m_Bitmap);
-
-            /////3.显示钻孔图层
-            //if (featureLayer.Visible == false)
-            //    featureLayer.Visible = true;
-
-            //IEnvelope envelop = feature.Shape.Envelope;
-            //DataEditCommon.g_pMyMapCtrl.ActiveView.Extent = envelop;
-            //DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewBackground, null, null);
-            //DataEditCommon.g_pMyMapCtrl.ActiveView.Refresh();
-
-            IPoint pt = new PointClass();
-            pt.X = breholeEntity.CoordinateX;
-            pt.Y = breholeEntity.CoordinateY;
-            pt.Z = breholeEntity.CoordinateZ;
-            if (pt.Z == double.NaN)
-                pt.Z = 0;
-            ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, GIS.LayerNames.DEFALUT_BOREHOLE);
-            if (pLayer == null)
-            {
-                MessageBox.Show("未找到钻孔图层,无法绘制钻孔图元。");
-                return;
-            }
-            IFeatureLayer pFeatureLayer = (IFeatureLayer)pLayer;
-            IGeometry geometry = pt;
-            List<ziduan> list = new List<ziduan>();
-            list.Add(new ziduan("bid", breholeEntity.BindingId.ToString()));
-            list.Add(new ziduan("BOREHOLE_NUMBER", breholeEntity.BoreholeNumber.ToString()));
-            list.Add(new ziduan("addtime", DateTime.Now.ToString()));
-            list.Add(new ziduan("GROUND_ELEVATION", breholeEntity.GroundElevation.ToString()));
-            list.Add(new ziduan("FLOOR_ELEVATION", boreholeLithologyEntity.FloorElevation.ToString()));
-            list.Add(new ziduan("THICKNESS", boreholeLithologyEntity.Thickness.ToString()));
-            list.Add(new ziduan("type", "2"));
-
-            IFeature pfeature = DataEditCommon.CreateNewFeature(pFeatureLayer, geometry, list);
-            if (pfeature != null)
-            {
-                GIS.MyMapHelp.Jump(pt);
-                DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh(
-                    esriViewDrawPhase.esriViewGeography | esriViewDrawPhase.esriViewForeground, null, null);
-            }
-        }
-
-        /// <summary>      
-        /// 未见煤钻孔
-        /// </summary>
-        /// <param name="breholeEntity">钻孔实体</param>
-        private void DrawZuanKong(Borehole breholeEntity)
-        {
-            ////1.获得当前编辑图层
-            //DrawSpecialCommon drawspecial = new DrawSpecialCommon();
-            //string sLayerAliasName = LibCommon.LibLayerNames.DEFALUT_BOREHOLE;//“默认_钻孔”图层
-            //IFeatureLayer featureLayer = drawspecial.GetFeatureLayerByName(sLayerAliasName);
-            //if (featureLayer == null)
-            //{
-            //    MessageBox.Show("未找到" + sLayerAliasName + "图层,无法绘制钻孔图元。");
-            //    return;
-            //}
-
-            ////2.绘制图元
-            //IPoint pt = new PointClass();
-            //pt.X = breholeEntity.CoordinateX;
-            //pt.Y = breholeEntity.CoordinateY;
-            //pt.Z = breholeEntity.CoordinateZ;
-            //if (pt.Z == double.NaN)
-            //    pt.Z = 0;
-            //GIS.SpecialGraphic.DrawZK2 drawZK2 = null;
-            ////标注内容
-            //string strH =breholeEntity.GroundElevation.ToString();//地面标高
-            //string strName = breholeEntity.BoreholeNumber.ToString();//孔号（名称）
-
-            //IFeature feature = featureLayer.FeatureClass.CreateFeature();
-            //IGeometry geometry = pt;
-            //DataEditCommon.ZMValue(feature, geometry);   //几何图形Z值处理
-            ////drawspecial.ZMValue(feature, geometry);    //几何图形Z值处理
-            //feature.Shape = pt;//要素形状
-            ////要素ID字段赋值（对应属性表中BindingID）
-            //int iFieldID = feature.Fields.FindField("ID");
-            //feature.Value[iFieldID] = breholeEntity.BindingId.ToString();
-            //feature.Store();//存储要素
-
-            //string strValue = feature.get_Value(feature.Fields.FindField("OBJECTID")).ToString();
-            //DataEditCommon.SpecialPointRenderer(featureLayer, "OBJECTID", strValue, drawZK2.m_Bitmap);
-
-            /////3.显示钻孔图层
-            //if (featureLayer.Visible == false)
-            //    featureLayer.Visible = true;
-
-            //IEnvelope envelop = feature.Shape.Envelope;
-            //DataEditCommon.g_pMyMapCtrl.ActiveView.Extent = envelop;
-            //DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewBackground, null, null);
-            //DataEditCommon.g_pMyMapCtrl.ActiveView.Refresh();
-
-            IPoint pt = new PointClass();
-            pt.X = breholeEntity.CoordinateX;
-            pt.Y = breholeEntity.CoordinateY;
-            pt.Z = breholeEntity.CoordinateZ;
-            if (pt.Z == double.NaN)
-                pt.Z = 0;
-            ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, GIS.LayerNames.DEFALUT_BOREHOLE);
-            if (pLayer == null)
-            {
-                MessageBox.Show("未找到钻孔图层,无法绘制钻孔图元。");
-                return;
-            }
-            IFeatureLayer pFeatureLayer = (IFeatureLayer)pLayer;
-            IGeometry geometry = pt;
-            List<ziduan> list = new List<ziduan>();
-            list.Add(new ziduan(GIS_Const.FIELD_BID, breholeEntity.BindingId.ToString()));
-            list.Add(new ziduan(GIS_Const.FIELD_BOREHOLE_NUMBER, breholeEntity.BoreholeNumber.ToString()));
-            list.Add(new ziduan(GIS_Const.FIELD_ADD_TIME, DateTime.Now.ToString()));
-            list.Add(new ziduan(GIS_Const.FIELD_GROUND_ELEVATION, breholeEntity.GroundElevation.ToString()));
-            list.Add(new ziduan(GIS_Const.FIELD_GROUND_FLOOR_ELEVATION, ""));
-            list.Add(new ziduan(GIS_Const.FIELD_THICKNESS, ""));
-            list.Add(new ziduan(GIS_Const.FIELD_TYPE, "1"));
-
-            IFeature pfeature = DataEditCommon.CreateNewFeature(pFeatureLayer, geometry, list);
-            if (pfeature != null)
-            {
-                GIS.MyMapHelp.Jump(pt);
-                DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh(
-                    esriViewDrawPhase.esriViewGeography | esriViewDrawPhase.esriViewForeground, null, null);
-            }
-        }
-
-        #endregion
-
-        /// <summary>
-        /// 取  消
+        ///     取  消
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnCancel_Click(object sender, EventArgs e)
         {
             // 关闭窗体
-            this.Close();
+            Close();
         }
 
         /// <summary>
-        /// 钻孔编号採番
-        /// </summary>
-        /// <returns>钻孔编号最大值 + 1</returns>
-        private int getBoreholeId()
-        {
-            return BoreholeBLL.getMaxBoreholeId() + 1;
-        }
-
-        /// <summary>
-        /// 验证画面入力数据
+        ///     验证画面入力数据
         /// </summary>
         /// <returns>验证结果：true 通过验证, false未通过验证</returns>
         private bool check()
         {
             // 判断孔号是否录入
-            if (!Check.isEmpty(this.txtBoreholeNumber, Const_GM.BOREHOLE_NUMBER))
+            if (!Check.isEmpty(txtBoreholeNumber, Const_GM.BOREHOLE_NUMBER))
             {
                 return false;
             }
 
-            // 孔号特殊字符判断
-            //if (!Check.checkSpecialCharacters(this.txtBoreholeNumber, Const_GM.BOREHOLE_NUMBER))
-            //{
-            //    return false;
-            //}
-
-            // 只有当添加新钻孔信息的时候才去判断孔号是否重复
-            if (this._bllType == "add")
-            {
-                // 判断孔号是否存在
-                if (!Check.isExist(this.txtBoreholeNumber, Const_GM.BOREHOLE_NUMBER,
-                    BoreholeBLL.isBoreholeNumberExist(this.txtBoreholeNumber.Text.Trim())))
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                /* 修改的时候，首先要获取UI输入的钻孔名称到DB中去检索，
-                如果检索件数 > 0 并且该断层ID还不是传过来的主键，那么视为输入了已存在的钻孔名称 */
-                int boreholeId = -1;
-                BoreholeBLL.selectBoreholeIdByBoreholeNum(this.txtBoreholeNumber.Text.ToString().Trim(), out boreholeId);
-                if (boreholeId != -1 && !Convert.ToString(boreholeId).Equals(_boreholeId.ToString()))
-                {
-                    this.txtBoreholeNumber.BackColor = Const.ERROR_FIELD_COLOR;
-                    Alert.alert(Const_GM.BOREHOLE_EXIST_MSG); // 孔号已存在，请重新录入！
-                    this.txtBoreholeNumber.Focus();
-                    return false;
-                }
-
-            }
-
             // 判断地面标高是否录入
-            if (!Check.isEmpty(this.txtGroundElevation, Const_GM.GROUND_ELEVATION))
+            if (!Check.isEmpty(txtGroundElevation, Const_GM.GROUND_ELEVATION))
             {
                 return false;
             }
 
             // 判断地面标高是否为数字
-            if (!Check.IsNumeric(this.txtGroundElevation, Const_GM.GROUND_ELEVATION))
+            if (!Check.IsNumeric(txtGroundElevation, Const_GM.GROUND_ELEVATION))
             {
                 return false;
             }
 
             // 判断坐标X是否录入
-            if (!Check.isEmpty(this.txtCoordinateX, Const_GM.COORDINATE_X))
+            if (!Check.isEmpty(txtCoordinateX, Const_GM.COORDINATE_X))
             {
                 return false;
             }
 
             // 判断坐标X是否为数字
-            if (!Check.IsNumeric(this.txtCoordinateX, Const_GM.COORDINATE_X))
+            if (!Check.IsNumeric(txtCoordinateX, Const_GM.COORDINATE_X))
             {
                 return false;
             }
 
             // 判断坐标Y是否录入
-            if (!Check.isEmpty(this.txtCoordinateY, Const_GM.COORDINATE_Y))
+            if (!Check.isEmpty(txtCoordinateY, Const_GM.COORDINATE_Y))
             {
                 return false;
             }
 
             // 判断坐标Y是否为数字
-            if (!Check.IsNumeric(this.txtCoordinateY, Const_GM.COORDINATE_Y))
+            if (!Check.IsNumeric(txtCoordinateY, Const_GM.COORDINATE_Y))
             {
                 return false;
             }
 
             // 判断坐标Z是否录入
-            if (!Check.isEmpty(this.txtCoordinateZ, Const_GM.COORDINATE_Z))
+            if (!Check.isEmpty(txtCoordinateZ, Const_GM.COORDINATE_Z))
             {
                 return false;
             }
 
             // 判断坐标Z是否为数字
-            if (!Check.IsNumeric(this.txtCoordinateZ, Const_GM.COORDINATE_Z))
+            if (!Check.IsNumeric(txtCoordinateZ, Const_GM.COORDINATE_Z))
             {
                 return false;
             }
 
             // 判断岩性是否入力
-            if (this.gvCoalSeamsTexture.Rows.Count - 1 == 0)
+            if (gvCoalSeamsTexture.Rows.Count - 1 == 0)
             {
                 Alert.alert(Const_GM.LITHOLOGY_MUST_INPUT); // 请录入煤层的岩性！
                 return false;
             }
 
             // 临时存储煤层名称
-            List<String> arrCoalSeamsName = new List<String>();
+            var arrCoalSeamsName = new List<String>();
 
             // 判断底板标高、厚度是否入力，以及入力的是否为数字
-            for (int i = 0; i < this.gvCoalSeamsTexture.RowCount; i++)
+            for (int i = 0; i < gvCoalSeamsTexture.RowCount; i++)
             {
                 // 最后一行为空行时，跳出循环
                 if (i == gvCoalSeamsTexture.RowCount - 1)
@@ -659,7 +409,7 @@ namespace sys3
                 }
 
                 // 岩性
-                DataGridViewComboBoxCell cell0 = this.gvCoalSeamsTexture.Rows[i].Cells[0] as DataGridViewComboBoxCell;
+                var cell0 = gvCoalSeamsTexture.Rows[i].Cells[0] as DataGridViewComboBoxCell;
                 // 判断岩性是否选择
                 if (cell0.Value == null)
                 {
@@ -668,7 +418,7 @@ namespace sys3
                 }
 
                 // 底板标高
-                DataGridViewTextBoxCell cell1 = gvCoalSeamsTexture.Rows[i].Cells[1] as DataGridViewTextBoxCell;
+                var cell1 = gvCoalSeamsTexture.Rows[i].Cells[1] as DataGridViewTextBoxCell;
                 // 判断底板标高是否入力
                 if (cell1.Value == null)
                 {
@@ -676,10 +426,7 @@ namespace sys3
                     Alert.alert("第" + (i + 1) + "行，底板标高不能为空！");
                     return false;
                 }
-                else
-                {
-                    cell1.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                }
+                cell1.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
 
                 // 判断底板标高是否为数字
                 if (!Validator.IsNumeric(cell1.Value.ToString()))
@@ -688,13 +435,10 @@ namespace sys3
                     Alert.alert("第" + (i + 1) + "行，底板标高应为数字！");
                     return false;
                 }
-                else
-                {
-                    cell1.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                }
+                cell1.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
 
                 // 厚度
-                DataGridViewTextBoxCell cell2 = gvCoalSeamsTexture.Rows[i].Cells[2] as DataGridViewTextBoxCell;
+                var cell2 = gvCoalSeamsTexture.Rows[i].Cells[2] as DataGridViewTextBoxCell;
                 // 判断厚度是否入力
                 if (cell2.Value == null)
                 {
@@ -702,10 +446,7 @@ namespace sys3
                     Alert.alert("第" + (i + 1) + "行，厚度不能为空！");
                     return false;
                 }
-                else
-                {
-                    cell2.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                }
+                cell2.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
                 // 判断厚度是否为数字
                 if (!Validator.IsNumeric(cell2.Value.ToString()))
                 {
@@ -713,17 +454,14 @@ namespace sys3
                     Alert.alert("第" + (i + 1) + "行，厚度应为数字！");
                     return false;
                 }
-                else
-                {
-                    cell2.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                }
+                cell2.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
 
                 // 当岩性选择为煤层时
                 DataSet ds = LithologyBLL.selectCoalInfo();
                 if (Convert.ToString(cell0.Value) == ds.Tables[0].Rows[0]["LITHOLOGY_NAME"].ToString())
                 {
                     // 煤层名称
-                    DataGridViewTextBoxCell cell3 = gvCoalSeamsTexture.Rows[i].Cells[3] as DataGridViewTextBoxCell;
+                    var cell3 = gvCoalSeamsTexture.Rows[i].Cells[3] as DataGridViewTextBoxCell;
                     // 判断煤层名称是否入力
                     if (cell3.Value == null || cell3.Value == "")
                     {
@@ -809,7 +547,7 @@ namespace sys3
                     //}
                 }
 
-                DataGridViewTextBoxCell cell40 = gvCoalSeamsTexture.Rows[i].Cells[4] as DataGridViewTextBoxCell;
+                var cell40 = gvCoalSeamsTexture.Rows[i].Cells[4] as DataGridViewTextBoxCell;
                 // 判断坐标X是否为数字
                 if (!Validator.IsNumeric(Convert.ToString(cell40.Value)))
                 {
@@ -817,12 +555,9 @@ namespace sys3
                     Alert.alert("第" + (i + 1) + "行，坐标X应为数字！");
                     return false;
                 }
-                else
-                {
-                    cell40.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                }
+                cell40.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
 
-                DataGridViewTextBoxCell cell50 = gvCoalSeamsTexture.Rows[i].Cells[5] as DataGridViewTextBoxCell;
+                var cell50 = gvCoalSeamsTexture.Rows[i].Cells[5] as DataGridViewTextBoxCell;
                 // 判断坐标Y是否为数字
                 if (!Validator.IsNumeric(Convert.ToString(cell50.Value)))
                 {
@@ -830,12 +565,9 @@ namespace sys3
                     Alert.alert("第" + (i + 1) + "行，坐标Y应为数字！");
                     return false;
                 }
-                else
-                {
-                    cell50.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                }
+                cell50.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
 
-                DataGridViewTextBoxCell cell60 = gvCoalSeamsTexture.Rows[i].Cells[6] as DataGridViewTextBoxCell;
+                var cell60 = gvCoalSeamsTexture.Rows[i].Cells[6] as DataGridViewTextBoxCell;
                 // 判断坐标Z是否为数字
                 if (!Validator.IsNumeric(Convert.ToString(cell60.Value)))
                 {
@@ -843,10 +575,7 @@ namespace sys3
                     Alert.alert("第" + (i + 1) + "行，坐标Z应为数字！");
                     return false;
                 }
-                else
-                {
-                    cell60.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                }
+                cell60.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
             }
 
             // 验证通过
@@ -854,97 +583,69 @@ namespace sys3
         }
 
         /// <summary>
-        /// 设置钻孔信息
+        ///     设置钻孔信息
         /// </summary>
         private void setBoreholeInfo()
         {
             // 获取钻孔信息
-            DataSet dsBoreholeInfo = BoreholeBLL.selectBoreholeInfoByBoreholeId(_boreholeId);
+            Borehole brehole = Borehole.Find(_boreholeId);
 
             // 获取钻孔岩性信息（煤层结构）
-            DataSet dsCoalSeam = BoreholeLithologyBLL.selectBoreholeLithologyInfoByBoreholeId(_boreholeId);
+            var boreholeLithologies = BoreholeLithology.FindAllByBoreholeId(_boreholeId);
 
-            if (dsBoreholeInfo.Tables[0].Rows.Count > 0 && dsCoalSeam.Tables[0].Rows.Count > 0)
+            if (brehole != null)
             {
                 //BID
-                BID = dsBoreholeInfo.Tables[0].Rows[0][BoreholeDBConstNames.BID].ToString();
+                BID = brehole.BindingId;
                 // 孔号
-                this.txtBoreholeNumber.Text =
-                    dsBoreholeInfo.Tables[0].Rows[0][BoreholeDBConstNames.BOREHOLE_NUMBER].ToString();
+                txtBoreholeNumber.Text = brehole.BoreholeNumber;
                 // 地面标高
-                this.txtGroundElevation.Text =
-                    dsBoreholeInfo.Tables[0].Rows[0][BoreholeDBConstNames.GROUND_ELEVATION].ToString();
+                txtGroundElevation.Text = brehole.GroundElevation.ToString(CultureInfo.InvariantCulture);
                 // X坐标
-                this.txtCoordinateX.Text =
-                    dsBoreholeInfo.Tables[0].Rows[0][BoreholeDBConstNames.COORDINATE_X].ToString();
+                txtCoordinateX.Text = brehole.CoordinateX.ToString(CultureInfo.InvariantCulture);
                 // Y坐标
-                this.txtCoordinateY.Text =
-                    dsBoreholeInfo.Tables[0].Rows[0][BoreholeDBConstNames.COORDINATE_Y].ToString();
+                txtCoordinateY.Text = brehole.CoordinateY.ToString(CultureInfo.InvariantCulture);
                 // Z坐标
-                this.txtCoordinateZ.Text =
-                    dsBoreholeInfo.Tables[0].Rows[0][BoreholeDBConstNames.COORDINATE_Z].ToString();
+                txtCoordinateZ.Text = brehole.CoordinateZ.ToString(CultureInfo.InvariantCulture);
 
-                // 设置DataGridViewComboBox数据源
-                // 岩性
-                DataGridViewComboBoxColumn dataGridViewComboBoxColumn =
-                    (DataGridViewComboBoxColumn)this.gvCoalSeamsTexture.Columns[0];
                 // 获取岩性信息
                 DataSet ds = LithologyBLL.selectAllLithologyInfo();
                 if (ds.Tables[0].Rows.Count > 0)
                 {
                     for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                     {
-                        this.LITHOLOGY.Items.Add(ds.Tables[0].Rows[i][LithologyDbConstNames.LITHOLOGY_NAME].ToString());
+                        LITHOLOGY.Items.Add(ds.Tables[0].Rows[i][LithologyDbConstNames.LITHOLOGY_NAME].ToString());
                     }
                 }
 
                 // 明细
-                this.gvCoalSeamsTexture.RowCount = dsCoalSeam.Tables[0].Rows.Count + 1;
-                for (int i = 0; i < dsCoalSeam.Tables[0].Rows.Count; i++)
+                gvCoalSeamsTexture.RowCount = boreholeLithologies.Length + 1;
+                for (int i = 0; i < boreholeLithologies.Length; i++)
                 {
                     // 岩性名称
-                    int iLithologyId = 0;
-                    if (int.TryParse(dsCoalSeam.Tables[0].Rows[i]["LITHOLOGY_ID"].ToString(), out iLithologyId))
+                    int iLithologyId = boreholeLithologies[i].Lithology.LithologyId;
+
+                    DataSet dsLithology = LithologyBLL.selectLithologyInfoByLithologyId(iLithologyId);
+                    if (dsLithology.Tables[0].Rows.Count > 0)
                     {
-                        DataSet dsLithology = LithologyBLL.selectLithologyInfoByLithologyId(iLithologyId);
-                        if (dsLithology.Tables[0].Rows.Count > 0)
-                        {
-                            this.gvCoalSeamsTexture[0, i].Value =
-                                dsLithology.Tables[0].Rows[0][LithologyDbConstNames.LITHOLOGY_NAME].ToString();
-                        }
-                        // 底板标高
-                        this.gvCoalSeamsTexture[1, i].Value =
-                            dsCoalSeam.Tables[0].Rows[i][BoreholeLithologyDbConstNames.FLOOR_ELEVATION].ToString();
-                        // 厚度
-                        this.gvCoalSeamsTexture[2, i].Value =
-                            dsCoalSeam.Tables[0].Rows[i][BoreholeLithologyDbConstNames.THICKNESS].ToString();
-                        // 煤层名称
-                        this.gvCoalSeamsTexture[3, i].Value =
-                            dsCoalSeam.Tables[0].Rows[i][BoreholeLithologyDbConstNames.COAL_SEAMS_NAME].ToString();
-
-                        // 坐标X
-                        string strCoordinate_X =
-                            dsCoalSeam.Tables[0].Rows[i][BoreholeLithologyDbConstNames.COORDINATE_X].ToString();
-                        this.gvCoalSeamsTexture[4, i].Value = (strCoordinate_X == Const.DOUBLE_DEFAULT_VALUE
-                            ? ""
-                            : strCoordinate_X);
-
-                        // 坐标Y
-                        string strCoordinate_Y =
-                            dsCoalSeam.Tables[0].Rows[i][BoreholeLithologyDbConstNames.COORDINATE_Y].ToString();
-                        this.gvCoalSeamsTexture[5, i].Value = (strCoordinate_Y == Const.DOUBLE_DEFAULT_VALUE
-                            ? ""
-                            : strCoordinate_Y);
-
-                        // 坐标Z
-                        string strCoordinate_Z =
-                            dsCoalSeam.Tables[0].Rows[i][BoreholeLithologyDbConstNames.COORDINATE_Z].ToString();
-                        this.gvCoalSeamsTexture[6, i].Value = (strCoordinate_Z == Const.DOUBLE_DEFAULT_VALUE
-                            ? ""
-                            : strCoordinate_Z);
-
+                        gvCoalSeamsTexture[0, i].Value =
+                            dsLithology.Tables[0].Rows[0][LithologyDbConstNames.LITHOLOGY_NAME].ToString();
                     }
+                    // 底板标高
+                    gvCoalSeamsTexture[1, i].Value = boreholeLithologies[i].FloorElevation;
+                    // 厚度
+                    gvCoalSeamsTexture[2, i].Value = boreholeLithologies[i].Thickness;
+                    // 煤层名称
+                    gvCoalSeamsTexture[3, i].Value = boreholeLithologies[i].CoalSeamsName;
 
+                    // 坐标X
+                    gvCoalSeamsTexture[4, i].Value = boreholeLithologies[i].CoordinateX.ToString(CultureInfo.InvariantCulture);
+
+                    // 坐标Y
+                    gvCoalSeamsTexture[5, i].Value = boreholeLithologies[i].CoordinateY.ToString(CultureInfo.InvariantCulture);
+
+                    // 坐标Z
+                    gvCoalSeamsTexture[6, i].Value = boreholeLithologies[i].CoordinateX.ToString(CultureInfo.InvariantCulture);
 
                 }
             }
@@ -952,7 +653,7 @@ namespace sys3
 
         // **************************************************************************
         /// <summary>
-        /// 岩性选择事件
+        ///     岩性选择事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -961,12 +662,12 @@ namespace sys3
             if (e.ColumnIndex == 0)
             {
                 // 岩性
-                DataGridViewComboBoxCell cell0 =
-                    this.gvCoalSeamsTexture.Rows[this.gvCoalSeamsTexture.CurrentRow.Index].Cells[0] as
+                var cell0 =
+                    gvCoalSeamsTexture.Rows[gvCoalSeamsTexture.CurrentRow.Index].Cells[0] as
                         DataGridViewComboBoxCell;
                 // 煤层名称
-                DataGridViewTextBoxCell cell3 =
-                    gvCoalSeamsTexture.Rows[this.gvCoalSeamsTexture.CurrentRow.Index].Cells[3] as
+                var cell3 =
+                    gvCoalSeamsTexture.Rows[gvCoalSeamsTexture.CurrentRow.Index].Cells[3] as
                         DataGridViewTextBoxCell;
 
                 DataSet ds = LithologyBLL.selectCoalInfo();
@@ -988,18 +689,18 @@ namespace sys3
         }
 
         /// <summary>
-        /// 修改岩性时，当前记录为煤时，煤层名称设为可编辑，否则设为不可编辑
+        ///     修改岩性时，当前记录为煤时，煤层名称设为可编辑，否则设为不可编辑
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void gvCoalSeamsTexture_RowValidated(object sender, DataGridViewCellEventArgs e)
         {
-            for (int i = 0; i < this.gvCoalSeamsTexture.RowCount - 1; i++)
+            for (int i = 0; i < gvCoalSeamsTexture.RowCount - 1; i++)
             {
                 // 岩性
-                DataGridViewComboBoxCell cell0 = this.gvCoalSeamsTexture.Rows[i].Cells[0] as DataGridViewComboBoxCell;
+                var cell0 = gvCoalSeamsTexture.Rows[i].Cells[0] as DataGridViewComboBoxCell;
                 // 煤层名称
-                DataGridViewTextBoxCell cell3 = gvCoalSeamsTexture.Rows[i].Cells[3] as DataGridViewTextBoxCell;
+                var cell3 = gvCoalSeamsTexture.Rows[i].Cells[3] as DataGridViewTextBoxCell;
 
                 DataSet ds = LithologyBLL.selectCoalInfo();
                 if (ds.Tables[0].Rows.Count > 0)
@@ -1020,7 +721,7 @@ namespace sys3
         }
 
         /// <summary>
-        /// 行删除
+        ///     行删除
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1031,18 +732,18 @@ namespace sys3
             {
                 //// 最后一行为空行时，跳出循环
                 // 最后一行删除按钮设为不可
-                if (gvCoalSeamsTexture.RowCount - 1 != this.gvCoalSeamsTexture.CurrentRow.Index)
+                if (gvCoalSeamsTexture.RowCount - 1 != gvCoalSeamsTexture.CurrentRow.Index)
                 {
-                    if (Alert.confirm(Const.DEL_CONFIRM_MSG) == true)
+                    if (Alert.confirm(Const.DEL_CONFIRM_MSG))
                     {
-                        this.gvCoalSeamsTexture.Rows.Remove(this.gvCoalSeamsTexture.CurrentRow);
+                        gvCoalSeamsTexture.Rows.Remove(gvCoalSeamsTexture.CurrentRow);
                     }
                 }
             }
         }
 
         /// <summary>
-        /// 右键菜单
+        ///     右键菜单
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1053,25 +754,24 @@ namespace sys3
                 if (e.RowIndex >= 0)
                 {
                     //若行已是选中状态就不再进行设置
-                    if (this.gvCoalSeamsTexture.Rows[e.RowIndex].Selected == false)
+                    if (gvCoalSeamsTexture.Rows[e.RowIndex].Selected == false)
                     {
-                        this.gvCoalSeamsTexture.ClearSelection();
-                        this.gvCoalSeamsTexture.Rows[e.RowIndex].Selected = true;
-                        this.gvCoalSeamsTexture.CurrentCell = this.gvCoalSeamsTexture.Rows[e.RowIndex].Cells[0];
+                        gvCoalSeamsTexture.ClearSelection();
+                        gvCoalSeamsTexture.Rows[e.RowIndex].Selected = true;
+                        gvCoalSeamsTexture.CurrentCell = gvCoalSeamsTexture.Rows[e.RowIndex].Cells[0];
                     }
                 }
             }
-
         }
 
         /// <summary>
-        /// 上移
+        ///     上移
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void 上移ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int iNowIndex = this.gvCoalSeamsTexture.CurrentRow.Index;
+            int iNowIndex = gvCoalSeamsTexture.CurrentRow.Index;
 
             if (iNowIndex == 0)
             {
@@ -1079,231 +779,228 @@ namespace sys3
                 return;
             }
 
-            object[] objArrRowData = new object[7];
+            var objArrRowData = new object[7];
 
             int index = -1;
             int n = -1;
-            objArrRowData[++n] = this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
-            objArrRowData[++n] = this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
-            objArrRowData[++n] = this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
-            objArrRowData[++n] = this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
-            objArrRowData[++n] = this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
-            objArrRowData[++n] = this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
-            objArrRowData[++n] = this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
+            objArrRowData[++n] = gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
+            objArrRowData[++n] = gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
+            objArrRowData[++n] = gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
+            objArrRowData[++n] = gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
+            objArrRowData[++n] = gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
+            objArrRowData[++n] = gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
+            objArrRowData[++n] = gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
 
             index = -1;
-            this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value =
-                this.gvCoalSeamsTexture.Rows[iNowIndex - 1].Cells[index].Value;
-            this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value =
-                this.gvCoalSeamsTexture.Rows[iNowIndex - 1].Cells[index].Value;
-            this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value =
-                this.gvCoalSeamsTexture.Rows[iNowIndex - 1].Cells[index].Value;
-            this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value =
-                this.gvCoalSeamsTexture.Rows[iNowIndex - 1].Cells[index].Value;
-            this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value =
-                this.gvCoalSeamsTexture.Rows[iNowIndex - 1].Cells[index].Value;
-            this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value =
-                this.gvCoalSeamsTexture.Rows[iNowIndex - 1].Cells[index].Value;
-            this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value =
-                this.gvCoalSeamsTexture.Rows[iNowIndex - 1].Cells[index].Value;
+            gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value =
+                gvCoalSeamsTexture.Rows[iNowIndex - 1].Cells[index].Value;
+            gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value =
+                gvCoalSeamsTexture.Rows[iNowIndex - 1].Cells[index].Value;
+            gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value =
+                gvCoalSeamsTexture.Rows[iNowIndex - 1].Cells[index].Value;
+            gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value =
+                gvCoalSeamsTexture.Rows[iNowIndex - 1].Cells[index].Value;
+            gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value =
+                gvCoalSeamsTexture.Rows[iNowIndex - 1].Cells[index].Value;
+            gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value =
+                gvCoalSeamsTexture.Rows[iNowIndex - 1].Cells[index].Value;
+            gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value =
+                gvCoalSeamsTexture.Rows[iNowIndex - 1].Cells[index].Value;
 
             index = -1;
             n = -1;
-            this.gvCoalSeamsTexture.Rows[iNowIndex - 1].Cells[++index].Value = objArrRowData[++n];
-            this.gvCoalSeamsTexture.Rows[iNowIndex - 1].Cells[++index].Value = objArrRowData[++n];
-            this.gvCoalSeamsTexture.Rows[iNowIndex - 1].Cells[++index].Value = objArrRowData[++n];
-            this.gvCoalSeamsTexture.Rows[iNowIndex - 1].Cells[++index].Value = objArrRowData[++n];
-            this.gvCoalSeamsTexture.Rows[iNowIndex - 1].Cells[++index].Value = objArrRowData[++n];
-            this.gvCoalSeamsTexture.Rows[iNowIndex - 1].Cells[++index].Value = objArrRowData[++n];
-            this.gvCoalSeamsTexture.Rows[iNowIndex - 1].Cells[++index].Value = objArrRowData[++n];
+            gvCoalSeamsTexture.Rows[iNowIndex - 1].Cells[++index].Value = objArrRowData[++n];
+            gvCoalSeamsTexture.Rows[iNowIndex - 1].Cells[++index].Value = objArrRowData[++n];
+            gvCoalSeamsTexture.Rows[iNowIndex - 1].Cells[++index].Value = objArrRowData[++n];
+            gvCoalSeamsTexture.Rows[iNowIndex - 1].Cells[++index].Value = objArrRowData[++n];
+            gvCoalSeamsTexture.Rows[iNowIndex - 1].Cells[++index].Value = objArrRowData[++n];
+            gvCoalSeamsTexture.Rows[iNowIndex - 1].Cells[++index].Value = objArrRowData[++n];
+            gvCoalSeamsTexture.Rows[iNowIndex - 1].Cells[++index].Value = objArrRowData[++n];
 
-            this.gvCoalSeamsTexture.CurrentCell = this.gvCoalSeamsTexture.Rows[iNowIndex - 1].Cells[0]; //设定当前行
-            this.gvCoalSeamsTexture.Rows[iNowIndex - 1].Selected = true;
-
+            gvCoalSeamsTexture.CurrentCell = gvCoalSeamsTexture.Rows[iNowIndex - 1].Cells[0]; //设定当前行
+            gvCoalSeamsTexture.Rows[iNowIndex - 1].Selected = true;
         }
 
         /// <summary>
-        /// 下移
+        ///     下移
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void 下移ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int iNowIndex = this.gvCoalSeamsTexture.CurrentRow.Index;
+            int iNowIndex = gvCoalSeamsTexture.CurrentRow.Index;
 
-            if (iNowIndex == this.gvCoalSeamsTexture.Rows.Count - 2 ||
-                iNowIndex == this.gvCoalSeamsTexture.Rows.Count - 1)
+            if (iNowIndex == gvCoalSeamsTexture.Rows.Count - 2 ||
+                iNowIndex == gvCoalSeamsTexture.Rows.Count - 1)
             {
                 Alert.alert("无法下移");
                 return;
             }
 
-            object[] objArrRowData = new object[7];
+            var objArrRowData = new object[7];
 
             int index = -1;
             int n = -1;
-            objArrRowData[++n] = this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
-            objArrRowData[++n] = this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
-            objArrRowData[++n] = this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
-            objArrRowData[++n] = this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
-            objArrRowData[++n] = this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
-            objArrRowData[++n] = this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
-            objArrRowData[++n] = this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
+            objArrRowData[++n] = gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
+            objArrRowData[++n] = gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
+            objArrRowData[++n] = gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
+            objArrRowData[++n] = gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
+            objArrRowData[++n] = gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
+            objArrRowData[++n] = gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
+            objArrRowData[++n] = gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
 
             index = -1;
-            this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value =
-                this.gvCoalSeamsTexture.Rows[iNowIndex + 1].Cells[index].Value;
-            this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value =
-                this.gvCoalSeamsTexture.Rows[iNowIndex + 1].Cells[index].Value;
-            this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value =
-                this.gvCoalSeamsTexture.Rows[iNowIndex + 1].Cells[index].Value;
-            this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value =
-                this.gvCoalSeamsTexture.Rows[iNowIndex + 1].Cells[index].Value;
-            this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value =
-                this.gvCoalSeamsTexture.Rows[iNowIndex + 1].Cells[index].Value;
-            this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value =
-                this.gvCoalSeamsTexture.Rows[iNowIndex + 1].Cells[index].Value;
-            this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value =
-                this.gvCoalSeamsTexture.Rows[iNowIndex + 1].Cells[index].Value;
+            gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value =
+                gvCoalSeamsTexture.Rows[iNowIndex + 1].Cells[index].Value;
+            gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value =
+                gvCoalSeamsTexture.Rows[iNowIndex + 1].Cells[index].Value;
+            gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value =
+                gvCoalSeamsTexture.Rows[iNowIndex + 1].Cells[index].Value;
+            gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value =
+                gvCoalSeamsTexture.Rows[iNowIndex + 1].Cells[index].Value;
+            gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value =
+                gvCoalSeamsTexture.Rows[iNowIndex + 1].Cells[index].Value;
+            gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value =
+                gvCoalSeamsTexture.Rows[iNowIndex + 1].Cells[index].Value;
+            gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value =
+                gvCoalSeamsTexture.Rows[iNowIndex + 1].Cells[index].Value;
 
             index = -1;
             n = -1;
-            this.gvCoalSeamsTexture.Rows[iNowIndex + 1].Cells[++index].Value = objArrRowData[++n];
-            this.gvCoalSeamsTexture.Rows[iNowIndex + 1].Cells[++index].Value = objArrRowData[++n];
-            this.gvCoalSeamsTexture.Rows[iNowIndex + 1].Cells[++index].Value = objArrRowData[++n];
-            this.gvCoalSeamsTexture.Rows[iNowIndex + 1].Cells[++index].Value = objArrRowData[++n];
-            this.gvCoalSeamsTexture.Rows[iNowIndex + 1].Cells[++index].Value = objArrRowData[++n];
-            this.gvCoalSeamsTexture.Rows[iNowIndex + 1].Cells[++index].Value = objArrRowData[++n];
-            this.gvCoalSeamsTexture.Rows[iNowIndex + 1].Cells[++index].Value = objArrRowData[++n];
+            gvCoalSeamsTexture.Rows[iNowIndex + 1].Cells[++index].Value = objArrRowData[++n];
+            gvCoalSeamsTexture.Rows[iNowIndex + 1].Cells[++index].Value = objArrRowData[++n];
+            gvCoalSeamsTexture.Rows[iNowIndex + 1].Cells[++index].Value = objArrRowData[++n];
+            gvCoalSeamsTexture.Rows[iNowIndex + 1].Cells[++index].Value = objArrRowData[++n];
+            gvCoalSeamsTexture.Rows[iNowIndex + 1].Cells[++index].Value = objArrRowData[++n];
+            gvCoalSeamsTexture.Rows[iNowIndex + 1].Cells[++index].Value = objArrRowData[++n];
+            gvCoalSeamsTexture.Rows[iNowIndex + 1].Cells[++index].Value = objArrRowData[++n];
 
-            this.gvCoalSeamsTexture.CurrentCell = this.gvCoalSeamsTexture.Rows[iNowIndex + 1].Cells[0]; //设定当前行
-            this.gvCoalSeamsTexture.Rows[iNowIndex + 1].Selected = true;
+            gvCoalSeamsTexture.CurrentCell = gvCoalSeamsTexture.Rows[iNowIndex + 1].Cells[0]; //设定当前行
+            gvCoalSeamsTexture.Rows[iNowIndex + 1].Selected = true;
         }
 
-        private object[] _objArrRowData = new object[7];
-
         /// <summary>
-        /// 复制
+        ///     复制
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void 复制ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int iNowIndex = this.gvCoalSeamsTexture.CurrentRow.Index;
+            int iNowIndex = gvCoalSeamsTexture.CurrentRow.Index;
 
-            object[] objArrRowData = new object[7];
+            var objArrRowData = new object[7];
 
             int index = -1;
             int n = -1;
-            objArrRowData[++n] = this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
-            objArrRowData[++n] = this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
-            objArrRowData[++n] = this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
-            objArrRowData[++n] = this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
-            objArrRowData[++n] = this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
-            objArrRowData[++n] = this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
-            objArrRowData[++n] = this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
+            objArrRowData[++n] = gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
+            objArrRowData[++n] = gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
+            objArrRowData[++n] = gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
+            objArrRowData[++n] = gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
+            objArrRowData[++n] = gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
+            objArrRowData[++n] = gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
+            objArrRowData[++n] = gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
 
             _objArrRowData = objArrRowData;
 
             //MessageBox.Show("复制成功！");
 
-            this.contextMenuStrip1.Items["粘贴ToolStripMenuItem"].Visible = true;
+            contextMenuStrip1.Items["粘贴ToolStripMenuItem"].Visible = true;
         }
 
         /// <summary>
-        /// 粘贴
+        ///     粘贴
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void 粘贴ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int iNowIndex = this.gvCoalSeamsTexture.CurrentRow.Index;
+            int iNowIndex = gvCoalSeamsTexture.CurrentRow.Index;
 
-            if (iNowIndex == this.gvCoalSeamsTexture.Rows.Count - 1)
+            if (iNowIndex == gvCoalSeamsTexture.Rows.Count - 1)
             {
-                this.gvCoalSeamsTexture.Rows.Add();
+                gvCoalSeamsTexture.Rows.Add();
             }
 
             int index = -1;
             int n = -1;
-            this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value = _objArrRowData[++n];
-            this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value = _objArrRowData[++n];
-            this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value = _objArrRowData[++n];
-            this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value = _objArrRowData[++n];
-            this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value = _objArrRowData[++n];
-            this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value = _objArrRowData[++n];
-            this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value = _objArrRowData[++n];
+            gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value = _objArrRowData[++n];
+            gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value = _objArrRowData[++n];
+            gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value = _objArrRowData[++n];
+            gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value = _objArrRowData[++n];
+            gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value = _objArrRowData[++n];
+            gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value = _objArrRowData[++n];
+            gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value = _objArrRowData[++n];
 
-            this.contextMenuStrip1.Items["粘贴ToolStripMenuItem"].Visible = false;
+            contextMenuStrip1.Items["粘贴ToolStripMenuItem"].Visible = false;
         }
 
         /// <summary>
-        /// 剪切
+        ///     剪切
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void 剪切ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int iNowIndex = this.gvCoalSeamsTexture.CurrentRow.Index;
+            int iNowIndex = gvCoalSeamsTexture.CurrentRow.Index;
 
-            object[] objArrRowData = new object[7];
+            var objArrRowData = new object[7];
 
             int index = -1;
             int n = -1;
-            objArrRowData[++n] = this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
-            objArrRowData[++n] = this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
-            objArrRowData[++n] = this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
-            objArrRowData[++n] = this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
-            objArrRowData[++n] = this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
-            objArrRowData[++n] = this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
-            objArrRowData[++n] = this.gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
+            objArrRowData[++n] = gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
+            objArrRowData[++n] = gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
+            objArrRowData[++n] = gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
+            objArrRowData[++n] = gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
+            objArrRowData[++n] = gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
+            objArrRowData[++n] = gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
+            objArrRowData[++n] = gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
 
             _objArrRowData = objArrRowData;
 
-            this.gvCoalSeamsTexture.Rows.Remove(this.gvCoalSeamsTexture.CurrentRow);
+            gvCoalSeamsTexture.Rows.Remove(gvCoalSeamsTexture.CurrentRow);
 
             //MessageBox.Show("剪切成功！");
 
-            this.contextMenuStrip1.Items["粘贴ToolStripMenuItem"].Visible = true;
+            contextMenuStrip1.Items["粘贴ToolStripMenuItem"].Visible = true;
         }
 
         /// <summary>
-        /// 插入
+        ///     插入
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void 插入ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int iNowIndex = this.gvCoalSeamsTexture.CurrentRow.Index;
+            int iNowIndex = gvCoalSeamsTexture.CurrentRow.Index;
 
-            DataGridViewRow newRow = new DataGridViewRow(); //新建行
-            this.gvCoalSeamsTexture.Rows.Insert(iNowIndex, newRow); //当前行的上面插入新行
+            var newRow = new DataGridViewRow(); //新建行
+            gvCoalSeamsTexture.Rows.Insert(iNowIndex, newRow); //当前行的上面插入新行
         }
 
         /// <summary>
-        /// 添加数据顺序编号
+        ///     添加数据顺序编号
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void gvCoalSeamsTexture_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            System.Drawing.Rectangle rectangle = new System.Drawing.Rectangle(e.RowBounds.Location.X,
-                e.RowBounds.Location.Y, this.gvCoalSeamsTexture.RowHeadersWidth - 4, e.RowBounds.Height);
+            var rectangle = new Rectangle(e.RowBounds.Location.X,
+                e.RowBounds.Location.Y, gvCoalSeamsTexture.RowHeadersWidth - 4, e.RowBounds.Height);
 
             TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
-                this.gvCoalSeamsTexture.RowHeadersDefaultCellStyle.Font, rectangle,
-                this.gvCoalSeamsTexture.RowHeadersDefaultCellStyle.ForeColor,
+                gvCoalSeamsTexture.RowHeadersDefaultCellStyle.Font, rectangle,
+                gvCoalSeamsTexture.RowHeadersDefaultCellStyle.ForeColor,
                 TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
 
         private void btnQD_Click(object sender, EventArgs e)
         {
-            GIS.Common.DataEditCommon.PickUpPoint(txtCoordinateX, txtCoordinateY);
+            DataEditCommon.PickUpPoint(txtCoordinateX, txtCoordinateY);
         }
 
         private void btnReadMultTxt_Click(object sender, EventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
+            var ofd = new OpenFileDialog();
             ofd.InitialDirectory = @"C:\";
             ofd.RestoreDirectory = true;
             ofd.Filter = "文本文件(*.txt)|*.txt|所有文件(*.*)|*.*";
@@ -1315,7 +1012,7 @@ namespace sys3
                 {
                     string aa = ofd.FileNames[i];
                     Encoding encoder = TxtFileEncoding.GetEncoding(aa, Encoding.GetEncoding("GB2312"));
-                    StreamReader sr = new StreamReader(@aa, encoder);
+                    var sr = new StreamReader(@aa, encoder);
                     string duqu;
                     while ((duqu = sr.ReadLine()) != null)
                     {
@@ -1329,9 +1026,7 @@ namespace sys3
                         //    "0");
                         //txtGroundElevation.Text = str[3];
 
-                        Borehole breholeEntity = new Borehole();
-
-                        breholeEntity.BoreholeId = this.getBoreholeId();
+                        var breholeEntity = new Borehole();
 
                         // 孔号
                         breholeEntity.BoreholeNumber = str[0];
@@ -1348,7 +1043,7 @@ namespace sys3
                         breholeEntity.CoalSeamsTexture = String.Empty;
 
                         // 创建钻孔岩性实体
-                        BoreholeLithology boreholeLithologyEntity = new BoreholeLithology();
+                        var boreholeLithologyEntity = new BoreholeLithology();
                         // 钻孔编号
                         boreholeLithologyEntity.Borehole.BoreholeId = breholeEntity.BoreholeId;
                         // 岩性编号
@@ -1387,25 +1082,18 @@ namespace sys3
                         breholeEntity.BindingId = IDGenerator.NewBindingID();
 
                         // 钻孔信息登录
-                        bResult = BoreholeBLL.insertBoreholeInfo(breholeEntity);
+                        breholeEntity.Save();
                         // 钻孔岩性信息登录
-                        if (bResult)
-                        {
-                            bResult = BoreholeLithologyBLL.insertBoreholeLithologyInfo(boreholeLithologyEntity);
-                        }
 
-
+                        boreholeLithologyEntity.Save();
 
                         // 添加/修改成功的场合
-                        if (bResult)
-                        {
-                            // TODO:
 
-                            if (breholeEntity.BindingId == null || breholeEntity.BindingId == "")
-                                return; //若BID值为空，则不绘制钻孔
+                        if (breholeEntity.BindingId == null || breholeEntity.BindingId == "")
+                            return; //若BID值为空，则不绘制钻孔
 
-                            DrawZuanKong(breholeEntity, boreholeLithologyEntity);
-                        }
+                        DrawZuanKong(breholeEntity, boreholeLithologyEntity);
+
                     }
                 }
             }
@@ -1413,7 +1101,7 @@ namespace sys3
 
         private void btnReadTxt_Click(object sender, EventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
+            var ofd = new OpenFileDialog();
             ofd.InitialDirectory = @"C:\";
             ofd.RestoreDirectory = true;
             ofd.Filter = "文本文件(*.txt)|*.txt|所有文件(*.*)|*.*";
@@ -1425,7 +1113,7 @@ namespace sys3
                 {
                     string aa = ofd.FileNames[i];
                     Encoding encoder = TxtFileEncoding.GetEncoding(aa, Encoding.GetEncoding("GB2312"));
-                    StreamReader sr = new StreamReader(@aa, encoder);
+                    var sr = new StreamReader(@aa, encoder);
                     string duqu;
                     while ((duqu = sr.ReadLine()) != null)
                     {
@@ -1441,8 +1129,182 @@ namespace sys3
                     }
                 }
             }
-
         }
+
+        #region 绘制钻孔
+
+        /// <summary>
+        ///     见煤钻孔
+        /// </summary>
+        /// <param name="breholeEntity">钻孔实体</param>
+        /// <param name="boreholeLithologyEntity">钻孔岩性实体</param>
+        private void DrawZuanKong(Borehole breholeEntity, BoreholeLithology boreholeLithologyEntity)
+        {
+            ////1.获得当前编辑图层
+            //DrawSpecialCommon drawspecial = new DrawSpecialCommon();
+            //string sLayerAliasName = LibCommon.LibLayerNames.DEFALUT_BOREHOLE;//“默认_钻孔”图层
+            //IFeatureLayer featureLayer = drawspecial.GetFeatureLayerByName(sLayerAliasName);
+            //if (featureLayer == null)
+            //{
+            //    MessageBox.Show("未找到" + sLayerAliasName + "图层,无法绘制钻孔图元。");
+            //    return;
+            //}
+
+            ////2.绘制图元
+            //IPoint pt = new PointClass();
+            //pt.X = breholeEntity.CoordinateX;
+            //pt.Y = breholeEntity.CoordinateY;
+            //pt.Z = breholeEntity.CoordinateZ;
+
+            ////标注内容
+            //string strH = breholeEntity.GroundElevation.ToString();//地面标高
+            //string strName = breholeEntity.BoreholeNumber.ToString();//孔号（名称）
+            //string strDBBG = boreholeLithologyEntity.FloorElevation.ToString();//底板标高
+            //string strMCHD = boreholeLithologyEntity.Thickness.ToString();//煤层厚度
+
+            //GIS.SpecialGraphic.DrawZK1 drawZK1 = new GIS.SpecialGraphic.DrawZK1(strName, strH, strDBBG, strMCHD);
+            //DataEditCommon.g_CurWorkspaceEdit.StartEditing(false);
+            //DataEditCommon.g_CurWorkspaceEdit.StartEditOperation();
+            //IFeature feature = featureLayer.FeatureClass.CreateFeature();
+
+            //IGeometry geometry = pt;
+            //DataEditCommon.ZMValue(feature, geometry);   //几何图形Z值处理
+            ////drawspecial.ZMValue(feature, geometry);//几何图形Z值处理
+            //feature.Shape = pt;//要素形状
+            ////要素ID字段赋值（对应属性表中BindingID）
+            //int iFieldID = feature.Fields.FindField("BID");
+            //feature.Value[iFieldID] =breholeEntity.BindingId.ToString();
+            //feature.Store();//存储要素
+            //DataEditCommon.g_CurWorkspaceEdit.StopEditOperation();
+            //DataEditCommon.g_CurWorkspaceEdit.StopEditing(true);
+            //string strValue = feature.get_Value(feature.Fields.FindField("OBJECTID")).ToString();
+            //DataEditCommon.SpecialPointRenderer(featureLayer, "OBJECTID", strValue, drawZK1.m_Bitmap);
+
+            /////3.显示钻孔图层
+            //if (featureLayer.Visible == false)
+            //    featureLayer.Visible = true;
+
+            //IEnvelope envelop = feature.Shape.Envelope;
+            //DataEditCommon.g_pMyMapCtrl.ActiveView.Extent = envelop;
+            //DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewBackground, null, null);
+            //DataEditCommon.g_pMyMapCtrl.ActiveView.Refresh();
+
+            IPoint pt = new PointClass();
+            pt.X = breholeEntity.CoordinateX;
+            pt.Y = breholeEntity.CoordinateY;
+            pt.Z = breholeEntity.CoordinateZ;
+            if (pt.Z == double.NaN)
+                pt.Z = 0;
+            ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.DEFALUT_BOREHOLE);
+            if (pLayer == null)
+            {
+                MessageBox.Show("未找到钻孔图层,无法绘制钻孔图元。");
+                return;
+            }
+            var pFeatureLayer = (IFeatureLayer)pLayer;
+            IGeometry geometry = pt;
+            var list = new List<ziduan>();
+            list.Add(new ziduan("bid", breholeEntity.BindingId));
+            list.Add(new ziduan("BOREHOLE_NUMBER", breholeEntity.BoreholeNumber));
+            list.Add(new ziduan("addtime", DateTime.Now.ToString()));
+            list.Add(new ziduan("GROUND_ELEVATION", breholeEntity.GroundElevation.ToString()));
+            list.Add(new ziduan("FLOOR_ELEVATION", boreholeLithologyEntity.FloorElevation.ToString()));
+            list.Add(new ziduan("THICKNESS", boreholeLithologyEntity.Thickness.ToString()));
+            list.Add(new ziduan("type", "2"));
+
+            IFeature pfeature = DataEditCommon.CreateNewFeature(pFeatureLayer, geometry, list);
+            if (pfeature != null)
+            {
+                MyMapHelp.Jump(pt);
+                DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh(
+                    esriViewDrawPhase.esriViewGeography | esriViewDrawPhase.esriViewForeground, null, null);
+            }
+        }
+
+        /// <summary>
+        ///     未见煤钻孔
+        /// </summary>
+        /// <param name="breholeEntity">钻孔实体</param>
+        private void DrawZuanKong(Borehole breholeEntity)
+        {
+            ////1.获得当前编辑图层
+            //DrawSpecialCommon drawspecial = new DrawSpecialCommon();
+            //string sLayerAliasName = LibCommon.LibLayerNames.DEFALUT_BOREHOLE;//“默认_钻孔”图层
+            //IFeatureLayer featureLayer = drawspecial.GetFeatureLayerByName(sLayerAliasName);
+            //if (featureLayer == null)
+            //{
+            //    MessageBox.Show("未找到" + sLayerAliasName + "图层,无法绘制钻孔图元。");
+            //    return;
+            //}
+
+            ////2.绘制图元
+            //IPoint pt = new PointClass();
+            //pt.X = breholeEntity.CoordinateX;
+            //pt.Y = breholeEntity.CoordinateY;
+            //pt.Z = breholeEntity.CoordinateZ;
+            //if (pt.Z == double.NaN)
+            //    pt.Z = 0;
+            //GIS.SpecialGraphic.DrawZK2 drawZK2 = null;
+            ////标注内容
+            //string strH =breholeEntity.GroundElevation.ToString();//地面标高
+            //string strName = breholeEntity.BoreholeNumber.ToString();//孔号（名称）
+
+            //IFeature feature = featureLayer.FeatureClass.CreateFeature();
+            //IGeometry geometry = pt;
+            //DataEditCommon.ZMValue(feature, geometry);   //几何图形Z值处理
+            ////drawspecial.ZMValue(feature, geometry);    //几何图形Z值处理
+            //feature.Shape = pt;//要素形状
+            ////要素ID字段赋值（对应属性表中BindingID）
+            //int iFieldID = feature.Fields.FindField("ID");
+            //feature.Value[iFieldID] = breholeEntity.BindingId.ToString();
+            //feature.Store();//存储要素
+
+            //string strValue = feature.get_Value(feature.Fields.FindField("OBJECTID")).ToString();
+            //DataEditCommon.SpecialPointRenderer(featureLayer, "OBJECTID", strValue, drawZK2.m_Bitmap);
+
+            /////3.显示钻孔图层
+            //if (featureLayer.Visible == false)
+            //    featureLayer.Visible = true;
+
+            //IEnvelope envelop = feature.Shape.Envelope;
+            //DataEditCommon.g_pMyMapCtrl.ActiveView.Extent = envelop;
+            //DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewBackground, null, null);
+            //DataEditCommon.g_pMyMapCtrl.ActiveView.Refresh();
+
+            IPoint pt = new PointClass();
+            pt.X = breholeEntity.CoordinateX;
+            pt.Y = breholeEntity.CoordinateY;
+            pt.Z = breholeEntity.CoordinateZ;
+            if (pt.Z == double.NaN)
+                pt.Z = 0;
+            ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.DEFALUT_BOREHOLE);
+            if (pLayer == null)
+            {
+                MessageBox.Show("未找到钻孔图层,无法绘制钻孔图元。");
+                return;
+            }
+            var pFeatureLayer = (IFeatureLayer)pLayer;
+            IGeometry geometry = pt;
+            var list = new List<ziduan>();
+            list.Add(new ziduan(GIS_Const.FIELD_BID, breholeEntity.BindingId));
+            list.Add(new ziduan(GIS_Const.FIELD_BOREHOLE_NUMBER, breholeEntity.BoreholeNumber));
+            list.Add(new ziduan(GIS_Const.FIELD_ADD_TIME, DateTime.Now.ToString()));
+            list.Add(new ziduan(GIS_Const.FIELD_GROUND_ELEVATION, breholeEntity.GroundElevation.ToString()));
+            list.Add(new ziduan(GIS_Const.FIELD_GROUND_FLOOR_ELEVATION, ""));
+            list.Add(new ziduan(GIS_Const.FIELD_THICKNESS, ""));
+            list.Add(new ziduan(GIS_Const.FIELD_TYPE, "1"));
+
+            IFeature pfeature = DataEditCommon.CreateNewFeature(pFeatureLayer, geometry, list);
+            if (pfeature != null)
+            {
+                MyMapHelp.Jump(pt);
+                DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh(
+                    esriViewDrawPhase.esriViewGeography | esriViewDrawPhase.esriViewForeground, null, null);
+            }
+        }
+
+        #endregion
     }
+
     // **************************************************************************
 }

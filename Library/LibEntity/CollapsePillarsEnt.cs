@@ -1,10 +1,16 @@
-﻿using Castle.ActiveRecord;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Castle.ActiveRecord;
+using NHibernate.Criterion;
 
 namespace LibEntity
 {
     [ActiveRecord("T_COLLAPSE_PILLARS_INFO")]
     public class CollapsePillarsEnt : ActiveRecordBase<CollapsePillarsEnt>
     {
+        public const String TableName = "T_COLLAPSE_PILLARS_INFO";
+
         /// <summary>
         ///     设置或获取主键
         /// </summary>
@@ -68,13 +74,15 @@ namespace LibEntity
         ///     类别
         /// </summary>
         public string Xtype { get; set; }
+
     }
 
     /// <summary>
     ///     20140531 lyf
     ///     陷落柱关键点实体
     /// </summary>
-    public class CollapsePillarsKeyPointEnt : ActiveRecordBase
+    [ActiveRecord("T_COLLAPSE_PILLARS_POINT_INFO")]
+    public class CollapsePillarsKeyPointEnt : ActiveRecordBase<CollapsePillarsKeyPointEnt>
     {
         /// <summary>
         ///     关键点ID
@@ -85,7 +93,7 @@ namespace LibEntity
         /// <summary>
         ///     设置或获取陷落柱ID
         /// </summary>
-        [BelongsTo("ID")]
+        [BelongsTo("COLLAPSE_PILLARS_ID")]
         public CollapsePillarsEnt CollapsePillars { get; set; }
 
         //关键点坐标X
@@ -119,5 +127,20 @@ namespace LibEntity
         /// </summary>
         [Property("BINDINGID")]
         public string BindingId { get; set; }
+
+
+        public static CollapsePillarsKeyPointEnt[] FindAllByCollapsePillarsId(int collapsePillarsId)
+        {
+            var criterion = new List<ICriterion>
+            {
+                Restrictions.Eq("CollapsePillars.Id", collapsePillarsId)
+            };
+            return FindAll(criterion.ToArray());
+        }
+
+        public static void DeleteAllByCollapsePillarsId(int collapsePillarsId)
+        {
+            DeleteAll(FindAllByCollapsePillarsId(collapsePillarsId).Select(u => u.PointId));
+        }
     }
 }

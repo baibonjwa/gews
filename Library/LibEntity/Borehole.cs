@@ -1,5 +1,8 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Castle.ActiveRecord;
+using NHibernate.Criterion;
+using NHibernate.Mapping;
 
 namespace LibEntity
 {
@@ -66,9 +69,17 @@ namespace LibEntity
 
         public override void Delete()
         {
-            var boreholeLithology = BoreholeLithology.FindAllByBoreholeId(BoreholeId);
-            BigFaultagePoint.DeleteAll(boreholeLithology.Select(u => u.BoreholeLithhologyId));
+            BoreholeLithology.DeleteAllByBoreholeId(BoreholeId);
             base.Delete();
+        }
+
+        public static Borehole FindOneByBoreholeNum(string boreholeNum)
+        {
+            var criterion = new List<ICriterion>
+            {
+                Restrictions.Eq("BoreholeNumber", boreholeNum)
+            };
+            return FindOne(criterion.ToArray());
         }
     }
 }

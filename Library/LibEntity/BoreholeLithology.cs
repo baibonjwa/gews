@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Castle.ActiveRecord;
 using NHibernate.Criterion;
 
@@ -65,6 +66,11 @@ namespace LibEntity
         {
             var criterion = new List<ICriterion> { Restrictions.Eq("Borehole.BoreholeId", boreholeId) };
             return FindAll(criterion.ToArray());
+        }
+
+        public static void DeleteAllByBoreholeId(int boreholeId)
+        {
+            DeleteAll(FindAllByBoreholeId(boreholeId).Select(u => u.BoreholeLithhologyId));
         }
     }
 }

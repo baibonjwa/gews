@@ -69,7 +69,6 @@ namespace _3.GeologyMeasure
             //};
 
             // 绑定钻孔信息
-            BindBoreholeInfo();
         }
 
         /// <summary>
@@ -92,28 +91,6 @@ namespace _3.GeologyMeasure
                 // 设置业务类型
                 this._bllType = "update";
 
-                // 设置勘探线信息
-                this.setProspectingLineInfo();
-            }
-        }
-
-        /// <summary>
-        /// 绑定钻孔信息
-        /// </summary>
-        private void BindBoreholeInfo()
-        {
-            // 检索所有钻孔信息
-            DataSet ds = BoreholeBLL.selectAllBoreholeInfo();
-
-            // 检索件数
-            int cnt = ds.Tables[0].Rows.Count;
-            if (cnt > 0)
-            {
-                for (int i = 0; i < cnt; i++)
-                {
-                    // 往左侧ListBox填充成员项目
-                    this.lstProspectingBoreholeAll.Items.Add(ds.Tables[0].Rows[i][BoreholeDBConstNames.BOREHOLE_NUMBER].ToString());
-                }
             }
         }
 
@@ -272,16 +249,14 @@ namespace _3.GeologyMeasure
         {
             try
             {
-                DataSet ds = BoreholeBLL.selectBoreholeInfoByBoreholeName(strDisplayName);
-                Borehole breholeEntity = new Borehole();
-                breholeEntity = BoreholeBLL.GetBoreholeEntity(ds.Tables[0].Rows[0]);
+                Borehole brehole = Borehole.FindOneByBoreholeNum(strDisplayName);
 
                 IPoint pt = new PointClass();
-                if (breholeEntity != null)
+                if (brehole != null)
                 {
-                    pt.X = breholeEntity.CoordinateX;
-                    pt.Y = breholeEntity.CoordinateX;
-                    pt.Z = breholeEntity.CoordinateZ;
+                    pt.X = brehole.CoordinateX;
+                    pt.Y = brehole.CoordinateX;
+                    pt.Z = brehole.CoordinateZ;
                 }
 
                 return pt;
@@ -394,61 +369,6 @@ namespace _3.GeologyMeasure
         }
 
         /// <summary>
-        /// 设置勘探线信息
-        /// </summary>
-        private void setProspectingLineInfo()
-        {
-            // 通过主键获取勘探线信息
-            DataSet ds = ProspectingLineBLL.selectProspectingLineInfoByProspectingLineId(this._iPK);
-
-            if (ds.Tables[0].Rows.Count > 0)
-            {
-                // 勘探线名称
-                this.txtProspectingLineName.Text = ds.Tables[0].Rows[0][ProspectingLineDbConstNames.PROSPECTING_LINE_NAME].ToString();
-                // 勘探钻孔
-                string[] strArr = ds.Tables[0].Rows[0][ProspectingLineDbConstNames.PROSPECTING_BOREHOLE].ToString().Split(',');
-
-                // 临时变量
-                string[] tempArr = new string[strArr.Length];
-
-                for (int i = 0; i < strArr.Length; i++)
-                {
-                    bool result = BoreholeBLL.isBoreholeNumberExist(strArr[i]);
-
-                    if (result)
-                    {
-                        this.lstProspectingBoreholeSelected.Items.Add(strArr[i]);
-                        tempArr[i] = strArr[i];
-                    }
-                    else
-                    {
-                        Alert.alert("该勘探线下的勘探钻孔【" + strArr[i] + "】已经不存在。");
-                    }
-                }
-
-                // 检索所有钻孔信息
-                DataSet dsBorehole = BoreholeBLL.selectAllBoreholeInfo();
-
-                // 检索件数
-                int cnt = dsBorehole.Tables[0].Rows.Count;
-                if (cnt > 0)
-                {
-                    for (int i = 0; i < cnt; i++)
-                    {
-                        if (!tempArr.Contains(dsBorehole.Tables[0].Rows[i][BoreholeDBConstNames.BOREHOLE_NUMBER].ToString()))
-                        {
-                            // 往左侧ListBox填充成员项目
-                            this.lstProspectingBoreholeAll.Items.Add(dsBorehole.Tables[0].Rows[i][BoreholeDBConstNames.BOREHOLE_NUMBER].ToString());
-                        }
-                    }
-                }
-
-
-
-            }
-        }
-
-        /// <summary>
         /// 实现点击鼠标右键，将点击处的Item设为选中
         /// </summary>
         /// <param name="sender"></param>
@@ -491,7 +411,7 @@ namespace _3.GeologyMeasure
 
             this.lstProspectingBoreholeSelected.ClearSelected();
 
-            this.lstProspectingBoreholeSelected.SelectedIndex = iNowIndex -1; // 设置该索引值对应的项为选定状态
+            this.lstProspectingBoreholeSelected.SelectedIndex = iNowIndex - 1; // 设置该索引值对应的项为选定状态
         }
 
         /// <summary>
