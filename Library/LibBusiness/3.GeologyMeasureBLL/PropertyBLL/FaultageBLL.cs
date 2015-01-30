@@ -1,14 +1,4 @@
-﻿// ******************************************************************
-// 概  述：揭露断层业务逻辑
-// 作  者：伍鑫
-// 创建日期：2013/11/27
-// 版本号：V1.0
-// 版本信息：
-// V1.0 新建
-// ******************************************************************
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Text;
 using LibEntity;
 using LibDatabase;
@@ -18,90 +8,6 @@ namespace LibBusiness
 {
     public class FaultageBLL
     {
-        /// <summary>
-        /// 根据一行数据获取断层实体
-        /// </summary>
-        /// <param name="dr"></param>
-        /// <returns></returns>
-        public static Faultage GetFaultageEnt(DataRow dr)
-        {
-            Faultage ret = null;
-            ret = new Faultage();
-
-            //断层ID
-            ret.FaultageId = int.Parse(dr[FaultageDbConstNames.FAULTAGE_ID].ToString());
-            //断层名称
-            ret.FaultageName = dr[FaultageDbConstNames.FAULTAGE_NAME].ToString();
-            //落差
-            ret.Gap = dr[FaultageDbConstNames.GAP].ToString();
-            //倾角
-            ret.Angle = Convert.ToDouble(dr[FaultageDbConstNames.ANGLE].ToString());
-            //类型
-            ret.Type = dr[FaultageDbConstNames.TYPE].ToString();
-            //走向
-            ret.Trend = dr[FaultageDbConstNames.TREND].ToString();
-            //断距
-            ret.Separation = dr[FaultageDbConstNames.SEPARATION].ToString();
-            //X坐标
-            ret.CoordinateX = Convert.ToDouble(dr[FaultageDbConstNames.X].ToString());
-            //Y坐标
-            ret.CoordinateY = Convert.ToDouble(dr[FaultageDbConstNames.Y].ToString());
-            //Z坐标
-            ret.CoordinateZ = Convert.ToDouble(dr[FaultageDbConstNames.Z].ToString());
-            //BID
-            ret.BindingId = dr[FaultageDbConstNames.BID].ToString();
-
-            return ret;
-        }
-
-        /// <summary>
-        /// 获取全部【揭露断层】
-        /// </summary>
-        /// <returns>全部【揭露断层】</returns>
-        public static DataSet selectAllFaultageInfo()
-        {
-            string sqlStr = "SELECT * FROM " + FaultageDbConstNames.TABLE_NAME;
-
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
-            DataSet ds = db.ReturnDS(sqlStr);
-            return ds;
-        }
-
-        /// <summary>
-        ///  获取【揭露断层】
-        /// </summary>
-        /// <param name="iStartIndex">开始位</param>
-        /// <param name="iEndIndex">结束位</param>
-        /// <returns></returns>
-        public static DataSet selectFaultageInfoForPage(int iStartIndex, int iEndIndex)
-        {
-            StringBuilder sqlStr = new StringBuilder();
-            sqlStr.Append("SELECT * FROM (");
-            sqlStr.Append(" SELECT ROW_NUMBER() OVER(ORDER BY " + FaultageDbConstNames.FAULTAGE_ID + ") AS rowid, *");
-            sqlStr.Append(" FROM " + FaultageDbConstNames.TABLE_NAME + ") AS TB");
-            sqlStr.Append(" WHERE rowid >= " + iStartIndex);
-            sqlStr.Append(" AND rowid <= " + iEndIndex);
-
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
-            DataSet ds = db.ReturnDS(sqlStr.ToString());
-            return ds;
-        }
-
-        /// <summary>
-        /// 通过【揭露断层】编号，获取【揭露断层】
-        /// </summary>
-        /// <param name="faultageId">【揭露断层】编号</param>
-        /// <returns>【揭露断层】</returns>
-        public static DataSet selectFaultageInfoByFaultageId(int faultageId)
-        {
-            StringBuilder sqlStr = new StringBuilder();
-            sqlStr.Append("SELECT * FROM " + FaultageDbConstNames.TABLE_NAME);
-            sqlStr.Append(" WHERE " + FaultageDbConstNames.FAULTAGE_ID + " = " + faultageId);
-
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
-            DataSet ds = db.ReturnDS(sqlStr.ToString());
-            return ds;
-        }
 
         /// <summary>
         /// 20140429 lyf
