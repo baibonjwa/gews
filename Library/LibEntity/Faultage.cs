@@ -1,16 +1,6 @@
-﻿// ******************************************************************
-// 概  述：揭露断层实体
-// 作  者：伍鑫
-// 创建日期：2013/11/27
-// 版本号：V1.0
-// 版本信息：
-// V1.0 新建
-// ******************************************************************
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Castle.ActiveRecord;
 using NHibernate.Criterion;
-using NHibernate.Impl;
 
 namespace LibEntity
 {
@@ -91,7 +81,6 @@ namespace LibEntity
                 Restrictions.Eq("FaultageName", faultageName)
             };
             return Exists(criterion.ToArray());
-            Exists();
         }
     }
 }

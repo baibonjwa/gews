@@ -51,6 +51,7 @@
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.controlNavigator1 = new DevExpress.XtraEditors.ControlNavigator();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcFaultage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -188,6 +189,7 @@
             // gridColumn1
             // 
             this.gridColumn1.Caption = "断层名称";
+            this.gridColumn1.FieldName = "FaultageName";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 0;
@@ -202,6 +204,7 @@
             // gridColumn3
             // 
             this.gridColumn3.Caption = "倾角";
+            this.gridColumn3.FieldName = "Angle";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 2;
@@ -209,6 +212,7 @@
             // gridColumn4
             // 
             this.gridColumn4.Caption = "类型";
+            this.gridColumn4.FieldName = "Type";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 3;
@@ -223,6 +227,7 @@
             // gridColumn6
             // 
             this.gridColumn6.Caption = "断距";
+            this.gridColumn6.FieldName = "Separation";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
             this.gridColumn6.VisibleIndex = 5;
@@ -237,6 +242,7 @@
             // gridColumn8
             // 
             this.gridColumn8.Caption = "Y坐标";
+            this.gridColumn8.FieldName = "CoordinateY";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
             this.gridColumn8.VisibleIndex = 7;
@@ -275,6 +281,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "揭露断层数据管理";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.FaultageInfoManagement_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcFaultage)).EndInit();
@@ -308,5 +315,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
         private DevExpress.XtraEditors.ControlNavigator controlNavigator1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }

@@ -63,15 +63,15 @@ namespace sys3
             var faultage = (Faultage)gridView1.GetFocusedRow();
             faultage.Delete();
             SendMessengToServer();
-            //20140429 lyf 根据图元绑定ID删除图元
             DeleteJLDCByBID(new[] { faultage.BindingId });
+            RefreshData();
         }
 
         /// <summary>
         /// 根据揭露断层绑定ID删除揭露断层图元
         /// </summary>
         /// <param name="sfpFaultageBidArray">要删除揭露断层的绑定ID</param>
-        private void DeleteJLDCByBID(IList<string> sfpFaultageBidArray)
+        private void DeleteJLDCByBID(ICollection<string> sfpFaultageBidArray)
         {
             if (sfpFaultageBidArray.Count == 0) return;
 
@@ -111,7 +111,10 @@ namespace sys3
         /// <param name="e"></param>
         private void tsBtnExport_Click(object sender, EventArgs e)
         {
-
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                gcFaultage.ExportToXls(saveFileDialog1.FileName);
+            }
         }
 
         /// <summary>
@@ -121,7 +124,7 @@ namespace sys3
         /// <param name="e"></param>
         private void tsBtnPrint_Click(object sender, EventArgs e)
         {
-
+            DevUtil.DevPrint(gcFaultage, "揭露断层信息报表");
         }
 
         /// <summary>
@@ -131,7 +134,7 @@ namespace sys3
         /// <param name="e"></param>
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-
+            RefreshData();
         }
 
         private void btnMap_Click(object sender, EventArgs e)
@@ -184,6 +187,11 @@ namespace sys3
             var msg = new GeologyMsg(0, 0, "", DateTime.Now, COMMAND_ID.UPDATE_GEOLOG_DATA);
             SendMsg2Server(msg);
             Log.Debug("服务端断层Map------完成" + msg);
+        }
+
+        private void FaultageInfoManagement_Load(object sender, EventArgs e)
+        {
+            RefreshData();
         }
     }
 }
