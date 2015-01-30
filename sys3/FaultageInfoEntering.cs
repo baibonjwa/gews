@@ -83,7 +83,7 @@ namespace sys3
             //长度
             string bid = faultage.BindingId;
             ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.DEFALUT_EXPOSE_FAULTAGE);
-            var featureLayer = (IFeatureLayer) pLayer;
+            var featureLayer = (IFeatureLayer)pLayer;
             if (pLayer == null)
             {
                 txtLength.Text = "0";
@@ -92,7 +92,7 @@ namespace sys3
             IFeature pFeature = MyMapHelp.FindFeatureByWhereClause(featureLayer, "BID='" + bid + "'");
             if (pFeature != null)
             {
-                var pline = (IPolyline) pFeature.Shape;
+                var pline = (IPolyline)pFeature.Shape;
                 if (pline == null) return;
                 txtLength.Text = Math.Round(pline.Length).ToString();
             }
@@ -178,7 +178,7 @@ namespace sys3
                 faultageEntity.BindingId = IDGenerator.NewBindingID();
 
                 // 断层信息登录
-                bResult = FaultageBLL.insertFaultageInfo(faultageEntity);
+                faultageEntity.Save();
                 // 工作面坐标已经改变，需要更新工作面信息
                 SendMessengToServer();
 
@@ -189,8 +189,8 @@ namespace sys3
             {
                 // 主键
                 faultageEntity.FaultageId = _iPK;
+                faultageEntity.Save();
                 // 断层信息修改
-                bResult = FaultageBLL.updateFaultageInfo(faultageEntity);
                 SendMessengToServer();
 
                 //20140428 lyf 
@@ -198,7 +198,7 @@ namespace sys3
                 string sBID = "";
                 if (faultageEntity.FaultageId != null)
                 {
-                    sBID = FaultageBLL.selectFaultageBIDByFaultageId(faultageEntity.FaultageId);
+                    sBID = Faultage.Find(_iPK).BindingId;
                     faultageEntity.BindingId = sBID;
                     ModifyJLDC(faultageEntity); //修改图元
                 }
@@ -247,8 +247,7 @@ namespace sys3
             if (_bllType == "add")
             {
                 // 判断探头名称是否存在
-                if (!Check.isExist(txtFaultageName, Const_GM.FAULTAGE_NAME,
-                    FaultageBLL.isFaultageNameExist(txtFaultageName.Text.Trim())))
+                if (Faultage.ExistsByFaultageName(txtFaultageName.Text))
                 {
                     return false;
                 }
@@ -257,9 +256,7 @@ namespace sys3
             {
                 /* 修改的时候，首先要获取UI输入的断层名称到DB中去检索，
                 如果检索件数 > 0 并且该断层ID还不是传过来的主键，那么视为输入了已存在的断层名称 */
-                DataSet ds = FaultageBLL.selectFaultageInfoByFaultageName(txtFaultageName.Text.Trim());
-                if (ds.Tables[0].Rows.Count > 0 &&
-                    !ds.Tables[0].Rows[0][FaultageDbConstNames.FAULTAGE_ID].ToString().Equals(_iPK.ToString()))
+                if (Faultage.ExistsByFaultageName(txtFaultageName.Text))
                 {
                     txtFaultageName.BackColor = Const.ERROR_FIELD_COLOR;
                     Alert.alert(Const_GM.FAULTAGE_EXIST_MSG); // 断层名称已存在，请重新录入！
@@ -540,7 +537,7 @@ namespace sys3
 
 
             ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.DEFALUT_EXPOSE_FAULTAGE);
-            var featureLayer = (IFeatureLayer) pLayer;
+            var featureLayer = (IFeatureLayer)pLayer;
             if (pLayer == null)
             {
                 MessageBox.Show("未找到揭露断层图层,无法绘制揭露断层图元。");
@@ -564,7 +561,7 @@ namespace sys3
             centrePt.Z = dCoordinateZ;
 
             double angle = Convert.ToDouble(txtAngle.Text); //倾角
-            double length = dLength/2; //默认长度为20，左右各10
+            double length = dLength / 2; //默认长度为20，左右各10
 
             //计算起止点
             IPoint fromPt = new PointClass();
@@ -608,13 +605,13 @@ namespace sys3
         /// <param name="toPt">终点</param>
         private void CalculateEndpoints(IPoint centrePt, double angle, double length, ref IPoint fromPt, ref IPoint toPt)
         {
-            double radian = (Math.PI/180)*angle; //角度转为弧度
+            double radian = (Math.PI / 180) * angle; //角度转为弧度
 
-            fromPt.X = centrePt.X + length*Math.Cos(radian);
-            fromPt.Y = centrePt.Y + length*Math.Sin(radian);
+            fromPt.X = centrePt.X + length * Math.Cos(radian);
+            fromPt.Y = centrePt.Y + length * Math.Sin(radian);
 
-            toPt.X = centrePt.X - length*Math.Cos(radian);
-            toPt.Y = centrePt.Y - length*Math.Sin(radian);
+            toPt.X = centrePt.X - length * Math.Cos(radian);
+            toPt.Y = centrePt.Y - length * Math.Sin(radian);
 
             //给Z坐标赋值
             if (centrePt.Z != double.NaN)
@@ -644,14 +641,14 @@ namespace sys3
             IStyleGalleryItem pStyleGalleryItem;
 
             pStyleGallery = new ServerStyleGalleryClass();
-            pStyleGalleryStorage = (IStyleGalleryStorage) pStyleGallery;
+            pStyleGalleryStorage = (IStyleGalleryStorage)pStyleGallery;
             ILineSymbol lineSymbol = new SimpleLineSymbolClass();
             pEnumStyleGalleryItem = new EnumServerStyleGalleryItemClass();
 
             //查找到符号
             pStyleGalleryStorage.TargetFile = sServerStylePath; //输入符号的地址
             pEnumStyleGalleryItem = pStyleGallery.get_Items("Line Symbols", sServerStylePath, sGalleryClassName);
-                //sGalleryClassName为输入符号库的名称
+            //sGalleryClassName为输入符号库的名称
 
             pEnumStyleGalleryItem.Reset();
             pStyleGalleryItem = pEnumStyleGalleryItem.Next();
@@ -659,7 +656,7 @@ namespace sys3
             {
                 if (pStyleGalleryItem.Name == symbolName)
                 {
-                    lineSymbol = (ILineSymbol) pStyleGalleryItem.Item;
+                    lineSymbol = (ILineSymbol)pStyleGalleryItem.Item;
                     Marshal.ReleaseComObject(pEnumStyleGalleryItem);
                     break;
                 }
@@ -685,7 +682,7 @@ namespace sys3
             queryFilter.AddField(field);
             fieldIndex = geoFeaLayer.FeatureClass.Fields.FindField(field); //获得字段的index  
 
-            var customSymbol = (ISymbol) lineSymbol;
+            var customSymbol = (ISymbol)lineSymbol;
             ISymbol defaultSymbol;
 
             ///设置渲染符号进行渲染
@@ -728,7 +725,7 @@ namespace sys3
 
             uniValueRender.FieldCount = 1;
             uniValueRender.Field[0] = "OBJECTID";
-            var customSymbol = (ISymbol) lineSymbol;
+            var customSymbol = (ISymbol)lineSymbol;
 
 
             ///设置渲染符号进行渲染

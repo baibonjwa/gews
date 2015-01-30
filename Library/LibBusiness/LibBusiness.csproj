@@ -183,7 +183,6 @@
     <Compile Include="3.GeologyMeasureBLL\PropertyBLL\MiningAreaBLL.cs" />
     <Compile Include="3.GeologyMeasureBLL\PropertyBLL\HorizontalBLL.cs" />
     <Compile Include="3.GeologyMeasureBLL\PropertyBLL\MineBLL.cs" />
-    <Compile Include="3.GeologyMeasureBLL\PropertyBLL\FaultageBLL.cs" />
     <Compile Include="3.GeologyMeasureBLL\PropertyBLL\LithologyBLL.cs" />
     <Compile Include="3.GeologyMeasureBLL\PropertyBLL\TunnelInfoBLL.cs" />
     <Compile Include="3.GeologyMeasureBLL\PropertyBLL\WireInfoBLL.cs" />
