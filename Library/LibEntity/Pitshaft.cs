@@ -1,4 +1,6 @@
-﻿using Castle.ActiveRecord;
+﻿using System.Collections.Generic;
+using Castle.ActiveRecord;
+using NHibernate.Criterion;
 
 namespace LibEntity
 {
@@ -85,5 +87,15 @@ namespace LibEntity
         /// </summary>
         [Property("BID")]
         public string BindingId { get; set; }
+
+
+        public static bool ExistsByPitshaftName(string pitshaftName)
+        {
+            var criterion = new List<ICriterion>
+            {
+                Restrictions.Eq("PitshaftName", pitshaftName)
+            };
+            return Exists(criterion.ToArray());
+        }
     }
 }

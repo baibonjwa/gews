@@ -1,44 +1,32 @@
-﻿// ******************************************************************
-// 概  述：井筒数据录入界面
-// 作  者：伍鑫
-// 创建日期：2013/03/05
-// 版本号：V1.0
-// 版本信息：
-// V1.0 新建
-// ******************************************************************
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using LibEntity;
-using LibBusiness;
-using LibCommon;
+using ESRI.ArcGIS.Carto;
+using ESRI.ArcGIS.Geodatabase;
+using ESRI.ArcGIS.Geometry;
 using GIS;
 using GIS.Common;
-using ESRI.ArcGIS.Carto;
-using ESRI.ArcGIS.Geometry;
-using ESRI.ArcGIS.Geodatabase;
+using LibBusiness;
+using LibCommon;
+using LibEntity;
 
-namespace _3.GeologyMeasure
+namespace sys3
 {
     public partial class PitshaftInfoEntering : Form
     {
-        private Rectangle _PropertyName;
-        /** 主键  **/
-        private int _iPK;
         /** 业务逻辑类型：添加/修改  **/
-        private string _bllType = "add";
-        PitshaftInfoManagement frm;
+        private readonly string _bllType = "add";
+        private readonly int _iPk;
+        private Rectangle _PropertyName;
+
         /// <summary>
-        /// 构造方法
+        ///     构造方法
         /// </summary>
-        public PitshaftInfoEntering(PitshaftInfoManagement form)
+        public PitshaftInfoEntering()
         {
-            frm = form;
             InitializeComponent();
             // 设置窗体默认属性
             FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_GM.INSERT_PITSHAFT_INFO);
@@ -47,27 +35,54 @@ namespace _3.GeologyMeasure
         }
 
         /// <summary>
-        /// 带参数的构造方法
+        ///     带参数的构造方法
         /// </summary>
         /// <param name="strPrimaryKey">主键</param>
-        public PitshaftInfoEntering(string strPrimaryKey, string strTitle, PitshaftInfoManagement form)
+        /// <param name="strTitle"></param>
+        public PitshaftInfoEntering(string strPrimaryKey, string strTitle)
         {
-            frm = form;
             InitializeComponent();
             // 设置业务类型
-            this._bllType = "update";
+            _bllType = "update";
             // 主键
-            this._iPK = Convert.ToInt32(strPrimaryKey);
+            _iPk = Convert.ToInt32(strPrimaryKey);
             // 设置窗体默认属性
             FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, strTitle);
             // 加载井筒类型信息
             loadPitshaftTypeInfo();
             // 设置井筒信息
-            this.setPitshaftTypeInfo();
+            // 通过主键获取断层信息
+            DataSet ds = PitshaftBLL.selectPitshaftInfoByPitshaftId(_iPk);
+
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                // 井筒名称
+                txtPitshaftName.Text = ds.Tables[0].Rows[0][PitshaftDbConstNames.PITSHAFT_NAME].ToString();
+                // 井筒类型
+                cobPitshaftType.SelectedValue = ds.Tables[0].Rows[0][PitshaftDbConstNames.PITSHAFT_TYPE_ID].ToString();
+
+                // 井口标高
+                txtWellheadElevation.Text = ds.Tables[0].Rows[0][PitshaftDbConstNames.WELLHEAD_ELEVATION].ToString();
+                // 井底标高
+                txtWellbottomElevation.Text = ds.Tables[0].Rows[0][PitshaftDbConstNames.WELLBOTTOM_ELEVATION].ToString();
+                // 井筒坐标X
+                txtPitshaftCoordinateX.Text =
+                    ds.Tables[0].Rows[0][PitshaftDbConstNames.PITSHAFT_COORDINATE_X].ToString();
+                // 井筒坐标Y
+                txtPitshaftCoordinateY.Text =
+                    ds.Tables[0].Rows[0][PitshaftDbConstNames.PITSHAFT_COORDINATE_Y].ToString();
+                // 图形坐标X
+                txtFigureCoordinateX.Text = ds.Tables[0].Rows[0][PitshaftDbConstNames.FIGURE_COORDINATE_X].ToString();
+                // 图形坐标Y
+                txtFigureCoordinateY.Text = ds.Tables[0].Rows[0][PitshaftDbConstNames.FIGURE_COORDINATE_Y].ToString();
+                // 图形坐标Z
+                string strCoordinate_Z = ds.Tables[0].Rows[0][PitshaftDbConstNames.FIGURE_COORDINATE_Z].ToString();
+                txtFigureCoordinateZ.Text = (strCoordinate_Z == Const.DOUBLE_DEFAULT_VALUE ? "" : strCoordinate_Z);
+            }
         }
 
         /// <summary>
-        /// 加载井筒类型信息
+        ///     加载井筒类型信息
         /// </summary>
         private void loadPitshaftTypeInfo()
         {
@@ -75,22 +90,22 @@ namespace _3.GeologyMeasure
 
             if (ds.Tables[0].Rows.Count > 0)
             {
-                this.cobPitshaftType.DataSource = ds.Tables[0];
-                this.cobPitshaftType.DisplayMember = PitshaftTypeDbConstNames.PITSHAFT_TYPE_NAME;
-                this.cobPitshaftType.ValueMember = PitshaftTypeDbConstNames.PITSHAFT_TYPE_ID;
-                this.cobPitshaftType.SelectedIndex = -1;
+                cobPitshaftType.DataSource = ds.Tables[0];
+                cobPitshaftType.DisplayMember = PitshaftTypeDbConstNames.PITSHAFT_TYPE_NAME;
+                cobPitshaftType.ValueMember = PitshaftTypeDbConstNames.PITSHAFT_TYPE_ID;
+                cobPitshaftType.SelectedIndex = -1;
             }
         }
 
         /// <summary>
-        /// 提  交
+        ///     提  交
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnSubmit_Click(object sender, EventArgs e)
         {
             // 验证
-            if (!this.check())
+            if (!check())
             {
                 DialogResult = DialogResult.None;
                 return;
@@ -98,78 +113,71 @@ namespace _3.GeologyMeasure
             DialogResult = DialogResult.OK;
 
             // 创建井筒实体
-            Pitshaft pitshaftEntity = new Pitshaft();
+            var pitshaftEntity = new Pitshaft();
             // 井筒名称
-            pitshaftEntity.PitshaftName = this.txtPitshaftName.Text.Trim();
+            pitshaftEntity.PitshaftName = txtPitshaftName.Text.Trim();
             // 井筒类型
             int iPitshaftTypeId = 0;
-            if (int.TryParse(Convert.ToString(this.cobPitshaftType.SelectedValue), out iPitshaftTypeId))
+            if (int.TryParse(Convert.ToString(cobPitshaftType.SelectedValue), out iPitshaftTypeId))
             {
                 pitshaftEntity.PitshaftType.PitshaftTypeId = iPitshaftTypeId;
             }
             // 井口标高
             double dWellheadElevation = 0;
-            if (double.TryParse(this.txtWellheadElevation.Text.Trim(), out dWellheadElevation))
+            if (double.TryParse(txtWellheadElevation.Text.Trim(), out dWellheadElevation))
             {
                 pitshaftEntity.WellheadElevation = dWellheadElevation;
             }
             // 井底标高
             double dWellbottomElevation = 0;
-            if (double.TryParse(this.txtWellbottomElevation.Text.Trim(), out dWellbottomElevation))
+            if (double.TryParse(txtWellbottomElevation.Text.Trim(), out dWellbottomElevation))
             {
                 pitshaftEntity.WellbottomElevation = dWellbottomElevation;
             }
             // 井筒坐标X
             double dPitshaftCoordinateX = 0;
-            if (double.TryParse(this.txtPitshaftCoordinateX.Text.Trim(), out dPitshaftCoordinateX))
+            if (double.TryParse(txtPitshaftCoordinateX.Text.Trim(), out dPitshaftCoordinateX))
             {
                 pitshaftEntity.PitshaftCoordinateX = Math.Round(dPitshaftCoordinateX, 3);
             }
             // 井筒坐标Y
             double dPitshaftCoordinateY = 0;
-            if (double.TryParse(this.txtPitshaftCoordinateY.Text.Trim(), out dPitshaftCoordinateY))
+            if (double.TryParse(txtPitshaftCoordinateY.Text.Trim(), out dPitshaftCoordinateY))
             {
                 pitshaftEntity.PitshaftCoordinateY = Math.Round(dPitshaftCoordinateY, 3);
             }
             // 图形坐标X
             double dFigureCoordinateX = 0;
-            if (double.TryParse(this.txtFigureCoordinateX.Text.Trim(), out dFigureCoordinateX))
+            if (double.TryParse(txtFigureCoordinateX.Text.Trim(), out dFigureCoordinateX))
             {
                 pitshaftEntity.FigureCoordinateX = Math.Round(dFigureCoordinateX, 3);
             }
             // 图形坐标Y
             double dFigureCoordinateY = 0;
-            if (double.TryParse(this.txtFigureCoordinateY.Text.Trim(), out dFigureCoordinateY))
+            if (double.TryParse(txtFigureCoordinateY.Text.Trim(), out dFigureCoordinateY))
             {
                 pitshaftEntity.FigureCoordinateY = Math.Round(dFigureCoordinateY, 3);
             }
             // 图形坐标Z
             double dFigureCoordinateZ = 0;
-            if (double.TryParse(this.txtFigureCoordinateZ.Text.Trim(), out dFigureCoordinateZ))
+            if (double.TryParse(txtFigureCoordinateZ.Text.Trim(), out dFigureCoordinateZ))
             {
                 pitshaftEntity.FigureCoordinateZ = dFigureCoordinateZ;
             }
 
             bool bResult = false;
-            if (this._bllType == "add")
+            if (_bllType == "add")
             {
                 // BID
                 pitshaftEntity.BindingId = IDGenerator.NewBindingID();
+                pitshaftEntity.Save();
 
-                //井筒信息插入
-                bResult = PitshaftBLL.insertPitshaftInfo(pitshaftEntity);
-
-                //绘制井筒
-                if (bResult)
-                {
-                    frm.refreshAdd();
-                    DrawJingTong(pitshaftEntity);
-                }
+                DrawJingTong(pitshaftEntity);
             }
             else
             {
                 // 主键
-                pitshaftEntity.PitshaftId = this._iPK;
+                pitshaftEntity.PitshaftId = _iPk;
                 // 井筒信息修改
                 bResult = PitshaftBLL.updatePitshaftInfo(pitshaftEntity);
 
@@ -178,7 +186,6 @@ namespace _3.GeologyMeasure
                 //获取井筒BID，为后面修改绘制井筒赋值所用
                 if (bResult)
                 {
-                    frm.refreshUpdate();
                     string sBID = "";
                     sBID = PitshaftBLL.selectPitshaftInfoBIDByPitshaftName(pitshaftEntity.PitshaftName);
                     pitshaftEntity.BindingId = sBID;
@@ -190,14 +197,174 @@ namespace _3.GeologyMeasure
             // 添加/修改成功的场合
             if (bResult)
             {
-                this.Close();
+                Close();
             }
+        }
+
+        /// <summary>
+        ///     取  消
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            // 关闭窗口
+            Close();
+        }
+
+        /// <summary>
+        ///     验证画面入力数据
+        /// </summary>
+        /// <returns>验证结果：true 通过验证, false未通过验证</returns>
+        private bool check()
+        {
+            // 判断<井筒名称>是否录入
+            if (!Check.isEmpty(txtPitshaftName, Const_GM.PITSHAFT_NAME))
+            {
+                return false;
+            }
+
+            // 判断<井筒名称>是否包含特殊字符
+            if (!Check.checkSpecialCharacters(txtPitshaftName, Const_GM.PITSHAFT_NAME))
+            {
+                return false;
+            }
+
+            // 判断井筒名称是否重复
+            if (_bllType == "add")
+            {
+                // 判断井筒名称是否存在
+                if (Pitshaft.ExistsByPitshaftName(txtPitshaftName.Text.Trim()))
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                /* 修改的时候，首先要获取UI输入的名称到DB中去检索，
+                如果检索件数 > 0 并且该断层ID还不是传过来的主键，那么视为输入了已存在的名称 */
+                DataSet ds = PitshaftBLL.selectPitshaftInfoByPitshaftName(txtPitshaftName.Text.Trim());
+                if (ds.Tables[0].Rows.Count > 0 &&
+                    !ds.Tables[0].Rows[0][PitshaftDbConstNames.PITSHAFT_ID].ToString().Equals(_iPk.ToString()))
+                {
+                    txtPitshaftName.BackColor = Const.ERROR_FIELD_COLOR;
+                    Alert.alert(Const_GM.PITSHAFT_NAME_EXIST_MSG); // 井筒名称已存在，请重新录入！
+                    txtPitshaftName.Focus();
+                    return false;
+                }
+            }
+
+            // 判断<井筒类型>是否选择
+            if (!Check.isEmpty(cobPitshaftType, Const_GM.PITSHAFT_TYPE))
+            {
+                return false;
+            }
+
+            // 判断<井口标高>是否录入
+            if (!Check.isEmpty(txtWellheadElevation, Const_GM.WELLHEAD_ELEVATION))
+            {
+                return false;
+            }
+
+            // 判断<井口标高>是否为数字
+            if (!Check.IsNumeric(txtWellheadElevation, Const_GM.WELLHEAD_ELEVATION))
+            {
+                return false;
+            }
+
+            // 判断<井底标高>是否录入
+            if (!Check.isEmpty(txtWellbottomElevation, Const_GM.WELLBOTTOM_ELEVATION))
+            {
+                return false;
+            }
+
+            // 判断<井底标高>是否为数字
+            if (!Check.IsNumeric(txtWellbottomElevation, Const_GM.WELLBOTTOM_ELEVATION))
+            {
+                return false;
+            }
+
+            // 判断<井筒坐标X>是否录入
+            if (!Check.isEmpty(txtPitshaftCoordinateX, Const_GM.PITSHAFT_COORDINATE_X))
+            {
+                return false;
+            }
+
+            // 判断<井筒坐标X>是否为数字
+            if (!Check.IsNumeric(txtPitshaftCoordinateX, Const_GM.PITSHAFT_COORDINATE_X))
+            {
+                return false;
+            }
+
+            // 判断<井筒坐标Y>是否录入
+            if (!Check.isEmpty(txtPitshaftCoordinateY, Const_GM.PITSHAFT_COORDINATE_Y))
+            {
+                return false;
+            }
+
+            // 判断<井筒坐标Y>是否为数字
+            if (!Check.IsNumeric(txtPitshaftCoordinateY, Const_GM.PITSHAFT_COORDINATE_Y))
+            {
+                return false;
+            }
+
+            // 判断<图形坐标X>是否录入
+            if (!Check.isEmpty(txtFigureCoordinateX, Const_GM.FIGURE_COORDINATE_X))
+            {
+                return false;
+            }
+
+            // 判断<图形坐标X>是否为数字
+            if (!Check.IsNumeric(txtFigureCoordinateX, Const_GM.FIGURE_COORDINATE_X))
+            {
+                return false;
+            }
+
+            // 判断<图形坐标Y>是否录入
+            if (!Check.isEmpty(txtFigureCoordinateY, Const_GM.FIGURE_COORDINATE_Y))
+            {
+                return false;
+            }
+
+            // 判断<图形坐标Y>是否为数字
+            if (!Check.IsNumeric(txtFigureCoordinateY, Const_GM.FIGURE_COORDINATE_Y))
+            {
+                return false;
+            }
+
+            // TODO:图形坐标Z暂时设为非必须录入，暂时保留
+            //// 判断<图形坐标Z>是否录入
+            //if (!Check.isEmpty(this.txtFigureCoordinateZ, Const_GM.FIGURE_COORDINATE_Z))
+            //{
+            //    return false;
+            //}
+
+            // 判断<图形坐标Z>是否为数字
+            if (!Check.IsNumeric(txtFigureCoordinateZ, Const_GM.FIGURE_COORDINATE_Z))
+            {
+                return false;
+            }
+
+            //****************************************************
+
+            // 验证通过
+            return true;
+        }
+
+        private void btnQD_Click(object sender, EventArgs e)
+        {
+            DataEditCommon.PickUpPoint(txtPitshaftCoordinateX, txtPitshaftCoordinateY);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DataEditCommon.PickUpPoint(txtFigureCoordinateX, txtFigureCoordinateY);
         }
 
         #region 绘制井筒图元
 
         /// <summary>
-        /// 绘制井筒图元
+        ///     绘制井筒图元
         /// </summary>
         /// <param name="pitshaftEntity"></param>
         private void DrawJingTong(Pitshaft pitshaftEntity)
@@ -267,27 +434,27 @@ namespace _3.GeologyMeasure
 
             ////DataEditCommon.g_pMyMapCtrl.ActiveView.Refresh();
 
-            double X = Convert.ToDouble(this.txtFigureCoordinateX.Text.ToString());
-            double Y = Convert.ToDouble(this.txtFigureCoordinateY.Text.ToString());
+            double X = Convert.ToDouble(txtFigureCoordinateX.Text);
+            double Y = Convert.ToDouble(txtFigureCoordinateY.Text);
             IPoint pt = new PointClass();
             pt.X = X;
             pt.Y = Y;
 
             double dZ = 0;
-            if (!string.IsNullOrEmpty(this.txtFigureCoordinateZ.Text))
+            if (!string.IsNullOrEmpty(txtFigureCoordinateZ.Text))
             {
-                double.TryParse(this.txtFigureCoordinateZ.Text, out dZ);
+                double.TryParse(txtFigureCoordinateZ.Text, out dZ);
             }
             pt.Z = dZ;
-            ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, GIS.LayerNames.DEFALUT_JINGTONG);
+            ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.DEFALUT_JINGTONG);
             if (pLayer == null)
             {
                 MessageBox.Show("未找到井筒图层,无法绘制井筒图元。");
                 return;
             }
-            IFeatureLayer pFeatureLayer = (IFeatureLayer)pLayer;
+            var pFeatureLayer = (IFeatureLayer)pLayer;
             IGeometry geometry = pt;
-            List<ziduan> list = new List<ziduan>();
+            var list = new List<ziduan>();
             list.Add(new ziduan("bid", pitshaftEntity.BindingId));
             list.Add(new ziduan("mc", pitshaftEntity.PitshaftName));
             list.Add(new ziduan("addtime", DateTime.Now.ToString()));
@@ -301,20 +468,21 @@ namespace _3.GeologyMeasure
             IFeature pfeature = DataEditCommon.CreateNewFeature(pFeatureLayer, geometry, list);
             if (pfeature != null)
             {
-                GIS.MyMapHelp.Jump(pt);
-                DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeography | esriViewDrawPhase.esriViewForeground, null, null);
+                MyMapHelp.Jump(pt);
+                DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh(
+                    esriViewDrawPhase.esriViewGeography | esriViewDrawPhase.esriViewForeground, null, null);
             }
         }
 
         /// <summary>
-        /// 修改井筒
+        ///     修改井筒
         /// </summary>
         /// <param name="pitshaftEntity"></param>
         private void ModifyJingTong(Pitshaft pitshaftEntity)
         {
             //1.获得当前编辑图层
-            DrawSpecialCommon drawspecial = new DrawSpecialCommon();
-            string sLayerAliasName = GIS.LayerNames.DEFALUT_JINGTONG;//“默认_井筒”图层
+            var drawspecial = new DrawSpecialCommon();
+            string sLayerAliasName = LayerNames.DEFALUT_JINGTONG; //“默认_井筒”图层
             IFeatureLayer featureLayer = drawspecial.GetFeatureLayerByName(sLayerAliasName);
             if (featureLayer == null)
             {
@@ -323,16 +491,17 @@ namespace _3.GeologyMeasure
             }
 
             //2.删除原来图元，重新绘制新图元
-            bool bIsDeleteOldFeature = DataEditCommon.DeleteFeatureByWhereClause(featureLayer, "BID='" + pitshaftEntity.BindingId + "'");
+            bool bIsDeleteOldFeature = DataEditCommon.DeleteFeatureByWhereClause(featureLayer,
+                "BID='" + pitshaftEntity.BindingId + "'");
             //if (bIsDeleteOldFeature)
             {
                 //绘制井筒
                 DrawJingTong(pitshaftEntity);
             }
-
         }
+
         /// <summary>
-        /// 坐标长度处理
+        ///     坐标长度处理
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>
@@ -355,199 +524,5 @@ namespace _3.GeologyMeasure
         }
 
         #endregion
-
-        /// <summary>
-        /// 取  消
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            // 关闭窗口
-            this.Close();
-        }
-
-        /// <summary>
-        /// 验证画面入力数据
-        /// </summary>
-        /// <returns>验证结果：true 通过验证, false未通过验证</returns>
-        private bool check()
-        {
-            // 判断<井筒名称>是否录入
-            if (!Check.isEmpty(this.txtPitshaftName, Const_GM.PITSHAFT_NAME))
-            {
-                return false;
-            }
-
-            // 判断<井筒名称>是否包含特殊字符
-            if (!Check.checkSpecialCharacters(this.txtPitshaftName, Const_GM.PITSHAFT_NAME))
-            {
-                return false;
-            }
-
-            // 判断井筒名称是否重复
-            if (this._bllType == "add")
-            {
-                // 判断井筒名称是否存在
-                if (!Check.isExist(this.txtPitshaftName, Const_GM.PITSHAFT_NAME,
-                    PitshaftBLL.isPitshaftNameExist(this.txtPitshaftName.Text.Trim())))
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                /* 修改的时候，首先要获取UI输入的名称到DB中去检索，
-                如果检索件数 > 0 并且该断层ID还不是传过来的主键，那么视为输入了已存在的名称 */
-                DataSet ds = PitshaftBLL.selectPitshaftInfoByPitshaftName(this.txtPitshaftName.Text.Trim());
-                if (ds.Tables[0].Rows.Count > 0 && !ds.Tables[0].Rows[0][PitshaftDbConstNames.PITSHAFT_ID].ToString().Equals(_iPK.ToString()))
-                {
-                    this.txtPitshaftName.BackColor = Const.ERROR_FIELD_COLOR;
-                    Alert.alert(Const_GM.PITSHAFT_NAME_EXIST_MSG); // 井筒名称已存在，请重新录入！
-                    this.txtPitshaftName.Focus();
-                    return false;
-                }
-
-            }
-
-            // 判断<井筒类型>是否选择
-            if (!Check.isEmpty(this.cobPitshaftType, Const_GM.PITSHAFT_TYPE))
-            {
-                return false;
-            }
-
-            // 判断<井口标高>是否录入
-            if (!Check.isEmpty(this.txtWellheadElevation, Const_GM.WELLHEAD_ELEVATION))
-            {
-                return false;
-            }
-
-            // 判断<井口标高>是否为数字
-            if (!Check.IsNumeric(this.txtWellheadElevation, Const_GM.WELLHEAD_ELEVATION))
-            {
-                return false;
-            }
-
-            // 判断<井底标高>是否录入
-            if (!Check.isEmpty(this.txtWellbottomElevation, Const_GM.WELLBOTTOM_ELEVATION))
-            {
-                return false;
-            }
-
-            // 判断<井底标高>是否为数字
-            if (!Check.IsNumeric(this.txtWellbottomElevation, Const_GM.WELLBOTTOM_ELEVATION))
-            {
-                return false;
-            }
-
-            // 判断<井筒坐标X>是否录入
-            if (!Check.isEmpty(this.txtPitshaftCoordinateX, Const_GM.PITSHAFT_COORDINATE_X))
-            {
-                return false;
-            }
-
-            // 判断<井筒坐标X>是否为数字
-            if (!Check.IsNumeric(this.txtPitshaftCoordinateX, Const_GM.PITSHAFT_COORDINATE_X))
-            {
-                return false;
-            }
-
-            // 判断<井筒坐标Y>是否录入
-            if (!Check.isEmpty(this.txtPitshaftCoordinateY, Const_GM.PITSHAFT_COORDINATE_Y))
-            {
-                return false;
-            }
-
-            // 判断<井筒坐标Y>是否为数字
-            if (!Check.IsNumeric(this.txtPitshaftCoordinateY, Const_GM.PITSHAFT_COORDINATE_Y))
-            {
-                return false;
-            }
-
-            // 判断<图形坐标X>是否录入
-            if (!Check.isEmpty(this.txtFigureCoordinateX, Const_GM.FIGURE_COORDINATE_X))
-            {
-                return false;
-            }
-
-            // 判断<图形坐标X>是否为数字
-            if (!Check.IsNumeric(this.txtFigureCoordinateX, Const_GM.FIGURE_COORDINATE_X))
-            {
-                return false;
-            }
-
-            // 判断<图形坐标Y>是否录入
-            if (!Check.isEmpty(this.txtFigureCoordinateY, Const_GM.FIGURE_COORDINATE_Y))
-            {
-                return false;
-            }
-
-            // 判断<图形坐标Y>是否为数字
-            if (!Check.IsNumeric(this.txtFigureCoordinateY, Const_GM.FIGURE_COORDINATE_Y))
-            {
-                return false;
-            }
-
-            // TODO:图形坐标Z暂时设为非必须录入，暂时保留
-            //// 判断<图形坐标Z>是否录入
-            //if (!Check.isEmpty(this.txtFigureCoordinateZ, Const_GM.FIGURE_COORDINATE_Z))
-            //{
-            //    return false;
-            //}
-
-            // 判断<图形坐标Z>是否为数字
-            if (!Check.IsNumeric(this.txtFigureCoordinateZ, Const_GM.FIGURE_COORDINATE_Z))
-            {
-                return false;
-            }
-
-            //****************************************************
-
-            // 验证通过
-            return true;
-        }
-
-        /// <summary>
-        /// 设置井筒信息
-        /// </summary>
-        private void setPitshaftTypeInfo()
-        {
-            // 通过主键获取断层信息
-            DataSet ds = PitshaftBLL.selectPitshaftInfoByPitshaftId(this._iPK);
-
-            if (ds.Tables[0].Rows.Count > 0)
-            {
-                // 井筒名称
-                this.txtPitshaftName.Text = ds.Tables[0].Rows[0][PitshaftDbConstNames.PITSHAFT_NAME].ToString();
-                // 井筒类型
-                this.cobPitshaftType.SelectedValue = ds.Tables[0].Rows[0][PitshaftDbConstNames.PITSHAFT_TYPE_ID].ToString();
-
-                // 井口标高
-                this.txtWellheadElevation.Text = ds.Tables[0].Rows[0][PitshaftDbConstNames.WELLHEAD_ELEVATION].ToString();
-                // 井底标高
-                this.txtWellbottomElevation.Text = ds.Tables[0].Rows[0][PitshaftDbConstNames.WELLBOTTOM_ELEVATION].ToString();
-                // 井筒坐标X
-                this.txtPitshaftCoordinateX.Text = ds.Tables[0].Rows[0][PitshaftDbConstNames.PITSHAFT_COORDINATE_X].ToString();
-                // 井筒坐标Y
-                this.txtPitshaftCoordinateY.Text = ds.Tables[0].Rows[0][PitshaftDbConstNames.PITSHAFT_COORDINATE_Y].ToString();
-                // 图形坐标X
-                this.txtFigureCoordinateX.Text = ds.Tables[0].Rows[0][PitshaftDbConstNames.FIGURE_COORDINATE_X].ToString();
-                // 图形坐标Y
-                this.txtFigureCoordinateY.Text = ds.Tables[0].Rows[0][PitshaftDbConstNames.FIGURE_COORDINATE_Y].ToString();
-                // 图形坐标Z
-                string strCoordinate_Z = ds.Tables[0].Rows[0][PitshaftDbConstNames.FIGURE_COORDINATE_Z].ToString();
-                this.txtFigureCoordinateZ.Text = (strCoordinate_Z == Const.DOUBLE_DEFAULT_VALUE ? "" : strCoordinate_Z);
-            }
-        }
-
-        private void btnQD_Click(object sender, EventArgs e)
-        {
-            GIS.Common.DataEditCommon.PickUpPoint(txtPitshaftCoordinateX, txtPitshaftCoordinateY);
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            GIS.Common.DataEditCommon.PickUpPoint(txtFigureCoordinateX, txtFigureCoordinateY);
-        }
     }
 }

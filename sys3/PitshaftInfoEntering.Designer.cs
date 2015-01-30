@@ -1,4 +1,4 @@
-﻿namespace _3.GeologyMeasure
+﻿namespace sys3
 {
     partial class PitshaftInfoEntering
     {

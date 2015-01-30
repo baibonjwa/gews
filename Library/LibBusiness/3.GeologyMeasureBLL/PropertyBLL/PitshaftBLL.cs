@@ -18,54 +18,6 @@ namespace LibBusiness
 {
     public class PitshaftBLL
     {
-        /// <summary>
-        /// 获取全部<井筒>信息
-        /// </summary>
-        /// <returns>全部<井筒>信息</returns>
-        public static DataSet selectAllPitshaftInfo()
-        {
-            string sqlStr = "SELECT * FROM " + PitshaftDbConstNames.TABLE_NAME;
-
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
-            DataSet ds = db.ReturnDS(sqlStr);
-            return ds;
-        }
-
-        /// <summary>
-        ///  获取【井筒】
-        /// </summary>
-        /// <param name="iStartIndex">开始位</param>
-        /// <param name="iEndIndex">结束位</param>
-        /// <returns></returns>
-        public static DataSet selectPitshaftInfoForPage(int iStartIndex, int iEndIndex)
-        {
-            StringBuilder sqlStr = new StringBuilder();
-            sqlStr.Append("SELECT * FROM (");
-            sqlStr.Append(" SELECT ROW_NUMBER() OVER(ORDER BY " + PitshaftDbConstNames.PITSHAFT_ID + ") AS rowid, *");
-            sqlStr.Append(" FROM " + PitshaftDbConstNames.TABLE_NAME + ") AS TB");
-            sqlStr.Append(" WHERE rowid >= " + iStartIndex);
-            sqlStr.Append(" AND rowid <= " + iEndIndex);
-
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
-            DataSet ds = db.ReturnDS(sqlStr.ToString());
-            return ds;
-        }
-
-        /// <summary>
-        /// 判断<井筒>名称是否存在
-        /// </summary>
-        /// <param name="strPitshaftName"><井筒>名称</param>
-        /// <returns>成功与否：true，false</returns>
-        public static bool isPitshaftNameExist(string strPitshaftName)
-        {
-            StringBuilder sqlStr = new StringBuilder();
-            sqlStr.Append("SELECT COUNT(*) FROM " + PitshaftDbConstNames.TABLE_NAME);
-            sqlStr.Append(" WHERE " + PitshaftDbConstNames.PITSHAFT_NAME + " = '" + strPitshaftName + "'");
-
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
-            DataSet ds = db.ReturnDS(sqlStr.ToString());
-            return int.Parse(ds.Tables[0].Rows[0][0].ToString()) > 0 ? true : false;
-        }
 
         /// <summary>
         /// 根据<井筒>名称，获取该<井筒>的详细信息
@@ -134,45 +86,6 @@ namespace LibBusiness
             {
                 return sBID;
             }
-        }
-
-
-        /// <summary>
-        /// <井筒>信息登录
-        /// </summary>
-        /// <param name="pitshaftEntity"><井筒>实体</param>
-        /// <returns>成功与否：true，false</returns>
-        public static bool insertPitshaftInfo(Pitshaft pitshaftEntity)
-        {
-            StringBuilder sqlStr = new StringBuilder();
-            sqlStr.Append("INSERT INTO " + PitshaftDbConstNames.TABLE_NAME);
-            sqlStr.Append(" (" + PitshaftDbConstNames.PITSHAFT_NAME);
-            sqlStr.Append(", " + PitshaftDbConstNames.PITSHAFT_TYPE_ID);
-            sqlStr.Append(", " + PitshaftDbConstNames.WELLHEAD_ELEVATION);
-            sqlStr.Append(", " + PitshaftDbConstNames.WELLBOTTOM_ELEVATION);
-            sqlStr.Append(", " + PitshaftDbConstNames.PITSHAFT_COORDINATE_X);
-            sqlStr.Append(", " + PitshaftDbConstNames.PITSHAFT_COORDINATE_Y);
-            sqlStr.Append(", " + PitshaftDbConstNames.FIGURE_COORDINATE_X);
-            sqlStr.Append(", " + PitshaftDbConstNames.FIGURE_COORDINATE_Y);
-            sqlStr.Append(", " + PitshaftDbConstNames.FIGURE_COORDINATE_Z);
-            sqlStr.Append(", " + PitshaftDbConstNames.BID);
-            sqlStr.Append(" )");
-            sqlStr.Append(" VALUES (");
-            sqlStr.Append("  '" + pitshaftEntity.PitshaftName + "'");
-            sqlStr.Append(", '" + pitshaftEntity.PitshaftType + "'");
-            sqlStr.Append(", '" + pitshaftEntity.WellheadElevation + "'");
-            sqlStr.Append(", '" + pitshaftEntity.WellbottomElevation + "'");
-            sqlStr.Append(", '" + pitshaftEntity.PitshaftCoordinateX + "'");
-            sqlStr.Append(", '" + pitshaftEntity.PitshaftCoordinateY + "'");
-            sqlStr.Append(", '" + pitshaftEntity.FigureCoordinateX + "'");
-            sqlStr.Append(", '" + pitshaftEntity.FigureCoordinateY + "'");
-            sqlStr.Append(", '" + pitshaftEntity.FigureCoordinateZ + "'");
-            sqlStr.Append(", '" + pitshaftEntity.BindingId + "'");
-            sqlStr.Append(" )");
-
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
-            bool bResult = db.OperateDB(sqlStr.ToString());
-            return bResult;
         }
 
         /// <summary>
