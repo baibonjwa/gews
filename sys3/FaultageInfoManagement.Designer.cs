@@ -235,6 +235,7 @@
             // gridColumn7
             // 
             this.gridColumn7.Caption = "X坐标";
+            this.gridColumn7.FieldName = "CoordinateX";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
             this.gridColumn7.VisibleIndex = 6;
@@ -250,6 +251,7 @@
             // gridColumn9
             // 
             this.gridColumn9.Caption = "Z坐标";
+            this.gridColumn9.FieldName = "CoordinateZ";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
             this.gridColumn9.VisibleIndex = 8;
