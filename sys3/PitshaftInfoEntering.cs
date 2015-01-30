@@ -179,26 +179,20 @@ namespace sys3
                 // 主键
                 pitshaftEntity.PitshaftId = _iPk;
                 // 井筒信息修改
-                bResult = PitshaftBLL.updatePitshaftInfo(pitshaftEntity);
+                pitshaftEntity.Save();
 
 
                 //20140428 lyf 
                 //获取井筒BID，为后面修改绘制井筒赋值所用
-                if (bResult)
-                {
-                    string sBID = "";
-                    sBID = PitshaftBLL.selectPitshaftInfoBIDByPitshaftName(pitshaftEntity.PitshaftName);
-                    pitshaftEntity.BindingId = sBID;
-                    //修改图元
-                    ModifyJingTong(pitshaftEntity);
-                }
+                string sBID = "";
+                sBID = Pitshaft.Find(_iPk).BindingId;
+                pitshaftEntity.BindingId = sBID;
+                //修改图元
+                ModifyJingTong(pitshaftEntity);
             }
 
             // 添加/修改成功的场合
-            if (bResult)
-            {
-                Close();
-            }
+            Close();
         }
 
         /// <summary>
@@ -243,9 +237,7 @@ namespace sys3
             {
                 /* 修改的时候，首先要获取UI输入的名称到DB中去检索，
                 如果检索件数 > 0 并且该断层ID还不是传过来的主键，那么视为输入了已存在的名称 */
-                DataSet ds = PitshaftBLL.selectPitshaftInfoByPitshaftName(txtPitshaftName.Text.Trim());
-                if (ds.Tables[0].Rows.Count > 0 &&
-                    !ds.Tables[0].Rows[0][PitshaftDbConstNames.PITSHAFT_ID].ToString().Equals(_iPk.ToString()))
+                if (Pitshaft.ExistsByPitshaftName(txtPitshaftName.Text.Trim()))
                 {
                     txtPitshaftName.BackColor = Const.ERROR_FIELD_COLOR;
                     Alert.alert(Const_GM.PITSHAFT_NAME_EXIST_MSG); // 井筒名称已存在，请重新录入！
