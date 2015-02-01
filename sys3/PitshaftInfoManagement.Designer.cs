@@ -51,6 +51,7 @@
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.controlNavigator1 = new DevExpress.XtraEditors.ControlNavigator();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcPitshaft)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -189,6 +190,7 @@
             // gridColumn1
             // 
             this.gridColumn1.Caption = "井筒名称";
+            this.gridColumn1.FieldName = "PitshaftName";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 0;
@@ -196,6 +198,7 @@
             // gridColumn2
             // 
             this.gridColumn2.Caption = "井筒类型";
+            this.gridColumn2.FieldName = "PitshaftType.PitshaftTypeName";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 1;
@@ -203,6 +206,7 @@
             // gridColumn3
             // 
             this.gridColumn3.Caption = "井筒标高";
+            this.gridColumn3.FieldName = "WellheadElevation";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 2;
@@ -210,6 +214,7 @@
             // gridColumn4
             // 
             this.gridColumn4.Caption = "井底标高";
+            this.gridColumn4.FieldName = "WellbottomElevation";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 3;
@@ -217,6 +222,7 @@
             // gridColumn5
             // 
             this.gridColumn5.Caption = "井筒坐标X";
+            this.gridColumn5.FieldName = "PitshaftCoordinateX";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
             this.gridColumn5.VisibleIndex = 4;
@@ -224,6 +230,7 @@
             // gridColumn6
             // 
             this.gridColumn6.Caption = "井筒坐标Y";
+            this.gridColumn6.FieldName = "PitshaftCoordinateY";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
             this.gridColumn6.VisibleIndex = 5;
@@ -231,6 +238,7 @@
             // gridColumn7
             // 
             this.gridColumn7.Caption = "图形坐标X";
+            this.gridColumn7.FieldName = "FigureCoordinateX";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
             this.gridColumn7.VisibleIndex = 6;
@@ -238,6 +246,7 @@
             // gridColumn8
             // 
             this.gridColumn8.Caption = "图形坐标Y";
+            this.gridColumn8.FieldName = "FigureCoordinateY";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
             this.gridColumn8.VisibleIndex = 7;
@@ -245,6 +254,7 @@
             // gridColumn9
             // 
             this.gridColumn9.Caption = "图形坐标Z";
+            this.gridColumn9.FieldName = "FigureCoordinateZ";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
             this.gridColumn9.VisibleIndex = 8;
@@ -307,5 +317,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
         private DevExpress.XtraEditors.ControlNavigator controlNavigator1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }

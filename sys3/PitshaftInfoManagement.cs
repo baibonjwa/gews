@@ -119,7 +119,10 @@ namespace sys3
         /// <param name="e"></param>
         private void tsBtnExport_Click(object sender, EventArgs e)
         {
-
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                gcPitshaft.ExportToXls(saveFileDialog1.FileName);
+            }
         }
 
         /// <summary>
@@ -129,7 +132,7 @@ namespace sys3
         /// <param name="e"></param>
         private void tsBtnPrint_Click(object sender, EventArgs e)
         {
-
+            DevUtil.DevPrint(gcPitshaft, "井筒信息报表");
         }
 
         /// <summary>
@@ -139,7 +142,7 @@ namespace sys3
         /// <param name="e"></param>
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-
+            RefreshData();
         }
 
 
