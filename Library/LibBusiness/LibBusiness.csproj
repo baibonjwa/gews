@@ -164,8 +164,6 @@
     <Compile Include="2.MiningSchedulingBLL\PropertyBLL\TeamBLL.cs" />
     <Compile Include="2.MiningSchedulingBLL\PropertyBLL\WorkTimeBLL.cs" />
     <Compile Include="2.MiningSchedulingBLL\PropertyBLL\DayReportHCBLL.cs" />
-    <Compile Include="3.GeologyMeasureBLL\DbConstNames\PitshaftDbConstNames.cs" />
-    <Compile Include="3.GeologyMeasureBLL\DbConstNames\PitshaftTypeDbConstNames.cs" />
     <Compile Include="3.GeologyMeasureBLL\DbConstNames\ProspectingLineDbConstNames.cs" />
     <Compile Include="3.GeologyMeasureBLL\DbConstNames\WorkingFaceDbConstNames.cs" />
     <Compile Include="3.GeologyMeasureBLL\DbConstNames\MiningAreaDbConstNames.cs" />
@@ -175,8 +173,6 @@
     <Compile Include="3.GeologyMeasureBLL\DbConstNames\TunnelInfoDbConstNames.cs" />
     <Compile Include="3.GeologyMeasureBLL\DbConstNames\WireInfoDbConstNames.cs" />
     <Compile Include="3.GeologyMeasureBLL\DbConstNames\WirePointDbConstNames.cs" />
-    <Compile Include="3.GeologyMeasureBLL\PropertyBLL\PitshaftBLL.cs" />
-    <Compile Include="3.GeologyMeasureBLL\PropertyBLL\PitshaftTypeBLL.cs" />
     <Compile Include="3.GeologyMeasureBLL\PropertyBLL\ProspectingLineBLL.cs" />
     <Compile Include="3.GeologyMeasureBLL\PropertyBLL\WorkingFaceBLL.cs" />
     <Compile Include="3.GeologyMeasureBLL\PropertyBLL\MiningAreaBLL.cs" />

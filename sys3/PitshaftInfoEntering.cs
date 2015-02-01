@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using ESRI.ArcGIS.Carto;
@@ -31,7 +32,7 @@ namespace sys3
             // 设置窗体默认属性
             FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_GM.INSERT_PITSHAFT_INFO);
             // 加载井筒类型信息
-            loadPitshaftTypeInfo();
+            LoadPitshaftTypeInfo();
         }
 
         /// <summary>
@@ -49,52 +50,46 @@ namespace sys3
             // 设置窗体默认属性
             FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, strTitle);
             // 加载井筒类型信息
-            loadPitshaftTypeInfo();
+            LoadPitshaftTypeInfo();
             // 设置井筒信息
             // 通过主键获取断层信息
-            DataSet ds = PitshaftBLL.selectPitshaftInfoByPitshaftId(_iPk);
+            Pitshaft pitshaft = Pitshaft.Find(_iPk);
 
-            if (ds.Tables[0].Rows.Count > 0)
+            if (pitshaft != null)
             {
                 // 井筒名称
-                txtPitshaftName.Text = ds.Tables[0].Rows[0][PitshaftDbConstNames.PITSHAFT_NAME].ToString();
+                txtPitshaftName.Text = pitshaft.PitshaftName;
                 // 井筒类型
-                cobPitshaftType.SelectedValue = ds.Tables[0].Rows[0][PitshaftDbConstNames.PITSHAFT_TYPE_ID].ToString();
-
+                cobPitshaftType.SelectedValue = pitshaft.PitshaftType.PitshaftTypeId;
                 // 井口标高
-                txtWellheadElevation.Text = ds.Tables[0].Rows[0][PitshaftDbConstNames.WELLHEAD_ELEVATION].ToString();
+                txtWellheadElevation.Text = pitshaft.WellheadElevation.ToString(CultureInfo.InvariantCulture);
                 // 井底标高
-                txtWellbottomElevation.Text = ds.Tables[0].Rows[0][PitshaftDbConstNames.WELLBOTTOM_ELEVATION].ToString();
+                txtWellbottomElevation.Text = pitshaft.WellbottomElevation.ToString(CultureInfo.InvariantCulture);
                 // 井筒坐标X
                 txtPitshaftCoordinateX.Text =
-                    ds.Tables[0].Rows[0][PitshaftDbConstNames.PITSHAFT_COORDINATE_X].ToString();
+                  pitshaft.PitshaftCoordinateX.ToString(CultureInfo.InvariantCulture);
                 // 井筒坐标Y
-                txtPitshaftCoordinateY.Text =
-                    ds.Tables[0].Rows[0][PitshaftDbConstNames.PITSHAFT_COORDINATE_Y].ToString();
+                txtPitshaftCoordinateY.Text = pitshaft.PitshaftCoordinateY.ToString(CultureInfo.InvariantCulture);
                 // 图形坐标X
-                txtFigureCoordinateX.Text = ds.Tables[0].Rows[0][PitshaftDbConstNames.FIGURE_COORDINATE_X].ToString();
+                txtFigureCoordinateX.Text = pitshaft.FigureCoordinateX.ToString(CultureInfo.InvariantCulture);
                 // 图形坐标Y
-                txtFigureCoordinateY.Text = ds.Tables[0].Rows[0][PitshaftDbConstNames.FIGURE_COORDINATE_Y].ToString();
+                txtFigureCoordinateY.Text = pitshaft.FigureCoordinateY.ToString(CultureInfo.InvariantCulture);
                 // 图形坐标Z
-                string strCoordinate_Z = ds.Tables[0].Rows[0][PitshaftDbConstNames.FIGURE_COORDINATE_Z].ToString();
-                txtFigureCoordinateZ.Text = (strCoordinate_Z == Const.DOUBLE_DEFAULT_VALUE ? "" : strCoordinate_Z);
+                txtFigureCoordinateZ.Text = pitshaft.FigureCoordinateZ.ToString(CultureInfo.InvariantCulture);
             }
         }
 
         /// <summary>
         ///     加载井筒类型信息
         /// </summary>
-        private void loadPitshaftTypeInfo()
+        private void LoadPitshaftTypeInfo()
         {
-            DataSet ds = PitshaftTypeBLL.selectAllPitshaftTypeInfo();
+            PitshaftType[] pitshaftTypes = PitshaftType.FindAll();
 
-            if (ds.Tables[0].Rows.Count > 0)
-            {
-                cobPitshaftType.DataSource = ds.Tables[0];
-                cobPitshaftType.DisplayMember = PitshaftTypeDbConstNames.PITSHAFT_TYPE_NAME;
-                cobPitshaftType.ValueMember = PitshaftTypeDbConstNames.PITSHAFT_TYPE_ID;
-                cobPitshaftType.SelectedIndex = -1;
-            }
+            cobPitshaftType.DataSource = pitshaftTypes;
+            cobPitshaftType.DisplayMember = "PitshaftTypeName";
+            cobPitshaftType.ValueMember = "PitshaftTypeId";
+            cobPitshaftType.SelectedIndex = -1;
         }
 
         /// <summary>
