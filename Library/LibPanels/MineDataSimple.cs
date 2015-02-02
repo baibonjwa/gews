@@ -29,7 +29,7 @@ namespace LibPanels
         private LibEntity.MineData mineDataEntity = new LibEntity.MineData();
         private Tunnel tunnelEntity = new Tunnel(); //巷道信息实体
         private LibEntity.UsualForecast ufEntity = new LibEntity.UsualForecast(); //日常预测实体
-        private VentilationInfo viEntity = new VentilationInfo(); //通风实体
+        private Ventilation viEntity = new Ventilation(); //通风实体
 
         //*************************
 
@@ -107,8 +107,8 @@ namespace LibPanels
         private void bindTeamInfo()
         {
             cboTeamName.Items.Clear();
-            TeamInfo[] teamInfos = TeamInfo.FindAll();
-            foreach (TeamInfo t in teamInfos)
+            Team[] team = Team.FindAll();
+            foreach (Team t in team)
             {
                 cboTeamName.Items.Add(t.TeamName);
             }
@@ -247,19 +247,19 @@ namespace LibPanels
             //共通实体转化为通风实体
             viEntity = mineDataEntity.ChangeToVentilationInfoEntity();
             //是否有无风区域
-            viEntity.IsNoWindArea = _ventilationInfoEntering.ventilationInfoEntity.IsNoWindArea;
+            viEntity.IsNoWindArea = _ventilationInfoEntering.VentilationEntity.IsNoWindArea;
             //是否有微风区域
-            viEntity.IsLightWindArea = _ventilationInfoEntering.ventilationInfoEntity.IsLightWindArea;
+            viEntity.IsLightWindArea = _ventilationInfoEntering.VentilationEntity.IsLightWindArea;
             //是否有风流反向区域
-            viEntity.IsReturnWindArea = _ventilationInfoEntering.ventilationInfoEntity.IsReturnWindArea;
+            viEntity.IsReturnWindArea = _ventilationInfoEntering.VentilationEntity.IsReturnWindArea;
             //是否通风断面小于设计断面的2/3
-            viEntity.IsSmall = _ventilationInfoEntering.ventilationInfoEntity.IsSmall;
+            viEntity.IsSmall = _ventilationInfoEntering.VentilationEntity.IsSmall;
             //是否工作面风量低于计划风量，风速与《煤矿安全规程》规定不符
-            viEntity.IsFollowRule = _ventilationInfoEntering.ventilationInfoEntity.IsFollowRule;
+            viEntity.IsFollowRule = _ventilationInfoEntering.VentilationEntity.IsFollowRule;
 
-            viEntity.FaultageArea = _ventilationInfoEntering.ventilationInfoEntity.FaultageArea;
+            viEntity.FaultageArea = _ventilationInfoEntering.VentilationEntity.FaultageArea;
 
-            viEntity.AirFlow = _ventilationInfoEntering.ventilationInfoEntity.AirFlow;
+            viEntity.AirFlow = _ventilationInfoEntering.VentilationEntity.AirFlow;
 
             bool bResult = false;
             if (Text == new LibPanels(MineDataPanelName.Ventilation).panelFormName)
@@ -268,7 +268,7 @@ namespace LibPanels
                 bResult = true;
                 Log.Debug("发送添加通风信息的Socket信息");
                 var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.ITunnelId,
-                    VentilationInfo.TableName, OPERATION_TYPE.ADD, dtpDateTime.Value);
+                    Ventilation.TableName, OPERATION_TYPE.ADD, dtpDateTime.Value);
                 MainForm.SendMsg2Server(msg);
                 Log.Debug("发送添加通风信息的Socket信息完成");
             }
@@ -278,7 +278,7 @@ namespace LibPanels
                 bResult = true;
                 Log.Debug("发送修改通风信息的Socket信息");
                 var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.ITunnelId,
-                    VentilationInfo.TableName, OPERATION_TYPE.UPDATE, dtpDateTime.Value);
+                    Ventilation.TableName, OPERATION_TYPE.UPDATE, dtpDateTime.Value);
                 MainForm.SendMsg2Server(msg);
                 Log.Debug("发送修改通风信息的Socket信息完成");
             }
@@ -607,7 +607,7 @@ namespace LibPanels
 
             if (Text == new LibPanels(MineDataPanelName.Ventilation_Change).panelFormName)
             {
-                viEntity = (VentilationInfo)_obj;
+                viEntity = (Ventilation)_obj;
             }
             if (Text == new LibPanels(MineDataPanelName.CoalExistence_Change).panelFormName)
             {
@@ -687,7 +687,7 @@ namespace LibPanels
                 Height = formHeight + _ventilationInfoEntering.Height;
                 changeMineCommonValue(viEntity);
 
-                _ventilationInfoEntering.ventilationInfoEntity = viEntity;
+                _ventilationInfoEntering.VentilationEntity = viEntity;
 
                 _ventilationInfoEntering.bindDefaultValue(viEntity);
 

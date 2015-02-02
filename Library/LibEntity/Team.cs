@@ -1,18 +1,9 @@
-﻿// ******************************************************************
-// 概  述：队别实体
-// 作  者：宋英杰
-// 日  期：2013/12/3
-// 版本号：V1.0
-// 版本信息：
-// V1.0 新建
-// ******************************************************************
-
-using Castle.ActiveRecord;
+﻿using Castle.ActiveRecord;
 
 namespace LibEntity
 {
     [ActiveRecord("T_TEAM_INFO")]
-    public class TeamInfo : ActiveRecordBase<TeamInfo>
+    public class Team : ActiveRecordBase<Team>
     {
         /// <summary>
         ///     队别ID
@@ -44,9 +35,9 @@ namespace LibEntity
         [Property("TEAM_MEMBER")]
         public string TeamMember { get; set; }
 
-        public static TeamInfo FindById(int id)
+        public static Team FindById(int id)
         {
-            return (TeamInfo)FindByPrimaryKey(typeof(TeamInfo), id);
+            return (Team)FindByPrimaryKey(typeof(Team), id);
         }
 
         public static int GetTotalCount()

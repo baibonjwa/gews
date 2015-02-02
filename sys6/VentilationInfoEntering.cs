@@ -21,7 +21,7 @@ namespace UnderTerminal
     public partial class VentilationInfoEntering : Form
     {
         #region ******变量声明******
-        public VentilationInfo ventilationInfoEntity = new VentilationInfo();
+        public Ventilation VentilationEntity = new Ventilation();
         double tmpDouble = 0;
         #endregion ******变量声明******
 
@@ -42,7 +42,7 @@ namespace UnderTerminal
         {
             if (rbtnNoWindY.Checked)
             {
-                this.ventilationInfoEntity.IsNoWindArea = 1;
+                this.VentilationEntity.IsNoWindArea = 1;
             }
         }
 
@@ -55,7 +55,7 @@ namespace UnderTerminal
         {
             if (rbtnNoWindN.Checked)
             {
-                this.ventilationInfoEntity.IsNoWindArea = 0;
+                this.VentilationEntity.IsNoWindArea = 0;
             }
         }
 
@@ -68,7 +68,7 @@ namespace UnderTerminal
         {
             if (rbtnLightWindY.Checked)
             {
-                this.ventilationInfoEntity.IsLightWindArea = 1;
+                this.VentilationEntity.IsLightWindArea = 1;
             }
         }
 
@@ -81,7 +81,7 @@ namespace UnderTerminal
         {
             if (rbtnLightWindN.Checked)
             {
-                this.ventilationInfoEntity.IsLightWindArea = 0;
+                this.VentilationEntity.IsLightWindArea = 0;
             }
         }
 
@@ -94,7 +94,7 @@ namespace UnderTerminal
         {
             if (rbtnReturnWindY.Checked)
             {
-                this.ventilationInfoEntity.IsReturnWindArea = 1;
+                this.VentilationEntity.IsReturnWindArea = 1;
             }
         }
 
@@ -107,7 +107,7 @@ namespace UnderTerminal
         {
             if (rbtnReturnWindN.Checked)
             {
-                this.ventilationInfoEntity.IsReturnWindArea = 0;
+                this.VentilationEntity.IsReturnWindArea = 0;
             }
         }
 
@@ -120,7 +120,7 @@ namespace UnderTerminal
         {
             if (rbtnFollowRuleY.Checked)
             {
-                this.ventilationInfoEntity.IsFollowRule = 1;
+                this.VentilationEntity.IsFollowRule = 1;
             }
         }
 
@@ -133,18 +133,18 @@ namespace UnderTerminal
         {
             if (rbtnFollowRuleN.Checked)
             {
-                this.ventilationInfoEntity.IsFollowRule = 0;
+                this.VentilationEntity.IsFollowRule = 0;
             }
         }
 
         /// <summary>
         /// 绑定修改数据
         /// </summary>
-        /// <param name="ventilationInfoEntity">通风实体</param>
-        public void bindDefaultValue(VentilationInfo ventilationInfoEntity)
+        /// <param name="VentilationEntity">通风实体</param>
+        public void bindDefaultValue(Ventilation VentilationEntity)
         {
             //是否有无风区域
-            if (ventilationInfoEntity.IsNoWindArea == 1)
+            if (VentilationEntity.IsNoWindArea == 1)
             {
                 rbtnNoWindY.Checked = true;
             }
@@ -153,7 +153,7 @@ namespace UnderTerminal
                 rbtnNoWindN.Checked = true;
             }
             //是否有微风区域
-            if (ventilationInfoEntity.IsLightWindArea == 1)
+            if (VentilationEntity.IsLightWindArea == 1)
             {
                 rbtnLightWindY.Checked = true;
             }
@@ -162,7 +162,7 @@ namespace UnderTerminal
                 rbtnLightWindN.Checked = true;
             }
             //是否有风流反向区域
-            if (ventilationInfoEntity.IsReturnWindArea == 1)
+            if (VentilationEntity.IsReturnWindArea == 1)
             {
                 rbtnReturnWindY.Checked = true;
             }
@@ -172,7 +172,7 @@ namespace UnderTerminal
             }
 
             //是否工作面风量低于计划风量，风速与《煤矿安全规程》规定不符
-            if (ventilationInfoEntity.IsFollowRule == 1)
+            if (VentilationEntity.IsFollowRule == 1)
             {
                 rbtnFollowRuleY.Checked = true;
             }
@@ -186,7 +186,7 @@ namespace UnderTerminal
         {
             if (double.TryParse(txtFaultageArea.Text, out tmpDouble))
             {
-                this.ventilationInfoEntity.FaultageArea = tmpDouble;
+                this.VentilationEntity.FaultageArea = tmpDouble;
                 tmpDouble = 0;
             }
         }
@@ -195,7 +195,7 @@ namespace UnderTerminal
         {
             if (double.TryParse(txtAirFlow.Text, out tmpDouble))
             {
-                this.ventilationInfoEntity.AirFlow = tmpDouble;
+                this.VentilationEntity.AirFlow = tmpDouble;
                 tmpDouble = 0;
             }
         }

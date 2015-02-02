@@ -24,7 +24,7 @@ namespace LibEntity
         ///     队别名称
         /// </summary>
         [BelongsTo("TEAM_NAME_ID")]
-        public TeamInfo TeamInfo { get; set; }
+        public Team Team { get; set; }
 
         // 班次
 

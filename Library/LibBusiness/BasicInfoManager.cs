@@ -41,7 +41,7 @@ namespace LibBusiness
         private Dictionary<int, Lithology> lithologyList = new Dictionary<int, Lithology>();
 
         // 对别
-        private Dictionary<int, TeamInfo> teamList = new Dictionary<int, TeamInfo>();
+        private Dictionary<int, Team> teamList = new Dictionary<int, Team>();
 
         public static BasicInfoManager getInstance()
         {
@@ -527,11 +527,11 @@ namespace LibBusiness
         {
             teamList.Clear();
 
-            TeamInfo[] teamInfos = TeamInfo.FindAll();
+            Team[] team = Team.FindAll();
 
-            foreach (TeamInfo teamInfo in teamInfos)
+            foreach (Team teamInfo in team)
             {
-                TeamInfo entity = new TeamInfo();
+                Team entity = new Team();
                 entity.TeamId = teamInfo.TeamId;
                 entity.TeamName = teamInfo.TeamName;
                 entity.TeamLeader = teamInfo.TeamLeader;
@@ -540,7 +540,7 @@ namespace LibBusiness
             }
         }
 
-        public TeamInfo getTeamInfoByID(int teamId)
+        public Team getTeamInfoByID(int teamId)
         {
             try
             {
@@ -555,7 +555,7 @@ namespace LibBusiness
 
         public String getTeamNameById(int teamId)
         {
-            TeamInfo entity = getTeamInfoByID(teamId);
+            Team entity = getTeamInfoByID(teamId);
 
             if (null == entity)
                 return "";

@@ -303,7 +303,7 @@ namespace _3.GeologyMeasure
                 tunnelHChuanEntity.Azimuth = Convert.ToDouble(textBox_Azimuth.Text);
             }
             //队别
-            tunnelHChuanEntity.TeamInfo.TeamId = Convert.ToInt32(cboTeamName.SelectedValue);
+            tunnelHChuanEntity.Team.TeamId = Convert.ToInt32(cboTeamName.SelectedValue);
             //开工日期
             tunnelHChuanEntity.StartDate = dtpStartDate.Value;
             //是否停工
@@ -710,7 +710,7 @@ namespace _3.GeologyMeasure
 
             tunnelEntity.TunnelId = tunnelHChuanEntity.TunnelId1;
             //队别名称
-            cboTeamName.Text = tunnelHChuanEntity.TeamInfo.TeamName;
+            cboTeamName.Text = tunnelHChuanEntity.Team.TeamName;
 
             //开始日期
             dtpStartDate.Value = tunnelHChuanEntity.StartDate;
@@ -746,8 +746,8 @@ namespace _3.GeologyMeasure
         private void bindTeamInfo()
         {
             cboTeamName.Items.Clear();
-            TeamInfo[] teamInfos = TeamInfo.FindAll();
-            foreach (TeamInfo t in teamInfos)
+            Team[] team = Team.FindAll();
+            foreach (Team t in team)
             {
                 cboTeamName.Items.Add(t.TeamName);
             }

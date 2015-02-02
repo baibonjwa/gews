@@ -21,7 +21,7 @@ namespace LibPanels
     public partial class VentilationInfoEntering : Form
     {
         #region ******变量声明******
-        public VentilationInfo ventilationInfoEntity = new VentilationInfo();
+        public Ventilation VentilationEntity = new Ventilation();
         double tmpDouble = 0;
         #endregion ******变量声明******
 
@@ -42,7 +42,7 @@ namespace LibPanels
         {
             if (rbtnNoWindY.Checked)
             {
-                this.ventilationInfoEntity.IsNoWindArea = 1;
+                this.VentilationEntity.IsNoWindArea = 1;
             }
         }
 
@@ -55,7 +55,7 @@ namespace LibPanels
         {
             if (rbtnNoWindN.Checked)
             {
-                this.ventilationInfoEntity.IsNoWindArea = 0;
+                this.VentilationEntity.IsNoWindArea = 0;
             }
         }
 
@@ -68,7 +68,7 @@ namespace LibPanels
         {
             if (rbtnLightWindY.Checked)
             {
-                this.ventilationInfoEntity.IsLightWindArea = 1;
+                this.VentilationEntity.IsLightWindArea = 1;
             }
         }
 
@@ -81,7 +81,7 @@ namespace LibPanels
         {
             if (rbtnLightWindN.Checked)
             {
-                this.ventilationInfoEntity.IsLightWindArea = 0;
+                this.VentilationEntity.IsLightWindArea = 0;
             }
         }
 
@@ -94,7 +94,7 @@ namespace LibPanels
         {
             if (rbtnReturnWindY.Checked)
             {
-                this.ventilationInfoEntity.IsReturnWindArea = 1;
+                this.VentilationEntity.IsReturnWindArea = 1;
             }
         }
 
@@ -107,7 +107,7 @@ namespace LibPanels
         {
             if (rbtnReturnWindN.Checked)
             {
-                this.ventilationInfoEntity.IsReturnWindArea = 0;
+                this.VentilationEntity.IsReturnWindArea = 0;
             }
         }
 
@@ -120,7 +120,7 @@ namespace LibPanels
         {
             if (rbtnSmallY.Checked)
             {
-                this.ventilationInfoEntity.IsSmall = 1;
+                this.VentilationEntity.IsSmall = 1;
             }
         }
 
@@ -133,7 +133,7 @@ namespace LibPanels
         {
             if (rbtnSmallN.Checked)
             {
-                this.ventilationInfoEntity.IsSmall = 0;
+                this.VentilationEntity.IsSmall = 0;
             }
         }
 
@@ -146,7 +146,7 @@ namespace LibPanels
         {
             if (rbtnFollowRuleY.Checked)
             {
-                this.ventilationInfoEntity.IsFollowRule = 1;
+                this.VentilationEntity.IsFollowRule = 1;
             }
         }
 
@@ -159,18 +159,18 @@ namespace LibPanels
         {
             if (rbtnFollowRuleN.Checked)
             {
-                this.ventilationInfoEntity.IsFollowRule = 0;
+                this.VentilationEntity.IsFollowRule = 0;
             }
         }
 
         /// <summary>
         /// 绑定修改数据
         /// </summary>
-        /// <param name="ventilationInfoEntity">通风实体</param>
-        public void bindDefaultValue(VentilationInfo ventilationInfoEntity)
+        /// <param name="VentilationEntity">通风实体</param>
+        public void bindDefaultValue(Ventilation VentilationEntity)
         {
             //是否有无风区域
-            if (ventilationInfoEntity.IsNoWindArea == 1)
+            if (VentilationEntity.IsNoWindArea == 1)
             {
                 rbtnNoWindY.Checked = true;
             }
@@ -179,7 +179,7 @@ namespace LibPanels
                 rbtnNoWindN.Checked = true;
             }
             //是否有微风区域
-            if (ventilationInfoEntity.IsLightWindArea == 1)
+            if (VentilationEntity.IsLightWindArea == 1)
             {
                 rbtnLightWindY.Checked = true;
             }
@@ -188,7 +188,7 @@ namespace LibPanels
                 rbtnLightWindN.Checked = true;
             }
             //是否有风流反向区域
-            if (ventilationInfoEntity.IsReturnWindArea == 1)
+            if (VentilationEntity.IsReturnWindArea == 1)
             {
                 rbtnReturnWindY.Checked = true;
             }
@@ -197,7 +197,7 @@ namespace LibPanels
                 rbtnReturnWindN.Checked = true;
             }
             //是否通风断面小于设计断面的2/3
-            if (ventilationInfoEntity.IsSmall == 1)
+            if (VentilationEntity.IsSmall == 1)
             {
                 rbtnSmallY.Checked = true;
             }
@@ -206,7 +206,7 @@ namespace LibPanels
                 rbtnSmallN.Checked = true;
             }
             //是否工作面风量低于计划风量，风速与《煤矿安全规程》规定不符
-            if (ventilationInfoEntity.IsFollowRule == 1)
+            if (VentilationEntity.IsFollowRule == 1)
             {
                 rbtnFollowRuleY.Checked = true;
             }
@@ -220,7 +220,7 @@ namespace LibPanels
         {
             if (double.TryParse(txtFaultageArea.Text, out tmpDouble))
             {
-                this.ventilationInfoEntity.FaultageArea = tmpDouble;
+                this.VentilationEntity.FaultageArea = tmpDouble;
                 tmpDouble = 0;
             }
         }
@@ -229,7 +229,7 @@ namespace LibPanels
         {
             if (double.TryParse(txtAirFlow.Text, out tmpDouble))
             {
-                this.ventilationInfoEntity.AirFlow = tmpDouble;
+                this.VentilationEntity.AirFlow = tmpDouble;
                 tmpDouble = 0;
             }
         }

@@ -40,7 +40,7 @@ namespace LibBusiness
             sb.Append(tunnelHChuanEntity.Y2 + ",");
             sb.Append(tunnelHChuanEntity.Z2 + ",");
             sb.Append(tunnelHChuanEntity.Azimuth + ",");
-            sb.Append(tunnelHChuanEntity.TeamInfo + ",'");
+            sb.Append(tunnelHChuanEntity.Team + ",'");
             sb.Append(tunnelHChuanEntity.StartDate + "',");
             sb.Append(tunnelHChuanEntity.IsFinish + ",'");
             sb.Append(tunnelHChuanEntity.StopDate + "','");
@@ -112,7 +112,7 @@ namespace LibBusiness
             sb.Append(tunnelHChuanEntity.Y2 + "," + TunnelHChuanDbConstNames.TUNNEL_Z2 + " = ");
             sb.Append(tunnelHChuanEntity.Z2 + "," + TunnelHChuanDbConstNames.TUNNEL_AZIMUTH + " = ");
             sb.Append(tunnelHChuanEntity.Azimuth + "," + TunnelHChuanDbConstNames.TEAM_NAME_ID + " = ");
-            sb.Append(tunnelHChuanEntity.TeamInfo + "," + TunnelHChuanDbConstNames.START_DATE + "='");
+            sb.Append(tunnelHChuanEntity.Team + "," + TunnelHChuanDbConstNames.START_DATE + "='");
             sb.Append(tunnelHChuanEntity.StartDate + "'," + TunnelHChuanDbConstNames.IS_FINISH + "=");
             sb.Append(tunnelHChuanEntity.IsFinish + "," + TunnelHChuanDbConstNames.STOP_DATE + "='");
             sb.Append(tunnelHChuanEntity.StopDate + "'," + TunnelHChuanDbConstNames.WORK_STYLE + "='");
@@ -169,7 +169,7 @@ namespace LibBusiness
                     tunnelHChuanEntity.Y2 = (double)ds.Tables[0].Rows[0][TunnelHChuanDbConstNames.TUNNEL_Y2];
                     tunnelHChuanEntity.Z2 = (double)ds.Tables[0].Rows[0][TunnelHChuanDbConstNames.TUNNEL_Z2];
                     tunnelHChuanEntity.Azimuth = (double)ds.Tables[0].Rows[0][TunnelHChuanDbConstNames.TUNNEL_AZIMUTH];
-                    tunnelHChuanEntity.TeamInfo.TeamId = (int)ds.Tables[0].Rows[0][TunnelHChuanDbConstNames.TEAM_NAME_ID];
+                    tunnelHChuanEntity.Team.TeamId = (int)ds.Tables[0].Rows[0][TunnelHChuanDbConstNames.TEAM_NAME_ID];
                     tunnelHChuanEntity.StartDate = Convert.ToDateTime(ds.Tables[0].Rows[0][TunnelHChuanDbConstNames.START_DATE]);
                     tunnelHChuanEntity.IsFinish = (int)ds.Tables[0].Rows[0][TunnelHChuanDbConstNames.IS_FINISH];
                     tunnelHChuanEntity.StopDate = Convert.ToDateTime(ds.Tables[0].Rows[0][TunnelHChuanDbConstNames.STOP_DATE]);

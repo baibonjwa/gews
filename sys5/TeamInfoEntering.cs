@@ -20,7 +20,7 @@ namespace _5.WarningManagement
     public partial class TeamInfoEntering : Form
     {
         //队别实体
-        TeamInfo teamInfoEntity = new TeamInfo();
+        Team teamEntity = new Team();
 
         /// <summary>
         /// 构造方法
@@ -35,10 +35,10 @@ namespace _5.WarningManagement
         /// <summary>
         /// 构造方法
         /// </summary>
-        /// <param name="teamInfoEntity">队别信息实体</param>
-        public TeamInfoEntering(TeamInfo teamInfoEntity)
+        /// <param name="teamEntity">队别信息实体</param>
+        public TeamInfoEntering(Team teamEntity)
         {
-            this.teamInfoEntity = teamInfoEntity;
+            this.teamEntity = teamEntity;
 
             InitializeComponent();
 
@@ -53,13 +53,13 @@ namespace _5.WarningManagement
         private void bindName()
         {
             /**队别名称**/
-            txtTeamName.Text = teamInfoEntity.TeamName;
+            txtTeamName.Text = teamEntity.TeamName;
             /**队长名称**/
-            txtTeamLeader.Text = teamInfoEntity.TeamLeader;
+            txtTeamLeader.Text = teamEntity.TeamLeader;
             /**队员名称**/
-            if (teamInfoEntity.TeamMember != "")
+            if (teamEntity.TeamMember != "")
             {
-                string[] teamMember = teamInfoEntity.TeamMember.Split(Const_MS.TEAM_INFO_MEMBER_BREAK_SIGN);
+                string[] teamMember = teamEntity.TeamMember.Split(Const_MS.TEAM_INFO_MEMBER_BREAK_SIGN);
 
                 //队员名称添加到List中
                 for (int i = 0; i < teamMember.Length; i++)
@@ -75,18 +75,18 @@ namespace _5.WarningManagement
         private void submitTeamInfo()
         {
             //队别名称
-            teamInfoEntity.TeamName = txtTeamName.Text;
+            teamEntity.TeamName = txtTeamName.Text;
             //队长姓名
-            teamInfoEntity.TeamLeader = txtTeamLeader.Text;
+            teamEntity.TeamLeader = txtTeamLeader.Text;
             //队员姓名
             for (int i = 0; i < lstTeamMate.Items.Count; i++)
             {
-                teamInfoEntity.TeamMember += lstTeamMate.Items[i].ToString() + Const_MS.TEAM_INFO_MEMBER_BREAK_SIGN;
+                teamEntity.TeamMember += lstTeamMate.Items[i].ToString() + Const_MS.TEAM_INFO_MEMBER_BREAK_SIGN;
             }
             //删除队员姓名是后一个(,)
-            teamInfoEntity.TeamMember = teamInfoEntity.TeamMember.Remove(teamInfoEntity.TeamMember.Length - 1);
+            teamEntity.TeamMember = teamEntity.TeamMember.Remove(teamEntity.TeamMember.Length - 1);
 
-            teamInfoEntity.Save();
+            teamEntity.Save();
 
             Alert.alert(Const_MS.MSG_UPDATE_FAILURE);
         }
@@ -97,9 +97,9 @@ namespace _5.WarningManagement
         private void changeTeamInfo()
         {
             //队别名称
-            teamInfoEntity.TeamLeader = txtTeamLeader.Text;
+            teamEntity.TeamLeader = txtTeamLeader.Text;
             //队长姓名
-            teamInfoEntity.TeamName = txtTeamName.Text;
+            teamEntity.TeamName = txtTeamName.Text;
             //队员姓名
             string teamMember = "";
             for (int i = 0; i < lstTeamMate.Items.Count; i++)
@@ -108,9 +108,9 @@ namespace _5.WarningManagement
             }
             //删除队员姓名最后一个(,)
             teamMember = teamMember.Remove(teamMember.Length - 1);
-            teamInfoEntity.TeamMember = teamMember;
+            teamEntity.TeamMember = teamMember;
             //修改操作
-            TeamBll.updateTeamInfo(teamInfoEntity);
+            TeamBll.updateTeamInfo(teamEntity);
         }
 
         /// <summary>
@@ -209,7 +209,7 @@ namespace _5.WarningManagement
             //修改时
             else
             {
-                if (this.txtTeamName.Text != teamInfoEntity.TeamName)
+                if (this.txtTeamName.Text != teamEntity.TeamName)
                 {
                     DataSet ds = new DataSet();
                     ds = TeamBll.selectTeamInfoByTeamName(txtTeamName.Text);

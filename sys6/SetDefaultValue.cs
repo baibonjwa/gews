@@ -49,8 +49,8 @@ namespace UnderTerminal
         private void bindTeamInfo()
         {
             cboTeamName.Items.Clear();
-            TeamInfo[] teamInfos = TeamInfo.FindAll();
-            foreach (TeamInfo t in teamInfos)
+            Team[] team = Team.FindAll();
+            foreach (Team t in team)
             {
                 cboTeamName.Items.Add(t.TeamName);
             }

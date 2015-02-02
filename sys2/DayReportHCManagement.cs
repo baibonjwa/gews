@@ -192,7 +192,7 @@ namespace sys2
                     cells[_rowDetailStartIndex + i, C_CHOOSE_BUTTON].CellType = ckbxcell;
 
                     //队别名称
-                    cells[_rowDetailStartIndex + i, C_TEAM_NAME].Text = dayReportHcs[i].TeamInfo.TeamName;
+                    cells[_rowDetailStartIndex + i, C_TEAM_NAME].Text = dayReportHcs[i].Team.TeamName;
 
                     //工作面名称
                     cells[_rowDetailStartIndex + i, C_WORKING_FACE_NAME].Text =

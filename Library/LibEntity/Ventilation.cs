@@ -1,21 +1,10 @@
-﻿// ******************************************************************
-// 概  述：
-// 作  者：
-// 日  期：
-// 版本号：V1.0
-// 版本信息：
-// V1.0 新建
-// ******************************************************************
-
-using System;
-using System.Collections.Generic;
+﻿using System;
 using Castle.ActiveRecord;
-using NHibernate.Criterion;
 
 namespace LibEntity
 {
     [ActiveRecord("T_VENTILATION_INFO")]
-    public class VentilationInfo : MineData
+    public class Ventilation : MineData
     {
         public const String TableName = "T_VENTILATION_INFO";
 
@@ -76,12 +65,12 @@ namespace LibEntity
 
         public static void FindById(int id)
         {
-            FindByPrimaryKey(typeof(VentilationInfo), id);
+            FindByPrimaryKey(typeof (Ventilation), id);
         }
 
-        public static VentilationInfo[] FindAll()
+        public static Ventilation[] FindAll()
         {
-            return (VentilationInfo[])FindAll(typeof(VentilationInfo));
+            return (Ventilation[]) FindAll(typeof (Ventilation));
         }
     }
 }

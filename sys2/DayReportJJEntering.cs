@@ -232,7 +232,7 @@ namespace sys2
             }
 
             //队别
-            cboTeamName.Text = TeamBll.selectTeamInfoByID(_dayReportJJEntity.TeamInfo.TeamId).TeamName;
+            cboTeamName.Text = TeamBll.selectTeamInfoByID(_dayReportJJEntity.Team.TeamId).TeamName;
 
             //绑定队别成员
             this.bindTeamMember();
@@ -253,8 +253,8 @@ namespace sys2
         private void bindTeamInfo()
         {
             cboTeamName.Items.Clear();
-            TeamInfo[] teamInfos = TeamInfo.FindAll();
-            foreach (TeamInfo t in teamInfos)
+            Team[] team = Team.FindAll();
+            foreach (Team t in team)
             {
                 cboTeamName.Items.Add(t.TeamName);
             }
@@ -299,10 +299,10 @@ namespace sys2
             }
             else
             {
-                TeamInfo teamInfoEntity = new TeamInfo();
-                teamInfoEntity.TeamId = Convert.ToInt32(cboTeamName.SelectedValue);
-                teamInfoEntity = TeamBll.selectTeamInfoByID(teamInfoEntity.TeamId);
-                teamInfoForm = new TeamInfoEntering(teamInfoEntity);
+                Team teamEntity = new Team();
+                teamEntity.TeamId = Convert.ToInt32(cboTeamName.SelectedValue);
+                teamEntity = TeamBll.selectTeamInfoByID(teamEntity.TeamId);
+                teamInfoForm = new TeamInfoEntering(teamEntity);
             }
 
             if (DialogResult.OK == teamInfoForm.ShowDialog())
@@ -482,7 +482,7 @@ namespace sys2
 
                 /**回采日报实体赋值**/
                 //队别名称
-                _dayReportJJEntity.TeamInfo.TeamId = Convert.ToInt32(cboTeamName.SelectedValue);
+                _dayReportJJEntity.Team.TeamId = Convert.ToInt32(cboTeamName.SelectedValue);
                 //绑定巷道编号
                 _dayReportJJEntity.WorkingFace.WorkingFaceId = workingFace.WorkingFaceId;
 

@@ -118,9 +118,9 @@ namespace LibEntity
         ///     转换为VentilationInfoEntity
         /// </summary>
         /// <returns></returns>
-        public VentilationInfo ChangeToVentilationInfoEntity()
+        public Ventilation ChangeToVentilationInfoEntity()
         {
-            var viEntity = new VentilationInfo
+            var viEntity = new Ventilation
             {
                 Id = Id,
                 Tunnel = Tunnel,

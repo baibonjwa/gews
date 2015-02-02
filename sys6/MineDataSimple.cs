@@ -25,7 +25,7 @@ namespace UnderTerminal
         UsualForecast usualForecast = new UsualForecast();              //日常预测
         ManagementInfoEntering management = new ManagementInfoEntering();                    //管理
         Tunnel tunnelEntity = new Tunnel();                 //巷道信息实体
-        VentilationInfo viEntity = new VentilationInfo();   //通风实体
+        Ventilation viEntity = new Ventilation();   //通风实体
         CoalExistence ceEntity = new CoalExistence();       //煤层赋存实体
         GasData gdEntity = new GasData();       //瓦斯实体
         LibEntity.UsualForecast ufEntity = new LibEntity.UsualForecast();       //日常预测实体
@@ -130,8 +130,8 @@ namespace UnderTerminal
         private void bindTeamInfo()
         {
             cboTeamName.Items.Clear();
-            TeamInfo[] teamInfos = TeamInfo.FindAll();
-            foreach (TeamInfo t in teamInfos)
+            Team[] team = Team.FindAll();
+            foreach (Team t in team)
             {
                 cboTeamName.Items.Add(t.TeamName);
             }
@@ -285,19 +285,19 @@ namespace UnderTerminal
             //共通实体转化为通风实体
             viEntity = mineDataEntity.ChangeToVentilationInfoEntity();
             //是否有无风区域
-            viEntity.IsNoWindArea = ventilationInfoEntering.ventilationInfoEntity.IsNoWindArea;
+            viEntity.IsNoWindArea = ventilationInfoEntering.VentilationEntity.IsNoWindArea;
             //是否有微风区域
-            viEntity.IsLightWindArea = ventilationInfoEntering.ventilationInfoEntity.IsLightWindArea;
+            viEntity.IsLightWindArea = ventilationInfoEntering.VentilationEntity.IsLightWindArea;
             //是否有风流反向区域
-            viEntity.IsReturnWindArea = ventilationInfoEntering.ventilationInfoEntity.IsReturnWindArea;
+            viEntity.IsReturnWindArea = ventilationInfoEntering.VentilationEntity.IsReturnWindArea;
             //是否通风断面小于设计断面的2/3
-            viEntity.IsSmall = ventilationInfoEntering.ventilationInfoEntity.IsSmall;
+            viEntity.IsSmall = ventilationInfoEntering.VentilationEntity.IsSmall;
             //是否工作面风量低于计划风量，风速与《煤矿安全规程》规定不符
-            viEntity.IsFollowRule = ventilationInfoEntering.ventilationInfoEntity.IsFollowRule;
+            viEntity.IsFollowRule = ventilationInfoEntering.VentilationEntity.IsFollowRule;
 
-            viEntity.FaultageArea = ventilationInfoEntering.ventilationInfoEntity.FaultageArea;
+            viEntity.FaultageArea = ventilationInfoEntering.VentilationEntity.FaultageArea;
 
-            viEntity.AirFlow = ventilationInfoEntering.ventilationInfoEntity.AirFlow;
+            viEntity.AirFlow = ventilationInfoEntering.VentilationEntity.AirFlow;
 
             bool bResult = false;
             if (this.Text == new LibPanels(MineDataPanelName.Ventilation).panelFormName)
@@ -306,7 +306,7 @@ namespace UnderTerminal
                 bResult = true;
 
                 UpdateWarningDataMsg msg = new UpdateWarningDataMsg(this.mainWin.workingfaceId, this.tunnelId,
-                    VentilationInfo.TableName, OPERATION_TYPE.ADD, dtpDateTime.Value);
+                    Ventilation.TableName, OPERATION_TYPE.ADD, dtpDateTime.Value);
                 mainWin.SendMsg2Server(msg);
             }
 

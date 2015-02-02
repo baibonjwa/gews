@@ -29,7 +29,7 @@ namespace LibPanels
         /**修改行号（修改时重新设置焦点用）**/
         int _tmpRowIndex = 0;
         /**队别实体**/
-        TeamInfo teamInfoEntity = new TeamInfo();
+        Team teamEntity = new Team();
         /**接分页查询数据**/
         DataSet _ds = new DataSet();
         #endregion
@@ -87,7 +87,7 @@ namespace LibPanels
             chkSelAll.Checked = false;
 
             //※分页必须
-            _iRecordCount = TeamInfo.GetTotalCount();
+            _iRecordCount = Team.GetTotalCount();
 
             // ※分页必须
             dataPager1.PageControlInit(_iRecordCount);
@@ -198,13 +198,13 @@ namespace LibPanels
                     //队别ID
                     int id = 0;
                     int.TryParse(_ds.Tables[0].Rows[i][TeamDbConstNames.ID].ToString(), out id);
-                    teamInfoEntity.TeamId = id;
+                    teamEntity.TeamId = id;
                     //队别名称
-                    teamInfoEntity.TeamName = this.fpTeam.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text;
+                    teamEntity.TeamName = this.fpTeam.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text;
                     //队长姓名
-                    teamInfoEntity.TeamLeader = this.fpTeam.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text;
+                    teamEntity.TeamLeader = this.fpTeam.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text;
                     //队员姓名
-                    teamInfoEntity.TeamMember = this.fpTeam.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text;
+                    teamEntity.TeamMember = this.fpTeam.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text;
                 }
             }
         }
@@ -238,7 +238,7 @@ namespace LibPanels
             //为队别实体赋值
             setTeamInfoEntityValue();
 
-            TeamInfoEntering teamInfoForm = new TeamInfoEntering(teamInfoEntity);
+            TeamInfoEntering teamInfoForm = new TeamInfoEntering(teamEntity);
             if (DialogResult.OK == teamInfoForm.ShowDialog())
             {
                 //绑定数据
@@ -269,9 +269,9 @@ namespace LibPanels
                     if (fpTeam.Sheets[0].Cells[_rowDetailStartIndex + i, 0].Value != null && (bool)fpTeam.Sheets[0].Cells[_rowDetailStartIndex + i, 0].Value == true)
                     {
                         //掘进ID
-                        teamInfoEntity.TeamId = (int)_ds.Tables[0].Rows[i][TeamDbConstNames.ID];
+                        teamEntity.TeamId = (int)_ds.Tables[0].Rows[i][TeamDbConstNames.ID];
                         //删除操作
-                        bResult = TeamBll.deleteTeamInfo(teamInfoEntity);
+                        bResult = TeamBll.deleteTeamInfo(teamEntity);
                     }
                 }
                 if (bResult)

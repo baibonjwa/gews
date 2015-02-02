@@ -18,7 +18,7 @@ namespace LibPanels
 
         private void RefreshData()
         {
-            gcVentilation.DataSource = VentilationInfo.FindAll();
+            gcVentilation.DataSource = Ventilation.FindAll();
         }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace LibPanels
         private void tsBtnDel_Click(object sender, EventArgs e)
         {
             if (!Alert.confirm("确认删除数据吗？")) return;
-            var ventilationInfo = (VentilationInfo)bandedGridView1.GetFocusedRow();
+            var ventilationInfo = (Ventilation)bandedGridView1.GetFocusedRow();
             ventilationInfo.Delete();
             RefreshData();
         }

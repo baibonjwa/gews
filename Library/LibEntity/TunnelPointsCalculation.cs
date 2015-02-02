@@ -23,7 +23,7 @@ namespace LibEntity
         /// <param name="leftDirRet">计算左邦的方向</param>
         /// <param name="rightDirRet">计算右邦的方向</param>
         /// <returns></returns>
-        private bool CalcLeftAndRightVerticsWith2TraverPoints(WirePointInfo[] wirePts,
+        private bool CalcLeftAndRightVerticsWith2TraverPoints(WirePoint[] wirePts,
             ref Vector3_DW[] verticesLeftRet, ref Vector3_DW[] verticesRightRet)
         {
             if (wirePts == null)
@@ -91,7 +91,7 @@ namespace LibEntity
         /// <param name="verticesLeftBtmRet">out，根据导线点计算出的巷道左帮所有点</param>
         /// <param name="verticesRightBtmRet">out，根据导线点计算出的巷道右帮所有点</param>
         /// <returns></returns>
-        public bool CalcLeftAndRightVertics(WirePointInfo[] wirePts, ref Vector3_DW[] verticesLeftBtmRet,
+        public bool CalcLeftAndRightVertics(WirePoint[] wirePts, ref Vector3_DW[] verticesLeftBtmRet,
             ref Vector3_DW[] verticesRightBtmRet)
         {
             if (wirePts == null)
@@ -128,16 +128,16 @@ namespace LibEntity
 
                 for (int i = 0; i < nTraversePtCnt - 2; i++)
                 {
-                    var lwDatasPreTmp = new WirePointInfo[2]
+                    var lwDatasPreTmp = new WirePoint[2]
                     {
-                        new WirePointInfo(wirePts[i]),
-                        new WirePointInfo(wirePts[i + 1])
+                        new WirePoint(wirePts[i]),
+                        new WirePoint(wirePts[i + 1])
                     };
 
-                    var lwDatasNextTmp = new WirePointInfo[2]
+                    var lwDatasNextTmp = new WirePoint[2]
                     {
-                        new WirePointInfo(wirePts[i + 1]),
-                        new WirePointInfo(wirePts[i + 2])
+                        new WirePoint(wirePts[i + 1]),
+                        new WirePoint(wirePts[i + 2])
                     };
 
                     Vector3_DW[] verticesLeftPreTmp = null;

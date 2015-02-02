@@ -102,7 +102,7 @@
     <Compile Include="CoalExistence.cs" />
     <Compile Include="MineData.cs" />
     <Compile Include="ProbeType.cs" />
-    <Compile Include="VentilationInfo.cs" />
+    <Compile Include="Ventilation.cs" />
     <Compile Include="DayReport.cs" />
     <Compile Include="DayReportHC.cs" />
     <Compile Include="GeologySpace.cs" />
@@ -170,15 +170,15 @@
     <Compile Include="WorkingFaceSelect.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tunnel.cs" />
-    <Compile Include="WireInfo.cs" />
+    <Compile Include="Wire.cs" />
     <Compile Include="BigFaultage.cs" />
-    <Compile Include="WirePointInfo.cs" />
+    <Compile Include="WirePoint.cs" />
     <Compile Include="TeamMemberInfo.cs" />
     <Compile Include="TunnelTypeEnum.cs" />
     <Compile Include="WorkingfaceTypeEnum.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TeamInfo.cs" />
+    <Compile Include="Team.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

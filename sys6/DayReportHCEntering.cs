@@ -136,7 +136,7 @@ namespace UnderTerminal
             }
 
             //队别
-            cboTeamName.SelectedValue = _dayReportHCEntity.TeamInfo;
+            cboTeamName.SelectedValue = _dayReportHCEntity.Team;
 
             //绑定队别成员
             this.bindTeamMember();
@@ -158,8 +158,8 @@ namespace UnderTerminal
         private void bindTeamInfo()
         {
             cboTeamName.Items.Clear();
-            TeamInfo[] teamInfos = TeamInfo.FindAll();
-            foreach (TeamInfo t in teamInfos)
+            Team[] team = Team.FindAll();
+            foreach (Team t in team)
             {
                 cboTeamName.Items.Add(t.TeamName);
             }
@@ -278,7 +278,7 @@ namespace UnderTerminal
                 /**回采日报实体赋值**/
                 //队别名称
                 //TODO:
-                dayReportHCEntity.TeamInfo = null;
+                dayReportHCEntity.Team = null;
                 //绑定巷道编号
                 //TODO:
                 dayReportHCEntity.WorkingFace = null;

@@ -38,20 +38,20 @@ namespace LibBusiness
         /// </summary>
         /// <param name="teamID"></param>
         /// <returns></returns>
-        public static TeamInfo selectTeamInfoByID(int teamID)
+        public static Team selectTeamInfoByID(int teamID)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
             string sql = "SELECT * FROM " + TeamDbConstNames.TABLE_NAME + " WHERE " + TeamDbConstNames.ID + " = " + teamID;
             DataSet ds = db.ReturnDS(sql);
-            TeamInfo teamInfoEntity = new TeamInfo();
+            Team teamEntity = new Team();
             if (ds.Tables[0].Rows.Count > 0)
             {
-                teamInfoEntity.TeamId = Convert.ToInt32(ds.Tables[0].Rows[0][TeamDbConstNames.ID].ToString());
-                teamInfoEntity.TeamName = ds.Tables[0].Rows[0][TeamDbConstNames.TEAM_NAME].ToString();
-                teamInfoEntity.TeamLeader = ds.Tables[0].Rows[0][TeamDbConstNames.TEAM_LEADER].ToString();
-                teamInfoEntity.TeamMember = ds.Tables[0].Rows[0][TeamDbConstNames.TEAM_MEMBER].ToString();
+                teamEntity.TeamId = Convert.ToInt32(ds.Tables[0].Rows[0][TeamDbConstNames.ID].ToString());
+                teamEntity.TeamName = ds.Tables[0].Rows[0][TeamDbConstNames.TEAM_NAME].ToString();
+                teamEntity.TeamLeader = ds.Tables[0].Rows[0][TeamDbConstNames.TEAM_LEADER].ToString();
+                teamEntity.TeamMember = ds.Tables[0].Rows[0][TeamDbConstNames.TEAM_MEMBER].ToString();
             }
-            return teamInfoEntity;
+            return teamEntity;
         }
 
         /// <summary>
@@ -90,17 +90,17 @@ namespace LibBusiness
         /// <summary>
         /// 修改队别信息
         /// </summary>
-        /// <param name="teamInfoEntity">队别实体</param>
+        /// <param name="teamEntity">队别实体</param>
         /// <returns></returns>
-        public static bool updateTeamInfo(TeamInfo teamInfoEntity)
+        public static bool updateTeamInfo(Team teamEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
             StringBuilder sqlStr = new StringBuilder();
             sqlStr.Append("UPDATE " + TeamDbConstNames.TABLE_NAME + " SET " + TeamDbConstNames.TEAM_NAME + " = '");
-            sqlStr.Append(teamInfoEntity.TeamName + "'," + TeamDbConstNames.TEAM_LEADER + " ='");
-            sqlStr.Append(teamInfoEntity.TeamLeader + "'," + TeamDbConstNames.TEAM_MEMBER + " ='");
-            sqlStr.Append(teamInfoEntity.TeamMember + "' WHERE " + TeamDbConstNames.ID + " = ");
-            sqlStr.Append(teamInfoEntity.TeamId);
+            sqlStr.Append(teamEntity.TeamName + "'," + TeamDbConstNames.TEAM_LEADER + " ='");
+            sqlStr.Append(teamEntity.TeamLeader + "'," + TeamDbConstNames.TEAM_MEMBER + " ='");
+            sqlStr.Append(teamEntity.TeamMember + "' WHERE " + TeamDbConstNames.ID + " = ");
+            sqlStr.Append(teamEntity.TeamId);
             //Alert.alert(sqlStr.ToString());
             bool bResult = db.OperateDB(sqlStr.ToString());
             return bResult;
@@ -109,12 +109,12 @@ namespace LibBusiness
         /// <summary>
         /// 删除队别信息
         /// </summary>
-        /// <param name="teamInfoEntity">队别实体</param>
+        /// <param name="teamEntity">队别实体</param>
         /// <returns></returns>
-        public static bool deleteTeamInfo(TeamInfo teamInfoEntity)
+        public static bool deleteTeamInfo(Team teamEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
-            string sql = "DELETE FROM " + TeamDbConstNames.TABLE_NAME + " WHERE " + TeamDbConstNames.ID + " =" + teamInfoEntity.TeamId;
+            string sql = "DELETE FROM " + TeamDbConstNames.TABLE_NAME + " WHERE " + TeamDbConstNames.ID + " =" + teamEntity.TeamId;
             bool bResult = db.OperateDB(sql);
             return bResult;
         }

@@ -318,7 +318,7 @@ namespace sys2
                     //掘进ID
                     eReturn.Id = (int)dr[DayReportJJDbConstNames.ID];
                     //队别ID
-                    eReturn.TeamInfo.TeamId = (int)dr[DayReportJJDbConstNames.TEAM_NAME_ID];
+                    eReturn.Team.TeamId = (int)dr[DayReportJJDbConstNames.TEAM_NAME_ID];
                     //工作面ID
                     eReturn.WorkingFace.WorkingFaceId = Convert.ToInt32(dr[DayReportJJDbConstNames.WORKINGFACE_ID]);
                     //班次

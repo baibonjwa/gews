@@ -240,7 +240,7 @@ namespace sys2
             }
 
             //队别
-            cboTeamName.SelectedValue = _dayReportHCEntity.TeamInfo;
+            cboTeamName.SelectedValue = _dayReportHCEntity.Team;
 
             //绑定队别成员
             this.bindTeamMember();
@@ -262,8 +262,8 @@ namespace sys2
         private void bindTeamInfo()
         {
             cboTeamName.Items.Clear();
-            TeamInfo[] teamInfos = TeamInfo.FindAll();
-            foreach (TeamInfo t in teamInfos)
+            Team[] team = Team.FindAll();
+            foreach (Team t in team)
             {
                 cboTeamName.Items.Add(t.TeamName);
             }
@@ -310,10 +310,10 @@ namespace sys2
             }
             else
             {
-                TeamInfo teamInfoEntity = new TeamInfo();
-                teamInfoEntity.TeamId = Convert.ToInt32(cboTeamName.SelectedValue);
-                teamInfoEntity = TeamBll.selectTeamInfoByID(teamInfoEntity.TeamId);
-                teamInfoForm = new TeamInfoEntering(teamInfoEntity);
+                Team teamEntity = new Team();
+                teamEntity.TeamId = Convert.ToInt32(cboTeamName.SelectedValue);
+                teamEntity = TeamBll.selectTeamInfoByID(teamEntity.TeamId);
+                teamInfoForm = new TeamInfoEntering(teamEntity);
             }
 
             if (DialogResult.OK == teamInfoForm.ShowDialog())
@@ -550,7 +550,7 @@ namespace sys2
 
                 /**回采日报实体赋值**/
                 //队别名称
-                dayReportHCEntity.TeamInfo = TeamInfo.FindById(Convert.ToInt32(cboTeamName.SelectedValue));
+                dayReportHCEntity.Team = Team.FindById(Convert.ToInt32(cboTeamName.SelectedValue));
                 //绑定回采面编号
                 dayReportHCEntity.WorkingFace.WorkingFaceId = selectWorkingfaceSimple1.IWorkingfaceId;
 
@@ -655,7 +655,7 @@ namespace sys2
             //绑定回采面编号
             _dayReportHCEntity.WorkingFace.WorkingFaceId = selectWorkingfaceSimple1.IWorkingfaceId;
             //队别名称
-            _dayReportHCEntity.TeamInfo.TeamId = Convert.ToInt32(cboTeamName.SelectedValue);
+            _dayReportHCEntity.Team.TeamId = Convert.ToInt32(cboTeamName.SelectedValue);
             //日期
             //_dayReportHCEntity.DateTime = dtpDate.Value;
             //填报人

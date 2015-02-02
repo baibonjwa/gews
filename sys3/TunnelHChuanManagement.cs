@@ -215,7 +215,7 @@ namespace _3.GeologyMeasure
                     //队别
                     if (int.TryParse(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TEAM_NAME_ID].ToString(), out tmp))
                     {
-                        tunnelHChuanEntity.TeamInfo.TeamId = tmp;
+                        tunnelHChuanEntity.Team.TeamId = tmp;
                         tmp = 0;
                     }
                     DateTime _dateTime;

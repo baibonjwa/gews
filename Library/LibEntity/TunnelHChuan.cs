@@ -113,7 +113,7 @@ namespace LibEntity
         ///     设置或获取队别编号
         /// </summary>
         [BelongsTo("TEAM_NAME_ID")]
-        public TeamInfo TeamInfo { get; set; }
+        public Team Team { get; set; }
 
         // 开工日期
 

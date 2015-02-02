@@ -178,7 +178,7 @@ namespace UnderTerminal
             }
 
             //队别
-            cboTeamName.Text = TeamBll.selectTeamInfoByID(_dayReportJJEntity.TeamInfo.TeamId).TeamName;
+            cboTeamName.Text = TeamBll.selectTeamInfoByID(_dayReportJJEntity.Team.TeamId).TeamName;
 
             //绑定队别成员
             bindTeamMember();
@@ -203,8 +203,8 @@ namespace UnderTerminal
         private void bindTeamInfo()
         {
             cboTeamName.Items.Clear();
-            TeamInfo[] teamInfos = TeamInfo.FindAll();
-            foreach (TeamInfo t in teamInfos)
+            Team[] team = Team.FindAll();
+            foreach (Team t in team)
             {
                 cboTeamName.Items.Add(t.TeamName);
             }
@@ -311,7 +311,7 @@ namespace UnderTerminal
 
                 /**回采日报实体赋值**/
                 //队别名称
-                _dayReportJJEntity.TeamInfo.TeamId = Convert.ToInt32(cboTeamName.SelectedValue);
+                _dayReportJJEntity.Team.TeamId = Convert.ToInt32(cboTeamName.SelectedValue);
                 //绑定巷道编号
                 _dayReportJJEntity.WorkingFace.WorkingFaceId =
                     BasicInfoManager.getInstance().getTunnelByID(_tunnelEntity.TunnelId).WorkingFace.WorkingFaceId;
@@ -375,7 +375,7 @@ namespace UnderTerminal
             //绑定巷道编号
             _dayReportJJEntity.WorkingFace.WorkingFaceId = tunnelId;
             //队别名称
-            _dayReportJJEntity.TeamInfo.TeamId = Convert.ToInt32(cboTeamName.SelectedValue);
+            _dayReportJJEntity.Team.TeamId = Convert.ToInt32(cboTeamName.SelectedValue);
             //日期
             _dayReportJJEntity.DateTime = dtpDate.Value;
             //填报人
@@ -649,8 +649,8 @@ namespace UnderTerminal
         {
             double distance = 0;
             double distanceFromWirepoint = 0;
-            var wirePointInfoEntityNew = new WirePointInfo();
-            var wirePointInfoEntityOld = new WirePointInfo();
+            var wirePointInfoEntityNew = new WirePoint();
+            var wirePointInfoEntityOld = new WirePoint();
             wirePointInfoEntityNew.Id = Convert.ToInt32(dgrdvDayReportJJ.CurrentRow.Cells[4].Value);
             wirePointInfoEntityNew = WirePointBLL.selectWirePointInfoByWirePointId(wirePointInfoEntityNew.Id);
             wirePointInfoEntityOld.Id = wirePointID;
