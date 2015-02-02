@@ -1,11 +1,4 @@
-﻿// ******************************************************************
-// 概  述：勘探线实体
-// 作  者：伍鑫
-// 创建日期：2014/03/05
-// 版本号：1.0
-// ******************************************************************
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Castle.ActiveRecord;
 using NHibernate.Criterion;
 

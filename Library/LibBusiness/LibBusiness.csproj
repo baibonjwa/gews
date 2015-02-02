@@ -164,7 +164,6 @@
     <Compile Include="2.MiningSchedulingBLL\PropertyBLL\TeamBLL.cs" />
     <Compile Include="2.MiningSchedulingBLL\PropertyBLL\WorkTimeBLL.cs" />
     <Compile Include="2.MiningSchedulingBLL\PropertyBLL\DayReportHCBLL.cs" />
-    <Compile Include="3.GeologyMeasureBLL\DbConstNames\ProspectingLineDbConstNames.cs" />
     <Compile Include="3.GeologyMeasureBLL\DbConstNames\WorkingFaceDbConstNames.cs" />
     <Compile Include="3.GeologyMeasureBLL\DbConstNames\MiningAreaDbConstNames.cs" />
     <Compile Include="3.GeologyMeasureBLL\DbConstNames\HorizontalDbConstNames.cs" />

@@ -1,65 +1,57 @@
-﻿// ******************************************************************
-// 概  述：导线信息添加修改
-// 作  者：宋英杰
-// 创建日期：2014/3/11
-// 版本号：V1.0
-// 版本信息：
-// V1.0 新建
-// ******************************************************************
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using ESRI.ArcGIS.Carto;
+using ESRI.ArcGIS.Geodatabase;
+using ESRI.ArcGIS.Geometry;
+using GIS;
+using GIS.Common;
+using GIS.HdProc;
+using GIS.SpecialGraphic;
 using LibBusiness;
 using LibCommon;
-using LibEntity;
-using ESRI.ArcGIS.Carto;
-using ESRI.ArcGIS.esriSystem;
-using LibGeometry;
-using ESRI.ArcGIS.Geometry;
-using GIS.Common;
 using LibCommonControl;
 using LibCommonForm;
+using LibEntity;
+using LibGeometry;
 using LibSocket;
-using ESRI.ArcGIS.Geodatabase;
-using System.Text.RegularExpressions;
-using GIS;
-using GIS.HdProc;
-using System.IO;
+using Point = ESRI.ArcGIS.Geometry.Point;
+using TunnelDefaultSelect = LibEntity.TunnelDefaultSelect;
 
-namespace _3.GeologyMeasure
+namespace sys3
 {
     public partial class WireInfoEntering : BaseForm
     {
         /**********变量声明***********/
-        DataGridViewCell[] dgvc = new DataGridViewCell[8];
-        string[] dr = new string[8];
-        int doing = 0;
-        int _tmpRowIndex = -1;
-        int _itemCount = 0;
-        Tunnel tunnelEntity = new Tunnel();
-        WireInfo wireInfoEntity = new WireInfo();
-        WirePointInfo[] wpiEntity;
-        int[] _arr = new int[5];
-        DataSet _dsWirePoint = new DataSet();
-        int _tunnelID;
-        double _tmpDouble = 0;
+        private readonly int[] _arr = new int[5];
+        private readonly DataGridViewCell[] dgvc = new DataGridViewCell[8];
+        private readonly string[] dr = new string[8];
+        private DataSet _dsWirePoint = new DataSet();
+        private int _itemCount;
+        private double _tmpDouble;
+        private int _tmpRowIndex = -1;
+        private int _tunnelID;
+        private int doing;
+        private Tunnel tunnelEntity = new Tunnel();
+        private WireInfo wireInfoEntity = new WireInfo();
+        private WirePointInfo[] wpiEntity;
         /*****************************/
 
         /// <summary>
-        /// 构造方法
+        ///     构造方法
         /// </summary>
-        public WireInfoEntering(MainFrm mainFrm)
+        public WireInfoEntering()
         {
-            this.MainForm = mainFrm;
             InitializeComponent();
-            LibCommon.FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_GM.WIRE_INFO_ADD);
+            FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_GM.WIRE_INFO_ADD);
             //自定义控件初始化
-            LibEntity.TunnelDefaultSelect tunnelDefaultSelectEntity = LibBusiness.TunnelDefaultSelect.selectDefaultTunnel(WireInfoDbConstNames.TABLE_NAME);
+            TunnelDefaultSelect tunnelDefaultSelectEntity =
+                LibBusiness.TunnelDefaultSelect.selectDefaultTunnel(WireInfoDbConstNames.TABLE_NAME);
             if (tunnelDefaultSelectEntity != null)
             {
                 _arr = new int[5];
@@ -67,14 +59,14 @@ namespace _3.GeologyMeasure
                 _arr[1] = tunnelDefaultSelectEntity.HorizontalID;
                 _arr[2] = tunnelDefaultSelectEntity.MiningAreaID;
                 _arr[3] = tunnelDefaultSelectEntity.WorkingFaceID;
-                this.selectTunnelUserControl1.setCurSelectedID(_arr);
+                selectTunnelUserControl1.setCurSelectedID(_arr);
             }
             else
             {
-                this.selectTunnelUserControl1.loadMineName();
+                selectTunnelUserControl1.loadMineName();
             }
             // 注册委托事件
-            this.selectTunnelUserControl1.TunnelNameChanged +=
+            selectTunnelUserControl1.TunnelNameChanged +=
                 InheritTunnelNameChanged;
             ////巷道信息赋值
             //Dictionary<string, string> flds = new Dictionary<string, string>();
@@ -105,27 +97,25 @@ namespace _3.GeologyMeasure
         }
 
         /// <summary>
-        /// 构造方法
+        ///     构造方法
         /// </summary>
         /// <param name="array">矿井信息数组</param>
         /// <param name="wireInfoEntity">导线实体</param>
-        public WireInfoEntering(int[] array, WireInfo wireInfoEntity, MainFrm mainFrm)
+        public WireInfoEntering(WireInfo wireInfoEntity)
         {
             // 初始化主窗体变量
-            this.MainForm = mainFrm;
             this.wireInfoEntity = wireInfoEntity;
-            _arr = array;
             InitializeComponent();
 
             // 加载需要修改的导线数据
             loadWireInfoData();
 
-            LibCommon.FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_GM.WIRE_INFO_CHANGE);
-            this.selectTunnelUserControl1.setCurSelectedID(_arr);
+            FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_GM.WIRE_INFO_CHANGE);
+            //this.selectTunnelUserControl1.setCurSelectedID(_arr);
             _tunnelID = _arr[4];
 
             // 注册委托事件
-            this.selectTunnelUserControl1.TunnelNameChanged +=
+            selectTunnelUserControl1.TunnelNameChanged +=
                 InheritTunnelNameChanged;
 
             //巷道信息赋值
@@ -154,7 +144,7 @@ namespace _3.GeologyMeasure
         }
 
         /// <summary>
-        /// 委托事件
+        ///     委托事件
         /// </summary>
         /// <param name="sender"></param>
         private void InheritTunnelNameChanged(object sender, TunnelEventArgs e)
@@ -163,7 +153,7 @@ namespace _3.GeologyMeasure
         }
 
         /// <summary>
-        /// 修改绑定数据
+        ///     修改绑定数据
         /// </summary>
         private void loadWireInfoData()
         {
@@ -204,7 +194,7 @@ namespace _3.GeologyMeasure
         }
 
         /// <summary>
-        /// 提交
+        ///     提交
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -213,29 +203,29 @@ namespace _3.GeologyMeasure
             //去掉无用空行
             for (int i = 0; i < dgrdvWire.RowCount - 1; i++)
             {
-                if (this.dgrdvWire.Rows[i].Cells[0].Value == null &&
-                    this.dgrdvWire.Rows[i].Cells[1].Value == null &&
-                    this.dgrdvWire.Rows[i].Cells[2].Value == null &&
-                    this.dgrdvWire.Rows[i].Cells[3].Value == null &&
-                    this.dgrdvWire.Rows[i].Cells[4].Value == null &&
-                    this.dgrdvWire.Rows[i].Cells[5].Value == null &&
-                    this.dgrdvWire.Rows[i].Cells[6].Value == null &&
-                    this.dgrdvWire.Rows[i].Cells[7].Value == null)
+                if (dgrdvWire.Rows[i].Cells[0].Value == null &&
+                    dgrdvWire.Rows[i].Cells[1].Value == null &&
+                    dgrdvWire.Rows[i].Cells[2].Value == null &&
+                    dgrdvWire.Rows[i].Cells[3].Value == null &&
+                    dgrdvWire.Rows[i].Cells[4].Value == null &&
+                    dgrdvWire.Rows[i].Cells[5].Value == null &&
+                    dgrdvWire.Rows[i].Cells[6].Value == null &&
+                    dgrdvWire.Rows[i].Cells[7].Value == null)
                 {
-                    this.dgrdvWire.Rows.RemoveAt(i);
+                    dgrdvWire.Rows.RemoveAt(i);
                 }
             }
 
-            if (!this.check())
+            if (!check())
             {
                 DialogResult = DialogResult.None;
                 return;
             }
 
             //判断导线点录入个数是否小于2
-            if (this.Text == Const_GM.WIRE_INFO_ADD)
+            if (Text == Const_GM.WIRE_INFO_ADD)
             {
-                DataSet ds = new DataSet();
+                var ds = new DataSet();
                 //获取巷道ID
                 tunnelEntity.TunnelId = selectTunnelUserControl1.ITunnelId;
                 //获取巷道对应导线信息
@@ -253,7 +243,7 @@ namespace _3.GeologyMeasure
                             }
                         }
                     }
-                    else if (dgrdvWire.Rows.Count < 3)  //添加时最后有一个空行
+                    else if (dgrdvWire.Rows.Count < 3) //添加时最后有一个空行
                     {
                         Alert.alert(Const_GM.WIRE_INFO_MSG_POINT_MUST_MORE_THAN_TWO);
                         return;
@@ -264,7 +254,7 @@ namespace _3.GeologyMeasure
 
             List<WirePointInfo> lstWirePointInfoEnt;
             string sADDorCHANGE = "";
-            if (this.Text == Const_GM.WIRE_INFO_ADD)
+            if (Text == Const_GM.WIRE_INFO_ADD)
             {
                 sADDorCHANGE = "ADD";
                 /// 2014.2.26 lyf 绘制导线点和巷道，下同
@@ -278,7 +268,6 @@ namespace _3.GeologyMeasure
                         MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
                     if (dlgResult == DialogResult.Yes)
                     {
-
                         //DrawTunnel(lstWirePointInfoEnt, sADDorCHANGE);
                         //巷道信息赋值
                         //Dictionary<string, string> flds = new Dictionary<string, string>();
@@ -292,7 +281,7 @@ namespace _3.GeologyMeasure
                         //string bid = "";
                         //string hdname = "";
                         //double hdwid = Global.linespace;//给个默认的值
-                        DataSet dst = LibBusiness.TunnelInfoBLL.selectOneTunnelInfoByTunnelID(_tunnelID);
+                        DataSet dst = TunnelInfoBLL.selectOneTunnelInfoByTunnelID(_tunnelID);
                         //if (dst.Tables[0].Rows.Count > 0)
                         //{
                         //    bid = dst.Tables[0].Rows[0][LibBusiness.TunnelInfoDbConstNames.BINDINGID].ToString();
@@ -315,7 +304,7 @@ namespace _3.GeologyMeasure
                 }
             }
 
-            if (this.Text == Const_GM.WIRE_INFO_CHANGE)
+            if (Text == Const_GM.WIRE_INFO_CHANGE)
             {
                 sADDorCHANGE = "CHANGE";
                 /// 2014.2.26 lyf
@@ -323,15 +312,15 @@ namespace _3.GeologyMeasure
                 lstWirePointInfoEnt = new List<WirePointInfo>();
                 if (wirePointInfoEnt != null)
                 {
-                    lstWirePointInfoEnt = wirePointInfoEnt.ToList<WirePointInfo>();
+                    lstWirePointInfoEnt = wirePointInfoEnt.ToList();
                     DrawWirePoint(lstWirePointInfoEnt, sADDorCHANGE);
 
                     DialogResult dlgResult = MessageBox.Show("是否同时更新巷道图形？", "提示", MessageBoxButtons.YesNo,
-                                                MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+                        MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
                     if (dlgResult == DialogResult.Yes)
                     {
                         //DrawTunnel(lstWirePointInfoEnt, sADDorCHANGE);
-                        DataSet dst = LibBusiness.TunnelInfoBLL.selectOneTunnelInfoByTunnelID(_tunnelID);
+                        DataSet dst = TunnelInfoBLL.selectOneTunnelInfoByTunnelID(_tunnelID);
                         double hdwid = 0.0;
                         dics = ConstructDics(dst, out hdwid);
                         if (dst.Tables[0].Rows.Count > 0)
@@ -339,7 +328,6 @@ namespace _3.GeologyMeasure
                             UpdateHdbyPnts(lstWirePointInfoEnt, dics, hdwid);
                         }
                     }
-
                 }
             }
         }
@@ -348,9 +336,10 @@ namespace _3.GeologyMeasure
         {
             //巷道信息赋值
             hdwid = 0.0;
-            Dictionary<string, string> flds = new Dictionary<string, string>();
+            var flds = new Dictionary<string, string>();
             flds.Add(GIS_Const.FIELD_HDID, tunnelEntity.TunnelId.ToString());
-            List<Tuple<IFeature, IGeometry, Dictionary<string, string>>> selobjs = Global.commonclss.SearchFeaturesByGeoAndText(Global.centerfdlyr, flds);
+            List<Tuple<IFeature, IGeometry, Dictionary<string, string>>> selobjs =
+                Global.commonclss.SearchFeaturesByGeoAndText(Global.centerfdlyr, flds);
 
             int xh = 0;
             if (selobjs.Count > 0)
@@ -358,277 +347,27 @@ namespace _3.GeologyMeasure
             string bid = "", hdname = "";
             if (dst.Tables[0].Rows.Count > 0)
             {
-                bid = dst.Tables[0].Rows[0][LibBusiness.TunnelInfoDbConstNames.BINDINGID].ToString();
-                hdname = dst.Tables[0].Rows[0][LibBusiness.TunnelInfoDbConstNames.TUNNEL_NAME].ToString();
-                hdwid = Convert.ToDouble(dst.Tables[0].Rows[0][LibBusiness.TunnelInfoDbConstNames.TUNNEL_WID]);
+                bid = dst.Tables[0].Rows[0][TunnelInfoDbConstNames.BINDINGID].ToString();
+                hdname = dst.Tables[0].Rows[0][TunnelInfoDbConstNames.TUNNEL_NAME].ToString();
+                hdwid = Convert.ToDouble(dst.Tables[0].Rows[0][TunnelInfoDbConstNames.TUNNEL_WID]);
             }
             dics.Clear();
             dics.Add(GIS_Const.FIELD_HDID, tunnelEntity.TunnelId.ToString());
             dics.Add(GIS_Const.FIELD_ID, "0");
             dics.Add(GIS_Const.FIELD_BS, "1");
-            dics.Add(GIS.GIS_Const.FIELD_BID, bid);
+            dics.Add(GIS_Const.FIELD_BID, bid);
             dics.Add(GIS_Const.FIELD_HDNAME, hdname);
             dics.Add(GIS_Const.FIELD_XH, (xh + 1).ToString());
             return dics;
         }
-        #region 绘制导线点和巷道图形
-        private List<ESRI.ArcGIS.Geometry.IPoint> dpts = new List<ESRI.ArcGIS.Geometry.IPoint>();
-        private List<ESRI.ArcGIS.Geometry.IPoint> leftpts = new List<ESRI.ArcGIS.Geometry.IPoint>();//记录左侧平行线坐标
-        private List<ESRI.ArcGIS.Geometry.IPoint> rightpts = new List<ESRI.ArcGIS.Geometry.IPoint>();//记录右侧平行线坐标
-        private Dictionary<string, string> dics = new Dictionary<string, string>();//属性字典
 
         /// <summary>
-        /// 通过（关键/导线）点绘制巷道
-        /// </summary>
-        /// <param name="wirepntcols">导线信息列表</param>
-        /// <param name="dics">巷道属性</param>
-        /// <param name="hdwid">巷道宽度</param>
-        private void AddHdbyPnts(List<WirePointInfo> wirepntcols, Dictionary<string, string> dics, double hdwid)
-        {
-            List<IPoint> rightresults = null;
-            List<IPoint> leftresults = null;
-            List<IPoint> results = null;
-
-            if (wirepntcols == null || wirepntcols.Count == 0)
-                return;
-
-            List<IPoint> pntcols = new List<IPoint>();
-            for (int i = 0; i < wirepntcols.Count; i++)
-            {
-                IPoint pnt = new PointClass();
-                pnt.X = wirepntcols[i].CoordinateX;
-                pnt.Y = wirepntcols[i].CoordinateY;
-                pnt.Z = wirepntcols[i].CoordinateZ;
-                pntcols.Add(pnt);
-            }
-
-            Global.cons.AddHangdaoToLayer(pntcols, dics, Global.pntlyr, wirepntcols);//添加中线上的点到导线点图层中
-            Global.cons.AddDxdLines(pntcols, dics, Global.pntlinlyr, wirepntcols);//添加导线点线图层符号
-            Global.cons.AddHangdaoToLayer(pntcols, dics, Global.centerlyr);//添加中心线到线图层中
-            Global.cons.AddFDLineToLayer(pntcols, dics, Global.centerfdlyr, 1);//添加分段中心线到中心线分段图层中
-
-            //#################计算交点坐标######################
-            rightpts = Global.cons.GetLRParallelPnts(pntcols, hdwid, 1);//右侧平行线上的端点串
-            leftpts = Global.cons.GetLRParallelPnts(pntcols, hdwid, 0);//左侧平行线上的端点串
-
-            //rightresults = Global.cons.CalculateRegPnts(rightpts);
-            //leftresults = Global.cons.CalculateRegPnts(leftpts);
-            //results = Global.cons.ConstructPnts(rightresults, leftresults);
-            results = Global.cons.ConstructPnts(rightpts, leftpts);
-
-            ////在巷道面显示面中绘制巷道面  
-            Global.cons.AddHangdaoToLayer(results, dics, Global.hdfdfulllyr);//添加巷道到巷道图层中
-            //Global.cons.AddFDRegToLayer(rightresults, leftresults, pntcols, dics, Global.hdfdlyr);
-            //Global.cons.AddHangdaoToLayer(rightpts, dics, Global.pntlyr);
-            //Global.cons.AddHangdaoToLayer(leftpts, dics, Global.pntlyr);
-            Global.cons.AddFDRegToLayer(rightpts, leftpts, pntcols, dics, Global.hdfdlyr, hdwid);
-            Global.pActiveView.Refresh();
-        }
-
-        /// <summary>
-        /// 更新巷道
-        /// </summary>
-        /// <param name="wirepntcols"></param>
-        /// <param name="dics"></param>
-        private void UpdateHdbyPnts(List<WirePointInfo> wirepntcols, Dictionary<string, string> dics, double hdwid)
-        {
-            List<IPoint> rightresults = null;
-            List<IPoint> leftresults = null;
-            List<IPoint> results = null;
-
-            if (wirepntcols == null || wirepntcols.Count == 0)
-                return;
-
-            List<IPoint> pntcols = new List<IPoint>();
-            for (int i = 0; i < wirepntcols.Count; i++)
-            {
-                IPoint pnt = new PointClass();
-                pnt.X = wirepntcols[i].CoordinateX;
-                pnt.Y = wirepntcols[i].CoordinateY;
-                pnt.Z = wirepntcols[i].CoordinateZ;
-                pntcols.Add(pnt);
-            }
-            //清除图层上对应的信息
-            string sql = "\"" + GIS.GIS_Const.FIELD_HDID + "\"='" + wireInfoEntity.Tunnel.ToString() + "'";
-            Global.commonclss.DelFeatures(Global.pntlyr, sql);
-            Global.commonclss.DelFeatures(Global.pntlinlyr, sql);
-            Global.commonclss.DelFeatures(Global.centerlyr, sql);
-            Global.commonclss.DelFeatures(Global.centerfdlyr, sql);
-            Global.commonclss.DelFeatures(Global.hdfdfulllyr, sql);
-            Global.commonclss.DelFeatures(Global.hdfdlyr, sql);
-            Global.commonclss.DelFeatures(Global.dslyr, sql);
-            //Global.commonclss.DelFeaturesByQueryFilter(Global.pntlyr, sql);
-            //Global.commonclss.DelFeaturesByQueryFilter(Global.pntlinlyr, sql);
-            //Global.commonclss.DelFeaturesByQueryFilter(Global.centerlyr, sql);
-            //Global.commonclss.DelFeaturesByQueryFilter(Global.centerfdlyr, sql);
-            //Global.commonclss.DelFeaturesByQueryFilter(Global.hdfdfulllyr, sql);
-            //Global.commonclss.DelFeaturesByQueryFilter(Global.hdfdlyr, sql);
-            //Global.commonclss.DelFeaturesByQueryFilter(Global.dslyr, sql);
-            //重新添加
-            Global.cons.AddHangdaoToLayer(pntcols, dics, Global.pntlyr, wirepntcols);//添加中线上的点到导线点图层中
-            Global.cons.AddDxdLines(pntcols, dics, Global.pntlinlyr, wirepntcols);//添加导线点线
-            Global.cons.AddHangdaoToLayer(pntcols, dics, Global.centerlyr);//添加中心线到线图层中
-            Global.cons.AddFDLineToLayer(pntcols, dics, Global.centerfdlyr, 1);//添加分段中心线到中心线分段图层中
-            //#################计算交点坐标######################
-            rightpts = Global.cons.GetLRParallelPnts(pntcols, hdwid, 1);//右侧平行线上的端点串
-            leftpts = Global.cons.GetLRParallelPnts(pntcols, hdwid, 0);//左侧平行线上的端点串
-            //rightresults = Global.cons.CalculateRegPnts(rightpts);
-            //leftresults = Global.cons.CalculateRegPnts(leftpts);
-            //results = Global.cons.ConstructPnts(rightresults, leftresults);
-            //Global.cons.AddHangdaoToLayer(rightpts, dics, Global.pntlyr);
-            //Global.cons.AddHangdaoToLayer(leftpts, dics, Global.pntlyr);
-            results = Global.cons.ConstructPnts(rightpts, leftpts);
-            //在巷道面显示面中绘制巷道面  
-            //Global.cons.AddHangdaoToLayer(rightpts, dics, Global.pntlyr);
-            //Global.cons.AddHangdaoToLayer(leftpts, dics, Global.pntlyr);
-            Global.cons.AddHangdaoToLayer(results, dics, Global.hdfdfulllyr);//添加巷道到巷道图层中
-            //Global.cons.AddFDRegToLayer(rightresults, leftresults, pntcols, dics, Global.hdfdlyr);
-            Global.cons.AddFDRegToLayer(rightpts, leftpts, pntcols, dics, Global.hdfdlyr, hdwid);
-            Global.pActiveView.Refresh();
-        }
-
-        /// <summary>
-        /// 根据坐标绘制导线点
-        /// </summary>
-        /// <param name="lstWPIE">导线坐标（List）</param>
-        private void DrawWirePoint(List<WirePointInfo> lstWPIE, string addOrChange)
-        {
-            WirePointInfo wirePtInfo = new WirePointInfo();
-            ESRI.ArcGIS.Geometry.IPoint pt = new ESRI.ArcGIS.Geometry.Point();
-
-            //找到导线点图层
-            IMap map = new MapClass();
-            map = DataEditCommon.g_pMap;
-            string layerName = GIS.LayerNames.DEFALUT_WIRE_PT;//“默认_导线点”图层
-            IFeatureLayer featureLayer = new FeatureLayerClass();
-            featureLayer = GIS.Common.LayerHelper.GetLayerByName(map, layerName);///获得图层
-
-            if (featureLayer == null)
-            {
-                MessageBox.Show("没有找到" + layerName + "图层，将不能绘制导线点。", "提示", MessageBoxButtons.OK);
-                return;
-            }
-
-            GIS.SpecialGraphic.DrawTunnels drawWirePt = new GIS.SpecialGraphic.DrawTunnels();
-            //修改导线点操作，要先删除原有导线点要素
-            if (addOrChange == "CHANGE")
-            {
-                for (int i = 0; i < lstWPIE.Count; i++)
-                {
-                    wirePtInfo = lstWPIE[i];
-                    DataEditCommon.DeleteFeatureByBId(featureLayer, wirePtInfo.BindingId);
-                }
-            }
-
-            for (int i = 0; i < lstWPIE.Count; i++)
-            {
-                wirePtInfo = lstWPIE[i];
-                pt.X = wirePtInfo.CoordinateX;
-                pt.Y = wirePtInfo.CoordinateY;
-                pt.Z = wirePtInfo.CoordinateZ;
-
-                drawWirePt.CreatePoint(featureLayer, pt, wirePtInfo.BindingId);///绘制点
-            }
-        }
-
-        /// <summary>
-        /// 根据导线点坐标绘制巷道
-        /// </summary>
-        /// <param name="lstWPIE"></param>
-        private void DrawTunnel(List<WirePointInfo> lstWPIE, string addOrChange)
-        {
-            ///根据导线点计算巷道边线点
-            WirePointInfo[] arrayWPtInfo = new WirePointInfo[] { };
-            arrayWPtInfo = lstWPIE.ToArray();
-            Vector3_DW[] verticesLeftBtmRet = null;
-            Vector3_DW[] verticesRightBtmRet = null;
-
-            TunnelPointsCalculation tunnelPtsCal = new TunnelPointsCalculation();
-            bool isCalSuccess = tunnelPtsCal.CalcLeftAndRightVertics(arrayWPtInfo, ref verticesLeftBtmRet, ref  verticesRightBtmRet);
-
-            if (!isCalSuccess)
-            {
-                MessageBox.Show("根据导线点计算巷道未成功！");
-            }
-            else
-            {
-                //找到巷道图层
-                IMap map = new MapClass();
-                map = DataEditCommon.g_pMap;
-                string layerName = GIS.LayerNames.DEFALUT_TUNNEL;//“默认_巷道”图层
-                IFeatureLayer featureLayer = new FeatureLayerClass();
-                featureLayer = GIS.Common.LayerHelper.GetLayerByName(map, layerName);//获得图层
-
-                if (featureLayer == null)
-                {
-                    MessageBox.Show("没有找到" + layerName + "图层，将不能绘制巷道。", "提示", MessageBoxButtons.OK);
-                    return;
-                }
-
-                GIS.SpecialGraphic.DrawTunnels drawWirePt = new GIS.SpecialGraphic.DrawTunnels();
-                //修改导线点操作，要先删除依据原有导线点所生成的巷道要素
-                if (addOrChange == "CHANGE")
-                {
-                    DataEditCommon.DeleteFeatureByBId(featureLayer, _tunnelID.ToString());
-                }
-
-                //绘制巷道左边线
-                List<IPoint> lstLeftBtmRet = new List<IPoint>();
-                lstLeftBtmRet = GetTunnelPts(verticesLeftBtmRet);
-
-                if (lstLeftBtmRet == null) return;
-
-                drawWirePt.CreateLine(featureLayer, lstLeftBtmRet, _tunnelID);
-
-                //绘制巷道右边线
-                List<ESRI.ArcGIS.Geometry.IPoint> lstRightBtmRet = new List<ESRI.ArcGIS.Geometry.IPoint>();
-                lstRightBtmRet = GetTunnelPts(verticesRightBtmRet);
-                drawWirePt.CreateLine(featureLayer, lstRightBtmRet, _tunnelID);
-            }
-        }
-
-        /// <summary>
-        /// 获得导线边线点坐标集
-        /// </summary>
-        /// <param name="verticesBtmRet">Vector3_DW数据</param>
-        /// <returns>导线边线点坐标集List</returns>
-        private List<ESRI.ArcGIS.Geometry.IPoint> GetTunnelPts(Vector3_DW[] verticesBtmRet)
-        {
-            List<ESRI.ArcGIS.Geometry.IPoint> lstBtmRet = new List<ESRI.ArcGIS.Geometry.IPoint>();
-            try
-            {
-                Vector3_DW vector3dw;
-                ESRI.ArcGIS.Geometry.IPoint pt;
-                for (int i = 0; i < verticesBtmRet.Length; i++)
-                {
-                    vector3dw = new Vector3_DW();
-                    vector3dw = verticesBtmRet[i];
-                    pt = new ESRI.ArcGIS.Geometry.PointClass();
-                    pt.X = vector3dw.X;
-                    pt.Y = vector3dw.Y;
-                    pt.Z = vector3dw.Z;
-                    if (!lstBtmRet.Contains(pt))
-                    {
-                        lstBtmRet.Add(pt);
-                    }
-                }
-
-                return lstBtmRet;
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
-        #endregion 绘制导线点和巷道图形
-
-        /// <summary>
-        /// 导线实体赋值
+        ///     导线实体赋值
         /// </summary>
         private void setWireInfoEntity()
         {
-            wireInfoEntity.Tunnel.TunnelId = selectTunnelUserControl1.ITunnelId; ;
+            wireInfoEntity.Tunnel.TunnelId = selectTunnelUserControl1.ITunnelId;
+            ;
             //tunnelEntity = TunnelInfoBLL.selectTunnelInfoByTunnelID(wireInfoEntity.Tunnel);
             //导线名称
             wireInfoEntity.WireName = txtWireName.Text;
@@ -652,20 +391,20 @@ namespace _3.GeologyMeasure
         }
 
         /// <summary>
-        /// 导线点实体赋值
+        ///     导线点实体赋值
         /// </summary>
         /// <param name="i">Datagridview行号</param>
         /// <returns>导线点实体</returns>
         private WirePointInfo setWirePointEntity(int i)
         {
             // 最后一行为空行时，跳出循环
-            if (i == this.dgrdvWire.RowCount - 1)
+            if (i == dgrdvWire.RowCount - 1)
             {
                 return null;
             }
             // 创建导线点实体
-            WirePointInfo wirePointInfoEntity = new WirePointInfo();
-            if (this.Text == Const_GM.WIRE_INFO_CHANGE)
+            var wirePointInfoEntity = new WirePointInfo();
+            if (Text == Const_GM.WIRE_INFO_CHANGE)
             {
                 if (i < wpiEntity.Length)
                 {
@@ -674,68 +413,68 @@ namespace _3.GeologyMeasure
             }
 
             //导线点编号
-            if (this.dgrdvWire.Rows[i].Cells[0] != null)
+            if (dgrdvWire.Rows[i].Cells[0] != null)
             {
-                wirePointInfoEntity.WirePointId = this.dgrdvWire.Rows[i].Cells[0].Value.ToString();
+                wirePointInfoEntity.WirePointId = dgrdvWire.Rows[i].Cells[0].Value.ToString();
             }
             //坐标X
-            if (this.dgrdvWire.Rows[i].Cells[1].Value != null)
+            if (dgrdvWire.Rows[i].Cells[1].Value != null)
             {
-                if (double.TryParse(this.dgrdvWire.Rows[i].Cells[1].Value.ToString(), out _tmpDouble))
+                if (double.TryParse(dgrdvWire.Rows[i].Cells[1].Value.ToString(), out _tmpDouble))
                 {
                     wirePointInfoEntity.CoordinateX = _tmpDouble;
                     _tmpDouble = 0;
                 }
             }
             //坐标Y
-            if (this.dgrdvWire.Rows[i].Cells[2].Value != null)
+            if (dgrdvWire.Rows[i].Cells[2].Value != null)
             {
-                if (double.TryParse(this.dgrdvWire.Rows[i].Cells[2].Value.ToString(), out _tmpDouble))
+                if (double.TryParse(dgrdvWire.Rows[i].Cells[2].Value.ToString(), out _tmpDouble))
                 {
                     wirePointInfoEntity.CoordinateY = _tmpDouble;
                     _tmpDouble = 0;
                 }
             }
             //坐标Z
-            if (this.dgrdvWire.Rows[i].Cells[3].Value != null)
+            if (dgrdvWire.Rows[i].Cells[3].Value != null)
             {
-                if (double.TryParse(this.dgrdvWire.Rows[i].Cells[3].Value.ToString(), out _tmpDouble))
+                if (double.TryParse(dgrdvWire.Rows[i].Cells[3].Value.ToString(), out _tmpDouble))
                 {
                     wirePointInfoEntity.CoordinateZ = _tmpDouble;
                     _tmpDouble = 0;
                 }
             }
             //距左帮距离
-            if (this.dgrdvWire.Rows[i].Cells[4].Value != null)
+            if (dgrdvWire.Rows[i].Cells[4].Value != null)
             {
-                if (double.TryParse(this.dgrdvWire.Rows[i].Cells[4].Value.ToString(), out _tmpDouble))
+                if (double.TryParse(dgrdvWire.Rows[i].Cells[4].Value.ToString(), out _tmpDouble))
                 {
                     wirePointInfoEntity.LeftDis = _tmpDouble;
                     _tmpDouble = 0;
                 }
             }
             //距右帮距离
-            if (this.dgrdvWire.Rows[i].Cells[5].Value != null)
+            if (dgrdvWire.Rows[i].Cells[5].Value != null)
             {
-                if (double.TryParse(this.dgrdvWire.Rows[i].Cells[5].Value.ToString(), out _tmpDouble))
+                if (double.TryParse(dgrdvWire.Rows[i].Cells[5].Value.ToString(), out _tmpDouble))
                 {
                     wirePointInfoEntity.RightDis = _tmpDouble;
                     _tmpDouble = 0;
                 }
             }
             //距顶板距离
-            if (this.dgrdvWire.Rows[i].Cells[6].Value != null)
+            if (dgrdvWire.Rows[i].Cells[6].Value != null)
             {
-                if (double.TryParse(this.dgrdvWire.Rows[i].Cells[6].Value.ToString(), out _tmpDouble))
+                if (double.TryParse(dgrdvWire.Rows[i].Cells[6].Value.ToString(), out _tmpDouble))
                 {
                     wirePointInfoEntity.TopDis = _tmpDouble;
                     _tmpDouble = 0;
                 }
             }
             //距底板距离
-            if (this.dgrdvWire.Rows[i].Cells[7].Value != null)
+            if (dgrdvWire.Rows[i].Cells[7].Value != null)
             {
-                if (double.TryParse(this.dgrdvWire.Rows[i].Cells[7].Value.ToString(), out _tmpDouble))
+                if (double.TryParse(dgrdvWire.Rows[i].Cells[7].Value.ToString(), out _tmpDouble))
                 {
                     wirePointInfoEntity.BottomDis = _tmpDouble;
                     _tmpDouble = 0;
@@ -747,7 +486,7 @@ namespace _3.GeologyMeasure
         }
 
         /// <summary>
-        /// 2014.2.26 lyf 修改函数，返回导线点List，为绘制导线点图形
+        ///     2014.2.26 lyf 修改函数，返回导线点List，为绘制导线点图形
         /// </summary>
         /// <returns>导线点List</returns>
         private List<WirePointInfo> insertWireInfo()
@@ -760,27 +499,32 @@ namespace _3.GeologyMeasure
             //无导线时插入
             if (WireInfoBLL.selectAllWireInfo(tunnelEntity).Tables[0].Rows.Count == 0)
             {
-                LibBusiness.TunnelDefaultSelect.InsertDefaultTunnel(WireInfoDbConstNames.TABLE_NAME, selectTunnelUserControl1.ITunnelId);
+                LibBusiness.TunnelDefaultSelect.InsertDefaultTunnel(WireInfoDbConstNames.TABLE_NAME,
+                    selectTunnelUserControl1.ITunnelId);
                 bResult = WireInfoBLL.insertWireInfo(wireInfoEntity);
                 if (bResult)
                 {
-                    UpdateWarningDataMsg msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.ITunnelId,
+                    var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.ITunnelId,
                         WireInfoDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, wireInfoEntity.MeasureDate);
-                    this.MainForm.SendMsg2Server(msg);
+                    MainForm.SendMsg2Server(msg);
                 }
             }
-            //导线存在时跳过
+                //导线存在时跳过
             else
             {
                 bResult = true;
             }
             //导线编号
-            wireInfoEntity.WireInfoId = Convert.ToInt32(WireInfoBLL.selectAllWireInfo(BasicInfoManager.getInstance().getTunnelByID(wireInfoEntity.Tunnel.TunnelId)).Tables[0].Rows[0][WireInfoDbConstNames.ID]);
+            wireInfoEntity.WireInfoId =
+                Convert.ToInt32(
+                    WireInfoBLL.selectAllWireInfo(
+                        BasicInfoManager.getInstance().getTunnelByID(wireInfoEntity.Tunnel.TunnelId)).Tables[0].Rows[0][
+                            WireInfoDbConstNames.ID]);
             //导线点信息登陆
-            List<WirePointInfo> wirePointInfoEntityList = new List<WirePointInfo>();
-            for (int i = 0; i < this.dgrdvWire.RowCount; i++)
+            var wirePointInfoEntityList = new List<WirePointInfo>();
+            for (int i = 0; i < dgrdvWire.RowCount; i++)
             {
-                WirePointInfo wirePointInfoEntity = new WirePointInfo();
+                var wirePointInfoEntity = new WirePointInfo();
 
                 wirePointInfoEntity = setWirePointEntity(i);
 
@@ -801,9 +545,9 @@ namespace _3.GeologyMeasure
                     bResult = WirePointBLL.insertWirePointInfo(wirePointInfoEntity);
                     if (bResult)
                     {
-                        UpdateWarningDataMsg msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.ITunnelId,
+                        var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.ITunnelId,
                             WireInfoDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, wireInfoEntity.MeasureDate);
-                        this.MainForm.SendMsg2Server(msg);
+                        MainForm.SendMsg2Server(msg);
                     }
                 }
             }
@@ -811,18 +555,18 @@ namespace _3.GeologyMeasure
         }
 
         /// <summary>
-        /// 2014.2.26 lyf 修改函数，返回导线点List，为绘制导线点图形
+        ///     2014.2.26 lyf 修改函数，返回导线点List，为绘制导线点图形
         /// </summary>
         /// <returns>导线点List</returns>
         private WirePointInfo[] updateWireInfo()
         {
             setWireInfoEntity();
 
-            WirePointInfo[] wirePointInfoEnt = new WirePointInfo[dgrdvWire.RowCount - 1];
+            var wirePointInfoEnt = new WirePointInfo[dgrdvWire.RowCount - 1];
             for (int i = 0; i < dgrdvWire.RowCount - 1; i++)
             {
                 // 创建导线点实体
-                WirePointInfo wirePointInfoEntity = new WirePointInfo();
+                var wirePointInfoEntity = new WirePointInfo();
                 wirePointInfoEntity = setWirePointEntity(i);
                 if (wirePointInfoEntity == null)
                 {
@@ -830,12 +574,12 @@ namespace _3.GeologyMeasure
                 }
 
                 wirePointInfoEnt[i] = wirePointInfoEntity;
-
             }
 
             //导线信息登陆
             _tunnelID = selectTunnelUserControl1.ITunnelId;
-            LibBusiness.TunnelDefaultSelect.UpdateDefaultTunnel(WireInfoDbConstNames.TABLE_NAME, selectTunnelUserControl1.ITunnelId);
+            LibBusiness.TunnelDefaultSelect.UpdateDefaultTunnel(WireInfoDbConstNames.TABLE_NAME,
+                selectTunnelUserControl1.ITunnelId);
             bool bResult = WireInfoBLL.updateWireInfo(wireInfoEntity, _tunnelID);
             //导线点信息登陆
             if (bResult)
@@ -849,9 +593,9 @@ namespace _3.GeologyMeasure
                         //socket
                         if (bResult)
                         {
-                            UpdateWarningDataMsg msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.ITunnelId,
+                            var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.ITunnelId,
                                 WireInfoDbConstNames.TABLE_NAME, OPERATION_TYPE.UPDATE, wireInfoEntity.MeasureDate);
-                            this.MainForm.SendMsg2Server(msg);
+                            MainForm.SendMsg2Server(msg);
                         }
                     }
                     else
@@ -864,22 +608,25 @@ namespace _3.GeologyMeasure
                         //socket
                         if (bResult)
                         {
-                            UpdateWarningDataMsg msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.ITunnelId,
+                            var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.ITunnelId,
                                 WireInfoDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, wireInfoEntity.MeasureDate);
-                            this.MainForm.SendMsg2Server(msg);
+                            MainForm.SendMsg2Server(msg);
                         }
                     }
                 }
 
                 //导线点实体
-                WirePointInfo wirePointInfoEntity = new WirePointInfo();
+                var wirePointInfoEntity = new WirePointInfo();
                 //当条数少于导线点个数时，多于部分做删除处理
                 if (dgrdvWire.Rows.Count <= _itemCount)
                 {
                     for (int i = dgrdvWire.Rows.Count - 1; i < _itemCount; i++)
                     {
-                        wirePointInfoEntity.Id = Convert.ToInt32(_dsWirePoint.Tables[0].Rows[i][WirePointDbConstNames.ID].ToString());
-                        wireInfoEntity.WireInfoId = Convert.ToInt32(_dsWirePoint.Tables[0].Rows[i][WirePointDbConstNames.WIRE_INFO_ID].ToString());
+                        wirePointInfoEntity.Id =
+                            Convert.ToInt32(_dsWirePoint.Tables[0].Rows[i][WirePointDbConstNames.ID].ToString());
+                        wireInfoEntity.WireInfoId =
+                            Convert.ToInt32(
+                                _dsWirePoint.Tables[0].Rows[i][WirePointDbConstNames.WIRE_INFO_ID].ToString());
                         //只剩一个空行时，即所有导线点信息全被删除时
                         //删除导线，导线点
                         if (dgrdvWire.Rows.Count == 1)
@@ -887,7 +634,7 @@ namespace _3.GeologyMeasure
                             bResult = WireInfoBLL.deleteWireInfo(wireInfoEntity);
                             bResult = WirePointBLL.deleteWirePointInfo(wirePointInfoEntity);
                         }
-                        //只删除多于导线点
+                            //只删除多于导线点
                         else
                         {
                             bResult = WirePointBLL.deleteWirePointInfo(wirePointInfoEntity);
@@ -900,18 +647,18 @@ namespace _3.GeologyMeasure
         }
 
         /// <summary>
-        /// 取消
+        ///     取消
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnCancel_Click(object sender, EventArgs e)
         {
             // 关闭窗口
-            this.Close();
+            Close();
         }
 
         /// <summary>
-        /// 验证画面入力数据
+        ///     验证画面入力数据
         /// </summary>
         /// <returns>验证结果：true 通过验证, false未通过验证</returns>
         private bool check()
@@ -926,7 +673,7 @@ namespace _3.GeologyMeasure
                 Alert.alert(Const.MSG_PLEASE_CHOOSE + Const_GM.TUNNEL + Const.SIGN_EXCLAMATION_MARK);
                 return false;
             }
-            if (this.Text == Const_GM.WIRE_INFO_ADD && !AutoChangeWireName())
+            if (Text == Const_GM.WIRE_INFO_ADD && !AutoChangeWireName())
             {
                 return false;
             }
@@ -936,30 +683,27 @@ namespace _3.GeologyMeasure
                 Alert.alert(Const.MSG_PLEASE_TYPE_IN + Const_GM.WIRE_NAME + Const.SIGN_EXCLAMATION_MARK);
                 return false;
             }
-            else
-            {
-                txtWireName.BackColor = Const.NO_ERROR_FIELD_COLOR;
-            }
+            txtWireName.BackColor = Const.NO_ERROR_FIELD_COLOR;
             //判断导线名称是否含有特殊字符
             if (!Check.checkSpecialCharacters(txtWireName, Const_GM.WIRE_NAME))
             {
                 return false;
             }
             // 判断导线点编号是否入力
-            if (this.dgrdvWire.Rows.Count - 1 == 0)
+            if (dgrdvWire.Rows.Count - 1 == 0)
             {
                 Alert.alert(Const.MSG_PLEASE_TYPE_IN + Const_GM.WIRE_POINT_ID + Const.SIGN_EXCLAMATION_MARK);
                 return false;
             }
             //dgrdvWire内部判断
-            for (int i = 0; i < this.dgrdvWire.RowCount; i++)
+            for (int i = 0; i < dgrdvWire.RowCount; i++)
             {
                 // 最后一行为空行时，跳出循环
                 if (i == dgrdvWire.RowCount - 1)
                 {
                     break;
                 }
-                DataGridViewTextBoxCell cell = dgrdvWire.Rows[i].Cells[0] as DataGridViewTextBoxCell;
+                var cell = dgrdvWire.Rows[i].Cells[0] as DataGridViewTextBoxCell;
                 // 判断导线点编号是否入力
                 if (cell.Value == null)
                 {
@@ -967,25 +711,20 @@ namespace _3.GeologyMeasure
                     Alert.alert(Const_GM.WIRE_POINT_ID + Const.MSG_NOT_NULL + Const.SIGN_EXCLAMATION_MARK);
                     return false;
                 }
-                else
-                {
-                    cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                }
+                cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
 
                 //判断导线点编号是否存在
-                if (this.Text == Const_GM.WIRE_INFO_ADD)
+                if (Text == Const_GM.WIRE_INFO_ADD)
                 {
                     //导线点是否存在
-                    if (new WireInfoBLL().isWirePointExist(dgrdvWire.Rows[i].Cells[0].Value.ToString(), wireInfoEntity.WireInfoId))
+                    if (new WireInfoBLL().isWirePointExist(dgrdvWire.Rows[i].Cells[0].Value.ToString(),
+                        wireInfoEntity.WireInfoId))
                     {
                         cell.Style.BackColor = Const.ERROR_FIELD_COLOR;
                         Alert.alert(Const_GM.WIRE_POINT_ID + Const.MSG_ALREADY_HAVE + Const.SIGN_EXCLAMATION_MARK);
                         return false;
                     }
-                    else
-                    {
-                        cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                    }
+                    cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
                 }
                 //判断导线点编号是否有输入重复
                 for (int j = 0; j < i; j++)
@@ -997,11 +736,8 @@ namespace _3.GeologyMeasure
                         Alert.alert(Const_GM.WIRE_POINT_ID + Const.MSG_DOUBLE_EXISTS + Const.SIGN_EXCLAMATION_MARK);
                         return false;
                     }
-                    else
-                    {
-                        cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                        dgrdvWire[0, j].Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                    }
+                    cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
+                    dgrdvWire[0, j].Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
                 }
 
                 //判断坐标X是否入力
@@ -1012,10 +748,7 @@ namespace _3.GeologyMeasure
                     Alert.alert(Const.rowNotNull(i, Const_GM.X));
                     return false;
                 }
-                else
-                {
-                    cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                }
+                cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
 
                 // 判断坐标X是否为数字
                 if (!Validator.IsNumeric(cell.Value.ToString()))
@@ -1024,10 +757,7 @@ namespace _3.GeologyMeasure
                     Alert.alert(Const.rowMustBeNumber(i, Const_GM.X));
                     return false;
                 }
-                else
-                {
-                    cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                }
+                cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
                 //判断坐标Y是否入力
                 cell = dgrdvWire.Rows[i].Cells[2] as DataGridViewTextBoxCell;
                 if (cell.Value == null)
@@ -1036,10 +766,7 @@ namespace _3.GeologyMeasure
                     Alert.alert(Const.rowNotNull(i, Const_GM.Y));
                     return false;
                 }
-                else
-                {
-                    cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                }
+                cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
 
                 // 判断坐标Y是否为数字
                 if (!Validator.IsNumeric(cell.Value.ToString()))
@@ -1048,10 +775,7 @@ namespace _3.GeologyMeasure
                     Alert.alert(Const.rowMustBeNumber(i, Const_GM.Y));
                     return false;
                 }
-                else
-                {
-                    cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                }
+                cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
                 //判断坐标Z是否入力
                 cell = dgrdvWire.Rows[i].Cells[3] as DataGridViewTextBoxCell;
                 if (cell.Value == null)
@@ -1060,10 +784,7 @@ namespace _3.GeologyMeasure
                     Alert.alert(Const.rowNotNull(i, Const_GM.Z));
                     return false;
                 }
-                else
-                {
-                    cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                }
+                cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
 
                 // 判断坐标Z是否为数字
                 if (!Validator.IsNumeric(cell.Value.ToString()))
@@ -1072,10 +793,7 @@ namespace _3.GeologyMeasure
                     Alert.alert(Const.rowMustBeNumber(i, Const_GM.Z));
                     return false;
                 }
-                else
-                {
-                    cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                }
+                cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
                 //判断距左帮距离是否入力
                 cell = dgrdvWire.Rows[i].Cells[4] as DataGridViewTextBoxCell;
                 if (cell.Value == null)
@@ -1084,10 +802,7 @@ namespace _3.GeologyMeasure
                     Alert.alert(Const.rowNotNull(i, Const_GM.DISTANCE_TO_LEFT));
                     return false;
                 }
-                else
-                {
-                    cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                }
+                cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
 
                 // 判断距左帮距离是否为数字
                 if (!Validator.IsNumeric(cell.Value.ToString()))
@@ -1096,10 +811,7 @@ namespace _3.GeologyMeasure
                     Alert.alert(Const.rowMustBeNumber(i, Const_GM.DISTANCE_TO_LEFT));
                     return false;
                 }
-                else
-                {
-                    cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                }
+                cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
                 //判断距右帮距离是否入力
                 cell = dgrdvWire.Rows[i].Cells[5] as DataGridViewTextBoxCell;
                 if (cell.Value == null)
@@ -1108,10 +820,7 @@ namespace _3.GeologyMeasure
                     Alert.alert(Const.rowNotNull(i, Const_GM.DISTANCE_TO_RIGHT));
                     return false;
                 }
-                else
-                {
-                    cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                }
+                cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
 
                 // 判断距右帮距离是否为数字
                 if (!Validator.IsNumeric(cell.Value.ToString()))
@@ -1120,10 +829,7 @@ namespace _3.GeologyMeasure
                     Alert.alert(Const.rowMustBeNumber(i, Const_GM.DISTANCE_TO_RIGHT));
                     return false;
                 }
-                else
-                {
-                    cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                }
+                cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
                 cell = dgrdvWire.Rows[i].Cells[6] as DataGridViewTextBoxCell;
                 // 判断距顶板距离是否为数字
                 if (cell.Value != null && !Validator.IsNumeric(cell.Value.ToString()))
@@ -1132,10 +838,7 @@ namespace _3.GeologyMeasure
                     Alert.alert(Const.rowMustBeNumber(i, Const_GM.DISTANCE_TO_TOP));
                     return false;
                 }
-                else
-                {
-                    cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                }
+                cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
                 cell = dgrdvWire.Rows[i].Cells[7] as DataGridViewTextBoxCell;
                 // 判断距底板距离是否为数字
                 if (cell.Value != null && !Validator.IsNumeric(cell.Value.ToString()))
@@ -1144,180 +847,47 @@ namespace _3.GeologyMeasure
                     Alert.alert(Const.rowMustBeNumber(i, Const_GM.DISTANCE_TO_BOTTOM));
                     return false;
                 }
-                else
-                {
-                    cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                }
+                cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
             }
             //验证成功
             return true;
         }
 
-        #region ******datagridview鼠标拖动排序******
-        int selectionIdx = -1;
-        DataGridViewRow nr = new DataGridViewRow();
-        DataGridViewRow ddr = new DataGridViewRow();
-        private void dgrdvWire_SelectionChanged(object sender, EventArgs e)
-        {
-            if (dgrdvWire.Rows.Count <= selectionIdx)
-            {
-                selectionIdx = dgrdvWire.Rows.Count - 1;
-                dgrdvWire.Rows[selectionIdx].Selected = true;
-            }
-        }
-
-        private void dgrdvWire_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                selectionIdx = e.RowIndex;
-                nr = dgrdvWire.Rows[selectionIdx];
-            }
-            //上移按钮可用性
-            if (e.RowIndex <= 0)
-            {
-                上移ToolStripMenuItem.Enabled = false;
-            }
-            else
-            {
-                上移ToolStripMenuItem.Enabled = true;
-            }
-            //下移按钮可用性
-            if (e.RowIndex >= dgrdvWire.Rows.Count - 1)
-            {
-                下移ToolStripMenuItem.Enabled = false;
-            }
-            else
-            {
-                下移ToolStripMenuItem.Enabled = true;
-            }
-            //剪切时粘贴后粘贴按钮消失
-            if (doing == 0)
-            {
-                粘贴ToolStripMenuItem.Visible = false;
-            }
-            //复制时粘贴按钮不消失
-            else
-            {
-                粘贴ToolStripMenuItem.Visible = true;
-            }
-            if (e.RowIndex > -1)
-            {
-                if (e.Button == MouseButtons.Right)
-                {
-                    dgrdvWire.Rows[e.RowIndex].Selected = true;
-                }
-                if (dgrdvWire[0, e.RowIndex].Value == null &&
-                    dgrdvWire[1, e.RowIndex].Value == null &&
-                    dgrdvWire[2, e.RowIndex].Value == null &&
-                    dgrdvWire[3, e.RowIndex].Value == null &&
-                    dgrdvWire[4, e.RowIndex].Value == null &&
-                    dgrdvWire[5, e.RowIndex].Value == null &&
-                    dgrdvWire[6, e.RowIndex].Value == null &&
-                    dgrdvWire[7, e.RowIndex].Value == null)
-                {
-                    this.剪切ToolStripMenuItem.Enabled = false;
-                    this.复制ToolStripMenuItem.Enabled = false;
-                    this.上移ToolStripMenuItem.Enabled = false;
-                    this.下移ToolStripMenuItem.Enabled = false;
-                }
-                else
-                {
-                    this.剪切ToolStripMenuItem.Enabled = true;
-                    this.复制ToolStripMenuItem.Enabled = true;
-                    this.上移ToolStripMenuItem.Enabled = true;
-                    this.下移ToolStripMenuItem.Enabled = true;
-                }
-            }
-            else
-            {
-                this.插入ToolStripMenuItem.Enabled = false;
-                this.剪切ToolStripMenuItem.Enabled = false;
-                this.复制ToolStripMenuItem.Enabled = false;
-                this.上移ToolStripMenuItem.Enabled = false;
-                this.下移ToolStripMenuItem.Enabled = false;
-                this.粘贴ToolStripMenuItem.Enabled = false;
-            }
-        }
-
-        private void dgrdvWire_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            if ((e.Clicks < 2) && (e.Button == MouseButtons.Left))
-            {
-                if ((e.ColumnIndex == -1) && (e.RowIndex > -1))
-                    dgrdvWire.DoDragDrop(dgrdvWire.Rows[e.RowIndex], DragDropEffects.Move);
-            }
-        }
-
-        private void dgrdvWire_DragDrop(object sender, DragEventArgs e)
-        {
-            int idx = GetRowFromPoint(e.X, e.Y);
-            if (idx < 0) return;
-
-            if (e.Data.GetDataPresent(typeof(DataGridViewRow)))
-            {
-                DataGridViewRow row = (DataGridViewRow)e.Data.GetData(typeof(DataGridViewRow));
-                ddr = dgrdvWire.Rows[idx];
-                dgrdvWire.Rows.RemoveAt(selectionIdx);
-                dgrdvWire.Rows.Insert(idx, nr);
-                dgrdvWire.ClearSelection();
-            }
-
-        }
-
-        private void dgrdvWire_DragEnter(object sender, DragEventArgs e)
-        {
-            e.Effect = DragDropEffects.Move;
-        }
         /// <summary>
-        /// 鼠标落点获取行号
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
-        private int GetRowFromPoint(int x, int y)
-        {
-            for (int i = 0; i < dgrdvWire.RowCount; i++)
-            {
-                Rectangle rec = dgrdvWire.GetRowDisplayRectangle(i, false);
-
-                if (dgrdvWire.RectangleToScreen(rec).Contains(x, y))
-                    return i;
-            }
-
-            return -1;
-        }
-        #endregion
-        /// <summary>
-        /// 添加自动转变修改
+        ///     添加自动转变修改
         /// </summary>
         /// <returns>是否转变</returns>
         private bool AutoChangeWireName()
         {
-            DataSet ds = new DataSet();
+            var ds = new DataSet();
             //获取巷道ID
             tunnelEntity.TunnelId = selectTunnelUserControl1.ITunnelId;
             //获取巷道对应导线信息
             ds = WireInfoBLL.selectAllWireInfo(tunnelEntity);
             if (ds.Tables[0].Rows.Count > 0)
             {
-                if (Convert.ToString(ds.Tables[0].Rows[0][WireInfoDbConstNames.WIRE_NAME]) != txtWireName.Text && this.Text == Const_GM.WIRE_INFO_ADD)
+                if (Convert.ToString(ds.Tables[0].Rows[0][WireInfoDbConstNames.WIRE_NAME]) != txtWireName.Text &&
+                    Text == Const_GM.WIRE_INFO_ADD)
                 {
                     //所选巷道已绑定导线，是否跳转到修改导线
-                    if (Alert.confirm(Const_GM.TUNNEL_CHOOSE_FIRST + Convert.ToString(ds.Tables[0].Rows[0][WireInfoDbConstNames.WIRE_NAME]) +
-                        Const_GM.TUNNEL_CHOOSE_MIDDLE + Convert.ToString(ds.Tables[0].Rows[0][WireInfoDbConstNames.WIRE_NAME]) + Const_GM.TUNNEL_CHOOSE_LAST))
+                    if (
+                        Alert.confirm(Const_GM.TUNNEL_CHOOSE_FIRST +
+                                      Convert.ToString(ds.Tables[0].Rows[0][WireInfoDbConstNames.WIRE_NAME]) +
+                                      Const_GM.TUNNEL_CHOOSE_MIDDLE +
+                                      Convert.ToString(ds.Tables[0].Rows[0][WireInfoDbConstNames.WIRE_NAME]) +
+                                      Const_GM.TUNNEL_CHOOSE_LAST))
                     {
                         //窗体名称改为修改巷道
-                        this.Text = Const_GM.WIRE_INFO_CHANGE;
-                        _tunnelID = this.selectTunnelUserControl1.ITunnelId;
+                        Text = Const_GM.WIRE_INFO_CHANGE;
+                        _tunnelID = selectTunnelUserControl1.ITunnelId;
                         //绑定信息
                         txtWireName.Text = Convert.ToString(ds.Tables[0].Rows[0][WireInfoDbConstNames.WIRE_NAME]);
-                        this.txtWireLevel.Text = Convert.ToString(ds.Tables[0].Rows[0][WireInfoDbConstNames.WIRE_LEVEL]);
-                        this.cboVobserver.Text = Convert.ToString(ds.Tables[0].Rows[0][WireInfoDbConstNames.VOBSERVER]);
-                        this.cboCounter.Text = Convert.ToString(ds.Tables[0].Rows[0][WireInfoDbConstNames.COUNTER]);
-                        this.cboChecker.Text = Convert.ToString(ds.Tables[0].Rows[0][WireInfoDbConstNames.CHECKER]);
+                        txtWireLevel.Text = Convert.ToString(ds.Tables[0].Rows[0][WireInfoDbConstNames.WIRE_LEVEL]);
+                        cboVobserver.Text = Convert.ToString(ds.Tables[0].Rows[0][WireInfoDbConstNames.VOBSERVER]);
+                        cboCounter.Text = Convert.ToString(ds.Tables[0].Rows[0][WireInfoDbConstNames.COUNTER]);
+                        cboChecker.Text = Convert.ToString(ds.Tables[0].Rows[0][WireInfoDbConstNames.CHECKER]);
 
-                        DataGridViewRow[] dgvr = new DataGridViewRow[dgrdvWire.Rows.Count - 1];
+                        var dgvr = new DataGridViewRow[dgrdvWire.Rows.Count - 1];
                         for (int i = 0; i < dgrdvWire.Rows.Count - 1; i++)
                         {
                             dgvr[i] = dgrdvWire.Rows[i];
@@ -1326,7 +896,9 @@ namespace _3.GeologyMeasure
                         //巷道信息
                         tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(tunnelEntity.TunnelId);
                         //导线ID
-                        wireInfoEntity.WireInfoId = Convert.ToInt32(WireInfoBLL.selectAllWireInfo(tunnelEntity).Tables[0].Rows[0][WireInfoDbConstNames.ID]);
+                        wireInfoEntity.WireInfoId =
+                            Convert.ToInt32(
+                                WireInfoBLL.selectAllWireInfo(tunnelEntity).Tables[0].Rows[0][WireInfoDbConstNames.ID]);
                         //导线信息
                         wireInfoEntity = WireInfoBLL.selectAllWireInfo(wireInfoEntity.WireInfoId);
                         _arr[0] = tunnelEntity.WorkingFace.MiningArea.Horizontal.Mine.MineId;
@@ -1343,7 +915,7 @@ namespace _3.GeologyMeasure
                             selectionIdx = dgrdvWire.CurrentRow.Index;
                         }
                     }
-                    //巷道已绑定导线，请重新选择巷道
+                        //巷道已绑定导线，请重新选择巷道
                     else
                     {
                         Alert.alert(Const_GM.WIRE_INFO_MSG_TUNNEL_ALREADY_BIND_WIRE);
@@ -1356,7 +928,7 @@ namespace _3.GeologyMeasure
         }
 
         /// <summary>
-        /// 右键插入
+        ///     右键插入
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1366,7 +938,7 @@ namespace _3.GeologyMeasure
         }
 
         /// <summary>
-        /// 右键复制
+        ///     右键复制
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1382,7 +954,7 @@ namespace _3.GeologyMeasure
         }
 
         /// <summary>
-        /// 右键剪切
+        ///     右键剪切
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1398,7 +970,7 @@ namespace _3.GeologyMeasure
         }
 
         /// <summary>
-        /// 右键粘贴
+        ///     右键粘贴
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1420,13 +992,13 @@ namespace _3.GeologyMeasure
         }
 
         /// <summary>
-        /// 右键上移
+        ///     右键上移
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void 上移ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DataGridViewRow dgvr = new DataGridViewRow();
+            var dgvr = new DataGridViewRow();
             dgvr = dgrdvWire.Rows[selectionIdx];
             dgrdvWire.Rows.RemoveAt(selectionIdx);
             dgrdvWire.Rows.Insert(selectionIdx - 1, dgvr);
@@ -1434,13 +1006,13 @@ namespace _3.GeologyMeasure
         }
 
         /// <summary>
-        /// 右键下移
+        ///     右键下移
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void 下移ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DataGridViewRow dgvr = new DataGridViewRow();
+            var dgvr = new DataGridViewRow();
             dgvr = dgrdvWire.Rows[selectionIdx];
             dgrdvWire.Rows.RemoveAt(selectionIdx);
             dgrdvWire.Rows.Insert(selectionIdx + 1, dgvr);
@@ -1448,13 +1020,13 @@ namespace _3.GeologyMeasure
         }
 
         /// <summary>
-        /// 显示行号
+        ///     显示行号
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void dgrdvWire_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            System.Drawing.Rectangle rectangle = new System.Drawing.Rectangle(e.RowBounds.Location.X,
+            var rectangle = new Rectangle(e.RowBounds.Location.X,
                 e.RowBounds.Location.Y, dgrdvWire.RowHeadersWidth - 4, e.RowBounds.Height);
 
             TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
@@ -1464,20 +1036,20 @@ namespace _3.GeologyMeasure
         }
 
         /// <summary>
-        /// 初始化
+        ///     初始化
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void WireInfoEntering_Load(object sender, EventArgs e)
         {
-            if (this.Text == Const_GM.WIRE_INFO_ADD)
+            if (Text == Const_GM.WIRE_INFO_ADD)
             {
                 addInfo();
             }
         }
 
         /// <summary>
-        /// 添加
+        ///     添加
         /// </summary>
         private void addInfo()
         {
@@ -1488,13 +1060,13 @@ namespace _3.GeologyMeasure
         }
 
         /// <summary>
-        /// combobox绑定
+        ///     combobox绑定
         /// </summary>
         private void bindNames()
         {
-            DataSet ds = new DataSet();
-            DataSet ds2 = new DataSet();
-            DataSet ds3 = new DataSet();
+            var ds = new DataSet();
+            var ds2 = new DataSet();
+            var ds3 = new DataSet();
             ds = UserInformationDetailsManagementBLL.GetUserInformationDetailsDS();
             ds2 = UserInformationDetailsManagementBLL.GetUserInformationDetailsDS();
             ds3 = UserInformationDetailsManagementBLL.GetUserInformationDetailsDS();
@@ -1513,7 +1085,7 @@ namespace _3.GeologyMeasure
         }
 
         /// <summary>
-        /// datagridview进入行时，按钮可操作性
+        ///     datagridview进入行时，按钮可操作性
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1531,10 +1103,7 @@ namespace _3.GeologyMeasure
                     btnPaste.Enabled = true;
                     break;
                 }
-                else
-                {
-                    btnPaste.Enabled = false;
-                }
+                btnPaste.Enabled = false;
             }
             if (e.RowIndex == 0)
             {
@@ -1577,7 +1146,7 @@ namespace _3.GeologyMeasure
         }
 
         /// <summary>
-        /// 复制按钮
+        ///     复制按钮
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1592,7 +1161,7 @@ namespace _3.GeologyMeasure
         }
 
         /// <summary>
-        /// 粘贴按钮
+        ///     粘贴按钮
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1602,7 +1171,7 @@ namespace _3.GeologyMeasure
         }
 
         /// <summary>
-        /// 添加按钮
+        ///     添加按钮
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1614,7 +1183,7 @@ namespace _3.GeologyMeasure
         }
 
         /// <summary>
-        /// 删除按钮
+        ///     删除按钮
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1625,7 +1194,7 @@ namespace _3.GeologyMeasure
         }
 
         /// <summary>
-        /// 上移按钮
+        ///     上移按钮
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1645,7 +1214,7 @@ namespace _3.GeologyMeasure
                 _tmpRowIndex = dgrdvWire.SelectedRows[0].Index;
             }
 
-            DataGridViewRow dgvr = new DataGridViewRow();
+            var dgvr = new DataGridViewRow();
             dgvr = dgrdvWire.Rows[_tmpRowIndex];
             dgrdvWire.Rows.RemoveAt(_tmpRowIndex);
 
@@ -1665,14 +1234,14 @@ namespace _3.GeologyMeasure
         }
 
         /// <summary>
-        /// 下移按钮
+        ///     下移按钮
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnMoveDown_Click(object sender, EventArgs e)
         {
             _tmpRowIndex = dgrdvWire.SelectedRows[0].Index;
-            DataGridViewRow dgvr = new DataGridViewRow();
+            var dgvr = new DataGridViewRow();
             dgvr = dgrdvWire.Rows[_tmpRowIndex];
             dgrdvWire.Rows.RemoveAt(_tmpRowIndex);
             dgrdvWire.Rows[_tmpRowIndex].Selected = true;
@@ -1684,7 +1253,7 @@ namespace _3.GeologyMeasure
 
         private void btnTXT_Click(object sender, EventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
+            var ofd = new OpenFileDialog();
             ofd.InitialDirectory = @"C:\Users\happybai\Desktop\巷道录入（11.06）";
             ofd.RestoreDirectory = true;
             ofd.Filter = "文本文件(*.txt)|*.txt|所有文件(*.*)|*.*";
@@ -1696,7 +1265,7 @@ namespace _3.GeologyMeasure
                 string caiqu = temp[0];
                 string hangname = temp[1];
                 txtWireName.Text = hangname.Split('.').Length > 0 ? hangname.Split('.')[0] + "导线点" : hangname + "导线点";
-                StreamReader sr = new StreamReader(@aa, Encoding.GetEncoding("GB2312"));
+                var sr = new StreamReader(@aa, Encoding.GetEncoding("GB2312"));
                 string duqu;
                 while ((duqu = sr.ReadLine()) != null)
                 {
@@ -1712,9 +1281,400 @@ namespace _3.GeologyMeasure
                     dgrdvWire[4, dgrdvWire.Rows.Count - 2].Value = "2.5";
                     dgrdvWire[5, dgrdvWire.Rows.Count - 2].Value = "2.5";
                 }
+            }
+        }
 
+        #region ******datagridview鼠标拖动排序******
+
+        private DataGridViewRow ddr = new DataGridViewRow();
+        private DataGridViewRow nr = new DataGridViewRow();
+        private int selectionIdx = -1;
+
+        private void dgrdvWire_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgrdvWire.Rows.Count <= selectionIdx)
+            {
+                selectionIdx = dgrdvWire.Rows.Count - 1;
+                dgrdvWire.Rows[selectionIdx].Selected = true;
+            }
+        }
+
+        private void dgrdvWire_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                selectionIdx = e.RowIndex;
+                nr = dgrdvWire.Rows[selectionIdx];
+            }
+            //上移按钮可用性
+            if (e.RowIndex <= 0)
+            {
+                上移ToolStripMenuItem.Enabled = false;
+            }
+            else
+            {
+                上移ToolStripMenuItem.Enabled = true;
+            }
+            //下移按钮可用性
+            if (e.RowIndex >= dgrdvWire.Rows.Count - 1)
+            {
+                下移ToolStripMenuItem.Enabled = false;
+            }
+            else
+            {
+                下移ToolStripMenuItem.Enabled = true;
+            }
+            //剪切时粘贴后粘贴按钮消失
+            if (doing == 0)
+            {
+                粘贴ToolStripMenuItem.Visible = false;
+            }
+                //复制时粘贴按钮不消失
+            else
+            {
+                粘贴ToolStripMenuItem.Visible = true;
+            }
+            if (e.RowIndex > -1)
+            {
+                if (e.Button == MouseButtons.Right)
+                {
+                    dgrdvWire.Rows[e.RowIndex].Selected = true;
+                }
+                if (dgrdvWire[0, e.RowIndex].Value == null &&
+                    dgrdvWire[1, e.RowIndex].Value == null &&
+                    dgrdvWire[2, e.RowIndex].Value == null &&
+                    dgrdvWire[3, e.RowIndex].Value == null &&
+                    dgrdvWire[4, e.RowIndex].Value == null &&
+                    dgrdvWire[5, e.RowIndex].Value == null &&
+                    dgrdvWire[6, e.RowIndex].Value == null &&
+                    dgrdvWire[7, e.RowIndex].Value == null)
+                {
+                    剪切ToolStripMenuItem.Enabled = false;
+                    复制ToolStripMenuItem.Enabled = false;
+                    上移ToolStripMenuItem.Enabled = false;
+                    下移ToolStripMenuItem.Enabled = false;
+                }
+                else
+                {
+                    剪切ToolStripMenuItem.Enabled = true;
+                    复制ToolStripMenuItem.Enabled = true;
+                    上移ToolStripMenuItem.Enabled = true;
+                    下移ToolStripMenuItem.Enabled = true;
+                }
+            }
+            else
+            {
+                插入ToolStripMenuItem.Enabled = false;
+                剪切ToolStripMenuItem.Enabled = false;
+                复制ToolStripMenuItem.Enabled = false;
+                上移ToolStripMenuItem.Enabled = false;
+                下移ToolStripMenuItem.Enabled = false;
+                粘贴ToolStripMenuItem.Enabled = false;
+            }
+        }
+
+        private void dgrdvWire_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if ((e.Clicks < 2) && (e.Button == MouseButtons.Left))
+            {
+                if ((e.ColumnIndex == -1) && (e.RowIndex > -1))
+                    dgrdvWire.DoDragDrop(dgrdvWire.Rows[e.RowIndex], DragDropEffects.Move);
+            }
+        }
+
+        private void dgrdvWire_DragDrop(object sender, DragEventArgs e)
+        {
+            int idx = GetRowFromPoint(e.X, e.Y);
+            if (idx < 0) return;
+
+            if (e.Data.GetDataPresent(typeof (DataGridViewRow)))
+            {
+                var row = (DataGridViewRow) e.Data.GetData(typeof (DataGridViewRow));
+                ddr = dgrdvWire.Rows[idx];
+                dgrdvWire.Rows.RemoveAt(selectionIdx);
+                dgrdvWire.Rows.Insert(idx, nr);
+                dgrdvWire.ClearSelection();
+            }
+        }
+
+        private void dgrdvWire_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+        }
+
+        /// <summary>
+        ///     鼠标落点获取行号
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        private int GetRowFromPoint(int x, int y)
+        {
+            for (int i = 0; i < dgrdvWire.RowCount; i++)
+            {
+                Rectangle rec = dgrdvWire.GetRowDisplayRectangle(i, false);
+
+                if (dgrdvWire.RectangleToScreen(rec).Contains(x, y))
+                    return i;
             }
 
+            return -1;
         }
+
+        #endregion
+
+        #region 绘制导线点和巷道图形
+
+        private Dictionary<string, string> dics = new Dictionary<string, string>(); //属性字典
+        private List<IPoint> dpts = new List<IPoint>();
+        private List<IPoint> leftpts = new List<IPoint>(); //记录左侧平行线坐标
+        private List<IPoint> rightpts = new List<IPoint>(); //记录右侧平行线坐标
+
+        /// <summary>
+        ///     通过（关键/导线）点绘制巷道
+        /// </summary>
+        /// <param name="wirepntcols">导线信息列表</param>
+        /// <param name="dics">巷道属性</param>
+        /// <param name="hdwid">巷道宽度</param>
+        private void AddHdbyPnts(List<WirePointInfo> wirepntcols, Dictionary<string, string> dics, double hdwid)
+        {
+            List<IPoint> rightresults = null;
+            List<IPoint> leftresults = null;
+            List<IPoint> results = null;
+
+            if (wirepntcols == null || wirepntcols.Count == 0)
+                return;
+
+            var pntcols = new List<IPoint>();
+            for (int i = 0; i < wirepntcols.Count; i++)
+            {
+                IPoint pnt = new PointClass();
+                pnt.X = wirepntcols[i].CoordinateX;
+                pnt.Y = wirepntcols[i].CoordinateY;
+                pnt.Z = wirepntcols[i].CoordinateZ;
+                pntcols.Add(pnt);
+            }
+
+            Global.cons.AddHangdaoToLayer(pntcols, dics, Global.pntlyr, wirepntcols); //添加中线上的点到导线点图层中
+            Global.cons.AddDxdLines(pntcols, dics, Global.pntlinlyr, wirepntcols); //添加导线点线图层符号
+            Global.cons.AddHangdaoToLayer(pntcols, dics, Global.centerlyr); //添加中心线到线图层中
+            Global.cons.AddFDLineToLayer(pntcols, dics, Global.centerfdlyr, 1); //添加分段中心线到中心线分段图层中
+
+            //#################计算交点坐标######################
+            rightpts = Global.cons.GetLRParallelPnts(pntcols, hdwid, 1); //右侧平行线上的端点串
+            leftpts = Global.cons.GetLRParallelPnts(pntcols, hdwid, 0); //左侧平行线上的端点串
+
+            //rightresults = Global.cons.CalculateRegPnts(rightpts);
+            //leftresults = Global.cons.CalculateRegPnts(leftpts);
+            //results = Global.cons.ConstructPnts(rightresults, leftresults);
+            results = Global.cons.ConstructPnts(rightpts, leftpts);
+
+            ////在巷道面显示面中绘制巷道面  
+            Global.cons.AddHangdaoToLayer(results, dics, Global.hdfdfulllyr); //添加巷道到巷道图层中
+            //Global.cons.AddFDRegToLayer(rightresults, leftresults, pntcols, dics, Global.hdfdlyr);
+            //Global.cons.AddHangdaoToLayer(rightpts, dics, Global.pntlyr);
+            //Global.cons.AddHangdaoToLayer(leftpts, dics, Global.pntlyr);
+            Global.cons.AddFDRegToLayer(rightpts, leftpts, pntcols, dics, Global.hdfdlyr, hdwid);
+            Global.pActiveView.Refresh();
+        }
+
+        /// <summary>
+        ///     更新巷道
+        /// </summary>
+        /// <param name="wirepntcols"></param>
+        /// <param name="dics"></param>
+        private void UpdateHdbyPnts(List<WirePointInfo> wirepntcols, Dictionary<string, string> dics, double hdwid)
+        {
+            List<IPoint> rightresults = null;
+            List<IPoint> leftresults = null;
+            List<IPoint> results = null;
+
+            if (wirepntcols == null || wirepntcols.Count == 0)
+                return;
+
+            var pntcols = new List<IPoint>();
+            for (int i = 0; i < wirepntcols.Count; i++)
+            {
+                IPoint pnt = new PointClass();
+                pnt.X = wirepntcols[i].CoordinateX;
+                pnt.Y = wirepntcols[i].CoordinateY;
+                pnt.Z = wirepntcols[i].CoordinateZ;
+                pntcols.Add(pnt);
+            }
+            //清除图层上对应的信息
+            string sql = "\"" + GIS_Const.FIELD_HDID + "\"='" + wireInfoEntity.Tunnel + "'";
+            Global.commonclss.DelFeatures(Global.pntlyr, sql);
+            Global.commonclss.DelFeatures(Global.pntlinlyr, sql);
+            Global.commonclss.DelFeatures(Global.centerlyr, sql);
+            Global.commonclss.DelFeatures(Global.centerfdlyr, sql);
+            Global.commonclss.DelFeatures(Global.hdfdfulllyr, sql);
+            Global.commonclss.DelFeatures(Global.hdfdlyr, sql);
+            Global.commonclss.DelFeatures(Global.dslyr, sql);
+            //Global.commonclss.DelFeaturesByQueryFilter(Global.pntlyr, sql);
+            //Global.commonclss.DelFeaturesByQueryFilter(Global.pntlinlyr, sql);
+            //Global.commonclss.DelFeaturesByQueryFilter(Global.centerlyr, sql);
+            //Global.commonclss.DelFeaturesByQueryFilter(Global.centerfdlyr, sql);
+            //Global.commonclss.DelFeaturesByQueryFilter(Global.hdfdfulllyr, sql);
+            //Global.commonclss.DelFeaturesByQueryFilter(Global.hdfdlyr, sql);
+            //Global.commonclss.DelFeaturesByQueryFilter(Global.dslyr, sql);
+            //重新添加
+            Global.cons.AddHangdaoToLayer(pntcols, dics, Global.pntlyr, wirepntcols); //添加中线上的点到导线点图层中
+            Global.cons.AddDxdLines(pntcols, dics, Global.pntlinlyr, wirepntcols); //添加导线点线
+            Global.cons.AddHangdaoToLayer(pntcols, dics, Global.centerlyr); //添加中心线到线图层中
+            Global.cons.AddFDLineToLayer(pntcols, dics, Global.centerfdlyr, 1); //添加分段中心线到中心线分段图层中
+            //#################计算交点坐标######################
+            rightpts = Global.cons.GetLRParallelPnts(pntcols, hdwid, 1); //右侧平行线上的端点串
+            leftpts = Global.cons.GetLRParallelPnts(pntcols, hdwid, 0); //左侧平行线上的端点串
+            //rightresults = Global.cons.CalculateRegPnts(rightpts);
+            //leftresults = Global.cons.CalculateRegPnts(leftpts);
+            //results = Global.cons.ConstructPnts(rightresults, leftresults);
+            //Global.cons.AddHangdaoToLayer(rightpts, dics, Global.pntlyr);
+            //Global.cons.AddHangdaoToLayer(leftpts, dics, Global.pntlyr);
+            results = Global.cons.ConstructPnts(rightpts, leftpts);
+            //在巷道面显示面中绘制巷道面  
+            //Global.cons.AddHangdaoToLayer(rightpts, dics, Global.pntlyr);
+            //Global.cons.AddHangdaoToLayer(leftpts, dics, Global.pntlyr);
+            Global.cons.AddHangdaoToLayer(results, dics, Global.hdfdfulllyr); //添加巷道到巷道图层中
+            //Global.cons.AddFDRegToLayer(rightresults, leftresults, pntcols, dics, Global.hdfdlyr);
+            Global.cons.AddFDRegToLayer(rightpts, leftpts, pntcols, dics, Global.hdfdlyr, hdwid);
+            Global.pActiveView.Refresh();
+        }
+
+        /// <summary>
+        ///     根据坐标绘制导线点
+        /// </summary>
+        /// <param name="lstWPIE">导线坐标（List）</param>
+        private void DrawWirePoint(List<WirePointInfo> lstWPIE, string addOrChange)
+        {
+            var wirePtInfo = new WirePointInfo();
+            IPoint pt = new Point();
+
+            //找到导线点图层
+            IMap map = new MapClass();
+            map = DataEditCommon.g_pMap;
+            string layerName = LayerNames.DEFALUT_WIRE_PT; //“默认_导线点”图层
+            IFeatureLayer featureLayer = new FeatureLayerClass();
+            featureLayer = LayerHelper.GetLayerByName(map, layerName); ///获得图层
+
+            if (featureLayer == null)
+            {
+                MessageBox.Show("没有找到" + layerName + "图层，将不能绘制导线点。", "提示", MessageBoxButtons.OK);
+                return;
+            }
+
+            var drawWirePt = new DrawTunnels();
+            //修改导线点操作，要先删除原有导线点要素
+            if (addOrChange == "CHANGE")
+            {
+                for (int i = 0; i < lstWPIE.Count; i++)
+                {
+                    wirePtInfo = lstWPIE[i];
+                    DataEditCommon.DeleteFeatureByBId(featureLayer, wirePtInfo.BindingId);
+                }
+            }
+
+            for (int i = 0; i < lstWPIE.Count; i++)
+            {
+                wirePtInfo = lstWPIE[i];
+                pt.X = wirePtInfo.CoordinateX;
+                pt.Y = wirePtInfo.CoordinateY;
+                pt.Z = wirePtInfo.CoordinateZ;
+
+                drawWirePt.CreatePoint(featureLayer, pt, wirePtInfo.BindingId); ///绘制点
+            }
+        }
+
+        /// <summary>
+        ///     根据导线点坐标绘制巷道
+        /// </summary>
+        /// <param name="lstWPIE"></param>
+        private void DrawTunnel(List<WirePointInfo> lstWPIE, string addOrChange)
+        {
+            ///根据导线点计算巷道边线点
+            WirePointInfo[] arrayWPtInfo = {};
+            arrayWPtInfo = lstWPIE.ToArray();
+            Vector3_DW[] verticesLeftBtmRet = null;
+            Vector3_DW[] verticesRightBtmRet = null;
+
+            var tunnelPtsCal = new TunnelPointsCalculation();
+            bool isCalSuccess = tunnelPtsCal.CalcLeftAndRightVertics(arrayWPtInfo, ref verticesLeftBtmRet,
+                ref verticesRightBtmRet);
+
+            if (!isCalSuccess)
+            {
+                MessageBox.Show("根据导线点计算巷道未成功！");
+            }
+            else
+            {
+                //找到巷道图层
+                IMap map = new MapClass();
+                map = DataEditCommon.g_pMap;
+                string layerName = LayerNames.DEFALUT_TUNNEL; //“默认_巷道”图层
+                IFeatureLayer featureLayer = new FeatureLayerClass();
+                featureLayer = LayerHelper.GetLayerByName(map, layerName); //获得图层
+
+                if (featureLayer == null)
+                {
+                    MessageBox.Show("没有找到" + layerName + "图层，将不能绘制巷道。", "提示", MessageBoxButtons.OK);
+                    return;
+                }
+
+                var drawWirePt = new DrawTunnels();
+                //修改导线点操作，要先删除依据原有导线点所生成的巷道要素
+                if (addOrChange == "CHANGE")
+                {
+                    DataEditCommon.DeleteFeatureByBId(featureLayer, _tunnelID.ToString());
+                }
+
+                //绘制巷道左边线
+                var lstLeftBtmRet = new List<IPoint>();
+                lstLeftBtmRet = GetTunnelPts(verticesLeftBtmRet);
+
+                if (lstLeftBtmRet == null) return;
+
+                drawWirePt.CreateLine(featureLayer, lstLeftBtmRet, _tunnelID);
+
+                //绘制巷道右边线
+                var lstRightBtmRet = new List<IPoint>();
+                lstRightBtmRet = GetTunnelPts(verticesRightBtmRet);
+                drawWirePt.CreateLine(featureLayer, lstRightBtmRet, _tunnelID);
+            }
+        }
+
+        /// <summary>
+        ///     获得导线边线点坐标集
+        /// </summary>
+        /// <param name="verticesBtmRet">Vector3_DW数据</param>
+        /// <returns>导线边线点坐标集List</returns>
+        private List<IPoint> GetTunnelPts(Vector3_DW[] verticesBtmRet)
+        {
+            var lstBtmRet = new List<IPoint>();
+            try
+            {
+                Vector3_DW vector3dw;
+                IPoint pt;
+                for (int i = 0; i < verticesBtmRet.Length; i++)
+                {
+                    vector3dw = new Vector3_DW();
+                    vector3dw = verticesBtmRet[i];
+                    pt = new PointClass();
+                    pt.X = vector3dw.X;
+                    pt.Y = vector3dw.Y;
+                    pt.Z = vector3dw.Z;
+                    if (!lstBtmRet.Contains(pt))
+                    {
+                        lstBtmRet.Add(pt);
+                    }
+                }
+
+                return lstBtmRet;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        #endregion 绘制导线点和巷道图形
     }
 }

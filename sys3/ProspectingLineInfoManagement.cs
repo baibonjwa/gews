@@ -113,7 +113,10 @@ namespace sys3
         /// <param name="e"></param>
         private void tsBtnExport_Click(object sender, EventArgs e)
         {
-
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                gcProspectingLine.ExportToXls(saveFileDialog1.FileName);
+            }
         }
 
         /// <summary>
@@ -123,7 +126,7 @@ namespace sys3
         /// <param name="e"></param>
         private void tsBtnPrint_Click(object sender, EventArgs e)
         {
-
+            DevUtil.DevPrint(gcProspectingLine, "勘探线信息报表");
         }
 
         /// <summary>
@@ -133,7 +136,7 @@ namespace sys3
         /// <param name="e"></param>
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-
+            RefreshData();
         }
 
 
@@ -183,6 +186,11 @@ namespace sys3
             {
                 Alert.alert("图元丢失");
             }
+        }
+
+        private void ProspectingLineInfoManagement_Load(object sender, EventArgs e)
+        {
+            RefreshData();
         }
     }
 
