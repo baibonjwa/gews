@@ -28,8 +28,8 @@ namespace _3.GeologyMeasure
         int _tmpRowIndex = -1;
         int _itemCount = 0;
         Tunnel _tunnelEntity = new Tunnel();
-        WireInfo wireInfoEntity = new WireInfo();
-        WirePointInfo[] wpiEntity;
+        Wire wireEntity = new Wire();
+        WirePoint[] wpiEntity;
         int[] _arr = new int[5];
         DataSet _dsWirePoint = new DataSet();
         int _tunnelID;
@@ -119,24 +119,18 @@ namespace _3.GeologyMeasure
                     Alert.alert(Const_GM.WIRE_POINT_ID + Const.MSG_NOT_NULL + Const.SIGN_EXCLAMATION_MARK);
                     return false;
                 }
-                else
-                {
-                    cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                }
+                cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
                 //判断导线点编号是否存在
                 if (this.Text == Const_GM.WIRE_INFO_ADD)
                 {
                     //导线点是否存在
-                    if (new WireInfoBLL().isWirePointExist(dgrdvWire.Rows[i].Cells[0].Value.ToString(), wireInfoEntity.WireInfoId))
+                    if (WirePoint.ExistsByWirePointIdInWireInfo(wireEntity.WireInfoId, dgrdvWire.Rows[i].Cells[0].Value.ToString()))
                     {
                         cell.Style.BackColor = Const.ERROR_FIELD_COLOR;
                         Alert.alert(Const_GM.WIRE_POINT_ID + Const.MSG_ALREADY_HAVE + Const.SIGN_EXCLAMATION_MARK);
                         return false;
                     }
-                    else
-                    {
-                        cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                    }
+                    cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
                 }
                 //判断导线点编号是否有输入重复
                 for (int j = 0; j < i; j++)
@@ -148,11 +142,8 @@ namespace _3.GeologyMeasure
                         Alert.alert(Const_GM.WIRE_POINT_ID + Const.MSG_DOUBLE_EXISTS + Const.SIGN_EXCLAMATION_MARK);
                         return false;
                     }
-                    else
-                    {
-                        cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                        dgrdvWire[0, j].Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                    }
+                    cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
+                    dgrdvWire[0, j].Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
                 }
 
                 //判断坐标X是否入力
@@ -452,7 +443,7 @@ namespace _3.GeologyMeasure
                         GeoStruct tmp = geoinfos[i];
 
                         GeologySpace geologyspaceEntity = new GeologySpace();
-                        geologyspaceEntity.WorkingFace =  workingFace;
+                        geologyspaceEntity.WorkingFace = workingFace;
                         geologyspaceEntity.TectonicType = Convert.ToInt32(key);
                         geologyspaceEntity.TectonicId = tmp.geoinfos[GIS.GIS_Const.FIELD_BID].ToString();
                         geologyspaceEntity.Distance = tmp.dist;

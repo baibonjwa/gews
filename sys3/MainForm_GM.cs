@@ -394,7 +394,7 @@ namespace sys3
         //导线管理
         private void mniDXGL_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            WireInfoManagement wm = new WireInfoManagement(this);
+            WireInfoManagement wm = new WireInfoManagement();
             wm.Show();
         }
 

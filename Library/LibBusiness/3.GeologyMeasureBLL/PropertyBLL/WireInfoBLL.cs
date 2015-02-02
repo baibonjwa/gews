@@ -1,100 +1,38 @@
-﻿// ******************************************************************
-// 概  述：导线业务逻辑
-// 作  者：宋英杰
-// 创建日期：2013/11/29
-// 版本号：V1.0
-// 版本信息：
-// V1.0 新建
-// ******************************************************************
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Data;
 using LibEntity;
 using LibDatabase;
-using System.Windows.Forms;
 
 namespace LibBusiness
 {
     public class WireInfoBLL
     {
-        public bool isWirePointExist(string wirePointID,int wireInfoID)
-        {
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
-            string sql = "SELECT * FROM "+WirePointDbConstNames.TABLE_NAME+" WHERE "+WirePointDbConstNames.WIRE_INFO_ID+"="+wireInfoID;
-            DataSet ds = db.ReturnDS(sql);
-            bool bResult = false;
-            if (ds.Tables[0].Rows.Count > 0)
-            {
-                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-                {
-                    if (ds.Tables[0].Rows[i][WirePointDbConstNames.WIRE_POINT_NAME].ToString() == wirePointID)
-                    {
-                        bResult =  true;
-                    }
-                }                
-            }
-            return bResult;
-        }
-
-        /// <summary>
-        /// 导线信息登录
-        /// </summary>
-        /// <param name="wireInfoEntity">导线实体</param>
-        /// <returns>成功与否：true，false</returns>
-        public static bool insertWireInfo(WireInfo wireInfoEntity)
-        {
-            StringBuilder sqlStr = new StringBuilder();
-            sqlStr.Append("INSERT INTO " + WireInfoDbConstNames.TABLE_NAME + " (" + 
-                WireInfoDbConstNames.WIRE_NAME + "," + 
-                WireInfoDbConstNames.WIRE_LEVEL + "," + 
-                WireInfoDbConstNames.MEASURE_DATE + "," + 
-                WireInfoDbConstNames.VOBSERVER + "," +
-                WireInfoDbConstNames.COUNTER + "," +
-                WireInfoDbConstNames.COUNT_DATE + "," +
-                WireInfoDbConstNames.CHECKER + "," +
-                WireInfoDbConstNames.CHECK_DATE + "," + 
-                WireInfoDbConstNames.TUNNEL_ID + ")");
-            sqlStr.Append("VALUES ('");
-            sqlStr.Append(wireInfoEntity.WireName + "','");
-            sqlStr.Append(wireInfoEntity.WireLevel + "','");
-            sqlStr.Append(wireInfoEntity.MeasureDate + "','");
-            sqlStr.Append(wireInfoEntity.Vobserver + "','");
-            sqlStr.Append(wireInfoEntity.Counter + "','");
-            sqlStr.Append(wireInfoEntity.CountDate + "','");
-            sqlStr.Append(wireInfoEntity.Checker + "','");
-            sqlStr.Append(wireInfoEntity.CheckDate + "','");
-            sqlStr.Append(wireInfoEntity.Tunnel+"')" );
-
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
-            bool bResult = db.OperateDB(sqlStr.ToString());
-            return bResult;
-        }
 
         /// <summary>
         /// 导线信息修改
         /// </summary>
-        /// <param name="wireInfoEntity">导线实体</param>
+        /// <param name="wireEntity">导线实体</param>
         /// <param name="tunnelID">巷道编号</param>
         /// <returns>成功与否：true,false</returns>
-        public static bool updateWireInfo(WireInfo wireInfoEntity,int tunnelID)
+        public static bool updateWireInfo(Wire wireEntity, int tunnelID)
         {
             StringBuilder sqlStr = new StringBuilder();
             sqlStr.Append("UPDATE " + WireInfoDbConstNames.TABLE_NAME + " SET " + WireInfoDbConstNames.TUNNEL_ID + " ='");
-            sqlStr.Append(wireInfoEntity.Tunnel + "'," + WireInfoDbConstNames.WIRE_NAME + " = '");
-            sqlStr.Append(wireInfoEntity.WireName + "',"  + WireInfoDbConstNames.WIRE_LEVEL + " = '");
-            sqlStr.Append(wireInfoEntity.WireLevel + "'," + WireInfoDbConstNames.MEASURE_DATE + " = '");
-            sqlStr.Append(wireInfoEntity.MeasureDate + "'," + WireInfoDbConstNames.VOBSERVER + " ='");
-            sqlStr.Append(wireInfoEntity.Vobserver + "'," + WireInfoDbConstNames.COUNTER + " ='");
-            sqlStr.Append(wireInfoEntity.Counter + "'," + WireInfoDbConstNames.COUNT_DATE + " ='");
-            sqlStr.Append(wireInfoEntity.CountDate + "'," + WireInfoDbConstNames.CHECKER + " ='");
-            sqlStr.Append(wireInfoEntity.Checker + "'," + WireInfoDbConstNames.CHECK_DATE + " ='");
-            //sqlStr.Append(wireInfoEntity.CheckDate+ "' WHERE " + WireInfoDbConstNames.TUNNEL_ID + "=");
+            sqlStr.Append(wireEntity.Tunnel + "'," + WireInfoDbConstNames.WIRE_NAME + " = '");
+            sqlStr.Append(wireEntity.WireName + "'," + WireInfoDbConstNames.WIRE_LEVEL + " = '");
+            sqlStr.Append(wireEntity.WireLevel + "'," + WireInfoDbConstNames.MEASURE_DATE + " = '");
+            sqlStr.Append(wireEntity.MeasureDate + "'," + WireInfoDbConstNames.VOBSERVER + " ='");
+            sqlStr.Append(wireEntity.Vobserver + "'," + WireInfoDbConstNames.COUNTER + " ='");
+            sqlStr.Append(wireEntity.Counter + "'," + WireInfoDbConstNames.COUNT_DATE + " ='");
+            sqlStr.Append(wireEntity.CountDate + "'," + WireInfoDbConstNames.CHECKER + " ='");
+            sqlStr.Append(wireEntity.Checker + "'," + WireInfoDbConstNames.CHECK_DATE + " ='");
+            //sqlStr.Append(wireEntity.CheckDate+ "' WHERE " + WireInfoDbConstNames.TUNNEL_ID + "=");
             //sqlStr.Append(tunnelID);
             //Fixed by Yanger_xy 2014.05.29
-            sqlStr.Append(wireInfoEntity.CheckDate + "' WHERE " + WireInfoDbConstNames.ID + "=");
-            sqlStr.Append(wireInfoEntity.WireInfoId);
+            sqlStr.Append(wireEntity.CheckDate + "' WHERE " + WireInfoDbConstNames.ID + "=");
+            sqlStr.Append(wireEntity.WireInfoId);
 
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
             bool bResult = db.OperateDB(sqlStr.ToString());
@@ -130,17 +68,7 @@ namespace LibBusiness
             DataSet ds = db.ReturnDS(sqlStr.ToString());
             return ds;
         }
-        /// <summary>
-        /// 返回所有导线信息
-        /// </summary>
-        /// <returns></returns>
-        public static DataSet selectAllWireInfo()
-        {
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
-            string sql = "SELECT * FROM " + WireInfoDbConstNames.TABLE_NAME;
-            DataSet ds = db.ReturnDS(sql);
-            return ds;
-        }
+
         /// <summary>
         /// 用导线ID查询巷道ID
         /// </summary>
@@ -159,44 +87,7 @@ namespace LibBusiness
             }
             return tunnelID;
         }
-        /// <summary>
-        /// 返回某导线信息
-        /// </summary>
-        /// <param name="wireInfoID">导线ID</param>
-        /// <returns>导线信息</returns>
-        public static WireInfo selectAllWireInfo(int wireInfoID)
-        {
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
-            string sql = "SELECT * FROM " + WireInfoDbConstNames.TABLE_NAME + " WHERE " + WireInfoDbConstNames.ID + " = " + wireInfoID;
-            DataSet ds = db.ReturnDS(sql);
-            
-            WireInfo wireInfoEntity = new WireInfo();
-            if (ds.Tables[0].Rows.Count > 0)
-            {
-                try
-                {
-                    wireInfoEntity.WireInfoId = wireInfoID;
-                    wireInfoEntity.WireName = ds.Tables[0].Rows[0][WireInfoDbConstNames.WIRE_NAME].ToString();
-                    wireInfoEntity.WireLevel = ds.Tables[0].Rows[0][WireInfoDbConstNames.WIRE_LEVEL].ToString();
-                    wireInfoEntity.Vobserver = ds.Tables[0].Rows[0][WireInfoDbConstNames.VOBSERVER].ToString();
-                    wireInfoEntity.MeasureDate = ds.Tables[0].Rows[0][WireInfoDbConstNames.MEASURE_DATE].ToString() != "" ? Convert.ToDateTime(ds.Tables[0].Rows[0][WireInfoDbConstNames.MEASURE_DATE].ToString()) : DateTime.Now;
-                    wireInfoEntity.Counter = ds.Tables[0].Rows[0][WireInfoDbConstNames.COUNTER].ToString();
-                    wireInfoEntity.CountDate = ds.Tables[0].Rows[0][WireInfoDbConstNames.COUNT_DATE].ToString() != "" ? Convert.ToDateTime(ds.Tables[0].Rows[0][WireInfoDbConstNames.COUNT_DATE].ToString()) : DateTime.Now;
-                    wireInfoEntity.Checker = ds.Tables[0].Rows[0][WireInfoDbConstNames.CHECKER].ToString();
-                    wireInfoEntity.CheckDate = ds.Tables[0].Rows[0][WireInfoDbConstNames.CHECK_DATE].ToString() != "" ? Convert.ToDateTime(ds.Tables[0].Rows[0][WireInfoDbConstNames.CHECK_DATE].ToString()) : DateTime.Now;
-                }
-                catch
-                {
-                    return null;
-                }
-            }
-            else
-            {
-                return null;
-            }
 
-            return wireInfoEntity;
-        }
         /// <summary>
         /// 返回绑定某巷道的导线信息
         /// </summary>
@@ -205,7 +96,7 @@ namespace LibBusiness
         public static DataSet selectAllWireInfo(Tunnel tunnelEntity)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
-            string sql = "SELECT * FROM " + WireInfoDbConstNames.TABLE_NAME+" WHERE "+WireInfoDbConstNames.TUNNEL_ID+" = "+tunnelEntity.TunnelId;
+            string sql = "SELECT * FROM " + WireInfoDbConstNames.TABLE_NAME + " WHERE " + WireInfoDbConstNames.TUNNEL_ID + " = " + tunnelEntity.TunnelId;
             DataSet ds = db.ReturnDS(sql);
             return ds;
         }
@@ -216,7 +107,7 @@ namespace LibBusiness
         /// <param name="iStartIndex">起始编号</param>
         /// <param name="iEndIndex">结束编号</param>
         /// <returns>导线信息</returns>
-        public static DataSet selectAllWireInfo(int iStartIndex,int iEndIndex)
+        public static DataSet selectAllWireInfo(int iStartIndex, int iEndIndex)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
             StringBuilder sb = new StringBuilder();
@@ -292,6 +183,7 @@ namespace LibBusiness
             db.Close();
             return wirePoint;
         }
+
         /// <summary>
         /// 返回距右帮距离
         /// </summary>
@@ -315,20 +207,6 @@ namespace LibBusiness
             }
             db.Close();
             return wirePoint;
-        }
-        
-        /// <summary>
-        /// 删除导线信息
-        /// </summary>
-        /// <param name="wirePointInfoEntity"></param>
-        /// <returns></returns>
-        public static bool deleteWireInfo(WireInfo wireInfoEntity)
-        {
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
-            bool bResult = false;
-            string sql = "DELETE FROM " + WireInfoDbConstNames.TABLE_NAME + " WHERE " + WireInfoDbConstNames.ID + " ='" + wireInfoEntity.WireInfoId + "'";
-            bResult = db.OperateDB(sql);
-            return bResult;
         }
     }
 }

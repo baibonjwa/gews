@@ -28,8 +28,8 @@ namespace _3.GeologyMeasure
         int _tmpRowIndex = -1;
         int _itemCount = 0;
         Tunnel _tunnelEntity = new Tunnel();
-        WireInfo wireInfoEntity = new WireInfo();
-        WirePointInfo[] wpiEntity;
+        Wire wireEntity = new Wire();
+        WirePoint[] wpiEntity;
         int[] _arr = new int[5];
         DataSet _dsWirePoint = new DataSet();
         int _tunnelID;
@@ -166,7 +166,7 @@ namespace _3.GeologyMeasure
                 if (this.Text == Const_GM.WIRE_INFO_ADD)
                 {
                     //导线点是否存在
-                    if (new WireInfoBLL().isWirePointExist(dgrdvWire.Rows[i].Cells[0].Value.ToString(), wireInfoEntity.WireInfoId))
+                    if (WirePoint.ExistsByWirePointIdInWireInfo(wireEntity.WireInfoId, dgrdvWire.Rows[i].Cells[0].Value.ToString()))
                     {
                         cell.Style.BackColor = Const.ERROR_FIELD_COLOR;
                         Alert.alert(Const_GM.WIRE_POINT_ID + Const.MSG_ALREADY_HAVE + Const.SIGN_EXCLAMATION_MARK);

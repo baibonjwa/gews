@@ -38,8 +38,8 @@ namespace sys3
         private int _tunnelID;
         private int doing;
         private Tunnel tunnelEntity = new Tunnel();
-        private WireInfo wireInfoEntity = new WireInfo();
-        private WirePointInfo[] wpiEntity;
+        private Wire wireEntity = new Wire();
+        private WirePoint[] wpiEntity;
         /*****************************/
 
         /// <summary>
@@ -100,11 +100,11 @@ namespace sys3
         ///     构造方法
         /// </summary>
         /// <param name="array">矿井信息数组</param>
-        /// <param name="wireInfoEntity">导线实体</param>
-        public WireInfoEntering(WireInfo wireInfoEntity)
+        /// <param name="wireEntity">导线实体</param>
+        public WireInfoEntering(Wire wireEntity)
         {
             // 初始化主窗体变量
-            this.wireInfoEntity = wireInfoEntity;
+            this.wireEntity = wireEntity;
             InitializeComponent();
 
             // 加载需要修改的导线数据
@@ -159,10 +159,10 @@ namespace sys3
         {
             addInfo();
             _itemCount = 0;
-            _dsWirePoint = WirePointBLL.selectAllWirePointInfo(wireInfoEntity.WireInfoId);
+            _dsWirePoint = WirePointBLL.selectAllWirePointInfo(wireEntity.WireInfoId);
             if (_dsWirePoint.Tables[0].Rows.Count > 0)
             {
-                wpiEntity = new WirePointInfo[_dsWirePoint.Tables[0].Rows.Count];
+                wpiEntity = new WirePoint[_dsWirePoint.Tables[0].Rows.Count];
                 dgrdvWire.RowCount = wpiEntity.Length + 1;
                 for (int i = 0; i < wpiEntity.Length; i++)
                 {
@@ -180,17 +180,17 @@ namespace sys3
                     _itemCount++;
                 }
             }
-            txtWireName.Text = wireInfoEntity.WireName;
-            txtWireLevel.Text = wireInfoEntity.WireLevel;
-            dtpMeasureDate.Value = wireInfoEntity.MeasureDate;
-            cboVobserver.Text = wireInfoEntity.Vobserver;
-            cboVobserver.Text = wireInfoEntity.Vobserver;
-            cboCounter.Text = wireInfoEntity.Counter;
-            cboCounter.Text = wireInfoEntity.Counter;
-            dtpCountDate.Value = wireInfoEntity.CountDate;
-            cboChecker.Text = wireInfoEntity.Checker;
-            cboChecker.Text = wireInfoEntity.Checker;
-            dtpCheckDate.Value = wireInfoEntity.CheckDate;
+            txtWireName.Text = wireEntity.WireName;
+            txtWireLevel.Text = wireEntity.WireLevel;
+            dtpMeasureDate.Value = wireEntity.MeasureDate;
+            cboVobserver.Text = wireEntity.Vobserver;
+            cboVobserver.Text = wireEntity.Vobserver;
+            cboCounter.Text = wireEntity.Counter;
+            cboCounter.Text = wireEntity.Counter;
+            dtpCountDate.Value = wireEntity.CountDate;
+            cboChecker.Text = wireEntity.Checker;
+            cboChecker.Text = wireEntity.Checker;
+            dtpCheckDate.Value = wireEntity.CheckDate;
         }
 
         /// <summary>
@@ -252,13 +252,13 @@ namespace sys3
             }
             DialogResult = DialogResult.OK;
 
-            List<WirePointInfo> lstWirePointInfoEnt;
+            List<WirePoint> lstWirePointInfoEnt;
             string sADDorCHANGE = "";
             if (Text == Const_GM.WIRE_INFO_ADD)
             {
                 sADDorCHANGE = "ADD";
                 /// 2014.2.26 lyf 绘制导线点和巷道，下同
-                lstWirePointInfoEnt = new List<WirePointInfo>();
+                lstWirePointInfoEnt = new List<WirePoint>();
                 lstWirePointInfoEnt = insertWireInfo();
                 if (lstWirePointInfoEnt != null)
                 {
@@ -308,11 +308,11 @@ namespace sys3
             {
                 sADDorCHANGE = "CHANGE";
                 /// 2014.2.26 lyf
-                WirePointInfo[] wirePointInfoEnt = updateWireInfo();
-                lstWirePointInfoEnt = new List<WirePointInfo>();
-                if (wirePointInfoEnt != null)
+                WirePoint[] wirePointEnt = updateWireInfo();
+                lstWirePointInfoEnt = new List<WirePoint>();
+                if (wirePointEnt != null)
                 {
-                    lstWirePointInfoEnt = wirePointInfoEnt.ToList();
+                    lstWirePointInfoEnt = wirePointEnt.ToList();
                     DrawWirePoint(lstWirePointInfoEnt, sADDorCHANGE);
 
                     DialogResult dlgResult = MessageBox.Show("是否同时更新巷道图形？", "提示", MessageBoxButtons.YesNo,
@@ -366,28 +366,28 @@ namespace sys3
         /// </summary>
         private void setWireInfoEntity()
         {
-            wireInfoEntity.Tunnel.TunnelId = selectTunnelUserControl1.ITunnelId;
+            wireEntity.Tunnel.TunnelId = selectTunnelUserControl1.ITunnelId;
             ;
-            //tunnelEntity = TunnelInfoBLL.selectTunnelInfoByTunnelID(wireInfoEntity.Tunnel);
+            //tunnelEntity = TunnelInfoBLL.selectTunnelInfoByTunnelID(wireEntity.Tunnel);
             //导线名称
-            wireInfoEntity.WireName = txtWireName.Text;
+            wireEntity.WireName = txtWireName.Text;
             //导线级别
-            wireInfoEntity.WireLevel = txtWireLevel.Text;
+            wireEntity.WireLevel = txtWireLevel.Text;
             //测量日期
-            wireInfoEntity.MeasureDate = dtpMeasureDate.Value;
+            wireEntity.MeasureDate = dtpMeasureDate.Value;
             //观测者
-            wireInfoEntity.Vobserver = cboVobserver.Text;
+            wireEntity.Vobserver = cboVobserver.Text;
             //txtVobserver.Text;
             //计算者
-            wireInfoEntity.Counter = cboCounter.Text;
+            wireEntity.Counter = cboCounter.Text;
             //txtCounter.Text;
             //计算日期
-            wireInfoEntity.CountDate = dtpCountDate.Value;
+            wireEntity.CountDate = dtpCountDate.Value;
             //校核者
-            wireInfoEntity.Checker = cboChecker.Text;
+            wireEntity.Checker = cboChecker.Text;
             //txtChecker.Text
             //校核日期
-            wireInfoEntity.CheckDate = dtpCheckDate.Value;
+            wireEntity.CheckDate = dtpCheckDate.Value;
         }
 
         /// <summary>
@@ -395,7 +395,7 @@ namespace sys3
         /// </summary>
         /// <param name="i">Datagridview行号</param>
         /// <returns>导线点实体</returns>
-        private WirePointInfo setWirePointEntity(int i)
+        private WirePoint setWirePointEntity(int i)
         {
             // 最后一行为空行时，跳出循环
             if (i == dgrdvWire.RowCount - 1)
@@ -403,7 +403,7 @@ namespace sys3
                 return null;
             }
             // 创建导线点实体
-            var wirePointInfoEntity = new WirePointInfo();
+            var wirePointInfoEntity = new WirePoint();
             if (Text == Const_GM.WIRE_INFO_CHANGE)
             {
                 if (i < wpiEntity.Length)
@@ -480,7 +480,7 @@ namespace sys3
                     _tmpDouble = 0;
                 }
             }
-            wirePointInfoEntity.WireInfo.WireInfoId = wireInfoEntity.WireInfoId;
+            wirePointInfoEntity.Wire.WireInfoId = wireEntity.WireInfoId;
 
             return wirePointInfoEntity;
         }
@@ -489,7 +489,7 @@ namespace sys3
         ///     2014.2.26 lyf 修改函数，返回导线点List，为绘制导线点图形
         /// </summary>
         /// <returns>导线点List</returns>
-        private List<WirePointInfo> insertWireInfo()
+        private List<WirePoint> insertWireInfo()
         {
             setWireInfoEntity();
 
@@ -501,30 +501,28 @@ namespace sys3
             {
                 LibBusiness.TunnelDefaultSelect.InsertDefaultTunnel(WireInfoDbConstNames.TABLE_NAME,
                     selectTunnelUserControl1.ITunnelId);
-                bResult = WireInfoBLL.insertWireInfo(wireInfoEntity);
-                if (bResult)
-                {
-                    var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.ITunnelId,
-                        WireInfoDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, wireInfoEntity.MeasureDate);
-                    MainForm.SendMsg2Server(msg);
-                }
+                wireEntity.Save();
+                var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.ITunnelId,
+                    WireInfoDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, wireEntity.MeasureDate);
+                MainForm.SendMsg2Server(msg);
+
             }
-                //导线存在时跳过
+            //导线存在时跳过
             else
             {
                 bResult = true;
             }
             //导线编号
-            wireInfoEntity.WireInfoId =
+            wireEntity.WireInfoId =
                 Convert.ToInt32(
                     WireInfoBLL.selectAllWireInfo(
-                        BasicInfoManager.getInstance().getTunnelByID(wireInfoEntity.Tunnel.TunnelId)).Tables[0].Rows[0][
+                        BasicInfoManager.getInstance().getTunnelByID(wireEntity.Tunnel.TunnelId)).Tables[0].Rows[0][
                             WireInfoDbConstNames.ID]);
             //导线点信息登陆
-            var wirePointInfoEntityList = new List<WirePointInfo>();
+            var wirePointInfoEntityList = new List<WirePoint>();
             for (int i = 0; i < dgrdvWire.RowCount; i++)
             {
-                var wirePointInfoEntity = new WirePointInfo();
+                var wirePointInfoEntity = new WirePoint();
 
                 wirePointInfoEntity = setWirePointEntity(i);
 
@@ -540,13 +538,13 @@ namespace sys3
 
             if (bResult)
             {
-                foreach (WirePointInfo wirePointInfoEntity in wirePointInfoEntityList)
+                foreach (WirePoint wirePointInfoEntity in wirePointInfoEntityList)
                 {
                     bResult = WirePointBLL.insertWirePointInfo(wirePointInfoEntity);
                     if (bResult)
                     {
                         var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.ITunnelId,
-                            WireInfoDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, wireInfoEntity.MeasureDate);
+                            WireInfoDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, wireEntity.MeasureDate);
                         MainForm.SendMsg2Server(msg);
                     }
                 }
@@ -558,15 +556,15 @@ namespace sys3
         ///     2014.2.26 lyf 修改函数，返回导线点List，为绘制导线点图形
         /// </summary>
         /// <returns>导线点List</returns>
-        private WirePointInfo[] updateWireInfo()
+        private WirePoint[] updateWireInfo()
         {
             setWireInfoEntity();
 
-            var wirePointInfoEnt = new WirePointInfo[dgrdvWire.RowCount - 1];
+            var wirePointInfoEnt = new WirePoint[dgrdvWire.RowCount - 1];
             for (int i = 0; i < dgrdvWire.RowCount - 1; i++)
             {
                 // 创建导线点实体
-                var wirePointInfoEntity = new WirePointInfo();
+                var wirePointInfoEntity = new WirePoint();
                 wirePointInfoEntity = setWirePointEntity(i);
                 if (wirePointInfoEntity == null)
                 {
@@ -580,7 +578,7 @@ namespace sys3
             _tunnelID = selectTunnelUserControl1.ITunnelId;
             LibBusiness.TunnelDefaultSelect.UpdateDefaultTunnel(WireInfoDbConstNames.TABLE_NAME,
                 selectTunnelUserControl1.ITunnelId);
-            bool bResult = WireInfoBLL.updateWireInfo(wireInfoEntity, _tunnelID);
+            bool bResult = WireInfoBLL.updateWireInfo(wireEntity, _tunnelID);
             //导线点信息登陆
             if (bResult)
             {
@@ -589,12 +587,12 @@ namespace sys3
                     if (j < _dsWirePoint.Tables[0].Rows.Count)
                     {
                         //修改导线点
-                        bResult = WirePointBLL.updateWirePointInfo(wirePointInfoEnt[j], wireInfoEntity);
+                        bResult = WirePointBLL.updateWirePointInfo(wirePointInfoEnt[j], wireEntity);
                         //socket
                         if (bResult)
                         {
                             var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.ITunnelId,
-                                WireInfoDbConstNames.TABLE_NAME, OPERATION_TYPE.UPDATE, wireInfoEntity.MeasureDate);
+                                WireInfoDbConstNames.TABLE_NAME, OPERATION_TYPE.UPDATE, wireEntity.MeasureDate);
                             MainForm.SendMsg2Server(msg);
                         }
                     }
@@ -609,14 +607,14 @@ namespace sys3
                         if (bResult)
                         {
                             var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.ITunnelId,
-                                WireInfoDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, wireInfoEntity.MeasureDate);
+                                WireInfoDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, wireEntity.MeasureDate);
                             MainForm.SendMsg2Server(msg);
                         }
                     }
                 }
 
                 //导线点实体
-                var wirePointInfoEntity = new WirePointInfo();
+                var wirePointInfoEntity = new WirePoint();
                 //当条数少于导线点个数时，多于部分做删除处理
                 if (dgrdvWire.Rows.Count <= _itemCount)
                 {
@@ -624,20 +622,20 @@ namespace sys3
                     {
                         wirePointInfoEntity.Id =
                             Convert.ToInt32(_dsWirePoint.Tables[0].Rows[i][WirePointDbConstNames.ID].ToString());
-                        wireInfoEntity.WireInfoId =
+                        wireEntity.WireInfoId =
                             Convert.ToInt32(
                                 _dsWirePoint.Tables[0].Rows[i][WirePointDbConstNames.WIRE_INFO_ID].ToString());
                         //只剩一个空行时，即所有导线点信息全被删除时
                         //删除导线，导线点
                         if (dgrdvWire.Rows.Count == 1)
                         {
-                            bResult = WireInfoBLL.deleteWireInfo(wireInfoEntity);
-                            bResult = WirePointBLL.deleteWirePointInfo(wirePointInfoEntity);
+                            wireEntity.Delete();
+                            WirePointBLL.deleteWirePointInfo(wirePointInfoEntity);
                         }
-                            //只删除多于导线点
+                        //只删除多于导线点
                         else
                         {
-                            bResult = WirePointBLL.deleteWirePointInfo(wirePointInfoEntity);
+                            WirePointBLL.deleteWirePointInfo(wirePointInfoEntity);
                         }
                     }
                 }
@@ -717,8 +715,7 @@ namespace sys3
                 if (Text == Const_GM.WIRE_INFO_ADD)
                 {
                     //导线点是否存在
-                    if (new WireInfoBLL().isWirePointExist(dgrdvWire.Rows[i].Cells[0].Value.ToString(),
-                        wireInfoEntity.WireInfoId))
+                    if (WirePoint.ExistsByWirePointIdInWireInfo(wireEntity.WireInfoId, dgrdvWire.Rows[i].Cells[0].Value.ToString()))
                     {
                         cell.Style.BackColor = Const.ERROR_FIELD_COLOR;
                         Alert.alert(Const_GM.WIRE_POINT_ID + Const.MSG_ALREADY_HAVE + Const.SIGN_EXCLAMATION_MARK);
@@ -896,11 +893,11 @@ namespace sys3
                         //巷道信息
                         tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(tunnelEntity.TunnelId);
                         //导线ID
-                        wireInfoEntity.WireInfoId =
+                        wireEntity.WireInfoId =
                             Convert.ToInt32(
                                 WireInfoBLL.selectAllWireInfo(tunnelEntity).Tables[0].Rows[0][WireInfoDbConstNames.ID]);
                         //导线信息
-                        wireInfoEntity = WireInfoBLL.selectAllWireInfo(wireInfoEntity.WireInfoId);
+                        wireEntity = Wire.Find(wireEntity.WireInfoId);
                         _arr[0] = tunnelEntity.WorkingFace.MiningArea.Horizontal.Mine.MineId;
                         _arr[1] = tunnelEntity.WorkingFace.MiningArea.Horizontal.HorizontalId;
                         _arr[2] = tunnelEntity.WorkingFace.MiningArea.MiningAreaId;
@@ -915,7 +912,7 @@ namespace sys3
                             selectionIdx = dgrdvWire.CurrentRow.Index;
                         }
                     }
-                        //巷道已绑定导线，请重新选择巷道
+                    //巷道已绑定导线，请重新选择巷道
                     else
                     {
                         Alert.alert(Const_GM.WIRE_INFO_MSG_TUNNEL_ALREADY_BIND_WIRE);
@@ -1329,7 +1326,7 @@ namespace sys3
             {
                 粘贴ToolStripMenuItem.Visible = false;
             }
-                //复制时粘贴按钮不消失
+            //复制时粘贴按钮不消失
             else
             {
                 粘贴ToolStripMenuItem.Visible = true;
@@ -1387,9 +1384,9 @@ namespace sys3
             int idx = GetRowFromPoint(e.X, e.Y);
             if (idx < 0) return;
 
-            if (e.Data.GetDataPresent(typeof (DataGridViewRow)))
+            if (e.Data.GetDataPresent(typeof(DataGridViewRow)))
             {
-                var row = (DataGridViewRow) e.Data.GetData(typeof (DataGridViewRow));
+                var row = (DataGridViewRow)e.Data.GetData(typeof(DataGridViewRow));
                 ddr = dgrdvWire.Rows[idx];
                 dgrdvWire.Rows.RemoveAt(selectionIdx);
                 dgrdvWire.Rows.Insert(idx, nr);
@@ -1436,7 +1433,7 @@ namespace sys3
         /// <param name="wirepntcols">导线信息列表</param>
         /// <param name="dics">巷道属性</param>
         /// <param name="hdwid">巷道宽度</param>
-        private void AddHdbyPnts(List<WirePointInfo> wirepntcols, Dictionary<string, string> dics, double hdwid)
+        private void AddHdbyPnts(List<WirePoint> wirepntcols, Dictionary<string, string> dics, double hdwid)
         {
             List<IPoint> rightresults = null;
             List<IPoint> leftresults = null;
@@ -1483,7 +1480,7 @@ namespace sys3
         /// </summary>
         /// <param name="wirepntcols"></param>
         /// <param name="dics"></param>
-        private void UpdateHdbyPnts(List<WirePointInfo> wirepntcols, Dictionary<string, string> dics, double hdwid)
+        private void UpdateHdbyPnts(List<WirePoint> wirepntcols, Dictionary<string, string> dics, double hdwid)
         {
             List<IPoint> rightresults = null;
             List<IPoint> leftresults = null;
@@ -1502,7 +1499,7 @@ namespace sys3
                 pntcols.Add(pnt);
             }
             //清除图层上对应的信息
-            string sql = "\"" + GIS_Const.FIELD_HDID + "\"='" + wireInfoEntity.Tunnel + "'";
+            string sql = "\"" + GIS_Const.FIELD_HDID + "\"='" + wireEntity.Tunnel + "'";
             Global.commonclss.DelFeatures(Global.pntlyr, sql);
             Global.commonclss.DelFeatures(Global.pntlinlyr, sql);
             Global.commonclss.DelFeatures(Global.centerlyr, sql);
@@ -1544,9 +1541,9 @@ namespace sys3
         ///     根据坐标绘制导线点
         /// </summary>
         /// <param name="lstWPIE">导线坐标（List）</param>
-        private void DrawWirePoint(List<WirePointInfo> lstWPIE, string addOrChange)
+        private void DrawWirePoint(List<WirePoint> lstWPIE, string addOrChange)
         {
-            var wirePtInfo = new WirePointInfo();
+            var wirePtInfo = new WirePoint();
             IPoint pt = new Point();
 
             //找到导线点图层
@@ -1588,16 +1585,16 @@ namespace sys3
         ///     根据导线点坐标绘制巷道
         /// </summary>
         /// <param name="lstWPIE"></param>
-        private void DrawTunnel(List<WirePointInfo> lstWPIE, string addOrChange)
+        private void DrawTunnel(List<WirePoint> lstWPIE, string addOrChange)
         {
             ///根据导线点计算巷道边线点
-            WirePointInfo[] arrayWPtInfo = {};
-            arrayWPtInfo = lstWPIE.ToArray();
+            WirePoint[] arrayWPt = { };
+            arrayWPt = lstWPIE.ToArray();
             Vector3_DW[] verticesLeftBtmRet = null;
             Vector3_DW[] verticesRightBtmRet = null;
 
             var tunnelPtsCal = new TunnelPointsCalculation();
-            bool isCalSuccess = tunnelPtsCal.CalcLeftAndRightVertics(arrayWPtInfo, ref verticesLeftBtmRet,
+            bool isCalSuccess = tunnelPtsCal.CalcLeftAndRightVertics(arrayWPt, ref verticesLeftBtmRet,
                 ref verticesRightBtmRet);
 
             if (!isCalSuccess)

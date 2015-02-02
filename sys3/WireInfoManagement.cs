@@ -13,7 +13,6 @@ using LibBusiness;
 using LibCommon;
 using LibCommonControl;
 using LibEntity;
-using _3.GeologyMeasure;
 
 namespace sys3
 {
@@ -24,7 +23,6 @@ namespace sys3
         // 列名称
         private readonly DataSet _ds = new DataSet();
         private readonly int[] _filterColunmIdxs = null;
-        private readonly Hashtable _htSelIdxs = new Hashtable();
         private readonly Cells cells = null;
         private int _BIDIndex = 22;
         private int _delRows = 0;
@@ -33,16 +31,15 @@ namespace sys3
         private int _rowsCount = 0; //数据行数
         private int[] _wirePointPrimaryKey;
         private Tunnel tunnelEntity;
-        private WireInfo wireInfoEntity = new WireInfo();
-        private WirePointInfo wirePointInfoEntity = new WirePointInfo();
+        private Wire wireEntity = new Wire();
+        private WirePoint wirePointEntity = new WirePoint();
         //****************************************
 
         /// <summary>
         ///     构造方法
         /// </summary>
-        public WireInfoManagement(MainFrm mainFrm)
+        public WireInfoManagement()
         {
-            MainForm = mainFrm;
             InitializeComponent();
 
             //设置窗体属性
@@ -81,11 +78,11 @@ namespace sys3
             //实体赋值
             setWireInfoEntityValue();
 
-            int tunnelID = WireInfoBLL.selectTunnelIDByWireInfoID(wireInfoEntity.WireInfoId);
+            int tunnelID = WireInfoBLL.selectTunnelIDByWireInfoID(wireEntity.WireInfoId);
             tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(tunnelID);
 
             //导线修改界面
-            var wireInfoForm = new WireInfoEntering(wireInfoEntity);
+            var wireInfoForm = new WireInfoEntering(wireEntity);
             if (DialogResult.OK == wireInfoForm.ShowDialog())
             {
             }
@@ -99,19 +96,19 @@ namespace sys3
             for (int i = 0; i < _wirePointPrimaryKey.Length; i++)
             {
                 if (cells[_rowDetailStartIndex + i, 0].Value != null &&
-                    (bool) cells[_rowDetailStartIndex + i, 0].Value)
+                    (bool)cells[_rowDetailStartIndex + i, 0].Value)
                 {
                     //导线点ID
-                    wirePointInfoEntity.Id = _wirePointPrimaryKey[i];
+                    wirePointEntity.Id = _wirePointPrimaryKey[i];
 
                     //导线点实体
-                    wirePointInfoEntity = WirePointBLL.selectWirePointInfoByWirePointId(wirePointInfoEntity.Id);
+                    wirePointEntity = WirePointBLL.selectWirePointInfoByWirePointId(wirePointEntity.Id);
 
                     //矿井编号
-                    wireInfoEntity = wirePointInfoEntity.WireInfo;
+                    wireEntity = wirePointEntity.Wire;
 
                     //巷道实体
-                    wireInfoEntity = WireInfoBLL.selectAllWireInfo(wireInfoEntity.WireInfoId);
+                    wireEntity = Wire.Find(wireEntity.WireInfoId);
                 }
             }
         }
@@ -131,35 +128,35 @@ namespace sys3
                 for (int i = 0; i < _wirePointPrimaryKey.Length; i++)
                 {
                     if (cells[_rowDetailStartIndex + i, 0].Value != null &&
-                        (bool) cells[_rowDetailStartIndex + i, 0].Value)
+                        (bool)cells[_rowDetailStartIndex + i, 0].Value)
                     {
                         //导线点ID
-                        wirePointInfoEntity.Id = _wirePointPrimaryKey[i];
+                        wirePointEntity.Id = _wirePointPrimaryKey[i];
 
                         //导线点实体
-                        wirePointInfoEntity = WirePointBLL.selectWirePointInfoByWirePointId(wirePointInfoEntity.Id);
+                        wirePointEntity = WirePointBLL.selectWirePointInfoByWirePointId(wirePointEntity.Id);
 
                         //矿井编号
-                        wireInfoEntity = wirePointInfoEntity.WireInfo;
+                        wireEntity = wirePointEntity.Wire;
 
                         //导线实体
-                        wireInfoEntity = WireInfoBLL.selectAllWireInfo(wireInfoEntity.WireInfoId);
-                        DataSet ds = WirePointBLL.selectAllWirePointInfo(wireInfoEntity.WireInfoId);
+                        wireEntity = Wire.Find(wireEntity.WireInfoId);
+                        DataSet ds = WirePointBLL.selectAllWirePointInfo(wireEntity.WireInfoId);
                         if (ds.Tables[0].Rows.Count > 0)
                         {
-                            bResult = WirePointBLL.deleteWirePointInfo(wireInfoEntity);
+                            bResult = WirePointBLL.deleteWirePointInfo(wireEntity);
                         }
-                        bResult = WireInfoBLL.deleteWireInfo(wireInfoEntity);
+                        wireEntity.Delete();
 
                         //20140430 lyf
                         //同时删除导线点、巷道图元
                         DialogResult dlgResult = MessageBox.Show("是否删除对应图元？", "", MessageBoxButtons.YesNo);
                         if (dlgResult == DialogResult.Yes)
                         {
-                            //DeleteWirePtByBID(wirePointInfoEntity);
+                            //DeleteWirePtByBID(wirePointEntity);
                             DelHdByHdId(tunnelEntity.TunnelId.ToString());
 
-                            //wireInfoEntity.Tunnel
+                            //wireEntity.Tunnel
                         }
                     }
                 }
@@ -243,9 +240,9 @@ namespace sys3
                 MessageBox.Show("未发现导线点图层！");
                 return;
             }
-            var pFeatureLayer = (IFeatureLayer) pLayer;
+            var pFeatureLayer = (IFeatureLayer)pLayer;
             string str = "";
-            string bid = ((WireInfo) gridView1.GetFocusedRow()).Tunnel.BindingID;
+            string bid = ((Wire)gridView1.GetFocusedRow()).Tunnel.BindingID;
             if (bid != "")
             {
                 if (true)
@@ -281,9 +278,9 @@ namespace sys3
         ///     根据导线点绑定ID删除导线点图元
         /// </summary>
         /// <param name="sfpFaultageBIDArray">要删除导线点的绑定ID</param>
-        private void DeleteWirePtByBID(WirePointInfo wirePointInfoEntity)
+        private void DeleteWirePtByBID(WirePoint wirePointEntity)
         {
-            if (wirePointInfoEntity.BindingId == "") return;
+            if (wirePointEntity.BindingId == "") return;
 
             //1.获得当前编辑图层
             var drawspecial = new DrawSpecialCommon();
@@ -296,7 +293,7 @@ namespace sys3
             }
 
             //2.删除导线点图元
-            DataEditCommon.DeleteFeatureByBId(featureLayer, wirePointInfoEntity.BindingId);
+            DataEditCommon.DeleteFeatureByBId(featureLayer, wirePointEntity.BindingId);
         }
 
 
@@ -304,9 +301,9 @@ namespace sys3
         ///     根据巷道ID删除巷道图元
         /// </summary>
         /// <param name="sfpFaultageBIDArray">要删除巷道的绑定ID</param>
-        private void DeleteWirePtByBID(WireInfo wireInfoEntity)
+        private void DeleteWirePtByBID(Wire wireEntity)
         {
-            if (wireInfoEntity.Tunnel.ToString() == "") return;
+            if (wireEntity.Tunnel.ToString() == "") return;
 
             //1.获得当前编辑图层
             var drawspecial = new DrawSpecialCommon();
@@ -319,7 +316,7 @@ namespace sys3
             }
 
             //2.删除巷道图元
-            DataEditCommon.DeleteFeatureByBId(featureLayer, wireInfoEntity.Tunnel.ToString());
+            DataEditCommon.DeleteFeatureByBId(featureLayer, wireEntity.Tunnel.ToString());
         }
 
         #endregion
