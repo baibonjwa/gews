@@ -157,7 +157,7 @@ namespace sys3
                 prospectingLineEntity.BindingId = IDGenerator.NewBindingID();
 
                 // 勘探线信息登录
-                bResult = ProspectingLineBLL.insertProspectingLineInfo(prospectingLineEntity);
+                prospectingLineEntity.Save();
 
                 ///20140505 lyf
                 ///绘制勘探线图形
@@ -168,16 +168,13 @@ namespace sys3
                 // 主键
                 prospectingLineEntity.ProspectingLineId = _iPK;
                 // 勘探线信息修改
-                bResult = ProspectingLineBLL.updateProspectingLineInfo(prospectingLineEntity);
-
+                prospectingLineEntity.Save();
                 //20140506 lyf 
                 //获取勘探线的BID
-                string sBID = "";
-                ProspectingLineBLL.selectProspectingLineBIDByProspectingLineID(prospectingLineEntity.ProspectingLineId,
-                    out sBID);
-                if (sBID != "")
+                string sBid = ProspectingLine.Find(_iPK).BindingId;
+                if (sBid != "")
                 {
-                    prospectingLineEntity.BindingId = sBID;
+                    prospectingLineEntity.BindingId = sBid;
                     ModifyProspectingLine(prospectingLineEntity, lstProspectingBoreholePts); //修改图元
                 }
             }
@@ -228,8 +225,7 @@ namespace sys3
             if (_bllType == "add")
             {
                 // 判断孔号是否存在
-                if (!Check.isExist(txtProspectingLineName, Const_GM.PROSPECTING_LINE_NAME,
-                    ProspectingLineBLL.isProspectingLineNameExist(txtProspectingLineName.Text.Trim())))
+                if (ProspectingLine.ExistsByProspectingLineName(txtProspectingLineName.Text.Trim()))
                 {
                     return false;
                 }
@@ -239,9 +235,7 @@ namespace sys3
                 /* 修改的时候，首先要获取UI输入的钻孔名称到DB中去检索，
                 如果检索件数 > 0 并且该断层ID还不是传过来的主键，那么视为输入了已存在的钻孔名称 */
                 int boreholeId = -1;
-                ProspectingLineBLL.selectProspectingLineIdByProspectingLineName(txtProspectingLineName.Text.Trim(),
-                    out boreholeId);
-                if (boreholeId != -1 && !Convert.ToString(boreholeId).Equals(_iPK.ToString()))
+                if (ProspectingLine.ExistsByProspectingLineName(txtProspectingLineName.Text.Trim()))
                 {
                     txtProspectingLineName.BackColor = Const.ERROR_FIELD_COLOR;
                     Alert.alert(Const_GM.PROSPECTING_LINE_EXIST_MSG); // 勘探线名称已存在，请重新录入！

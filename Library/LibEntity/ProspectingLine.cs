@@ -5,7 +5,9 @@
 // 版本号：1.0
 // ******************************************************************
 
+using System.Collections.Generic;
 using Castle.ActiveRecord;
+using NHibernate.Criterion;
 
 namespace LibEntity
 {
@@ -35,5 +37,14 @@ namespace LibEntity
         /// </summary>
         [Property("BID")]
         public string BindingId { get; set; }
+
+        public static bool ExistsByProspectingLineName(string prospectingLineName)
+        {
+            var criterion = new List<ICriterion>
+            {
+                Restrictions.Eq("ProspectingLineName", prospectingLineName)
+            };
+            return Exists(criterion.ToArray());
+        }
     }
 }

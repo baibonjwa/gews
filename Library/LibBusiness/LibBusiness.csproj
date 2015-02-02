@@ -173,7 +173,6 @@
     <Compile Include="3.GeologyMeasureBLL\DbConstNames\TunnelInfoDbConstNames.cs" />
     <Compile Include="3.GeologyMeasureBLL\DbConstNames\WireInfoDbConstNames.cs" />
     <Compile Include="3.GeologyMeasureBLL\DbConstNames\WirePointDbConstNames.cs" />
-    <Compile Include="3.GeologyMeasureBLL\PropertyBLL\ProspectingLineBLL.cs" />
     <Compile Include="3.GeologyMeasureBLL\PropertyBLL\WorkingFaceBLL.cs" />
     <Compile Include="3.GeologyMeasureBLL\PropertyBLL\MiningAreaBLL.cs" />
     <Compile Include="3.GeologyMeasureBLL\PropertyBLL\HorizontalBLL.cs" />
