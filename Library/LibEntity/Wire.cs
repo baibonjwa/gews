@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Castle.ActiveRecord;
+using NHibernate.Criterion;
 
 namespace LibEntity
 {
@@ -11,7 +13,7 @@ namespace LibEntity
         ///     导线编号
         /// </summary>
         [PrimaryKey(PrimaryKeyType.Identity, "OBJECTID")]
-        public int WireInfoId { get; set; }
+        public int WireId { get; set; }
         /// <summary>
         ///     校核日期
         /// </summary>
@@ -65,6 +67,15 @@ namespace LibEntity
         /// </summary>
         [Property("VOBSERVER")]
         public string Vobserver { get; set; }
+
+        public static Wire FindOneByTunnelId(int tunnelId)
+        {
+            var criterion = new ICriterion[]
+            {
+                Restrictions.Eq("Tunnel.TunnelId",tunnelId)
+            };
+            return FindOne(criterion);
+        }
 
 
     }

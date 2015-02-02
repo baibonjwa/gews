@@ -1,67 +1,57 @@
-﻿// ******************************************************************
-// 概  述：巷道信息管理
-// 作  者：宋英杰
-// 创建日期：2014/3/11
-// 版本号：V1.0
-// 版本信息：
-// V1.0 新建
-// ******************************************************************
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using ESRI.ArcGIS.Carto;
-using LibEntity;
+using ESRI.ArcGIS.Geodatabase;
+using FarPoint.Win;
+using FarPoint.Win.Spread;
+using FarPoint.Win.Spread.CellType;
+using GIS;
+using GIS.Common;
 using LibBusiness;
 using LibCommon;
-using Excel = Microsoft.Office.Interop.Excel;
 using LibCommonControl;
 using LibCommonForm;
-using System.Data.SqlClient;
+using LibEntity;
 
-namespace _3.GeologyMeasure
+namespace sys3
 {
     public partial class TunnelInfoManagement : BaseForm
     {
         //****************变量声明***************
-        private int _iRecordCount = 0;
-        int rowsCount = 0;      //数据行数
-        int checkCount = 0;     //选择行数
-        DataSet ds = new DataSet();
-        int rowDetailStartIndex = 4;
-        int activeRow = 0;
-        //需要过滤的列索引
-        private int[] _filterColunmIdxs = null;
-        private bool bFirst = true;
-
+        private readonly int[] _filterColunmIdxs;
+        private readonly Hashtable _htSelIdxs = new Hashtable();
         private int _BIDIndex = 16;
-        /** 保存所有用户选中的行的索引 **/
-        private Hashtable _htSelIdxs = new Hashtable();
-        Tunnel tunnelEntity = new Tunnel();
+        private int _iRecordCount;
+        private int activeRow;
+        private bool bFirst = true;
+        private Cells cells;
+        private int checkCount; //选择行数
+        private DataSet ds = new DataSet();
+        private int rowDetailStartIndex = 4;
+        private int rowsCount; //数据行数
+        private Tunnel tunnelEntity = new Tunnel();
 
-        FarPoint.Win.Spread.Cells cells;
         //****************************************
 
         /// <summary>
-        /// 构造方法
+        ///     构造方法
         /// </summary>
         public TunnelInfoManagement(MainFrm mainFrm)
         {
-            this.MainForm = mainFrm;
+            MainForm = mainFrm;
             InitializeComponent();
 
-            LibCommon.FormDefaultPropertiesSetter.SetManagementFormDefaultProperties(this, Const_GM.TUNNEL_INFO_MANAGEMENT);
+            FormDefaultPropertiesSetter.SetManagementFormDefaultProperties(this, Const_GM.TUNNEL_INFO_MANAGEMENT);
 
-            LibCommon.FarpointDefaultPropertiesSetter.SetFpDefaultProperties(fpTunnelInfo, LibCommon.Const_GM.TUNNEL_INFO_FARPOINT_TITLE, rowDetailStartIndex);
+            FarpointDefaultPropertiesSetter.SetFpDefaultProperties(fpTunnelInfo, Const_GM.TUNNEL_INFO_FARPOINT_TITLE,
+                rowDetailStartIndex);
 
             dataPager1.FrmChild_EventHandler += FrmParent_EventHandler;
 
-            _filterColunmIdxs = new int[]
+            _filterColunmIdxs = new[]
             {
                 1,
                 2,
@@ -80,15 +70,11 @@ namespace _3.GeologyMeasure
             //禁用选择颜色相关控件
             farpointFilter1.EnableChooseColorCtrls(false);
             //设置自动隐藏过滤条件
-            FarpointDefaultPropertiesSetter.SetFpFilterHideProperties(this.fpTunnelInfo, _filterColunmIdxs);
-
-
-
-
+            FarpointDefaultPropertiesSetter.SetFpFilterHideProperties(fpTunnelInfo, _filterColunmIdxs);
         }
 
         /// <summary>
-        /// 初始化
+        ///     初始化
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -98,11 +84,11 @@ namespace _3.GeologyMeasure
             btnWired.BackColor = Const.WIRED_TUNNEL_COLOR;
             btnTunnelJJ.BackColor = Const.JJ_TUNNEL_COLOR;
             btnTunnelHC.BackColor = Const.HC_TUNNEL_COLOR;
-            this.bindFpTunnelInfo();
+            bindFpTunnelInfo();
         }
 
         /// <summary>
-        /// 委托方法
+        ///     委托方法
         /// </summary>
         /// <param name="sender"></param>
         private void FrmParent_EventHandler(object sender)
@@ -118,11 +104,10 @@ namespace _3.GeologyMeasure
         }
 
         /// <summary>
-        /// farpoint数据绑定
+        ///     farpoint数据绑定
         /// </summary>
         private void bindFpTunnelInfo()
         {
-
             // 清空HashTabl（必须实装）
             _htSelIdxs.Clear();
 
@@ -147,10 +132,10 @@ namespace _3.GeologyMeasure
 
             List<Tunnel> tunnelList = BasicInfoManager.getInstance().getTunnelListByDataSet(ds);
 
-            FarPoint.Win.Spread.CellType.CheckBoxCellType ckbxcell = new FarPoint.Win.Spread.CellType.CheckBoxCellType();
+            var ckbxcell = new CheckBoxCellType();
 
             // Get the spread sheet cells.
-            cells = this.fpTunnelInfo.Sheets[0].Cells;
+            cells = fpTunnelInfo.Sheets[0].Cells;
             fpTunnelInfo.Sheets[0].Columns[_BIDIndex].Visible = false;
 
             ckbxcell.ThreeState = false;
@@ -177,7 +162,8 @@ namespace _3.GeologyMeasure
                 //支护方式
                 cells[rowDetailStartIndex + i, ++index].Text = entity.TunnelSupportPattern;
                 //围岩类型
-                cells[rowDetailStartIndex + i, ++index].Text = BasicInfoManager.getInstance().getLithologyNameById(entity.TunnelLithologyID);
+                cells[rowDetailStartIndex + i, ++index].Text =
+                    BasicInfoManager.getInstance().getLithologyNameById(entity.TunnelLithologyID);
                 //断面类型
                 cells[rowDetailStartIndex + i, ++index].Text = entity.TunnelSectionType;
                 //断面参数
@@ -186,20 +172,22 @@ namespace _3.GeologyMeasure
                 cells[rowDetailStartIndex + i, ++index].Text = entity.CoalOrStone;
                 //绑定煤层
                 cells[rowDetailStartIndex + i, ++index].Text =
-                    entity.CoalLayerID == 0 ? "" : BasicInfoManager.getInstance().getCoalSeamById(entity.CoalLayerID).CoalSeamsName;
+                    entity.CoalLayerID == 0
+                        ? ""
+                        : BasicInfoManager.getInstance().getCoalSeamById(entity.CoalLayerID).CoalSeamsName;
 
                 ++index;
-                if (WireInfoBLL.selectAllWireInfo(tunnelEntity).Tables[0].Rows.Count > 0)
+                Wire wire = Wire.FindOneByTunnelId(tunnelEntity.TunnelId);
+                if (wire != null)
                 {
                     //绑定导线名称
-                    cells[rowDetailStartIndex + i, index].Text =
-                        WireInfoBLL.selectAllWireInfo(tunnelEntity).Tables[0].Rows[0][WireInfoDbConstNames.WIRE_NAME].ToString();
-
+                    cells[rowDetailStartIndex + i, index].Text = wire.WireName;
                 }
-                //未绑定导线巷道背景色设置
+                    //未绑定导线巷道背景色设置
                 else
                 {
-                    FarPointOperate.farPointRowColorChange(fpTunnelInfo, i, rowDetailStartIndex, columnCount, Const.NO_WIRE_TUNNEL_COLOR);
+                    FarPointOperate.farPointRowColorChange(fpTunnelInfo, i, rowDetailStartIndex, columnCount,
+                        Const.NO_WIRE_TUNNEL_COLOR);
                 }
 
                 //巷道类型
@@ -208,12 +196,14 @@ namespace _3.GeologyMeasure
                 //掘进巷道
                 if (cells[rowDetailStartIndex + i, index].Text == Const_GM.TUNNEL_TYPE_TUNNELING_CHN)
                 {
-                    FarPointOperate.farPointRowColorChange(fpTunnelInfo, i, rowDetailStartIndex, columnCount, Const.JJ_TUNNEL_COLOR);
+                    FarPointOperate.farPointRowColorChange(fpTunnelInfo, i, rowDetailStartIndex, columnCount,
+                        Const.JJ_TUNNEL_COLOR);
                 }
                 //回采巷道
                 if (cells[rowDetailStartIndex + i, index].Text == Const_GM.TUNNEL_TYPE_STOPING_CHN)
                 {
-                    FarPointOperate.farPointRowColorChange(fpTunnelInfo, i, rowDetailStartIndex, columnCount, Const.HC_TUNNEL_COLOR);
+                    FarPointOperate.farPointRowColorChange(fpTunnelInfo, i, rowDetailStartIndex, columnCount,
+                        Const.HC_TUNNEL_COLOR);
                 }
 
                 //BID
@@ -229,15 +219,15 @@ namespace _3.GeologyMeasure
         }
 
         /// <summary>
-        /// farpoint中checkbox选中对全选反选的影响
+        ///     farpoint中checkbox选中对全选反选的影响
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void fpTunnelInfo_ButtonClicked(object sender, FarPoint.Win.Spread.EditorNotifyEventArgs e)
+        private void fpTunnelInfo_ButtonClicked(object sender, EditorNotifyEventArgs e)
         {
-            if (e.EditingControl is FarPoint.Win.FpCheckBox)
+            if (e.EditingControl is FpCheckBox)
             {
-                FarPoint.Win.FpCheckBox fpChk = (FarPoint.Win.FpCheckBox)e.EditingControl;
+                var fpChk = (FpCheckBox) e.EditingControl;
                 if (fpChk.Checked)
                 {
                     // 保存索引号
@@ -249,7 +239,7 @@ namespace _3.GeologyMeasure
                         if (_htSelIdxs.Count == checkCount)
                         {
                             // 全选/全不选checkbox设为选中
-                            this.chkSelAll.Checked = true;
+                            chkSelAll.Checked = true;
                         }
                     }
 
@@ -275,7 +265,7 @@ namespace _3.GeologyMeasure
         }
 
         /// <summary>
-        /// 设置按钮可操作性
+        ///     设置按钮可操作性
         /// </summary>
         private void setButtenEnable()
         {
@@ -298,7 +288,7 @@ namespace _3.GeologyMeasure
         }
 
         /// <summary>
-        /// 为变量tunnelEntity赋值
+        ///     为变量tunnelEntity赋值
         /// </summary>
         private void setTunnelEntityValue()
         {
@@ -306,12 +296,11 @@ namespace _3.GeologyMeasure
             int rowDetailStartIndex = 4;
             for (int i = 0; i < rowsCount; i++)
             {
-
                 if (cells[rowDetailStartIndex + i, 0].Value != null &&
-                    (bool)cells[rowDetailStartIndex + i, 0].Value == true)
+                    (bool) cells[rowDetailStartIndex + i, 0].Value)
                 {
                     //巷道编号
-                    tunnelEntity.TunnelId = (int)ds.Tables[0].Rows[i][TunnelInfoDbConstNames.ID];
+                    tunnelEntity.TunnelId = (int) ds.Tables[0].Rows[i][TunnelInfoDbConstNames.ID];
                     //巷道实体
                     tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(tunnelEntity.TunnelId);
 
@@ -321,20 +310,20 @@ namespace _3.GeologyMeasure
         }
 
         /// <summary>
-        /// 添加按钮响应
+        ///     添加按钮响应
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void tsBtnAdd_Click(object sender, EventArgs e)
         {
-            LibCommonForm.TunnelInfoEntering d = new LibCommonForm.TunnelInfoEntering(this.MainForm);
+            var d = new TunnelInfoEntering(MainForm);
 
             if (DialogResult.OK == d.ShowDialog())
             {
                 //绑定信息
                 bindFpTunnelInfo();
                 //跳转到尾页
-                this.dataPager1.btnLastPage_Click(sender, e);
+                dataPager1.btnLastPage_Click(sender, e);
                 //获取最新行号
                 activeRow = rowsCount + rowDetailStartIndex;
                 // 设置farpoint焦点
@@ -343,7 +332,7 @@ namespace _3.GeologyMeasure
         }
 
         /// <summary>
-        /// 修改按钮响应
+        ///     修改按钮响应
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -351,25 +340,26 @@ namespace _3.GeologyMeasure
         {
             //实体赋值
             setTunnelEntityValue();
-            int[] arr = new int[4] {
+            var arr = new int[4]
+            {
                 tunnelEntity.WorkingFace.MiningArea.Horizontal.Mine.MineId,
                 tunnelEntity.WorkingFace.MiningArea.Horizontal.HorizontalId,
                 tunnelEntity.WorkingFace.MiningArea.MiningAreaId,
                 tunnelEntity.WorkingFace.WorkingFaceId
             };
 
-            LibCommonForm.TunnelInfoEntering d = new LibCommonForm.TunnelInfoEntering(tunnelEntity.TunnelId, arr, this.MainForm);
+            var d = new TunnelInfoEntering(tunnelEntity.TunnelId, arr, MainForm);
             if (DialogResult.OK == d.ShowDialog())
             {
                 //绑定巷道信息
                 bindFpTunnelInfo();
                 //修改后焦点设置
-                this.fpTunnelInfo.Sheets[0].SetActiveCell(activeRow, 0);
+                fpTunnelInfo.Sheets[0].SetActiveCell(activeRow, 0);
             }
         }
 
         /// <summary>
-        /// 删除按钮响应
+        ///     删除按钮响应
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -381,16 +371,16 @@ namespace _3.GeologyMeasure
                 for (int i = 0; i < rowsCount; i++)
                 {
                     if (cells[rowDetailStartIndex + i, 0].Value != null &&
-                        (bool)cells[rowDetailStartIndex + i, 0].Value == true)
+                        (bool) cells[rowDetailStartIndex + i, 0].Value)
                     {
                         //掘进ID
-                        tunnelEntity.TunnelId = (int)ds.Tables[0].Rows[i][TunnelInfoDbConstNames.ID];
+                        tunnelEntity.TunnelId = (int) ds.Tables[0].Rows[i][TunnelInfoDbConstNames.ID];
                         //巷道类型为掘进或回采巷道
                         if (TunnelInfoBLL.isTunnelJJ(tunnelEntity) || TunnelInfoBLL.isTunnelHC(tunnelEntity))
                         {
                             TunnelInfoBLL.deleteJJHCTunnelInfo(tunnelEntity);
                         }
-                        if (WireInfoBLL.selectAllWireInfo(tunnelEntity).Tables[0].Rows.Count > 0)
+                        if (Wire.FindOneByTunnelId(tunnelEntity.TunnelId) != null)
                         {
                             TunnelInfoBLL.deleteWireInfoBindingTunnelID(tunnelEntity);
                             //是否删除关联导线
@@ -399,11 +389,7 @@ namespace _3.GeologyMeasure
                                 TunnelInfoBLL.deleteWireInfoBindingTunnelID(tunnelEntity);
                             }
 
-                            //不删除时将导线重新绑定到其他巷道，默认为巷道ID=0
-                            else
-                            {
-                                //WireInfoBLL.changeWireInfoTunnelIDAsDefaultValue(tunnelEntity, 0);
-                            }
+                                //不删除时将导线重新绑定到其他巷道，默认为巷道ID=0
                         }
                         //删除巷道对应掘进日报
                         TunnelInfoBLL.deleteDayReportJJBindingTunnelID(tunnelEntity);
@@ -424,27 +410,27 @@ namespace _3.GeologyMeasure
         }
 
         /// <summary>
-        /// 确定按钮事件
+        ///     确定按钮事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnOK_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         /// <summary>
-        /// 退出按钮事件
+        ///     退出按钮事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void tsBtnExit_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         /// <summary>
-        /// 全选反选
+        ///     全选反选
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -463,14 +449,14 @@ namespace _3.GeologyMeasure
                         {
                             _htSelIdxs.Add(rowDetailStartIndex + i, true);
                         }
-                        this.fpTunnelInfo.Sheets[0].Cells[rowDetailStartIndex + i, 0].Value = ((CheckBox)sender).Checked;
+                        fpTunnelInfo.Sheets[0].Cells[rowDetailStartIndex + i, 0].Value = ((CheckBox) sender).Checked;
                         checkCount = ds.Tables[0].Rows.Count;
                     }
-                    //checkbox未选中
+                        //checkbox未选中
                     else
                     {
                         _htSelIdxs.Remove(rowDetailStartIndex + i);
-                        this.fpTunnelInfo.Sheets[0].Cells[rowDetailStartIndex + i, 0].Value = ((CheckBox)sender).Checked;
+                        fpTunnelInfo.Sheets[0].Cells[rowDetailStartIndex + i, 0].Value = ((CheckBox) sender).Checked;
                         checkCount = 0;
                     }
                 }
@@ -479,18 +465,18 @@ namespace _3.GeologyMeasure
         }
 
         /// <summary>
-        /// 取消按钮事件
+        ///     取消按钮事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnCancel_Click(object sender, EventArgs e)
         {
             // 关闭窗口
-            this.Close();
+            Close();
         }
 
         /// <summary>
-        /// 导出按钮事件
+        ///     导出按钮事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -503,7 +489,7 @@ namespace _3.GeologyMeasure
         }
 
         /// <summary>
-        /// 打印按钮事件
+        ///     打印按钮事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -513,7 +499,7 @@ namespace _3.GeologyMeasure
         }
 
         /// <summary>
-        /// 刷新按钮事件
+        ///     刷新按钮事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -523,7 +509,7 @@ namespace _3.GeologyMeasure
         }
 
         /// <summary>
-        /// 巷道类型中英转化
+        ///     巷道类型中英转化
         /// </summary>
         /// <param name="tunnelType"></param>
         /// <returns></returns>
@@ -554,61 +540,18 @@ namespace _3.GeologyMeasure
             return "";
         }
 
-        #region Farpoint自动过滤功能
-        private void farpointFilter1_OnCheckFilterChanged(object sender, EventArgs arg)
-        {
-            CheckBox chk = (CheckBox)sender;
-            //当Checkbox选中时，筛选过程中则将不符合条件的数据隐藏
-
-            MessageBox.Show("你好");
-            if (chk.Checked == true)
-            {
-                //禁用选择颜色相关控件
-                farpointFilter1.EnableChooseColorCtrls(false);
-                //设置自动隐藏过滤条件
-                FarpointDefaultPropertiesSetter.SetFpFilterHideProperties(this.fpTunnelInfo, _filterColunmIdxs);
-
-            }
-            else//未选中时，根据用户自定义的颜色进行分类显示
-            {
-                //启用选择颜色相关控件
-                farpointFilter1.EnableChooseColorCtrls(true);
-                //设置自定义过滤条件
-                FarpointDefaultPropertiesSetter.SetFpCustomFilterProperties(this.fpTunnelInfo, farpointFilter1.GetSelectedFitColor(), farpointFilter1.GetSelectedNotFitColor(), _filterColunmIdxs);
-            }
-        }
-
-        private void farpointFilter1_OnClickClearFilterBtn(object sender, EventArgs arg)
-        {
-            //清空过滤条件
-            this.fpTunnelInfo.ActiveSheet.RowFilter.ResetFilter();
-        }
-
-        private void farpointFilter1_OnClickFitColorBtnOK(object sender, EventArgs arg)
-        {
-            //根据新的颜色值设置自动隐藏过滤条件
-            FarpointDefaultPropertiesSetter.SetFpCustomFilterProperties(this.fpTunnelInfo, farpointFilter1.GetSelectedFitColor(), farpointFilter1.GetSelectedNotFitColor(), _filterColunmIdxs);
-        }
-
-        private void farpointFilter1_OnClickNotFitColorBtnOK(object sender, EventArgs arg)
-        {
-            //根据新的颜色值设置自动隐藏过滤条件
-            FarpointDefaultPropertiesSetter.SetFpCustomFilterProperties(this.fpTunnelInfo, farpointFilter1.GetSelectedFitColor(), farpointFilter1.GetSelectedNotFitColor(), _filterColunmIdxs);
-        }
-        #endregion
-
         /// <summary>
-        /// 获取farpoint中选中的所有行（必须实装）
+        ///     获取farpoint中选中的所有行（必须实装）
         /// </summary>
         /// <returns>注意，返回值可能是null，null则代表一个也没选中</returns>
         private int[] GetSelIdxs()
         {
-            if (this._htSelIdxs.Count == 0)
+            if (_htSelIdxs.Count == 0)
             {
                 return null;
             }
-            int[] retArr = new int[this._htSelIdxs.Count];
-            this._htSelIdxs.Keys.CopyTo(retArr, 0);
+            var retArr = new int[_htSelIdxs.Count];
+            _htSelIdxs.Keys.CopyTo(retArr, 0);
             return retArr;
         }
 
@@ -622,17 +565,17 @@ namespace _3.GeologyMeasure
                 return;
             }
             string bid = "";
-            ILayer pLayer = GIS.Common.DataEditCommon.GetLayerByName(GIS.Common.DataEditCommon.g_pMap, GIS.LayerNames.LAYER_ALIAS_MR_TUNNEL);
+            ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.LAYER_ALIAS_MR_TUNNEL);
             if (pLayer == null)
             {
                 MessageBox.Show("未发现巷道全图层！");
                 return;
             }
-            IFeatureLayer pFeatureLayer = (IFeatureLayer)pLayer;
+            var pFeatureLayer = (IFeatureLayer) pLayer;
             string str = "";
             for (int i = 0; i < iSelIdxsArr.Length; i++)
             {
-                bid = this.fpTunnelInfo.Sheets[0].Cells[iSelIdxsArr[i], _BIDIndex].Text.Trim();
+                bid = fpTunnelInfo.Sheets[0].Cells[iSelIdxsArr[i], _BIDIndex].Text.Trim();
                 if (bid != "")
                 {
                     if (i == 0)
@@ -641,25 +584,73 @@ namespace _3.GeologyMeasure
                         str += " or HdId='" + bid + "'";
                 }
             }
-            List<ESRI.ArcGIS.Geodatabase.IFeature> list = GIS.MyMapHelp.FindFeatureListByWhereClause(pFeatureLayer, str);
+            List<IFeature> list = MyMapHelp.FindFeatureListByWhereClause(pFeatureLayer, str);
             if (list.Count > 0)
             {
-                GIS.MyMapHelp.Jump(GIS.MyMapHelp.GetGeoFromFeature(list));
-                GIS.Common.DataEditCommon.g_pMap.ClearSelection();
+                MyMapHelp.Jump(MyMapHelp.GetGeoFromFeature(list));
+                DataEditCommon.g_pMap.ClearSelection();
                 for (int i = 0; i < list.Count; i++)
                 {
-                    GIS.Common.DataEditCommon.g_pMap.SelectFeature(pLayer, list[i]);
+                    DataEditCommon.g_pMap.SelectFeature(pLayer, list[i]);
                 }
-                this.WindowState = FormWindowState.Normal;
-                this.Location = GIS.Common.DataEditCommon.g_axTocControl.Location;
-                this.Width = GIS.Common.DataEditCommon.g_axTocControl.Width;
-                this.Height = GIS.Common.DataEditCommon.g_axTocControl.Height;
-                GIS.Common.DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeoSelection, null, GIS.Common.DataEditCommon.g_pAxMapControl.Extent);
+                WindowState = FormWindowState.Normal;
+                Location = DataEditCommon.g_axTocControl.Location;
+                Width = DataEditCommon.g_axTocControl.Width;
+                Height = DataEditCommon.g_axTocControl.Height;
+                DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeoSelection, null,
+                    DataEditCommon.g_pAxMapControl.Extent);
             }
             else
             {
                 Alert.alert("图元丢失");
             }
         }
+
+        #region Farpoint自动过滤功能
+
+        private void farpointFilter1_OnCheckFilterChanged(object sender, EventArgs arg)
+        {
+            var chk = (CheckBox) sender;
+            //当Checkbox选中时，筛选过程中则将不符合条件的数据隐藏
+
+            MessageBox.Show("你好");
+            if (chk.Checked)
+            {
+                //禁用选择颜色相关控件
+                farpointFilter1.EnableChooseColorCtrls(false);
+                //设置自动隐藏过滤条件
+                FarpointDefaultPropertiesSetter.SetFpFilterHideProperties(fpTunnelInfo, _filterColunmIdxs);
+            }
+            else //未选中时，根据用户自定义的颜色进行分类显示
+            {
+                //启用选择颜色相关控件
+                farpointFilter1.EnableChooseColorCtrls(true);
+                //设置自定义过滤条件
+                FarpointDefaultPropertiesSetter.SetFpCustomFilterProperties(fpTunnelInfo,
+                    farpointFilter1.GetSelectedFitColor(), farpointFilter1.GetSelectedNotFitColor(), _filterColunmIdxs);
+            }
+        }
+
+        private void farpointFilter1_OnClickClearFilterBtn(object sender, EventArgs arg)
+        {
+            //清空过滤条件
+            fpTunnelInfo.ActiveSheet.RowFilter.ResetFilter();
+        }
+
+        private void farpointFilter1_OnClickFitColorBtnOK(object sender, EventArgs arg)
+        {
+            //根据新的颜色值设置自动隐藏过滤条件
+            FarpointDefaultPropertiesSetter.SetFpCustomFilterProperties(fpTunnelInfo,
+                farpointFilter1.GetSelectedFitColor(), farpointFilter1.GetSelectedNotFitColor(), _filterColunmIdxs);
+        }
+
+        private void farpointFilter1_OnClickNotFitColorBtnOK(object sender, EventArgs arg)
+        {
+            //根据新的颜色值设置自动隐藏过滤条件
+            FarpointDefaultPropertiesSetter.SetFpCustomFilterProperties(fpTunnelInfo,
+                farpointFilter1.GetSelectedFitColor(), farpointFilter1.GetSelectedNotFitColor(), _filterColunmIdxs);
+        }
+
+        #endregion
     }
 }

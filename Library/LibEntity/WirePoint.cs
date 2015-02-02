@@ -101,10 +101,20 @@ namespace LibEntity
         {
             var criterion = new List<ICriterion>
             {
-                Restrictions.Eq("Wire.WireInfoId", wireInfoId),
+                Restrictions.Eq("Wire.WireId", wireInfoId),
                 Restrictions.Eq("WirePointId", wirePointId)
             };
             return Exists(criterion.ToArray());
+        }
+
+
+        public static WirePoint[] FindAllByWireId(int wireId)
+        {
+            var criterion = new ICriterion[]
+            {
+                Restrictions.Eq("Wire.WireId", wireId)
+            };
+            return FindAll(criterion);
         }
     }
 }

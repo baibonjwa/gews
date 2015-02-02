@@ -32,7 +32,7 @@ namespace sys3
         private int[] _wirePointPrimaryKey;
         private Tunnel tunnelEntity;
         private Wire wireEntity = new Wire();
-        private WirePoint wirePointEntity = new WirePoint();
+        private WirePoint wirePointInfoEntity = new WirePoint();
         //****************************************
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace sys3
             //实体赋值
             setWireInfoEntityValue();
 
-            int tunnelID = WireInfoBLL.selectTunnelIDByWireInfoID(wireEntity.WireInfoId);
+            int tunnelID = Wire.Find(wireEntity.WireId).Tunnel.TunnelId;
             tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(tunnelID);
 
             //导线修改界面
@@ -99,16 +99,16 @@ namespace sys3
                     (bool)cells[_rowDetailStartIndex + i, 0].Value)
                 {
                     //导线点ID
-                    wirePointEntity.Id = _wirePointPrimaryKey[i];
+                    wirePointInfoEntity.Id = _wirePointPrimaryKey[i];
 
                     //导线点实体
-                    wirePointEntity = WirePointBLL.selectWirePointInfoByWirePointId(wirePointEntity.Id);
+                    wirePointInfoEntity = WirePointBLL.selectWirePointInfoByWirePointId(wirePointInfoEntity.Id);
 
                     //矿井编号
-                    wireEntity = wirePointEntity.Wire;
+                    wireEntity = wirePointInfoEntity.Wire;
 
                     //巷道实体
-                    wireEntity = Wire.Find(wireEntity.WireInfoId);
+                    wireEntity = Wire.Find(wireEntity.WireId);
                 }
             }
         }
@@ -131,17 +131,17 @@ namespace sys3
                         (bool)cells[_rowDetailStartIndex + i, 0].Value)
                     {
                         //导线点ID
-                        wirePointEntity.Id = _wirePointPrimaryKey[i];
+                        wirePointInfoEntity.Id = _wirePointPrimaryKey[i];
 
                         //导线点实体
-                        wirePointEntity = WirePointBLL.selectWirePointInfoByWirePointId(wirePointEntity.Id);
+                        wirePointInfoEntity = WirePointBLL.selectWirePointInfoByWirePointId(wirePointInfoEntity.Id);
 
                         //矿井编号
-                        wireEntity = wirePointEntity.Wire;
+                        wireEntity = wirePointInfoEntity.Wire;
 
                         //导线实体
-                        wireEntity = Wire.Find(wireEntity.WireInfoId);
-                        DataSet ds = WirePointBLL.selectAllWirePointInfo(wireEntity.WireInfoId);
+                        wireEntity = Wire.Find(wireEntity.WireId);
+                        DataSet ds = WirePointBLL.selectAllWirePointInfo(wireEntity.WireId);
                         if (ds.Tables[0].Rows.Count > 0)
                         {
                             bResult = WirePointBLL.deleteWirePointInfo(wireEntity);
@@ -153,7 +153,7 @@ namespace sys3
                         DialogResult dlgResult = MessageBox.Show("是否删除对应图元？", "", MessageBoxButtons.YesNo);
                         if (dlgResult == DialogResult.Yes)
                         {
-                            //DeleteWirePtByBID(wirePointEntity);
+                            //DeleteWirePtByBID(wirePointInfoEntity);
                             DelHdByHdId(tunnelEntity.TunnelId.ToString());
 
                             //wireEntity.Tunnel
@@ -278,9 +278,9 @@ namespace sys3
         ///     根据导线点绑定ID删除导线点图元
         /// </summary>
         /// <param name="sfpFaultageBIDArray">要删除导线点的绑定ID</param>
-        private void DeleteWirePtByBID(WirePoint wirePointEntity)
+        private void DeleteWirePtByBID(WirePoint wirePointInfoEntity)
         {
-            if (wirePointEntity.BindingId == "") return;
+            if (wirePointInfoEntity.BindingId == "") return;
 
             //1.获得当前编辑图层
             var drawspecial = new DrawSpecialCommon();
@@ -293,7 +293,7 @@ namespace sys3
             }
 
             //2.删除导线点图元
-            DataEditCommon.DeleteFeatureByBId(featureLayer, wirePointEntity.BindingId);
+            DataEditCommon.DeleteFeatureByBId(featureLayer, wirePointInfoEntity.BindingId);
         }
 
 

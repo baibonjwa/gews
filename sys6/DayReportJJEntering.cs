@@ -1,13 +1,4 @@
-﻿// ******************************************************************
-// 概  述：掘进日报添加修改
-// 作  者：宋英杰
-// 创建日期：2014/3/11
-// 版本号：V1.0
-// 版本信息：
-// V1.0 新建
-// ******************************************************************
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
@@ -32,7 +23,7 @@ namespace UnderTerminal
         private DayReportJj _dayReportJJEntity = new DayReportJj();
         private Tunnel _tunnelEntity = new Tunnel();
         /**巷道关联矿井等信息ID集合**/
-        private DataSet dsWirePoint = new DataSet();
+        private WirePoint[] wirePoints;
 
         #endregion ******变量声明******
 
@@ -203,8 +194,8 @@ namespace UnderTerminal
         private void bindTeamInfo()
         {
             cboTeamName.Items.Clear();
-            Team[] team = Team.FindAll();
-            foreach (Team t in team)
+            Team[] teams = Team.FindAll();
+            foreach (Team t in teams)
             {
                 cboTeamName.Items.Add(t.TeamName);
             }
@@ -638,6 +629,8 @@ namespace UnderTerminal
             }
         }
 
+
+        
         /// <summary>
         ///     自动计算距参考导线点距离
         /// </summary>
@@ -645,274 +638,271 @@ namespace UnderTerminal
         /// <param name="jjjc">掘进进尺</param>
         /// <param name="wirePointID">参考导线点编号</param>
         /// <returns>距参考导线点距离</returns>
-        private double autoDistanceFromWirepoint(double lastDistanceFromWirepoint, double jjjc, int wirePointID)
-        {
-            double distance = 0;
-            double distanceFromWirepoint = 0;
-            var wirePointInfoEntityNew = new WirePoint();
-            var wirePointInfoEntityOld = new WirePoint();
-            wirePointInfoEntityNew.Id = Convert.ToInt32(dgrdvDayReportJJ.CurrentRow.Cells[4].Value);
-            wirePointInfoEntityNew = WirePointBLL.selectWirePointInfoByWirePointId(wirePointInfoEntityNew.Id);
-            wirePointInfoEntityOld.Id = wirePointID;
-            wirePointInfoEntityOld = WirePointBLL.selectWirePointInfoByWirePointId(wirePointInfoEntityOld.Id);
-            if (wirePointID != 0)
-            {
-                distance =
-                    Math.Sqrt(Math.Pow((wirePointInfoEntityNew.CoordinateX - wirePointInfoEntityOld.CoordinateX), 2) +
-                              Math.Pow((wirePointInfoEntityNew.CoordinateY - wirePointInfoEntityOld.CoordinateY), 2));
-                if (wirePointInfoEntityNew.Id < wirePointInfoEntityOld.Id)
-                {
-                    distanceFromWirepoint = jjjc + lastDistanceFromWirepoint + distance;
-                }
-                else
-                {
-                    distanceFromWirepoint = jjjc + lastDistanceFromWirepoint - distance;
-                }
-                //if (distanceFromWirepoint < 0)
-                //{
-                //    distanceFromWirepoint = -distanceFromWirepoint;
-                //}
-            }
-            else
-            {
-                DataSet ds = DayReportJJBLL.selectDayReportJJInfo(tunnelId);
-                int minWirepoint = 0;
-                if (ds.Tables[0].Rows.Count > 0)
-                {
-                    if (int.TryParse(ds.Tables[0].Rows[0][DayReportJJDbConstNames.ID].ToString(), out minWirepoint))
-                    {
-                        wirePointInfoEntityOld.Id = minWirepoint;
-                        wirePointInfoEntityOld = WirePointBLL.selectWirePointInfoByWirePointId(wirePointInfoEntityOld.Id);
-                    }
-                    distance =
-                        Math.Sqrt(
-                            Math.Pow((wirePointInfoEntityNew.CoordinateX - wirePointInfoEntityOld.CoordinateX), 2) +
-                            Math.Pow((wirePointInfoEntityNew.CoordinateY - wirePointInfoEntityOld.CoordinateY), 2));
-                }
-                else
-                {
-                    distance = 0;
-                }
+        //private double autoDistanceFromWirepoint(double lastDistanceFromWirepoint, double jjjc, int wirePointID)
+        //{
+        //    double distance = 0;
+        //    double distanceFromWirepoint = 0;
+        //    var wirePointInfoEntityNew = new WirePoint();
+        //    var wirePointInfoEntityOld = new WirePoint();
+        //    wirePointInfoEntityNew.Id = Convert.ToInt32(dgrdvDayReportJJ.CurrentRow.Cells[4].Value);
+        //    wirePointInfoEntityNew = WirePointBLL.selectWirePointInfoByWirePointId(wirePointInfoEntityNew.Id);
+        //    wirePointInfoEntityOld.Id = wirePointID;
+        //    wirePointInfoEntityOld = WirePointBLL.selectWirePointInfoByWirePointId(wirePointInfoEntityOld.Id);
+        //    if (wirePointID != 0)
+        //    {
+        //        distance =
+        //            Math.Sqrt(Math.Pow((wirePointInfoEntityNew.CoordinateX - wirePointInfoEntityOld.CoordinateX), 2) +
+        //                      Math.Pow((wirePointInfoEntityNew.CoordinateY - wirePointInfoEntityOld.CoordinateY), 2));
+        //        if (wirePointInfoEntityNew.Id < wirePointInfoEntityOld.Id)
+        //        {
+        //            distanceFromWirepoint = jjjc + lastDistanceFromWirepoint + distance;
+        //        }
+        //        else
+        //        {
+        //            distanceFromWirepoint = jjjc + lastDistanceFromWirepoint - distance;
+        //        }
+        //        //if (distanceFromWirepoint < 0)
+        //        //{
+        //        //    distanceFromWirepoint = -distanceFromWirepoint;
+        //        //}
+        //    }
+        //    else
+        //    {
+        //        DataSet ds = DayReportJJBLL.selectDayReportJJInfo(tunnelId);
+        //        int minWirepoint = 0;
+        //        if (ds.Tables[0].Rows.Count > 0)
+        //        {
+        //            if (int.TryParse(ds.Tables[0].Rows[0][DayReportJJDbConstNames.ID].ToString(), out minWirepoint))
+        //            {
+        //                wirePointInfoEntityOld.Id = minWirepoint;
+        //                wirePointInfoEntityOld = WirePointBLL.selectWirePointInfoByWirePointId(wirePointInfoEntityOld.Id);
+        //            }
+        //            distance =
+        //                Math.Sqrt(
+        //                    Math.Pow((wirePointInfoEntityNew.CoordinateX - wirePointInfoEntityOld.CoordinateX), 2) +
+        //                    Math.Pow((wirePointInfoEntityNew.CoordinateY - wirePointInfoEntityOld.CoordinateY), 2));
+        //        }
+        //        else
+        //        {
+        //            distance = 0;
+        //        }
 
-                distanceFromWirepoint = jjjc + lastDistanceFromWirepoint - distance;
-            }
-            return distanceFromWirepoint;
-        }
+        //        distanceFromWirepoint = jjjc + lastDistanceFromWirepoint - distance;
+        //    }
+        //    return distanceFromWirepoint;
+        //}
 
         /// <summary>
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dgrdvDayReportJJ_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            //第一行时
-            if (e.RowIndex == 0)
-            {
-                //进尺单元格
-                if (e.ColumnIndex == 2)
-                {
-                    //非空
-                    if (dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value != null)
-                    {
-                        //验证输入是否为数字
-                        if (Validator.IsNumeric(dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value.ToString()))
-                        {
-                            //添加时计算方式
-                            if (Text == Const_MS.DAY_REPORT_JJ_ADD)
-                            {
-                                if (tunnelId > 0)
-                                {
-                                    _dayReportJJEntity = DayReportJJBLL.returnMaxRowDistanceFromWirepoint(tunnelId);
-                                    dgrdvDayReportJJ[e.ColumnIndex + 1, e.RowIndex].Value =
-                                        autoDistanceFromWirepoint(_dayReportJJEntity.DistanceFromWirepoint,
-                                            Convert.ToDouble(dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value),
-                                            _dayReportJJEntity.ConsultWirepoint);
-                                }
-                            }
-                            //修改时计算方式
-                            else
-                            {
-                                dgrdvDayReportJJ[e.ColumnIndex + 1, e.RowIndex].Value =
-                                    Convert.ToDouble(dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value) -
-                                    _dayReportJJEntity.JinChi + _dayReportJJEntity.DistanceFromWirepoint;
-                            }
-                        }
-                        //不是数字时
-                        else
-                        {
-                            Alert.alert(Const_MS.JC + Const.MSG_MUST_NUMBER + Const_MS.SIGN_EXCLAMATION_MARK);
-                            //错误处理
-                            //添加时处理方式
-                            if (Text == Const_MS.DAY_REPORT_JJ_ADD)
-                            {
-                                dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value = null;
-                                dgrdvDayReportJJ[e.ColumnIndex + 1, e.RowIndex].Value = null;
-                            }
-                            //修改时处理方式
-                            else
-                            {
-                                dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value = _dayReportJJEntity.JinChi;
-                                dgrdvDayReportJJ[e.ColumnIndex + 1, e.RowIndex].Value =
-                                    _dayReportJJEntity.DistanceFromWirepoint;
-                            }
-                        }
-                    }
-                }
-                //距切眼距离单元格
-                if (e.ColumnIndex == 3)
-                {
-                    //为空
-                    if (dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value == null ||
-                        dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value.ToString().Trim() == "")
-                    {
-                        Alert.alert(Const_MS.OFC + Const.MSG_NOT_NULL);
-                        //添加时计算方式
-                        if (Text == Const_MS.DAY_REPORT_JJ_ADD)
-                        {
-                            if (tunnelId > 0)
-                            {
-                                dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value =
-                                    autoDistanceFromWirepoint(_dayReportJJEntity.DistanceFromWirepoint,
-                                        Convert.ToDouble(dgrdvDayReportJJ[e.ColumnIndex - 1, e.RowIndex].Value),
-                                        _dayReportJJEntity.ConsultWirepoint);
-                            }
-                        }
-                        //修改时计算方式
-                        else
-                        {
-                            dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value =
-                                Convert.ToDouble(dgrdvDayReportJJ[e.ColumnIndex - 1, e.RowIndex].Value) -
-                                _dayReportJJEntity.JinChi + _dayReportJJEntity.DistanceFromWirepoint;
-                        }
-                    }
-                }
-            }
-            //非第一行时
-            else
-            {
-                //进尺单元格
-                if (e.ColumnIndex == 2)
-                {
-                    //非空
-                    if (dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value != null)
-                    {
-                        //验证输入是否为数字
-                        if (Validator.IsNumeric(dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value.ToString()))
-                        {
-                            //添加时计算方式
-                            if (Text == Const_MS.DAY_REPORT_JJ_ADD)
-                            {
-                                dgrdvDayReportJJ[e.ColumnIndex + 1, e.RowIndex].Value =
-                                    autoDistanceFromWirepoint(
-                                        Convert.ToDouble(dgrdvDayReportJJ[e.ColumnIndex + 1, e.RowIndex - 1].Value),
-                                        Convert.ToDouble(dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value),
-                                        Convert.ToInt32(dgrdvDayReportJJ[4, dgrdvDayReportJJ.CurrentRow.Index - 1].Value));
-                            }
-                        }
-                        //不是数字时
-                        else
-                        {
-                            Alert.alert(Const_MS.JC + Const.MSG_MUST_NUMBER + Const_MS.SIGN_EXCLAMATION_MARK);
-                            //错误处理
-                            //添加时处理方式
-                            if (Text == Const_MS.DAY_REPORT_HC_ADD)
-                            {
-                                dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value = null;
-                                dgrdvDayReportJJ[e.ColumnIndex + 1, e.RowIndex].Value = null;
-                            }
-                        }
-                    }
-                }
-                //距参考导线点距离
-                if (e.ColumnIndex == 3)
-                {
-                    //为空
-                    if (dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value == null ||
-                        dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value.ToString().Trim() == "")
-                    {
-                        Alert.alert(Const_MS.DFW + Const.MSG_NOT_NULL);
-                        //添加时计算方式
-                        if (Text == Const_MS.DAY_REPORT_JJ_ADD)
-                        {
-                            if (tunnelId > 0)
-                            {
-                                dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value =
-                                    autoDistanceFromWirepoint(_dayReportJJEntity.DistanceFromWirepoint,
-                                        Convert.ToDouble(dgrdvDayReportJJ[e.ColumnIndex - 1, e.RowIndex].Value),
-                                        _dayReportJJEntity.ConsultWirepoint);
-                            }
-                        }
-                        //修改时计算方式
-                        else
-                        {
-                            dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value =
-                                Convert.ToDouble(dgrdvDayReportJJ[e.ColumnIndex - 1, e.RowIndex].Value) -
-                                _dayReportJJEntity.JinChi + _dayReportJJEntity.DistanceFromWirepoint;
-                        }
-                    }
-                }
-            }
-        }
+        //private void dgrdvDayReportJJ_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    //第一行时
+        //    if (e.RowIndex == 0)
+        //    {
+        //        //进尺单元格
+        //        if (e.ColumnIndex == 2)
+        //        {
+        //            //非空
+        //            if (dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value != null)
+        //            {
+        //                //验证输入是否为数字
+        //                if (Validator.IsNumeric(dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value.ToString()))
+        //                {
+        //                    //添加时计算方式
+        //                    if (Text == Const_MS.DAY_REPORT_JJ_ADD)
+        //                    {
+        //                        if (tunnelId > 0)
+        //                        {
+        //                            _dayReportJJEntity = DayReportJJBLL.returnMaxRowDistanceFromWirepoint(tunnelId);
+        //                            dgrdvDayReportJJ[e.ColumnIndex + 1, e.RowIndex].Value =
+        //                                autoDistanceFromWirepoint(_dayReportJJEntity.DistanceFromWirepoint,
+        //                                    Convert.ToDouble(dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value),
+        //                                    _dayReportJJEntity.ConsultWirepoint);
+        //                        }
+        //                    }
+        //                    //修改时计算方式
+        //                    else
+        //                    {
+        //                        dgrdvDayReportJJ[e.ColumnIndex + 1, e.RowIndex].Value =
+        //                            Convert.ToDouble(dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value) -
+        //                            _dayReportJJEntity.JinChi + _dayReportJJEntity.DistanceFromWirepoint;
+        //                    }
+        //                }
+        //                //不是数字时
+        //                else
+        //                {
+        //                    Alert.alert(Const_MS.JC + Const.MSG_MUST_NUMBER + Const_MS.SIGN_EXCLAMATION_MARK);
+        //                    //错误处理
+        //                    //添加时处理方式
+        //                    if (Text == Const_MS.DAY_REPORT_JJ_ADD)
+        //                    {
+        //                        dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value = null;
+        //                        dgrdvDayReportJJ[e.ColumnIndex + 1, e.RowIndex].Value = null;
+        //                    }
+        //                    //修改时处理方式
+        //                    else
+        //                    {
+        //                        dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value = _dayReportJJEntity.JinChi;
+        //                        dgrdvDayReportJJ[e.ColumnIndex + 1, e.RowIndex].Value =
+        //                            _dayReportJJEntity.DistanceFromWirepoint;
+        //                    }
+        //                }
+        //            }
+        //        }
+        //        //距切眼距离单元格
+        //        if (e.ColumnIndex == 3)
+        //        {
+        //            //为空
+        //            if (dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value == null ||
+        //                dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value.ToString().Trim() == "")
+        //            {
+        //                Alert.alert(Const_MS.OFC + Const.MSG_NOT_NULL);
+        //                //添加时计算方式
+        //                if (Text == Const_MS.DAY_REPORT_JJ_ADD)
+        //                {
+        //                    if (tunnelId > 0)
+        //                    {
+        //                        dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value =
+        //                            autoDistanceFromWirepoint(_dayReportJJEntity.DistanceFromWirepoint,
+        //                                Convert.ToDouble(dgrdvDayReportJJ[e.ColumnIndex - 1, e.RowIndex].Value),
+        //                                _dayReportJJEntity.ConsultWirepoint);
+        //                    }
+        //                }
+        //                //修改时计算方式
+        //                else
+        //                {
+        //                    dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value =
+        //                        Convert.ToDouble(dgrdvDayReportJJ[e.ColumnIndex - 1, e.RowIndex].Value) -
+        //                        _dayReportJJEntity.JinChi + _dayReportJJEntity.DistanceFromWirepoint;
+        //                }
+        //            }
+        //        }
+        //    }
+        //    //非第一行时
+        //    else
+        //    {
+        //        //进尺单元格
+        //        if (e.ColumnIndex == 2)
+        //        {
+        //            //非空
+        //            if (dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value != null)
+        //            {
+        //                //验证输入是否为数字
+        //                if (Validator.IsNumeric(dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value.ToString()))
+        //                {
+        //                    //添加时计算方式
+        //                    if (Text == Const_MS.DAY_REPORT_JJ_ADD)
+        //                    {
+        //                        dgrdvDayReportJJ[e.ColumnIndex + 1, e.RowIndex].Value =
+        //                            autoDistanceFromWirepoint(
+        //                                Convert.ToDouble(dgrdvDayReportJJ[e.ColumnIndex + 1, e.RowIndex - 1].Value),
+        //                                Convert.ToDouble(dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value),
+        //                                Convert.ToInt32(dgrdvDayReportJJ[4, dgrdvDayReportJJ.CurrentRow.Index - 1].Value));
+        //                    }
+        //                }
+        //                //不是数字时
+        //                else
+        //                {
+        //                    Alert.alert(Const_MS.JC + Const.MSG_MUST_NUMBER + Const_MS.SIGN_EXCLAMATION_MARK);
+        //                    //错误处理
+        //                    //添加时处理方式
+        //                    if (Text == Const_MS.DAY_REPORT_HC_ADD)
+        //                    {
+        //                        dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value = null;
+        //                        dgrdvDayReportJJ[e.ColumnIndex + 1, e.RowIndex].Value = null;
+        //                    }
+        //                }
+        //            }
+        //        }
+        //        //距参考导线点距离
+        //        if (e.ColumnIndex == 3)
+        //        {
+        //            //为空
+        //            if (dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value == null ||
+        //                dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value.ToString().Trim() == "")
+        //            {
+        //                Alert.alert(Const_MS.DFW + Const.MSG_NOT_NULL);
+        //                //添加时计算方式
+        //                if (Text == Const_MS.DAY_REPORT_JJ_ADD)
+        //                {
+        //                    if (tunnelId > 0)
+        //                    {
+        //                        dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value =
+        //                            autoDistanceFromWirepoint(_dayReportJJEntity.DistanceFromWirepoint,
+        //                                Convert.ToDouble(dgrdvDayReportJJ[e.ColumnIndex - 1, e.RowIndex].Value),
+        //                                _dayReportJJEntity.ConsultWirepoint);
+        //                    }
+        //                }
+        //                //修改时计算方式
+        //                else
+        //                {
+        //                    dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value =
+        //                        Convert.ToDouble(dgrdvDayReportJJ[e.ColumnIndex - 1, e.RowIndex].Value) -
+        //                        _dayReportJJEntity.JinChi + _dayReportJJEntity.DistanceFromWirepoint;
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
 
-        private void dgrdvDayReportJJ_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            dgrdvDayReportJJ[1, e.RowIndex].Value = "掘进";
-            if (e.RowIndex > 0 && dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value == null)
-            {
-                dgrdvDayReportJJ[4, e.RowIndex].Value = dgrdvDayReportJJ[4, e.RowIndex - 1].Value;
-            }
-        }
+        //private void dgrdvDayReportJJ_RowEnter(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    dgrdvDayReportJJ[1, e.RowIndex].Value = "掘进";
+        //    if (e.RowIndex > 0 && dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value == null)
+        //    {
+        //        dgrdvDayReportJJ[4, e.RowIndex].Value = dgrdvDayReportJJ[4, e.RowIndex - 1].Value;
+        //    }
+        //}
 
-        private void dgrdvDayReportJJ_RowLeave(object sender, DataGridViewCellEventArgs e)
-        {
-            if (dgrdvDayReportJJ[0, e.RowIndex].Value == null && dgrdvDayReportJJ[2, e.RowIndex].Value == null &&
-                dgrdvDayReportJJ[3, e.RowIndex].Value == null && dgrdvDayReportJJ[4, e.RowIndex].Value == null &&
-                dgrdvDayReportJJ[5, e.RowIndex].Value == null)
-            {
-                dgrdvDayReportJJ[1, e.RowIndex].Value = null;
-            }
-        }
+        //private void dgrdvDayReportJJ_RowLeave(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    if (dgrdvDayReportJJ[0, e.RowIndex].Value == null && dgrdvDayReportJJ[2, e.RowIndex].Value == null &&
+        //        dgrdvDayReportJJ[3, e.RowIndex].Value == null && dgrdvDayReportJJ[4, e.RowIndex].Value == null &&
+        //        dgrdvDayReportJJ[5, e.RowIndex].Value == null)
+        //    {
+        //        dgrdvDayReportJJ[1, e.RowIndex].Value = null;
+        //    }
+        //}
 
         /// <summary>
         ///     获取参考导线点的下一个导线点
         /// </summary>
         /// <param name="refPointID">参考导线点ID</param>
         /// <returns>下一个点的ID</returns>
-        private int getNextWirePointID(int refPointID)
-        {
-            try
-            {
-                DataSet dsWireInfo = WireInfoBLL.selectAllWireInfo(_tunnelEntity);
-                if (dsWireInfo.Tables[0].Rows.Count > 0)
-                {
-                    //获取导线上的所有导线点信息
-                    dsWirePoint =
-                        WirePointBLL.selectAllWirePointInfo(
-                            Convert.ToInt32(dsWireInfo.Tables[0].Rows[0][WireInfoDbConstNames.ID].ToString()));
-                    DataTable dt = dsWirePoint.Tables[0];
-                    if (dt.Rows.Count < 2)
-                        return -1;
+        //private int getNextWirePointID(int refPointID)
+        //{
+        //    try
+        //    {
+        //        var wireInfo = Wire.FindOneByTunnelId(_tunnelEntity.TunnelId);
+        //        if (wireInfo != null)
+        //        {
+        //            //获取导线上的所有导线点信息
+        //            wirePoints = WirePoint.FindAllByWireId(wireInfo.WireId);
+        //            if (wirePoints.Length < 2)
+        //                return -1;
 
-                    int wirePointID = -1;
-                    for (int i = 0; i < dt.Rows.Count; i++)
-                    {
-                        wirePointID = Convert.ToInt32(dt.Rows[i][WirePointDbConstNames.ID]);
-                        if (wirePointID == refPointID + 1) //参考导线点的下一个点
-                            return wirePointID;
-                    }
-                }
-                return -1;
-            }
-            catch (Exception ex)
-            {
-                Trace.WriteLine("获取参考导线点下一个点ID出错:" + ex.Message);
-                return -1;
-            }
-        }
+        //            int wirePointID = -1;
+        //            for (int i = 0; i < wirePoints.Length; i++)
+        //            {
+        //                wirePointID = wirePoints[i].Id;
+        //                if (wirePointID == refPointID + 1) //参考导线点的下一个点
+        //                    return wirePointID;
+        //            }
+        //        }
+        //        return -1;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Trace.WriteLine("获取参考导线点下一个点ID出错:" + ex.Message);
+        //        return -1;
+        //    }
+        //}
 
-        private void dgrdvDayReportJJ_CellLeave(object sender, DataGridViewCellEventArgs e)
-        {
-            dgrdvDayReportJJ.EndEdit();
-        }
+        //private void dgrdvDayReportJJ_CellLeave(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    dgrdvDayReportJJ.EndEdit();
+        //}
     }
 }

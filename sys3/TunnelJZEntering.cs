@@ -166,7 +166,7 @@ namespace _3.GeologyMeasure
                 if (this.Text == Const_GM.WIRE_INFO_ADD)
                 {
                     //导线点是否存在
-                    if (WirePoint.ExistsByWirePointIdInWireInfo(wireEntity.WireInfoId, dgrdvWire.Rows[i].Cells[0].Value.ToString()))
+                    if (WirePoint.ExistsByWirePointIdInWireInfo(wireEntity.WireId, dgrdvWire.Rows[i].Cells[0].Value.ToString()))
                     {
                         cell.Style.BackColor = Const.ERROR_FIELD_COLOR;
                         Alert.alert(Const_GM.WIRE_POINT_ID + Const.MSG_ALREADY_HAVE + Const.SIGN_EXCLAMATION_MARK);

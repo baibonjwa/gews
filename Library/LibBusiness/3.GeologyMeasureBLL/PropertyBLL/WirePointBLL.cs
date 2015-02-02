@@ -113,7 +113,7 @@ namespace LibBusiness
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
             bool bResult = false;
-            string sql = "DELETE FROM " + WirePointDbConstNames.TABLE_NAME + " WHERE " + WirePointDbConstNames.WIRE_INFO_ID + " ='" + wireEntity.WireInfoId + "'";
+            string sql = "DELETE FROM " + WirePointDbConstNames.TABLE_NAME + " WHERE " + WirePointDbConstNames.WIRE_INFO_ID + " ='" + wireEntity.WireId + "'";
             bResult = db.OperateDB(sql);
             return bResult;
         }
@@ -152,7 +152,7 @@ namespace LibBusiness
                 wirePointEntity.RightDis = Convert.ToDouble(ds.Tables[0].Rows[0][WirePointDbConstNames.DISTANCE_FROM_THE_RIGHT]);
                 wirePointEntity.TopDis = Convert.ToDouble(ds.Tables[0].Rows[0][WirePointDbConstNames.DISTANCE_FROM_TOP]);
                 wirePointEntity.BottomDis = Convert.ToDouble(ds.Tables[0].Rows[0][WirePointDbConstNames.DISTANCE_FROM_BOTTOM]);
-                wirePointEntity.Wire.WireInfoId = Convert.ToInt32(ds.Tables[0].Rows[0][WirePointDbConstNames.WIRE_INFO_ID]);
+                wirePointEntity.Wire.WireId = Convert.ToInt32(ds.Tables[0].Rows[0][WirePointDbConstNames.WIRE_INFO_ID]);
             }
             return wirePointEntity;
         }
