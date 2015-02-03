@@ -5,7 +5,9 @@
 // 版本号：1.0
 // ******************************************************************
 
+using System.Collections.Generic;
 using Castle.ActiveRecord;
+using NHibernate.Criterion;
 
 namespace LibEntity
 {
@@ -23,5 +25,14 @@ namespace LibEntity
         /// </summary>
         [Property("MINE_NAME")]
         public string MineName { get; set; }
+
+        public static bool ExistsByMineName(string mineName)
+        {
+            var criterion = new ICriterion[]
+            {
+                Restrictions.Eq("MineName", mineName)
+            };
+            return Exists(criterion);
+        }
     }
 }

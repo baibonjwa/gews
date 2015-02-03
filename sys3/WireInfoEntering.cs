@@ -279,7 +279,7 @@ namespace sys3
                         //string bid = "";
                         //string hdname = "";
                         //double hdwid = Global.linespace;//给个默认的值
-                        DataSet dst = TunnelInfoBLL.selectOneTunnelInfoByTunnelID(_tunnelID);
+                        Tunnel tunnel = Tunnel.Find(_tunnelID);
                         //if (dst.Tables[0].Rows.Count > 0)
                         //{
                         //    bid = dst.Tables[0].Rows[0][LibBusiness.TunnelInfoDbConstNames.BINDINGID].ToString();
@@ -296,7 +296,7 @@ namespace sys3
 
                         // 绘制巷道
                         double hdwid = 0.0;
-                        dics = ConstructDics(dst, out hdwid);
+                        dics = ConstructDics(tunnel, out hdwid);
                         AddHdbyPnts(lstWirePointInfoEnt, dics, hdwid);
                     }
                 }
@@ -318,10 +318,10 @@ namespace sys3
                     if (dlgResult == DialogResult.Yes)
                     {
                         //DrawTunnel(lstWirePointInfoEnt, sADDorCHANGE);
-                        DataSet dst = TunnelInfoBLL.selectOneTunnelInfoByTunnelID(_tunnelID);
+                        Tunnel tunnel = Tunnel.Find(_tunnelID);
                         double hdwid = 0.0;
-                        dics = ConstructDics(dst, out hdwid);
-                        if (dst.Tables[0].Rows.Count > 0)
+                        dics = ConstructDics(tunnel, out hdwid);
+                        if (tunnel != null)
                         {
                             UpdateHdbyPnts(lstWirePointInfoEnt, dics, hdwid);
                         }
@@ -330,7 +330,7 @@ namespace sys3
             }
         }
 
-        private Dictionary<string, string> ConstructDics(DataSet dst, out double hdwid)
+        private Dictionary<string, string> ConstructDics(Tunnel tunnel, out double hdwid)
         {
             //巷道信息赋值
             hdwid = 0.0;
@@ -343,11 +343,11 @@ namespace sys3
             if (selobjs.Count > 0)
                 xh = Convert.ToInt16(selobjs[0].Item3[GIS_Const.FIELD_XH]) + 1;
             string bid = "", hdname = "";
-            if (dst.Tables[0].Rows.Count > 0)
+            if (tunnel != null)
             {
-                bid = dst.Tables[0].Rows[0][TunnelInfoDbConstNames.BINDINGID].ToString();
-                hdname = dst.Tables[0].Rows[0][TunnelInfoDbConstNames.TUNNEL_NAME].ToString();
-                hdwid = Convert.ToDouble(dst.Tables[0].Rows[0][TunnelInfoDbConstNames.TUNNEL_WID]);
+                bid = tunnel.BindingID;
+                hdname = tunnel.TunnelName;
+                hdwid = tunnel.TunnelWid;
             }
             dics.Clear();
             dics.Add(GIS_Const.FIELD_HDID, tunnelEntity.TunnelId.ToString());

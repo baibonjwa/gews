@@ -1,4 +1,5 @@
 ﻿using Castle.ActiveRecord;
+using NHibernate.Criterion;
 
 namespace LibEntity
 {
@@ -113,5 +114,13 @@ namespace LibEntity
         /// </summary>
         [Property("Tunnel_Wid")]
         public double TunnelWid { get; set; }
+
+        public static Tunnel[] FindAllByWorkingFaceId(int workingfaceId)
+        {
+            var criterion =new ICriterion[]
+            {
+                
+            }
+        }
     }
 }

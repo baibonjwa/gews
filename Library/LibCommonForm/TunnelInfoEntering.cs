@@ -155,16 +155,9 @@ namespace LibCommonForm
 
             tunnelEntity.TunnelWid = 5;
             //巷道信息登录
-            bool bResult = TunnelInfoBLL.insertTunnelInfo(tunnelEntity);
-            if (bResult)
-            {
-                Alert.alert("提交成功！");
-            }
-            else
-            {
-                Alert.alert("提交失败！");
-                return;
-            }
+
+            tunnelEntity.Save();
+            Alert.alert("提交成功！");
         }
 
         private void updateTunnelInfo()
@@ -236,16 +229,8 @@ namespace LibCommonForm
             //巷道信息登录
 
             tunnelEntity.TunnelWid = 5;
-            bool bResult = TunnelInfoBLL.updateTunnelInfo(tunnelEntity);
-            if (bResult)
-            {
-                Alert.alert("提交成功！");
-            }
-            else
-            {
-                Alert.alert("提交失败！");
-                return;
-            }
+            tunnelEntity.Save();
+            Alert.alert("提交成功！");
         }
 
 

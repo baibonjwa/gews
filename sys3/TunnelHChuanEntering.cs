@@ -691,13 +691,13 @@ namespace _3.GeologyMeasure
         private void bindInfo()
         {
             //关联巷道1
-            DataTable dt = TunnelInfoBLL.selectOneTunnelInfoByTunnelID(tunnelHChuanEntity.TunnelId1).Tables[0];
-            if (dt != null && dt.Rows.Count > 0)
-                btnTunnelChoose1.Text = dt.Rows[0][TunnelInfoDbConstNames.TUNNEL_NAME].ToString();
+            Tunnel tunnel = Tunnel.Find(tunnelHChuanEntity.TunnelId1);
+            if (tunnel != null)
+                btnTunnelChoose1.Text = tunnel.TunnelName;
             //关联巷道2
-            dt = TunnelInfoBLL.selectOneTunnelInfoByTunnelID(tunnelHChuanEntity.TunnelId2).Tables[0];
-            if (dt != null && dt.Rows.Count > 0)
-                btnTunnelChoose2.Text = dt.Rows[0][TunnelInfoDbConstNames.TUNNEL_NAME].ToString();
+            tunnel = Tunnel.Find(tunnelHChuanEntity.TunnelId2);
+            if (tunnel != null)
+                btnTunnelChoose2.Text = tunnel.TunnelName;
             textBox_Name.Text = tunnelHChuanEntity.NameHChuan;
             txtWidth.Text = tunnelHChuanEntity.Width.ToString();
             textBox_X1.Text = Convert.ToString(tunnelHChuanEntity.X1);

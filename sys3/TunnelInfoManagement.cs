@@ -183,7 +183,7 @@ namespace sys3
                     //绑定导线名称
                     cells[rowDetailStartIndex + i, index].Text = wire.WireName;
                 }
-                    //未绑定导线巷道背景色设置
+                //未绑定导线巷道背景色设置
                 else
                 {
                     FarPointOperate.farPointRowColorChange(fpTunnelInfo, i, rowDetailStartIndex, columnCount,
@@ -227,7 +227,7 @@ namespace sys3
         {
             if (e.EditingControl is FpCheckBox)
             {
-                var fpChk = (FpCheckBox) e.EditingControl;
+                var fpChk = (FpCheckBox)e.EditingControl;
                 if (fpChk.Checked)
                 {
                     // 保存索引号
@@ -297,10 +297,10 @@ namespace sys3
             for (int i = 0; i < rowsCount; i++)
             {
                 if (cells[rowDetailStartIndex + i, 0].Value != null &&
-                    (bool) cells[rowDetailStartIndex + i, 0].Value)
+                    (bool)cells[rowDetailStartIndex + i, 0].Value)
                 {
                     //巷道编号
-                    tunnelEntity.TunnelId = (int) ds.Tables[0].Rows[i][TunnelInfoDbConstNames.ID];
+                    tunnelEntity.TunnelId = (int)ds.Tables[0].Rows[i][TunnelInfoDbConstNames.ID];
                     //巷道实体
                     tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(tunnelEntity.TunnelId);
 
@@ -371,10 +371,10 @@ namespace sys3
                 for (int i = 0; i < rowsCount; i++)
                 {
                     if (cells[rowDetailStartIndex + i, 0].Value != null &&
-                        (bool) cells[rowDetailStartIndex + i, 0].Value)
+                        (bool)cells[rowDetailStartIndex + i, 0].Value)
                     {
                         //掘进ID
-                        tunnelEntity.TunnelId = (int) ds.Tables[0].Rows[i][TunnelInfoDbConstNames.ID];
+                        tunnelEntity.TunnelId = (int)ds.Tables[0].Rows[i][TunnelInfoDbConstNames.ID];
                         //巷道类型为掘进或回采巷道
                         if (TunnelInfoBLL.isTunnelJJ(tunnelEntity) || TunnelInfoBLL.isTunnelHC(tunnelEntity))
                         {
@@ -389,23 +389,20 @@ namespace sys3
                                 TunnelInfoBLL.deleteWireInfoBindingTunnelID(tunnelEntity);
                             }
 
-                                //不删除时将导线重新绑定到其他巷道，默认为巷道ID=0
+                            //不删除时将导线重新绑定到其他巷道，默认为巷道ID=0
                         }
                         //删除巷道对应掘进日报
                         TunnelInfoBLL.deleteDayReportJJBindingTunnelID(tunnelEntity);
                         //删除巷道对应回采日报
                         TunnelInfoBLL.deleteDayReportHCBindingTunnelID(tunnelEntity);
                         //删除巷道
-                        bResult = TunnelInfoBLL.deleteTunnelInfo(tunnelEntity);
+                        tunnelEntity.Delete();
                     }
                 }
-                if (bResult)
-                {
-                    //绑定信息
-                    bindFpTunnelInfo();
-                    //删除后焦点设置
-                    FarPointOperate.farPointFocusSetDel(fpTunnelInfo, rowDetailStartIndex);
-                }
+                //绑定信息
+                bindFpTunnelInfo();
+                //删除后焦点设置
+                FarPointOperate.farPointFocusSetDel(fpTunnelInfo, rowDetailStartIndex);
             }
         }
 
@@ -449,14 +446,14 @@ namespace sys3
                         {
                             _htSelIdxs.Add(rowDetailStartIndex + i, true);
                         }
-                        fpTunnelInfo.Sheets[0].Cells[rowDetailStartIndex + i, 0].Value = ((CheckBox) sender).Checked;
+                        fpTunnelInfo.Sheets[0].Cells[rowDetailStartIndex + i, 0].Value = ((CheckBox)sender).Checked;
                         checkCount = ds.Tables[0].Rows.Count;
                     }
-                        //checkbox未选中
+                    //checkbox未选中
                     else
                     {
                         _htSelIdxs.Remove(rowDetailStartIndex + i);
-                        fpTunnelInfo.Sheets[0].Cells[rowDetailStartIndex + i, 0].Value = ((CheckBox) sender).Checked;
+                        fpTunnelInfo.Sheets[0].Cells[rowDetailStartIndex + i, 0].Value = ((CheckBox)sender).Checked;
                         checkCount = 0;
                     }
                 }
@@ -571,7 +568,7 @@ namespace sys3
                 MessageBox.Show("未发现巷道全图层！");
                 return;
             }
-            var pFeatureLayer = (IFeatureLayer) pLayer;
+            var pFeatureLayer = (IFeatureLayer)pLayer;
             string str = "";
             for (int i = 0; i < iSelIdxsArr.Length; i++)
             {
@@ -610,7 +607,7 @@ namespace sys3
 
         private void farpointFilter1_OnCheckFilterChanged(object sender, EventArgs arg)
         {
-            var chk = (CheckBox) sender;
+            var chk = (CheckBox)sender;
             //当Checkbox选中时，筛选过程中则将不符合条件的数据隐藏
 
             MessageBox.Show("你好");

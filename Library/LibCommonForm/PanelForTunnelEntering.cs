@@ -86,25 +86,7 @@ namespace LibCommonForm
         /// </summary>
         private void loadMineName()
         {
-            this.lstMineName.DataSource = null;
-            this.lstHorizontalName.DataSource = null;
-            this.lstMiningAreaName.DataSource = null;
-            this.lstWorkingFaceName.DataSource = null;
-
-            // 获取矿井信息
-            DataSet ds = MineBLL.selectAllMineInfo();
-            // 检索件数
-            int iSelCnt = ds.Tables[0].Rows.Count;
-            // 检索件数 > 0 的场合
-            if (iSelCnt > 0)
-            {
-                // 绑定矿井信息
-                this.lstMineName.DataSource = ds.Tables[0];
-                this.lstMineName.DisplayMember = MineDbConstNames.MINE_NAME;
-                this.lstMineName.ValueMember = MineDbConstNames.MINE_ID;
-
-                this.lstMineName.SelectedIndex = -1;
-            }
+            DataBindUtil.LoadMineName(lstMineName);
         }
         #endregion
 
@@ -116,33 +98,24 @@ namespace LibCommonForm
         /// <param name="e"></param>
         private void lstMineName_MouseUp(object sender, MouseEventArgs e)
         {
-            this.lstHorizontalName.DataSource = null;
-            this.lstMiningAreaName.DataSource = null;
-            this.lstWorkingFaceName.DataSource = null;
+            // 矿井编号
+            int iMineId = Convert.ToInt32(this.lstMineName.SelectedValue);
+            _iMineId = iMineId;
 
-            if (this.lstMineName.SelectedItems.Count > 0)
+            // 获取水平信息
+            DataSet ds = HorizontalBLL.selectHorizontalInfoByMineId(iMineId);
+
+            // 检索件数
+            int iSelCnt = ds.Tables[0].Rows.Count;
+            // 检索件数 > 0 的场合
+            if (iSelCnt > 0)
             {
-                //MessageBox.Show("矿井编号：" + this.lstMineName.SelectedValue.ToString());
+                // 绑定水平信息
+                this.lstHorizontalName.DataSource = ds.Tables[0];
+                this.lstHorizontalName.DisplayMember = HorizontalDbConstNames.HORIZONTAL_NAME;
+                this.lstHorizontalName.ValueMember = HorizontalDbConstNames.HORIZONTAL_ID;
 
-                // 矿井编号
-                int iMineId = Convert.ToInt32(this.lstMineName.SelectedValue);
-                _iMineId = iMineId;
-
-                // 获取水平信息
-                DataSet ds = HorizontalBLL.selectHorizontalInfoByMineId(iMineId);
-
-                // 检索件数
-                int iSelCnt = ds.Tables[0].Rows.Count;
-                // 检索件数 > 0 的场合
-                if (iSelCnt > 0)
-                {
-                    // 绑定水平信息
-                    this.lstHorizontalName.DataSource = ds.Tables[0];
-                    this.lstHorizontalName.DisplayMember = HorizontalDbConstNames.HORIZONTAL_NAME;
-                    this.lstHorizontalName.ValueMember = HorizontalDbConstNames.HORIZONTAL_ID;
-
-                    this.lstHorizontalName.SelectedIndex = -1;
-                }
+                this.lstHorizontalName.SelectedIndex = -1;
             }
         }
         #endregion
@@ -357,7 +330,7 @@ namespace LibCommonForm
         /// <param name="e"></param>
         private void btnMineName_Click(object sender, EventArgs e)
         {
-            CommonManagement commonManagement = new CommonManagement(1, 999, this.MainForm);
+            CommonManagement commonManagement = new CommonManagement(1, 999);
             if (DialogResult.OK == commonManagement.ShowDialog())
             {
                 // 绑定矿井信息
@@ -374,7 +347,7 @@ namespace LibCommonForm
         {
             if (this.lstMineName.SelectedItems.Count > 0)
             {
-                CommonManagement commonManagement = new CommonManagement(2, _iMineId, this.MainForm);
+                CommonManagement commonManagement = new CommonManagement(2, _iMineId);
                 if (DialogResult.OK == commonManagement.ShowDialog())
                 {
                     // 绑定水平信息
@@ -396,7 +369,7 @@ namespace LibCommonForm
         {
             if (this.lstHorizontalName.SelectedItems.Count > 0)
             {
-                CommonManagement commonManagement = new CommonManagement(3, _iHorizontalId, this.MainForm);
+                CommonManagement commonManagement = new CommonManagement(3, _iHorizontalId);
                 if (DialogResult.OK == commonManagement.ShowDialog())
                 {
                     // 绑定采区信息
@@ -418,7 +391,7 @@ namespace LibCommonForm
         {
             if (this.lstMiningAreaName.SelectedItems.Count > 0)
             {
-                CommonManagement commonManagement = new CommonManagement(4, _iMiningAreaId, this.MainForm);
+                CommonManagement commonManagement = new CommonManagement(4, _iMiningAreaId);
                 if (DialogResult.OK == commonManagement.ShowDialog())
                 {
                     // 绑定工作面信息

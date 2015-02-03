@@ -467,7 +467,7 @@ namespace _4.OutburstPrevention
         /// <param name="e"></param>
         private void btnAddCoalSeams_Click(object sender, EventArgs e)
         {
-            CommonManagement commonManagementForm = new CommonManagement(5, 0, this.MainForm);
+            CommonManagement commonManagementForm = new CommonManagement(5, 0);
 
             if (DialogResult.OK == commonManagementForm.ShowDialog())
             {

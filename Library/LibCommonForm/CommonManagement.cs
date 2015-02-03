@@ -1,153 +1,135 @@
-﻿// ******************************************************************
-// 概  述：矿井名称，水平名称，采区名称，工作面名称共通管理界面
-// 作成者：伍鑫
-// 作成日：2014/02/26
-// 版本号：1.0
-// ******************************************************************
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using LibBusiness;
-using LibEntity;
 using LibCommon;
 using LibCommonControl;
+using LibEntity;
 
 namespace LibCommonForm
 {
     public partial class CommonManagement : BaseForm
     {
         // 功能识别位
+
+        private const int FlagManangingMineName = 1;
+        private const int FlagManangingHorizontal = 2;
+        private const int FlagManangingMiningArea = 3;
+        private const int FlagManangingWorkingFace = 4;
+        private const int FlagManangingCoalSeam = 5;
         private static int _typeFlag;
         // id
         private static int _id;
 
-        private const int FLAG_MANANGING_MINE_NAME = 1;
-        private const int FLAG_MANANGING_HORIZONTAL = 2;
-        private const int FLAG_MANANGING_MINING_AREA = 3;
-        private const int FLAG_MANANGING_WORKING_FACE = 4;
-        private const int FLAG_MANANGING_COAL_SEAM = 5;
-
         /// <summary>
-        /// 构造方法
+        ///     构造方法
         /// </summary>
         public CommonManagement(MainFrm mainFrm)
         {
             InitializeComponent();
-            this.MainForm = mainFrm;
+            MainForm = mainFrm;
         }
 
         /// <summary>
-        /// 带参数的构造方法
+        ///     带参数的构造方法
         /// </summary>
         /// <param name="typeFlag"></param>
         /// <param name="id"></param>
-        public CommonManagement(int typeFlag, int id, MainFrm mainFrm)
+        public CommonManagement(int typeFlag, int id)
         {
             InitializeComponent();
-
-            this.MainForm = mainFrm;
 
             _id = id;
             _typeFlag = typeFlag;
 
             switch (typeFlag)
             {
-                case FLAG_MANANGING_MINE_NAME:
+                case FlagManangingMineName:
                     {
                         // 窗口标题
-                        this.Text = "矿井名称管理";
+                        Text = @"矿井名称管理";
                         // 编号
-                        DataGridViewTextBoxColumn textBoxColumn0 = new DataGridViewTextBoxColumn();
-                        textBoxColumn0.HeaderText = "编号";
-                        textBoxColumn0.Width = 60;
-                        textBoxColumn0.ReadOnly = true;
-                        this.dataGridView1.Columns.Add(textBoxColumn0);
+                        var textBoxColumn0 = new DataGridViewTextBoxColumn { HeaderText = @"编号", Width = 60, ReadOnly = true };
+                        dataGridView1.Columns.Add(textBoxColumn0);
                         // 矿井名称
-                        DataGridViewTextBoxColumn textBoxColumn1 = new DataGridViewTextBoxColumn();
-                        textBoxColumn1.HeaderText = "矿井名称";
-                        textBoxColumn1.Width = 100;
-                        this.dataGridView1.Columns.Add(textBoxColumn1);
+                        var textBoxColumn1 = new DataGridViewTextBoxColumn { HeaderText = @"矿井名称", Width = 100 };
+                        dataGridView1.Columns.Add(textBoxColumn1);
 
                         // 删除按钮
-                        DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn();
-                        buttonColumn.HeaderText = "删除";
-                        buttonColumn.Width = 60;
-                        buttonColumn.Text = "删除";
-                        buttonColumn.UseColumnTextForButtonValue = true;
-                        this.dataGridView1.Columns.Add(buttonColumn);
+                        var buttonColumn = new DataGridViewButtonColumn
+                        {
+                            HeaderText = @"删除",
+                            Width = 60,
+                            Text = "删除",
+                            UseColumnTextForButtonValue = true
+                        };
+                        dataGridView1.Columns.Add(buttonColumn);
 
                         // 绑定矿井信息
-                        loadMineInfo();
-
+                        LoadMineInfo();
                     }
                     break;
-                case FLAG_MANANGING_HORIZONTAL:
+                case FlagManangingHorizontal:
                     {
-                        this.Text = "水平名称管理";
+                        Text = @"水平名称管理";
                         // 编号
-                        DataGridViewTextBoxColumn textBoxColumn0 = new DataGridViewTextBoxColumn();
-                        textBoxColumn0.HeaderText = "编号";
-                        textBoxColumn0.Width = 60;
-                        textBoxColumn0.ReadOnly = true;
-                        this.dataGridView1.Columns.Add(textBoxColumn0);
+                        var textBoxColumn0 = new DataGridViewTextBoxColumn
+                        {
+                            HeaderText = @"编号",
+                            Width = 60,
+                            ReadOnly = true
+                        };
+                        dataGridView1.Columns.Add(textBoxColumn0);
                         // 水平名称
-                        DataGridViewTextBoxColumn textBoxColumn1 = new DataGridViewTextBoxColumn();
-                        textBoxColumn1.HeaderText = "水平名称";
-                        textBoxColumn1.Width = 100;
-                        this.dataGridView1.Columns.Add(textBoxColumn1);
+                        var textBoxColumn1 = new DataGridViewTextBoxColumn { HeaderText = @"水平名称", Width = 100 };
+                        dataGridView1.Columns.Add(textBoxColumn1);
                         // 所属矿井
-                        DataGridViewComboBoxColumn comboBoxColumn = new DataGridViewComboBoxColumn();
-                        comboBoxColumn.HeaderText = "所属矿井";
-                        comboBoxColumn.Width = 100;
-                        this.dataGridView1.Columns.Add(comboBoxColumn);
+                        var comboBoxColumn = new DataGridViewComboBoxColumn { HeaderText = @"所属矿井", Width = 100 };
+                        dataGridView1.Columns.Add(comboBoxColumn);
 
                         //*******************************************************
                         // 获取矿井信息
-                        DataSet ds = MineBLL.selectMineInfoByMineId(id);
+                        Mine mine = Mine.Find(id);
                         // 设置数据源
-                        comboBoxColumn.DataSource = ds.Tables[0];
+                        comboBoxColumn.DataSource = mine;
                         // 设置显示字段
-                        comboBoxColumn.DisplayMember = MineDbConstNames.MINE_NAME;
+                        comboBoxColumn.DisplayMember = "MineName";
                         // 设置隐藏字段
-                        comboBoxColumn.ValueMember = MineDbConstNames.MINE_ID;
+                        comboBoxColumn.ValueMember = "MineId";
                         //*******************************************************
 
                         // 删除按钮
-                        DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn();
-                        buttonColumn.HeaderText = "删除";
-                        buttonColumn.Width = 60;
-                        buttonColumn.Text = "删除";
-                        buttonColumn.UseColumnTextForButtonValue = true;
-                        this.dataGridView1.Columns.Add(buttonColumn);
+                        var buttonColumn = new DataGridViewButtonColumn
+                        {
+                            HeaderText = @"删除",
+                            Width = 60,
+                            Text = "删除",
+                            UseColumnTextForButtonValue = true
+                        };
+                        dataGridView1.Columns.Add(buttonColumn);
 
                         // 绑定水平信息
                         loadHorizontalInfo(id);
                     }
                     break;
-                case FLAG_MANANGING_MINING_AREA:
+                case FlagManangingMiningArea:
                     {
-                        this.Text = "采区名称管理";
+                        Text = @"采区名称管理";
                         // 编号
-                        DataGridViewTextBoxColumn textBoxColumn0 = new DataGridViewTextBoxColumn();
-                        textBoxColumn0.HeaderText = "编号";
-                        textBoxColumn0.Width = 60;
-                        textBoxColumn0.ReadOnly = true;
-                        this.dataGridView1.Columns.Add(textBoxColumn0);
+                        var textBoxColumn0 = new DataGridViewTextBoxColumn
+                        {
+                            HeaderText = @"编号",
+                            Width = 60,
+                            ReadOnly = true
+                        };
+                        dataGridView1.Columns.Add(textBoxColumn0);
                         // 采区名称
-                        DataGridViewTextBoxColumn textBoxColumn1 = new DataGridViewTextBoxColumn();
-                        textBoxColumn1.HeaderText = "采区名称";
-                        textBoxColumn1.Width = 100;
-                        this.dataGridView1.Columns.Add(textBoxColumn1);
+                        var textBoxColumn1 = new DataGridViewTextBoxColumn { HeaderText = @"采区名称", Width = 100 };
+                        dataGridView1.Columns.Add(textBoxColumn1);
                         // 所属水平
-                        DataGridViewComboBoxColumn comboBoxColumn = new DataGridViewComboBoxColumn();
-                        comboBoxColumn.HeaderText = "所属水平";
-                        comboBoxColumn.Width = 100;
-                        this.dataGridView1.Columns.Add(comboBoxColumn);
+                        var comboBoxColumn = new DataGridViewComboBoxColumn { HeaderText = @"所属水平", Width = 100 };
+                        dataGridView1.Columns.Add(comboBoxColumn);
 
                         //*******************************************************
                         // 获取水平信息
@@ -161,46 +143,48 @@ namespace LibCommonForm
                         //*******************************************************
 
                         // 删除按钮
-                        DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn();
-                        buttonColumn.HeaderText = "删除";
-                        buttonColumn.Width = 60;
-                        buttonColumn.Text = "删除";
-                        buttonColumn.UseColumnTextForButtonValue = true;
-                        this.dataGridView1.Columns.Add(buttonColumn);
+                        var buttonColumn = new DataGridViewButtonColumn
+                        {
+                            HeaderText = @"删除",
+                            Width = 60,
+                            Text = @"删除",
+                            UseColumnTextForButtonValue = true
+                        };
+                        dataGridView1.Columns.Add(buttonColumn);
 
                         // 绑定采区信息
                         loadMiningAreaInfo(id);
                     }
                     break;
-                case FLAG_MANANGING_WORKING_FACE:
+                case FlagManangingWorkingFace:
                     {
-                        this.Text = "工作面名称管理";
+                        Text = "工作面名称管理";
                         // 编号
-                        DataGridViewTextBoxColumn textBoxColumn0 = new DataGridViewTextBoxColumn();
+                        var textBoxColumn0 = new DataGridViewTextBoxColumn();
                         textBoxColumn0.HeaderText = "编号";
                         textBoxColumn0.Width = 60;
                         textBoxColumn0.ReadOnly = true;
-                        this.dataGridView1.Columns.Add(textBoxColumn0);
+                        dataGridView1.Columns.Add(textBoxColumn0);
                         // 工作面名称
-                        DataGridViewTextBoxColumn textBoxColumn1 = new DataGridViewTextBoxColumn();
+                        var textBoxColumn1 = new DataGridViewTextBoxColumn();
                         textBoxColumn1.HeaderText = "工作面名称";
                         textBoxColumn1.Width = 100;
-                        this.dataGridView1.Columns.Add(textBoxColumn1);
+                        dataGridView1.Columns.Add(textBoxColumn1);
                         // 所属采区
-                        DataGridViewComboBoxColumn comboBoxColumn = new DataGridViewComboBoxColumn();
+                        var comboBoxColumn = new DataGridViewComboBoxColumn();
                         comboBoxColumn.HeaderText = "所属采区";
                         comboBoxColumn.Width = 100;
-                        this.dataGridView1.Columns.Add(comboBoxColumn);
+                        dataGridView1.Columns.Add(comboBoxColumn);
 
-                        DataGridViewComboBoxColumn comboBoxWorkingfaceType = new DataGridViewComboBoxColumn();
+                        var comboBoxWorkingfaceType = new DataGridViewComboBoxColumn();
                         comboBoxWorkingfaceType.HeaderText = "工作面类型";
                         comboBoxWorkingfaceType.Width = 100;
-                        List<TunnelSimple> list = new List<TunnelSimple>
-                        {
-                            new TunnelSimple((int) WorkingfaceTypeEnum.OTHER, "其他"),
-                            new TunnelSimple((int) WorkingfaceTypeEnum.JJ, "掘进"),
-                            new TunnelSimple((int) WorkingfaceTypeEnum.HC, "回采")
-                        };
+                        var list = new List<TunnelSimple>
+                    {
+                        new TunnelSimple((int) WorkingfaceTypeEnum.OTHER, "其他"),
+                        new TunnelSimple((int) WorkingfaceTypeEnum.JJ, "掘进"),
+                        new TunnelSimple((int) WorkingfaceTypeEnum.HC, "回采")
+                    };
                         //foreach (var i in list)
                         //{
                         //    comboBoxWorkingfaceType.Items.Add(i);
@@ -211,7 +195,7 @@ namespace LibCommonForm
                         comboBoxWorkingfaceType.ValueMember = "Id";
 
 
-                        this.dataGridView1.Columns.Add(comboBoxWorkingfaceType);
+                        dataGridView1.Columns.Add(comboBoxWorkingfaceType);
 
                         //*******************************************************
                         // 获取采区信息
@@ -226,41 +210,41 @@ namespace LibCommonForm
                         //*******************************************************
 
                         // 删除按钮
-                        DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn();
+                        var buttonColumn = new DataGridViewButtonColumn();
                         buttonColumn.HeaderText = "删除";
                         buttonColumn.Width = 60;
                         buttonColumn.Text = "删除";
                         buttonColumn.UseColumnTextForButtonValue = true;
-                        this.dataGridView1.Columns.Add(buttonColumn);
+                        dataGridView1.Columns.Add(buttonColumn);
 
                         // 绑定工作面信息
                         loadWorkingFaceInfo(id);
                     }
                     break;
 
-                case FLAG_MANANGING_COAL_SEAM:
+                case FlagManangingCoalSeam:
                     {
                         // 窗口标题
-                        this.Text = "煤层名称管理";
+                        Text = "煤层名称管理";
                         // 编号
-                        DataGridViewTextBoxColumn textBoxColumn0 = new DataGridViewTextBoxColumn();
+                        var textBoxColumn0 = new DataGridViewTextBoxColumn();
                         textBoxColumn0.HeaderText = "编号";
                         textBoxColumn0.Width = 60;
                         textBoxColumn0.ReadOnly = true;
-                        this.dataGridView1.Columns.Add(textBoxColumn0);
+                        dataGridView1.Columns.Add(textBoxColumn0);
                         // 矿井名称
-                        DataGridViewTextBoxColumn textBoxColumn1 = new DataGridViewTextBoxColumn();
+                        var textBoxColumn1 = new DataGridViewTextBoxColumn();
                         textBoxColumn1.HeaderText = "煤层名称";
                         textBoxColumn1.Width = 100;
-                        this.dataGridView1.Columns.Add(textBoxColumn1);
+                        dataGridView1.Columns.Add(textBoxColumn1);
 
                         // 删除按钮
-                        DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn();
+                        var buttonColumn = new DataGridViewButtonColumn();
                         buttonColumn.HeaderText = "删除";
                         buttonColumn.Width = 60;
                         buttonColumn.Text = "删除";
                         buttonColumn.UseColumnTextForButtonValue = true;
-                        this.dataGridView1.Columns.Add(buttonColumn);
+                        dataGridView1.Columns.Add(buttonColumn);
 
                         // 绑定矿煤层信息
                         loadCoalSeamsInfo();
@@ -273,32 +257,26 @@ namespace LibCommonForm
             }
         }
 
-        /// <summary>
-        /// 绑定矿井信息
-        /// </summary>
-        private void loadMineInfo()
+        public override sealed string Text
         {
-            this.dataGridView1.DataSource = null;
-
-            // 获取矿井信息
-            DataSet ds = MineBLL.selectAllMineInfo();
-            int iSelCnt = ds.Tables[0].Rows.Count;
-            if (iSelCnt > 0)
-            {
-                // 禁止自动生成列(※位置不可变)
-                this.dataGridView1.AutoGenerateColumns = false;
-                this.dataGridView1.DataSource = ds.Tables[0];
-                this.dataGridView1.Columns[0].DataPropertyName = MineDbConstNames.MINE_ID;
-                this.dataGridView1.Columns[1].DataPropertyName = MineDbConstNames.MINE_NAME;
-            }
+            get { return base.Text; }
+            set { base.Text = value; }
         }
 
         /// <summary>
-        /// 绑定水平信息
+        ///     绑定矿井信息
+        /// </summary>
+        private void LoadMineInfo()
+        {
+            DataBindUtil.LoadMineName(dataGridView1);
+        }
+
+        /// <summary>
+        ///     绑定水平信息
         /// </summary>
         private void loadHorizontalInfo(int id)
         {
-            this.dataGridView1.DataSource = null;
+            dataGridView1.DataSource = null;
 
             // 获取水平信息
             DataSet ds = HorizontalBLL.selectHorizontalInfoByMineId(id);
@@ -306,20 +284,20 @@ namespace LibCommonForm
             if (iSelCnt > 0)
             {
                 // 禁止自动生成列(※位置不可变)
-                this.dataGridView1.AutoGenerateColumns = false;
-                this.dataGridView1.DataSource = ds.Tables[0];
-                this.dataGridView1.Columns[0].DataPropertyName = HorizontalDbConstNames.HORIZONTAL_ID;
-                this.dataGridView1.Columns[1].DataPropertyName = HorizontalDbConstNames.HORIZONTAL_NAME;
-                this.dataGridView1.Columns[2].DataPropertyName = HorizontalDbConstNames.MINE_ID;
+                dataGridView1.AutoGenerateColumns = false;
+                dataGridView1.DataSource = ds.Tables[0];
+                dataGridView1.Columns[0].DataPropertyName = HorizontalDbConstNames.HORIZONTAL_ID;
+                dataGridView1.Columns[1].DataPropertyName = HorizontalDbConstNames.HORIZONTAL_NAME;
+                dataGridView1.Columns[2].DataPropertyName = HorizontalDbConstNames.MINE_ID;
             }
         }
 
         /// <summary>
-        /// 绑定采区信息
+        ///     绑定采区信息
         /// </summary>
         private void loadMiningAreaInfo(int id)
         {
-            this.dataGridView1.DataSource = null;
+            dataGridView1.DataSource = null;
 
             // 获取水平信息
             DataSet ds = MiningAreaBLL.selectMiningAreaInfoByHorizontalId(id);
@@ -327,20 +305,20 @@ namespace LibCommonForm
             if (iSelCnt > 0)
             {
                 // 禁止自动生成列(※位置不可变)
-                this.dataGridView1.AutoGenerateColumns = false;
-                this.dataGridView1.DataSource = ds.Tables[0];
-                this.dataGridView1.Columns[0].DataPropertyName = MiningAreaDbConstNames.MININGAREA_ID;
-                this.dataGridView1.Columns[1].DataPropertyName = MiningAreaDbConstNames.MININGAREA_NAME;
-                this.dataGridView1.Columns[2].DataPropertyName = MiningAreaDbConstNames.HORIZONTAL_ID;
+                dataGridView1.AutoGenerateColumns = false;
+                dataGridView1.DataSource = ds.Tables[0];
+                dataGridView1.Columns[0].DataPropertyName = MiningAreaDbConstNames.MININGAREA_ID;
+                dataGridView1.Columns[1].DataPropertyName = MiningAreaDbConstNames.MININGAREA_NAME;
+                dataGridView1.Columns[2].DataPropertyName = MiningAreaDbConstNames.HORIZONTAL_ID;
             }
         }
 
         /// <summary>
-        /// 绑定工作面信息
+        ///     绑定工作面信息
         /// </summary>
         private void loadWorkingFaceInfo(int id)
         {
-            this.dataGridView1.DataSource = null;
+            dataGridView1.DataSource = null;
 
             // 获取水平信息
             DataSet ds = WorkingFaceBLL.selectWorkingFaceInfoByMiningAreaId(id);
@@ -348,21 +326,21 @@ namespace LibCommonForm
             if (iSelCnt > 0)
             {
                 // 禁止自动生成列(※位置不可变)
-                this.dataGridView1.AutoGenerateColumns = false;
-                this.dataGridView1.DataSource = ds.Tables[0];
-                this.dataGridView1.Columns[0].DataPropertyName = WorkingFaceDbConstNames.WORKINGFACE_ID;
-                this.dataGridView1.Columns[1].DataPropertyName = WorkingFaceDbConstNames.WORKINGFACE_NAME;
-                this.dataGridView1.Columns[2].DataPropertyName = WorkingFaceDbConstNames.MININGAREA_ID;
-                this.dataGridView1.Columns[3].DataPropertyName = WorkingFaceDbConstNames.WORKINGFACE_TYPE;
+                dataGridView1.AutoGenerateColumns = false;
+                dataGridView1.DataSource = ds.Tables[0];
+                dataGridView1.Columns[0].DataPropertyName = WorkingFaceDbConstNames.WORKINGFACE_ID;
+                dataGridView1.Columns[1].DataPropertyName = WorkingFaceDbConstNames.WORKINGFACE_NAME;
+                dataGridView1.Columns[2].DataPropertyName = WorkingFaceDbConstNames.MININGAREA_ID;
+                dataGridView1.Columns[3].DataPropertyName = WorkingFaceDbConstNames.WORKINGFACE_TYPE;
             }
         }
 
         /// <summary>
-        /// 绑定煤层信息
+        ///     绑定煤层信息
         /// </summary>
         private void loadCoalSeamsInfo()
         {
-            this.dataGridView1.DataSource = null;
+            dataGridView1.DataSource = null;
 
             // 获取矿井信息
             DataSet ds = CoalSeamsBLL.selectAllCoalSeamsInfo();
@@ -370,22 +348,22 @@ namespace LibCommonForm
             if (iSelCnt > 0)
             {
                 // 禁止自动生成列(※位置不可变)
-                this.dataGridView1.AutoGenerateColumns = false;
-                this.dataGridView1.DataSource = ds.Tables[0];
-                this.dataGridView1.Columns[0].DataPropertyName = CoalSeamsDbConstNames.COAL_SEAMS_ID;
-                this.dataGridView1.Columns[1].DataPropertyName = CoalSeamsDbConstNames.COAL_SEAMS_NAME;
+                dataGridView1.AutoGenerateColumns = false;
+                dataGridView1.DataSource = ds.Tables[0];
+                dataGridView1.Columns[0].DataPropertyName = CoalSeamsDbConstNames.COAL_SEAMS_ID;
+                dataGridView1.Columns[1].DataPropertyName = CoalSeamsDbConstNames.COAL_SEAMS_NAME;
             }
         }
 
         /// <summary>
-        /// 提交
+        ///     提交
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnSubmit_Click(object sender, EventArgs e)
         {
             // 验证
-            if (!this.check())
+            if (!check())
             {
                 DialogResult = DialogResult.None;
                 return;
@@ -394,23 +372,23 @@ namespace LibCommonForm
 
             switch (_typeFlag)
             {
-                case FLAG_MANANGING_MINE_NAME:
+                case FlagManangingMineName:
                     // 矿井名称管理
                     updateMineInfo();
                     break;
-                case FLAG_MANANGING_HORIZONTAL:
+                case FlagManangingHorizontal:
                     // 水平名称管理
                     updateHorizontalInfo();
                     break;
-                case FLAG_MANANGING_MINING_AREA:
+                case FlagManangingMiningArea:
                     // 采区名称管理
                     updateMiningAreaInfo();
                     break;
-                case FLAG_MANANGING_WORKING_FACE:
+                case FlagManangingWorkingFace:
                     // 工作面名称管理
                     updateWorkingFaceInfo();
                     break;
-                case FLAG_MANANGING_COAL_SEAM:
+                case FlagManangingCoalSeam:
                     // 煤层名称管理
                     updateCoalSeamsInfo();
                     break;
@@ -420,86 +398,72 @@ namespace LibCommonForm
         }
 
         /// <summary>
-        /// 更新矿井信息
+        ///     更新矿井信息
         /// </summary>
         private void updateMineInfo()
         {
             bool bResultFlag = true;
 
-            for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
+            for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
             {
-                Mine mineEntity = new Mine();
+                var mineEntity = new Mine();
                 // 矿井编号
-                if (this.dataGridView1.Rows[i].Cells[0].Value != System.DBNull.Value && this.dataGridView1.Rows[i].Cells[0].Value != null)
+                if (dataGridView1.Rows[i].Cells[0].Value != DBNull.Value && dataGridView1.Rows[i].Cells[0].Value != null)
                 {
-                    mineEntity.MineId = Convert.ToInt32(this.dataGridView1.Rows[i].Cells[0].Value);
+                    mineEntity.MineId = Convert.ToInt32(dataGridView1.Rows[i].Cells[0].Value);
                 }
                 // 矿井名称
-                if (this.dataGridView1.Rows[i].Cells[1].Value != System.DBNull.Value && this.dataGridView1.Rows[i].Cells[1].Value != null)
+                if (dataGridView1.Rows[i].Cells[1].Value != DBNull.Value && dataGridView1.Rows[i].Cells[1].Value != null)
                 {
-                    mineEntity.MineName = Convert.ToString(this.dataGridView1.Rows[i].Cells[1].Value);
+                    mineEntity.MineName = Convert.ToString(dataGridView1.Rows[i].Cells[1].Value);
                 }
 
-                if (this.dataGridView1.Rows[i].Cells[0].Value != System.DBNull.Value && this.dataGridView1.Rows[i].Cells[0].Value != null)
+                if (dataGridView1.Rows[i].Cells[0].Value != DBNull.Value && dataGridView1.Rows[i].Cells[0].Value != null)
                 {
-                    bResultFlag = MineBLL.updateMineInfo(mineEntity);
+                    mineEntity.Save();
                 }
                 else
                 {
-                    bResultFlag = MineBLL.insertMineInfo(mineEntity);
-                }
-
-                if (!bResultFlag)
-                {
-                    break;
+                    mineEntity.Save();
                 }
             }
-
-            BasicInfoManager.getInstance().refreshMineInfo();
-
-            // 执行结果判断
-            if (bResultFlag)
-            {
-                Alert.alert(Const.SUCCESS_MSG);
-                // 绑定矿井名称
-                loadMineInfo();
-            }
-            else
-            {
-                Alert.alert(Const.FAILURE_MSG);
-            }
+            BasicInfoManager.getInstance().RefreshMineInfo();
+            Alert.alert(Const.SUCCESS_MSG);
+            // 绑定矿井名称
+            LoadMineInfo();
+            Alert.alert(Const.FAILURE_MSG);
         }
 
         /// <summary>
-        /// 更新水平信息
+        ///     更新水平信息
         /// </summary>
         private void updateHorizontalInfo()
         {
             bool bResultFlag = true;
 
-            for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
+            for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
             {
-                Horizontal horizontalEntity = new Horizontal();
+                var horizontalEntity = new Horizontal();
                 // 水平编号
-                if (this.dataGridView1.Rows[i].Cells[0].Value != System.DBNull.Value && this.dataGridView1.Rows[i].Cells[0].Value != null)
+                if (dataGridView1.Rows[i].Cells[0].Value != DBNull.Value && dataGridView1.Rows[i].Cells[0].Value != null)
                 {
-                    horizontalEntity.HorizontalId = Convert.ToInt32(this.dataGridView1.Rows[i].Cells[0].Value);
+                    horizontalEntity.HorizontalId = Convert.ToInt32(dataGridView1.Rows[i].Cells[0].Value);
                 }
                 // 水平名称
-                if (this.dataGridView1.Rows[i].Cells[1].Value != System.DBNull.Value && this.dataGridView1.Rows[i].Cells[1].Value != null)
+                if (dataGridView1.Rows[i].Cells[1].Value != DBNull.Value && dataGridView1.Rows[i].Cells[1].Value != null)
                 {
-                    horizontalEntity.HorizontalName = Convert.ToString(this.dataGridView1.Rows[i].Cells[1].Value);
+                    horizontalEntity.HorizontalName = Convert.ToString(dataGridView1.Rows[i].Cells[1].Value);
                 }
 
                 //***************************************
                 // 所属矿井
-                if (this.dataGridView1.Rows[i].Cells[2].Value != System.DBNull.Value && this.dataGridView1.Rows[i].Cells[2].Value != null)
+                if (dataGridView1.Rows[i].Cells[2].Value != DBNull.Value && dataGridView1.Rows[i].Cells[2].Value != null)
                 {
-                    horizontalEntity.Mine.MineId = Convert.ToInt32(this.dataGridView1.Rows[i].Cells[2].Value);
+                    horizontalEntity.Mine.MineId = Convert.ToInt32(dataGridView1.Rows[i].Cells[2].Value);
                 }
                 //***************************************
 
-                if (this.dataGridView1.Rows[i].Cells[0].Value != System.DBNull.Value && this.dataGridView1.Rows[i].Cells[0].Value != null)
+                if (dataGridView1.Rows[i].Cells[0].Value != DBNull.Value && dataGridView1.Rows[i].Cells[0].Value != null)
                 {
                     bResultFlag = HorizontalBLL.updateHorizontalInfo(horizontalEntity);
                 }
@@ -530,39 +494,39 @@ namespace LibCommonForm
         }
 
         /// <summary>
-        /// 更新采区信息
+        ///     更新采区信息
         /// </summary>
         private void updateMiningAreaInfo()
         {
             bool bResultFlag = true;
 
-            for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
+            for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
             {
                 int miningAreaId = Const.INVALID_ID;
                 string miningAreaName = string.Empty;
                 int horizontalId = Const.INVALID_ID;
 
                 // 采区编号
-                if (this.dataGridView1.Rows[i].Cells[0].Value != System.DBNull.Value && this.dataGridView1.Rows[i].Cells[0].Value != null)
+                if (dataGridView1.Rows[i].Cells[0].Value != DBNull.Value && dataGridView1.Rows[i].Cells[0].Value != null)
                 {
-                    miningAreaId = Convert.ToInt32(this.dataGridView1.Rows[i].Cells[0].Value);
+                    miningAreaId = Convert.ToInt32(dataGridView1.Rows[i].Cells[0].Value);
                 }
                 // 采区名称
-                if (this.dataGridView1.Rows[i].Cells[1].Value != System.DBNull.Value && this.dataGridView1.Rows[i].Cells[1].Value != null)
+                if (dataGridView1.Rows[i].Cells[1].Value != DBNull.Value && dataGridView1.Rows[i].Cells[1].Value != null)
                 {
-                    miningAreaName = Convert.ToString(this.dataGridView1.Rows[i].Cells[1].Value);
+                    miningAreaName = Convert.ToString(dataGridView1.Rows[i].Cells[1].Value);
                 }
 
                 //***************************************
                 // 所属水平
-                if (this.dataGridView1.Rows[i].Cells[2].Value != System.DBNull.Value && this.dataGridView1.Rows[i].Cells[2].Value != null)
+                if (dataGridView1.Rows[i].Cells[2].Value != DBNull.Value && dataGridView1.Rows[i].Cells[2].Value != null)
                 {
-                    horizontalId = Convert.ToInt32(this.dataGridView1.Rows[i].Cells[2].Value);
+                    horizontalId = Convert.ToInt32(dataGridView1.Rows[i].Cells[2].Value);
                 }
 
                 //***************************************
 
-                if (this.dataGridView1.Rows[i].Cells[0].Value != System.DBNull.Value && this.dataGridView1.Rows[i].Cells[0].Value != null)
+                if (dataGridView1.Rows[i].Cells[0].Value != DBNull.Value && dataGridView1.Rows[i].Cells[0].Value != null)
                 {
                     bResultFlag = MiningAreaBLL.updateMiningAreaInfo(miningAreaId, miningAreaName, horizontalId);
                 }
@@ -596,32 +560,32 @@ namespace LibCommonForm
         {
             bool bResultFlag = true;
 
-            for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
+            for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
             {
-                DataGridViewCellCollection cells = this.dataGridView1.Rows[i].Cells;
+                DataGridViewCellCollection cells = dataGridView1.Rows[i].Cells;
                 int tmpWorkingFaceId = Const.INVALID_ID;
                 string tmpWorkingFaceName = string.Empty;
                 int miningAreaId = Const.INVALID_ID;
                 int workingfaceType = 0;
                 // 工作面编号
-                if (cells[0].Value != System.DBNull.Value && cells[0].Value != null)
+                if (cells[0].Value != DBNull.Value && cells[0].Value != null)
                 {
                     tmpWorkingFaceId = Convert.ToInt32(cells[0].Value);
                 }
                 // 工作面名称
-                if (cells[1].Value != System.DBNull.Value && cells[1].Value != null)
+                if (cells[1].Value != DBNull.Value && cells[1].Value != null)
                 {
                     tmpWorkingFaceName = Convert.ToString(cells[1].Value);
                 }
 
                 //***************************************
                 // 所属采区
-                if (cells[2].Value != System.DBNull.Value && cells[2].Value != null)
+                if (cells[2].Value != DBNull.Value && cells[2].Value != null)
                 {
                     miningAreaId = Convert.ToInt32(cells[2].Value);
                 }
 
-                if (cells[3].Value != System.DBNull.Value &&
+                if (cells[3].Value != DBNull.Value &&
                     cells[3].Value != null)
                 {
                     workingfaceType = Convert.ToInt32(cells[3].Value);
@@ -629,13 +593,15 @@ namespace LibCommonForm
 
                 //***************************************
 
-                if (cells[0].Value != System.DBNull.Value && cells[0].Value != null)
+                if (cells[0].Value != DBNull.Value && cells[0].Value != null)
                 {
-                    bResultFlag = WorkingFaceBLL.updateWorkingFaceBasicInfo(tmpWorkingFaceId, tmpWorkingFaceName, miningAreaId, workingfaceType);
+                    bResultFlag = WorkingFaceBLL.updateWorkingFaceBasicInfo(tmpWorkingFaceId, tmpWorkingFaceName,
+                        miningAreaId, workingfaceType);
                 }
                 else
                 {
-                    bResultFlag = WorkingFaceBLL.insertWorkingFaceBasicInfo(tmpWorkingFaceName, miningAreaId, workingfaceType);
+                    bResultFlag = WorkingFaceBLL.insertWorkingFaceBasicInfo(tmpWorkingFaceName, miningAreaId,
+                        workingfaceType);
                 }
 
                 if (!bResultFlag)
@@ -661,27 +627,27 @@ namespace LibCommonForm
         }
 
         /// <summary>
-        /// 更新煤层信息
+        ///     更新煤层信息
         /// </summary>
         private void updateCoalSeamsInfo()
         {
             bool bResultFlag = true;
 
-            for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
+            for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
             {
-                CoalSeams coalSeamsEntity = new CoalSeams();
+                var coalSeamsEntity = new CoalSeams();
                 // 煤层编号
-                if (this.dataGridView1.Rows[i].Cells[0].Value != System.DBNull.Value && this.dataGridView1.Rows[i].Cells[0].Value != null)
+                if (dataGridView1.Rows[i].Cells[0].Value != DBNull.Value && dataGridView1.Rows[i].Cells[0].Value != null)
                 {
-                    coalSeamsEntity.CoalSeamsId = Convert.ToInt32(this.dataGridView1.Rows[i].Cells[0].Value);
+                    coalSeamsEntity.CoalSeamsId = Convert.ToInt32(dataGridView1.Rows[i].Cells[0].Value);
                 }
                 // 煤层名称
-                if (this.dataGridView1.Rows[i].Cells[1].Value != System.DBNull.Value && this.dataGridView1.Rows[i].Cells[1].Value != null)
+                if (dataGridView1.Rows[i].Cells[1].Value != DBNull.Value && dataGridView1.Rows[i].Cells[1].Value != null)
                 {
-                    coalSeamsEntity.CoalSeamsName = Convert.ToString(this.dataGridView1.Rows[i].Cells[1].Value);
+                    coalSeamsEntity.CoalSeamsName = Convert.ToString(dataGridView1.Rows[i].Cells[1].Value);
                 }
 
-                if (this.dataGridView1.Rows[i].Cells[0].Value != System.DBNull.Value && this.dataGridView1.Rows[i].Cells[0].Value != null)
+                if (dataGridView1.Rows[i].Cells[0].Value != DBNull.Value && dataGridView1.Rows[i].Cells[0].Value != null)
                 {
                     bResultFlag = CoalSeamsBLL.updateCoalSeamsInfo(coalSeamsEntity);
                 }
@@ -713,12 +679,13 @@ namespace LibCommonForm
 
         private bool check()
         {
-            for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
+            for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
             {
                 int count = 0;
-                for (int j = 0; j < this.dataGridView1.Rows.Count - 1; j++)
+                for (int j = 0; j < dataGridView1.Rows.Count - 1; j++)
                 {
-                    if (this.dataGridView1.Rows[i].Cells[1].Value.ToString() == this.dataGridView1.Rows[j].Cells[1].Value.ToString())
+                    if (dataGridView1.Rows[i].Cells[1].Value.ToString() ==
+                        dataGridView1.Rows[j].Cells[1].Value.ToString())
                     {
                         count = count + 1;
                     }
@@ -734,79 +701,72 @@ namespace LibCommonForm
         }
 
         /// <summary>
-        /// 取消
+        ///     取消
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnCancel_Click(object sender, EventArgs e)
         {
             // 窗口关闭
-            this.Close();
+            Close();
         }
 
         /// <summary>
-        /// Cell Click事件
-        /// 主要用于删除操作
+        ///     Cell Click事件
+        ///     主要用于删除操作
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             // 矿井名称管理
-            if (_typeFlag == FLAG_MANANGING_MINE_NAME)
+            if (_typeFlag == FlagManangingMineName)
             {
                 // 判断列索引是不是删除按钮
                 if (e.ColumnIndex == 2)
                 {
                     // 最后一行删除按钮设为不可
-                    if (this.dataGridView1.RowCount - 1 != this.dataGridView1.CurrentRow.Index)
+                    if (dataGridView1.RowCount - 1 != dataGridView1.CurrentRow.Index)
                     {
                         if (Alert.confirm(Const.DEL_CONFIRM_MSG))
                         {
-
-                            if (this.dataGridView1.Rows[this.dataGridView1.CurrentRow.Index].Cells[0].Value != System.DBNull.Value
-                                && this.dataGridView1.Rows[this.dataGridView1.CurrentRow.Index].Cells[0].Value != null)
+                            if (dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].Value != DBNull.Value
+                                && dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].Value != null)
                             {
-                                int iMineId = Convert.ToInt32(this.dataGridView1.Rows[this.dataGridView1.CurrentRow.Index].Cells[0].Value);
-                                bool bResult = MineBLL.deleteMineInfo(iMineId);
+                                int iMineId =
+                                    Convert.ToInt32(dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].Value);
 
-                                if (bResult)
-                                {
-                                    // 绑定矿井名称
-                                    loadMineInfo();
-                                }
-                                else
-                                {
-                                    Alert.alert(Const.DEL_FAILURE_MSG);
-                                }
+                                Mine.Find(iMineId).Delete();
+                                // 绑定矿井名称
+                                LoadMineInfo();
+
+                                Alert.alert(Const.DEL_FAILURE_MSG);
                             }
                             else
                             {
-                                this.dataGridView1.Rows.Remove(this.dataGridView1.CurrentRow);
+                                dataGridView1.Rows.Remove(dataGridView1.CurrentRow);
                             }
-
                         }
                     }
-
                 }
             }
 
             // 水平名称管理
-            if (_typeFlag == FLAG_MANANGING_HORIZONTAL)
+            if (_typeFlag == FlagManangingHorizontal)
             {
                 // 判断列索引是不是删除按钮
                 if (e.ColumnIndex == 3)
                 {
                     // 最后一行删除按钮设为不可
-                    if (this.dataGridView1.RowCount - 1 != this.dataGridView1.CurrentRow.Index)
+                    if (dataGridView1.RowCount - 1 != dataGridView1.CurrentRow.Index)
                     {
                         if (Alert.confirm(Const.DEL_CONFIRM_MSG))
                         {
-
-                            if (this.dataGridView1.Rows[this.dataGridView1.CurrentRow.Index].Cells[0].Value != System.DBNull.Value
-                                && this.dataGridView1.Rows[this.dataGridView1.CurrentRow.Index].Cells[0].Value != null)
+                            if (dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].Value != DBNull.Value
+                                && dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].Value != null)
                             {
-                                int iHorizontalId = Convert.ToInt32(this.dataGridView1.Rows[this.dataGridView1.CurrentRow.Index].Cells[0].Value);
+                                int iHorizontalId =
+                                    Convert.ToInt32(dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].Value);
                                 bool bResult = HorizontalBLL.deleteHorizontalInfo(iHorizontalId);
 
                                 if (bResult)
@@ -821,31 +781,30 @@ namespace LibCommonForm
                             }
                             else
                             {
-                                this.dataGridView1.Rows.Remove(this.dataGridView1.CurrentRow);
+                                dataGridView1.Rows.Remove(dataGridView1.CurrentRow);
                             }
-
                         }
                     }
-
                 }
             }
 
-            if (_typeFlag == FLAG_MANANGING_MINING_AREA)
+            if (_typeFlag == FlagManangingMiningArea)
             {
                 // 判断列索引是不是删除按钮
                 if (e.ColumnIndex == 3)
                 {
                     // 最后一行删除按钮设为不可
-                    if (this.dataGridView1.RowCount - 1 != this.dataGridView1.CurrentRow.Index)
+                    if (dataGridView1.RowCount - 1 != dataGridView1.CurrentRow.Index)
                     {
                         if (Alert.confirm(Const.DEL_CONFIRM_MSG))
                         {
-
-                            if (this.dataGridView1.Rows[this.dataGridView1.CurrentRow.Index].Cells[0].Value != System.DBNull.Value
-                                && this.dataGridView1.Rows[this.dataGridView1.CurrentRow.Index].Cells[0].Value != null)
+                            if (dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].Value != DBNull.Value
+                                && dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].Value != null)
                             {
-                                int iMiningAreaId = Convert.ToInt32(this.dataGridView1.Rows[this.dataGridView1.CurrentRow.Index].Cells[0].Value);
-                                int count = BasicInfoManager.getInstance().getWorkingFaceCountByMiningAreaId(iMiningAreaId);
+                                int iMiningAreaId =
+                                    Convert.ToInt32(dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].Value);
+                                int count =
+                                    BasicInfoManager.getInstance().getWorkingFaceCountByMiningAreaId(iMiningAreaId);
                                 if (count > 0)
                                 {
                                     Alert.alert("采区有关联的工作面，请首先解除关联");
@@ -867,31 +826,30 @@ namespace LibCommonForm
                             }
                             else
                             {
-                                this.dataGridView1.Rows.Remove(this.dataGridView1.CurrentRow);
+                                dataGridView1.Rows.Remove(dataGridView1.CurrentRow);
                             }
-
                         }
                     }
-
                 }
             }
 
-            if (_typeFlag == FLAG_MANANGING_WORKING_FACE)
+            if (_typeFlag == FlagManangingWorkingFace)
             {
                 // 判断列索引是不是删除按钮
                 if (e.ColumnIndex == 4)
                 {
                     // 最后一行删除按钮设为不可
-                    if (this.dataGridView1.RowCount - 1 != this.dataGridView1.CurrentRow.Index)
+                    if (dataGridView1.RowCount - 1 != dataGridView1.CurrentRow.Index)
                     {
                         if (Alert.confirm(Const.DEL_CONFIRM_MSG))
                         {
-
-                            if (this.dataGridView1.Rows[this.dataGridView1.CurrentRow.Index].Cells[0].Value != System.DBNull.Value
-                                && this.dataGridView1.Rows[this.dataGridView1.CurrentRow.Index].Cells[0].Value != null)
+                            if (dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].Value != DBNull.Value
+                                && dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].Value != null)
                             {
-                                int iWorkingFaceId = Convert.ToInt32(this.dataGridView1.Rows[this.dataGridView1.CurrentRow.Index].Cells[0].Value);
-                                List<Tunnel> list = BasicInfoManager.getInstance().getTunnelListByWorkingFaceId(iWorkingFaceId);
+                                int iWorkingFaceId =
+                                    Convert.ToInt32(dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].Value);
+                                List<Tunnel> list =
+                                    BasicInfoManager.getInstance().getTunnelListByWorkingFaceId(iWorkingFaceId);
                                 if (list != null && list.Count > 0)
                                 {
                                     Alert.alert("工作面有关联的巷道，请首先解除关联");
@@ -914,31 +872,29 @@ namespace LibCommonForm
                             }
                             else
                             {
-                                this.dataGridView1.Rows.Remove(this.dataGridView1.CurrentRow);
+                                dataGridView1.Rows.Remove(dataGridView1.CurrentRow);
                             }
-
                         }
                     }
-
                 }
             }
 
             // 煤层名称管理
-            if (_typeFlag == FLAG_MANANGING_COAL_SEAM)
+            if (_typeFlag == FlagManangingCoalSeam)
             {
                 // 判断列索引是不是删除按钮
                 if (e.ColumnIndex == 2)
                 {
                     // 最后一行删除按钮设为不可
-                    if (this.dataGridView1.RowCount - 1 != this.dataGridView1.CurrentRow.Index)
+                    if (dataGridView1.RowCount - 1 != dataGridView1.CurrentRow.Index)
                     {
                         if (Alert.confirm(Const.DEL_CONFIRM_MSG))
                         {
-
-                            if (this.dataGridView1.Rows[this.dataGridView1.CurrentRow.Index].Cells[0].Value != System.DBNull.Value
-                                && this.dataGridView1.Rows[this.dataGridView1.CurrentRow.Index].Cells[0].Value != null)
+                            if (dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].Value != DBNull.Value
+                                && dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].Value != null)
                             {
-                                int iCoalSeamsId = Convert.ToInt32(this.dataGridView1.Rows[this.dataGridView1.CurrentRow.Index].Cells[0].Value);
+                                int iCoalSeamsId =
+                                    Convert.ToInt32(dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].Value);
                                 bool bResult = CoalSeamsBLL.deleteCoalSeamsInfo(iCoalSeamsId);
 
                                 if (bResult)
@@ -953,19 +909,16 @@ namespace LibCommonForm
                             }
                             else
                             {
-                                this.dataGridView1.Rows.Remove(this.dataGridView1.CurrentRow);
+                                dataGridView1.Rows.Remove(dataGridView1.CurrentRow);
                             }
-
                         }
                     }
-
                 }
             }
-
         }
 
         /// <summary>
-        /// 编号自动排序
+        ///     编号自动排序
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -973,7 +926,7 @@ namespace LibCommonForm
         {
             if (_typeFlag == 2 || _typeFlag == 3 || _typeFlag == 4)
             {
-                this.dataGridView1.Rows[e.Row.Index - 1].Cells[2].Value = _id;
+                dataGridView1.Rows[e.Row.Index - 1].Cells[2].Value = _id;
             }
         }
     }

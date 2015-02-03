@@ -22,14 +22,14 @@ namespace LibCommonForm
         public SelectWorkingFaceDlg()
         {
             InitializeComponent();
-            this.selectWorkingFaceControl1.loadMineName();
+            this.selectWorkingFaceControl1.LoadMineName();
         }
 
         public SelectWorkingFaceDlg(params WorkingfaceTypeEnum[] workingfaceTypes)
         {
             InitializeComponent();
             SetFilterOn(workingfaceTypes);
-            this.selectWorkingFaceControl1.loadMineName();
+            this.selectWorkingFaceControl1.LoadMineName();
         }
 
         //private void SetFilterOn(WorkingfaceTypeEnum workingfaceType)

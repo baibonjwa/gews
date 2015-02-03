@@ -1,16 +1,10 @@
-﻿// ******************************************************************
-// 概  述：水平实体
-// 作  者：伍鑫
-// 创建日期：2014/02/25
-// 版本号：1.0
-// ******************************************************************
-
-using Castle.ActiveRecord;
+﻿using Castle.ActiveRecord;
+using NHibernate.Criterion;
 
 namespace LibEntity
 {
     [ActiveRecord("T_HORIZONTAL_INFO")]
-    public class Horizontal : ActiveRecordBase
+    public class Horizontal : ActiveRecordBase<Horizontal>
     {
 
         /// <summary>
@@ -30,5 +24,14 @@ namespace LibEntity
         /// </summary>
         [BelongsTo("MINE_ID")]
         public Mine Mine { get; set; }
+
+        public static Horizontal[] FindAllByMineId(int mineId)
+        {
+            var criterion = new ICriterion[]
+            {
+                Restrictions.Eq("Mine.MineId", mineId)
+            };
+            return FindAll(criterion);
+        }
     }
 }

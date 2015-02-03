@@ -167,7 +167,6 @@
     <Compile Include="3.GeologyMeasureBLL\DbConstNames\WorkingFaceDbConstNames.cs" />
     <Compile Include="3.GeologyMeasureBLL\DbConstNames\MiningAreaDbConstNames.cs" />
     <Compile Include="3.GeologyMeasureBLL\DbConstNames\HorizontalDbConstNames.cs" />
-    <Compile Include="3.GeologyMeasureBLL\DbConstNames\MineDbConstNames.cs" />
     <Compile Include="3.GeologyMeasureBLL\DbConstNames\LithologyDbConstNames.cs" />
     <Compile Include="3.GeologyMeasureBLL\DbConstNames\TunnelInfoDbConstNames.cs" />
     <Compile Include="3.GeologyMeasureBLL\DbConstNames\WireInfoDbConstNames.cs" />
@@ -175,7 +174,6 @@
     <Compile Include="3.GeologyMeasureBLL\PropertyBLL\WorkingFaceBLL.cs" />
     <Compile Include="3.GeologyMeasureBLL\PropertyBLL\MiningAreaBLL.cs" />
     <Compile Include="3.GeologyMeasureBLL\PropertyBLL\HorizontalBLL.cs" />
-    <Compile Include="3.GeologyMeasureBLL\PropertyBLL\MineBLL.cs" />
     <Compile Include="3.GeologyMeasureBLL\PropertyBLL\LithologyBLL.cs" />
     <Compile Include="3.GeologyMeasureBLL\PropertyBLL\TunnelInfoBLL.cs" />
     <Compile Include="3.GeologyMeasureBLL\PropertyBLL\WireInfoBLL.cs" />
@@ -229,7 +227,7 @@
     <Compile Include="CommonBLL\PropertyBLL\UserInformationDetailsManagementBLL.cs" />
     <Compile Include="CommonBLL\PropertyBLL\UserInformationManagementBLL.cs" />
     <Compile Include="CommonBLL\PropertyBLL\UserLoginInformationManagementBLL.cs" />
-    <Compile Include="CommonBLL\PropertyBLL\WorkingFaceSelect.cs" />
+    <Compile Include="DataBindUtil.cs" />
     <Compile Include="PreWarningAnalysisResultBLL.cs" />
     <Compile Include="PreWarningDataCommonBLL.cs" />
     <Compile Include="PreWarningDataDbConstNames.cs" />

@@ -1,12 +1,4 @@
-﻿// ******************************************************************
-// 概  述：巷道选择共同Panel
-// 作  者：伍鑫
-// 创建日期：2014/02/25
-// 版本号：V1.0
-// 版本信息:
-// V1.0 新建
-// ******************************************************************
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -93,26 +85,11 @@ namespace LibPanels
         /// </summary>
         private void loadMineName()
         {
-            this.lstMineName.DataSource = null;
-            this.lstHorizontalName.DataSource = null;
-            this.lstMiningAreaName.DataSource = null;
-            this.lstWorkingFaceName.DataSource = null;
-            this.lstTunnelName.DataSource = null;
-
-            // 获取矿井信息
-            DataSet ds = MineBLL.selectAllMineInfo();
-            // 检索件数
-            int iSelCnt = ds.Tables[0].Rows.Count;
-            // 检索件数 > 0 的场合
-            if (iSelCnt > 0)
-            {
-                // 绑定矿井信息
-                this.lstMineName.DataSource = ds.Tables[0];
-                this.lstMineName.DisplayMember = MineDbConstNames.MINE_NAME;
-                this.lstMineName.ValueMember = MineDbConstNames.MINE_ID;
-
-                this.lstMineName.SelectedIndex = -1;
-            }
+            lstMineName.DataSource = null;
+            lstHorizontalName.DataSource = null;
+            lstMiningAreaName.DataSource = null;
+            lstWorkingFaceName.DataSource = null;
+            DataBindUtil.LoadMineName(lstMineName);
         }
         #endregion
 
@@ -443,7 +420,7 @@ namespace LibPanels
         /// <param name="e"></param>
         private void btnMineName_Click(object sender, EventArgs e)
         {
-            LibCommonForm.CommonManagement commonManagement = new LibCommonForm.CommonManagement(1, 999, this.MainForm);
+            LibCommonForm.CommonManagement commonManagement = new LibCommonForm.CommonManagement(1, 999);
             if (DialogResult.OK == commonManagement.ShowDialog())
             {
                 // 绑定矿井信息
@@ -460,7 +437,7 @@ namespace LibPanels
         {
             if (this.lstMineName.SelectedItems.Count > 0)
             {
-                LibCommonForm.CommonManagement commonManagement = new LibCommonForm.CommonManagement(2, _iMineId, this.MainForm);
+                LibCommonForm.CommonManagement commonManagement = new LibCommonForm.CommonManagement(2, _iMineId);
                 if (DialogResult.OK == commonManagement.ShowDialog())
                 {
                     // 绑定水平信息
@@ -482,7 +459,7 @@ namespace LibPanels
         {
             if (this.lstHorizontalName.SelectedItems.Count > 0)
             {
-                LibCommonForm.CommonManagement commonManagement = new LibCommonForm.CommonManagement(3, _iHorizontalId, this.MainForm);
+                LibCommonForm.CommonManagement commonManagement = new LibCommonForm.CommonManagement(3, _iHorizontalId);
                 if (DialogResult.OK == commonManagement.ShowDialog())
                 {
                     // 绑定采区信息
@@ -504,7 +481,7 @@ namespace LibPanels
         {
             if (this.lstMiningAreaName.SelectedItems.Count > 0)
             {
-                LibCommonForm.CommonManagement commonManagement = new LibCommonForm.CommonManagement(4, _iMiningAreaId, this.MainForm);
+                LibCommonForm.CommonManagement commonManagement = new LibCommonForm.CommonManagement(4, _iMiningAreaId);
                 if (DialogResult.OK == commonManagement.ShowDialog())
                 {
                     // 绑定工作面信息
@@ -556,7 +533,7 @@ namespace LibPanels
             else
             {
                 Alert.alert("请先选择所在工作面名称！");
-                
+
             }
 
         }

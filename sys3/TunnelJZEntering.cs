@@ -120,9 +120,9 @@ namespace _3.GeologyMeasure
                 pnt.Z = z;
                 coordinates.Add(pnt);
             }
-            DataSet dst = LibBusiness.TunnelInfoBLL.selectOneTunnelInfoByTunnelID(_tunnelEntity.TunnelId);
+            Tunnel tunnel = Tunnel.Find(_tunnelEntity.TunnelId);
 
-            Global.cons.DrawJJJZ(_tunnelEntity.TunnelId.ToString(), coordinates, Convert.ToDouble(dst.Tables[0].Rows[0][TunnelInfoDbConstNames.TUNNEL_WID]), 0, 0, Global.searchlen, Global.sxjl, 1);
+            Global.cons.DrawJJJZ(_tunnelEntity.TunnelId.ToString(), coordinates, Convert.ToDouble(tunnel.TunnelWid), 0, 0, Global.searchlen, Global.sxjl, 1);
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

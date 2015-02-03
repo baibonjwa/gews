@@ -55,7 +55,7 @@ namespace LibBusiness
 
         private void init()
         {
-            refreshMineInfo();
+            RefreshMineInfo();
             refreshHorizontalInfo();
             refreshMiningAreaInfo();
             refreshWorkingFaceInfo();
@@ -71,16 +71,13 @@ namespace LibBusiness
         /// <summary>
         /// 加载更新矿信息
         /// </summary>
-        public void refreshMineInfo()
+        public void RefreshMineInfo()
         {
             mineList.Clear();
             // 
-            DataSet ds = MineBLL.selectAllMineInfo();
-            foreach (DataRow dr in ds.Tables[0].Rows)
+            var mines = Mine.FindAll();
+            foreach (var entity in mines.Select(i => new Mine { MineId = i.MineId, MineName = i.MineName }))
             {
-                Mine entity = new Mine();
-                entity.MineId = Convert.ToInt32(dr[MineDbConstNames.MINE_ID]);
-                entity.MineName = dr[MineDbConstNames.MINE_NAME].ToString();
                 mineList.Add(entity.MineId, entity);
             }
         }
@@ -385,19 +382,7 @@ namespace LibBusiness
         /// <param name="tunnelId">巷道id</param>
         public Tunnel refreshTunnelInfo(int tunnelId)
         {
-            if (-1 == tunnelId)
-                return null;
-
-            DataSet ds = TunnelInfoBLL.selectOneTunnelInfoByTunnelID(tunnelId);
-
-            if (ds.Tables[0].Rows.Count > 0)
-            {
-                DataRow dr = ds.Tables[0].Rows[0];
-                Tunnel entity = getTunnelEntityByDataRow(dr);
-                return entity;
-            }
-
-            return null;
+            return Tunnel.Find(tunnelId);
         }
 
         /// <summary>

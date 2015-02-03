@@ -185,7 +185,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LibCommon\LibCommon.csproj">
-      <Project>{2EBCDE4B-A244-4CCA-A1AE-1A884D81772B}</Project>
+      <Project>{2ebcde4b-a244-4cca-a1ae-1a884d81772b}</Project>
       <Name>LibCommon</Name>
     </ProjectReference>
     <ProjectReference Include="..\LibGeometry\LibGeometry.csproj">

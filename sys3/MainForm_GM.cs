@@ -531,7 +531,7 @@ namespace sys3
         //煤层管理
         private void mniMCGL_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            CommonManagement commonManagementForm = new CommonManagement(5, 0, this);
+            CommonManagement commonManagementForm = new CommonManagement(5, 0);
             if (DialogResult.OK == commonManagementForm.ShowDialog())
             {
 
