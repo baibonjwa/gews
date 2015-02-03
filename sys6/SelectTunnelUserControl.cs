@@ -18,6 +18,7 @@ using LibBusiness;
 using LibCommon;
 using LibCommonControl;
 using LibCommonForm;
+using LibEntity;
 
 namespace UnderTerminal
 {
@@ -445,30 +446,15 @@ namespace UnderTerminal
                 _iWorkingFaceId = iWorkingFaceId;
 
                 // 获取巷道信息
-                DataSet ds = new DataSet();
-                if (_isFilterOn)
-                {
-                    if (_filterType == 0)
-                    {
-                        ds = TunnelInfoBLL.selectTunnelInfoByWorkingFaceWithFilter(iWorkingFaceId, _columnName, _columnValue);
-                    }
-                    if (_filterType == 1)
-                    {
-                        ds = TunnelInfoBLL.selectTunnelInfoWithFilter(_tunnelFilterRules, _iWorkingFaceId);
-                    }
-                }
-                else
-                {
-                    ds = TunnelInfoBLL.selectTunnelInfoByWorkingFaceId(iWorkingFaceId);
-                }
+                Tunnel[] tunnels = Tunnel.FindAllByWorkingFaceId(iWorkingFaceId);
 
                 // 检索件数
-                int iSelCnt = ds.Tables[0].Rows.Count;
+                int iSelCnt = tunnels.Length;
                 // 检索件数 > 0 的场合
                 if (iSelCnt > 0)
                 {
                     // 绑定巷道信息
-                    this.lstTunnelName.DataSource = ds.Tables[0];
+                    this.lstTunnelName.DataSource = tunnels;
                     this.lstTunnelName.DisplayMember = TunnelInfoDbConstNames.TUNNEL_NAME;
                     this.lstTunnelName.ValueMember = TunnelInfoDbConstNames.ID;
 
@@ -493,31 +479,16 @@ namespace UnderTerminal
                 // 工作面编号
                 int iWorkingFaceId = Convert.ToInt32(this.lstWorkingFaceName.SelectedValue);
                 _iWorkingFaceId = iWorkingFaceId;
-                DataSet ds = new DataSet();
                 // 获取巷道信息
-                if (_isFilterOn)
-                {
-                    if (_filterType == 0)
-                    {
-                        ds = TunnelInfoBLL.selectTunnelInfoByWorkingFaceWithFilter(iWorkingFaceId, _columnName, _columnValue);
-                    }
-                    if (_filterType == 1)
-                    {
-                        ds = TunnelInfoBLL.selectTunnelInfoWithFilter(_tunnelFilterRules, _iWorkingFaceId);
-                    }
-                }
-                else
-                {
-                    ds = TunnelInfoBLL.selectTunnelInfoByWorkingFaceId(iWorkingFaceId);
-                }
+                Tunnel[] tunnels = Tunnel.FindAllByWorkingFaceId(iWorkingFaceId);
 
                 // 检索件数
-                int iSelCnt = ds.Tables[0].Rows.Count;
+                int iSelCnt = tunnels.Length;
                 // 检索件数 > 0 的场合
                 if (iSelCnt > 0)
                 {
                     // 绑定巷道信息
-                    this.lstTunnelName.DataSource = ds.Tables[0];
+                    this.lstTunnelName.DataSource = tunnels;
                     this.lstTunnelName.DisplayMember = TunnelInfoDbConstNames.TUNNEL_NAME;
                     this.lstTunnelName.ValueMember = TunnelInfoDbConstNames.ID;
 
@@ -662,7 +633,7 @@ namespace UnderTerminal
 
                 if (this.lstTunnelName.SelectedItems.Count > 0)
                 {
-                    LibCommonForm.TunnelInfoEntering tunnelInfoEntering = new LibCommonForm.TunnelInfoEntering(iTunnelId, intArr, this.MainForm);
+                    LibCommonForm.TunnelInfoEntering tunnelInfoEntering = new LibCommonForm.TunnelInfoEntering(iTunnelId);
                     if (DialogResult.OK == tunnelInfoEntering.ShowDialog())
                     {
                         // 绑定巷道信息
@@ -671,7 +642,7 @@ namespace UnderTerminal
                 }
                 else
                 {
-                    LibCommonForm.TunnelInfoEntering tunnelInfoEntering = new LibCommonForm.TunnelInfoEntering(intArr, this.MainForm);
+                    LibCommonForm.TunnelInfoEntering tunnelInfoEntering = new LibCommonForm.TunnelInfoEntering(intArr);
                     if (DialogResult.OK == tunnelInfoEntering.ShowDialog())
                     {
                         // 绑定巷道信息

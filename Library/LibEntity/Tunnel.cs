@@ -117,10 +117,22 @@ namespace LibEntity
 
         public static Tunnel[] FindAllByWorkingFaceId(int workingfaceId)
         {
-            var criterion =new ICriterion[]
+            var criterion = new ICriterion[]
             {
-                
-            }
+                Restrictions.Eq("WorkingFace.WorkingFaceId",workingfaceId)
+            };
+            return FindAll(criterion);
         }
+
+        public static bool ExistsByTunnelNameAndWorkingFaceId(string tunnelName, int workingfaceId)
+        {
+            var criterion = new ICriterion[]
+            {
+                Restrictions.Eq("TunnelName",tunnelName),
+                Restrictions.Eq("WorkingFace.WorkingFaceId",workingfaceId)
+            };
+            return Exists(criterion);
+        }
+
     }
 }

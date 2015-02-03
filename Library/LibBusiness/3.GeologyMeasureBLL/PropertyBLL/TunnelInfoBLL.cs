@@ -20,40 +20,6 @@ namespace LibBusiness
 {
     public class TunnelInfoBLL
     {
-
-        /// <summary>
-        /// 通过<工作面编号>，获取该<工作面>下所有<巷道>信息
-        /// </summary>
-        /// <returns><巷道>信息</returns>
-        //public static DataSet selectTunnelInfoByWorkingFaceId(int iWorkingFaceId)
-        //{
-        //    StringBuilder sqlStr = new StringBuilder();
-        //    sqlStr.Append("SELECT * FROM " + TunnelInfoDbConstNames.TABLE_NAME);
-        //    sqlStr.Append(" WHERE " + TunnelInfoDbConstNames.WORKINGFACE_ID + " = " + iWorkingFaceId);
-
-        //    ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
-        //    DataSet ds = db.ReturnDS(sqlStr.ToString());
-        //    return ds;
-        //}
-
-        /// <summary>
-        /// 巷道类型过滤
-        /// </summary>
-        /// <param name="iWorkingFaceId">工作面ID</param>
-        /// <param name="columnName">参数列名</param>
-        /// <param name="columnValue">参数值</param>
-        /// <returns>过滤后巷道信息</returns>
-        public static DataSet selectTunnelInfoByWorkingFaceWithFilter(int iWorkingFaceId, string columnName, string columnValue)
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("SELECT * FROM " + TunnelInfoDbConstNames.TABLE_NAME);
-            sb.Append(" WHERE " + TunnelInfoDbConstNames.WORKINGFACE_ID + " = " + iWorkingFaceId);
-            sb.Append(" AND " + columnName + " = '" + columnValue.ToString() + "'");
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
-            DataSet ds = db.ReturnDS(sb.ToString());
-            return ds;
-        }
-
         /// <summary>
         /// 巷道类型过滤
         /// </summary>
@@ -87,52 +53,6 @@ namespace LibBusiness
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
             DataSet ds = db.ReturnDS(sqlStr);
             return ds;
-        }
-
-        /// <summary>
-        /// 条件过滤巷道
-        /// </summary>
-        /// <param name="tunnelFilterRules">过滤规则</param>
-        /// <param name="iWorkingFaceID">工作面ID</param>
-        /// <returns>过滤后巷道信息</returns>
-        public static DataSet selectTunnelInfoWithFilter(TunnelFilter.TunnelFilterRules tunnelFilterRules, int iWorkingFaceID)
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("SELECT * FROM " + TunnelInfoDbConstNames.TABLE_NAME);
-            sb.Append(" WHERE " + TunnelInfoDbConstNames.WORKINGFACE_ID + " = " + iWorkingFaceID);
-            if (tunnelFilterRules == TunnelFilter.TunnelFilterRules.IS_WIRE_INFO_BIND)
-            {
-                //                sb.Append(" AND " + TunnelInfoDbConstNames.ID + " IN (");//zwj 2014,7,28
-                //               sb.Append("SELECT " + WireInfoDbConstNames.TUNNEL_ID + " FROM " + WireInfoDbConstNames.TABLE_NAME+")");//zwj 2014,7,28
-            }
-            if (tunnelFilterRules == TunnelFilter.TunnelFilterRules.IS_TUNNE_KQY)
-            {
-                //                sb.Append(" AND " + TunnelInfoDbConstNames.ID + " IN (");//zwj 2014,7,28
-                //                sb.Append("SELECT " + TunnelHCDbConstNames.TUNNEL_ID3 + " FROM " + TunnelHCDbConstNames.TABLE_NAME+")");//zwj 2014,7,28
-            }
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
-            DataSet ds = db.ReturnDS(sb.ToString());
-            return ds;
-        }
-
-
-        /// <summary>
-        /// 工作面下巷道名称是否存在
-        /// </summary>
-        /// <param name="tunnelName"></param>
-        /// <param name="workingFaceID"></param>
-        /// <returns></returns>
-        public static bool isTunnelNameExist(string tunnelName, int workingFaceID)
-        {
-            string sql = "SELECT * FROM " + TunnelInfoDbConstNames.TABLE_NAME + " WHERE " + TunnelInfoDbConstNames.TUNNEL_NAME + " = '" + tunnelName + "' AND " + TunnelInfoDbConstNames.WORKINGFACE_ID + " = " + workingFaceID;
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
-            DataSet ds = db.ReturnDS(sql);
-            bool bResult = false;
-            if (ds.Tables[0].Rows.Count > 0)
-            {
-                bResult = true;
-            }
-            return bResult;
         }
 
         public static DataSet returnLithologyName()
@@ -189,37 +109,37 @@ namespace LibBusiness
         /// </summary>
         /// <param name="tunnelEntity">巷道实体</param>
         /// <returns>是否为掘进巷道？true:false</returns>
-        public static bool isTunnelJJ(Tunnel tunnelEntity)
-        {
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
-            string sql = "SELECT " +
-                "A." + TunnelInfoDbConstNames.TUNNEL_TYPE +
-                ", B." + WorkingFaceDbConstNames.IS_FINISH +
-                 " FROM " +
-                TunnelInfoDbConstNames.TABLE_NAME + " AS A, " +
-                WorkingFaceDbConstNames.TABLE_NAME + " AS B" +
-                " WHERE " +
-                "A." + TunnelInfoDbConstNames.ID + " = " + tunnelEntity.TunnelId +
-                " AND " +
-                "A." + TunnelInfoDbConstNames.TUNNEL_TYPE + " = " + (int)TunnelTypeEnum.TUNNELLING +
-                 " AND " +
-                "A." + TunnelInfoDbConstNames.WORKINGFACE_ID + " = B." + TunnelInfoDbConstNames.WORKINGFACE_ID;
+        //public static bool isTunnelJJ(Tunnel tunnelEntity)
+        //{
+        //    ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
+        //    string sql = "SELECT " +
+        //        "A." + TunnelInfoDbConstNames.TUNNEL_TYPE +
+        //        ", B." + WorkingFaceDbConstNames.IS_FINISH +
+        //         " FROM " +
+        //        TunnelInfoDbConstNames.TABLE_NAME + " AS A, " +
+        //        WorkingFaceDbConstNames.TABLE_NAME + " AS B" +
+        //        " WHERE " +
+        //        "A." + TunnelInfoDbConstNames.ID + " = " + tunnelEntity.TunnelId +
+        //        " AND " +
+        //        "A." + TunnelInfoDbConstNames.TUNNEL_TYPE + " = " + (int)TunnelTypeEnum.TUNNELLING +
+        //         " AND " +
+        //        "A." + TunnelInfoDbConstNames.WORKINGFACE_ID + " = B." + TunnelInfoDbConstNames.WORKINGFACE_ID;
 
-            DataSet ds = db.ReturnDS(sql);
-            if (ds.Tables[0].Rows.Count > 0)
-            {
-                if (Convert.ToInt32(ds.Tables[0].Rows[0][WorkingFaceDbConstNames.IS_FINISH].ToString()) == 1)
-                {
-                    return false;
-                }
+        //    DataSet ds = db.ReturnDS(sql);
+        //    if (ds.Tables[0].Rows.Count > 0)
+        //    {
+        //        if (Convert.ToInt32(ds.Tables[0].Rows[0][WorkingFaceDbConstNames.IS_FINISH].ToString()) == 1)
+        //        {
+        //            return false;
+        //        }
 
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        return false;
+        //    }
+        //}
 
         /// <summary>
         /// 返回巷道是否为回采巷道

@@ -385,7 +385,7 @@ namespace _3.GeologyMeasure
             if (tmpTunnelHChuanEntity.TunnelId1 != tunnelHChuanEntity.TunnelId1)
             {
                 //检查巷道是否为掘进巷道
-                if (TunnelInfoBLL.isTunnelJJ(tunnelEntity))
+                if (tunnelEntity.WorkingFace.WorkingfaceTypeEnum == WorkingfaceTypeEnum.JJ)
                 {
                     Alert.alert(btnTunnelChoose1.Text + Const_GM.TUNNEL_HC_MSG_TUNNEL_IS_JJ);
                     return false;
@@ -409,7 +409,7 @@ namespace _3.GeologyMeasure
             if (tmpTunnelHChuanEntity.TunnelId2 != tunnelHChuanEntity.TunnelId2)
             {
                 //检查巷道是否为掘进巷道
-                if (TunnelInfoBLL.isTunnelJJ(tunnelEntity))
+                if (tunnelEntity.WorkingFace.WorkingfaceTypeEnum == WorkingfaceTypeEnum.JJ)
                 {
                     Alert.alert(btnTunnelChoose2.Text + Const_GM.TUNNEL_HC_MSG_TUNNEL_IS_JJ);
                     return false;

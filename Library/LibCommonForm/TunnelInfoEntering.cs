@@ -37,11 +37,9 @@ namespace LibCommonForm
 
         }
 
-        public TunnelInfoEntering(int[] array, MainFrm mainFrm)
+        public TunnelInfoEntering(int[] array)
         {
             InitializeComponent();
-
-            this.MainForm = mainFrm;
 
             arr = array;
             //设置窗体格式
@@ -56,10 +54,8 @@ namespace LibCommonForm
         /// 修改
         /// </summary>
         /// <param name="tunnelID"></param>
-        public TunnelInfoEntering(int tunnelID, int[] array, MainFrm frm)
+        public TunnelInfoEntering(int tunnelID)
         {
-            this.MainForm = frm;
-            arr = array;
             tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(tunnelID);
             InitializeComponent();
             LibCommon.FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_GM.TUNNEL_INFO_CHANGE);
