@@ -89,10 +89,6 @@ namespace sys3
                 //掘进ID
                 var tunnelEntity = (Tunnel)gridView1.GetFocusedRow();
                 //巷道类型为掘进或回采巷道
-                if (tunnelEntity.WorkingFace.WorkingfaceTypeEnum == WorkingfaceTypeEnum.JJ || tunnelEntity.WorkingFace.WorkingfaceTypeEnum == WorkingfaceTypeEnum.HC)
-                {
-                    TunnelInfoBLL.deleteJJHCTunnelInfo(tunnelEntity);
-                }
                 if (Wire.FindOneByTunnelId(tunnelEntity.TunnelId) != null)
                 {
                     var wire = Wire.FindOneByTunnelId(tunnelEntity.TunnelId);

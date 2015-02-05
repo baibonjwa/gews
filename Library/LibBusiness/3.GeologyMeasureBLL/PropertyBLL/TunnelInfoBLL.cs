@@ -18,52 +18,6 @@ namespace LibBusiness
     {
 
 
-        /// <summary>
-        /// 设置巷道为横川巷道
-        /// </summary>
-        /// <param name="tunnelHCEntity">巷道实体</param>
-        /// <returns>是否成功设置巷道为横川巷道？true:false</returns>
-        public static bool setTunnelAsHChuan(TunnelHChuan tunnelHChuanEntity)
-        {
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
-            db.Open();
-            string sql = "UPDATE " + TunnelInfoDbConstNames.TABLE_NAME + " SET " +
-                TunnelInfoDbConstNames.TUNNEL_TYPE + " = '" + "HENGCHUAN" +
-                "' WHERE " + TunnelInfoDbConstNames.ID + " = " + tunnelHChuanEntity.TunnelId1;
-            bool bResult = db.OperateDBNotOpenAndClose(sql);
-            sql = "UPDATE " + TunnelInfoDbConstNames.TABLE_NAME + " SET " +
-                TunnelInfoDbConstNames.TUNNEL_TYPE + " = '" + "HENGCHUAN" +
-                "' WHERE " + TunnelInfoDbConstNames.ID + " = " + tunnelHChuanEntity.TunnelId2;
-            if (bResult)
-            {
-                bResult = db.OperateDBNotOpenAndClose(sql);
-            }
-            else
-            {
-                db.Close();
-                return bResult;
-            }
-
-            return bResult;
-        }
-
-        /// <summary>
-        /// 删除掘进回采巷道相关数据（删除巷道时使用）
-        /// </summary>
-        /// <param name="tunnelEntity">巷道实体</param>
-        /// <returns>是否成功删除掘进或回采巷道信息</returns>
-        public static void deleteJJHCTunnelInfo(Tunnel tunnelEntity)
-        {
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
-            db.Open();
-
-            string sql = "UPDATE " + TunnelInfoDbConstNames.TABLE_NAME + " SET " +
-                TunnelInfoDbConstNames.TUNNEL_TYPE + " = " + (int)TunnelTypeEnum.OTHER +
-                " WHERE " + TunnelInfoDbConstNames.ID + " = " + tunnelEntity.TunnelId;
-            db.OperateDBNotOpenAndClose(sql);
-
-            db.Close();
-        }
 
         /// <summary>
         /// 删除巷道的掘进进尺相关信息
