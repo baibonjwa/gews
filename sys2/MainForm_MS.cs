@@ -189,7 +189,7 @@ namespace sys2
         //回采进尺日报
         private void mniHCJCRB_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            DayReportHCManagement hc = new DayReportHCManagement(this);
+            DayReportHcManagement hc = new DayReportHcManagement();
             hc.Show();
         }
 

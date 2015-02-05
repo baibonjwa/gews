@@ -45,7 +45,7 @@ namespace sys2
         /// <summary>
         /// 构造方法
         /// </summary>
-        public DayReportHcEntering(MainFrm frm)
+        public DayReportHcEntering()
         {
             InitializeComponent();
 
@@ -54,8 +54,6 @@ namespace sys2
             dtp.Format = DateTimePickerFormat.Custom;   //设置日期格式为2010-08-05
             dtp.TextChanged += dtp_TextChange; //为时间控件加入事件dtp_TextChange
             this.dgrdvDayReportHC.DataError += delegate(object sender, DataGridViewDataErrorEventArgs e) { };
-
-            this.MainForm = frm;
 
             addInfo();
             //设置窗体格式
@@ -102,11 +100,8 @@ namespace sys2
         /// </summary>
         /// <param name="array">巷道编号数组</param>
         /// <param name="dayReportHCEntity">回采进尺日报实体</param>
-        public DayReportHcEntering(int[] array, DayReportHc dayReportHCEntity, MainFrm frm)
+        public DayReportHcEntering(DayReportHc dayReportHCEntity)
         {
-            _arr = array;
-            this.MainForm = frm;
-
             this._dayReportHCEntity = dayReportHCEntity;
 
             updateWorkingFaceInfo(dayReportHCEntity.WorkingFace.WorkingFaceId);

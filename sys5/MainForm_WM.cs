@@ -407,7 +407,7 @@ namespace _5.WarningManagement
         //回采进尺日报
         private void mniHCJCRB_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            DayReportHCManagement dhcm = new DayReportHCManagement(this);
+            DayReportHcManagement dhcm = new DayReportHcManagement();
             dhcm.Show();
         }
 
