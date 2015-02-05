@@ -68,6 +68,7 @@ namespace sys3
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.controlNavigator1 = new DevExpress.XtraEditors.ControlNavigator();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.toolStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcTunnel)).BeginInit();
@@ -325,6 +326,7 @@ namespace sys3
             // gridColumn1
             // 
             this.gridColumn1.Caption = "矿井名称";
+            this.gridColumn1.FieldName = "WorkingFace.MiningArea.Horizontal.Mine.MineName";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 0;
@@ -332,6 +334,7 @@ namespace sys3
             // gridColumn2
             // 
             this.gridColumn2.Caption = "水平";
+            this.gridColumn2.FieldName = "WorkingFace.MiningArea.Horizontal.HorizontalName";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 1;
@@ -339,6 +342,7 @@ namespace sys3
             // gridColumn3
             // 
             this.gridColumn3.Caption = "采区";
+            this.gridColumn3.FieldName = "WorkingFace.MiningArea.MiningAreaName";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 2;
@@ -346,6 +350,7 @@ namespace sys3
             // gridColumn4
             // 
             this.gridColumn4.Caption = "工作面";
+            this.gridColumn4.FieldName = "WorkingFace.WorkingFaceName";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 3;
@@ -353,6 +358,7 @@ namespace sys3
             // gridColumn5
             // 
             this.gridColumn5.Caption = "巷道名称";
+            this.gridColumn5.FieldName = "TunnelName";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
             this.gridColumn5.VisibleIndex = 4;
@@ -360,6 +366,7 @@ namespace sys3
             // gridColumn6
             // 
             this.gridColumn6.Caption = "设计长度";
+            this.gridColumn6.FieldName = "TunnelDesignLength";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
             this.gridColumn6.VisibleIndex = 5;
@@ -367,6 +374,7 @@ namespace sys3
             // gridColumn7
             // 
             this.gridColumn7.Caption = "设计面积";
+            this.gridColumn7.FieldName = "TunnelDesignArea";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
             this.gridColumn7.VisibleIndex = 6;
@@ -374,6 +382,7 @@ namespace sys3
             // gridColumn8
             // 
             this.gridColumn8.Caption = "支护方式";
+            this.gridColumn8.FieldName = "TunnelSupportPattern";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
             this.gridColumn8.VisibleIndex = 7;
@@ -381,6 +390,7 @@ namespace sys3
             // gridColumn9
             // 
             this.gridColumn9.Caption = "围岩类型";
+            this.gridColumn9.FieldName = "TunnelLithology.LithologyName";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
             this.gridColumn9.VisibleIndex = 8;
@@ -388,6 +398,7 @@ namespace sys3
             // gridColumn10
             // 
             this.gridColumn10.Caption = "断面参数";
+            this.gridColumn10.FieldName = "TunnelParam";
             this.gridColumn10.Name = "gridColumn10";
             this.gridColumn10.Visible = true;
             this.gridColumn10.VisibleIndex = 9;
@@ -395,6 +406,7 @@ namespace sys3
             // gridColumn11
             // 
             this.gridColumn11.Caption = "煤巷岩巷";
+            this.gridColumn11.FieldName = "CoalOrStone";
             this.gridColumn11.Name = "gridColumn11";
             this.gridColumn11.Visible = true;
             this.gridColumn11.VisibleIndex = 10;
@@ -402,6 +414,7 @@ namespace sys3
             // gridColumn12
             // 
             this.gridColumn12.Caption = "绑定煤层";
+            this.gridColumn12.FieldName = "CoalSeams.CoalSeamsName";
             this.gridColumn12.Name = "gridColumn12";
             this.gridColumn12.Visible = true;
             this.gridColumn12.VisibleIndex = 11;
@@ -416,6 +429,7 @@ namespace sys3
             // gridColumn14
             // 
             this.gridColumn14.Caption = "巷道类型";
+            this.gridColumn14.FieldName = "TunnelType";
             this.gridColumn14.Name = "gridColumn14";
             this.gridColumn14.Visible = true;
             this.gridColumn14.VisibleIndex = 13;
@@ -499,5 +513,6 @@ namespace sys3
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
         private DevExpress.XtraEditors.ControlNavigator controlNavigator1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }

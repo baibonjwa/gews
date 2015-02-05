@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Geodatabase;
-using FarPoint.Win;
-using FarPoint.Win.Spread;
-using FarPoint.Win.Spread.CellType;
 using GIS;
 using GIS.Common;
 using LibBusiness;
@@ -21,21 +16,6 @@ namespace sys3
 {
     public partial class TunnelInfoManagement : BaseForm
     {
-        //****************变量声明***************
-        private readonly int[] _filterColunmIdxs;
-        private readonly Hashtable _htSelIdxs = new Hashtable();
-        private int _BIDIndex = 16;
-        private int _iRecordCount;
-        private int activeRow;
-        private bool bFirst = true;
-        private Cells cells;
-        private int checkCount; //选择行数
-        private DataSet ds = new DataSet();
-        private int rowDetailStartIndex = 4;
-        private int rowsCount; //数据行数
-        private Tunnel tunnelEntity = new Tunnel();
-
-        //****************************************
 
         /// <summary>
         ///     构造方法
@@ -49,6 +29,11 @@ namespace sys3
 
         }
 
+        private void RefreshData()
+        {
+            gcTunnel.DataSource = Management.FindAll();
+        }
+
         /// <summary>
         ///     初始化
         /// </summary>
@@ -56,32 +41,11 @@ namespace sys3
         /// <param name="e"></param>
         private void TunnelInfoManagement_Load(object sender, EventArgs e)
         {
+            RefreshData();
             btnNoWire.BackColor = Const.NO_WIRE_TUNNEL_COLOR;
             btnWired.BackColor = Const.WIRED_TUNNEL_COLOR;
             btnTunnelJJ.BackColor = Const.JJ_TUNNEL_COLOR;
             btnTunnelHC.BackColor = Const.HC_TUNNEL_COLOR;
-        }
-
-        /// <summary>
-        ///     为变量tunnelEntity赋值
-        /// </summary>
-        private void setTunnelEntityValue()
-        {
-            int searchCount = rowsCount;
-            int rowDetailStartIndex = 4;
-            for (int i = 0; i < rowsCount; i++)
-            {
-                if (cells[rowDetailStartIndex + i, 0].Value != null &&
-                    (bool)cells[rowDetailStartIndex + i, 0].Value)
-                {
-                    //巷道编号
-                    tunnelEntity.TunnelId = (int)ds.Tables[0].Rows[i][TunnelInfoDbConstNames.ID];
-                    //巷道实体
-                    tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(tunnelEntity.TunnelId);
-
-                    activeRow = rowDetailStartIndex + i;
-                }
-            }
         }
 
         /// <summary>
@@ -91,11 +55,11 @@ namespace sys3
         /// <param name="e"></param>
         private void tsBtnAdd_Click(object sender, EventArgs e)
         {
-            var d = new TunnelInfoEntering(MainForm);
+            var d = new TunnelInfoEntering();
 
             if (DialogResult.OK == d.ShowDialog())
             {
-
+                RefreshData();
             }
         }
 
@@ -106,12 +70,10 @@ namespace sys3
         /// <param name="e"></param>
         private void tsBtnModify_Click(object sender, EventArgs e)
         {
-
-
-            var d = new TunnelInfoEntering(tunnelEntity.TunnelId);
+            var d = new TunnelInfoEntering((Tunnel)gridView1.GetFocusedRow());
             if (DialogResult.OK == d.ShowDialog())
             {
-
+                RefreshData();
             }
         }
 
@@ -124,34 +86,25 @@ namespace sys3
         {
             if (Alert.confirm(Const_GM.TUNNEL_INFO_MSG_DEL))
             {
-                bool bResult = false;
-                for (int i = 0; i < rowsCount; i++)
+                //掘进ID
+                var tunnelEntity = (Tunnel)gridView1.GetFocusedRow();
+                //巷道类型为掘进或回采巷道
+                if (tunnelEntity.WorkingFace.WorkingfaceTypeEnum == WorkingfaceTypeEnum.JJ || tunnelEntity.WorkingFace.WorkingfaceTypeEnum == WorkingfaceTypeEnum.HC)
                 {
-                    if (cells[rowDetailStartIndex + i, 0].Value != null &&
-                        (bool)cells[rowDetailStartIndex + i, 0].Value)
-                    {
-                        //掘进ID
-                        tunnelEntity.TunnelId = (int)ds.Tables[0].Rows[i][TunnelInfoDbConstNames.ID];
-                        //巷道类型为掘进或回采巷道
-                        if (tunnelEntity.WorkingFace.WorkingfaceTypeEnum == WorkingfaceTypeEnum.JJ || tunnelEntity.WorkingFace.WorkingfaceTypeEnum == WorkingfaceTypeEnum.HC)
-                        {
-                            TunnelInfoBLL.deleteJJHCTunnelInfo(tunnelEntity);
-                        }
-                        if (Wire.FindOneByTunnelId(tunnelEntity.TunnelId) != null)
-                        {
-                            var wire = Wire.FindOneByTunnelId(tunnelEntity.TunnelId);
-                            Wire.DeleteAll(WirePoint.FindAllByWireId(wire.WireId).Select(u => u.WirePointId));
-                            //不删除时将导线重新绑定到其他巷道，默认为巷道ID=0
-                        }
-                        //删除巷道对应掘进日报
-                        TunnelInfoBLL.deleteDayReportJJBindingTunnelID(tunnelEntity);
-                        //删除巷道对应回采日报
-                        TunnelInfoBLL.deleteDayReportHCBindingTunnelID(tunnelEntity);
-                        //删除巷道
-                        tunnelEntity.Delete();
-                    }
+                    TunnelInfoBLL.deleteJJHCTunnelInfo(tunnelEntity);
                 }
-                //绑定信息
+                if (Wire.FindOneByTunnelId(tunnelEntity.TunnelId) != null)
+                {
+                    var wire = Wire.FindOneByTunnelId(tunnelEntity.TunnelId);
+                    Wire.DeleteAll(WirePoint.FindAllByWireId(wire.WireId).Select(u => u.WirePointId));
+                    //不删除时将导线重新绑定到其他巷道，默认为巷道ID=0
+                }
+                //删除巷道对应掘进日报
+                TunnelInfoBLL.deleteDayReportJJBindingTunnelID(tunnelEntity);
+                //删除巷道对应回采日报
+                TunnelInfoBLL.deleteDayReportHCBindingTunnelID(tunnelEntity);
+                //删除巷道
+                tunnelEntity.Delete();
             }
         }
 
@@ -171,7 +124,10 @@ namespace sys3
         /// <param name="e"></param>
         private void tsBtnExport_Click(object sender, EventArgs e)
         {
-
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                gcTunnel.ExportToXls(saveFileDialog1.FileName);
+            }
         }
 
         /// <summary>
@@ -181,7 +137,7 @@ namespace sys3
         /// <param name="e"></param>
         private void tsBtnPrint_Click(object sender, EventArgs e)
         {
-
+            DevUtil.DevPrint(gcTunnel, "巷道信息报表");
         }
 
         /// <summary>
@@ -191,24 +147,23 @@ namespace sys3
         /// <param name="e"></param>
         private void tsBtnRefresh_Click(object sender, EventArgs e)
         {
-
+            RefreshData();
         }
 
         private void btnMap_Click(object sender, EventArgs e)
         {
             // 获取已选择明细行的索引
-            string bid = "";
-            ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.LAYER_ALIAS_MR_TUNNEL);
+            var pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.LAYER_ALIAS_MR_TUNNEL);
             if (pLayer == null)
             {
-                MessageBox.Show("未发现巷道全图层！");
+                MessageBox.Show(@"未发现巷道全图层！");
                 return;
             }
             var pFeatureLayer = (IFeatureLayer)pLayer;
             string str = "";
             //for (int i = 0; i < iSelIdxsArr.Length; i++)
             //{
-            bid = ((Tunnel)gridView1.GetFocusedRow()).BindingID;
+            string bid = ((Tunnel)gridView1.GetFocusedRow()).BindingId;
             if (bid != "")
             {
                 if (true)
@@ -222,9 +177,9 @@ namespace sys3
             {
                 MyMapHelp.Jump(MyMapHelp.GetGeoFromFeature(list));
                 DataEditCommon.g_pMap.ClearSelection();
-                for (int i = 0; i < list.Count; i++)
+                foreach (var t in list)
                 {
-                    DataEditCommon.g_pMap.SelectFeature(pLayer, list[i]);
+                    DataEditCommon.g_pMap.SelectFeature(pLayer, t);
                 }
                 WindowState = FormWindowState.Normal;
                 Location = DataEditCommon.g_axTocControl.Location;

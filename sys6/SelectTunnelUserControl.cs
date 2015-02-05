@@ -633,7 +633,7 @@ namespace UnderTerminal
 
                 if (this.lstTunnelName.SelectedItems.Count > 0)
                 {
-                    LibCommonForm.TunnelInfoEntering tunnelInfoEntering = new LibCommonForm.TunnelInfoEntering(iTunnelId);
+                    var tunnelInfoEntering = new TunnelInfoEntering(Tunnel.Find(iTunnelId));
                     if (DialogResult.OK == tunnelInfoEntering.ShowDialog())
                     {
                         // 绑定巷道信息

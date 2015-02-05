@@ -30,7 +30,7 @@ namespace LibEntity
         ///     围岩类型
         /// </summary>
         [Property("LITHOLOGY_ID")]
-        public int TunnelLithologyID { get; set; }
+        public Lithology TunnelLithology { get; set; }
 
         // 断面类型
 
@@ -59,7 +59,7 @@ namespace LibEntity
         // 设计面积
 
         /// <summary>
-        ///     设计长度
+        ///     设计面积
         /// </summary>
         [Property("DESIGNAREA")]
         public double TunnelDesignArea { get; set; }
@@ -94,7 +94,7 @@ namespace LibEntity
         ///     绑定煤层ID
         /// </summary>
         [Property("COAL_LAYER_ID")]
-        public int CoalLayerID { get; set; }
+        public CoalSeams CoalSeams { get; set; }
 
         // BID
 
@@ -102,7 +102,7 @@ namespace LibEntity
         ///     BID
         /// </summary>
         [Property("BINDINGID")]
-        public string BindingID { get; set; }
+        public string BindingId { get; set; }
 
         /// <summary>
         ///     巷道使用次数，用来缓存信息，此外无实际意义。

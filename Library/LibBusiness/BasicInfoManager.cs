@@ -454,7 +454,7 @@ namespace LibBusiness
             entity.CoalOrStone = dr[TunnelInfoDbConstNames.COAL_OR_STONE].ToString();
 
             // 岩性 //围岩类型
-            entity.TunnelLithologyID = Convert.ToInt32(dr[TunnelInfoDbConstNames.LITHOLOGY_ID]);
+            entity.TunnelLithology.LithologyId = Convert.ToInt32(dr[TunnelInfoDbConstNames.LITHOLOGY_ID]);
 
             //设计长度
             entity.TunnelDesignLength = Convert.ToDouble(dr[TunnelInfoDbConstNames.DESIGNLENGTH]);
@@ -472,9 +472,9 @@ namespace LibBusiness
             entity.TunnelParam = dr[TunnelInfoDbConstNames.PARAM].ToString();
 
             //绑定煤层
-            entity.CoalLayerID = Convert.ToInt32(dr[TunnelInfoDbConstNames.COAL_LAYER_ID]);
+            entity.CoalSeams = CoalSeams.Find(Convert.ToInt32(dr[TunnelInfoDbConstNames.COAL_LAYER_ID]));
 
-            entity.BindingID = dr[TunnelInfoDbConstNames.BINDINGID].ToString();
+            entity.BindingId = dr[TunnelInfoDbConstNames.BINDINGID].ToString();
             //绑定巷道宽度
             entity.TunnelWid = Convert.ToDouble(dr[TunnelInfoDbConstNames.TUNNEL_WID]);
             return entity;

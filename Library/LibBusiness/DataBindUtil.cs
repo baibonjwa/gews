@@ -1,43 +1,55 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Windows.Forms;
 using LibEntity;
 
 namespace LibBusiness
 {
     public class DataBindUtil
     {
-        public static void LoadMineName(ListBox lb, int selectedValue = -1)
+        private static void DataBindListControl(ListControl lc, ICollection<object> dataSource, string displayMember, string valueMember, int selectedValue = -1)
+        {
+            if (dataSource.Count <= 0) return;
+            lc.DataSource = dataSource;
+            lc.DisplayMember = displayMember;
+            lc.ValueMember = valueMember;
+            lc.SelectedValue = selectedValue;
+        }
+
+        private static void DataBindListControl(DataGridView dgv, ICollection<object> dataSource, string displayMember, string valueMember)
+        {
+            if (dataSource.Count <= 0) return;
+            dgv.AutoGenerateColumns = false;
+            dgv.DataSource = dataSource;
+            dgv.Columns[0].DataPropertyName = displayMember;
+            dgv.Columns[1].DataPropertyName = valueMember;
+        }
+
+        public static void LoadMineName(ListControl lb, int selectedValue = -1)
         {
             var mines = Mine.FindAll();
-            if (mines.Length <= 0) return;
-            // 绑定矿井信息
-            lb.DataSource = mines;
-            lb.DisplayMember = "MineName";
-            lb.ValueMember = "MineId";
-            lb.SelectedValue = selectedValue;
+            if (mines != null) DataBindListControl(lb, mines, "MineName", "MineId", selectedValue);
         }
 
         public static void LoadMineName(DataGridView dgv, int selectedValue = -1)
         {
             var mines = Mine.FindAll();
-            if (mines.Length <= 0) return;
-            // 绑定矿井信息
-            // 禁止自动生成列(※位置不可变)
-            dgv.AutoGenerateColumns = false;
-            dgv.DataSource = mines;
-            dgv.Columns[0].DataPropertyName = "MineId";
-            dgv.Columns[1].DataPropertyName = "MineName";
+            DataBindListControl(dgv, mines, "MineId", "MineName");
         }
 
-        public static void LoadHorizontalName(ListBox lb, int mineId, int selectedValue = -1)
+        public static void LoadHorizontalName(ListControl lb, int mineId, int selectedValue = -1)
         {
-            var horizontal = Horizontal.FindAllByMineId(mineId);
-            if (horizontal.Length <= 0) return;
-            // 绑定矿井信息
-            lb.DataSource = horizontal;
-            lb.DisplayMember = "HorizontalName";
-            lb.ValueMember = "HorizontalId";
-            lb.SelectedValue = selectedValue;
+            var horizontals = Horizontal.FindAllByMineId(mineId);
+            if (horizontals != null) DataBindListControl(lb, horizontals, "HorizontalName", "HorizontalId", selectedValue);
         }
+
+        public static void LoadLithology(ListControl lb, int selectedValue = -1)
+        {
+            var lithologys = Lithology.FindAll();
+            if (lithologys != null) DataBindListControl(lb, lithologys, "LithologyName", "LithologyId", selectedValue);
+        }
+
 
 
     }

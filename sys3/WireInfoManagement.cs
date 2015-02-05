@@ -242,7 +242,7 @@ namespace sys3
             }
             var pFeatureLayer = (IFeatureLayer)pLayer;
             string str = "";
-            string bid = ((Wire)gridView1.GetFocusedRow()).Tunnel.BindingID;
+            string bid = ((Wire)gridView1.GetFocusedRow()).Tunnel.BindingId;
             if (bid != "")
             {
                 if (true)

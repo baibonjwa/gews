@@ -345,7 +345,7 @@ namespace sys3
             string bid = "", hdname = "";
             if (tunnel != null)
             {
-                bid = tunnel.BindingID;
+                bid = tunnel.BindingId;
                 hdname = tunnel.TunnelName;
                 hdwid = tunnel.TunnelWid;
             }

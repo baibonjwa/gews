@@ -184,7 +184,7 @@ namespace _3.GeologyMeasure
                     cells[rowDetailStartIndex + i, COLUMN_INDEX_TUNNEL_ID].Text = entity.TunnelId.ToString();
                     cells[rowDetailStartIndex + i, COLUMN_INDEX_WORKING_FACE_ID].Text = entity.WorkingFace.WorkingFaceId.ToString();
 
-                    cells[rowDetailStartIndex + i, _BIDIndex].Text = entity.BindingID;
+                    cells[rowDetailStartIndex + i, _BIDIndex].Text = entity.BindingId;
 
                     i++;
                 }
