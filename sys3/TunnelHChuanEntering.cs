@@ -391,7 +391,7 @@ namespace _3.GeologyMeasure
                     return false;
                 }
                 //检查巷道是否为回采巷道
-                if (TunnelInfoBLL.isTunnelHC(tunnelEntity))
+                if (tunnelEntity.WorkingFace.WorkingfaceTypeEnum == WorkingfaceTypeEnum.HC)
                 {
                     Alert.alert(btnTunnelChoose1.Text + Const_GM.TUNNEL_HC_MSG_TUNNEL_IS_HC);
                     return false;
@@ -415,7 +415,7 @@ namespace _3.GeologyMeasure
                     return false;
                 }
                 //检查巷道是否为回采巷道
-                if (TunnelInfoBLL.isTunnelHC(tunnelEntity))
+                if (tunnelEntity.WorkingFace.WorkingfaceTypeEnum == WorkingfaceTypeEnum.HC)
                 {
                     Alert.alert(btnTunnelChoose2.Text + Const_GM.TUNNEL_HC_MSG_TUNNEL_IS_HC);
                     return false;

@@ -77,6 +77,15 @@ namespace LibEntity
             return FindOne(criterion);
         }
 
+        public static void DeleteByTunnelId(int tunnelId)
+        {
+            var criterion = new ICriterion[]
+            {
+                Restrictions.Eq("Tunnel.TunnelId",tunnelId)
+            };
+            Delete(criterion);
+        }
+
 
     }
 }

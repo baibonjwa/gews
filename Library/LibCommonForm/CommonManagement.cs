@@ -192,7 +192,7 @@ namespace LibCommonForm
                         comboBoxWorkingfaceType.DataSource = list;
                         //comboBoxWorkingfaceType.Items.AddRange(list);
                         comboBoxWorkingfaceType.DisplayMember = "Name";
-                        comboBoxWorkingfaceType.ValueMember = "Id";
+                        comboBoxWorkingfaceType.ValueMember = "WirePointName";
 
 
                         dataGridView1.Columns.Add(comboBoxWorkingfaceType);

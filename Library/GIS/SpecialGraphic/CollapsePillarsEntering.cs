@@ -192,7 +192,7 @@ namespace GIS
                 {
                     collapse.BindingId = IDGenerator.NewBindingID();
 
-                    //collapse.Id =
+                    //collapse.WirePointName =
                     //    Convert.ToInt32(
                     //        CollapsePillarsBLL.selectMaxCollapsePillars().Tables[0].Rows[0][
                     //            CollapsePillarsInfoDbConstNames.ID].ToString());

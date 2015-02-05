@@ -300,7 +300,9 @@ namespace _3.GeologyMeasure
             bindTunnelJJEntity();
 
             //设置巷道为掘进巷道
-            TunnelInfoBLL.setTunnelAsJJ(jjWorkFaceEntity, tunnelEntity);
+            tunnelEntity.TunnelType = TunnelTypeEnum.TUNNELLING;
+            jjWorkFaceEntity.Save();
+            tunnelEntity.Save();
         }
 
         /// <summary>
@@ -369,7 +371,7 @@ namespace _3.GeologyMeasure
             }
 
             //是否已为回采巷道
-            if (TunnelInfoBLL.isTunnelHC(tunnelEntity))
+            if (tunnelEntity.WorkingFace.WorkingfaceTypeEnum == WorkingfaceTypeEnum.HC)
             {
                 Alert.alert(Const_GM.TUNNEL_JJ_MSG_TUNNEL_IS_HC);
                 return false;

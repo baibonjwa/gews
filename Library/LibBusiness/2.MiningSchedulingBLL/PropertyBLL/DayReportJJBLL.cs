@@ -123,7 +123,7 @@ namespace LibBusiness
         //public static bool deleteDayReportJJInfo(DayReportJj dayReportJJEntity)
         //{
         //    ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
-        //    string sql = "DELETE FROM " + DayReportJJDbConstNames.TABLE_NAME + " WHERE " + DayReportJJDbConstNames.ID + " =" + dayReportJJEntity.Id;
+        //    string sql = "DELETE FROM " + DayReportJJDbConstNames.TABLE_NAME + " WHERE " + DayReportJJDbConstNames.ID + " =" + dayReportJJEntity.WirePointName;
         //    bool bResult = db.OperateDB(sql);
         //    return bResult;
         //}

@@ -99,10 +99,10 @@ namespace sys3
                     (bool)cells[_rowDetailStartIndex + i, 0].Value)
                 {
                     //导线点ID
-                    wirePointInfoEntity.Id = _wirePointPrimaryKey[i];
+                    wirePointInfoEntity.WirePointId = _wirePointPrimaryKey[i];
 
                     //导线点实体
-                    wirePointInfoEntity = WirePointBLL.selectWirePointInfoByWirePointId(wirePointInfoEntity.Id);
+                    wirePointInfoEntity = WirePointBLL.selectWirePointInfoByWirePointId(wirePointInfoEntity.WirePointId);
 
                     //矿井编号
                     wireEntity = wirePointInfoEntity.Wire;
@@ -131,10 +131,10 @@ namespace sys3
                         (bool)cells[_rowDetailStartIndex + i, 0].Value)
                     {
                         //导线点ID
-                        wirePointInfoEntity.Id = _wirePointPrimaryKey[i];
+                        wirePointInfoEntity.WirePointId = _wirePointPrimaryKey[i];
 
                         //导线点实体
-                        wirePointInfoEntity = WirePointBLL.selectWirePointInfoByWirePointId(wirePointInfoEntity.Id);
+                        wirePointInfoEntity = WirePointBLL.selectWirePointInfoByWirePointId(wirePointInfoEntity.WirePointId);
 
                         //矿井编号
                         wireEntity = wirePointInfoEntity.Wire;

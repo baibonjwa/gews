@@ -539,6 +539,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SpecialGraphic\FrmZhzzt.resx">
       <DependentUpon>FrmZhzzt.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="SpecialGraphic\MakeContours.resx">
       <DependentUpon>MakeContours.cs</DependentUpon>

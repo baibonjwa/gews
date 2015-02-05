@@ -133,7 +133,7 @@ namespace LibEntity
         {
             var criterion = new List<ICriterion>
             {
-                Restrictions.Eq("CollapsePillars.Id", collapsePillarsId)
+                Restrictions.Eq("CollapsePillars.WirePointName", collapsePillarsId)
             };
             return FindAll(criterion.ToArray());
         }

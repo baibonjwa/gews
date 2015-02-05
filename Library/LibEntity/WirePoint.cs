@@ -35,9 +35,9 @@ namespace LibEntity
         ///     主键
         /// </summary>
         [PrimaryKey(PrimaryKeyType.Identity, "ID")]
-        public int Id { get; set; }
+        public int WirePointId { get; set; }
 
-        public string WirePointId { get; set; }
+        public string WirePointName { get; set; }
 
         /// <summary>
         ///     距底板距离
@@ -102,7 +102,7 @@ namespace LibEntity
             var criterion = new List<ICriterion>
             {
                 Restrictions.Eq("Wire.WireId", wireInfoId),
-                Restrictions.Eq("WirePointId", wirePointId)
+                Restrictions.Eq("WirePointName", wirePointId)
             };
             return Exists(criterion.ToArray());
         }

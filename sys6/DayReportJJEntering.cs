@@ -644,16 +644,16 @@ namespace UnderTerminal
         //    double distanceFromWirepoint = 0;
         //    var wirePointInfoEntityNew = new WirePoint();
         //    var wirePointInfoEntityOld = new WirePoint();
-        //    wirePointInfoEntityNew.Id = Convert.ToInt32(dgrdvDayReportJJ.CurrentRow.Cells[4].Value);
-        //    wirePointInfoEntityNew = WirePointBLL.selectWirePointInfoByWirePointId(wirePointInfoEntityNew.Id);
-        //    wirePointInfoEntityOld.Id = wirePointID;
-        //    wirePointInfoEntityOld = WirePointBLL.selectWirePointInfoByWirePointId(wirePointInfoEntityOld.Id);
+        //    wirePointInfoEntityNew.WirePointName = Convert.ToInt32(dgrdvDayReportJJ.CurrentRow.Cells[4].Value);
+        //    wirePointInfoEntityNew = WirePointBLL.selectWirePointInfoByWirePointId(wirePointInfoEntityNew.WirePointName);
+        //    wirePointInfoEntityOld.WirePointName = wirePointID;
+        //    wirePointInfoEntityOld = WirePointBLL.selectWirePointInfoByWirePointId(wirePointInfoEntityOld.WirePointName);
         //    if (wirePointID != 0)
         //    {
         //        distance =
         //            Math.Sqrt(Math.Pow((wirePointInfoEntityNew.CoordinateX - wirePointInfoEntityOld.CoordinateX), 2) +
         //                      Math.Pow((wirePointInfoEntityNew.CoordinateY - wirePointInfoEntityOld.CoordinateY), 2));
-        //        if (wirePointInfoEntityNew.Id < wirePointInfoEntityOld.Id)
+        //        if (wirePointInfoEntityNew.WirePointName < wirePointInfoEntityOld.WirePointName)
         //        {
         //            distanceFromWirepoint = jjjc + lastDistanceFromWirepoint + distance;
         //        }
@@ -674,8 +674,8 @@ namespace UnderTerminal
         //        {
         //            if (int.TryParse(ds.Tables[0].Rows[0][DayReportJJDbConstNames.ID].ToString(), out minWirepoint))
         //            {
-        //                wirePointInfoEntityOld.Id = minWirepoint;
-        //                wirePointInfoEntityOld = WirePointBLL.selectWirePointInfoByWirePointId(wirePointInfoEntityOld.Id);
+        //                wirePointInfoEntityOld.WirePointName = minWirepoint;
+        //                wirePointInfoEntityOld = WirePointBLL.selectWirePointInfoByWirePointId(wirePointInfoEntityOld.WirePointName);
         //            }
         //            distance =
         //                Math.Sqrt(
@@ -886,7 +886,7 @@ namespace UnderTerminal
         //            int wirePointID = -1;
         //            for (int i = 0; i < wirePoints.Length; i++)
         //            {
-        //                wirePointID = wirePoints[i].Id;
+        //                wirePointID = wirePoints[i].WirePointName;
         //                if (wirePointID == refPointID + 1) //参考导线点的下一个点
         //                    return wirePointID;
         //            }

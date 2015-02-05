@@ -35,7 +35,7 @@ namespace _5.WarningManagement
 
         // 传出值
         private string sOutWorkface = null; // 工作面名称
-        private string sOutTunnelId = null; // Tunnel Id
+        private string sOutTunnelId = null; // Tunnel WirePointName
         private string sOutDate = null; // 日期
         private string sOutShift = null; // 班次
         private string sOutWarningResult = null; // 红色/黄色/绿色

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Geodatabase;
@@ -132,19 +133,14 @@ namespace sys3
                         //掘进ID
                         tunnelEntity.TunnelId = (int)ds.Tables[0].Rows[i][TunnelInfoDbConstNames.ID];
                         //巷道类型为掘进或回采巷道
-                        if (tunnelEntity.WorkingFace.WorkingfaceTypeEnum == WorkingfaceTypeEnum.JJ || TunnelInfoBLL.isTunnelHC(tunnelEntity))
+                        if (tunnelEntity.WorkingFace.WorkingfaceTypeEnum == WorkingfaceTypeEnum.JJ || tunnelEntity.WorkingFace.WorkingfaceTypeEnum == WorkingfaceTypeEnum.HC)
                         {
                             TunnelInfoBLL.deleteJJHCTunnelInfo(tunnelEntity);
                         }
                         if (Wire.FindOneByTunnelId(tunnelEntity.TunnelId) != null)
                         {
-                            TunnelInfoBLL.deleteWireInfoBindingTunnelID(tunnelEntity);
-                            //是否删除关联导线
-                            if (Alert.confirm(Const_GM.TUNNEL_INFO_MSG_DEL_WIRE))
-                            {
-                                TunnelInfoBLL.deleteWireInfoBindingTunnelID(tunnelEntity);
-                            }
-
+                            var wire = Wire.FindOneByTunnelId(tunnelEntity.TunnelId);
+                            Wire.DeleteAll(WirePoint.FindAllByWireId(wire.WireId).Select(u => u.WirePointId));
                             //不删除时将导线重新绑定到其他巷道，默认为巷道ID=0
                         }
                         //删除巷道对应掘进日报

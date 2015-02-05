@@ -34,7 +34,7 @@ namespace LibBusiness
         //    DayReportHc dayReportHCEntity = new DayReportHc();
         //    if (ds.Tables[0].Rows.Count > 0)
         //    {
-        //        dayReportHCEntity.Id = Convert.ToInt32(ds.Tables[0].Rows[0][DayReportHCDbConstNames.ID].ToString());
+        //        dayReportHCEntity.WirePointName = Convert.ToInt32(ds.Tables[0].Rows[0][DayReportHCDbConstNames.ID].ToString());
         //        dayReportHCEntity.Team = Team.FindById(Convert.ToInt32(ds.Tables[0].Rows[0][DayReportHCDbConstNames.TEAM_NAME_ID].ToString()));
         //        dayReportHCEntity.WorkingFace.WorkingFaceID = Convert.ToInt32(ds.Tables[0].Rows[0][DayReportHCDbConstNames.WORKINGFACE_ID].ToString());
         //        dayReportHCEntity.WorkTime = ds.Tables[0].Rows[0][DayReportHCDbConstNames.WORK_TIME].ToString();

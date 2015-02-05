@@ -168,7 +168,7 @@ namespace _3.GeologyMeasure
                 listBox_Browse.Items.Add(new TunnelSimple(i.TunnelId, i.TunnelName));
             }
             listBox_Browse.DisplayMember = "Name";
-            listBox_Browse.ValueMember = "Id";
+            listBox_Browse.ValueMember = "WirePointName";
             //其它巷道
             //string[] sArray = new string[10];
             //sArray = SplitString(tunnelHCEntity.Tunnel);
@@ -464,10 +464,15 @@ namespace _3.GeologyMeasure
                 DialogResult = DialogResult.OK;
                 bindTunnelHCEntity();
 
-                bool bResult = TunnelInfoBLL.setTunnelAsHC(workingFace, tunnelSet);
+
+                workingFace.Save();
+                foreach (var i in tunnelSet)
+                {
+                    i.Save();
+                }
 
                 //添加
-                if (Text == Const_GM.TUNNEL_HC_ADD && bResult)
+                if (Text == Const_GM.TUNNEL_HC_ADD)
                 {
                     //添加回采进尺图上显示信息
                     AddHcjc(tunnelZY.TunnelId, tunnelFY.TunnelId, tunnelQY.TunnelId, tunnelZY.TunnelWid,
@@ -475,18 +480,15 @@ namespace _3.GeologyMeasure
                 }
 
                 //修改
-                if (Text == Const_GM.TUNNEL_HC_CHANGE && bResult)
+                if (Text == Const_GM.TUNNEL_HC_CHANGE)
                 {
                     //修改回采进尺图上显示信息，更新工作面信息表
                     UpdateHcjc(tunnelZY.TunnelId, tunnelFY.TunnelId, tunnelQY.TunnelId, tunnelFY.TunnelWid,
                         tunnelFY.TunnelWid, tunnelQY.TunnelWid);
                 }
 
-                if (bResult)
-                {
-                    Alert.alert("回采工作面关联成功！");
-                    //TODO:成功后事件
-                }
+                Alert.alert("回采工作面关联成功！");
+
             }
             catch (Exception)
             {

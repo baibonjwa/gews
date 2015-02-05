@@ -406,14 +406,14 @@ namespace sys3
             {
                 if (i < wpiEntity.Length)
                 {
-                    wirePointInfoEntity.Id = wpiEntity[i].Id;
+                    wirePointInfoEntity.WirePointId = wpiEntity[i].WirePointId;
                 }
             }
 
             //导线点编号
             if (dgrdvWire.Rows[i].Cells[0] != null)
             {
-                wirePointInfoEntity.WirePointId = dgrdvWire.Rows[i].Cells[0].Value.ToString();
+                wirePointInfoEntity.WirePointName = dgrdvWire.Rows[i].Cells[0].Value.ToString();
             }
             //坐标X
             if (dgrdvWire.Rows[i].Cells[1].Value != null)
@@ -533,13 +533,10 @@ namespace sys3
             {
                 foreach (WirePoint wirePointInfoEntity in wirePointInfoEntityList)
                 {
-                    bResult = WirePointBLL.insertWirePointInfo(wirePointInfoEntity);
-                    if (bResult)
-                    {
-                        var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.ITunnelId,
-                            WireInfoDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, wireEntity.MeasureDate);
-                        MainForm.SendMsg2Server(msg);
-                    }
+                    wirePointInfoEntity.Save();
+                    var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.ITunnelId,
+                        WireInfoDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, wireEntity.MeasureDate);
+                    MainForm.SendMsg2Server(msg);
                 }
             }
             return wirePointInfoEntityList;
@@ -579,7 +576,8 @@ namespace sys3
                 if (j < _dsWirePoint.Tables[0].Rows.Count)
                 {
                     //修改导线点
-                    WirePointBLL.updateWirePointInfo(wirePointInfoEnt[j], wireEntity);
+                    wirePointInfoEnt[j].Save();
+                    wireEntity.Save();
                     //socket
                     var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.ITunnelId,
                         WireInfoDbConstNames.TABLE_NAME, OPERATION_TYPE.UPDATE, wireEntity.MeasureDate);
@@ -591,7 +589,7 @@ namespace sys3
                     //BindingID
                     wirePointInfoEnt[j].BindingId = IDGenerator.NewBindingID();
                     //添加导线点
-                    WirePointBLL.insertWirePointInfo(wirePointInfoEnt[j]);
+                    wirePointInfoEnt[j].Save();
                     //socket
 
                     var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.ITunnelId,
@@ -606,7 +604,7 @@ namespace sys3
             {
                 for (int i = dgrdvWire.Rows.Count - 1; i < _itemCount; i++)
                 {
-                    wirePointInfoEntity.Id =
+                    wirePointInfoEntity.WirePointId =
                         Convert.ToInt32(_dsWirePoint.Tables[0].Rows[i][WirePointDbConstNames.ID].ToString());
                     wireEntity.WireId =
                         Convert.ToInt32(

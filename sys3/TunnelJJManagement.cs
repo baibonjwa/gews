@@ -185,7 +185,7 @@ namespace _3.GeologyMeasure
                     cells[rowDetailStartIndex + i, COLUMN_INDEX_WORKING_FACE_ID].Text = entity.WorkingFace.WorkingFaceId.ToString();
 
                     cells[rowDetailStartIndex + i, _BIDIndex].Text = entity.BindingID;
-                    
+
                     i++;
                 }
             }
@@ -204,7 +204,7 @@ namespace _3.GeologyMeasure
             {
                 FarPoint.Win.FpCheckBox fpChk = (FarPoint.Win.FpCheckBox)e.EditingControl;
                 if (fpChk.Checked)
-                {  
+                {
                     // 保存索引号
                     if (!_htSelIdxs.Contains(e.Row))
                     {
@@ -340,7 +340,9 @@ namespace _3.GeologyMeasure
                     {
                         int tunnelId = Convert.ToInt32(cells[rowDetailStartIndex + i, COLUMN_INDEX_TUNNEL_ID].Text);
                         //掘进ID
-                        TunnelInfoBLL.clearTunnelType(tunnelId);
+                        var tunnel = Tunnel.Find(tunnelId);
+                        tunnel.TunnelType = TunnelTypeEnum.OTHER;
+                        tunnel.Save();
                         delCount++;
                     }
                 }

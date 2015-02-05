@@ -25,41 +25,41 @@ namespace LibBusiness
         /// </summary>
         /// <param name="wirePointEntity">导线点实体</param>
         /// <returns>成功与否：true，false</returns>
-        public static bool insertWirePointInfo(WirePoint wirePointEntity)
-        {
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
+        //public static bool insertWirePointInfo(WirePoint wirePointEntity)
+        //{
+        //    ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
 
-            PValue[] pValue = new PValue[1];
-            pValue[0] = new PValue("WirePointName", wirePointEntity.WirePointId);
+        //    PValue[] pValue = new PValue[1];
+        //    pValue[0] = new PValue("WirePointName", wirePointEntity.WirePointId);
 
-            StringBuilder sb = new StringBuilder();
-            sb.Append("INSERT INTO " + WirePointDbConstNames.TABLE_NAME + " (" +
-                WirePointDbConstNames.WIRE_POINT_NAME + "," +
-                WirePointDbConstNames.COORDINATE_X + "," +
-                WirePointDbConstNames.COORDINATE_Y + "," +
-                WirePointDbConstNames.COORDINATE_Z + "," +
-                WirePointDbConstNames.DISTANCE_FROM_THE_LEFT + "," +
-                WirePointDbConstNames.DISTANCE_FROM_THE_RIGHT + "," +
-                WirePointDbConstNames.DISTANCE_FROM_TOP + "," +
-                WirePointDbConstNames.DISTANCE_FROM_BOTTOM + "," +
-                WirePointDbConstNames.WIRE_INFO_ID + "," +
-                WirePointDbConstNames.BINDINGID + ")");
-            sb.Append("VALUES (");
-            sb.Append("@WirePointName,'");
-            sb.Append(wirePointEntity.CoordinateX + "','");
-            sb.Append(wirePointEntity.CoordinateY + "','");
-            sb.Append(wirePointEntity.CoordinateZ + "','");
-            sb.Append(wirePointEntity.LeftDis + "','");
-            sb.Append(wirePointEntity.RightDis + "','");
-            sb.Append(wirePointEntity.TopDis + "','");
-            sb.Append(wirePointEntity.BottomDis + "','");
-            sb.Append(wirePointEntity.Wire + "','");
-            sb.Append(wirePointEntity.BindingId + "')");
+        //    StringBuilder sb = new StringBuilder();
+        //    sb.Append("INSERT INTO " + WirePointDbConstNames.TABLE_NAME + " (" +
+        //        WirePointDbConstNames.WIRE_POINT_NAME + "," +
+        //        WirePointDbConstNames.COORDINATE_X + "," +
+        //        WirePointDbConstNames.COORDINATE_Y + "," +
+        //        WirePointDbConstNames.COORDINATE_Z + "," +
+        //        WirePointDbConstNames.DISTANCE_FROM_THE_LEFT + "," +
+        //        WirePointDbConstNames.DISTANCE_FROM_THE_RIGHT + "," +
+        //        WirePointDbConstNames.DISTANCE_FROM_TOP + "," +
+        //        WirePointDbConstNames.DISTANCE_FROM_BOTTOM + "," +
+        //        WirePointDbConstNames.WIRE_INFO_ID + "," +
+        //        WirePointDbConstNames.BINDINGID + ")");
+        //    sb.Append("VALUES (");
+        //    sb.Append("@WirePointName,'");
+        //    sb.Append(wirePointEntity.CoordinateX + "','");
+        //    sb.Append(wirePointEntity.CoordinateY + "','");
+        //    sb.Append(wirePointEntity.CoordinateZ + "','");
+        //    sb.Append(wirePointEntity.LeftDis + "','");
+        //    sb.Append(wirePointEntity.RightDis + "','");
+        //    sb.Append(wirePointEntity.TopDis + "','");
+        //    sb.Append(wirePointEntity.BottomDis + "','");
+        //    sb.Append(wirePointEntity.Wire + "','");
+        //    sb.Append(wirePointEntity.BindingId + "')");
 
-            bool bResult = db.ExecuteDataSet(sb.ToString(), pValue);
-            return bResult;
+        //    bool bResult = db.ExecuteDataSet(sb.ToString(), pValue);
+        //    return bResult;
 
-        }
+        //}
         /// <summary>
         /// 
         /// </summary>
@@ -67,29 +67,29 @@ namespace LibBusiness
         /// <param name="wireEntity"></param>
         /// <param name="wirePointID"></param>
         /// <returns></returns>
-        public static bool updateWirePointInfo(WirePoint wirePointEntity, Wire wireEntity)
-        {
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
+        //public static bool updateWirePointInfo(WirePoint wirePointEntity, Wire wireEntity)
+        //{
+        //    ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
 
-            PValue[] pValue = new PValue[1];
-            pValue[0] = new PValue("WirePointName", wirePointEntity.WirePointId);
+        //    PValue[] pValue = new PValue[1];
+        //    pValue[0] = new PValue("WirePointName", wirePointEntity.WirePointId);
 
-            StringBuilder sb = new StringBuilder();
-            sb.Append("UPDATE " + WirePointDbConstNames.TABLE_NAME + " SET ");
-            sb.Append(WirePointDbConstNames.WIRE_POINT_NAME + " = ");
-            sb.Append("@WirePointName," + WirePointDbConstNames.COORDINATE_X + " =");
-            sb.Append(wirePointEntity.CoordinateX + "," + WirePointDbConstNames.COORDINATE_Y + "=");
-            sb.Append(wirePointEntity.CoordinateY + "," + WirePointDbConstNames.COORDINATE_Z + "=");
-            sb.Append(wirePointEntity.CoordinateZ + "," + WirePointDbConstNames.DISTANCE_FROM_THE_LEFT + "=");
-            sb.Append(wirePointEntity.LeftDis + "," + WirePointDbConstNames.DISTANCE_FROM_THE_RIGHT + "=");
-            sb.Append(wirePointEntity.RightDis + "," + WirePointDbConstNames.DISTANCE_FROM_TOP + "=");
-            sb.Append(wirePointEntity.TopDis + "," + WirePointDbConstNames.DISTANCE_FROM_BOTTOM + "=");
-            sb.Append(wirePointEntity.BottomDis + " WHERE " + WirePointDbConstNames.ID + "=");
-            sb.Append(wirePointEntity.Id);
+        //    StringBuilder sb = new StringBuilder();
+        //    sb.Append("UPDATE " + WirePointDbConstNames.TABLE_NAME + " SET ");
+        //    sb.Append(WirePointDbConstNames.WIRE_POINT_NAME + " = ");
+        //    sb.Append("@WirePointName," + WirePointDbConstNames.COORDINATE_X + " =");
+        //    sb.Append(wirePointEntity.CoordinateX + "," + WirePointDbConstNames.COORDINATE_Y + "=");
+        //    sb.Append(wirePointEntity.CoordinateY + "," + WirePointDbConstNames.COORDINATE_Z + "=");
+        //    sb.Append(wirePointEntity.CoordinateZ + "," + WirePointDbConstNames.DISTANCE_FROM_THE_LEFT + "=");
+        //    sb.Append(wirePointEntity.LeftDis + "," + WirePointDbConstNames.DISTANCE_FROM_THE_RIGHT + "=");
+        //    sb.Append(wirePointEntity.RightDis + "," + WirePointDbConstNames.DISTANCE_FROM_TOP + "=");
+        //    sb.Append(wirePointEntity.TopDis + "," + WirePointDbConstNames.DISTANCE_FROM_BOTTOM + "=");
+        //    sb.Append(wirePointEntity.BottomDis + " WHERE " + WirePointDbConstNames.ID + "=");
+        //    sb.Append(wirePointEntity.WirePointId);
 
-            bool bResult = db.ExecuteDataSet(sb.ToString(), pValue);
-            return bResult;
-        }
+        //    bool bResult = db.ExecuteDataSet(sb.ToString(), pValue);
+        //    return bResult;
+        //}
         /// <summary>
         /// 删除导线点信息
         /// </summary>
@@ -99,7 +99,7 @@ namespace LibBusiness
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
             bool bResult = false;
-            string sql = "DELETE FROM " + WirePointDbConstNames.TABLE_NAME + " WHERE " + WirePointDbConstNames.ID + " ='" + wirePointEntity.Id + "'";
+            string sql = "DELETE FROM " + WirePointDbConstNames.TABLE_NAME + " WHERE " + WirePointDbConstNames.ID + " ='" + wirePointEntity.WirePointId + "'";
             bResult = db.OperateDB(sql);
             return bResult;
         }
@@ -143,8 +143,8 @@ namespace LibBusiness
             WirePoint wirePointEntity = new WirePoint();
             if (ds.Tables[0].Rows.Count > 0)
             {
-                wirePointEntity.Id = Convert.ToInt32(ds.Tables[0].Rows[0][WirePointDbConstNames.ID]);
-                wirePointEntity.WirePointId = ds.Tables[0].Rows[0][WirePointDbConstNames.WIRE_POINT_NAME].ToString();
+                wirePointEntity.WirePointId = Convert.ToInt32(ds.Tables[0].Rows[0][WirePointDbConstNames.ID]);
+                wirePointEntity.WirePointName = ds.Tables[0].Rows[0][WirePointDbConstNames.WIRE_POINT_NAME].ToString();
                 wirePointEntity.CoordinateX = Convert.ToDouble(ds.Tables[0].Rows[0][WirePointDbConstNames.COORDINATE_X]);
                 wirePointEntity.CoordinateY = Convert.ToDouble(ds.Tables[0].Rows[0][WirePointDbConstNames.COORDINATE_Y]);
                 wirePointEntity.CoordinateZ = Convert.ToDouble(ds.Tables[0].Rows[0][WirePointDbConstNames.COORDINATE_Z]);
@@ -195,8 +195,8 @@ namespace LibBusiness
             WirePoint wirePointEntity = new WirePoint();
             if (ds.Tables[0].Rows.Count > 0)
             {
-                wirePointEntity.Id = Convert.ToInt32(ds.Tables[0].Rows[0][WirePointDbConstNames.ID]);
-                wirePointEntity.WirePointId = ds.Tables[0].Rows[0][WirePointDbConstNames.WIRE_POINT_NAME].ToString();
+                wirePointEntity.WirePointId = Convert.ToInt32(ds.Tables[0].Rows[0][WirePointDbConstNames.ID]);
+                wirePointEntity.WirePointName = ds.Tables[0].Rows[0][WirePointDbConstNames.WIRE_POINT_NAME].ToString();
                 wirePointEntity.CoordinateX = Convert.ToDouble(ds.Tables[0].Rows[0][WirePointDbConstNames.COORDINATE_X]);
                 wirePointEntity.CoordinateY = Convert.ToDouble(ds.Tables[0].Rows[0][WirePointDbConstNames.COORDINATE_Y]);
                 wirePointEntity.CoordinateZ = Convert.ToDouble(ds.Tables[0].Rows[0][WirePointDbConstNames.COORDINATE_Z]);

@@ -10,7 +10,7 @@ namespace GIS
         public const string DEFAULT_MXD_FILE = "default.mxd";
 
         public const string FIELD_OBJECTID = "OBJECTID"; //
-        public const string FIELD_BID      = "BID";      // Binding Id.
+        public const string FIELD_BID      = "BID";      // Binding WirePointName.
         public const string FIELD_SHAPE    = "SHAPE";    // 形状
         public const string FIELD_DCBZ     = "DCBZ";     // 断层标注
         public const string FIELD_BS       = "BS";       // 标示（巷道）是否被矫正过

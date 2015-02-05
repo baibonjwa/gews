@@ -134,8 +134,12 @@ namespace LibBusiness
             TunnelHChuan tunnelHChuanEntity = selectTunnelHChuan(tunnelHChuanID);
             if (tunnelHChuanEntity != null)
             {
-                TunnelInfoBLL.clearTunnelType(tunnelHChuanEntity.TunnelId1);
-                TunnelInfoBLL.clearTunnelType(tunnelHChuanEntity.TunnelId2);
+                var tunnel1 = Tunnel.Find(tunnelHChuanEntity.TunnelId1);
+                var tunnel2 = Tunnel.Find(tunnelHChuanEntity.TunnelId2);
+                tunnel1.TunnelType = TunnelTypeEnum.OTHER;
+                tunnel2.TunnelType = TunnelTypeEnum.OTHER;
+                tunnel1.Save();
+                tunnel2.Save();
             }
         }
         /// <summary>

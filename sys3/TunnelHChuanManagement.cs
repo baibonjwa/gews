@@ -411,8 +411,12 @@ namespace _3.GeologyMeasure
                         }
 
                         //重设巷道类型
-                        TunnelInfoBLL.clearTunnelType(tunnelHChuanEntity.TunnelId1);
-                        TunnelInfoBLL.clearTunnelType(tunnelHChuanEntity.TunnelId2);
+                        var tunnel1 = Tunnel.Find(tunnelHChuanEntity.TunnelId1);
+                        tunnel1.TunnelType = TunnelTypeEnum.OTHER;
+                        tunnel1.Save();
+                        var tunnel2 = Tunnel.Find(tunnelHChuanEntity.TunnelId2);
+                        tunnel2.TunnelType = TunnelTypeEnum.OTHER;
+                        tunnel2.Save();
 
                         //删除回采巷道信息
                         bResult = TunnelHChuanBLL.deleteTunnelHChuan(tunnelHChuanEntity);

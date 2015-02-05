@@ -122,7 +122,7 @@ namespace _5.WarningManagement
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="sOutTunnelId">Tunnel Id</param>
+        /// <param name="sOutTunnelId">Tunnel WirePointName</param>
         /// <param name="sOutWorkface">Work Face Name</param>
         /// <param name="sOutDate">Date</param>
         /// <param name="sOutShift">班次</param>
@@ -410,7 +410,7 @@ namespace _5.WarningManagement
             //idSpanInfo.SpanRowCnt = warningTypeSpanInfo.SpanRowCnt;
             //idSpanInfo.applyCellsSpan();
             ////设置编号
-            //idSpanInfo.setText(entity.Id.ToString());
+            //idSpanInfo.setText(entity.WirePointName.ToString());
 
             //背景色设置为淡绿
             //设置背景颜色,采取白与RGB（200, 250, 160）交替设置
@@ -667,13 +667,13 @@ namespace _5.WarningManagement
             //for (int i = FROZEN_ROW_COUNT; i < this._fpPreWarningResultDetials.ActiveSheet.RowCount; i++)
             //{
             //    PojoWarningDetail detail = new PojoWarningDetail();
-            //    detail.Id = cells[i, COLUMN_INDEX_HIDE_DATA_ID].Text;
+            //    detail.WirePointName = cells[i, COLUMN_INDEX_HIDE_DATA_ID].Text;
             //    detail.Comments = cells[i, COLUMN_INDEX_COMMENTS].Text;
             //    detail.Actions = cells[i, COLUMN_INDEX_ACTIONS].Text;
             //    detail.ActionsPerson = ConfigManager.Instance.getValueByKey(ConfigConst.CONFIG_CURRENT_USER);
             //    detail.ActionsDateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            //    detail.RuleId = warningResultDetails.Find(u => u.Id == detail.Id).RuleId;
-            //    detail.DataId = warningResultDetails.Find(u => u.Id == detail.Id).DataId;
+            //    detail.RuleId = warningResultDetails.Find(u => u.WirePointName == detail.WirePointName).RuleId;
+            //    detail.DataId = warningResultDetails.Find(u => u.WirePointName == detail.WirePointName).DataId;
 
             //    string warningId = cells[i, COLUMN_INDEX_HIDE_WARNING_ID].Text;
 
@@ -729,13 +729,13 @@ namespace _5.WarningManagement
             //for (int i = FROZEN_ROW_COUNT; i < this._fpPreWarningResultDetials.ActiveSheet.RowCount; i++)
             //{
             //    PojoWarningDetail detail = new PojoWarningDetail();
-            //    detail.Id = cells[i, COLUMN_INDEX_HIDE_DATA_ID].Text;
+            //    detail.WirePointName = cells[i, COLUMN_INDEX_HIDE_DATA_ID].Text;
             //    detail.Comments = cells[i, COLUMN_INDEX_COMMENTS].Text; // 措施评价
             //    detail.Actions = cells[i, COLUMN_INDEX_ACTIONS].Text; // 措施
             //    detail.LiftPerson = ConfigManager.Instance.getValueByKey(ConfigConst.CONFIG_CURRENT_USER);// 解除人
             //    detail.LiftDateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            //    detail.RuleId = warningResultDetails.Find(u => u.Id == detail.Id).RuleId;
-            //    detail.DataId = warningResultDetails.Find(u => u.Id == detail.Id).DataId;
+            //    detail.RuleId = warningResultDetails.Find(u => u.WirePointName == detail.WirePointName).RuleId;
+            //    detail.DataId = warningResultDetails.Find(u => u.WirePointName == detail.WirePointName).DataId;
 
             //    string warningId = cells[i, COLUMN_INDEX_HIDE_WARNING_ID].Text;
 

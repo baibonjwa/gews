@@ -82,7 +82,7 @@ namespace LibBusiness
         //{
         //    var db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
         //    string sql = "DELETE FROM " + StopLineDbConstNames.TABLE_NAME + " WHERE " + StopLineDbConstNames.ID + " =" +
-        //                 stoplineEntity.Id;
+        //                 stoplineEntity.WirePointName;
         //    bool bResult = db.OperateDB(sql);
         //    return bResult;
         //}
