@@ -248,7 +248,7 @@ namespace sys2
             dgrdvDayReportHC[C_WORK_TIME, 0].Value = _dayReportHCEntity.WorkTime;
             dgrdvDayReportHC[C_WORK_CONTENT, 0].Value = _dayReportHCEntity.WorkInfo;
             dgrdvDayReportHC[C_WORK_PROGRESS, 0].Value = _dayReportHCEntity.JinChi;
-            dgrdvDayReportHC[C_COMMENTS, 0].Value = _dayReportHCEntity.Other;
+            dgrdvDayReportHC[C_COMMENTS, 0].Value = _dayReportHCEntity.Remarks;
         }
 
         /// <summary>
@@ -368,13 +368,13 @@ namespace sys2
             }
             if (this.Text == Const_MS.DAY_REPORT_HC_ADD)
             {
-                LibBusiness.TunnelDefaultSelect.InsertDefaultTunnel(DayReportHCDbConstNames.TABLE_NAME, selectWorkingfaceSimple1.IWorkingfaceId);
+                LibBusiness.TunnelDefaultSelect.InsertDefaultTunnel(DayReportHc.TableName, selectWorkingfaceSimple1.IWorkingfaceId);
                 insertDayReportHCInfo();
             }
             else if (this.Text == Const_MS.DAY_REPORT_HC_CHANGE)
             {
                 DayReportHc oldDayReportHCEntity = _dayReportHCEntity; //修改前实体
-                LibBusiness.TunnelDefaultSelect.UpdateDefaultTunnel(DayReportHCDbConstNames.TABLE_NAME, selectWorkingfaceSimple1.IWorkingfaceId);
+                LibBusiness.TunnelDefaultSelect.UpdateDefaultTunnel(DayReportHc.TableName, selectWorkingfaceSimple1.IWorkingfaceId);
                 updateDayReportHCInfo();
 
                 DayReportHc newDayReportHCEntity = _dayReportHCEntity; //修改后实体
@@ -588,7 +588,7 @@ namespace sys2
                 //备注
                 if (cells[C_COMMENTS].Value != null)
                 {
-                    dayReportHCEntity.Other = cells[C_COMMENTS].Value.ToString();
+                    dayReportHCEntity.Remarks = cells[C_COMMENTS].Value.ToString();
                 }
                 //BID
                 dayReportHCEntity.BindingId = IDGenerator.NewBindingID();
@@ -636,7 +636,7 @@ namespace sys2
                 // 通知服务端回采进尺已经添加
                 UpdateWarningDataMsg msg = new UpdateWarningDataMsg(selectWorkingfaceSimple1.IWorkingfaceId,
                     Const.INVALID_ID,
-                    DayReportHCDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, DateTime.Now);
+                    DayReportHc.TableName, OPERATION_TYPE.ADD, DateTime.Now);
                 this.MainForm.SendMsg2Server(msg);
                 Log.Debug("发送地址构造消息------完成" + msg.ToString());
             }
@@ -693,7 +693,7 @@ namespace sys2
             //备注
             if (cells[C_COMMENTS].Value != null)
             {
-                _dayReportHCEntity.Other = cells[C_COMMENTS].Value.ToString();
+                _dayReportHCEntity.Remarks = cells[C_COMMENTS].Value.ToString();
             }
 
             //提交修改
@@ -714,7 +714,7 @@ namespace sys2
 
                 // 通知服务器数据已经修改
                 UpdateWarningDataMsg msg = new UpdateWarningDataMsg(workingFace.WorkingFaceId, tunnelQY.TunnelId,
-                    DayReportHCDbConstNames.TABLE_NAME, OPERATION_TYPE.UPDATE, DateTime.Now);
+                     DayReportHc.TableName, OPERATION_TYPE.UPDATE, DateTime.Now);
                 this.MainForm.SendMsg2Server(msg);
             }
         }

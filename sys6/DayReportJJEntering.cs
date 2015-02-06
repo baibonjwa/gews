@@ -185,7 +185,7 @@ namespace UnderTerminal
             dgrdvDayReportJJ[2, 0].Value = _dayReportJJEntity.JinChi;
             dgrdvDayReportJJ[3, 0].Value = _dayReportJJEntity.DistanceFromWirepoint;
             dgrdvDayReportJJ[4, 0].Value = _dayReportJJEntity.ConsultWirepoint;
-            dgrdvDayReportJJ[5, 0].Value = _dayReportJJEntity.Other;
+            dgrdvDayReportJJ[5, 0].Value = _dayReportJJEntity.Remarks;
         }
 
         /// <summary>
@@ -337,7 +337,7 @@ namespace UnderTerminal
                 //备注
                 if (dgrdvDayReportJJ.Rows[i].Cells[C_COMMENTS].Value != null)
                 {
-                    _dayReportJJEntity.Other = dgrdvDayReportJJ.Rows[i].Cells[C_COMMENTS].Value.ToString();
+                    _dayReportJJEntity.Remarks = dgrdvDayReportJJ.Rows[i].Cells[C_COMMENTS].Value.ToString();
                 }
                 //BID
                 _dayReportJJEntity.BindingId = IDGenerator.NewBindingID();
@@ -352,7 +352,7 @@ namespace UnderTerminal
                 //添加回采进尺日报
                 dayReportJJEntity.SaveAndFlush();
 
-                var msg = new UpdateWarningDataMsg(mainWin.workingfaceId, tunnelId, DayReportJJDbConstNames.TABLE_NAME,
+                var msg = new UpdateWarningDataMsg(mainWin.workingfaceId, tunnelId, DayReportJj.TableName,
                     OPERATION_TYPE.ADD, DateTime.Now);
                 mainWin.SendMsg2Server(msg);
             }
@@ -398,7 +398,7 @@ namespace UnderTerminal
             //备注
             if (dgrdvDayReportJJ.Rows[0].Cells[5].Value != null)
             {
-                _dayReportJJEntity.Other = dgrdvDayReportJJ.Rows[0].Cells[5].Value.ToString();
+                _dayReportJJEntity.Remarks = dgrdvDayReportJJ.Rows[0].Cells[5].Value.ToString();
             }
 
             //备注
@@ -419,7 +419,7 @@ namespace UnderTerminal
             _dayReportJJEntity.SaveAndFlush();
 
             //修改成功
-            var msg = new UpdateWarningDataMsg(mainWin.workingfaceId, tunnelId, DayReportJJDbConstNames.TABLE_NAME,
+            var msg = new UpdateWarningDataMsg(mainWin.workingfaceId, tunnelId, DayReportJj.TableName,
                 OPERATION_TYPE.UPDATE, dtpDate.Value);
             mainWin.SendMsg2Server(msg);
         }

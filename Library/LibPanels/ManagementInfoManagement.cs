@@ -1,14 +1,5 @@
-﻿// ******************************************************************
-// 概  述：井下数据管理信息管理
-// 作  者：宋英杰
-// 创建日期：2014/3/11
-// 版本号：V1.0
-// 版本信息：
-// V1.0 新建
-// ******************************************************************
-using System;
+﻿using System;
 using System.Windows.Forms;
-using DevExpress.Spreadsheet;
 using LibCommonControl;
 using LibCommon;
 using LibEntity;
@@ -17,11 +8,9 @@ namespace LibPanels
 {
     public partial class ManagementInfoManagement : BaseForm
     {
-        public ManagementInfoManagement(MainFrm mainFrm)
+        public ManagementInfoManagement()
         {
             InitializeComponent();
-
-            MainForm = mainFrm;
         }
 
         private void RefreshData()

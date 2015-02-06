@@ -38,7 +38,7 @@ namespace LibBusiness
             sb.Append(" WHERE ");
             sb.Append(DayReportJJDbConstNames.DATETIME + " >= '" + dtFrom.ToString());
             sb.Append("' AND ");
-            sb.Append(DayReportHCDbConstNames.DATETIME + " < '" + dtTo.ToString() + "'");
+            sb.Append("DATATIME"+  " < '" + dtTo.ToString() + "'");
             DataSet ds = db.ReturnDS(sb.ToString());
             return ds;
         }
@@ -108,7 +108,7 @@ namespace LibBusiness
             sb.Append(" WHERE ");
             sb.Append(DayReportJJDbConstNames.DATETIME + " >= '" + dtFrom.ToString());
             sb.Append("' AND ");
-            sb.Append(DayReportHCDbConstNames.DATETIME + " < '" + dtTo.ToString() + "') AS TB ");
+            sb.Append("DATATIME" + " < '" + dtTo.ToString() + "') AS TB ");
             sb.Append("WHERE rowid >= " + iStartIndex);
             sb.Append("AND rowid <= " + iEndIndex);
             DataSet ds = db.ReturnDS(sb.ToString());

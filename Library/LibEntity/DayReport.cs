@@ -92,7 +92,7 @@ namespace LibEntity
         ///     备注
         /// </summary>
         [Property("OTHER")]
-        public string Other { get; set; }
+        public string Remarks { get; set; }
 
         // BID
 

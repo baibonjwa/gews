@@ -11,21 +11,11 @@ namespace LibCommonControl
 {
     public partial class BaseForm : MainFrm
     {
-        private MainFrm mainForm;
-
         public BaseForm()
         {
             InitializeComponent();
         }
 
-        public MainFrm MainForm
-        {
-            get
-            {
-                return this.mainForm;
-            }
-
-            set { this.mainForm = value; }
-        }
+        public MainFrm MainForm { get; set; }
     }
 }

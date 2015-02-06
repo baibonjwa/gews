@@ -151,19 +151,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="2.MiningSchedulingBLL\DbConstNames\DayReportHCDbConstNames.cs" />
-    <Compile Include="2.MiningSchedulingBLL\DbConstNames\DayReportJJDbConstNames.cs" />
     <Compile Include="2.MiningSchedulingBLL\DbConstNames\GeologySpaceDbConstNames.cs" />
     <Compile Include="2.MiningSchedulingBLL\DbConstNames\StopLineDbConstNames.cs" />
     <Compile Include="2.MiningSchedulingBLL\DbConstNames\TeamDbConstNames.cs" />
     <Compile Include="2.MiningSchedulingBLL\DbConstNames\WorkTimeDbConstNames.cs" />
     <Compile Include="2.MiningSchedulingBLL\DbConstNames\WorkTimeDefaultDbConstNames.cs" />
-    <Compile Include="2.MiningSchedulingBLL\PropertyBLL\DayReportJJBLL.cs" />
     <Compile Include="2.MiningSchedulingBLL\PropertyBLL\GeologySpaceBLL.cs" />
     <Compile Include="2.MiningSchedulingBLL\PropertyBLL\StopLineBLL.cs" />
     <Compile Include="2.MiningSchedulingBLL\PropertyBLL\TeamBLL.cs" />
     <Compile Include="2.MiningSchedulingBLL\PropertyBLL\WorkTimeBLL.cs" />
-    <Compile Include="2.MiningSchedulingBLL\PropertyBLL\DayReportHCBLL.cs" />
     <Compile Include="3.GeologyMeasureBLL\DbConstNames\WorkingFaceDbConstNames.cs" />
     <Compile Include="3.GeologyMeasureBLL\DbConstNames\MiningAreaDbConstNames.cs" />
     <Compile Include="3.GeologyMeasureBLL\DbConstNames\HorizontalDbConstNames.cs" />

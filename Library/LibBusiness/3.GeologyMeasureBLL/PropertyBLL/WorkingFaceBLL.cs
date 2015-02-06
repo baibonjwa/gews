@@ -300,9 +300,9 @@ namespace LibBusiness
         public static bool CheckIsExist(int WorkingFaceID, string WorkTimeName, DateTime CreateTime)
         {
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
-            string sql = "SELECT * FROM " + DayReportHCDbConstNames.TABLE_NAME + " WHERE " + DayReportHCDbConstNames.WORKINGFACE_ID + " = " + WorkingFaceID;
-            sql += " AND " + DayReportHCDbConstNames.WORK_TIME + " = '" + WorkTimeName + "'";
-            sql += " AND " + DayReportHCDbConstNames.DATETIME + " = '" + CreateTime + "'";
+            string sql = "SELECT * FROM " + "T_DAYREPORT_HC" + " WHERE " + "WORKINGFACE_ID" + " = " + WorkingFaceID;
+            sql += " AND " + "WORK_TIME" + " = '" + WorkTimeName + "'";
+            sql += " AND " + "DATETIME" + " = '" + CreateTime + "'";
             DataSet ds = db.ReturnDS(sql);
 
             if ((ds == null) || (ds.Tables == null))

@@ -18,9 +18,11 @@ namespace LibEntity
     /// <summary>
     ///     回采进尺日报实体
     /// </summary>
-    [ActiveRecord("T_DAYREPORT_JJ")]
+    [ActiveRecord("T_DAYREPORT_HC")]
     public class DayReportHc : DayReport
     {
+
+        public const String TableName = "T_DAYREPORT_HC";
         /// <summary>
         ///     该条记录是否删除，用于修改进尺信息
         /// </summary>
@@ -54,11 +56,11 @@ namespace LibEntity
         public static DayReportHc[] SlicedFindByDatetime(int firstResult, int maxResult,
             DateTime startTime, DateTime endTime)
         {
-            var criterion = new List<ICriterion>
+            var criterion = new ICriterion[]
             {
                 Restrictions.Between("Datetime", startTime, endTime)
             };
-            var results = (DayReportHc[])SlicedFindAll(typeof(DayReportHc), firstResult, maxResult, criterion.ToArray());
+            var results = (DayReportHc[])SlicedFindAll(typeof(DayReportHc), firstResult, maxResult, criterion);
             return results;
         }
 
@@ -66,6 +68,15 @@ namespace LibEntity
         {
             var results = (DayReportHc[])SlicedFindAll(typeof(DayReportHc), firstResult, maxResult);
             return results;
+        }
+
+        public static void DeleteByWorkingFaceId(int workingFaceId)
+        {
+            var criterion = new ICriterion[]
+            {
+                Restrictions.Eq("WorkingFace.WorkingFaceId", workingFaceId)
+            };
+            DeleteAll(typeof(DayReportHc), criterion);
         }
 
     }

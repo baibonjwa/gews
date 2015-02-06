@@ -156,10 +156,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gcDayReportHc.Cursor = System.Windows.Forms.Cursors.Default;
-            this.gcDayReportHc.Location = new System.Drawing.Point(12, 38);
+            this.gcDayReportHc.Location = new System.Drawing.Point(12, 27);
             this.gcDayReportHc.MainView = this.gridView1;
             this.gcDayReportHc.Name = "gcDayReportHc";
-            this.gcDayReportHc.Size = new System.Drawing.Size(1108, 644);
+            this.gcDayReportHc.Size = new System.Drawing.Size(1108, 655);
             this.gcDayReportHc.TabIndex = 11;
             this.gcDayReportHc.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -182,6 +182,7 @@
             // gridColumn1
             // 
             this.gridColumn1.Caption = "队别";
+            this.gridColumn1.FieldName = "Team.TeamName";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 0;
@@ -189,6 +190,7 @@
             // gridColumn2
             // 
             this.gridColumn2.Caption = "工作面名称";
+            this.gridColumn2.FieldName = "WorkingFace.WorkinFaceName";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 1;
@@ -196,6 +198,7 @@
             // gridColumn3
             // 
             this.gridColumn3.Caption = "班次";
+            this.gridColumn3.FieldName = "WorkTime";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 2;
@@ -203,6 +206,7 @@
             // gridColumn4
             // 
             this.gridColumn4.Caption = "工作制式";
+            this.gridColumn4.FieldName = "WorkTimeStyle";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 3;
@@ -210,6 +214,7 @@
             // gridColumn5
             // 
             this.gridColumn5.Caption = "工作内容";
+            this.gridColumn5.FieldName = "WorkInfo";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
             this.gridColumn5.VisibleIndex = 4;
@@ -217,6 +222,7 @@
             // gridColumn6
             // 
             this.gridColumn6.Caption = "进尺";
+            this.gridColumn6.FieldName = "JinChi";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
             this.gridColumn6.VisibleIndex = 5;
@@ -224,6 +230,7 @@
             // gridColumn7
             // 
             this.gridColumn7.Caption = "日期";
+            this.gridColumn7.FieldName = "DateTime";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
             this.gridColumn7.VisibleIndex = 6;
@@ -231,6 +238,7 @@
             // gridColumn8
             // 
             this.gridColumn8.Caption = "填报人";
+            this.gridColumn8.FieldName = "Submitter";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
             this.gridColumn8.VisibleIndex = 7;
@@ -238,6 +246,7 @@
             // gridColumn9
             // 
             this.gridColumn9.Caption = "备注";
+            this.gridColumn9.FieldName = "Remarks";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
             this.gridColumn9.VisibleIndex = 8;
@@ -254,7 +263,7 @@
             this.controlNavigator1.TextLocation = DevExpress.XtraEditors.NavigatorButtonsTextLocation.Center;
             this.controlNavigator1.TextStringFormat = "记录 {0} / {1}";
             // 
-            // DayReportHCManagement
+            // DayReportHcManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

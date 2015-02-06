@@ -55,7 +55,7 @@ namespace UnderTerminal
             addInfo();
             workingfaceId = BasicInfoManager.getInstance().getTunnelByID(tunnelId).WorkingFace.WorkingFaceId;
             //自定义控件初始化
-            LibEntity.TunnelDefaultSelect tunnelDefaultSelectEntity = LibBusiness.TunnelDefaultSelect.selectDefaultTunnel(DayReportHCDbConstNames.TABLE_NAME);
+            LibEntity.TunnelDefaultSelect tunnelDefaultSelectEntity = LibBusiness.TunnelDefaultSelect.selectDefaultTunnel(DayReportHc.TableName);
 
         }
 
@@ -149,7 +149,7 @@ namespace UnderTerminal
             dgrdvDayReportHC[2, 0].Value = _dayReportHCEntity.JinChi;
             //TODO
             //dgrdvDayReportHC[3, 0].Value = _dayReportHCEntity.OpenOffCutDistance;
-            dgrdvDayReportHC[4, 0].Value = _dayReportHCEntity.Other;
+            dgrdvDayReportHC[4, 0].Value = _dayReportHCEntity.Remarks;
         }
 
         /// <summary>
@@ -319,7 +319,7 @@ namespace UnderTerminal
                 //备注
                 if (this.dgrdvDayReportHC.Rows[i].Cells[C_COMMENTS].Value != null)
                 {
-                    dayReportHCEntity.Other = this.dgrdvDayReportHC.Rows[i].Cells[C_COMMENTS].Value.ToString();
+                    dayReportHCEntity.Remarks = this.dgrdvDayReportHC.Rows[i].Cells[C_COMMENTS].Value.ToString();
                 }
                 //BID
                 dayReportHCEntity.BindingId = IDGenerator.NewBindingID();
@@ -338,7 +338,7 @@ namespace UnderTerminal
                 bResult = true;
                 if (bResult)
                 {
-                    var msg = new UpdateWarningDataMsg(this.mainWin.workingfaceId, tunnelId, DayReportHCDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, dtpDate.Value);
+                    var msg = new UpdateWarningDataMsg(this.mainWin.workingfaceId, tunnelId, DayReportHc.TableName, OPERATION_TYPE.ADD, dtpDate.Value);
                     mainWin.SendMsg2Server(msg);
                 }
             }
@@ -589,7 +589,7 @@ namespace UnderTerminal
                             {
                                 if (tunnelId >= 0)
                                 {
-                                    dgrdvDayReportHC[e.ColumnIndex + 1, e.RowIndex].Value = autoOpenOffCutDistance(DayReportHCBLL.returnMaxRowOpenOffCutDistance(tunnelId), Convert.ToDouble(dgrdvDayReportHC[e.ColumnIndex, e.RowIndex].Value));
+                                    dgrdvDayReportHC[e.ColumnIndex + 1, e.RowIndex].Value = autoOpenOffCutDistance(0, Convert.ToDouble(dgrdvDayReportHC[e.ColumnIndex, e.RowIndex].Value));
                                 }
                             }
                             //修改时计算方式
@@ -632,7 +632,7 @@ namespace UnderTerminal
                         {
                             if (tunnelId >= 0)
                             {
-                                dgrdvDayReportHC[e.ColumnIndex, e.RowIndex].Value = autoOpenOffCutDistance(DayReportHCBLL.returnMaxRowOpenOffCutDistance(tunnelId), Convert.ToDouble(dgrdvDayReportHC[e.ColumnIndex - 1, e.RowIndex].Value));
+                                dgrdvDayReportHC[e.ColumnIndex, e.RowIndex].Value = autoOpenOffCutDistance(0, Convert.ToDouble(dgrdvDayReportHC[e.ColumnIndex - 1, e.RowIndex].Value));
                             }
                         }
                         //修改时计算方式
@@ -689,7 +689,7 @@ namespace UnderTerminal
                         {
                             if (tunnelId >= 0)
                             {
-                                dgrdvDayReportHC[e.ColumnIndex, e.RowIndex].Value = autoOpenOffCutDistance(DayReportHCBLL.returnMaxRowOpenOffCutDistance(tunnelId), Convert.ToDouble(dgrdvDayReportHC[e.ColumnIndex - 1, e.RowIndex].Value));
+                                dgrdvDayReportHC[e.ColumnIndex, e.RowIndex].Value = autoOpenOffCutDistance(0, Convert.ToDouble(dgrdvDayReportHC[e.ColumnIndex - 1, e.RowIndex].Value));
                             }
                         }
                         //修改时计算方式

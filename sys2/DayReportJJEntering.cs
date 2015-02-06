@@ -1,19 +1,11 @@
-﻿// ******************************************************************
-// 概  述：掘进日报添加修改
-// 作  者：宋英杰
-// 创建日期：2014/3/11
-// 版本号：V1.0
-// 版本信息：
-// V1.0 新建
-// ******************************************************************
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using ESRI.ArcGIS.Geometry;
+using GIS;
 using GIS.HdProc;
 using LibBusiness;
 using LibBusiness.CommonBLL;
@@ -23,49 +15,48 @@ using LibCommonForm;
 using LibEntity;
 using LibPanels;
 using LibSocket;
+using Point = System.Drawing.Point;
+using TunnelDefaultSelect = LibBusiness.TunnelDefaultSelect;
 
 namespace sys2
 {
     public partial class DayReportJJEntering : BaseForm
     {
         #region ******变量声明******
-        /**掘进面实体**/
-        private WorkingFace workingFace;
-        /**回采日报实体**/
-        DayReportJj _dayReportJJEntity = new DayReportJj();
-        /**巷道关联矿井等信息ID集合**/
-        int[] _arr;
 
-        private DateTimePicker dtp = new DateTimePicker();   //这里实例化一个DateTimePicker控件
-        private Rectangle _Rectangle;
+        /**掘进面实体**/
 
         //各列索引
-        const int C_DATE = 0;     // 选择日期
-        const int C_WORK_TIME = 1;     // 班次
-        const int C_WORK_CONTENT = 2;     // 工作内容
-        const int C_WORK_PROGRESS = 3;     // 进尺
-        const int C_COMMENTS = 4;     // 备注
+        private const int C_DATE = 0; // 选择日期
+        private const int C_WORK_TIME = 1; // 班次
+        private const int C_WORK_CONTENT = 2; // 工作内容
+        private const int C_WORK_PROGRESS = 3; // 进尺
+        private const int C_COMMENTS = 4; // 备注
+        private readonly DayReportJj _dayReportJJEntity = new DayReportJj();
+        private readonly DateTimePicker dtp = new DateTimePicker(); //这里实例化一个DateTimePicker控件
+        private Rectangle _Rectangle;
+        private int[] _arr;
+        private WorkingFace workingFace;
+
         #endregion
 
         /// <summary>
-        /// 构造方法
+        ///     构造方法
         /// </summary>
-        public DayReportJJEntering(MainFrm mainFrm)
+        public DayReportJJEntering()
         {
             InitializeComponent();
 
-            this.MainForm = mainFrm;
+            dgrdvDayReportJJ.DataError += delegate { };
 
-            this.dgrdvDayReportJJ.DataError += delegate(object sender, DataGridViewDataErrorEventArgs e) { };
-
-            dgrdvDayReportJJ.Controls.Add(dtp);   //把时间控件加入DataGridView
-            dtp.Visible = false;   //先不让它显示
-            dtp.Format = DateTimePickerFormat.Custom;   //设置日期格式为2010-08-05
+            dgrdvDayReportJJ.Controls.Add(dtp); //把时间控件加入DataGridView
+            dtp.Visible = false; //先不让它显示
+            dtp.Format = DateTimePickerFormat.Custom; //设置日期格式为2010-08-05
             dtp.TextChanged += dtp_TextChange; //为时间控件加入事件dtp_TextChange
 
             addInfo();
             //设置窗体格式
-            LibCommon.FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_MS.DAY_REPORT_JJ_ADD);
+            FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_MS.DAY_REPORT_JJ_ADD);
 
             //自定义控件初始化
             //WorkingFaceSelectEntity workingFaceSelectEntity = WorkingFaceSelect.SelectWorkingFace(DayReportHCDbConstNames.TABLE_NAME);
@@ -88,40 +79,30 @@ namespace sys2
             //注册事件 
         }
 
-        private void NameChangeEvent(object sender, WorkingFaceEventArgs e)
-        {
-            workingFace = BasicInfoManager.getInstance().getWorkingFaceById(
-                this.selectWorkingfaceSimple1.IWorkingfaceId);
-        }
-
         /// <summary>
-        /// 构造方法
+        ///     构造方法
         /// </summary>
         /// <param name="array">巷道编号数组</param>
         /// <param name="dayReportHCEntity">回采进尺日报实体</param>
-        public DayReportJJEntering(int[] array, DayReportJj dayReportJJEntity, MainFrm mainFrm)
+        public DayReportJJEntering(DayReportJj dayReportJJEntity)
         {
-            this.MainForm = mainFrm;
-
-            _arr = array;
-            this._dayReportJJEntity = dayReportJJEntity;
+            _dayReportJJEntity = dayReportJJEntity;
             InitializeComponent();
             //修改初始化
             changeInfo();
             //设置窗体格式
-            LibCommon.FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_MS.DAY_REPORT_JJ_CHANGE);
+            FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_MS.DAY_REPORT_JJ_CHANGE);
             dgrdvDayReportJJ.AllowUserToAddRows = false;
 
-            dgrdvDayReportJJ.Controls.Add(dtp);   //把时间控件加入DataGridView
-            dtp.Visible = false;   //先不让它显示
-            dtp.Format = DateTimePickerFormat.Custom;   //设置日期格式为2010-08-05
+            dgrdvDayReportJJ.Controls.Add(dtp); //把时间控件加入DataGridView
+            dtp.Visible = false; //先不让它显示
+            dtp.Format = DateTimePickerFormat.Custom; //设置日期格式为2010-08-05
             dtp.TextChanged += dtp_TextChange; //为时间控件加入事件dtp_TextChange
 
-            this.dgrdvDayReportJJ.DataError += delegate(object sender, DataGridViewDataErrorEventArgs e) { };
+            dgrdvDayReportJJ.DataError += delegate { };
 
             workingFace = BasicInfoManager.getInstance().getWorkingFaceById(
-             Convert.ToInt32(_arr[3]));
-
+                Convert.ToInt32(_arr[3]));
 
 
             //自定义控件初始化
@@ -141,28 +122,33 @@ namespace sys2
             //    this.selectWorkingFaceControl1.loadMineName();
             //}
             //注册事件
+        }
 
+        private void NameChangeEvent(object sender, WorkingFaceEventArgs e)
+        {
+            workingFace = BasicInfoManager.getInstance().getWorkingFaceById(
+                selectWorkingfaceSimple1.IWorkingfaceId);
         }
 
 
         private void DayReportJJEntering_Load(object sender, EventArgs e)
         {
-            this.selectWorkingfaceSimple1.WorkingfaceNameChanged += NameChangeEvent;
+            selectWorkingfaceSimple1.WorkingfaceNameChanged += NameChangeEvent;
             if (workingFace != null)
             {
-                WorkingfaceSimple ws = new WorkingfaceSimple(workingFace.WorkingFaceId, workingFace.WorkingFaceName, workingFace.WorkingfaceTypeEnum);
-                this.selectWorkingfaceSimple1.SelectTunnelItemWithoutHistory(ws);
+                var ws = new WorkingfaceSimple(workingFace.WorkingFaceId, workingFace.WorkingFaceName,
+                    workingFace.WorkingfaceTypeEnum);
+                selectWorkingfaceSimple1.SelectTunnelItemWithoutHistory(ws);
             }
-
         }
 
         /// <summary>
-        /// 添加时加载初始化设置
+        ///     添加时加载初始化设置
         /// </summary>
         private void addInfo()
         {
             //绑定队别名称
-            this.bindTeamInfo();
+            bindTeamInfo();
             ////初始化班次
             //this.bindWorkTimeFirstTime();
             //设置为默认工作制式
@@ -184,13 +170,13 @@ namespace sys2
         }
 
         /// <summary>
-        /// 设置班次名称
+        ///     设置班次名称
         /// </summary>
         private void setWorkTimeName()
         {
             string strWorkTimeName = "";
             string sysDateTime = DateTime.Now.ToLongTimeString();
-            if (this.rbtn38.Checked == true)
+            if (rbtn38.Checked)
             {
                 strWorkTimeName = MineDataSimpleBLL.selectWorkTimeNameByWorkTimeGroupIdAndSysTime(1, sysDateTime);
             }
@@ -206,7 +192,7 @@ namespace sys2
         }
 
         /// <summary>
-        /// 修改时加载初始化设置
+        ///     修改时加载初始化设置
         /// </summary>
         private void changeInfo()
         {
@@ -217,7 +203,7 @@ namespace sys2
         }
 
         /// <summary>
-        /// datagridview绑定信息
+        ///     datagridview绑定信息
         /// </summary>
         private void bindInfo()
         {
@@ -235,7 +221,7 @@ namespace sys2
             cboTeamName.Text = TeamBll.selectTeamInfoByID(_dayReportJJEntity.Team.TeamId).TeamName;
 
             //绑定队别成员
-            this.bindTeamMember();
+            bindTeamMember();
 
             //填报人
             cboSubmitter.Text = _dayReportJJEntity.Submitter;
@@ -244,7 +230,7 @@ namespace sys2
             dgrdvDayReportJJ[C_WORK_TIME, 0].Value = _dayReportJJEntity.WorkTime;
             dgrdvDayReportJJ[C_WORK_CONTENT, 0].Value = _dayReportJJEntity.WorkInfo;
             dgrdvDayReportJJ[C_WORK_PROGRESS, 0].Value = _dayReportJJEntity.JinChi;
-            dgrdvDayReportJJ[C_COMMENTS, 0].Value = _dayReportJJEntity.Other;
+            dgrdvDayReportJJ[C_COMMENTS, 0].Value = _dayReportJJEntity.Remarks;
         }
 
         /// <summary>
@@ -286,7 +272,7 @@ namespace sys2
         }
 
         /// <summary>
-        /// 添加队别
+        ///     添加队别
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -299,7 +285,7 @@ namespace sys2
             }
             else
             {
-                Team teamEntity = new Team();
+                var teamEntity = new Team();
                 teamEntity.TeamId = Convert.ToInt32(cboTeamName.SelectedValue);
                 teamEntity = TeamBll.selectTeamInfoByID(teamEntity.TeamId);
                 teamInfoForm = new TeamInfoEntering(teamEntity);
@@ -307,9 +293,9 @@ namespace sys2
 
             if (DialogResult.OK == teamInfoForm.ShowDialog())
             {
-                this.bindTeamInfo();
+                bindTeamInfo();
                 cboTeamName.Text = teamInfoForm.returnTeamName();
-                DataSet ds = new DataSet();
+                var ds = new DataSet();
                 ds = TeamBll.selectTeamInfoByTeamName(teamInfoForm.returnTeamName());
                 if (ds.Tables[0].Rows.Count > 0)
                 {
@@ -321,22 +307,22 @@ namespace sys2
         }
 
         /// <summary>
-        /// 添加队别
+        ///     添加队别
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnAddTeamMemberInfo_Click(object sender, EventArgs e)
         {
-            TeamInfoEntering t = new TeamInfoEntering();
+            var t = new TeamInfoEntering();
             if (DialogResult.OK == t.ShowDialog())
             {
-                this.bindTeamMember();
+                bindTeamMember();
                 cboSubmitter.Text = t.returnTeamName();
             }
         }
 
         /// <summary>
-        /// 队别选择事件（根据队别绑定队员）
+        ///     队别选择事件（根据队别绑定队员）
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -346,40 +332,40 @@ namespace sys2
         }
 
         /// <summary>
-        /// 取消按钮事件
+        ///     取消按钮事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnCancel_Click(object sender, EventArgs e)
         {
             //关闭窗体
-            this.Close();
+            Close();
         }
 
         /// <summary>
-        /// 提交按钮事件
+        ///     提交按钮事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnSubmit_Click(object sender, EventArgs e)
         {
             // 验证
-            if (!this.check())
+            if (!check())
             {
                 DialogResult = DialogResult.None;
                 return;
             }
             DialogResult = DialogResult.OK;
             //巷道掘进的参数
-            if (this.Text == Const_MS.DAY_REPORT_JJ_ADD)
+            if (Text == Const_MS.DAY_REPORT_JJ_ADD)
             {
-                LibBusiness.TunnelDefaultSelect.InsertDefaultTunnel(DayReportJJDbConstNames.TABLE_NAME, workingFace.WorkingFaceId);
+                TunnelDefaultSelect.InsertDefaultTunnel(DayReportJj.TableName, workingFace.WorkingFaceId);
                 insertDayReportJJInfo();
             }
-            if (this.Text == Const_MS.DAY_REPORT_JJ_CHANGE)
+            if (Text == Const_MS.DAY_REPORT_JJ_CHANGE)
             {
                 DayReportJj oldDayReportJJEntity = _dayReportJJEntity; //修改之前的实体
-                LibBusiness.TunnelDefaultSelect.UpdateDefaultTunnel(DayReportJJDbConstNames.TABLE_NAME, workingFace.WorkingFaceId);
+                TunnelDefaultSelect.UpdateDefaultTunnel(DayReportJj.TableName, workingFace.WorkingFaceId);
                 DayReportJj newDayReportJJEntity = _dayReportJJEntity; //修改后的掘进信息实体               
             }
         }
@@ -387,18 +373,19 @@ namespace sys2
         //添加巷道掘进
         private void addHdJc(string hdid, double jjcd, string bid, double hdwid)
         {
-            Dictionary<string, List<GeoStruct>> geostructsinfos = Global.cons.DrawJJCD(hdid, bid, hdwid, null, jjcd, 0, Global.searchlen, Global.sxjl, 0);
+            Dictionary<string, List<GeoStruct>> geostructsinfos = Global.cons.DrawJJCD(hdid, bid, hdwid, null, jjcd, 0,
+                Global.searchlen, Global.sxjl, 0);
             //修改工作面信息表中对应的X Y Z坐标信息
             List<GeoStruct> pos = geostructsinfos.Last().Value;
-            IPoint workfacepos = pos[0].geo as IPoint;
+            var workfacepos = pos[0].geo as IPoint;
             if (workfacepos != null)
             {
                 workingFace.Coordinate = new Coordinate(workfacepos.X, workfacepos.Y, 0.0);
-                LibBusiness.WorkingFaceBLL.updateWorkingfaceXYZ(workingFace);
+                WorkingFaceBLL.updateWorkingfaceXYZ(workingFace);
             }
             //查询地质结构信息
             geostructsinfos.Remove("LAST");
-            GeologySpaceBll.DeleteGeologySpaceEntityInfos(workingFace.WorkingFaceId);//删除工作面ID对应的地质构造信息
+            GeologySpaceBll.DeleteGeologySpaceEntityInfos(workingFace.WorkingFaceId); //删除工作面ID对应的地质构造信息
             foreach (string key in geostructsinfos.Keys)
             {
                 List<GeoStruct> geoinfos = geostructsinfos[key];
@@ -407,23 +394,23 @@ namespace sys2
                 {
                     GeoStruct tmp = geoinfos[i];
 
-                    GeologySpace geologyspaceEntity = new GeologySpace();
+                    var geologyspaceEntity = new GeologySpace();
                     geologyspaceEntity.WorkingFace = workingFace;
                     geologyspaceEntity.TectonicType = Convert.ToInt32(key);
-                    geologyspaceEntity.TectonicId = tmp.geoinfos[GIS.GIS_Const.FIELD_BID].ToString();
+                    geologyspaceEntity.TectonicId = tmp.geoinfos[GIS_Const.FIELD_BID];
                     geologyspaceEntity.Distance = tmp.dist;
                     geologyspaceEntity.OnDateTime = DateTime.Now.ToShortDateString();
 
                     geologyspaceEntity.Save();
                 }
             }
-
         }
 
         //修改巷道
         private void UpdateHdJc(string hdid, string bid, double jjcd)
         {
-            Dictionary<string, string> deltas = Global.cons.UpdateJJCD(hdid, bid, jjcd, 0, Global.searchlen, Global.sxjl, 0);
+            Dictionary<string, string> deltas = Global.cons.UpdateJJCD(hdid, bid, jjcd, 0, Global.searchlen, Global.sxjl,
+                0);
             string xydeltas = deltas[bid];
             double xdelta = Convert.ToDouble(xydeltas.Split('|')[0]);
             double ydelta = Convert.ToDouble(xydeltas.Split('|')[1]);
@@ -437,13 +424,13 @@ namespace sys2
 
             //修改工作面信息表中对应的X Y Z坐标信息
             workingFace.Coordinate = new Coordinate(pnt.X, pnt.Y, 0.0);
-            LibBusiness.WorkingFaceBLL.updateWorkingfaceXYZ(workingFace);
+            WorkingFaceBLL.updateWorkingfaceXYZ(workingFace);
 
             //查询地质结构信息
-            List<int> hd_ids = new List<int>();
+            var hd_ids = new List<int>();
             hd_ids.Add(Convert.ToInt16(hdid));
             Dictionary<string, List<GeoStruct>> geostructsinfos = Global.commonclss.GetStructsInfos(pnt, hd_ids);
-            GeologySpaceBll.DeleteGeologySpaceEntityInfos(workingFace.WorkingFaceId);//删除对应工作面ID的地质构造信息
+            GeologySpaceBll.DeleteGeologySpaceEntityInfos(workingFace.WorkingFaceId); //删除对应工作面ID的地质构造信息
             foreach (string key in geostructsinfos.Keys)
             {
                 List<GeoStruct> geoinfos = geostructsinfos[key];
@@ -452,10 +439,10 @@ namespace sys2
                 {
                     GeoStruct tmp = geoinfos[i];
 
-                    GeologySpace geologyspaceEntity = new GeologySpace();
+                    var geologyspaceEntity = new GeologySpace();
                     geologyspaceEntity.WorkingFace = workingFace;
                     geologyspaceEntity.TectonicType = Convert.ToInt32(key);
-                    geologyspaceEntity.TectonicId = tmp.geoinfos[GIS.GIS_Const.FIELD_BID].ToString();
+                    geologyspaceEntity.TectonicId = tmp.geoinfos[GIS_Const.FIELD_BID];
                     geologyspaceEntity.Distance = tmp.dist;
                     geologyspaceEntity.OnDateTime = DateTime.Now.ToShortDateString();
 
@@ -465,17 +452,17 @@ namespace sys2
         }
 
         /// <summary>
-        /// 添加掘进日报
+        ///     添加掘进日报
         /// </summary>
         private void insertDayReportJJInfo()
         {
-            List<DayReportJj> dayReportJJEntityList = new List<DayReportJj>();
+            var dayReportJJEntityList = new List<DayReportJj>();
 
-            for (int i = 0; i < this.dgrdvDayReportJJ.RowCount; i++)
+            for (int i = 0; i < dgrdvDayReportJJ.RowCount; i++)
             {
-                DayReportJj _dayReportJJEntity = new DayReportJj();
+                var _dayReportJJEntity = new DayReportJj();
                 // 最后一行为空行时，跳出循环
-                if (i == this.dgrdvDayReportJJ.RowCount - 1)
+                if (i == dgrdvDayReportJJ.RowCount - 1)
                 {
                     break;
                 }
@@ -486,7 +473,7 @@ namespace sys2
                 //绑定巷道编号
                 _dayReportJJEntity.WorkingFace.WorkingFaceId = workingFace.WorkingFaceId;
 
-                DataGridViewCellCollection cells = this.dgrdvDayReportJJ.Rows[i].Cells;
+                DataGridViewCellCollection cells = dgrdvDayReportJJ.Rows[i].Cells;
                 //日期
                 if (cells[C_DATE].Value != null)
                 {
@@ -522,7 +509,7 @@ namespace sys2
                 //备注
                 if (cells[C_COMMENTS].Value != null)
                 {
-                    _dayReportJJEntity.Other = cells[C_COMMENTS].Value.ToString();
+                    _dayReportJJEntity.Remarks = cells[C_COMMENTS].Value.ToString();
                 }
                 //BID
                 _dayReportJJEntity.BindingId = IDGenerator.NewBindingID();
@@ -552,14 +539,14 @@ namespace sys2
 
             Log.Debug("添加进尺数据发送Socket消息");
             // 通知服务器掘进进尺已经更新
-            UpdateWarningDataMsg msg = new UpdateWarningDataMsg(workingFace.WorkingFaceId, tunnel.TunnelId,
-                DayReportJJDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, DateTime.Now);
-            this.MainForm.SendMsg2Server(msg);
+            var msg = new UpdateWarningDataMsg(workingFace.WorkingFaceId, tunnel.TunnelId,
+                DayReportJj.TableName, OPERATION_TYPE.ADD, DateTime.Now);
+            MainForm.SendMsg2Server(msg);
             Log.Debug("添加进尺数据Socket消息发送完成");
         }
 
         /// <summary>
-        /// 三八制选择事件
+        ///     三八制选择事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -624,19 +611,19 @@ namespace sys2
         }
 
         /// <summary>
-        /// 验证
+        ///     验证
         /// </summary>
         /// <returns></returns>
         private bool check()
         {
             //巷道是否选择
-            if (this.selectWorkingfaceSimple1.IWorkingfaceId <= 0)
+            if (selectWorkingfaceSimple1.IWorkingfaceId <= 0)
             {
                 Alert.alert(Const.MSG_PLEASE_CHOOSE + Const_MS.TUNNEL + Const.SIGN_EXCLAMATION_MARK);
                 return false;
             }
             //队别为空
-            if (Validator.IsEmpty(this.cboTeamName.Text))
+            if (Validator.IsEmpty(cboTeamName.Text))
             {
                 Alert.alert(Const.MSG_PLEASE_TYPE_IN + Const_MS.TEAM_NAME + Const.SIGN_EXCLAMATION_MARK);
                 return false;
@@ -655,39 +642,36 @@ namespace sys2
             }
             //datagridview验证
             //只有一条数据时
-            if (this.dgrdvDayReportJJ.Rows.Count - 1 == 0)
+            if (dgrdvDayReportJJ.Rows.Count - 1 == 0)
             {
                 //添加时判断为未录入进尺
-                if (this.Text == Const_MS.DAY_REPORT_JJ_ADD)
+                if (Text == Const_MS.DAY_REPORT_JJ_ADD)
                 {
                     Alert.alert(Const.MSG_PLEASE_TYPE_IN + Const_MS.JC + Const.SIGN_EXCLAMATION_MARK);
                     return false;
                 }
                 //修改时
-                else
+                bool bResult = false;
+                //为空返回false，不数据时跳出循环
+                for (int i = 0; i < dgrdvDayReportJJ.ColumnCount; i++)
                 {
-                    bool bResult = false;
-                    //为空返回false，不数据时跳出循环
-                    for (int i = 0; i < dgrdvDayReportJJ.ColumnCount; i++)
+                    if (dgrdvDayReportJJ[i, 0].Value == null)
                     {
-                        if (dgrdvDayReportJJ[i, 0].Value == null)
-                        {
-                            bResult = false;
-                        }
-                        else
-                        {
-                            bResult = true;
-                            break;
-                        }
+                        bResult = false;
                     }
-                    if (!bResult)
+                    else
                     {
-                        Alert.alert(Const.MSG_PLEASE_TYPE_IN + Const_MS.JC);
-                        return bResult;
+                        bResult = true;
+                        break;
                     }
                 }
+                if (!bResult)
+                {
+                    Alert.alert(Const.MSG_PLEASE_TYPE_IN + Const_MS.JC);
+                    return bResult;
+                }
             }
-            for (int i = 0; i < this.dgrdvDayReportJJ.RowCount; i++)
+            for (int i = 0; i < dgrdvDayReportJJ.RowCount; i++)
             {
                 // 最后一行为空行时，跳出循环
                 if (i == dgrdvDayReportJJ.RowCount - 1)
@@ -695,7 +679,7 @@ namespace sys2
                     break;
                 }
 
-                DataGridViewTextBoxCell cell = dgrdvDayReportJJ.Rows[i].Cells[C_WORK_PROGRESS] as DataGridViewTextBoxCell;
+                var cell = dgrdvDayReportJJ.Rows[i].Cells[C_WORK_PROGRESS] as DataGridViewTextBoxCell;
                 //进尺为空
                 if (cell.Value == null)
                 {
@@ -705,10 +689,7 @@ namespace sys2
                         Alert.alert(Const_MS.JC + Const.MSG_NOT_NULL + Const.SIGN_EXCLAMATION_MARK);
                         return false;
                     }
-                    else
-                    {
-                        cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                    }
+                    cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
                 }
                 else
                 {
@@ -721,10 +702,7 @@ namespace sys2
                     Alert.alert(Const_MS.JC + Const.MSG_MUST_NUMBER + Const.SIGN_EXCLAMATION_MARK);
                     return false;
                 }
-                else
-                {
-                    cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                }
+                cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
 
                 cell = dgrdvDayReportJJ.Rows[i].Cells[C_COMMENTS] as DataGridViewTextBoxCell;
                 //备注不能含特殊字符
@@ -736,10 +714,7 @@ namespace sys2
                         Alert.alert(Const_MS.OTHER + Const.MSG_SP_CHAR + Const.SIGN_EXCLAMATION_MARK);
                         return false;
                     }
-                    else
-                    {
-                        cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                    }
+                    cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
                 }
             }
             //验证成功
@@ -755,16 +730,12 @@ namespace sys2
                     bindTeamMember();
                     break;
                 }
-                else
-                {
-                    cboSubmitter.Items.Clear();
-                    cboSubmitter.Text = "";
-                }
+                cboSubmitter.Items.Clear();
+                cboSubmitter.Text = "";
             }
         }
 
         /// <summary>
-        ///
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -785,7 +756,7 @@ namespace sys2
                             Alert.alert(Const_MS.JC + Const.MSG_MUST_NUMBER + Const_MS.SIGN_EXCLAMATION_MARK);
                             //错误处理
                             //添加时处理方式
-                            if (this.Text == Const_MS.DAY_REPORT_JJ_ADD)
+                            if (Text == Const_MS.DAY_REPORT_JJ_ADD)
                             {
                                 dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value = null;
                             }
@@ -813,7 +784,7 @@ namespace sys2
                             Alert.alert(Const_MS.JC + Const.MSG_MUST_NUMBER + Const_MS.SIGN_EXCLAMATION_MARK);
                             //错误处理
                             //添加时处理方式
-                            if (this.Text == Const_MS.DAY_REPORT_HC_ADD)
+                            if (Text == Const_MS.DAY_REPORT_HC_ADD)
                             {
                                 dgrdvDayReportJJ[e.ColumnIndex, e.RowIndex].Value = null;
                             }
@@ -845,32 +816,36 @@ namespace sys2
         }
 
         /*************时间控件选择时间时****************/
+
         private void dtp_TextChange(object sender, EventArgs e)
         {
-            dgrdvDayReportJJ.CurrentCell.Value = dtp.Text.ToString();   //时间控件选择时间时，就把时间赋给所在的单元格
+            dgrdvDayReportJJ.CurrentCell.Value = dtp.Text; //时间控件选择时间时，就把时间赋给所在的单元格
         }
 
         /****************单元格被单击，判断是否是放时间控件的那一列*******************/
+
         private void dgrdvDayReportHC_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == C_DATE)
             {
                 _Rectangle = dgrdvDayReportJJ.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true); //得到所在单元格位置和大小
                 dtp.Size = new Size(_Rectangle.Width, _Rectangle.Height); //把单元格大小赋给时间控件
-                dtp.Location = new System.Drawing.Point(_Rectangle.X, _Rectangle.Y); //把单元格位置赋给时间控件
-                dtp.Visible = true;   //可以显示控件了
+                dtp.Location = new Point(_Rectangle.X, _Rectangle.Y); //把单元格位置赋给时间控件
+                dtp.Visible = true; //可以显示控件了
             }
             //else
             //    dtp.Visible = false;
         }
 
         /***********当列的宽度变化时，时间控件先隐藏起来，不然单元格变大时间控件无法跟着变大哦***********/
+
         private void dataGridView1_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
         {
             //dtp.Visible = false;
         }
 
         /***********滚动条滚动时，单元格位置发生变化，也得隐藏时间控件，不然时间控件位置不动就乱了********/
+
         private void dataGridView1_Scroll(object sender, ScrollEventArgs e)
         {
             //dtp.Visible = false;
@@ -901,7 +876,5 @@ namespace sys2
                 }
             }
         }
-
     }
 }
-

@@ -24,28 +24,28 @@ namespace LibBusiness
         /// </summary>
         /// <param name="tunnelEntity">巷道实体</param>
         /// <returns>是否成功删除？true:false</returns>
-        public static bool deleteDayReportJJBindingTunnelID(Tunnel tunnelEntity)
-        {
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
-            string sql = "DELETE FROM " + DayReportJJDbConstNames.TABLE_NAME +
-                " WHERE " + DayReportJJDbConstNames.WORKINGFACE_ID + " = " + tunnelEntity.TunnelId;
-            bool bResult = db.OperateDB(sql);
-            return bResult;
-        }
+        //public static bool deleteDayReportJJBindingTunnelID(Tunnel tunnelEntity)
+        //{
+        //    ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
+        //    string sql = "DELETE FROM " + DayReportJJDbConstNames.TABLE_NAME +
+        //        " WHERE " + DayReportJJDbConstNames.WORKINGFACE_ID + " = " + tunnelEntity.TunnelId;
+        //    bool bResult = db.OperateDB(sql);
+        //    return bResult;
+        //}
 
         /// <summary>
         /// 删除巷道的回采进尺相关信息
         /// </summary>
         /// <param name="tunnelEntity"></param>
         /// <returns></returns>
-        public static bool deleteDayReportHCBindingTunnelID(Tunnel tunnelEntity)
-        {
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
-            string sql = "DELETE FROM " + DayReportHCDbConstNames.TABLE_NAME +
-                " WHERE " + DayReportHCDbConstNames.WORKINGFACE_ID + " = " + tunnelEntity.TunnelId;
-            bool bResult = db.OperateDB(sql);
-            return bResult;
-        }
+        //public static bool deleteDayReportHCBindingTunnelID(Tunnel tunnelEntity)
+        //{
+        //    ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
+        //    string sql = "DELETE FROM " + DayReportHCDbConstNames.TABLE_NAME +
+        //        " WHERE " + DayReportHCDbConstNames.WORKINGFACE_ID + " = " + tunnelEntity.TunnelId;
+        //    bool bResult = db.OperateDB(sql);
+        //    return bResult;
+        //}
 
         /// <summary>
         /// 查询掘进面巷道数据

@@ -1,6 +1,6 @@
 ﻿namespace sys2
 {
-    partial class DayReportJJManagement
+    partial class DayReportJjManagement
     {
         /// <summary>
         /// Required designer variable.
@@ -28,54 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            FarPoint.Win.ComplexBorder complexBorder1 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder2 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None));
-            FarPoint.Win.ComplexBorder complexBorder3 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None));
-            FarPoint.Win.ComplexBorder complexBorder4 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None));
-            FarPoint.Win.ComplexBorder complexBorder5 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None));
-            FarPoint.Win.ComplexBorder complexBorder6 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None));
-            FarPoint.Win.ComplexBorder complexBorder7 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None));
-            FarPoint.Win.ComplexBorder complexBorder8 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None));
-            FarPoint.Win.ComplexBorder complexBorder9 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None));
-            FarPoint.Win.ComplexBorder complexBorder10 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None));
-            FarPoint.Win.ComplexBorder complexBorder11 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder12 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder13 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder14 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder15 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder16 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder17 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder18 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder19 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder20 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder21 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.Spread.CellType.TextCellType textCellType1 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.ComplexBorder complexBorder22 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder23 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder24 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder25 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder26 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.Spread.CellType.TextCellType textCellType2 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.ComplexBorder complexBorder27 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder28 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder29 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder30 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.Spread.CellType.TextCellType textCellType3 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.Spread.CellType.TextCellType textCellType4 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.Spread.CellType.TextCellType textCellType5 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.Spread.CellType.TextCellType textCellType6 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.Spread.CellType.TextCellType textCellType7 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.Spread.CellType.TextCellType textCellType8 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.Spread.CellType.TextCellType textCellType9 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.Spread.CellType.TextCellType textCellType10 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.Spread.CellType.TextCellType textCellType11 = new FarPoint.Win.Spread.CellType.TextCellType();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DayReportJJManagement));
-            this.fpDayReportJJ = new FarPoint.Win.Spread.FpSpread();
-            this.fpDayReportJJ_Sheet1 = new FarPoint.Win.Spread.SheetView();
-            this.btnOK = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.chkSelectAll = new System.Windows.Forms.CheckBox();
-            this.dataPager1 = new LibCommonControl.DataPager();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DayReportJjManagement));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsBtnPrint = new System.Windows.Forms.ToolStripButton();
             this.tsBtnExport = new System.Windows.Forms.ToolStripButton();
@@ -83,204 +36,26 @@
             this.tsBtnModify = new System.Windows.Forms.ToolStripButton();
             this.tsBtnDel = new System.Windows.Forms.ToolStripButton();
             this.tsBtnRefresh = new System.Windows.Forms.ToolStripButton();
+            this.btnMap = new System.Windows.Forms.ToolStripButton();
             this.tsBtnExit = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.chkSearch = new System.Windows.Forms.CheckBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.dtpTo = new System.Windows.Forms.DateTimePicker();
-            this.dtpFrom = new System.Windows.Forms.DateTimePicker();
-            this.farpointFilter1 = new LibCommonControl.FarpointFilter();
-            this.btnMap = new System.Windows.Forms.ToolStripButton();
-            ((System.ComponentModel.ISupportInitialize)(this.fpDayReportJJ)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fpDayReportJJ_Sheet1)).BeginInit();
+            this.gcDayReportJj = new DevExpress.XtraGrid.GridControl();
+            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.controlNavigator1 = new DevExpress.XtraEditors.ControlNavigator();
             this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gcDayReportJj)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // fpDayReportJJ
-            // 
-            this.fpDayReportJJ.AccessibleDescription = "fpDayReportJJ, Sheet1, Row 0, Column 0, 掘进进尺日报数据管理表";
-            this.fpDayReportJJ.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.fpDayReportJJ.BorderCollapse = FarPoint.Win.Spread.BorderCollapse.Collapse;
-            this.fpDayReportJJ.ColumnSplitBoxPolicy = FarPoint.Win.Spread.SplitBoxPolicy.Never;
-            this.fpDayReportJJ.HorizontalScrollBarPolicy = FarPoint.Win.Spread.ScrollBarPolicy.AsNeeded;
-            this.fpDayReportJJ.Location = new System.Drawing.Point(12, 78);
-            this.fpDayReportJJ.Name = "fpDayReportJJ";
-            this.fpDayReportJJ.RowSplitBoxPolicy = FarPoint.Win.Spread.SplitBoxPolicy.Never;
-            this.fpDayReportJJ.Sheets.AddRange(new FarPoint.Win.Spread.SheetView[] {
-            this.fpDayReportJJ_Sheet1});
-            this.fpDayReportJJ.Size = new System.Drawing.Size(925, 469);
-            this.fpDayReportJJ.TabIndex = 6;
-            this.fpDayReportJJ.VerticalScrollBarPolicy = FarPoint.Win.Spread.ScrollBarPolicy.AsNeeded;
-            this.fpDayReportJJ.ButtonClicked += new FarPoint.Win.Spread.EditorNotifyEventHandler(this.fpDayReportJJ_ButtonClicked);
-            this.fpDayReportJJ.SetViewportTopRow(0, 0, 3);
-            this.fpDayReportJJ.SetActiveViewport(0, -1, 0);
-            // 
-            // fpDayReportJJ_Sheet1
-            // 
-            this.fpDayReportJJ_Sheet1.Reset();
-            fpDayReportJJ_Sheet1.SheetName = "Sheet1";
-            // Formulas and custom names must be loaded with R1C1 reference style
-            this.fpDayReportJJ_Sheet1.ReferenceStyle = FarPoint.Win.Spread.Model.ReferenceStyle.R1C1;
-            fpDayReportJJ_Sheet1.ColumnCount = 26;
-            fpDayReportJJ_Sheet1.RowCount = 52;
-            this.fpDayReportJJ_Sheet1.Cells.Get(0, 0).Border = complexBorder1;
-            this.fpDayReportJJ_Sheet1.Cells.Get(0, 0).ColumnSpan = 10;
-            this.fpDayReportJJ_Sheet1.Cells.Get(0, 0).Font = new System.Drawing.Font("宋体", 16F, System.Drawing.FontStyle.Bold);
-            this.fpDayReportJJ_Sheet1.Cells.Get(0, 0).Locked = true;
-            this.fpDayReportJJ_Sheet1.Cells.Get(0, 0).RowSpan = 2;
-            this.fpDayReportJJ_Sheet1.Cells.Get(0, 0).Value = "掘进进尺日报数据管理表";
-            this.fpDayReportJJ_Sheet1.Cells.Get(0, 1).Border = complexBorder2;
-            this.fpDayReportJJ_Sheet1.Cells.Get(0, 2).Border = complexBorder3;
-            this.fpDayReportJJ_Sheet1.Cells.Get(0, 3).Border = complexBorder4;
-            this.fpDayReportJJ_Sheet1.Cells.Get(0, 4).Border = complexBorder5;
-            this.fpDayReportJJ_Sheet1.Cells.Get(0, 5).Border = complexBorder6;
-            this.fpDayReportJJ_Sheet1.Cells.Get(0, 6).Border = complexBorder7;
-            this.fpDayReportJJ_Sheet1.Cells.Get(0, 7).Border = complexBorder8;
-            this.fpDayReportJJ_Sheet1.Cells.Get(0, 8).Border = complexBorder9;
-            this.fpDayReportJJ_Sheet1.Cells.Get(0, 9).Border = complexBorder10;
-            this.fpDayReportJJ_Sheet1.Cells.Get(1, 0).Border = complexBorder11;
-            this.fpDayReportJJ_Sheet1.Cells.Get(1, 1).Border = complexBorder12;
-            this.fpDayReportJJ_Sheet1.Cells.Get(1, 2).Border = complexBorder13;
-            this.fpDayReportJJ_Sheet1.Cells.Get(1, 3).Border = complexBorder14;
-            this.fpDayReportJJ_Sheet1.Cells.Get(1, 4).Border = complexBorder15;
-            this.fpDayReportJJ_Sheet1.Cells.Get(1, 5).Border = complexBorder16;
-            this.fpDayReportJJ_Sheet1.Cells.Get(1, 6).Border = complexBorder17;
-            this.fpDayReportJJ_Sheet1.Cells.Get(1, 7).Border = complexBorder18;
-            this.fpDayReportJJ_Sheet1.Cells.Get(1, 8).Border = complexBorder19;
-            this.fpDayReportJJ_Sheet1.Cells.Get(1, 9).Border = complexBorder20;
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 0).Border = complexBorder21;
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 0).CellType = textCellType1;
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 0).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 0).Locked = true;
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 0).Value = "选择";
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 0).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 1).Border = complexBorder22;
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 1).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 1).Locked = true;
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 1).Value = "队别";
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 1).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 2).Border = complexBorder23;
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 2).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 2).Locked = true;
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 2).Value = "巷道名称";
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 2).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 3).Border = complexBorder24;
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 3).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 3).Locked = true;
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 3).Value = "班次";
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 3).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 4).Border = complexBorder25;
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 4).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 4).Locked = true;
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 4).Value = "工作制式";
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 4).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 5).Border = complexBorder26;
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 5).CellType = textCellType2;
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 5).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 5).Locked = true;
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 5).Value = "工作内容";
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 5).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 6).Border = complexBorder27;
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 6).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 6).Locked = true;
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 6).Value = "进尺";
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 6).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 7).Border = complexBorder28;
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 7).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 7).Locked = true;
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 7).Value = "日期";
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 7).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 8).Border = complexBorder29;
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 8).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 8).Locked = true;
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 8).Value = "填报人";
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 8).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 9).Border = complexBorder30;
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 9).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 9).Locked = true;
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 9).Value = "备注";
-            this.fpDayReportJJ_Sheet1.Cells.Get(2, 9).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpDayReportJJ_Sheet1.Columns.Get(0).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpDayReportJJ_Sheet1.Columns.Get(0).Width = 40F;
-            this.fpDayReportJJ_Sheet1.Columns.Get(1).CellType = textCellType3;
-            this.fpDayReportJJ_Sheet1.Columns.Get(1).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpDayReportJJ_Sheet1.Columns.Get(1).Width = 77F;
-            this.fpDayReportJJ_Sheet1.Columns.Get(2).CellType = textCellType4;
-            this.fpDayReportJJ_Sheet1.Columns.Get(2).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpDayReportJJ_Sheet1.Columns.Get(2).Width = 76F;
-            this.fpDayReportJJ_Sheet1.Columns.Get(3).CellType = textCellType5;
-            this.fpDayReportJJ_Sheet1.Columns.Get(3).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpDayReportJJ_Sheet1.Columns.Get(4).CellType = textCellType6;
-            this.fpDayReportJJ_Sheet1.Columns.Get(4).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpDayReportJJ_Sheet1.Columns.Get(4).Width = 67F;
-            this.fpDayReportJJ_Sheet1.Columns.Get(5).CellType = textCellType7;
-            this.fpDayReportJJ_Sheet1.Columns.Get(5).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpDayReportJJ_Sheet1.Columns.Get(5).Width = 80F;
-            this.fpDayReportJJ_Sheet1.Columns.Get(6).CellType = textCellType8;
-            this.fpDayReportJJ_Sheet1.Columns.Get(6).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpDayReportJJ_Sheet1.Columns.Get(6).Width = 73F;
-            this.fpDayReportJJ_Sheet1.Columns.Get(7).CellType = textCellType9;
-            this.fpDayReportJJ_Sheet1.Columns.Get(7).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpDayReportJJ_Sheet1.Columns.Get(7).Width = 82F;
-            this.fpDayReportJJ_Sheet1.Columns.Get(8).CellType = textCellType10;
-            this.fpDayReportJJ_Sheet1.Columns.Get(8).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpDayReportJJ_Sheet1.Columns.Get(8).Width = 69F;
-            this.fpDayReportJJ_Sheet1.Columns.Get(9).CellType = textCellType11;
-            this.fpDayReportJJ_Sheet1.Columns.Get(9).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpDayReportJJ_Sheet1.Columns.Get(9).Width = 259F;
-            this.fpDayReportJJ_Sheet1.DefaultStyle.HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpDayReportJJ_Sheet1.DefaultStyle.Locked = false;
-            this.fpDayReportJJ_Sheet1.DefaultStyle.NoteIndicatorColor = System.Drawing.Color.Red;
-            this.fpDayReportJJ_Sheet1.DefaultStyle.Parent = "DataAreaDefault";
-            this.fpDayReportJJ_Sheet1.DefaultStyle.VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpDayReportJJ_Sheet1.FrozenRowCount = 3;
-            this.fpDayReportJJ_Sheet1.RowHeader.Columns.Default.Resizable = false;
-            this.fpDayReportJJ_Sheet1.ReferenceStyle = FarPoint.Win.Spread.Model.ReferenceStyle.A1;
-            // 
-            // btnOK
-            // 
-            this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOK.Location = new System.Drawing.Point(781, 559);
-            this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(75, 23);
-            this.btnOK.TabIndex = 8;
-            this.btnOK.Text = "确定";
-            this.btnOK.UseVisualStyleBackColor = true;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(862, 559);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 9;
-            this.btnCancel.Text = "取消";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // chkSelectAll
-            // 
-            this.chkSelectAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkSelectAll.AutoSize = true;
-            this.chkSelectAll.Location = new System.Drawing.Point(63, 559);
-            this.chkSelectAll.Name = "chkSelectAll";
-            this.chkSelectAll.Size = new System.Drawing.Size(78, 16);
-            this.chkSelectAll.TabIndex = 7;
-            this.chkSelectAll.Text = "全选/不选";
-            this.chkSelectAll.UseVisualStyleBackColor = true;
-            this.chkSelectAll.Click += new System.EventHandler(this.chkSelectAll_Click);
-            // 
-            // dataPager1
-            // 
-            this.dataPager1.Location = new System.Drawing.Point(12, 30);
-            this.dataPager1.Name = "dataPager1";
-            this.dataPager1.Size = new System.Drawing.Size(920, 42);
-            this.dataPager1.TabIndex = 5;
             // 
             // toolStrip1
             // 
@@ -296,7 +71,7 @@
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(949, 24);
+            this.toolStrip1.Size = new System.Drawing.Size(1107, 24);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.TabStop = true;
             this.toolStrip1.Text = "toolStrip1";
@@ -355,6 +130,15 @@
             this.tsBtnRefresh.Text = "刷新";
             this.tsBtnRefresh.Click += new System.EventHandler(this.tsBtnRefresh_Click);
             // 
+            // btnMap
+            // 
+            this.btnMap.Image = ((System.Drawing.Image)(resources.GetObject("btnMap.Image")));
+            this.btnMap.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnMap.Name = "btnMap";
+            this.btnMap.Size = new System.Drawing.Size(52, 21);
+            this.btnMap.Text = "图显";
+            this.btnMap.Click += new System.EventHandler(this.btnMap_Click);
+            // 
             // tsBtnExit
             // 
             this.tsBtnExit.Image = ((System.Drawing.Image)(resources.GetObject("tsBtnExit.Image")));
@@ -366,9 +150,10 @@
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 596);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 699);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(949, 22);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(1107, 22);
             this.statusStrip1.TabIndex = 10;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -376,98 +161,134 @@
             // 
             this.saveFileDialog1.Filter = "Excel 2007|*.xlsx|Excel 2003兼容|*.xls|PDF文档|*.pdf|TXT文档|*.txt";
             // 
-            // chkSearch
+            // gcDayReportJj
             // 
-            this.chkSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.chkSearch.AutoSize = true;
-            this.chkSearch.Location = new System.Drawing.Point(576, 6);
-            this.chkSearch.Name = "chkSearch";
-            this.chkSearch.Size = new System.Drawing.Size(84, 16);
-            this.chkSearch.TabIndex = 1;
-            this.chkSearch.Text = "按时间查询";
-            this.chkSearch.UseVisualStyleBackColor = true;
-            this.chkSearch.CheckedChanged += new System.EventHandler(this.chkSearch_CheckedChanged);
+            this.gcDayReportJj.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gcDayReportJj.Cursor = System.Windows.Forms.Cursors.Default;
+            this.gcDayReportJj.Location = new System.Drawing.Point(12, 27);
+            this.gcDayReportJj.MainView = this.gridView1;
+            this.gcDayReportJj.Name = "gcDayReportJj";
+            this.gcDayReportJj.Size = new System.Drawing.Size(1083, 639);
+            this.gcDayReportJj.TabIndex = 12;
+            this.gcDayReportJj.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView1});
             // 
-            // label2
+            // gridView1
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(793, 6);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(17, 12);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "到";
+            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn1,
+            this.gridColumn2,
+            this.gridColumn3,
+            this.gridColumn4,
+            this.gridColumn5,
+            this.gridColumn6,
+            this.gridColumn7,
+            this.gridColumn8,
+            this.gridColumn9});
+            this.gridView1.GridControl = this.gcDayReportJj;
+            this.gridView1.Name = "gridView1";
             // 
-            // dtpTo
+            // gridColumn1
             // 
-            this.dtpTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dtpTo.Location = new System.Drawing.Point(816, 3);
-            this.dtpTo.Name = "dtpTo";
-            this.dtpTo.Size = new System.Drawing.Size(121, 21);
-            this.dtpTo.TabIndex = 4;
-            this.dtpTo.Value = new System.DateTime(2014, 3, 3, 18, 26, 18, 0);
-            this.dtpTo.ValueChanged += new System.EventHandler(this.dtpTo_ValueChanged);
+            this.gridColumn1.Caption = "队别";
+            this.gridColumn1.FieldName = "Team.TeamName";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 0;
             // 
-            // dtpFrom
+            // gridColumn2
             // 
-            this.dtpFrom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dtpFrom.Location = new System.Drawing.Point(666, 3);
-            this.dtpFrom.Name = "dtpFrom";
-            this.dtpFrom.Size = new System.Drawing.Size(121, 21);
-            this.dtpFrom.TabIndex = 2;
-            this.dtpFrom.Value = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
-            this.dtpFrom.ValueChanged += new System.EventHandler(this.dtpFrom_ValueChanged);
+            this.gridColumn2.Caption = "工作面名称";
+            this.gridColumn2.FieldName = "WorkingFace.WorkingFaceName";
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.VisibleIndex = 1;
             // 
-            // farpointFilter1
+            // gridColumn3
             // 
-            this.farpointFilter1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.farpointFilter1.BackColor = System.Drawing.Color.Transparent;
-            this.farpointFilter1.Location = new System.Drawing.Point(276, 557);
-            this.farpointFilter1.Name = "farpointFilter1";
-            this.farpointFilter1.Size = new System.Drawing.Size(499, 25);
-            this.farpointFilter1.TabIndex = 31;
-            this.farpointFilter1.OnCheckFilterChanged += new LibCommonControl.FarpointFilter.CheckHideEventHandler(this.farpointFilter1_OnCheckFilterChanged);
-            this.farpointFilter1.OnClickFitColorBtnOK += new LibCommonControl.FarpointFilter.ClickFitColorBtnEventHandler(this.farpointFilter1_OnClickFitColorBtnOK);
-            this.farpointFilter1.OnClickNotFitColorBtnOK += new LibCommonControl.FarpointFilter.ClickFitColorBtnEventHandler(this.farpointFilter1_OnClickNotFitColorBtnOK);
-            this.farpointFilter1.OnClickClearFilterBtn += new LibCommonControl.FarpointFilter.ClickClearFilterBtnEventHandler(this.farpointFilter1_OnClickClearFilterBtn);
+            this.gridColumn3.Caption = "班次";
+            this.gridColumn3.FieldName = "WorkTime";
+            this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.Visible = true;
+            this.gridColumn3.VisibleIndex = 2;
             // 
-            // btnMap
+            // gridColumn4
             // 
-            this.btnMap.Image = ((System.Drawing.Image)(resources.GetObject("btnMap.Image")));
-            this.btnMap.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnMap.Name = "btnMap";
-            this.btnMap.Size = new System.Drawing.Size(52, 21);
-            this.btnMap.Text = "图显";
-            this.btnMap.Click += new System.EventHandler(this.btnMap_Click);
+            this.gridColumn4.Caption = "工作制式";
+            this.gridColumn4.FieldName = "WorkTimeStyle";
+            this.gridColumn4.Name = "gridColumn4";
+            this.gridColumn4.Visible = true;
+            this.gridColumn4.VisibleIndex = 3;
             // 
-            // DayReportJJManagement
+            // gridColumn5
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.gridColumn5.Caption = "工作内容";
+            this.gridColumn5.FieldName = "WorkInfo";
+            this.gridColumn5.Name = "gridColumn5";
+            this.gridColumn5.Visible = true;
+            this.gridColumn5.VisibleIndex = 4;
+            // 
+            // gridColumn6
+            // 
+            this.gridColumn6.Caption = "进尺";
+            this.gridColumn6.FieldName = "JinChi";
+            this.gridColumn6.Name = "gridColumn6";
+            this.gridColumn6.Visible = true;
+            this.gridColumn6.VisibleIndex = 5;
+            // 
+            // gridColumn7
+            // 
+            this.gridColumn7.Caption = "日期";
+            this.gridColumn7.Name = "gridColumn7";
+            this.gridColumn7.Visible = true;
+            this.gridColumn7.VisibleIndex = 6;
+            // 
+            // gridColumn8
+            // 
+            this.gridColumn8.Caption = "填报人";
+            this.gridColumn8.Name = "gridColumn8";
+            this.gridColumn8.Visible = true;
+            this.gridColumn8.VisibleIndex = 7;
+            // 
+            // gridColumn9
+            // 
+            this.gridColumn9.Caption = "备注";
+            this.gridColumn9.Name = "gridColumn9";
+            this.gridColumn9.Visible = true;
+            this.gridColumn9.VisibleIndex = 8;
+            // 
+            // controlNavigator1
+            // 
+            this.controlNavigator1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.controlNavigator1.Location = new System.Drawing.Point(12, 672);
+            this.controlNavigator1.Name = "controlNavigator1";
+            this.controlNavigator1.Size = new System.Drawing.Size(311, 24);
+            this.controlNavigator1.TabIndex = 89;
+            this.controlNavigator1.Text = "controlNavigator1";
+            this.controlNavigator1.TextLocation = DevExpress.XtraEditors.NavigatorButtonsTextLocation.Center;
+            this.controlNavigator1.TextStringFormat = "记录 {0} / {1}";
+            // 
+            // DayReportJjManagement
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(949, 618);
-            this.Controls.Add(this.farpointFilter1);
-            this.Controls.Add(this.chkSearch);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.dtpTo);
-            this.Controls.Add(this.dtpFrom);
+            this.ClientSize = new System.Drawing.Size(1107, 721);
+            this.Controls.Add(this.controlNavigator1);
+            this.Controls.Add(this.gcDayReportJj);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.dataPager1);
-            this.Controls.Add(this.chkSelectAll);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnOK);
-            this.Controls.Add(this.fpDayReportJJ);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "DayReportJJManagement";
+            this.Name = "DayReportJjManagement";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "掘进进尺日报数据管理";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.DayReportJJManagement_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.fpDayReportJJ)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fpDayReportJJ_Sheet1)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gcDayReportJj)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -475,12 +296,6 @@
 
         #endregion
 
-        private FarPoint.Win.Spread.FpSpread fpDayReportJJ;
-        private FarPoint.Win.Spread.SheetView fpDayReportJJ_Sheet1;
-        private System.Windows.Forms.Button btnOK;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.CheckBox chkSelectAll;
-        private LibCommonControl.DataPager dataPager1;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton tsBtnPrint;
         private System.Windows.Forms.ToolStripButton tsBtnExport;
@@ -491,12 +306,19 @@
         private System.Windows.Forms.ToolStripButton tsBtnExit;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
-        private System.Windows.Forms.CheckBox chkSearch;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DateTimePicker dtpTo;
-        private System.Windows.Forms.DateTimePicker dtpFrom;
-        private LibCommonControl.FarpointFilter farpointFilter1;
         private System.Windows.Forms.ToolStripButton btnMap;
+        private DevExpress.XtraGrid.GridControl gcDayReportJj;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
+        private DevExpress.XtraEditors.ControlNavigator controlNavigator1;
 
     }
 }

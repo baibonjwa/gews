@@ -182,7 +182,7 @@ namespace sys2
         //掘进进尺日报
         private void mniJJJCRB_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            DayReportJJManagement jj = new DayReportJJManagement(this);
+            DayReportJjManagement jj = new DayReportJjManagement();
             jj.Show();
         }
 

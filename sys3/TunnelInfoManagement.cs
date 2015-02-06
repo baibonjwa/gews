@@ -96,9 +96,9 @@ namespace sys3
                     //不删除时将导线重新绑定到其他巷道，默认为巷道ID=0
                 }
                 //删除巷道对应掘进日报
-                TunnelInfoBLL.deleteDayReportJJBindingTunnelID(tunnelEntity);
+                DayReportJj.DeleteByWorkingFaceId(tunnelEntity.WorkingFace.WorkingFaceId);
                 //删除巷道对应回采日报
-                TunnelInfoBLL.deleteDayReportHCBindingTunnelID(tunnelEntity);
+                DayReportHc.DeleteByWorkingFaceId(tunnelEntity.WorkingFace.WorkingFaceId);
                 //删除巷道
                 tunnelEntity.Delete();
             }

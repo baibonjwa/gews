@@ -124,6 +124,15 @@ namespace LibEntity
             return FindAll(criterion);
         }
 
+        public static Tunnel FindFirstByWorkingFaceId(int workingfaceId)
+        {
+            var criterion = new ICriterion[]
+            {
+                Restrictions.Eq("WorkingFace.WorkingFaceId",workingfaceId)
+            };
+            return FindFirst(criterion);
+        }
+
         public static bool ExistsByTunnelNameAndWorkingFaceId(string tunnelName, int workingfaceId)
         {
             var criterion = new ICriterion[]
