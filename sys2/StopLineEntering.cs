@@ -26,18 +26,15 @@ namespace sys2
         private readonly StopLine stopLineEntity = new StopLine();
 
         #endregion
-
-        private readonly StopLineManagement frmStop;
         private StopLine _oldStopLineEntity; //更新前的停采线实体
 
         /// <summary>
         ///     构造方法
         /// </summary>
-        public StopLineEntering(StopLineManagement frm)
+        public StopLineEntering()
         {
             InitializeComponent();
             //窗体属性设置
-            frmStop = frm;
             FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_MS.STOP_LINE_ADD);
         }
 
@@ -45,12 +42,11 @@ namespace sys2
         ///     构造方法
         /// </summary>
         /// <param name="stopLineEntity">停采线实体</param>
-        public StopLineEntering(StopLine stopLineEntity, StopLineManagement frm)
+        public StopLineEntering(StopLine stopLineEntity)
         {
             this.stopLineEntity = stopLineEntity;
 
             InitializeComponent();
-            frmStop = frm;
             //绑定修改初始信息
             updateInfo();
 
@@ -135,9 +131,6 @@ namespace sys2
         {
             //添加操作
             stopLineEntity.Save();
-
-            //TODO:添加成功
-            frmStop.refreshAdd();
             DrawStopLine(stopLineEntity); //在地图上绘制停采线
             Close();
         }
@@ -151,8 +144,6 @@ namespace sys2
             bool bResult = StopLineBLL.updateStopLineInfo(stopLineEntity);
             if (bResult)
             {
-                //TODO:修改成功
-                frmStop.refreshUpdate();
                 UpdateStopLineOnMap(_oldStopLineEntity, stopLineEntity); //更新地图上的停采线 
                 Close();
             }

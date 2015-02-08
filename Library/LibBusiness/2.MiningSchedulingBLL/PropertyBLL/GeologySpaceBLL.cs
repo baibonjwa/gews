@@ -8,39 +8,6 @@ namespace LibBusiness
 {
     public class GeologySpaceBll
     {
-        /// <summary>
-        /// 分页用返回停采区所有信息
-        /// </summary>
-        /// <returns>分页用停采区所有信息</returns>
-        public static DataSet SelectStopLineInfo(int iStartIndex, int iEndIndex)
-        {
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
-            StringBuilder sb = new StringBuilder();
-            sb.Append("SELECT * FROM ( ");
-            sb.Append("SELECT ROW_NUMBER() OVER(ORDER BY " + StopLineDbConstNames.ID + ") AS rowid, * ");
-            sb.Append("FROM " + StopLineDbConstNames.TABLE_NAME + " ) AS TB ");
-            sb.Append("WHERE rowid >= " + iStartIndex);
-            sb.Append("AND rowid <= " + iEndIndex);
-            DataSet ds = db.ReturnDS(sb.ToString());
-            return ds;
-        }
-
-        /// <summary>
-        /// 查询停采线名称是否存在
-        /// </summary>
-        /// <param name="stopLineEntity">停采线实体</param>
-        /// <returns>是否存在？是true：否false</returns>
-        public static bool SelectStopLineName(string stopLineName)
-        {
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
-            string sql = "SELECT * FROM " + StopLineDbConstNames.TABLE_NAME + " WHERE " + StopLineDbConstNames.STOP_LINE_NAME + " = '" + stopLineName+"'";
-            DataSet ds = db.ReturnDS(sql);
-            if (ds.Tables[0].Rows.Count > 0)
-            {
-                return true;
-            }
-            return false;
-        }
 
         /// <summary>
         /// 处理地质构造信息

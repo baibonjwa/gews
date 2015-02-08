@@ -11,13 +11,13 @@ namespace LibBusiness
         ///     返回停采区所有信息
         /// </summary>
         /// <returns>停采区所有信息</returns>
-        public static DataSet selectStopLineInfo()
-        {
-            var db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
-            string sql = "SELECT * FROM " + StopLineDbConstNames.TABLE_NAME;
-            DataSet ds = db.ReturnDS(sql);
-            return ds;
-        }
+        //public static DataSet selectStopLineInfo()
+        //{
+        //    var db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
+        //    string sql = "SELECT * FROM " + StopLineDbConstNames.TABLE_NAME;
+        //    DataSet ds = db.ReturnDS(sql);
+        //    return ds;
+        //}
 
         /// <summary>
         ///     分页用返回停采区所有信息
