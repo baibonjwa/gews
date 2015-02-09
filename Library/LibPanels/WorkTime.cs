@@ -49,7 +49,7 @@ namespace LibPanels
             _dtp.TextChanged += dtp_TextChanged;
             dgrdvWorkTime.Controls.Add(_dtp);
 
-            if (WorkTimeBLL.getDefaultWorkTime() == Const_MS.WORK_TIME_38)
+            if (WorkingTimeDefault.FindFirst().DefaultWorkTimeGroupId == Const_MS.WORK_GROUP_ID_38)
             {
                 rbtn38.Checked = true;
             }
@@ -177,7 +177,7 @@ namespace LibPanels
             UpdateWorkTimeTable();
             // 通知server端，班次信息已经修改
             var msg = new UpdateWarningDataMsg(Const.INVALID_ID, Const.INVALID_ID,
-                WorkTimeDbConstNames.TABLE_NAME, OPERATION_TYPE.UPDATE, DateTime.Now)
+              WorkingTime.TableName, OPERATION_TYPE.UPDATE, DateTime.Now)
             {
                 CommandId = COMMAND_ID.UPDATE_WORK_TIME
             };
@@ -204,10 +204,12 @@ namespace LibPanels
         private void btnSetAsDefault_Click(object sender, EventArgs e)
         {
             //设置默认工作制式
-            if (WorkTimeBLL.setDefaultWorkTime(rbtn38.Checked ? Const_MS.WORK_TIME_38 : Const_MS.WORK_TIME_46))
+            var workingTime = new WorkingTimeDefault()
             {
-                Alert.alert(Const_MS.WORK_TIME_MSG_CHANGE_DEFAULT_WORK_TIME_SUCCESS + (rbtn38.Checked ? Const_MS.WORK_TIME_38 : Const_MS.WORK_TIME_46));
-            }
+                DefaultWorkTimeGroupId = rbtn38.Checked ? Const_MS.WORK_GROUP_ID_38 : Const_MS.WORK_GROUP_ID_46
+            };
+            workingTime.Save();
+            Alert.alert(Const_MS.WORK_TIME_MSG_CHANGE_DEFAULT_WORK_TIME_SUCCESS + (rbtn38.Checked ? Const_MS.WORK_TIME_38 : Const_MS.WORK_TIME_46));
         }
 
         /// <summary>

@@ -47,7 +47,7 @@ namespace LibBusiness
         public static List<PreWarningResultQuery> SelectPreWarningResultInOneDateShift(string date, string date_shift, string tunnel_ID, string warning_type)
         {
             List<PreWarningResultQuery> ents = new List<PreWarningResultQuery>();
-            string[] times = GetDateShiftTimes(date_shift, date);
+            DateTime[] times = WorkingTime.GetDateShiftTimes(date_shift);
             if (times.Length != 2)
             {
                 return null;
@@ -170,7 +170,7 @@ namespace LibBusiness
             if (addWarningFilter)
             {
                 strSql = new StringBuilder();
-                string[] times = GetDateShiftTimes(date_shift, date);
+                DateTime[] times = WorkingTime.GetDateShiftTimes(date_shift);
                 if (times.Length != 2)
                 {
                     return 0;
@@ -240,37 +240,37 @@ namespace LibBusiness
         /// <param name="strWorkTimeName"></param>
         /// <param name="strDate"></param>
         /// <returns></returns>
-        public static string[] GetDateShiftTimes(string strWorkTimeName, string strDate)
-        {
-            //select WORK_TIME_FROM,WORK_TIME_TO from T_WORK_TIME where WORK_TIME_NAME ='早班'
-            string[] times = null;
-            StringBuilder strSql = new StringBuilder();
-            strSql.Append("SELECT ");
-            strSql.Append(LibBusiness.WorkTimeDbConstNames.WORK_TIME_FROM + ",");
-            strSql.Append(LibBusiness.WorkTimeDbConstNames.WORK_TIME_TO);
-            strSql.Append(" FROM ");
-            strSql.Append(LibBusiness.WorkTimeDbConstNames.TABLE_NAME);
-            strSql.Append(" WHERE ");
-            strSql.Append(LibBusiness.WorkTimeDbConstNames.WORK_TIME_NAME);
-            strSql.Append(" = ");
-            strSql.Append("'" + strWorkTimeName + "'");
-            DataSet ds = _database.ReturnDSNotOpenAndClose(strSql.ToString());
-            if (ds != null)
-            {
-                DataTable dt = ds.Tables[0];
-                if (dt != null)
-                {
-                    //2014-03-05 15:43:45.000
-                    if (dt.Rows.Count > 0)
-                    {
-                        times = new string[2];
-                        times[0] = strDate + " " + dt.Rows[0][LibBusiness.WorkTimeDbConstNames.WORK_TIME_FROM].ToString();
-                        times[1] = strDate + " " + dt.Rows[0][LibBusiness.WorkTimeDbConstNames.WORK_TIME_TO].ToString();
-                    }
-                }
-            }
-            return times;
-        }
+        //public static string[] GetDateShiftTimes(string strWorkTimeName, string strDate)
+        //{
+        //    //select WORK_TIME_FROM,WORK_TIME_TO from T_WORK_TIME where WORK_TIME_NAME ='早班'
+        //    string[] times = null;
+        //    StringBuilder strSql = new StringBuilder();
+        //    strSql.Append("SELECT ");
+        //    strSql.Append(LibBusiness.WorkTimeDbConstNames.WORK_TIME_FROM + ",");
+        //    strSql.Append(LibBusiness.WorkTimeDbConstNames.WORK_TIME_TO);
+        //    strSql.Append(" FROM ");
+        //    strSql.Append(LibBusiness.WorkTimeDbConstNames.TABLE_NAME);
+        //    strSql.Append(" WHERE ");
+        //    strSql.Append(LibBusiness.WorkTimeDbConstNames.WORK_TIME_NAME);
+        //    strSql.Append(" = ");
+        //    strSql.Append("'" + strWorkTimeName + "'");
+        //    DataSet ds = _database.ReturnDSNotOpenAndClose(strSql.ToString());
+        //    if (ds != null)
+        //    {
+        //        DataTable dt = ds.Tables[0];
+        //        if (dt != null)
+        //        {
+        //            //2014-03-05 15:43:45.000
+        //            if (dt.Rows.Count > 0)
+        //            {
+        //                times = new string[2];
+        //                times[0] = strDate + " " + dt.Rows[0][LibBusiness.WorkTimeDbConstNames.WORK_TIME_FROM].ToString();
+        //                times[1] = strDate + " " + dt.Rows[0][LibBusiness.WorkTimeDbConstNames.WORK_TIME_TO].ToString();
+        //            }
+        //        }
+        //    }
+        //    return times;
+        //}
 
         /// <summary>
         /// 根据tunelID,查找巷道名称。若属于回采巷道，返回工作面名称

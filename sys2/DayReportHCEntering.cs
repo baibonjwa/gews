@@ -170,7 +170,7 @@ namespace sys2
             ////初始化班次
             //this.bindWorkTimeFirstTime();
             //设置为默认工作制式
-            if (WorkTimeBLL.getDefaultWorkTime() == Const_MS.WORK_TIME_38)
+            if (WorkingTimeDefault.FindFirst().DefaultWorkTimeGroupId == Const_MS.WORK_GROUP_ID_38)
             {
                 rbtn38.Checked = true;
             }
@@ -786,7 +786,7 @@ namespace sys2
                     Alert.alert(Const.MSG_PLEASE_TYPE_IN + Const_MS.JC + Const.SIGN_EXCLAMATION_MARK);
                     return false;
                 }
-                    //修改时
+                //修改时
                 else
                 {
                     bool bResult = false;
@@ -911,7 +911,7 @@ namespace sys2
                             {
                                 dgrdvDayReportHC[e.ColumnIndex, e.RowIndex].Value = null;
                             }
-                                //修改时处理方式
+                            //修改时处理方式
                             else
                             {
                                 dgrdvDayReportHC[e.ColumnIndex, e.RowIndex].Value = _dayReportHCEntity.JinChi;
@@ -920,7 +920,7 @@ namespace sys2
                     }
                 }
             }
-                //非第一行时
+            //非第一行时
             else
             {
                 //进尺单元格
@@ -988,7 +988,7 @@ namespace sys2
         private void dtp_TextChange(object sender, EventArgs e)
         {
             dgrdvDayReportHC.Rows[dgrdvDayReportHC.CurrentCell.RowIndex].Cells[C_DATE].Value = dtp.Text.ToString();
-                //时间控件选择时间时，就把时间赋给所在的单元格
+            //时间控件选择时间时，就把时间赋给所在的单元格
         }
 
         /****************单元格被单击，判断是否是放时间控件的那一列*******************/
@@ -1036,7 +1036,7 @@ namespace sys2
                 {
                     dtp.Value = Convert.ToDateTime(dgrdvDayReportHC[e.ColumnIndex, e.RowIndex].Value.ToString());
                 }
-                    //默认填充系统时间
+                //默认填充系统时间
                 else
                 {
                     dtp.Value = DateTime.Now;

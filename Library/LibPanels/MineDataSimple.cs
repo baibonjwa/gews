@@ -63,9 +63,10 @@ namespace LibPanels
         private void addInfo()
         {
             bindTeamInfo();
-            bindWorkTimeFirstTime();
+            DataBindUtil.LoadWorkTime(cboWorkTime,
+                rbtn38.Checked ? Const_MS.WORK_GROUP_ID_38 : Const_MS.WORK_GROUP_ID_46);
 
-            if (WorkTimeBLL.getDefaultWorkTime() == Const_MS.WORK_TIME_38)
+            if (WorkingTimeDefault.FindFirst().DefaultWorkTimeGroupId == Const_MS.WORK_GROUP_ID_38)
             {
                 rbtn38.Checked = true;
             }
@@ -117,22 +118,7 @@ namespace LibPanels
         /// <summary>
         ///     绑定班次
         /// </summary>
-        private void bindWorkTimeFirstTime()
-        {
-            WorkingTime[] WorkingTimes;
-            if (rbtn38.Checked)
-            {
-                WorkingTimes = WorkingTime.FindAllByWorkTimeName(rbtn38.Text);
-            }
-            else
-            {
-                WorkingTimes = WorkingTime.FindAllByWorkTimeName(rbtn46.Text);
-            }
-            foreach (var t in WorkingTimes)
-            {
-                cboWorkTime.Items.Add(t.WorkTimeName);
-            }
-        }
+
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {

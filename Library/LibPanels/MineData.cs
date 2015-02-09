@@ -362,7 +362,7 @@ namespace LibPanels
         {
             this.bindTeamInfo();
             DataBindUtil.LoadWorkTime(cboWorkTime, rbtn38.Checked ? Const_MS.WORK_GROUP_ID_38 : Const_MS.WORK_GROUP_ID_46);
-            if (WorkTimeBLL.getDefaultWorkTime() == Const_MS.WORK_TIME_38)
+            if (WorkingTimeDefault.FindFirst().DefaultWorkTimeGroupId == Const_MS.WORK_GROUP_ID_38)
             {
                 rbtn38.Checked = true;
             }

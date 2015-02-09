@@ -83,7 +83,8 @@ namespace LibBusiness
         public static string JudgeWorkTimeNow(string workStyle)
         {
             //获取班次
-            WorkingTime[] workingTimes = WorkingTime.FindAllByWorkTimeName(workStyle);
+            WorkingTime[] workingTimes;
+            workingTimes = workStyle == "三八制" ? WorkingTime.FindAllBy38Times() : WorkingTime.FindAllBy46Times();
             //小时
             int hour = DateTime.Now.Hour;
             string workTime = "";

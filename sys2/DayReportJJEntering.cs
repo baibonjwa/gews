@@ -152,7 +152,7 @@ namespace sys2
             ////初始化班次
             //this.bindWorkTimeFirstTime();
             //设置为默认工作制式
-            if (WorkTimeBLL.getDefaultWorkTime() == Const_MS.WORK_TIME_38)
+            if (WorkingTimeDefault.FindFirst().DefaultWorkTimeGroupId == Const_MS.WORK_GROUP_ID_38)
             {
                 rbtn38.Checked = true;
             }

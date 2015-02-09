@@ -49,7 +49,7 @@ namespace _3.GeologyMeasure
             rbtnHCN.Checked = true;
 
             //默认工作制式选择
-            if (WorkTimeBLL.getDefaultWorkTime() == Const_MS.WORK_TIME_38)
+            if (WorkingTimeDefault.FindFirst().DefaultWorkTimeGroupId == Const_MS.WORK_GROUP_ID_38)
             {
                 rbtn38.Checked = true;
             }

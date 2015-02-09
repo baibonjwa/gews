@@ -10,6 +10,8 @@ namespace LibEntity
     [ActiveRecord("T_WORK_TIME")]
     public class WorkingTime : ActiveRecordBase<WorkingTime>
     {
+
+        public const String TableName = "T_WORK_TIME";
         /// <summary>
         ///     获取设置工作制Id
         /// </summary>
@@ -49,13 +51,13 @@ namespace LibEntity
             return FindAll(criterion);
         }
 
-        public static WorkingTime[] FindAllByWorkTimeName(string workTimeName)
+        public static WorkingTime FindOneByWorkTimeName(string workTimeName)
         {
             var criterion = new ICriterion[]
             {
                 Restrictions.Eq("WorkTimeName", workTimeName)
             };
-            return FindAll(criterion);
+            return FindOne(criterion);
         }
 
 
@@ -67,6 +69,12 @@ namespace LibEntity
         public static WorkingTime[] FindAllBy46Times()
         {
             return FindAllByWorkTimeGroupId(2);
+        }
+
+        public static DateTime[] GetDateShiftTimes(string strWorkTimeName)
+        {
+            var workingTime = FindOneByWorkTimeName(strWorkTimeName);
+            return new[] { workingTime.WorkTimeFrom, workingTime.WorkTimeTo };
         }
 
 

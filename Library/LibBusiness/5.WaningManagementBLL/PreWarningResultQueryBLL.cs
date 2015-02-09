@@ -442,56 +442,9 @@ namespace LibBusiness
         /// </summary>
         /// <param name="database"></param>
         /// <returns></returns>
-        public static List<WorkingTime> GetDateShift(ManageDataBase database)
+        public static WorkingTime[] GetDateShift(ManageDataBase database)
         {
-            //SELECT  dbo.T_WORK_TIME.WORK_TIME_NAME ,
-            //        dbo.T_WORK_TIME_DEFAULT.DEFAULT_WORK_TIME_GROUP_ID
-            //		  dbo.T_WORK_TIME.WORK_TIME_FROM ,
-            //        dbo.T_WORK_TIME.WORK_TIME_TO ,
-            //FROM    dbo.T_WORK_TIME ,
-            //        dbo.T_WORK_TIME_DEFAULT
-            //WHERE   T_WORK_TIME.WORK_TIME_GROUP_ID = T_WORK_TIME_DEFAULT.DEFAULT_WORK_TIME_GROUP_ID
-
-            List<WorkingTime> datashifts = new List<WorkingTime>();
-
-            StringBuilder strSql = new StringBuilder();
-            strSql.Append("SELECT ");
-            strSql.Append(WorkTimeDbConstNames.TABLE_NAME + "." + WorkTimeDbConstNames.WORK_TIME_NAME);
-            strSql.Append(", ");
-            strSql.Append(WorkTimeDbConstNames.TABLE_NAME + "." + WorkTimeDbConstNames.WORK_TIME_FROM);
-            strSql.Append(", ");
-            strSql.Append(WorkTimeDbConstNames.TABLE_NAME + "." + WorkTimeDbConstNames.WORK_TIME_TO);
-            strSql.Append(", ");
-            strSql.Append(WorkTimeDbConstNames.DEFAULT_WORK_TIME_TABLE_NAME + "." + WorkTimeDbConstNames.DEFAULT_WORK_TIME_GROUP_ID);
-            strSql.Append(" FROM ");
-            strSql.Append(WorkTimeDbConstNames.TABLE_NAME);
-            strSql.Append(", ");
-            strSql.Append(WorkTimeDefaultDbConstNames.TABLE_NAME);
-            strSql.Append(" WHERE ");
-            strSql.Append(WorkTimeDbConstNames.TABLE_NAME + "." + WorkTimeDbConstNames.WORK_TIME_GROUP_ID);
-            strSql.Append(" = ");
-            strSql.Append(WorkTimeDbConstNames.DEFAULT_WORK_TIME_TABLE_NAME + "." + WorkTimeDbConstNames.DEFAULT_WORK_TIME_GROUP_ID);
-
-            DataTable dt = database.ReturnDSNotOpenAndClose(strSql.ToString()).Tables[0];
-            if (dt != null)
-            {
-                int rowCount = dt.Rows.Count;
-                if (rowCount > 0)
-                {
-                    for (int i = 0; i < rowCount; i++)
-                    {
-                        //定义时间类
-                        var wt = new WorkingTime
-                        {
-                            WorkTimeName = dt.Rows[i][WorkTimeDbConstNames.WORK_TIME_NAME].ToString(),
-                            WorkTimeFrom = Convert.ToDateTime(dt.Rows[i][WorkTimeDbConstNames.WORK_TIME_FROM]),
-                            WorkTimeTo = Convert.ToDateTime(dt.Rows[i][WorkTimeDbConstNames.WORK_TIME_TO])
-                        };
-                        datashifts.Add(wt);
-                    }
-                }
-            }
-            return datashifts;
+            return WorkingTime.FindAllByWorkTimeGroupId(WorkingTimeDefault.FindFirst().DefaultWorkTimeGroupId);
         }
 
         /// <summary>
@@ -1237,7 +1190,7 @@ namespace LibBusiness
 
             //获取所有的班次名称与起止时间
             //TODO:此处可优化，但不是重点
-            List<WorkingTime> dateShifts = GetDateShift(databaseForSaveTime);
+            WorkingTime[] dateShifts = GetDateShift(databaseForSaveTime);
             List<String> workFaceList = new List<string>();
             if (String.IsNullOrEmpty(workingfaceName))
             {
@@ -1295,33 +1248,11 @@ dateShift.WorkTimeFrom, dateShift.WorkTimeTo, warningType);
         /// <param name="strWorkTimeName"></param>
         /// <param name="strDate"></param>
         /// <returns></returns>
-        public static string[] GetDateShiftTimes(ManageDataBase database, string strWorkTimeName, string strDate)
-        {
-            //select WORK_TIME_FROM,WORK_TIME_TO from T_WORK_TIME where WORK_TIME_NAME ='早班'
-            string[] times = null;
-            StringBuilder strSql = new StringBuilder();
-            strSql.Append("SELECT ");
-            strSql.Append(LibBusiness.WorkTimeDbConstNames.WORK_TIME_FROM + ",");
-            strSql.Append(LibBusiness.WorkTimeDbConstNames.WORK_TIME_TO);
-            strSql.Append(" FROM ");
-            strSql.Append(LibBusiness.WorkTimeDbConstNames.TABLE_NAME);
-            strSql.Append(" WHERE ");
-            strSql.Append(LibBusiness.WorkTimeDbConstNames.WORK_TIME_NAME);
-            strSql.Append(" = ");
-            strSql.Append("'" + strWorkTimeName + "'");
-            DataTable dt = database.ReturnDSNotOpenAndClose(strSql.ToString()).Tables[0];
-            if (dt != null)
-            {
-                //2014-03-05 15:43:45.000
-                if (dt.Rows.Count > 0)
-                {
-                    times = new string[2];
-                    times[0] = strDate + " " + dt.Rows[0][LibBusiness.WorkTimeDbConstNames.WORK_TIME_FROM].ToString();
-                    times[1] = strDate + " " + dt.Rows[0][LibBusiness.WorkTimeDbConstNames.WORK_TIME_TO].ToString();
-                }
-            }
-            return times;
-        }
+        //public static DateTime[] GetDateShiftTimes(ManageDataBase database, string strWorkTimeName)
+        //{
+        //    var workingTime = WorkingTime.FindOneByWorkTimeName(strWorkTimeName);
+        //    return new[] { workingTime.WorkTimeFrom, workingTime.WorkTimeTo };
+        //}
 
         /// <summary>
         /// 清空临时表中的临时信息
