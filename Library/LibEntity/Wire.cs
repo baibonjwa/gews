@@ -8,6 +8,7 @@ namespace LibEntity
     [ActiveRecord("T_WIRE_INFO")]
     public class Wire : ActiveRecordBase<Wire>
     {
+        public const String TableName = "T_WIRE_INFO";
 
         /// <summary>
         ///     导线编号
@@ -67,6 +68,16 @@ namespace LibEntity
         /// </summary>
         [Property("VOBSERVER")]
         public string Vobserver { get; set; }
+
+        public override void Delete()
+        {
+            var wirePoints = WirePoint.FindAllByWireId(WireId);
+            foreach (var p in wirePoints)
+            {
+                p.Delete();
+            }
+            base.Delete();
+        }
 
         public static Wire FindOneByTunnelId(int tunnelId)
         {

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Castle.ActiveRecord;
 using NHibernate.Criterion;
 
@@ -116,5 +117,14 @@ namespace LibEntity
             };
             return FindAll(criterion);
         }
+
+        //public static void DeleteAllByWireId(int wireId)
+        //{
+        //    var criterion = new ICriterion[]
+        //    {
+        //        Restrictions.Eq("Wire.WireId", wireId)
+        //    };
+        //    DeleteAll(FindAll(criterion).Select(u => u.WirePointId));
+        //}
     }
 }

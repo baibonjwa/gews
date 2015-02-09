@@ -102,7 +102,7 @@ namespace sys3
                     wirePointInfoEntity.WirePointId = _wirePointPrimaryKey[i];
 
                     //导线点实体
-                    wirePointInfoEntity = WirePointBLL.selectWirePointInfoByWirePointId(wirePointInfoEntity.WirePointId);
+                    wirePointInfoEntity = WirePoint.Find(wirePointInfoEntity.WirePointId);
 
                     //矿井编号
                     wireEntity = wirePointInfoEntity.Wire;
@@ -134,18 +134,13 @@ namespace sys3
                         wirePointInfoEntity.WirePointId = _wirePointPrimaryKey[i];
 
                         //导线点实体
-                        wirePointInfoEntity = WirePointBLL.selectWirePointInfoByWirePointId(wirePointInfoEntity.WirePointId);
+                        wirePointInfoEntity = WirePoint.Find(wirePointInfoEntity.WirePointId);
 
                         //矿井编号
                         wireEntity = wirePointInfoEntity.Wire;
 
                         //导线实体
                         wireEntity = Wire.Find(wireEntity.WireId);
-                        DataSet ds = WirePointBLL.selectAllWirePointInfo(wireEntity.WireId);
-                        if (ds.Tables[0].Rows.Count > 0)
-                        {
-                            bResult = WirePointBLL.deleteWirePointInfo(wireEntity);
-                        }
                         wireEntity.Delete();
 
                         //20140430 lyf

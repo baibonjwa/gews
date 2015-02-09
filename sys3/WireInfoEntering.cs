@@ -31,7 +31,7 @@ namespace sys3
         private readonly int[] _arr = new int[5];
         private readonly DataGridViewCell[] dgvc = new DataGridViewCell[8];
         private readonly string[] dr = new string[8];
-        private DataSet _dsWirePoint = new DataSet();
+        private WirePoint[] wirePoints;
         private int _itemCount;
         private double _tmpDouble;
         private int _tmpRowIndex = -1;
@@ -39,7 +39,6 @@ namespace sys3
         private int doing;
         private Tunnel tunnelEntity = new Tunnel();
         private Wire wireEntity = new Wire();
-        private WirePoint[] wpiEntity;
         /*****************************/
 
         /// <summary>
@@ -51,7 +50,7 @@ namespace sys3
             FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_GM.WIRE_INFO_ADD);
             //自定义控件初始化
             TunnelDefaultSelect tunnelDefaultSelectEntity =
-                LibBusiness.TunnelDefaultSelect.selectDefaultTunnel(WireInfoDbConstNames.TABLE_NAME);
+                LibBusiness.TunnelDefaultSelect.selectDefaultTunnel(Wire.TableName);
             if (tunnelDefaultSelectEntity != null)
             {
                 _arr = new int[5];
@@ -159,24 +158,19 @@ namespace sys3
         {
             addInfo();
             _itemCount = 0;
-            _dsWirePoint = WirePointBLL.selectAllWirePointInfo(wireEntity.WireId);
-            if (_dsWirePoint.Tables[0].Rows.Count > 0)
+            wirePoints = WirePoint.FindAllByWireId(wireEntity.WireId);
+            if (wirePoints.Length > 0)
             {
-                wpiEntity = new WirePoint[_dsWirePoint.Tables[0].Rows.Count];
-                dgrdvWire.RowCount = wpiEntity.Length + 1;
-                for (int i = 0; i < wpiEntity.Length; i++)
+                for (int i = 0; i < wirePoints.Length; i++)
                 {
-                    int wpiID = Convert.ToInt32(_dsWirePoint.Tables[0].Rows[i][WirePointDbConstNames.ID].ToString());
-                    wpiEntity[i] = WirePointBLL.returnWirePointInfo(wpiID);
-
-                    dgrdvWire[0, i].Value = wpiEntity[i].WirePointId;
-                    dgrdvWire[1, i].Value = wpiEntity[i].CoordinateX;
-                    dgrdvWire[2, i].Value = wpiEntity[i].CoordinateY;
-                    dgrdvWire[3, i].Value = wpiEntity[i].CoordinateZ;
-                    dgrdvWire[4, i].Value = wpiEntity[i].LeftDis;
-                    dgrdvWire[5, i].Value = wpiEntity[i].RightDis;
-                    dgrdvWire[6, i].Value = wpiEntity[i].TopDis;
-                    dgrdvWire[7, i].Value = wpiEntity[i].BottomDis;
+                    dgrdvWire[0, i].Value = wirePoints[i].WirePointId;
+                    dgrdvWire[1, i].Value = wirePoints[i].CoordinateX;
+                    dgrdvWire[2, i].Value = wirePoints[i].CoordinateY;
+                    dgrdvWire[3, i].Value = wirePoints[i].CoordinateZ;
+                    dgrdvWire[4, i].Value = wirePoints[i].LeftDis;
+                    dgrdvWire[5, i].Value = wirePoints[i].RightDis;
+                    dgrdvWire[6, i].Value = wirePoints[i].TopDis;
+                    dgrdvWire[7, i].Value = wirePoints[i].BottomDis;
                     _itemCount++;
                 }
             }
@@ -230,16 +224,9 @@ namespace sys3
                 Wire wire = Wire.FindOneByTunnelId(selectTunnelUserControl1.ITunnelId);
                 if (wire != null)
                 {
-                    if (Convert.ToString(ds.Tables[0].Rows[0][WireInfoDbConstNames.WIRE_NAME]) == txtWireName.Text)
+                    if (Convert.ToString(ds.Tables[0].Rows[0]["WIRE_NAME"]) == txtWireName.Text)
                     {
-                        for (int i = 0; i < dgrdvWire.Rows.Count; i++)
-                        {
-                            if (WirePointBLL.isWirePointNameExist(dgrdvWire[0, i].Value.ToString()))
-                            {
-                                Alert.alert(Const_GM.WIRE_INFO_MSG_WIRE_POINT_NAME_DOUBLE);
-                                return;
-                            }
-                        }
+                        //TODO:判断导线点重名？
                     }
                     else if (dgrdvWire.Rows.Count < 3) //添加时最后有一个空行
                     {
@@ -404,9 +391,9 @@ namespace sys3
             var wirePointInfoEntity = new WirePoint();
             if (Text == Const_GM.WIRE_INFO_CHANGE)
             {
-                if (i < wpiEntity.Length)
+                if (i < wirePoints.Length)
                 {
-                    wirePointInfoEntity.WirePointId = wpiEntity[i].WirePointId;
+                    wirePointInfoEntity.WirePointId = wirePoints[i].WirePointId;
                 }
             }
 
@@ -497,11 +484,11 @@ namespace sys3
             //无导线时插入
             if (Wire.FindOneByTunnelId(tunnelEntity.TunnelId) == null)
             {
-                LibBusiness.TunnelDefaultSelect.InsertDefaultTunnel(WireInfoDbConstNames.TABLE_NAME,
+                LibBusiness.TunnelDefaultSelect.InsertDefaultTunnel(Wire.TableName,
                     selectTunnelUserControl1.ITunnelId);
                 wireEntity.Save();
                 var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.ITunnelId,
-                    WireInfoDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, wireEntity.MeasureDate);
+                    Wire.TableName, OPERATION_TYPE.ADD, wireEntity.MeasureDate);
                 MainForm.SendMsg2Server(msg);
             }
             //导线存在时跳过
@@ -535,7 +522,7 @@ namespace sys3
                 {
                     wirePointInfoEntity.Save();
                     var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.ITunnelId,
-                        WireInfoDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, wireEntity.MeasureDate);
+                        Wire.TableName, OPERATION_TYPE.ADD, wireEntity.MeasureDate);
                     MainForm.SendMsg2Server(msg);
                 }
             }
@@ -566,21 +553,21 @@ namespace sys3
 
             //导线信息登陆
             _tunnelID = selectTunnelUserControl1.ITunnelId;
-            LibBusiness.TunnelDefaultSelect.UpdateDefaultTunnel(WireInfoDbConstNames.TABLE_NAME,
+            LibBusiness.TunnelDefaultSelect.UpdateDefaultTunnel(Wire.TableName,
                 selectTunnelUserControl1.ITunnelId);
             wireEntity.Tunnel = Tunnel.Find(_tunnelID);
             wireEntity.Save();
             //导线点信息登陆
             for (int j = 0; j < dgrdvWire.Rows.Count - 1; j++)
             {
-                if (j < _dsWirePoint.Tables[0].Rows.Count)
+                if (j < wirePoints.Length)
                 {
                     //修改导线点
                     wirePointInfoEnt[j].Save();
                     wireEntity.Save();
                     //socket
                     var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.ITunnelId,
-                        WireInfoDbConstNames.TABLE_NAME, OPERATION_TYPE.UPDATE, wireEntity.MeasureDate);
+                        Wire.TableName, OPERATION_TYPE.UPDATE, wireEntity.MeasureDate);
                     MainForm.SendMsg2Server(msg);
                 }
                 else
@@ -593,7 +580,7 @@ namespace sys3
                     //socket
 
                     var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.ITunnelId,
-                        WireInfoDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, wireEntity.MeasureDate);
+                       Wire.TableName, OPERATION_TYPE.ADD, wireEntity.MeasureDate);
                     MainForm.SendMsg2Server(msg);
                 }
             }
@@ -605,21 +592,20 @@ namespace sys3
                 for (int i = dgrdvWire.Rows.Count - 1; i < _itemCount; i++)
                 {
                     wirePointInfoEntity.WirePointId =
-                        Convert.ToInt32(_dsWirePoint.Tables[0].Rows[i][WirePointDbConstNames.ID].ToString());
+                        Convert.ToInt32(wirePoints[i].WirePointId);
                     wireEntity.WireId =
                         Convert.ToInt32(
-                            _dsWirePoint.Tables[0].Rows[i][WirePointDbConstNames.WIRE_INFO_ID].ToString());
+                            wirePoints[i].Wire.WireId);
                     //只剩一个空行时，即所有导线点信息全被删除时
                     //删除导线，导线点
                     if (dgrdvWire.Rows.Count == 1)
                     {
                         wireEntity.Delete();
-                        WirePointBLL.deleteWirePointInfo(wirePointInfoEntity);
                     }
                     //只删除多于导线点
                     else
                     {
-                        WirePointBLL.deleteWirePointInfo(wirePointInfoEntity);
+                        wirePointInfoEntity.Delete();
                     }
                 }
             }
@@ -847,26 +833,26 @@ namespace sys3
             Wire wire = Wire.FindOneByTunnelId(tunnelEntity.TunnelId);
             if (wire != null)
             {
-                if (Convert.ToString(ds.Tables[0].Rows[0][WireInfoDbConstNames.WIRE_NAME]) != txtWireName.Text &&
+                if (Convert.ToString(ds.Tables[0].Rows[0][Wire.TableName]) != txtWireName.Text &&
                     Text == Const_GM.WIRE_INFO_ADD)
                 {
                     //所选巷道已绑定导线，是否跳转到修改导线
                     if (
                         Alert.confirm(Const_GM.TUNNEL_CHOOSE_FIRST +
-                                      Convert.ToString(ds.Tables[0].Rows[0][WireInfoDbConstNames.WIRE_NAME]) +
+                                      Convert.ToString(ds.Tables[0].Rows[0]["WIRE_NAME"]) +
                                       Const_GM.TUNNEL_CHOOSE_MIDDLE +
-                                      Convert.ToString(ds.Tables[0].Rows[0][WireInfoDbConstNames.WIRE_NAME]) +
+                                      Convert.ToString(ds.Tables[0].Rows[0]["WIRE_NAME"]) +
                                       Const_GM.TUNNEL_CHOOSE_LAST))
                     {
                         //窗体名称改为修改巷道
                         Text = Const_GM.WIRE_INFO_CHANGE;
                         _tunnelID = selectTunnelUserControl1.ITunnelId;
                         //绑定信息
-                        txtWireName.Text = Convert.ToString(ds.Tables[0].Rows[0][WireInfoDbConstNames.WIRE_NAME]);
-                        txtWireLevel.Text = Convert.ToString(ds.Tables[0].Rows[0][WireInfoDbConstNames.WIRE_LEVEL]);
-                        cboVobserver.Text = Convert.ToString(ds.Tables[0].Rows[0][WireInfoDbConstNames.VOBSERVER]);
-                        cboCounter.Text = Convert.ToString(ds.Tables[0].Rows[0][WireInfoDbConstNames.COUNTER]);
-                        cboChecker.Text = Convert.ToString(ds.Tables[0].Rows[0][WireInfoDbConstNames.CHECKER]);
+                        txtWireName.Text = Convert.ToString(ds.Tables[0].Rows[0]["WIRE_NAME"]);
+                        txtWireLevel.Text = Convert.ToString(ds.Tables[0].Rows[0]["WIRE_LEVEL"]);
+                        cboVobserver.Text = Convert.ToString(ds.Tables[0].Rows[0]["VOBSERVER"]);
+                        cboCounter.Text = Convert.ToString(ds.Tables[0].Rows[0]["COUNTER"]);
+                        cboChecker.Text = Convert.ToString(ds.Tables[0].Rows[0]["CHECKER"]);
 
                         var dgvr = new DataGridViewRow[dgrdvWire.Rows.Count - 1];
                         for (int i = 0; i < dgrdvWire.Rows.Count - 1; i++)

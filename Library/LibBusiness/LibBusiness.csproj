@@ -158,15 +158,11 @@
     <Compile Include="3.GeologyMeasureBLL\DbConstNames\HorizontalDbConstNames.cs" />
     <Compile Include="3.GeologyMeasureBLL\DbConstNames\LithologyDbConstNames.cs" />
     <Compile Include="3.GeologyMeasureBLL\DbConstNames\TunnelInfoDbConstNames.cs" />
-    <Compile Include="3.GeologyMeasureBLL\DbConstNames\WireInfoDbConstNames.cs" />
-    <Compile Include="3.GeologyMeasureBLL\DbConstNames\WirePointDbConstNames.cs" />
     <Compile Include="3.GeologyMeasureBLL\PropertyBLL\WorkingFaceBLL.cs" />
     <Compile Include="3.GeologyMeasureBLL\PropertyBLL\MiningAreaBLL.cs" />
     <Compile Include="3.GeologyMeasureBLL\PropertyBLL\HorizontalBLL.cs" />
     <Compile Include="3.GeologyMeasureBLL\PropertyBLL\LithologyBLL.cs" />
     <Compile Include="3.GeologyMeasureBLL\PropertyBLL\TunnelInfoBLL.cs" />
-    <Compile Include="3.GeologyMeasureBLL\PropertyBLL\WireInfoBLL.cs" />
-    <Compile Include="3.GeologyMeasureBLL\PropertyBLL\WirePointBLL.cs" />
     <Compile Include="4.OutburstPreventionBLL\SaveDBXyz2Txt.cs" />
     <Compile Include="4.OutburstPreventionBLL\DbConstNames\GasContentDbConstNames.cs" />
     <Compile Include="4.OutburstPreventionBLL\DbConstNames\GasPressureDbConstNames.cs" />

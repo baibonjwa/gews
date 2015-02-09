@@ -49,7 +49,7 @@ namespace _3.GeologyMeasure
             //this.selectTunnelUserControl1.init(this.MainForm);
             //自定义控件初始化
             this.selectTunnelUserControl1.setCurSelectedID(_arr);
-            LibEntity.TunnelDefaultSelect tunnelDefaultSelectEntity = LibBusiness.TunnelDefaultSelect.selectDefaultTunnel(WireInfoDbConstNames.TABLE_NAME);
+            LibEntity.TunnelDefaultSelect tunnelDefaultSelectEntity = LibBusiness.TunnelDefaultSelect.selectDefaultTunnel(Wire.TableName);
             if (tunnelDefaultSelectEntity != null)
             {
                 _arr = new int[5];
