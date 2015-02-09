@@ -431,21 +431,6 @@ namespace LibPanels
             }
         }
 
-        //绑定填报人
-        private void bindTeamMember()
-        {
-            cboSubmitter.Items.Clear();
-            cboSubmitter.Text = "";
-            DataSet ds = TeamBll.selectTeamInfoByTeamName(cboTeamName.Text);
-            string teamLeader = ds.Tables[0].Rows[0][TeamDbConstNames.TEAM_LEADER].ToString();
-            string[] teamMember = ds.Tables[0].Rows[0][TeamDbConstNames.TEAM_MEMBER].ToString().Split(',');
-            cboSubmitter.Items.Add(teamLeader);
-            for (int i = 0; i < teamMember.Length; i++)
-            {
-                cboSubmitter.Items.Add(teamMember[i]);
-            }
-        }
-
         /// <summary>
         /// 提交
         /// </summary>
@@ -882,7 +867,7 @@ namespace LibPanels
         {
             if (cboTeamName.SelectedIndex > 0)
             {
-                this.bindTeamMember();
+                DataBindUtil.LoadTeamMemberByTeamName(cboSubmitter, cboTeamName.Text);
             }
         }
 

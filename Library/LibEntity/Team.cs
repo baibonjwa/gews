@@ -1,4 +1,7 @@
 ﻿using Castle.ActiveRecord;
+using NHibernate;
+using NHibernate.Criterion;
+using NHibernate.Impl;
 
 namespace LibEntity
 {
@@ -35,15 +38,28 @@ namespace LibEntity
         [Property("TEAM_MEMBER")]
         public string TeamMember { get; set; }
 
-        public static Team FindById(int id)
+        public static Team FindOneByTeamName(string teamName)
         {
-            return (Team)FindByPrimaryKey(typeof(Team), id);
+            var criterion = new ICriterion[]
+            {
+                Restrictions.Eq("TeamName", teamName)
+            };
+            return FindOne(criterion);
         }
 
-        public static int GetTotalCount()
+        public static bool ExistsByTeamName(string teamName)
         {
-            return Count();
+            var criterion = new ICriterion[]
+            {
+                Restrictions.Eq("TeamName", teamName)
+            };
+            return Exists(criterion);
         }
+
+        //public static int GetTotalCount()
+        //{
+        //    return Count();
+        //}
 
 
     }

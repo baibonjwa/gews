@@ -139,7 +139,7 @@ namespace UnderTerminal
             cboTeamName.SelectedValue = _dayReportHCEntity.Team;
 
             //绑定队别成员
-            this.bindTeamMember();
+            DataBindUtil.LoadTeamMemberByTeamName(cboSubmitter, cboTeamName.Text);
 
             //填报人
             cboSubmitter.Text = _dayReportHCEntity.Submitter;
@@ -165,32 +165,6 @@ namespace UnderTerminal
             }
         }
 
-        /// <summary>
-        /// 绑定填报人
-        /// </summary>
-        private void bindTeamMember()
-        {
-            //清空填报人
-            cboSubmitter.Items.Clear();
-            cboSubmitter.Text = "";
-
-            //获取队别成员姓名
-            DataSet ds = TeamBll.selectTeamInfoByTeamName(cboTeamName.Text);
-            string teamLeader;
-            string[] teamMember;
-            if (ds.Tables[0].Rows.Count > 0)
-            {
-                //队长
-                teamLeader = ds.Tables[0].Rows[0][TeamDbConstNames.TEAM_LEADER].ToString();
-                //队员
-                teamMember = ds.Tables[0].Rows[0][TeamDbConstNames.TEAM_MEMBER].ToString().Split(',');
-                cboSubmitter.Items.Add(teamLeader);
-                for (int i = 0; i < teamMember.Length; i++)
-                {
-                    cboSubmitter.Items.Add(teamMember[i]);
-                }
-            }
-        }
 
         /// <summary>
         /// 自动填充距切眼距离
@@ -712,8 +686,7 @@ namespace UnderTerminal
             {
                 if (cboTeamName.Text == cboTeamName.GetItemText(cboTeamName.Items[i]))
                 {
-                    bindTeamMember();
-                    break;
+                    DataBindUtil.LoadTeamMemberByTeamName(cboSubmitter, cboTeamName.Text);
                 }
                 else
                 {

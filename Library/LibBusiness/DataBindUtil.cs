@@ -50,6 +50,16 @@ namespace LibBusiness
             if (lithologys != null) DataBindListControl(lb, lithologys, "LithologyName", "LithologyId", selectedValue);
         }
 
+        public static void LoadTeamMemberByTeamName(ListControl lb, string teamName, int selectedValue = -1)
+        {
+            var teamMember = Team.FindOneByTeamName(teamName);
+            if (teamMember != null)
+            {
+                var teamMembers = teamMember.ToString().Split(',');
+                DataBindListControl(lb, teamMembers, "TeamName", "TeamName", selectedValue);
+            }
+        }
+
 
 
     }

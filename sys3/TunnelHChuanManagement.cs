@@ -345,7 +345,7 @@ namespace _3.GeologyMeasure
                     //队别
                     if (int.TryParse(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TEAM_NAME_ID].ToString(), out tmpInt))
                     {
-                        this.fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text = TeamBll.selectTeamInfoByID(tmpInt).TeamName;
+                        this.fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text = Team.Find(tmpInt).TeamName;
                         tmpInt = 0;
                     }
                     //开工日期

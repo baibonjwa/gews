@@ -238,7 +238,7 @@ namespace sys2
             cboTeamName.SelectedValue = _dayReportHCEntity.Team;
 
             //绑定队别成员
-            this.bindTeamMember();
+            DataBindUtil.LoadTeamMemberByTeamName(cboSubmitter, cboTeamName.Text);
 
             //填报人
             cboSubmitter.Text = _dayReportHCEntity.Submitter;
@@ -264,32 +264,6 @@ namespace sys2
             }
         }
 
-        /// <summary>
-        /// 绑定填报人
-        /// </summary>
-        private void bindTeamMember()
-        {
-            //清空填报人
-            cboSubmitter.Items.Clear();
-            cboSubmitter.Text = "";
-
-            //获取队别成员姓名
-            DataSet ds = TeamBll.selectTeamInfoByTeamName(cboTeamName.Text);
-            string teamLeader;
-            string[] teamMember;
-            if (ds.Tables[0].Rows.Count > 0)
-            {
-                //队长
-                teamLeader = ds.Tables[0].Rows[0][TeamDbConstNames.TEAM_LEADER].ToString();
-                //队员
-                teamMember = ds.Tables[0].Rows[0][TeamDbConstNames.TEAM_MEMBER].ToString().Split(',');
-                cboSubmitter.Items.Add(teamLeader);
-                for (int i = 0; i < teamMember.Length; i++)
-                {
-                    cboSubmitter.Items.Add(teamMember[i]);
-                }
-            }
-        }
 
         /// <summary>
         /// 添加队别
@@ -307,7 +281,7 @@ namespace sys2
             {
                 Team teamEntity = new Team();
                 teamEntity.TeamId = Convert.ToInt32(cboTeamName.SelectedValue);
-                teamEntity = TeamBll.selectTeamInfoByID(teamEntity.TeamId);
+                teamEntity = Team.Find(teamEntity.TeamId);
                 teamInfoForm = new TeamInfoEntering(teamEntity);
             }
 
@@ -315,14 +289,8 @@ namespace sys2
             {
                 this.bindTeamInfo();
                 cboTeamName.Text = teamInfoForm.returnTeamName();
-                DataSet ds = new DataSet();
-                ds = TeamBll.selectTeamInfoByTeamName(teamInfoForm.returnTeamName());
-                if (ds.Tables[0].Rows.Count > 0)
-                {
-                    cboSubmitter.Items.Add(ds.Tables[0].Rows[0].ToString());
-                    cboSubmitter.Items.RemoveAt(cboSubmitter.Items.Count - 1);
-                    cboSubmitter.Text = cboSubmitter.Items[0].ToString();
-                }
+                DataBindUtil.LoadTeamMemberByTeamName(cboSubmitter, teamInfoForm.returnTeamName());
+
             }
         }
 
@@ -545,7 +513,7 @@ namespace sys2
 
                 /**回采日报实体赋值**/
                 //队别名称
-                dayReportHCEntity.Team = Team.FindById(Convert.ToInt32(cboTeamName.SelectedValue));
+                dayReportHCEntity.Team = Team.Find(cboTeamName.SelectedValue);
                 //绑定回采面编号
                 dayReportHCEntity.WorkingFace.WorkingFaceId = selectWorkingfaceSimple1.IWorkingfaceId;
 
@@ -1020,7 +988,7 @@ namespace sys2
             {
                 if (cboTeamName.Text == cboTeamName.GetItemText(cboTeamName.Items[i]))
                 {
-                    bindTeamMember();
+                    DataBindUtil.LoadTeamMemberByTeamName(cboSubmitter, cboTeamName.Text);
                     break;
                 }
                 else

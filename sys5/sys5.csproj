@@ -337,18 +337,6 @@
     <Compile Include="ShortMessage.Designer.cs">
       <DependentUpon>ShortMessage.cs</DependentUpon>
     </Compile>
-    <Compile Include="TeamInfoEntering.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TeamInfoEntering.Designer.cs">
-      <DependentUpon>TeamInfoEntering.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TeamManagement.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TeamManagement.Designer.cs">
-      <DependentUpon>TeamManagement.cs</DependentUpon>
-    </Compile>
     <Compile Include="TunnelPreWarningCalc.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -414,12 +402,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ShortMessage.resx">
       <DependentUpon>ShortMessage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TeamInfoEntering.resx">
-      <DependentUpon>TeamInfoEntering.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TeamManagement.resx">
-      <DependentUpon>TeamManagement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TunnelPreWarningCalc.resx">
       <DependentUpon>TunnelPreWarningCalc.cs</DependentUpon>

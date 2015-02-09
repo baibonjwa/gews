@@ -157,20 +157,6 @@ namespace UnderTerminal
             }
         }
 
-        //绑定填报人
-        private void bindTeamMember()
-        {
-            cboSubmitter.Items.Clear();
-            cboSubmitter.Text = "";
-            DataSet ds = TeamBll.selectTeamInfoByTeamName(cboTeamName.Text);
-            string teamLeader = ds.Tables[0].Rows[0][TeamDbConstNames.TEAM_LEADER].ToString();
-            string[] teamMember = ds.Tables[0].Rows[0][TeamDbConstNames.TEAM_MEMBER].ToString().Split(',');
-            cboSubmitter.Items.Add(teamLeader);
-            for (int i = 0; i < teamMember.Length; i++)
-            {
-                cboSubmitter.Items.Add(teamMember[i]);
-            }
-        }
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
@@ -669,7 +655,7 @@ namespace UnderTerminal
         /// <param name="e"></param>
         private void cboTeamName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.bindTeamMember();
+            DataBindUtil.LoadTeamMemberByTeamName(cboSubmitter, cboTeamName.Text);
         }
 
         private void MineDataSimple_FormClosing(object sender, FormClosingEventArgs e)

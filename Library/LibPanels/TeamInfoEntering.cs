@@ -101,7 +101,7 @@ namespace LibPanels
             teamMember = teamMember.Remove(teamMember.Length - 1);
             teamEntity.TeamMember = teamMember;
             //修改操作
-            TeamBll.updateTeamInfo(teamEntity);
+            teamEntity.Save();
         }
 
         /// <summary>
@@ -187,11 +187,9 @@ namespace LibPanels
             }
             //队别名称不可重复
             //添加时
-            if (this.Text == Const_MS.TEAM_INFO_ADD)
+            if (Text == Const_MS.TEAM_INFO_ADD)
             {
-                DataSet ds = new DataSet();
-                ds = TeamBll.selectTeamInfoByTeamName(txtTeamName.Text);
-                if (ds.Tables[0].Rows.Count > 0)
+                if (Team.ExistsByTeamName(txtTeamName.Text))
                 {
                     Alert.alert(Const_MS.TEAM_INFO_MSG_TEAM_NAME_EXIST);
                     return false;
@@ -200,11 +198,9 @@ namespace LibPanels
             //修改时
             else
             {
-                if (this.txtTeamName.Text != teamEntity.TeamName)
+                if (txtTeamName.Text != teamEntity.TeamName)
                 {
-                    DataSet ds = new DataSet();
-                    ds = TeamBll.selectTeamInfoByTeamName(txtTeamName.Text);
-                    if (ds.Tables[0].Rows.Count > 0)
+                    if (Team.ExistsByTeamName(txtTeamName.Text))
                     {
                         Alert.alert(Const_MS.TEAM_INFO_MSG_TEAM_NAME_EXIST);
                         return false;
