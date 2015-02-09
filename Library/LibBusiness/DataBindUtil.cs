@@ -60,6 +60,45 @@ namespace LibBusiness
             }
         }
 
+        public static void LoadWorkTime(ListControl lb, int timeGroupId, int selectedValue = -1)
+        {
+            var workingTimes = WorkingTime.FindAllByWorkTimeGroupId(timeGroupId);
+            if (workingTimes != null)
+            {
+                DataBindListControl(lb, workingTimes, "WorkTimeName", "WorkTimeName", selectedValue);
+            }
+        }
+
+
+        public static void LoadWorkTime(DataGridViewComboBoxColumn dgvcbc
+            , int timeGroupId, int selectedValue = -1)
+        {
+            var workingTimes = WorkingTime.FindAllByWorkTimeGroupId(timeGroupId);
+            foreach (var t in workingTimes)
+            {
+                dgvcbc.Items.Add(t.WorkTimeName);
+            }
+        }
+
+        public static string JudgeWorkTimeNow(string workStyle)
+        {
+            //获取班次
+            WorkingTime[] workingTimes = WorkingTime.FindAllByWorkTimeName(workStyle);
+            //小时
+            int hour = DateTime.Now.Hour;
+            string workTime = "";
+            for (int i = 0; i < workingTimes.Length; i++)
+            {
+                //对比小时
+                if (hour > Convert.ToInt32(workingTimes[i].WorkTimeFrom.ToString().Remove(2)) && hour <= Convert.ToInt32(workingTimes[i].WorkTimeTo.ToString().Remove(2)))
+                {
+                    //获取当前时间对应班次
+                    workTime = workingTimes[i].WorkTimeName;
+                }
+            }
+            return workTime;
+        }
+
 
 
     }

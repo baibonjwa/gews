@@ -315,7 +315,6 @@
     <Compile Include="UsualForecast.designer.cs">
       <DependentUpon>UsualForecast.cs</DependentUpon>
     </Compile>
-    <Compile Include="Utils.cs" />
     <Compile Include="VentilationInfoEntering.cs">
       <SubType>Form</SubType>
     </Compile>

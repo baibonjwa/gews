@@ -428,26 +428,6 @@ namespace _3.GeologyMeasure
         }
 
         /// <summary>
-        ///     绑定班次
-        /// </summary>
-        private void bindWorkTimeFirstTime()
-        {
-            DataSet dsWorkTime;
-            if (rbtn38.Checked)
-            {
-                dsWorkTime = WorkTimeBLL.returnWorkTime(rbtn38.Text);
-            }
-            else
-            {
-                dsWorkTime = WorkTimeBLL.returnWorkTime(rbtn46.Text);
-            }
-            for (int i = 0; i < dsWorkTime.Tables[0].Rows.Count; i++)
-            {
-                cboWorkTime.Items.Add(dsWorkTime.Tables[0].Rows[i][WorkTimeDbConstNames.WORK_TIME_NAME].ToString());
-            }
-        }
-
-        /// <summary>
         ///     提交
         /// </summary>
         /// <param name="sender"></param>
@@ -614,15 +594,8 @@ namespace _3.GeologyMeasure
         /// <param name="e"></param>
         private void rbtn38_CheckedChanged(object sender, EventArgs e)
         {
-            //三八制
-            if (rbtn38.Checked)
-            {
-                cboWorkTime.DataSource = null;
-                DataSet dsWorkTime = WorkTimeBLL.returnWorkTime(Const_MS.WORK_TIME_38);
-                cboWorkTime.DataSource = dsWorkTime.Tables[0];
-                cboWorkTime.DisplayMember = WorkTimeDbConstNames.WORK_TIME_NAME;
-                cboWorkTime.ValueMember = WorkTimeDbConstNames.WORK_TIME_ID;
-            }
+            DataBindUtil.LoadWorkTime(cboWorkTime,
+                rbtn38.Checked ? Const_MS.WORK_GROUP_ID_38 : Const_MS.WORK_GROUP_ID_46);
             // 设置班次名称
             setWorkTimeName();
         }
@@ -635,14 +608,8 @@ namespace _3.GeologyMeasure
         private void rbtn46_CheckedChanged(object sender, EventArgs e)
         {
             //四六制
-            if (rbtn46.Checked)
-            {
-                cboWorkTime.DataSource = null;
-                DataSet dsWorkTime = WorkTimeBLL.returnWorkTime(Const_MS.WORK_TIME_46);
-                cboWorkTime.DataSource = dsWorkTime.Tables[0];
-                cboWorkTime.DisplayMember = WorkTimeDbConstNames.WORK_TIME_NAME;
-                cboWorkTime.ValueMember = WorkTimeDbConstNames.WORK_TIME_ID;
-            }
+            DataBindUtil.LoadWorkTime(cboWorkTime,
+                rbtn38.Checked ? Const_MS.WORK_GROUP_ID_38 : Const_MS.WORK_GROUP_ID_46);
             // 设置班次名称
             setWorkTimeName();
         }

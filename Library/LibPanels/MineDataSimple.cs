@@ -119,18 +119,18 @@ namespace LibPanels
         /// </summary>
         private void bindWorkTimeFirstTime()
         {
-            DataSet dsWorkTime;
+            WorkingTime[] WorkingTimes;
             if (rbtn38.Checked)
             {
-                dsWorkTime = WorkTimeBLL.returnWorkTime(rbtn38.Text);
+                WorkingTimes = WorkingTime.FindAllByWorkTimeName(rbtn38.Text);
             }
             else
             {
-                dsWorkTime = WorkTimeBLL.returnWorkTime(rbtn46.Text);
+                WorkingTimes = WorkingTime.FindAllByWorkTimeName(rbtn46.Text);
             }
-            for (int i = 0; i < dsWorkTime.Tables[0].Rows.Count; i++)
+            foreach (var t in WorkingTimes)
             {
-                cboWorkTime.Items.Add(dsWorkTime.Tables[0].Rows[i][WorkTimeDbConstNames.WORK_TIME_NAME].ToString());
+                cboWorkTime.Items.Add(t.WorkTimeName);
             }
         }
 
@@ -545,21 +545,13 @@ namespace LibPanels
             {
                 cboWorkTime.Text = "";
                 cboWorkTime.Items.Clear();
-                DataSet dsWorkTime = WorkTimeBLL.returnWorkTime(rbtn38.Text);
-                for (int i = 0; i < dsWorkTime.Tables[0].Rows.Count; i++)
-                {
-                    cboWorkTime.Items.Add(dsWorkTime.Tables[0].Rows[i][WorkTimeDbConstNames.WORK_TIME_NAME].ToString());
-                }
+                DataBindUtil.LoadWorkTime(cboWorkTime, Const_MS.WORK_GROUP_ID_38);
             }
             else
             {
                 cboWorkTime.Text = "";
                 cboWorkTime.Items.Clear();
-                DataSet dsWorkTime = WorkTimeBLL.returnWorkTime(rbtn46.Text);
-                for (int i = 0; i < dsWorkTime.Tables[0].Rows.Count; i++)
-                {
-                    cboWorkTime.Items.Add(dsWorkTime.Tables[0].Rows[i][WorkTimeDbConstNames.WORK_TIME_NAME].ToString());
-                }
+                DataBindUtil.LoadWorkTime(cboWorkTime, Const_MS.WORK_GROUP_ID_46);
             }
 
             // 设置班次名称

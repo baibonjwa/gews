@@ -16,6 +16,7 @@ using System.Text;
 using System.Windows.Forms;
 using LibBusiness;
 using LibCommonForm;
+using LibBusiness;
 using LibEntity;
 using LibCommon;
 using LibSocket;
@@ -86,7 +87,8 @@ namespace UnderTerminal
             //绑定队别名称
             this.bindTeamInfo();
             //初始化班次
-            this.bindWorkTimeFirstTime();
+            DataBindUtil.LoadWorkTime(cboWorkTime,
+     rbtn38.Checked ? Const_MS.WORK_GROUP_ID_38 : Const_MS.WORK_GROUP_ID_46);
             //设置为默认工作制式
             if (WorkTimeBLL.getDefaultWorkTime() == Const_MS.WORK_TIME_38)
             {
@@ -97,7 +99,7 @@ namespace UnderTerminal
                 rbtn46.Checked = true;
             }
             //设置班次为当前时间对应的班次
-            dgrdvDayReportHC[0, 0].Value = Utils.returnSysWorkTime(rbtn38.Checked ? Const_MS.WORK_TIME_38 : Const_MS.WORK_TIME_46);
+            dgrdvDayReportHC[0, 0].Value = DataBindUtil.JudgeWorkTimeNow(rbtn38.Checked ? Const_MS.WORK_TIME_38 : Const_MS.WORK_TIME_46);
         }
 
         /// <summary>
@@ -324,27 +326,6 @@ namespace UnderTerminal
                 return;
             }
         }
-
-        private void bindWorkTimeFirstTime()
-        {
-            DataSet dsWorkTime;
-            //获取三八制班次
-            if (rbtn38.Checked)
-            {
-                dsWorkTime = WorkTimeBLL.returnWorkTime(rbtn38.Text);
-            }
-            //获取四六制班次
-            else
-            {
-                dsWorkTime = WorkTimeBLL.returnWorkTime(rbtn46.Text);
-            }
-            //向combobox里插入数据
-            for (int i = 0; i < dsWorkTime.Tables[0].Rows.Count; i++)
-            {
-                cboWorkTime.Items.Add(dsWorkTime.Tables[0].Rows[i][WorkTimeDbConstNames.WORK_TIME_NAME].ToString());
-            }
-        }
-
         /// <summary>
         /// 三八制选择事件
         /// </summary>
@@ -352,54 +333,8 @@ namespace UnderTerminal
         /// <param name="e"></param>
         private void rbtn38_CheckedChanged(object sender, EventArgs e)
         {
-            //选择三八制
-            if (rbtn38.Checked)
-            {
-                cboWorkTime.Items.Clear();
-                //清空班次下拉框中选项
-
-                DataSet dsWorkTime = WorkTimeBLL.returnWorkTime(rbtn38.Text);
-                for (int j = 0; j < dsWorkTime.Tables[0].Rows.Count; j++)
-                {
-                    cboWorkTime.Items.Add(dsWorkTime.Tables[0].Rows[j][WorkTimeDbConstNames.WORK_TIME_NAME].ToString());
-                }
-                for (int i = 0; i < dgrdvDayReportHC.RowCount; i++)
-                {
-                    //清空班次
-                    dgrdvDayReportHC[0, i].Value = "";
-
-                    if (i == 0)
-                    {
-                        dgrdvDayReportHC[0, 0].Value = Utils.returnSysWorkTime(rbtn38.Text);
-                    }
-                    else
-                    {
-                        dgrdvDayReportHC[0, i].Value = null;
-                    }
-                }
-            }
-            //选择四六制
-            else
-            {
-                cboWorkTime.Items.Clear();
-                DataSet dsWorkTime = WorkTimeBLL.returnWorkTime(rbtn46.Text);
-                for (int j = 0; j < dsWorkTime.Tables[0].Rows.Count; j++)
-                {
-                    cboWorkTime.Items.Add(dsWorkTime.Tables[0].Rows[j][WorkTimeDbConstNames.WORK_TIME_NAME].ToString());
-                }
-                for (int i = 0; i < dgrdvDayReportHC.RowCount; i++)
-                {
-                    dgrdvDayReportHC[0, i].Value = "";
-                    if (i == 0)
-                    {
-                        dgrdvDayReportHC[0, 0].Value = Utils.returnSysWorkTime(rbtn46.Text);
-                    }
-                    else
-                    {
-                        dgrdvDayReportHC[0, i].Value = null;
-                    }
-                }
-            }
+            DataBindUtil.LoadWorkTime(cboWorkTime,
+                rbtn38.Checked ? Const_MS.WORK_GROUP_ID_38 : Const_MS.WORK_GROUP_ID_46);
         }
 
         /// <summary>

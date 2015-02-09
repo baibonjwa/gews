@@ -127,7 +127,7 @@ namespace UnderTerminal
             setWorkTimeName();
             //设置班次为当前时间对应的班次
             dgrdvDayReportJJ[0, 0].Value =
-                Utils.returnSysWorkTime(rbtn38.Checked ? Const_MS.WORK_TIME_38 : Const_MS.WORK_TIME_46);
+                DataBindUtil.JudgeWorkTimeNow(rbtn38.Checked ? Const_MS.WORK_TIME_38 : Const_MS.WORK_TIME_46);
 
             dgrdvDayReportJJ[1, 0].Value = Const_MS.JJ;
         }
@@ -428,54 +428,8 @@ namespace UnderTerminal
         /// <param name="e"></param>
         private void rbtn38_CheckedChanged(object sender, EventArgs e)
         {
-            //选择三八制
-            if (rbtn38.Checked)
-            {
-                cboWorkTime.Items.Clear();
-                //清空班次下拉框中选项
-
-                DataSet dsWorkTime = WorkTimeBLL.returnWorkTime(rbtn38.Text);
-                for (int j = 0; j < dsWorkTime.Tables[0].Rows.Count; j++)
-                {
-                    cboWorkTime.Items.Add(dsWorkTime.Tables[0].Rows[j][WorkTimeDbConstNames.WORK_TIME_NAME].ToString());
-                }
-                for (int i = 0; i < dgrdvDayReportJJ.RowCount; i++)
-                {
-                    //清空班次
-                    dgrdvDayReportJJ[0, i].Value = "";
-
-                    if (i == 0)
-                    {
-                        dgrdvDayReportJJ[0, 0].Value = Utils.returnSysWorkTime(rbtn38.Text);
-                    }
-                    else
-                    {
-                        dgrdvDayReportJJ[0, i].Value = null;
-                    }
-                }
-            }
-            //选择四六制
-            else
-            {
-                cboWorkTime.Items.Clear();
-                DataSet dsWorkTime = WorkTimeBLL.returnWorkTime(rbtn46.Text);
-                for (int j = 0; j < dsWorkTime.Tables[0].Rows.Count; j++)
-                {
-                    cboWorkTime.Items.Add(dsWorkTime.Tables[0].Rows[j][WorkTimeDbConstNames.WORK_TIME_NAME].ToString());
-                }
-                for (int i = 0; i < dgrdvDayReportJJ.RowCount; i++)
-                {
-                    dgrdvDayReportJJ[0, i].Value = "";
-                    if (i == 0)
-                    {
-                        dgrdvDayReportJJ[0, 0].Value = Utils.returnSysWorkTime(rbtn46.Text);
-                    }
-                    else
-                    {
-                        dgrdvDayReportJJ[0, i].Value = null;
-                    }
-                }
-            }
+            DataBindUtil.LoadWorkTime(cboWorkTime,
+                rbtn38.Checked ? Const_MS.WORK_GROUP_ID_38 : Const_MS.WORK_GROUP_ID_46);
         }
 
         /// <summary>

@@ -20,7 +20,7 @@ namespace LibEntity
         ///     获取设置工作制制式类别
         /// </summary>
         [Property("WORK_TIME_GROUP_ID")]
-        public string WorkTimeGroupId { get; set; }
+        public int WorkTimeGroupId { get; set; }
 
         /// <summary>
         ///     获取设置工作制名称
@@ -40,23 +40,36 @@ namespace LibEntity
         [Property("WORK_TIME_TO")]
         public DateTime WorkTimeTo { get; set; }
 
-        public static WorkingTime[] FindAllBy38Times()
+        public static WorkingTime[] FindAllByWorkTimeGroupId(int workTimeGroupId)
         {
             var criterion = new ICriterion[]
             {
-                Restrictions.Eq("WorkTimeGroupId", 1)
+                Restrictions.Eq("WorkTimeGroupId", workTimeGroupId)
             };
             return FindAll(criterion);
         }
 
-        public static WorkingTime[] FindAllBy46Times()
+        public static WorkingTime[] FindAllByWorkTimeName(string workTimeName)
         {
             var criterion = new ICriterion[]
             {
-                Restrictions.Eq("WorkTimeGroupId", 2)
+                Restrictions.Eq("WorkTimeName", workTimeName)
             };
             return FindAll(criterion);
         }
+
+
+        public static WorkingTime[] FindAllBy38Times()
+        {
+            return FindAllByWorkTimeGroupId(1);
+        }
+
+        public static WorkingTime[] FindAllBy46Times()
+        {
+            return FindAllByWorkTimeGroupId(2);
+        }
+
+
 
     }
 }

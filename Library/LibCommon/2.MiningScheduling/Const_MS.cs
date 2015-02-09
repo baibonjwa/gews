@@ -117,8 +117,8 @@ namespace LibCommon
         public const string DEFAULT_TIME_18_FROM = "18:00:00";
         public const string DEFAULT_TIME_18_TO = "23:59:59";
 
-        public const string WORK_GROUP_ID_38 = "1";
-        public const string WORK_GROUP_ID_46 = "2";
+        public const int WORK_GROUP_ID_38 = 1;
+        public const int WORK_GROUP_ID_46 = 2;
 
         public const string WORK_TIME_MSG_IS_TRUNCATE = "确认要恢复初始设置吗？（恢复操作会清空当前设置的班次信息，并恢复为初始班次信息。）";
         public const string WORK_TIME_MSG_CHANGE_DEFAULT_WORK_TIME_SUCCESS = "成功修改默认工作制式为：";
