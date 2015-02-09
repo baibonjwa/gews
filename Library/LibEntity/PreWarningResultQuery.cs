@@ -7,6 +7,7 @@
 // V1.0 新建
 // ******************************************************************
 
+using System;
 using LibCommon;
 
 namespace LibEntity
@@ -15,7 +16,7 @@ namespace LibEntity
     {
         private int _iTunnelID = Const.INVALID_ID;
         private string _strDateShift = "";
-        private string _strDateTime = "";
+        private DateTime _strDateTime;
         private WarningResultEnt _strOutBrustWarningResult = new WarningResultEnt();
         private WarningResultEnt _strOverLimitWarningResult = new WarningResultEnt();
         private string _strTunelName = "";
@@ -61,7 +62,7 @@ namespace LibEntity
         /// <summary>
         ///     日期
         /// </summary>
-        public string DateTime
+        public DateTime DateTime
         {
             get { return _strDateTime; }
             set { _strDateTime = value; }

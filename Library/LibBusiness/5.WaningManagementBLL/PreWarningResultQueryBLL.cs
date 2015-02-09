@@ -180,7 +180,7 @@ namespace LibBusiness
                 {
                     ent = new PreWarningResultQuery();
                     ent.TunelName = BasicInfoManager.getInstance().getTunnelByID(Convert.ToInt32(dt.Rows[i][PreWarningResultDBConstNames.TUNNEL_ID].ToString())).TunnelName;
-                    ent.DateTime = dt.Rows[i][PreWarningResultDBConstNames.DATA_TIME].ToString();
+                    ent.DateTime = Convert.ToDateTime(dt.Rows[i][PreWarningResultDBConstNames.DATA_TIME]);
                     ent.Date_Shift = dt.Rows[i][PreWarningResultDBConstNames.DATE_SHIFT].ToString();
                 }
 
@@ -392,9 +392,9 @@ namespace LibBusiness
         //    return datatimes;
         //}
 
-        public static string[] GetDateBySelectTimeAndWorkingfaceName(ManageDataBase database, string workingfaceName, string startTime, string endTime)
+        public static DateTime[] GetDateBySelectTimeAndWorkingfaceName(ManageDataBase database, string workingfaceName, string startTime, string endTime)
         {
-            string[] datatimes = null;
+            DateTime[] datatimes = null;
             StringBuilder strSql = new StringBuilder();
             strSql.Append("SELECT DISTINCT ");
             strSql.Append(" CONVERT(CHAR(10),");
@@ -425,10 +425,10 @@ namespace LibBusiness
                 int rowCount = dt.Rows.Count;
                 if (rowCount > 0)
                 {
-                    datatimes = new string[rowCount];
+                    datatimes = new DateTime[rowCount];
                     for (int i = 0; i < rowCount; i++)
                     {
-                        datatimes[i] = dt.Rows[i]["DATE"].ToString();
+                        datatimes[i] = Convert.ToDateTime(dt.Rows[i]["DATE"]);
                     }
                 }
             }
@@ -481,10 +481,12 @@ namespace LibBusiness
                     for (int i = 0; i < rowCount; i++)
                     {
                         //定义时间类
-                        WorkingTime wt = new WorkingTime();
-                        wt.WorkTimeName = dt.Rows[i][WorkTimeDbConstNames.WORK_TIME_NAME].ToString();
-                        wt.WorkTimeFrom = dt.Rows[i][WorkTimeDbConstNames.WORK_TIME_FROM].ToString();
-                        wt.WorkTimeTo = dt.Rows[i][WorkTimeDbConstNames.WORK_TIME_TO].ToString();
+                        var wt = new WorkingTime
+                        {
+                            WorkTimeName = dt.Rows[i][WorkTimeDbConstNames.WORK_TIME_NAME].ToString(),
+                            WorkTimeFrom = Convert.ToDateTime(dt.Rows[i][WorkTimeDbConstNames.WORK_TIME_FROM]),
+                            WorkTimeTo = Convert.ToDateTime(dt.Rows[i][WorkTimeDbConstNames.WORK_TIME_TO])
+                        };
                         datashifts.Add(wt);
                     }
                 }
@@ -712,9 +714,9 @@ namespace LibBusiness
             return result;
         }
 
-        public static void GetWorkingfaceWorstPreWarningResultInOneDateshift(ManageDataBase database, DataTable dt, string date,
+        public static void GetWorkingfaceWorstPreWarningResultInOneDateshift(ManageDataBase database, DataTable dt, DateTime date,
             string dateshift,
-            string workfaceName, string warningType, string fromTime, string toTime, string warningRorY)
+            string workfaceName, string warningType, DateTime fromTime, DateTime toTime, string warningRorY)
         {
             PreWarningHistoryResultWithWorkingfaceEnt ent = new PreWarningHistoryResultWithWorkingfaceEnt();
             //共同属性
@@ -1249,14 +1251,14 @@ namespace LibBusiness
             bar.PerformStep();
             //获取预警日期
             //TODO:此处可优化，但不是重点
-            string[] dates = GetDateBySelectTimeAndWorkingfaceName(databaseForSaveTime, workingfaceName, startTime, endTime);
+            DateTime[] dates = GetDateBySelectTimeAndWorkingfaceName(databaseForSaveTime, workingfaceName, startTime, endTime);
             bar.Step = 1 + (int)bar.Maximum;
             bar.Visible = true;
             bar.Value = 0;
             DataTable dt = GetWarningResultsWithCondition(databaseForSaveTime, startTime, endTime, workingfaceName);
             if (dates == null)
             { return; }
-            foreach (string date in dates)
+            foreach (var date in dates)
             {
                 if (dateShifts == null)
                 { return; }
@@ -1374,7 +1376,7 @@ dateShift.WorkTimeFrom, dateShift.WorkTimeTo, warningType);
                         //巷道ID
                         ent.TunnelID = (int)(dt.Rows[i][PreWarningResultDBConstNames.TUNNEL_ID]);
                         //日期
-                        ent.DateTime = dt.Rows[i][PreWarningResultDBConstNames.DATA_TIME].ToString();
+                        ent.DateTime = Convert.ToDateTime(dt.Rows[i][PreWarningResultDBConstNames.DATA_TIME]);
                         //班次
                         ent.Date_Shift = dt.Rows[i][PreWarningResultDBConstNames.DATE_SHIFT].ToString();
 
@@ -1457,7 +1459,7 @@ dateShift.WorkTimeFrom, dateShift.WorkTimeTo, warningType);
                         //巷道ID
                         ent.TunnelID = (int)(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.TUNNEL_ID]);
                         //日期
-                        ent.DateTime = dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.DATA_TIME].ToString();
+                        ent.DateTime = Convert.ToDateTime(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.DATA_TIME]);
                         //班次
                         ent.Date_Shift = dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.DATE_SHIFT].ToString();
 

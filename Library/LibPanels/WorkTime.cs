@@ -1,19 +1,11 @@
-﻿// ******************************************************************
-// 概  述：工作制式添加修改
-// 作  者：宋英杰
-// 创建日期：2013/12/5
-// 版本号：V1.0
-// 版本信息：
-// V1.0 新建
-// ******************************************************************
-
-using System;
+﻿using System;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 using LibBusiness;
 using LibCommon;
 using LibCommonControl;
+using LibEntity;
 using LibSocket;
 
 namespace LibPanels
@@ -21,22 +13,20 @@ namespace LibPanels
     public partial class WorkTime : BaseForm
     {
         #region ******变量声明******
-        DataSet _ds38 = new DataSet();
-        DataSet _ds46 = new DataSet();
-        DateTimePicker _dtp = new DateTimePicker();
+
+        private WorkingTime[] _workingTimes38;
+        private WorkingTime[] _workingTimes46;
+        private readonly DateTimePicker _dtp = new DateTimePicker();
         #endregion
 
         /// <summary>
         /// 构造方法
         /// </summary>
-        public WorkTime(MainFrm mainFrm)
+        public WorkTime()
         {
             InitializeComponent();
-
-            this.MainForm = mainFrm;
-
             //修改窗体格式
-            LibCommon.FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_MS.WORK_TIME_MANAGEMENT);
+            FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_MS.WORK_TIME_MANAGEMENT);
         }
 
         /// <summary>
@@ -67,6 +57,8 @@ namespace LibPanels
             {
                 rbtn46.Checked = true;
             }
+            _workingTimes38 = WorkingTime.FindAllBy38Times();
+            _workingTimes46 = WorkingTime.FindAllBy46Times();
         }
 
         /// <summary>
@@ -90,7 +82,7 @@ namespace LibPanels
             if (rbtn38.Checked)
             {
                 //绑定三八制
-                this.bind38();
+                Bind38();
             }
         }
 
@@ -104,183 +96,73 @@ namespace LibPanels
             if (rbtn46.Checked)
             {
                 //绑定四六制
-                this.bind46();
+                Bind46();
             }
         }
 
         /// <summary>
         /// 绑定三八制
         /// </summary>
-        private void bind38()
+        private void Bind38()
         {
-            //检查数据库中是否有38制的数据
-            bool bResult = WorkTimeBLL.isWorkTime38Exist();
-            //复制表结构与数据
-            _ds38 = WorkTimeBLL.returnWorkTime38DS().Copy();
-            //存在
-            if (bResult)
+            //设置datagridview数据行数
+            dgrdvWorkTime.RowCount = _workingTimes38.Length;
+            //插入数据
+            for (int i = 0; i < _workingTimes38.Length; i++)
             {
-                //设置datagridview数据行数
-                dgrdvWorkTime.RowCount = _ds38.Tables[0].Rows.Count;
-                //插入数据
-                for (int i = 0; i < _ds38.Tables[0].Rows.Count; i++)
-                {
-                    dgrdvWorkTime[0, i].Value = _ds38.Tables[0].Rows[i][WorkTimeDbConstNames.WORK_TIME_NAME].ToString();
-                    dgrdvWorkTime[1, i].Value = _ds38.Tables[0].Rows[i][WorkTimeDbConstNames.WORK_TIME_FROM].ToString();
-                    dgrdvWorkTime[2, i].Value = _ds38.Tables[0].Rows[i][WorkTimeDbConstNames.WORK_TIME_TO].ToString();
-                }
+                dgrdvWorkTime[0, i].Value = _workingTimes38[i].WorkTimeName;
+                dgrdvWorkTime[1, i].Value = _workingTimes38[i].WorkTimeFrom;
+                dgrdvWorkTime[2, i].Value = _workingTimes38[i].WorkTimeTo;
             }
-            //不存在
-            else
-            {
-                //绑定默认数据
-                this.bindDefault38();
-            }
-        }
-
-        /// <summary>
-        /// 绑定默认三八制
-        /// </summary>
-        private void bindDefault38()
-        {
-            dgrdvWorkTime.ColumnCount = 3;
-            dgrdvWorkTime.RowCount = 3;
-            dgrdvWorkTime[0, 0].Value = Const_MS.DEFAULT_TIME_MORNING;
-            dgrdvWorkTime[1, 0].Value = Const_MS.DEFAULT_TIME_MORNING_FROM;
-            dgrdvWorkTime[2, 0].Value = Const_MS.DEFAULT_TIME_MORNING_TO;
-            dgrdvWorkTime[0, 1].Value = Const_MS.DEFAULT_TIME_NOON;
-            dgrdvWorkTime[1, 1].Value = Const_MS.DEFAULT_TIME_NOON_FROM;
-            dgrdvWorkTime[2, 1].Value = Const_MS.DEFAULT_TIME_NOON_TO;
-            dgrdvWorkTime[0, 2].Value = Const_MS.DEFAULT_TIME_EVENING;
-            dgrdvWorkTime[1, 2].Value = Const_MS.DEFAULT_TIME_EVENING_FROM;
-            dgrdvWorkTime[2, 2].Value = Const_MS.DEFAULT_TIME_EVENING_TO;
         }
 
         /// <summary>
         /// 绑定四六制
         /// </summary>
-        private void bind46()
+        private void Bind46()
         {
-            //检查数据库中是否有46制数据
-            bool bResult = WorkTimeBLL.isWorkTime46Exist();
-            //复制表结构与数据
-            _ds46 = WorkTimeBLL.returnWorkTime46DS().Copy();
-            //存在
-            if (bResult)
+            //设置datagridview行数
+            dgrdvWorkTime.RowCount = _workingTimes46.Length;
+
+            for (var i = 0; i < _workingTimes46.Length; i++)
             {
-                //设置datagridview行数
-                dgrdvWorkTime.RowCount = _ds46.Tables[0].Rows.Count;
-                //插入数据
-                for (int i = 0; i < _ds46.Tables[0].Rows.Count; i++)
-                {
-                    dgrdvWorkTime[0, i].Value = _ds46.Tables[0].Rows[i][WorkTimeDbConstNames.WORK_TIME_NAME].ToString();
-                    dgrdvWorkTime[1, i].Value = _ds46.Tables[0].Rows[i][WorkTimeDbConstNames.WORK_TIME_FROM].ToString();
-                    dgrdvWorkTime[2, i].Value = _ds46.Tables[0].Rows[i][WorkTimeDbConstNames.WORK_TIME_TO].ToString();
-                }
-            }
-            //不存在
-            else
-            {
-                //绑定默认数据
-                this.bindDefault46();
+                dgrdvWorkTime[0, i].Value = _workingTimes46[i].WorkTimeName;
+                dgrdvWorkTime[1, i].Value = _workingTimes46[i].WorkTimeFrom;
+                dgrdvWorkTime[2, i].Value = _workingTimes46[i].WorkTimeTo;
             }
         }
 
-        /// <summary>
-        /// 绑定默认四六制
-        /// </summary>
-        private void bindDefault46()
-        {
-            dgrdvWorkTime.ColumnCount = 3;
-            dgrdvWorkTime.RowCount = 4;
-            dgrdvWorkTime[0, 0].Value = Const_MS.DEFAULT_TIME_0;
-            dgrdvWorkTime[1, 0].Value = Const_MS.DEFAULT_TIME_0_FROM;
-            dgrdvWorkTime[2, 0].Value = Const_MS.DEFAULT_TIME_0_TO;
-            dgrdvWorkTime[0, 1].Value = Const_MS.DEFAULT_TIME_6;
-            dgrdvWorkTime[1, 1].Value = Const_MS.DEFAULT_TIME_6_FROM;
-            dgrdvWorkTime[2, 1].Value = Const_MS.DEFAULT_TIME_6_TO;
-            dgrdvWorkTime[0, 2].Value = Const_MS.DEFAULT_TIME_12;
-            dgrdvWorkTime[1, 2].Value = Const_MS.DEFAULT_TIME_12_FROM;
-            dgrdvWorkTime[2, 2].Value = Const_MS.DEFAULT_TIME_12_TO;
-            dgrdvWorkTime[0, 3].Value = Const_MS.DEFAULT_TIME_18;
-            dgrdvWorkTime[1, 3].Value = Const_MS.DEFAULT_TIME_18_FROM;
-            dgrdvWorkTime[2, 3].Value = Const_MS.DEFAULT_TIME_18_TO;
-        }
 
         /// <summary>
         /// 更新表数据
         /// </summary>
-        private bool updateWorkTimeTable()
+        private void UpdateWorkTimeTable()
         {
-            DataSet ds = new DataSet();
-            //克隆表结构
-            ds.Tables.Add(WorkTimeBLL.returnWorkTime38DS().Tables[0].Copy());
-
-            ds.Tables[0].Rows.Clear();
             //选择三八制
             if (rbtn38.Checked)
             {
-                //表中有三八制数据
-                if (WorkTimeBLL.isWorkTime38Exist())
+                //绑定三八制数据
+                for (int i = 0; i < _workingTimes38.Length; i++)
                 {
-                    //绑定三八制数据
-                    for (int i = 0; i < dgrdvWorkTime.RowCount; i++)
-                    {
-                        ds.Tables[0].Rows.Add();
-                        ds.Tables[0].Rows[i][WorkTimeDbConstNames.WORK_TIME_ID] = _ds38.Tables[0].Rows[i][WorkTimeDbConstNames.WORK_TIME_ID];
-                        ds.Tables[0].Rows[i][WorkTimeDbConstNames.WORK_TIME_GROUP_ID] = Const_MS.WORK_GROUP_ID_38;
-                        ds.Tables[0].Rows[i][WorkTimeDbConstNames.WORK_TIME_NAME] = dgrdvWorkTime[0, i].Value;
-                        ds.Tables[0].Rows[i][WorkTimeDbConstNames.WORK_TIME_FROM] = Convert.ToDateTime(dgrdvWorkTime[1, i].Value).TimeOfDay;
-                        ds.Tables[0].Rows[i][WorkTimeDbConstNames.WORK_TIME_TO] = Convert.ToDateTime(dgrdvWorkTime[2, i].Value).TimeOfDay;
-                    }
-                }
-                //表中无三八制数据
-                else
-                {
-                    //绑定默认三八制数据
-                    for (int i = 0; i < dgrdvWorkTime.RowCount; i++)
-                    {
-                        ds.Tables[0].Rows.Add();
-                        ds.Tables[0].Rows[i][WorkTimeDbConstNames.WORK_TIME_GROUP_ID] = Const_MS.WORK_GROUP_ID_38;
-                        ds.Tables[0].Rows[i][WorkTimeDbConstNames.WORK_TIME_NAME] = dgrdvWorkTime[0, i].Value;
-                        ds.Tables[0].Rows[i][WorkTimeDbConstNames.WORK_TIME_FROM] = Convert.ToDateTime(dgrdvWorkTime[1, i].Value).TimeOfDay;
-                        ds.Tables[0].Rows[i][WorkTimeDbConstNames.WORK_TIME_TO] = Convert.ToDateTime(dgrdvWorkTime[2, i].Value).TimeOfDay;
-                    }
+                    _workingTimes38[i].WorkTimeGroupId = Const_MS.WORK_GROUP_ID_38;
+                    _workingTimes38[i].WorkTimeName = dgrdvWorkTime[0, i].Value.ToString();
+                    _workingTimes38[i].WorkTimeFrom = Convert.ToDateTime(dgrdvWorkTime[1, i].Value);
+                    _workingTimes38[i].WorkTimeTo = Convert.ToDateTime(dgrdvWorkTime[2, i].Value);
+                    _workingTimes38[i].Save();
                 }
             }
-            //选择四六制
-            if (rbtn46.Checked)
+            else if (rbtn46.Checked)
             {
-                //表中有四六制数据
-                if (WorkTimeBLL.isWorkTime46Exist())
+                //绑定四六制数据
+                for (int i = 0; i < _workingTimes46.Length; i++)
                 {
-                    //绑定四六制数据
-                    for (int i = 0; i < dgrdvWorkTime.RowCount; i++)
-                    {
-                        ds.Tables[0].Rows.Add();
-                        ds.Tables[0].Rows[i][WorkTimeDbConstNames.WORK_TIME_ID] = _ds46.Tables[0].Rows[i][WorkTimeDbConstNames.WORK_TIME_ID];
-                        ds.Tables[0].Rows[i][WorkTimeDbConstNames.WORK_TIME_GROUP_ID] = Const_MS.WORK_GROUP_ID_46;
-                        ds.Tables[0].Rows[i][WorkTimeDbConstNames.WORK_TIME_NAME] = dgrdvWorkTime[0, i].Value;
-                        ds.Tables[0].Rows[i][WorkTimeDbConstNames.WORK_TIME_FROM] = Convert.ToDateTime(dgrdvWorkTime[1, i].Value).TimeOfDay;
-                        ds.Tables[0].Rows[i][WorkTimeDbConstNames.WORK_TIME_TO] = Convert.ToDateTime(dgrdvWorkTime[2, i].Value).TimeOfDay;
-                    }
-                }
-                else
-                //表中无四六制数据
-                {
-                    for (int i = 0; i < dgrdvWorkTime.RowCount; i++)
-                    {
-                        //绑定默认四六制数据
-                        ds.Tables[0].Rows.Add();
-                        ds.Tables[0].Rows[i][WorkTimeDbConstNames.WORK_TIME_GROUP_ID] = Const_MS.WORK_GROUP_ID_46;
-                        ds.Tables[0].Rows[i][WorkTimeDbConstNames.WORK_TIME_NAME] = dgrdvWorkTime[0, i].Value;
-                        ds.Tables[0].Rows[i][WorkTimeDbConstNames.WORK_TIME_FROM] = Convert.ToDateTime(dgrdvWorkTime[1, i].Value).TimeOfDay;
-                        ds.Tables[0].Rows[i][WorkTimeDbConstNames.WORK_TIME_TO] = Convert.ToDateTime(dgrdvWorkTime[2, i].Value).TimeOfDay;
-                    }
+                    _workingTimes46[i].WorkTimeGroupId = Const_MS.WORK_GROUP_ID_46;
+                    _workingTimes46[i].WorkTimeName = dgrdvWorkTime[0, i].Value.ToString();
+                    _workingTimes46[i].WorkTimeFrom = Convert.ToDateTime(dgrdvWorkTime[1, i].Value);
+                    _workingTimes46[i].WorkTimeTo = Convert.ToDateTime(dgrdvWorkTime[2, i].Value);
+                    _workingTimes38[i].Save();
                 }
             }
-            bool bResult = WorkTimeBLL.insertWorkTime(ds);
-            return bResult;
         }
 
         /// <summary>
@@ -290,21 +172,17 @@ namespace LibPanels
         /// <param name="e"></param>
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            if (check())
+            if (!Check()) return;
+            //提交修改
+            UpdateWorkTimeTable();
+            // 通知server端，班次信息已经修改
+            var msg = new UpdateWarningDataMsg(Const.INVALID_ID, Const.INVALID_ID,
+                WorkTimeDbConstNames.TABLE_NAME, OPERATION_TYPE.UPDATE, DateTime.Now)
             {
-                //提交修改
-                bool bResult = updateWorkTimeTable();
-                if (bResult)
-                {
-                    this.Close();
-
-                    // 通知server端，班次信息已经修改
-                    UpdateWarningDataMsg msg = new UpdateWarningDataMsg(Const.INVALID_ID, Const.INVALID_ID,
-                        WorkTimeDbConstNames.TABLE_NAME, OPERATION_TYPE.UPDATE, DateTime.Now);
-                    msg.CommandId = COMMAND_ID.UPDATE_WORK_TIME;
-                    this.MainForm.SendMsg2Server(msg);
-                }
-            }
+                CommandId = COMMAND_ID.UPDATE_WORK_TIME
+            };
+            MainForm.SendMsg2Server(msg);
+            Close();
         }
 
         /// <summary>
@@ -315,7 +193,7 @@ namespace LibPanels
         private void btnCancle_Click(object sender, EventArgs e)
         {
             //关闭窗体
-            this.Close();
+            Close();
         }
 
         /// <summary>
@@ -336,57 +214,48 @@ namespace LibPanels
         /// 验证
         /// </summary>
         /// <returns></returns>
-        private bool check()
+        private bool Check()
         {
-            for (int i = 0; i < this.dgrdvWorkTime.RowCount; i++)
+            for (int i = 0; i < dgrdvWorkTime.RowCount; i++)
             {
-                DataGridViewTextBoxCell cell = dgrdvWorkTime.Rows[i].Cells[0] as DataGridViewTextBoxCell;
+                var cell = dgrdvWorkTime.Rows[i].Cells[0] as DataGridViewTextBoxCell;
                 //判断班次名非空
-                if (Convert.ToString(cell.Value).Trim() == Const.DATA_NULL)
+                if (cell != null && Convert.ToString(cell.Value).Trim() == Const.DATA_NULL)
                 {
                     cell.Style.BackColor = Const.ERROR_FIELD_COLOR;
                     Alert.alert(Const_MS.WORK_TIME_NAME + Const.MSG_NOT_NULL);
                     return false;
                 }
-                else
+                if (cell != null)
                 {
                     cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                }
-                // 判断班次名特殊字符
-                if (Validator.checkSpecialCharacters(cell.Value.ToString()))
-                {
-                    Alert.alert(Const_MS.WORK_TIME_NAME + Const.MSG_SP_CHAR);
-                    cell.Style.BackColor = Const.ERROR_FIELD_COLOR;
-                    return false;
-                }
-                else
-                {
+                    // 判断班次名特殊字符
+                    if (Validator.checkSpecialCharacters(cell.Value.ToString()))
+                    {
+                        Alert.alert(Const_MS.WORK_TIME_NAME + Const.MSG_SP_CHAR);
+                        cell.Style.BackColor = Const.ERROR_FIELD_COLOR;
+                        return false;
+                    }
                     cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
                 }
                 cell = dgrdvWorkTime.Rows[i].Cells[1] as DataGridViewTextBoxCell;
                 //判断开始时间非空
-                if (cell.Value == null)
+                if (cell != null && cell.Value == null)
                 {
                     cell.Style.BackColor = Const.ERROR_FIELD_COLOR;
                     Alert.alert(Const_MS.WORK_TIME_FROM + Const.MSG_NOT_NULL);
                     return false;
                 }
-                else
-                {
-                    cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                }
+                if (cell != null) cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
                 cell = dgrdvWorkTime.Rows[i].Cells[2] as DataGridViewTextBoxCell;
                 //判断结束时间非空
-                if (cell.Value == null)
+                if (cell != null && cell.Value == null)
                 {
                     cell.Style.BackColor = Const.ERROR_FIELD_COLOR;
                     Alert.alert(Const_MS.WORK_TIME_TO + Const.MSG_NOT_NULL);
                     return false;
                 }
-                else
-                {
-                    cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                }
+                if (cell != null) cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
             }
             return true;
         }
@@ -440,7 +309,7 @@ namespace LibPanels
         /// </summary>
         /// <param name="workStyle">工作制式名</param>
         /// <returns>班次名</returns>
-        public static string returnSysWorkTime(string workStyle)
+        public static string ReturnSysWorkTime(string workStyle)
         {
             //获取班次
             DataSet ds = WorkTimeBLL.returnWorkTime(workStyle);

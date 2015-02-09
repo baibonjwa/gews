@@ -1,4 +1,6 @@
-﻿using Castle.ActiveRecord;
+﻿using System;
+using Castle.ActiveRecord;
+using NHibernate.Criterion;
 
 namespace LibEntity
 {
@@ -8,13 +10,6 @@ namespace LibEntity
     [ActiveRecord("T_WORK_TIME")]
     public class WorkingTime : ActiveRecordBase<WorkingTime>
     {
-        public WorkingTime()
-        {
-            WorkTimeTo = "";
-            WorkTimeFrom = "";
-            WorkTimeName = "";
-        }
-
         /// <summary>
         ///     获取设置工作制Id
         /// </summary>
@@ -37,12 +32,31 @@ namespace LibEntity
         ///     获取设置工作起始时间
         /// </summary>
         [Property("WORK_TIME_FROM")]
-        public string WorkTimeFrom { get; set; }
+        public DateTime WorkTimeFrom { get; set; }
 
         /// <summary>
         ///     获取设置工作终止时间
         /// </summary>
         [Property("WORK_TIME_TO")]
-        public string WorkTimeTo { get; set; }
+        public DateTime WorkTimeTo { get; set; }
+
+        public static WorkingTime[] FindAllBy38Times()
+        {
+            var criterion = new ICriterion[]
+            {
+                Restrictions.Eq("WorkTimeGroupId", 1)
+            };
+            return FindAll(criterion);
+        }
+
+        public static WorkingTime[] FindAllBy46Times()
+        {
+            var criterion = new ICriterion[]
+            {
+                Restrictions.Eq("WorkTimeGroupId", 2)
+            };
+            return FindAll(criterion);
+        }
+
     }
 }

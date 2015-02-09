@@ -382,7 +382,7 @@ namespace _5.WarningManagement
                 summaryCells[i, COLUMN_TUNNEL_NAME].HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
                 summaryCells[i, COLUMN_TUNNEL_NAME].VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
                 //日期
-                summaryCells[i, COLUMN_DATE_TIME].Value = _ents[i].DateTime.Split(' ')[0];
+                summaryCells[i, COLUMN_DATE_TIME].Value = _ents[i].DateTime.ToShortDateString();
                 summaryCells[i, COLUMN_DATE_TIME].HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
                 summaryCells[i, COLUMN_DATE_TIME].VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
                 //班次

@@ -35,7 +35,7 @@ namespace LibBusiness
         public static void CloseDatabase()
         {
             _database.Close();
-        }                
+        }
 
         /// <summary>
         /// 获取所有实体
@@ -45,7 +45,7 @@ namespace LibBusiness
         /// <param name="tunnel_ID"></param>
         /// <returns></returns>
         public static List<PreWarningResultQuery> SelectPreWarningResultInOneDateShift(string date, string date_shift, string tunnel_ID, string warning_type)
-        { 
+        {
             List<PreWarningResultQuery> ents = new List<PreWarningResultQuery>();
             string[] times = GetDateShiftTimes(date_shift, date);
             if (times.Length != 2)
@@ -76,7 +76,7 @@ namespace LibBusiness
             strSql.Append(PreWarningResultDBConstNames.WARNING_RESULT);
             strSql.Append(" < ");
             strSql.Append((int)LibCommon.WarningResult.GREEN);
-            strSql.Append(") )AS T");            
+            strSql.Append(") )AS T");
 
             DataSet ds = _database.ReturnDSNotOpenAndClose(strSql.ToString());
             if (ds != null)
@@ -91,7 +91,7 @@ namespace LibBusiness
                         #region 实体赋值
                         PreWarningResultQuery ent = new PreWarningResultQuery();
                         ent.TunelName = GetTunelNameByTunelID(tunnel_ID);
-                        ent.DateTime = dt.Rows[i][PreWarningResultDBConstNames.DATA_TIME].ToString();
+                        ent.DateTime = Convert.ToDateTime(dt.Rows[i][PreWarningResultDBConstNames.DATA_TIME]);
                         ent.Date_Shift = dt.Rows[i][PreWarningResultDBConstNames.DATE_SHIFT].ToString();
 
                         int defultValue = (int)WarningResult.NULL;
@@ -161,9 +161,9 @@ namespace LibBusiness
         /// <param name="tunnel_ID"></param>
         /// <returns></returns>
         public static int SelectPreWarningResultCountInOneDateShift(string date,
-            string date_shift, string tunnel_ID,string warning_type,bool addWarningFilter)
+            string date_shift, string tunnel_ID, string warning_type, bool addWarningFilter)
         {
-            int rowCount = 0;            
+            int rowCount = 0;
             StringBuilder strSql = null;
 
             //用以限制是否同时显示超限和突出预警

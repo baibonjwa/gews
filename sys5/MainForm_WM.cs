@@ -644,7 +644,7 @@ namespace _5.WarningManagement
         //班次管理
         private void mniShiftsSetting_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var workTime = new WorkTime(this);
+            var workTime = new WorkTime();
             workTime.Show();
         }
 

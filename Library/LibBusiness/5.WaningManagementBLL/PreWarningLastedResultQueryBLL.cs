@@ -58,7 +58,7 @@ namespace LibBusiness
                     ent.WorkingfaceId = dt.Rows[i][WorkingFaceDbConstNames.WORKINGFACE_ID] != DBNull.Value ? Convert.ToInt32(dt.Rows[i][WorkingFaceDbConstNames.WORKINGFACE_ID]) : 0;
                     ent.WorkingfaceName = dt.Rows[i][WorkingFaceDbConstNames.WORKINGFACE_ID] != DBNull.Value ? dt.Rows[i][WorkingFaceDbConstNames.WORKINGFACE_NAME].ToString() : "";
                     //日期
-                    ent.DateTime = dt.Rows[i][PreWarningResultDBConstNames.DATA_TIME].ToString();
+                    ent.DateTime = Convert.ToDateTime(dt.Rows[i][PreWarningResultDBConstNames.DATA_TIME]);
                     //班次
                     ent.Date_Shift = dt.Rows[i][PreWarningResultDBConstNames.DATE_SHIFT].ToString();
                     //}
@@ -316,7 +316,7 @@ namespace LibBusiness
                     ent.WorkingfaceName = dt.Rows[i][WorkingFaceDbConstNames.WORKINGFACE_ID] != DBNull.Value ? dt.Rows[i][WorkingFaceDbConstNames.WORKINGFACE_NAME].ToString() : "";
 
                     //日期
-                    ent.DateTime = dt.Rows[i][PreWarningResultDBConstNames.DATA_TIME].ToString();
+                    ent.DateTime = Convert.ToDateTime(dt.Rows[i][PreWarningResultDBConstNames.DATA_TIME]);
                     //班次
                     ent.Date_Shift = dt.Rows[i][PreWarningResultDBConstNames.DATE_SHIFT].ToString();
 

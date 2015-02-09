@@ -260,7 +260,7 @@ namespace sys2
         //队别管理
         private void mniShiftsSetting_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            WorkTime wt = new WorkTime(this);
+            WorkTime wt = new WorkTime();
             wt.Show();
         }
 

@@ -141,7 +141,7 @@ namespace LibBusiness
                         //巷道ID
                         ent.TunnelID = (int)(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.TUNNEL_ID]);
                         //日期
-                        ent.DateTime = dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.DATA_TIME].ToString();
+                        ent.DateTime = Convert.ToDateTime(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.DATA_TIME]);
                         //班次
                         ent.Date_Shift = dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.DATE_SHIFT].ToString();
 

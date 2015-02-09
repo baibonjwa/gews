@@ -15,7 +15,7 @@ namespace LibEntity
     public class PreWarningResultQueryWithWorkingface
     {
         private string _strDateShift = "";
-        private string _strDateTime = "";
+        private DateTime _strDateTime;
         private WarningResultEnt _strOutBrustWarningResult = new WarningResultEnt();
         private WarningResultEnt _strOverLimitWarningResult = new WarningResultEnt();
         private int _workingfaceID = Const.INVALID_ID;
@@ -57,7 +57,7 @@ namespace LibEntity
         /// <summary>
         ///     日期
         /// </summary>
-        public string DateTime
+        public DateTime DateTime
         {
             get { return _strDateTime; }
             set { _strDateTime = value; }

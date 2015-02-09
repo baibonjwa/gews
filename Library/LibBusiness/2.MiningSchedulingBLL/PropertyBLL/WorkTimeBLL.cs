@@ -19,77 +19,33 @@ namespace LibBusiness
 {
     public class WorkTimeBLL
     {
-        /// <summary>
-        /// 登入工作时间
-        /// </summary>
-        /// <param name="ds">工作时间</param>
-        /// <returns>是否成功登入：true,false</returns>
-        public static bool insertWorkTime(DataSet ds)
-        {
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
-            bool bResult = true;
-            if (ds.Tables[0].Rows[0][WorkTimeDbConstNames.WORK_TIME_ID].ToString() != "")
-            {
-                //Alert.alert(ds.Tables[0].Rows[0]["WORK_TIME_ID"].ToString());
-                db.Open();
-                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-                {
-                    StringBuilder sqlStr = new StringBuilder();
-                    sqlStr.Append("UPDATE " + WorkTimeDbConstNames.TABLE_NAME + " SET " + WorkTimeDbConstNames.WORK_TIME_NAME + " = '");
-                    sqlStr.Append(ds.Tables[0].Rows[i][WorkTimeDbConstNames.WORK_TIME_NAME].ToString() + "'," + WorkTimeDbConstNames.WORK_TIME_FROM + " ='");
-                    sqlStr.Append(ds.Tables[0].Rows[i][WorkTimeDbConstNames.WORK_TIME_FROM].ToString() + "'," + WorkTimeDbConstNames.WORK_TIME_TO + " ='");
-                    sqlStr.Append(ds.Tables[0].Rows[i][WorkTimeDbConstNames.WORK_TIME_TO].ToString() + "' WHERE " + WorkTimeDbConstNames.WORK_TIME_ID + " =");
-                    sqlStr.Append(Convert.ToInt32(ds.Tables[0].Rows[i][WorkTimeDbConstNames.WORK_TIME_ID]) + " AND " + WorkTimeDbConstNames.WORK_TIME_GROUP_ID + " =");
-                    sqlStr.Append((int)(ds.Tables[0].Rows[i][WorkTimeDbConstNames.WORK_TIME_GROUP_ID]));
-                    bool bbResult = db.OperateDBNotOpenAndClose(sqlStr.ToString());
-                    bResult = (bResult && bbResult);
-                }
-                db.Close();
-            }
-            else
-            {
-                db.Open();
-                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-                {
-                    StringBuilder sqlStr = new StringBuilder();
-                    sqlStr.Append("INSERT INTO " + WorkTimeDbConstNames.TABLE_NAME + " (" + WorkTimeDbConstNames.WORK_TIME_GROUP_ID + "," + WorkTimeDbConstNames.WORK_TIME_NAME + "," + WorkTimeDbConstNames.WORK_TIME_FROM + "," + WorkTimeDbConstNames.WORK_TIME_TO + ") VALUES (");
-                    sqlStr.Append((int)(ds.Tables[0].Rows[i][WorkTimeDbConstNames.WORK_TIME_GROUP_ID]) + ",'");
-                    sqlStr.Append(ds.Tables[0].Rows[i][WorkTimeDbConstNames.WORK_TIME_NAME].ToString() + "','");
-                    sqlStr.Append(ds.Tables[0].Rows[i][WorkTimeDbConstNames.WORK_TIME_FROM].ToString() + "','");
-                    sqlStr.Append(ds.Tables[0].Rows[i][WorkTimeDbConstNames.WORK_TIME_TO].ToString() + "')");
-                    bool bbResult = db.OperateDBNotOpenAndClose(sqlStr.ToString());
-                    bResult = (bResult && bbResult);
-                }
-                db.Close();
-            }
-            return bResult;
-        }
+
 
         /// <summary>
         /// 返回工作时间信息
         /// </summary>
         /// <returns>工作时间</returns>
-        public static DataSet returnWorkTime38DS()
-        {
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
-            StringBuilder sqlStr = new StringBuilder();
-            sqlStr.Append("SELECT * FROM  " + WorkTimeDbConstNames.TABLE_NAME + " WHERE  " + WorkTimeDbConstNames.WORK_TIME_GROUP_ID + " =1");
-            DataSet ds = db.ReturnDS(sqlStr.ToString());
-            return ds;
-        }
+        //public static DataSet returnWorkTime38DS()
+        //{
+        //    ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
+        //    StringBuilder sqlStr = new StringBuilder();
+        //    sqlStr.Append("SELECT * FROM  " + WorkTimeDbConstNames.TABLE_NAME + " WHERE  " + WorkTimeDbConstNames.WORK_TIME_GROUP_ID + " =1");
+        //    DataSet ds = db.ReturnDS(sqlStr.ToString());
+        //    return ds;
+        //}
 
         /// <summary>
         /// 返回工作时间信息
         /// </summary>
         /// <returns>工作时间</returns>
-        public static DataSet returnWorkTime46DS()
-        {
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
-            StringBuilder sqlStr = new StringBuilder();
-            sqlStr.Append("SELECT * FROM  " + WorkTimeDbConstNames.TABLE_NAME + " WHERE  " + WorkTimeDbConstNames.WORK_TIME_GROUP_ID + " =2");
-            DataSet ds = db.ReturnDS(sqlStr.ToString());
-            return ds;
-        }
+        //public static DataSet returnWorkTime46DS()
+        //{
+        //    ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
+        //    StringBuilder sqlStr = new StringBuilder();
+        //    sqlStr.Append("SELECT * FROM  " + WorkTimeDbConstNames.TABLE_NAME + " WHERE  " + WorkTimeDbConstNames.WORK_TIME_GROUP_ID + " =2");
+        //    DataSet ds = db.ReturnDS(sqlStr.ToString());
+        //    return ds;
+        //}
 
         /// <summary>
         /// 检查是否存在38制工作时间
@@ -144,7 +100,7 @@ namespace LibBusiness
         /// <returns>是否</returns>
         public static bool setDefaultWorkTime(string workTime)
         {
-            int defaultWorkTimeGroupID;
+            string defaultWorkTimeGroupID;
             if (workTime == Const_MS.WORK_TIME_38)
             {
                 defaultWorkTimeGroupID = Const_MS.WORK_GROUP_ID_38;
