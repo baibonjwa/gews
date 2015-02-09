@@ -21,19 +21,6 @@ namespace LibBusiness
     {
 
         /// <summary>
-        /// 查询队别名称（去重）
-        /// </summary>
-        /// <returns>队别名</returns>
-        //public static DataSet SelectTeamInfo()
-        //{
-        //    ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
-        //    StringBuilder sqlStr = new StringBuilder();
-        //    sqlStr.Append("SELECT DISTINCT * FROM " + TeamDbConstNames.TABLE_NAME);
-        //    DataSet ds = db.ReturnDS(sqlStr.ToString());
-        //    return ds;
-        //}
-
-        /// <summary>
         /// 查询某巷道信息
         /// </summary>
         /// <param name="teamID"></param>

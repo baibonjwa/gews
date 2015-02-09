@@ -1,13 +1,4 @@
-﻿// ******************************************************************
-// 概  述：队别信息添加修改
-// 作  者：宋英杰
-// 创建日期：2014/3/11
-// 版本号：V1.0
-// 版本信息：
-// V1.0 新建
-// ******************************************************************
-
-using System;
+﻿using System;
 using System.Data;
 using System.Windows.Forms;
 using LibBusiness;
@@ -45,7 +36,7 @@ namespace LibPanels
             bindName();
 
             //窗体属性设置
-            LibCommon.FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_MS.TEAM_INFO_CHANGE);
+            FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_MS.TEAM_INFO_CHANGE);
         }
 
         //绑定姓名信息

@@ -120,7 +120,7 @@ namespace sys2
             if (Text == Const_MS.STOP_LINE_CHANGE)
             {
                 //修改
-                updateStopLineInfo();
+                UpdateStopLineInfo();
             }
         }
 
@@ -138,15 +138,12 @@ namespace sys2
         /// <summary>
         ///     修改
         /// </summary>
-        private void updateStopLineInfo()
+        private void UpdateStopLineInfo()
         {
             //修改操作
-            bool bResult = StopLineBLL.updateStopLineInfo(stopLineEntity);
-            if (bResult)
-            {
-                UpdateStopLineOnMap(_oldStopLineEntity, stopLineEntity); //更新地图上的停采线 
-                Close();
-            }
+            stopLineEntity.Save();
+            UpdateStopLineOnMap(_oldStopLineEntity, stopLineEntity); //更新地图上的停采线 
+            Close();
         }
 
         /// <summary>
@@ -179,7 +176,7 @@ namespace sys2
             //停采线名称重复
             if (txtStopLineName.Text != stopLineEntity.StopLineName)
             {
-                if (StopLineBLL.selectStopLineName(txtStopLineName.Text))
+                if (StopLine.ExistsByStopLineName(txtStopLineName.Text))
                 {
                     Alert.alert(Const_MS.STOP_LINE + Const.MSG_ALREADY_HAVE + Const.SIGN_EXCLAMATION_MARK);
                     return false;

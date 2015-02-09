@@ -22,6 +22,11 @@ namespace sys2
             FormDefaultPropertiesSetter.SetManagementFormDefaultProperties(this, Const_MS.STOP_LINE_MANAGEMENT);
         }
 
+        private void RefreshData()
+        {
+            gcStopLine.DataSource = StopLine.FindAll();
+        }
+
         /// <summary>
         /// 初始化
         /// </summary>
@@ -29,7 +34,7 @@ namespace sys2
         /// <param name="e"></param>
         private void TunnelInfoManagement_Load(object sender, EventArgs e)
         {
-
+            RefreshData();
         }
 
         /// <summary>
@@ -42,7 +47,7 @@ namespace sys2
             var d = new StopLineEntering();
             if (DialogResult.OK == d.ShowDialog())
             {
-
+                RefreshData();
             }
         }
         /// <summary>
@@ -55,7 +60,7 @@ namespace sys2
             var d = new StopLineEntering((StopLine)gridView1.GetFocusedRow());
             if (DialogResult.OK == d.ShowDialog())
             {
-
+                RefreshData();
             }
         }
 
@@ -73,6 +78,7 @@ namespace sys2
             if (featureLayer != null)
                 GIS.SpecialGraphic.DrawStopLine.DeleteLineFeature(featureLayer, stopLine.BindingId); //删除对应的停采线要素
             stopLine.Delete();
+            RefreshData();
         }
 
         /// <summary>
@@ -108,6 +114,7 @@ namespace sys2
         private void tsBtnRefresh_Click(object sender, EventArgs e)
         {
             //绑定数据
+            RefreshData();
         }
 
         /// <summary>
@@ -117,7 +124,10 @@ namespace sys2
         /// <param name="e"></param>
         private void tsBtnExport_Click(object sender, EventArgs e)
         {
-
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                gcStopLine.ExportToXls(saveFileDialog1.FileName);
+            }
         }
 
         /// <summary>
@@ -127,6 +137,7 @@ namespace sys2
         /// <param name="e"></param>
         private void tsBtnPrint_Click(object sender, EventArgs e)
         {
+            DevUtil.DevPrint(gcStopLine, "停采线信息报表");
         }
 
 

@@ -1,13 +1,6 @@
-﻿// ******************************************************************
-// 概  述：停采线数据实体
-// 作  者：宋英杰
-// 日  期：2014/3/12
-// 版本号：V1.0
-// 版本信息：
-// V1.0 新建
-// ******************************************************************
-
+﻿using System.Collections.Generic;
 using Castle.ActiveRecord;
+using NHibernate.Criterion;
 
 namespace LibEntity
 {
@@ -67,5 +60,14 @@ namespace LibEntity
         /// </summary>
         [Property("BINDINGID")]
         public string BindingId { get; set; }
+
+        public static bool ExistsByStopLineName(string stopLineName)
+        {
+            var criterion = new List<ICriterion>
+            {
+                Restrictions.Eq("StopLineName", stopLineName)
+            };
+            return Exists(criterion.ToArray());
+        }
     }
 }

@@ -49,6 +49,7 @@
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.controlNavigator1 = new DevExpress.XtraEditors.ControlNavigator();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcStopLine)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -184,6 +185,7 @@
             // gridColumn1
             // 
             this.gridColumn1.Caption = "停采线名称";
+            this.gridColumn1.FieldName = "StopLineName";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 0;
@@ -191,6 +193,7 @@
             // gridColumn2
             // 
             this.gridColumn2.Caption = "起点坐标X";
+            this.gridColumn2.FieldName = "SCoordinateX";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 1;
@@ -198,6 +201,7 @@
             // gridColumn3
             // 
             this.gridColumn3.Caption = "起点坐标Y";
+            this.gridColumn3.FieldName = "SCoordinateY";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 2;
@@ -205,6 +209,7 @@
             // gridColumn4
             // 
             this.gridColumn4.Caption = "起点坐标Z";
+            this.gridColumn4.FieldName = "SCoordinateZ";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 3;
@@ -212,6 +217,7 @@
             // gridColumn5
             // 
             this.gridColumn5.Caption = "终点坐标X";
+            this.gridColumn5.FieldName = "FCoordinateX";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
             this.gridColumn5.VisibleIndex = 4;
@@ -219,6 +225,7 @@
             // gridColumn6
             // 
             this.gridColumn6.Caption = "终点坐标Y";
+            this.gridColumn6.FieldName = "FCoordinateY";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
             this.gridColumn6.VisibleIndex = 5;
@@ -226,6 +233,7 @@
             // gridColumn7
             // 
             this.gridColumn7.Caption = "终点坐标Z";
+            this.gridColumn7.FieldName = "FCoordinateZ";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
             this.gridColumn7.VisibleIndex = 6;
@@ -235,6 +243,7 @@
             this.controlNavigator1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.controlNavigator1.Location = new System.Drawing.Point(12, 612);
             this.controlNavigator1.Name = "controlNavigator1";
+            this.controlNavigator1.NavigatableControl = this.gcStopLine;
             this.controlNavigator1.Size = new System.Drawing.Size(311, 24);
             this.controlNavigator1.TabIndex = 89;
             this.controlNavigator1.Text = "controlNavigator1";
@@ -287,6 +296,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
         private DevExpress.XtraEditors.ControlNavigator controlNavigator1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
 
 
     }
