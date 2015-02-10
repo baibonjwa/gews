@@ -67,8 +67,8 @@ namespace LibEntity
         /// <summary>
         ///     设置或获取队别编号
         /// </summary>
-        [Property("TEAM_NAME_ID")]
-        public int TeamNameId { get; set; }
+        [BelongsTo("TEAM_NAME_ID")]
+        public Team Team { get; set; }
 
         // 采区
         [BelongsTo("MININGAREA_ID")]

@@ -219,7 +219,7 @@ namespace LibBusiness
                 entity.StartDate = dr[WorkingFaceDbConstNames.START_DATE] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(dr[WorkingFaceDbConstNames.START_DATE].ToString());
                 entity.StopDate = dr[WorkingFaceDbConstNames.STOP_DATE] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(dr[WorkingFaceDbConstNames.STOP_DATE].ToString());
                 entity.IsFinish = dr[WorkingFaceDbConstNames.IS_FINISH] == DBNull.Value ? 0 : Convert.ToInt32(dr[WorkingFaceDbConstNames.IS_FINISH]);
-                entity.TeamNameId = dr[WorkingFaceDbConstNames.TEAM_NAME_ID] == DBNull.Value ? Const.INVALID_ID : Convert.ToInt32(dr[WorkingFaceDbConstNames.TEAM_NAME_ID].ToString());
+                entity.Team =  Team.Find(dr[WorkingFaceDbConstNames.TEAM_NAME_ID] == DBNull.Value ? Const.INVALID_ID : Convert.ToInt32(dr[WorkingFaceDbConstNames.TEAM_NAME_ID].ToString()));
             }
         }
 
@@ -253,7 +253,7 @@ namespace LibBusiness
                 entity.StartDate = dr[WorkingFaceDbConstNames.START_DATE] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(dr[WorkingFaceDbConstNames.START_DATE].ToString());
                 entity.StopDate = dr[WorkingFaceDbConstNames.STOP_DATE] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(dr[WorkingFaceDbConstNames.STOP_DATE].ToString());
                 entity.IsFinish = dr[WorkingFaceDbConstNames.IS_FINISH] == DBNull.Value ? 0 : Convert.ToInt32(dr[WorkingFaceDbConstNames.IS_FINISH]);
-                entity.TeamNameId = dr[WorkingFaceDbConstNames.TEAM_NAME_ID] == DBNull.Value ? Const.INVALID_ID : Convert.ToInt32(dr[WorkingFaceDbConstNames.TEAM_NAME_ID].ToString());
+                entity.Team = Team.Find(dr[WorkingFaceDbConstNames.TEAM_NAME_ID] == DBNull.Value ? Const.INVALID_ID : Convert.ToInt32(dr[WorkingFaceDbConstNames.TEAM_NAME_ID].ToString()));
                 entity.WorkingfaceTypeEnum = dr[WorkingFaceDbConstNames.WORKINGFACE_TYPE] == DBNull.Value ? WorkingfaceTypeEnum.OTHER : (WorkingfaceTypeEnum)dr[WorkingFaceDbConstNames.WORKINGFACE_TYPE];
 
                 wfList.Add(entity.WorkingFaceId, entity);

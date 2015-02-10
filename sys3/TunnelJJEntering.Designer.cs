@@ -1,6 +1,6 @@
-﻿namespace _3.GeologyMeasure
+﻿namespace sys3
 {
-    partial class TunnelJJEntering
+    partial class TunnelJjEntering
     {
         /// <summary>
         /// Required designer variable.
@@ -286,7 +286,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "TunnelJJEntering";
+            this.Name = "TunnelJjEntering";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "设置掘进面";
             this.Load += new System.EventHandler(this.TunnelJJHC_Load);

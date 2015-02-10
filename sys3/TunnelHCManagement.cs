@@ -200,7 +200,7 @@ namespace _3.GeologyMeasure
                     //其他关联
                     cells[_rowDetailStartIndex + i, COLUMN_INDEX_TUNNEL_OTHER].Text = otherTunnel;
                     //队别
-                    cells[_rowDetailStartIndex + i, COLUMN_INDEX_TEAM_NAME].Text = BasicInfoManager.getInstance().getTeamNameById(entity.TeamNameId);
+                    cells[_rowDetailStartIndex + i, COLUMN_INDEX_TEAM_NAME].Text = entity.Team.TeamName;
 
                     //开工日期
                     cells[_rowDetailStartIndex + i, COLUMN_INDEX_START_DATE].Text = string.Format("{0:YYYY-MM-dd}", entity.StartDate);

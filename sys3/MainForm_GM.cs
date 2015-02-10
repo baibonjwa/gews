@@ -411,7 +411,7 @@ namespace sys3
         //掘进面管理
         private void mniJJHDGL_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            TunnelJJManagement tjjm = new TunnelJJManagement(this);
+            TunnelJjManagement tjjm = new TunnelJjManagement();
             tjjm.Show();
         }
 

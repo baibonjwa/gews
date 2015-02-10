@@ -119,7 +119,7 @@ namespace LibEntity
         {
             var criterion = new ICriterion[]
             {
-                Restrictions.Eq("WorkingFace.WorkingFaceId",workingfaceId)
+                Restrictions.Eq("WorkingFace.WorkingFaceId", workingfaceId)
             };
             return FindAll(criterion);
         }
@@ -128,7 +128,7 @@ namespace LibEntity
         {
             var criterion = new ICriterion[]
             {
-                Restrictions.Eq("WorkingFace.WorkingFaceId",workingfaceId)
+                Restrictions.Eq("WorkingFace.WorkingFaceId", workingfaceId)
             };
             return FindFirst(criterion);
         }
@@ -137,11 +137,19 @@ namespace LibEntity
         {
             var criterion = new ICriterion[]
             {
-                Restrictions.Eq("TunnelName",tunnelName),
-                Restrictions.Eq("WorkingFace.WorkingFaceId",workingfaceId)
+                Restrictions.Eq("TunnelName", tunnelName),
+                Restrictions.Eq("WorkingFace.WorkingFaceId", workingfaceId)
             };
             return Exists(criterion);
         }
 
+        public static Tunnel[] FindAllByTunnelType(TunnelTypeEnum tunnelType)
+        {
+            var criterion = new ICriterion[]
+            {
+                Restrictions.Eq("TunnelType", tunnelType)
+            };
+            return FindAll(criterion);
+        }
     }
 }

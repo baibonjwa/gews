@@ -1,30 +1,15 @@
-﻿// ******************************************************************
-// 概  述：掘进面信息添加修改
-// 作  者：宋英杰
-// 创建日期：2014/3/11
-// 版本号：V1.0
-// 版本信息：
-// V1.0 新建
-// ******************************************************************
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+﻿using System;
 using System.Windows.Forms;
-using LibCommon;
-using LibEntity;
 using LibBusiness;
-//using _2.MiningScheduling;
 using LibBusiness.CommonBLL;
+using LibCommon;
 using LibCommonControl;
 using LibCommonForm;
+using LibEntity;
 
-namespace _3.GeologyMeasure
+namespace sys3
 {
-    public partial class TunnelJJEntering : BaseForm
+    public partial class TunnelJjEntering : BaseForm
     {
         /************变量定义*****************/
         // 掘进面
@@ -36,9 +21,8 @@ namespace _3.GeologyMeasure
         /// <summary>
         /// 构造方法
         /// </summary>
-        public TunnelJJEntering(MainFrm mainFrm)
+        public TunnelJjEntering()
         {
-            this.MainForm = mainFrm;
             InitializeComponent();
 
             //默认选择未掘进完毕
@@ -64,13 +48,11 @@ namespace _3.GeologyMeasure
         /// <summary>
         /// 构造方法
         /// </summary>
-        /// <param name="tunnelJJEntity">掘进巷道实体</param>
-        public TunnelJJEntering(WorkingFace wfEntity, Tunnel tunnelEntity, MainFrm mainFrm)
+        /// <param name="tunnelEntity"></param>
+        public TunnelJjEntering(Tunnel tunnelEntity)
         {
-            this.MainForm = mainFrm;
 
             this.tunnelEntity = tunnelEntity;
-            this.jjWorkFaceEntity = wfEntity;
 
             InitializeComponent();
 
@@ -137,7 +119,7 @@ namespace _3.GeologyMeasure
             btnChooseTunnel.Text = tunnelEntity.TunnelName;
 
             //队别
-            cboTeamName.Text = BasicInfoManager.getInstance().getTeamNameById(jjWorkFaceEntity.TeamNameId);
+            cboTeamName.Text = jjWorkFaceEntity.Team.TeamName;
 
             //开工日期
             dtpStartDate.Value = DateTimeUtil.validateDTPDateTime((System.DateTime)this.jjWorkFaceEntity.StartDate);
@@ -181,7 +163,7 @@ namespace _3.GeologyMeasure
                 return;
             }
 
-            jjWorkFaceEntity.TeamNameId = Convert.ToInt32(cboTeamName.SelectedValue);
+            jjWorkFaceEntity.Team = Team.Find(cboTeamName.SelectedValue);
             jjWorkFaceEntity.StartDate = dtpStartDate.Value;
             if (rbtnJJY.Checked)
             {

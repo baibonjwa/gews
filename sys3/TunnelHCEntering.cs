@@ -182,7 +182,7 @@ namespace _3.GeologyMeasure
             //}
 
             //队别名称
-            cboTeamName.Text = BasicInfoManager.getInstance().getTeamNameById(workingFace.TeamNameId);
+            cboTeamName.Text = workingFace.Team.TeamName;
 
             //开始日期
             dtpStartDate.Value = DateTimeUtil.validateDTPDateTime((DateTime)workingFace.StartDate);
@@ -384,7 +384,7 @@ namespace _3.GeologyMeasure
             if (workingFace == null) return;
 
             //队别
-            workingFace.TeamNameId = Convert.ToInt32(cboTeamName.SelectedValue);
+            workingFace.Team = Team.Find(cboTeamName.SelectedValue);
             //开工日期
             workingFace.StartDate = dtpStartDate.Value;
             //是否停工
