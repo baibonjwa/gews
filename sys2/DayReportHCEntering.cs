@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using ESRI.ArcGIS.Geodatabase;
 using ESRI.ArcGIS.Geometry;
@@ -96,20 +97,11 @@ namespace sys2
         {
             if (workingFaceId != Const.INVALID_ID)
             {
-                workingFace = BasicInfoManager.getInstance().getWorkingFaceById(workingFaceId);
+                workingFace = WorkingFace.Find(workingFaceId);
 
-                workingFace.TunnelSet =
-                    BasicInfoManager.getInstance()
-                        .getTunnelSetByDataSet(TunnelInfoBLL.selectTunnelByWorkingFaceId(workingFace.WorkingFaceId));
-                Dictionary<TunnelTypeEnum, Tunnel> tList = TunnelUtils.getTunnelDict(workingFace);
-                if (tList.Count == 0)
-                    return;
-                if (tList.Count >= 3)
-                {
-                    tunnelZY = tList[TunnelTypeEnum.STOPING_ZY];
-                    tunnelFY = tList[TunnelTypeEnum.STOPING_FY];
-                    tunnelQY = tList[TunnelTypeEnum.STOPING_QY];
-                }
+                tunnelZY = workingFace.Tunnels.First(u => u.TunnelType == TunnelTypeEnum.STOPING_ZY);
+                tunnelFY = workingFace.Tunnels.First(u => u.TunnelType == TunnelTypeEnum.STOPING_FY);
+                tunnelQY = workingFace.Tunnels.First(u => u.TunnelType == TunnelTypeEnum.STOPING_QY);
 
                 if (null == workingFace)
                 {
@@ -130,16 +122,9 @@ namespace sys2
                 selectWorkingfaceSimple1.SelectTunnelItemWithoutHistory(ws);
 
 
-                workingFace.TunnelSet =
-                    BasicInfoManager.getInstance()
-                        .getTunnelSetByDataSet(TunnelInfoBLL.selectTunnelByWorkingFaceId(workingFace.WorkingFaceId));
-                Dictionary<TunnelTypeEnum, Tunnel> tList = TunnelUtils.getTunnelDict(workingFace);
-                if (tList.Count >= 3)
-                {
-                    tunnelZY = tList[TunnelTypeEnum.STOPING_ZY];
-                    tunnelFY = tList[TunnelTypeEnum.STOPING_FY];
-                    tunnelQY = tList[TunnelTypeEnum.STOPING_QY];
-                }
+                tunnelZY = workingFace.Tunnels.First(u => u.TunnelType == TunnelTypeEnum.STOPING_ZY);
+                tunnelFY = workingFace.Tunnels.First(u => u.TunnelType == TunnelTypeEnum.STOPING_FY);
+                tunnelQY = workingFace.Tunnels.First(u => u.TunnelType == TunnelTypeEnum.STOPING_QY);
             }
         }
 

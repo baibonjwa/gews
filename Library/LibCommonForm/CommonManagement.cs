@@ -848,8 +848,9 @@ namespace LibCommonForm
                             {
                                 int iWorkingFaceId =
                                     Convert.ToInt32(dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].Value);
-                                List<Tunnel> list =
-                                    BasicInfoManager.getInstance().getTunnelListByWorkingFaceId(iWorkingFaceId);
+
+
+                                IList<Tunnel> list = WorkingFace.Find(iWorkingFaceId).Tunnels;
                                 if (list != null && list.Count > 0)
                                 {
                                     Alert.alert("工作面有关联的巷道，请首先解除关联");

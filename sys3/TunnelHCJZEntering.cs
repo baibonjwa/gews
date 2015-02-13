@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 using ESRI.ArcGIS.Geodatabase;
 using ESRI.ArcGIS.Geometry;
@@ -80,17 +81,10 @@ namespace sys3
 
         private void updateWorkingFaceInfo(int workingFaceId)
         {
-            workingFace = BasicInfoManager.getInstance().getWorkingFaceById(workingFaceId);
-
-            workingFace.TunnelSet =
-                BasicInfoManager.getInstance()
-                    .getTunnelSetByDataSet(TunnelInfoBLL.selectTunnelByWorkingFaceId(workingFace.WorkingFaceId));
-            Dictionary<TunnelTypeEnum, Tunnel> tList = TunnelUtils.getTunnelDict(workingFace);
-            if (tList.Count < 1)
-                return;
-            tunnelZY = tList[TunnelTypeEnum.STOPING_ZY];
-            tunnelFY = tList[TunnelTypeEnum.STOPING_FY];
-            tunnelQY = tList[TunnelTypeEnum.STOPING_QY];
+            workingFace = WorkingFace.Find(workingFaceId);
+            tunnelZY = workingFace.Tunnels.First(u => u.TunnelType == TunnelTypeEnum.STOPING_ZY);
+            tunnelFY = workingFace.Tunnels.First(u => u.TunnelType == TunnelTypeEnum.STOPING_FY);
+            tunnelQY = workingFace.Tunnels.First(u => u.TunnelType == TunnelTypeEnum.STOPING_QY);
         }
 
         /// <summary>
@@ -365,8 +359,8 @@ namespace sys3
                     //Dictionary<string, List<IPoint>> fourpnts = Global.commonclss.getCoordinates(hcreg, pline1, pline2, pline3, Global.linespace, Global.linespace);
                     //List<IPoint> listpnts = fourpnts["1"];
                     IPoint pntcenter = new PointClass();
-                    pntcenter.PutCoords((oldpnts["1"][0].X + oldpnts["1"][1].X)/2,
-                        (oldpnts["1"][0].Y + oldpnts["1"][1].Y)/2);
+                    pntcenter.PutCoords((oldpnts["1"][0].X + oldpnts["1"][1].X) / 2,
+                        (oldpnts["1"][0].Y + oldpnts["1"][1].Y) / 2);
                     pntcenter.Z = 0;
                     //double hccd1 = Math.Sqrt(Math.Pow((pnt.X - pntcenter.X), 2) + Math.Pow((pnt.Y - pntcenter.Y), 2));
                     //查询回采方向 这里没有设置传入的切眼 可能会出错 需要调试2014-9-23

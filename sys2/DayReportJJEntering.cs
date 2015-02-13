@@ -489,8 +489,7 @@ namespace sys2
                 dayReportJJEntityList.Add(_dayReportJJEntity);
             }
 
-            bool bResult = false;
-            Tunnel tunnel = BasicInfoManager.getInstance().getTunnelListByWorkingFaceId(workingFace.WorkingFaceId)[0];
+            Tunnel tunnel = Tunnel.FindFirstByWorkingFaceId(workingFace.WorkingFaceId);
 
             //循环添加
             foreach (DayReportJj dayReportJJEntity in dayReportJJEntityList)

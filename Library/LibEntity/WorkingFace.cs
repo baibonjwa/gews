@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Castle.ActiveRecord;
+using NHibernate.Mapping;
 
 namespace LibEntity
 {
@@ -10,7 +11,10 @@ namespace LibEntity
         /** 工作面编号 **/
         private DateTime? _startDate;
         private DateTime? _stopDate;
-        public HashSet<Tunnel> TunnelSet;
+
+        [HasMany(typeof(Tunnel), Table = "T_TUNNEL_INFO", ColumnKey = "WORKINGFACE_ID",
+            Cascade = ManyRelationCascadeEnum.SaveUpdate)]
+        public IList<Tunnel> Tunnels { get; set; }
 
         /// <summary>
         ///     工作面编号
@@ -97,5 +101,7 @@ namespace LibEntity
         /// </summary>
         [Property("WORKINGFACE_TYPE")]
         public WorkingfaceTypeEnum WorkingfaceTypeEnum { get; set; }
+
+
     }
 }

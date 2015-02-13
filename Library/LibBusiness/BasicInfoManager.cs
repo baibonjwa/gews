@@ -548,11 +548,11 @@ namespace LibBusiness
                 return entity.TeamName;
         }
 
-        public List<Tunnel> getTunnelListByWorkingFaceId(int wfId)
-        {
-            DataSet ds = TunnelInfoBLL.selectTunnelByWorkingFaceId(wfId);
-            return getTunnelListByDataSet(ds);
-        }
+        //public List<Tunnel> getTunnelListByWorkingFaceId(int wfId)
+        //{
+        //    DataSet ds = TunnelInfoBLL.selectTunnelByWorkingFaceId(wfId);
+        //    return getTunnelListByDataSet(ds);
+        //}
 
         public int getWorkingFaceCountByMiningAreaId(int miningAreaId)
         {

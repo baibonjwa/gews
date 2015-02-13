@@ -122,16 +122,13 @@ namespace sys3
         /// </summary>
         private void bindInfo()
         {
-            workingFace.TunnelSet =
-                BasicInfoManager.getInstance()
-                    .getTunnelSetByDataSet(TunnelInfoBLL.selectTunnelByWorkingFaceId(workingFace.WorkingFaceId));
             intArr[0] = workingFace.MiningArea.Horizontal.Mine.MineId;
             intArr[1] = workingFace.MiningArea.Horizontal.HorizontalId;
             intArr[2] = workingFace.MiningArea.MiningAreaId;
             intArr[3] = workingFace.WorkingFaceId;
 
             string otherTunnel = "";
-            foreach (Tunnel tunnel in workingFace.TunnelSet)
+            foreach (Tunnel tunnel in workingFace.Tunnels)
             {
                 if (tunnel.TunnelType == TunnelTypeEnum.STOPING_ZY)
                     tunnelZY = tunnel; //主运顺槽

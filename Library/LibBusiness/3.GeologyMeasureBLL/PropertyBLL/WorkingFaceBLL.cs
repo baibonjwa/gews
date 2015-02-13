@@ -333,7 +333,7 @@ namespace LibBusiness
         {
             string sql = " BEGIN ";
 
-            foreach (Tunnel tEntity in entity.TunnelSet)
+            foreach (Tunnel tEntity in entity.Tunnels)
             {
                 sql += "UPDATE " + TunnelInfoDbConstNames.TABLE_NAME +
                       " SET TUNNEL_TYPE=" + (int)TunnelTypeEnum.OTHER + " WHERE " + TunnelInfoDbConstNames.ID + " = " + tEntity.TunnelId;
