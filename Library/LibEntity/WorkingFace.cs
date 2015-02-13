@@ -5,7 +5,7 @@ using Castle.ActiveRecord;
 namespace LibEntity
 {
     [ActiveRecord("T_WORKINGFACE_INFO")]
-    public class WorkingFace : ActiveRecordBase
+    public class WorkingFace : ActiveRecordBase<WorkingFace>
     {
         /** 工作面编号 **/
         private DateTime? _startDate;

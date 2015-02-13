@@ -18,96 +18,25 @@ namespace LibBusiness
     {
 
         /// <summary>
-        /// 查询掘进面巷道数据
-        /// </summary>
-        /// <returns></returns>
-        public static DataSet selectTunnelJJ()
-        {
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
-            string sql = "SELECT * FROM " + TunnelInfoDbConstNames.TABLE_NAME + " WHERE TUNNEL_TYPE=" + (int)TunnelTypeEnum.TUNNELLING;
-            DataSet ds = db.ReturnDS(sql);
-            return ds;
-        }
-
-        /// <summary>
-        /// 返回掘进巷道所有信息
-        /// </summary>
-        /// <returns></returns>
-        public static DataSet selectTunnelJJ(int iStartIndex, int iEndIndex)
-        {
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
-            StringBuilder sb = new StringBuilder();
-            sb.Append("SELECT * FROM ( ");
-            sb.Append("SELECT ROW_NUMBER() OVER(ORDER BY " + TunnelInfoDbConstNames.ID + ") AS rowid, * ");
-            sb.Append("FROM " + TunnelInfoDbConstNames.TABLE_NAME + " WHERE " +
-                TunnelInfoDbConstNames.TUNNEL_TYPE + "=" + (int)TunnelTypeEnum.TUNNELLING + " ) AS TB ");
-            sb.Append("WHERE rowid >= " + iStartIndex);
-            sb.Append(" AND rowid <= " + iEndIndex);
-            DataSet ds = db.ReturnDS(sb.ToString());
-            return ds;
-        }
-
-        /// <summary>
         /// 分页用返回回采巷道所有信息
         /// </summary>
         /// <returns></returns>
         public static DataSet selectTunnelHC(int iStartIndex, int iEndIndex)
         {
-            //            SELECT ROW_NUMBER() OVER (ORDER BY WORKINGFACE_ID) AS rowid ,*FROM
-            //(
-            //SELECT  
-            //DISTINCT B.*
-            //  FROM 
-            //  T_TUNNEL_INFO AS A,
-            //  T_WORKINGFACE_INFO AS B
-            //   WHERE 
-            //   TUNNEL_TYPE IN (0, 1, 2,3) AND A.WORKINGFACE_ID=B.WORKINGFACE_ID
-            //   ) Base
-
-
-
-            //            ;WITH TB AS
-            //(
-            //SELECT  
-            //DISTINCT B.*
-            //  FROM 
-            //  T_TUNNEL_INFO AS A,
-            //  T_WORKINGFACE_INFO AS B
-            //   WHERE 
-            //   TUNNEL_TYPE IN (0, 1, 2,3) AND A.WORKINGFACE_ID=B.WORKINGFACE_ID
-            //   ) 
-
-            //SELECT * FROM(
-            //SELECT ROW_NUMBER() OVER (ORDER BY WORKINGFACE_ID) AS rowid ,* FROM
-            //TB )
-            //AS TB1
-            //WHERE rowid>=1 AND rowid<=2
-
-
-            //ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
-            //StringBuilder sb = new StringBuilder();
-            //sb.Append("SELECT * FROM ( ");
-            //sb.Append("SELECT ROW_NUMBER() OVER(ORDER BY " + TunnelInfoDbConstNames.ID + ") AS rowid, * ");
-            //sb.Append("FROM " + TunnelInfoDbConstNames.TABLE_NAME + " ) AS TB ");
-            //sb.Append("WHERE rowid >= " + iStartIndex);
-            //sb.Append("AND rowid <= " + iEndIndex);
-            //DataSet ds = db.ReturnDS(sb.ToString());
-            //return ds;
-
 
 
             ManageDataBase db = new ManageDataBase(DATABASE_TYPE.MiningSchedulingDB);
             StringBuilder sb = new StringBuilder();
             sb.Append(";WITH TB AS" +
-"(" +
-"SELECT " +
-"DISTINCT B.* " +
-"  FROM " +
-"  T_TUNNEL_INFO AS A, " +
-"  T_WORKINGFACE_INFO AS B " +
-"   WHERE " +
-"   TUNNEL_TYPE IN (0, 1, 2,3) AND A.WORKINGFACE_ID=B.WORKINGFACE_ID" +
-"   ) ");
+                        "(" +
+                        "SELECT " +
+                        "DISTINCT B.* " +
+                        "  FROM " +
+                        "  T_TUNNEL_INFO AS A, " +
+                        "  T_WORKINGFACE_INFO AS B " +
+                        "   WHERE " +
+                        "   TUNNEL_TYPE IN (0, 1, 2,3) AND A.WORKINGFACE_ID=B.WORKINGFACE_ID" +
+                        "   ) ");
             sb.Append("SELECT * FROM ( ");
             sb.Append("SELECT ROW_NUMBER() OVER(ORDER BY " + TunnelInfoDbConstNames.WORKINGFACE_ID + ") AS rowid, * ");
             sb.Append("FROM TB ) AS TB1 ");

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Data;
 using System.Windows.Forms;
 using ESRI.ArcGIS.Geometry;
 using GIS;
@@ -13,7 +11,7 @@ using LibCommonControl;
 using LibCommonForm;
 using LibEntity;
 
-namespace _3.GeologyMeasure
+namespace sys3
 {
     /// <summary>
     ///     回采面
@@ -36,9 +34,8 @@ namespace _3.GeologyMeasure
 
         #endregion ******变量声明******
 
-        public TunnelHCEntering(MainFrm mainFrm)
+        public TunnelHCEntering()
         {
-            MainForm = mainFrm;
 
             InitializeComponent();
 
@@ -67,11 +64,10 @@ namespace _3.GeologyMeasure
         /// <summary>
         ///     构造方法
         /// </summary>
-        /// <param name="tunnelHCEntity">回采面实体</param>
-        public TunnelHCEntering(WorkingFace tunnelHCEntity, MainFrm mainFrm)
+        /// <param name="tunnelHcEntity">回采面实体</param>
+        public TunnelHCEntering(WorkingFace tunnelHcEntity)
         {
-            MainForm = mainFrm;
-            workingFace = ObjectCopier.Clone(tunnelHCEntity);
+            workingFace = ObjectCopier.Clone(tunnelHcEntity);
             Text = Const_GM.TUNNEL_HC_CHANGE;
             InitializeComponent();
 

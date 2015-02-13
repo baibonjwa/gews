@@ -418,7 +418,7 @@ namespace sys3
         //回采面管理
         private void mniHCHDGL_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            TunnelHCManagement thcm = new TunnelHCManagement(this);
+            TunnelHcManagement thcm = new TunnelHcManagement(this);
             thcm.Show();
         }
         //横川
