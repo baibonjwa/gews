@@ -23,16 +23,16 @@ namespace LibBusiness
         /// 通过<采区编号>，获取该<采区>下所有<工作面>信息
         /// </summary>
         /// <returns><工作面>信息</returns>
-        public static DataSet selectWorkingFaceInfoByMiningAreaId(int iMiningAreaId)
-        {
-            StringBuilder sqlStr = new StringBuilder();
-            sqlStr.Append("SELECT * FROM " + WorkingFaceDbConstNames.TABLE_NAME);
-            sqlStr.Append(" WHERE " + WorkingFaceDbConstNames.MININGAREA_ID + " = " + iMiningAreaId);
+        //public static DataSet selectWorkingFaceInfoByMiningAreaId(int iMiningAreaId)
+        //{
+        //    StringBuilder sqlStr = new StringBuilder();
+        //    sqlStr.Append("SELECT * FROM " + WorkingFaceDbConstNames.TABLE_NAME);
+        //    sqlStr.Append(" WHERE " + WorkingFaceDbConstNames.MININGAREA_ID + " = " + iMiningAreaId);
 
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
-            DataSet ds = db.ReturnDS(sqlStr.ToString());
-            return ds;
-        }
+        //    ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
+        //    DataSet ds = db.ReturnDS(sqlStr.ToString());
+        //    return ds;
+        //}
 
         /// <summary>
         /// 通过<采区编号>，获取该<采区>下所有<工作面>信息

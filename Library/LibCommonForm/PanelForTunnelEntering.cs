@@ -239,7 +239,7 @@ namespace LibCommonForm
         /// <param name="e"></param>
         private void lstMiningAreaName_MouseUp(object sender, MouseEventArgs e)
         {
-            this.lstWorkingFaceName.DataSource = null;
+            lstWorkingFaceName.DataSource = null;
 
             if (this.lstMiningAreaName.SelectedItems.Count > 0)
             {

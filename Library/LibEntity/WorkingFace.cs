@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Castle.ActiveRecord;
-using NHibernate.Mapping;
 
 namespace LibEntity
 {
@@ -13,7 +12,7 @@ namespace LibEntity
         private DateTime? _stopDate;
 
         [HasMany(typeof(Tunnel), Table = "T_TUNNEL_INFO", ColumnKey = "WORKINGFACE_ID",
-            Cascade = ManyRelationCascadeEnum.SaveUpdate)]
+            Cascade = ManyRelationCascadeEnum.SaveUpdate, Lazy = true)]
         public IList<Tunnel> Tunnels { get; set; }
 
         /// <summary>
