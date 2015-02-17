@@ -5,7 +5,9 @@
 // 版本号：1.0
 // ******************************************************************
 
+using System.Collections.Generic;
 using Castle.ActiveRecord;
+using NHibernate.Criterion;
 
 namespace LibEntity
 {
@@ -35,5 +37,14 @@ namespace LibEntity
         /// </summary>
         [BelongsTo("HORIZONTAL_ID")]
         public Horizontal Horizontal { get; set; }
+
+        public static MiningArea[] FindAllByHorizontalId(int horizontalId)
+        {
+            var criterion = new ICriterion[]
+            {
+                Restrictions.Eq("Horizontal.HorizontalId", horizontalId)
+            };
+            return FindAll(criterion);
+        }
     }
 }

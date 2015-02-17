@@ -120,6 +120,13 @@ namespace LibEntity
             return Exists(criterion.ToArray());
         }
 
-
+        public static bool ExistsByMiningAreaId(int miningAreaId)
+        {
+            var criterion = new List<ICriterion>
+            {
+                Restrictions.Eq("MiningArea.MiningAreaId", miningAreaId)
+            };
+            return Exists(criterion);
+        }
     }
 }

@@ -6,6 +6,7 @@ using LibBusiness;
 using LibCommon;
 using LibCommonControl;
 using LibEntity;
+using NHibernate.Criterion;
 
 namespace LibCommonForm
 {
@@ -200,13 +201,13 @@ namespace LibCommonForm
 
                         //*******************************************************
                         // 获取采区信息
-                        DataSet ds = MiningAreaBLL.selectMiningAreaInfoByMiningAreaId(id);
+                        var miningArea = MiningArea.Find(id);
                         // 设置数据源
-                        comboBoxColumn.DataSource = ds.Tables[0];
+                        comboBoxColumn.DataSource = miningArea;
                         // 设置显示字段
-                        comboBoxColumn.DisplayMember = MiningAreaDbConstNames.MININGAREA_NAME;
+                        comboBoxColumn.DisplayMember = "MiningAreaName";
                         // 设置隐藏字段
-                        comboBoxColumn.ValueMember = MiningAreaDbConstNames.MININGAREA_ID;
+                        comboBoxColumn.ValueMember = "MiningAreaId";
 
                         //*******************************************************
 
@@ -290,17 +291,7 @@ namespace LibCommonForm
             dataGridView1.DataSource = null;
 
             // 获取水平信息
-            DataSet ds = MiningAreaBLL.selectMiningAreaInfoByHorizontalId(id);
-            int iSelCnt = ds.Tables[0].Rows.Count;
-            if (iSelCnt > 0)
-            {
-                // 禁止自动生成列(※位置不可变)
-                dataGridView1.AutoGenerateColumns = false;
-                dataGridView1.DataSource = ds.Tables[0];
-                dataGridView1.Columns[0].DataPropertyName = MiningAreaDbConstNames.MININGAREA_ID;
-                dataGridView1.Columns[1].DataPropertyName = MiningAreaDbConstNames.MININGAREA_NAME;
-                dataGridView1.Columns[2].DataPropertyName = MiningAreaDbConstNames.HORIZONTAL_ID;
-            }
+            DataBindUtil.LoadMiningAreaName(dataGridView1, id);
         }
 
         /// <summary>
@@ -495,11 +486,19 @@ namespace LibCommonForm
 
                 if (dataGridView1.Rows[i].Cells[0].Value != DBNull.Value && dataGridView1.Rows[i].Cells[0].Value != null)
                 {
-                    bResultFlag = MiningAreaBLL.updateMiningAreaInfo(miningAreaId, miningAreaName, horizontalId);
+                    var miningArea = MiningArea.Find(miningAreaId);
+                    miningArea.MiningAreaName = miningAreaName;
+                    miningArea.Horizontal = Horizontal.Find(horizontalId);
+                    miningArea.Save();
                 }
                 else
                 {
-                    bResultFlag = MiningAreaBLL.insertMiningAreaInfo(miningAreaName, horizontalId);
+                    var miningArea = new MiningArea
+                    {
+                        MiningAreaName = miningAreaName,
+                        Horizontal = Horizontal.Find(horizontalId)
+                    };
+                    miningArea.Save();
                 }
 
                 if (!bResultFlag)
@@ -755,9 +754,7 @@ namespace LibCommonForm
                             {
                                 int iMiningAreaId =
                                     Convert.ToInt32(dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].Value);
-                                int count =
-                                    BasicInfoManager.getInstance().getWorkingFaceCountByMiningAreaId(iMiningAreaId);
-                                if (count > 0)
+                                if (WorkingFace.ExistsByMiningAreaId(iMiningAreaId))
                                 {
                                     Alert.alert("采区有关联的工作面，请首先解除关联");
                                 }

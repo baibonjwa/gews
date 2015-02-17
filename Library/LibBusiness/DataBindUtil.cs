@@ -44,11 +44,25 @@ namespace LibBusiness
             if (horizontals != null) DataBindListControl(lb, horizontals, "HorizontalName", "HorizontalId", selectedValue);
         }
 
-        public static void LoadHorizontalName(DataGridView dgv, int mineId, int selectedValue = -1)
+        public static void LoadHorizontalName(DataGridView dgv, int mineId)
         {
             var horizontals = Horizontal.FindAllByMineId(mineId);
             if (horizontals != null) DataBindListControl(dgv, horizontals, "HorizontalName", "HorizontalId");
         }
+
+        public static void LoadMiningAreaName(ListControl lb, int horizontalId, int selectedValue = -1)
+        {
+            var miningAreas = MiningArea.FindAllByHorizontalId(horizontalId);
+            if (miningAreas != null) DataBindListControl(lb, miningAreas, "MiningAreaName", "MiningAreaId", selectedValue);
+        }
+
+        public static void LoadMiningAreaName(DataGridView dgv, int horizontalId)
+        {
+            var miningAreas = MiningArea.FindAllByHorizontalId(horizontalId);
+            if (miningAreas != null) DataBindListControl(dgv, miningAreas, "MiningAreaName", "MiningAreaId");
+        }
+
+
 
         public static void LoadWorkingFaceName(ListControl lb, int miningAreaId, int selectedValue = -1)
         {
