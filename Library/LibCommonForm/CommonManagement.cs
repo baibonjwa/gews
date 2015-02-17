@@ -396,7 +396,6 @@ namespace LibCommonForm
                     mineEntity.Save();
                 }
             }
-            BasicInfoManager.getInstance().RefreshMineInfo();
             Alert.alert(Const.SUCCESS_MSG);
             // 绑定矿井名称
             LoadMineInfo();
@@ -619,8 +618,6 @@ namespace LibCommonForm
                     break;
                 }
             }
-
-            BasicInfoManager.getInstance().refreshCoalSeamsInfo();
 
             // 执行结果判断
             if (bResultFlag)

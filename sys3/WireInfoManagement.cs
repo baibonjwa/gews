@@ -79,7 +79,7 @@ namespace sys3
             setWireInfoEntityValue();
 
             int tunnelID = Wire.Find(wireEntity.WireId).Tunnel.TunnelId;
-            tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(tunnelID);
+            tunnelEntity = Tunnel.Find(tunnelID);
 
             //导线修改界面
             var wireInfoForm = new WireInfoEntering(wireEntity);

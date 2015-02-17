@@ -247,7 +247,7 @@ namespace sys3
                 //巷道选择按钮Text改变
                 btnChooseWF.Text = wfChoose.workFaceName;
                 //实体赋值
-                workingFace = BasicInfoManager.getInstance().getWorkingFaceById(wfChoose.workFaceId);
+                workingFace = WorkingFace.Find(wfChoose.workFaceId);
                 intArr[0] = workingFace.MiningArea.Horizontal.Mine.MineId;
                 intArr[1] = workingFace.MiningArea.Horizontal.HorizontalId;
                 intArr[2] = workingFace.MiningArea.MiningAreaId;
@@ -275,7 +275,7 @@ namespace sys3
             {
                 if (tunnelZY != null)
                 {
-                    Tunnel ent = BasicInfoManager.getInstance().getTunnelByID(tunnelZY.TunnelId);
+                    Tunnel ent = Tunnel.Find(tunnelZY.TunnelId);
                     ent.TunnelType = TunnelTypeEnum.OTHER;
                     tunnelSet.Add(ent);
                 }
@@ -283,7 +283,7 @@ namespace sys3
                 //巷道选择按钮Text改变
                 btnChooseZY.Text = tunnelChoose.tunnelName;
                 //实体赋值
-                tunnelZY = BasicInfoManager.getInstance().getTunnelByID(tunnelChoose.tunnelId);
+                tunnelZY = Tunnel.Find(tunnelChoose.tunnelId);
                 if (tunnelZY != null)
                 {
                     tunnelZY.TunnelType = TunnelTypeEnum.STOPING_ZY;
@@ -313,7 +313,7 @@ namespace sys3
             {
                 if (tunnelFY != null)
                 {
-                    Tunnel ent = BasicInfoManager.getInstance().getTunnelByID(tunnelFY.TunnelId);
+                    Tunnel ent = Tunnel.Find(tunnelFY.TunnelId);
                     ent.TunnelType = TunnelTypeEnum.OTHER;
                     tunnelSet.Add(ent);
                 }
@@ -322,7 +322,7 @@ namespace sys3
                 btnChooseFY.Text = tunnelChoose.tunnelName;
                 //实体赋值
 
-                tunnelFY = BasicInfoManager.getInstance().getTunnelByID(tunnelChoose.tunnelId);
+                tunnelFY = Tunnel.Find(tunnelChoose.tunnelId);
                 if (tunnelFY != null)
                 {
                     tunnelFY.TunnelType = TunnelTypeEnum.STOPING_FY;
@@ -352,7 +352,7 @@ namespace sys3
             {
                 if (tunnelQY != null)
                 {
-                    Tunnel ent = BasicInfoManager.getInstance().getTunnelByID(tunnelQY.TunnelId);
+                    Tunnel ent = Tunnel.Find(tunnelQY.TunnelId);
                     ent.TunnelType = TunnelTypeEnum.OTHER;
                     tunnelSet.Add(ent);
                 }
@@ -360,7 +360,7 @@ namespace sys3
                 //巷道选择按钮Text改变
                 btnChooseQY.Text = tunnelChoose.tunnelName;
                 //实体赋值
-                tunnelQY = BasicInfoManager.getInstance().getTunnelByID(tunnelChoose.tunnelId);
+                tunnelQY = Tunnel.Find(tunnelChoose.tunnelId);
                 if (tunnelQY != null)
                 {
                     tunnelQY.TunnelType = TunnelTypeEnum.STOPING_QY;
@@ -692,7 +692,7 @@ namespace sys3
                 //添加信息到listBox
                 var ts = new TunnelSimple(tunnelChoose.tunnelId, tunnelChoose.tunnelName);
                 listBox_Browse.Items.Add(ts);
-                Tunnel ent = BasicInfoManager.getInstance().getTunnelByID(tunnelChoose.tunnelId);
+                Tunnel ent = Tunnel.Find(tunnelChoose.tunnelId);
                 if (ent != null)
                 {
                     ent.TunnelType = TunnelTypeEnum.STOPING_OTHER;
@@ -707,8 +707,7 @@ namespace sys3
             if (e.KeyCode == Keys.Delete)
             {
                 Tunnel ent =
-                    BasicInfoManager.getInstance()
-                        .getTunnelByID(Convert.ToInt32(((TunnelSimple)listBox_Browse.SelectedItem).Id));
+                    Tunnel.Find(Convert.ToInt32(((TunnelSimple)listBox_Browse.SelectedItem).Id));
                 ent.TunnelType = TunnelTypeEnum.OTHER;
                 tunnelSet.Add(ent);
 

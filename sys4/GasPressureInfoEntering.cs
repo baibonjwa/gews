@@ -357,7 +357,7 @@ namespace _4.OutburstPrevention
                 int iTunnelID = 0;
                 if (int.TryParse(ds.Tables[0].Rows[0][GasPressureDbConstNames.TUNNEL_ID].ToString(), out iTunnelID))
                 {
-                    Tunnel tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(iTunnelID); // TunnelInfoBLL.selectTunnelInfoByTunnelID(iTunnelID);
+                    Tunnel tunnelEntity = Tunnel.Find(iTunnelID); // TunnelInfoBLL.selectTunnelInfoByTunnelID(iTunnelID);
                     TunnelSimple ts = new TunnelSimple(tunnelEntity.TunnelId, tunnelEntity.TunnelName);
                     selectTunnelSimple1.SelectTunnelItemWithoutHistory(ts);
 

@@ -217,7 +217,7 @@ namespace LibPanels
             //通知服务器探头数据已更新
             // Added by jhou, 2014/3/24
             WorkingFace workingfaceEnt =
-                BasicInfoManager.getInstance().getTunnelByID(_probe.Tunnel.TunnelId).WorkingFace;
+               Tunnel.Find(_probe.Tunnel.TunnelId).WorkingFace;
 
             if (_oldTunnelId != 0)
             {

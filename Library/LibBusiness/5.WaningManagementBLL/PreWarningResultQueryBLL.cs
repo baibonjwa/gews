@@ -179,7 +179,7 @@ namespace LibBusiness
                 if (i % 2 == 0)
                 {
                     ent = new PreWarningResultQuery();
-                    ent.TunelName = BasicInfoManager.getInstance().getTunnelByID(Convert.ToInt32(dt.Rows[i][PreWarningResultDBConstNames.TUNNEL_ID].ToString())).TunnelName;
+                    ent.TunelName = Tunnel.Find(dt.Rows[i][PreWarningResultDBConstNames.TUNNEL_ID]).TunnelName;
                     ent.DateTime = Convert.ToDateTime(dt.Rows[i][PreWarningResultDBConstNames.DATA_TIME]);
                     ent.Date_Shift = dt.Rows[i][PreWarningResultDBConstNames.DATE_SHIFT].ToString();
                 }

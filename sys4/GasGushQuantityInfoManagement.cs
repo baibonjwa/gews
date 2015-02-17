@@ -187,7 +187,7 @@ namespace _4.OutburstPrevention
                     int iTunnelID = 0;
                     if (int.TryParse(ds.Tables[0].Rows[i][GasGushQuantityDbConstNames.TUNNEL_ID].ToString(), out iTunnelID))
                     {
-                        Tunnel tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(iTunnelID); // TunnelInfoBLL.selectTunnelInfoByTunnelID(iTunnelID);
+                        Tunnel tunnelEntity = Tunnel.Find(iTunnelID); // TunnelInfoBLL.selectTunnelInfoByTunnelID(iTunnelID);
                         if (tunnelEntity != null)
                         {
                             // 矿井名称
@@ -208,7 +208,7 @@ namespace _4.OutburstPrevention
                     int iCoalSeamsId = 0;
                     if (int.TryParse(ds.Tables[0].Rows[i][GasGushQuantityDbConstNames.COAL_SEAMS_ID].ToString(), out iCoalSeamsId))
                     {
-                        CoalSeams ent = BasicInfoManager.getInstance().getCoalSeamById(iCoalSeamsId);
+                        CoalSeams ent = CoalSeams.Find(iCoalSeamsId);
                         cells[_iRowDetailStartIndex + i, index].Text = ent == null ? "" : ent.CoalSeamsName;
                     }
 

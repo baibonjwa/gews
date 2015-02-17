@@ -158,7 +158,6 @@
     <Compile Include="3.GeologyMeasureBLL\DbConstNames\HorizontalDbConstNames.cs" />
     <Compile Include="3.GeologyMeasureBLL\DbConstNames\LithologyDbConstNames.cs" />
     <Compile Include="3.GeologyMeasureBLL\DbConstNames\TunnelInfoDbConstNames.cs" />
-    <Compile Include="3.GeologyMeasureBLL\PropertyBLL\MiningAreaBLL.cs" />
     <Compile Include="4.OutburstPreventionBLL\SaveDBXyz2Txt.cs" />
     <Compile Include="4.OutburstPreventionBLL\DbConstNames\GasContentDbConstNames.cs" />
     <Compile Include="4.OutburstPreventionBLL\DbConstNames\GasPressureDbConstNames.cs" />
@@ -187,7 +186,6 @@
     <Compile Include="5.WaningManagementBLL\PreWarningExcelBLL.cs" />
     <Compile Include="5.WaningManagementBLL\WarningImgBLL.cs" />
     <Compile Include="5.WaningManagementBLL\WarningResultsQuery.cs" />
-    <Compile Include="BasicInfoManager.cs" />
     <Compile Include="CommonBLL\DbConstNames\CoalSeamsDbConstNames.cs" />
     <Compile Include="CommonBLL\DbConstNames\CommonDbConsts.cs" />
     <Compile Include="CommonBLL\DbConstNames\DepartmentInformationManagemetDbConstNames.cs" />

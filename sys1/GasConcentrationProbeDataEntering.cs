@@ -392,7 +392,7 @@ namespace sys1
                     #region 通知服务器预警数据已更新
 
                     WorkingFace workingfaceEnt =
-                        BasicInfoManager.getInstance().getTunnelByID(selectTunnelUserControl1.ITunnelId).WorkingFace;
+                       Tunnel.Find(selectTunnelUserControl1.ITunnelId).WorkingFace;
                     var msg = new UpdateWarningDataMsg(workingfaceEnt.WorkingFaceId, selectTunnelUserControl1.ITunnelId,
                         DayReportHc.TableName, opType, gasConcentrationProbeDataEntity.RecordTime);
                     MainForm.SendMsg2Server(msg);
@@ -411,7 +411,7 @@ namespace sys1
                 #region 通知服务器预警数据已更新
 
                 WorkingFace workingfaceEnt =
-                    BasicInfoManager.getInstance().getTunnelByID(selectTunnelUserControl1.ITunnelId).WorkingFace;
+                    Tunnel.Find(selectTunnelUserControl1.ITunnelId).WorkingFace;
                 var msg = new UpdateWarningDataMsg(workingfaceEnt.WorkingFaceId, selectTunnelUserControl1.ITunnelId,
                     DayReportHc.TableName, opType, gasConcentrationProbeDataEntity.RecordTime);
                 MainForm.SendMsg2Server(msg);

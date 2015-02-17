@@ -48,9 +48,8 @@ namespace LibPanels
 
         private void InheritTunnelNameChanged(object sender, TunnelEventArgs e)
         {
-            Tunnel entTunnel = BasicInfoManager.getInstance().getTunnelByID(selectTunnelSimple1.ITunnelId);
-            WorkingFace entWorkingFace =
-                BasicInfoManager.getInstance().getWorkingFaceById(entTunnel.WorkingFace.WorkingFaceId);
+            Tunnel entTunnel = Tunnel.Find(selectTunnelSimple1.ITunnelId);
+            WorkingFace entWorkingFace = WorkingFace.Find(entTunnel.WorkingFace.WorkingFaceId);
             //WorkingFaceBLL.selectWorkingFaceInfoByID(entTunnel.WorkingFace.WorkingFaceID);
             txtCoordinateX.Text = entWorkingFace.Coordinate.X.ToString();
             txtCoordinateY.Text = entWorkingFace.Coordinate.Y.ToString();

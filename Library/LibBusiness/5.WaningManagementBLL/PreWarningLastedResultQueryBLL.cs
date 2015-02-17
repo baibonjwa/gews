@@ -309,7 +309,7 @@ namespace LibBusiness
 
                     ent.TunnelID = tunelId;
 
-                    Tunnel entTunnel = BasicInfoManager.getInstance().getTunnelByID(tunelId);
+                    Tunnel entTunnel = Tunnel.Find(tunelId);
                     ent.TunelName = entTunnel.WorkingFace.WorkingfaceTypeEnum == WorkingfaceTypeEnum.JJ ? entTunnel.WorkingFace.WorkingFaceName : entTunnel.WorkingFace.WorkingFaceName + " - " + entTunnel.TunnelName;
                     //ent.TunelName = GetTunelNameByTunelID(tunelId);
                     ent.WorkingfaceId = dt.Rows[i][WorkingFaceDbConstNames.WORKINGFACE_ID] != DBNull.Value ? Convert.ToInt32(dt.Rows[i][WorkingFaceDbConstNames.WORKINGFACE_ID]) : 0;

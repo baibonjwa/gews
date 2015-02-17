@@ -152,7 +152,7 @@ namespace UnderTerminal
             _tunnelEntity.TunnelId = _arr[4];
 
             //巷道实体
-            _tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(tunnelId);
+            _tunnelEntity = Tunnel.Find(tunnelId);
 
             //日期
             dtpDate.Value = _dayReportJJEntity.DateTime;
@@ -238,7 +238,7 @@ namespace UnderTerminal
             }
 
             _tunnelEntity.TunnelId = tunnelId;
-            _tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(tunnelId);
+            _tunnelEntity = Tunnel.Find(tunnelId);
             // 验证
             if (!check())
             {
@@ -280,7 +280,7 @@ namespace UnderTerminal
                 _dayReportJJEntity.Team.TeamId = Convert.ToInt32(cboTeamName.SelectedValue);
                 //绑定巷道编号
                 _dayReportJJEntity.WorkingFace.WorkingFaceId =
-                    BasicInfoManager.getInstance().getTunnelByID(_tunnelEntity.TunnelId).WorkingFace.WorkingFaceId;
+                    Tunnel.Find(_tunnelEntity.TunnelId).WorkingFace.WorkingFaceId;
                 //日期
                 _dayReportJJEntity.DateTime = dtpDate.Value;
                 //填报人

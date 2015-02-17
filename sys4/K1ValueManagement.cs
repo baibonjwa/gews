@@ -251,8 +251,7 @@ namespace _4.OutburstPrevention
                 {
                     int index = 0;
                     tunnelEntity =
-                        BasicInfoManager.getInstance()
-                            .getTunnelByID(Convert.ToInt32(ds.Tables[0].Rows[i][K1ValueDbConstNames.TUNNEL_ID]));// TunnelInfoBLL.selectTunnelInfoByTunnelID(Convert.ToInt32(ds.Tables[0].Rows[i][K1ValueDbConstNames.TUNNEL_ID]));
+                        Tunnel.Find(Convert.ToInt32(ds.Tables[0].Rows[i][K1ValueDbConstNames.TUNNEL_ID]));
                     k1ValueEntity = K1ValueBLL.selectValueK1ByID(Convert.ToInt32(ds.Tables[0].Rows[i][K1ValueDbConstNames.ID]));
                     this.fpK1Value.Sheets[0].Cells[rowDetailStartIndex + i, index].CellType = ckbxcell;
                     //坐标X

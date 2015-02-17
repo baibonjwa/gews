@@ -612,7 +612,7 @@ namespace _3.GeologyMeasure
                     tunnelHChuanEntity.TunnelId2 = tunnelChoose.tunnelId;
                 }
                 //巷道实体赋值，用于下次巷道选择
-                tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(tunnelChoose.tunnelId);
+                tunnelEntity = Tunnel.Find(tunnelChoose.tunnelId);
             }
         }
         /// <summary>
@@ -786,7 +786,7 @@ namespace _3.GeologyMeasure
                     tunnelHChuanEntity.TunnelId1 = tunnelChoose.tunnelId;
                 }
                 //巷道实体赋值，用于下次巷道选择
-                tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(tunnelChoose.tunnelId);
+                tunnelEntity = Tunnel.Find(tunnelChoose.tunnelId);
             }
         }
 

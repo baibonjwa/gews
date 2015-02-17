@@ -72,7 +72,7 @@ namespace _4.OutburstPrevention
 
         private void BindCoordinate(object sender, TunnelEventArgs e)
         {
-            Tunnel tunnel = BasicInfoManager.getInstance().getTunnelByID(selectTunnelSimple1.ITunnelId);
+            Tunnel tunnel = Tunnel.Find(selectTunnelSimple1.ITunnelId);
             tbCoordinateX.Text = tunnel.WorkingFace.Coordinate.X.ToString(CultureInfo.InvariantCulture);
             tbCoordinateY.Text = tunnel.WorkingFace.Coordinate.Y.ToString(CultureInfo.InvariantCulture);
             tbCoordinateZ.Text = tunnel.WorkingFace.Coordinate.Z.ToString(CultureInfo.InvariantCulture);
@@ -211,7 +211,7 @@ namespace _4.OutburstPrevention
             this.DialogResult = DialogResult.OK;
 
             //tunnelEntity.Tunnel = selectTunnelSimple1.ITunnelId;
-            tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(selectTunnelSimple1.ITunnelId);
+            tunnelEntity = Tunnel.Find(selectTunnelSimple1.ITunnelId);
             //TunnelInfoBLL.selectTunnelInfoByTunnelID(tunnelEntity.Tunnel);
             //添加
             if (this.Text == Const_OP.K1_VALUE_ADD)

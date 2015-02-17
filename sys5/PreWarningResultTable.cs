@@ -41,7 +41,7 @@ namespace _5.WarningManagement
             {
                 _tunnelID = tunnelID;
                 //获取巷道实体信息
-                Tunnel tunnelEnt = BasicInfoManager.getInstance().getTunnelByID(_tunnelID);
+                Tunnel tunnelEnt = Tunnel.Find(_tunnelID);
                 // 标题
                 this.fpPreWarningResultTable.Sheets[0].Cells[0, 0].Text = tunnelEnt.TunnelName + "预警结果表";
                 // 预警日期

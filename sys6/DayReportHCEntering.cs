@@ -54,7 +54,7 @@ namespace UnderTerminal
             this.Text += "-" + tunnelName;
             this.mainWin = win;
             addInfo();
-            workingfaceId = BasicInfoManager.getInstance().getTunnelByID(tunnelId).WorkingFace.WorkingFaceId;
+            workingfaceId = Tunnel.Find(tunnelId).WorkingFace.WorkingFaceId;
             //自定义控件初始化
             LibEntity.TunnelDefaultSelect tunnelDefaultSelectEntity = LibBusiness.TunnelDefaultSelect.selectDefaultTunnel(DayReportHc.TableName);
 
@@ -122,7 +122,7 @@ namespace UnderTerminal
             _tunnelEntity.TunnelId = _arr[4];
 
             //巷道实体
-            _tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(tunnelId);
+            _tunnelEntity = Tunnel.Find(tunnelId);
 
             //日期
             dtpDate.Value = _dayReportHCEntity.DateTime;
@@ -216,7 +216,7 @@ namespace UnderTerminal
             DialogResult = DialogResult.OK;
             _tunnelEntity.TunnelId =
                 workingfaceId;
-            _tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(tunnelId);
+            _tunnelEntity = Tunnel.Find(tunnelId);
             //if (this.Text == Const_MS.DAY_REPORT_HC_ADD)
             //{
             //TunnelDefaultSelect.InsertDefaultTunnel(DayReportHCDbConstNames.TABLE_NAME, tunnelId);

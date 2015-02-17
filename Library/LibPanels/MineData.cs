@@ -93,7 +93,7 @@ namespace LibPanels
         private void setArrValue(int tunnelID)
         {
             //tunnelEntity.Tunnel = tunnelID;
-            tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(tunnelID);
+            tunnelEntity = Tunnel.Find(tunnelID);
             //tunnelEntity = TunnelInfoBLL.selectTunnelInfoByTunnelID(tunnelEntity.Tunnel);
             arr[0] = tunnelEntity.WorkingFace.MiningArea.Horizontal.Mine.MineId;
             arr[1] = tunnelEntity.WorkingFace.MiningArea.Horizontal.HorizontalId;//HorizontalID;

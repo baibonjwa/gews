@@ -101,7 +101,7 @@ namespace sys2
 
             dgrdvDayReportJJ.DataError += delegate { };
 
-            workingFace = BasicInfoManager.getInstance().getWorkingFaceById(
+            workingFace = WorkingFace.Find(
                 Convert.ToInt32(_arr[3]));
 
 
@@ -126,7 +126,7 @@ namespace sys2
 
         private void NameChangeEvent(object sender, WorkingFaceEventArgs e)
         {
-            workingFace = BasicInfoManager.getInstance().getWorkingFaceById(
+            workingFace = WorkingFace.Find(
                 selectWorkingfaceSimple1.IWorkingfaceId);
         }
 

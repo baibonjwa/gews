@@ -138,7 +138,7 @@ namespace LibCommonForm
             tunnelEntity.CoalSeams = CoalSeams.Find(cboCoalLayer.SelectedValue);
             //通过煤层ID获取煤层名称方法
 
-            tunnelEntity.WorkingFace = BasicInfoManager.getInstance().getWorkingFaceById(workingFaceID);
+            tunnelEntity.WorkingFace = WorkingFace.Find(workingFaceID);
 
             tunnelEntity.BindingId = IDGenerator.NewBindingID();
 
@@ -444,7 +444,7 @@ namespace LibCommonForm
 
         private void bindInfo(int tunnelID)
         {
-            Tunnel tEntity = BasicInfoManager.getInstance().getTunnelByID(tunnelID);
+            Tunnel tEntity = Tunnel.Find(tunnelID);
             tunnelEntity = tEntity;
             txtTunnelName.Text = tunnelEntity.TunnelName;
             cboSupportPattern.Text = tunnelEntity.TunnelSupportPattern;

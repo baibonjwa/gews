@@ -134,7 +134,7 @@ namespace sys2
                     {
                         var geologyspaceEntity = new GeologySpace
                         {
-                            WorkingFace = BasicInfoManager.getInstance().getWorkingFaceById(workingfaceid),
+                            WorkingFace = WorkingFace.Find(workingfaceid),
                             TectonicType = Convert.ToInt32(key),
                             TectonicId = tmp.geoinfos[GIS.GIS_Const.FIELD_BID],
                             Distance = tmp.dist,

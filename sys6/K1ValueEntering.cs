@@ -61,7 +61,7 @@ namespace UnderTerminal
             this.tunnelId = tunnelId;
             this.Text = tunnelName;
             this.mainWin = win;
-            Tunnel entTunnel = BasicInfoManager.getInstance().getTunnelByID(tunnelId);
+            Tunnel entTunnel = Tunnel.Find(tunnelId);
 
             X = entTunnel.WorkingFace.Coordinate.X.ToString();
             Y = entTunnel.WorkingFace.Coordinate.Y.ToString();
@@ -120,7 +120,7 @@ namespace UnderTerminal
             this.DialogResult = DialogResult.OK;
 
             tunnelEntity.TunnelId = this.tunnelId;
-            tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(tunnelId);
+            tunnelEntity = Tunnel.Find(tunnelId);
             //添加
             //if (this.Text == Const_OP.K1_VALUE_ADD)
             //{

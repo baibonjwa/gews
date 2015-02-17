@@ -861,7 +861,7 @@ namespace sys3
                         }
                         dgrdvWire.Rows.Clear();
                         //巷道信息
-                        tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(tunnelEntity.TunnelId);
+                        tunnelEntity = Tunnel.Find(tunnelEntity.TunnelId);
                         //导线ID
                         wireEntity.WireId = Wire.FindOneByTunnelId(tunnelEntity.TunnelId).WireId;
                         //导线信息

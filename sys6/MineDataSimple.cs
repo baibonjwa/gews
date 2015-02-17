@@ -43,9 +43,8 @@ namespace UnderTerminal
             InitializeComponent();
             this.tunnelId = tunnelId;
             //this.Text += "-" + tunnelName;
-            Tunnel entTunnel = BasicInfoManager.getInstance().getTunnelByID(tunnelId);
-            WorkingFace entWorkingFace =
-                BasicInfoManager.getInstance().getWorkingFaceById(entTunnel.WorkingFace.WorkingFaceId); //WorkingFaceBLL.selectWorkingFaceInfoByID(entTunnel.WorkingFace.WorkingFaceID);
+            Tunnel entTunnel = Tunnel.Find(tunnelId);
+            WorkingFace entWorkingFace = WorkingFace.Find(entTunnel.WorkingFace.WorkingFaceId);
             txtCoordinateX.Text = entWorkingFace.Coordinate.X.ToString();
             txtCoordinateY.Text = entWorkingFace.Coordinate.Y.ToString();
             txtCoordinateZ.Text = entWorkingFace.Coordinate.Z.ToString();

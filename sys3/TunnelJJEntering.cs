@@ -204,7 +204,7 @@ namespace sys3
                 //巷道选择按钮Text改变
                 btnChooseWorkFace.Text = selectWF.workFaceName;
                 //实体赋值
-                jjWorkFaceEntity = BasicInfoManager.getInstance().getWorkingFaceById(selectWF.workFaceId);
+                jjWorkFaceEntity = WorkingFace.Find(selectWF.workFaceId);
             }
         }
 
@@ -226,7 +226,7 @@ namespace sys3
                 //巷道选择按钮Text改变
                 btnChooseTunnel.Text = tunnelChoose.tunnelName;
                 //实体赋值
-                tunnelEntity = BasicInfoManager.getInstance().getTunnelByID(tunnelChoose.tunnelId);
+                tunnelEntity = Tunnel.Find(tunnelChoose.tunnelId);
             }
         }
 

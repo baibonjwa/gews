@@ -470,7 +470,7 @@ namespace sys2
 
                         var geologyspaceEntity = new GeologySpace();
                         geologyspaceEntity.WorkingFace =
-                            BasicInfoManager.getInstance().getWorkingFaceById(selectWorkingfaceSimple1.IWorkingfaceId);
+                            WorkingFace.Find(selectWorkingfaceSimple1.IWorkingfaceId);
                         geologyspaceEntity.TectonicType = Convert.ToInt32(key);
 
                         geologyspaceEntity.TectonicId = tmp.geoinfos[GIS_Const.FIELD_BID];
