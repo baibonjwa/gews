@@ -398,7 +398,7 @@ namespace sys3
                 if (prevPnt != null)
                 {
                     workingFace.Coordinate = new Coordinate(prevPnt.X, prevPnt.Y, 0.0);
-                    bool bres = WorkingFaceBLL.updateWorkingfaceXYZ(workingFace);
+                    workingFace.Save();
                 }
                 //根据点查询60米范围内的地质构造的信息
                 var hd_ids = new List<int>();

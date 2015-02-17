@@ -352,7 +352,7 @@ namespace sys2
             if (workfacepos != null)
             {
                 workingFace.Coordinate = new Coordinate(workfacepos.X, workfacepos.Y, 0.0);
-                WorkingFaceBLL.updateWorkingfaceXYZ(workingFace);
+                workingFace.Save();
             }
             //查询地质结构信息
             geostructsinfos.Remove("LAST");
@@ -395,7 +395,7 @@ namespace sys2
 
             //修改工作面信息表中对应的X Y Z坐标信息
             workingFace.Coordinate = new Coordinate(pnt.X, pnt.Y, 0.0);
-            WorkingFaceBLL.updateWorkingfaceXYZ(workingFace);
+            workingFace.Save();
 
             //查询地质结构信息
             var hd_ids = new List<int>();

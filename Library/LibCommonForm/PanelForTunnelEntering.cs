@@ -103,20 +103,7 @@ namespace LibCommonForm
             _iMineId = iMineId;
 
             // 获取水平信息
-            DataSet ds = HorizontalBLL.selectHorizontalInfoByMineId(iMineId);
-
-            // 检索件数
-            int iSelCnt = ds.Tables[0].Rows.Count;
-            // 检索件数 > 0 的场合
-            if (iSelCnt > 0)
-            {
-                // 绑定水平信息
-                this.lstHorizontalName.DataSource = ds.Tables[0];
-                this.lstHorizontalName.DisplayMember = HorizontalDbConstNames.HORIZONTAL_NAME;
-                this.lstHorizontalName.ValueMember = HorizontalDbConstNames.HORIZONTAL_ID;
-
-                this.lstHorizontalName.SelectedIndex = -1;
-            }
+            DataBindUtil.LoadHorizontalName(lstHorizontalName, iMineId);
         }
         #endregion
 
@@ -138,21 +125,7 @@ namespace LibCommonForm
                 int iMineId = Convert.ToInt32(this.lstMineName.SelectedValue);
                 _iMineId = iMineId;
 
-                // 获取水平信息
-                DataSet ds = HorizontalBLL.selectHorizontalInfoByMineId(iMineId);
-
-                // 检索件数
-                int iSelCnt = ds.Tables[0].Rows.Count;
-                // 检索件数 > 0 的场合
-                if (iSelCnt > 0)
-                {
-                    // 绑定水平信息
-                    this.lstHorizontalName.DataSource = ds.Tables[0];
-                    this.lstHorizontalName.DisplayMember = HorizontalDbConstNames.HORIZONTAL_NAME;
-                    this.lstHorizontalName.ValueMember = HorizontalDbConstNames.HORIZONTAL_ID;
-
-                    this.lstHorizontalName.SelectedIndex = -1;
-                }
+                DataBindUtil.LoadHorizontalName(lstHorizontalName, iMineId);
             }
         }
         #endregion
@@ -250,20 +223,7 @@ namespace LibCommonForm
                 _iMiningAreaId = iMiningAreaId;
 
                 // 获取工作面信息
-                DataSet ds = WorkingFaceBLL.selectWorkingFaceInfoByMiningAreaId(iMiningAreaId);
-
-                // 检索件数
-                int iSelCnt = ds.Tables[0].Rows.Count;
-                // 检索件数 > 0 的场合
-                if (iSelCnt > 0)
-                {
-                    // 绑定工作面信息
-                    this.lstWorkingFaceName.DataSource = ds.Tables[0];
-                    this.lstWorkingFaceName.DisplayMember = WorkingFaceDbConstNames.WORKINGFACE_NAME;
-                    this.lstWorkingFaceName.ValueMember = WorkingFaceDbConstNames.WORKINGFACE_ID;
-
-                    this.lstWorkingFaceName.SelectedIndex = -1;
-                }
+                DataBindUtil.LoadWorkingFaceName(lstWorkingFaceName, iMiningAreaId);
             }
         }
         #endregion
@@ -284,21 +244,7 @@ namespace LibCommonForm
                 int iMiningAreaId = Convert.ToInt32(this.lstMiningAreaName.SelectedValue);
                 _iMiningAreaId = iMiningAreaId;
 
-                // 获取工作面信息
-                DataSet ds = WorkingFaceBLL.selectWorkingFaceInfoByMiningAreaId(iMiningAreaId);
-
-                // 检索件数
-                int iSelCnt = ds.Tables[0].Rows.Count;
-                // 检索件数 > 0 的场合
-                if (iSelCnt > 0)
-                {
-                    // 绑定工作面信息
-                    this.lstWorkingFaceName.DataSource = ds.Tables[0];
-                    this.lstWorkingFaceName.DisplayMember = WorkingFaceDbConstNames.WORKINGFACE_NAME;
-                    this.lstWorkingFaceName.ValueMember = WorkingFaceDbConstNames.WORKINGFACE_ID;
-
-                    this.lstWorkingFaceName.SelectedIndex = -1;
-                }
+                DataBindUtil.LoadWorkingFaceName(lstWorkingFaceName, iMiningAreaId);
             }
         }
         #endregion

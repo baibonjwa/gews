@@ -83,12 +83,12 @@ namespace sys3
         private void loadLithologyInfo()
         {
             // 获取岩性信息
-            DataSet ds = LithologyBLL.selectAllLithologyInfo();
-            if (ds.Tables[0].Rows.Count > 0)
+            Lithology[] lithologys = Lithology.FindAll();
+            if (lithologys.Length > 0)
             {
-                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                foreach (Lithology t in lithologys)
                 {
-                    LITHOLOGY.Items.Add(ds.Tables[0].Rows[i][LithologyDbConstNames.LITHOLOGY_NAME].ToString());
+                    LITHOLOGY.Items.Add(t.LithologyName);
                 }
             }
         }
@@ -161,16 +161,7 @@ namespace sys3
                 var cell0 = gvCoalSeamsTexture.Rows[i].Cells[0] as DataGridViewComboBoxCell;
                 if (cell0 != null && cell0.Value != null)
                 {
-                    DataSet ds = LithologyBLL.selectLithologyInfoByLithologyName(cell0.Value.ToString());
-                    if (ds.Tables[0].Rows.Count > 0)
-                    {
-                        int iLithologyId = 0;
-                        if (int.TryParse(ds.Tables[0].Rows[0][LithologyDbConstNames.LITHOLOGY_ID].ToString(),
-                            out iLithologyId))
-                        {
-                            boreholeLithologyEntity.Lithology.LithologyId = iLithologyId;
-                        }
-                    }
+                    boreholeLithologyEntity.Lithology = Lithology.FindOneByLithologyName(cell0.Value.ToString());
                 }
                 // 底板标高
                 double dFloorElevation = 0;
@@ -457,8 +448,8 @@ namespace sys3
                 cell2.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
 
                 // 当岩性选择为煤层时
-                DataSet ds = LithologyBLL.selectCoalInfo();
-                if (Convert.ToString(cell0.Value) == ds.Tables[0].Rows[0]["LITHOLOGY_NAME"].ToString())
+                Lithology lithology = Lithology.FindOneByCoal();
+                if (Convert.ToString(cell0.Value) == lithology.LithologyName)
                 {
                     // 煤层名称
                     var cell3 = gvCoalSeamsTexture.Rows[i].Cells[3] as DataGridViewTextBoxCell;
@@ -609,12 +600,13 @@ namespace sys3
                 txtCoordinateZ.Text = brehole.CoordinateZ.ToString(CultureInfo.InvariantCulture);
 
                 // 获取岩性信息
-                DataSet ds = LithologyBLL.selectAllLithologyInfo();
-                if (ds.Tables[0].Rows.Count > 0)
+                Lithology[] lithologys = Lithology.FindAll();
+                if (lithologys.Length > 0)
                 {
-                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+
+                    foreach (Lithology t in lithologys)
                     {
-                        LITHOLOGY.Items.Add(ds.Tables[0].Rows[i][LithologyDbConstNames.LITHOLOGY_NAME].ToString());
+                        LITHOLOGY.Items.Add(t.LithologyName);
                     }
                 }
 
@@ -625,12 +617,9 @@ namespace sys3
                     // 岩性名称
                     int iLithologyId = boreholeLithologies[i].Lithology.LithologyId;
 
-                    DataSet dsLithology = LithologyBLL.selectLithologyInfoByLithologyId(iLithologyId);
-                    if (dsLithology.Tables[0].Rows.Count > 0)
-                    {
-                        gvCoalSeamsTexture[0, i].Value =
-                            dsLithology.Tables[0].Rows[0][LithologyDbConstNames.LITHOLOGY_NAME].ToString();
-                    }
+                    Lithology lithology = Lithology.Find(iLithologyId);
+
+                    gvCoalSeamsTexture[0, i].Value = lithology.LithologyName;
                     // 底板标高
                     gvCoalSeamsTexture[1, i].Value = boreholeLithologies[i].FloorElevation;
                     // 厚度
@@ -670,20 +659,18 @@ namespace sys3
                     gvCoalSeamsTexture.Rows[gvCoalSeamsTexture.CurrentRow.Index].Cells[3] as
                         DataGridViewTextBoxCell;
 
-                DataSet ds = LithologyBLL.selectCoalInfo();
-                if (ds.Tables[0].Rows.Count > 0)
+                Lithology lithology = Lithology.FindOneByCoal();
+
+                // 当岩性名称选择为“煤”时，煤层名称可编辑，否则煤层名称设置为不可编辑，并清空
+                if (Convert.ToString(cell0.Value) ==
+                  lithology.LithologyName)
                 {
-                    // 当岩性名称选择为“煤”时，煤层名称可编辑，否则煤层名称设置为不可编辑，并清空
-                    if (Convert.ToString(cell0.Value) ==
-                        ds.Tables[0].Rows[0][LithologyDbConstNames.LITHOLOGY_NAME].ToString())
-                    {
-                        cell3.ReadOnly = false;
-                    }
-                    else
-                    {
-                        cell3.Value = "";
-                        cell3.ReadOnly = true;
-                    }
+                    cell3.ReadOnly = false;
+                }
+                else
+                {
+                    cell3.Value = "";
+                    cell3.ReadOnly = true;
                 }
             }
         }
@@ -702,20 +689,18 @@ namespace sys3
                 // 煤层名称
                 var cell3 = gvCoalSeamsTexture.Rows[i].Cells[3] as DataGridViewTextBoxCell;
 
-                DataSet ds = LithologyBLL.selectCoalInfo();
-                if (ds.Tables[0].Rows.Count > 0)
+
+                Lithology lithology = Lithology.FindOneByCoal();
+                // 当岩性名称选择为“煤”时，煤层名称可编辑，否则煤层名称设置为不可编辑，并清空
+                if (Convert.ToString(cell0.Value) ==
+                    lithology.LithologyName)
                 {
-                    // 当岩性名称选择为“煤”时，煤层名称可编辑，否则煤层名称设置为不可编辑，并清空
-                    if (Convert.ToString(cell0.Value) ==
-                        ds.Tables[0].Rows[0][LithologyDbConstNames.LITHOLOGY_NAME].ToString())
-                    {
-                        cell3.ReadOnly = false;
-                    }
-                    else
-                    {
-                        cell3.Value = "";
-                        cell3.ReadOnly = true;
-                    }
+                    cell3.ReadOnly = false;
+                }
+                else
+                {
+                    cell3.Value = "";
+                    cell3.ReadOnly = true;
                 }
             }
         }
@@ -1047,16 +1032,7 @@ namespace sys3
                         // 钻孔编号
                         boreholeLithologyEntity.Borehole.BoreholeId = breholeEntity.BoreholeId;
                         // 岩性编号
-                        DataSet ds = LithologyBLL.selectLithologyInfoByLithologyName("煤层");
-                        if (ds.Tables[0].Rows.Count > 0)
-                        {
-                            int iLithologyId = 0;
-                            if (int.TryParse(ds.Tables[0].Rows[0][LithologyDbConstNames.LITHOLOGY_ID].ToString(),
-                                out iLithologyId))
-                            {
-                                boreholeLithologyEntity.Lithology.LithologyId = iLithologyId;
-                            }
-                        }
+                        boreholeLithologyEntity.Lithology = Lithology.FindOneByCoal();
                         // 底板标高
 
                         boreholeLithologyEntity.FloorElevation = Convert.ToDouble(str[4]);

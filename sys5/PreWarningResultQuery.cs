@@ -167,12 +167,12 @@ namespace _5.WarningManagement
 
             //加载预警类型
             //AddWarningType();
-            var ds = WorkingFaceBLL.selectAllWorkingFace();
+            var workingFace = WorkingFace.FindAll();
             _cbxSelWorkSurface.Items.Add("全部");
             _cbxSelWorkSurface.SelectedIndex = 0;
-            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            foreach (var t in workingFace)
             {
-                _cbxSelWorkSurface.Items.Add(ds.Tables[0].Rows[i][WorkingFaceDbConstNames.WORKINGFACE_NAME]);
+                _cbxSelWorkSurface.Items.Add(t.WorkingFaceName);
             }
 
             //设置farpoint显示行列数

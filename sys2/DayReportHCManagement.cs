@@ -164,7 +164,7 @@ namespace sys2
                 double y = results[key].Y;
                 double z = results[key].Z;
                 wfEntity.Coordinate = new Coordinate(x, y, z);
-                LibBusiness.WorkingFaceBLL.updateWorkingfaceXYZ(wfEntity);
+                wfEntity.Save();
 
                 index += 1;
                 if (index == count - 1)

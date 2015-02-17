@@ -133,13 +133,14 @@ namespace LibCommonForm
 
                         //*******************************************************
                         // 获取水平信息
-                        DataSet ds = HorizontalBLL.selectHorizontalInfoByHorizontalId(id);
+
+                        Horizontal horizontals = Horizontal.Find(id);
                         // 设置数据源
-                        comboBoxColumn.DataSource = ds.Tables[0];
+                        comboBoxColumn.DataSource = horizontals;
                         // 设置显示字段
-                        comboBoxColumn.DisplayMember = HorizontalDbConstNames.HORIZONTAL_NAME;
+                        comboBoxColumn.DisplayMember = "HorizontalName";
                         // 设置隐藏字段
-                        comboBoxColumn.ValueMember = HorizontalDbConstNames.HORIZONTAL_ID;
+                        comboBoxColumn.ValueMember = "HorizontalId";
                         //*******************************************************
 
                         // 删除按钮
@@ -278,18 +279,7 @@ namespace LibCommonForm
         {
             dataGridView1.DataSource = null;
 
-            // 获取水平信息
-            DataSet ds = HorizontalBLL.selectHorizontalInfoByMineId(id);
-            int iSelCnt = ds.Tables[0].Rows.Count;
-            if (iSelCnt > 0)
-            {
-                // 禁止自动生成列(※位置不可变)
-                dataGridView1.AutoGenerateColumns = false;
-                dataGridView1.DataSource = ds.Tables[0];
-                dataGridView1.Columns[0].DataPropertyName = HorizontalDbConstNames.HORIZONTAL_ID;
-                dataGridView1.Columns[1].DataPropertyName = HorizontalDbConstNames.HORIZONTAL_NAME;
-                dataGridView1.Columns[2].DataPropertyName = HorizontalDbConstNames.MINE_ID;
-            }
+            DataBindUtil.LoadHorizontalName(dataGridView1, id);
         }
 
         /// <summary>
@@ -319,20 +309,8 @@ namespace LibCommonForm
         private void loadWorkingFaceInfo(int id)
         {
             dataGridView1.DataSource = null;
-
             // 获取水平信息
-            DataSet ds = WorkingFaceBLL.selectWorkingFaceInfoByMiningAreaId(id);
-            int iSelCnt = ds.Tables[0].Rows.Count;
-            if (iSelCnt > 0)
-            {
-                // 禁止自动生成列(※位置不可变)
-                dataGridView1.AutoGenerateColumns = false;
-                dataGridView1.DataSource = ds.Tables[0];
-                dataGridView1.Columns[0].DataPropertyName = WorkingFaceDbConstNames.WORKINGFACE_ID;
-                dataGridView1.Columns[1].DataPropertyName = WorkingFaceDbConstNames.WORKINGFACE_NAME;
-                dataGridView1.Columns[2].DataPropertyName = WorkingFaceDbConstNames.MININGAREA_ID;
-                dataGridView1.Columns[3].DataPropertyName = WorkingFaceDbConstNames.WORKINGFACE_TYPE;
-            }
+            DataBindUtil.LoadWorkingFaceName(dataGridView1, id);
         }
 
         /// <summary>
@@ -465,32 +443,21 @@ namespace LibCommonForm
 
                 if (dataGridView1.Rows[i].Cells[0].Value != DBNull.Value && dataGridView1.Rows[i].Cells[0].Value != null)
                 {
-                    bResultFlag = HorizontalBLL.updateHorizontalInfo(horizontalEntity);
+                    horizontalEntity.Save();
                 }
                 else
                 {
-                    bResultFlag = HorizontalBLL.insertHorizontalInfo(horizontalEntity);
-                }
-
-                if (!bResultFlag)
-                {
-                    break;
+                    horizontalEntity.Save();
                 }
             }
 
-            BasicInfoManager.getInstance().refreshHorizontalInfo();
+            //BasicInfoManager.getInstance().refreshHorizontalInfo();
 
             // 执行结果判断
-            if (bResultFlag)
-            {
-                Alert.alert(Const.SUCCESS_MSG);
-                // 绑定水平信息
-                loadHorizontalInfo(_id);
-            }
-            else
-            {
-                Alert.alert(Const.FAILURE_MSG);
-            }
+
+            Alert.alert(Const.SUCCESS_MSG);
+            // 绑定水平信息
+            loadHorizontalInfo(_id);
         }
 
         /// <summary>
@@ -540,8 +507,6 @@ namespace LibCommonForm
                     break;
                 }
             }
-
-            BasicInfoManager.getInstance().refreshMiningAreaInfo();
 
             // 执行结果判断
             if (bResultFlag)
@@ -595,35 +560,29 @@ namespace LibCommonForm
 
                 if (cells[0].Value != DBNull.Value && cells[0].Value != null)
                 {
-                    bResultFlag = WorkingFaceBLL.updateWorkingFaceBasicInfo(tmpWorkingFaceId, tmpWorkingFaceName,
-                        miningAreaId, workingfaceType);
+                    var workingFace = WorkingFace.Find(tmpWorkingFaceId);
+                    workingFace.WorkingFaceName = tmpWorkingFaceName;
+                    workingFace.MiningArea = MiningArea.Find(miningAreaId);
+                    workingFace.WorkingfaceTypeEnum = (WorkingfaceTypeEnum)workingfaceType;
+
+                    workingFace.Save();
                 }
                 else
                 {
-                    bResultFlag = WorkingFaceBLL.insertWorkingFaceBasicInfo(tmpWorkingFaceName, miningAreaId,
-                        workingfaceType);
+                    var workingFace = new WorkingFace()
+                    {
+                        WorkingFaceName = tmpWorkingFaceName,
+                        MiningArea = MiningArea.Find(miningAreaId),
+                        WorkingfaceTypeEnum = (WorkingfaceTypeEnum)workingfaceType
+                    };
+                    workingFace.Save();
                 }
-
-                if (!bResultFlag)
-                {
-                    break;
-                }
             }
 
-            // 工作面信息已经变更，需要刷新工作面信息
-            BasicInfoManager.getInstance().refreshWorkingFaceInfo();
 
-            // 执行结果判断
-            if (bResultFlag)
-            {
-                Alert.alert(Const.SUCCESS_MSG);
-                // 绑定工作面信息
-                loadWorkingFaceInfo(_id);
-            }
-            else
-            {
-                Alert.alert(Const.FAILURE_MSG);
-            }
+            Alert.alert(Const.SUCCESS_MSG);
+            // 绑定工作面信息
+            loadWorkingFaceInfo(_id);
         }
 
         /// <summary>
@@ -767,17 +726,10 @@ namespace LibCommonForm
                             {
                                 int iHorizontalId =
                                     Convert.ToInt32(dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].Value);
-                                bool bResult = HorizontalBLL.deleteHorizontalInfo(iHorizontalId);
+                                Horizontal.Find(iHorizontalId).Delete();
+                                // 绑定水平信息
+                                loadHorizontalInfo(_id);
 
-                                if (bResult)
-                                {
-                                    // 绑定水平信息
-                                    loadHorizontalInfo(_id);
-                                }
-                                else
-                                {
-                                    Alert.alert(Const.DEL_FAILURE_MSG);
-                                }
                             }
                             else
                             {
@@ -811,17 +763,11 @@ namespace LibCommonForm
                                 }
                                 else
                                 {
-                                    bool bResult = MiningAreaBLL.deleteMiningAreaInfo(iMiningAreaId);
+                                    var miningArea = MiningArea.Find(iMiningAreaId);
+                                    miningArea.Delete();
 
-                                    if (bResult)
-                                    {
-                                        // 绑定采区信息
-                                        loadMiningAreaInfo(_id);
-                                    }
-                                    else
-                                    {
-                                        Alert.alert(Const.DEL_FAILURE_MSG);
-                                    }
+                                    // 绑定采区信息
+                                    loadMiningAreaInfo(_id);
                                 }
                             }
                             else
@@ -857,18 +803,10 @@ namespace LibCommonForm
                                 }
                                 else
                                 {
-                                    bool bResult = WorkingFaceBLL.deleteWorkingFaceInfo(iWorkingFaceId);
-
-                                    if (bResult)
-                                    {
-                                        BasicInfoManager.getInstance().refreshWorkingFaceInfo();
-                                        // 绑定工作面信息
-                                        loadWorkingFaceInfo(_id);
-                                    }
-                                    else
-                                    {
-                                        Alert.alert(Const.DEL_FAILURE_MSG);
-                                    }
+                                    var workingFace = WorkingFace.Find(iWorkingFaceId);
+                                    workingFace.Delete();
+                                    // 绑定工作面信息
+                                    loadWorkingFaceInfo(_id);
                                 }
                             }
                             else

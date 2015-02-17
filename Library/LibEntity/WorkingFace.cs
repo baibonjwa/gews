@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Castle.ActiveRecord;
+using NHibernate.Criterion;
 
 namespace LibEntity
 {
@@ -100,6 +101,24 @@ namespace LibEntity
         /// </summary>
         [Property("WORKINGFACE_TYPE")]
         public WorkingfaceTypeEnum WorkingfaceTypeEnum { get; set; }
+
+        public static WorkingFace[] FindAllByMiningAreaId(int miningAreaId)
+        {
+            var criterion = new ICriterion[]
+            {
+                Restrictions.Eq("MiningArea.MiningAreaId", miningAreaId)
+            };
+            return FindAll(criterion);
+        }
+
+        public static bool ExistsByWorkingFaceName(string workingFaceName)
+        {
+            var criterion = new List<ICriterion>
+            {
+                Restrictions.Eq("WorkingFaceName", workingFaceName)
+            };
+            return Exists(criterion.ToArray());
+        }
 
 
     }

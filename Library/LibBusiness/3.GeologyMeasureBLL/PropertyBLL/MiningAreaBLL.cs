@@ -18,19 +18,7 @@ namespace LibBusiness
 {
     public class MiningAreaBLL
     {
-        /// <summary>
-        /// 获取所有<采区>信息
-        /// </summary>
-        /// <returns><采区>信息</returns>
-        public static DataSet selectAllMiningAreaInfo()
-        {
-            StringBuilder sqlStr = new StringBuilder();
-            sqlStr.Append("SELECT * FROM " + MiningAreaDbConstNames.TABLE_NAME);
 
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
-            DataSet ds = db.ReturnDS(sqlStr.ToString());
-            return ds;
-        }
 
         /// <summary>
         /// 通过<水平编号>，获取该<水平>下所有<采区>信息
@@ -103,21 +91,6 @@ namespace LibBusiness
             return bResult;
         }
 
-        /// <summary>
-        /// 采区信息删除
-        /// </summary>
-        /// <param name="iMiningAreaId">删除数据主键</param>
-        /// <returns>成功与否：true，false</returns>
-        public static bool deleteMiningAreaInfo(int iMiningAreaId)
-        {
-            StringBuilder sqlStr = new StringBuilder();
-            sqlStr.Append("DELETE FROM " + MiningAreaDbConstNames.TABLE_NAME);
-            sqlStr.Append(" WHERE " + MiningAreaDbConstNames.MININGAREA_ID + " = " + iMiningAreaId);
-
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
-            bool bResult = db.OperateDB(sqlStr.ToString());
-            return bResult;
-        }
 
         /// <summary>
         /// 条件过滤巷道

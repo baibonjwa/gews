@@ -299,16 +299,12 @@ namespace LibBusiness
                     if (TunnelUtils.isStoping((TunnelTypeEnum)Convert.ToInt32(dt.Rows[0][LibBusiness.TunnelInfoDbConstNames.TUNNEL_TYPE])))
                     {
                         //获取工作面名称
-                        int workFaceID = 0;
-                        int.TryParse(dt.Rows[0][LibBusiness.TunnelInfoDbConstNames.WORKINGFACE_ID].ToString(), out workFaceID);
-                        DataTable dtWorkFaceInfo = LibBusiness.WorkingFaceBLL.selectWorkingFaceInfoByWorkingFaceId(workFaceID).Tables[0];
-                        if (dtWorkFaceInfo != null)
+                        int workFaceId;
+                        int.TryParse(dt.Rows[0][TunnelInfoDbConstNames.WORKINGFACE_ID].ToString(), out workFaceId);
+                        WorkingFace workingFace = WorkingFace.Find(workFaceId);
+                        if (workingFace != null)
                         {
-                            if (dtWorkFaceInfo.Rows.Count > 0)
-                            {
-                                //返回工作面名称
-                                return dtWorkFaceInfo.Rows[0][LibBusiness.WorkingFaceDbConstNames.WORKINGFACE_NAME].ToString();
-                            }
+                            return workingFace.WorkingFaceName;
                         }
                     }
                     else

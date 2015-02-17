@@ -56,12 +56,12 @@ namespace LibBusiness
         private void init()
         {
             RefreshMineInfo();
-            refreshHorizontalInfo();
-            refreshMiningAreaInfo();
-            refreshWorkingFaceInfo();
+            //refreshHorizontalInfo();
+            //refreshMiningAreaInfo();
+            //refreshWorkingFaceInfo();
 
             refreshCoalSeamsInfo();
-            refreshLithologyInfo();
+            //refreshLithologyInfo();
             refreshTeamInfo();
 
             refreshTunnelInfo(-1);
@@ -104,24 +104,6 @@ namespace LibBusiness
                 return string.Empty;
         }
 
-        /// <summary>
-        /// 加载更新水平信息
-        /// </summary>
-        public void refreshHorizontalInfo()
-        {
-            horizList.Clear();
-
-            DataSet ds = HorizontalBLL.selectAllHorizontalInfo();
-            foreach (DataRow dr in ds.Tables[0].Rows)
-            {
-                Horizontal entity = new Horizontal();
-                entity.HorizontalId = Convert.ToInt32(dr[HorizontalDbConstNames.HORIZONTAL_ID]);
-                entity.HorizontalName = dr[HorizontalDbConstNames.HORIZONTAL_NAME].ToString();
-                entity.Mine = getMineById(Convert.ToInt32(dr[HorizontalDbConstNames.MINE_ID]));
-                horizList.Add(entity.HorizontalId, entity);
-            }
-        }
-
         public string getHorizontalNameById(int horizontalId)
         {
             Horizontal entity = getHorizontalById(horizontalId);
@@ -144,23 +126,6 @@ namespace LibBusiness
             }
         }
 
-        /// <summary>
-        /// 加载采区信息
-        /// </summary>
-        public void refreshMiningAreaInfo()
-        {
-            maList.Clear();
-
-            DataSet ds = MiningAreaBLL.selectAllMiningAreaInfo();
-            foreach (DataRow dr in ds.Tables[0].Rows)
-            {
-                MiningArea entity = new MiningArea();
-                entity.MiningAreaId = Convert.ToInt32(dr[MiningAreaDbConstNames.MININGAREA_ID]);
-                entity.MiningAreaName = dr[MiningAreaDbConstNames.MININGAREA_NAME].ToString();
-                entity.Horizontal = getHorizontalById(Convert.ToInt32(dr[MiningAreaDbConstNames.HORIZONTAL_ID]));
-                maList.Add(entity.MiningAreaId, entity);
-            }
-        }
 
         /// <summary>
         /// 获取采区名称
@@ -197,68 +162,68 @@ namespace LibBusiness
         /// <summary>
         /// 更新指定工作面信息
         /// </summary>
-        public void refreshWorkingFaceInfo(WorkingFace entity)
-        {
-            // 加载工作面信息
-            DataSet ds = WorkingFaceBLL.selectWorkingFaceInfoByWorkingFaceId(entity.WorkingFaceId);
+        //public void refreshWorkingFaceInfo(WorkingFace entity)
+        //{
+        //    // 加载工作面信息
+        //    WorkingFace workingFace = WorkingFace.Find(entity.WorkingFaceId); 
 
-            foreach (DataRow dr in ds.Tables[0].Rows)
-            {
-                entity.WorkingFaceName = dr[WorkingFaceDbConstNames.WORKINGFACE_NAME] == DBNull.Value ? string.Empty : dr[WorkingFaceDbConstNames.WORKINGFACE_NAME].ToString();
+        //    foreach (DataRow dr in ds.Tables[0].Rows)
+        //    {
+        //        entity.WorkingFaceName = dr[WorkingFaceDbConstNames.WORKINGFACE_NAME] == DBNull.Value ? string.Empty : dr[WorkingFaceDbConstNames.WORKINGFACE_NAME].ToString();
 
-                // 采区
-                entity.MiningArea = getMiningAreaById(
-                    dr[WorkingFaceDbConstNames.MININGAREA_ID] == DBNull.Value ? Const.INVALID_ID : Convert.ToInt32(dr[WorkingFaceDbConstNames.MININGAREA_ID].ToString())
-                    );
+        //        // 采区
+        //        entity.MiningArea = getMiningAreaById(
+        //            dr[WorkingFaceDbConstNames.MININGAREA_ID] == DBNull.Value ? Const.INVALID_ID : Convert.ToInt32(dr[WorkingFaceDbConstNames.MININGAREA_ID].ToString())
+        //            );
 
-                double x = dr[WorkingFaceDbConstNames.COORDINATE_X] == DBNull.Value ? 0.0 : Convert.ToDouble(dr[WorkingFaceDbConstNames.COORDINATE_X]);
-                double y = dr[WorkingFaceDbConstNames.COORDINATE_Y] == DBNull.Value ? 0.0 : Convert.ToDouble(dr[WorkingFaceDbConstNames.COORDINATE_Y]);
-                double z = dr[WorkingFaceDbConstNames.COORDINATE_Z] == DBNull.Value ? 0.0 : Convert.ToDouble(dr[WorkingFaceDbConstNames.COORDINATE_Z]);
-                entity.Coordinate = new Coordinate(x, y, z);
+        //        double x = dr[WorkingFaceDbConstNames.COORDINATE_X] == DBNull.Value ? 0.0 : Convert.ToDouble(dr[WorkingFaceDbConstNames.COORDINATE_X]);
+        //        double y = dr[WorkingFaceDbConstNames.COORDINATE_Y] == DBNull.Value ? 0.0 : Convert.ToDouble(dr[WorkingFaceDbConstNames.COORDINATE_Y]);
+        //        double z = dr[WorkingFaceDbConstNames.COORDINATE_Z] == DBNull.Value ? 0.0 : Convert.ToDouble(dr[WorkingFaceDbConstNames.COORDINATE_Z]);
+        //        entity.Coordinate = new Coordinate(x, y, z);
 
-                entity.StartDate = dr[WorkingFaceDbConstNames.START_DATE] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(dr[WorkingFaceDbConstNames.START_DATE].ToString());
-                entity.StopDate = dr[WorkingFaceDbConstNames.STOP_DATE] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(dr[WorkingFaceDbConstNames.STOP_DATE].ToString());
-                entity.IsFinish = dr[WorkingFaceDbConstNames.IS_FINISH] == DBNull.Value ? 0 : Convert.ToInt32(dr[WorkingFaceDbConstNames.IS_FINISH]);
-                entity.Team =  Team.Find(dr[WorkingFaceDbConstNames.TEAM_NAME_ID] == DBNull.Value ? Const.INVALID_ID : Convert.ToInt32(dr[WorkingFaceDbConstNames.TEAM_NAME_ID].ToString()));
-            }
-        }
+        //        entity.StartDate = dr[WorkingFaceDbConstNames.START_DATE] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(dr[WorkingFaceDbConstNames.START_DATE].ToString());
+        //        entity.StopDate = dr[WorkingFaceDbConstNames.STOP_DATE] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(dr[WorkingFaceDbConstNames.STOP_DATE].ToString());
+        //        entity.IsFinish = dr[WorkingFaceDbConstNames.IS_FINISH] == DBNull.Value ? 0 : Convert.ToInt32(dr[WorkingFaceDbConstNames.IS_FINISH]);
+        //        entity.Team =  Team.Find(dr[WorkingFaceDbConstNames.TEAM_NAME_ID] == DBNull.Value ? Const.INVALID_ID : Convert.ToInt32(dr[WorkingFaceDbConstNames.TEAM_NAME_ID].ToString()));
+        //    }
+        //}
 
         /// <summary>
         /// 更新工作面信息
         /// </summary>
-        public void refreshWorkingFaceInfo()
-        {
-            wfList.Clear();
+        //public void refreshWorkingFaceInfo()
+        //{
+        //    wfList.Clear();
 
-            // 加载工作面信息
-            DataSet ds = WorkingFaceBLL.selectAllWorkingFace();
+        //    // 加载工作面信息
+        //    DataSet ds = WorkingFaceBLL.selectAllWorkingFace();
 
-            foreach (DataRow dr in ds.Tables[0].Rows)
-            {
-                WorkingFace entity = new WorkingFace();
+        //    foreach (DataRow dr in ds.Tables[0].Rows)
+        //    {
+        //        WorkingFace entity = new WorkingFace();
 
-                entity.WorkingFaceId = dr[WorkingFaceDbConstNames.WORKINGFACE_ID] == DBNull.Value ? Const.INVALID_ID : Convert.ToInt32(dr[WorkingFaceDbConstNames.WORKINGFACE_ID].ToString());
-                entity.WorkingFaceName = dr[WorkingFaceDbConstNames.WORKINGFACE_NAME] == DBNull.Value ? string.Empty : dr[WorkingFaceDbConstNames.WORKINGFACE_NAME].ToString();
+        //        entity.WorkingFaceId = dr[WorkingFaceDbConstNames.WORKINGFACE_ID] == DBNull.Value ? Const.INVALID_ID : Convert.ToInt32(dr[WorkingFaceDbConstNames.WORKINGFACE_ID].ToString());
+        //        entity.WorkingFaceName = dr[WorkingFaceDbConstNames.WORKINGFACE_NAME] == DBNull.Value ? string.Empty : dr[WorkingFaceDbConstNames.WORKINGFACE_NAME].ToString();
 
-                // 采区
-                entity.MiningArea = getMiningAreaById(
-                    dr[WorkingFaceDbConstNames.MININGAREA_ID] == DBNull.Value ? Const.INVALID_ID : Convert.ToInt32(dr[WorkingFaceDbConstNames.MININGAREA_ID].ToString())
-                    );
+        //        // 采区
+        //        entity.MiningArea = getMiningAreaById(
+        //            dr[WorkingFaceDbConstNames.MININGAREA_ID] == DBNull.Value ? Const.INVALID_ID : Convert.ToInt32(dr[WorkingFaceDbConstNames.MININGAREA_ID].ToString())
+        //            );
 
-                double x = dr[WorkingFaceDbConstNames.COORDINATE_X] == DBNull.Value ? 0.0 : Convert.ToDouble(dr[WorkingFaceDbConstNames.COORDINATE_X]);
-                double y = dr[WorkingFaceDbConstNames.COORDINATE_Y] == DBNull.Value ? 0.0 : Convert.ToDouble(dr[WorkingFaceDbConstNames.COORDINATE_Y]);
-                double z = dr[WorkingFaceDbConstNames.COORDINATE_Z] == DBNull.Value ? 0.0 : Convert.ToDouble(dr[WorkingFaceDbConstNames.COORDINATE_Z]);
-                entity.Coordinate = new Coordinate(x, y, z);
+        //        double x = dr[WorkingFaceDbConstNames.COORDINATE_X] == DBNull.Value ? 0.0 : Convert.ToDouble(dr[WorkingFaceDbConstNames.COORDINATE_X]);
+        //        double y = dr[WorkingFaceDbConstNames.COORDINATE_Y] == DBNull.Value ? 0.0 : Convert.ToDouble(dr[WorkingFaceDbConstNames.COORDINATE_Y]);
+        //        double z = dr[WorkingFaceDbConstNames.COORDINATE_Z] == DBNull.Value ? 0.0 : Convert.ToDouble(dr[WorkingFaceDbConstNames.COORDINATE_Z]);
+        //        entity.Coordinate = new Coordinate(x, y, z);
 
-                entity.StartDate = dr[WorkingFaceDbConstNames.START_DATE] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(dr[WorkingFaceDbConstNames.START_DATE].ToString());
-                entity.StopDate = dr[WorkingFaceDbConstNames.STOP_DATE] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(dr[WorkingFaceDbConstNames.STOP_DATE].ToString());
-                entity.IsFinish = dr[WorkingFaceDbConstNames.IS_FINISH] == DBNull.Value ? 0 : Convert.ToInt32(dr[WorkingFaceDbConstNames.IS_FINISH]);
-                entity.Team = Team.Find(dr[WorkingFaceDbConstNames.TEAM_NAME_ID] == DBNull.Value ? Const.INVALID_ID : Convert.ToInt32(dr[WorkingFaceDbConstNames.TEAM_NAME_ID].ToString()));
-                entity.WorkingfaceTypeEnum = dr[WorkingFaceDbConstNames.WORKINGFACE_TYPE] == DBNull.Value ? WorkingfaceTypeEnum.OTHER : (WorkingfaceTypeEnum)dr[WorkingFaceDbConstNames.WORKINGFACE_TYPE];
+        //        entity.StartDate = dr[WorkingFaceDbConstNames.START_DATE] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(dr[WorkingFaceDbConstNames.START_DATE].ToString());
+        //        entity.StopDate = dr[WorkingFaceDbConstNames.STOP_DATE] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(dr[WorkingFaceDbConstNames.STOP_DATE].ToString());
+        //        entity.IsFinish = dr[WorkingFaceDbConstNames.IS_FINISH] == DBNull.Value ? 0 : Convert.ToInt32(dr[WorkingFaceDbConstNames.IS_FINISH]);
+        //        entity.Team = Team.Find(dr[WorkingFaceDbConstNames.TEAM_NAME_ID] == DBNull.Value ? Const.INVALID_ID : Convert.ToInt32(dr[WorkingFaceDbConstNames.TEAM_NAME_ID].ToString()));
+        //        entity.WorkingfaceTypeEnum = dr[WorkingFaceDbConstNames.WORKINGFACE_TYPE] == DBNull.Value ? WorkingfaceTypeEnum.OTHER : (WorkingfaceTypeEnum)dr[WorkingFaceDbConstNames.WORKINGFACE_TYPE];
 
-                wfList.Add(entity.WorkingFaceId, entity);
-            }
-        }
+        //        wfList.Add(entity.WorkingFaceId, entity);
+        //    }
+        //}
 
         /// <summary>
         /// 根据工作面面id，获取工作面实体
@@ -335,23 +300,6 @@ namespace LibBusiness
                 return string.Empty;
         }
 
-        /// <summary>
-        /// 获取岩性信息
-        /// </summary>
-        public void refreshLithologyInfo()
-        {
-            lithologyList.Clear();
-
-            DataSet ds = LithologyBLL.selectAllLithologyInfo();
-
-            foreach (DataRow dr in ds.Tables[0].Rows)
-            {
-                Lithology entity = new Lithology();
-                entity.LithologyId = Convert.ToInt32(dr[LithologyDbConstNames.LITHOLOGY_ID]);
-                entity.LithologyName = dr[LithologyDbConstNames.LITHOLOGY_NAME].ToString();
-                lithologyList.Add(entity.LithologyId, entity);
-            }
-        }
 
         public Lithology getLithologyById(int lighologyId)
         {

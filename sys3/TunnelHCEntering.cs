@@ -495,8 +495,8 @@ namespace sys3
                     return;
 
                 workingFace.Coordinate = new Coordinate(pos.X, pos.Y, 0.0);
+                workingFace.Save();
 
-                WorkingFaceBLL.updateWorkingFaceInfo(workingFace);
                 //添加地质构造信息到数据库表中
                 if (dzxlist.Count > 0)
                 {
@@ -552,8 +552,8 @@ namespace sys3
 
                 //工作面信息提交
                 workingFace.Coordinate = new Coordinate(pos.X, pos.Y, 0.0);
+                workingFace.Save();
 
-                WorkingFaceBLL.updateWorkingFaceInfo(workingFace);
                 //更新地质构造表
                 if (dzxlist.Count > 0)
                 {

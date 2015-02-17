@@ -44,6 +44,25 @@ namespace LibBusiness
             if (horizontals != null) DataBindListControl(lb, horizontals, "HorizontalName", "HorizontalId", selectedValue);
         }
 
+        public static void LoadHorizontalName(DataGridView dgv, int mineId, int selectedValue = -1)
+        {
+            var horizontals = Horizontal.FindAllByMineId(mineId);
+            if (horizontals != null) DataBindListControl(dgv, horizontals, "HorizontalName", "HorizontalId");
+        }
+
+        public static void LoadWorkingFaceName(ListControl lb, int miningAreaId, int selectedValue = -1)
+        {
+            var workingFaces = WorkingFace.FindAllByMiningAreaId(miningAreaId);
+            if (workingFaces != null) DataBindListControl(lb, workingFaces, "WorkingFaceName", "WorkingFaceId", selectedValue);
+        }
+
+        public static void LoadWorkingFaceName(DataGridView dgv, int miningAreaId)
+        {
+            var workingFaces = WorkingFace.FindAllByMiningAreaId(miningAreaId);
+            if (workingFaces != null) DataBindListControl(dgv, workingFaces, "WorkingFaceName", "WorkingFaceId");
+        }
+
+
         public static void LoadLithology(ListControl lb, int selectedValue = -1)
         {
             var lithologys = Lithology.FindAll();

@@ -1,4 +1,5 @@
 ﻿using Castle.ActiveRecord;
+using NHibernate.Criterion;
 
 namespace LibEntity
 {
@@ -13,5 +14,23 @@ namespace LibEntity
 
         [Property("LITHOLOGY_DESCRIBE")]
         public string LithologyDescribe { get; set; }
+
+        public static Lithology FindOneByCoal()
+        {
+            var criterion = new ICriterion[]
+            {
+                Restrictions.Eq("LithologyName", "煤层")
+            };
+            return FindOne(criterion);
+        }
+
+        public static Lithology FindOneByLithologyName(string lithologyName)
+        {
+            var criterion = new ICriterion[]
+            {
+                Restrictions.Eq("LithologyName", lithologyName)
+            };
+            return FindOne(criterion);
+        }
     }
 }

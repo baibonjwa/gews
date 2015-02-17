@@ -339,7 +339,7 @@ namespace sys2
             var dics = new Dictionary<string, string>();
             IPoint prevPnt = null;
 
-            workingFace = WorkingFaceBLL.selectWorkingFaceInfoByWksId(workingFace.WorkingFaceId);
+            workingFace = WorkingFace.Find(workingFace.WorkingFaceId);
 
             if (workingFace != null)
             {
@@ -379,7 +379,7 @@ namespace sys2
             if (pos != null)
             {
                 workingFace.Coordinate = new Coordinate(pos.X, pos.Y, 0.0);
-                WorkingFaceBLL.updateWorkingfaceXYZ(workingFace);
+                workingFace.Save();
             }
 
             //更新地质构造表
@@ -436,8 +436,7 @@ namespace sys2
             foreach (string key in results_pts.Keys)
             {
                 workingFace.Coordinate = new Coordinate(results_pts[key].X, results_pts[key].Y, results_pts[key].Z);
-
-                WorkingFaceBLL.updateWorkingfaceXYZ(workingFace);
+                workingFace.Save();
                 if (index == results_pts.Count - 1)
                 {
                     pnt.X = results_pts[key].X;
@@ -588,8 +587,6 @@ namespace sys2
             {
                 // 工作面坐标已经改变，需要更新工作面信息
                 Log.Debug("发送地址构造消息------开始");
-                BasicInfoManager.getInstance().refreshWorkingFaceInfo(workingFace);
-
                 // 通知服务端回采进尺已经添加
                 var msg = new UpdateWarningDataMsg(selectWorkingfaceSimple1.IWorkingfaceId,
                     Const.INVALID_ID,
@@ -664,41 +661,13 @@ namespace sys2
             UpdateHcjc(tunnelZY.TunnelId, tunnelFY.TunnelId, tunnelQY.TunnelId, hcjc, bid, tunnelZY.TunnelWid,
                 tunnelFY.TunnelWid, tunnelQY.TunnelWid);
 
-            //修改成功
-            if (bResult)
-            {
-                // 工作面坐标修改，需要更新工作面信息
-                BasicInfoManager.getInstance().refreshWorkingFaceInfo(workingFace);
 
-                // 通知服务器数据已经修改
-                var msg = new UpdateWarningDataMsg(workingFace.WorkingFaceId, tunnelQY.TunnelId,
-                    DayReportHc.TableName, OPERATION_TYPE.UPDATE, DateTime.Now);
-                MainForm.SendMsg2Server(msg);
-            }
+
+            // 通知服务器数据已经修改
+            var msg = new UpdateWarningDataMsg(workingFace.WorkingFaceId, tunnelQY.TunnelId,
+                DayReportHc.TableName, OPERATION_TYPE.UPDATE, DateTime.Now);
+            MainForm.SendMsg2Server(msg);
         }
-
-        ///// <summary>
-        ///// 初始化班次
-        ///// </summary>
-        //private void bindWorkTimeFirstTime()
-        //{
-        //    DataSet dsWorkTime;
-        //    //获取三八制班次
-        //    if (rbtn38.Checked)
-        //    {
-        //        dsWorkTime = WorkTimeBLL.returnWorkTime(rbtn38.Text);
-        //    }
-        //    //获取四六制班次
-        //    else
-        //    {
-        //        dsWorkTime = WorkTimeBLL.returnWorkTime(rbtn46.Text);
-        //    }
-        //    //向combobox里插入数据
-        //    for (int i = 0; i < dsWorkTime.Tables[0].Rows.Count; i++)
-        //    {
-        //        cboWorkTime.Items.Add(dsWorkTime.Tables[0].Rows[i][WorkTimeDbConstNames.WORK_TIME_NAME].ToString());
-        //    }
-        //}
 
         /// <summary>
         ///     三八制选择事件
@@ -753,18 +722,6 @@ namespace sys2
             //只有一条数据时
             if (dgrdvDayReportHC.Rows.Count - 1 == 0)
             {
-                //工作面是否选择
-                if (Text == Const_MS.DAY_REPORT_HC_ADD)
-                {
-                    if (
-                        !WorkingFaceBLL.CheckIsExist(selectWorkingfaceSimple1.IWorkingfaceId,
-                            Convert.ToString(dgrdvDayReportHC[1, 0].Value),
-                            Convert.ToDateTime(dgrdvDayReportHC[0, 0].Value)))
-                    {
-                        Alert.alert(Const_MS.WORKINGFACEEXIST + Const.SIGN_EXCLAMATION_MARK);
-                        return false;
-                    }
-                }
                 //添加时判断为未录入进尺
                 if (Text == Const_MS.DAY_REPORT_HC_ADD)
                 {
@@ -772,27 +729,24 @@ namespace sys2
                     return false;
                 }
                 //修改时
-                else
+                bool bResult = false;
+                //为空返回false，不数据时跳出循环
+                for (int i = 0; i < dgrdvDayReportHC.ColumnCount; i++)
                 {
-                    bool bResult = false;
-                    //为空返回false，不数据时跳出循环
-                    for (int i = 0; i < dgrdvDayReportHC.ColumnCount; i++)
+                    if (dgrdvDayReportHC[3, i].Value == null)
                     {
-                        if (dgrdvDayReportHC[3, i].Value == null)
-                        {
-                            bResult = false;
-                        }
-                        else
-                        {
-                            bResult = true;
-                            break;
-                        }
+                        bResult = false;
                     }
-                    if (!bResult)
+                    else
                     {
-                        Alert.alert(Const.MSG_PLEASE_TYPE_IN + Const_MS.JC + Const.SIGN_EXCLAMATION_MARK);
-                        return bResult;
+                        bResult = true;
+                        break;
                     }
+                }
+                if (!bResult)
+                {
+                    Alert.alert(Const.MSG_PLEASE_TYPE_IN + Const_MS.JC + Const.SIGN_EXCLAMATION_MARK);
+                    return bResult;
                 }
             }
 
@@ -808,23 +762,6 @@ namespace sys2
 
                 var cell = cells[C_DATE] as DataGridViewTextBoxCell;
                 //工作面是否选择
-                if (Text == Const_MS.DAY_REPORT_HC_ADD)
-                {
-                    if (
-                        !WorkingFaceBLL.CheckIsExist(selectWorkingfaceSimple1.IWorkingfaceId,
-                            dgrdvDayReportHC[1, i].Value.ToString(),
-                            Convert.ToDateTime(dgrdvDayReportHC[0, i].Value)))
-                    {
-                        cell.Style.BackColor = Const.ERROR_FIELD_COLOR;
-                        Alert.alert(Const_MS.DAY_REPORT_HC_EXIST + Const.SIGN_EXCLAMATION_MARK);
-                        return false;
-                    }
-                    else
-                    {
-                        cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                    }
-                }
-
                 cell = cells[C_WORK_PROGRESS] as DataGridViewTextBoxCell;
                 //进尺为空
                 if (cell.Value == null)
