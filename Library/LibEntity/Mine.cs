@@ -1,11 +1,5 @@
-﻿// ******************************************************************
-// 概  述：矿井实体
-// 作  者：伍鑫
-// 创建日期：2014/02/25
-// 版本号：1.0
-// ******************************************************************
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using Castle.ActiveRecord;
 using NHibernate.Criterion;
 
@@ -35,4 +29,6 @@ namespace LibEntity
             return Exists(criterion);
         }
     }
+
+
 }

@@ -22,14 +22,14 @@ namespace LibCommonForm
         public SelectWorkingFaceDlg()
         {
             InitializeComponent();
-            this.selectWorkingFaceControl1.LoadMineName();
+            this.selectWorkingFaceControl1.LoadMineData();
         }
 
         public SelectWorkingFaceDlg(params WorkingfaceTypeEnum[] workingfaceTypes)
         {
             InitializeComponent();
             SetFilterOn(workingfaceTypes);
-            this.selectWorkingFaceControl1.LoadMineName();
+            this.selectWorkingFaceControl1.LoadMineData();
         }
 
         //private void SetFilterOn(WorkingfaceTypeEnum workingfaceType)
@@ -39,18 +39,12 @@ namespace LibCommonForm
 
         private void SetFilterOn(params WorkingfaceTypeEnum[] types)
         {
-            this.selectWorkingFaceControl1.SetFilterOn(types);
+            //this.selectWorkingFaceControl1.SetFilterOn(types);
         }
 
         private void btnOK_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
-
-            // 巷道编号
-            workFaceId = this.selectWorkingFaceControl1.IWorkingFaceId;
-            workFaceName = this.selectWorkingFaceControl1.SWorkingFaceName;
-            workFaceType = this.workFaceType = selectWorkingFaceControl1.workingfaceType;
-
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

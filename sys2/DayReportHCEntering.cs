@@ -88,11 +88,6 @@ namespace sys2
             dgrdvDayReportHC.DataError += delegate(object sender, DataGridViewDataErrorEventArgs e) { };
         }
 
-        private void NameChangeEvent(object sender, WorkingFaceEventArgs e)
-        {
-            updateWorkingFaceInfo(selectWorkingfaceSimple1.IWorkingfaceId);
-        }
-
         private void updateWorkingFaceInfo(int workingFaceId)
         {
             if (workingFaceId != Const.INVALID_ID)
@@ -114,7 +109,6 @@ namespace sys2
 
         private void DayReportHCEntering_Load(object sender, EventArgs e)
         {
-            selectWorkingfaceSimple1.WorkingfaceNameChanged += NameChangeEvent;
             if (workingFace != null)
             {
                 var ws = new WorkingfaceSimple(workingFace.WorkingFaceId, workingFace.WorkingFaceName,

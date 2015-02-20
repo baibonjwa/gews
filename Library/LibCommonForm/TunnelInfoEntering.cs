@@ -1,11 +1,4 @@
-﻿// ******************************************************************
-// 概  述：巷道信息录入
-// 作成者：宋英杰
-// 作成日：2013/11/28
-// 版本号：1.0
-// ******************************************************************
-
-using System;
+﻿using System;
 using System.Data;
 using System.Windows.Forms;
 using LibBusiness;
@@ -32,8 +25,6 @@ namespace LibCommonForm
             //设置窗体格式
             FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_GM.TUNNEL_INFO_ADD);
             Text = Const_GM.TUNNEL_INFO_ADD;
-            DataBindUtil.LoadLithology(cboLithology);
-            bindCoalLayer();
         }
 
         public TunnelInfoEntering(int[] array)
@@ -43,10 +34,6 @@ namespace LibCommonForm
             arr = array;
             //设置窗体格式
             FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_GM.TUNNEL_INFO_ADD);
-            //绑定围岩类型
-            DataBindUtil.LoadLithology(cboLithology);
-            //绑定煤层
-            bindCoalLayer();
         }
 
         /// <summary>
@@ -58,8 +45,7 @@ namespace LibCommonForm
             InitializeComponent();
             FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_GM.TUNNEL_INFO_CHANGE);
             Text = Const_GM.TUNNEL_INFO_CHANGE;
-            DataBindUtil.LoadLithology(cboLithology);
-            bindCoalLayer();
+
             //bindInfo(tunnelID);
         }
 
@@ -394,15 +380,6 @@ namespace LibCommonForm
             }
         }
 
-        private void bindCoalLayer()
-        {
-            DataSet dsCoalLayer = CoalSeamsBLL.selectAllCoalSeamsInfo();
-            cboCoalLayer.DataSource = dsCoalLayer.Tables[0];
-            cboCoalLayer.DisplayMember = CoalSeamsDbConstNames.COAL_SEAMS_NAME;
-            cboCoalLayer.ValueMember = CoalSeamsDbConstNames.COAL_SEAMS_ID;
-            cboCoalLayer.SelectedIndex = -1;
-        }
-
         private void setTunnelType()
         {
             cboCoalOrStone.Text = cboCoalOrStone.Items[0].ToString();
@@ -411,25 +388,17 @@ namespace LibCommonForm
         private void TunnelInfoEntering_Load(object sender, EventArgs e)
         {
             formHeight = Height;
-            cboLithology.Text = "";
             changeFormSize(null);
 
-            PanelForTunnelEntering panelForTunnelEnteringForm;
+            DataBindUtil.LoadLithology(cboLithology, "煤层");
+            DataBindUtil.LoadCoalSeamsName(cboCoalLayer);
+            selectWorkingFaceControl1.LoadMineData();
             if (Text == Const_GM.TUNNEL_INFO_ADD)
             {
-                panelForTunnelEnteringForm = new PanelForTunnelEntering(MainForm);
             }
             else
             {
-                panelForTunnelEnteringForm = new PanelForTunnelEntering(arr, MainForm);
             }
-            panelForTunnelEnteringForm.MdiParent = this;
-            panel2.Controls.Add(panelForTunnelEnteringForm);
-            panelForTunnelEnteringForm.WindowState = FormWindowState.Maximized;
-            panelForTunnelEnteringForm.Show();
-            panelForTunnelEnteringForm.Activate();
-            ActiveControl = txtTunnelName;
-            txtTunnelName.Focus();
 
             if (cboFaultageType.Text != "")
             {
@@ -486,19 +455,12 @@ namespace LibCommonForm
 
         private void cboLithology_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cboLithology.Text == "煤层")
-            {
-                cboCoalOrStone.Text = "煤巷";
-            }
-            else
-            {
-                cboCoalOrStone.Text = "";
-            }
+            cboCoalOrStone.Text = cboLithology.Text == @"煤层" ? "煤巷" : "岩巷";
         }
 
-        private void cboCoalOrStone_TextChanged(object sender, EventArgs e)
+        private void cboCoalOrStone_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cboCoalOrStone.Text == "煤巷")
+            if (cboCoalOrStone.Text == @"煤巷")
             {
                 lblCoalLayer.Visible = true;
                 cboCoalLayer.Visible = true;

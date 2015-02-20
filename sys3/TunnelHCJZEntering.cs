@@ -32,11 +32,6 @@ namespace sys3
         private DataGridViewCell[] dgvc = new DataGridViewCell[8];
         private int doing = 0;
         private string[] dr = new string[8];
-
-        private Tunnel tunnelFY; // 辅运顺槽
-        private Tunnel tunnelQY; // 切眼
-        private Tunnel tunnelZY; // 主运
-        private WorkingFace workingFace; // 工作面
         private WirePoint[] wpiEntity;
         /*****************************/
 
@@ -68,24 +63,24 @@ namespace sys3
             //}
             //else
             //{
-            selectWorkingFaceControl1.LoadMineName();
+            selectWorkingFaceControl1.LoadMineData();
             //}
             // 注册委托事件
-            selectWorkingFaceControl1.WorkingFaceNameChanged += NameChangeEvent;
+            //selectWorkingFaceControl1.WorkingFaceNameChanged += NameChangeEvent;
         }
 
-        private void NameChangeEvent(object sender, WorkingFaceEventArgs e)
-        {
-            updateWorkingFaceInfo(selectWorkingFaceControl1.IWorkingFaceId);
-        }
+        //private void NameChangeEvent(object sender, WorkingFaceEventArgs e)
+        //{
+        //    updateWorkingFaceInfo(selectWorkingFaceControl1.IWorkingFaceId);
+        //}
 
-        private void updateWorkingFaceInfo(int workingFaceId)
-        {
-            workingFace = WorkingFace.Find(workingFaceId);
-            tunnelZY = workingFace.Tunnels.First(u => u.TunnelType == TunnelTypeEnum.STOPING_ZY);
-            tunnelFY = workingFace.Tunnels.First(u => u.TunnelType == TunnelTypeEnum.STOPING_FY);
-            tunnelQY = workingFace.Tunnels.First(u => u.TunnelType == TunnelTypeEnum.STOPING_QY);
-        }
+        //private void updateWorkingFaceInfo(int workingFaceId)
+        //{
+        //    workingFace = WorkingFace.Find(workingFaceId);
+        //    tunnelZY = workingFace.Tunnels.First(u => u.TunnelType == TunnelTypeEnum.STOPING_ZY);
+        //    tunnelFY = workingFace.Tunnels.First(u => u.TunnelType == TunnelTypeEnum.STOPING_FY);
+        //    tunnelQY = workingFace.Tunnels.First(u => u.TunnelType == TunnelTypeEnum.STOPING_QY);
+        //}
 
         /// <summary>
         ///     验证
@@ -285,8 +280,12 @@ namespace sys3
                 pnt.Z = z;
                 coordinates.Add(pnt);
             }
+            var workingFace = selectWorkingFaceControl1.SelectedWorkingFace;
             if (workingFace != null)
             {
+                var tunnelZY = workingFace.Tunnels.First(u => u.TunnelType == TunnelTypeEnum.STOPING_ZY);
+                var tunnelFY = workingFace.Tunnels.First(u => u.TunnelType == TunnelTypeEnum.STOPING_FY);
+                var tunnelQY = workingFace.Tunnels.First(u => u.TunnelType == TunnelTypeEnum.STOPING_QY);
                 TunnelHcJz(coordinates, tunnelZY.TunnelId.ToString(), tunnelFY.TunnelId.ToString(),
                     tunnelQY.TunnelId.ToString(), workingFace.WorkingFaceId, tunnelZY.TunnelWid, tunnelFY.TunnelWid,
                     tunnelQY.TunnelWid);
@@ -395,6 +394,7 @@ namespace sys3
                 Global.cons.AddHangdaoToLayer(pnthccols, dics, Global.hcqlyr);
                 //将当前点写入到对应的工作面表中
                 IPoint prevPnt = pntcol.get_Point(pntcol.PointCount - 1);
+                var workingFace = selectWorkingFaceControl1.SelectedWorkingFace;
                 if (prevPnt != null)
                 {
                     workingFace.Coordinate = new Coordinate(prevPnt.X, prevPnt.Y, 0.0);

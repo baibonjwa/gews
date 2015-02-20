@@ -191,12 +191,10 @@
             // 
             // selectWorkingFaceControl1
             // 
-            this.selectWorkingFaceControl1.IWorkingFaceId = 0;
             this.selectWorkingFaceControl1.Location = new System.Drawing.Point(12, 35);
             this.selectWorkingFaceControl1.MainForm = null;
             this.selectWorkingFaceControl1.Name = "selectWorkingFaceControl1";
             this.selectWorkingFaceControl1.Size = new System.Drawing.Size(464, 186);
-            this.selectWorkingFaceControl1.SWorkingFaceName = null;
             this.selectWorkingFaceControl1.TabIndex = 49;
             // 
             // TunnelHCJZEntering

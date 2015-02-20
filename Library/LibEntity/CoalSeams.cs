@@ -1,11 +1,5 @@
-﻿// ******************************************************************
-// 概  述：煤层实体
-// 作  者：伍鑫
-// 创建日期：2014/02/25
-// 版本号：1.0
-// ******************************************************************
-
-using Castle.ActiveRecord;
+﻿using Castle.ActiveRecord;
+using NHibernate.Criterion;
 
 namespace LibEntity
 {
@@ -23,5 +17,15 @@ namespace LibEntity
         /// </summary>
         [Property("COAL_SEAMS_NAME")]
         public string CoalSeamsName { get; set; }
+
+        public static CoalSeams FindOneByCoalSeamsName(string coalSeamsName)
+        {
+            var criterion = new ICriterion[]
+            {
+                Restrictions.Eq("CoalSeamsName",coalSeamsName)
+            };
+            return FindOne(criterion);
+        }
+
     }
 }

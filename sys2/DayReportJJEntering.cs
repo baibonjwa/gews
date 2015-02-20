@@ -124,16 +124,9 @@ namespace sys2
             //注册事件
         }
 
-        private void NameChangeEvent(object sender, WorkingFaceEventArgs e)
-        {
-            workingFace = WorkingFace.Find(
-                selectWorkingfaceSimple1.IWorkingfaceId);
-        }
-
 
         private void DayReportJJEntering_Load(object sender, EventArgs e)
         {
-            selectWorkingfaceSimple1.WorkingfaceNameChanged += NameChangeEvent;
             if (workingFace != null)
             {
                 var ws = new WorkingfaceSimple(workingFace.WorkingFaceId, workingFace.WorkingFaceName,

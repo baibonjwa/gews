@@ -8,103 +8,112 @@ namespace LibBusiness
 {
     public class DataBindUtil
     {
-        private static void DataBindListControl(ListControl lc, ICollection<object> dataSource, string displayMember, string valueMember, int selectedValue = -1)
+        private static void DataBindListControl(ListControl lc, ICollection<object> dataSource, string displayMember, string valueMember, String selectedText = "")
         {
             if (dataSource.Count <= 0) return;
             lc.DataSource = dataSource;
             lc.DisplayMember = displayMember;
             lc.ValueMember = valueMember;
-            lc.SelectedValue = selectedValue;
+            lc.Text = selectedText;
         }
 
-        private static void DataBindListControl(DataGridView dgv, ICollection<object> dataSource, string displayMember, string valueMember)
+        private static void DataBindListControl(DataGridView dgv, ICollection<object> dataSource)
         {
             if (dataSource.Count <= 0) return;
             dgv.AutoGenerateColumns = false;
             dgv.DataSource = dataSource;
-            dgv.Columns[0].DataPropertyName = displayMember;
-            dgv.Columns[1].DataPropertyName = valueMember;
         }
 
-        public static void LoadMineName(ListControl lb, int selectedValue = -1)
+        public static void LoadMineName(ListControl lb, String selectedText = "")
         {
             var mines = Mine.FindAll();
-            if (mines != null) DataBindListControl(lb, mines, "MineName", "MineId", selectedValue);
+            if (mines != null) DataBindListControl(lb, mines, "MineName", "MineId", selectedText);
         }
 
-        public static void LoadMineName(DataGridView dgv, int selectedValue = -1)
+        public static void LoadMineName(DataGridView dgv, String selectedText = "")
         {
             var mines = Mine.FindAll();
-            DataBindListControl(dgv, mines, "MineId", "MineName");
+            DataBindListControl(dgv, mines);
         }
 
-        public static void LoadHorizontalName(ListControl lb, int mineId, int selectedValue = -1)
+        public static void LoadHorizontalName(ListControl lb, int mineId, String selectedText = "")
         {
             var horizontals = Horizontal.FindAllByMineId(mineId);
-            if (horizontals != null) DataBindListControl(lb, horizontals, "HorizontalName", "HorizontalId", selectedValue);
+            if (horizontals != null) DataBindListControl(lb, horizontals, "HorizontalName", "HorizontalId", selectedText);
         }
 
         public static void LoadHorizontalName(DataGridView dgv, int mineId)
         {
             var horizontals = Horizontal.FindAllByMineId(mineId);
-            if (horizontals != null) DataBindListControl(dgv, horizontals, "HorizontalName", "HorizontalId");
+            if (horizontals != null) DataBindListControl(dgv, horizontals);
         }
 
-        public static void LoadMiningAreaName(ListControl lb, int horizontalId, int selectedValue = -1)
+        public static void LoadMiningAreaName(ListControl lb, int horizontalId, String selectedText = "")
         {
             var miningAreas = MiningArea.FindAllByHorizontalId(horizontalId);
-            if (miningAreas != null) DataBindListControl(lb, miningAreas, "MiningAreaName", "MiningAreaId", selectedValue);
+            if (miningAreas != null) DataBindListControl(lb, miningAreas, "MiningAreaName", "MiningAreaId", selectedText);
         }
 
         public static void LoadMiningAreaName(DataGridView dgv, int horizontalId)
         {
             var miningAreas = MiningArea.FindAllByHorizontalId(horizontalId);
-            if (miningAreas != null) DataBindListControl(dgv, miningAreas, "MiningAreaName", "MiningAreaId");
+            if (miningAreas != null) DataBindListControl(dgv, miningAreas);
         }
 
 
 
-        public static void LoadWorkingFaceName(ListControl lb, int miningAreaId, int selectedValue = -1)
+        public static void LoadWorkingFaceName(ListControl lb, int miningAreaId, String selectedText = "")
         {
             var workingFaces = WorkingFace.FindAllByMiningAreaId(miningAreaId);
-            if (workingFaces != null) DataBindListControl(lb, workingFaces, "WorkingFaceName", "WorkingFaceId", selectedValue);
+            if (workingFaces != null) DataBindListControl(lb, workingFaces, "WorkingFaceName", "WorkingFaceId", selectedText);
         }
 
         public static void LoadWorkingFaceName(DataGridView dgv, int miningAreaId)
         {
             var workingFaces = WorkingFace.FindAllByMiningAreaId(miningAreaId);
-            if (workingFaces != null) DataBindListControl(dgv, workingFaces, "WorkingFaceName", "WorkingFaceId");
+            if (workingFaces != null) DataBindListControl(dgv, workingFaces);
         }
 
+        public static void LoadCoalSeamsName(ListControl lb, String selectedText = "")
+        {
+            var coalSeams = CoalSeams.FindAll();
+            if (coalSeams != null) DataBindListControl(lb, coalSeams, "CoalSeamsName", "CoalSeamsId", selectedText);
+        }
 
-        public static void LoadLithology(ListControl lb, int selectedValue = -1)
+        public static void LoadCoalSeamsName(DataGridView dgv)
+        {
+            var coalSeams = CoalSeams.FindAll();
+            if (coalSeams != null) DataBindListControl(dgv, coalSeams);
+        }
+
+        public static void LoadLithology(ListControl lb, String selectedText = "")
         {
             var lithologys = Lithology.FindAll();
-            if (lithologys != null) DataBindListControl(lb, lithologys, "LithologyName", "LithologyId", selectedValue);
+            if (lithologys != null) DataBindListControl(lb, lithologys, "LithologyName", "LithologyId", selectedText);
         }
 
-        public static void LoadTeamMemberByTeamName(ListControl lb, string teamName, int selectedValue = -1)
+        public static void LoadTeamMemberByTeamName(ListControl lb, string teamName, String selectedText = "")
         {
             var teamMember = Team.FindOneByTeamName(teamName);
             if (teamMember != null)
             {
                 var teamMembers = teamMember.ToString().Split(',');
-                DataBindListControl(lb, teamMembers, "TeamName", "TeamName", selectedValue);
+                DataBindListControl(lb, teamMembers, "TeamName", "TeamName", selectedText);
             }
         }
 
-        public static void LoadWorkTime(ListControl lb, int timeGroupId, int selectedValue = -1)
+        public static void LoadWorkTime(ListControl lb, int timeGroupId, String selectedText = "")
         {
             var workingTimes = WorkingTime.FindAllByWorkTimeGroupId(timeGroupId);
             if (workingTimes != null)
             {
-                DataBindListControl(lb, workingTimes, "WorkTimeName", "WorkTimeName", selectedValue);
+                DataBindListControl(lb, workingTimes, "WorkTimeName", "WorkTimeName", selectedText);
             }
         }
 
 
         public static void LoadWorkTime(DataGridViewComboBoxColumn dgvcbc
-            , int timeGroupId, int selectedValue = -1)
+            , int timeGroupId, String selectedText = "")
         {
             var workingTimes = WorkingTime.FindAllByWorkTimeGroupId(timeGroupId);
             foreach (var t in workingTimes)
