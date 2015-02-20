@@ -13,7 +13,7 @@ using LibConfig;
 
 namespace LibCommonControl
 {
-    public partial class MainFrm : XtraForm
+    public partial class MainFrm
     {
         //客户端
         public static ClientSocket _clientSocket = null;
@@ -45,7 +45,7 @@ namespace LibCommonControl
             int port = int.Parse(ConfigManager.Instance.getValueByKey(ConfigConst.CONFIG_PORT));
 
             //初始化客户端Socket，连接服务器
-            string errorMsg = SocketHelper.InitClientSocket(serverIp, port, out MainFrm._clientSocket);
+            string errorMsg = SocketHelper.InitClientSocket(serverIp, port, out _clientSocket);
             if (errorMsg != "")
             {
                 Alert.alert(Const.CONNECT_SOCKET_ERROR, Const.NOTES, MessageBoxButtons.OK, MessageBoxIcon.Warning);

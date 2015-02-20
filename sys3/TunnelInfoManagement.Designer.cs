@@ -294,6 +294,9 @@ namespace sys3
             // 
             // gcTunnel
             // 
+            this.gcTunnel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gcTunnel.Cursor = System.Windows.Forms.Cursors.Default;
             this.gcTunnel.Location = new System.Drawing.Point(12, 27);
             this.gcTunnel.MainView = this.gridView1;
@@ -322,6 +325,7 @@ namespace sys3
             this.gridColumn14});
             this.gridView1.GridControl = this.gcTunnel;
             this.gridView1.Name = "gridView1";
+            this.gridView1.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.gridView1_CustomColumnDisplayText);
             // 
             // gridColumn1
             // 
@@ -390,7 +394,7 @@ namespace sys3
             // gridColumn9
             // 
             this.gridColumn9.Caption = "Œß—“¿‡–Õ";
-            this.gridColumn9.FieldName = "TunnelLithology.LithologyName";
+            this.gridColumn9.FieldName = "Lithology.LithologyName";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
             this.gridColumn9.VisibleIndex = 8;

@@ -21,7 +21,7 @@ namespace LibEntity
         /// <summary>
         ///     煤层名称
         /// </summary>
-        [Property("FLOOR_ELEVATION")]
+        [Property("COAL_SEAMS_NAME")]
         public string CoalSeamsName { get; set; }
     }
 }

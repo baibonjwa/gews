@@ -29,8 +29,8 @@ namespace LibEntity
         /// <summary>
         ///     围岩类型
         /// </summary>
-        [Property("LITHOLOGY_ID")]
-        public Lithology TunnelLithology { get; set; }
+        [BelongsTo("LITHOLOGY_ID")]
+        public Lithology Lithology { get; set; }
 
         // 断面类型
 
@@ -93,7 +93,7 @@ namespace LibEntity
         /// <summary>
         ///     绑定煤层ID
         /// </summary>
-        [Property("COAL_LAYER_ID")]
+        [BelongsTo("COAL_LAYER_ID")]
         public CoalSeams CoalSeams { get; set; }
 
         // BID

@@ -31,7 +31,7 @@ namespace sys3
 
         private void RefreshData()
         {
-            gcTunnel.DataSource = Management.FindAll();
+            gcTunnel.DataSource = Tunnel.FindAll();
         }
 
         /// <summary>
@@ -187,6 +187,34 @@ namespace sys3
             else
             {
                 Alert.alert("图元丢失");
+            }
+        }
+
+        private void gridView1_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
+        {
+            if (e.Column.FieldName == "TunnelType")
+            {
+                switch (e.DisplayText)
+                {
+                    case "OTHER":
+                        e.DisplayText = "其他";
+                        break;
+                    case "TUNNELLING":
+                        e.DisplayText = "掘进巷道";
+                        break;
+                    case "STOPING_OTHER":
+                        e.DisplayText = "回采面其他关联巷道";
+                        break;
+                    case "STOPING_QY":
+                        e.DisplayText = "切眼";
+                        break;
+                    case "STOPING_FY":
+                        e.DisplayText = "辅运顺槽";
+                        break;
+                    case "STOPING_ZY":
+                        e.DisplayText = "主运顺槽";
+                        break;
+                }
             }
         }
     }

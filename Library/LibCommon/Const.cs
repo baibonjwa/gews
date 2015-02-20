@@ -23,7 +23,7 @@ namespace LibCommon
         #endregion
 
         #region 提示信息
-        public const string CONNECT_SOCKET_ERROR = "连接服务器失败,预警结果将无法及时更新！";
+        public const string CONNECT_SOCKET_ERROR = "连接服务器失败,数据可以正常录入,但预警结果将无法及时更新！";
         public const string READ_SOCKET_CONFIG_FAILED = "读取客户端配置信息失败！";
         public const string LOG_MSG_CONNECT_SUCCEED = "连接服务器成功！";
         #endregion
@@ -166,7 +166,7 @@ namespace LibCommon
         /// <returns>提示信息</returns>
         public static string rowMustBeNumber(int rowIndex, string columnName)
         {
-            string msg = "第" + (rowIndex+1) + "行, " + columnName + " 必须为数字！";
+            string msg = "第" + (rowIndex + 1) + "行, " + columnName + " 必须为数字！";
             return msg;
         }
 

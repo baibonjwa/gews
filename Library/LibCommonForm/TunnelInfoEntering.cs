@@ -92,7 +92,7 @@ namespace LibCommonForm
             {
                 cboLithology.SelectedIndex = -1;
             }
-            tunnelEntity.TunnelLithology.LithologyId = Convert.ToInt32(cboLithology.SelectedValue);
+            tunnelEntity.Lithology.LithologyId = Convert.ToInt32(cboLithology.SelectedValue);
             //断面类型
             tunnelEntity.TunnelSectionType = cboFaultageType.Text;
             //断面参数
@@ -167,7 +167,7 @@ namespace LibCommonForm
             {
                 cboLithology.SelectedIndex = -1;
             }
-            tunnelEntity.TunnelLithology.LithologyId = Convert.ToInt32(cboLithology.SelectedValue);
+            tunnelEntity.Lithology.LithologyId = Convert.ToInt32(cboLithology.SelectedValue);
 
             //断面类型
             tunnelEntity.TunnelSectionType = cboFaultageType.Text;
@@ -449,9 +449,9 @@ namespace LibCommonForm
             txtTunnelName.Text = tunnelEntity.TunnelName;
             cboSupportPattern.Text = tunnelEntity.TunnelSupportPattern;
             string lithology = "";
-            if (tunnelEntity.TunnelLithology.LithologyId != 0)
+            if (tunnelEntity.Lithology.LithologyId != 0)
             {
-                lithology = Lithology.Find(tunnelEntity.TunnelLithology).LithologyName;
+                lithology = Lithology.Find(tunnelEntity.Lithology).LithologyName;
             }
             cboLithology.Text = lithology;
             cboFaultageType.Text = tunnelEntity.TunnelSectionType;
