@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Castle.ActiveRecord;
+using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraPrinting.Native;
 using LibBusiness;
 using LibCommon;
 using LibCommonControl;
@@ -57,7 +62,7 @@ namespace LibCommonForm
                         {
                             Caption = @"编号",
                             FieldName = "MineId",
-                            Visible = true,
+                            MaxWidth = 60,
                             VisibleIndex = gridView1.Columns.Count
                         });
                         // 矿井名称
@@ -65,220 +70,152 @@ namespace LibCommonForm
                         {
                             Caption = @"矿井名称",
                             FieldName = "MineName",
-                            Visible = true,
                             VisibleIndex = gridView1.Columns.Count
                         });
 
-                        // 删除按钮
-                        var delButton = new RepositoryItemButtonEdit()
-                        {
-                            TextEditStyle = TextEditStyles.HideTextEditor
-                        };
-                        delButton.Buttons.Add(new EditorButton(ButtonPredefines.Delete));
-                        gridView1.Columns.Add(new GridColumn
-                        {
-                            Caption = @"删除",
-                            Width = 60,
-                            Visible = true,
-                            VisibleIndex = gridView1.Columns.Count,
-                            ColumnEdit = delButton
-                        });
-                        // 绑定矿井信息
+                        AddDeleteButton();
+
                         gridControl1.DataSource = Mine.FindAll();
                     }
                     break;
                 case FlagManangingHorizontal:
                     {
-                        //Text = @"水平名称管理";
-                        //// 编号
-                        //gridView1.Columns.Add(new DataGridViewTextBoxColumn
-                        //{
-                        //    HeaderText = @"编号",
-                        //    DataPropertyName = "HorizontalId",
-                        //    Width = 60,
-                        //    ReadOnly = true
-                        //});
-                        //// 水平名称
-                        //gridView1.Columns.Add(new DataGridViewTextBoxColumn
-                        //{
-                        //    HeaderText = @"水平名称",
-                        //    DataPropertyName = "HorizontalName",
-                        //    Width = 100
-                        //});
-                        //// 所属矿井
-                        //var comboBoxColumn = new DataGridViewComboBoxColumn
-                        //{
-                        //    HeaderText = @"所属矿井",
-                        //    ValueMember = "Mine.MineId",
-                        //    Width = 100
-                        //};
-                        //gridView1.Columns.Add(comboBoxColumn);
+                        gridView1.Columns.Add(new GridColumn
+                        {
+                            Caption = @"编号",
+                            FieldName = "HorizontalId",
+                            MaxWidth = 60,
+                            VisibleIndex = gridView1.Columns.Count
+                        });
+                        // 矿井名称
+                        gridView1.Columns.Add(new GridColumn
+                        {
+                            Caption = @"水平名称",
+                            FieldName = "HorizontalName",
+                            VisibleIndex = gridView1.Columns.Count
+                        });
 
-                        //// 获取矿井信息
-                        //var mine = Mine.FindAll();
-                        //// 设置数据源
-                        //comboBoxColumn.DataSource = mine;
-                        //// 设置显示字段
-                        //comboBoxColumn.DisplayMember = "MineName";
-                        //// 设置隐藏字段
-                        //comboBoxColumn.ValueMember = "MineId";
+                        // 所属矿井
+                        var mineComboBox = new RepositoryItemLookUpEdit();
 
-                        //// 删除按钮
-                        //var buttonColumn = new DataGridViewButtonColumn
-                        //{
-                        //    HeaderText = @"删除",
-                        //    Width = 60,
-                        //    Text = "删除",
-                        //    UseColumnTextForButtonValue = true
-                        //};
-                        //gridView1.Columns.Add(buttonColumn);
-                        //DataBindUtil.LoadHorizontalName(gridView1, id);
+                        mineComboBox.Columns.Add(new LookUpColumnInfo("MineId", "编号"));
+                        mineComboBox.Columns.Add(new LookUpColumnInfo("MineName", "矿井名称"));
+                        mineComboBox.DataSource = Mine.FindAll();
+                        mineComboBox.DisplayMember = "MineName";
+                        mineComboBox.ValueMember = "MineId";
+
+                        gridView1.Columns.Add(new GridColumn
+                        {
+                            Caption = @"所在矿区",
+                            FieldName = "Mine.MineId",
+                            ColumnEdit = mineComboBox,
+                            VisibleIndex = gridView1.Columns.Count
+                        });
+
+                        AddDeleteButton();
+
+                        gridControl1.DataSource = Horizontal.FindAll();
                     }
                     break;
                 case FlagManangingMiningArea:
                     {
-                        //Text = @"采区名称管理";
-                        //// 编号
-                        //var textBoxColumn0 = new DataGridViewTextBoxColumn
-                        //{
-                        //    HeaderText = @"编号",
-                        //    DataPropertyName = "MiningAreaId",
-                        //    Width = 60,
-                        //    ReadOnly = true
-                        //};
-                        //gridView1.Columns.Add(textBoxColumn0);
-                        //// 采区名称
-                        //var textBoxColumn1 = new DataGridViewTextBoxColumn
-                        //{
-                        //    HeaderText = @"采区名称",
-                        //    DataPropertyName = "MiningAreaName",
-                        //    Width = 100
-                        //};
-                        //gridView1.Columns.Add(textBoxColumn1);
-                        //// 所属水平
-                        //var comboBoxColumn = new DataGridViewComboBoxColumn { HeaderText = @"所属水平", Width = 100 };
-                        //gridView1.Columns.Add(comboBoxColumn);
+                        gridView1.Columns.Add(new GridColumn
+                        {
+                            Caption = @"编号",
+                            FieldName = "MiningAreaId",
+                            MaxWidth = 60,
+                            VisibleIndex = gridView1.Columns.Count
+                        });
+                        // 矿井名称
+                        gridView1.Columns.Add(new GridColumn
+                        {
+                            Caption = @"采区名称",
+                            FieldName = "MiningAreaName",
+                            VisibleIndex = gridView1.Columns.Count
+                        });
 
-                        ////*******************************************************
-                        //// 获取水平信息
 
-                        //var horizontals = Horizontal.FindAll();
-                        //// 设置数据源
-                        //comboBoxColumn.DataSource = horizontals;
-                        //// 设置显示字段
-                        //comboBoxColumn.DisplayMember = "HorizontalName";
-                        //// 设置隐藏字段
-                        //comboBoxColumn.ValueMember = "HorizontalId";
-                        ////*******************************************************
+                        // 所属水平
+                        var horizontalComboBox = new RepositoryItemLookUpEdit();
 
-                        //// 删除按钮
-                        //var buttonColumn = new DataGridViewButtonColumn
-                        //{
-                        //    HeaderText = @"删除",
-                        //    Width = 60,
-                        //    Text = @"删除",
-                        //    UseColumnTextForButtonValue = true
-                        //};
-                        //gridView1.Columns.Add(buttonColumn);
-                        //DataBindUtil.LoadMiningAreaName(gridView1, id);
+                        horizontalComboBox.Columns.Add(new LookUpColumnInfo("HorizontalId", "编号"));
+                        horizontalComboBox.Columns.Add(new LookUpColumnInfo("HorizontalName", "水平名称"));
+                        horizontalComboBox.DataSource = Horizontal.FindAll();
+                        horizontalComboBox.DisplayMember = "HorizontalName";
+                        horizontalComboBox.ValueMember = "HorizontalId";
+
+                        gridView1.Columns.Add(new GridColumn
+                        {
+                            Caption = @"所在水平",
+                            FieldName = "Horizontal.HorizontalId",
+                            ColumnEdit = horizontalComboBox,
+                            VisibleIndex = gridView1.Columns.Count
+                        });
+
+                        AddDeleteButton();
+                        gridControl1.DataSource = MiningArea.FindAll();
+
                     }
                     break;
                 case FlagManangingWorkingFace:
                     {
-                        //Text = @"工作面名称管理";
-                        //// 编号
-                        //var textBoxColumn0 = new DataGridViewTextBoxColumn
-                        //{
-                        //    HeaderText = @"编号",
-                        //    DataPropertyName = "WorkingFaceId",
-                        //    Width = 60,
-                        //    ReadOnly = true
-                        //};
-                        //gridView1.Columns.Add(textBoxColumn0);
-                        //// 工作面名称
-                        //var textBoxColumn1 = new DataGridViewTextBoxColumn
-                        //{
-                        //    HeaderText = @"工作面名称",
-                        //    DataPropertyName = "WorkingFaceName",
-                        //    Width = 100
-                        //};
-                        //gridView1.Columns.Add(textBoxColumn1);
-                        //// 所属采区
-                        //var comboBoxColumn = new DataGridViewComboBoxColumn { HeaderText = @"所属采区", Width = 100 };
-                        //gridView1.Columns.Add(comboBoxColumn);
+                        Text = @"工作面名称管理";
+                        gridView1.Columns.Add(new GridColumn
+                        {
+                            Caption = @"编号",
+                            FieldName = "WorkingFaceId",
+                            MaxWidth = 60,
+                            VisibleIndex = gridView1.Columns.Count
+                        });
+                        // 矿井名称
+                        gridView1.Columns.Add(new GridColumn
+                        {
+                            Caption = @"工作面名称",
+                            FieldName = "WorkingFaceName",
+                            VisibleIndex = gridView1.Columns.Count
+                        });
 
-                        //var comboBoxWorkingfaceType = new DataGridViewComboBoxColumn { HeaderText = @"工作面类型", Width = 100 };
-                        //var list = new List<TunnelSimple>
-                        //{
-                        //    new TunnelSimple((int) WorkingfaceTypeEnum.OTHER, "其他"),
-                        //    new TunnelSimple((int) WorkingfaceTypeEnum.JJ, "掘进"),
-                        //    new TunnelSimple((int) WorkingfaceTypeEnum.HC, "回采")
-                        //};
-                        ////foreach (var i in list)
-                        ////{
-                        ////    comboBoxWorkingfaceType.Items.Add(i);
-                        ////}
-                        //comboBoxWorkingfaceType.DataSource = list;
-                        ////comboBoxWorkingfaceType.Items.AddRange(list);
-                        //comboBoxWorkingfaceType.DisplayMember = "Name";
-                        //comboBoxWorkingfaceType.ValueMember = "WirePointName";
+                        var horizontalComboBox = new RepositoryItemLookUpEdit();
+
+                        horizontalComboBox.Columns.Add(new LookUpColumnInfo("MiningAreaId", "编号"));
+                        horizontalComboBox.Columns.Add(new LookUpColumnInfo("MiningAreaName", "采区名称"));
+                        horizontalComboBox.DataSource = MiningArea.FindAll();
+                        horizontalComboBox.DisplayMember = "MiningAreaName";
+                        horizontalComboBox.ValueMember = "MiningAreaId";
 
 
-                        //gridView1.Columns.Add(comboBoxWorkingfaceType);
-
-                        ////*******************************************************
-                        //// 获取采区信息
-                        //var miningArea = MiningArea.Find(id);
-                        //// 设置数据源
-                        //comboBoxColumn.DataSource = miningArea;
-                        //// 设置显示字段
-                        //comboBoxColumn.DisplayMember = "MiningAreaName";
-                        //// 设置隐藏字段
-                        //comboBoxColumn.ValueMember = "MiningAreaId";
-
-
-                        //// 删除按钮
-                        //var buttonColumn = new DataGridViewButtonColumn
-                        //{
-                        //    HeaderText = @"删除",
-                        //    Width = 60,
-                        //    Text = "删除",
-                        //    UseColumnTextForButtonValue = true
-                        //};
-                        //gridView1.Columns.Add(buttonColumn);
-                        //// 绑定工作面信息
-                        //DataBindUtil.LoadWorkingFaceName(gridView1, id);
+                        gridView1.Columns.Add(new GridColumn
+                        {
+                            Caption = @"所在采区",
+                            FieldName = "MiningArea.MiningAreaId",
+                            ColumnEdit = horizontalComboBox,
+                            VisibleIndex = gridView1.Columns.Count
+                        });
+                        AddDeleteButton();
+                        gridControl1.DataSource = WorkingFace.FindAll();
                     }
                     break;
 
                 case FlagManangingCoalSeam:
                     {
                         //// 窗口标题
-                        //Text = @"煤层名称管理";
-                        //// 编号
-                        //var textBoxColumn0 = new DataGridViewTextBoxColumn
-                        //{
-                        //    HeaderText = @"编号",
-                        //    Width = 60,
-                        //    ReadOnly = true
-                        //};
-                        //gridView1.Columns.Add(textBoxColumn0);
-                        //// 矿井名称
-                        //var textBoxColumn1 = new DataGridViewTextBoxColumn { HeaderText = @"煤层名称", Width = 100 };
-                        //gridView1.Columns.Add(textBoxColumn1);
-
-                        //// 删除按钮
-                        //var buttonColumn = new DataGridViewButtonColumn
-                        //{
-                        //    HeaderText = @"删除",
-                        //    Width = 60,
-                        //    Text = "删除",
-                        //    UseColumnTextForButtonValue = true
-                        //};
-                        //gridView1.Columns.Add(buttonColumn);
-
-                        //// 绑定矿煤层信息
-                        //DataBindUtil.LoadCoalSeamsName(gridView1);
+                        Text = @"煤层名称管理";
+                        gridView1.Columns.Add(new GridColumn
+                        {
+                            Caption = @"编号",
+                            FieldName = "CoalSeamId",
+                            MaxWidth = 60,
+                            VisibleIndex = gridView1.Columns.Count
+                        });
+                        // 矿井名称
+                        gridView1.Columns.Add(new GridColumn
+                        {
+                            Caption = @"煤层名称",
+                            FieldName = "CoalSeamName",
+                            VisibleIndex = gridView1.Columns.Count
+                        });
+                        AddDeleteButton();
+                        gridControl1.DataSource = CoalSeams.FindAll();
                     }
                     break;
             }
@@ -309,23 +246,23 @@ namespace LibCommonForm
             {
                 case FlagManangingMineName:
                     // 矿井名称管理
-                    UpdateMineInfo();
+                    UpdateInfo<Mine>();
                     break;
                 case FlagManangingHorizontal:
                     // 水平名称管理
-                    UpdateHorizontalInfo();
+                    UpdateInfo<Horizontal>();
                     break;
                 case FlagManangingMiningArea:
                     // 采区名称管理
-                    UpdateMiningAreaInfo();
+                    UpdateInfo<MiningArea>();
                     break;
                 case FlagManangingWorkingFace:
                     // 工作面名称管理
-                    UpdateWorkingFaceInfo();
+                    UpdateInfo<WorkingFace>();
                     break;
                 case FlagManangingCoalSeam:
                     // 煤层名称管理
-                    UpdateCoalSeamsInfo();
+                    UpdateInfo<CoalSeams>();
                     break;
             }
         }
@@ -333,15 +270,14 @@ namespace LibCommonForm
         /// <summary>
         ///     更新矿井信息
         /// </summary>
-        private void UpdateMineInfo()
+        private void UpdateInfo<T>() where T : ActiveRecordBase
         {
-            //foreach (DataGridViewRow row in gridView1.Rows)
-            //{
-            //    var mine = Mine.Find(row.Cells[0].Value);
-            //    mine.MineName = row.Cells[1].Value.ToString();
-            //    mine.Save();
-            //}
-            //Alert.alert(Const.SUCCESS_MSG);
+            for (int i = 0; i < gridView1.DataRowCount; i++)
+            {
+                var mine = (T)gridView1.GetRow(i);
+                mine.Save();
+            }
+            Alert.alert(Const.SUCCESS_MSG);
         }
 
         /// <summary>
@@ -770,6 +706,23 @@ namespace LibCommonForm
             //{
             //    gridView1.Rows[e.Row.Index - 1].Cells[2].Value = _id;
             //}
+        }
+
+        private void AddDeleteButton()
+        {
+            var delButton = new RepositoryItemButtonEdit();
+            delButton.Buttons.Clear();
+            delButton.TextEditStyle = TextEditStyles.HideTextEditor;
+            var button = new EditorButton { Kind = ButtonPredefines.Glyph, Caption = "删除" };
+            delButton.Buttons.Add(button);
+            //delButton.Buttons.Add(new EditorButton(ButtonPredefines.Delete));
+            gridView1.Columns.Add(new GridColumn
+            {
+                Caption = @"删除",
+                MaxWidth = 60,
+                VisibleIndex = gridView1.Columns.Count,
+                ColumnEdit = delButton
+            });
         }
     }
 }

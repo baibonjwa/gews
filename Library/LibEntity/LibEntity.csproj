@@ -101,7 +101,6 @@
   <ItemGroup>
     <Compile Include="CoalExistence.cs" />
     <Compile Include="Domain\WorkingFaceHc.cs" />
-    <Compile Include="MyTypeDescriptionProvider.cs" />
     <Compile Include="WorkingTimeDefault.cs" />
     <Compile Include="MineData.cs" />
     <Compile Include="ProbeType.cs" />
