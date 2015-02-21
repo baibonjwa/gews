@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Castle.ActiveRecord;
 using DevExpress.XtraBars.Docking2010;
+using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Columns;
@@ -175,23 +177,17 @@ namespace LibCommonForm
                             VisibleIndex = gridView1.Columns.Count
                         });
 
-                        var horizontalComboBox = new RepositoryItemLookUpEdit();
-
-                        horizontalComboBox.Columns.Add(new LookUpColumnInfo("MiningAreaId", "编号"));
-                        horizontalComboBox.Columns.Add(new LookUpColumnInfo("MiningAreaName", "采区名称"));
-                        horizontalComboBox.DataSource = MiningArea.FindAll();
-                        horizontalComboBox.DisplayMember = "MiningAreaName";
-                        horizontalComboBox.ValueMember = "MiningAreaId";
-
 
                         gridView1.Columns.Add(new GridColumn
                         {
                             Caption = @"所在采区",
-                            FieldName = "MiningArea.MiningAreaId",
-                            ColumnEdit = horizontalComboBox,
+                            FieldName = "MiningArea",
+                            ColumnEdit = lueMiningArea,
                             VisibleIndex = gridView1.Columns.Count
                         });
+
                         AddDeleteButton();
+                        lueMiningArea.DataSource = MiningArea.FindAll();
                         gridControl1.DataSource = WorkingFace.FindAll();
                     }
                     break;
@@ -272,10 +268,11 @@ namespace LibCommonForm
         /// </summary>
         private void UpdateInfo<T>() where T : ActiveRecordBase
         {
-            for (int i = 0; i < gridView1.DataRowCount; i++)
+            for (int i = 0; i < gridView1.RowCount; i++)
             {
-                var mine = (T)gridView1.GetRow(i);
-                mine.Save();
+                int rowHandle = gridView1.GetVisibleRowHandle(i);
+                var obj = (T)gridView1.GetRow(rowHandle);
+                if (obj != null) obj.Save();
             }
             Alert.alert(Const.SUCCESS_MSG);
         }
