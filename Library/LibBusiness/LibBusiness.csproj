@@ -186,6 +186,7 @@
     <Compile Include="5.WaningManagementBLL\PreWarningExcelBLL.cs" />
     <Compile Include="5.WaningManagementBLL\WarningImgBLL.cs" />
     <Compile Include="5.WaningManagementBLL\WarningResultsQuery.cs" />
+    <Compile Include="CollectionHelper.cs" />
     <Compile Include="CommonBLL\DbConstNames\CoalSeamsDbConstNames.cs" />
     <Compile Include="CommonBLL\DbConstNames\CommonDbConsts.cs" />
     <Compile Include="CommonBLL\DbConstNames\DepartmentInformationManagemetDbConstNames.cs" />

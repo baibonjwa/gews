@@ -28,16 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.lueMiningArea = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.lueHorizontal = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.lueMine = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.beDelete = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lueMiningArea)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lueHorizontal)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lueMine)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.beDelete)).BeginInit();
             this.SuspendLayout();
             // 
             // btnSubmit
@@ -70,7 +75,9 @@
             this.gridControl1.Name = "gridControl1";
             this.gridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.lueMiningArea,
-            this.lueHorizontal});
+            this.lueHorizontal,
+            this.lueMine,
+            this.beDelete});
             this.gridControl1.Size = new System.Drawing.Size(465, 243);
             this.gridControl1.TabIndex = 3;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -80,6 +87,9 @@
             // 
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
+            this.gridView1.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
+            this.gridView1.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Bottom;
             this.gridView1.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.gridView1_CustomColumnDisplayText);
             // 
             // lueMiningArea
@@ -103,6 +113,26 @@
             this.lueHorizontal.DisplayMember = "HorizontalName";
             this.lueHorizontal.Name = "lueHorizontal";
             // 
+            // lueMine
+            // 
+            this.lueMine.AutoHeight = false;
+            this.lueMine.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lueMine.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("MineId", "编号"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("MineName", "矿区名称")});
+            this.lueMine.DisplayMember = "MineName";
+            this.lueMine.Name = "lueMine";
+            // 
+            // beDelete
+            // 
+            this.beDelete.AutoHeight = false;
+            this.beDelete.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "删除", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
+            this.beDelete.Name = "beDelete";
+            this.beDelete.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.beDelete.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.beDelete_ButtonClick);
+            // 
             // CommonManagement
             // 
             this.AcceptButton = this.btnSubmit;
@@ -123,6 +153,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lueMiningArea)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lueHorizontal)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lueMine)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.beDelete)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -135,5 +167,7 @@
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit lueMiningArea;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit lueHorizontal;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit lueMine;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit beDelete;
     }
 }

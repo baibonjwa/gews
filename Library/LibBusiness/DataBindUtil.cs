@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
+using System.Reflection;
 using System.Windows.Forms;
 using LibEntity;
 
@@ -8,9 +10,10 @@ namespace LibBusiness
 {
     public class DataBindUtil
     {
-        private static void DataBindListControl(ListControl lc, ICollection<object> dataSource, string displayMember, string valueMember, String selectedText = "")
+        private static void DataBindListControl(ListControl lc, ICollection<object> dataSource, string displayMember,
+            string valueMember, String selectedText = "")
         {
-            if (dataSource.Count <= 0) return;
+            if (dataSource.Count <= 0) lc.DataSource = null;
             lc.DataSource = dataSource;
             lc.DisplayMember = displayMember;
             lc.ValueMember = valueMember;
@@ -39,7 +42,8 @@ namespace LibBusiness
         public static void LoadHorizontalName(ListControl lb, int mineId, String selectedText = "")
         {
             var horizontals = Horizontal.FindAllByMineId(mineId);
-            if (horizontals != null) DataBindListControl(lb, horizontals, "HorizontalName", "HorizontalId", selectedText);
+            if (horizontals != null)
+                DataBindListControl(lb, horizontals, "HorizontalName", "HorizontalId", selectedText);
         }
 
         public static void LoadHorizontalName(DataGridView dgv, int mineId)
@@ -51,7 +55,8 @@ namespace LibBusiness
         public static void LoadMiningAreaName(ListControl lb, int horizontalId, String selectedText = "")
         {
             var miningAreas = MiningArea.FindAllByHorizontalId(horizontalId);
-            if (miningAreas != null) DataBindListControl(lb, miningAreas, "MiningAreaName", "MiningAreaId", selectedText);
+            if (miningAreas != null)
+                DataBindListControl(lb, miningAreas, "MiningAreaName", "MiningAreaId", selectedText);
         }
 
         public static void LoadMiningAreaName(DataGridView dgv, int horizontalId)
@@ -65,7 +70,8 @@ namespace LibBusiness
         public static void LoadWorkingFaceName(ListControl lb, int miningAreaId, String selectedText = "")
         {
             var workingFaces = WorkingFace.FindAllByMiningAreaId(miningAreaId);
-            if (workingFaces != null) DataBindListControl(lb, workingFaces, "WorkingFaceName", "WorkingFaceId", selectedText);
+            if (workingFaces != null)
+                DataBindListControl(lb, workingFaces, "WorkingFaceName", "WorkingFaceId", selectedText);
         }
 
         public static void LoadWorkingFaceName(DataGridView dgv, int miningAreaId)
@@ -133,7 +139,8 @@ namespace LibBusiness
             for (int i = 0; i < workingTimes.Length; i++)
             {
                 //对比小时
-                if (hour > Convert.ToInt32(workingTimes[i].WorkTimeFrom.ToString().Remove(2)) && hour <= Convert.ToInt32(workingTimes[i].WorkTimeTo.ToString().Remove(2)))
+                if (hour > Convert.ToInt32(workingTimes[i].WorkTimeFrom.ToString().Remove(2)) &&
+                    hour <= Convert.ToInt32(workingTimes[i].WorkTimeTo.ToString().Remove(2)))
                 {
                     //获取当前时间对应班次
                     workTime = workingTimes[i].WorkTimeName;
@@ -142,7 +149,30 @@ namespace LibBusiness
             return workTime;
         }
 
+        public static DataTable ToDataTable(IList list)
+        {
+            DataTable result = new DataTable();
+            if (list.Count > 0)
+            {
+                PropertyInfo[] propertys = list[0].GetType().GetProperties();
+                foreach (PropertyInfo pi in propertys)
+                {
+                    result.Columns.Add(pi.Name, pi.PropertyType);
+                }
 
-
+                for (int i = 0; i < list.Count; i++)
+                {
+                    ArrayList tempList = new ArrayList();
+                    foreach (PropertyInfo pi in propertys)
+                    {
+                        object obj = pi.GetValue(list[i], null);
+                        tempList.Add(obj);
+                    }
+                    object[] array = tempList.ToArray();
+                    result.LoadDataRow(array, true);
+                }
+            }
+            return result;
+        }
     }
 }

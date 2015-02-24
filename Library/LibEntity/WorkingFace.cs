@@ -9,8 +9,8 @@ namespace LibEntity
     public class WorkingFace : ActiveRecordBase<WorkingFace>
     {
         /** 工作面编号 **/
-        private DateTime? _startDate;
-        private DateTime? _stopDate;
+        private DateTime _startDate;
+        private DateTime _stopDate;
 
         [HasMany(typeof(Tunnel), Table = "T_TUNNEL_INFO", ColumnKey = "WORKINGFACE_ID",
             Cascade = ManyRelationCascadeEnum.SaveUpdate, Lazy = true)]
@@ -39,8 +39,8 @@ namespace LibEntity
         /// <summary>
         ///     设置或获取开工日期
         /// </summary>
-        [Property("START_DATE")]
-        public DateTime? StartDate
+        //[Property("START_DATE")]
+        public DateTime StartDate
         {
             get { return _startDate; }
             set { _startDate = value; }
@@ -59,8 +59,8 @@ namespace LibEntity
         /// <summary>
         ///     设置或获取停工日期
         /// </summary>
-        [Property("STOP_DATE")]
-        public DateTime? StopDate
+        //[Property("STOP_DATE")]
+        public DateTime StopDate
         {
             get { return _stopDate; }
             set { _stopDate = value; }
