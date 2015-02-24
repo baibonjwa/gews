@@ -115,7 +115,6 @@ namespace LibCommonForm
                         });
 
                         AddDeleteButton();
-
                         gridControl1.DataSource = Horizontal.FindAll();
                     }
                     break;
@@ -138,23 +137,16 @@ namespace LibCommonForm
 
 
                         // 所属水平
-                        var horizontalComboBox = new RepositoryItemLookUpEdit();
-
-                        horizontalComboBox.Columns.Add(new LookUpColumnInfo("HorizontalId", "编号"));
-                        horizontalComboBox.Columns.Add(new LookUpColumnInfo("HorizontalName", "水平名称"));
-                        horizontalComboBox.DataSource = Horizontal.FindAll();
-                        horizontalComboBox.DisplayMember = "HorizontalName";
-                        horizontalComboBox.ValueMember = "HorizontalId";
-
                         gridView1.Columns.Add(new GridColumn
                         {
                             Caption = @"所在水平",
-                            FieldName = "Horizontal.HorizontalId",
-                            ColumnEdit = horizontalComboBox,
+                            FieldName = "Horizontal",
+                            ColumnEdit = lueHorizontal,
                             VisibleIndex = gridView1.Columns.Count
                         });
 
                         AddDeleteButton();
+                        lueHorizontal.DataSource = Horizontal.FindAll();
                         gridControl1.DataSource = MiningArea.FindAll();
 
                     }
@@ -176,7 +168,6 @@ namespace LibCommonForm
                             FieldName = "WorkingFaceName",
                             VisibleIndex = gridView1.Columns.Count
                         });
-
 
                         gridView1.Columns.Add(new GridColumn
                         {
@@ -721,5 +712,30 @@ namespace LibCommonForm
                 ColumnEdit = delButton
             });
         }
+
+        private void gridView1_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
+        {
+            switch (e.Column.FieldName)
+            {
+                case "MiningArea":
+                    {
+                        if (e.Value == null) return;
+                        var miningArea = (MiningArea)e.Value;
+                        e.DisplayText = miningArea.MiningAreaName;
+                        break;
+                    }
+                case "Horizontal":
+                    {
+                        if (e.Value == null) return;
+                        var horizontal = (Horizontal)e.Value;
+                        e.DisplayText = horizontal.HorizontalName;
+                        break;
+                    }
+
+            }
+
+
+        }
+
     }
 }

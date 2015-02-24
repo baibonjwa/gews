@@ -33,9 +33,11 @@
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.lueMiningArea = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.lueHorizontal = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lueMiningArea)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lueHorizontal)).BeginInit();
             this.SuspendLayout();
             // 
             // btnSubmit
@@ -67,7 +69,8 @@
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
             this.gridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.lueMiningArea});
+            this.lueMiningArea,
+            this.lueHorizontal});
             this.gridControl1.Size = new System.Drawing.Size(465, 243);
             this.gridControl1.TabIndex = 3;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -77,6 +80,7 @@
             // 
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
+            this.gridView1.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.gridView1_CustomColumnDisplayText);
             // 
             // lueMiningArea
             // 
@@ -87,6 +91,17 @@
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("MiningAreaName", "采区名称")});
             this.lueMiningArea.DisplayMember = "MiningAreaName";
             this.lueMiningArea.Name = "lueMiningArea";
+            // 
+            // lueHorizontal
+            // 
+            this.lueHorizontal.AutoHeight = false;
+            this.lueHorizontal.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lueHorizontal.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("HorizontalId", "编号"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("HorizontalName", "水平名称")});
+            this.lueHorizontal.DisplayMember = "HorizontalName";
+            this.lueHorizontal.Name = "lueHorizontal";
             // 
             // CommonManagement
             // 
@@ -107,6 +122,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lueMiningArea)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lueHorizontal)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -118,5 +134,6 @@
         private DevExpress.XtraGrid.GridControl gridControl1;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit lueMiningArea;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit lueHorizontal;
     }
 }
