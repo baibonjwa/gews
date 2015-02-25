@@ -87,26 +87,27 @@
             // 
             // selectTunnelUserControl1
             // 
-            this.selectTunnelUserControl1.Location = new System.Drawing.Point(12, 10);
+            this.selectTunnelUserControl1.Location = new System.Drawing.Point(14, 12);
             this.selectTunnelUserControl1.MainForm = null;
             this.selectTunnelUserControl1.Name = "selectTunnelUserControl1";
-            this.selectTunnelUserControl1.Size = new System.Drawing.Size(583, 187);
+            this.selectTunnelUserControl1.SelectedTunnel = null;
+            this.selectTunnelUserControl1.Size = new System.Drawing.Size(680, 218);
             this.selectTunnelUserControl1.TabIndex = 36;
             // 
             // lblWireName
             // 
             this.lblWireName.AutoSize = true;
-            this.lblWireName.Location = new System.Drawing.Point(19, 203);
+            this.lblWireName.Location = new System.Drawing.Point(22, 237);
             this.lblWireName.Name = "lblWireName";
-            this.lblWireName.Size = new System.Drawing.Size(65, 12);
+            this.lblWireName.Size = new System.Drawing.Size(67, 14);
             this.lblWireName.TabIndex = 1;
             this.lblWireName.Text = "导线名称：";
             // 
             // txtWireName
             // 
-            this.txtWireName.Location = new System.Drawing.Point(90, 199);
+            this.txtWireName.Location = new System.Drawing.Point(105, 232);
             this.txtWireName.Name = "txtWireName";
-            this.txtWireName.Size = new System.Drawing.Size(119, 21);
+            this.txtWireName.Size = new System.Drawing.Size(138, 22);
             this.txtWireName.TabIndex = 2;
             // 
             // dgrdvWire
@@ -114,9 +115,9 @@
             this.dgrdvWire.AllowDrop = true;
             this.dgrdvWire.AllowUserToOrderColumns = true;
             this.dgrdvWire.AllowUserToResizeRows = false;
-            this.dgrdvWire.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgrdvWire.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgrdvWire.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgrdvWire.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.txtWirePointID,
@@ -127,12 +128,12 @@
             this.txtDistanceFromTheRight,
             this.txtDistanceFromTop,
             this.txtDistanceFromBottom});
-            this.dgrdvWire.Location = new System.Drawing.Point(11, 264);
+            this.dgrdvWire.Location = new System.Drawing.Point(13, 308);
             this.dgrdvWire.MultiSelect = false;
             this.dgrdvWire.Name = "dgrdvWire";
             this.dgrdvWire.RowTemplate.Height = 23;
             this.dgrdvWire.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgrdvWire.Size = new System.Drawing.Size(765, 219);
+            this.dgrdvWire.Size = new System.Drawing.Size(892, 255);
             this.dgrdvWire.TabIndex = 17;
             this.dgrdvWire.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgrdvWire_CellMouseDown);
             this.dgrdvWire.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgrdvWire_CellMouseDown);
@@ -276,9 +277,9 @@
             // btnSubmit
             // 
             this.btnSubmit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSubmit.Location = new System.Drawing.Point(620, 489);
+            this.btnSubmit.Location = new System.Drawing.Point(723, 570);
             this.btnSubmit.Name = "btnSubmit";
-            this.btnSubmit.Size = new System.Drawing.Size(75, 23);
+            this.btnSubmit.Size = new System.Drawing.Size(87, 27);
             this.btnSubmit.TabIndex = 24;
             this.btnSubmit.Text = "提交";
             this.btnSubmit.UseVisualStyleBackColor = true;
@@ -288,9 +289,9 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(701, 489);
+            this.btnCancel.Location = new System.Drawing.Point(818, 570);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(87, 27);
             this.btnCancel.TabIndex = 25;
             this.btnCancel.Text = "取消";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -299,44 +300,44 @@
             // lblWireLevel
             // 
             this.lblWireLevel.AutoSize = true;
-            this.lblWireLevel.Location = new System.Drawing.Point(19, 233);
+            this.lblWireLevel.Location = new System.Drawing.Point(22, 272);
             this.lblWireLevel.Name = "lblWireLevel";
-            this.lblWireLevel.Size = new System.Drawing.Size(65, 12);
+            this.lblWireLevel.Size = new System.Drawing.Size(67, 14);
             this.lblWireLevel.TabIndex = 3;
             this.lblWireLevel.Text = "导线级别：";
             // 
             // lblMeasureDate
             // 
             this.lblMeasureDate.AutoSize = true;
-            this.lblMeasureDate.Location = new System.Drawing.Point(240, 234);
+            this.lblMeasureDate.Location = new System.Drawing.Point(280, 273);
             this.lblMeasureDate.Name = "lblMeasureDate";
-            this.lblMeasureDate.Size = new System.Drawing.Size(65, 12);
+            this.lblMeasureDate.Size = new System.Drawing.Size(67, 14);
             this.lblMeasureDate.TabIndex = 7;
             this.lblMeasureDate.Text = "测量日期：";
             // 
             // lblVobserver
             // 
             this.lblVobserver.AutoSize = true;
-            this.lblVobserver.Location = new System.Drawing.Point(240, 205);
+            this.lblVobserver.Location = new System.Drawing.Point(280, 239);
             this.lblVobserver.Name = "lblVobserver";
-            this.lblVobserver.Size = new System.Drawing.Size(65, 12);
+            this.lblVobserver.Size = new System.Drawing.Size(63, 14);
             this.lblVobserver.TabIndex = 5;
             this.lblVobserver.Text = "观 测 者：";
             // 
             // txtWireLevel
             // 
-            this.txtWireLevel.Location = new System.Drawing.Point(90, 230);
+            this.txtWireLevel.Location = new System.Drawing.Point(105, 268);
             this.txtWireLevel.Name = "txtWireLevel";
-            this.txtWireLevel.Size = new System.Drawing.Size(119, 21);
+            this.txtWireLevel.Size = new System.Drawing.Size(138, 22);
             this.txtWireLevel.TabIndex = 4;
             // 
             // dtpMeasureDate
             // 
             this.dtpMeasureDate.CustomFormat = "yyyy/MM/dd";
             this.dtpMeasureDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpMeasureDate.Location = new System.Drawing.Point(311, 230);
+            this.dtpMeasureDate.Location = new System.Drawing.Point(363, 268);
             this.dtpMeasureDate.Name = "dtpMeasureDate";
-            this.dtpMeasureDate.Size = new System.Drawing.Size(118, 21);
+            this.dtpMeasureDate.Size = new System.Drawing.Size(137, 22);
             this.dtpMeasureDate.TabIndex = 8;
             this.dtpMeasureDate.Value = new System.DateTime(2013, 12, 2, 9, 30, 14, 0);
             // 
@@ -344,27 +345,27 @@
             // 
             this.dtpCountDate.CustomFormat = "yyyy/MM/dd";
             this.dtpCountDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpCountDate.Location = new System.Drawing.Point(526, 230);
+            this.dtpCountDate.Location = new System.Drawing.Point(614, 268);
             this.dtpCountDate.Name = "dtpCountDate";
-            this.dtpCountDate.Size = new System.Drawing.Size(118, 21);
+            this.dtpCountDate.Size = new System.Drawing.Size(137, 22);
             this.dtpCountDate.TabIndex = 12;
             this.dtpCountDate.Value = new System.DateTime(2013, 12, 2, 9, 30, 14, 0);
             // 
             // lblCounter
             // 
             this.lblCounter.AutoSize = true;
-            this.lblCounter.Location = new System.Drawing.Point(455, 205);
+            this.lblCounter.Location = new System.Drawing.Point(531, 239);
             this.lblCounter.Name = "lblCounter";
-            this.lblCounter.Size = new System.Drawing.Size(65, 12);
+            this.lblCounter.Size = new System.Drawing.Size(63, 14);
             this.lblCounter.TabIndex = 9;
             this.lblCounter.Text = "计 算 者：";
             // 
             // lblCountDate
             // 
             this.lblCountDate.AutoSize = true;
-            this.lblCountDate.Location = new System.Drawing.Point(455, 234);
+            this.lblCountDate.Location = new System.Drawing.Point(531, 273);
             this.lblCountDate.Name = "lblCountDate";
-            this.lblCountDate.Size = new System.Drawing.Size(65, 12);
+            this.lblCountDate.Size = new System.Drawing.Size(67, 14);
             this.lblCountDate.TabIndex = 11;
             this.lblCountDate.Text = "计算日期：";
             // 
@@ -372,61 +373,61 @@
             // 
             this.dtpCheckDate.CustomFormat = "yyyy/MM/dd";
             this.dtpCheckDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpCheckDate.Location = new System.Drawing.Point(748, 228);
+            this.dtpCheckDate.Location = new System.Drawing.Point(873, 266);
             this.dtpCheckDate.Name = "dtpCheckDate";
-            this.dtpCheckDate.Size = new System.Drawing.Size(118, 21);
+            this.dtpCheckDate.Size = new System.Drawing.Size(137, 22);
             this.dtpCheckDate.TabIndex = 16;
             this.dtpCheckDate.Value = new System.DateTime(2013, 12, 2, 9, 30, 14, 0);
             // 
             // lblChecker
             // 
             this.lblChecker.AutoSize = true;
-            this.lblChecker.Location = new System.Drawing.Point(674, 204);
+            this.lblChecker.Location = new System.Drawing.Point(786, 238);
             this.lblChecker.Name = "lblChecker";
-            this.lblChecker.Size = new System.Drawing.Size(65, 12);
+            this.lblChecker.Size = new System.Drawing.Size(63, 14);
             this.lblChecker.TabIndex = 13;
             this.lblChecker.Text = "校 核 者：";
             // 
             // lblCheckDate
             // 
             this.lblCheckDate.AutoSize = true;
-            this.lblCheckDate.Location = new System.Drawing.Point(674, 232);
+            this.lblCheckDate.Location = new System.Drawing.Point(786, 271);
             this.lblCheckDate.Name = "lblCheckDate";
-            this.lblCheckDate.Size = new System.Drawing.Size(65, 12);
+            this.lblCheckDate.Size = new System.Drawing.Size(67, 14);
             this.lblCheckDate.TabIndex = 15;
             this.lblCheckDate.Text = "校核日期：";
             // 
             // cboVobserver
             // 
             this.cboVobserver.FormattingEnabled = true;
-            this.cboVobserver.Location = new System.Drawing.Point(311, 201);
+            this.cboVobserver.Location = new System.Drawing.Point(363, 234);
             this.cboVobserver.Name = "cboVobserver";
-            this.cboVobserver.Size = new System.Drawing.Size(120, 20);
+            this.cboVobserver.Size = new System.Drawing.Size(139, 22);
             this.cboVobserver.TabIndex = 6;
             // 
             // cboCounter
             // 
             this.cboCounter.FormattingEnabled = true;
-            this.cboCounter.Location = new System.Drawing.Point(526, 201);
+            this.cboCounter.Location = new System.Drawing.Point(614, 234);
             this.cboCounter.Name = "cboCounter";
-            this.cboCounter.Size = new System.Drawing.Size(118, 20);
+            this.cboCounter.Size = new System.Drawing.Size(137, 22);
             this.cboCounter.TabIndex = 10;
             // 
             // cboChecker
             // 
             this.cboChecker.FormattingEnabled = true;
-            this.cboChecker.Location = new System.Drawing.Point(748, 200);
+            this.cboChecker.Location = new System.Drawing.Point(873, 233);
             this.cboChecker.Name = "cboChecker";
-            this.cboChecker.Size = new System.Drawing.Size(118, 20);
+            this.cboChecker.Size = new System.Drawing.Size(137, 22);
             this.cboChecker.TabIndex = 14;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.ForeColor = System.Drawing.Color.Red;
-            this.label5.Location = new System.Drawing.Point(611, 86);
+            this.label5.Location = new System.Drawing.Point(713, 100);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(11, 12);
+            this.label5.Size = new System.Drawing.Size(14, 14);
             this.label5.TabIndex = 33;
             this.label5.Text = "*";
             // 
@@ -434,9 +435,9 @@
             // 
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(215, 205);
+            this.label1.Location = new System.Drawing.Point(251, 239);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(11, 12);
+            this.label1.Size = new System.Drawing.Size(14, 14);
             this.label1.TabIndex = 32;
             this.label1.Text = "*";
             // 
@@ -444,9 +445,9 @@
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(119, 267);
+            this.label2.Location = new System.Drawing.Point(125, 311);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(11, 12);
+            this.label2.Size = new System.Drawing.Size(14, 14);
             this.label2.TabIndex = 26;
             this.label2.Text = "*";
             // 
@@ -454,9 +455,9 @@
             // 
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(192, 267);
+            this.label3.Location = new System.Drawing.Point(224, 311);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(11, 12);
+            this.label3.Size = new System.Drawing.Size(14, 14);
             this.label3.TabIndex = 27;
             this.label3.Text = "*";
             // 
@@ -464,9 +465,9 @@
             // 
             this.label4.AutoSize = true;
             this.label4.ForeColor = System.Drawing.Color.Red;
-            this.label4.Location = new System.Drawing.Point(284, 267);
+            this.label4.Location = new System.Drawing.Point(331, 311);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(11, 12);
+            this.label4.Size = new System.Drawing.Size(14, 14);
             this.label4.TabIndex = 28;
             this.label4.Text = "*";
             // 
@@ -474,9 +475,9 @@
             // 
             this.label6.AutoSize = true;
             this.label6.ForeColor = System.Drawing.Color.Red;
-            this.label6.Location = new System.Drawing.Point(380, 267);
+            this.label6.Location = new System.Drawing.Point(443, 311);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(11, 12);
+            this.label6.Size = new System.Drawing.Size(14, 14);
             this.label6.TabIndex = 29;
             this.label6.Text = "*";
             // 
@@ -484,9 +485,9 @@
             // 
             this.label7.AutoSize = true;
             this.label7.ForeColor = System.Drawing.Color.Red;
-            this.label7.Location = new System.Drawing.Point(484, 267);
+            this.label7.Location = new System.Drawing.Point(565, 311);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(11, 12);
+            this.label7.Size = new System.Drawing.Size(14, 14);
             this.label7.TabIndex = 30;
             this.label7.Text = "*";
             // 
@@ -494,9 +495,9 @@
             // 
             this.label8.AutoSize = true;
             this.label8.ForeColor = System.Drawing.Color.Red;
-            this.label8.Location = new System.Drawing.Point(575, 267);
+            this.label8.Location = new System.Drawing.Point(671, 311);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(11, 12);
+            this.label8.Size = new System.Drawing.Size(14, 14);
             this.label8.TabIndex = 31;
             this.label8.Text = "*";
             // 
@@ -504,9 +505,9 @@
             // 
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAdd.Enabled = false;
-            this.btnAdd.Location = new System.Drawing.Point(799, 265);
+            this.btnAdd.Location = new System.Drawing.Point(932, 309);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(75, 23);
+            this.btnAdd.Size = new System.Drawing.Size(87, 27);
             this.btnAdd.TabIndex = 18;
             this.btnAdd.Text = "插入";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -516,9 +517,9 @@
             // 
             this.btnCopy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCopy.Enabled = false;
-            this.btnCopy.Location = new System.Drawing.Point(799, 304);
+            this.btnCopy.Location = new System.Drawing.Point(932, 355);
             this.btnCopy.Name = "btnCopy";
-            this.btnCopy.Size = new System.Drawing.Size(75, 23);
+            this.btnCopy.Size = new System.Drawing.Size(87, 27);
             this.btnCopy.TabIndex = 19;
             this.btnCopy.Text = "复制";
             this.btnCopy.UseVisualStyleBackColor = true;
@@ -528,9 +529,9 @@
             // 
             this.btnPaste.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPaste.Enabled = false;
-            this.btnPaste.Location = new System.Drawing.Point(799, 343);
+            this.btnPaste.Location = new System.Drawing.Point(932, 400);
             this.btnPaste.Name = "btnPaste";
-            this.btnPaste.Size = new System.Drawing.Size(75, 23);
+            this.btnPaste.Size = new System.Drawing.Size(87, 27);
             this.btnPaste.TabIndex = 20;
             this.btnPaste.Text = "粘贴";
             this.btnPaste.UseVisualStyleBackColor = true;
@@ -540,9 +541,9 @@
             // 
             this.btnMoveUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnMoveUp.Enabled = false;
-            this.btnMoveUp.Location = new System.Drawing.Point(799, 421);
+            this.btnMoveUp.Location = new System.Drawing.Point(932, 491);
             this.btnMoveUp.Name = "btnMoveUp";
-            this.btnMoveUp.Size = new System.Drawing.Size(75, 23);
+            this.btnMoveUp.Size = new System.Drawing.Size(87, 27);
             this.btnMoveUp.TabIndex = 22;
             this.btnMoveUp.Text = "上移";
             this.btnMoveUp.UseVisualStyleBackColor = true;
@@ -552,9 +553,9 @@
             // 
             this.btnMoveDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnMoveDown.Enabled = false;
-            this.btnMoveDown.Location = new System.Drawing.Point(799, 460);
+            this.btnMoveDown.Location = new System.Drawing.Point(932, 537);
             this.btnMoveDown.Name = "btnMoveDown";
-            this.btnMoveDown.Size = new System.Drawing.Size(75, 23);
+            this.btnMoveDown.Size = new System.Drawing.Size(87, 27);
             this.btnMoveDown.TabIndex = 23;
             this.btnMoveDown.Text = "下移";
             this.btnMoveDown.UseVisualStyleBackColor = true;
@@ -564,9 +565,9 @@
             // 
             this.btnDel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDel.Enabled = false;
-            this.btnDel.Location = new System.Drawing.Point(799, 382);
+            this.btnDel.Location = new System.Drawing.Point(932, 446);
             this.btnDel.Name = "btnDel";
-            this.btnDel.Size = new System.Drawing.Size(75, 23);
+            this.btnDel.Size = new System.Drawing.Size(87, 27);
             this.btnDel.TabIndex = 21;
             this.btnDel.Text = "删除";
             this.btnDel.UseVisualStyleBackColor = true;
@@ -575,9 +576,9 @@
             // btnTXT
             // 
             this.btnTXT.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnTXT.Location = new System.Drawing.Point(511, 489);
+            this.btnTXT.Location = new System.Drawing.Point(596, 570);
             this.btnTXT.Name = "btnTXT";
-            this.btnTXT.Size = new System.Drawing.Size(75, 23);
+            this.btnTXT.Size = new System.Drawing.Size(87, 27);
             this.btnTXT.TabIndex = 34;
             this.btnTXT.Text = "读取txt";
             this.btnTXT.UseVisualStyleBackColor = true;
@@ -586,10 +587,10 @@
             // WireInfoEntering
             // 
             this.AcceptButton = this.btnSubmit;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(886, 524);
+            this.ClientSize = new System.Drawing.Size(1034, 611);
             this.Controls.Add(this.btnTXT);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);

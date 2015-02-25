@@ -41,6 +41,9 @@ namespace sys3
         private Wire wireEntity = new Wire();
         /*****************************/
 
+
+        private Wire Wire { get; set; }
+
         /// <summary>
         ///     构造方法
         /// </summary>
@@ -92,12 +95,11 @@ namespace sys3
         /// <summary>
         ///     构造方法
         /// </summary>
-        /// <param name="array">矿井信息数组</param>
-        /// <param name="wireEntity">导线实体</param>
-        public WireInfoEntering(Wire wireEntity)
+        /// <param name="wire"></param>
+        public WireInfoEntering(Wire wire)
         {
             // 初始化主窗体变量
-            this.wireEntity = wireEntity;
+            Wire = wire;
             InitializeComponent();
 
             // 加载需要修改的导线数据
@@ -150,7 +152,6 @@ namespace sys3
         /// </summary>
         private void loadWireInfoData()
         {
-            addInfo();
             _itemCount = 0;
             wirePoints = WirePoint.FindAllByWireId(wireEntity.WireId);
             if (wirePoints.Length > 0)
@@ -1003,44 +1004,15 @@ namespace sys3
         {
             if (Text == Const_GM.WIRE_INFO_ADD)
             {
-                addInfo();
+                selectTunnelUserControl1.LoadData();
+                dtpMeasureDate.Value = DateTime.Now;
+                dtpCountDate.Value = DateTime.Now;
+                dtpCheckDate.Value = DateTime.Now;
             }
-        }
-
-        /// <summary>
-        ///     添加
-        /// </summary>
-        private void addInfo()
-        {
-            bindNames();
-            dtpMeasureDate.Value = DateTime.Now;
-            dtpCountDate.Value = DateTime.Now;
-            dtpCheckDate.Value = DateTime.Now;
-        }
-
-        /// <summary>
-        ///     combobox绑定
-        /// </summary>
-        private void bindNames()
-        {
-            var ds = new DataSet();
-            var ds2 = new DataSet();
-            var ds3 = new DataSet();
-            ds = UserInformationDetailsManagementBLL.GetUserInformationDetailsDS();
-            ds2 = UserInformationDetailsManagementBLL.GetUserInformationDetailsDS();
-            ds3 = UserInformationDetailsManagementBLL.GetUserInformationDetailsDS();
-            cboVobserver.DataSource = ds.Tables[0];
-            cboVobserver.DisplayMember = UserInformationDetailsManagementDbConstNames.USER_NAME;
-            cboVobserver.ValueMember = UserInformationDetailsManagementDbConstNames.ID;
-            cboVobserver.SelectedIndex = -1;
-            cboCounter.DataSource = ds2.Tables[0];
-            cboCounter.DisplayMember = UserInformationDetailsManagementDbConstNames.USER_NAME;
-            cboCounter.ValueMember = UserInformationDetailsManagementDbConstNames.ID;
-            cboCounter.SelectedIndex = -1;
-            cboChecker.DataSource = ds3.Tables[0];
-            cboChecker.DisplayMember = UserInformationDetailsManagementDbConstNames.USER_NAME;
-            cboChecker.ValueMember = UserInformationDetailsManagementDbConstNames.ID;
-            cboChecker.SelectedIndex = -1;
+            else
+            {
+                selectTunnelUserControl1.LoadData(Wire.Tunnel);
+            }
         }
 
         /// <summary>

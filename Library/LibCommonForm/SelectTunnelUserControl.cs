@@ -194,16 +194,16 @@ namespace LibCommonForm
         private void lstWorkingFaceName_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (lstWorkingFaceName.SelectedItems.Count <= 0) return;
-            var workingFace = (WorkingFace)lstMiningAreaName.SelectedItem;
-            DataBindUtil.LoadTunnelName(lstWorkingFaceName, workingFace.WorkingFaceId);
+            var workingFace = (WorkingFace)lstWorkingFaceName.SelectedItem;
+            DataBindUtil.LoadTunnelName(lstTunnelName, workingFace.WorkingFaceId);
         }
 
         private void lstTunnelName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (lstWorkingFaceName.SelectedItems.Count <= 0)
+            if (lstTunnelName.SelectedItems.Count <= 0)
                 SelectedTunnel = null;
             else
-                SelectedTunnel = (Tunnel)lstWorkingFaceName.SelectedItem;
+                SelectedTunnel = (Tunnel)lstTunnelName.SelectedItem;
         }
     }
 }

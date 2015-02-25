@@ -183,6 +183,7 @@
             this.gridColumn6});
             this.gridView1.GridControl = this.gcWireInfo;
             this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsBehavior.Editable = false;
             // 
             // gridColumn1
             // 
