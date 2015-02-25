@@ -74,11 +74,18 @@ namespace LibBusiness
                 DataBindListControl(lb, workingFaces, "WorkingFaceName", "WorkingFaceId", selectedText);
         }
 
-        public static void LoadWorkingFaceName(DataGridView dgv, int miningAreaId)
+        public static void LoadTunnelName(ListControl lb, int workingFaceId, String selectedText = "")
         {
-            var workingFaces = WorkingFace.FindAllByMiningAreaId(miningAreaId);
-            if (workingFaces != null) DataBindListControl(dgv, workingFaces);
+            var tunnels = Tunnel.FindAllByWorkingFaceId(workingFaceId);
+            if (tunnels != null)
+                DataBindListControl(lb, tunnels, "TunnelName", "TunnelId", selectedText);
         }
+
+        //public static void LoadWorkingFaceName(DataGridView dgv, int miningAreaId)
+        //{
+        //    var workingFaces = WorkingFace.FindAllByMiningAreaId(miningAreaId);
+        //    if (workingFaces != null) DataBindListControl(dgv, workingFaces);
+        //}
 
         public static void LoadCoalSeamsName(ListControl lb, String selectedText = "")
         {

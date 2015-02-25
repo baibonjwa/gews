@@ -55,9 +55,7 @@ namespace LibPanels
         {
             this.MainForm = mainFrm;
             InitializeComponent();
-
-            this.selectTunnelUserControl1.init(mainFrm);
-            selectTunnelUserControl1.loadMineName();
+            selectTunnelUserControl1.LoadData();
 
             addInfo();
         }
@@ -75,13 +73,12 @@ namespace LibPanels
             if (tunnelEntity == null)
             {
                 InitializeComponent();
-                selectTunnelUserControl1.loadMineName();
+                selectTunnelUserControl1.LoadData();
             }
             else
             {
                 setArrValue(tunnelEntity.TunnelId);
                 InitializeComponent();
-                this.selectTunnelUserControl1.setCurSelectedID(arr);
             }
             addInfo();
         }
@@ -418,7 +415,7 @@ namespace LibPanels
 
             //通用信息
             //巷道ID
-            mineDataEntity.Tunnel.TunnelId = selectTunnelUserControl1.ITunnelId;
+            mineDataEntity.Tunnel = selectTunnelUserControl1.SelectedTunnel;
             //坐标X
             if (txtCoordinateX.Text == "")
             {
@@ -684,7 +681,7 @@ namespace LibPanels
             {
                 mEntity.SaveAndFlush();
                 bResult = true;
-                UpdateWarningDataMsg msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.ITunnelId,
+                UpdateWarningDataMsg msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.SelectedTunnel.TunnelId,
                     Management.TableName, OPERATION_TYPE.ADD, mEntity.Datetime);
                 this.MainForm.SendMsg2Server(msg);
             }
@@ -747,7 +744,7 @@ namespace LibPanels
         {
             // 判断巷道信息是否选择
             //矿井名称
-            if (selectTunnelUserControl1.ITunnelId == 0)
+            if (selectTunnelUserControl1.SelectedTunnel != null)
             {
                 Alert.alert(Const.MSG_PLEASE_CHOOSE + Const_GM.TUNNEL + Const.SIGN_EXCLAMATION_MARK);
                 return false;

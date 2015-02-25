@@ -48,40 +48,28 @@ namespace _3.GeologyMeasure
             //this.selectTunnelUserControl1.SetFilterOn(TunnelTypeEnum.TUNNELLING);
             //this.selectTunnelUserControl1.init(this.MainForm);
             //自定义控件初始化
-            this.selectTunnelUserControl1.setCurSelectedID(_arr);
+
             LibEntity.TunnelDefaultSelect tunnelDefaultSelectEntity = LibBusiness.TunnelDefaultSelect.selectDefaultTunnel(Wire.TableName);
-            if (tunnelDefaultSelectEntity != null)
-            {
-                _arr = new int[5];
-                _arr[0] = tunnelDefaultSelectEntity.MineID;
-                _arr[1] = tunnelDefaultSelectEntity.HorizontalID;
-                _arr[2] = tunnelDefaultSelectEntity.MiningAreaID;
-                _arr[3] = tunnelDefaultSelectEntity.WorkingFaceID;
-                this.selectTunnelUserControl1.setCurSelectedID(_arr);
-            }
-            else
-            {
-                this.selectTunnelUserControl1.loadMineName();
-            }
+
             // 注册委托事件
-            this.selectTunnelUserControl1.TunnelNameChanged +=
-                InheritTunnelNameChanged;
+            //this.selectTunnelUserControl1.TunnelNameChanged +=
+            //    InheritTunnelNameChanged;
         }
 
         /// <summary>
         /// 委托事件
         /// </summary>
         /// <param name="sender"></param>
-        private void InheritTunnelNameChanged(object sender, LibCommonForm.TunnelEventArgs e)
-        {
-            bindDistanceFromWirePoint();
-        }
+        //private void InheritTunnelNameChanged(object sender, LibCommonForm.TunnelEventArgs e)
+        //{
+        //    bindDistanceFromWirePoint();
+        //}
 
         private void bindDistanceFromWirePoint()
         {
             if (this.Text == "掘进巷道校正")
             {
-                _tunnelEntity.TunnelId = selectTunnelUserControl1.ITunnelId;
+                _tunnelEntity.TunnelId = selectTunnelUserControl1.SelectedTunnel.TunnelId;
             }
         }
 
@@ -345,7 +333,7 @@ namespace _3.GeologyMeasure
 
         private void selectTunnelUserControl1_Load(object sender, EventArgs e)
         {
-            selectTunnelUserControl1.SetFilterOn(TunnelTypeEnum.TUNNELLING, TunnelTypeEnum.OTHER);
+
         }
     }
 }

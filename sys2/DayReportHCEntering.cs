@@ -126,17 +126,17 @@ namespace sys2
         ///     委托事件
         /// </summary>
         /// <param name="sender"></param>
-        private void InheritTunnelNameChanged(object sender, TunnelEventArgs e)
-        {
-            for (int i = 0; i < dgrdvDayReportHC.RowCount; i++)
-            {
-                if (dgrdvDayReportHC[3, i].Value != null)
-                {
-                    var dgvce = new DataGridViewCellEventArgs(2, i);
-                    dgrdvDayReportHC_CellEndEdit(sender, dgvce);
-                }
-            }
-        }
+        //private void InheritTunnelNameChanged(object sender, TunnelEventArgs e)
+        //{
+        //    for (int i = 0; i < dgrdvDayReportHC.RowCount; i++)
+        //    {
+        //        if (dgrdvDayReportHC[3, i].Value != null)
+        //        {
+        //            var dgvce = new DataGridViewCellEventArgs(2, i);
+        //            dgrdvDayReportHC_CellEndEdit(sender, dgvce);
+        //        }
+        //    }
+        //}
 
         /// <summary>
         ///     添加时加载初始化设置

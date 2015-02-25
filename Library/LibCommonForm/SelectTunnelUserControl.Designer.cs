@@ -106,9 +106,9 @@
             // 
             // lblTunnelName
             // 
-            this.lblTunnelName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblTunnelName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTunnelName.AutoSize = true;
             this.lblTunnelName.Location = new System.Drawing.Point(499, 4);
             this.lblTunnelName.Name = "lblTunnelName";
@@ -124,7 +124,7 @@
             this.lstTunnelName.Name = "lstTunnelName";
             this.lstTunnelName.Size = new System.Drawing.Size(90, 124);
             this.lstTunnelName.TabIndex = 136;
-            this.lstTunnelName.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lstTunnelName_MouseUp);
+            this.lstTunnelName.SelectedIndexChanged += new System.EventHandler(this.lstTunnelName_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -137,9 +137,9 @@
             // 
             // lblWorkingFaceName
             // 
-            this.lblWorkingFaceName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblWorkingFaceName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblWorkingFaceName.AutoSize = true;
             this.lblWorkingFaceName.Location = new System.Drawing.Point(374, 4);
             this.lblWorkingFaceName.Name = "lblWorkingFaceName";
@@ -155,7 +155,7 @@
             this.lstWorkingFaceName.Name = "lstWorkingFaceName";
             this.lstWorkingFaceName.Size = new System.Drawing.Size(92, 124);
             this.lstWorkingFaceName.TabIndex = 133;
-            this.lstWorkingFaceName.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lstWorkingFaceName_MouseUp);
+            this.lstWorkingFaceName.SelectedIndexChanged += new System.EventHandler(this.lstWorkingFaceName_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -177,9 +177,9 @@
             // 
             // lblMiningAreaName
             // 
-            this.lblMiningAreaName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblMiningAreaName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblMiningAreaName.AutoSize = true;
             this.lblMiningAreaName.Location = new System.Drawing.Point(250, 4);
             this.lblMiningAreaName.Name = "lblMiningAreaName";
@@ -195,13 +195,13 @@
             this.lstMiningAreaName.Name = "lstMiningAreaName";
             this.lstMiningAreaName.Size = new System.Drawing.Size(91, 124);
             this.lstMiningAreaName.TabIndex = 129;
-            this.lstMiningAreaName.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lstMiningAreaName_MouseUp);
+            this.lstMiningAreaName.SelectedIndexChanged += new System.EventHandler(this.lstMiningAreaName_SelectedIndexChanged);
             // 
             // lblHorizontalName
             // 
-            this.lblHorizontalName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblHorizontalName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblHorizontalName.AutoSize = true;
             this.lblHorizontalName.Location = new System.Drawing.Point(129, 4);
             this.lblHorizontalName.Name = "lblHorizontalName";
@@ -226,13 +226,13 @@
             this.lstHorizontalName.Name = "lstHorizontalName";
             this.lstHorizontalName.Size = new System.Drawing.Size(91, 124);
             this.lstHorizontalName.TabIndex = 125;
-            this.lstHorizontalName.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lstHorizontalName_MouseUp);
+            this.lstHorizontalName.SelectedIndexChanged += new System.EventHandler(this.lstHorizontalName_SelectedIndexChanged);
             // 
             // label5
             // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(12, 4);
             this.label5.Name = "label5";
@@ -248,7 +248,7 @@
             this.lstMineName.Name = "lstMineName";
             this.lstMineName.Size = new System.Drawing.Size(86, 124);
             this.lstMineName.TabIndex = 124;
-            this.lstMineName.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lstMineName_MouseUp);
+            this.lstMineName.SelectedIndexChanged += new System.EventHandler(this.lstMineName_SelectedIndexChanged);
             // 
             // SelectTunnelUserControl
             // 

@@ -37,7 +37,6 @@ namespace LibPanels
         {
             MainForm = mainFrm;
             InitializeComponent();
-            selectTunnelSimple1.TunnelNameChanged += InheritTunnelNameChanged;
 
             // 设置工作制式
             addInfo();
@@ -46,15 +45,15 @@ namespace LibPanels
             setWorkTimeName();
         }
 
-        private void InheritTunnelNameChanged(object sender, TunnelEventArgs e)
-        {
-            Tunnel entTunnel = Tunnel.Find(selectTunnelSimple1.ITunnelId);
-            WorkingFace entWorkingFace = WorkingFace.Find(entTunnel.WorkingFace.WorkingFaceId);
-            //WorkingFaceBLL.selectWorkingFaceInfoByID(entTunnel.WorkingFace.WorkingFaceID);
-            txtCoordinateX.Text = entWorkingFace.Coordinate.X.ToString();
-            txtCoordinateY.Text = entWorkingFace.Coordinate.Y.ToString();
-            txtCoordinateZ.Text = entWorkingFace.Coordinate.Z.ToString();
-        }
+        //private void InheritTunnelNameChanged(object sender, TunnelEventArgs e)
+        //{
+        //    Tunnel entTunnel = Tunnel.Find(selectTunnelSimple1.ITunnelId);
+        //    WorkingFace entWorkingFace = WorkingFace.Find(entTunnel.WorkingFace.WorkingFaceId);
+        //    //WorkingFaceBLL.selectWorkingFaceInfoByID(entTunnel.WorkingFace.WorkingFaceID);
+        //    txtCoordinateX.Text = entWorkingFace.Coordinate.X.ToString();
+        //    txtCoordinateY.Text = entWorkingFace.Coordinate.Y.ToString();
+        //    txtCoordinateZ.Text = entWorkingFace.Coordinate.Z.ToString();
+        //}
 
         /// <summary>
         ///     添加时初始化

@@ -87,12 +87,10 @@
             // 
             // selectTunnelUserControl1
             // 
-            this.selectTunnelUserControl1.ITunnelId = 0;
             this.selectTunnelUserControl1.Location = new System.Drawing.Point(12, 10);
             this.selectTunnelUserControl1.MainForm = null;
             this.selectTunnelUserControl1.Name = "selectTunnelUserControl1";
             this.selectTunnelUserControl1.Size = new System.Drawing.Size(583, 187);
-            this.selectTunnelUserControl1.STunnelName = null;
             this.selectTunnelUserControl1.TabIndex = 36;
             // 
             // lblWireName

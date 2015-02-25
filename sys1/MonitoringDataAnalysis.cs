@@ -45,24 +45,24 @@ namespace _1.GasEmission
             InitializeComponent();
 
             // 调用选择巷道控件时需要调用的方法
-            this.selectTunnelUserControl1.loadMineName();
+            this.selectTunnelUserControl1.LoadData();
 
             // 注册委托事件
-            this.selectTunnelUserControl1.TunnelNameChanged += InheritTunnelNameChanged;
+            //this.selectTunnelUserControl1.TunnelNameChanged += InheritTunnelNameChanged;
         }
 
         /// <summary>
         /// 委托事件
         /// </summary>
         /// <param name="sender"></param>
-        private void InheritTunnelNameChanged(object sender, TunnelEventArgs e)
-        {
-            this._lstProbeStyle.DataSource = null;
-            this._lstProbeName.DataSource = null;
+        //private void InheritTunnelNameChanged(object sender, TunnelEventArgs e)
+        //{
+        //    this._lstProbeStyle.DataSource = null;
+        //    this._lstProbeName.DataSource = null;
 
-            // 加载探头类型信息
-            loadProbeTypeInfo();
-        }
+        //    // 加载探头类型信息
+        //    loadProbeTypeInfo();
+        //}
 
         /// <summary>
         /// 加载探头类型信息
@@ -90,14 +90,14 @@ namespace _1.GasEmission
             this._lstProbeName.DataSource = null;
 
             // 没有选择巷道
-            if (this.selectTunnelUserControl1.ITunnelId == Const.INVALID_ID)
+            if (this.selectTunnelUserControl1.SelectedTunnel == null)
             {
                 Alert.alert(Const_GE.TUNNEL_NAME_MUST_INPUT);
             }
             else
             {
                 // 根据巷道编号和探头类型编号获取探头信息
-                Probe[] probes = Probe.FindAllByTunnelIdAndProbeTypeId(selectTunnelUserControl1.ITunnelId,
+                Probe[] probes = Probe.FindAllByTunnelIdAndProbeTypeId(selectTunnelUserControl1.SelectedTunnel.TunnelId,
                     Convert.ToInt32(this._lstProbeStyle.SelectedValue));
 
                 for (int i = 0; i < probes.Length; i++)
@@ -119,10 +119,9 @@ namespace _1.GasEmission
         private void _lstProbeName_MouseUp(object sender, MouseEventArgs e)
         {
             // 没有选择巷道
-            if (this.selectTunnelUserControl1.ITunnelId == Const.INVALID_ID)
+            if (this.selectTunnelUserControl1.SelectedTunnel == null)
             {
                 Alert.alert(Const_GE.TUNNEL_NAME_MUST_INPUT);
-                return;
             }
             else
             {
@@ -339,7 +338,7 @@ namespace _1.GasEmission
         private void _btnStart_Click(object sender, EventArgs e)
         {
             // 没有选择巷道 
-            if (this.selectTunnelUserControl1.ITunnelId == Const.INVALID_ID)
+            if (this.selectTunnelUserControl1.SelectedTunnel == null)
             {
                 Alert.alert(Const_GE.TUNNEL_NAME_MUST_INPUT);
                 return;
@@ -352,7 +351,7 @@ namespace _1.GasEmission
                 return;
             }
 
-            if (this.selectTunnelUserControl1.ITunnelId != Const.INVALID_ID
+            if (this.selectTunnelUserControl1.SelectedTunnel != null
                 && this._lstProbeName.SelectedItems.Count > 0)
             {
 
@@ -400,7 +399,7 @@ namespace _1.GasEmission
         private void _btnQuery_Click(object sender, EventArgs e)
         {
             // 没有选择巷道 
-            if (this.selectTunnelUserControl1.ITunnelId == Const.INVALID_ID)
+            if (this.selectTunnelUserControl1.SelectedTunnel == null)
             {
                 Alert.alert(Const_GE.TUNNEL_NAME_MUST_INPUT);
                 return;
@@ -413,7 +412,7 @@ namespace _1.GasEmission
                 return;
             }
 
-            if (this.selectTunnelUserControl1.ITunnelId != Const.INVALID_ID
+            if (this.selectTunnelUserControl1.SelectedTunnel != null
                 && this._lstProbeName.SelectedItems.Count > 0)
             {
                 // 清空datagridview

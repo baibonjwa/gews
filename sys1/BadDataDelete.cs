@@ -79,11 +79,11 @@ namespace sys1
             _dateTimeEnd.Value = Convert.ToDateTime(todayEnd);
 
             // 调用选择巷道控件时需要调用的方法
-            selectTunnelUserControl1.loadMineName();
+            selectTunnelUserControl1.LoadData();
 
             // 注册委托事件
-            selectTunnelUserControl1.TunnelNameChanged +=
-                InheritTunnelNameChanged;
+            //selectTunnelUserControl1.TunnelNameChanged +=
+            //    InheritTunnelNameChanged;
 
             // 调用委托方法 （必须实装）
             //dataPager1.FrmChild_EventHandler += new DataPager.FrmChild_DelegateHandler(FrmParent_EventHandler);
@@ -118,14 +118,14 @@ namespace sys1
         ///     委托事件
         /// </summary>
         /// <param name="sender"></param>
-        private void InheritTunnelNameChanged(object sender, TunnelEventArgs e)
-        {
-            _lstProbeStyle.DataSource = null;
-            _lstProbeName.DataSource = null;
+        //private void InheritTunnelNameChanged(object sender, TunnelEventArgs e)
+        //{
+        //    _lstProbeStyle.DataSource = null;
+        //    _lstProbeName.DataSource = null;
 
-            // 加载探头类型信息
-            loadProbeTypeInfo();
-        }
+        //    // 加载探头类型信息
+        //    loadProbeTypeInfo();
+        //}
 
         /// <summary>
         ///     加载探头类型信息
@@ -153,14 +153,14 @@ namespace sys1
             _lstProbeName.DataSource = null;
 
             // 没有选择巷道
-            if (selectTunnelUserControl1.ITunnelId == Const.INVALID_ID)
+            if (selectTunnelUserControl1.SelectedTunnel == null)
             {
                 Alert.alert(Const_GE.TUNNEL_NAME_MUST_INPUT);
             }
             else
             {
                 // 根据巷道编号和探头类型编号获取探头信息
-                Probe[] probes = Probe.FindAllByTunnelIdAndProbeTypeId(selectTunnelUserControl1.ITunnelId,
+                Probe[] probes = Probe.FindAllByTunnelIdAndProbeTypeId(selectTunnelUserControl1.SelectedTunnel.TunnelId,
                   Convert.ToInt32(this._lstProbeStyle.SelectedValue));
 
                 for (int i = 0; i < probes.Length; i++)
@@ -182,7 +182,7 @@ namespace sys1
         private void _lstProbeName_MouseUp(object sender, MouseEventArgs e)
         {
             // 没有选择巷道
-            if (selectTunnelUserControl1.ITunnelId == Const.INVALID_ID)
+            if (selectTunnelUserControl1.SelectedTunnel == null)
             {
                 Alert.alert(Const_GE.TUNNEL_NAME_MUST_INPUT);
             }
@@ -223,7 +223,7 @@ namespace sys1
         private bool check()
         {
             // 判断选择巷道是否选择
-            if (selectTunnelUserControl1.ITunnelId == Const.INVALID_ID)
+            if (selectTunnelUserControl1.SelectedTunnel == null)
             {
                 Alert.alert(Const_GE.TUNNEL_NAME_MUST_INPUT);
                 return false;
@@ -490,26 +490,7 @@ namespace sys1
         /// <param name="e"></param>
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            // 获取巷道选择自定义控件上选择的数据信息
-            int[] intArr = selectTunnelUserControl1.getSelectedValueArr();
-
-            var objArr = new object[7];
-            // 矿井编号
-            objArr[0] = intArr[0];
-            // 水平编号
-            objArr[1] = intArr[1];
-            // 采区编号
-            objArr[2] = intArr[2];
-            // 工作面编号
-            objArr[3] = intArr[3];
-            // 巷道编号
-            objArr[4] = intArr[4];
-            // 探头类型编号
-            objArr[5] = _lstProbeStyle.SelectedValue;
-            // 探头编号
-            objArr[6] = _lstProbeName.SelectedValue;
-
-            var gasConcentrationProbeDataEntering = new GasConcentrationProbeDataEntering(objArr, MainForm);
+            var gasConcentrationProbeDataEntering = new GasConcentrationProbeDataEntering(MainForm);
             if (DialogResult.OK == gasConcentrationProbeDataEntering.ShowDialog())
             {
                 if (_iDisposeFlag == Const.DISPOSE_FLAG_ONE)
@@ -533,32 +514,12 @@ namespace sys1
         /// <param name="e"></param>
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            // 获取巷道选择自定义控件上选择的数据信息
-            int[] intArr = selectTunnelUserControl1.getSelectedValueArr();
-
-            var objArr = new object[7];
-            // 矿井编号
-            objArr[0] = intArr[0];
-            // 水平编号
-            objArr[1] = intArr[1];
-            // 采区编号
-            objArr[2] = intArr[2];
-            // 工作面编号
-            objArr[3] = intArr[3];
-            // 巷道编号
-            objArr[4] = intArr[4];
-            // 探头类型编号
-            objArr[5] = _lstProbeStyle.SelectedValue;
-            // 探头编号
-            objArr[6] = _lstProbeName.SelectedValue;
-
             // 获取已选择明细行的索引
             int[] iSelIdxsArr = GetSelIdxs();
             // 获取编号（主键）
             string strPrimaryKey = fpGasConcentrationProbeDataInfo.Sheets[0].Cells[iSelIdxsArr[0], 1].Text;
 
-            var gasConcentrationProbeDataEntering = new GasConcentrationProbeDataEntering(strPrimaryKey, objArr,
-                MainForm);
+            var gasConcentrationProbeDataEntering = new GasConcentrationProbeDataEntering(strPrimaryKey);
             if (DialogResult.OK == gasConcentrationProbeDataEntering.ShowDialog())
             {
                 // 加载瓦斯浓度探头数据信息

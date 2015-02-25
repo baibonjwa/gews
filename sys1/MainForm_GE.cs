@@ -101,7 +101,7 @@ namespace sys1
             //checkTimer.Start();
 
             // 注册事件（巷道选择自定义控件必须实装代码）
-            selectTunnelSimple1.TunnelNameChanged += TunnelNameChanged;
+            //selectTunnelSimple1.TunnelNameChanged += TunnelNameChanged;
             //// 设置日期控件格式
             _dateTimeStart.Text = DateTime.Now.ToString("yyyy-MM-dd") + @" 00:00:00";
             _dateTimeEnd.Text = DateTime.Now.ToString("yyyy-MM-dd") + @" 23:59:59";
@@ -266,12 +266,12 @@ namespace sys1
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void TunnelNameChanged(object sender, TunnelEventArgs e)
-        {
-            _lstProbeName.DataSource = null;
-            _currentTunnelId = selectTunnelSimple1.ITunnelId;
-            _t2Id = Probe.GetT2Id(_currentTunnelId);
-        }
+        //private void TunnelNameChanged(object sender, TunnelEventArgs e)
+        //{
+        //    _lstProbeName.DataSource = null;
+        //    _currentTunnelId = selectTunnelSimple1.ITunnelId;
+        //    _t2Id = Probe.GetT2Id(_currentTunnelId);
+        //}
 
         /// <summary>
         /// 加载探头类型信息

@@ -70,12 +70,10 @@
             // selectTunnelUserControl1
             // 
             this.selectTunnelUserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.selectTunnelUserControl1.ITunnelId = 0;
             this.selectTunnelUserControl1.Location = new System.Drawing.Point(3, 18);
             this.selectTunnelUserControl1.MainForm = null;
             this.selectTunnelUserControl1.Name = "selectTunnelUserControl1";
             this.selectTunnelUserControl1.Size = new System.Drawing.Size(674, 217);
-            this.selectTunnelUserControl1.STunnelName = null;
             this.selectTunnelUserControl1.TabIndex = 0;
             // 
             // SelectTunnelDlg

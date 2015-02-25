@@ -70,13 +70,13 @@ namespace _4.OutburstPrevention
 
         }
 
-        private void BindCoordinate(object sender, TunnelEventArgs e)
-        {
-            Tunnel tunnel = Tunnel.Find(selectTunnelSimple1.ITunnelId);
-            tbCoordinateX.Text = tunnel.WorkingFace.Coordinate.X.ToString(CultureInfo.InvariantCulture);
-            tbCoordinateY.Text = tunnel.WorkingFace.Coordinate.Y.ToString(CultureInfo.InvariantCulture);
-            tbCoordinateZ.Text = tunnel.WorkingFace.Coordinate.Z.ToString(CultureInfo.InvariantCulture);
-        }
+        //private void BindCoordinate(object sender, TunnelEventArgs e)
+        //{
+        //    Tunnel tunnel = Tunnel.Find(selectTunnelSimple1.ITunnelId);
+        //    tbCoordinateX.Text = tunnel.WorkingFace.Coordinate.X.ToString(CultureInfo.InvariantCulture);
+        //    tbCoordinateY.Text = tunnel.WorkingFace.Coordinate.Y.ToString(CultureInfo.InvariantCulture);
+        //    tbCoordinateZ.Text = tunnel.WorkingFace.Coordinate.Z.ToString(CultureInfo.InvariantCulture);
+        //}
 
         /// <summary>
         /// 修改
@@ -105,7 +105,7 @@ namespace _4.OutburstPrevention
         /// <param name="e"></param>
         private void K1Value_Load(object sender, EventArgs e)
         {
-            this.selectTunnelSimple1.TunnelNameChanged += BindCoordinate;
+            //this.selectTunnelSimple1.TunnelNameChanged += BindCoordinate;
 
             //设置Datagridview样式
             setDataGridViewStyle();

@@ -50,20 +50,19 @@ namespace sys1
             dtpRecordTime.CustomFormat = Const.DATE_FORMART_YYYY_MM_DD;
 
             // 调用选择巷道控件时需要调用的方法
-            selectTunnelUserControl1.loadMineName();
+            selectTunnelUserControl1.LoadData();
 
             // 注册委托事件
-            selectTunnelUserControl1.TunnelNameChanged +=
-                InheritTunnelNameChanged;
+            //selectTunnelUserControl1.TunnelNameChanged +=
+            //    InheritTunnelNameChanged;
         }
 
         /// <summary>
         ///     带参数的构造方法
         /// </summary>
         /// <param name="intArr"></param>
-        public GasConcentrationProbeDataEntering(object[] objArr, MainFrm mainFrm)
+        public GasConcentrationProbeDataEntering()
         {
-            MainForm = mainFrm;
 
             InitializeComponent();
 
@@ -74,80 +73,14 @@ namespace sys1
             // 设置日期控件格式
             dtpRecordTime.Format = DateTimePickerFormat.Custom;
             dtpRecordTime.CustomFormat = Const.DATE_FORMART_YYYY_MM_DD;
-
-            // 提取数组前五位，用来绑定巷道信息，后两位是用来绑定探头类型及探头名称信息
-            var intArr = new int[5];
-            // 矿井编号
-            int iMineId = 0;
-            if (int.TryParse(Convert.ToString(objArr[0]), out iMineId))
-            {
-                intArr[0] = iMineId;
-            }
-            // 水平编号
-            int iHorizontal = 0;
-            if (int.TryParse(Convert.ToString(objArr[1]), out iHorizontal))
-            {
-                intArr[1] = iHorizontal;
-            }
-            // 采区编号
-            int iMiningArea = 0;
-            if (int.TryParse(Convert.ToString(objArr[2]), out iMiningArea))
-            {
-                intArr[2] = iMiningArea;
-            }
-            // 工作面编号
-            int iWorkingFace = 0;
-            if (int.TryParse(Convert.ToString(objArr[3]), out iWorkingFace))
-            {
-                intArr[3] = iWorkingFace;
-            }
-            // 巷道编号
-            int iTunnel = 0;
-            if (int.TryParse(Convert.ToString(objArr[4]), out iTunnel))
-            {
-                intArr[4] = iTunnel;
-            }
-
-            // 巷道编号不等于0的场合（即巷道已选择）
-            if (iTunnel != 0)
-            {
-                // 加载探头类型
-                loadProbeTypeInfo();
-
-                // 探头类型编号不为
-                if (objArr[5] != null)
-                {
-                    int iProbeTypeId = 0;
-                    if (int.TryParse(Convert.ToString(objArr[5]), out iProbeTypeId))
-                    {
-                        _lstProbeStyle.SelectedValue = iProbeTypeId;
-                    }
-                }
-
-                // 探头编号
-                if (objArr[6] != null)
-                {
-                    // 加载探头名称
-                    loadProbeName(iTunnel);
-                    _lstProbeName.SelectedValue = Convert.ToString(objArr[6]);
-                }
-            }
-
-            // 调用选择巷道控件时需要调用的方法
-            selectTunnelUserControl1.setCurSelectedID(intArr);
-
-            // 注册委托事件
-            selectTunnelUserControl1.TunnelNameChanged +=
-                InheritTunnelNameChanged;
         }
 
         /// <summary>
         ///     带参数的构造方法
         /// </summary>
         /// <param name="intArr"></param>
-        public GasConcentrationProbeDataEntering(string strPrimaryKey, object[] objArr, MainFrm mainFrm)
+        public GasConcentrationProbeDataEntering(string strPrimaryKey)
         {
-            MainForm = mainFrm;
             InitializeComponent();
 
             _iPK = strPrimaryKey;
@@ -163,70 +96,12 @@ namespace sys1
             dtpRecordTime.Format = DateTimePickerFormat.Custom;
             dtpRecordTime.CustomFormat = Const.DATE_FORMART_YYYY_MM_DD;
 
-            // 提取数组前五位，用来绑定巷道信息，后两位是用来绑定探头类型及探头名称信息
-            var intArr = new int[5];
-            // 矿井编号
-            int iMineId = 0;
-            if (int.TryParse(Convert.ToString(objArr[0]), out iMineId))
-            {
-                intArr[0] = iMineId;
-            }
-            // 水平编号
-            int iHorizontal = 0;
-            if (int.TryParse(Convert.ToString(objArr[1]), out iHorizontal))
-            {
-                intArr[1] = iHorizontal;
-            }
-            // 采区编号
-            int iMiningArea = 0;
-            if (int.TryParse(Convert.ToString(objArr[2]), out iMiningArea))
-            {
-                intArr[2] = iMiningArea;
-            }
-            // 工作面编号
-            int iWorkingFace = 0;
-            if (int.TryParse(Convert.ToString(objArr[3]), out iWorkingFace))
-            {
-                intArr[3] = iWorkingFace;
-            }
-            // 巷道编号
-            int iTunnel = 0;
-            if (int.TryParse(Convert.ToString(objArr[4]), out iTunnel))
-            {
-                intArr[4] = iTunnel;
-            }
-
-            // 巷道编号不等于0的场合（即巷道已选择）
-            if (iTunnel != 0)
-            {
-                // 加载探头类型
-                loadProbeTypeInfo();
-
-                // 探头类型编号不为
-                if (objArr[5] != null)
-                {
-                    int iProbeTypeId = 0;
-                    if (int.TryParse(Convert.ToString(objArr[5]), out iProbeTypeId))
-                    {
-                        _lstProbeStyle.SelectedValue = iProbeTypeId;
-                    }
-                }
-
-                // 探头编号
-                if (objArr[6] != null)
-                {
-                    // 加载探头名称
-                    loadProbeName(iTunnel);
-                    _lstProbeName.SelectedValue = Convert.ToString(objArr[6]);
-                }
-            }
-
             // 调用选择巷道控件时需要调用的方法
-            selectTunnelUserControl1.setCurSelectedID(intArr);
+            //selectTunnelUserControl1.setCurSelectedID(intArr);
 
             // 注册委托事件
-            selectTunnelUserControl1.TunnelNameChanged +=
-                InheritTunnelNameChanged;
+            //selectTunnelUserControl1.TunnelNameChanged +=
+            //    InheritTunnelNameChanged;
 
             // 设置瓦斯浓度探头数据
             setGasConcentrationProbeData(strPrimaryKey);
@@ -256,14 +131,14 @@ namespace sys1
         ///     委托事件
         /// </summary>
         /// <param name="sender"></param>
-        private void InheritTunnelNameChanged(object sender, TunnelEventArgs e)
-        {
-            _lstProbeStyle.DataSource = null;
-            _lstProbeName.DataSource = null;
+        //private void InheritTunnelNameChanged(object sender, TunnelEventArgs e)
+        //{
+        //    _lstProbeStyle.DataSource = null;
+        //    _lstProbeName.DataSource = null;
 
-            // 加载探头类型信息
-            loadProbeTypeInfo();
-        }
+        //    // 加载探头类型信息
+        //    loadProbeTypeInfo();
+        //}
 
         /// <summary>
         ///     加载探头类型信息
@@ -291,14 +166,14 @@ namespace sys1
             _lstProbeName.DataSource = null;
 
             // 没有选择巷道
-            if (selectTunnelUserControl1.ITunnelId == Const.INVALID_ID)
+            if (selectTunnelUserControl1.SelectedTunnel == null)
             {
                 Alert.alert(Const_GE.TUNNEL_NAME_MUST_INPUT);
             }
             else
             {
                 // 根据巷道编号和探头类型编号获取探头信息
-                Probe[] probes = Probe.FindAllByTunnelIdAndProbeTypeId(selectTunnelUserControl1.ITunnelId,
+                Probe[] probes = Probe.FindAllByTunnelIdAndProbeTypeId(selectTunnelUserControl1.SelectedTunnel.TunnelId,
                     Convert.ToInt32(this._lstProbeStyle.SelectedValue));
 
                 for (int i = 0; i < probes.Length; i++)
@@ -342,7 +217,7 @@ namespace sys1
         private void _lstProbeName_MouseUp(object sender, MouseEventArgs e)
         {
             // 没有选择巷道
-            if (selectTunnelUserControl1.ITunnelId == Const.INVALID_ID)
+            if (selectTunnelUserControl1.SelectedTunnel == null)
             {
                 Alert.alert(Const_GE.TUNNEL_NAME_MUST_INPUT);
             }
@@ -391,9 +266,8 @@ namespace sys1
                 {
                     #region 通知服务器预警数据已更新
 
-                    WorkingFace workingfaceEnt =
-                       Tunnel.Find(selectTunnelUserControl1.ITunnelId).WorkingFace;
-                    var msg = new UpdateWarningDataMsg(workingfaceEnt.WorkingFaceId, selectTunnelUserControl1.ITunnelId,
+                    WorkingFace workingfaceEnt = selectTunnelUserControl1.SelectedTunnel.WorkingFace;
+                    var msg = new UpdateWarningDataMsg(workingfaceEnt.WorkingFaceId, selectTunnelUserControl1.SelectedTunnel.TunnelId,
                         DayReportHc.TableName, opType, gasConcentrationProbeDataEntity.RecordTime);
                     MainForm.SendMsg2Server(msg);
 
@@ -410,9 +284,8 @@ namespace sys1
 
                 #region 通知服务器预警数据已更新
 
-                WorkingFace workingfaceEnt =
-                    Tunnel.Find(selectTunnelUserControl1.ITunnelId).WorkingFace;
-                var msg = new UpdateWarningDataMsg(workingfaceEnt.WorkingFaceId, selectTunnelUserControl1.ITunnelId,
+                WorkingFace workingfaceEnt = selectTunnelUserControl1.SelectedTunnel.WorkingFace;
+                var msg = new UpdateWarningDataMsg(workingfaceEnt.WorkingFaceId, selectTunnelUserControl1.SelectedTunnel.TunnelId,
                     DayReportHc.TableName, opType, gasConcentrationProbeDataEntity.RecordTime);
                 MainForm.SendMsg2Server(msg);
 
@@ -449,7 +322,7 @@ namespace sys1
         private bool check()
         {
             // 判断选择巷道是否选择
-            if (selectTunnelUserControl1.ITunnelId == Const.INVALID_ID)
+            if (selectTunnelUserControl1.SelectedTunnel == null)
             {
                 Alert.alert(Const_GE.TUNNEL_NAME_MUST_INPUT);
                 return false;

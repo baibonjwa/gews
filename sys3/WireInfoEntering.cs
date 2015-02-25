@@ -53,20 +53,14 @@ namespace sys3
                 LibBusiness.TunnelDefaultSelect.selectDefaultTunnel(Wire.TableName);
             if (tunnelDefaultSelectEntity != null)
             {
-                _arr = new int[5];
-                _arr[0] = tunnelDefaultSelectEntity.MineID;
-                _arr[1] = tunnelDefaultSelectEntity.HorizontalID;
-                _arr[2] = tunnelDefaultSelectEntity.MiningAreaID;
-                _arr[3] = tunnelDefaultSelectEntity.WorkingFaceID;
-                selectTunnelUserControl1.setCurSelectedID(_arr);
             }
             else
             {
-                selectTunnelUserControl1.loadMineName();
+                selectTunnelUserControl1.LoadData();
             }
             // 注册委托事件
-            selectTunnelUserControl1.TunnelNameChanged +=
-                InheritTunnelNameChanged;
+            //selectTunnelUserControl1.TunnelNameChanged +=
+            //    InheritTunnelNameChanged;
             ////巷道信息赋值
             //Dictionary<string, string> flds = new Dictionary<string, string>();
             //flds.Add(GIS_Const.FIELD_HDID, _tunnelID.ToString());
@@ -114,8 +108,8 @@ namespace sys3
             _tunnelID = _arr[4];
 
             // 注册委托事件
-            selectTunnelUserControl1.TunnelNameChanged +=
-                InheritTunnelNameChanged;
+            //selectTunnelUserControl1.TunnelNameChanged +=
+            //    InheritTunnelNameChanged;
 
             //巷道信息赋值
             //Dictionary<string, string> flds = new Dictionary<string, string>();
@@ -146,10 +140,10 @@ namespace sys3
         ///     委托事件
         /// </summary>
         /// <param name="sender"></param>
-        private void InheritTunnelNameChanged(object sender, TunnelEventArgs e)
-        {
-            AutoChangeWireName();
-        }
+        //private void InheritTunnelNameChanged(object sender, TunnelEventArgs e)
+        //{
+        //    AutoChangeWireName();
+        //}
 
         /// <summary>
         ///     修改绑定数据
@@ -221,7 +215,7 @@ namespace sys3
             {
                 var ds = new DataSet();
                 //获取巷道对应导线信息
-                Wire wire = Wire.FindOneByTunnelId(selectTunnelUserControl1.ITunnelId);
+                Wire wire = Wire.FindOneByTunnelId(selectTunnelUserControl1.SelectedTunnel.TunnelId);
                 if (wire != null)
                 {
                     if (Convert.ToString(ds.Tables[0].Rows[0]["WIRE_NAME"]) == txtWireName.Text)
@@ -351,7 +345,7 @@ namespace sys3
         /// </summary>
         private void setWireInfoEntity()
         {
-            wireEntity.Tunnel.TunnelId = selectTunnelUserControl1.ITunnelId;
+            wireEntity.Tunnel = selectTunnelUserControl1.SelectedTunnel;
             ;
             //tunnelEntity = TunnelInfoBLL.selectTunnelInfoByTunnelID(wireEntity.Tunnel);
             //导线名称
@@ -485,9 +479,9 @@ namespace sys3
             if (Wire.FindOneByTunnelId(tunnelEntity.TunnelId) == null)
             {
                 LibBusiness.TunnelDefaultSelect.InsertDefaultTunnel(Wire.TableName,
-                    selectTunnelUserControl1.ITunnelId);
+                    selectTunnelUserControl1.SelectedTunnel.TunnelId);
                 wireEntity.Save();
-                var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.ITunnelId,
+                var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.SelectedTunnel.TunnelId,
                     Wire.TableName, OPERATION_TYPE.ADD, wireEntity.MeasureDate);
                 MainForm.SendMsg2Server(msg);
             }
@@ -521,7 +515,7 @@ namespace sys3
                 foreach (WirePoint wirePointInfoEntity in wirePointInfoEntityList)
                 {
                     wirePointInfoEntity.Save();
-                    var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.ITunnelId,
+                    var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.SelectedTunnel.TunnelId,
                         Wire.TableName, OPERATION_TYPE.ADD, wireEntity.MeasureDate);
                     MainForm.SendMsg2Server(msg);
                 }
@@ -552,9 +546,9 @@ namespace sys3
             }
 
             //导线信息登陆
-            _tunnelID = selectTunnelUserControl1.ITunnelId;
+            _tunnelID = selectTunnelUserControl1.SelectedTunnel.TunnelId;
             LibBusiness.TunnelDefaultSelect.UpdateDefaultTunnel(Wire.TableName,
-                selectTunnelUserControl1.ITunnelId);
+                selectTunnelUserControl1.SelectedTunnel.TunnelId);
             wireEntity.Tunnel = Tunnel.Find(_tunnelID);
             wireEntity.Save();
             //导线点信息登陆
@@ -566,7 +560,7 @@ namespace sys3
                     wirePointInfoEnt[j].Save();
                     wireEntity.Save();
                     //socket
-                    var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.ITunnelId,
+                    var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.SelectedTunnel.TunnelId,
                         Wire.TableName, OPERATION_TYPE.UPDATE, wireEntity.MeasureDate);
                     MainForm.SendMsg2Server(msg);
                 }
@@ -579,7 +573,7 @@ namespace sys3
                     wirePointInfoEnt[j].Save();
                     //socket
 
-                    var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.ITunnelId,
+                    var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.SelectedTunnel.TunnelId,
                        Wire.TableName, OPERATION_TYPE.ADD, wireEntity.MeasureDate);
                     MainForm.SendMsg2Server(msg);
                 }
@@ -635,7 +629,7 @@ namespace sys3
                 dgrdvWire.BackgroundColor = Const.NO_ERROR_FIELD_COLOR;
             }
             //// 判断巷道信息是否选择
-            if (selectTunnelUserControl1.ITunnelId == 0)
+            if (selectTunnelUserControl1.SelectedTunnel == null)
             {
                 Alert.alert(Const.MSG_PLEASE_CHOOSE + Const_GM.TUNNEL + Const.SIGN_EXCLAMATION_MARK);
                 return false;
@@ -828,7 +822,7 @@ namespace sys3
         {
             var ds = new DataSet();
             //获取巷道ID
-            tunnelEntity.TunnelId = selectTunnelUserControl1.ITunnelId;
+            tunnelEntity.TunnelId = selectTunnelUserControl1.SelectedTunnel.TunnelId;
             //获取巷道对应导线信息
             Wire wire = Wire.FindOneByTunnelId(tunnelEntity.TunnelId);
             if (wire != null)
@@ -846,7 +840,7 @@ namespace sys3
                     {
                         //窗体名称改为修改巷道
                         Text = Const_GM.WIRE_INFO_CHANGE;
-                        _tunnelID = selectTunnelUserControl1.ITunnelId;
+                        _tunnelID = selectTunnelUserControl1.SelectedTunnel.TunnelId;
                         //绑定信息
                         txtWireName.Text = Convert.ToString(ds.Tables[0].Rows[0]["WIRE_NAME"]);
                         txtWireLevel.Text = Convert.ToString(ds.Tables[0].Rows[0]["WIRE_LEVEL"]);

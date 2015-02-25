@@ -264,12 +264,10 @@ namespace LibPanels
             // selectTunnelUserControl1
             // 
             this.selectTunnelUserControl1.BackColor = System.Drawing.Color.Transparent;
-            this.selectTunnelUserControl1.ITunnelId = 0;
             this.selectTunnelUserControl1.Location = new System.Drawing.Point(12, 34);
             this.selectTunnelUserControl1.MainForm = null;
             this.selectTunnelUserControl1.Name = "selectTunnelUserControl1";
             this.selectTunnelUserControl1.Size = new System.Drawing.Size(587, 186);
-            this.selectTunnelUserControl1.STunnelName = null;
             this.selectTunnelUserControl1.TabIndex = 0;
             // 
             // label5

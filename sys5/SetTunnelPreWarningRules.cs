@@ -79,21 +79,21 @@ namespace _5.WarningManagement
             //_selectTunnel.loadMineName();
 
             //注册事件 
-            this.selectTunnelSimple1.TunnelNameChanged += TunnelNameChanged;
+            //this.selectTunnelSimple1.TunnelNameChanged += TunnelNameChanged;
         }
 
-        private void TunnelNameChanged(object sender, TunnelEventArgs e)
-        {
-            this.lblMessage.Text = Const_WM.MSG03;
-            if (this.selectTunnelSimple1.ITunnelId != Const.INVALID_ID)
-            {
-                _preWarningRulesPanel.SetTunnelSelectedRuleIdsAndUpdateParams(this.selectTunnelSimple1.ITunnelId);
-            }
-            else
-            {
-                _preWarningRulesPanel.ClearSelectedRules();
-            }
-        }
+        //private void TunnelNameChanged(object sender, TunnelEventArgs e)
+        //{
+        //    this.lblMessage.Text = Const_WM.MSG03;
+        //    if (this.selectTunnelSimple1.ITunnelId != Const.INVALID_ID)
+        //    {
+        //        _preWarningRulesPanel.SetTunnelSelectedRuleIdsAndUpdateParams(this.selectTunnelSimple1.ITunnelId);
+        //    }
+        //    else
+        //    {
+        //        _preWarningRulesPanel.ClearSelectedRules();
+        //    }
+        //}
 
         /// <summary>
         /// 应用

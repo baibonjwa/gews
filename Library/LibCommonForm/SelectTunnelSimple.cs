@@ -17,14 +17,6 @@ namespace LibCommonForm
         // 巷道编号，无效巷道ID均使用
         private int _iTunnelId = Const.INVALID_ID;
 
-        //声明巷道名称更改委托
-        public delegate void TunnelNameChangedEventHandler(object sender, TunnelEventArgs e);
-        //巷道名称更改事件
-        public event TunnelNameChangedEventHandler TunnelNameChanged;
-        //在其他类当中如果需要对巷道名称改变事件进行处理可按下列方式实现：
-        //1,在其他类当中定义事件处理函数，如：void InheritTunnelNameChanged(object sender, TunnelEventArgs e);
-        //2,注册方法,如：_selectTunnelUserControl.TunnelNameChanged += new TunnelNameChangedEventHandler(InheritTunnelNameChanged);
-
         public SelectTunnelSimple()
         {
             InitializeComponent();
@@ -150,18 +142,7 @@ namespace LibCommonForm
             //MessageBox.Show("tunnel id=" + _iTunnelId);
 
             //调用事件方法，以便外部能够响应巷道名称改变事件。
-            try
-            {
-                if (TunnelNameChanged != null && _iTunnelId != -1)
-                {
-                    TunnelEventArgs arg = new TunnelEventArgs(_iTunnelId);
-                    TunnelNameChanged(this, arg);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("未正常注册TunnelNameChanged事件: " + ex.Message);
-            }
+
         }
 
         // 按delete键，删除选中的tunnel

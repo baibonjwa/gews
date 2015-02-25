@@ -65,8 +65,8 @@ namespace LibCommonForm
             var commonManagement = new CommonManagement(1, 999);
             if (DialogResult.OK == commonManagement.ShowDialog())
             {
-                DataBindUtil.LoadMineName(lstMineName);
             }
+            DataBindUtil.LoadMineName(lstMineName);
         }
 
         /// <summary>
@@ -81,10 +81,11 @@ namespace LibCommonForm
                 var commonManagement = new CommonManagement(2, Convert.ToInt32(lstMineName.SelectedValue));
                 if (DialogResult.OK == commonManagement.ShowDialog())
                 {
-                    if (lstMineName.SelectedItems.Count <= 0) return;
-                    var mine = (Mine)lstMineName.SelectedItem;
-                    DataBindUtil.LoadHorizontalName(lstHorizontalName, mine.MineId);
+
                 }
+                if (lstMineName.SelectedItems.Count <= 0) return;
+                var mine = (Mine)lstMineName.SelectedItem;
+                DataBindUtil.LoadHorizontalName(lstHorizontalName, mine.MineId);
             }
             else
             {
@@ -104,10 +105,11 @@ namespace LibCommonForm
                 var commonManagement = new CommonManagement(3, Convert.ToInt32(lstHorizontalName.SelectedValue));
                 if (DialogResult.OK == commonManagement.ShowDialog())
                 {
-                    if (lstHorizontalName.SelectedItems.Count <= 0) return;
-                    var horizontal = (Horizontal)lstHorizontalName.SelectedItem;
-                    DataBindUtil.LoadMiningAreaName(lstMiningAreaName, horizontal.HorizontalId);
+
                 }
+                if (lstHorizontalName.SelectedItems.Count <= 0) return;
+                var horizontal = (Horizontal)lstHorizontalName.SelectedItem;
+                DataBindUtil.LoadMiningAreaName(lstMiningAreaName, horizontal.HorizontalId);
             }
             else
             {
@@ -127,10 +129,11 @@ namespace LibCommonForm
                 var commonManagement = new CommonManagement(4, Convert.ToInt32(lstMiningAreaName.SelectedValue));
                 if (DialogResult.OK == commonManagement.ShowDialog())
                 {
-                    if (lstMiningAreaName.SelectedItems.Count <= 0) return;
-                    var miningArea = (MiningArea)lstMiningAreaName.SelectedItem;
-                    DataBindUtil.LoadWorkingFaceName(lstWorkingFaceName, miningArea.MiningAreaId);
+
                 }
+                if (lstMiningAreaName.SelectedItems.Count <= 0) return;
+                var miningArea = (MiningArea)lstMiningAreaName.SelectedItem;
+                DataBindUtil.LoadWorkingFaceName(lstWorkingFaceName, miningArea.MiningAreaId);
             }
             else
             {

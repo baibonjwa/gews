@@ -29,17 +29,12 @@ namespace LibCommonForm
         /// <summary>
         /// 构造方法
         /// </summary>
-        public SelectTunnelDlg(MainFrm mainFrm)
+        public SelectTunnelDlg()
         {
             InitializeComponent();
 
-            this.MainForm = mainFrm;
-
             // 设置窗体默认属性
             FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_GE.CHOOSE_TUNNEL);
-
-            // 调用选择巷道控件时需要调用的方法
-            this.selectTunnelUserControl1.loadMineName();
         }
 
         public SelectTunnelDlg(MainFrm mainFrm, params TunnelTypeEnum[] types)
@@ -50,10 +45,6 @@ namespace LibCommonForm
 
             // 设置窗体默认属性
             FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_GE.CHOOSE_TUNNEL);
-
-            this.selectTunnelUserControl1.SetFilterOn(types);
-            // 调用选择巷道控件时需要调用的方法
-            this.selectTunnelUserControl1.loadMineName();
         }
 
         /// <summary>
@@ -67,9 +58,6 @@ namespace LibCommonForm
 
             //窗体属性设置
             LibCommon.FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_GM.TUNNEL_CHOOSE);
-            this.selectTunnelUserControl1.SetFilterOn(TunnelFilter.TunnelFilterRules.IS_WIRE_INFO_BIND);
-            //自定义控件
-            this.selectTunnelUserControl1.setCurSelectedID(tEntity);
         }
 
         /// <summary>
@@ -83,9 +71,7 @@ namespace LibCommonForm
 
             //窗体属性设置
             LibCommon.FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_GM.TUNNEL_CHOOSE);
-            this.selectTunnelUserControl1.SetFilterOn(TunnelFilter.TunnelFilterRules.IS_WIRE_INFO_BIND);
-            //自定义控件
-            this.selectTunnelUserControl1.setCurSelectedID(intArr);
+
         }
 
         /// <summary>
@@ -99,10 +85,6 @@ namespace LibCommonForm
 
             //窗体属性设置
             LibCommon.FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_GM.TUNNEL_CHOOSE);
-            this.selectTunnelUserControl1.SetFilterOn(TunnelFilter.TunnelFilterRules.IS_WIRE_INFO_BIND);
-            //自定义控件
-            this.selectTunnelUserControl1.SetFilterOn(filterType);
-            this.selectTunnelUserControl1.setCurSelectedID(intArr);
         }
 
         /// <summary>
@@ -113,11 +95,6 @@ namespace LibCommonForm
         private void btnSubmit_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
-
-            // 巷道编号
-            tunnelId = this.selectTunnelUserControl1.ITunnelId;
-            tunnelName = this.selectTunnelUserControl1.STunnelName;
-
             //MessageBox.Show("tunnelId=" + tunnelId + ", tunnelName=" + tunnelName);
         }
 
