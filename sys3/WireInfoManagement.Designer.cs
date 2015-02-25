@@ -187,6 +187,7 @@
             // gridColumn1
             // 
             this.gridColumn1.Caption = "矿井名称";
+            this.gridColumn1.FieldName = "Tunnel.WorkingFace.MiningArea.Horizontal.Mine.MineName";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 0;
@@ -194,6 +195,7 @@
             // gridColumn2
             // 
             this.gridColumn2.Caption = "水平";
+            this.gridColumn2.FieldName = "Tunnel.WorkingFace.MiningArea.Horizontal.HorizontalName";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 1;
@@ -201,6 +203,7 @@
             // gridColumn3
             // 
             this.gridColumn3.Caption = "采区";
+            this.gridColumn3.FieldName = "Tunnel.WorkingFace.MiningArea.MiningAreaName";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 2;
@@ -208,6 +211,7 @@
             // gridColumn4
             // 
             this.gridColumn4.Caption = "工作面";
+            this.gridColumn4.FieldName = "Tunnel.WorkingFace.WorkingFaceName";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 3;
@@ -215,6 +219,7 @@
             // gridColumn5
             // 
             this.gridColumn5.Caption = "巷道名称";
+            this.gridColumn5.FieldName = "Tunnel.TunnelName";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
             this.gridColumn5.VisibleIndex = 4;
@@ -222,6 +227,7 @@
             // gridColumn6
             // 
             this.gridColumn6.Caption = "导线名称";
+            this.gridColumn6.FieldName = "WireName";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
             this.gridColumn6.VisibleIndex = 5;
@@ -231,6 +237,7 @@
             this.controlNavigator1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.controlNavigator1.Location = new System.Drawing.Point(12, 803);
             this.controlNavigator1.Name = "controlNavigator1";
+            this.controlNavigator1.NavigatableControl = this.gcWireInfo;
             this.controlNavigator1.Size = new System.Drawing.Size(311, 24);
             this.controlNavigator1.TabIndex = 90;
             this.controlNavigator1.Text = "controlNavigator1";

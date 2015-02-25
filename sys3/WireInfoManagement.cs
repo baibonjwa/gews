@@ -46,6 +46,13 @@ namespace sys3
             FormDefaultPropertiesSetter.SetManagementFormDefaultProperties(this, Const_GM.WIRE_INFO_MANAGEMENT);
         }
 
+
+        private void RefreshData()
+        {
+                var wires = Wire.FindAll();
+                gcWireInfo.DataSource = wires; 
+        }
+
         /// <summary>
         ///     初始化
         /// </summary>
@@ -53,6 +60,7 @@ namespace sys3
         /// <param name="e"></param>
         private void WireInfoManagement_Load(object sender, EventArgs e)
         {
+            RefreshData();
         }
 
         /// <summary>
@@ -65,6 +73,7 @@ namespace sys3
             var wireInfoForm = new WireInfoEntering();
             if (DialogResult.OK == wireInfoForm.ShowDialog())
             {
+                RefreshData();
             }
         }
 
@@ -85,6 +94,7 @@ namespace sys3
             var wireInfoForm = new WireInfoEntering(wireEntity);
             if (DialogResult.OK == wireInfoForm.ShowDialog())
             {
+                RefreshData();
             }
         }
 
@@ -155,12 +165,7 @@ namespace sys3
                         }
                     }
                 }
-
-                // 全部删除成功
-                if (bResult)
-                {
-                    //TODO:全部删除后事件
-                }
+                RefreshData();
             }
         }
 
@@ -210,6 +215,10 @@ namespace sys3
         /// <param name="e"></param>
         private void tsBtnExport_Click(object sender, EventArgs e)
         {
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                gcWireInfo.ExportToXls(saveFileDialog1.FileName);
+            }
         }
 
         /// <summary>
@@ -219,6 +228,7 @@ namespace sys3
         /// <param name="e"></param>
         private void tsBtnPrint_Click(object sender, EventArgs e)
         {
+            DevUtil.DevPrint(gcWireInfo, "巷道导线点信息报表");
         }
 
         /// <summary>

@@ -15,6 +15,7 @@ namespace LibEntity
         /// </summary>
         [PrimaryKey(PrimaryKeyType.Identity, "OBJECTID")]
         public int WireId { get; set; }
+
         /// <summary>
         ///     校核日期
         /// </summary>
