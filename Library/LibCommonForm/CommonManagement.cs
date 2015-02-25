@@ -1,11 +1,9 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 using Castle.ActiveRecord;
 using DevExpress.XtraEditors.Controls;
-using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Base;
@@ -27,7 +25,6 @@ namespace LibCommonForm
         private const int FlagManangingCoalSeam = 5;
         private static int _typeFlag;
         // id
-        private static int _id;
 
         /// <summary>
         ///     构造方法
@@ -186,11 +183,7 @@ namespace LibCommonForm
             set { base.Text = value; }
         }
 
-        public static int Id
-        {
-            get { return _id; }
-            set { _id = value; }
-        }
+        public static int Id { get; set; }
 
         /// <summary>
         ///     提交
@@ -363,7 +356,7 @@ namespace LibCommonForm
                     DeleteInfo<CoalSeams>();
                     gridControl1.DataSource = CollectionHelper.ConvertTo(CoalSeams.FindAll());
                     break;
-            }         
+            }
         }
     }
 }

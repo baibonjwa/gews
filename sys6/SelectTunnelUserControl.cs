@@ -557,7 +557,7 @@ namespace UnderTerminal
                 }
                 else
                 {
-                    LibCommonForm.TunnelInfoEntering tunnelInfoEntering = new LibCommonForm.TunnelInfoEntering(intArr);
+                    LibCommonForm.TunnelInfoEntering tunnelInfoEntering = new LibCommonForm.TunnelInfoEntering();
                     if (DialogResult.OK == tunnelInfoEntering.ShowDialog())
                     {
                         // 绑定巷道信息

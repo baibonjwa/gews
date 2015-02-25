@@ -44,7 +44,6 @@
             this.label31 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
             this.txtDesignArea = new System.Windows.Forms.TextBox();
             this.label27 = new System.Windows.Forms.Label();
@@ -231,7 +230,6 @@
             this.panel1.Controls.Add(this.label31);
             this.panel1.Controls.Add(this.label26);
             this.panel1.Controls.Add(this.label30);
-            this.panel1.Controls.Add(this.label29);
             this.panel1.Controls.Add(this.label28);
             this.panel1.Controls.Add(this.txtDesignArea);
             this.panel1.Controls.Add(this.label27);
@@ -297,16 +295,6 @@
             this.label30.TabIndex = 43;
             this.label30.Text = "米";
             // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.ForeColor = System.Drawing.Color.Red;
-            this.label29.Location = new System.Drawing.Point(521, 255);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(14, 14);
-            this.label29.TabIndex = 42;
-            this.label29.Text = "*";
-            // 
             // label28
             // 
             this.label28.AutoSize = true;
@@ -326,11 +314,11 @@
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(272, 260);
+            this.label27.Location = new System.Drawing.Point(274, 260);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(67, 14);
+            this.label27.Size = new System.Drawing.Size(55, 14);
             this.label27.TabIndex = 39;
-            this.label27.Text = "设计面积：";
+            this.label27.Text = "设计面积";
             // 
             // lblCoalLayer
             // 
@@ -693,6 +681,7 @@
             this.selectWorkingFaceControl1.Location = new System.Drawing.Point(4, 0);
             this.selectWorkingFaceControl1.MainForm = null;
             this.selectWorkingFaceControl1.Name = "selectWorkingFaceControl1";
+            this.selectWorkingFaceControl1.SelectedWorkingFace = null;
             this.selectWorkingFaceControl1.Size = new System.Drawing.Size(538, 219);
             this.selectWorkingFaceControl1.TabIndex = 0;
             // 
@@ -781,7 +770,6 @@
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label lblCoalLayer;
         private System.Windows.Forms.ComboBox cboCoalLayer;
-        private System.Windows.Forms.Label label29;
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.TextBox txtDesignArea;
         private System.Windows.Forms.Label label27;
