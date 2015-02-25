@@ -325,6 +325,7 @@ namespace sys3
             this.gridColumn14});
             this.gridView1.GridControl = this.gcTunnel;
             this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsBehavior.Editable = false;
             this.gridView1.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.gridView1_CustomColumnDisplayText);
             // 
             // gridColumn1

@@ -6,7 +6,6 @@ using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Geodatabase;
 using GIS;
 using GIS.Common;
-using LibBusiness;
 using LibCommon;
 using LibCommonControl;
 using LibCommonForm;
@@ -20,18 +19,15 @@ namespace sys3
         /// <summary>
         ///     构造方法
         /// </summary>
-        public TunnelInfoManagement(MainFrm mainFrm)
+        public TunnelInfoManagement()
         {
-            MainForm = mainFrm;
             InitializeComponent();
-
             FormDefaultPropertiesSetter.SetManagementFormDefaultProperties(this, Const_GM.TUNNEL_INFO_MANAGEMENT);
-
         }
 
         private void RefreshData()
         {
-                gcTunnel.DataSource = Tunnel.FindAll();
+            gcTunnel.DataSource = Tunnel.FindAll();
         }
 
         /// <summary>
@@ -101,6 +97,7 @@ namespace sys3
                 DayReportHc.DeleteByWorkingFaceId(tunnelEntity.WorkingFace.WorkingFaceId);
                 //删除巷道
                 tunnelEntity.Delete();
+                RefreshData();
             }
         }
 

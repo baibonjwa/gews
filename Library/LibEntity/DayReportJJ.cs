@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Castle.ActiveRecord;
 using NHibernate.Criterion;
 
@@ -47,7 +48,8 @@ namespace LibEntity
             {
                 Restrictions.Eq("WorkingFace.WorkingFaceId", workingFaceId)
             };
-            DeleteAll(typeof(DayReportJj), criterion);
+            var result = (DayReportJj[])FindAll(typeof(DayReportJj), criterion);
+            DeleteAll(typeof(DayReportJj), result.Select(u => u.Id));
         }
     }
 }

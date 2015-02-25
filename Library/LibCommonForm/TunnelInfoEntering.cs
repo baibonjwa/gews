@@ -12,23 +12,15 @@ namespace LibCommonForm
     public partial class TunnelInfoEntering : BaseForm
     {
         private int _formHeight;
-        private Tunnel _tunnelEntity = new Tunnel();
+        private Tunnel Tunnel { get; set; }
 
         /// <summary>
         ///     添加
         /// </summary>
         public TunnelInfoEntering()
         {
-
             InitializeComponent();
             //设置窗体格式
-            FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_GM.TUNNEL_INFO_ADD);
-            Text = Const_GM.TUNNEL_INFO_ADD;
-        }
-
-        public TunnelInfoEntering(WorkingFace workingFace)
-        {
-            InitializeComponent();
             FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_GM.TUNNEL_INFO_ADD);
             Text = Const_GM.TUNNEL_INFO_ADD;
         }
@@ -47,8 +39,62 @@ namespace LibCommonForm
             InitializeComponent();
             FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_GM.TUNNEL_INFO_CHANGE);
             Text = Const_GM.TUNNEL_INFO_CHANGE;
+            Tunnel = tunnel;
+        }
 
-            //bindInfo(tunnelID);
+        private void TunnelInfoEntering_Load(object sender, EventArgs e)
+        {
+            _formHeight = Height;
+            ChangeFormSize(null);
+
+            DataBindUtil.LoadLithology(cboLithology, "煤层");
+            DataBindUtil.LoadCoalSeamsName(cboCoalLayer);
+
+            if (Text == Const_GM.TUNNEL_INFO_ADD)
+            {
+                selectWorkingFaceControl1.LoadData();
+            }
+            else
+            {
+                selectWorkingFaceControl1.LoadData(Tunnel.WorkingFace);
+                txtTunnelName.Text = Tunnel.TunnelName;
+                cboSupportPattern.Text = Tunnel.TunnelSupportPattern;
+                cboSupportPattern.Text = Tunnel.TunnelSupportPattern;
+                cboLithology.SelectedValue = Tunnel.Lithology.LithologyId;
+                cboFaultageType.Text = Tunnel.TunnelSectionType;
+
+                txtDesignLength.Text = Tunnel.TunnelDesignLength.ToString(CultureInfo.InvariantCulture);
+                string[] param = { "", "", "", "", "" };
+                if (Tunnel.TunnelParam != null)
+                {
+                    string[] paramOld = Tunnel.TunnelParam.Split(',');
+                    for (int i = 0; i < paramOld.Length; i++)
+                    {
+                        param[i] = paramOld[i];
+                    }
+                }
+                txtParam1.Text = param[0];
+                txtParam2.Text = param[1];
+                txtParam3.Text = param[2];
+                txtParam4.Text = param[3];
+                txtParam5.Text = param[4];
+
+                cboCoalOrStone.Text = Tunnel.CoalOrStone;
+                if (cboCoalOrStone.Text == Const_GM.COAL_TUNNEL)
+                {
+                    cboCoalLayer.Visible = true;
+                    cboCoalLayer.Text = Tunnel.CoalSeams.CoalSeamsName;
+                }
+                else
+                {
+                    cboCoalLayer.Visible = false;
+                }
+            }
+
+            if (cboFaultageType.Text != "")
+            {
+                ShowParam();
+            }
         }
 
         private void AddTunnelInfo()
@@ -115,7 +161,10 @@ namespace LibCommonForm
             {
                 tunnel.TunnelDesignLength = Convert.ToInt32(txtDesignLength.Text);
             }
-
+            if (txtDesignArea.Text != "")
+            {
+                tunnel.TunnelDesignArea = Convert.ToInt32(txtDesignLength.Text);
+            }
             //巷道信息登录
 
             tunnel.Save();
@@ -130,20 +179,17 @@ namespace LibCommonForm
                 return;
             }
             DialogResult = DialogResult.OK;
-            _tunnelEntity.WorkingFace.WorkingFaceId = PanelForTunnelEntering.IWorkingFaceId;
+            Tunnel.WorkingFace = selectWorkingFaceControl1.SelectedWorkingFace;
             //巷道名称
-            _tunnelEntity.TunnelName = txtTunnelName.Text;
+            Tunnel.TunnelName = txtTunnelName.Text;
             //支护方式
-            _tunnelEntity.TunnelSupportPattern = cboSupportPattern.Text;
+            Tunnel.TunnelSupportPattern = cboSupportPattern.Text;
             //围岩类型
-            if (cboLithology.Text == "")
-            {
-                cboLithology.SelectedIndex = -1;
-            }
-            _tunnelEntity.Lithology.LithologyId = Convert.ToInt32(cboLithology.SelectedValue);
+            Tunnel.Lithology = (Lithology)cboLithology.SelectedItem;
 
+            Tunnel.TunnelWid = 5;
             //断面类型
-            _tunnelEntity.TunnelSectionType = cboFaultageType.Text;
+            Tunnel.TunnelSectionType = cboFaultageType.Text;
             //断面参数
             string tunnelParam = "";
             if (txtParam1.Visible)
@@ -172,26 +218,29 @@ namespace LibCommonForm
             }
             if (tunnelParam.Length > 0)
             {
-                _tunnelEntity.TunnelParam = tunnelParam.Remove(tunnelParam.Length - 1);
+                Tunnel.TunnelParam = tunnelParam.Remove(tunnelParam.Length - 1);
             }
             //设计长度
             if (txtDesignLength.Text != "")
             {
-                _tunnelEntity.TunnelDesignLength = Convert.ToInt32(txtDesignLength.Text);
+                Tunnel.TunnelDesignLength = Convert.ToInt32(txtDesignLength.Text);
+            }
+            if (txtDesignArea.Text != "")
+            {
+                Tunnel.TunnelDesignArea = Convert.ToInt32(txtDesignLength.Text);
             }
             //煤巷岩巷
             if (cboCoalOrStone.Text != "")
             {
-                _tunnelEntity.CoalOrStone = cboCoalOrStone.Text;
+                Tunnel.CoalOrStone = cboCoalOrStone.Text;
             }
             if (cboCoalLayer.Text != "")
             {
-                _tunnelEntity.CoalSeams = CoalSeams.Find(Convert.ToInt32(cboCoalLayer.SelectedValue));
+                Tunnel.CoalSeams = CoalSeams.Find(Convert.ToInt32(cboCoalLayer.SelectedValue));
             }
             //巷道信息登录
 
-            _tunnelEntity.TunnelWid = 5;
-            _tunnelEntity.Save();
+            Tunnel.Save();
             Alert.alert("提交成功！");
         }
 
@@ -358,70 +407,6 @@ namespace LibCommonForm
                 txtParam4.Visible = false;
                 txtParam5.Visible = false;
                 cbotxtParam3.Visible = false;
-            }
-        }
-
-        private void TunnelInfoEntering_Load(object sender, EventArgs e)
-        {
-            _formHeight = Height;
-            ChangeFormSize(null);
-
-            DataBindUtil.LoadLithology(cboLithology, "煤层");
-            DataBindUtil.LoadCoalSeamsName(cboCoalLayer);
-            selectWorkingFaceControl1.LoadMineData();
-            if (Text == Const_GM.TUNNEL_INFO_ADD)
-            {
-            }
-            else
-            {
-                BindInfo(_tunnelEntity.TunnelId);
-            }
-
-            if (cboFaultageType.Text != "")
-            {
-                ShowParam();
-            }
-        }
-
-        private void BindInfo(int tunnelId)
-        {
-            Tunnel tEntity = Tunnel.Find(tunnelId);
-            _tunnelEntity = tEntity;
-            txtTunnelName.Text = _tunnelEntity.TunnelName;
-            cboSupportPattern.Text = _tunnelEntity.TunnelSupportPattern;
-            string lithology = "";
-            if (_tunnelEntity.Lithology.LithologyId != 0)
-            {
-                lithology = Lithology.Find(_tunnelEntity.Lithology).LithologyName;
-            }
-            cboLithology.Text = lithology;
-            cboFaultageType.Text = _tunnelEntity.TunnelSectionType;
-
-            txtDesignLength.Text = _tunnelEntity.TunnelDesignLength.ToString(CultureInfo.InvariantCulture);
-            string[] param = { "", "", "", "", "" };
-            if (_tunnelEntity.TunnelParam != null)
-            {
-                string[] paramOld = _tunnelEntity.TunnelParam.Split(',');
-                for (int i = 0; i < paramOld.Length; i++)
-                {
-                    param[i] = paramOld[i];
-                }
-            }
-            txtParam1.Text = param[0];
-            txtParam2.Text = param[1];
-            txtParam3.Text = param[2];
-            txtParam4.Text = param[3];
-            txtParam5.Text = param[4];
-
-            cboCoalOrStone.Text = _tunnelEntity.CoalOrStone;
-            if (cboCoalOrStone.Text == Const_GM.COAL_TUNNEL)
-            {
-                cboCoalLayer.Visible = true;
-                cboCoalLayer.Text = _tunnelEntity.CoalSeams.CoalSeamsName;
-            }
-            else
-            {
-                cboCoalLayer.Visible = false;
             }
         }
 

@@ -19,19 +19,29 @@ namespace LibCommonForm
 
         public SelectWorkingFaceControl(WorkingFace workingFace)
         {
-            LoadMineData();
-            lstMineName.SelectedItem = workingFace.MiningArea.Horizontal.Mine;
-            lstHorizontalName.SelectedItem = workingFace.MiningArea.Horizontal;
-            lstMiningAreaName.SelectedItem = workingFace.MiningArea;
-            lstWorkingFaceName.SelectedItem = workingFace;
+            LoadData(workingFace);
         }
 
         public SelectWorkingFaceControl(MiningArea miningArea)
         {
-            LoadMineData();
-            lstMineName.SelectedItem = miningArea.Horizontal.Mine;
-            lstHorizontalName.SelectedItem = miningArea.Horizontal;
-            lstMiningAreaName.SelectedItem = miningArea;
+            LoadData(miningArea);
+        }
+
+        public void LoadData(WorkingFace workingFace)
+        {
+            LoadData();
+            lstMineName.SelectedValue = workingFace.MiningArea.Horizontal.Mine.MineId;
+            lstHorizontalName.SelectedValue = workingFace.MiningArea.Horizontal.HorizontalId;
+            lstMiningAreaName.SelectedValue = workingFace.MiningArea.MiningAreaId;
+            lstWorkingFaceName.SelectedValue = workingFace.WorkingFaceId;
+        }
+
+        public void LoadData(MiningArea miningArea)
+        {
+            LoadData();
+            lstMineName.SelectedValue = miningArea.Horizontal.Mine.MineId;
+            lstHorizontalName.SelectedValue = miningArea.Horizontal.HorizontalId;
+            lstMiningAreaName.SelectedValue = miningArea.MiningAreaId;
         }
 
 
@@ -39,7 +49,7 @@ namespace LibCommonForm
         /// <summary>
         /// 加载矿井信息
         /// </summary>
-        public void LoadMineData()
+        public void LoadData()
         {
             DataBindUtil.LoadMineName(lstMineName);
         }

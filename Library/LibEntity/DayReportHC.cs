@@ -9,6 +9,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Castle.ActiveRecord;
 using NHibernate.Criterion;
 
@@ -76,7 +77,8 @@ namespace LibEntity
             {
                 Restrictions.Eq("WorkingFace.WorkingFaceId", workingFaceId)
             };
-            DeleteAll(typeof(DayReportHc), criterion);
+            var result = (DayReportHc[])FindAll(typeof(DayReportHc), criterion);
+            DeleteAll(typeof(DayReportHc), result.Select(u => u.Id));
         }
 
     }

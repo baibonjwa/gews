@@ -387,7 +387,7 @@ namespace sys3
         //设计巷道管理
         private void mniSJHDGL_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            TunnelInfoManagement tm = new TunnelInfoManagement(this);
+            TunnelInfoManagement tm = new TunnelInfoManagement();
             tm.Show();
         }
 

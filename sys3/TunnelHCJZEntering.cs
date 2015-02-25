@@ -63,7 +63,7 @@ namespace sys3
             //}
             //else
             //{
-            selectWorkingFaceControl1.LoadMineData();
+            selectWorkingFaceControl1.LoadData();
             //}
             // 注册委托事件
             //selectWorkingFaceControl1.WorkingFaceNameChanged += NameChangeEvent;
