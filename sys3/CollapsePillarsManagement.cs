@@ -10,7 +10,7 @@ using LibEntity;
 
 namespace sys3
 {
-    public partial class CollapsePillarsManagement : MainFrm
+    public partial class CollapsePillarsManagement : SocketHelper
     {
         /// <summary>
         ///     构造方法

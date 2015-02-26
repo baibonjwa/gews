@@ -39,7 +39,7 @@ namespace _1.GasEmission
         /// <summary>
         /// 构造方法
         /// </summary>
-        public MonitoringDataAnalysis(MainFrm mainFrm)
+        public MonitoringDataAnalysis(SocketHelper mainFrm)
         {
             this.MainForm = mainFrm;
             InitializeComponent();

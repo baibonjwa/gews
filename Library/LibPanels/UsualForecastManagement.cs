@@ -23,7 +23,7 @@ namespace LibPanels
 {
     public partial class UsualForecastManagement : BaseForm
     {
-        public UsualForecastManagement(MainFrm mainFrm)
+        public UsualForecastManagement(SocketHelper mainFrm)
         {
             InitializeComponent();
 

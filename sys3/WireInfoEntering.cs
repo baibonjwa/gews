@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Castle.ActiveRecord;
 using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Geodatabase;
 using ESRI.ArcGIS.Geometry;
@@ -47,9 +48,11 @@ namespace sys3
         /// <summary>
         ///     构造方法
         /// </summary>
-        public WireInfoEntering()
+        public WireInfoEntering(SocketHelper mainFrm)
         {
+
             InitializeComponent();
+            MainForm = mainFrm;
             FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_GM.WIRE_INFO_ADD);
             //自定义控件初始化
             TunnelDefaultSelect tunnelDefaultSelectEntity =
@@ -96,12 +99,12 @@ namespace sys3
         ///     构造方法
         /// </summary>
         /// <param name="wire"></param>
-        public WireInfoEntering(Wire wire)
+        public WireInfoEntering(Wire wire, SocketHelper mainFrm)
         {
             // 初始化主窗体变量
             Wire = wire;
             InitializeComponent();
-
+            MainForm = mainFrm;
             // 加载需要修改的导线数据
             loadWireInfoData();
 
@@ -189,50 +192,38 @@ namespace sys3
         /// <param name="e"></param>
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            //去掉无用空行
-            for (int i = 0; i < dgrdvWire.RowCount - 1; i++)
-            {
-                if (dgrdvWire.Rows[i].Cells[0].Value == null &&
-                    dgrdvWire.Rows[i].Cells[1].Value == null &&
-                    dgrdvWire.Rows[i].Cells[2].Value == null &&
-                    dgrdvWire.Rows[i].Cells[3].Value == null &&
-                    dgrdvWire.Rows[i].Cells[4].Value == null &&
-                    dgrdvWire.Rows[i].Cells[5].Value == null &&
-                    dgrdvWire.Rows[i].Cells[6].Value == null &&
-                    dgrdvWire.Rows[i].Cells[7].Value == null)
-                {
-                    dgrdvWire.Rows.RemoveAt(i);
-                }
-            }
-
-            if (!check())
+            if (!Check())
             {
                 DialogResult = DialogResult.None;
                 return;
             }
 
+            Wire wire;
+            using (new SessionScope())
+            {
+                wire = Wire.FindOneByTunnelId(selectTunnelUserControl1.SelectedTunnel.TunnelId);
+            }
+
+            wire.WirePoints = insertWireInfo();
+
             //判断导线点录入个数是否小于2
             if (Text == Const_GM.WIRE_INFO_ADD)
             {
-                var ds = new DataSet();
                 //获取巷道对应导线信息
-                Wire wire = Wire.FindOneByTunnelId(selectTunnelUserControl1.SelectedTunnel.TunnelId);
                 if (wire != null)
                 {
-                    if (Convert.ToString(ds.Tables[0].Rows[0]["WIRE_NAME"]) == txtWireName.Text)
-                    {
-                        //TODO:判断导线点重名？
-                    }
-                    else if (dgrdvWire.Rows.Count < 3) //添加时最后有一个空行
+                    if (dgrdvWire.Rows.Count < 3) //添加时最后有一个空行
                     {
                         Alert.alert(Const_GM.WIRE_INFO_MSG_POINT_MUST_MORE_THAN_TWO);
                         return;
                     }
                 }
             }
-            DialogResult = DialogResult.OK;
+
 
             List<WirePoint> lstWirePointInfoEnt;
+
+
             string sADDorCHANGE = "";
             if (Text == Const_GM.WIRE_INFO_ADD)
             {
@@ -310,6 +301,7 @@ namespace sys3
                     }
                 }
             }
+            DialogResult = DialogResult.OK;
         }
 
         private Dictionary<string, string> ConstructDics(Tunnel tunnel, out double hdwid)
@@ -623,7 +615,7 @@ namespace sys3
         ///     验证画面入力数据
         /// </summary>
         /// <returns>验证结果：true 通过验证, false未通过验证</returns>
-        private bool check()
+        private bool Check()
         {
             for (int i = 0; i < dgrdvWire.Rows.Count; i++)
             {
@@ -635,10 +627,6 @@ namespace sys3
                 Alert.alert(Const.MSG_PLEASE_CHOOSE + Const_GM.TUNNEL + Const.SIGN_EXCLAMATION_MARK);
                 return false;
             }
-            if (Text == Const_GM.WIRE_INFO_ADD && !AutoChangeWireName())
-            {
-                return false;
-            }
             if (Validator.IsEmpty(txtWireName.Text))
             {
                 txtWireName.BackColor = Const.ERROR_FIELD_COLOR;
@@ -646,11 +634,6 @@ namespace sys3
                 return false;
             }
             txtWireName.BackColor = Const.NO_ERROR_FIELD_COLOR;
-            //判断导线名称是否含有特殊字符
-            if (!Check.checkSpecialCharacters(txtWireName, Const_GM.WIRE_NAME))
-            {
-                return false;
-            }
             // 判断导线点编号是否入力
             if (dgrdvWire.Rows.Count - 1 == 0)
             {
@@ -675,32 +658,32 @@ namespace sys3
                 }
                 cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
 
-                //判断导线点编号是否存在
-                if (Text == Const_GM.WIRE_INFO_ADD)
-                {
-                    //导线点是否存在
-                    if (WirePoint.ExistsByWirePointIdInWireInfo(wireEntity.WireId,
-                        dgrdvWire.Rows[i].Cells[0].Value.ToString()))
-                    {
-                        cell.Style.BackColor = Const.ERROR_FIELD_COLOR;
-                        Alert.alert(Const_GM.WIRE_POINT_ID + Const.MSG_ALREADY_HAVE + Const.SIGN_EXCLAMATION_MARK);
-                        return false;
-                    }
-                    cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                }
-                //判断导线点编号是否有输入重复
-                for (int j = 0; j < i; j++)
-                {
-                    if (dgrdvWire[0, j].Value.ToString() == dgrdvWire[0, i].Value.ToString())
-                    {
-                        cell.Style.BackColor = Const.ERROR_FIELD_COLOR;
-                        dgrdvWire[0, j].Style.BackColor = Const.ERROR_FIELD_COLOR;
-                        Alert.alert(Const_GM.WIRE_POINT_ID + Const.MSG_DOUBLE_EXISTS + Const.SIGN_EXCLAMATION_MARK);
-                        return false;
-                    }
-                    cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                    dgrdvWire[0, j].Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                }
+                ////判断导线点编号是否存在
+                //if (Text == Const_GM.WIRE_INFO_ADD)
+                //{
+                //    //导线点是否存在
+                //    if (WirePoint.ExistsByWirePointIdInWireInfo(wireEntity.WireId,
+                //        dgrdvWire.Rows[i].Cells[0].Value.ToString()))
+                //    {
+                //        cell.Style.BackColor = Const.ERROR_FIELD_COLOR;
+                //        Alert.alert(Const_GM.WIRE_POINT_ID + Const.MSG_ALREADY_HAVE + Const.SIGN_EXCLAMATION_MARK);
+                //        return false;
+                //    }
+                //    cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
+                //}
+                ////判断导线点编号是否有输入重复
+                //for (int j = 0; j < i; j++)
+                //{
+                //    if (dgrdvWire[0, j].Value.ToString() == dgrdvWire[0, i].Value.ToString())
+                //    {
+                //        cell.Style.BackColor = Const.ERROR_FIELD_COLOR;
+                //        dgrdvWire[0, j].Style.BackColor = Const.ERROR_FIELD_COLOR;
+                //        Alert.alert(Const_GM.WIRE_POINT_ID + Const.MSG_DOUBLE_EXISTS + Const.SIGN_EXCLAMATION_MARK);
+                //        return false;
+                //    }
+                //    cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
+                //    dgrdvWire[0, j].Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
+                //}
 
                 //判断坐标X是否入力
                 cell = dgrdvWire.Rows[i].Cells[1] as DataGridViewTextBoxCell;
@@ -815,77 +798,6 @@ namespace sys3
             return true;
         }
 
-        /// <summary>
-        ///     添加自动转变修改
-        /// </summary>
-        /// <returns>是否转变</returns>
-        private bool AutoChangeWireName()
-        {
-            var ds = new DataSet();
-            //获取巷道ID
-            tunnelEntity.TunnelId = selectTunnelUserControl1.SelectedTunnel.TunnelId;
-            //获取巷道对应导线信息
-            Wire wire = Wire.FindOneByTunnelId(tunnelEntity.TunnelId);
-            if (wire != null)
-            {
-                if (Convert.ToString(ds.Tables[0].Rows[0][Wire.TableName]) != txtWireName.Text &&
-                    Text == Const_GM.WIRE_INFO_ADD)
-                {
-                    //所选巷道已绑定导线，是否跳转到修改导线
-                    if (
-                        Alert.confirm(Const_GM.TUNNEL_CHOOSE_FIRST +
-                                      Convert.ToString(ds.Tables[0].Rows[0]["WIRE_NAME"]) +
-                                      Const_GM.TUNNEL_CHOOSE_MIDDLE +
-                                      Convert.ToString(ds.Tables[0].Rows[0]["WIRE_NAME"]) +
-                                      Const_GM.TUNNEL_CHOOSE_LAST))
-                    {
-                        //窗体名称改为修改巷道
-                        Text = Const_GM.WIRE_INFO_CHANGE;
-                        _tunnelID = selectTunnelUserControl1.SelectedTunnel.TunnelId;
-                        //绑定信息
-                        txtWireName.Text = Convert.ToString(ds.Tables[0].Rows[0]["WIRE_NAME"]);
-                        txtWireLevel.Text = Convert.ToString(ds.Tables[0].Rows[0]["WIRE_LEVEL"]);
-                        cboVobserver.Text = Convert.ToString(ds.Tables[0].Rows[0]["VOBSERVER"]);
-                        cboCounter.Text = Convert.ToString(ds.Tables[0].Rows[0]["COUNTER"]);
-                        cboChecker.Text = Convert.ToString(ds.Tables[0].Rows[0]["CHECKER"]);
-
-                        var dgvr = new DataGridViewRow[dgrdvWire.Rows.Count - 1];
-                        for (int i = 0; i < dgrdvWire.Rows.Count - 1; i++)
-                        {
-                            dgvr[i] = dgrdvWire.Rows[i];
-                        }
-                        dgrdvWire.Rows.Clear();
-                        //巷道信息
-                        tunnelEntity = Tunnel.Find(tunnelEntity.TunnelId);
-                        //导线ID
-                        wireEntity.WireId = Wire.FindOneByTunnelId(tunnelEntity.TunnelId).WireId;
-                        //导线信息
-                        wireEntity = Wire.Find(wireEntity.WireId);
-                        _arr[0] = tunnelEntity.WorkingFace.MiningArea.Horizontal.Mine.MineId;
-                        _arr[1] = tunnelEntity.WorkingFace.MiningArea.Horizontal.HorizontalId;
-                        _arr[2] = tunnelEntity.WorkingFace.MiningArea.MiningAreaId;
-                        _arr[3] = tunnelEntity.WorkingFace.WorkingFaceId;
-                        _arr[4] = tunnelEntity.TunnelId;
-                        //绑定修改信息
-                        loadWireInfoData();
-
-                        for (int i = 0; i < dgvr.Length; i++)
-                        {
-                            dgrdvWire.Rows.Add(dgvr[i]);
-                            selectionIdx = dgrdvWire.CurrentRow.Index;
-                        }
-                    }
-                    //巷道已绑定导线，请重新选择巷道
-                    else
-                    {
-                        Alert.alert(Const_GM.WIRE_INFO_MSG_TUNNEL_ALREADY_BIND_WIRE);
-                        return false;
-                    }
-                }
-                return true;
-            }
-            return true;
-        }
 
         /// <summary>
         ///     右键插入
@@ -1025,16 +937,13 @@ namespace sys3
             _tmpRowIndex = e.RowIndex;
             selectionIdx = e.RowIndex;
             btnAdd.Enabled = true;
-            btnCopy.Enabled = true;
             btnDel.Enabled = true;
             for (int i = 0; i < dgvc.Length; i++)
             {
                 if (dgvc[i] != null)
                 {
-                    btnPaste.Enabled = true;
                     break;
                 }
-                btnPaste.Enabled = false;
             }
             if (e.RowIndex == 0)
             {
@@ -1054,25 +963,12 @@ namespace sys3
             }
             if (e.RowIndex == dgrdvWire.NewRowIndex)
             {
-                btnCopy.Enabled = false;
                 btnMoveUp.Enabled = false;
                 btnDel.Enabled = false;
             }
             else
             {
-                btnCopy.Enabled = true;
                 btnDel.Enabled = true;
-            }
-            if (dgrdvWire[0, e.RowIndex].Value == null &&
-                dgrdvWire[1, e.RowIndex].Value == null &&
-                dgrdvWire[2, e.RowIndex].Value == null &&
-                dgrdvWire[3, e.RowIndex].Value == null &&
-                dgrdvWire[4, e.RowIndex].Value == null &&
-                dgrdvWire[5, e.RowIndex].Value == null &&
-                dgrdvWire[6, e.RowIndex].Value == null &&
-                dgrdvWire[7, e.RowIndex].Value == null)
-            {
-                btnCopy.Enabled = false;
             }
         }
 
@@ -1088,7 +984,6 @@ namespace sys3
             {
                 dr[i] = dgvc[i].Value.ToString();
             }
-            btnPaste.Enabled = true;
         }
 
         /// <summary>
@@ -1184,19 +1079,25 @@ namespace sys3
 
         private void btnTXT_Click(object sender, EventArgs e)
         {
-            var ofd = new OpenFileDialog();
-            ofd.InitialDirectory = @"C:\Users\happybai\Desktop\巷道录入（11.06）";
-            ofd.RestoreDirectory = true;
-            ofd.Filter = "文本文件(*.txt)|*.txt|所有文件(*.*)|*.*";
-            //ofd.ShowDialog();
+            var ofd = new OpenFileDialog { RestoreDirectory = true, Filter = @"文本文件(*.txt)|*.txt|所有文件(*.*)|*.*" };
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                string aa = ofd.FileName;
-                string[] temp = aa.Split('-');
-                string caiqu = temp[0];
-                string hangname = temp[1];
-                txtWireName.Text = hangname.Split('.').Length > 0 ? hangname.Split('.')[0] + "导线点" : hangname + "导线点";
-                var sr = new StreamReader(@aa, Encoding.GetEncoding("GB2312"));
+                string fileName = ofd.SafeFileName;
+                if (fileName != null)
+                {
+                    string[] strs = fileName.Split('-');
+                    string workingFaceName = strs[0];
+                    string tunnelName = strs[1].Split('.')[0];
+                    using (new SessionScope())
+                    {
+                        WorkingFace workingFace = WorkingFace.FindByWorkingFaceName(workingFaceName);
+                        var tunnel = workingFace.Tunnels.First(u => u.TunnelName == tunnelName);
+                        selectTunnelUserControl1.LoadData(tunnel);
+                    }
+                    txtWireName.Text = tunnelName.Split('.').Length > 0 ? tunnelName.Split('.')[0] + "导线点" : tunnelName + "导线点";
+                }
+
+                var sr = new StreamReader(ofd.FileName, Encoding.GetEncoding("GB2312"));
                 string duqu;
                 while ((duqu = sr.ReadLine()) != null)
                 {
@@ -1607,5 +1508,10 @@ namespace sys3
         }
 
         #endregion 绘制导线点和巷道图形
+
+        private void btnMultTxt_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

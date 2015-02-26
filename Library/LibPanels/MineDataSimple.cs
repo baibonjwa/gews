@@ -33,7 +33,7 @@ namespace LibPanels
 
         //*************************
 
-        public MineDataSimple(MainFrm mainFrm)
+        public MineDataSimple(SocketHelper mainFrm)
         {
             MainForm = mainFrm;
             InitializeComponent();

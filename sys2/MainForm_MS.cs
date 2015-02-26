@@ -16,7 +16,7 @@ using LibPanels;
 
 namespace sys2
 {
-    public partial class MainForm_MS : MainFrm
+    public partial class MainForm_MS : SocketHelper
     {
         private GIS_FileMenu m_FileMenu = new GIS_FileMenu();
 
@@ -31,7 +31,7 @@ namespace sys2
             }
             InitializeComponent();
 
-            base.doInitilization();
+            base.DoInitilization();
 
             //////////////////////////////////////////////////////
             Log.Debug("[MS]...Loading Mxd file......");

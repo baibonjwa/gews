@@ -42,7 +42,7 @@ namespace _4.OutburstPrevention
         /// <summary>
         /// 构造方法
         /// </summary>
-        public K1ValueManagement(MainFrm mainFrm)
+        public K1ValueManagement(SocketHelper mainFrm)
         {
             InitializeComponent();
 

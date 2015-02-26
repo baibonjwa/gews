@@ -12,7 +12,7 @@ namespace LibPanels
         /// <summary>
         ///     构造方法
         /// </summary>
-        public GasInfoManagement(MainFrm mainFrm)
+        public GasInfoManagement(SocketHelper mainFrm)
         {
             MainForm = mainFrm;
             InitializeComponent();

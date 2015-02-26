@@ -39,7 +39,7 @@ namespace LibCommonForm
         /// <summary>
         /// 构造方法
         /// </summary>
-        public PanelForTunnelEntering(MainFrm mainFrm)
+        public PanelForTunnelEntering(SocketHelper mainFrm)
         {
             this.MainForm = mainFrm;
             InitializeComponent();
@@ -51,7 +51,7 @@ namespace LibCommonForm
         /// 带参数的构造方法
         /// </summary>
         /// <param name="intArr">存储所选矿井编号，水平编号，采区编号，工作面编号的数组</param>
-        public PanelForTunnelEntering(int[] intArr, MainFrm mainFrm)
+        public PanelForTunnelEntering(int[] intArr, SocketHelper mainFrm)
         {
             this.MainForm = mainFrm;
 

@@ -41,7 +41,7 @@ namespace sys1
         private int _primaryKey2Index = 2;
         /** 处理标志位 **/
 
-        public GasConcentrationProbeDataManamement(MainFrm mainFrm)
+        public GasConcentrationProbeDataManamement(SocketHelper mainFrm)
         {
             MainForm = mainFrm;
             InitializeComponent();

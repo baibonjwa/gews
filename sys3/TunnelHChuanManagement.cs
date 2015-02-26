@@ -38,7 +38,7 @@ namespace _3.GeologyMeasure
         /// <summary>
         /// 构造方法
         /// </summary>
-        public TunnelHChuanManagement(MainFrm mainFrm)
+        public TunnelHChuanManagement(SocketHelper mainFrm)
         {
             this.MainForm = mainFrm;
             InitializeComponent();

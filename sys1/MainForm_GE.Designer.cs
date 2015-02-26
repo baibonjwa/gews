@@ -2,7 +2,7 @@
 
 namespace sys1
 {
-    partial class MainFormGe : MainFrm
+    partial class MainFormGe : SocketHelper
     {
         private const string configFileName = "sys.properties";
 

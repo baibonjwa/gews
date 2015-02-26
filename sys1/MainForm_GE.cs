@@ -70,7 +70,7 @@ namespace sys1
             EnableDeleteAndModifyBtn = true;
             this.mniAbout = mniAbout;
             InitializeComponent();
-            doInitilization();
+            DoInitilization();
 
 
             var fp = new FileProperties(configFileName);

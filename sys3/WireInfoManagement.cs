@@ -49,8 +49,8 @@ namespace sys3
 
         private void RefreshData()
         {
-                var wires = Wire.FindAll();
-                gcWireInfo.DataSource = wires; 
+            var wires = Wire.FindAll();
+            gcWireInfo.DataSource = wires;
         }
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace sys3
             tunnelEntity = Tunnel.Find(tunnelID);
 
             //导线修改界面
-            var wireInfoForm = new WireInfoEntering(wireEntity);
+            var wireInfoForm = new WireInfoEntering(wireEntity, this);
             if (DialogResult.OK == wireInfoForm.ShowDialog())
             {
                 RefreshData();

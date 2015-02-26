@@ -21,7 +21,7 @@ using stdole;
 
 namespace sys3
 {
-    public partial class FaultageInfoEntering : MainFrm
+    public partial class FaultageInfoEntering : SocketHelper
     {
         /** 主键  **/
         /** 业务逻辑类型：添加/修改  **/

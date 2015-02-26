@@ -8,7 +8,7 @@ namespace LibPanels
 {
     public partial class VentilationInfoManagement : BaseForm
     {
-        public VentilationInfoManagement(MainFrm mainFrm)
+        public VentilationInfoManagement(SocketHelper mainFrm)
         {
             MainForm = mainFrm;
 

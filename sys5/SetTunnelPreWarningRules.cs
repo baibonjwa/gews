@@ -23,7 +23,7 @@ namespace _5.WarningManagement
 {
     public partial class SetTunnelPreWarningRules : Form
     {
-        MainFrm mainForm;
+        SocketHelper mainForm;
 
         // 创建预警规则管理界面
         PreWarningRulesPanel _preWarningRulesPanel = new PreWarningRulesPanel();
@@ -47,7 +47,7 @@ namespace _5.WarningManagement
         /// 根据过滤条件显示预警规则
         /// </summary>
         /// <param name="ruleTypeFilter"></param>
-        public SetTunnelPreWarningRules(RULE_TYPE_WARNING_TYPE_FILTER warningTypeFilter, MainFrm mainFrm)
+        public SetTunnelPreWarningRules(RULE_TYPE_WARNING_TYPE_FILTER warningTypeFilter, SocketHelper mainFrm)
         {
             this.mainForm = mainFrm;
 

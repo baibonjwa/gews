@@ -189,9 +189,7 @@
     <Compile Include="CoalExistenceInfoEntering.Designer.cs">
       <DependentUpon>CoalExistenceInfoEntering.cs</DependentUpon>
     </Compile>
-    <Compile Include="CoalExistenceInfoManagement.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="CoalExistenceInfoManagement.cs" />
     <Compile Include="CoalExistenceInfoManagement.Designer.cs">
       <DependentUpon>CoalExistenceInfoManagement.cs</DependentUpon>
     </Compile>
@@ -207,9 +205,7 @@
     <Compile Include="GasInfoEntering.Designer.cs">
       <DependentUpon>GasInfoEntering.cs</DependentUpon>
     </Compile>
-    <Compile Include="GasInfoManagement.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="GasInfoManagement.cs" />
     <Compile Include="GasInfoManagement.Designer.cs">
       <DependentUpon>GasInfoManagement.cs</DependentUpon>
     </Compile>
@@ -219,9 +215,7 @@
     <Compile Include="GeologicStructureInfoEntering.Designer.cs">
       <DependentUpon>GeologicStructureInfoEntering.cs</DependentUpon>
     </Compile>
-    <Compile Include="GeologicStructureInfoManagement.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="GeologicStructureInfoManagement.cs" />
     <Compile Include="GeologicStructureInfoManagement.Designer.cs">
       <DependentUpon>GeologicStructureInfoManagement.cs</DependentUpon>
     </Compile>
@@ -244,21 +238,15 @@
     <Compile Include="ManagementInfoManagement.Designer.cs">
       <DependentUpon>ManagementInfoManagement.cs</DependentUpon>
     </Compile>
-    <Compile Include="MineData.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="MineData.cs" />
     <Compile Include="MineData.Designer.cs">
       <DependentUpon>MineData.cs</DependentUpon>
     </Compile>
-    <Compile Include="MineDataSimple.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="MineDataSimple.cs" />
     <Compile Include="MineDataSimple.Designer.cs">
       <DependentUpon>MineDataSimple.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProbeInfoEntering.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="ProbeInfoEntering.cs" />
     <Compile Include="ProbeInfoEntering.Designer.cs">
       <DependentUpon>ProbeInfoEntering.cs</DependentUpon>
     </Compile>
@@ -287,9 +275,7 @@
     <Compile Include="UsualForecast.Designer.cs">
       <DependentUpon>UsualForecast.cs</DependentUpon>
     </Compile>
-    <Compile Include="UsualForecastManagement.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="UsualForecastManagement.cs" />
     <Compile Include="UsualForecastManagement.Designer.cs">
       <DependentUpon>UsualForecastManagement.cs</DependentUpon>
     </Compile>
@@ -299,9 +285,7 @@
     <Compile Include="VentilationInfoEntering.Designer.cs">
       <DependentUpon>VentilationInfoEntering.cs</DependentUpon>
     </Compile>
-    <Compile Include="VentilationInfoManagement.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="VentilationInfoManagement.cs" />
     <Compile Include="VentilationInfoManagement.Designer.cs">
       <DependentUpon>VentilationInfoManagement.cs</DependentUpon>
     </Compile>

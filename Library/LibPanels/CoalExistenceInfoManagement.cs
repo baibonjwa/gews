@@ -22,7 +22,7 @@ namespace LibPanels
         /// <summary>
         /// 构造方法
         /// </summary>
-        public CoalExistenceInfoManagement(MainFrm mainFrm)
+        public CoalExistenceInfoManagement(SocketHelper mainFrm)
         {
             MainForm = mainFrm;
             InitializeComponent();

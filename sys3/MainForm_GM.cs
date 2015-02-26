@@ -19,7 +19,7 @@ using _3.GeologyMeasure;
 #endregion
 namespace sys3
 {
-    public partial class MainForm_GM : MainFrm
+    public partial class MainForm_GM : SocketHelper
     {
         private GIS_FileMenu m_FileMenu = new GIS_FileMenu();
         private string m_mapDocumentName = string.Empty;
@@ -34,7 +34,7 @@ namespace sys3
             }
             InitializeComponent();
 
-            base.doInitilization();
+            base.DoInitilization();
 
             //defaultLookAndFeel1.LookAndFeel.UseWindowsXPTheme = false;
             //defaultLookAndFeel1.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Skin;

@@ -1,5 +1,6 @@
 ﻿using Castle.ActiveRecord;
 using NHibernate.Criterion;
+using NHibernate.Engine;
 
 namespace LibEntity
 {

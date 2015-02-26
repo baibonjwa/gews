@@ -51,7 +51,7 @@ namespace LibPanels
         /// <summary>
         /// 构造方法
         /// </summary>
-        public MineData(MainFrm mainFrm)
+        public MineData(SocketHelper mainFrm)
         {
             this.MainForm = mainFrm;
             InitializeComponent();
@@ -64,7 +64,7 @@ namespace LibPanels
         /// 构造方法
         /// </summary>
         /// <param name="obj"></param>
-        public MineData(object obj, MainFrm mainFrm)
+        public MineData(object obj, SocketHelper mainFrm)
         {
             this.MainForm = mainFrm;
             this.obj = obj;

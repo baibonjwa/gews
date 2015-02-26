@@ -214,6 +214,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="3.GeologyMeasureBLL\PropertyBLL\TunnelHChuanBLL.cs" />
     <Compile Include="3.GeologyMeasureBLL\DbConstNames\TunnelHChuanDbConstNames.cs" />
+    <Compile Include="Socket.cs" />
     <Compile Include="TunnelUtils.cs" />
   </ItemGroup>
   <ItemGroup>

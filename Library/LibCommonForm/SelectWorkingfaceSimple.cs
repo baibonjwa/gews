@@ -34,7 +34,7 @@ namespace LibCommonForm
             InitializeComponent();
         }
 
-        public SelectWorkingfaceSimple(MainFrm mainFrm)
+        public SelectWorkingfaceSimple(SocketHelper mainFrm)
         {
             this.MainForm = mainFrm;
             InitializeComponent();

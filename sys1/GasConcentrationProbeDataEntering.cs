@@ -29,7 +29,7 @@ namespace sys1
         /// <summary>
         ///     构造方法
         /// </summary>
-        public GasConcentrationProbeDataEntering(MainFrm mainFrm)
+        public GasConcentrationProbeDataEntering(SocketHelper mainFrm)
         {
             MainForm = mainFrm;
 

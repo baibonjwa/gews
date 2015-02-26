@@ -39,7 +39,7 @@ namespace _4.OutburstPrevention
         /// <summary>
         /// 构造方法
         /// </summary>
-        public GasContentInfoEntering(MainFrm mainFrm)
+        public GasContentInfoEntering(SocketHelper mainFrm)
         {
             InitializeComponent();
 
@@ -60,7 +60,7 @@ namespace _4.OutburstPrevention
         /// 带参数的构造方法
         /// </summary>
         /// <param name="strPrimaryKey">主键</param>
-        public GasContentInfoEntering(string strPrimaryKey, MainFrm mainFrm)
+        public GasContentInfoEntering(string strPrimaryKey, SocketHelper mainFrm)
         {
             InitializeComponent();
 

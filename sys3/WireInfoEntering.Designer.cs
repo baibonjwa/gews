@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.selectTunnelUserControl1 = new LibCommonForm.SelectTunnelUserControl();
             this.lblWireName = new System.Windows.Forms.Label();
             this.txtWireName = new System.Windows.Forms.TextBox();
             this.dgrdvWire = new System.Windows.Forms.DataGridView();
@@ -68,31 +67,16 @@
             this.cboChecker = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.btnCopy = new System.Windows.Forms.Button();
-            this.btnPaste = new System.Windows.Forms.Button();
             this.btnMoveUp = new System.Windows.Forms.Button();
-            this.btnMoveDown = new System.Windows.Forms.Button();
             this.btnDel = new System.Windows.Forms.Button();
-            this.btnTXT = new System.Windows.Forms.Button();
+            this.selectTunnelUserControl1 = new LibCommonForm.SelectTunnelUserControl();
+            this.btnMoveDown = new System.Windows.Forms.Button();
+            this.btnTxt = new System.Windows.Forms.Button();
+            this.btnMultTxt = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgrdvWire)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // selectTunnelUserControl1
-            // 
-            this.selectTunnelUserControl1.Location = new System.Drawing.Point(14, 12);
-            this.selectTunnelUserControl1.MainForm = null;
-            this.selectTunnelUserControl1.Name = "selectTunnelUserControl1";
-            this.selectTunnelUserControl1.SelectedTunnel = null;
-            this.selectTunnelUserControl1.Size = new System.Drawing.Size(680, 218);
-            this.selectTunnelUserControl1.TabIndex = 36;
             // 
             // lblWireName
             // 
@@ -441,66 +425,6 @@
             this.label1.TabIndex = 32;
             this.label1.Text = "*";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(125, 311);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(14, 14);
-            this.label2.TabIndex = 26;
-            this.label2.Text = "*";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(224, 311);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(14, 14);
-            this.label3.TabIndex = 27;
-            this.label3.Text = "*";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.ForeColor = System.Drawing.Color.Red;
-            this.label4.Location = new System.Drawing.Point(331, 311);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(14, 14);
-            this.label4.TabIndex = 28;
-            this.label4.Text = "*";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.ForeColor = System.Drawing.Color.Red;
-            this.label6.Location = new System.Drawing.Point(443, 311);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(14, 14);
-            this.label6.TabIndex = 29;
-            this.label6.Text = "*";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.ForeColor = System.Drawing.Color.Red;
-            this.label7.Location = new System.Drawing.Point(565, 311);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(14, 14);
-            this.label7.TabIndex = 30;
-            this.label7.Text = "*";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.ForeColor = System.Drawing.Color.Red;
-            this.label8.Location = new System.Drawing.Point(671, 311);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(14, 14);
-            this.label8.TabIndex = 31;
-            this.label8.Text = "*";
-            // 
             // btnAdd
             // 
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -513,35 +437,11 @@
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // btnCopy
-            // 
-            this.btnCopy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCopy.Enabled = false;
-            this.btnCopy.Location = new System.Drawing.Point(932, 355);
-            this.btnCopy.Name = "btnCopy";
-            this.btnCopy.Size = new System.Drawing.Size(87, 27);
-            this.btnCopy.TabIndex = 19;
-            this.btnCopy.Text = "复制";
-            this.btnCopy.UseVisualStyleBackColor = true;
-            this.btnCopy.Click += new System.EventHandler(this.btnCopy_Click);
-            // 
-            // btnPaste
-            // 
-            this.btnPaste.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPaste.Enabled = false;
-            this.btnPaste.Location = new System.Drawing.Point(932, 400);
-            this.btnPaste.Name = "btnPaste";
-            this.btnPaste.Size = new System.Drawing.Size(87, 27);
-            this.btnPaste.TabIndex = 20;
-            this.btnPaste.Text = "粘贴";
-            this.btnPaste.UseVisualStyleBackColor = true;
-            this.btnPaste.Click += new System.EventHandler(this.btnPaste_Click);
-            // 
             // btnMoveUp
             // 
             this.btnMoveUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnMoveUp.Enabled = false;
-            this.btnMoveUp.Location = new System.Drawing.Point(932, 491);
+            this.btnMoveUp.Location = new System.Drawing.Point(932, 399);
             this.btnMoveUp.Name = "btnMoveUp";
             this.btnMoveUp.Size = new System.Drawing.Size(87, 27);
             this.btnMoveUp.TabIndex = 22;
@@ -549,23 +449,11 @@
             this.btnMoveUp.UseVisualStyleBackColor = true;
             this.btnMoveUp.Click += new System.EventHandler(this.btnMoveUp_Click);
             // 
-            // btnMoveDown
-            // 
-            this.btnMoveDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMoveDown.Enabled = false;
-            this.btnMoveDown.Location = new System.Drawing.Point(932, 537);
-            this.btnMoveDown.Name = "btnMoveDown";
-            this.btnMoveDown.Size = new System.Drawing.Size(87, 27);
-            this.btnMoveDown.TabIndex = 23;
-            this.btnMoveDown.Text = "下移";
-            this.btnMoveDown.UseVisualStyleBackColor = true;
-            this.btnMoveDown.Click += new System.EventHandler(this.btnMoveDown_Click);
-            // 
             // btnDel
             // 
             this.btnDel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDel.Enabled = false;
-            this.btnDel.Location = new System.Drawing.Point(932, 446);
+            this.btnDel.Location = new System.Drawing.Point(932, 354);
             this.btnDel.Name = "btnDel";
             this.btnDel.Size = new System.Drawing.Size(87, 27);
             this.btnDel.TabIndex = 21;
@@ -573,16 +461,48 @@
             this.btnDel.UseVisualStyleBackColor = true;
             this.btnDel.Click += new System.EventHandler(this.btnDel_Click);
             // 
-            // btnTXT
+            // selectTunnelUserControl1
             // 
-            this.btnTXT.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnTXT.Location = new System.Drawing.Point(596, 570);
-            this.btnTXT.Name = "btnTXT";
-            this.btnTXT.Size = new System.Drawing.Size(87, 27);
-            this.btnTXT.TabIndex = 34;
-            this.btnTXT.Text = "读取txt";
-            this.btnTXT.UseVisualStyleBackColor = true;
-            this.btnTXT.Click += new System.EventHandler(this.btnTXT_Click);
+            this.selectTunnelUserControl1.Location = new System.Drawing.Point(14, 12);
+            this.selectTunnelUserControl1.MainForm = null;
+            this.selectTunnelUserControl1.Name = "selectTunnelUserControl1";
+            this.selectTunnelUserControl1.SelectedTunnel = null;
+            this.selectTunnelUserControl1.Size = new System.Drawing.Size(680, 218);
+            this.selectTunnelUserControl1.TabIndex = 36;
+            // 
+            // btnMoveDown
+            // 
+            this.btnMoveDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMoveDown.Enabled = false;
+            this.btnMoveDown.Location = new System.Drawing.Point(932, 445);
+            this.btnMoveDown.Name = "btnMoveDown";
+            this.btnMoveDown.Size = new System.Drawing.Size(87, 27);
+            this.btnMoveDown.TabIndex = 23;
+            this.btnMoveDown.Text = "下移";
+            this.btnMoveDown.UseVisualStyleBackColor = true;
+            this.btnMoveDown.Click += new System.EventHandler(this.btnMoveDown_Click);
+            // 
+            // btnTxt
+            // 
+            this.btnTxt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnTxt.Location = new System.Drawing.Point(634, 570);
+            this.btnTxt.Name = "btnTxt";
+            this.btnTxt.Size = new System.Drawing.Size(83, 27);
+            this.btnTxt.TabIndex = 34;
+            this.btnTxt.Text = "从txt读取";
+            this.btnTxt.UseVisualStyleBackColor = true;
+            this.btnTxt.Click += new System.EventHandler(this.btnTXT_Click);
+            // 
+            // btnMultTxt
+            // 
+            this.btnMultTxt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMultTxt.Location = new System.Drawing.Point(515, 570);
+            this.btnMultTxt.Name = "btnMultTxt";
+            this.btnMultTxt.Size = new System.Drawing.Size(113, 27);
+            this.btnMultTxt.TabIndex = 37;
+            this.btnMultTxt.Text = "从txt读取并提交";
+            this.btnMultTxt.UseVisualStyleBackColor = true;
+            this.btnMultTxt.Click += new System.EventHandler(this.btnMultTxt_Click);
             // 
             // WireInfoEntering
             // 
@@ -591,19 +511,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(1034, 611);
-            this.Controls.Add(this.btnTXT);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label7);
+            this.Controls.Add(this.btnMultTxt);
+            this.Controls.Add(this.btnTxt);
             this.Controls.Add(this.btnMoveDown);
             this.Controls.Add(this.btnDel);
-            this.Controls.Add(this.btnPaste);
-            this.Controls.Add(this.label6);
             this.Controls.Add(this.btnMoveUp);
-            this.Controls.Add(this.btnCopy);
             this.Controls.Add(this.btnAdd);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.cboCounter);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.lblChecker);
@@ -674,17 +587,8 @@
         private System.Windows.Forms.ComboBox cboChecker;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Button btnCopy;
-        private System.Windows.Forms.Button btnPaste;
         private System.Windows.Forms.Button btnMoveUp;
-        private System.Windows.Forms.Button btnMoveDown;
         private System.Windows.Forms.Button btnDel;
         private System.Windows.Forms.DataGridViewTextBoxColumn txtWirePointID;
         private System.Windows.Forms.DataGridViewTextBoxColumn txtCoordinateX;
@@ -694,6 +598,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn txtDistanceFromTheRight;
         private System.Windows.Forms.DataGridViewTextBoxColumn txtDistanceFromTop;
         private System.Windows.Forms.DataGridViewTextBoxColumn txtDistanceFromBottom;
-        private System.Windows.Forms.Button btnTXT;
+        private System.Windows.Forms.Button btnMoveDown;
+        private System.Windows.Forms.Button btnTxt;
+        private System.Windows.Forms.Button btnMultTxt;
     }
 }

@@ -249,9 +249,7 @@
     <Compile Include="BoreholeInfoManagement.Designer.cs">
       <DependentUpon>BoreholeInfoManagement.cs</DependentUpon>
     </Compile>
-    <Compile Include="CollapsePillarsManagement.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="CollapsePillarsManagement.cs" />
     <Compile Include="CollapsePillarsManagement.Designer.cs">
       <DependentUpon>CollapsePillarsManagement.cs</DependentUpon>
     </Compile>
@@ -285,21 +283,15 @@
     <Compile Include="ProspectingLineInfoEntering.Designer.cs">
       <DependentUpon>ProspectingLineInfoEntering.cs</DependentUpon>
     </Compile>
-    <Compile Include="FaultageInfoManagement.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="FaultageInfoManagement.cs" />
     <Compile Include="FaultageInfoManagement.Designer.cs">
       <DependentUpon>FaultageInfoManagement.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForm_GM.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="MainForm_GM.cs" />
     <Compile Include="MainForm_GM.Designer.cs">
       <DependentUpon>MainForm_GM.cs</DependentUpon>
     </Compile>
-    <Compile Include="TunnelHChuanEntering.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="TunnelHChuanEntering.cs" />
     <Compile Include="TunnelHChuanEntering.Designer.cs">
       <DependentUpon>TunnelHChuanEntering.cs</DependentUpon>
     </Compile>
@@ -309,9 +301,7 @@
     <Compile Include="TunnelHCJZEntering.Designer.cs">
       <DependentUpon>TunnelHCJZEntering.cs</DependentUpon>
     </Compile>
-    <Compile Include="TunnelHCManagement.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="TunnelHCManagement.cs" />
     <Compile Include="TunnelHCManagement.Designer.cs">
       <DependentUpon>TunnelHCManagement.cs</DependentUpon>
     </Compile>
@@ -339,21 +329,15 @@
     <Compile Include="TunnelJZEntering.Designer.cs">
       <DependentUpon>TunnelJZEntering.cs</DependentUpon>
     </Compile>
-    <Compile Include="TunnelHChuanManagement.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="TunnelHChuanManagement.cs" />
     <Compile Include="TunnelHChuanManagement.Designer.cs">
       <DependentUpon>TunnelHChuanManagement.cs</DependentUpon>
     </Compile>
-    <Compile Include="WireInfoEntering.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="WireInfoEntering.cs" />
     <Compile Include="WireInfoEntering.Designer.cs">
       <DependentUpon>WireInfoEntering.cs</DependentUpon>
     </Compile>
-    <Compile Include="FaultageInfoEntering.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="FaultageInfoEntering.cs" />
     <Compile Include="FaultageInfoEntering.Designer.cs">
       <DependentUpon>FaultageInfoEntering.cs</DependentUpon>
     </Compile>

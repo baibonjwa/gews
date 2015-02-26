@@ -44,7 +44,7 @@ namespace _4.OutburstPrevention
         /// <summary>
         /// 构造方法
         /// </summary>
-        public GasGushQuantityInfoManagement(MainFrm mainFrm)
+        public GasGushQuantityInfoManagement(SocketHelper mainFrm)
         {
             InitializeComponent();
 

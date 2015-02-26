@@ -31,7 +31,6 @@ namespace LibEntity
         public string WorkingFaceName { get; set; }
 
         // 坐标
-
         public Coordinate Coordinate { get; set; }
 
         // 开工日期
@@ -109,6 +108,15 @@ namespace LibEntity
                 Restrictions.Eq("MiningArea.MiningAreaId", miningAreaId)
             };
             return FindAll(criterion);
+        }
+
+        public static WorkingFace FindByWorkingFaceName(string workingFaceName)
+        {
+            var criterion = new ICriterion[]
+            {
+                Restrictions.Eq("WorkingFaceName", workingFaceName)
+            };
+            return FindOne(criterion);
         }
 
         public static bool ExistsByWorkingFaceName(string workingFaceName)

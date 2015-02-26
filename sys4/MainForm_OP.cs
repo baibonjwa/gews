@@ -35,7 +35,7 @@ using LibCommonControl;
 
 namespace _4.OutburstPrevention
 {
-    public partial class MainForm_OP : MainFrm
+    public partial class MainForm_OP : SocketHelper
     {
         private string strPath = Application.StartupPath;
         private GIS_FileMenu m_FileMenu = new GIS_FileMenu();
@@ -55,7 +55,7 @@ namespace _4.OutburstPrevention
             //bool islicense=license.InitializeApplication();
             InitializeComponent();
 
-            base.doInitilization();
+            base.DoInitilization();
 
             ///文件菜单
             this.mapControl_OP.LoadMxFile(Application.StartupPath + "\\" + GIS_Const.DEFAULT_MXD_FILE);

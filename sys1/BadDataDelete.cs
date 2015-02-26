@@ -43,7 +43,7 @@ namespace sys1
         private Thread t;
         private ThreadStart ts;
 
-        public BadDataDelete(MainFrm mainFrm)
+        public BadDataDelete(SocketHelper mainFrm)
         {
             MainForm = mainFrm;
             InitializeComponent();

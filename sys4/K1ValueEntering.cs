@@ -54,7 +54,7 @@ namespace _4.OutburstPrevention
         /// <summary>
         /// 添加
         /// </summary>
-        public K1ValueEntering(MainFrm mainFrm)
+        public K1ValueEntering(SocketHelper mainFrm)
         {
             InitializeComponent();
 
@@ -82,7 +82,7 @@ namespace _4.OutburstPrevention
         /// 修改
         /// </summary>
         /// <param name="array"></param>
-        public K1ValueEntering(int[] array, int id, MainFrm mainFrm)
+        public K1ValueEntering(int[] array, int id, SocketHelper mainFrm)
         {
             this.MainForm = mainFrm;
 

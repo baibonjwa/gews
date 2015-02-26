@@ -27,7 +27,7 @@ namespace sys3
         /// <summary>
         /// 构造方法
         /// </summary>
-        public TunnelHcManagement(MainFrm mainFrm)
+        public TunnelHcManagement(SocketHelper mainFrm)
         {
             this.MainForm = mainFrm;
             InitializeComponent();

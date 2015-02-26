@@ -25,7 +25,7 @@ using LibCommon;
 
 namespace _5.WarningManagement
 {
-    public partial class PreWarningLastedResultQuery : MainFrm
+    public partial class PreWarningLastedResultQuery : SocketHelper
     {
         public GIS.Warning.FlashWarningPoints flashGis = new GIS.Warning.FlashWarningPoints();
 

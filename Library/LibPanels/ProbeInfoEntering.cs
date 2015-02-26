@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using LibBusiness;
 using LibCommon;
 using LibCommonControl;
@@ -10,7 +11,7 @@ using LibSocket;
 
 namespace LibPanels
 {
-    public partial class ProbeInfoEntering : BaseForm
+    public partial class ProbeInfoEntering : Form
     {
         /** 主键  **/
         /** 业务逻辑类型：添加、修改  **/
@@ -24,9 +25,8 @@ namespace LibPanels
         /// <summary>
         ///     构造方法
         /// </summary>
-        public ProbeInfoEntering(MainFrm mainFrm)
+        public ProbeInfoEntering(SocketHelper mainFrm)
         {
-            MainForm = mainFrm;
             InitializeComponent();
 
             // 设置窗体默认属性
@@ -41,9 +41,8 @@ namespace LibPanels
         /// </summary>
         /// <param name="strPrimaryKey">主键</param>
         /// <param name="mainFrm"></param>
-        public ProbeInfoEntering(string strPrimaryKey, MainFrm mainFrm)
+        public ProbeInfoEntering(string strPrimaryKey, SocketHelper mainFrm)
         {
-            MainForm = mainFrm;
             InitializeComponent();
             _oldTunnelId = Convert.ToInt32(strPrimaryKey);
             _iPk = strPrimaryKey;
@@ -224,13 +223,13 @@ namespace LibPanels
                 var msgUpdate = new UpdateWarningDataMsg(workingfaceEnt.WorkingFaceId,
                     _probe.Tunnel.TunnelId,
                     Probe.TableName, opType, DateTime.Now);
-                MainForm.SendMsg2Server(msgUpdate);
+                Socket.SendMsg2Server(msgUpdate);
             }
 
             var msg = new UpdateWarningDataMsg(workingfaceEnt.WorkingFaceId,
                 _probe.Tunnel.TunnelId,
                 Probe.TableName, opType, DateTime.Now);
-            MainForm.SendMsg2Server(msg);
+            Socket.SendMsg2Server(msg);
         }
 
         /// <summary>
@@ -241,7 +240,7 @@ namespace LibPanels
         private void btnCancel_Click(object sender, EventArgs e)
         {
             // 关闭窗口
-            Close();
+
         }
 
         /// <summary>

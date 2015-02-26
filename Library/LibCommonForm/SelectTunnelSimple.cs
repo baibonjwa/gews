@@ -22,7 +22,7 @@ namespace LibCommonForm
             InitializeComponent();
         }
 
-        public SelectTunnelSimple(MainFrm mainFrm)
+        public SelectTunnelSimple(SocketHelper mainFrm)
         {
             this.MainForm = mainFrm;
             InitializeComponent();

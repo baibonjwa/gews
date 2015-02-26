@@ -46,7 +46,7 @@ namespace _4.OutburstPrevention
         /// <summary>
         /// 构造方法
         /// </summary>
-        public GasPressureInfoManagement(MainFrm mainFrm)
+        public GasPressureInfoManagement(SocketHelper mainFrm)
         {
             InitializeComponent();
 

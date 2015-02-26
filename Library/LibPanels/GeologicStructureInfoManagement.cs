@@ -29,7 +29,7 @@ namespace LibPanels
         /// <summary>
         /// 构造方法
         /// </summary>
-        public GeologicStructureInfoManagement(MainFrm mainFrm)
+        public GeologicStructureInfoManagement(SocketHelper mainFrm)
         {
             MainForm = mainFrm;
 

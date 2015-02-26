@@ -31,7 +31,7 @@ namespace _3.GeologyMeasure
         TunnelHChuanManagement frmStop;
         /*************************************/
 
-        public TunnelHChuanEntering(MainFrm mainFrm, TunnelHChuanManagement frmhc)
+        public TunnelHChuanEntering(SocketHelper mainFrm, TunnelHChuanManagement frmhc)
         {
             this.MainForm = mainFrm;
             frmStop = frmhc;
@@ -58,7 +58,7 @@ namespace _3.GeologyMeasure
             setWorkTimeName();
         }
 
-        public TunnelHChuanEntering(TunnelHChuan tunnelHChuanEntity, MainFrm mainFrm, TunnelHChuanManagement frmhc)
+        public TunnelHChuanEntering(TunnelHChuan tunnelHChuanEntity, SocketHelper mainFrm, TunnelHChuanManagement frmhc)
         {
             this.MainForm = mainFrm;
             frmStop = frmhc;

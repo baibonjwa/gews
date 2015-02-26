@@ -12,17 +12,15 @@ using LibCommonControl;
 
 namespace LibCommonForm
 {
-    public partial class QueryConditions : BaseControl
+    public partial class QueryConditions : Control
     {
         public String DefaultStartTime { get; set; }
         public String DefaultEndTime { get; set; }
         public delegate void BindDataGrid();
         public new BindDataGrid Show { get; set; }
         public int TunnelId { get; set; }
-        public QueryConditions(MainFrm mainFrm)
+        public QueryConditions()
         {
-            this.MainForm = mainFrm;
-
             InitializeComponent();
             if (!String.IsNullOrEmpty(DefaultStartTime))
             {

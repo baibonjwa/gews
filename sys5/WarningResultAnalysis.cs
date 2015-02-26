@@ -12,7 +12,7 @@ namespace _5.WarningManagement
 {
     public partial class WarningResultAnalysis : BaseForm
     {
-        public WarningResultAnalysis(LibCommon.WarningReasonItems warningType, MainFrm mainFrm)
+        public WarningResultAnalysis(LibCommon.WarningReasonItems warningType, SocketHelper mainFrm)
         {
             this.MainForm = mainFrm;
             InitializeComponent();

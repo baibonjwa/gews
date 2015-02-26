@@ -181,7 +181,7 @@ namespace LibPanels
             {
                 CommandId = COMMAND_ID.UPDATE_WORK_TIME
             };
-            MainForm.SendMsg2Server(msg);
+            SocketHelper.SendMsg2Server(msg);
             Close();
         }
 

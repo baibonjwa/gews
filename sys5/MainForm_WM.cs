@@ -24,7 +24,7 @@ using sys2;
 
 namespace _5.WarningManagement
 {
-    public partial class MainForm_WM : MainFrm
+    public partial class MainForm_WM : SocketHelper
     {
         //最新预警结果
         private static PreWarningLastedResultQuery _latestWarningResult;
@@ -46,7 +46,7 @@ namespace _5.WarningManagement
             }
             InitializeComponent();
 
-            base.doInitilization();
+            base.DoInitilization();
 
             //////////////////////////////////////////////////////
             ///文件菜单
@@ -151,7 +151,7 @@ namespace _5.WarningManagement
         private void MainForm_WM_Load(object sender, EventArgs e)
         {
             //注册更新预警结果事件
-            _clientSocket.OnMsgUpdateWarningResult += UpdateWarningResultUI;
+            ClientSocket.OnMsgUpdateWarningResult += UpdateWarningResultUI;
             var msg = new SocketMessage(COMMAND_ID.REGISTER_WARNING_RESULT_NOTIFICATION_ALL, DateTime.Now);
             SendMsg2Server(msg);
 

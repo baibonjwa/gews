@@ -10,7 +10,7 @@ using LibSocket;
 
 namespace sys3
 {
-    public partial class FaultageInfoManagement : MainFrm
+    public partial class FaultageInfoManagement : SocketHelper
     {
         public FaultageInfoManagement()
         {

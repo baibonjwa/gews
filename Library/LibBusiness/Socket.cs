@@ -1,29 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using DevExpress.XtraEditors;
-using LibSocket;
+﻿using System.Windows.Forms;
 using LibCommon;
 using LibConfig;
+using LibSocket;
 
-namespace LibCommonControl
+namespace LibBusiness
 {
-    public partial class MainFrm
+    public class Socket
     {
         //客户端
-        public static ClientSocket _clientSocket = null;
+        public static ClientSocket ClientSocket = null;
 
-        public MainFrm()
-        {
-            InitializeComponent();
-        }
-
-        public void doInitilization()
+        public static void DoInitilization()
         {
             // Initialize configuration manager.
             ConfigManager cfgMgr = ConfigManager.Instance;
@@ -39,13 +26,13 @@ namespace LibCommonControl
             InitClientSocket();
         }
 
-        public void InitClientSocket()
+        public static void InitClientSocket()
         {
             string serverIp = ConfigManager.Instance.getValueByKey(ConfigConst.CONFIG_SERVER_IP);
             int port = int.Parse(ConfigManager.Instance.getValueByKey(ConfigConst.CONFIG_PORT));
 
             //初始化客户端Socket，连接服务器
-            string errorMsg = SocketHelper.InitClientSocket(serverIp, port, out _clientSocket);
+            string errorMsg = SocketHelper.InitClientSocket(serverIp, port, out ClientSocket);
             if (errorMsg != "")
             {
                 Alert.alert(Const.CONNECT_SOCKET_ERROR, Const.NOTES, MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -62,20 +49,20 @@ namespace LibCommonControl
         /// 获取客户端Socket实例
         /// </summary>
         /// <returns>不会返回NULL</returns>
-        public ClientSocket GetClientSocketInstance()
+        public static ClientSocket GetClientSocketInstance()
         {
-            if (_clientSocket == null)
+            if (ClientSocket == null)
             {
                 InitClientSocket();
             }
-            return _clientSocket;
+            return ClientSocket;
         }
 
         /// <summary>
         /// 发送消息至服务器
         /// </summary>
         /// <param name="msg"></param>
-        public void SendMsg2Server(SocketMessage msg)
+        public static void SendMsg2Server(SocketMessage msg)
         {
             ClientSocket cs = GetClientSocketInstance();
             if (cs != null)
@@ -84,7 +71,7 @@ namespace LibCommonControl
                 Log.Debug("Send message " + msg);
                 if (errMsg != "")
                 {
-                    Log.Error(Const.SEND_MSG_FAILED + Const.CONNECT_ARROW + msg.ToString());
+                    Log.Error(Const.SEND_MSG_FAILED + Const.CONNECT_ARROW + msg);
                 }
             }
             else

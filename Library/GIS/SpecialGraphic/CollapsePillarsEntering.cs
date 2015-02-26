@@ -24,7 +24,7 @@ namespace GIS
         //陷落柱实体
         public static ClientSocket _clientSocket = null;
         private readonly CollapsePillarsEnt collapsePillarsEnt = new CollapsePillarsEnt();
-        private readonly MainFrm mainFrm;
+        private readonly SocketHelper mainFrm;
         private CollapsePillarsKeyPointEnt[] _dsCollapsePillarsPoint;
         private int _itemCount;
         private int _rowIndex = -1;
