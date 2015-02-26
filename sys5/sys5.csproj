@@ -269,11 +269,15 @@
     <Compile Include="ImgPreview.Designer.cs">
       <DependentUpon>ImgPreview.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForm_WM.cs" />
+    <Compile Include="MainForm_WM.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="MainForm_WM.Designer.cs">
       <DependentUpon>MainForm_WM.cs</DependentUpon>
     </Compile>
-    <Compile Include="PreWarningLastedResultQuery.cs" />
+    <Compile Include="PreWarningLastedResultQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PreWarningLastedResultQuery.Designer.cs">
       <DependentUpon>PreWarningLastedResultQuery.cs</DependentUpon>
     </Compile>
@@ -345,7 +349,9 @@
     <Compile Include="UploadImg.Designer.cs">
       <DependentUpon>UploadImg.cs</DependentUpon>
     </Compile>
-    <Compile Include="WarningResultAnalysis.cs" />
+    <Compile Include="WarningResultAnalysis.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="WarningResultAnalysis.Designer.cs">
       <DependentUpon>WarningResultAnalysis.cs</DependentUpon>
     </Compile>

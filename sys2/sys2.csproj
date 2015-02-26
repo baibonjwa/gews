@@ -491,10 +491,6 @@
       <Project>{4586c1e2-10a4-47af-8867-b1b32b0cdee5}</Project>
       <Name>LibBusiness</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Library\LibCommonControl\LibCommonControl.csproj">
-      <Project>{c98cb9d1-8567-4539-b30f-79bf7654727e}</Project>
-      <Name>LibCommonControl</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Library\LibCommonForm\LibCommonForm.csproj">
       <Project>{e0db63e3-2420-4b72-99f8-776f8ed1d3ef}</Project>
       <Name>LibCommonForm</Name>

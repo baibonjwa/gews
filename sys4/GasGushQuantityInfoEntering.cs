@@ -27,7 +27,7 @@ using LibCommonControl;
 
 namespace _4.OutburstPrevention
 {
-    public partial class GasGushQuantityInfoEntering : BaseForm
+    public partial class GasGushQuantityInfoEntering : Form
     {
         /** 主键  **/
         private int _iPK;
@@ -39,11 +39,9 @@ namespace _4.OutburstPrevention
         /// <summary>
         /// 构造方法
         /// </summary>
-        public GasGushQuantityInfoEntering(SocketHelper mainFrm)
+        public GasGushQuantityInfoEntering()
         {
             InitializeComponent();
-
-            this.MainForm = mainFrm;
 
             // 设置窗体默认属性
             FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_OP.INSERT_GASGUSHQUANTITY_INFO);
@@ -58,11 +56,9 @@ namespace _4.OutburstPrevention
         /// 带参数的构造方法
         /// </summary>
         /// <param name="strPrimaryKey">主键</param>
-        public GasGushQuantityInfoEntering(string strPrimaryKey, SocketHelper mainFrm)
+        public GasGushQuantityInfoEntering(string strPrimaryKey)
         {
             InitializeComponent();
-
-            this.MainForm = mainFrm;
 
             // 主键
             int iPK = 0;

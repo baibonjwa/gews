@@ -6,13 +6,12 @@ using ESRI.ArcGIS.Carto;
 using GIS.HdProc;
 using LibBusiness;
 using LibCommon;
-using LibCommonControl;
 using LibEntity;
 using LibSocket;
 
 namespace sys2
 {
-    public partial class DayReportJjManagement : BaseForm
+    public partial class DayReportJjManagement : Form
     {
         /// <summary>
         /// 构造方法
@@ -87,7 +86,7 @@ namespace sys2
             var msg = new UpdateWarningDataMsg(entity.WorkingFace.WorkingFaceId,
                 Const.INVALID_ID,
                 DayReportJj.TableName, OPERATION_TYPE.DELETE, DateTime.Now);
-            MainForm.SendMsg2Server(msg);
+            SocketUtil.SendMsg2Server(msg);
         }
 
         /// <summary>

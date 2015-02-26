@@ -435,7 +435,7 @@ namespace UnderTerminal
             IPEndPoint sender = new IPEndPoint(IPAddress.Any, 0);
             EndPoint tempRemoteEP = (EndPoint)sender;
 
-            // Get the Socket
+            // Get the SocketUtil
             Socket remote = (Socket)iar.AsyncState;
 
             // Call EndReceiveFrom to get the received Data

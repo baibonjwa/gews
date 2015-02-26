@@ -117,7 +117,7 @@ namespace _5.WarningManagement
                     //通知服务器预警数据已更新
                     ResetTunnelRulesMsg msg = new ResetTunnelRulesMsg(Const.INVALID_ID, this.selectTunnelSimple1.ITunnelId,
                         TunnelInfoDbConstNames.TABLE_NAME, DateTime.Now);
-                    this.mainForm.SendMsg2Server(msg);
+                    SocketUtil.SendMsg2Server(msg);
                 }
             }
         }

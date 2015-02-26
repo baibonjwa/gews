@@ -22,7 +22,7 @@ using LibEntity;
 
 namespace UnderTerminal
 {
-    public partial class SelectTunnelUserControl : BaseControl
+    public partial class SelectTunnelUserControl : Control
     {
         // 矿井编号
         private int _iMineId;

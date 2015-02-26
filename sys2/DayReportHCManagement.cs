@@ -5,7 +5,6 @@ using ESRI.ArcGIS.Geometry;
 using GIS.HdProc;
 using LibBusiness;
 using LibCommon;
-using LibCommonControl;
 using LibEntity;
 
 namespace sys2
@@ -13,7 +12,7 @@ namespace sys2
     /// <summary>
     /// 回采进尺管理
     /// </summary>
-    public partial class DayReportHcManagement : BaseForm
+    public partial class DayReportHcManagement : Form
     {
         /// <summary>
         /// 构造方法

@@ -28,7 +28,7 @@ using LibCommonForm;
 
 namespace _4.OutburstPrevention
 {
-    public partial class GasPressureInfoManagement : BaseForm
+    public partial class GasPressureInfoManagement : Form
     {
         /** 明细部开始index位置 **/
         private const int _iRowDetailStartIndex = 4;
@@ -46,11 +46,9 @@ namespace _4.OutburstPrevention
         /// <summary>
         /// 构造方法
         /// </summary>
-        public GasPressureInfoManagement(SocketHelper mainFrm)
+        public GasPressureInfoManagement()
         {
             InitializeComponent();
-
-            this.MainForm = mainFrm;
 
             // 设置窗体默认属性
             LibCommon.FormDefaultPropertiesSetter.SetManagementFormDefaultProperties(this, Const_OP.MANAGE_GASPRESSURE_INFO);
@@ -225,7 +223,7 @@ namespace _4.OutburstPrevention
         /// <param name="e"></param>
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            GasPressureInfoEntering gasPressureInfoEnteringForm = new GasPressureInfoEntering(this.MainForm);
+            GasPressureInfoEntering gasPressureInfoEnteringForm = new GasPressureInfoEntering();
             if (DialogResult.OK == gasPressureInfoEnteringForm.ShowDialog())
             {
                 // 加载瓦斯压力数据
@@ -250,7 +248,7 @@ namespace _4.OutburstPrevention
             // 获取编号（主键）
             string strPrimaryKey = this.fpGasPressureInfo.Sheets[0].Cells[iSelIdxsArr[0], _primaryKeyIndex].Text;
 
-            GasPressureInfoEntering gasPressureInfoEnteringForm = new GasPressureInfoEntering(strPrimaryKey, this.MainForm);
+            GasPressureInfoEntering gasPressureInfoEnteringForm = new GasPressureInfoEntering(strPrimaryKey);
             if (DialogResult.OK == gasPressureInfoEnteringForm.ShowDialog())
             {
                 // 加载瓦斯压力数据

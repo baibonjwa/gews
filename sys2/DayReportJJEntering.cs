@@ -10,7 +10,6 @@ using GIS.HdProc;
 using LibBusiness;
 using LibBusiness.CommonBLL;
 using LibCommon;
-using LibCommonControl;
 using LibCommonForm;
 using LibEntity;
 using LibPanels;
@@ -20,7 +19,7 @@ using TunnelDefaultSelect = LibBusiness.TunnelDefaultSelect;
 
 namespace sys2
 {
-    public partial class DayReportJJEntering : BaseForm
+    public partial class DayReportJJEntering : Form
     {
         #region ******变量声明******
 
@@ -504,7 +503,7 @@ namespace sys2
             // 通知服务器掘进进尺已经更新
             var msg = new UpdateWarningDataMsg(workingFace.WorkingFaceId, tunnel.TunnelId,
                 DayReportJj.TableName, OPERATION_TYPE.ADD, DateTime.Now);
-            MainForm.SendMsg2Server(msg);
+            SocketUtil.SendMsg2Server(msg);
             Log.Debug("添加进尺数据Socket消息发送完成");
         }
 

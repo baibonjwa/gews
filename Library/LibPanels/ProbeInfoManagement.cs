@@ -18,7 +18,7 @@ using LibEntity;
 
 namespace LibPanels
 {
-    public partial class ProbeInfoManagement : BaseForm
+    public partial class ProbeInfoManagement : Form
     {
 
         public ProbeInfoManagement()
@@ -126,7 +126,7 @@ namespace LibPanels
         private void tsBtnModify_Click(object sender, EventArgs e)
         {
             var probe = (Probe)bandedGridView1.GetFocusedRow();
-            var probeInfoEntering = new ProbeInfoEntering(probe.ProbeId, this);
+            var probeInfoEntering = new ProbeInfoEntering(probe.ProbeId);
             if (probeInfoEntering.ShowDialog() == DialogResult.OK)
             {
                 RefreshData();

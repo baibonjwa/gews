@@ -1,6 +1,6 @@
 ﻿using LibCommonForm;
 
-namespace _4.OutburstPrevention
+namespace sys4
 {
     partial class K1ValueManagement
     {
@@ -86,7 +86,7 @@ namespace _4.OutburstPrevention
             this.tsBtnExport = new System.Windows.Forms.ToolStripButton();
             this.farpointFilter1 = new LibCommonControl.FarpointFilter();
             this.panel1 = new System.Windows.Forms.Panel();
-            this._queryConditions = new QueryConditions(this.MainForm);
+            this._queryConditions = new QueryConditions();
             ((System.ComponentModel.ISupportInitialize)(this.fpK1Value)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fpK1Value_Sheet1)).BeginInit();
             this.toolStrip1.SuspendLayout();
@@ -446,7 +446,6 @@ namespace _4.OutburstPrevention
             this._queryConditions.DefaultEndTime = "";
             this._queryConditions.DefaultStartTime = "";
             this._queryConditions.Location = new System.Drawing.Point(13, 7);
-            this._queryConditions.MainForm = null;
             this._queryConditions.Name = "_queryConditions";
             this._queryConditions.Show = null;
             this._queryConditions.Size = new System.Drawing.Size(817, 43);

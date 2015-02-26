@@ -9,7 +9,7 @@ using LibEntity;
 
 namespace sys3
 {
-    public partial class TunnelJjManagement : BaseForm
+    public partial class TunnelJjManagement : Form
     {
         /// <summary>
         /// 构造方法

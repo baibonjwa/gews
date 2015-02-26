@@ -14,7 +14,7 @@ using LibEntity;
 
 namespace LibCommonForm
 {
-    public partial class CommonManagement : BaseForm
+    public partial class CommonManagement : Form
     {
         // 功能识别位
 

@@ -5,12 +5,11 @@ using ESRI.ArcGIS.Carto;
 using GIS;
 using GIS.Common;
 using LibCommon;
-using LibCommonControl;
 using LibEntity;
 
 namespace sys3
 {
-    public partial class CollapsePillarsManagement : SocketHelper
+    public partial class CollapsePillarsManagement : Form
     {
         /// <summary>
         ///     构造方法
@@ -59,7 +58,7 @@ namespace sys3
         /// <param name="e"></param>
         private void tsBtnModify_Click(object sender, EventArgs e)
         {
-            var c = new CollapsePillarsEntering((CollapsePillarsEnt) gridView1.GetFocusedRow());
+            var c = new CollapsePillarsEntering((CollapsePillarsEnt)gridView1.GetFocusedRow());
             if (DialogResult.OK == c.ShowDialog())
             {
                 RefreshData();
@@ -74,7 +73,7 @@ namespace sys3
         private void tsBtnDel_Click(object sender, EventArgs e)
         {
             if (!Alert.confirm(Const.DEL_CONFIRM_MSG)) return;
-            var collapsePillarsEnt = (CollapsePillarsEnt) gridView1.GetFocusedRow();
+            var collapsePillarsEnt = (CollapsePillarsEnt)gridView1.GetFocusedRow();
             DeleteyXLZ(collapsePillarsEnt.Id.ToString(CultureInfo.InvariantCulture));
             collapsePillarsEnt.Delete();
             RefreshData();
@@ -137,9 +136,9 @@ namespace sys3
                 MessageBox.Show(@"未发现陷落柱图层！");
                 return;
             }
-            var pFeatureLayer = (IFeatureLayer) pLayer;
+            var pFeatureLayer = (IFeatureLayer)pLayer;
             string str = "";
-            string bid = ((CollapsePillarsEnt) gridView1.GetFocusedRow()).Id.ToString(CultureInfo.InvariantCulture);
+            string bid = ((CollapsePillarsEnt)gridView1.GetFocusedRow()).Id.ToString(CultureInfo.InvariantCulture);
             if (bid != "")
             {
                 if (true)

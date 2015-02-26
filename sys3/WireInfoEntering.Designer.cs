@@ -464,7 +464,6 @@
             // selectTunnelUserControl1
             // 
             this.selectTunnelUserControl1.Location = new System.Drawing.Point(14, 12);
-            this.selectTunnelUserControl1.MainForm = null;
             this.selectTunnelUserControl1.Name = "selectTunnelUserControl1";
             this.selectTunnelUserControl1.SelectedTunnel = null;
             this.selectTunnelUserControl1.Size = new System.Drawing.Size(680, 218);

@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Windows.Forms;
-using LibCommonControl;
 using LibCommon;
 using LibEntity;
 
 namespace LibPanels
 {
-    public partial class ManagementInfoManagement : BaseForm
+    public partial class ManagementInfoManagement : Form
     {
         public ManagementInfoManagement()
         {
@@ -26,7 +25,7 @@ namespace LibPanels
         private void tsBtnAdd_Click(object sender, EventArgs e)
         {
             //MineData m = new MineData();
-            var m = new MineDataSimple(MainForm) { Text = new LibPanels(MineDataPanelName.Management).panelFormName };
+            var m = new MineDataSimple { Text = new LibPanels(MineDataPanelName.Management).panelFormName };
             if (DialogResult.OK == m.ShowDialog())
             {
                 RefreshData();
@@ -40,7 +39,7 @@ namespace LibPanels
         /// <param name="e"></param>
         private void tsBtnModify_Click(object sender, EventArgs e)
         {
-            var m = new MineData(bandedGridView1.GetFocusedRow(), MainForm)
+            var m = new MineData(bandedGridView1.GetFocusedRow())
             {
                 Text = new LibPanels(MineDataPanelName.Management_Change).panelFormName
             };

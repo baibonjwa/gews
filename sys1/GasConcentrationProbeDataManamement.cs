@@ -22,7 +22,7 @@ using LibEntity;
 
 namespace sys1
 {
-    public partial class GasConcentrationProbeDataManamement : BaseForm
+    public partial class GasConcentrationProbeDataManamement : Form
     {
         /** 明细部开始index位置 **/
         private const int _iRowDetailStartIndex = 4;
@@ -41,9 +41,8 @@ namespace sys1
         private int _primaryKey2Index = 2;
         /** 处理标志位 **/
 
-        public GasConcentrationProbeDataManamement(SocketHelper mainFrm)
+        public GasConcentrationProbeDataManamement()
         {
-            MainForm = mainFrm;
             InitializeComponent();
 
             //分配用户权限
@@ -460,7 +459,7 @@ namespace sys1
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             // 获取巷道选择自定义控件上选择的数据信息
-          
+
 
             // 获取已选择明细行的索引
             int[] iSelIdxsArr = GetSelIdxs();

@@ -18,7 +18,7 @@ namespace sys3
     /// <summary>
     ///     回采进尺矫正
     /// </summary>
-    public partial class TunnelHCJZEntering : BaseForm
+    public partial class TunnelHCJZEntering : Form
     {
         /**********变量声明***********/
         private readonly Wire wireEntity = new Wire();

@@ -1,20 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using LibCommonControl;
 
-namespace _5.WarningManagement
+namespace sys5
 {
-    public partial class WarningResultAnalysis : BaseForm
+    public partial class WarningResultAnalysis : Form
     {
-        public WarningResultAnalysis(LibCommon.WarningReasonItems warningType, SocketHelper mainFrm)
+        public WarningResultAnalysis(LibCommon.WarningReasonItems warningType)
         {
-            this.MainForm = mainFrm;
             InitializeComponent();
             this.Text = warningType + "分析";
         }

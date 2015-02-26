@@ -3,13 +3,11 @@ using System.Globalization;
 using System.Windows.Forms;
 using LibBusiness;
 using LibCommon;
-using LibCommonControl;
 using LibEntity;
-using NHibernate.Engine;
 
 namespace LibCommonForm
 {
-    public partial class TunnelInfoEntering : BaseForm
+    public partial class TunnelInfoEntering : Form
     {
         private int _formHeight;
         private Tunnel Tunnel { get; set; }

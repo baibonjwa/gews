@@ -9,7 +9,7 @@ using LibEntity;
 
 namespace sys3
 {
-    public partial class TunnelJjEntering : BaseForm
+    public partial class TunnelJjEntering : Form
     {
         /************变量定义*****************/
         // 掘进面
@@ -218,7 +218,7 @@ namespace sys3
             //巷道选择窗体
             SelectTunnelDlg tunnelChoose;
 
-            tunnelChoose = new SelectTunnelDlg(this.MainForm, TunnelTypeEnum.TUNNELLING, TunnelTypeEnum.OTHER);
+            tunnelChoose = new SelectTunnelDlg(TunnelTypeEnum.TUNNELLING, TunnelTypeEnum.OTHER);
 
             //巷道选择完毕
             if (DialogResult.OK == tunnelChoose.ShowDialog())

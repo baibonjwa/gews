@@ -21,13 +21,11 @@ using LibEntity;
 
 namespace LibPanels
 {
-    public partial class UsualForecastManagement : BaseForm
+    public partial class UsualForecastManagement : Form
     {
-        public UsualForecastManagement(SocketHelper mainFrm)
+        public UsualForecastManagement()
         {
             InitializeComponent();
-
-            this.MainForm = mainFrm;
 
             dataPager1.FrmChild_EventHandler += FrmParent_EventHandler;
         }
@@ -324,7 +322,7 @@ namespace LibPanels
 
         private void tsBtnAdd_Click(object sender, EventArgs e)
         {
-            MineData m = new MineData(this.MainForm);
+            MineData m = new MineData();
             m.Text = new LibPanels(MineDataPanelName.UsualForecast).panelFormName;
             if (DialogResult.OK == m.ShowDialog())
             {
@@ -340,7 +338,7 @@ namespace LibPanels
         private void tsBtnModify_Click(object sender, EventArgs e)
         {
             setMineDataEntityValue();
-            MineData m = new MineData(ufEntity, this.MainForm);
+            MineData m = new MineData(ufEntity);
 
             m.Text = new LibPanels(MineDataPanelName.UsualForecast_Change).panelFormName;
             if (DialogResult.OK == m.ShowDialog())

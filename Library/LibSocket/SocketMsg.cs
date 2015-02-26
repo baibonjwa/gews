@@ -1,17 +1,4 @@
-﻿// ******************************************************************
-// 概  述：Socket客户端
-// 作  者：杨小颖
-// 创建日期：2014/03/16
-// 版本号：V1.0
-// 版本信息：
-// V1.0 新建
-// ******************************************************************
-
-using System.ComponentModel.Design;
-#pragma warning disable 0414
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 
 namespace LibSocket
 {

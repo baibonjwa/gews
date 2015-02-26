@@ -25,7 +25,7 @@ using ESRI.ArcGIS.Geometry;
 
 namespace _4.OutburstPrevention
 {
-    public partial class GasContentInfoManagement : BaseForm
+    public partial class GasContentInfoManagement : Form
     {
         /** 明细部开始index位置 **/
         private const int _iRowDetailStartIndex = 4;
@@ -43,11 +43,9 @@ namespace _4.OutburstPrevention
         /// <summary>
         /// 构造方法
         /// </summary>
-        public GasContentInfoManagement(SocketHelper mainFrm)
+        public GasContentInfoManagement()
         {
             InitializeComponent();
-
-            this.MainForm = mainFrm;
 
             // 设置窗体默认属性
             LibCommon.FormDefaultPropertiesSetter.SetManagementFormDefaultProperties(this, Const_OP.MANAGE_GASCONTENT_INFO);
@@ -228,7 +226,7 @@ namespace _4.OutburstPrevention
         /// <param name="e"></param>
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            GasContentInfoEntering gasContentInfoEnteringForm = new GasContentInfoEntering(this.MainForm);
+            GasContentInfoEntering gasContentInfoEnteringForm = new GasContentInfoEntering();
             if (DialogResult.OK == gasContentInfoEnteringForm.ShowDialog())
             {
                 // 加载瓦斯含量数据
@@ -253,7 +251,7 @@ namespace _4.OutburstPrevention
             // 获取编号（主键）
             string strPrimaryKey = this.fpGasContentInfo.Sheets[0].Cells[iSelIdxsArr[0], _primaryKeyIndex].Text;
 
-            GasContentInfoEntering gasContentInfoEnteringForm = new GasContentInfoEntering(strPrimaryKey, this.MainForm);
+            GasContentInfoEntering gasContentInfoEnteringForm = new GasContentInfoEntering(strPrimaryKey);
             if (DialogResult.OK == gasContentInfoEnteringForm.ShowDialog())
             {
                 // 加载瓦斯含量数据

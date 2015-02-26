@@ -25,7 +25,7 @@ namespace LibPanels
         /// <summary>
         ///     构造方法
         /// </summary>
-        public ProbeInfoEntering(SocketHelper mainFrm)
+        public ProbeInfoEntering()
         {
             InitializeComponent();
 
@@ -41,7 +41,7 @@ namespace LibPanels
         /// </summary>
         /// <param name="strPrimaryKey">主键</param>
         /// <param name="mainFrm"></param>
-        public ProbeInfoEntering(string strPrimaryKey, SocketHelper mainFrm)
+        public ProbeInfoEntering(string strPrimaryKey)
         {
             InitializeComponent();
             _oldTunnelId = Convert.ToInt32(strPrimaryKey);
@@ -223,13 +223,13 @@ namespace LibPanels
                 var msgUpdate = new UpdateWarningDataMsg(workingfaceEnt.WorkingFaceId,
                     _probe.Tunnel.TunnelId,
                     Probe.TableName, opType, DateTime.Now);
-                Socket.SendMsg2Server(msgUpdate);
+                SocketUtil.SendMsg2Server(msgUpdate);
             }
 
             var msg = new UpdateWarningDataMsg(workingfaceEnt.WorkingFaceId,
                 _probe.Tunnel.TunnelId,
                 Probe.TableName, opType, DateTime.Now);
-            Socket.SendMsg2Server(msg);
+            SocketUtil.SendMsg2Server(msg);
         }
 
         /// <summary>

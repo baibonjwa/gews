@@ -12,19 +12,13 @@ using LibCommonControl;
 
 namespace LibCommonForm
 {
-    public partial class SelectTunnelSimple : BaseControl
+    public partial class SelectTunnelSimple : UserControl
     {
         // 巷道编号，无效巷道ID均使用
         private int _iTunnelId = Const.INVALID_ID;
 
         public SelectTunnelSimple()
         {
-            InitializeComponent();
-        }
-
-        public SelectTunnelSimple(SocketHelper mainFrm)
-        {
-            this.MainForm = mainFrm;
             InitializeComponent();
         }
 
@@ -74,7 +68,7 @@ namespace LibCommonForm
          */
         private void btnChooseTunnel_Click(object sender, EventArgs e)
         {
-            SelectTunnelDlg dlg = new SelectTunnelDlg(this.MainForm);
+            SelectTunnelDlg dlg = new SelectTunnelDlg();
             if (DialogResult.OK == dlg.ShowDialog())
             {
                 int index = -1;

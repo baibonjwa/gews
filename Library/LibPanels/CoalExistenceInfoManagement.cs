@@ -16,15 +16,14 @@ using LibCommonControl;
 
 namespace LibPanels
 {
-    public partial class CoalExistenceInfoManagement : BaseForm
+    public partial class CoalExistenceInfoManagement : Form
     {
 
         /// <summary>
         /// 构造方法
         /// </summary>
-        public CoalExistenceInfoManagement(SocketHelper mainFrm)
+        public CoalExistenceInfoManagement()
         {
-            MainForm = mainFrm;
             InitializeComponent();
         }
 
@@ -50,7 +49,7 @@ namespace LibPanels
         private void tsBtnAdd_Click(object sender, EventArgs e)
         {
             //MineData m = new MineData();
-            var m = new MineDataSimple(MainForm)
+            var m = new MineDataSimple()
             {
                 Text = new LibPanels(MineDataPanelName.CoalExistence).panelFormName
             };
@@ -68,7 +67,7 @@ namespace LibPanels
         private void tsBtnModify_Click(object sender, EventArgs e)
         {
 
-            var m = new MineData(MainForm) { Text = new LibPanels(MineDataPanelName.CoalExistence_Change).panelFormName };
+            var m = new MineData() { Text = new LibPanels(MineDataPanelName.CoalExistence_Change).panelFormName };
 
             if (DialogResult.OK == m.ShowDialog())
             {

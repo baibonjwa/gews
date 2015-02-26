@@ -36,7 +36,7 @@
             this.btnSelAll = new System.Windows.Forms.ToolStripButton();
             this.btnCancelSelAll = new System.Windows.Forms.ToolStripButton();
             this.btnExit = new System.Windows.Forms.ToolStripButton();
-            this.selectTunnelSimple1 = new LibCommonForm.SelectTunnelSimple(this.mainForm);
+            this.selectTunnelSimple1 = new LibCommonForm.SelectTunnelSimple();
             this.lblMessage = new System.Windows.Forms.Label();
             this._panelRules = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();

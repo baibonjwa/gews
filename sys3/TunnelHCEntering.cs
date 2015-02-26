@@ -16,7 +16,7 @@ namespace sys3
     /// <summary>
     ///     回采面
     /// </summary>
-    public partial class TunnelHCEntering : BaseForm
+    public partial class TunnelHCEntering : Form
     {
         #region ******变量声明******;
 
@@ -268,7 +268,7 @@ namespace sys3
                 return;
             }
 
-            var tunnelChoose = new SelectTunnelDlg(intArr, MainForm, 2);
+            var tunnelChoose = new SelectTunnelDlg(intArr, 2);
 
             //巷道选择完毕
             if (DialogResult.OK == tunnelChoose.ShowDialog())
@@ -306,7 +306,7 @@ namespace sys3
             }
 
             //巷道选择窗体
-            var tunnelChoose = new SelectTunnelDlg(intArr, MainForm, 2);
+            var tunnelChoose = new SelectTunnelDlg(intArr, 2);
 
             //巷道选择完毕
             if (DialogResult.OK == tunnelChoose.ShowDialog())
@@ -345,7 +345,7 @@ namespace sys3
             }
 
             //巷道选择窗体
-            var tunnelChoose = new SelectTunnelDlg(intArr, MainForm, 2);
+            var tunnelChoose = new SelectTunnelDlg(intArr, 2);
 
             //巷道选择完毕
             if (DialogResult.OK == tunnelChoose.ShowDialog())
@@ -686,7 +686,7 @@ namespace sys3
         {
             ////巷道选择窗体
             SelectTunnelDlg tunnelChoose;
-            tunnelChoose = new SelectTunnelDlg(MainForm);
+            tunnelChoose = new SelectTunnelDlg();
             if (DialogResult.OK == tunnelChoose.ShowDialog())
             {
                 //添加信息到listBox

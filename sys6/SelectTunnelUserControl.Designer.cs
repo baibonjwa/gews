@@ -1,4 +1,6 @@
-﻿namespace UnderTerminal
+﻿using System.Windows.Forms;
+
+namespace UnderTerminal
 {
     partial class SelectTunnelUserControl
     {
@@ -192,8 +194,6 @@
             // 
             // SelectTunnelUserControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.lstTunnelName);
             this.Controls.Add(this.lblTunnelName);
             this.Controls.Add(this.label4);
@@ -210,7 +210,6 @@
             this.Controls.Add(this.label5);
             this.Name = "SelectTunnelUserControl";
             this.Size = new System.Drawing.Size(580, 179);
-            this.Load += new System.EventHandler(this.SelectTunnelUserControl_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

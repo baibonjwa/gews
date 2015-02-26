@@ -26,7 +26,7 @@ using TunnelDefaultSelect = LibEntity.TunnelDefaultSelect;
 
 namespace sys3
 {
-    public partial class WireInfoEntering : BaseForm
+    public partial class WireInfoEntering : Form
     {
         /**********变量声明***********/
         private readonly int[] _arr = new int[5];
@@ -48,11 +48,10 @@ namespace sys3
         /// <summary>
         ///     构造方法
         /// </summary>
-        public WireInfoEntering(SocketHelper mainFrm)
+        public WireInfoEntering()
         {
 
             InitializeComponent();
-            MainForm = mainFrm;
             FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_GM.WIRE_INFO_ADD);
             //自定义控件初始化
             TunnelDefaultSelect tunnelDefaultSelectEntity =
@@ -99,12 +98,11 @@ namespace sys3
         ///     构造方法
         /// </summary>
         /// <param name="wire"></param>
-        public WireInfoEntering(Wire wire, SocketHelper mainFrm)
+        public WireInfoEntering(Wire wire)
         {
             // 初始化主窗体变量
             Wire = wire;
             InitializeComponent();
-            MainForm = mainFrm;
             // 加载需要修改的导线数据
             loadWireInfoData();
 
@@ -476,7 +474,7 @@ namespace sys3
                 wireEntity.Save();
                 var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.SelectedTunnel.TunnelId,
                     Wire.TableName, OPERATION_TYPE.ADD, wireEntity.MeasureDate);
-                MainForm.SendMsg2Server(msg);
+                SocketUtil.SendMsg2Server(msg);
             }
             //导线存在时跳过
             else
@@ -510,7 +508,7 @@ namespace sys3
                     wirePointInfoEntity.Save();
                     var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.SelectedTunnel.TunnelId,
                         Wire.TableName, OPERATION_TYPE.ADD, wireEntity.MeasureDate);
-                    MainForm.SendMsg2Server(msg);
+                    SocketUtil.SendMsg2Server(msg);
                 }
             }
             return wirePointInfoEntityList;
@@ -555,7 +553,7 @@ namespace sys3
                     //socket
                     var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.SelectedTunnel.TunnelId,
                         Wire.TableName, OPERATION_TYPE.UPDATE, wireEntity.MeasureDate);
-                    MainForm.SendMsg2Server(msg);
+                    SocketUtil.SendMsg2Server(msg);
                 }
                 else
                 {
@@ -568,7 +566,7 @@ namespace sys3
 
                     var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.SelectedTunnel.TunnelId,
                        Wire.TableName, OPERATION_TYPE.ADD, wireEntity.MeasureDate);
-                    MainForm.SendMsg2Server(msg);
+                    SocketUtil.SendMsg2Server(msg);
                 }
             }
 

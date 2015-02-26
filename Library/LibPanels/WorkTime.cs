@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 using LibBusiness;
 using LibCommon;
-using LibCommonControl;
 using LibEntity;
 using LibSocket;
 
 namespace LibPanels
 {
-    public partial class WorkTime : BaseForm
+    public partial class WorkTime : Form
     {
         #region ******变量声明******
 
@@ -181,7 +179,7 @@ namespace LibPanels
             {
                 CommandId = COMMAND_ID.UPDATE_WORK_TIME
             };
-            SocketHelper.SendMsg2Server(msg);
+            SocketUtil.SendMsg2Server(msg);
             Close();
         }
 
@@ -204,7 +202,7 @@ namespace LibPanels
         private void btnSetAsDefault_Click(object sender, EventArgs e)
         {
             //设置默认工作制式
-            var workingTime = new WorkingTimeDefault()
+            var workingTime = new WorkingTimeDefault
             {
                 DefaultWorkTimeGroupId = rbtn38.Checked ? Const_MS.WORK_GROUP_ID_38 : Const_MS.WORK_GROUP_ID_46
             };

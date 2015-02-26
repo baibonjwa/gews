@@ -3,25 +3,14 @@ using System.Windows.Forms;
 using LibEntity;
 using LibBusiness;
 using LibCommon;
-using LibCommonControl;
 
 namespace LibCommonForm
 {
-    public partial class SelectTunnelUserControl : BaseControl
+    public partial class SelectTunnelUserControl : UserControl
     {
         public Tunnel SelectedTunnel { get; set; }
 
         public SelectTunnelUserControl()
-        {
-            InitializeComponent();
-        }
-
-        public SelectTunnelUserControl(Tunnel tunnel)
-        {
-            InitializeComponent();
-        }
-
-        public SelectTunnelUserControl(WorkingFace workingFace)
         {
             InitializeComponent();
         }

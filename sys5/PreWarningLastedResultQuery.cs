@@ -6,26 +6,20 @@
 // 版本信息:
 // V1.0 新建
 // ******************************************************************
+
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+using System.IO;
 using System.Windows.Forms;
 using LibBusiness;
-using LibCommonControl;
+using LibCommon;
 using LibEntity;
-using LibCommon;
-using LibSocket;
-using System.IO;
-using LibDatabase;
-using LibCommon;
+using _5.WarningManagement;
 
-namespace _5.WarningManagement
+namespace sys5
 {
-    public partial class PreWarningLastedResultQuery : SocketHelper
+    public partial class PreWarningLastedResultQuery : Form
     {
         public GIS.Warning.FlashWarningPoints flashGis = new GIS.Warning.FlashWarningPoints();
 

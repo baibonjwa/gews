@@ -5,7 +5,7 @@ using LibSocket;
 
 namespace LibBusiness
 {
-    public class Socket
+    public class SocketUtil
     {
         //客户端
         public static ClientSocket ClientSocket = null;

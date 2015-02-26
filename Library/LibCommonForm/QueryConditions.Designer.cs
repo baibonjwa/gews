@@ -1,6 +1,8 @@
-﻿namespace LibCommonForm
+﻿using System.Windows.Forms;
+
+namespace LibCommonForm
 {
-    partial class QueryConditions
+    partial class QueryConditions : Control
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -33,7 +35,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this._dateTimeEnd = new System.Windows.Forms.DateTimePicker();
             this._dateTimeStart = new System.Windows.Forms.DateTimePicker();
-            this.selectTunnelSimple1 = new SelectTunnelSimple(this.MainForm);
+            this.selectTunnelSimple1 = new SelectTunnelSimple();
             this.SuspendLayout();
             // 
             // _btnSearch
@@ -96,8 +98,6 @@
             // 
             // QueryConditions
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this._btnSearch);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);

@@ -1,19 +1,15 @@
 ﻿using System;
 using System.Windows.Forms;
-using LibCommonControl;
 using LibCommon;
 using LibEntity;
 
 namespace LibPanels
 {
-    public partial class VentilationInfoManagement : BaseForm
+    public partial class VentilationInfoManagement : Form
     {
-        public VentilationInfoManagement(SocketHelper mainFrm)
+        public VentilationInfoManagement()
         {
-            MainForm = mainFrm;
-
             InitializeComponent();
-
         }
 
         private void RefreshData()
@@ -39,7 +35,7 @@ namespace LibPanels
         private void tsBtnAdd_Click(object sender, EventArgs e)
         {
             //MineData m = new MineData();
-            var m = new MineDataSimple(MainForm)
+            var m = new MineDataSimple
             {
                 Text = new LibPanels(MineDataPanelName.Ventilation).panelFormName
             };
@@ -56,7 +52,7 @@ namespace LibPanels
         /// <param name="e"></param>
         private void tsBtnModify_Click(object sender, EventArgs e)
         {
-            var m = new MineData(bandedGridView1.GetFocusedRow(), MainForm)
+            var m = new MineData(bandedGridView1.GetFocusedRow())
             {
                 Text = new LibPanels(MineDataPanelName.Ventilation_Change).panelFormName
             };

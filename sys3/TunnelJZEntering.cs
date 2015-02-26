@@ -19,7 +19,7 @@ namespace _3.GeologyMeasure
     /// <summary>
     /// 掘进巷道矫正
     /// </summary>
-    public partial class TunnelJZEntering : BaseForm
+    public partial class TunnelJZEntering : Form
     {
         /**********变量声明***********/
         DataGridViewCell[] dgvc = new DataGridViewCell[8];

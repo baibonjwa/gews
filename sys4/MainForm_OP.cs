@@ -1,41 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using LibCommonForm;
-using LibDatabase;
-using LibEntity;
-using GIS;
 using ESRI.ArcGIS.Carto;
-using LibPanels;
-using LibGeometry;
 using ESRI.ArcGIS.Controls;
-using GIS.Common;
-using ESRI.ArcGIS.DataSourcesGDB;
-using ESRI.ArcGIS.Geodatabase;
-using ESRI.ArcGIS.Geometry;
-using GIS.SpecialGraphic;
-using ESRI.ArcGIS.Display;
-using ESRI.ArcGIS.DisplayUI;
-using LibSocket;
-using LibCommon;
-using DevExpress.Skins;
-using DevExpress.LookAndFeel;
-using DevExpress.UserSkins;
-using DevExpress.XtraEditors;
-using LibAbout;
 using ESRI.ArcGIS.esriSystem;
-using ESRI.ArcGIS.SystemUI;
-using LibConfig;
-using LibCommonControl;
+using ESRI.ArcGIS.Geometry;
+using GIS;
+using GIS.Common;
+using GIS.SpecialGraphic;
+using LibAbout;
+using LibCommon;
+using LibCommonForm;
+using _4.OutburstPrevention;
 
-namespace _4.OutburstPrevention
+namespace sys4
 {
-    public partial class MainForm_OP : SocketHelper
+    public partial class MainForm_OP : Form
     {
         private string strPath = Application.StartupPath;
         private GIS_FileMenu m_FileMenu = new GIS_FileMenu();
@@ -54,8 +33,6 @@ namespace _4.OutburstPrevention
             //LicenseInitializer license = new LicenseInitializer();
             //bool islicense=license.InitializeApplication();
             InitializeComponent();
-
-            base.DoInitilization();
 
             ///文件菜单
             this.mapControl_OP.LoadMxFile(Application.StartupPath + "\\" + GIS_Const.DEFAULT_MXD_FILE);
@@ -132,7 +109,7 @@ namespace _4.OutburstPrevention
         {
             m_currentButton = 0;
 
-            GasPressureInfoManagement gasPressureInfoManagement = new GasPressureInfoManagement(this);
+            GasPressureInfoManagement gasPressureInfoManagement = new GasPressureInfoManagement();
             gasPressureInfoManagement.Show();
         }
 
@@ -145,7 +122,7 @@ namespace _4.OutburstPrevention
         {
             m_currentButton = 0;
 
-            GasContentInfoManagement GasContentInfoManagementForm = new GasContentInfoManagement(this);
+            GasContentInfoManagement GasContentInfoManagementForm = new GasContentInfoManagement();
             GasContentInfoManagementForm.Show();
         }
 
@@ -158,7 +135,7 @@ namespace _4.OutburstPrevention
         {
             m_currentButton = 0;
 
-            GasGushQuantityInfoManagement gasGushQuantityInfoManagementForm = new GasGushQuantityInfoManagement(this);
+            GasGushQuantityInfoManagement gasGushQuantityInfoManagementForm = new GasGushQuantityInfoManagement();
             gasGushQuantityInfoManagementForm.Show();
         }
         #endregion
@@ -244,7 +221,7 @@ namespace _4.OutburstPrevention
         {
             m_currentButton = 0;
 
-            K1ValueManagement k1ValueManagement = new K1ValueManagement(this);
+            K1ValueManagement k1ValueManagement = new K1ValueManagement();
             k1ValueManagement.Show();
         }
         //瓦斯压力等值线绘制
@@ -437,19 +414,19 @@ namespace _4.OutburstPrevention
                 switch (m_currentButton)
                 {
                     case 1:
-                        GasPressureInfoEntering gasPressureInfoEnteringForm = new GasPressureInfoEntering(this);
+                        GasPressureInfoEntering gasPressureInfoEnteringForm = new GasPressureInfoEntering();
                         gasPressureInfoEnteringForm.GasPressurePoint = pt;
                         gasPressureInfoEnteringForm.ShowDialog();//绘制瓦斯压力点
                         m_currentButton = 0;//解除当前按钮
                         break;
                     case 2:
-                        GasContentInfoEntering gasContentInfoEnteringForm = new GasContentInfoEntering(this);
+                        GasContentInfoEntering gasContentInfoEnteringForm = new GasContentInfoEntering();
                         gasContentInfoEnteringForm.GasContentPoint = pt;
                         gasContentInfoEnteringForm.ShowDialog();//绘制瓦斯含量点
                         m_currentButton = 0;//解除当前按钮
                         break;
                     case 3:
-                        GasGushQuantityInfoEntering gasGushQuantityInfoEnteringForm = new GasGushQuantityInfoEntering(this);
+                        GasGushQuantityInfoEntering gasGushQuantityInfoEnteringForm = new GasGushQuantityInfoEntering();
                         gasGushQuantityInfoEnteringForm.GasGushQuantityPoint = pt;
                         gasGushQuantityInfoEnteringForm.ShowDialog();//绘制瓦斯涌出量点
                         m_currentButton = 0;//解除当前按钮
@@ -636,7 +613,7 @@ namespace _4.OutburstPrevention
         {
             m_currentButton = 0;
 
-            GasContentInfoManagement GasContentInfoManagementForm = new GasContentInfoManagement(this);
+            GasContentInfoManagement GasContentInfoManagementForm = new GasContentInfoManagement();
             GasContentInfoManagementForm.Show();
         }
         //瓦斯压力点
@@ -644,7 +621,7 @@ namespace _4.OutburstPrevention
         {
             m_currentButton = 0;
 
-            GasPressureInfoManagement gasPressureInfoManagement = new GasPressureInfoManagement(this);
+            GasPressureInfoManagement gasPressureInfoManagement = new GasPressureInfoManagement();
             gasPressureInfoManagement.Show();
         }
         //瓦斯涌出量点
@@ -652,7 +629,7 @@ namespace _4.OutburstPrevention
         {
             m_currentButton = 0;
 
-            GasGushQuantityInfoManagement gasGushQuantityInfoManagementForm = new GasGushQuantityInfoManagement(this);
+            GasGushQuantityInfoManagement gasGushQuantityInfoManagementForm = new GasGushQuantityInfoManagement();
             gasGushQuantityInfoManagementForm.Show();
         }
 
@@ -661,7 +638,7 @@ namespace _4.OutburstPrevention
         {
             m_currentButton = 0;
 
-            K1ValueManagement k1ValueManagement = new K1ValueManagement(this);
+            K1ValueManagement k1ValueManagement = new K1ValueManagement();
             k1ValueManagement.Show();
         }
 

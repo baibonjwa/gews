@@ -1,4 +1,4 @@
-﻿namespace _5.WarningManagement
+﻿namespace sys5
 {
     partial class WarningResultAnalysis
     {
@@ -40,7 +40,7 @@
             this.cValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cResult = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnStartAnalysis = new System.Windows.Forms.Button();
-            this.selectTunnelSimple1 = new LibCommonForm.SelectTunnelSimple(this.MainForm);
+            this.selectTunnelSimple1 = new LibCommonForm.SelectTunnelSimple();
             this.selectRuleUserControl1 = new LibCommonControl.SelectRuleUserControl();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();

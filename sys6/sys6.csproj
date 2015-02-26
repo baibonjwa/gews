@@ -283,7 +283,7 @@
       <DependentUpon>SelectTunnelSimple.cs</DependentUpon>
     </Compile>
     <Compile Include="SelectTunnelUserControl.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="SelectTunnelUserControl.Designer.cs">
       <DependentUpon>SelectTunnelUserControl.cs</DependentUpon>

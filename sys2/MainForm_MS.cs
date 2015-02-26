@@ -9,14 +9,13 @@ using GIS.Common;
 using GIS.HdProc;
 using LibAbout;
 using LibCommon;
-using LibCommonControl;
 using LibCommonForm;
 using LibDatabase;
 using LibPanels;
 
 namespace sys2
 {
-    public partial class MainForm_MS : SocketHelper
+    public partial class MainForm_MS : Form
     {
         private GIS_FileMenu m_FileMenu = new GIS_FileMenu();
 
@@ -30,8 +29,6 @@ namespace sys2
                 licenseStatus = (esriLicenseStatus)aoini.Initialize(esriLicenseProductCode.esriLicenseProductCodeStandard);
             }
             InitializeComponent();
-
-            base.DoInitilization();
 
             //////////////////////////////////////////////////////
             Log.Debug("[MS]...Loading Mxd file......");

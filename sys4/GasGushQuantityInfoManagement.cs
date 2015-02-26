@@ -26,7 +26,7 @@ using LibCommonForm;
 
 namespace _4.OutburstPrevention
 {
-    public partial class GasGushQuantityInfoManagement : BaseForm
+    public partial class GasGushQuantityInfoManagement : Form
     {
         /** 明细部开始index位置 **/
         private const int _iRowDetailStartIndex = 4;
@@ -44,11 +44,9 @@ namespace _4.OutburstPrevention
         /// <summary>
         /// 构造方法
         /// </summary>
-        public GasGushQuantityInfoManagement(SocketHelper mainFrm)
+        public GasGushQuantityInfoManagement()
         {
             InitializeComponent();
-
-            this.MainForm = mainFrm;
 
             // 设置窗体默认属性
             LibCommon.FormDefaultPropertiesSetter.SetManagementFormDefaultProperties(this, Const_OP.MANAGE_GASGUSHQUANTITY_INFO);
@@ -229,7 +227,7 @@ namespace _4.OutburstPrevention
         /// <param name="e"></param>
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            GasGushQuantityInfoEntering gasGushQuantityInfoEnteringForm = new GasGushQuantityInfoEntering(this.MainForm);
+            GasGushQuantityInfoEntering gasGushQuantityInfoEnteringForm = new GasGushQuantityInfoEntering();
             if (DialogResult.OK == gasGushQuantityInfoEnteringForm.ShowDialog())
             {
                 // 加载瓦斯涌出量数据
@@ -254,7 +252,7 @@ namespace _4.OutburstPrevention
             // 获取编号（主键）
             string strPrimaryKey = this.fpGasGushQuantityInfo.Sheets[0].Cells[iSelIdxsArr[0], _primaryKeyIndex].Text;
 
-            GasGushQuantityInfoEntering gasGushQuantityInfoEnteringForm = new GasGushQuantityInfoEntering(strPrimaryKey, this.MainForm);
+            GasGushQuantityInfoEntering gasGushQuantityInfoEnteringForm = new GasGushQuantityInfoEntering(strPrimaryKey);
             if (DialogResult.OK == gasGushQuantityInfoEnteringForm.ShowDialog())
             {
                 // 加载瓦斯涌出量数据

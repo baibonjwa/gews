@@ -271,7 +271,6 @@
             // 
             this.selectWorkingfaceSimple1.IWorkingfaceId = 0;
             this.selectWorkingfaceSimple1.Location = new System.Drawing.Point(131, 15);
-            this.selectWorkingfaceSimple1.MainForm = null;
             this.selectWorkingfaceSimple1.Name = "selectWorkingfaceSimple1";
             this.selectWorkingfaceSimple1.Size = new System.Drawing.Size(219, 38);
             this.selectWorkingfaceSimple1.TabIndex = 19;

@@ -15,6 +15,7 @@ using System.Threading;
 using System.Windows.Forms;
 using DevExpress.XtraBars;
 using LibAbout;
+using LibBusiness;
 using LibCommon;
 using LibCommonForm;
 using LibDatabase;
@@ -70,7 +71,7 @@ namespace sys1
             EnableDeleteAndModifyBtn = true;
             this.mniAbout = mniAbout;
             InitializeComponent();
-            DoInitilization();
+            SocketUtil.DoInitilization();
 
 
             var fp = new FileProperties(configFileName);
@@ -91,7 +92,7 @@ namespace sys1
             //初始化客户端Socket
             //InitClientSocket();
 
-            //udpServerSocket = new Socket(AddressFamily.InterNetwork,
+            //udpServerSocket = new SocketUtil(AddressFamily.InterNetwork,
             //  SocketType.Dgram, ProtocolType.Udp);
             //udpServerSocket.Bind(ep);//udpServerSocket.BeginReceiveFrom(buffer, 0, 1024, SocketFlags.None, ref ep, new AsyncCallback(ReceiveData), udpServerSocket);
 
@@ -151,7 +152,7 @@ namespace sys1
         //传感器管理
         private void mniSensorManagement_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var probeInfoManagementForm = new  ProbeInfoManagement();
+            var probeInfoManagementForm = new ProbeInfoManagement();
             probeInfoManagementForm.Show();
         }
 
@@ -227,7 +228,7 @@ namespace sys1
         // 传感器数据管理
         private void mniSensorDataManage_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var gasConcentrationProbeDataManamementForm = new GasConcentrationProbeDataManamement(this);
+            var gasConcentrationProbeDataManamementForm = new GasConcentrationProbeDataManamement();
             gasConcentrationProbeDataManamementForm.Show();
         }
 
@@ -1067,7 +1068,7 @@ namespace sys1
         // 坏数据剔除
         private void bbiBadDataEdit_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var bdd = new BadDataDelete(this);
+            var bdd = new BadDataDelete();
             bdd.ShowDialog();
         }
 
@@ -1077,8 +1078,8 @@ namespace sys1
         //    IPEndPoint sender = new IPEndPoint(IPAddress.Any, 0);
         //    EndPoint tempRemoteEP = (EndPoint)sender;
 
-        //    // Get the Socket
-        //    Socket remote = (Socket)iar.AsyncState;
+        //    // Get the SocketUtil
+        //    SocketUtil remote = (SocketUtil)iar.AsyncState;
 
         //    // Call EndReceiveFrom to get the received Data
         //    int recv = remote.EndReceiveFrom(iar, ref tempRemoteEP);

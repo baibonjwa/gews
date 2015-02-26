@@ -13,7 +13,7 @@ using LibEntity;
 
 namespace sys3
 {
-    public partial class TunnelInfoManagement : BaseForm
+    public partial class TunnelInfoManagement : Form
     {
 
         /// <summary>

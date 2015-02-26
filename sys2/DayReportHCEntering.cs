@@ -10,7 +10,6 @@ using GIS.HdProc;
 using LibBusiness;
 using LibBusiness.CommonBLL;
 using LibCommon;
-using LibCommonControl;
 using LibCommonForm;
 using LibEntity;
 using LibPanels;
@@ -19,7 +18,7 @@ using TunnelDefaultSelect = LibBusiness.TunnelDefaultSelect;
 
 namespace sys2
 {
-    public partial class DayReportHcEntering : BaseForm
+    public partial class DayReportHcEntering : Form
     {
         #region ******变量声明******
 
@@ -585,7 +584,7 @@ namespace sys2
                 var msg = new UpdateWarningDataMsg(selectWorkingfaceSimple1.IWorkingfaceId,
                     Const.INVALID_ID,
                     DayReportHc.TableName, OPERATION_TYPE.ADD, DateTime.Now);
-                MainForm.SendMsg2Server(msg);
+                SocketUtil.SendMsg2Server(msg);
                 Log.Debug("发送地址构造消息------完成" + msg.ToString());
             }
         }
@@ -660,7 +659,7 @@ namespace sys2
             // 通知服务器数据已经修改
             var msg = new UpdateWarningDataMsg(workingFace.WorkingFaceId, tunnelQY.TunnelId,
                 DayReportHc.TableName, OPERATION_TYPE.UPDATE, DateTime.Now);
-            MainForm.SendMsg2Server(msg);
+            SocketUtil.SendMsg2Server(msg);
         }
 
         /// <summary>

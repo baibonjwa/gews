@@ -6,15 +6,14 @@ using LibEntity;
 
 namespace LibPanels
 {
-    public partial class GasInfoManagement : BaseForm
+    public partial class GasInfoManagement : Form
     {
 
         /// <summary>
         ///     构造方法
         /// </summary>
-        public GasInfoManagement(SocketHelper mainFrm)
+        public GasInfoManagement()
         {
-            MainForm = mainFrm;
             InitializeComponent();
         }
 
@@ -58,7 +57,7 @@ namespace LibPanels
         private void tsBtnAdd_Click(object sender, EventArgs e)
         {
             //MineData m = new MineData();
-            var m = new MineDataSimple(MainForm)
+            var m = new MineDataSimple()
             {
                 Text = new LibPanels(MineDataPanelName.GasData).panelFormName
             };
@@ -70,7 +69,7 @@ namespace LibPanels
 
         private void tsBtnModify_Click(object sender, EventArgs e)
         {
-            var m = new MineData(MainForm) { Text = new LibPanels(MineDataPanelName.GasData_Change).panelFormName };
+            var m = new MineData() { Text = new LibPanels(MineDataPanelName.GasData_Change).panelFormName };
 
             if (DialogResult.OK == m.ShowDialog())
             {

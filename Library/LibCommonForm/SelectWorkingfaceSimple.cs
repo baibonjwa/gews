@@ -13,7 +13,7 @@ using LibEntity;
 
 namespace LibCommonForm
 {
-    public partial class SelectWorkingfaceSimple : BaseControl
+    public partial class SelectWorkingfaceSimple : UserControl
     {
         // 工作面编号，无效巷道ID均使用
         private int _iWorkingfaceId = Const.INVALID_ID;
@@ -31,12 +31,6 @@ namespace LibCommonForm
         public SelectWorkingfaceSimple(params WorkingfaceTypeEnum[] types)
         {
             this.types = types;
-            InitializeComponent();
-        }
-
-        public SelectWorkingfaceSimple(SocketHelper mainFrm)
-        {
-            this.MainForm = mainFrm;
             InitializeComponent();
         }
 

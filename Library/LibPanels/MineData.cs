@@ -24,7 +24,7 @@ using NHibernate.Tuple.Entity;
 
 namespace LibPanels
 {
-    public partial class MineData
+    public partial class MineData : Form
     {
         //******定义变量***********
         VentilationInfoEntering ventilationInfoEntering = new VentilationInfoEntering();      //通风
@@ -51,9 +51,8 @@ namespace LibPanels
         /// <summary>
         /// 构造方法
         /// </summary>
-        public MineData(SocketHelper mainFrm)
+        public MineData()
         {
-            this.MainForm = mainFrm;
             InitializeComponent();
             selectTunnelUserControl1.LoadData();
 
@@ -64,9 +63,8 @@ namespace LibPanels
         /// 构造方法
         /// </summary>
         /// <param name="obj"></param>
-        public MineData(object obj, SocketHelper mainFrm)
+        public MineData(object obj)
         {
-            this.MainForm = mainFrm;
             this.obj = obj;
             tunnelEntity.TunnelId = ((LibEntity.MineData)obj).Tunnel.TunnelId;
             //tunnelEntity = TunnelInfoBLL.selectTunnelInfoByTunnelID(tunnelEntity.Tunnel);
@@ -683,7 +681,7 @@ namespace LibPanels
                 bResult = true;
                 UpdateWarningDataMsg msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.SelectedTunnel.TunnelId,
                     Management.TableName, OPERATION_TYPE.ADD, mEntity.Datetime);
-                this.MainForm.SendMsg2Server(msg);
+                SocketUtil.SendMsg2Server(msg);
             }
             //修改
             else if (this.Text == new LibPanels(MineDataPanelName.Management_Change).panelFormName)

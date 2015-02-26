@@ -7,7 +7,7 @@ using LibEntity;
 
 namespace LibCommonForm
 {
-    public partial class SelectWorkingFaceControl : BaseControl
+    public partial class SelectWorkingFaceControl : UserControl
     {
 
         public WorkingFace SelectedWorkingFace { get; set; }

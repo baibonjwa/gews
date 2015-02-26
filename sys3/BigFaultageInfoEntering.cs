@@ -10,7 +10,7 @@ using LibEntity;
 
 namespace sys3
 {
-    public partial class BigFaultageInfoEntering : BaseForm
+    public partial class BigFaultageInfoEntering : Form
     {
         /** 主键  **/
         /** 业务逻辑类型：添加/修改  **/

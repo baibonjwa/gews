@@ -16,7 +16,7 @@ using LibEntity;
 
 namespace sys3
 {
-    public partial class WireInfoManagement : BaseForm
+    public partial class WireInfoManagement : Form
     {
         //****************变量声明***************
 
@@ -91,7 +91,7 @@ namespace sys3
             tunnelEntity = Tunnel.Find(tunnelID);
 
             //导线修改界面
-            var wireInfoForm = new WireInfoEntering(wireEntity, this);
+            var wireInfoForm = new WireInfoEntering(wireEntity);
             if (DialogResult.OK == wireInfoForm.ShowDialog())
             {
                 RefreshData();

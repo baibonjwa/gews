@@ -21,7 +21,7 @@ using LibEntity;
 
 namespace LibCommonForm
 {
-    public partial class SelectTunnelDlg : BaseForm
+    public partial class SelectTunnelDlg : Form
     {
         public int tunnelId;
         public string tunnelName;
@@ -37,12 +37,9 @@ namespace LibCommonForm
             FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_GE.CHOOSE_TUNNEL);
         }
 
-        public SelectTunnelDlg(SocketHelper mainFrm, params TunnelTypeEnum[] types)
+        public SelectTunnelDlg(params TunnelTypeEnum[] types)
         {
             InitializeComponent();
-
-            this.MainForm = mainFrm;
-
             // 设置窗体默认属性
             FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_GE.CHOOSE_TUNNEL);
         }
@@ -51,9 +48,8 @@ namespace LibCommonForm
         /// 构造方法
         /// </summary>
         /// <param name="tEntity">巷道实体</param>
-        public SelectTunnelDlg(Tunnel tEntity, SocketHelper mainFrm)
+        public SelectTunnelDlg(Tunnel tEntity)
         {
-            this.MainForm = mainFrm;
             InitializeComponent();
 
             //窗体属性设置
@@ -64,9 +60,8 @@ namespace LibCommonForm
         /// 构造方法
         /// </summary>
         /// <param name="tEntity">巷道实体</param>
-        public SelectTunnelDlg(int[] intArr, SocketHelper mainFrm)
+        public SelectTunnelDlg(int[] intArr)
         {
-            this.MainForm = mainFrm;
             InitializeComponent();
 
             //窗体属性设置
@@ -78,9 +73,8 @@ namespace LibCommonForm
         /// 构造方法
         /// </summary>
         /// <param name="tEntity">巷道实体</param>
-        public SelectTunnelDlg(int[] intArr, SocketHelper mainFrm, int filterType)
+        public SelectTunnelDlg(int[] intArr, int filterType)
         {
-            this.MainForm = mainFrm;
             InitializeComponent();
 
             //窗体属性设置

@@ -265,7 +265,6 @@
             // 
             this.selectTunnelSimple1.ITunnelId = -1;
             this.selectTunnelSimple1.Location = new System.Drawing.Point(14, 37);
-            this.selectTunnelSimple1.MainForm = null;
             this.selectTunnelSimple1.Name = "selectTunnelSimple1";
             this.selectTunnelSimple1.Size = new System.Drawing.Size(219, 38);
             this.selectTunnelSimple1.TabIndex = 19;

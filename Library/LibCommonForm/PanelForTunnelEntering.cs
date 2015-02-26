@@ -19,7 +19,7 @@ using LibCommonControl;
 
 namespace LibCommonForm
 {
-    public partial class PanelForTunnelEntering : BaseForm
+    public partial class PanelForTunnelEntering : Form
     {
         // 矿井编号
         private static int _iMineId;
@@ -39,9 +39,8 @@ namespace LibCommonForm
         /// <summary>
         /// 构造方法
         /// </summary>
-        public PanelForTunnelEntering(SocketHelper mainFrm)
+        public PanelForTunnelEntering()
         {
-            this.MainForm = mainFrm;
             InitializeComponent();
             // 加载矿井信息
             loadMineName();
@@ -51,10 +50,8 @@ namespace LibCommonForm
         /// 带参数的构造方法
         /// </summary>
         /// <param name="intArr">存储所选矿井编号，水平编号，采区编号，工作面编号的数组</param>
-        public PanelForTunnelEntering(int[] intArr, SocketHelper mainFrm)
+        public PanelForTunnelEntering(int[] intArr)
         {
-            this.MainForm = mainFrm;
-
             InitializeComponent();
             // 加载矿井信息
             loadMineName();

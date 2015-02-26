@@ -183,11 +183,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FileProperties.cs" />
-    <Compile Include="GasConcentrationProbeDataEntering.cs" />
+    <Compile Include="GasConcentrationProbeDataEntering.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="GasConcentrationProbeDataEntering.Designer.cs">
       <DependentUpon>GasConcentrationProbeDataEntering.cs</DependentUpon>
     </Compile>
-    <Compile Include="GasConcentrationProbeDataManamement.cs" />
+    <Compile Include="GasConcentrationProbeDataManamement.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="GasConcentrationProbeDataManamement.Designer.cs">
       <DependentUpon>GasConcentrationProbeDataManamement.cs</DependentUpon>
     </Compile>
@@ -203,14 +207,18 @@
     <Compile Include="MoniroSettings.Designer.cs">
       <DependentUpon>MoniroSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="MonitoringDataAnalysis.cs" />
+    <Compile Include="MonitoringDataAnalysis.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="MonitoringDataAnalysis.Designer.cs">
       <DependentUpon>MonitoringDataAnalysis.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TimeUtil.cs" />
-    <Compile Include="BadDataDelete.cs" />
+    <Compile Include="BadDataDelete.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="BadDataDelete.Designer.cs">
       <DependentUpon>BadDataDelete.cs</DependentUpon>
     </Compile>

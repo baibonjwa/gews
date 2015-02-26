@@ -22,14 +22,13 @@ using LibEntity.Domain;
 
 namespace sys3
 {
-    public partial class TunnelHcManagement : BaseForm
+    public partial class TunnelHcManagement : Form
     {
         /// <summary>
         /// 构造方法
         /// </summary>
-        public TunnelHcManagement(SocketHelper mainFrm)
+        public TunnelHcManagement()
         {
-            this.MainForm = mainFrm;
             InitializeComponent();
 
             //窗体属性设置

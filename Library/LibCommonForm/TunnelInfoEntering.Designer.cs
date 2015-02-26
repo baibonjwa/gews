@@ -679,7 +679,6 @@
             // selectWorkingFaceControl1
             // 
             this.selectWorkingFaceControl1.Location = new System.Drawing.Point(4, 0);
-            this.selectWorkingFaceControl1.MainForm = null;
             this.selectWorkingFaceControl1.Name = "selectWorkingFaceControl1";
             this.selectWorkingFaceControl1.SelectedWorkingFace = null;
             this.selectWorkingFaceControl1.Size = new System.Drawing.Size(538, 219);

@@ -19,7 +19,7 @@ using _1.GasEmission;
 
 namespace sys1
 {
-    public partial class GasConcentrationProbeDataEntering : BaseForm
+    public partial class GasConcentrationProbeDataEntering : Form
     {
         /** 主键  **/
         /** 业务逻辑类型：添加、修改  **/
@@ -29,10 +29,8 @@ namespace sys1
         /// <summary>
         ///     构造方法
         /// </summary>
-        public GasConcentrationProbeDataEntering(SocketHelper mainFrm)
+        public GasConcentrationProbeDataEntering()
         {
-            MainForm = mainFrm;
-
             InitializeComponent();
 
             //分配权限
@@ -55,24 +53,6 @@ namespace sys1
             // 注册委托事件
             //selectTunnelUserControl1.TunnelNameChanged +=
             //    InheritTunnelNameChanged;
-        }
-
-        /// <summary>
-        ///     带参数的构造方法
-        /// </summary>
-        /// <param name="intArr"></param>
-        public GasConcentrationProbeDataEntering()
-        {
-
-            InitializeComponent();
-
-            // 设置窗体默认属性
-            FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this,
-                Const_GE.INSERT_GAS_CONCENTRATION_PROBE_DATA);
-
-            // 设置日期控件格式
-            dtpRecordTime.Format = DateTimePickerFormat.Custom;
-            dtpRecordTime.CustomFormat = Const.DATE_FORMART_YYYY_MM_DD;
         }
 
         /// <summary>
@@ -269,7 +249,7 @@ namespace sys1
                     WorkingFace workingfaceEnt = selectTunnelUserControl1.SelectedTunnel.WorkingFace;
                     var msg = new UpdateWarningDataMsg(workingfaceEnt.WorkingFaceId, selectTunnelUserControl1.SelectedTunnel.TunnelId,
                         DayReportHc.TableName, opType, gasConcentrationProbeDataEntity.RecordTime);
-                    MainForm.SendMsg2Server(msg);
+                    SocketUtil.SendMsg2Server(msg);
 
                     #endregion
                 }
@@ -287,7 +267,7 @@ namespace sys1
                 WorkingFace workingfaceEnt = selectTunnelUserControl1.SelectedTunnel.WorkingFace;
                 var msg = new UpdateWarningDataMsg(workingfaceEnt.WorkingFaceId, selectTunnelUserControl1.SelectedTunnel.TunnelId,
                     DayReportHc.TableName, opType, gasConcentrationProbeDataEntity.RecordTime);
-                MainForm.SendMsg2Server(msg);
+                SocketUtil.SendMsg2Server(msg);
 
                 #endregion
             }

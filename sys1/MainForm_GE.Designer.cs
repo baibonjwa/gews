@@ -1,8 +1,9 @@
-﻿using LibCommonControl;
+﻿using System.Windows.Forms;
+using LibCommonControl;
 
 namespace sys1
 {
-    partial class MainFormGe : SocketHelper
+    partial class MainFormGe : Form
     {
         private const string configFileName = "sys.properties";
 
@@ -459,7 +460,7 @@ namespace sys1
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBox1.Controls.Add(this._dgvData);
             this.groupBox1.Location = new System.Drawing.Point(17, 446);
@@ -539,7 +540,6 @@ namespace sys1
             // 
             this.selectTunnelSimple1.ITunnelId = 0;
             this.selectTunnelSimple1.Location = new System.Drawing.Point(13, 17);
-            this.selectTunnelSimple1.MainForm = this;
             this.selectTunnelSimple1.Name = "selectTunnelSimple1";
             this.selectTunnelSimple1.Size = new System.Drawing.Size(238, 38);
             this.selectTunnelSimple1.TabIndex = 0;
@@ -739,7 +739,7 @@ namespace sys1
             // 
             // picBoxLogo
             // 
-            this.picBoxLogo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.picBoxLogo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.picBoxLogo.Image = ((System.Drawing.Image)(resources.GetObject("picBoxLogo.Image")));
             this.picBoxLogo.Location = new System.Drawing.Point(3, 3);
@@ -770,7 +770,7 @@ namespace sys1
             // 
             // _ckbSetMarks3
             // 
-            this._ckbSetMarks3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this._ckbSetMarks3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this._ckbSetMarks3.AutoSize = true;
             this._ckbSetMarks3.Location = new System.Drawing.Point(1242, 277);
@@ -783,7 +783,7 @@ namespace sys1
             // 
             // _ckbSetMarks2
             // 
-            this._ckbSetMarks2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this._ckbSetMarks2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this._ckbSetMarks2.AutoSize = true;
             this._ckbSetMarks2.Location = new System.Drawing.Point(1242, 87);
@@ -796,7 +796,7 @@ namespace sys1
             // 
             // _ckbSetMarks1
             // 
-            this._ckbSetMarks1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this._ckbSetMarks1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this._ckbSetMarks1.AutoSize = true;
             this._ckbSetMarks1.Location = new System.Drawing.Point(1242, 490);
@@ -809,7 +809,7 @@ namespace sys1
             // 
             // tChartN
             // 
-            this.tChartN.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tChartN.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             // 
             // 
@@ -966,7 +966,7 @@ namespace sys1
             // 
             // tChartT2
             // 
-            this.tChartT2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tChartT2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             // 
             // 
@@ -1176,7 +1176,7 @@ namespace sys1
             // 
             // tChartM
             // 
-            this.tChartM.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tChartM.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             // 
             // 
@@ -1354,9 +1354,6 @@ namespace sys1
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.LookAndFeel.SkinName = "Office 2007 Blue";
-            this.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat;
-            this.LookAndFeel.UseDefaultLookAndFeel = false;
             this.Name = "MainFormGe";
             this.Text = "KJGEW110 工作面瓦斯涌出动态特征管理系统";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

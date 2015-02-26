@@ -1,13 +1,4 @@
-﻿// ******************************************************************
-// 概  述：瓦斯浓度探头数据查询
-// 作  者：伍鑫
-// 创建日期：2014/03/11
-// 版本号：V1.0
-// 版本信息:
-// V1.0 新建
-// ******************************************************************
-
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -15,14 +6,11 @@ using System.Windows.Forms;
 using FarPoint.Win;
 using FarPoint.Win.Spread;
 using LibCommon;
-using LibCommonControl;
-using LibCommonForm;
 using LibEntity;
-using _1.GasEmission;
 
 namespace sys1
 {
-    public partial class BadDataDelete : BaseForm
+    public partial class BadDataDelete : Form
     {
         /** 明细部开始index位置 **/
         private const int _iRowDetailStartIndex = 4;
@@ -43,12 +31,10 @@ namespace sys1
         private Thread t;
         private ThreadStart ts;
 
-        public BadDataDelete(SocketHelper mainFrm)
+        public BadDataDelete()
         {
-            MainForm = mainFrm;
             InitializeComponent();
             //为了使用上个窗体的坏数据点阈值变量
-            mainWin = (MainFormGe)mainFrm;
             //分配用户权限
             if (CurrentUser.CurLoginUserInfo.Permission != Permission.管理员.ToString())
             {
@@ -490,7 +476,7 @@ namespace sys1
         /// <param name="e"></param>
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            var gasConcentrationProbeDataEntering = new GasConcentrationProbeDataEntering(MainForm);
+            var gasConcentrationProbeDataEntering = new GasConcentrationProbeDataEntering();
             if (DialogResult.OK == gasConcentrationProbeDataEntering.ShowDialog())
             {
                 if (_iDisposeFlag == Const.DISPOSE_FLAG_ONE)

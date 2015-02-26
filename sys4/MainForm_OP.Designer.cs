@@ -1,6 +1,4 @@
-﻿using LibCommonControl;
-
-namespace _4.OutburstPrevention
+﻿namespace sys4
 {
     partial class MainForm_OP
     {
@@ -548,7 +546,7 @@ namespace _4.OutburstPrevention
             // 
             this.mniSaveAs.Caption = "另存为(&A)...";
             this.mniSaveAs.Id = 9;
-            this.mniSaveAs.ItemShortcut = new DevExpress.XtraBars.BarShortcut(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            this.mniSaveAs.ItemShortcut = new DevExpress.XtraBars.BarShortcut(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
                 | System.Windows.Forms.Keys.S));
             this.mniSaveAs.Name = "mniSaveAs";
             this.mniSaveAs.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniSaveAs_ItemClick);
@@ -700,7 +698,7 @@ namespace _4.OutburstPrevention
             // 
             this.mniWSYLDHZ.Caption = "瓦斯压力点绘制(&W)";
             this.mniWSYLDHZ.Id = 22;
-            this.mniWSYLDHZ.ItemShortcut = new DevExpress.XtraBars.BarShortcut(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            this.mniWSYLDHZ.ItemShortcut = new DevExpress.XtraBars.BarShortcut(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
                 | System.Windows.Forms.Keys.D0));
             this.mniWSYLDHZ.Name = "mniWSYLDHZ";
             this.mniWSYLDHZ.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniWSYLDHZ_ItemClick);
@@ -709,7 +707,7 @@ namespace _4.OutburstPrevention
             // 
             this.mniWSHLDHZ.Caption = "瓦斯含量点绘制(&H)";
             this.mniWSHLDHZ.Id = 23;
-            this.mniWSHLDHZ.ItemShortcut = new DevExpress.XtraBars.BarShortcut(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            this.mniWSHLDHZ.ItemShortcut = new DevExpress.XtraBars.BarShortcut(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
                 | System.Windows.Forms.Keys.D1));
             this.mniWSHLDHZ.Name = "mniWSHLDHZ";
             this.mniWSHLDHZ.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniWSHLDHZ_ItemClick);
@@ -718,7 +716,7 @@ namespace _4.OutburstPrevention
             // 
             this.mniWSYCLDHZ.Caption = "瓦斯涌出量点绘制(&Y)";
             this.mniWSYCLDHZ.Id = 24;
-            this.mniWSYCLDHZ.ItemShortcut = new DevExpress.XtraBars.BarShortcut(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            this.mniWSYCLDHZ.ItemShortcut = new DevExpress.XtraBars.BarShortcut(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
                 | System.Windows.Forms.Keys.D2));
             this.mniWSYCLDHZ.Name = "mniWSYCLDHZ";
             this.mniWSYCLDHZ.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniWSYCLDHZ_ItemClick);
@@ -869,7 +867,7 @@ namespace _4.OutburstPrevention
             this.mniDatabaseSet.Caption = "数据库设置(&S)...";
             this.mniDatabaseSet.Id = 37;
             this.mniDatabaseSet.ImageIndex = 10;
-            this.mniDatabaseSet.ItemShortcut = new DevExpress.XtraBars.BarShortcut(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            this.mniDatabaseSet.ItemShortcut = new DevExpress.XtraBars.BarShortcut(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
                 | System.Windows.Forms.Keys.J));
             this.mniDatabaseSet.Name = "mniDatabaseSet";
             this.mniDatabaseSet.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniDatabaseSet_ItemClick);
@@ -1273,7 +1271,7 @@ namespace _4.OutburstPrevention
             this.mniExport3.Id = 10;
             this.mniExport3.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E));
             this.mniExport3.Name = "mniExport3";
-            this.mniExport3.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniExport_ItemClick); 
+            this.mniExport3.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniExport_ItemClick);
             // 
             // barButtonItem1
             // 

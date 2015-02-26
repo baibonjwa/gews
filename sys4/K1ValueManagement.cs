@@ -6,22 +6,19 @@
 // 版本信息：
 // V1.0 新建
 // ******************************************************************
+
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using LibBusiness;
-using LibEntity;
 using LibCommon;
-using LibCommonControl;
+using LibEntity;
+using _4.OutburstPrevention;
 
-namespace _4.OutburstPrevention
+namespace sys4
 {
-    public partial class K1ValueManagement : BaseForm
+    public partial class K1ValueManagement : Form
     {
         /***********变量声明*************/
         private int _iRecordCount = 0;
@@ -42,11 +39,9 @@ namespace _4.OutburstPrevention
         /// <summary>
         /// 构造方法
         /// </summary>
-        public K1ValueManagement(SocketHelper mainFrm)
+        public K1ValueManagement()
         {
             InitializeComponent();
-
-            this.MainForm = mainFrm;
 
             dataPager1.FrmChild_EventHandler += FrmParent_EventHandler;
 
@@ -95,7 +90,7 @@ namespace _4.OutburstPrevention
         /// <param name="e"></param>
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            K1ValueEntering k1value = new K1ValueEntering(this.MainForm);
+            K1ValueEntering k1value = new K1ValueEntering();
             //添加成功
             if (DialogResult.OK == k1value.ShowDialog())
             {
@@ -118,7 +113,7 @@ namespace _4.OutburstPrevention
             setK1ValueEntity();
             //记录当前选定单元格
             _tmpRowIndex = fpK1Value.ActiveSheet.ActiveRowIndex;
-            K1ValueEntering k1value = new K1ValueEntering(arr, k1ValueEntity.Id, this.MainForm);
+            K1ValueEntering k1value = new K1ValueEntering(arr, k1ValueEntity.Id);
             //添加成功
             if (DialogResult.OK == k1value.ShowDialog())
             {

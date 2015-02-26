@@ -833,8 +833,6 @@
             this.Controls.Add(this.barDockControl2);
             this.Controls.Add(this.barDockControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat;
-            this.LookAndFeel.UseDefaultLookAndFeel = false;
             this.Name = "MainForm_MS";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "KJGEW111 工作面采掘进度管理系统";

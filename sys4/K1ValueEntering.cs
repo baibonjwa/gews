@@ -28,7 +28,7 @@ using LibSocket;
 
 namespace _4.OutburstPrevention
 {
-    public partial class K1ValueEntering : BaseForm
+    public partial class K1ValueEntering : Form
     {
         #region ******各种变量定义******
         K1Value _k1ValueEntity = new K1Value();
@@ -54,11 +54,9 @@ namespace _4.OutburstPrevention
         /// <summary>
         /// 添加
         /// </summary>
-        public K1ValueEntering(SocketHelper mainFrm)
+        public K1ValueEntering()
         {
             InitializeComponent();
-
-            this.MainForm = mainFrm;
 
             //设置窗体属性
             LibCommon.FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_OP.K1_VALUE_ADD);
@@ -82,10 +80,8 @@ namespace _4.OutburstPrevention
         /// 修改
         /// </summary>
         /// <param name="array"></param>
-        public K1ValueEntering(int[] array, int id, SocketHelper mainFrm)
+        public K1ValueEntering(int[] array, int id)
         {
-            this.MainForm = mainFrm;
-
             arr = array;
             _k1ValueEntity.Id = id;
 
@@ -300,7 +296,7 @@ namespace _4.OutburstPrevention
                 {
                     //TODO:添加成功
                     UpdateWarningDataMsg msg = new UpdateWarningDataMsg(tunnelEntity.WorkingFace.WorkingFaceId, tunnelEntity.TunnelId, K1ValueDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, DateTime.Now);
-                    this.MainForm.SendMsg2Server(msg);
+                    SocketUtil.SendMsg2Server(msg);
                     DrawGasGushQuantityPt();
                 }
                 else
@@ -395,7 +391,7 @@ namespace _4.OutburstPrevention
                     {
                         //TODO:修改成功
                         UpdateWarningDataMsg msg = new UpdateWarningDataMsg(tunnelEntity.WorkingFace.WorkingFaceId, tunnelEntity.TunnelId, K1ValueDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, DateTime.Now);
-                        this.MainForm.SendMsg2Server(msg);
+                        SocketUtil.SendMsg2Server(msg);
                         DelGasGushQuantityPt("", "");
                         DrawGasGushQuantityPt();
                     }

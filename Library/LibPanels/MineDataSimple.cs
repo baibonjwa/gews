@@ -11,7 +11,7 @@ using LibSocket;
 
 namespace LibPanels
 {
-    public partial class MineDataSimple : BaseForm
+    public partial class MineDataSimple : Form
     {
         //******定义变量***********
         private GasInfoEntering _gasData = new GasInfoEntering(); //瓦斯
@@ -33,9 +33,8 @@ namespace LibPanels
 
         //*************************
 
-        public MineDataSimple(SocketHelper mainFrm)
+        public MineDataSimple()
         {
-            MainForm = mainFrm;
             InitializeComponent();
 
             // 设置工作制式
@@ -238,7 +237,7 @@ namespace LibPanels
                 Log.Debug("发送添加通风信息的Socket信息");
                 var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.ITunnelId,
                     Ventilation.TableName, OPERATION_TYPE.ADD, dtpDateTime.Value);
-                MainForm.SendMsg2Server(msg);
+                SocketUtil.SendMsg2Server(msg);
                 Log.Debug("发送添加通风信息的Socket信息完成");
             }
             else if (Text == new LibPanels(MineDataPanelName.Ventilation_Change).panelFormName)
@@ -248,7 +247,7 @@ namespace LibPanels
                 Log.Debug("发送修改通风信息的Socket信息");
                 var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.ITunnelId,
                     Ventilation.TableName, OPERATION_TYPE.UPDATE, dtpDateTime.Value);
-                MainForm.SendMsg2Server(msg);
+                SocketUtil.SendMsg2Server(msg);
                 Log.Debug("发送修改通风信息的Socket信息完成");
             }
             return bResult;
@@ -286,13 +285,13 @@ namespace LibPanels
                 {
                     var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.ITunnelId,
                         LibEntity.CoalExistence.TableName, OPERATION_TYPE.ADD, dtpDateTime.Value);
-                    MainForm.SendMsg2Server(msg);
+                    SocketUtil.SendMsg2Server(msg);
                 }
                 else if (Text == new LibPanels(MineDataPanelName.CoalExistence_Change).panelFormName)
                 {
                     var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.ITunnelId,
                         LibEntity.CoalExistence.TableName, OPERATION_TYPE.UPDATE, dtpDateTime.Value);
-                    MainForm.SendMsg2Server(msg);
+                    SocketUtil.SendMsg2Server(msg);
                 }
                 return true;
             }
@@ -328,7 +327,7 @@ namespace LibPanels
                 Log.Debug("发送添加瓦斯信息的Socket信息");
                 var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.ITunnelId,
                     GasData.TableName, OPERATION_TYPE.ADD, dtpDateTime.Value);
-                MainForm.SendMsg2Server(msg);
+                SocketUtil.SendMsg2Server(msg);
                 Log.Debug("发送添加瓦斯信息的Socket信息完成");
             }
             else if (Text == new LibPanels(MineDataPanelName.GasData_Change).panelFormName)
@@ -336,7 +335,7 @@ namespace LibPanels
                 Log.Debug("发送修改瓦斯信息的Socket信息");
                 var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.ITunnelId,
                     GasData.TableName, OPERATION_TYPE.UPDATE, dtpDateTime.Value);
-                MainForm.SendMsg2Server(msg);
+                SocketUtil.SendMsg2Server(msg);
                 gdEntity.SaveAndFlush();
                 bResult = true;
                 Log.Debug("发送修改瓦斯信息的Socket信息完成");
@@ -361,13 +360,13 @@ namespace LibPanels
 
                 var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.ITunnelId,
                     UsualForecastDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, dtpDateTime.Value);
-                MainForm.SendMsg2Server(msg);
+                SocketUtil.SendMsg2Server(msg);
             }
             else if (Text == new LibPanels(MineDataPanelName.UsualForecast_Change).panelFormName)
             {
                 var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.ITunnelId,
                     UsualForecastDbConstNames.TABLE_NAME, OPERATION_TYPE.UPDATE, dtpDateTime.Value);
-                MainForm.SendMsg2Server(msg);
+                SocketUtil.SendMsg2Server(msg);
                 bResult = UsualForecastBLL.updateUsualForecastInfo(ufEntity);
             }
             return bResult;
@@ -403,7 +402,7 @@ namespace LibPanels
                 Log.Debug("发送添加管理信息的Socket信息");
                 var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.ITunnelId,
                     Management.TableName, OPERATION_TYPE.ADD, dtpDateTime.Value);
-                MainForm.SendMsg2Server(msg);
+                SocketUtil.SendMsg2Server(msg);
                 Log.Debug("发送添加管理信息的Socket信息完成");
             }
             else if (Text == new LibPanels(MineDataPanelName.Management_Change).panelFormName)
@@ -413,7 +412,7 @@ namespace LibPanels
                 Log.Debug("发送修改管理信息的Socket信息");
                 var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.ITunnelId,
                     Management.TableName, OPERATION_TYPE.UPDATE, mEntity.Datetime);
-                MainForm.SendMsg2Server(msg);
+                SocketUtil.SendMsg2Server(msg);
                 Log.Debug("发送修改管理信息的Socket信息完成");
             }
             return bResult;
@@ -445,7 +444,7 @@ namespace LibPanels
                 Log.Debug("发送添加地址构造信息的Socket信息");
                 var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.ITunnelId,
                      GeologicStructure.TableName, OPERATION_TYPE.ADD, dtpDateTime.Value);
-                MainForm.SendMsg2Server(msg);
+                SocketUtil.SendMsg2Server(msg);
                 Log.Debug("发送添加地址构造信息的Socket信息完成");
             }
             else if (Text == new LibPanels(MineDataPanelName.GeologicStructure_Change).panelFormName)
@@ -455,7 +454,7 @@ namespace LibPanels
                 Log.Debug("发送修改地址构造信息的Socket信息");
                 var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.ITunnelId,
                      GeologicStructure.TableName, OPERATION_TYPE.UPDATE, dtpDateTime.Value);
-                MainForm.SendMsg2Server(msg);
+                SocketUtil.SendMsg2Server(msg);
                 Log.Debug("发送修改地址构造信息的Socket信息完成");
             }
             return bResult;

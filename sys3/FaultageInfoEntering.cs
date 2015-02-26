@@ -21,7 +21,7 @@ using stdole;
 
 namespace sys3
 {
-    public partial class FaultageInfoEntering : SocketHelper
+    public partial class FaultageInfoEntering : Form
     {
         /** 主键  **/
         /** 业务逻辑类型：添加/修改  **/
@@ -374,7 +374,7 @@ namespace sys3
             Log.Debug("更新服务端断层Map------开始");
             // 通知服务端回采进尺已经添加
             var msg = new GeologyMsg(0, 0, "", DateTime.Now, COMMAND_ID.UPDATE_GEOLOG_DATA);
-            SendMsg2Server(msg);
+            SocketUtil.SendMsg2Server(msg);
             Log.Debug("服务端断层Map------完成" + msg);
         }
 

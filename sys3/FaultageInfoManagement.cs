@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using ESRI.ArcGIS.Carto;
 using GIS.Common;
+using LibBusiness;
 using LibCommon;
 using LibCommonControl;
 using LibEntity;
@@ -10,7 +11,7 @@ using LibSocket;
 
 namespace sys3
 {
-    public partial class FaultageInfoManagement : SocketHelper
+    public partial class FaultageInfoManagement : Form
     {
         public FaultageInfoManagement()
         {
@@ -185,7 +186,7 @@ namespace sys3
             Log.Debug("更新服务端断层Map------开始");
             // 通知服务端回采进尺已经添加
             var msg = new GeologyMsg(0, 0, "", DateTime.Now, COMMAND_ID.UPDATE_GEOLOG_DATA);
-            SendMsg2Server(msg);
+            SocketUtil.SendMsg2Server(msg);
             Log.Debug("服务端断层Map------完成" + msg);
         }
 

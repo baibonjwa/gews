@@ -14,6 +14,7 @@ using GIS.HdProc;
 using GIS.LayersManager;
 using GIS.Warning;
 using LibAbout;
+using LibBusiness;
 using LibCommon;
 using LibCommonControl;
 using LibCommonForm;
@@ -21,10 +22,11 @@ using LibDatabase;
 using LibPanels;
 using LibSocket;
 using sys2;
+using sys5;
 
 namespace _5.WarningManagement
 {
-    public partial class MainForm_WM : SocketHelper
+    public partial class MainForm_WM : Form
     {
         //最新预警结果
         private static PreWarningLastedResultQuery _latestWarningResult;
@@ -46,8 +48,6 @@ namespace _5.WarningManagement
             }
             InitializeComponent();
 
-            base.DoInitilization();
-
             //////////////////////////////////////////////////////
             ///文件菜单
             mapControl_WM.LoadMxFile(Application.StartupPath + "\\" + GIS_Const.DEFAULT_MXD_FILE);
@@ -59,8 +59,8 @@ namespace _5.WarningManagement
             //////////////////////////////////////////////////////
             ///绘制基本图元工具条
             ///加载测试数 
-            var mapControl = (IMapControl3) mapControl_WM.Object;
-            var toolbarControl = (IToolbarControl) toolBar_WM.Object;
+            var mapControl = (IMapControl3)mapControl_WM.Object;
+            var toolbarControl = (IToolbarControl)toolBar_WM.Object;
 
             //绑定控件
             toolBar_WM.SetBuddyControl(mapControl);
@@ -151,9 +151,9 @@ namespace _5.WarningManagement
         private void MainForm_WM_Load(object sender, EventArgs e)
         {
             //注册更新预警结果事件
-            ClientSocket.OnMsgUpdateWarningResult += UpdateWarningResultUI;
+            SocketUtil.DoInitilization();
             var msg = new SocketMessage(COMMAND_ID.REGISTER_WARNING_RESULT_NOTIFICATION_ALL, DateTime.Now);
-            SendMsg2Server(msg);
+            SocketUtil.SendMsg2Server(msg);
 
             //浮动工具条中文设置
             DXSeting.floatToolsLoadSet();
@@ -201,7 +201,7 @@ namespace _5.WarningManagement
 
         private void barBtnGasAnalysis_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var wra = new WarningResultAnalysis(WarningReasonItems.瓦斯, this);
+            var wra = new WarningResultAnalysis(WarningReasonItems.瓦斯);
             wra.Show();
         }
 
@@ -211,28 +211,28 @@ namespace _5.WarningManagement
 
         private void barBtnCoalAnalysis_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var wra = new WarningResultAnalysis(WarningReasonItems.煤层赋存, this);
+            var wra = new WarningResultAnalysis(WarningReasonItems.煤层赋存);
             wra.Show();
         }
 
         // 通风预警结果分析
         private void barBtnVentilationAnalysis_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var wra = new WarningResultAnalysis(WarningReasonItems.通风, this);
+            var wra = new WarningResultAnalysis(WarningReasonItems.通风);
             wra.Show();
         }
 
         // 管理因素预警结果分析
         private void barBtnManagementAnalysis_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var wra = new WarningResultAnalysis(WarningReasonItems.管理因素, this);
+            var wra = new WarningResultAnalysis(WarningReasonItems.管理因素);
             wra.Show();
         }
 
         // 地质构造预警结果分析
         private void barBtnGeologyAnalysis_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var wra = new WarningResultAnalysis(WarningReasonItems.地质构造, this);
+            var wra = new WarningResultAnalysis(WarningReasonItems.地质构造);
             wra.Show();
         }
 
@@ -290,9 +290,9 @@ namespace _5.WarningManagement
                 ILegendGroup pLG = new LegendGroupClass();
                 if (unk is ILegendGroup)
                 {
-                    pLG = (ILegendGroup) unk;
+                    pLG = (ILegendGroup)unk;
                 }
-                pLC = pLG.get_Class((int) data);
+                pLC = pLG.get_Class((int)data);
                 ISymbol pSym;
                 pSym = pLC.Symbol;
                 ISymbolSelector pSS = new
@@ -455,14 +455,14 @@ namespace _5.WarningManagement
         //瓦斯超限预警规则设置
         private void mniWSCXYJGZSZ_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var dlg = new SetTunnelPreWarningRules(RULE_TYPE_WARNING_TYPE_FILTER.OUT_OF_LIMIT, this);
+            var dlg = new SetTunnelPreWarningRules(RULE_TYPE_WARNING_TYPE_FILTER.OUT_OF_LIMIT);
             dlg.ShowDialog();
         }
 
         //瓦斯突出预警规则设置
         private void mniWSTCYJGZSZ_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var dlg = new SetTunnelPreWarningRules(RULE_TYPE_WARNING_TYPE_FILTER.OUTBURST, this);
+            var dlg = new SetTunnelPreWarningRules(RULE_TYPE_WARNING_TYPE_FILTER.OUTBURST);
             dlg.ShowDialog();
         }
 
@@ -480,28 +480,28 @@ namespace _5.WarningManagement
         //瓦斯信息
         private void mniWSXX_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var gdm = new GasInfoManagement(this);
+            var gdm = new GasInfoManagement();
             gdm.Show();
         }
 
         //地质构造信息
         private void mniDZGZXX_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var geologicStructrueManagement = new GeologicStructureInfoManagement(this);
+            var geologicStructrueManagement = new GeologicStructureInfoManagement();
             geologicStructrueManagement.Show();
         }
 
         //煤层赋存信息
         private void mniMCFCXX_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var cem = new CoalExistenceInfoManagement(this);
+            var cem = new CoalExistenceInfoManagement();
             cem.Show();
         }
 
         //通风信息
         private void mniTFXX_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var vim = new VentilationInfoManagement(this);
+            var vim = new VentilationInfoManagement();
             vim.Show();
         }
 

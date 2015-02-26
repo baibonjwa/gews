@@ -11,6 +11,7 @@ using GIS.Common;
 using GIS.HdProc;
 using GIS.View;
 using LibAbout;
+using LibBusiness;
 using LibCommon;
 using LibCommonControl;
 using LibCommonForm;
@@ -19,7 +20,7 @@ using _3.GeologyMeasure;
 #endregion
 namespace sys3
 {
-    public partial class MainForm_GM : SocketHelper
+    public partial class MainForm_GM : Form
     {
         private GIS_FileMenu m_FileMenu = new GIS_FileMenu();
         private string m_mapDocumentName = string.Empty;
@@ -34,7 +35,7 @@ namespace sys3
             }
             InitializeComponent();
 
-            base.DoInitilization();
+            SocketUtil.DoInitilization();
 
             //defaultLookAndFeel1.LookAndFeel.UseWindowsXPTheme = false;
             //defaultLookAndFeel1.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Skin;
@@ -418,13 +419,13 @@ namespace sys3
         //回采面管理
         private void mniHCHDGL_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            TunnelHcManagement thcm = new TunnelHcManagement(this);
+            TunnelHcManagement thcm = new TunnelHcManagement();
             thcm.Show();
         }
         //横川
         private void mniHENGCHUANHDGL_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            TunnelHChuanManagement formHChuanManagement = new TunnelHChuanManagement(this);
+            TunnelHChuanManagement formHChuanManagement = new TunnelHChuanManagement();
             formHChuanManagement.Show(this);
         }
         //井筒

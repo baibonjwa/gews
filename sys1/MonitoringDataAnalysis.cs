@@ -6,25 +6,18 @@
 // 版本信息：
 // V1.0 新建
 // ******************************************************************
+
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using LibDatabase;
-using System.Data.SqlClient;
-using LibBusiness;
-using LibEntity;
 using LibCommon;
-using LibCommonControl;
-using LibCommonForm;
+using LibDatabase;
+using LibEntity;
 
-namespace _1.GasEmission
+namespace sys1
 {
-    public partial class MonitoringDataAnalysis : BaseForm
+    public partial class MonitoringDataAnalysis : Form
     {
         /** 探头数据更新频率(单位：秒) **/
         private int _xInterval = 5;
@@ -39,9 +32,8 @@ namespace _1.GasEmission
         /// <summary>
         /// 构造方法
         /// </summary>
-        public MonitoringDataAnalysis(SocketHelper mainFrm)
+        public MonitoringDataAnalysis()
         {
-            this.MainForm = mainFrm;
             InitializeComponent();
 
             // 调用选择巷道控件时需要调用的方法

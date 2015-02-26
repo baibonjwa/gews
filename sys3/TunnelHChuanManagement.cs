@@ -17,7 +17,7 @@ using GIS.HdProc;
 
 namespace _3.GeologyMeasure
 {
-    public partial class TunnelHChuanManagement : BaseForm
+    public partial class TunnelHChuanManagement : Form
     {
         //****************变量声明***************
         private int _iRecordCount = 0;
@@ -38,9 +38,8 @@ namespace _3.GeologyMeasure
         /// <summary>
         /// 构造方法
         /// </summary>
-        public TunnelHChuanManagement(SocketHelper mainFrm)
+        public TunnelHChuanManagement()
         {
-            this.MainForm = mainFrm;
             InitializeComponent();
 
             //分页委托
@@ -265,7 +264,7 @@ namespace _3.GeologyMeasure
 
         private void tsBtnAdd_Click(object sender, EventArgs e)
         {
-            TunnelHChuanEntering tunnelHCForm = new TunnelHChuanEntering(this.MainForm, this);
+            TunnelHChuanEntering tunnelHCForm = new TunnelHChuanEntering(this);
             tunnelHCForm.Show(this);
         }
         public void refreshAdd()
@@ -534,7 +533,7 @@ namespace _3.GeologyMeasure
         {
             setTunnelHCEntityValue();
 
-            TunnelHChuanEntering tunnelHChuanForm = new TunnelHChuanEntering(tunnelHChuanEntity, this.MainForm, this);
+            TunnelHChuanEntering tunnelHChuanForm = new TunnelHChuanEntering(tunnelHChuanEntity, this);
             tunnelHChuanForm.Show(this);
         }
         public void refreshUpdate()

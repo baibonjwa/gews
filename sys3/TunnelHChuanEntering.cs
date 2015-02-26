@@ -22,7 +22,7 @@ using ESRI.ArcGIS.Geodatabase;
 
 namespace _3.GeologyMeasure
 {
-    public partial class TunnelHChuanEntering : BaseForm
+    public partial class TunnelHChuanEntering : Form
     {
         /************变量定义*****************/
         TunnelHChuan tunnelHChuanEntity = new TunnelHChuan();
@@ -31,9 +31,8 @@ namespace _3.GeologyMeasure
         TunnelHChuanManagement frmStop;
         /*************************************/
 
-        public TunnelHChuanEntering(SocketHelper mainFrm, TunnelHChuanManagement frmhc)
+        public TunnelHChuanEntering(TunnelHChuanManagement frmhc)
         {
-            this.MainForm = mainFrm;
             frmStop = frmhc;
             InitializeComponent();
 
@@ -58,9 +57,8 @@ namespace _3.GeologyMeasure
             setWorkTimeName();
         }
 
-        public TunnelHChuanEntering(TunnelHChuan tunnelHChuanEntity, SocketHelper mainFrm, TunnelHChuanManagement frmhc)
+        public TunnelHChuanEntering(TunnelHChuan tunnelHChuanEntity, TunnelHChuanManagement frmhc)
         {
-            this.MainForm = mainFrm;
             frmStop = frmhc;
             this.tunnelHChuanEntity = tunnelHChuanEntity;
             this.tmpTunnelHChuanEntity = tunnelHChuanEntity;
@@ -590,12 +588,12 @@ namespace _3.GeologyMeasure
             //第一次选择巷道
             if (tunnelEntity.TunnelId == 0)
             {
-                tunnelChoose = new SelectTunnelDlg(this.MainForm);
+                tunnelChoose = new SelectTunnelDlg();
             }
             //非第一次选择巷道
             else
             {
-                tunnelChoose = new SelectTunnelDlg(tunnelEntity, this.MainForm);
+                tunnelChoose = new SelectTunnelDlg(tunnelEntity);
             }
             //巷道选择完毕
             if (DialogResult.OK == tunnelChoose.ShowDialog())
@@ -764,12 +762,12 @@ namespace _3.GeologyMeasure
             //第一次选择巷道
             if (tunnelEntity.TunnelId == 0)
             {
-                tunnelChoose = new SelectTunnelDlg(this.MainForm);
+                tunnelChoose = new SelectTunnelDlg();
             }
             //非第一次选择巷道
             else
             {
-                tunnelChoose = new SelectTunnelDlg(tunnelEntity, this.MainForm);
+                tunnelChoose = new SelectTunnelDlg(tunnelEntity);
             }
             //巷道选择完毕
             if (DialogResult.OK == tunnelChoose.ShowDialog())

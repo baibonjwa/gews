@@ -23,16 +23,14 @@ using LibCommonForm;
 
 namespace LibPanels
 {
-    public partial class GeologicStructureInfoManagement : BaseForm
+    public partial class GeologicStructureInfoManagement : Form
     {
 
         /// <summary>
         /// 构造方法
         /// </summary>
-        public GeologicStructureInfoManagement(SocketHelper mainFrm)
+        public GeologicStructureInfoManagement()
         {
-            MainForm = mainFrm;
-
             InitializeComponent();
         }
 
@@ -50,7 +48,7 @@ namespace LibPanels
         private void tsBtnAdd_Click(object sender, EventArgs e)
         {
             //MineData m = new MineData();
-            var m = new MineDataSimple(this.MainForm)
+            var m = new MineDataSimple()
             {
                 Text = new LibPanels(MineDataPanelName.GeologicStructure).panelFormName
             };
@@ -67,7 +65,7 @@ namespace LibPanels
         /// <param name="e"></param>
         private void tsBtnModify_Click(object sender, EventArgs e)
         {
-            var m = new MineData(bandedGridView1.GetFocusedRow(), this.MainForm);
+            var m = new MineData(bandedGridView1.GetFocusedRow());
             m.Text = new LibPanels(MineDataPanelName.GeologicStructure_Change).panelFormName;
             if (DialogResult.OK == m.ShowDialog())
             {
