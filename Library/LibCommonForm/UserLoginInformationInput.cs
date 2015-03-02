@@ -135,7 +135,7 @@ namespace LibCommonForm
             //添加时查重
             if (_strIsAddOrModify == "add")
             {
-                UserLogin entAdd = LoginFormBLL.GetUserLoginInformationByLoginname(_txtLoginName.Text.ToString().Trim());
+                UserLogin entAdd = UserLogin.FindOneByLoginName(_txtLoginName.Text.ToString().Trim());
                 if (entAdd != null)
                 {
                     if (entAdd.LoginName == _txtLoginName.Text.ToString())
@@ -149,7 +149,7 @@ namespace LibCommonForm
             //修改
             else if (_strIsAddOrModify == "modify")
             {
-                UserLogin entModify = LoginFormBLL.GetUserLoginInformationByIDAndLoginName(_needModifyEnt.Id, _txtLoginName.Text.ToString().Trim());
+                UserLogin entModify = UserLogin.Find(_needModifyEnt.Id);
                 if (entModify != null)
                 {
                     Alert.alert(LibCommon.Const.LOGIN_NAME_EXIST, LibCommon.Const.NOTES, MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -210,8 +210,15 @@ namespace LibCommonForm
             if (_strIsAddOrModify == "modify")
             {
                 //数据库更新，ent代表修改的实体，参数2代表LoginName
-                LoginFormBLL.UpdateUserLoginInfomation(ent, UserLoginInformationManagement._userSel[0]);
-                UserGroupInformationManagementBLL.UpdateUserCountFromUserGroup(ent.GroupName);
+                UserLogin.FindOneByLoginName(UserLoginInformationManagement._userSel[0]);
+                ent.LoginName = loginname;
+                ent.PassWord = password;
+                ent.Permission = permission;
+                ent.GroupName = groupname;
+                ent.Remarks = remarks;
+                ent.IsLogined = 0;
+                ent.IsSavePassWord = 0;
+                ent.Save();
             }
 
             //初次登录系统时，需要添加新用户。记录初次登录的用户名与密码，并直接输入到LoginForm中

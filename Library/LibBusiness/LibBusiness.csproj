@@ -198,7 +198,6 @@
     <Compile Include="CommonBLL\PropertyBLL\MineDataSimpleBLL.cs" />
     <Compile Include="CommonBLL\PropertyBLL\CoalSeamsBLL.cs" />
     <Compile Include="CommonBLL\PropertyBLL\DepartmentInformationManagementBLL.cs" />
-    <Compile Include="CommonBLL\PropertyBLL\LoginFormBLL.cs" />
     <Compile Include="5.WaningManagementBLL\PreWarningLastedResultQueryBLL.cs" />
     <Compile Include="CommonBLL\PropertyBLL\TunnelDefaultSelect.cs" />
     <Compile Include="CommonBLL\PropertyBLL\UserGroupInformationManagementBLL.cs" />

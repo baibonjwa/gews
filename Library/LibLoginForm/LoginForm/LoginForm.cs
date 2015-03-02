@@ -163,10 +163,11 @@ namespace LibLoginForm
         {
             //定义记录登录成功与否的值
             bool isLogin = false;
-            if (LoginFormBLL.LoginSuccess(userName, password) != null)
+            var userLogin = UserLogin.FindOneByLoginNameAndPassword(userName, password);
+            if (userLogin != null)
             {
                 //set CurrentUser
-                CurrentUser.CurLoginUserInfo = LoginFormBLL.LoginSuccess(userName, password);
+                CurrentUser.CurLoginUserInfo = userLogin;
 
                 //记录最后一次登录用户
                 StreamWriter sw = new StreamWriter(Application.StartupPath + "\\DefaultUser", false);
@@ -174,7 +175,6 @@ namespace LibLoginForm
                 sw.Close();
 
                 //记住密码,登录成功，修改用户“尚未登录”为False；根据是否记住密码设定相应的值
-                var userLogin = UserLogin.FindOneByLoginName(userName);
                 userLogin.IsSavePassWord = Convert.ToInt32(_chkSavePassword.Checked);
                 userLogin.Save();
                 ConfigManager.Instance.add(ConfigConst.CONFIG_CURRENT_USER, userName);

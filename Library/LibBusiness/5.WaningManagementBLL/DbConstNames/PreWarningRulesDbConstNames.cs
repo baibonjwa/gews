@@ -42,7 +42,7 @@ namespace LibBusiness
 
         //比较符
         public const string OPERATOR = "OPERATOR";//＞,≥,＜,≤,＝,
-            ≠；多个比较符用逗号分隔，比较符个数与参数个数是一一对应的
+            //≠；多个比较符用逗号分隔，比较符个数与参数个数是一一对应的
 
         //修改日期
         public const string MODIFY_DATE = "MODIFY_DATE";//修改日期，精确到时分秒

@@ -1,14 +1,4 @@
-﻿// ******************************************************************
-// 概  述：用户登录信息实体
-// 作  者：秦凯
-// 创建日期：2014/03/10
-// 版本号：V1.0
-// 版本信息:
-// V1.0 新建
-// ******************************************************************
-
-using System.Net.Mail;
-using Castle.ActiveRecord;
+﻿using Castle.ActiveRecord;
 using NHibernate.Criterion;
 
 namespace LibEntity
@@ -80,6 +70,21 @@ namespace LibEntity
                 Restrictions.Eq("LoginName", loginName)
             };
             return FindOne(criterion);
+        }
+
+        public static UserLogin FindOneByLoginNameAndPassword(string loginName, string password)
+        {
+            var criterion = new ICriterion[]
+            {
+                Restrictions.Eq("LoginName", loginName),
+                Restrictions.Eq("PassWord", password)
+            };
+            return FindOne(criterion);
+        }
+
+        public new static int Count()
+        {
+            return Count(typeof(UserLogin));
         }
     }
 }

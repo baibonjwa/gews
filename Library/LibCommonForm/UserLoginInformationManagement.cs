@@ -262,7 +262,7 @@ namespace LibCommonForm
             }
 
             //定义  用户登录信息实体，接受旧值，添加到窗体中。旧值来源于管理界面的选择值。可以直接取值，也可从数据库取值，暂不考虑效率。
-            UserLogin ent = LoginFormBLL.GetUserLoginInformationByLoginname(UserLoginInformationManagement._userSel[0]);
+            UserLogin ent = UserLogin.FindOneByLoginName(UserLoginInformationManagement._userSel[0]);
 
             //修改
             UserLoginInformationInput ulii = new UserLoginInformationInput(ent);
@@ -303,10 +303,11 @@ namespace LibCommonForm
                 //遍历 记录用户信息的数组，删除数据库中的数据
                 foreach (string str in _userSel)
                 {
-                    LoginFormBLL.DeleteUserLoginInformationByLoginName(str);
+                    var userLogin = UserLogin.FindOneByLoginName(str);
+                    userLogin.Delete();
                 }
                 fpUserLoginInformation.Refresh();
-                this.fpUserLoginInformation.ActiveSheet.SetActiveCell(LoginFormBLL.GetRecordCountFromTable() + 1, 0);
+                this.fpUserLoginInformation.ActiveSheet.SetActiveCell(UserLogin.Count() + 1, 0);
 
                 //清除所有选择数据
                 _userSel.Clear();

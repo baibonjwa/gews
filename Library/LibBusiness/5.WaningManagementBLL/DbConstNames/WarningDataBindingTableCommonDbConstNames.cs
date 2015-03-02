@@ -19,6 +19,6 @@ namespace LibBusiness
         //字段使用方式
         public const string COLUMN_USE_MANNER = 
             "COLUMN_USE_MANNER";//字段使用方式，目前包含：直接使用、计算最近距离(详见预警规则计算流程.vsd)。当字段使用方式为计算最近距离时，当前表中COLUMN_NAME在预警数据表中随便选一个即可。字段使用方式为 
-            非直接使用 的 一种字段使用方式只能对应一条记录
+            //非直接使用 的 一种字段使用方式只能对应一条记录
     }
 }

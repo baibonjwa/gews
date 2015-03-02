@@ -5,8 +5,10 @@ using LibEntity;
 
 namespace LibPanels
 {
+
     public partial class ManagementInfoManagement : Form
     {
+
         public ManagementInfoManagement()
         {
             InitializeComponent();
