@@ -126,34 +126,7 @@ InstallDirRegKey HKLM "${PRODUCT_DIR_REGKEY}" ""
 ShowInstDetails show
 ShowUnInstDetails show
 
-Section "核心文件" SEC01
-  SetOutPath "$INSTDIR"
-  SetOverwrite try
-  File "C:\gews\DevExpressCrack\DevExpress.BonusSkins.v14.1.dll"
-  File "C:\gews\DevExpressCrack\DevExpress.Data.v14.1.dll"
-  File "C:\gews\DevExpressCrack\DevExpress.Printing.v14.1.Core.dll"
-  File "C:\gews\DevExpressCrack\DevExpress.Utils.v14.1.dll"
-  File "C:\gews\DevExpressCrack\DevExpress.XtraBars.v14.1.dll"
-  File "C:\gews\DevExpressCrack\DevExpress.XtraEditors.v14.1.dll"
-  File "C:\gews\DevExpressCrack\DevExpress.XtraNavBar.v14.1.dll"
-  File "C:\gews\DevExpressCrack\DevExpress.XtraScheduler.v14.1.Core.dll"
-  File "C:\gews\DevExpressCrack\gacutil.exe"
-  File "C:\gews\DevExpressCrack\gacutil.exe.config"
-  File "C:\gews\DevExpressCrack\register.bat"
-  File "C:\gews\DevExpressCrack\sn.exe"
-  File "C:\gews\DevExpressCrack\sn.exe.config"
-  File "C:\gews\DevExpressCrack\unregister.bat"
-
-  ; ExecWait "$INSTDIR\bin\register.bat"
-  ; Show .bat windows
-  ; nsExec::Exec "$INSTDIR\bin\register.bat"
-  ; Put file there
-; Shortcuts
-  !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
-  !insertmacro MUI_STARTMENU_WRITE_END
-SectionEnd
-
-Section "工作面瓦斯涌出动态特征管理系统" SEC02
+Section "工作面瓦斯涌出动态特征管理系统" SEC01
   File "C:\gews\sys1\bin\Debug\Antlr3.Runtime.dll"
   File "C:\gews\sys1\bin\Debug\ARConfig.xml"
   File "C:\gews\sys1\bin\Debug\Castle.ActiveRecord.dll"
