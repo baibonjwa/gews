@@ -18,139 +18,48 @@ namespace LibBusiness
 {
     public class LoginFormBLL
     {
-        /// <summary>
-        /// 返回曾经成功登录过系统的用户
-        /// </summary>
-        /// <returns>用户登录信息实体数组</returns>
-        public static UserLogin[] GetUserLoginedInformation()
-        {
-            UserLogin[] names = null;
-            StringBuilder strSql = new StringBuilder();
-            strSql.Append("SELECT * FROM ");
-            strSql.Append(LoginFormDbConstNames.TABLE_NAME);
-            strSql.Append(" WHERE ");
-            strSql.Append(LoginFormDbConstNames.USER_NAVER_LOGIN);
-            strSql.Append(" =  ");
-            strSql.Append("'" + ConvertTrueAndFalseToBool(LibCommon.Const.TrueOrFalse.False.ToString()) + "'");
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
-            DataTable dt= database.ReturnDS(strSql.ToString()).Tables[0];
-            if (dt!=null)
-            {
-                int n = dt.Rows.Count;
-                names = new UserLogin[n];
-                for (int i = 0; i < n;i++ )
-                {
-                    UserLogin name = new UserLogin();
-                    name.LoginName = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][1].ToString());
-                    name.PassWord = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][2].ToString());
-                    name.Permission = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][3].ToString());
-                    name.GroupName = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][4].ToString());
-                    name.SavePassWord = ConvertTrueAndFalseToBool(dt.Rows[i][5].ToString());
-                    name.NaverLogin = ConvertTrueAndFalseToBool(dt.Rows[i][6].ToString());
-                    name.Remarks = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][7].ToString());
-                    names[i] = name;
-                }
-            }
-            return names;
-        }
 
-        /// <summary>
-        /// 字段类型为Bit的字段，插值时需要转换为"True","False"
-        /// </summary>
-        /// <param name="str">“True”or“False”</param>
-        /// <returns>返回bool值</returns>
-        private static bool ConvertTrueAndFalseToBool(string str)
-        {
-            bool b = false;
-            bool.TryParse(str, out b);
-            return b;
-        }
-
-        /// <summary>
-        /// 记录登录用户中曾经登录过的用户信息
-        /// </summary>
-        /// <param name="ent">登录用户信息实体</param>
-        /// <returns>是否记录成功</returns>
-        public static bool RememberLoginUser(UserLogin ent)
-        {
-            StringBuilder strSql = new StringBuilder();
-            strSql.Append("UPDATE ");
-            strSql.Append(LoginFormDbConstNames.TABLE_NAME);
-            strSql.Append(" SET ");
-            strSql.Append(LoginFormDbConstNames.USER_NAVER_LOGIN);
-            strSql.Append(" = ");
-            strSql.Append("'" + LibCommon.Const.TrueOrFalse.False.ToString() + "'");
-            strSql.Append(" WHERE ");
-            strSql.Append(LoginFormDbConstNames.USER_LOGIN_NAME);
-            strSql.Append(" = ");
-            strSql.Append("'" + LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.LoginName) + "'");
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
-            return database.OperateDB(strSql.ToString());
-        }
-
-        /// <summary>
-        /// 记住密码
-        /// </summary>
-        /// <param name="strLoginName"></param>
-        /// <returns>操作是否成功</returns>
-        public static bool RememberPassword(string strLoginName,bool savePassword)
-        {
-            StringBuilder strSql = new StringBuilder();
-            strSql.Append("UPDATE ");
-            strSql.Append(LoginFormDbConstNames.TABLE_NAME);
-            strSql.Append(" SET ");
-            strSql.Append(LoginFormDbConstNames.USER_NAVER_LOGIN);
-            strSql.Append(" = ");
-            strSql.Append("'" + LibCommon.Const.TrueOrFalse.False.ToString() + "',");
-            strSql.Append(LoginFormDbConstNames.USER_SAVE_PASSWORD);
-            strSql.Append(" = ");
-            strSql.Append("'" + savePassword.ToString() + "'");
-            strSql.Append(" WHERE ");
-            strSql.Append(LoginFormDbConstNames.USER_LOGIN_NAME);
-            strSql.Append(" = ");
-            strSql.Append("'" + LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(strLoginName) + "'");
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
-            return database.OperateDB(strSql.ToString());
-        }
 
         /// <summary>
         /// 获取所有登录用户信息
         /// </summary>
         /// <returns>用户登录信息实体数组，无用户信息时返回NULL</returns>
-        public static UserLogin[] GetUserLoginInformations()
-        {
-            UserLogin[] infos = null;
-            StringBuilder strSql = new StringBuilder();
-            strSql.Append("SELECT * FROM ");
-            strSql.Append(LoginFormDbConstNames.TABLE_NAME);            
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
-            DataTable dt = database.ReturnDS(strSql.ToString()).Tables[0];
-            if (dt != null)
-            {
-                int n = dt.Rows.Count;
-                if (n > 0)
-                {
-                    infos = new UserLogin[n];
-                }
-                else
-                {
-                    return null;
-                }
-                for (int i = 0; i < n; i++)
-                {
-                    UserLogin info = new UserLogin();
-                    info.LoginName = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][1].ToString());
-                    info.PassWord = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][2].ToString());
-                    info.Permission = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][3].ToString());
-                    info.GroupName = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][4].ToString());
-                    info.SavePassWord = ConvertTrueAndFalseToBool(dt.Rows[i][5].ToString());
-                    info.NaverLogin = ConvertTrueAndFalseToBool(dt.Rows[i][6].ToString());
-                    info.Remarks = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][7].ToString());
-                    infos[i] = info;
-                }
-            }
-            return infos;
-        }
+        //public static UserLogin[] GetUserLoginInformations()
+        //{
+        //    UserLogin[] infos = null;
+        //    StringBuilder strSql = new StringBuilder();
+        //    strSql.Append("SELECT * FROM ");
+        //    strSql.Append(LoginFormDbConstNames.TABLE_NAME);
+        //    ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+        //    DataTable dt = database.ReturnDS(strSql.ToString()).Tables[0];
+        //    if (dt != null)
+        //    {
+        //        int n = dt.Rows.Count;
+        //        if (n > 0)
+        //        {
+        //            infos = new UserLogin[n];
+        //        }
+        //        else
+        //        {
+        //            return null;
+        //        }
+        //        for (int i = 0; i < n; i++)
+        //        {
+        //            UserLogin info = new UserLogin
+        //            {
+        //                LoginName = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][1].ToString()),
+        //                PassWord = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][2].ToString()),
+        //                Permission = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][3].ToString()),
+        //                GroupName = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][4].ToString()),
+        //                IsSavePassWord = Convert.ToInt32(dt.Rows[i][5]),
+        //                IsLogined = Convert.ToInt32(dt.Rows[i][6]),
+        //                Remarks = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][7].ToString())
+        //            };
+        //            infos[i] = info;
+        //        }
+        //    }
+        //    return infos;
+        //}
 
         /// <summary>
         /// 获取所有用户组名称
@@ -176,28 +85,6 @@ namespace LibBusiness
                 }
             }
             return names;
-        }
-
-        /// <summary>
-        /// 插入新的用户登录信息
-        /// </summary>
-        /// <param name="ent">新值</param>
-        /// <returns>是否录入成功</returns>
-        public static bool InsertUserLoginInfoIntoTable(UserLogin ent)
-        {
-            StringBuilder strSql = new StringBuilder();
-            strSql.Append("INSERT INTO ");
-            strSql.Append(LoginFormDbConstNames.TABLE_NAME);
-            strSql.Append(" VALUES(");
-            strSql.Append("'" + LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.LoginName) + "',");
-            strSql.Append("'" + LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.PassWord) + "',");
-            strSql.Append("'" + LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.Permission) + "',");
-            strSql.Append("'" + LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.GroupName) + "',");
-            strSql.Append("'" + ent.SavePassWord + "',");
-            strSql.Append("'" + ent.NaverLogin + "',");
-            strSql.Append("'" + LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.Remarks) + "')");
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
-            return database.OperateDB(strSql.ToString());
         }
 
         /// <summary>
@@ -239,18 +126,18 @@ namespace LibBusiness
             DataTable dt = database.ReturnDS(strSql.ToString()).Tables[0];
             if (dt != null)
             {
-                int n = dt.Rows.Count;                
+                int n = dt.Rows.Count;
                 for (int i = 0; i < n; i++)
                 {
                     name = new UserLogin();
-                    name.Id = dt.Rows[i][0].ToString() ;
+                    name.Id = dt.Rows[i][0].ToString();
                     name.LoginName = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][1].ToString());
-                    name.PassWord =  LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][2].ToString());
-                    name.Permission =  LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][3].ToString());
-                    name.GroupName =  LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][4].ToString());
-                    name.SavePassWord = ConvertTrueAndFalseToBool(dt.Rows[i][5].ToString());
-                    name.NaverLogin = ConvertTrueAndFalseToBool(dt.Rows[i][6].ToString());
-                    name.Remarks =  LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][7].ToString());
+                    name.PassWord = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][2].ToString());
+                    name.Permission = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][3].ToString());
+                    name.GroupName = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][4].ToString());
+                    name.IsSavePassWord = Convert.ToInt32(dt.Rows[i][5]);
+                    name.IsLogined = Convert.ToInt32(dt.Rows[i][6]);
+                    name.Remarks = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][7].ToString());
                 }
             }
             return name;
@@ -286,8 +173,8 @@ namespace LibBusiness
                 name.PassWord = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[0][2].ToString());
                 name.Permission = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[0][3].ToString());
                 name.GroupName = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[0][4].ToString());
-                name.SavePassWord = ConvertTrueAndFalseToBool(dt.Rows[0][5].ToString());
-                name.NaverLogin = ConvertTrueAndFalseToBool(dt.Rows[0][6].ToString());
+                name.IsSavePassWord = Convert.ToInt32(dt.Rows[0][5]);
+                name.IsLogined = Convert.ToInt32(dt.Rows[0][6].ToString());
                 name.Remarks = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[0][7].ToString());
             }
 
@@ -307,7 +194,7 @@ namespace LibBusiness
             strSql.Append(" WHERE ");
             strSql.Append(LoginFormDbConstNames.USER_LOGIN_NAME);
             strSql.Append(" =  ");
-            strSql.Append("'" + LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(loginname)+ "'");
+            strSql.Append("'" + LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(loginname) + "'");
             strSql.Append(" AND ");
             strSql.Append(LoginFormDbConstNames.USER_ID);
             strSql.Append(" !=  ");
@@ -325,8 +212,8 @@ namespace LibBusiness
                     name.PassWord = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][2].ToString());
                     name.Permission = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][3].ToString());
                     name.GroupName = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][4].ToString());
-                    name.SavePassWord = ConvertTrueAndFalseToBool(dt.Rows[i][5].ToString());
-                    name.NaverLogin = ConvertTrueAndFalseToBool(dt.Rows[i][6].ToString());
+                    name.IsSavePassWord = Convert.ToInt32(dt.Rows[i][5].ToString());
+                    name.IsLogined = Convert.ToInt32(dt.Rows[i][6].ToString());
                     name.Remarks = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][7].ToString());
                 }
             }
@@ -372,9 +259,9 @@ namespace LibBusiness
             strSql.Append(LoginFormDbConstNames.USER_GROUP_NAME + " = ");
             strSql.Append("'" + LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.GroupName) + "',");
             strSql.Append(LoginFormDbConstNames.USER_SAVE_PASSWORD + " = ");
-            strSql.Append("'" + ent.SavePassWord+ "',");
+            strSql.Append("'" + ent.IsSavePassWord + "',");
             strSql.Append(LoginFormDbConstNames.USER_NAVER_LOGIN + " = ");
-            strSql.Append("'" + ent.NaverLogin + "',");
+            strSql.Append("'" + ent.IsLogined + "',");
             strSql.Append(LoginFormDbConstNames.USER_REMARKS + " = ");
             strSql.Append("'" + LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.Remarks) + "'");
             strSql.Append(" WHERE ");

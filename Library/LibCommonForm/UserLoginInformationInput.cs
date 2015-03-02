@@ -30,7 +30,7 @@ namespace LibCommonForm
         /// <summary>
         /// 构造函数
         /// </summary>
-        public UserLoginInformationInput(UserLogin ent,bool isAddNewUser)
+        public UserLoginInformationInput(UserLogin ent, bool isAddNewUser)
         {
             InitializeComponent();
 
@@ -55,7 +55,7 @@ namespace LibCommonForm
         /// </summary>
         public UserLoginInformationInput()
         {
-            InitializeComponent();            
+            InitializeComponent();
         }
 
         /// <summary>
@@ -74,18 +74,18 @@ namespace LibCommonForm
 
             //通过传入实体的值，判断是添加、修改
             if (ent != null)
-            {            
+            {
                 //旧登录名
                 _txtLoginName.Text = ent.LoginName;
                 //旧密码
                 _txtPassWord.Text = ent.PassWord;
                 //旧权限
-                if (_cboPermission.Items.Count!=0)
+                if (_cboPermission.Items.Count != 0)
                 {
                     _cboPermission.SelectedIndex = GetPermissionIndex(ent.Permission);
                 }
                 //旧用户组
-                if (_cboGroup.Items .Count!= 0)
+                if (_cboGroup.Items.Count != 0)
                 {
                     _cboGroup.SelectedIndex = GetGroupIndex(ent.GroupName);
                 }
@@ -95,7 +95,7 @@ namespace LibCommonForm
                 //标志字符
                 _strIsAddOrModify = "modify";
                 //设置修改窗体格式
-                LibCommon.FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, LibCommon.LibFormTitles.USER_LOGIN_INFO_MOD);                
+                LibCommon.FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, LibCommon.LibFormTitles.USER_LOGIN_INFO_MOD);
             }
             else
             {
@@ -121,7 +121,7 @@ namespace LibCommonForm
             //权限
             string permission = _cboPermission.Text;
             //备注
-            string remarks=_rtxtRemark.Text;
+            string remarks = _rtxtRemark.Text;
 
             //用户登录名不能包含特殊字符且不能为空
             //查空、特殊字符
@@ -151,7 +151,7 @@ namespace LibCommonForm
             {
                 UserLogin entModify = LoginFormBLL.GetUserLoginInformationByIDAndLoginName(_needModifyEnt.Id, _txtLoginName.Text.ToString().Trim());
                 if (entModify != null)
-                {                
+                {
                     Alert.alert(LibCommon.Const.LOGIN_NAME_EXIST, LibCommon.Const.NOTES, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     _txtLoginName.Focus();
                     return;
@@ -195,15 +195,15 @@ namespace LibCommonForm
             //备注
             ent.Remarks = remarks;
             //尚未登录系统，在插入新值时，默认为True
-            ent.NaverLogin = true;
+            ent.IsLogined = 0;
             //记住密码，在插入新值时，默认为False
-            ent.SavePassWord = false;
+            ent.IsSavePassWord = 0;
 
             //添加
-            if (_strIsAddOrModify=="add")
+            if (_strIsAddOrModify == "add")
             {
                 //数据库插值
-                LoginFormBLL.InsertUserLoginInfoIntoTable(ent);
+                ent.Save();
                 UserGroupInformationManagementBLL.UpdateUserCountFromUserGroup(ent.GroupName);
             }
             //修改
@@ -220,17 +220,17 @@ namespace LibCommonForm
                 LibCommon.Const.FIRST_LOGIN_NAME = ent.LoginName;
                 LibCommon.Const.FIRST_LOGIN_PASSWORD = ent.PassWord;
                 LibCommon.Const.FIRST_LOGIN_PERMISSION = ent.Permission;
-                this.Close(); 
+                this.Close();
                 return;
             }
             this.Close();
         }
-                      
+
         /// <summary>
         /// 添加所有用户组名称
         /// </summary>
         private void SetcboGroupNameValue()
-        {       
+        {
             //从数据库中获得所有组名称
             string[] groupName = LoginFormBLL.GetUserGroupName();
             foreach (string str in groupName)
@@ -304,7 +304,7 @@ namespace LibCommonForm
                 return -1;
             }
             return returnNumber;
-        }             
+        }
 
         /// <summary>
         /// 窗体登陆事件
@@ -314,6 +314,6 @@ namespace LibCommonForm
         private void UserLoginInformationInput_Load(object sender, EventArgs e)
         {
 
-        }      
+        }
     }
 }

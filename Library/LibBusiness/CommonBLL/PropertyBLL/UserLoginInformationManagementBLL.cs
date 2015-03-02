@@ -37,14 +37,16 @@ namespace LibBusiness
                 infos = new UserLogin[n];
                 for (int i = 0; i < n; i++)
                 {
-                    UserLogin info = new UserLogin();
-                    info.LoginName = dt.Rows[i][1].ToString();
-                    info.PassWord = dt.Rows[i][2].ToString();
-                    info.Permission = dt.Rows[i][3].ToString();
-                    info.GroupName = dt.Rows[i][4].ToString();
-                    info.SavePassWord = ConvertTrueAndFalseToBool(dt.Rows[i][5].ToString());
-                    info.NaverLogin = ConvertTrueAndFalseToBool(dt.Rows[i][6].ToString());
-                    info.Remarks = dt.Rows[i][7].ToString();
+                    UserLogin info = new UserLogin
+                    {
+                        LoginName = dt.Rows[i][1].ToString(),
+                        PassWord = dt.Rows[i][2].ToString(),
+                        Permission = dt.Rows[i][3].ToString(),
+                        GroupName = dt.Rows[i][4].ToString(),
+                        IsSavePassWord = Convert.ToInt32(dt.Rows[i][5]),
+                        IsLogined = Convert.ToInt32(dt.Rows[i][6].ToString()),
+                        Remarks = dt.Rows[i][7].ToString()
+                    };
                     infos[i] = info;
                 }
             }

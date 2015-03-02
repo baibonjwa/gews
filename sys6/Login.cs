@@ -24,7 +24,7 @@ namespace UnderTerminal
         {
             doInitilization();
             InitializeComponent();
-            ents = LoginFormBLL.GetUserLoginInformations();
+            ents = UserLogin.FindAll();
             //doSecuritySetting(false);
         }
 
@@ -51,7 +51,9 @@ namespace UnderTerminal
                     sw.Close();
 
                     //记住密码,登录成功，修改用户“尚未登录”为False；根据是否记住密码设定相应的值
-                    LoginFormBLL.RememberPassword(ents[i].LoginName, false);
+                    var userLogin = UserLogin.FindOneByLoginName(userName);
+                    userLogin.IsSavePassWord = 0;
+                    userLogin.Save();
                     isLogin = true;
                     break;
                 }

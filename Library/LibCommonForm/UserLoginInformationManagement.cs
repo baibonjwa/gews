@@ -88,28 +88,28 @@ namespace LibCommonForm
         private void GetUserLoginInfo()
         {
             //sql语句,从数据库中获取数据
-            UserLogin[] ents = LibBusiness.LoginFormBLL.GetUserLoginInformations();
-            if (ents==null)
+            UserLogin[] ents = UserLogin.FindAll();
+            if (ents == null)
             {
                 return;
             }
             //获取记录条数
-            int rowsCount=ents.Length;
+            int rowsCount = ents.Length;
 
             fpUserLoginInformation.ActiveSheet.Rows.Count = rowsCount + _fpTitleRowCount;
             fpUserLoginInformation.ActiveSheet.Columns.Count = _columnsCount;
-            
-            for (int i = 0; i < rowsCount;i++ )
+
+            for (int i = 0; i < rowsCount; i++)
             {
                 //选择
-                this.fpUserLoginInformation.ActiveSheet.Cells[i + 2, 0].CellType=new FarPoint.Win.Spread.CellType.CheckBoxCellType();
+                this.fpUserLoginInformation.ActiveSheet.Cells[i + 2, 0].CellType = new FarPoint.Win.Spread.CellType.CheckBoxCellType();
                 this.fpUserLoginInformation.ActiveSheet.Cells[i + 2, 0].HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
                 this.fpUserLoginInformation.ActiveSheet.Cells[i + 2, 0].VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
                 //登录名
                 this.fpUserLoginInformation.ActiveSheet.Cells[i + 2, 1].Text = ents[i].LoginName;
                 //密码，让密码显示为“******”
                 //this.fpUserLoginInformation.ActiveSheet.Cells[i + 2, 2].Text = ents[i].PassWord;
-                this.fpUserLoginInformation.ActiveSheet.Cells[i + 2, 2].Text = new string(LibCommon.Const.PASSWORD_CHAR,6);
+                this.fpUserLoginInformation.ActiveSheet.Cells[i + 2, 2].Text = new string(LibCommon.Const.PASSWORD_CHAR, 6);
                 this.fpUserLoginInformation.ActiveSheet.Cells[i + 2, 2].HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
                 this.fpUserLoginInformation.ActiveSheet.Cells[i + 2, 2].VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
                 //权限
@@ -117,15 +117,15 @@ namespace LibCommonForm
                 //所属用户组
                 this.fpUserLoginInformation.ActiveSheet.Cells[i + 2, 4].Text = ents[i].GroupName;
                 //记住密码，“√”为True
-                this.fpUserLoginInformation.ActiveSheet.Cells[i + 2, 5].Text = ents[i].SavePassWord ? LibCommon.Const.YES : LibCommon.Const.NO;
+                this.fpUserLoginInformation.ActiveSheet.Cells[i + 2, 5].Text = ents[i].IsSavePassWord.ToString();
                 this.fpUserLoginInformation.ActiveSheet.Cells[i + 2, 5].HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
                 this.fpUserLoginInformation.ActiveSheet.Cells[i + 2, 5].VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
 
-                this.fpUserLoginInformation.ActiveSheet.Cells[i + 2, 6].Text = ents[i].NaverLogin ? LibCommon.Const.YES : LibCommon.Const.NO;
+                this.fpUserLoginInformation.ActiveSheet.Cells[i + 2, 6].Text = ents[i].IsLogined.ToString();
                 this.fpUserLoginInformation.ActiveSheet.Cells[i + 2, 6].HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
                 this.fpUserLoginInformation.ActiveSheet.Cells[i + 2, 6].VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
                 //备注
-                this.fpUserLoginInformation.ActiveSheet.Cells[i + 2, 7].Text = ents[i].Remarks;               
+                this.fpUserLoginInformation.ActiveSheet.Cells[i + 2, 7].Text = ents[i].Remarks;
             }
             //设置焦点
             this.fpUserLoginInformation.ActiveSheet.SetActiveCell(1, 0);
@@ -169,8 +169,8 @@ namespace LibCommonForm
                         _userSel.Add(this.fpUserLoginInformation.ActiveSheet.Cells[e.Row, 1].Value.ToString());
                         //checkbox赋值前，先移除CheckedChanged事件，然后加上
                         this.chkSelAll.CheckedChanged -= this.chkSelAll_CheckedChanged;
-                        chkSelAll.Checked = (_userSel.Count == _fpRowsCount-_fpTitleRowCount) ? true : false;
-                        this.chkSelAll.CheckedChanged += this.chkSelAll_CheckedChanged;                                              
+                        chkSelAll.Checked = (_userSel.Count == _fpRowsCount - _fpTitleRowCount) ? true : false;
+                        this.chkSelAll.CheckedChanged += this.chkSelAll_CheckedChanged;
                     }
                 }
                 else
@@ -245,7 +245,7 @@ namespace LibCommonForm
             if (FileExport.fileExport(fpUserLoginInformation, true))
             {
                 Alert.alert(Const.EXPORT_SUCCESS_MSG);
-            }            
+            }
         }
 
         /// <summary>
@@ -259,11 +259,11 @@ namespace LibCommonForm
             if (UserLoginInformationManagement._userSel.Count == 0)
             {
                 return;
-            }   
+            }
 
             //定义  用户登录信息实体，接受旧值，添加到窗体中。旧值来源于管理界面的选择值。可以直接取值，也可从数据库取值，暂不考虑效率。
             UserLogin ent = LoginFormBLL.GetUserLoginInformationByLoginname(UserLoginInformationManagement._userSel[0]);
-           
+
             //修改
             UserLoginInformationInput ulii = new UserLoginInformationInput(ent);
             ulii.ShowDialog();
@@ -278,11 +278,11 @@ namespace LibCommonForm
         /// <param name="e"></param>
         private void tsBtnDel_Click(object sender, EventArgs e)
         {
-            if (Alert.confirm(LibCommon.Const.DELETE_USER_INFO, LibCommon.Const.NOTES, MessageBoxButtons.YesNo,MessageBoxIcon.Question))
+            if (Alert.confirm(LibCommon.Const.DELETE_USER_INFO, LibCommon.Const.NOTES, MessageBoxButtons.YesNo, MessageBoxIcon.Question))
             {
                 //获取登录用户记录条数
                 //int n = LoginFormBLL.GetRecordCountFromTable();
-                int n = this.fpUserLoginInformation.ActiveSheet.Rows.Count-_fpTitleRowCount;
+                int n = this.fpUserLoginInformation.ActiveSheet.Rows.Count - _fpTitleRowCount;
                 //从数据末尾删除数据
                 for (int i = n - 1; i >= 0; i--)
                 {
@@ -302,7 +302,7 @@ namespace LibCommonForm
                 }
                 //遍历 记录用户信息的数组，删除数据库中的数据
                 foreach (string str in _userSel)
-                {                    
+                {
                     LoginFormBLL.DeleteUserLoginInformationByLoginName(str);
                 }
                 fpUserLoginInformation.Refresh();
@@ -314,7 +314,7 @@ namespace LibCommonForm
                 //设置删除按钮是否启用
                 this.tsBtnDel.Enabled = false;
                 //设置修改按钮是否启用
-                this.tsBtnModify.Enabled =false;
+                this.tsBtnModify.Enabled = false;
 
                 //记录当前farpoint的记录条数
                 _fpRowsCount = this.fpUserLoginInformation.ActiveSheet.Rows.Count;

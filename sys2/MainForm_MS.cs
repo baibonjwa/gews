@@ -8,6 +8,7 @@ using GIS;
 using GIS.Common;
 using GIS.HdProc;
 using LibAbout;
+using LibBusiness;
 using LibCommon;
 using LibCommonForm;
 using LibDatabase;
@@ -29,6 +30,8 @@ namespace sys2
                 licenseStatus = (esriLicenseStatus)aoini.Initialize(esriLicenseProductCode.esriLicenseProductCodeStandard);
             }
             InitializeComponent();
+
+            SocketUtil.DoInitilization();
 
             //////////////////////////////////////////////////////
             Log.Debug("[MS]...Loading Mxd file......");

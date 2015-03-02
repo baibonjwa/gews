@@ -60,11 +60,19 @@ namespace LibLoginForm
             string path = Application.StartupPath + LibCommon.Const.LOGIN_BACKGROUND_BMP_PATH;
             BitmapRegion.CreateControlRegion(this, new Bitmap(path));
 
+            try
+            {
+                ents = UserLogin.FindAll();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
             //获取所有用户信息
-            ents = LoginFormBLL.GetUserLoginInformations();
+
 
             //添加已记录的登录用户
-            entsLogined = LoginFormBLL.GetUserLoginedInformation();
+            entsLogined = UserLogin.FindAllByIsLogined(0);
             foreach (UserLogin ent in entsLogined)
             {
                 _cbxUserName.Items.Add(ent.LoginName);
@@ -101,7 +109,7 @@ namespace LibLoginForm
             string userName = this._cbxUserName.Text;
             string password = this._txtPassword.Text;
 
-            UserLogin[] ents = LoginFormBLL.GetUserLoginInformations();
+            UserLogin[] ents = UserLogin.FindAll();
             //数据库中无用户名及密码信息
             if (ents == null)
             {
@@ -166,7 +174,9 @@ namespace LibLoginForm
                 sw.Close();
 
                 //记住密码,登录成功，修改用户“尚未登录”为False；根据是否记住密码设定相应的值
-                LoginFormBLL.RememberPassword(userName, _chkSavePassword.Checked);
+                var userLogin = UserLogin.FindOneByLoginName(userName);
+                userLogin.IsSavePassWord = Convert.ToInt32(_chkSavePassword.Checked);
+                userLogin.Save();
                 ConfigManager.Instance.add(ConfigConst.CONFIG_CURRENT_USER, userName);
                 isLogin = true;
             }
@@ -196,10 +206,10 @@ namespace LibLoginForm
                 if (strSelLoginName == ent.LoginName)
                 {
                     //验证是否记住密码,并赋予相应的值
-                    _chkSavePassword.Checked = ent.SavePassWord ? true : false;
-                    _txtPassword.Text = ent.SavePassWord ? ent.PassWord : "";
+                    _chkSavePassword.Checked = ent.IsSavePassWord != 0;
+                    _txtPassword.Text = ent.IsSavePassWord == 1 ? ent.PassWord : "";
                     //设置焦点
-                    if (ent.SavePassWord)
+                    if (ent.IsSavePassWord == 1)
                     {
                         buttonOk.Focus();
                     }

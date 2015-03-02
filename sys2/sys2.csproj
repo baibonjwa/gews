@@ -502,9 +502,17 @@
       <Project>{2ebcde4b-a244-4cca-a1ae-1a884d81772b}</Project>
       <Name>LibCommon</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Library\LibConfig\LibConfig.csproj">
+      <Project>{697EED3C-3244-494D-B663-296CC80D4022}</Project>
+      <Name>LibConfig</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Library\LibDatabase\LibDatabase.csproj">
       <Project>{38b3be6b-bd0c-4108-9414-a728f5990a0c}</Project>
       <Name>LibDatabase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Library\LibEncryptDecrypt\LibEncryptDecrypt.csproj">
+      <Project>{123585d4-b4a2-4694-81e8-df9cdccc487f}</Project>
+      <Name>LibEncryptDecrypt</Name>
     </ProjectReference>
     <ProjectReference Include="..\Library\LibEntity\LibEntity.csproj">
       <Project>{28c303d9-18cb-42b3-b0fa-b9b126503176}</Project>
