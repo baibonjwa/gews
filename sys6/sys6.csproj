@@ -184,7 +184,7 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="TeeChart">
-      <HintPath>..\internalrefs\TeeChart.dll</HintPath>
+      <HintPath>..\packages\TeeChart.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

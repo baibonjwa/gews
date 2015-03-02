@@ -1,12 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
-using LibLoginForm;
+using Castle.ActiveRecord;
+using Castle.ActiveRecord.Framework;
+using Castle.ActiveRecord.Framework.Config;
 using LibCommon;
-using sys2;
+using LibLoginForm;
 
-namespace _2.MiningScheduling
+namespace sys2
 {
     static class Program
     {
@@ -14,20 +15,28 @@ namespace _2.MiningScheduling
         /// 应用程序的主入口点。
         /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main()
         {
-            Log.Debug("[MS]...Starting......");
-            ESRI.ArcGIS.RuntimeManager.Bind(ESRI.ArcGIS.ProductCode.EngineOrDesktop);
+            System.Threading.Thread.CurrentThread.CurrentUICulture =
+                new System.Globalization.CultureInfo("zh-Hans");
 
-            //DX皮肤
-            //DXSeting.formSkinsSet();
-            DXSeting.SetFormSkin(DXSkineNames.CARAMEL);
+            // The following line provides localization for data formats. 
+            System.Threading.Thread.CurrentThread.CurrentCulture =
+                new System.Globalization.CultureInfo("zh-Hans");
 
+            IConfigurationSource config = new XmlConfigurationSource("ARConfig.xml");
+
+            Assembly asm = Assembly.Load("LibEntity");
+
+            ActiveRecordStarter.Initialize(asm, config);
+            Log.Debug("Starting ......");
+            ESRI.ArcGIS.RuntimeManager.Bind(ESRI.ArcGIS.ProductCode.EngineOrDesktop);//RuntimeManager.Bind
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
             Log.Debug("[MS]...Constructing Main Form......");
-            MainForm_MS mf = new MainForm_MS();
-            LoginForm lf = new LoginForm(mf);
+            var mf = new MainForm_MS();
+            var lf = new LoginForm(mf);
             Log.Debug("[MS]...Begin Login......");
             Application.Run(lf);
         }

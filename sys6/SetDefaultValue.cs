@@ -1,15 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using LibBusiness;
 using LibCommon;
 using LibEntity;
-using Steema.TeeChart.Functions;
 
 namespace UnderTerminal
 {

@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Castle.ActiveRecord;
 using NHibernate.Criterion;
-using Remotion.Data.Linq.Clauses.ResultOperators;
 
 namespace LibEntity
 {

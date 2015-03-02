@@ -15,10 +15,10 @@ namespace sys3
         /// 应用程序的主入口点。
         /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main()
         {
             System.Threading.Thread.CurrentThread.CurrentUICulture =
-              new System.Globalization.CultureInfo("zh-Hans");
+                new System.Globalization.CultureInfo("zh-Hans");
 
             // The following line provides localization for data formats. 
             System.Threading.Thread.CurrentThread.CurrentCulture =
@@ -30,7 +30,7 @@ namespace sys3
 
             ActiveRecordStarter.Initialize(asm, config);
             Log.Debug("Starting ......");
-            ESRI.ArcGIS.RuntimeManager.Bind(ESRI.ArcGIS.ProductCode.EngineOrDesktop);//RuntimeManager.Bind
+            ESRI.ArcGIS.RuntimeManager.Bind(ESRI.ArcGIS.ProductCode.EngineOrDesktop); //RuntimeManager.Bind
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
