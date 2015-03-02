@@ -60,15 +60,24 @@ namespace LibBusiness
         /// <returns></returns>
         public static string sqlUpdate(MineData mdEntity)
         {
-            string sql = PreWarningDataDbConstNames.TUNNEL_ID + "=" + mdEntity.Tunnel.TunnelId + "," +
-                PreWarningDataDbConstNames.COORDINATE_X + "=" + mdEntity.CoordinateX + "," +
-                PreWarningDataDbConstNames.COORDINATE_Y + "=" + mdEntity.CoordinateY + "," +
-                PreWarningDataDbConstNames.COORDINATE_Z + "=" + mdEntity.CoordinateZ + "," +
-                PreWarningDataDbConstNames.WORK_STYLE + "='" + mdEntity.WorkStyle + "'," +
-                PreWarningDataDbConstNames.WORK_TIME + "='" + mdEntity.WorkTime + "'," +
-                PreWarningDataDbConstNames.TEAM_NAME + "='" + mdEntity.TeamName + "'," +
-                PreWarningDataDbConstNames.SUBMITTER + "='" + mdEntity.Submitter + "'," +
-                PreWarningDataDbConstNames.DATETIME + "='" + mdEntity.Datetime + "'";
+            string sql = PreWarningDataDbConstNames.TUNNEL_ID + "=" + 
+                mdEntity.Tunnel.TunnelId + "," +
+                PreWarningDataDbConstNames.COORDINATE_X + "=" + 
+                    mdEntity.CoordinateX + "," +
+                PreWarningDataDbConstNames.COORDINATE_Y + "=" + 
+                    mdEntity.CoordinateY + "," +
+                PreWarningDataDbConstNames.COORDINATE_Z + "=" + 
+                    mdEntity.CoordinateZ + "," +
+                PreWarningDataDbConstNames.WORK_STYLE + "='" + 
+                    mdEntity.WorkStyle + "'," +
+                PreWarningDataDbConstNames.WORK_TIME + "='" + 
+                    mdEntity.WorkTime + "'," +
+                PreWarningDataDbConstNames.TEAM_NAME + "='" + 
+                    mdEntity.TeamName + "'," +
+                PreWarningDataDbConstNames.SUBMITTER + "='" + 
+                    mdEntity.Submitter + "'," +
+                PreWarningDataDbConstNames.DATETIME + "='" + 
+                    mdEntity.Datetime + "'";
             return sql;
         }
     }

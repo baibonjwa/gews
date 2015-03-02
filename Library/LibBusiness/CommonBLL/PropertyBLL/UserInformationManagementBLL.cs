@@ -40,8 +40,9 @@ namespace LibBusiness
             strSql.Append("from ");
             strSql.Append(" "+UserInformationManagementDbConstNames.TABLE_NAME);
 
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
-            return dt=database.ReturnDS(strSql.ToString()).Tables[0];            
+            ManageDataBase database = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            return dt=database.ReturnDS(strSql.ToString()).Tables[0];
         }
 
         /// <summary>
@@ -53,20 +54,32 @@ namespace LibBusiness
             UserInformation[] ents = null;
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select ");
-            strSql.Append(UserInformationManagementDbConstNames.USER_LOGIN_NAME + ",");
-            strSql.Append(UserInformationManagementDbConstNames.USER_PASSWORD + ",");
-            strSql.Append(UserInformationManagementDbConstNames.USER_UNDER_GROUP + ",");
-            strSql.Append(UserInformationManagementDbConstNames.USER_UNDER_DEPT + ",");
-            strSql.Append(UserInformationManagementDbConstNames.USER_NAME + ",");
-            strSql.Append(UserInformationManagementDbConstNames.USER_EMAIL + ",");
-            strSql.Append(UserInformationManagementDbConstNames.USER_TEL + ",");
-            strSql.Append(UserInformationManagementDbConstNames.USER_PHONE + ",");
-            strSql.Append(UserInformationManagementDbConstNames.USER_REMARKS + ",");
-            strSql.Append(UserInformationManagementDbConstNames.USER_PERMISSION + " ");
+            strSql.Append(UserInformationManagementDbConstNames.USER_LOGIN_NAME 
+                + ",");
+            strSql.Append(UserInformationManagementDbConstNames.USER_PASSWORD 
+                + ",");
+            strSql.Append(UserInformationManagementDbConstNames.USER_UNDER_GROUP 
+                + ",");
+            strSql.Append(UserInformationManagementDbConstNames.USER_UNDER_DEPT 
+                + ",");
+            strSql.Append(UserInformationManagementDbConstNames.USER_NAME + 
+                ",");
+            strSql.Append(UserInformationManagementDbConstNames.USER_EMAIL 
+                + ",");
+            strSql.Append(UserInformationManagementDbConstNames.USER_TEL + 
+                ",");
+            strSql.Append(UserInformationManagementDbConstNames.USER_PHONE 
+                + ",");
+            strSql.Append(UserInformationManagementDbConstNames.USER_REMARKS 
+                + ",");
+            strSql.Append(UserInformationManagementDbConstNames.USER_PERMISSION 
+                + " ");
             strSql.Append("from ");
-            strSql.Append(" " + UserInformationManagementDbConstNames.TABLE_NAME);
+            strSql.Append(" " + 
+                UserInformationManagementDbConstNames.TABLE_NAME);
 
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase database = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             DataTable dt = database.ReturnDS(strSql.ToString()).Tables[0];
             if (dt.Rows.Count > 0)
             {
@@ -80,16 +93,26 @@ namespace LibBusiness
             for (int i = 0; i < n;i++ )
             {
                 UserInformation ent = new UserInformation();
-                ent.LoginName = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][0].ToString());
-                ent.PassWord = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][1].ToString());
-                ent.Group = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][2].ToString());
-                ent.Department = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][3].ToString());
-                ent.Name = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][4].ToString());
-                ent.Email = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][5].ToString());
-                ent.Tel = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][6].ToString());
-                ent.Phone = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][7].ToString());
-                ent.Remark = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][8].ToString());
-                ent.Permission = LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][9].ToString());
+                ent.LoginName = 
+                    LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][0].ToString());
+                ent.PassWord = 
+                    LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][1].ToString());
+                ent.Group = 
+                    LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][2].ToString());
+                ent.Department = 
+                    LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][3].ToString());
+                ent.Name = 
+                    LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][4].ToString());
+                ent.Email = 
+                    LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][5].ToString());
+                ent.Tel = 
+                    LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][6].ToString());
+                ent.Phone = 
+                    LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][7].ToString());
+                ent.Remark = 
+                    LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][8].ToString());
+                ent.Permission = 
+                    LibEncryptDecrypt.DWEncryptDecryptClass.DecryptString(dt.Rows[i][9].ToString());
                 ents[i] = ent;
             }
            
@@ -105,7 +128,8 @@ namespace LibBusiness
             strSql.Append("select * from ");
             strSql.Append(tableName);
 
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase database = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             DataTable dt=database.ReturnDS(strSql.ToString()).Tables[0];
             if (dt!=null)
             {
@@ -124,7 +148,8 @@ namespace LibBusiness
            strSql.Append(DepartmentInformationManagemetDbConstNames.DEPT_NAME);
            strSql.Append(" from ");
            strSql.Append(DepartmentInformationManagemetDbConstNames.TABLE_NAME);
-           ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+           ManageDataBase database = new 
+               ManageDataBase(DATABASE_TYPE.WarningManagementDB);
            DataTable dt=database.ReturnDS(strSql.ToString()).Tables[0];
             if (dt!=null)
             {
@@ -148,7 +173,8 @@ namespace LibBusiness
             strSql.Append(UserGroupInformationMangementDbConstNames.USER_GROUP_NAME);
             strSql.Append(" from ");
             strSql.Append(UserGroupInformationMangementDbConstNames.TABLE_NAME);
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase database = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             DataTable dt = database.ReturnDS(strSql.ToString()).Tables[0];
             if (dt != null)
             {
@@ -163,7 +189,8 @@ namespace LibBusiness
         }
 
         //通过用户登陆名更新记录
-       public static bool UpdateUserInfomationDatabase(UserInformation ent, string oldName)
+       public static bool UpdateUserInfomationDatabase(UserInformation ent, 
+           string oldName)
         {
             //string sqlUpdate = "update T_USER_INFO_MANAGEMENT set USER_LOGIN_NAME = '" + ent.LoginName + "',"
             //        + "USER_PASSWORD = '" + ent.PassWord + "',"
@@ -180,30 +207,64 @@ namespace LibBusiness
             strSql.Append("update ");
             strSql.Append(UserInformationManagementDbConstNames.TABLE_NAME);
             strSql.Append(" set ");
-            strSql.Append(UserInformationManagementDbConstNames.USER_LOGIN_NAME + " = ");
-            strSql.Append("'" + LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.LoginName) + "',");
-            strSql.Append(UserInformationManagementDbConstNames.USER_PASSWORD + " = ");
-            strSql.Append("'" + LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.PassWord) + "',");
-            strSql.Append(UserInformationManagementDbConstNames.USER_UNDER_GROUP + " = ");
-            strSql.Append("'" + LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.Group) + "',");
-            strSql.Append(UserInformationManagementDbConstNames.USER_UNDER_DEPT + " = ");
-            strSql.Append("'" + LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.Department) + "',"); 
-            strSql.Append(UserInformationManagementDbConstNames.USER_NAME + " = ");
-            strSql.Append("'" + LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.Name) + "',"); 
-            strSql.Append(UserInformationManagementDbConstNames.USER_EMAIL + " = ");
-            strSql.Append("'" + LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.Email) + "',"); 
-            strSql.Append(UserInformationManagementDbConstNames.USER_TEL + " = ");
-            strSql.Append("'" + LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.Tel) + "',");
-            strSql.Append(UserInformationManagementDbConstNames.USER_PHONE + " = ");
-            strSql.Append("'" + LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.Phone) + "',");
-            strSql.Append(UserInformationManagementDbConstNames.USER_REMARKS + " = ");
-            strSql.Append("'" + LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.Remark) + "',");
-            strSql.Append(UserInformationManagementDbConstNames.USER_PERMISSION + " = ");
-            strSql.Append("'" + LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.Permission) + "'");
+            strSql.Append(UserInformationManagementDbConstNames.USER_LOGIN_NAME 
+                + " = ");
+            strSql.Append("'" + 
+                LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.LoginName) 
+                + "',");
+            strSql.Append(UserInformationManagementDbConstNames.USER_PASSWORD 
+                + " = ");
+            strSql.Append("'" + 
+                LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.PassWord) 
+                + "',");
+            strSql.Append(UserInformationManagementDbConstNames.USER_UNDER_GROUP 
+                + " = ");
+            strSql.Append("'" + 
+                LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.Group) 
+                + "',");
+            strSql.Append(UserInformationManagementDbConstNames.USER_UNDER_DEPT 
+                + " = ");
+            strSql.Append("'" + 
+                LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.Department) 
+                + "',");
+            strSql.Append(UserInformationManagementDbConstNames.USER_NAME + 
+                " = ");
+            strSql.Append("'" + 
+                LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.Name) 
+                + "',");
+            strSql.Append(UserInformationManagementDbConstNames.USER_EMAIL 
+                + " = ");
+            strSql.Append("'" + 
+                LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.Email) 
+                + "',");
+            strSql.Append(UserInformationManagementDbConstNames.USER_TEL + 
+                " = ");
+            strSql.Append("'" + 
+                LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.Tel) 
+                + "',");
+            strSql.Append(UserInformationManagementDbConstNames.USER_PHONE 
+                + " = ");
+            strSql.Append("'" + 
+                LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.Phone) 
+                + "',");
+            strSql.Append(UserInformationManagementDbConstNames.USER_REMARKS 
+                + " = ");
+            strSql.Append("'" + 
+                LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.Remark) 
+                + "',");
+            strSql.Append(UserInformationManagementDbConstNames.USER_PERMISSION 
+                + " = ");
+            strSql.Append("'" + 
+                LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.Permission) 
+                + "'");
             strSql.Append( " where ");
-            strSql.Append(UserInformationManagementDbConstNames.USER_LOGIN_NAME + " = ");
-            strSql.Append("'" + LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(oldName) + "'");
-            ManageDataBase database=new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            strSql.Append(UserInformationManagementDbConstNames.USER_LOGIN_NAME 
+                + " = ");
+            strSql.Append("'" + 
+                LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(oldName) 
+                + "'");
+            ManageDataBase database=new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             return  database.OperateDB(strSql.ToString());
         }
 
@@ -217,8 +278,11 @@ namespace LibBusiness
             strSql.Append(" where ");
             strSql.Append(UserInformationManagementDbConstNames.USER_LOGIN_NAME);
             strSql.Append(" = ");
-            strSql.Append("'" + LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(name) + "'");
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            strSql.Append("'" + 
+                LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(name) + 
+                "'");
+            ManageDataBase database = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             return database.OperateDB(strSql.ToString());
         }
 
@@ -233,9 +297,12 @@ namespace LibBusiness
             strSql.Append(" where ");
             strSql.Append(UserInformationManagementDbConstNames.USER_LOGIN_NAME);
             strSql.Append(" = ");
-            strSql.Append("'" + LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(newLoginName) + "'");
+            strSql.Append("'" + 
+                LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(newLoginName) 
+                + "'");
 
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase database = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             DataTable dt = database.ReturnDS(strSql.ToString()).Tables[0];
             if (dt!=null)
             {
@@ -248,7 +315,8 @@ namespace LibBusiness
         }
 
         //向用户信息记录表中插入新的用户信息
-        public static bool InsertRecordIntoTableUserInformation(UserInformation ent)
+        public static bool 
+            InsertRecordIntoTableUserInformation(UserInformation ent)
         {
             //string sql = "insert into T_USER_INFO_MANAGEMENT values ('" + _txtLoginName.Text.ToString().Trim() + "','"
             //    + _txtPassWord.Text.ToString().Trim() + "','"
@@ -265,18 +333,39 @@ namespace LibBusiness
             strSql.Append("insert into ");
             strSql.Append(UserInformationManagementDbConstNames.TABLE_NAME);
             strSql.Append(" values (");
-            strSql.Append("'" + LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.LoginName) + "',");
-            strSql.Append("'" + LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.PassWord) + "',");
-            strSql.Append("'" + LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.Group) + "',");
-            strSql.Append("'" + LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.Department) + "',");
-            strSql.Append("'" + LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.Name) + "',");
-            strSql.Append("'" + LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.Email)  + "',");
-            strSql.Append("'" + LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.Tel)  + "',");
-            strSql.Append("'" + LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.Phone) + "',");
-            strSql.Append("'" + LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.Remark) + "',");
-            strSql.Append("'" + LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.Permission) + "')");
+            strSql.Append("'" + 
+                LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.LoginName) 
+                + "',");
+            strSql.Append("'" + 
+                LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.PassWord) 
+                + "',");
+            strSql.Append("'" + 
+                LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.Group) 
+                + "',");
+            strSql.Append("'" + 
+                LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.Department) 
+                + "',");
+            strSql.Append("'" + 
+                LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.Name) 
+                + "',");
+            strSql.Append("'" + 
+                LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.Email) 
+                + "',");
+            strSql.Append("'" + 
+                LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.Tel)  
+                + "',");
+            strSql.Append("'" + 
+                LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.Phone) 
+                + "',");
+            strSql.Append("'" + 
+                LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.Remark) 
+                + "',");
+            strSql.Append("'" + 
+                LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(ent.Permission) 
+                + "')");
 
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase database = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             return database.OperateDB(strSql.ToString());
         }
     }  

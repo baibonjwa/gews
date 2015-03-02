@@ -23,7 +23,8 @@ namespace LibBusiness
         /// <summary>
         /// 临时数据库名称
         /// </summary>
-        public const string TABLE_NAME_TEMP = "T_EARLY_WARNING_RESULT_TEMP";
+        public const string TABLE_NAME_TEMP = 
+            "T_EARLY_WARNING_RESULT_TEMP";
 
         /// <summary>
         /// ID

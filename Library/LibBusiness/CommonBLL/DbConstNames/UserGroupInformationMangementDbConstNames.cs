@@ -25,7 +25,8 @@ namespace LibBusiness
         public const string USER_GROUP_NAME = "USER_GROUP_NAME";
 
         //用户组人数
-        public const string USER_GROUP_STAFF_COUNT = "USER_GROUP_STAFF_COUNT";
+        public const string USER_GROUP_STAFF_COUNT = 
+            "USER_GROUP_STAFF_COUNT";
 
         //备注
         public const string USER_GROUP_REMARKS = "USER_GROUP_REMARKS";

@@ -28,14 +28,18 @@ namespace LibBusiness
 
         public static void InitClientSocket()
         {
-            string serverIp = ConfigManager.Instance.getValueByKey(ConfigConst.CONFIG_SERVER_IP);
-            int port = int.Parse(ConfigManager.Instance.getValueByKey(ConfigConst.CONFIG_PORT));
+            string serverIp = 
+                ConfigManager.Instance.getValueByKey(ConfigConst.CONFIG_SERVER_IP);
+            int port = 
+                int.Parse(ConfigManager.Instance.getValueByKey(ConfigConst.CONFIG_PORT));
 
             //初始化客户端Socket，连接服务器
-            string errorMsg = SocketHelper.InitClientSocket(serverIp, port, out ClientSocket);
+            string errorMsg = SocketHelper.InitClientSocket(serverIp, port, 
+                out ClientSocket);
             if (errorMsg != "")
             {
-                Alert.alert(Const.CONNECT_SOCKET_ERROR, Const.NOTES, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Alert.alert(Const.CONNECT_SOCKET_ERROR, Const.NOTES, 
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Log.Error(errorMsg);
             }
             else
@@ -71,12 +75,14 @@ namespace LibBusiness
                 Log.Debug("Send message " + msg);
                 if (errMsg != "")
                 {
-                    Log.Error(Const.SEND_MSG_FAILED + Const.CONNECT_ARROW + msg);
+                    Log.Error(Const.SEND_MSG_FAILED + Const.CONNECT_ARROW + 
+                        msg);
                 }
             }
             else
             {
-                Log.Info(Const.CLIENT_SOCKET_IS_NULL + Const.CONNECT_ARROW);
+                Log.Info(Const.CLIENT_SOCKET_IS_NULL + 
+                    Const.CONNECT_ARROW);
             }
         }
     }

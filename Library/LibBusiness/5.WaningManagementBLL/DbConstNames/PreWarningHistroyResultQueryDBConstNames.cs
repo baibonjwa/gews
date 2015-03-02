@@ -35,8 +35,10 @@ namespace LibBusiness
         public const string OVER_LIMIT_GAS = "over_limit_gas";
         public const string OVER_LIMIT_COAL = "over_limit_coal";
         public const string OVER_LIMIT_GEOLOGY = "over_limit_geology";
-        public const string OVER_LIMIT_VENTILATION = "over_limit_ventilation";
-        public const string OVER_LIMIT_MANAGEMENT = "over_limit_management";
+        public const string OVER_LIMIT_VENTILATION = 
+            "over_limit_ventilation";
+        public const string OVER_LIMIT_MANAGEMENT = 
+            "over_limit_management";
 
         public const string OUTBURST_GAS = "outburst_gas";
         public const string OUTBURST_COAL = "outburst_coal";

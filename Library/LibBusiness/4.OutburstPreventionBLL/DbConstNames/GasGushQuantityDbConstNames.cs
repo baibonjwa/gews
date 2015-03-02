@@ -26,13 +26,16 @@ namespace LibBusiness
         public const string Z = "COORDINATE_Z";
 
         //绝对瓦斯涌出量
-        public const string ABSOLUTE_GAS_GUSH_QUANTITY = "ABSOLUTE_GAS_GUSH_QUANTITY"; // 单位：m³/min
+        public const string ABSOLUTE_GAS_GUSH_QUANTITY = 
+            "ABSOLUTE_GAS_GUSH_QUANTITY"; // 单位：m³/min
 
         // 相对瓦斯涌出量
-        public const string RELATIVE_GAS_GUSH_QUANTITY = "RELATIVE_GAS_GUSH_QUANTITY"; // 单位：m³/t
+        public const string RELATIVE_GAS_GUSH_QUANTITY = 
+            "RELATIVE_GAS_GUSH_QUANTITY"; // 单位：m³/t
 
         //工作面日产量
-        public const string WORKING_FACE_DAY_OUTPUT = "WORKING_FACE_DAY_OUTPUT"; // 单位：t
+        public const string WORKING_FACE_DAY_OUTPUT = 
+            "WORKING_FACE_DAY_OUTPUT"; // 单位：t
 
         //回采年月
         public const string STOPE_DATE = "STOPE_DATE"; // 时间只精确到年月。格式：YYYY年MM月
@@ -47,7 +50,8 @@ namespace LibBusiness
         public const string BID = "BID";
 
         /* 备注
-         * ※同一位置、同一时间不能重复录入。其中，坐标误差允许范围0.1，如：坐标p1（42.3,6,6）和坐标p2（42.2,6,6）,则认为两个坐标相同。																					
+         * ※同一位置、同一时间不能重复录入。其中，坐标误差允许范围0.1，如：坐标p1（42.3,6,6）和坐标p2（42.2,6,6）,
+             则认为两个坐标相同。
          * ※时间误差允许范围10分钟
          */
     }

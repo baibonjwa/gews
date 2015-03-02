@@ -14,7 +14,8 @@ namespace LibBusiness
         {
             DataTable table = CreateTable<T>();
             Type entityType = typeof(T);
-            PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(entityType);
+            PropertyDescriptorCollection properties = 
+                TypeDescriptor.GetProperties(entityType);
 
             foreach (T item in list)
             {
@@ -75,7 +76,8 @@ namespace LibBusiness
 
                 foreach (DataColumn column in row.Table.Columns)
                 {
-                    PropertyInfo prop = obj.GetType().GetProperty(column.ColumnName);
+                    PropertyInfo prop = 
+                        obj.GetType().GetProperty(column.ColumnName);
                     try
                     {
                         object value = row[column.ColumnName];
@@ -96,7 +98,8 @@ namespace LibBusiness
         {
             Type entityType = typeof(T);
             DataTable table = new DataTable(entityType.Name);
-            PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(entityType);
+            PropertyDescriptorCollection properties = 
+                TypeDescriptor.GetProperties(entityType);
 
             foreach (PropertyDescriptor prop in properties)
             {

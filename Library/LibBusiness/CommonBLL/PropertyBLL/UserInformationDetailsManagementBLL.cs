@@ -27,7 +27,8 @@ namespace LibBusiness
             StringBuilder strSql = new StringBuilder();
             strSql.Append("SELECT * FROM ");
             strSql.Append(UserInformationDetailsManagementDbConstNames.TABLE_NAME);
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase database = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             DataSet ds = database.ReturnDS(strSql.ToString());
             return ds;
         }
@@ -42,7 +43,8 @@ namespace LibBusiness
             StringBuilder strSql = new StringBuilder();
             strSql.Append("SELECT * FROM ");
             strSql.Append(UserInformationDetailsManagementDbConstNames.TABLE_NAME);
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase database = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             DataTable dt = database.ReturnDS(strSql.ToString()).Tables[0];
             if (dt != null)
             {
@@ -57,7 +59,8 @@ namespace LibBusiness
                 }
                 for (int i = 0; i < n; i++)
                 {
-                    UserInformationDetails info = new UserInformationDetails();
+                    UserInformationDetails info = new 
+                        UserInformationDetails();
                     info.Id = (int)dt.Rows[i][0];
                     info.Name = dt.Rows[i][1].ToString();
                     info.PhoneNumber = dt.Rows[i][2].ToString();
@@ -85,7 +88,8 @@ namespace LibBusiness
             strSql.Append("SELECT * FROM ");
             strSql.Append(UserInformationDetailsManagementDbConstNames.TABLE_NAME);
 
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase database = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             DataTable dt = database.ReturnDS(strSql.ToString()).Tables[0];
             if (dt != null)
             {
@@ -108,7 +112,8 @@ namespace LibBusiness
             strSql.Append(UserInformationDetailsManagementDbConstNames.ID);
             strSql.Append(" = ");
             strSql.Append(id);
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase database = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             return database.OperateDB(strSql.ToString());
         }
 
@@ -117,7 +122,8 @@ namespace LibBusiness
         /// </summary>
         /// <param name="name">ID</param>
         /// <returns>若无值，则返回空</returns>
-        public static UserInformationDetails GetUserLoginInformationByID(int id)
+        public static UserInformationDetails 
+            GetUserLoginInformationByID(int id)
         {
             UserInformationDetails ent = null;
             StringBuilder strSql = new StringBuilder();
@@ -127,7 +133,8 @@ namespace LibBusiness
             strSql.Append(UserInformationDetailsManagementDbConstNames.ID);
             strSql.Append(" = ");
             strSql.Append(id);
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase database = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             DataTable dt = database.ReturnDS(strSql.ToString()).Tables[0];
             if (dt != null)
             {
@@ -161,7 +168,8 @@ namespace LibBusiness
             strSql.Append(DepartmentInformationManagemetDbConstNames.DEPT_NAME);
             strSql.Append(" FROM ");
             strSql.Append(DepartmentInformationManagemetDbConstNames.TABLE_NAME);
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase database = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             DataTable dt = database.ReturnDS(strSql.ToString()).Tables[0];
             if (dt != null)
             {
@@ -180,7 +188,8 @@ namespace LibBusiness
         /// </summary>
         /// <param name="ent">新值</param>
         /// <returns>是否录入成功</returns>
-        public static bool InsertUserInformationDetailsIntoTable(UserInformationDetails ent)
+        public static bool 
+            InsertUserInformationDetailsIntoTable(UserInformationDetails ent)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("INSERT INTO ");
@@ -194,7 +203,8 @@ namespace LibBusiness
             strSql.Append("'" + ent.Position + "',");
             strSql.Append("'" + ent.Remarks + "',");
             strSql.Append("'" + ent.IsInform + "')");
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase database = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             return database.OperateDB(strSql.ToString());
         }
 
@@ -203,32 +213,43 @@ namespace LibBusiness
         /// </summary>
         /// <param name="ent">新值</param>
         /// <returns>是否修改成功</returns>
-        public static bool UpdataUserInformationDetails(UserInformationDetails ent, int id)
+        public static bool 
+            UpdataUserInformationDetails(UserInformationDetails ent, int id)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("UPDATE ");
             strSql.Append(UserInformationDetailsManagementDbConstNames.TABLE_NAME);
             strSql.Append(" SET ");
-            strSql.Append(UserInformationDetailsManagementDbConstNames.USER_NAME + " = ");
+            strSql.Append(UserInformationDetailsManagementDbConstNames.USER_NAME 
+                + " = ");
             strSql.Append("'" + ent.Name + "',");
-            strSql.Append(UserInformationDetailsManagementDbConstNames.USER_PHONENUMBER + " = ");
+            strSql.Append(UserInformationDetailsManagementDbConstNames.USER_PHONENUMBER 
+                + " = ");
             strSql.Append("'" + ent.PhoneNumber + "',");
-            strSql.Append(UserInformationDetailsManagementDbConstNames.USER_TELEPHONE + " = ");
+            strSql.Append(UserInformationDetailsManagementDbConstNames.USER_TELEPHONE 
+                + " = ");
             strSql.Append("'" + ent.TelePhoneNumber + "',");
-            strSql.Append(UserInformationDetailsManagementDbConstNames.USER_EMAIL + " = ");
+            strSql.Append(UserInformationDetailsManagementDbConstNames.USER_EMAIL 
+                + " = ");
             strSql.Append("'" + ent.Email + "',");
-            strSql.Append(UserInformationDetailsManagementDbConstNames.USER_DEPARTMENT + " = ");
+            strSql.Append(UserInformationDetailsManagementDbConstNames.USER_DEPARTMENT 
+                + " = ");
             strSql.Append("'" + ent.Depratment + "',");
-            strSql.Append(UserInformationDetailsManagementDbConstNames.USER_POSITION + " = ");
+            strSql.Append(UserInformationDetailsManagementDbConstNames.USER_POSITION 
+                + " = ");
             strSql.Append("'" + ent.Position + "',");
-            strSql.Append(UserInformationDetailsManagementDbConstNames.USER_REMARKS + " = ");
+            strSql.Append(UserInformationDetailsManagementDbConstNames.USER_REMARKS 
+                + " = ");
             strSql.Append("'" + ent.Remarks + "',");
-            strSql.Append(UserInformationDetailsManagementDbConstNames.USER_ISINFORM + " = ");
+            strSql.Append(UserInformationDetailsManagementDbConstNames.USER_ISINFORM 
+                + " = ");
             strSql.Append("'" + ent.IsInform + "'");
             strSql.Append(" WHERE ");
-            strSql.Append(UserInformationDetailsManagementDbConstNames.ID + "=");
+            strSql.Append(UserInformationDetailsManagementDbConstNames.ID + 
+                "=");
             strSql.Append(id);
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase database = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             return database.OperateDB(strSql.ToString());
         }
 
@@ -238,9 +259,11 @@ namespace LibBusiness
             strSql.Append("SELECT * FROM ");
             strSql.Append(UserInformationDetailsManagementDbConstNames.TABLE_NAME);
             strSql.Append(" WHERE ");
-            strSql.Append(UserInformationDetailsManagementDbConstNames.USER_ISINFORM + " = ");
+            strSql.Append(UserInformationDetailsManagementDbConstNames.USER_ISINFORM 
+                + " = ");
             strSql.Append("1");
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase database = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             return database.ReturnDS(strSql.ToString());
         }
     }

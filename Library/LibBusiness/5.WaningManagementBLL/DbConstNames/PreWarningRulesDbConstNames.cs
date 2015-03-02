@@ -20,7 +20,8 @@ namespace LibBusiness
         public const string RULE_CODE = "RULE_CODE";//编码，唯一，不能重复
 
         //规则类别
-        public const string RULE_TYPE = "RULE_TYPE";//瓦斯、煤层赋存、地质构造、通风、采掘影响、防突措施、日常预测、管理因素、其他
+        public const string RULE_TYPE = 
+            "RULE_TYPE";//瓦斯、煤层赋存、地质构造、通风、采掘影响、防突措施、日常预测、管理因素、其他
 
         //预警类型
         public const string WARNING_TYPE = "WARNING_TYPE";//趋势预警、状态预警
@@ -29,16 +30,19 @@ namespace LibBusiness
         public const string WARNING_LEVEL = "WARNING_LEVEL";//红色预警、黄色预警
 
         //适用位置
-        public const string SUITABLE_LOCATION = "SUITABLE_LOCATION";//掘进工作面、回采工作面、掘进和回采工作面、整个矿井
+        public const string SUITABLE_LOCATION = 
+            "SUITABLE_LOCATION";//掘进工作面、回采工作面、掘进和回采工作面、整个矿井
 
         //规则描述
-        public const string RULE_DESCRIPTION = "RULE_DESCRIPTION";//规则描述当中参数名使用[]标识，参数值使
+        public const string RULE_DESCRIPTION = 
+            "RULE_DESCRIPTION";//规则描述当中参数名使用[]标识，参数值使
 
         //指标类型
         public const string INDICATOR_TYPE = "INDICATOR_TYPE";//用()标识
 
         //比较符
-        public const string OPERATOR = "OPERATOR";//＞,≥,＜,≤,＝,≠；多个比较符用逗号分隔，比较符个数与参数个数是一一对应的
+        public const string OPERATOR = "OPERATOR";//＞,≥,＜,≤,＝,
+            ≠；多个比较符用逗号分隔，比较符个数与参数个数是一一对应的
 
         //修改日期
         public const string MODIFY_DATE = "MODIFY_DATE";//修改日期，精确到时分秒

@@ -22,7 +22,8 @@ namespace LibBusiness
         public static bool InsertPreWarningRulesInfo(PreWarningRules ent)
         {
             //MARK FIELD
-            string sql = "INSERT INTO " + PreWarningRulesDbConstNames.TABLE_NAME + "(" +
+            string sql = "INSERT INTO " + 
+                PreWarningRulesDbConstNames.TABLE_NAME + "(" +
                 PreWarningRulesDbConstNames.RULE_CODE + ", " +
                 PreWarningRulesDbConstNames.RULE_TYPE + ", " +
                 PreWarningRulesDbConstNames.WARNING_TYPE + ", " +
@@ -36,7 +37,8 @@ namespace LibBusiness
                 PreWarningRulesDbConstNames.BINDING_TABLE_NAME + ", " +
                 PreWarningRulesDbConstNames.BINDING_COLUMN_NAME + ", " +
                 PreWarningRulesDbConstNames.USE_TYPE + ", " +
-                PreWarningRulesDbConstNames.BINDING_SINGLERULES+ ")" + " VALUES('" +
+                PreWarningRulesDbConstNames.BINDING_SINGLERULES+ ")" + 
+                    " VALUES('" +
                 ent.RuleCode + "','" +
                 ent.RuleType + "','" +
                 ent.WarningType + "','" +
@@ -51,7 +53,8 @@ namespace LibBusiness
                 ent.BindingColumnName + "','" +
                 ent.UseType + "','" +
                 ent.StrBindingSingleRuleName + "')";
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase db = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             return db.OperateDB(sql);
         }
 
@@ -63,10 +66,16 @@ namespace LibBusiness
         public static DataSet selectHuiCaiWarningRules()
         {
             //string sql = "SELECT * FROM T_PRE_WARNING_RULES";
-            string sql = "SELECT * FROM " + PreWarningRulesDbConstNames.TABLE_NAME +
-                " WHERE " + PreWarningRulesDbConstNames.SUITABLE_LOCATION + "='" + Const_WM.SUITABLE_LOCATION_HUI_CAI + "' OR " +
-                PreWarningRulesDbConstNames.SUITABLE_LOCATION + "='" + Const_WM.SUITABLE_LOCATION_JUE_JIN_HUI_CAI_COMMON + "' ORDER BY " + PreWarningRulesDbConstNames.SUITABLE_LOCATION;
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            string sql = "SELECT * FROM " + 
+                PreWarningRulesDbConstNames.TABLE_NAME +
+                " WHERE " + PreWarningRulesDbConstNames.SUITABLE_LOCATION + 
+                    "='" + Const_WM.SUITABLE_LOCATION_HUI_CAI + "' OR " +
+                PreWarningRulesDbConstNames.SUITABLE_LOCATION + "='" + 
+                    Const_WM.SUITABLE_LOCATION_JUE_JIN_HUI_CAI_COMMON + 
+                    "' ORDER BY " + 
+                    PreWarningRulesDbConstNames.SUITABLE_LOCATION;
+            ManageDataBase db = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             return db.ReturnDS(sql);
         }
 
@@ -76,10 +85,16 @@ namespace LibBusiness
         /// <returns></returns>
         public static DataSet selectJueJinWarningRules()
         {
-            string sql = "SELECT * FROM " + PreWarningRulesDbConstNames.TABLE_NAME +
-                " WHERE " + PreWarningRulesDbConstNames.SUITABLE_LOCATION + "='" + Const_WM.SUITABLE_LOCATION_JUE_JIN + "' OR " +
-                PreWarningRulesDbConstNames.SUITABLE_LOCATION + "='" + Const_WM.SUITABLE_LOCATION_JUE_JIN_HUI_CAI_COMMON + "' ORDER BY " + PreWarningRulesDbConstNames.SUITABLE_LOCATION;
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            string sql = "SELECT * FROM " + 
+                PreWarningRulesDbConstNames.TABLE_NAME +
+                " WHERE " + PreWarningRulesDbConstNames.SUITABLE_LOCATION + 
+                    "='" + Const_WM.SUITABLE_LOCATION_JUE_JIN + "' OR " +
+                PreWarningRulesDbConstNames.SUITABLE_LOCATION + "='" + 
+                    Const_WM.SUITABLE_LOCATION_JUE_JIN_HUI_CAI_COMMON + 
+                    "' ORDER BY " + 
+                    PreWarningRulesDbConstNames.SUITABLE_LOCATION;
+            ManageDataBase db = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             return db.ReturnDS(sql);
         }
 
@@ -89,10 +104,13 @@ namespace LibBusiness
         /// <returns></returns>
         public static DataSet selectJueJinHuiCaiCommonRules()
         {
-            string sql = "SELECT * FROM " + PreWarningRulesDbConstNames.TABLE_NAME +
-            " WHERE " + PreWarningRulesDbConstNames.SUITABLE_LOCATION + "='" + Const_WM.SUITABLE_LOCATION_JUE_JIN_HUI_CAI_COMMON +
+            string sql = "SELECT * FROM " + 
+                PreWarningRulesDbConstNames.TABLE_NAME +
+            " WHERE " + PreWarningRulesDbConstNames.SUITABLE_LOCATION + 
+                "='" + Const_WM.SUITABLE_LOCATION_JUE_JIN_HUI_CAI_COMMON +
             "' ORDER BY " + PreWarningRulesDbConstNames.SUITABLE_LOCATION;
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase db = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             return db.ReturnDS(sql);
         }
 
@@ -102,10 +120,13 @@ namespace LibBusiness
         /// <returns></returns>
         public static DataSet selectOthersRules()
         {
-            string sql = "SELECT * FROM " + PreWarningRulesDbConstNames.TABLE_NAME +
-            " WHERE " + PreWarningRulesDbConstNames.SUITABLE_LOCATION + "='" + Const_WM.SUITABLE_LOCATION_OTHERS +
+            string sql = "SELECT * FROM " + 
+                PreWarningRulesDbConstNames.TABLE_NAME +
+            " WHERE " + PreWarningRulesDbConstNames.SUITABLE_LOCATION + 
+                "='" + Const_WM.SUITABLE_LOCATION_OTHERS +
             "' ORDER BY " + PreWarningRulesDbConstNames.SUITABLE_LOCATION;
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase db = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             return db.ReturnDS(sql);
         }
         #endregion
@@ -117,9 +138,13 @@ namespace LibBusiness
         /// <returns></returns>
         public static DataSet selectChaoXianWarningRules()
         {
-            string sql = "SELECT * FROM " + PreWarningRulesDbConstNames.TABLE_NAME +
-                " WHERE " + PreWarningRulesDbConstNames.WARNING_TYPE + "='" + Const_WM.WARNING_TYPE_OUT_OF_LIMIT + "' ORDER BY " + PreWarningRulesDbConstNames.WARNING_TYPE;
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            string sql = "SELECT * FROM " + 
+                PreWarningRulesDbConstNames.TABLE_NAME +
+                " WHERE " + PreWarningRulesDbConstNames.WARNING_TYPE + "='" 
+                    + Const_WM.WARNING_TYPE_OUT_OF_LIMIT + "' ORDER BY " + 
+                    PreWarningRulesDbConstNames.WARNING_TYPE;
+            ManageDataBase db = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             return db.ReturnDS(sql);
         }
 
@@ -129,9 +154,13 @@ namespace LibBusiness
         /// <returns></returns>
         public static DataSet selectTuChuWarningRules()
         {
-            string sql = "SELECT * FROM " + PreWarningRulesDbConstNames.TABLE_NAME +
-                " WHERE " + PreWarningRulesDbConstNames.WARNING_TYPE + "='" + Const_WM.WARNING_TYPE_GAS_OUTBURST + "' ORDER BY " + PreWarningRulesDbConstNames.WARNING_TYPE;
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            string sql = "SELECT * FROM " + 
+                PreWarningRulesDbConstNames.TABLE_NAME +
+                " WHERE " + PreWarningRulesDbConstNames.WARNING_TYPE + "='" 
+                    + Const_WM.WARNING_TYPE_GAS_OUTBURST + "' ORDER BY " + 
+                    PreWarningRulesDbConstNames.WARNING_TYPE;
+            ManageDataBase db = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             return db.ReturnDS(sql);
         }
         #endregion
@@ -142,8 +171,11 @@ namespace LibBusiness
         /// <returns></returns>
         public static DataSet selectAllWarningRules()
         {
-            string sql = "SELECT * FROM " + PreWarningRulesDbConstNames.TABLE_NAME + " ORDER BY " + PreWarningRulesDbConstNames.SUITABLE_LOCATION; ;
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            string sql = "SELECT * FROM " + 
+                PreWarningRulesDbConstNames.TABLE_NAME + " ORDER BY " + 
+                PreWarningRulesDbConstNames.SUITABLE_LOCATION; ;
+            ManageDataBase db = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             return db.ReturnDS(sql);
         }
 
@@ -154,19 +186,32 @@ namespace LibBusiness
         /// <returns></returns>
         public static bool updateWarningRulesInfo(PreWarningRules ent)
         {
-            string sql = "UPDATE " + PreWarningRulesDbConstNames.TABLE_NAME + " SET " +
-                PreWarningRulesDbConstNames.RULE_CODE + "='" + ent.RuleCode + "'," +
-            PreWarningRulesDbConstNames.RULE_TYPE + "='" + ent.RuleType + "'," +
-            PreWarningRulesDbConstNames.WARNING_TYPE + "='" + ent.WarningType + "'," +
-            PreWarningRulesDbConstNames.WARNING_LEVEL + "='" + ent.WarningLevel + "'," +
-            PreWarningRulesDbConstNames.SUITABLE_LOCATION + "='" + ent.SuitableLocation + "'," +
-            PreWarningRulesDbConstNames.RULE_DESCRIPTION + "='" + ent.RuleDescription + "'," +
-            PreWarningRulesDbConstNames.INDICATOR_TYPE + "='" + ent.IndicatorType + "'," +
-            PreWarningRulesDbConstNames.OPERATOR + "='" + ent.Operator + "'," +
-            PreWarningRulesDbConstNames.MODIFY_DATE + "='" + ent.ModifyDate.ToString() + "', " +//MARK FIELD
-            PreWarningRulesDbConstNames.REMARKS + "='" + ent.Remarks + "' " + " WHERE " +
-            PreWarningRulesDbConstNames.RULE_ID + "=" + ent.RuleId.ToString();
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            string sql = "UPDATE " + PreWarningRulesDbConstNames.TABLE_NAME 
+                + " SET " +
+                PreWarningRulesDbConstNames.RULE_CODE + "='" + ent.RuleCode 
+                    + "'," +
+            PreWarningRulesDbConstNames.RULE_TYPE + "='" + ent.RuleType + 
+                "'," +
+            PreWarningRulesDbConstNames.WARNING_TYPE + "='" + 
+                ent.WarningType + "'," +
+            PreWarningRulesDbConstNames.WARNING_LEVEL + "='" + 
+                ent.WarningLevel + "'," +
+            PreWarningRulesDbConstNames.SUITABLE_LOCATION + "='" + 
+                ent.SuitableLocation + "'," +
+            PreWarningRulesDbConstNames.RULE_DESCRIPTION + "='" + 
+                ent.RuleDescription + "'," +
+            PreWarningRulesDbConstNames.INDICATOR_TYPE + "='" + 
+                ent.IndicatorType + "'," +
+            PreWarningRulesDbConstNames.OPERATOR + "='" + ent.Operator + 
+                "'," +
+            PreWarningRulesDbConstNames.MODIFY_DATE + "='" + 
+                ent.ModifyDate.ToString() + "', " +//MARK FIELD
+            PreWarningRulesDbConstNames.REMARKS + "='" + ent.Remarks + "' " 
+                + " WHERE " +
+            PreWarningRulesDbConstNames.RULE_ID + "=" + 
+                ent.RuleId.ToString();
+            ManageDataBase db = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             bool ret = db.OperateDB(sql);
             //未添加更新巷道信息表的代码，参数中需要将参数名同时保存
             //MARK YANGER
@@ -180,7 +225,8 @@ namespace LibBusiness
         /// <param name="tunnelID">巷道ID</param>
         /// <param name="ruleId">规则ID</param>
         /// <returns>当巷道未绑定规则编码时，返回null</returns>
-        public static RuleInfo GetTunnelBindingParamsByRuleId(int tunnelID, int ruleId)
+        public static RuleInfo GetTunnelBindingParamsByRuleId(int tunnelID, 
+            int ruleId)
         {
             RuleInfo[] all = GetTunnelBindingRuleIdsAndParams(tunnelID);
             if (all == null)
@@ -204,7 +250,8 @@ namespace LibBusiness
         /// <param name="preWarningParamsInDB">数据库中保存的预警规则参数</param>
         /// <returns>规则参数与编码单元</returns>
         /// <summary>
-        public static RuleInfo[] GetTunnelBindingRuleIdsAndParams(int tunnelID)
+        public static RuleInfo[] GetTunnelBindingRuleIdsAndParams(int 
+            tunnelID)
         {
             //获取巷道绑定的规则编码字符串和预警参数字符串
             string sql = "SELECT " +
@@ -212,7 +259,8 @@ namespace LibBusiness
                 TunnelInfoDbConstNames.PRE_WARNING_PARAMS + " FROM " +
                 TunnelInfoDbConstNames.TABLE_NAME + " WHERE " +
                 TunnelInfoDbConstNames.ID + "=" + tunnelID;
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
+            ManageDataBase db = new 
+                ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
             DataSet ds = db.ReturnDS(sql);
 
             string allRuleIds = "";
@@ -221,8 +269,10 @@ namespace LibBusiness
                 //Alert.alert("数据库中无对应巷道！");
                 return null;
             }
-            allRuleIds = ds.Tables[0].Rows[0][TunnelInfoDbConstNames.RULE_IDS].ToString();
-            string allParams = ds.Tables[0].Rows[0][TunnelInfoDbConstNames.PRE_WARNING_PARAMS].ToString();
+            allRuleIds = 
+                ds.Tables[0].Rows[0][TunnelInfoDbConstNames.RULE_IDS].ToString();
+            string allParams = 
+                ds.Tables[0].Rows[0][TunnelInfoDbConstNames.PRE_WARNING_PARAMS].ToString();
 
             if (allRuleIds == "")//未绑定规则编码
             {
@@ -245,10 +295,12 @@ namespace LibBusiness
                 TunnelInfoDbConstNames.RULE_IDS + " FROM " +
                 TunnelInfoDbConstNames.TABLE_NAME + " WHERE " +
                 TunnelInfoDbConstNames.ID + "=" + tunnelID;
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
+            ManageDataBase db = new 
+                ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
             DataSet ds = db.ReturnDS(sql);
             string allRuleIds = "";
-            allRuleIds = ds.Tables[0].Rows[0][TunnelInfoDbConstNames.RULE_IDS].ToString();
+            allRuleIds = 
+                ds.Tables[0].Rows[0][TunnelInfoDbConstNames.RULE_IDS].ToString();
             return PreWarningRulesBLL.ParseRuleIds(allRuleIds);
         }
 
@@ -256,7 +308,8 @@ namespace LibBusiness
         /// 根据规则ID获取预警规则实体
         /// <param name="ruleId">规则Id</param>
         /// </summary>
-        public static PreWarningRules GetPreWarningRulesEntityByRuleId(int ruleId)
+        public static PreWarningRules GetPreWarningRulesEntityByRuleId(int 
+            ruleId)
         {
             try
             {
@@ -272,8 +325,10 @@ namespace LibBusiness
                     PreWarningRulesDbConstNames.MODIFY_DATE + "," +
                     PreWarningRulesDbConstNames.REMARKS + " FROM " +
                     PreWarningRulesDbConstNames.TABLE_NAME + " WHERE " +
-                    PreWarningRulesDbConstNames.RULE_ID + "=" + ruleId.ToString();
-                ManageDataBase db = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+                    PreWarningRulesDbConstNames.RULE_ID + "=" + 
+                        ruleId.ToString();
+                ManageDataBase db = new 
+                    ManageDataBase(DATABASE_TYPE.WarningManagementDB);
                 DataSet ds = db.ReturnDS(sql);
                 int n = ds.Tables[0].Rows.Count;
                 if (n != 1)
@@ -288,21 +343,32 @@ namespace LibBusiness
                 }
 
                 PreWarningRules ret = new PreWarningRules(ruleId);
-                ret.RuleCode = ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.RULE_CODE].ToString();
-                ret.RuleType = ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.RULE_TYPE].ToString();
-                ret.WarningType = ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.WARNING_TYPE].ToString();
-                ret.WarningLevel = ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.WARNING_LEVEL].ToString();
-                ret.SuitableLocation = ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.SUITABLE_LOCATION].ToString();
-                ret.RuleDescription = ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.RULE_DESCRIPTION].ToString();
-                ret.IndicatorType = ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.INDICATOR_TYPE].ToString();
-                ret.Operator = ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.OPERATOR].ToString();
-                ret.ModifyDate = Convert.ToDateTime(ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.MODIFY_DATE].ToString());
-                ret.Remarks = ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.REMARKS].ToString();
+                ret.RuleCode = 
+                    ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.RULE_CODE].ToString();
+                ret.RuleType = 
+                    ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.RULE_TYPE].ToString();
+                ret.WarningType = 
+                    ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.WARNING_TYPE].ToString();
+                ret.WarningLevel = 
+                    ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.WARNING_LEVEL].ToString();
+                ret.SuitableLocation = 
+                    ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.SUITABLE_LOCATION].ToString();
+                ret.RuleDescription = 
+                    ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.RULE_DESCRIPTION].ToString();
+                ret.IndicatorType = 
+                    ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.INDICATOR_TYPE].ToString();
+                ret.Operator = 
+                    ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.OPERATOR].ToString();
+                ret.ModifyDate = 
+                    Convert.ToDateTime(ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.MODIFY_DATE].ToString());
+                ret.Remarks = 
+                    ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.REMARKS].ToString();
                 return ret;
             }
             catch (Exception ex)
             {
-                Alert.alert(ex.Message + " 函数名：GetPreWarningRulesEntityByRuleCode");
+                Alert.alert(ex.Message + 
+                    " 函数名：GetPreWarningRulesEntityByRuleCode");
                 return null;
             }
         }
@@ -311,7 +377,8 @@ namespace LibBusiness
         /// 根据规则ID获取预警规则实体
         /// <param name="ruleId">规则Id</param>
         /// </summary>
-        public static PreWarningRules GetPreWarningRulesEntityByRuleId(string ruleId)
+        public static PreWarningRules 
+            GetPreWarningRulesEntityByRuleId(string ruleId)
         {
             try
             {
@@ -327,8 +394,10 @@ namespace LibBusiness
                     PreWarningRulesDbConstNames.MODIFY_DATE + "," +
                     PreWarningRulesDbConstNames.REMARKS + " FROM " +
                     PreWarningRulesDbConstNames.TABLE_NAME + " WHERE " +
-                    PreWarningRulesDbConstNames.RULE_ID + "=" + ruleId.ToString();
-                ManageDataBase db = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+                    PreWarningRulesDbConstNames.RULE_ID + "=" + 
+                        ruleId.ToString();
+                ManageDataBase db = new 
+                    ManageDataBase(DATABASE_TYPE.WarningManagementDB);
                 DataSet ds = db.ReturnDS(sql);
                 int n = ds.Tables[0].Rows.Count;
                 if (n != 1)
@@ -344,21 +413,32 @@ namespace LibBusiness
                 int iRuleID = -1;
                 int.TryParse(ruleId, out iRuleID);
                 PreWarningRules ret = new PreWarningRules(iRuleID);
-                ret.RuleCode = ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.RULE_CODE].ToString();
-                ret.RuleType = ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.RULE_TYPE].ToString();
-                ret.WarningType = ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.WARNING_TYPE].ToString();
-                ret.WarningLevel = ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.WARNING_LEVEL].ToString();
-                ret.SuitableLocation = ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.SUITABLE_LOCATION].ToString();
-                ret.RuleDescription = ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.RULE_DESCRIPTION].ToString();
-                ret.IndicatorType = ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.INDICATOR_TYPE].ToString();
-                ret.Operator = ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.OPERATOR].ToString();
-                ret.ModifyDate = Convert.ToDateTime(ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.MODIFY_DATE].ToString());
-                ret.Remarks = ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.REMARKS].ToString();
+                ret.RuleCode = 
+                    ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.RULE_CODE].ToString();
+                ret.RuleType = 
+                    ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.RULE_TYPE].ToString();
+                ret.WarningType = 
+                    ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.WARNING_TYPE].ToString();
+                ret.WarningLevel = 
+                    ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.WARNING_LEVEL].ToString();
+                ret.SuitableLocation = 
+                    ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.SUITABLE_LOCATION].ToString();
+                ret.RuleDescription = 
+                    ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.RULE_DESCRIPTION].ToString();
+                ret.IndicatorType = 
+                    ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.INDICATOR_TYPE].ToString();
+                ret.Operator = 
+                    ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.OPERATOR].ToString();
+                ret.ModifyDate = 
+                    Convert.ToDateTime(ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.MODIFY_DATE].ToString());
+                ret.Remarks = 
+                    ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.REMARKS].ToString();
                 return ret;
             }
             catch (Exception ex)
             {
-                Alert.alert(ex.Message + " 函数名：GetPreWarningRulesEntityByRuleCode");
+                Alert.alert(ex.Message + 
+                    " 函数名：GetPreWarningRulesEntityByRuleCode");
                 return null;
             }
         }
@@ -368,7 +448,8 @@ namespace LibBusiness
         /// <param name="ruleCodes">规则编码字符串</param>
         /// <param name="preWarningParams">预警参数字符串</param>
         /// <returns>规则编码与参数单元,无规则编码和参数则返回null；注意有规则编码但无参数的情况！(此时返回值当中规则编码含有值，但预警参数为null)</returns>
-        private static RuleInfo[] ParseRuleIdsAndParams(string ruleIds, string preWarningParams)
+        private static RuleInfo[] ParseRuleIdsAndParams(string ruleIds, 
+            string preWarningParams)
         {
             //规则编码为空
             if (ruleIds == "" && preWarningParams == "")
@@ -378,7 +459,8 @@ namespace LibBusiness
             try
             {
 
-                char[] seperator = Const_WM.GetPreWarningRuleIdAndParamsSeperatorArr();
+                char[] seperator = 
+                    Const_WM.GetPreWarningRuleIdAndParamsSeperatorArr();
 
                 string[] rules = ruleIds.Split(seperator);
                 string[] warningParams = preWarningParams.Split(seperator);
@@ -388,7 +470,8 @@ namespace LibBusiness
                     ret[i] = new RuleInfo(int.Parse(rules[i]));
                     if (warningParams[i] != "")//该规则编码含有参数
                     {
-                        ret[i].PreWarningParams = PreWarningRules.ParseRuleDescriptionOfOneRuleId(warningParams[i]);
+                        ret[i].PreWarningParams = 
+                            PreWarningRules.ParseRuleDescriptionOfOneRuleId(warningParams[i]);
                     }
                     else//该规则编码无对应参数
                     {
@@ -420,7 +503,8 @@ namespace LibBusiness
             try
             {
 
-                char[] seperator = Const_WM.GetPreWarningRuleIdAndParamsSeperatorArr();
+                char[] seperator = 
+                    Const_WM.GetPreWarningRuleIdAndParamsSeperatorArr();
 
                 string[] rules = ruleIdsInDb.Split(seperator);
                 return rules;
@@ -439,7 +523,8 @@ namespace LibBusiness
         /// <param name="paramInfo">单条规则编码及对应的参数</param>
         /// 注意：规则编码无参数时，也要加分号。
         /// <returns>返回转换后的信息，注意：返回值可能为null</returns>
-        public static RuleInfo ConvertOneRuleCodeAndParamInfo2DBString(RuleInfo ruleInfo)
+        public static RuleInfo 
+            ConvertOneRuleCodeAndParamInfo2DBString(RuleInfo ruleInfo)
         {
             if (ruleInfo == null)
             {
@@ -451,12 +536,14 @@ namespace LibBusiness
             //规则编码
             //ret.RuleCodesStr += paramInfo.RuleCode;
             ret.RuleCodesStr += ruleInfo.Id.ToString();
-            ret.RuleCodesStr += Const_WM.PRE_WARNING_RULE_CODE_AND_PARAMS_SEPERATOR_MULTI;
+            ret.RuleCodesStr += 
+                Const_WM.PRE_WARNING_RULE_CODE_AND_PARAMS_SEPERATOR_MULTI;
 
             int idx = 0;
             if (ruleInfo.PreWarningParams != null)
             {
-                foreach (string paramName in ruleInfo.PreWarningParams.Keys)
+                foreach (string paramName in 
+                    ruleInfo.PreWarningParams.Keys)
                 {
                     //参数名
                     ret.ParamsInfoStr += Const_WM.PARAM_START_SEPERATOR;
@@ -464,16 +551,19 @@ namespace LibBusiness
                     ret.ParamsInfoStr += Const_WM.PARAM_END_SEPERATOR;
                     //值
                     ret.ParamsInfoStr += Const_WM.VALUE_START_SEPERATOR;
-                    ret.ParamsInfoStr += ruleInfo.PreWarningParams[paramName].ToString();
+                    ret.ParamsInfoStr += 
+                        ruleInfo.PreWarningParams[paramName].ToString();
                     ret.ParamsInfoStr += Const_WM.VALUE_END_SEPERATOR;
                     if (idx != ruleInfo.PreWarningParams.Count - 1)
                     {
-                        ret.ParamsInfoStr += Const_WM.PRE_WARNING_RULE_CODE_AND_PARAMS_SEPERATOR_SINGLE;
+                        ret.ParamsInfoStr += 
+                            Const_WM.PRE_WARNING_RULE_CODE_AND_PARAMS_SEPERATOR_SINGLE;
                     }
                     idx++;
                 }
             }
-            ret.ParamsInfoStr += Const_WM.PRE_WARNING_RULE_CODE_AND_PARAMS_SEPERATOR_MULTI;
+            ret.ParamsInfoStr += 
+                Const_WM.PRE_WARNING_RULE_CODE_AND_PARAMS_SEPERATOR_MULTI;
             return ret;
         }
 
@@ -484,7 +574,8 @@ namespace LibBusiness
         /// <param name="tunnelID">巷道ID</param>
         /// <param name="info">巷道绑定的所有规则ID和参数信息</param>
         /// <returns>更新成功返回True</returns>
-        public static bool UpdateRuleIdsAndParams2TunnelTable(int tunnelID, RuleInfo[] info)
+        public static bool UpdateRuleIdsAndParams2TunnelTable(int tunnelID, 
+            RuleInfo[] info)
         {
             string ruleIds = "";
             string warningParams = "";
@@ -493,7 +584,8 @@ namespace LibBusiness
                 int n = info.Length;
                 for (int i = 0; i < n; i++)
                 {
-                    RuleInfo cvtInfo = PreWarningRulesBLL.ConvertOneRuleCodeAndParamInfo2DBString(info[i]);
+                    RuleInfo cvtInfo = 
+                        PreWarningRulesBLL.ConvertOneRuleCodeAndParamInfo2DBString(info[i]);
                     ruleIds += cvtInfo.RuleCodesStr;
                     warningParams += cvtInfo.ParamsInfoStr;
                 }
@@ -501,16 +593,20 @@ namespace LibBusiness
             string sql = "UPDATE " +
                 TunnelInfoDbConstNames.TABLE_NAME + " SET " +
                 TunnelInfoDbConstNames.RULE_IDS + "='" + ruleIds + "'," +
-                TunnelInfoDbConstNames.PRE_WARNING_PARAMS + "='" + warningParams + "' WHERE " +
+                TunnelInfoDbConstNames.PRE_WARNING_PARAMS + "='" + 
+                    warningParams + "' WHERE " +
                 TunnelInfoDbConstNames.ID + "=" + tunnelID;
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
+            ManageDataBase db = new 
+                ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
             return db.OperateDB(sql);
         }
 
         public static bool ClearPreWarningDB()
         {
-            string sql = "TRUNCATE TABLE[" + PreWarningRulesDbConstNames.TABLE_NAME + "]";
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            string sql = "TRUNCATE TABLE[" + 
+                PreWarningRulesDbConstNames.TABLE_NAME + "]";
+            ManageDataBase db = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             return db.OperateDB(sql);
         }
     }

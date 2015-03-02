@@ -232,7 +232,7 @@ namespace LibCommonForm
         private void SetcboGroupNameValue()
         {
             //从数据库中获得所有组名称
-            string[] groupName = LoginFormBLL.GetUserGroupName();
+            string[] groupName = UserGroup.FindAll().Select(u => u.GroupName).ToArray();
             foreach (string str in groupName)
             {
                 _cboGroup.Items.Add(str);

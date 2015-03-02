@@ -42,18 +42,24 @@ namespace LibBusiness
             //sb.Append("INSERT INTO " + WarningImgDbConstNames.TABLE_NAME + "VALUES");
             //sb.Append("('" + ent.FileName + "','" + ent.WarningId + "','" + ent.Remarks + "',"")");
 
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
-            db.OperateDBWithPropertys(props, WarningImgDbConstNames.TABLE_NAME, length, types, contents);
+            ManageDataBase db = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            db.OperateDBWithPropertys(props, 
+                WarningImgDbConstNames.TABLE_NAME, length, types, contents);
             return false;
         }
 
-        public static List<String> GetFilsNameListWithWarningId(string warningId)
+        public static List<String> GetFilsNameListWithWarningId(string 
+            warningId)
         {
-            string sqlStr = "SELECT " + WarningImgDbConstNames.IMG_FILENAME + " FROM " + WarningImgDbConstNames.TABLE_NAME;
-            sqlStr += " WHERE " + WarningImgDbConstNames.WARNING_ID + " LIKE '%" + warningId + "%'";
+            string sqlStr = "SELECT " + WarningImgDbConstNames.IMG_FILENAME 
+                + " FROM " + WarningImgDbConstNames.TABLE_NAME;
+            sqlStr += " WHERE " + WarningImgDbConstNames.WARNING_ID + 
+                " LIKE '%" + warningId + "%'";
             var strList = new List<String>();
 
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase db = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             SqlDataReader sdr = db.GetDataReader(sqlStr);
             while (sdr.Read())
             {
@@ -63,13 +69,18 @@ namespace LibBusiness
             return strList;
         }
 
-        public static bool IsRepeatWithWarningIdAndFileName(string warningId, string fileName)
+        public static bool IsRepeatWithWarningIdAndFileName(string 
+            warningId, string fileName)
         {
-            string sqlStr = "SELECT " + WarningImgDbConstNames.IMG_FILENAME + " FROM " + WarningImgDbConstNames.TABLE_NAME;
-            sqlStr += " WHERE " + WarningImgDbConstNames.WARNING_ID + " LIKE '%" + warningId + "%'";
-            sqlStr += " AND " + WarningImgDbConstNames.IMG_FILENAME + "='" + fileName + "'";
+            string sqlStr = "SELECT " + WarningImgDbConstNames.IMG_FILENAME 
+                + " FROM " + WarningImgDbConstNames.TABLE_NAME;
+            sqlStr += " WHERE " + WarningImgDbConstNames.WARNING_ID + 
+                " LIKE '%" + warningId + "%'";
+            sqlStr += " AND " + WarningImgDbConstNames.IMG_FILENAME + "='" 
+                + fileName + "'";
 
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase db = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             SqlDataReader sdr = db.GetDataReader(sqlStr);
             while (sdr.Read())
             {
@@ -78,24 +89,33 @@ namespace LibBusiness
             return false;
         }
 
-        public static void DeleteWarningImgWithWarningIdAndFileName(string warningId, string fileName)
+        public static void DeleteWarningImgWithWarningIdAndFileName(string 
+            warningId, string fileName)
         {
             string sqlStr = "DELETE " + WarningImgDbConstNames.TABLE_NAME;
-            sqlStr += " WHERE " + WarningImgDbConstNames.WARNING_ID + " LIKE '%" + warningId + "%'";
-            sqlStr += " AND " + WarningImgDbConstNames.IMG_FILENAME + "='" + fileName + "'";
+            sqlStr += " WHERE " + WarningImgDbConstNames.WARNING_ID + 
+                " LIKE '%" + warningId + "%'";
+            sqlStr += " AND " + WarningImgDbConstNames.IMG_FILENAME + "='" 
+                + fileName + "'";
 
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase db = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             db.OperateDB(sqlStr);
         }
 
-        public static byte[] GetImageWithWarningIdAndFileName(string warningId, string fileName)
+        public static byte[] GetImageWithWarningIdAndFileName(string 
+            warningId, string fileName)
         {
-            string sqlStr = "SELECT " + WarningImgDbConstNames.IMG + " FROM " + WarningImgDbConstNames.TABLE_NAME;
-            sqlStr += " WHERE " + WarningImgDbConstNames.WARNING_ID + " LIKE '%" + warningId + "%'";
-            sqlStr += " AND " + WarningImgDbConstNames.IMG_FILENAME + "='" + fileName + "'";
+            string sqlStr = "SELECT " + WarningImgDbConstNames.IMG + 
+                " FROM " + WarningImgDbConstNames.TABLE_NAME;
+            sqlStr += " WHERE " + WarningImgDbConstNames.WARNING_ID + 
+                " LIKE '%" + warningId + "%'";
+            sqlStr += " AND " + WarningImgDbConstNames.IMG_FILENAME + "='" 
+                + fileName + "'";
 
             byte[] result = new byte[] { };
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase db = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             SqlDataReader sdr = db.GetDataReader(sqlStr);
             while (sdr.Read())
             {

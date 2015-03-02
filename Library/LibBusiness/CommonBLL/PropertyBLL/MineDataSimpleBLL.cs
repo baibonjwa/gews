@@ -24,19 +24,27 @@ namespace LibBusiness.CommonBLL
         /// <param name="workTimeGroupId">班次ID</param>
         /// <param name="sysDateTime">系统时间</param>
         /// <returns>系统当前时间对应的工作班次</returns>
-        public static string selectWorkTimeNameByWorkTimeGroupIdAndSysTime(int workTimeGroupId, string sysDateTime)
+        public static string 
+            selectWorkTimeNameByWorkTimeGroupIdAndSysTime(int workTimeGroupId, 
+            string sysDateTime)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append(" SELECT " + MineDataSimpleDbConstNames.WORK_TIME_NAME);
-            strSql.Append(" FROM " + MineDataSimpleDbConstNames.TABLE_NAME);
+            strSql.Append(" SELECT " + 
+                MineDataSimpleDbConstNames.WORK_TIME_NAME);
+            strSql.Append(" FROM " + 
+                MineDataSimpleDbConstNames.TABLE_NAME);
             strSql.Append(" WHERE ");
-            strSql.Append(MineDataSimpleDbConstNames.WORK_TIME_GROUP_ID + " = " + workTimeGroupId);
+            strSql.Append(MineDataSimpleDbConstNames.WORK_TIME_GROUP_ID + 
+                " = " + workTimeGroupId);
             strSql.Append(" AND ");
-            strSql.Append("'" + sysDateTime + "'" + " <= " + MineDataSimpleDbConstNames.WORK_TIME_TO);
+            strSql.Append("'" + sysDateTime + "'" + " <= " + 
+                MineDataSimpleDbConstNames.WORK_TIME_TO);
             strSql.Append(" AND ");
-            strSql.Append("'" + sysDateTime + "'" + " >= " + MineDataSimpleDbConstNames.WORK_TIME_FROM);
+            strSql.Append("'" + sysDateTime + "'" + " >= " + 
+                MineDataSimpleDbConstNames.WORK_TIME_FROM);
 
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
+            ManageDataBase db = new 
+                ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
             DataSet ds = db.ReturnDS(strSql.ToString());
 
             if (ds.Tables[0].Rows.Count > 0)

@@ -25,7 +25,8 @@ namespace LibBusiness
         /// <param name="yFieldName">y字段名称</param>
         /// <param name="zFiledName">z字段名称</param>
         /// <param name="coalSeamID">煤层名称ID</param>
-        public static void WriteXYZ(string svPath, string tableName, string xFieldName, string yFieldName, string zFiledName, int coalSeamID)
+        public static void WriteXYZ(string svPath, string tableName, string 
+            xFieldName, string yFieldName, string zFiledName, int coalSeamID)
         {
             FileStream fsPointFile = null;
             StreamWriter sw = null;
@@ -34,14 +35,17 @@ namespace LibBusiness
                 File.Delete(svPath);
             }
             //创建写入文件 
-            fsPointFile = new FileStream(svPath, FileMode.Create, FileAccess.Write);
+            fsPointFile = new FileStream(svPath, FileMode.Create, 
+                FileAccess.Write);
             sw = new StreamWriter(fsPointFile);
 
             const string SEPERATOR = " ";
             const string RETURN_STR = "";
-            ManageDataBase manaDB = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
+            ManageDataBase manaDB = new 
+                ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
             StringBuilder sqlStr = new StringBuilder();
-            sqlStr.Append("SELECT " + xFieldName + "," + yFieldName + "," + zFiledName);
+            sqlStr.Append("SELECT " + xFieldName + "," + yFieldName + "," + 
+                zFiledName);
             sqlStr.Append(" FROM " + tableName);
             sqlStr.Append(" WHERE COAL_SEAMS_ID=" + coalSeamID);
             DataSet ds = manaDB.ReturnDS(sqlStr.ToString());
@@ -49,7 +53,9 @@ namespace LibBusiness
             //开始写入值
             for (int i = 0; i < dsRowsCount; i++)
             {
-                sw.WriteLine(ds.Tables[0].Rows[i][xFieldName] + SEPERATOR + ds.Tables[0].Rows[i][yFieldName] + SEPERATOR + ds.Tables[0].Rows[i][zFiledName] + RETURN_STR);
+                sw.WriteLine(ds.Tables[0].Rows[i][xFieldName] + SEPERATOR + 
+                    ds.Tables[0].Rows[i][yFieldName] + SEPERATOR + 
+                    ds.Tables[0].Rows[i][zFiledName] + RETURN_STR);
             }
             //写入完成
             sw.Close();

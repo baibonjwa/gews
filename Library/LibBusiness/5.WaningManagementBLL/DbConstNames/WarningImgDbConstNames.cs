@@ -14,8 +14,10 @@ namespace LibBusiness
         //图片预警ID
         public const string WARNING_ID = "WARNING_ID";
         //图片备注
-        public const string REMARKS = "REMARKS";//如：断层、陷落柱等构造不需要考虑时间及巷道ID等约束条件。代码中转换为bool
+        public const string REMARKS = 
+            "REMARKS";//如：断层、陷落柱等构造不需要考虑时间及巷道ID等约束条件。代码中转换为bool
         //图片
-        public const string IMG = "IMG";//如：断层、陷落柱等构造不需要考虑时间及巷道ID等约束条件。代码中转换为bool
+        public const string IMG = 
+            "IMG";//如：断层、陷落柱等构造不需要考虑时间及巷道ID等约束条件。代码中转换为bool
     }
 }

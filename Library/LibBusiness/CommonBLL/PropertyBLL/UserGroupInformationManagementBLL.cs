@@ -27,12 +27,15 @@ namespace LibBusiness
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("SELECT ");
-            strSql.Append(UserGroupInformationMangementDbConstNames.USER_GROUP_NAME + ",");
-            strSql.Append(UserGroupInformationMangementDbConstNames.USER_GROUP_STAFF_COUNT + ",");
+            strSql.Append(UserGroupInformationMangementDbConstNames.USER_GROUP_NAME 
+                + ",");
+            strSql.Append(UserGroupInformationMangementDbConstNames.USER_GROUP_STAFF_COUNT 
+                + ",");
             strSql.Append(UserGroupInformationMangementDbConstNames.USER_GROUP_REMARKS);
             strSql.Append(" FROM ");
             strSql.Append(UserGroupInformationMangementDbConstNames.TABLE_NAME);
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase database = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             DataTable dt = database.ReturnDS(strSql.ToString()).Tables[0];
             return dt;
         }
@@ -42,7 +45,8 @@ namespace LibBusiness
         /// </summary>
         /// <param name="groupName">用户组名称</param>
         /// <returns>是否删除成功</returns>
-        public static bool DeleteUserGroupInformationByGroupName(string groupName)
+        public static bool DeleteUserGroupInformationByGroupName(string 
+            groupName)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("DELETE FROM ");
@@ -51,7 +55,8 @@ namespace LibBusiness
             strSql.Append(UserGroupInformationMangementDbConstNames.USER_GROUP_NAME);
             strSql.Append(" = ");
             strSql.Append("'" + groupName + "'");
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase database = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             return database.OperateDB(strSql.ToString());
         }
 
@@ -61,22 +66,28 @@ namespace LibBusiness
         /// <param name="ent">用户组实体</param>
         /// <param name="oldName">用户组名称</param>
         /// <returns>是否更新成功</returns>
-        public static bool UpdateUserGroupInfomationDatabase(UserGroup ent, string oldName)
+        public static bool UpdateUserGroupInfomationDatabase(UserGroup ent, 
+            string oldName)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("UPDATE ");
             strSql.Append(UserGroupInformationMangementDbConstNames.TABLE_NAME);
             strSql.Append(" SET ");
-            strSql.Append(UserGroupInformationMangementDbConstNames.USER_GROUP_NAME + " = ");
+            strSql.Append(UserGroupInformationMangementDbConstNames.USER_GROUP_NAME 
+                + " = ");
             strSql.Append("'" + ent.GroupName + "',");
-            strSql.Append(UserGroupInformationMangementDbConstNames.USER_GROUP_STAFF_COUNT + " = ");
+            strSql.Append(UserGroupInformationMangementDbConstNames.USER_GROUP_STAFF_COUNT 
+                + " = ");
             strSql.Append("'" + ent.UserCount + "',");
-            strSql.Append(UserGroupInformationMangementDbConstNames.USER_GROUP_REMARKS + " = ");
+            strSql.Append(UserGroupInformationMangementDbConstNames.USER_GROUP_REMARKS 
+                + " = ");
             strSql.Append("'" + ent.Remark + "'");
             strSql.Append(" WHERE ");
-            strSql.Append(UserGroupInformationMangementDbConstNames.USER_GROUP_NAME + " = ");
+            strSql.Append(UserGroupInformationMangementDbConstNames.USER_GROUP_NAME 
+                + " = ");
             strSql.Append("'" + oldName + "'");
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase database = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             return database.OperateDB(strSql.ToString());
         }
 
@@ -93,7 +104,8 @@ namespace LibBusiness
             strSql.Append(LoginFormDbConstNames.USER_PERMISSION);
             strSql.Append(" FROM ");
             strSql.Append(LoginFormDbConstNames.TABLE_NAME);
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase database = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             DataTable dt = database.ReturnDS(strSql.ToString()).Tables[0];
             return dt;
         }
@@ -114,7 +126,8 @@ namespace LibBusiness
             strSql.Append(" = ");
             strSql.Append("'" + newGroupName + "'");
 
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase database = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             DataTable dt = database.ReturnDS(strSql.ToString()).Tables[0];
             if (dt != null)
             {
@@ -131,7 +144,8 @@ namespace LibBusiness
         /// </summary>
         /// <param name="ent"></param>
         /// <returns></returns>
-        public static bool InsertRecordIntoTableUserGroupInformation(UserGroup ent)
+        public static bool 
+            InsertRecordIntoTableUserGroupInformation(UserGroup ent)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("INSERT INTO ");
@@ -141,7 +155,8 @@ namespace LibBusiness
             strSql.Append(ent.UserCount + ",");
             strSql.Append("'" + ent.Remark + "',");
             strSql.Append("'" + ent.Permission + "')");
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase database = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             return database.OperateDB(strSql.ToString());
         }
 
@@ -151,18 +166,24 @@ namespace LibBusiness
         /// <param name="newGroupName">新用户组名称</param>
         /// <param name="oldGroupName">旧用户组名称</param>
         /// <returns></returns>
-        public static bool ChangeUserGroup(string newGroupName, string userLoginName)
+        public static bool ChangeUserGroup(string newGroupName, string 
+            userLoginName)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("UPDATE ");
             strSql.Append(LoginFormDbConstNames.TABLE_NAME);
             strSql.Append(" SET ");
             strSql.Append(LoginFormDbConstNames.USER_GROUP_NAME + " = ");
-            strSql.Append("'" + LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(newGroupName) + "'");//清空组名            
+            strSql.Append("'" + 
+                LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(newGroupName) 
+                + "'");//清空组名
             strSql.Append(" WHERE ");
             strSql.Append(LoginFormDbConstNames.USER_LOGIN_NAME + " = ");
-            strSql.Append("'" + LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(userLoginName) + "'");
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            strSql.Append("'" + 
+                LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(userLoginName) 
+                + "'");
+            ManageDataBase database = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             return database.OperateDB(strSql.ToString());
         }
 
@@ -171,9 +192,11 @@ namespace LibBusiness
         /// </summary>
         /// <param name="groupName">用户组名称</param>
         /// <returns>是否更新成功</returns>
-        public static bool UpdateUserInformationWhenDeleteGroup(string groupName)
+        public static bool UpdateUserInformationWhenDeleteGroup(string 
+            groupName)
         {
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase database = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             StringBuilder strSql = new StringBuilder();
             strSql.Append("UPDATE ");
             strSql.Append(LoginFormDbConstNames.TABLE_NAME);
@@ -197,7 +220,8 @@ namespace LibBusiness
             strSql.Append("SELECT * FROM ");
             strSql.Append(UserGroupInformationMangementDbConstNames.TABLE_NAME);
 
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase database = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             DataTable dt = database.ReturnDS(strSql.ToString()).Tables[0];
             if (dt != null)
             {
@@ -218,9 +242,12 @@ namespace LibBusiness
             strSql.Append((LoginFormDbConstNames.TABLE_NAME));
             strSql.Append(" WHERE ");
             strSql.Append(LoginFormDbConstNames.USER_GROUP_NAME + " = ");
-            strSql.Append("'" + LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(groupName) + "'");
+            strSql.Append("'" + 
+                LibEncryptDecrypt.DWEncryptDecryptClass.EncryptString(groupName) 
+                + "'");
 
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase database = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             DataTable dt = database.ReturnDS(strSql.ToString()).Tables[0];
 
             return dt.Rows.Count;
@@ -233,7 +260,8 @@ namespace LibBusiness
         public static void UpdateUserCountFromUserGroup(string groupName)
         {
             int iCount = GetUserCountFromUserGroup(groupName);
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase database = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             StringBuilder strSql = new StringBuilder();
             strSql.Append("UPDATE ");
             strSql.Append(UserGroupInformationMangementDbConstNames.TABLE_NAME);

@@ -25,8 +25,10 @@ namespace LibBusiness
         /// <returns>全部日常预测信息</returns>
         public static DataSet selectUsualForecast()
         {
-            string sqlStr = "SELECT * FROM " + UsualForecastDbConstNames.TABLE_NAME;
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
+            string sqlStr = "SELECT * FROM " + 
+                UsualForecastDbConstNames.TABLE_NAME;
+            ManageDataBase db = new 
+                ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
             DataSet ds = db.ReturnDS(sqlStr);
             return ds;
         }
@@ -36,13 +38,17 @@ namespace LibBusiness
         /// <param name="iStartIndex">开始ID</param>
         /// <param name="iEndIndex">结束ID</param>
         /// <returns>显示部分数据</returns>
-        public static DataSet selectUsualForecast(int iStartIndex, int iEndIndex)
+        public static DataSet selectUsualForecast(int iStartIndex, int 
+            iEndIndex)
         {
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
+            ManageDataBase db = new 
+                ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
             StringBuilder sb = new StringBuilder();
             sb.Append("SELECT * FROM ( ");
-            sb.Append("SELECT ROW_NUMBER() OVER(ORDER BY " + UsualForecastDbConstNames.ID + ") AS rowid, * ");
-            sb.Append("FROM " + UsualForecastDbConstNames.TABLE_NAME + " ) AS TB ");
+            sb.Append("SELECT ROW_NUMBER() OVER(ORDER BY " + 
+                UsualForecastDbConstNames.ID + ") AS rowid, * ");
+            sb.Append("FROM " + UsualForecastDbConstNames.TABLE_NAME + 
+                " ) AS TB ");
             sb.Append("WHERE rowid >= " + iStartIndex);
             sb.Append("AND rowid <= " + iEndIndex);
             DataSet ds = db.ReturnDS(sb.ToString());
@@ -56,9 +62,16 @@ namespace LibBusiness
         /// <returns>日常预测信息</returns>
         public static bool insertUsualForecastInfo(UsualForecast ufEntity)
         {
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
+            ManageDataBase db = new 
+                ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
             StringBuilder sb = new StringBuilder();
-            sb.Append("INSERT INTO " + UsualForecastDbConstNames.TABLE_NAME + " (" + PreWarningDataCommonBLL.sqlFront() + "," + UsualForecastDbConstNames.IS_ROOF_DOWN + "," + UsualForecastDbConstNames.IS_SUPPORT_BROKEN + "," + UsualForecastDbConstNames.IS_COAL_WALL_DROP + "," + UsualForecastDbConstNames.IS_PART_ROOF_FALL + "," + UsualForecastDbConstNames.IS_BIG_ROOF_FALL + ") VALUES(");
+            sb.Append("INSERT INTO " + UsualForecastDbConstNames.TABLE_NAME 
+                + " (" + PreWarningDataCommonBLL.sqlFront() + "," + 
+                UsualForecastDbConstNames.IS_ROOF_DOWN + "," + 
+                UsualForecastDbConstNames.IS_SUPPORT_BROKEN + "," + 
+                UsualForecastDbConstNames.IS_COAL_WALL_DROP + "," + 
+                UsualForecastDbConstNames.IS_PART_ROOF_FALL + "," + 
+                UsualForecastDbConstNames.IS_BIG_ROOF_FALL + ") VALUES(");
             sb.Append(PreWarningDataCommonBLL.sqlBack(ufEntity) + ",");
             sb.Append(ufEntity.IsRoofDown + ",");
             sb.Append(ufEntity.IsSupportBroken + ",");
@@ -77,19 +90,31 @@ namespace LibBusiness
         /// <returns>是否修改成功?true:false</returns>
         public static bool updateUsualForecastInfo(UsualForecast ufEntity)
         {
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
+            ManageDataBase db = new 
+                ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
             StringBuilder sb = new StringBuilder();
-            sb.Append("UPDATE " + UsualForecastDbConstNames.TABLE_NAME + " SET " + UsualForecastDbConstNames.TUNNEL_ID + "=");
-            sb.Append(ufEntity.Tunnel.TunnelId + "," + UsualForecastDbConstNames.X + "=");
-            sb.Append(ufEntity.CoordinateX + "," + UsualForecastDbConstNames.Y + "=");
-            sb.Append(ufEntity.CoordinateY + "," + UsualForecastDbConstNames.Z + "=");
-            sb.Append(ufEntity.CoordinateZ + "," + UsualForecastDbConstNames.DATETIME + "='");
-            sb.Append(ufEntity.Datetime + "'," + UsualForecastDbConstNames.IS_ROOF_DOWN + "=");
-            sb.Append(ufEntity.IsRoofDown + "," + UsualForecastDbConstNames.IS_SUPPORT_BROKEN + "=");
-            sb.Append(ufEntity.IsSupportBroken + "," + UsualForecastDbConstNames.IS_COAL_WALL_DROP + "=");
-            sb.Append(ufEntity.IsCoalWallDrop + "," + UsualForecastDbConstNames.IS_PART_ROOF_FALL + "=");
-            sb.Append(ufEntity.IsPartRoolFall + "," + UsualForecastDbConstNames.IS_BIG_ROOF_FALL + "=");
-            sb.Append(ufEntity.IsBigRoofFall + "WHERE " + UsualForecastDbConstNames.ID + "=");
+            sb.Append("UPDATE " + UsualForecastDbConstNames.TABLE_NAME + 
+                " SET " + UsualForecastDbConstNames.TUNNEL_ID + "=");
+            sb.Append(ufEntity.Tunnel.TunnelId + "," + 
+                UsualForecastDbConstNames.X + "=");
+            sb.Append(ufEntity.CoordinateX + "," + 
+                UsualForecastDbConstNames.Y + "=");
+            sb.Append(ufEntity.CoordinateY + "," + 
+                UsualForecastDbConstNames.Z + "=");
+            sb.Append(ufEntity.CoordinateZ + "," + 
+                UsualForecastDbConstNames.DATETIME + "='");
+            sb.Append(ufEntity.Datetime + "'," + 
+                UsualForecastDbConstNames.IS_ROOF_DOWN + "=");
+            sb.Append(ufEntity.IsRoofDown + "," + 
+                UsualForecastDbConstNames.IS_SUPPORT_BROKEN + "=");
+            sb.Append(ufEntity.IsSupportBroken + "," + 
+                UsualForecastDbConstNames.IS_COAL_WALL_DROP + "=");
+            sb.Append(ufEntity.IsCoalWallDrop + "," + 
+                UsualForecastDbConstNames.IS_PART_ROOF_FALL + "=");
+            sb.Append(ufEntity.IsPartRoolFall + "," + 
+                UsualForecastDbConstNames.IS_BIG_ROOF_FALL + "=");
+            sb.Append(ufEntity.IsBigRoofFall + "WHERE " + 
+                UsualForecastDbConstNames.ID + "=");
             sb.Append(ufEntity.Id);
             bool bResult = db.OperateDB(sb.ToString());
             return bResult;
@@ -102,8 +127,11 @@ namespace LibBusiness
         /// <returns>是否删除成功?true:false</returns>
         public static bool deleteUsualForecastInfo(int id)
         {
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
-            string sql = "DELETE FROM " + UsualForecastDbConstNames.TABLE_NAME + " WHERE " + UsualForecastDbConstNames.ID + " = " + id;
+            ManageDataBase db = new 
+                ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
+            string sql = "DELETE FROM " + 
+                UsualForecastDbConstNames.TABLE_NAME + " WHERE " + 
+                UsualForecastDbConstNames.ID + " = " + id;
             bool bResult = db.OperateDB(sql);
             return bResult;
         }

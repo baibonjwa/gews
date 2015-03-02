@@ -27,14 +27,19 @@ namespace LibBusiness
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("SELECT ");
-            strSql.Append(DepartmentInformationManagemetDbConstNames.DEPT_NAME + ",");
-            strSql.Append(DepartmentInformationManagemetDbConstNames.DEPT_TEL + ",");
-            strSql.Append(DepartmentInformationManagemetDbConstNames.DEPT_EMAIL + ",");
-            strSql.Append(DepartmentInformationManagemetDbConstNames.DEPT_STAFF_COUNT + ",");
+            strSql.Append(DepartmentInformationManagemetDbConstNames.DEPT_NAME 
+                + ",");
+            strSql.Append(DepartmentInformationManagemetDbConstNames.DEPT_TEL 
+                + ",");
+            strSql.Append(DepartmentInformationManagemetDbConstNames.DEPT_EMAIL 
+                + ",");
+            strSql.Append(DepartmentInformationManagemetDbConstNames.DEPT_STAFF_COUNT 
+                + ",");
             strSql.Append(DepartmentInformationManagemetDbConstNames.DEPT_REMARKS);
             strSql.Append(" FROM ");
             strSql.Append(DepartmentInformationManagemetDbConstNames.TABLE_NAME);
-            ManageDataBase database = new ManageDataBase(LibDatabase.DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase database = new 
+                ManageDataBase(LibDatabase.DATABASE_TYPE.WarningManagementDB);
             return database.ReturnDS(strSql.ToString()).Tables[0];
         }
 
@@ -43,7 +48,8 @@ namespace LibBusiness
         /// </summary>
         /// <param name="deptName">部门名称</param>
         /// <returns>返回的DataTable中包含所有满足条件的记录</returns>
-        public static DataTable GetDeptInformationByDeptName(string deptName)
+        public static DataTable GetDeptInformationByDeptName(string 
+            deptName)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("SELECT * FROM ");          
@@ -52,7 +58,8 @@ namespace LibBusiness
             strSql.Append(DepartmentInformationManagemetDbConstNames.DEPT_NAME);
             strSql.Append(" = ");
             strSql.Append("'" + deptName + "'");
-            ManageDataBase database = new ManageDataBase(LibDatabase.DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase database = new 
+                ManageDataBase(LibDatabase.DATABASE_TYPE.WarningManagementDB);
             return database.ReturnDS(strSql.ToString()).Tables[0];
         }
 
@@ -63,7 +70,8 @@ namespace LibBusiness
         /// <returns></returns>
         public static bool InsertDeptInfoIntoTable(Department ent)
         {
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase database = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             StringBuilder strSql = new StringBuilder();
             strSql.Append("INSERT INTO ");
             strSql.Append(DepartmentInformationManagemetDbConstNames.TABLE_NAME);
@@ -82,26 +90,34 @@ namespace LibBusiness
         /// <param name="ent">部门信息实体</param>
         /// <param name="oldName">部门旧名称</param>
         /// <returns></returns>
-        public static bool UpdateDepartmentInfomationDatabase(Department ent, string oldName)
+        public static bool UpdateDepartmentInfomationDatabase(Department 
+            ent, string oldName)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("UPDATE ");
             strSql.Append(DepartmentInformationManagemetDbConstNames.TABLE_NAME);
             strSql.Append(" SET ");
-            strSql.Append(DepartmentInformationManagemetDbConstNames.DEPT_NAME + " = ");
+            strSql.Append(DepartmentInformationManagemetDbConstNames.DEPT_NAME 
+                + " = ");
             strSql.Append("'" + ent.Name + "',");
-            strSql.Append(DepartmentInformationManagemetDbConstNames.DEPT_TEL + " = ");
+            strSql.Append(DepartmentInformationManagemetDbConstNames.DEPT_TEL 
+                + " = ");
             strSql.Append("'" + ent.Tel + "',");
-            strSql.Append(DepartmentInformationManagemetDbConstNames.DEPT_EMAIL + " = ");
+            strSql.Append(DepartmentInformationManagemetDbConstNames.DEPT_EMAIL 
+                + " = ");
             strSql.Append("'" + ent.Email + "',");
-            strSql.Append(DepartmentInformationManagemetDbConstNames.DEPT_STAFF_COUNT + " = ");
+            strSql.Append(DepartmentInformationManagemetDbConstNames.DEPT_STAFF_COUNT 
+                + " = ");
             strSql.Append("'"+ent.Staff+"',");
-            strSql.Append(DepartmentInformationManagemetDbConstNames.DEPT_REMARKS + " = ");
+            strSql.Append(DepartmentInformationManagemetDbConstNames.DEPT_REMARKS 
+                + " = ");
             strSql.Append("'" + ent.Remark + "'");
             strSql.Append(" WHERE ");
-            strSql.Append(DepartmentInformationManagemetDbConstNames.DEPT_NAME + " = ");
+            strSql.Append(DepartmentInformationManagemetDbConstNames.DEPT_NAME 
+                + " = ");
             strSql.Append("'" + oldName + "'");
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase database = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             return database.OperateDB(strSql.ToString());
         }
 
@@ -119,7 +135,8 @@ namespace LibBusiness
             strSql.Append(DepartmentInformationManagemetDbConstNames.DEPT_NAME);
             strSql.Append(" = ");
             strSql.Append("'" + deptName + "'");
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase database = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             return database.OperateDB(strSql.ToString());
         }
 
@@ -128,9 +145,11 @@ namespace LibBusiness
         /// </summary>
         /// <param name="deptName"></param>
         /// <returns></returns>
-        public static bool UpdateUserInformationWhenDeleteDept(string deptName)
+        public static bool UpdateUserInformationWhenDeleteDept(string 
+            deptName)
         {
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase database = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             StringBuilder strSql = new StringBuilder();
             strSql.Append("UPDATE ");
             strSql.Append(UserInformationDetailsManagementDbConstNames.TABLE_NAME);
@@ -154,7 +173,8 @@ namespace LibBusiness
             strSql.Append("SELECT * FROM ");
             strSql.Append(DepartmentInformationManagemetDbConstNames.TABLE_NAME);
 
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase database = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             DataTable dt = database.ReturnDS(strSql.ToString()).Tables[0];
             if (dt != null)
             {
@@ -178,7 +198,8 @@ namespace LibBusiness
             strSql.Append(DepartmentInformationManagemetDbConstNames.DEPT_NAME);
             strSql.Append(" = ");
             strSql.Append("'" + deptName + "'");
-            ManageDataBase database = new ManageDataBase(LibDatabase.DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase database = new 
+                ManageDataBase(LibDatabase.DATABASE_TYPE.WarningManagementDB);
             DataTable dt = database.ReturnDS(strSql.ToString()).Tables[0];
             if (dt != null)
             {

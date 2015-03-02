@@ -24,9 +24,11 @@ namespace LibBusiness
         /// <returns>全部煤层信息</returns>
         public static DataSet selectAllCoalSeamsInfo()
         {
-            string sqlStr = "SELECT * FROM " + CoalSeamsDbConstNames.TABLE_NAME;
+            string sqlStr = "SELECT * FROM " + 
+                CoalSeamsDbConstNames.TABLE_NAME;
 
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
+            ManageDataBase db = new 
+                ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
             DataSet ds = db.ReturnDS(sqlStr);
             return ds;
         }
@@ -39,14 +41,16 @@ namespace LibBusiness
         public static bool insertCoalSeamsInfo(CoalSeams coalSeamsEntity)
         {
             StringBuilder sqlStr = new StringBuilder();
-            sqlStr.Append("INSERT INTO " + CoalSeamsDbConstNames.TABLE_NAME);
+            sqlStr.Append("INSERT INTO " + 
+                CoalSeamsDbConstNames.TABLE_NAME);
             sqlStr.Append(" (" + CoalSeamsDbConstNames.COAL_SEAMS_NAME);
             sqlStr.Append(" )");
             sqlStr.Append(" VALUES (");
             sqlStr.Append("  '" + coalSeamsEntity.CoalSeamsName + "'");
             sqlStr.Append(" )");
 
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
+            ManageDataBase db = new 
+                ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
             bool bResult = db.OperateDB(sqlStr.ToString());
             return bResult;
         }
@@ -61,10 +65,13 @@ namespace LibBusiness
             StringBuilder sqlStr = new StringBuilder();
             sqlStr.Append("UPDATE " + CoalSeamsDbConstNames.TABLE_NAME);
             sqlStr.Append(" SET");
-            sqlStr.Append("  " + CoalSeamsDbConstNames.COAL_SEAMS_NAME + " = '" + coalSeamsEntity.CoalSeamsName + "'");
-            sqlStr.Append(" WHERE " + CoalSeamsDbConstNames.COAL_SEAMS_ID + " = " + coalSeamsEntity.CoalSeamsId);
+            sqlStr.Append("  " + CoalSeamsDbConstNames.COAL_SEAMS_NAME + 
+                " = '" + coalSeamsEntity.CoalSeamsName + "'");
+            sqlStr.Append(" WHERE " + CoalSeamsDbConstNames.COAL_SEAMS_ID + 
+                " = " + coalSeamsEntity.CoalSeamsId);
 
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
+            ManageDataBase db = new 
+                ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
             bool bResult = db.OperateDB(sqlStr.ToString());
             return bResult;
         }
@@ -77,10 +84,13 @@ namespace LibBusiness
         public static bool deleteCoalSeamsInfo(int iCoalSeamsId)
         {
             StringBuilder sqlStr = new StringBuilder();
-            sqlStr.Append("DELETE FROM " + CoalSeamsDbConstNames.TABLE_NAME);
-            sqlStr.Append(" WHERE " + CoalSeamsDbConstNames.COAL_SEAMS_ID + " = " + iCoalSeamsId);
+            sqlStr.Append("DELETE FROM " + 
+                CoalSeamsDbConstNames.TABLE_NAME);
+            sqlStr.Append(" WHERE " + CoalSeamsDbConstNames.COAL_SEAMS_ID + 
+                " = " + iCoalSeamsId);
 
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
+            ManageDataBase db = new 
+                ManageDataBase(DATABASE_TYPE.GeologyMeasureDB);
             bool bResult = db.OperateDB(sqlStr.ToString());
             return bResult;
         }

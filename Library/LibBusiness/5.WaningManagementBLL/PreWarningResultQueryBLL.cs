@@ -119,7 +119,8 @@ namespace LibBusiness
             strSql.Append(" ORDER BY ");
             strSql.Append(PreWarningResultDBConstNames.DATA_TIME);
             strSql.Append(" DESC");
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase database = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             DataTable dt = new DataTable();
             dt = database.ReturnDS(strSql.ToString()).Tables[0];
             if (dt != null)
@@ -130,7 +131,8 @@ namespace LibBusiness
                     times = new string[rowCount];
                     for (int i = 0; i < rowCount; i++)
                     {
-                        times[i] = dt.Rows[i][PreWarningResultDBConstNames.DATA_TIME].ToString();
+                        times[i] = 
+                            dt.Rows[i][PreWarningResultDBConstNames.DATA_TIME].ToString();
                     }
                 }
             }
@@ -142,17 +144,22 @@ namespace LibBusiness
         //WHERE W.data_time IN (
         //SELECT DISTINCT T.data_time FROM T_EARLY_WARNING_RESULT AS T WHERE T.data_time 
         //BETWEEN '2014-03-08 11:29:55.000' AND '2014-03-08 11:31:00.000') 
-        public static List<PreWarningResultQuery> GetPerWarningResult(string timeStart, string timeEnd)
+        public static List<PreWarningResultQuery> 
+            GetPerWarningResult(string timeStart, string timeEnd)
         {
-            List<PreWarningResultQuery> ents = new List<PreWarningResultQuery>();
+            List<PreWarningResultQuery> ents = new 
+                List<PreWarningResultQuery>();
             StringBuilder strSql = new StringBuilder();
             strSql.Append("SELECT ROW_NUMBER() OVER (ORDER BY ");
-            strSql.Append("W." + PreWarningResultDBConstNames.DATA_TIME + " DESC,");
-            strSql.Append("W." + PreWarningResultDBConstNames.TUNNEL_ID + ",");
+            strSql.Append("W." + PreWarningResultDBConstNames.DATA_TIME + 
+                " DESC,");
+            strSql.Append("W." + PreWarningResultDBConstNames.TUNNEL_ID + 
+                ",");
             strSql.Append("W." + PreWarningResultDBConstNames.ID + ")");
             strSql.Append(" AS rowid , *");
             strSql.Append(" FROM ");
-            strSql.Append(PreWarningResultDBConstNames.TABLE_NAME + " AS" + " W");
+            strSql.Append(PreWarningResultDBConstNames.TABLE_NAME + " AS" + 
+                " W");
             strSql.Append(" WHERE");
             strSql.Append(" W." + PreWarningResultDBConstNames.DATA_TIME);
             strSql.Append(" IN (");
@@ -169,62 +176,83 @@ namespace LibBusiness
             strSql.Append(" T." + PreWarningResultDBConstNames.DATA_TIME);
             strSql.Append(" < ");
             strSql.Append("'" + timeEnd + "')");
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase database = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             DataTable dt = database.ReturnDS(strSql.ToString()).Tables[0];
             int iRowCount = dt.Rows.Count;
             PreWarningResultQuery ent = new PreWarningResultQuery();
             for (int i = 0; i < iRowCount; i++)
             {
-                string warning_type = dt.Rows[i][PreWarningResultDBConstNames.WARNING_TYPE].ToString();
+                string warning_type = 
+                    dt.Rows[i][PreWarningResultDBConstNames.WARNING_TYPE].ToString();
                 if (i % 2 == 0)
                 {
                     ent = new PreWarningResultQuery();
-                    ent.TunelName = Tunnel.Find(dt.Rows[i][PreWarningResultDBConstNames.TUNNEL_ID]).TunnelName;
-                    ent.DateTime = Convert.ToDateTime(dt.Rows[i][PreWarningResultDBConstNames.DATA_TIME]);
-                    ent.Date_Shift = dt.Rows[i][PreWarningResultDBConstNames.DATE_SHIFT].ToString();
+                    ent.TunelName = 
+                        Tunnel.Find(dt.Rows[i][PreWarningResultDBConstNames.TUNNEL_ID]).TunnelName;
+                    ent.DateTime = 
+                        Convert.ToDateTime(dt.Rows[i][PreWarningResultDBConstNames.DATA_TIME]);
+                    ent.Date_Shift = 
+                        dt.Rows[i][PreWarningResultDBConstNames.DATE_SHIFT].ToString();
                 }
 
                 int defultValue = (int)WarningResult.NULL;
-                if (warning_type == LibCommon.WarningType.OVER_LIMIT.ToString())
+                if (warning_type == 
+                    LibCommon.WarningType.OVER_LIMIT.ToString())
                 {
-                    ent.OverLimitWarningResult.ID = dt.Rows[i][PreWarningResultDBConstNames.ID].ToString();
-                    int.TryParse(dt.Rows[i][LibBusiness.PreWarningResultDBConstNames.WARNING_RESULT].ToString(), out defultValue);
+                    ent.OverLimitWarningResult.ID = 
+                        dt.Rows[i][PreWarningResultDBConstNames.ID].ToString();
+                    int.TryParse(dt.Rows[i][LibBusiness.PreWarningResultDBConstNames.WARNING_RESULT].ToString(),
+                        out defultValue);
                     ent.OverLimitWarningResult.WarningResult = defultValue;
                     defultValue = (int)WarningResult.NULL;
-                    int.TryParse(dt.Rows[i][LibBusiness.PreWarningResultDBConstNames.GAS].ToString(), out defultValue);
+                    int.TryParse(dt.Rows[i][LibBusiness.PreWarningResultDBConstNames.GAS].ToString(),
+                        out defultValue);
                     ent.OverLimitWarningResult.Gas = defultValue;
                     defultValue = (int)WarningResult.NULL;
-                    int.TryParse(dt.Rows[i][LibBusiness.PreWarningResultDBConstNames.COAL].ToString(), out defultValue);
+                    int.TryParse(dt.Rows[i][LibBusiness.PreWarningResultDBConstNames.COAL].ToString(),
+                        out defultValue);
                     ent.OverLimitWarningResult.Coal = defultValue;
                     defultValue = (int)WarningResult.NULL;
-                    int.TryParse(dt.Rows[i][LibBusiness.PreWarningResultDBConstNames.GEOLOGY].ToString(), out defultValue);
+                    int.TryParse(dt.Rows[i][LibBusiness.PreWarningResultDBConstNames.GEOLOGY].ToString(),
+                        out defultValue);
                     ent.OverLimitWarningResult.Geology = defultValue;
                     defultValue = (int)WarningResult.NULL;
-                    int.TryParse(dt.Rows[i][LibBusiness.PreWarningResultDBConstNames.VENTILATION].ToString(), out defultValue);
+                    int.TryParse(dt.Rows[i][LibBusiness.PreWarningResultDBConstNames.VENTILATION].ToString(),
+                        out defultValue);
                     ent.OverLimitWarningResult.Ventilation = defultValue;
                     defultValue = (int)WarningResult.NULL;
-                    int.TryParse(dt.Rows[i][LibBusiness.PreWarningResultDBConstNames.MANAGEMENT].ToString(), out defultValue);
+                    int.TryParse(dt.Rows[i][LibBusiness.PreWarningResultDBConstNames.MANAGEMENT].ToString(),
+                        out defultValue);
                     ent.OverLimitWarningResult.Management = defultValue;
                 }
-                if (warning_type == LibCommon.WarningType.OUTBURST.ToString())
+                if (warning_type == 
+                    LibCommon.WarningType.OUTBURST.ToString())
                 {
-                    ent.OutBrustWarningResult.ID = dt.Rows[i][PreWarningResultDBConstNames.ID].ToString();
-                    int.TryParse(dt.Rows[i][LibBusiness.PreWarningResultDBConstNames.WARNING_RESULT].ToString(), out defultValue);
+                    ent.OutBrustWarningResult.ID = 
+                        dt.Rows[i][PreWarningResultDBConstNames.ID].ToString();
+                    int.TryParse(dt.Rows[i][LibBusiness.PreWarningResultDBConstNames.WARNING_RESULT].ToString(),
+                        out defultValue);
                     ent.OutBrustWarningResult.WarningResult = defultValue;
                     defultValue = (int)WarningResult.NULL;
-                    int.TryParse(dt.Rows[i][LibBusiness.PreWarningResultDBConstNames.GAS].ToString(), out defultValue);
+                    int.TryParse(dt.Rows[i][LibBusiness.PreWarningResultDBConstNames.GAS].ToString(),
+                        out defultValue);
                     ent.OutBrustWarningResult.Gas = defultValue;
                     defultValue = (int)WarningResult.NULL;
-                    int.TryParse(dt.Rows[i][LibBusiness.PreWarningResultDBConstNames.COAL].ToString(), out defultValue);
+                    int.TryParse(dt.Rows[i][LibBusiness.PreWarningResultDBConstNames.COAL].ToString(),
+                        out defultValue);
                     ent.OutBrustWarningResult.Coal = defultValue;
                     defultValue = (int)WarningResult.NULL;
-                    int.TryParse(dt.Rows[i][LibBusiness.PreWarningResultDBConstNames.GEOLOGY].ToString(), out defultValue);
+                    int.TryParse(dt.Rows[i][LibBusiness.PreWarningResultDBConstNames.GEOLOGY].ToString(),
+                        out defultValue);
                     ent.OutBrustWarningResult.Geology = defultValue;
                     defultValue = (int)WarningResult.NULL;
-                    int.TryParse(dt.Rows[i][LibBusiness.PreWarningResultDBConstNames.VENTILATION].ToString(), out defultValue);
+                    int.TryParse(dt.Rows[i][LibBusiness.PreWarningResultDBConstNames.VENTILATION].ToString(),
+                        out defultValue);
                     ent.OutBrustWarningResult.Ventilation = defultValue;
                     defultValue = (int)WarningResult.NULL;
-                    int.TryParse(dt.Rows[i][LibBusiness.PreWarningResultDBConstNames.MANAGEMENT].ToString(), out defultValue);
+                    int.TryParse(dt.Rows[i][LibBusiness.PreWarningResultDBConstNames.MANAGEMENT].ToString(),
+                        out defultValue);
                     ent.OutBrustWarningResult.Management = defultValue;
                 }
 
@@ -242,7 +270,8 @@ namespace LibBusiness
         /// <param name="startTime"></param>
         /// <param name="endTime"></param>
         /// <returns></returns>
-        public static string[] GetTunnleIDBetweenSelectTime(ManageDataBase database, string startTime, string endTime)
+        public static string[] GetTunnleIDBetweenSelectTime(ManageDataBase 
+            database, string startTime, string endTime)
         {
             string[] tunnelIDs = null;
             StringBuilder strSql = new StringBuilder();
@@ -258,7 +287,8 @@ namespace LibBusiness
             strSql.Append(PreWarningResultDBConstNames.DATA_TIME);
             strSql.Append(" <= ");
             strSql.Append("'" + endTime + "'");
-            DataTable dt = database.ReturnDSNotOpenAndClose(strSql.ToString()).Tables[0];
+            DataTable dt = 
+                database.ReturnDSNotOpenAndClose(strSql.ToString()).Tables[0];
             #region 此处需要优化 marked by yanger
             if (dt != null)
             {
@@ -283,12 +313,16 @@ namespace LibBusiness
         /// <param name="startTime"></param>
         /// <param name="endTime"></param>
         /// <returns></returns>
-        public static string[] GetTunnleIDBetweenSelectTime(ManageDataBase database, string startTime, string endTime, string workfaceName)
+        public static string[] GetTunnleIDBetweenSelectTime(ManageDataBase 
+            database, string startTime, string endTime, string workfaceName)
         {
             string[] tunnelIDs = null;
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("SELECT DISTINCT " + PreWarningResultDBConstNames.TUNNEL_ID + " FROM " + PreWarningResultViewDbConstNames.VIEW_NAME);
-            strSql.Append(" WHERE " + WorkingFaceDbConstNames.WORKINGFACE_NAME);
+            strSql.Append("SELECT DISTINCT " + 
+                PreWarningResultDBConstNames.TUNNEL_ID + " FROM " + 
+                PreWarningResultViewDbConstNames.VIEW_NAME);
+            strSql.Append(" WHERE " + 
+                WorkingFaceDbConstNames.WORKINGFACE_NAME);
             strSql.Append(" = '" + workfaceName + "'");
             strSql.Append(" AND ");
             strSql.Append(PreWarningResultDBConstNames.DATA_TIME);
@@ -298,7 +332,8 @@ namespace LibBusiness
             strSql.Append(PreWarningResultDBConstNames.DATA_TIME);
             strSql.Append(" <= ");
             strSql.Append("'" + endTime + "'");
-            DataTable dt = database.ReturnDSNotOpenAndClose(strSql.ToString()).Tables[0];
+            DataTable dt = 
+                database.ReturnDSNotOpenAndClose(strSql.ToString()).Tables[0];
             #region 此处需要优化 marked by yanger
             if (dt != null)
             {
@@ -317,10 +352,13 @@ namespace LibBusiness
             return tunnelIDs;
         }
 
-        public static DataTable GetWarningResultsWithCondition(ManageDataBase database, string startTime, string endTime, string workfaceName)
+        public static DataTable 
+            GetWarningResultsWithCondition(ManageDataBase database, string 
+            startTime, string endTime, string workfaceName)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("SELECT * FROM " + PreWarningResultViewDbConstNames.VIEW_NAME);
+            strSql.Append("SELECT * FROM " + 
+                PreWarningResultViewDbConstNames.VIEW_NAME);
             strSql.Append(" WHERE 1=1 ");
             if (!String.IsNullOrEmpty(workfaceName))
             {
@@ -337,9 +375,11 @@ namespace LibBusiness
             strSql.Append(" <= ");
             strSql.Append("'" + endTime + "'");
             strSql.Append(" AND ");
-            strSql.Append(PreWarningResultDBConstNames.WARNING_RESULT + " < 2");
+            strSql.Append(PreWarningResultDBConstNames.WARNING_RESULT + 
+                " < 2");
 
-            DataTable dt = database.ReturnDSNotOpenAndClose(strSql.ToString()).Tables[0];
+            DataTable dt = 
+                database.ReturnDSNotOpenAndClose(strSql.ToString()).Tables[0];
 
             return dt;
         }
@@ -392,7 +432,9 @@ namespace LibBusiness
         //    return datatimes;
         //}
 
-        public static DateTime[] GetDateBySelectTimeAndWorkingfaceName(ManageDataBase database, string workingfaceName, string startTime, string endTime)
+        public static DateTime[] 
+            GetDateBySelectTimeAndWorkingfaceName(ManageDataBase database, 
+            string workingfaceName, string startTime, string endTime)
         {
             DateTime[] datatimes = null;
             StringBuilder strSql = new StringBuilder();
@@ -419,7 +461,8 @@ namespace LibBusiness
             strSql.Append(" <= ");
             strSql.Append("'" + endTime + "'");
             #region 此处需要优化 marked by yanger
-            DataTable dt = database.ReturnDSNotOpenAndClose(strSql.ToString()).Tables[0];
+            DataTable dt = 
+                database.ReturnDSNotOpenAndClose(strSql.ToString()).Tables[0];
             if (dt != null)
             {
                 int rowCount = dt.Rows.Count;
@@ -428,7 +471,8 @@ namespace LibBusiness
                     datatimes = new DateTime[rowCount];
                     for (int i = 0; i < rowCount; i++)
                     {
-                        datatimes[i] = Convert.ToDateTime(dt.Rows[i]["DATE"]);
+                        datatimes[i] = 
+                            Convert.ToDateTime(dt.Rows[i]["DATE"]);
                     }
                 }
             }
@@ -444,7 +488,8 @@ namespace LibBusiness
         /// <returns></returns>
         public static WorkingTime[] GetDateShift(ManageDataBase database)
         {
-            return WorkingTime.FindAllByWorkTimeGroupId(WorkingTimeDefault.FindFirst().DefaultWorkTimeGroupId);
+            return 
+                WorkingTime.FindAllByWorkTimeGroupId(WorkingTimeDefault.FindFirst().DefaultWorkTimeGroupId);
         }
 
         /// <summary>
@@ -453,7 +498,9 @@ namespace LibBusiness
         /// <param name="tunnelID"></param>
         /// <param name="datatime"></param>
         /// <returns></returns>
-        public static string[] GetDateShiftByDatatimeAndTunnelID(ManageDataBase database, string tunnelID, string date)
+        public static string[] 
+            GetDateShiftByDatatimeAndTunnelID(ManageDataBase database, string 
+            tunnelID, string date)
         {
             //select distinct date_shift from T_EARLY_WARNING_RESULT where convert(char(10),data_time,120) = '2014-03-08'
             string[] datashifts = null;
@@ -472,7 +519,8 @@ namespace LibBusiness
             strSql.Append(PreWarningResultDBConstNames.TUNNEL_ID);
             strSql.Append(" = ");
             strSql.Append("'" + tunnelID + "'");
-            DataTable dt = database.ReturnDSNotOpenAndClose(strSql.ToString()).Tables[0];
+            DataTable dt = 
+                database.ReturnDSNotOpenAndClose(strSql.ToString()).Tables[0];
             if (dt != null)
             {
                 int rowCount = dt.Rows.Count;
@@ -658,20 +706,27 @@ namespace LibBusiness
         //    InsertSortedDataIntoTable(database, ent);
         //}
 
-        private static int DataTableFilterReturnWarningLevel(DataTable dt, int warningType, string filter)
+        private static int DataTableFilterReturnWarningLevel(DataTable dt, 
+            int warningType, string filter)
         {
             int result = 4;
-            DataRow[] drRows = dt.Select(PreWarningResultDBConstNames.WARNING_TYPE + " = " + warningType);
+            DataRow[] drRows = 
+                dt.Select(PreWarningResultDBConstNames.WARNING_TYPE + " = " + 
+                warningType);
             if (drRows.Length > 0)
                 result = drRows.Min(r => r.Field<int>(filter));
             return result;
         }
 
-        public static void GetWorkingfaceWorstPreWarningResultInOneDateshift(ManageDataBase database, DataTable dt, DateTime date,
+        public static void 
+            GetWorkingfaceWorstPreWarningResultInOneDateshift(ManageDataBase 
+            database, DataTable dt, DateTime date,
             string dateshift,
-            string workfaceName, string warningType, DateTime fromTime, DateTime toTime, string warningRorY)
+            string workfaceName, string warningType, DateTime fromTime, 
+                DateTime toTime, string warningRorY)
         {
-            PreWarningHistoryResultWithWorkingfaceEnt ent = new PreWarningHistoryResultWithWorkingfaceEnt();
+            PreWarningHistoryResultWithWorkingfaceEnt ent = new 
+                PreWarningHistoryResultWithWorkingfaceEnt();
             //共同属性
             //int value;
             //int.TryParse(tunnelID, out value);
@@ -690,11 +745,15 @@ namespace LibBusiness
             //{
             //    dtSelected.ImportRow(row);
             //}
-            string queryStr = PreWarningResultDBConstNames.DATE_SHIFT + " = '" + dateshift + "' AND " +
-                  WorkingFaceDbConstNames.WORKINGFACE_NAME + " = '" + workfaceName + "' AND " +
+            string queryStr = PreWarningResultDBConstNames.DATE_SHIFT + 
+                " = '" + dateshift + "' AND " +
+                  WorkingFaceDbConstNames.WORKINGFACE_NAME + " = '" + 
+                      workfaceName + "' AND " +
                 //PreWarningResultDBConstNames.WARNING_TYPE + " = " + warningType + " AND " +
-                  PreWarningResultDBConstNames.DATA_TIME + " > '" + startTime + "' AND " +
-                  PreWarningResultDBConstNames.DATA_TIME + " < '" + endTime + "'";
+                  PreWarningResultDBConstNames.DATA_TIME + " > '" + 
+                      startTime + "' AND " +
+                  PreWarningResultDBConstNames.DATA_TIME + " < '" + endTime 
+                      + "'";
             DataRow[] drRows = dt.Select(queryStr);
 
             DataTable dtSelected = dt.Clone();
@@ -703,22 +762,31 @@ namespace LibBusiness
                 dtSelected.ImportRow(i);
             }
 
-            ent.OverLimitWarningResult.WarningResult = DataTableFilterReturnWarningLevel(dtSelected, (int)LibCommon.WarningType.OVER_LIMIT, PreWarningResultDBConstNames.WARNING_RESULT);
+            ent.OverLimitWarningResult.WarningResult = 
+                DataTableFilterReturnWarningLevel(dtSelected, 
+                (int)LibCommon.WarningType.OVER_LIMIT, 
+                PreWarningResultDBConstNames.WARNING_RESULT);
 
             ent.OutBrustWarningResult.WarningResult =
-                DataTableFilterReturnWarningLevel(dtSelected, (int)LibCommon.WarningType.OUTBURST, PreWarningResultDBConstNames.WARNING_RESULT);
+                DataTableFilterReturnWarningLevel(dtSelected, 
+                    (int)LibCommon.WarningType.OUTBURST, 
+                    PreWarningResultDBConstNames.WARNING_RESULT);
 
             //过滤绿色的预警结果
-            if (ent.OverLimitWarningResult.WarningResult >= (int)LibCommon.WarningResult.GREEN &&
-                ent.OutBrustWarningResult.WarningResult >= (int)LibCommon.WarningResult.GREEN)
+            if (ent.OverLimitWarningResult.WarningResult >= 
+                (int)LibCommon.WarningResult.GREEN &&
+                ent.OutBrustWarningResult.WarningResult >= 
+                    (int)LibCommon.WarningResult.GREEN)
             {
                 return;
             }
 
             if (warningRorY == "红色预警")
             {
-                if (ent.OverLimitWarningResult.WarningResult != (int)LibCommon.WarningResult.RED &&
-                    ent.OutBrustWarningResult.WarningResult != (int)LibCommon.WarningResult.RED)
+                if (ent.OverLimitWarningResult.WarningResult != 
+                    (int)LibCommon.WarningResult.RED &&
+                    ent.OutBrustWarningResult.WarningResult != 
+                        (int)LibCommon.WarningResult.RED)
                 {
                     return;
                 }
@@ -726,8 +794,10 @@ namespace LibBusiness
 
             if (warningRorY == "黄色预警")
             {
-                if (ent.OverLimitWarningResult.WarningResult != (int)LibCommon.WarningResult.YELLOW &&
-    ent.OutBrustWarningResult.WarningResult != (int)LibCommon.WarningResult.YELLOW)
+                if (ent.OverLimitWarningResult.WarningResult != 
+                    (int)LibCommon.WarningResult.YELLOW &&
+    ent.OutBrustWarningResult.WarningResult != 
+        (int)LibCommon.WarningResult.YELLOW)
                 {
                     return;
                 }
@@ -735,36 +805,44 @@ namespace LibBusiness
 
             //瓦斯
             ent.OverLimitWarningResult.Gas =
-                 DataTableFilterReturnWarningLevel(dtSelected, (int)LibCommon.WarningType.OVER_LIMIT,
+                 DataTableFilterReturnWarningLevel(dtSelected, 
+                     (int)LibCommon.WarningType.OVER_LIMIT,
                     PreWarningResultDBConstNames.GAS);
             //煤层
             ent.OverLimitWarningResult.Coal =
-               DataTableFilterReturnWarningLevel(dtSelected, (int)LibCommon.WarningType.OVER_LIMIT,
+               DataTableFilterReturnWarningLevel(dtSelected, 
+                   (int)LibCommon.WarningType.OVER_LIMIT,
                     PreWarningResultDBConstNames.COAL);
             //地质
             ent.OverLimitWarningResult.Geology =
-                DataTableFilterReturnWarningLevel(dtSelected, (int)LibCommon.WarningType.OVER_LIMIT,
+                DataTableFilterReturnWarningLevel(dtSelected, 
+                    (int)LibCommon.WarningType.OVER_LIMIT,
                     PreWarningResultDBConstNames.GEOLOGY);
             //通风
             ent.OverLimitWarningResult.Ventilation =
-                DataTableFilterReturnWarningLevel(dtSelected, (int)LibCommon.WarningType.OVER_LIMIT,
+                DataTableFilterReturnWarningLevel(dtSelected, 
+                    (int)LibCommon.WarningType.OVER_LIMIT,
                     PreWarningResultDBConstNames.VENTILATION);
             //管理
             ent.OverLimitWarningResult.Management =
-               DataTableFilterReturnWarningLevel(dtSelected, (int)LibCommon.WarningType.OVER_LIMIT,
+               DataTableFilterReturnWarningLevel(dtSelected, 
+                   (int)LibCommon.WarningType.OVER_LIMIT,
                     PreWarningResultDBConstNames.MANAGEMENT);
 
             //瓦斯
             ent.OutBrustWarningResult.Gas =
-                 DataTableFilterReturnWarningLevel(dtSelected, (int)LibCommon.WarningType.OUTBURST,
+                 DataTableFilterReturnWarningLevel(dtSelected, 
+                     (int)LibCommon.WarningType.OUTBURST,
                     PreWarningResultDBConstNames.GAS);
             //煤层
             ent.OutBrustWarningResult.Coal =
-                 DataTableFilterReturnWarningLevel(dtSelected, (int)LibCommon.WarningType.OUTBURST,
+                 DataTableFilterReturnWarningLevel(dtSelected, 
+                     (int)LibCommon.WarningType.OUTBURST,
                     PreWarningResultDBConstNames.COAL);
             //地质
             ent.OutBrustWarningResult.Geology =
-               DataTableFilterReturnWarningLevel(dtSelected, (int)LibCommon.WarningType.OUTBURST,
+               DataTableFilterReturnWarningLevel(dtSelected, 
+                   (int)LibCommon.WarningType.OUTBURST,
                     PreWarningResultDBConstNames.GEOLOGY);
             //通风
             ent.OutBrustWarningResult.Ventilation =
@@ -773,7 +851,8 @@ namespace LibBusiness
                     PreWarningResultDBConstNames.VENTILATION);
             //管理
             ent.OutBrustWarningResult.Management =
-                DataTableFilterReturnWarningLevel(dtSelected, (int)LibCommon.WarningType.OUTBURST,
+                DataTableFilterReturnWarningLevel(dtSelected, 
+                    (int)LibCommon.WarningType.OUTBURST,
                     PreWarningResultDBConstNames.MANAGEMENT);
 
             InsertSortedDataIntoTable(database, ent);
@@ -852,8 +931,11 @@ namespace LibBusiness
         //}
 
 
-        public static int GetGistWorkingfaceWorstPreWarningResultInOneDateshift(ManageDataBase database, string item,
-    int warning_type, string dateshift, string workingfaceName, string startTime, string endTime)
+        public static int 
+            GetGistWorkingfaceWorstPreWarningResultInOneDateshift(ManageDataBase 
+            database, string item,
+    int warning_type, string dateshift, string workingfaceName, string 
+        startTime, string endTime)
         {
             DataTable dt = new DataTable();
             StringBuilder strSql = new StringBuilder();
@@ -883,25 +965,30 @@ namespace LibBusiness
             strSql.Append("ORDER BY ");
             strSql.Append(item);
 
-            dt = database.ReturnDSNotOpenAndClose(strSql.ToString()).Tables[0];
+            dt = 
+                database.ReturnDSNotOpenAndClose(strSql.ToString()).Tables[0];
             if (dt != null)
             {
                 int rowCount = dt.Rows.Count;
                 if (dt.Rows.Count == 1)
                 {
-                    if (dt.Rows[0][item].ToString() == ((int)LibCommon.WarningResult.RED).ToString())
+                    if (dt.Rows[0][item].ToString() == 
+                        ((int)LibCommon.WarningResult.RED).ToString())
                     {
                         return (int)LibCommon.WarningResult.RED;
                     }
-                    else if (dt.Rows[0][item].ToString() == ((int)LibCommon.WarningResult.YELLOW).ToString())
+                    else if (dt.Rows[0][item].ToString() == 
+                        ((int)LibCommon.WarningResult.YELLOW).ToString())
                     {
                         return (int)LibCommon.WarningResult.YELLOW;
                     }
-                    else if (dt.Rows[0][item].ToString() == ((int)LibCommon.WarningResult.GREEN).ToString())
+                    else if (dt.Rows[0][item].ToString() == 
+                        ((int)LibCommon.WarningResult.GREEN).ToString())
                     {
                         return (int)LibCommon.WarningResult.GREEN;
                     }
-                    else if (dt.Rows[0][item].ToString() == ((int)LibCommon.WarningResult.NOT_AVAILABLE).ToString())
+                    else if (dt.Rows[0][item].ToString() == 
+                        ((int)LibCommon.WarningResult.NOT_AVAILABLE).ToString())
                     {
                         return (int)LibCommon.WarningResult.NOT_AVAILABLE;
                     }
@@ -989,8 +1076,11 @@ namespace LibBusiness
 
 
 
-        public static int GetWarningTypeTunnelWorstPreWarningResultInOneDateshift(ManageDataBase database, string dateshift,
-            string workingfaceName, int warningType, string startTime, string endTime)
+        public static int 
+            GetWarningTypeTunnelWorstPreWarningResultInOneDateshift(ManageDataBase 
+            database, string dateshift,
+            string workingfaceName, int warningType, string startTime, 
+                string endTime)
         {
             DataTable dt = new DataTable();
             StringBuilder strSql = new StringBuilder();
@@ -1020,26 +1110,36 @@ namespace LibBusiness
             strSql.Append("ORDER BY ");
             strSql.Append(PreWarningResultDBConstNames.WARNING_RESULT);
 
-            dt = database.ReturnDSNotOpenAndClose(strSql.ToString()).Tables[0];
+            dt = 
+                database.ReturnDSNotOpenAndClose(strSql.ToString()).Tables[0];
             if (dt != null)
             {
                 int rowCount = dt.Rows.Count;
                 if (dt.Rows.Count == 1)
                 {
                     DataRow dr = dt.Rows[0];
-                    if (dr[PreWarningResultDBConstNames.WARNING_RESULT].ToString() == ((int)LibCommon.WarningResult.RED).ToString())
+                    if 
+                        (dr[PreWarningResultDBConstNames.WARNING_RESULT].ToString() 
+                        == ((int)LibCommon.WarningResult.RED).ToString())
                     {
                         return (int)LibCommon.WarningResult.RED;
                     }
-                    else if (dr[PreWarningResultDBConstNames.WARNING_RESULT].ToString() == ((int)LibCommon.WarningResult.YELLOW).ToString())
+                    else if 
+                        (dr[PreWarningResultDBConstNames.WARNING_RESULT].ToString() 
+                        == ((int)LibCommon.WarningResult.YELLOW).ToString())
                     {
                         return (int)LibCommon.WarningResult.YELLOW;
                     }
-                    else if (dr[PreWarningResultDBConstNames.WARNING_RESULT].ToString() == ((int)LibCommon.WarningResult.GREEN).ToString())
+                    else if 
+                        (dr[PreWarningResultDBConstNames.WARNING_RESULT].ToString() 
+                        == ((int)LibCommon.WarningResult.GREEN).ToString())
                     {
                         return (int)LibCommon.WarningResult.GREEN;
                     }
-                    else if (dr[PreWarningResultDBConstNames.WARNING_RESULT].ToString() == ((int)LibCommon.WarningResult.NOT_AVAILABLE).ToString())
+                    else if 
+                        (dr[PreWarningResultDBConstNames.WARNING_RESULT].ToString() 
+                        == 
+                        ((int)LibCommon.WarningResult.NOT_AVAILABLE).ToString())
                     {
                         return (int)LibCommon.WarningResult.NOT_AVAILABLE;
                     }
@@ -1084,7 +1184,8 @@ namespace LibBusiness
         //}
 
 
-        public static bool InsertSortedDataIntoTable(ManageDataBase database, PreWarningHistoryResultWithWorkingfaceEnt ent)
+        public static bool InsertSortedDataIntoTable(ManageDataBase 
+            database, PreWarningHistoryResultWithWorkingfaceEnt ent)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("INSERT INTO ");
@@ -1094,18 +1195,24 @@ namespace LibBusiness
             strSql.Append("'" + ent.WorkingfaceName.TrimEnd() + "',");
             strSql.Append("'" + ent.Date_Shift + "',");
             strSql.Append("'" + ent.DateTime + "',");
-            strSql.Append("'" + ent.OverLimitWarningResult.WarningResult + "',");
-            strSql.Append("'" + ent.OutBrustWarningResult.WarningResult + "',");
+            strSql.Append("'" + ent.OverLimitWarningResult.WarningResult + 
+                "',");
+            strSql.Append("'" + ent.OutBrustWarningResult.WarningResult + 
+                "',");
             strSql.Append("'" + ent.OverLimitWarningResult.Gas + "',");
             strSql.Append("'" + ent.OverLimitWarningResult.Coal + "',");
             strSql.Append("'" + ent.OverLimitWarningResult.Geology + "',");
-            strSql.Append("'" + ent.OverLimitWarningResult.Ventilation + "',");
-            strSql.Append("'" + ent.OverLimitWarningResult.Management + "',");
+            strSql.Append("'" + ent.OverLimitWarningResult.Ventilation + 
+                "',");
+            strSql.Append("'" + ent.OverLimitWarningResult.Management + 
+                "',");
             strSql.Append("'" + ent.OutBrustWarningResult.Gas + "',");
             strSql.Append("'" + ent.OutBrustWarningResult.Coal + "',");
             strSql.Append("'" + ent.OutBrustWarningResult.Geology + "',");
-            strSql.Append("'" + ent.OutBrustWarningResult.Ventilation + "',");
-            strSql.Append("'" + ent.OutBrustWarningResult.Management + "')");
+            strSql.Append("'" + ent.OutBrustWarningResult.Ventilation + 
+                "',");
+            strSql.Append("'" + ent.OutBrustWarningResult.Management + 
+                "')");
 
             return database.OperateDBNotOpenAndClose(strSql.ToString());
         }
@@ -1169,7 +1276,9 @@ namespace LibBusiness
         //    databaseForSaveTime.Close();
         //}
 
-        public static void PreWarningResultSort(string startTime, string endTime, ToolStripProgressBar bar, string workingfaceName, string warningType)
+        public static void PreWarningResultSort(string startTime, string 
+            endTime, ToolStripProgressBar bar, string workingfaceName, string 
+            warningType)
         {
             //if (!LibCommon.Validator.ExistTableInDatabase(LibBusiness.PreWarningHistroyResultQueryDBConstNames.TABLE_NAME))
             //{
@@ -1180,7 +1289,8 @@ namespace LibBusiness
             ClearSortedData();
 
             //实例化一公用的数据库操作
-            ManageDataBase databaseForSaveTime = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase databaseForSaveTime = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             databaseForSaveTime.Open();
 
             //获取巷道ID
@@ -1204,11 +1314,15 @@ namespace LibBusiness
             bar.PerformStep();
             //获取预警日期
             //TODO:此处可优化，但不是重点
-            DateTime[] dates = GetDateBySelectTimeAndWorkingfaceName(databaseForSaveTime, workingfaceName, startTime, endTime);
+            DateTime[] dates = 
+                GetDateBySelectTimeAndWorkingfaceName(databaseForSaveTime, 
+                workingfaceName, startTime, endTime);
             bar.Step = 1 + (int)bar.Maximum;
             bar.Visible = true;
             bar.Value = 0;
-            DataTable dt = GetWarningResultsWithCondition(databaseForSaveTime, startTime, endTime, workingfaceName);
+            DataTable dt = 
+                GetWarningResultsWithCondition(databaseForSaveTime, startTime, 
+                endTime, workingfaceName);
             if (dates == null)
             { return; }
             foreach (var date in dates)
@@ -1223,16 +1337,20 @@ namespace LibBusiness
                     {
                         foreach (var item in workFaceList)
                         {
-                            GetWorkingfaceWorstPreWarningResultInOneDateshift(databaseForSaveTime, dt, date,
+                            GetWorkingfaceWorstPreWarningResultInOneDateshift(databaseForSaveTime,
+                                dt, date,
 dateShift.WorkTimeName, item, LibCommon.WarningType.OUTBURST.ToString(),
 dateShift.WorkTimeFrom, dateShift.WorkTimeTo, warningType);
                         }
                     }
                     else
                     {
-                        GetWorkingfaceWorstPreWarningResultInOneDateshift(databaseForSaveTime, dt, date,
-                        dateShift.WorkTimeName, workingfaceName, LibCommon.WarningType.OUTBURST.ToString(),
-                        dateShift.WorkTimeFrom, dateShift.WorkTimeTo, warningType);
+                        GetWorkingfaceWorstPreWarningResultInOneDateshift(databaseForSaveTime,
+                            dt, date,
+                        dateShift.WorkTimeName, workingfaceName, 
+                            LibCommon.WarningType.OUTBURST.ToString(),
+                        dateShift.WorkTimeFrom, dateShift.WorkTimeTo, 
+                            warningType);
                     }
                 }
             }
@@ -1263,7 +1381,8 @@ dateShift.WorkTimeFrom, dateShift.WorkTimeTo, warningType);
             StringBuilder strSql = new StringBuilder();
             strSql.Append("DELETE FROM ");
             strSql.Append(LibBusiness.PreWarningHistroyResultQueryDBConstNames.TABLE_NAME);
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase database = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             return database.OperateDB(strSql.ToString());
         }
 
@@ -1276,7 +1395,8 @@ dateShift.WorkTimeFrom, dateShift.WorkTimeTo, warningType);
             StringBuilder strSql = new StringBuilder();
             strSql.Append("SELECT COUNT(*) FROM ");
             strSql.Append(PreWarningResultDBConstNames.TABLE_NAME_TEMP);
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase database = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             DataTable dt = database.ReturnDS(strSql.ToString()).Tables[0];
             return Convert.ToInt32(dt.Rows[0][0].ToString());
         }
@@ -1284,13 +1404,15 @@ dateShift.WorkTimeFrom, dateShift.WorkTimeTo, warningType);
         /// 获取整理完成的数据，该函数
         /// </summary>
         /// <returns></returns>
-        public static List<PreWarningHistoryResultEnt> GetSortedPreWarningData()
+        public static List<PreWarningHistoryResultEnt> 
+            GetSortedPreWarningData()
         {
             List<PreWarningHistoryResultEnt> ents = null;
             StringBuilder strSql = new StringBuilder();
             strSql.Append("SELECT * FROM ");
             strSql.Append(PreWarningResultDBConstNames.TABLE_NAME_TEMP);
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase database = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             DataTable dt = database.ReturnDS(strSql.ToString()).Tables[0];
             if (dt != null)
             {
@@ -1305,49 +1427,69 @@ dateShift.WorkTimeFrom, dateShift.WorkTimeTo, warningType);
                         //巷道名称
                         //ent.TunelName = dt.Rows[i][LibBusiness.PreWarningResultQueryDBConstNames.TUNNEL_NAME].ToString();//(数据库中不包含该字段！！！)
                         //巷道ID
-                        ent.TunnelID = (int)(dt.Rows[i][PreWarningResultDBConstNames.TUNNEL_ID]);
+                        ent.TunnelID = 
+                            (int)(dt.Rows[i][PreWarningResultDBConstNames.TUNNEL_ID]);
                         //日期
-                        ent.DateTime = Convert.ToDateTime(dt.Rows[i][PreWarningResultDBConstNames.DATA_TIME]);
+                        ent.DateTime = 
+                            Convert.ToDateTime(dt.Rows[i][PreWarningResultDBConstNames.DATA_TIME]);
                         //班次
-                        ent.Date_Shift = dt.Rows[i][PreWarningResultDBConstNames.DATE_SHIFT].ToString();
+                        ent.Date_Shift = 
+                            dt.Rows[i][PreWarningResultDBConstNames.DATE_SHIFT].ToString();
 
                         int defultValue = (int)WarningResult.NULL;
                         //超限预警详细信息
-                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OVER_LIMIT].ToString(), out defultValue);
-                        ent.OverLimitWarningResult.WarningResult = defultValue;
+                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OVER_LIMIT].ToString(),
+                            out defultValue);
+                        ent.OverLimitWarningResult.WarningResult = 
+                            defultValue;
                         defultValue = (int)WarningResult.NULL;
-                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OVER_LIMIT_GAS].ToString(), out defultValue);
+                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OVER_LIMIT_GAS].ToString(),
+                            out defultValue);
                         ent.OverLimitWarningResult.Gas = defultValue;
                         defultValue = (int)WarningResult.NULL;
-                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OVER_LIMIT_COAL].ToString(), out defultValue);
+                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OVER_LIMIT_COAL].ToString(),
+                            out defultValue);
                         ent.OverLimitWarningResult.Coal = defultValue;
                         defultValue = (int)WarningResult.NULL;
-                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OVER_LIMIT_GEOLOGY].ToString(), out defultValue);
+                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OVER_LIMIT_GEOLOGY].ToString(),
+                            out defultValue);
                         ent.OverLimitWarningResult.Geology = defultValue;
                         defultValue = (int)WarningResult.NULL;
-                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OVER_LIMIT_VENTILATION].ToString(), out defultValue);
-                        ent.OverLimitWarningResult.Ventilation = defultValue;
+                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OVER_LIMIT_VENTILATION].ToString(),
+                            out defultValue);
+                        ent.OverLimitWarningResult.Ventilation = 
+                            defultValue;
                         defultValue = (int)WarningResult.NULL;
-                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OVER_LIMIT_MANAGEMENT].ToString(), out defultValue);
-                        ent.OverLimitWarningResult.Management = defultValue;
+                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OVER_LIMIT_MANAGEMENT].ToString(),
+                            out defultValue);
+                        ent.OverLimitWarningResult.Management = 
+                            defultValue;
 
                         //突出预警详细信息
-                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OUTBURST].ToString(), out defultValue);
-                        ent.OutBrustWarningResult.WarningResult = defultValue;
+                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OUTBURST].ToString(),
+                            out defultValue);
+                        ent.OutBrustWarningResult.WarningResult = 
+                            defultValue;
                         defultValue = (int)WarningResult.NULL;
-                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OUTBURST_GAS].ToString(), out defultValue);
+                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OUTBURST_GAS].ToString(),
+                            out defultValue);
                         ent.OutBrustWarningResult.Gas = defultValue;
                         defultValue = (int)WarningResult.NULL;
-                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OUTBURST_COAL].ToString(), out defultValue);
+                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OUTBURST_COAL].ToString(),
+                            out defultValue);
                         ent.OutBrustWarningResult.Coal = defultValue;
                         defultValue = (int)WarningResult.NULL;
-                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OUTBURST_GEOLOGY].ToString(), out defultValue);
+                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OUTBURST_GEOLOGY].ToString(),
+                            out defultValue);
                         ent.OutBrustWarningResult.Geology = defultValue;
                         defultValue = (int)WarningResult.NULL;
-                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OUTBURST_VENTILATION].ToString(), out defultValue);
-                        ent.OutBrustWarningResult.Ventilation = defultValue;
+                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OUTBURST_VENTILATION].ToString(),
+                            out defultValue);
+                        ent.OutBrustWarningResult.Ventilation = 
+                            defultValue;
                         defultValue = (int)WarningResult.NULL;
-                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OUTBURST_MANAGEMENT].ToString(), out defultValue);
+                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OUTBURST_MANAGEMENT].ToString(),
+                            out defultValue);
                         ent.OutBrustWarningResult.Management = defultValue;
 
                         ents.Add(ent);
@@ -1363,17 +1505,22 @@ dateShift.WorkTimeFrom, dateShift.WorkTimeTo, warningType);
         /// <param name="iStartIndex"></param>
         /// <param name="iEndIndex"></param>
         /// <returns></returns>
-        public static List<PreWarningHistoryResultEnt> GetSortedPreWarningData(int iStartIndex, int iEndIndex)
+        public static List<PreWarningHistoryResultEnt> 
+            GetSortedPreWarningData(int iStartIndex, int iEndIndex)
         {
             List<PreWarningHistoryResultEnt> ents = null;
             StringBuilder strSql = new StringBuilder();
             strSql.Append("SELECT * FROM (");
-            strSql.Append(" SELECT ROW_NUMBER() OVER(ORDER BY " + PreWarningResultDBConstNames.ID + ") AS rowid, *");
-            strSql.Append(" FROM " + PreWarningResultDBConstNames.TABLE_NAME_TEMP + ") AS TB");
+            strSql.Append(" SELECT ROW_NUMBER() OVER(ORDER BY " + 
+                PreWarningResultDBConstNames.ID + ") AS rowid, *");
+            strSql.Append(" FROM " + 
+                PreWarningResultDBConstNames.TABLE_NAME_TEMP + ") AS TB");
             strSql.Append(" WHERE rowid >= " + iStartIndex);
             strSql.Append(" AND rowid <= " + iEndIndex);
-            strSql.Append(" ORDER BY " + PreWarningResultDBConstNames.DATA_TIME + " DESC");
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            strSql.Append(" ORDER BY " + 
+                PreWarningResultDBConstNames.DATA_TIME + " DESC");
+            ManageDataBase database = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             DataTable dt = database.ReturnDS(strSql.ToString()).Tables[0];
             if (dt != null)
             {
@@ -1386,51 +1533,72 @@ dateShift.WorkTimeFrom, dateShift.WorkTimeTo, warningType);
                     {
                         ent = new PreWarningHistoryResultEnt();
                         //巷道名称
-                        ent.TunelName = dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.TUNNEL_NAME].ToString().TrimEnd();
+                        ent.TunelName = 
+                            dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.TUNNEL_NAME].ToString().TrimEnd();
                         //巷道ID
-                        ent.TunnelID = (int)(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.TUNNEL_ID]);
+                        ent.TunnelID = 
+                            (int)(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.TUNNEL_ID]);
                         //日期
-                        ent.DateTime = Convert.ToDateTime(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.DATA_TIME]);
+                        ent.DateTime = 
+                            Convert.ToDateTime(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.DATA_TIME]);
                         //班次
-                        ent.Date_Shift = dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.DATE_SHIFT].ToString();
+                        ent.Date_Shift = 
+                            dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.DATE_SHIFT].ToString();
 
                         int defultValue = (int)WarningResult.NULL;
                         //超限预警详细信息
-                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OVER_LIMIT].ToString(), out defultValue);
-                        ent.OverLimitWarningResult.WarningResult = defultValue;
+                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OVER_LIMIT].ToString(),
+                            out defultValue);
+                        ent.OverLimitWarningResult.WarningResult = 
+                            defultValue;
                         defultValue = (int)WarningResult.NULL;
-                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OVER_LIMIT_GAS].ToString(), out defultValue);
+                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OVER_LIMIT_GAS].ToString(),
+                            out defultValue);
                         ent.OverLimitWarningResult.Gas = defultValue;
                         defultValue = (int)WarningResult.NULL;
-                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OVER_LIMIT_COAL].ToString(), out defultValue);
+                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OVER_LIMIT_COAL].ToString(),
+                            out defultValue);
                         ent.OverLimitWarningResult.Coal = defultValue;
                         defultValue = (int)WarningResult.NULL;
-                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OVER_LIMIT_GEOLOGY].ToString(), out defultValue);
+                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OVER_LIMIT_GEOLOGY].ToString(),
+                            out defultValue);
                         ent.OverLimitWarningResult.Geology = defultValue;
                         defultValue = (int)WarningResult.NULL;
-                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OVER_LIMIT_VENTILATION].ToString(), out defultValue);
-                        ent.OverLimitWarningResult.Ventilation = defultValue;
+                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OVER_LIMIT_VENTILATION].ToString(),
+                            out defultValue);
+                        ent.OverLimitWarningResult.Ventilation = 
+                            defultValue;
                         defultValue = (int)WarningResult.NULL;
-                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OVER_LIMIT_MANAGEMENT].ToString(), out defultValue);
-                        ent.OverLimitWarningResult.Management = defultValue;
+                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OVER_LIMIT_MANAGEMENT].ToString(),
+                            out defultValue);
+                        ent.OverLimitWarningResult.Management = 
+                            defultValue;
 
                         //突出预警详细信息
-                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OUTBURST].ToString(), out defultValue);
-                        ent.OutBrustWarningResult.WarningResult = defultValue;
+                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OUTBURST].ToString(),
+                            out defultValue);
+                        ent.OutBrustWarningResult.WarningResult = 
+                            defultValue;
                         defultValue = (int)WarningResult.NULL;
-                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OUTBURST_GAS].ToString(), out defultValue);
+                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OUTBURST_GAS].ToString(),
+                            out defultValue);
                         ent.OutBrustWarningResult.Gas = defultValue;
                         defultValue = (int)WarningResult.NULL;
-                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OUTBURST_COAL].ToString(), out defultValue);
+                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OUTBURST_COAL].ToString(),
+                            out defultValue);
                         ent.OutBrustWarningResult.Coal = defultValue;
                         defultValue = (int)WarningResult.NULL;
-                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OUTBURST_GEOLOGY].ToString(), out defultValue);
+                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OUTBURST_GEOLOGY].ToString(),
+                            out defultValue);
                         ent.OutBrustWarningResult.Geology = defultValue;
                         defultValue = (int)WarningResult.NULL;
-                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OUTBURST_VENTILATION].ToString(), out defultValue);
-                        ent.OutBrustWarningResult.Ventilation = defultValue;
+                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OUTBURST_VENTILATION].ToString(),
+                            out defultValue);
+                        ent.OutBrustWarningResult.Ventilation = 
+                            defultValue;
                         defultValue = (int)WarningResult.NULL;
-                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OUTBURST_MANAGEMENT].ToString(), out defultValue);
+                        int.TryParse(dt.Rows[i][LibBusiness.PreWarningHistroyResultQueryDBConstNames.OUTBURST_MANAGEMENT].ToString(),
+                            out defultValue);
                         ent.OutBrustWarningResult.Management = defultValue;
                         ents.Add(ent);
                     }
@@ -1467,14 +1635,17 @@ dateShift.WorkTimeFrom, dateShift.WorkTimeTo, warningType);
             strSql.Append("[outburst_geology] [int] NULL,");
             strSql.Append("	[outburst_ventilation] [int] NULL,");
             strSql.Append("[outburst_management] [int] NULL,)");
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            ManageDataBase database = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             return database.OperateDB(strSql.ToString());
         }
 
         public static List<String> GetWorkingFaceList()
         {
-            string strSql = "SELECT DISTINCT WORKINGFACE_NAME FROM V_EARLY_WARNING_DETAIL";
-            ManageDataBase database = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+            string strSql = 
+                "SELECT DISTINCT WORKINGFACE_NAME FROM V_EARLY_WARNING_DETAIL";
+            ManageDataBase database = new 
+                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
             DataTable dt = database.ReturnDS(strSql).Tables[0];
             var results = new List<string>();
             for (int i = 0; i < dt.Rows.Count; i++)

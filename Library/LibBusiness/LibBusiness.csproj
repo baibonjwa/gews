@@ -204,7 +204,6 @@
     <Compile Include="CommonBLL\PropertyBLL\UserGroupInformationManagementBLL.cs" />
     <Compile Include="CommonBLL\PropertyBLL\UserInformationDetailsManagementBLL.cs" />
     <Compile Include="CommonBLL\PropertyBLL\UserInformationManagementBLL.cs" />
-    <Compile Include="CommonBLL\PropertyBLL\UserLoginInformationManagementBLL.cs" />
     <Compile Include="DataBindUtil.cs" />
     <Compile Include="PreWarningAnalysisResultBLL.cs" />
     <Compile Include="PreWarningDataCommonBLL.cs" />

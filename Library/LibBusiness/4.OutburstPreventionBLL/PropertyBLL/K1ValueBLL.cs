@@ -24,26 +24,53 @@ namespace LibBusiness
         /// <returns></returns>
         public static DataSet selectValueK1()
         {
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
-            string sql = "SELECT DISTINCT " + K1ValueDbConstNames.VALUE_K1_ID + " FROM " + K1ValueDbConstNames.TABLE_NAME;
+            ManageDataBase db = new 
+                ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
+            string sql = "SELECT DISTINCT " + 
+                K1ValueDbConstNames.VALUE_K1_ID + " FROM " + 
+                K1ValueDbConstNames.TABLE_NAME;
             DataSet ds = db.ReturnDS(sql);
             return ds;
         }
 
-        public static DataSet selectValueK12(int tunnelId, string startTime, string endTime)
+        public static DataSet selectValueK12(int tunnelId, string startTime,
+            string endTime)
         {
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
+            ManageDataBase db = new 
+                ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
             StringBuilder sb = new StringBuilder();
             db.Open();
             sb.Append("SELECT * FROM");
-            sb.Append(" (SELECT ROW_NUMBER() OVER(ORDER BY " + K1ValueDbConstNames.ID + ") AS rowid,* FROM ");
-            sb.Append(" (SELECT ROW_NUMBER() OVER(PARTITION BY " + K1ValueDbConstNames.VALUE_K1_ID + " ORDER BY " + K1ValueDbConstNames.ID + ") AS V, * FROM " + K1ValueDbConstNames.TABLE_NAME + " WHERE " + K1ValueDbConstNames.ID + " IN");
-            sb.Append(" (SELECT MAX(" + K1ValueDbConstNames.ID + ") FROM " + K1ValueDbConstNames.TABLE_NAME + " A,(SELECT  MAX((" + K1ValueDbConstNames.VALUE_K1_DRY + "+" + K1ValueDbConstNames.VALUE_K1_WET + " + ABS(" + K1ValueDbConstNames.VALUE_K1_DRY + "-" + K1ValueDbConstNames.VALUE_K1_WET + "))/2) AS " + K1ValueDbConstNames.VALUE_K1_DRY + "," + K1ValueDbConstNames.VALUE_K1_ID + " FROM " + K1ValueDbConstNames.TABLE_NAME + " GROUP BY " + K1ValueDbConstNames.VALUE_K1_ID + ") B ");
+            sb.Append(" (SELECT ROW_NUMBER() OVER(ORDER BY " + 
+                K1ValueDbConstNames.ID + ") AS rowid,* FROM ");
+            sb.Append(" (SELECT ROW_NUMBER() OVER(PARTITION BY " + 
+                K1ValueDbConstNames.VALUE_K1_ID + " ORDER BY " + 
+                K1ValueDbConstNames.ID + ") AS V, * FROM " + 
+                K1ValueDbConstNames.TABLE_NAME + " WHERE " + 
+                K1ValueDbConstNames.ID + " IN");
+            sb.Append(" (SELECT MAX(" + K1ValueDbConstNames.ID + ") FROM " 
+                + K1ValueDbConstNames.TABLE_NAME + " A,(SELECT  MAX((" + 
+                K1ValueDbConstNames.VALUE_K1_DRY + "+" + 
+                K1ValueDbConstNames.VALUE_K1_WET + " + ABS(" + 
+                K1ValueDbConstNames.VALUE_K1_DRY + "-" + 
+                K1ValueDbConstNames.VALUE_K1_WET + "))/2) AS " + 
+                K1ValueDbConstNames.VALUE_K1_DRY + "," + 
+                K1ValueDbConstNames.VALUE_K1_ID + " FROM " + 
+                K1ValueDbConstNames.TABLE_NAME + " GROUP BY " + 
+                K1ValueDbConstNames.VALUE_K1_ID + ") B ");
             //此处的K1ValueDbConstNames.Value_K1_DRY并非是表中的字段名，而是自定名称的字段
-            sb.Append(" WHERE A." + K1ValueDbConstNames.VALUE_K1_ID + " = B." + K1ValueDbConstNames.VALUE_K1_ID + " AND (A." + K1ValueDbConstNames.VALUE_K1_DRY + " = B." + K1ValueDbConstNames.VALUE_K1_DRY + " OR A." + K1ValueDbConstNames.VALUE_K1_WET + " = B." + K1ValueDbConstNames.VALUE_K1_DRY + ") GROUP BY A." + K1ValueDbConstNames.VALUE_K1_DRY + ",A." + K1ValueDbConstNames.VALUE_K1_ID + ")) AS TC");
+            sb.Append(" WHERE A." + K1ValueDbConstNames.VALUE_K1_ID + 
+                " = B." + K1ValueDbConstNames.VALUE_K1_ID + " AND (A." + 
+                K1ValueDbConstNames.VALUE_K1_DRY + " = B." + 
+                K1ValueDbConstNames.VALUE_K1_DRY + " OR A." + 
+                K1ValueDbConstNames.VALUE_K1_WET + " = B." + 
+                K1ValueDbConstNames.VALUE_K1_DRY + ") GROUP BY A." + 
+                K1ValueDbConstNames.VALUE_K1_DRY + ",A." + 
+                K1ValueDbConstNames.VALUE_K1_ID + ")) AS TC");
             sb.Append(" WHERE V <= 1) AS TB WHERE ");
             sb.Append(K1ValueDbConstNames.TUNNEL_ID + " = " + tunnelId);
-            sb.Append(" AND " + K1ValueDbConstNames.TIME + " BETWEEN '" + startTime + "' AND '" + endTime + "'");
+            sb.Append(" AND " + K1ValueDbConstNames.TIME + " BETWEEN '" + 
+                startTime + "' AND '" + endTime + "'");
 
             DataSet ds = db.ReturnDSNotOpenAndClose(sb.ToString());
             return ds;
@@ -56,27 +83,43 @@ namespace LibBusiness
         public static K1Value selectValueK1ByID(int ID)
         {
             K1Value k1ValueEntity = new K1Value();
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
-            string sql = "SELECT * FROM " + K1ValueDbConstNames.TABLE_NAME + " WHERE " + K1ValueDbConstNames.ID + " = " + ID;
+            ManageDataBase db = new 
+                ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
+            string sql = "SELECT * FROM " + K1ValueDbConstNames.TABLE_NAME 
+                + " WHERE " + K1ValueDbConstNames.ID + " = " + ID;
             DataSet ds = db.ReturnDS(sql);
             if (ds.Tables[0].Rows.Count > 0)
             {
                 try
                 {
-                    k1ValueEntity.Id = Convert.ToInt32(ds.Tables[0].Rows[0][K1ValueDbConstNames.ID]);
-                    k1ValueEntity.K1ValueId = Convert.ToInt32(ds.Tables[0].Rows[0][K1ValueDbConstNames.VALUE_K1_ID]);
-                    k1ValueEntity.CoordinateX = Convert.ToDouble(ds.Tables[0].Rows[0][K1ValueDbConstNames.COORDINATE_X]);
-                    k1ValueEntity.CoordinateY = Convert.ToDouble(ds.Tables[0].Rows[0][K1ValueDbConstNames.COORDINATE_Y]);
-                    k1ValueEntity.CoordinateZ = Convert.ToDouble(ds.Tables[0].Rows[0][K1ValueDbConstNames.COORDINATE_Z]);
-                    k1ValueEntity.ValueK1Dry = Convert.ToDouble(ds.Tables[0].Rows[0][K1ValueDbConstNames.VALUE_K1_DRY]);
-                    k1ValueEntity.ValueK1Wet = Convert.ToDouble(ds.Tables[0].Rows[0][K1ValueDbConstNames.VALUE_K1_WET]);
-                    k1ValueEntity.Sg = Convert.ToDouble(ds.Tables[0].Rows[0][K1ValueDbConstNames.VALUE_SG]);
-                    k1ValueEntity.Sv = Convert.ToDouble(ds.Tables[0].Rows[0][K1ValueDbConstNames.VALUE_SV]);
-                    k1ValueEntity.Q = Convert.ToDouble(ds.Tables[0].Rows[0][K1ValueDbConstNames.VALUE_Q]);
-                    k1ValueEntity.BoreholeDeep = Convert.ToDouble(ds.Tables[0].Rows[0][K1ValueDbConstNames.BOREHOLE_DEEP]);
-                    k1ValueEntity.Time = Convert.ToDateTime(ds.Tables[0].Rows[0][K1ValueDbConstNames.TIME].ToString());
-                    k1ValueEntity.TypeInTime = Convert.ToDateTime(ds.Tables[0].Rows[0][K1ValueDbConstNames.TYPE_IN_TIME].ToString());
-                    k1ValueEntity.Tunnel.TunnelId = Convert.ToInt32(ds.Tables[0].Rows[0][K1ValueDbConstNames.TUNNEL_ID]);
+                    k1ValueEntity.Id = 
+                        Convert.ToInt32(ds.Tables[0].Rows[0][K1ValueDbConstNames.ID]);
+                    k1ValueEntity.K1ValueId = 
+                        Convert.ToInt32(ds.Tables[0].Rows[0][K1ValueDbConstNames.VALUE_K1_ID]);
+                    k1ValueEntity.CoordinateX = 
+                        Convert.ToDouble(ds.Tables[0].Rows[0][K1ValueDbConstNames.COORDINATE_X]);
+                    k1ValueEntity.CoordinateY = 
+                        Convert.ToDouble(ds.Tables[0].Rows[0][K1ValueDbConstNames.COORDINATE_Y]);
+                    k1ValueEntity.CoordinateZ = 
+                        Convert.ToDouble(ds.Tables[0].Rows[0][K1ValueDbConstNames.COORDINATE_Z]);
+                    k1ValueEntity.ValueK1Dry = 
+                        Convert.ToDouble(ds.Tables[0].Rows[0][K1ValueDbConstNames.VALUE_K1_DRY]);
+                    k1ValueEntity.ValueK1Wet = 
+                        Convert.ToDouble(ds.Tables[0].Rows[0][K1ValueDbConstNames.VALUE_K1_WET]);
+                    k1ValueEntity.Sg = 
+                        Convert.ToDouble(ds.Tables[0].Rows[0][K1ValueDbConstNames.VALUE_SG]);
+                    k1ValueEntity.Sv = 
+                        Convert.ToDouble(ds.Tables[0].Rows[0][K1ValueDbConstNames.VALUE_SV]);
+                    k1ValueEntity.Q = 
+                        Convert.ToDouble(ds.Tables[0].Rows[0][K1ValueDbConstNames.VALUE_Q]);
+                    k1ValueEntity.BoreholeDeep = 
+                        Convert.ToDouble(ds.Tables[0].Rows[0][K1ValueDbConstNames.BOREHOLE_DEEP]);
+                    k1ValueEntity.Time = 
+                        Convert.ToDateTime(ds.Tables[0].Rows[0][K1ValueDbConstNames.TIME].ToString());
+                    k1ValueEntity.TypeInTime = 
+                        Convert.ToDateTime(ds.Tables[0].Rows[0][K1ValueDbConstNames.TYPE_IN_TIME].ToString());
+                    k1ValueEntity.Tunnel.TunnelId = 
+                        Convert.ToInt32(ds.Tables[0].Rows[0][K1ValueDbConstNames.TUNNEL_ID]);
 
                 }
                 catch
@@ -98,8 +141,11 @@ namespace LibBusiness
         /// <returns>K1实体</returns>
         public static K1Value[] selectValueK1ByK1ValueID(int k1ValueID)
         {
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
-            string sql = "SELECT * FROM " + K1ValueDbConstNames.TABLE_NAME + " WHERE " + K1ValueDbConstNames.VALUE_K1_ID + " = " + k1ValueID;
+            ManageDataBase db = new 
+                ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
+            string sql = "SELECT * FROM " + K1ValueDbConstNames.TABLE_NAME 
+                + " WHERE " + K1ValueDbConstNames.VALUE_K1_ID + " = " + 
+                k1ValueID;
             DataSet ds = db.ReturnDS(sql);
             K1Value[] k1Entity = new K1Value[ds.Tables[0].Rows.Count];
             if (ds.Tables[0].Rows.Count > 0)
@@ -109,20 +155,34 @@ namespace LibBusiness
                     try
                     {
                         K1Value k1ValueEntity = new K1Value();
-                        k1ValueEntity.Id = Convert.ToInt32(ds.Tables[0].Rows[i][K1ValueDbConstNames.ID]);
-                        k1ValueEntity.K1ValueId = Convert.ToInt32(ds.Tables[0].Rows[i][K1ValueDbConstNames.VALUE_K1_ID]);
-                        k1ValueEntity.CoordinateX = Convert.ToDouble(ds.Tables[0].Rows[i][K1ValueDbConstNames.COORDINATE_X]);
-                        k1ValueEntity.CoordinateY = Convert.ToDouble(ds.Tables[0].Rows[i][K1ValueDbConstNames.COORDINATE_Y]);
-                        k1ValueEntity.CoordinateZ = Convert.ToDouble(ds.Tables[0].Rows[i][K1ValueDbConstNames.COORDINATE_Z]);
-                        k1ValueEntity.ValueK1Dry = Convert.ToDouble(ds.Tables[0].Rows[i][K1ValueDbConstNames.VALUE_K1_DRY]);
-                        k1ValueEntity.ValueK1Wet = Convert.ToDouble(ds.Tables[0].Rows[i][K1ValueDbConstNames.VALUE_K1_WET]);
-                        k1ValueEntity.Sg = Convert.ToDouble(ds.Tables[0].Rows[i][K1ValueDbConstNames.VALUE_SG]);
-                        k1ValueEntity.Sv = Convert.ToDouble(ds.Tables[0].Rows[i][K1ValueDbConstNames.VALUE_SV]);
-                        k1ValueEntity.Q = Convert.ToDouble(ds.Tables[0].Rows[i][K1ValueDbConstNames.VALUE_Q]);
-                        k1ValueEntity.BoreholeDeep = Convert.ToDouble(ds.Tables[0].Rows[i][K1ValueDbConstNames.BOREHOLE_DEEP]);
-                        k1ValueEntity.Time = Convert.ToDateTime(ds.Tables[0].Rows[i][K1ValueDbConstNames.TIME].ToString());
-                        k1ValueEntity.TypeInTime = Convert.ToDateTime(ds.Tables[0].Rows[i][K1ValueDbConstNames.TYPE_IN_TIME].ToString());
-                        k1ValueEntity.Tunnel.TunnelId = Convert.ToInt32(ds.Tables[0].Rows[i][K1ValueDbConstNames.TUNNEL_ID]);
+                        k1ValueEntity.Id = 
+                            Convert.ToInt32(ds.Tables[0].Rows[i][K1ValueDbConstNames.ID]);
+                        k1ValueEntity.K1ValueId = 
+                            Convert.ToInt32(ds.Tables[0].Rows[i][K1ValueDbConstNames.VALUE_K1_ID]);
+                        k1ValueEntity.CoordinateX = 
+                            Convert.ToDouble(ds.Tables[0].Rows[i][K1ValueDbConstNames.COORDINATE_X]);
+                        k1ValueEntity.CoordinateY = 
+                            Convert.ToDouble(ds.Tables[0].Rows[i][K1ValueDbConstNames.COORDINATE_Y]);
+                        k1ValueEntity.CoordinateZ = 
+                            Convert.ToDouble(ds.Tables[0].Rows[i][K1ValueDbConstNames.COORDINATE_Z]);
+                        k1ValueEntity.ValueK1Dry = 
+                            Convert.ToDouble(ds.Tables[0].Rows[i][K1ValueDbConstNames.VALUE_K1_DRY]);
+                        k1ValueEntity.ValueK1Wet = 
+                            Convert.ToDouble(ds.Tables[0].Rows[i][K1ValueDbConstNames.VALUE_K1_WET]);
+                        k1ValueEntity.Sg = 
+                            Convert.ToDouble(ds.Tables[0].Rows[i][K1ValueDbConstNames.VALUE_SG]);
+                        k1ValueEntity.Sv = 
+                            Convert.ToDouble(ds.Tables[0].Rows[i][K1ValueDbConstNames.VALUE_SV]);
+                        k1ValueEntity.Q = 
+                            Convert.ToDouble(ds.Tables[0].Rows[i][K1ValueDbConstNames.VALUE_Q]);
+                        k1ValueEntity.BoreholeDeep = 
+                            Convert.ToDouble(ds.Tables[0].Rows[i][K1ValueDbConstNames.BOREHOLE_DEEP]);
+                        k1ValueEntity.Time = 
+                            Convert.ToDateTime(ds.Tables[0].Rows[i][K1ValueDbConstNames.TIME].ToString());
+                        k1ValueEntity.TypeInTime = 
+                            Convert.ToDateTime(ds.Tables[0].Rows[i][K1ValueDbConstNames.TYPE_IN_TIME].ToString());
+                        k1ValueEntity.Tunnel.TunnelId = 
+                            Convert.ToInt32(ds.Tables[0].Rows[i][K1ValueDbConstNames.TUNNEL_ID]);
                         k1Entity[i] = k1ValueEntity;
 
                     }
@@ -147,25 +207,38 @@ namespace LibBusiness
         public static K1Value selectValueK1ByTunnelID(int tunnelID)
         {
             K1Value k1ValueEntity = new K1Value();
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
-            string sql = "SELECT * FROM " + K1ValueDbConstNames.TABLE_NAME + " WHERE " + K1ValueDbConstNames.TUNNEL_ID + " = " + tunnelID;
+            ManageDataBase db = new 
+                ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
+            string sql = "SELECT * FROM " + K1ValueDbConstNames.TABLE_NAME 
+                + " WHERE " + K1ValueDbConstNames.TUNNEL_ID + " = " + tunnelID;
             DataSet ds = db.ReturnDS(sql);
             if (ds.Tables[0].Rows.Count > 0)
             {
                 try
                 {
 
-                    k1ValueEntity.Id = Convert.ToInt32(ds.Tables[0].Rows[0][K1ValueDbConstNames.ID]);
-                    k1ValueEntity.K1ValueId = Convert.ToInt32(ds.Tables[0].Rows[0][K1ValueDbConstNames.VALUE_K1_ID]);
-                    k1ValueEntity.CoordinateX = Convert.ToDouble(ds.Tables[0].Rows[0][K1ValueDbConstNames.COORDINATE_X]);
-                    k1ValueEntity.CoordinateY = Convert.ToDouble(ds.Tables[0].Rows[0][K1ValueDbConstNames.COORDINATE_Y]);
-                    k1ValueEntity.CoordinateZ = Convert.ToDouble(ds.Tables[0].Rows[0][K1ValueDbConstNames.COORDINATE_Z]);
-                    k1ValueEntity.ValueK1Dry = Convert.ToDouble(ds.Tables[0].Rows[0][K1ValueDbConstNames.VALUE_K1_DRY]);
-                    k1ValueEntity.ValueK1Wet = Convert.ToDouble(ds.Tables[0].Rows[0][K1ValueDbConstNames.VALUE_K1_WET]);
-                    k1ValueEntity.BoreholeDeep = Convert.ToDouble(ds.Tables[0].Rows[0][K1ValueDbConstNames.BOREHOLE_DEEP]);
-                    k1ValueEntity.Time = Convert.ToDateTime(ds.Tables[0].Rows[0][K1ValueDbConstNames.TIME].ToString());
-                    k1ValueEntity.TypeInTime = Convert.ToDateTime(ds.Tables[0].Rows[0][K1ValueDbConstNames.TYPE_IN_TIME].ToString());
-                    k1ValueEntity.Tunnel.TunnelId = Convert.ToInt32(ds.Tables[0].Rows[0][K1ValueDbConstNames.TUNNEL_ID]);
+                    k1ValueEntity.Id = 
+                        Convert.ToInt32(ds.Tables[0].Rows[0][K1ValueDbConstNames.ID]);
+                    k1ValueEntity.K1ValueId = 
+                        Convert.ToInt32(ds.Tables[0].Rows[0][K1ValueDbConstNames.VALUE_K1_ID]);
+                    k1ValueEntity.CoordinateX = 
+                        Convert.ToDouble(ds.Tables[0].Rows[0][K1ValueDbConstNames.COORDINATE_X]);
+                    k1ValueEntity.CoordinateY = 
+                        Convert.ToDouble(ds.Tables[0].Rows[0][K1ValueDbConstNames.COORDINATE_Y]);
+                    k1ValueEntity.CoordinateZ = 
+                        Convert.ToDouble(ds.Tables[0].Rows[0][K1ValueDbConstNames.COORDINATE_Z]);
+                    k1ValueEntity.ValueK1Dry = 
+                        Convert.ToDouble(ds.Tables[0].Rows[0][K1ValueDbConstNames.VALUE_K1_DRY]);
+                    k1ValueEntity.ValueK1Wet = 
+                        Convert.ToDouble(ds.Tables[0].Rows[0][K1ValueDbConstNames.VALUE_K1_WET]);
+                    k1ValueEntity.BoreholeDeep = 
+                        Convert.ToDouble(ds.Tables[0].Rows[0][K1ValueDbConstNames.BOREHOLE_DEEP]);
+                    k1ValueEntity.Time = 
+                        Convert.ToDateTime(ds.Tables[0].Rows[0][K1ValueDbConstNames.TIME].ToString());
+                    k1ValueEntity.TypeInTime = 
+                        Convert.ToDateTime(ds.Tables[0].Rows[0][K1ValueDbConstNames.TYPE_IN_TIME].ToString());
+                    k1ValueEntity.Tunnel.TunnelId = 
+                        Convert.ToInt32(ds.Tables[0].Rows[0][K1ValueDbConstNames.TUNNEL_ID]);
 
                 }
                 catch
@@ -186,21 +259,27 @@ namespace LibBusiness
         /// <param name="iStartIndex"></param>
         /// <param name="iEndIndex"></param>
         /// <returns></returns>
-        public static DataSet selectValueK1Entity(int iStartIndex, int iEndIndex)
+        public static DataSet selectValueK1Entity(int iStartIndex, int 
+            iEndIndex)
         {
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
+            ManageDataBase db = new 
+                ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
             StringBuilder sb = new StringBuilder();
             StringBuilder sc = new StringBuilder();
             db.Open();
             sb.Append("SELECT * FROM ( ");
-            sb.Append("SELECT ROW_NUMBER() OVER(ORDER BY " + K1ValueDbConstNames.ID + ") AS rowid, * ");
-            sb.Append("FROM " + K1ValueDbConstNames.TABLE_NAME + " WHERE ID IN (SELECT MAX(ID) FROM T_VALUE_K1  A,(SELECT MAX(VALUE_K1_DRY) AS VALUE_K1_DRY,VALUE_K1_ID FROM T_VALUE_K1 GROUP BY VALUE_K1_ID)B WHERE A.VALUE_K1_ID = B.VALUE_K1_ID AND A.VALUE_K1_DRY = B. VALUE_K1_DRY GROUP BY A.VALUE_K1_DRY,A.VALUE_K1_ID)) AS TB ");
+            sb.Append("SELECT ROW_NUMBER() OVER(ORDER BY " + 
+                K1ValueDbConstNames.ID + ") AS rowid, * ");
+            sb.Append("FROM " + K1ValueDbConstNames.TABLE_NAME + 
+                " WHERE ID IN (SELECT MAX(ID) FROM T_VALUE_K1  A,(SELECT MAX(VALUE_K1_DRY) AS VALUE_K1_DRY,VALUE_K1_ID FROM T_VALUE_K1 GROUP BY VALUE_K1_ID)B WHERE A.VALUE_K1_ID = B.VALUE_K1_ID AND A.VALUE_K1_DRY = B. VALUE_K1_DRY GROUP BY A.VALUE_K1_DRY,A.VALUE_K1_ID)) AS TB ");
             sb.Append("WHERE rowid >= " + iStartIndex);
             sb.Append("AND rowid <= " + iEndIndex);
 
             sc.Append("SELECT * FROM ( ");
-            sc.Append("SELECT ROW_NUMBER() OVER(ORDER BY " + K1ValueDbConstNames.ID + ") AS rowid, * ");
-            sc.Append("FROM " + K1ValueDbConstNames.TABLE_NAME + " WHERE ID IN (SELECT MAX(ID) FROM T_VALUE_K1  A,(SELECT MAX(VALUE_K1_WET) AS VALUE_K1_WET,VALUE_K1_ID FROM T_VALUE_K1 GROUP BY VALUE_K1_ID)B WHERE A.VALUE_K1_ID = B.VALUE_K1_ID AND A.VALUE_K1_WET = B. VALUE_K1_WET GROUP BY A.VALUE_K1_WET,A.VALUE_K1_ID)) AS TB ");
+            sc.Append("SELECT ROW_NUMBER() OVER(ORDER BY " + 
+                K1ValueDbConstNames.ID + ") AS rowid, * ");
+            sc.Append("FROM " + K1ValueDbConstNames.TABLE_NAME + 
+                " WHERE ID IN (SELECT MAX(ID) FROM T_VALUE_K1  A,(SELECT MAX(VALUE_K1_WET) AS VALUE_K1_WET,VALUE_K1_ID FROM T_VALUE_K1 GROUP BY VALUE_K1_ID)B WHERE A.VALUE_K1_ID = B.VALUE_K1_ID AND A.VALUE_K1_WET = B. VALUE_K1_WET GROUP BY A.VALUE_K1_WET,A.VALUE_K1_ID)) AS TB ");
             sc.Append("WHERE rowid >= " + iStartIndex);
             sc.Append("AND rowid <= " + iEndIndex);
 
@@ -216,39 +295,89 @@ namespace LibBusiness
             return ds;
         }
 
-        public static DataSet selectValueK1Entity2(int iStartIndex, int iEndIndex, int tunnelId, string startTime, string endTime)
+        public static DataSet selectValueK1Entity2(int iStartIndex, int 
+            iEndIndex, int tunnelId, string startTime, string endTime)
         {
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
+            ManageDataBase db = new 
+                ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
             StringBuilder sb = new StringBuilder();
             db.Open();
             sb.Append("SELECT * FROM");
-            sb.Append(" (SELECT ROW_NUMBER() OVER(ORDER BY " + K1ValueDbConstNames.ID + ") AS rowid,* FROM ");
-            sb.Append(" (SELECT ROW_NUMBER() OVER(PARTITION BY " + K1ValueDbConstNames.VALUE_K1_ID + " ORDER BY " + K1ValueDbConstNames.ID + ") AS V, * FROM " + K1ValueDbConstNames.TABLE_NAME + " WHERE " + K1ValueDbConstNames.ID + " IN");
-            sb.Append(" (SELECT MAX(" + K1ValueDbConstNames.ID + ") FROM " + K1ValueDbConstNames.TABLE_NAME + " A,(SELECT  MAX((" + K1ValueDbConstNames.VALUE_K1_DRY + "+" + K1ValueDbConstNames.VALUE_K1_WET + " + ABS(" + K1ValueDbConstNames.VALUE_K1_DRY + "-" + K1ValueDbConstNames.VALUE_K1_WET + "))/2) AS " + K1ValueDbConstNames.VALUE_K1_DRY + "," + K1ValueDbConstNames.VALUE_K1_ID + " FROM " + K1ValueDbConstNames.TABLE_NAME + " GROUP BY " + K1ValueDbConstNames.VALUE_K1_ID + ") B ");
+            sb.Append(" (SELECT ROW_NUMBER() OVER(ORDER BY " + 
+                K1ValueDbConstNames.ID + ") AS rowid,* FROM ");
+            sb.Append(" (SELECT ROW_NUMBER() OVER(PARTITION BY " + 
+                K1ValueDbConstNames.VALUE_K1_ID + " ORDER BY " + 
+                K1ValueDbConstNames.ID + ") AS V, * FROM " + 
+                K1ValueDbConstNames.TABLE_NAME + " WHERE " + 
+                K1ValueDbConstNames.ID + " IN");
+            sb.Append(" (SELECT MAX(" + K1ValueDbConstNames.ID + ") FROM " 
+                + K1ValueDbConstNames.TABLE_NAME + " A,(SELECT  MAX((" + 
+                K1ValueDbConstNames.VALUE_K1_DRY + "+" + 
+                K1ValueDbConstNames.VALUE_K1_WET + " + ABS(" + 
+                K1ValueDbConstNames.VALUE_K1_DRY + "-" + 
+                K1ValueDbConstNames.VALUE_K1_WET + "))/2) AS " + 
+                K1ValueDbConstNames.VALUE_K1_DRY + "," + 
+                K1ValueDbConstNames.VALUE_K1_ID + " FROM " + 
+                K1ValueDbConstNames.TABLE_NAME + " GROUP BY " + 
+                K1ValueDbConstNames.VALUE_K1_ID + ") B ");
             //此处的K1ValueDbConstNames.Value_K1_DRY并非是表中的字段名，而是自定名称的字段
-            sb.Append(" WHERE A." + K1ValueDbConstNames.VALUE_K1_ID + " = B." + K1ValueDbConstNames.VALUE_K1_ID + " AND (A." + K1ValueDbConstNames.VALUE_K1_DRY + " = B." + K1ValueDbConstNames.VALUE_K1_DRY + " OR A." + K1ValueDbConstNames.VALUE_K1_WET + " = B." + K1ValueDbConstNames.VALUE_K1_DRY + ") GROUP BY A." + K1ValueDbConstNames.VALUE_K1_DRY + ",A." + K1ValueDbConstNames.VALUE_K1_ID + ")) AS TC");
+            sb.Append(" WHERE A." + K1ValueDbConstNames.VALUE_K1_ID + 
+                " = B." + K1ValueDbConstNames.VALUE_K1_ID + " AND (A." + 
+                K1ValueDbConstNames.VALUE_K1_DRY + " = B." + 
+                K1ValueDbConstNames.VALUE_K1_DRY + " OR A." + 
+                K1ValueDbConstNames.VALUE_K1_WET + " = B." + 
+                K1ValueDbConstNames.VALUE_K1_DRY + ") GROUP BY A." + 
+                K1ValueDbConstNames.VALUE_K1_DRY + ",A." + 
+                K1ValueDbConstNames.VALUE_K1_ID + ")) AS TC");
             sb.Append(" WHERE V <= 1");
-            sb.Append(" AND " + K1ValueDbConstNames.TUNNEL_ID + " = " + tunnelId);
-            sb.Append(" AND " + K1ValueDbConstNames.TIME + " BETWEEN '" + startTime + "' AND '" + endTime + "' ) AS TB ");
-            sb.Append(" WHERE rowid >=" + iStartIndex + " AND rowid <= " + iEndIndex);
+            sb.Append(" AND " + K1ValueDbConstNames.TUNNEL_ID + " = " + 
+                tunnelId);
+            sb.Append(" AND " + K1ValueDbConstNames.TIME + " BETWEEN '" + 
+                startTime + "' AND '" + endTime + "' ) AS TB ");
+            sb.Append(" WHERE rowid >=" + iStartIndex + " AND rowid <= " + 
+                iEndIndex);
 
 
             DataSet ds = db.ReturnDSNotOpenAndClose(sb.ToString());
             return ds;
         }
 
-        public static DataSet selectValueK1Entity2(int tunnelId, string startTime, string endTime)
+        public static DataSet selectValueK1Entity2(int tunnelId, string 
+            startTime, string endTime)
         {
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
+            ManageDataBase db = new 
+                ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
             StringBuilder sb = new StringBuilder();
             db.Open();
             sb.Append("SELECT * FROM");
-            sb.Append(" (SELECT ROW_NUMBER() OVER(PARTITION BY " + K1ValueDbConstNames.VALUE_K1_ID + " ORDER BY " + K1ValueDbConstNames.ID + ") AS V, * FROM " + K1ValueDbConstNames.TABLE_NAME + " WHERE " + K1ValueDbConstNames.ID + " IN");
-            sb.Append(" (SELECT MAX(" + K1ValueDbConstNames.ID + ") FROM " + K1ValueDbConstNames.TABLE_NAME + " A,(SELECT  MAX((" + K1ValueDbConstNames.VALUE_K1_DRY + "+" + K1ValueDbConstNames.VALUE_K1_WET + " + ABS(" + K1ValueDbConstNames.VALUE_K1_DRY + "-" + K1ValueDbConstNames.VALUE_K1_WET + "))/2) AS " + K1ValueDbConstNames.VALUE_K1_DRY + "," + K1ValueDbConstNames.VALUE_K1_ID + " FROM " + K1ValueDbConstNames.TABLE_NAME + " GROUP BY " + K1ValueDbConstNames.VALUE_K1_ID + ") B ");
+            sb.Append(" (SELECT ROW_NUMBER() OVER(PARTITION BY " + 
+                K1ValueDbConstNames.VALUE_K1_ID + " ORDER BY " + 
+                K1ValueDbConstNames.ID + ") AS V, * FROM " + 
+                K1ValueDbConstNames.TABLE_NAME + " WHERE " + 
+                K1ValueDbConstNames.ID + " IN");
+            sb.Append(" (SELECT MAX(" + K1ValueDbConstNames.ID + ") FROM " 
+                + K1ValueDbConstNames.TABLE_NAME + " A,(SELECT  MAX((" + 
+                K1ValueDbConstNames.VALUE_K1_DRY + "+" + 
+                K1ValueDbConstNames.VALUE_K1_WET + " + ABS(" + 
+                K1ValueDbConstNames.VALUE_K1_DRY + "-" + 
+                K1ValueDbConstNames.VALUE_K1_WET + "))/2) AS " + 
+                K1ValueDbConstNames.VALUE_K1_DRY + "," + 
+                K1ValueDbConstNames.VALUE_K1_ID + " FROM " + 
+                K1ValueDbConstNames.TABLE_NAME + " GROUP BY " + 
+                K1ValueDbConstNames.VALUE_K1_ID + ") B ");
             //此处的K1ValueDbConstNames.Value_K1_DRY并非是表中的字段名，而是自定名称的字段
-            sb.Append(" WHERE A." + K1ValueDbConstNames.VALUE_K1_ID + " = B." + K1ValueDbConstNames.VALUE_K1_ID + " AND (A." + K1ValueDbConstNames.VALUE_K1_DRY + " = B." + K1ValueDbConstNames.VALUE_K1_DRY + " OR A." + K1ValueDbConstNames.VALUE_K1_WET + " = B." + K1ValueDbConstNames.VALUE_K1_DRY + ") GROUP BY A." + K1ValueDbConstNames.VALUE_K1_DRY + ",A." + K1ValueDbConstNames.VALUE_K1_ID + ")) AS TC");
-            sb.Append(" WHERE " + K1ValueDbConstNames.TUNNEL_ID + " = " + tunnelId);
-            sb.Append(" AND " + K1ValueDbConstNames.TIME + " BETWEEN '" + startTime + "' AND '" + endTime + "'");
+            sb.Append(" WHERE A." + K1ValueDbConstNames.VALUE_K1_ID + 
+                " = B." + K1ValueDbConstNames.VALUE_K1_ID + " AND (A." + 
+                K1ValueDbConstNames.VALUE_K1_DRY + " = B." + 
+                K1ValueDbConstNames.VALUE_K1_DRY + " OR A." + 
+                K1ValueDbConstNames.VALUE_K1_WET + " = B." + 
+                K1ValueDbConstNames.VALUE_K1_DRY + ") GROUP BY A." + 
+                K1ValueDbConstNames.VALUE_K1_DRY + ",A." + 
+                K1ValueDbConstNames.VALUE_K1_ID + ")) AS TC");
+            sb.Append(" WHERE " + K1ValueDbConstNames.TUNNEL_ID + " = " + 
+                tunnelId);
+            sb.Append(" AND " + K1ValueDbConstNames.TIME + " BETWEEN '" + 
+                startTime + "' AND '" + endTime + "'");
 
             DataSet ds = db.ReturnDSNotOpenAndClose(sb.ToString());
             return ds;
@@ -269,14 +398,17 @@ namespace LibBusiness
         /// <param name="iStartIndex"></param>
         /// <param name="iEndIndex"></param>
         /// <returns></returns>
-        public static DataSet selectValueK1EntityByCondition(int iStartIndex, int iEndIndex)
+        public static DataSet selectValueK1EntityByCondition(int 
+            iStartIndex, int iEndIndex)
         {
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
+            ManageDataBase db = new 
+                ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
             StringBuilder sb = new StringBuilder();
             StringBuilder sc = new StringBuilder();
             db.Open();
             sb.Append("SELECT * FROM ( ");
-            sb.Append("SELECT ROW_NUMBER() OVER(ORDER BY " + K1ValueDbConstNames.ID + ") AS rowid, * ");
+            sb.Append("SELECT ROW_NUMBER() OVER(ORDER BY " + 
+                K1ValueDbConstNames.ID + ") AS rowid, * ");
             sb.Append("FROM " + K1ValueDbConstNames.TABLE_NAME + ") AS TB ");
             sb.Append("WHERE rowid >= " + iStartIndex);
             sb.Append("AND rowid <= " + iEndIndex);
@@ -313,9 +445,11 @@ namespace LibBusiness
         /// <param name="iStartIndex"></param>
         /// <param name="iEndIndex"></param>
         /// <returns></returns>
-        public static DataSet selectValueK1EntityByConditionWithoutPage(int iTunnelId)
+        public static DataSet selectValueK1EntityByConditionWithoutPage(int 
+            iTunnelId)
         {
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
+            ManageDataBase db = new 
+                ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
             StringBuilder sb = new StringBuilder();
             //StringBuilder sc = new StringBuilder();
             //db.Open();
@@ -359,8 +493,10 @@ namespace LibBusiness
         /// <returns></returns>
         public static int selectValueK1GroupCount()
         {
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
-            string sql = "SELECT MAX(" + K1ValueDbConstNames.VALUE_K1_ID + ") FROM " + K1ValueDbConstNames.TABLE_NAME;
+            ManageDataBase db = new 
+                ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
+            string sql = "SELECT MAX(" + K1ValueDbConstNames.VALUE_K1_ID + 
+                ") FROM " + K1ValueDbConstNames.TABLE_NAME;
             DataSet ds = db.ReturnDS(sql);
             int count = 0;
             if (ds.Tables[0].Rows.Count > 0)
@@ -381,9 +517,11 @@ namespace LibBusiness
         /// <returns>是否成功插入?true:false</returns>
         public static bool insertValueK1(K1Value k1ValueEntity)
         {
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
+            ManageDataBase db = new 
+                ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
             StringBuilder sb = new StringBuilder();
-            sb.Append("INSERT INTO " + K1ValueDbConstNames.TABLE_NAME + " (");
+            sb.Append("INSERT INTO " + K1ValueDbConstNames.TABLE_NAME + 
+                " (");
             sb.Append(K1ValueDbConstNames.VALUE_K1_ID + ",");
             sb.Append(K1ValueDbConstNames.COORDINATE_X + ",");
             sb.Append(K1ValueDbConstNames.COORDINATE_Y + ",");
@@ -422,21 +560,34 @@ namespace LibBusiness
         /// <returns></returns>
         public static bool updateValueK1(K1Value k1ValueEntity)
         {
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
+            ManageDataBase db = new 
+                ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
             StringBuilder sb = new StringBuilder();
             sb.Append("UPDATE " + K1ValueDbConstNames.TABLE_NAME + " SET ");
-            sb.Append(K1ValueDbConstNames.COORDINATE_X + " = " + k1ValueEntity.CoordinateX + ",");
-            sb.Append(K1ValueDbConstNames.COORDINATE_Y + " = " + k1ValueEntity.CoordinateY + ",");
-            sb.Append(K1ValueDbConstNames.COORDINATE_Z + " = " + k1ValueEntity.CoordinateZ + ",");
-            sb.Append(K1ValueDbConstNames.VALUE_K1_DRY + " = " + k1ValueEntity.ValueK1Dry + ",");
-            sb.Append(K1ValueDbConstNames.VALUE_K1_WET + " = " + k1ValueEntity.ValueK1Wet + ",");
-            sb.Append(K1ValueDbConstNames.VALUE_SG + " = " + k1ValueEntity.Sg + ",");
-            sb.Append(K1ValueDbConstNames.VALUE_SV + " = " + k1ValueEntity.Sv + ",");
-            sb.Append(K1ValueDbConstNames.VALUE_Q + " = " + k1ValueEntity.Q + ",");
-            sb.Append(K1ValueDbConstNames.BOREHOLE_DEEP + " = " + k1ValueEntity.BoreholeDeep + ",");
-            sb.Append(K1ValueDbConstNames.TIME + " = '" + k1ValueEntity.Time + "',");
-            sb.Append(K1ValueDbConstNames.TYPE_IN_TIME + " = '" + k1ValueEntity.TypeInTime + "',");
-            sb.Append(K1ValueDbConstNames.TUNNEL_ID + " = " + k1ValueEntity.Tunnel + " WHERE ");
+            sb.Append(K1ValueDbConstNames.COORDINATE_X + " = " + 
+                k1ValueEntity.CoordinateX + ",");
+            sb.Append(K1ValueDbConstNames.COORDINATE_Y + " = " + 
+                k1ValueEntity.CoordinateY + ",");
+            sb.Append(K1ValueDbConstNames.COORDINATE_Z + " = " + 
+                k1ValueEntity.CoordinateZ + ",");
+            sb.Append(K1ValueDbConstNames.VALUE_K1_DRY + " = " + 
+                k1ValueEntity.ValueK1Dry + ",");
+            sb.Append(K1ValueDbConstNames.VALUE_K1_WET + " = " + 
+                k1ValueEntity.ValueK1Wet + ",");
+            sb.Append(K1ValueDbConstNames.VALUE_SG + " = " + 
+                k1ValueEntity.Sg + ",");
+            sb.Append(K1ValueDbConstNames.VALUE_SV + " = " + 
+                k1ValueEntity.Sv + ",");
+            sb.Append(K1ValueDbConstNames.VALUE_Q + " = " + k1ValueEntity.Q 
+                + ",");
+            sb.Append(K1ValueDbConstNames.BOREHOLE_DEEP + " = " + 
+                k1ValueEntity.BoreholeDeep + ",");
+            sb.Append(K1ValueDbConstNames.TIME + " = '" + 
+                k1ValueEntity.Time + "',");
+            sb.Append(K1ValueDbConstNames.TYPE_IN_TIME + " = '" + 
+                k1ValueEntity.TypeInTime + "',");
+            sb.Append(K1ValueDbConstNames.TUNNEL_ID + " = " + 
+                k1ValueEntity.Tunnel + " WHERE ");
             sb.Append(K1ValueDbConstNames.ID + " = " + k1ValueEntity.Id);
 
             bool bResult = db.OperateDB(sb.ToString());
@@ -450,17 +601,23 @@ namespace LibBusiness
         /// <param name="k1ValueEntity">K1实体</param>
         /// <param name="deleteType">删除方式：0为删除一条，1为删除该组所有数据</param>
         /// <returns></returns>
-        public static bool deleteK1Value(K1Value k1ValueEntity, int deleteType)
+        public static bool deleteK1Value(K1Value k1ValueEntity, int 
+            deleteType)
         {
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
+            ManageDataBase db = new 
+                ManageDataBase(DATABASE_TYPE.OutburstPreventionDB);
             string sql = "";
             if (deleteType == 0)
             {
-                sql = "DELETE FROM " + K1ValueDbConstNames.TABLE_NAME + " WHERE " + K1ValueDbConstNames.ID + " = " + k1ValueEntity.Id;
+                sql = "DELETE FROM " + K1ValueDbConstNames.TABLE_NAME + 
+                    " WHERE " + K1ValueDbConstNames.ID + " = " + 
+                    k1ValueEntity.Id;
             }
             if (deleteType == 1)
             {
-                sql = "DELETE FROM " + K1ValueDbConstNames.TABLE_NAME + " WHERE " + K1ValueDbConstNames.VALUE_K1_ID + " = " + k1ValueEntity.K1ValueId;
+                sql = "DELETE FROM " + K1ValueDbConstNames.TABLE_NAME + 
+                    " WHERE " + K1ValueDbConstNames.VALUE_K1_ID + " = " + 
+                    k1ValueEntity.K1ValueId;
             }
             bool bResult = db.OperateDB(sql);
             return bResult;

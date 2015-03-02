@@ -20,6 +20,6 @@ namespace LibBusiness
         public const string LITHOLOGY_NAME = "LITHOLOGY_NAME";
 
         // 岩性描述
-        public const string YLITHOLOGY_DESCRIBE = "LITHOLOGY_DESCRIBE";															
+        public const string YLITHOLOGY_DESCRIBE = "LITHOLOGY_DESCRIBE";
     }
 }
