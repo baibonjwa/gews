@@ -38,6 +38,7 @@ namespace LibEntity
         [PrimaryKey(PrimaryKeyType.Identity, "ID")]
         public int WirePointId { get; set; }
 
+        [Property("WIRE_POINT_NAME")]
         public string WirePointName { get; set; }
 
         /// <summary>

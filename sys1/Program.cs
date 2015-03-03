@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
+using AutoUpdaterDotNET;
 using Castle.ActiveRecord;
 using Castle.ActiveRecord.Framework;
 using Castle.ActiveRecord.Framework.Config;
@@ -34,6 +35,8 @@ namespace _1.GasEmission
             Assembly asm = Assembly.Load("LibEntity");
 
             ActiveRecordStarter.Initialize(asm, config);
+
+            //AutoUpdater.Start("http://rbsoft.org/updates/right-click-enhancer.xml");
 
             MainFormGe mf = new MainFormGe(new BarButtonItem());
             LoginForm lf = new LoginForm(mf);
