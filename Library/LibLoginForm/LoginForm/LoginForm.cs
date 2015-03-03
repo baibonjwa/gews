@@ -1,21 +1,6 @@
-﻿// ******************************************************************
-// 概  述：登录界面
-// 作  者：杨小颖
-// 创建日期：2014/03/07
-// 版本号：V1.0
-// 版本信息:
-// V1.0 新建
-// V1.1 添加用户登录
-// ******************************************************************
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using System;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using LibBusiness;
 using LibEntity;
 using LibCommon;
 using LibCommonForm;
