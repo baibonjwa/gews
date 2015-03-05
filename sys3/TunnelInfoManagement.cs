@@ -146,14 +146,14 @@ namespace sys3
             string str = "";
             //for (int i = 0; i < iSelIdxsArr.Length; i++)
             //{
-            string bid = ((Tunnel)gridView1.GetFocusedRow()).BindingId;
-            if (bid != "")
-            {
-                if (true)
-                    str = "HdId='" + bid + "'";
-                //else
-                //    str += " or HdId='" + bid + "'";
-            }
+            var tunnel = (Tunnel)gridView1.GetFocusedRow();
+            //if (bid != "")
+            //{
+            //if (true)
+            str = "HdId='" + tunnel.TunnelId + "'";
+            //else
+            //    str += " or HdId='" + bid + "'";
+            //}
             //}
             List<IFeature> list = MyMapHelp.FindFeatureListByWhereClause(pFeatureLayer, str);
             if (list.Count > 0)

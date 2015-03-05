@@ -19,7 +19,6 @@ using LibEntity;
 using LibGeometry;
 using LibSocket;
 using Point = ESRI.ArcGIS.Geometry.Point;
-using TunnelDefaultSelect = LibEntity.TunnelDefaultSelect;
 
 namespace sys3
 {
