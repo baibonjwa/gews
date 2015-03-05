@@ -1,4 +1,5 @@
-﻿using Castle.ActiveRecord;
+﻿using System.Linq;
+using Castle.ActiveRecord;
 using NHibernate.Criterion;
 using NHibernate.Engine;
 
@@ -151,6 +152,19 @@ namespace LibEntity
                 Restrictions.Eq("TunnelType", tunnelType)
             };
             return FindAll(criterion);
+        }
+
+        public override void Delete()
+        {
+            var wire = Wire.FindOneByTunnelId(TunnelId);
+            if (wire != null)
+            {
+                WirePoint.DeleteAll(WirePoint.FindAllByWireId(wire.WireId).Select(u => u.WirePointId));
+                wire.Delete();
+            }
+            DayReportJj.DeleteByWorkingFaceId(WorkingFace.WorkingFaceId);
+            DayReportHc.DeleteByWorkingFaceId(WorkingFace.WorkingFaceId);
+            base.Delete();
         }
     }
 }

@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using LibCommon;
-using LibBusiness;
 using ESRI.ArcGIS.Geometry;
 using ESRI.ArcGIS.Carto;
 using GIS.Common;

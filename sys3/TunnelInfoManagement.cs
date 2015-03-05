@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using ESRI.ArcGIS.Carto;
@@ -83,20 +84,9 @@ namespace sys3
             if (Alert.confirm(Const_GM.TUNNEL_INFO_MSG_DEL))
             {
                 //掘进ID
-                var tunnelEntity = (Tunnel)gridView1.GetFocusedRow();
-                //巷道类型为掘进或回采巷道
-                if (Wire.FindOneByTunnelId(tunnelEntity.TunnelId) != null)
-                {
-                    var wire = Wire.FindOneByTunnelId(tunnelEntity.TunnelId);
-                    Wire.DeleteAll(WirePoint.FindAllByWireId(wire.WireId).Select(u => u.WirePointId));
-                    //不删除时将导线重新绑定到其他巷道，默认为巷道ID=0
-                }
-                //删除巷道对应掘进日报
-                DayReportJj.DeleteByWorkingFaceId(tunnelEntity.WorkingFace.WorkingFaceId);
-                //删除巷道对应回采日报
-                DayReportHc.DeleteByWorkingFaceId(tunnelEntity.WorkingFace.WorkingFaceId);
-                //删除巷道
-                tunnelEntity.Delete();
+                var tunnel = (Tunnel)gridView1.GetFocusedRow();
+                GisHelper.DelHdByHdId(tunnel.TunnelId.ToString(CultureInfo.InvariantCulture));
+                tunnel.Delete();
                 RefreshData();
             }
         }

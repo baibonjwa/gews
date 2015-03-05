@@ -290,7 +290,8 @@ namespace GIS.Warning
             updateWarningPosition();
 
             // 所有红色和黄色预警
-            _ents2 = LibBusiness.PreWarningLastedResultQueryBLL.QueryHoldWarningResult();
+            //TODO :此处需要重写一下
+            _ents2 = new List<PreWarningResultQuery>();// LibBusiness.PreWarningLastedResultQueryBLL.QueryHoldWarningResult();
             List<IPoint> list = new List<IPoint>();
             IPoint pt;
             if (_ents2.Count > 0)

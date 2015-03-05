@@ -10,7 +10,6 @@ using ESRI.ArcGIS.Display;
 using ESRI.ArcGIS.Geodatabase;
 using ESRI.ArcGIS.Geometry;
 using GIS.Common;
-using LibBusiness;
 using LibCommon;
 using LibCommonControl;
 using LibEntity;

@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Castle.ActiveRecord;
-using DevExpress.Data.Linq;
 using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Geodatabase;
 using ESRI.ArcGIS.Geometry;
@@ -17,8 +15,6 @@ using GIS.HdProc;
 using GIS.SpecialGraphic;
 using LibBusiness;
 using LibCommon;
-using LibCommonControl;
-using LibCommonForm;
 using LibEntity;
 using LibGeometry;
 using LibSocket;
@@ -32,14 +28,8 @@ namespace sys3
         /**********变量声明***********/
         private readonly DataGridViewCell[] dgvc = new DataGridViewCell[8];
         private readonly string[] dr = new string[8];
-        private readonly WirePoint[] _wirePoints;
         private double _tmpDouble;
         private int _tmpRowIndex = -1;
-        private int _tunnelID;
-        private int doing;
-        private Tunnel tunnelEntity = new Tunnel();
-        private Wire wireEntity = new Wire();
-        /*****************************/
 
 
         private Wire Wire { get; set; }
@@ -52,16 +42,7 @@ namespace sys3
 
             InitializeComponent();
             FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_GM.WIRE_INFO_ADD);
-            //自定义控件初始化
-            TunnelDefaultSelect tunnelDefaultSelectEntity =
-                LibBusiness.TunnelDefaultSelect.selectDefaultTunnel(Wire.TableName);
-            if (tunnelDefaultSelectEntity != null)
-            {
-            }
-            else
-            {
-                selectTunnelUserControl1.LoadData();
-            }
+            selectTunnelUserControl1.LoadData();
             // 注册委托事件
             //selectTunnelUserControl1.TunnelNameChanged +=
             //    InheritTunnelNameChanged;
@@ -103,33 +84,33 @@ namespace sys3
             Wire = wire;
             InitializeComponent();
             // 加载需要修改的导线数据
-            _wirePoints = WirePoint.FindAllByWireId(wireEntity.WireId);
-            if (_wirePoints.Length > 0)
+            WirePoint[] wirePoints = WirePoint.FindAllByWireId(wire.WireId);
+            if (wirePoints.Length > 0)
             {
-                for (int i = 0; i < _wirePoints.Length; i++)
+                for (int i = 0; i < wirePoints.Length; i++)
                 {
-                    dgrdvWire[0, i].Value = _wirePoints[i].WirePointId;
-                    dgrdvWire[1, i].Value = _wirePoints[i].CoordinateX;
-                    dgrdvWire[2, i].Value = _wirePoints[i].CoordinateY;
-                    dgrdvWire[3, i].Value = _wirePoints[i].CoordinateZ;
-                    dgrdvWire[4, i].Value = _wirePoints[i].LeftDis;
-                    dgrdvWire[5, i].Value = _wirePoints[i].RightDis;
-                    dgrdvWire[6, i].Value = _wirePoints[i].TopDis;
-                    dgrdvWire[7, i].Value = _wirePoints[i].BottomDis;
+                    dgrdvWire[0, i].Value = wirePoints[i].WirePointId;
+                    dgrdvWire[1, i].Value = wirePoints[i].CoordinateX;
+                    dgrdvWire[2, i].Value = wirePoints[i].CoordinateY;
+                    dgrdvWire[3, i].Value = wirePoints[i].CoordinateZ;
+                    dgrdvWire[4, i].Value = wirePoints[i].LeftDis;
+                    dgrdvWire[5, i].Value = wirePoints[i].RightDis;
+                    dgrdvWire[6, i].Value = wirePoints[i].TopDis;
+                    dgrdvWire[7, i].Value = wirePoints[i].BottomDis;
                 }
             }
 
-            txtWireName.Text = wireEntity.WireName;
-            txtWireLevel.Text = wireEntity.WireLevel;
-            dtpMeasureDate.Value = wireEntity.MeasureDate;
-            cboVobserver.Text = wireEntity.Vobserver;
-            cboVobserver.Text = wireEntity.Vobserver;
-            cboCounter.Text = wireEntity.Counter;
-            cboCounter.Text = wireEntity.Counter;
-            dtpCountDate.Value = wireEntity.CountDate;
-            cboChecker.Text = wireEntity.Checker;
-            cboChecker.Text = wireEntity.Checker;
-            dtpCheckDate.Value = wireEntity.CheckDate;
+            txtWireName.Text = wire.WireName;
+            txtWireLevel.Text = wire.WireLevel;
+            dtpMeasureDate.Value = wire.MeasureDate;
+            cboVobserver.Text = wire.Vobserver;
+            cboVobserver.Text = wire.Vobserver;
+            cboCounter.Text = wire.Counter;
+            cboCounter.Text = wire.Counter;
+            dtpCountDate.Value = wire.CountDate;
+            cboChecker.Text = wire.Checker;
+            cboChecker.Text = wire.Checker;
+            dtpCheckDate.Value = wire.CheckDate;
 
             FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_GM.WIRE_INFO_CHANGE);
             //this.selectTunnelUserControl1.setCurSelectedID(_arr);
@@ -188,10 +169,10 @@ namespace sys3
                 {
                     if (Alert.confirm("该巷道已绑定导线点，是否覆盖？"))
                     {
-                        foreach (var p in wire.WirePoints)
-                        {
-                            p.Delete();
-                        }
+                        //foreach (var p in wire.WirePoints)
+                        //{
+                        //    p.Delete();
+                        //}
                         foreach (var p in wirePoints)
                         {
                             p.Wire = wire;
@@ -206,6 +187,13 @@ namespace sys3
                         wire.Checker = cboChecker.Text;
                         wire.CheckDate = dtpCheckDate.Value;
                         wire.Save();
+                        DrawWirePoint(wirePoints, "CHANGE");
+                        double hdwid = 0.0;
+                        dics = ConstructDics(selectTunnelUserControl1.SelectedTunnel, out hdwid);
+                        if (selectTunnelUserControl1.SelectedTunnel != null)
+                        {
+                            UpdateHdbyPnts(wirePoints, dics, hdwid);
+                        }
                     }
                     else
                     {
@@ -232,76 +220,18 @@ namespace sys3
                         p.Save();
                     }
                     wire.Save();
-                }
-            }
 
-            var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.SelectedTunnel.TunnelId,
-                    Wire.TableName, OPERATION_TYPE.ADD, wireEntity.MeasureDate);
-            SocketUtil.SendMsg2Server(msg);
+                    DrawWirePoint(wirePoints, "ADD");
 
-            string sADDorCHANGE = "";
-            if (Text == Const_GM.WIRE_INFO_ADD)
-            {
-                sADDorCHANGE = "ADD";
-                DrawWirePoint(wirePoints, sADDorCHANGE);
-
-                DialogResult dlgResult = MessageBox.Show("是否同时绘制巷道？", "提示", MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
-                if (dlgResult == DialogResult.Yes)
-                {
-                    //DrawTunnel(lstWirePointInfoEnt, sADDorCHANGE);
-                    //巷道信息赋值
-                    //Dictionary<string, string> flds = new Dictionary<string, string>();
-                    //flds.Add(GIS_Const.FIELD_HDID, tunnelEntity.Tunnel.ToString());
-                    //List<Tuple<IFeature, IGeometry, Dictionary<string, string>>> selobjs = Global.commonclss.SearchFeaturesByGeoAndText(Global.centerfdlyr, flds);
-
-                    //// 序号
-                    //int xh = 0;
-                    //if (selobjs.Count > 0)
-                    //    xh = Convert.ToInt16(selobjs[0].Item3[GIS_Const.FIELD_XH]) + 1;
-                    //string bid = "";
-                    //string hdname = "";
-                    //double hdwid = Global.linespace;//给个默认的值
-                    //if (dst.Tables[0].Rows.Count > 0)
-                    //{
-                    //    bid = dst.Tables[0].Rows[0][LibBusiness.TunnelInfoDbConstNames.BINDINGID].ToString();
-                    //    hdname = dst.Tables[0].Rows[0][LibBusiness.TunnelInfoDbConstNames.TUNNEL_NAME].ToString();
-                    //    hdwid = Convert.ToDouble(dst.Tables[0].Rows[0][LibBusiness.TunnelInfoDbConstNames.TUNNEL_WID]);
-                    //}
-                    //dics.Clear();
-                    //dics.Add(GIS_Const.FIELD_HDID, tunnelEntity.Tunnel.ToString());
-                    //dics.Add(GIS_Const.FIELD_ID, "0");
-                    //dics.Add(GIS_Const.FIELD_BS, "1");
-                    //dics.Add(GIS.GIS_Const.FIELD_BID, bid);
-                    //dics.Add(GIS_Const.FIELD_HDNAME,hdname);
-                    //dics.Add(GIS_Const.FIELD_XH, (xh + 1).ToString());
-
-                    // 绘制巷道
                     double hdwid = 0.0;
                     dics = ConstructDics(selectTunnelUserControl1.SelectedTunnel, out hdwid);
                     AddHdbyPnts(wirePoints, dics, hdwid);
                 }
             }
 
-            if (Text == Const_GM.WIRE_INFO_CHANGE)
-            {
-                sADDorCHANGE = "CHANGE";
-                DrawWirePoint(wirePoints, sADDorCHANGE);
-
-                DialogResult dlgResult = MessageBox.Show("是否同时更新巷道图形？", "提示", MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
-                if (dlgResult == DialogResult.Yes)
-                {
-                    //DrawTunnel(lstWirePointInfoEnt, sADDorCHANGE);
-                    Tunnel tunnel = Tunnel.Find(_tunnelID);
-                    double hdwid = 0.0;
-                    dics = ConstructDics(tunnel, out hdwid);
-                    if (tunnel != null)
-                    {
-                        UpdateHdbyPnts(wirePoints, dics, hdwid);
-                    }
-                }
-            }
+            var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.SelectedTunnel.TunnelId,
+                    Wire.TableName, OPERATION_TYPE.ADD, DateTime.Now);
+            SocketUtil.SendMsg2Server(msg);
             DialogResult = DialogResult.OK;
         }
 
@@ -310,7 +240,7 @@ namespace sys3
             //巷道信息赋值
             hdwid = 0.0;
             var flds = new Dictionary<string, string>();
-            flds.Add(GIS_Const.FIELD_HDID, tunnelEntity.TunnelId.ToString());
+            flds.Add(GIS_Const.FIELD_HDID, selectTunnelUserControl1.SelectedTunnel.TunnelId.ToString());
             List<Tuple<IFeature, IGeometry, Dictionary<string, string>>> selobjs =
                 Global.commonclss.SearchFeaturesByGeoAndText(Global.centerfdlyr, flds);
 
@@ -325,7 +255,7 @@ namespace sys3
                 hdwid = tunnel.TunnelWid;
             }
             dics.Clear();
-            dics.Add(GIS_Const.FIELD_HDID, tunnelEntity.TunnelId.ToString());
+            dics.Add(GIS_Const.FIELD_HDID, selectTunnelUserControl1.SelectedTunnel.TunnelId.ToString());
             dics.Add(GIS_Const.FIELD_ID, "0");
             dics.Add(GIS_Const.FIELD_BS, "1");
             dics.Add(GIS_Const.FIELD_BID, bid);
@@ -337,31 +267,31 @@ namespace sys3
         /// <summary>
         ///     导线实体赋值
         /// </summary>
-        private void setWireInfoEntity()
-        {
-            wireEntity.Tunnel = selectTunnelUserControl1.SelectedTunnel;
-            ;
-            //tunnelEntity = TunnelInfoBLL.selectTunnelInfoByTunnelID(wireEntity.Tunnel);
-            //导线名称
-            wireEntity.WireName = txtWireName.Text;
-            //导线级别
-            wireEntity.WireLevel = txtWireLevel.Text;
-            //测量日期
-            wireEntity.MeasureDate = dtpMeasureDate.Value;
-            //观测者
-            wireEntity.Vobserver = cboVobserver.Text;
-            //txtVobserver.Text;
-            //计算者
-            wireEntity.Counter = cboCounter.Text;
-            //txtCounter.Text;
-            //计算日期
-            wireEntity.CountDate = dtpCountDate.Value;
-            //校核者
-            wireEntity.Checker = cboChecker.Text;
-            //txtChecker.Text
-            //校核日期
-            wireEntity.CheckDate = dtpCheckDate.Value;
-        }
+        //private void setWireInfoEntity()
+        //{
+        //    wireEntity.Tunnel = selectTunnelUserControl1.SelectedTunnel;
+        //    ;
+        //    //tunnelEntity = TunnelInfoBLL.selectTunnelInfoByTunnelID(wireEntity.Tunnel);
+        //    //导线名称
+        //    wireEntity.WireName = txtWireName.Text;
+        //    //导线级别
+        //    wireEntity.WireLevel = txtWireLevel.Text;
+        //    //测量日期
+        //    wireEntity.MeasureDate = dtpMeasureDate.Value;
+        //    //观测者
+        //    wireEntity.Vobserver = cboVobserver.Text;
+        //    //txtVobserver.Text;
+        //    //计算者
+        //    wireEntity.Counter = cboCounter.Text;
+        //    //txtCounter.Text;
+        //    //计算日期
+        //    wireEntity.CountDate = dtpCountDate.Value;
+        //    //校核者
+        //    wireEntity.Checker = cboChecker.Text;
+        //    //txtChecker.Text
+        //    //校核日期
+        //    wireEntity.CheckDate = dtpCheckDate.Value;
+        //}
 
         /// <summary>
         ///     导线点实体赋值
@@ -480,61 +410,60 @@ namespace sys3
         ///     2014.2.26 lyf 修改函数，返回导线点List，为绘制导线点图形
         /// </summary>
         /// <returns>导线点List</returns>
-        private WirePoint[] updateWireInfo()
-        {
-            setWireInfoEntity();
-            var wirePointInfoEntity = new WirePoint();
-            var wirePointInfoEnt = new WirePoint[dgrdvWire.RowCount - 1];
-            for (int i = 0; i < dgrdvWire.RowCount - 1; i++)
-            {
-                // 创建导线点实体
+        //private WirePoint[] updateWireInfo()
+        //{
+        //    var wirePointInfoEntity = new WirePoint();
+        //    var wirePointInfoEnt = new WirePoint[dgrdvWire.RowCount - 1];
+        //    for (int i = 0; i < dgrdvWire.RowCount - 1; i++)
+        //    {
+        //        // 创建导线点实体
 
-                wirePointInfoEntity = setWirePointEntity(i);
-                if (wirePointInfoEntity == null)
-                {
-                    break;
-                }
+        //        wirePointInfoEntity = setWirePointEntity(i);
+        //        if (wirePointInfoEntity == null)
+        //        {
+        //            break;
+        //        }
 
-                wirePointInfoEnt[i] = wirePointInfoEntity;
-            }
+        //        wirePointInfoEnt[i] = wirePointInfoEntity;
+        //    }
 
-            //导线信息登陆
-            _tunnelID = selectTunnelUserControl1.SelectedTunnel.TunnelId;
-            LibBusiness.TunnelDefaultSelect.UpdateDefaultTunnel(Wire.TableName,
-                selectTunnelUserControl1.SelectedTunnel.TunnelId);
-            wireEntity.Tunnel = Tunnel.Find(_tunnelID);
-            wireEntity.Save();
-            //导线点信息登陆
-            for (int j = 0; j < dgrdvWire.Rows.Count - 1; j++)
-            {
-                if (j < _wirePoints.Length)
-                {
-                    //修改导线点
-                    wirePointInfoEnt[j].Save();
-                    wireEntity.Save();
-                    //socket
-                    var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.SelectedTunnel.TunnelId,
-                        Wire.TableName, OPERATION_TYPE.UPDATE, wireEntity.MeasureDate);
-                    SocketUtil.SendMsg2Server(msg);
-                }
-                else
-                {
-                    //超出数量部分做添加操作
-                    //BindingID
-                    wirePointInfoEnt[j].BindingId = IDGenerator.NewBindingID();
-                    //添加导线点
-                    wirePointInfoEnt[j].Save();
-                    //socket
+        //    //导线信息登陆
+        //    _tunnelID = selectTunnelUserControl1.SelectedTunnel.TunnelId;
+        //    LibBusiness.TunnelDefaultSelect.UpdateDefaultTunnel(Wire.TableName,
+        //        selectTunnelUserControl1.SelectedTunnel.TunnelId);
+        //    wireEntity.Tunnel = Tunnel.Find(_tunnelID);
+        //    wireEntity.Save();
+        //    //导线点信息登陆
+        //    for (int j = 0; j < dgrdvWire.Rows.Count - 1; j++)
+        //    {
+        //        if (j < _wirePoints.Length)
+        //        {
+        //            //修改导线点
+        //            wirePointInfoEnt[j].Save();
+        //            wireEntity.Save();
+        //            //socket
+        //            var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.SelectedTunnel.TunnelId,
+        //                Wire.TableName, OPERATION_TYPE.UPDATE, wireEntity.MeasureDate);
+        //            SocketUtil.SendMsg2Server(msg);
+        //        }
+        //        else
+        //        {
+        //            //超出数量部分做添加操作
+        //            //BindingID
+        //            wirePointInfoEnt[j].BindingId = IDGenerator.NewBindingID();
+        //            //添加导线点
+        //            wirePointInfoEnt[j].Save();
+        //            //socket
 
-                    var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.SelectedTunnel.TunnelId,
-                       Wire.TableName, OPERATION_TYPE.ADD, wireEntity.MeasureDate);
-                    SocketUtil.SendMsg2Server(msg);
-                }
-            }
+        //            var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.SelectedTunnel.TunnelId,
+        //               Wire.TableName, OPERATION_TYPE.ADD, wireEntity.MeasureDate);
+        //            SocketUtil.SendMsg2Server(msg);
+        //        }
+        //    }
 
-            //返回导线点信息组
-            return wirePointInfoEnt;
-        }
+        //    //返回导线点信息组
+        //    return wirePointInfoEnt;
+        //}
 
         /// <summary>
         ///     取消
@@ -743,60 +672,6 @@ namespace sys3
         private void 插入ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             dgrdvWire.Rows.Insert(selectionIdx, 1);
-        }
-
-        /// <summary>
-        ///     右键复制
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void 复制ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            doing = 2;
-            dgrdvWire.Rows[selectionIdx].Cells.CopyTo(dgvc, 0);
-            for (int i = 0; i < dgvc.Length; i++)
-            {
-                dr[i] = dgvc[i].Value.ToString();
-            }
-            _tmpRowIndex = selectionIdx;
-        }
-
-        /// <summary>
-        ///     右键剪切
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void 剪切ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            doing = 1;
-            dgrdvWire.Rows[selectionIdx].Cells.CopyTo(dgvc, 0);
-            for (int i = 0; i < dgvc.Length; i++)
-            {
-                dr[i] = dgvc[i].Value.ToString();
-            }
-            _tmpRowIndex = selectionIdx;
-        }
-
-        /// <summary>
-        ///     右键粘贴
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void 粘贴ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (doing == 1)
-            {
-                dgrdvWire.Rows.RemoveAt(_tmpRowIndex);
-            }
-            dgrdvWire.Rows.Insert(selectionIdx, dr);
-            if (doing == 1)
-            {
-                doing = 0;
-            }
-            else
-            {
-                doing = 2;
-            }
         }
 
         /// <summary>
@@ -1027,8 +902,31 @@ namespace sys3
                     using (new SessionScope())
                     {
                         WorkingFace workingFace = WorkingFace.FindByWorkingFaceName(workingFaceName);
-                        var tunnel = workingFace.Tunnels.First(u => u.TunnelName == tunnelName);
-                        selectTunnelUserControl1.LoadData(tunnel);
+                        var tunnel = workingFace.Tunnels.FirstOrDefault(u => u.TunnelName == tunnelName);
+                        if (tunnel != null)
+                        {
+                            selectTunnelUserControl1.LoadData(tunnel);
+                        }
+                        else
+                        {
+                            if (Alert.confirm("该巷道不存在，是否创建该巷道？"))
+                            {
+                                tunnel = new Tunnel
+                                {
+                                    TunnelName = tunnelName,
+                                    WorkingFace = workingFace,
+                                    TunnelWid = 5,
+                                    BindingId = IDGenerator.NewBindingID(),
+                                    TunnelType = TunnelTypeEnum.OTHER
+                                };
+                                tunnel.Save();
+                                selectTunnelUserControl1.LoadData(tunnel);
+                            }
+                            else
+                            {
+                                return;
+                            }
+                        }
                     }
                     txtWireName.Text = tunnelName.Split('.').Length > 0 ? tunnelName.Split('.')[0] + "导线点" : tunnelName + "导线点";
                 }
@@ -1092,16 +990,6 @@ namespace sys3
             {
                 下移ToolStripMenuItem.Enabled = true;
             }
-            //剪切时粘贴后粘贴按钮消失
-            if (doing == 0)
-            {
-                粘贴ToolStripMenuItem.Visible = false;
-            }
-            //复制时粘贴按钮不消失
-            else
-            {
-                粘贴ToolStripMenuItem.Visible = true;
-            }
             if (e.RowIndex > -1)
             {
                 if (e.Button == MouseButtons.Right)
@@ -1117,15 +1005,11 @@ namespace sys3
                     dgrdvWire[6, e.RowIndex].Value == null &&
                     dgrdvWire[7, e.RowIndex].Value == null)
                 {
-                    剪切ToolStripMenuItem.Enabled = false;
-                    复制ToolStripMenuItem.Enabled = false;
                     上移ToolStripMenuItem.Enabled = false;
                     下移ToolStripMenuItem.Enabled = false;
                 }
                 else
                 {
-                    剪切ToolStripMenuItem.Enabled = true;
-                    复制ToolStripMenuItem.Enabled = true;
                     上移ToolStripMenuItem.Enabled = true;
                     下移ToolStripMenuItem.Enabled = true;
                 }
@@ -1133,11 +1017,8 @@ namespace sys3
             else
             {
                 插入ToolStripMenuItem.Enabled = false;
-                剪切ToolStripMenuItem.Enabled = false;
-                复制ToolStripMenuItem.Enabled = false;
                 上移ToolStripMenuItem.Enabled = false;
                 下移ToolStripMenuItem.Enabled = false;
-                粘贴ToolStripMenuItem.Enabled = false;
             }
         }
 
@@ -1270,7 +1151,7 @@ namespace sys3
                 pntcols.Add(pnt);
             }
             //清除图层上对应的信息
-            string sql = "\"" + GIS_Const.FIELD_HDID + "\"='" + wireEntity.Tunnel + "'";
+            string sql = "\"" + GIS_Const.FIELD_HDID + "\"='" + selectTunnelUserControl1.SelectedTunnel.TunnelId + "'";
             Global.commonclss.DelFeatures(Global.pntlyr, sql);
             Global.commonclss.DelFeatures(Global.pntlinlyr, sql);
             Global.commonclss.DelFeatures(Global.centerlyr, sql);
@@ -1391,7 +1272,7 @@ namespace sys3
                 //修改导线点操作，要先删除依据原有导线点所生成的巷道要素
                 if (addOrChange == "CHANGE")
                 {
-                    DataEditCommon.DeleteFeatureByBId(featureLayer, _tunnelID.ToString());
+                    DataEditCommon.DeleteFeatureByBId(featureLayer, selectTunnelUserControl1.SelectedTunnel.TunnelId.ToString());
                 }
 
                 //绘制巷道左边线
@@ -1400,12 +1281,12 @@ namespace sys3
 
                 if (lstLeftBtmRet == null) return;
 
-                drawWirePt.CreateLine(featureLayer, lstLeftBtmRet, _tunnelID);
+                drawWirePt.CreateLine(featureLayer, lstLeftBtmRet, selectTunnelUserControl1.SelectedTunnel.TunnelId);
 
                 //绘制巷道右边线
                 var lstRightBtmRet = new List<IPoint>();
                 lstRightBtmRet = GetTunnelPts(verticesRightBtmRet);
-                drawWirePt.CreateLine(featureLayer, lstRightBtmRet, _tunnelID);
+                drawWirePt.CreateLine(featureLayer, lstRightBtmRet, selectTunnelUserControl1.SelectedTunnel.TunnelId);
             }
         }
 
