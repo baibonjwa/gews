@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.lblWireName = new System.Windows.Forms.Label();
             this.txtWireName = new System.Windows.Forms.TextBox();
             this.dgrdvWire = new System.Windows.Forms.DataGridView();
@@ -40,11 +39,6 @@
             this.txtDistanceFromTheRight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtDistanceFromTop = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtDistanceFromBottom = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.插入ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.上移ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.下移ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.lblWireLevel = new System.Windows.Forms.Label();
@@ -71,7 +65,6 @@
             this.btnTxt = new System.Windows.Forms.Button();
             this.btnMultTxt = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgrdvWire)).BeginInit();
-            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblWireName
@@ -115,17 +108,11 @@
             this.dgrdvWire.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgrdvWire.Size = new System.Drawing.Size(765, 219);
             this.dgrdvWire.TabIndex = 17;
-            this.dgrdvWire.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgrdvWire_CellMouseDown);
-            this.dgrdvWire.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgrdvWire_CellMouseDown);
             this.dgrdvWire.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgrdvWire_RowEnter);
             this.dgrdvWire.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgrdvWire_RowPostPaint);
-            this.dgrdvWire.SelectionChanged += new System.EventHandler(this.dgrdvWire_SelectionChanged);
-            this.dgrdvWire.DragDrop += new System.Windows.Forms.DragEventHandler(this.dgrdvWire_DragDrop);
-            this.dgrdvWire.DragEnter += new System.Windows.Forms.DragEventHandler(this.dgrdvWire_DragEnter);
             // 
             // txtWirePointID
             // 
-            this.txtWirePointID.Frozen = true;
             this.txtWirePointID.HeaderText = "导线点编号";
             this.txtWirePointID.MaxInputLength = 15;
             this.txtWirePointID.Name = "txtWirePointID";
@@ -135,7 +122,6 @@
             // 
             // txtCoordinateX
             // 
-            this.txtCoordinateX.Frozen = true;
             this.txtCoordinateX.HeaderText = "坐标X";
             this.txtCoordinateX.Name = "txtCoordinateX";
             this.txtCoordinateX.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -143,7 +129,6 @@
             // 
             // txtCoordinateY
             // 
-            this.txtCoordinateY.Frozen = true;
             this.txtCoordinateY.HeaderText = "坐标Y";
             this.txtCoordinateY.Name = "txtCoordinateY";
             this.txtCoordinateY.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -151,7 +136,6 @@
             // 
             // txtCoordinateZ
             // 
-            this.txtCoordinateZ.Frozen = true;
             this.txtCoordinateZ.HeaderText = "坐标Z";
             this.txtCoordinateZ.Name = "txtCoordinateZ";
             this.txtCoordinateZ.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -159,7 +143,6 @@
             // 
             // txtDistanceFromTheLeft
             // 
-            this.txtDistanceFromTheLeft.Frozen = true;
             this.txtDistanceFromTheLeft.HeaderText = "距左帮距离";
             this.txtDistanceFromTheLeft.Name = "txtDistanceFromTheLeft";
             this.txtDistanceFromTheLeft.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -167,7 +150,6 @@
             // 
             // txtDistanceFromTheRight
             // 
-            this.txtDistanceFromTheRight.Frozen = true;
             this.txtDistanceFromTheRight.HeaderText = "距右帮距离";
             this.txtDistanceFromTheRight.Name = "txtDistanceFromTheRight";
             this.txtDistanceFromTheRight.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -175,7 +157,6 @@
             // 
             // txtDistanceFromTop
             // 
-            this.txtDistanceFromTop.Frozen = true;
             this.txtDistanceFromTop.HeaderText = "距顶板距离";
             this.txtDistanceFromTop.Name = "txtDistanceFromTop";
             this.txtDistanceFromTop.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -187,42 +168,6 @@
             this.txtDistanceFromBottom.HeaderText = "距底板距离";
             this.txtDistanceFromBottom.Name = "txtDistanceFromBottom";
             this.txtDistanceFromBottom.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.插入ToolStripMenuItem,
-            this.toolStripSeparator2,
-            this.上移ToolStripMenuItem,
-            this.下移ToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 98);
-            // 
-            // 插入ToolStripMenuItem
-            // 
-            this.插入ToolStripMenuItem.Name = "插入ToolStripMenuItem";
-            this.插入ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.插入ToolStripMenuItem.Text = "插入";
-            this.插入ToolStripMenuItem.Click += new System.EventHandler(this.插入ToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
-            // 
-            // 上移ToolStripMenuItem
-            // 
-            this.上移ToolStripMenuItem.Name = "上移ToolStripMenuItem";
-            this.上移ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.上移ToolStripMenuItem.Text = "上移";
-            this.上移ToolStripMenuItem.Click += new System.EventHandler(this.上移ToolStripMenuItem_Click);
-            // 
-            // 下移ToolStripMenuItem
-            // 
-            this.下移ToolStripMenuItem.Name = "下移ToolStripMenuItem";
-            this.下移ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.下移ToolStripMenuItem.Text = "下移";
-            this.下移ToolStripMenuItem.Click += new System.EventHandler(this.下移ToolStripMenuItem_Click);
             // 
             // btnSubmit
             // 
@@ -513,7 +458,6 @@
             this.Text = "导线信息";
             this.Load += new System.EventHandler(this.WireInfoEntering_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgrdvWire)).EndInit();
-            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -538,11 +482,6 @@
         private System.Windows.Forms.Label lblChecker;
         private System.Windows.Forms.Label lblCheckDate;
         private LibCommonForm.SelectTunnelUserControl selectTunnelUserControl1;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem 插入ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripMenuItem 上移ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 下移ToolStripMenuItem;
         private System.Windows.Forms.ComboBox cboVobserver;
         private System.Windows.Forms.ComboBox cboCounter;
         private System.Windows.Forms.ComboBox cboChecker;
@@ -551,6 +490,9 @@
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnMoveUp;
         private System.Windows.Forms.Button btnDel;
+        private System.Windows.Forms.Button btnMoveDown;
+        private System.Windows.Forms.Button btnTxt;
+        private System.Windows.Forms.Button btnMultTxt;
         private System.Windows.Forms.DataGridViewTextBoxColumn txtWirePointID;
         private System.Windows.Forms.DataGridViewTextBoxColumn txtCoordinateX;
         private System.Windows.Forms.DataGridViewTextBoxColumn txtCoordinateY;
@@ -559,8 +501,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn txtDistanceFromTheRight;
         private System.Windows.Forms.DataGridViewTextBoxColumn txtDistanceFromTop;
         private System.Windows.Forms.DataGridViewTextBoxColumn txtDistanceFromBottom;
-        private System.Windows.Forms.Button btnMoveDown;
-        private System.Windows.Forms.Button btnTxt;
-        private System.Windows.Forms.Button btnMultTxt;
     }
 }

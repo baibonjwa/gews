@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Data;
 using System.Globalization;
 using System.Windows.Forms;
 using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Geodatabase;
-using FarPoint.Win.Spread;
 using GIS;
 using GIS.Common;
-using GIS.HdProc;
-using LibBusiness;
 using LibCommon;
-using LibCommonControl;
 using LibEntity;
 
 namespace sys3
@@ -33,15 +27,8 @@ namespace sys3
 
         private void RefreshData()
         {
-            try
-            {
-                var wires = Wire.FindAll();
-                gcWireInfo.DataSource = wires;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            var wires = Wire.FindAll();
+            gcWireInfo.DataSource = wires;
         }
 
         /// <summary>
@@ -75,7 +62,13 @@ namespace sys3
         /// <param name="e"></param>
         private void tsBtnModify_Click(object sender, EventArgs e)
         {
-            var wireInfoForm = new WireInfoEntering((Wire)gridView1.GetFocusedRow());
+            var wire = (Wire)gridView1.GetFocusedRow();
+            if (wire == null)
+            {
+                Alert.alert("请选择要修改的巷道");
+                return;
+            }
+            var wireInfoForm = new WireInfoEntering(wire);
             if (DialogResult.OK == wireInfoForm.ShowDialog())
             {
                 RefreshData();
@@ -105,6 +98,7 @@ namespace sys3
         /// <param name="e"></param>
         private void tsBtnRefresh_Click(object sender, EventArgs e)
         {
+            RefreshData();
         }
 
         /// <summary>
