@@ -152,9 +152,6 @@
     <Compile Include="2.MiningSchedulingBLL\DbConstNames\GeologySpaceDbConstNames.cs" />
     <Compile Include="2.MiningSchedulingBLL\PropertyBLL\GeologySpaceBLL.cs" />
     <Compile Include="3.GeologyMeasureBLL\DbConstNames\WorkingFaceDbConstNames.cs" />
-    <Compile Include="3.GeologyMeasureBLL\DbConstNames\MiningAreaDbConstNames.cs" />
-    <Compile Include="3.GeologyMeasureBLL\DbConstNames\HorizontalDbConstNames.cs" />
-    <Compile Include="3.GeologyMeasureBLL\DbConstNames\LithologyDbConstNames.cs" />
     <Compile Include="3.GeologyMeasureBLL\DbConstNames\TunnelInfoDbConstNames.cs" />
     <Compile Include="4.OutburstPreventionBLL\SaveDBXyz2Txt.cs" />
     <Compile Include="4.OutburstPreventionBLL\DbConstNames\GasContentDbConstNames.cs" />
@@ -177,13 +174,13 @@
     <Compile Include="5.WaningManagementBLL\DbConstNames\WarningDatasCommonDbConstNames.cs" />
     <Compile Include="5.WaningManagementBLL\DbConstNames\PreWarningRulesDbConstNames.cs" />
     <Compile Include="5.WaningManagementBLL\DbConstNames\WarningImgDbConstNames.cs" />
-    <Compile Include="5.WaningManagementBLL\PreWarningDetailsBLL.cs" />
-    <Compile Include="5.WaningManagementBLL\PreWarningResultDetailsQueryBLL.cs" />
-    <Compile Include="5.WaningManagementBLL\PreWarningResultQueryBLL.cs" />
-    <Compile Include="5.WaningManagementBLL\PreWarningRulesBLL.cs" />
-    <Compile Include="5.WaningManagementBLL\PreWarningExcelBLL.cs" />
-    <Compile Include="5.WaningManagementBLL\WarningImgBLL.cs" />
-    <Compile Include="5.WaningManagementBLL\WarningResultsQuery.cs" />
+    <Compile Include="PreWarningDetailsBLL.cs" />
+    <Compile Include="PreWarningResultDetailsQueryBLL.cs" />
+    <Compile Include="PreWarningResultQueryBLL.cs" />
+    <Compile Include="PreWarningRulesBLL.cs" />
+    <Compile Include="PreWarningExcelBLL.cs" />
+    <Compile Include="WarningImgBLL.cs" />
+    <Compile Include="WarningResultsQuery.cs" />
     <Compile Include="CollectionHelper.cs" />
     <Compile Include="CommonBLL\DbConstNames\CoalSeamsDbConstNames.cs" />
     <Compile Include="CommonBLL\DbConstNames\CommonDbConsts.cs" />
@@ -198,7 +195,7 @@
     <Compile Include="CommonBLL\PropertyBLL\MineDataSimpleBLL.cs" />
     <Compile Include="CommonBLL\PropertyBLL\CoalSeamsBLL.cs" />
     <Compile Include="CommonBLL\PropertyBLL\DepartmentInformationManagementBLL.cs" />
-    <Compile Include="5.WaningManagementBLL\PreWarningLastedResultQueryBLL.cs" />
+    <Compile Include="PreWarningLastedResultQueryBLL.cs" />
     <Compile Include="CommonBLL\PropertyBLL\TunnelDefaultSelect.cs" />
     <Compile Include="CommonBLL\PropertyBLL\UserGroupInformationManagementBLL.cs" />
     <Compile Include="CommonBLL\PropertyBLL\UserInformationDetailsManagementBLL.cs" />
@@ -217,7 +214,6 @@
     <Folder Include="2.MiningSchedulingBLL\GraphicBLL\" />
     <Folder Include="3.GeologyMeasureBLL\GraphicBLL\" />
     <Folder Include="5.WaningManagementBLL\GraphicBLL\" />
-    <Folder Include="5.WaningManagementBLL\PropertyBLL\" />
     <Folder Include="CommonBLL\GraphicBLL\" />
   </ItemGroup>
   <ItemGroup>

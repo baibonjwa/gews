@@ -1,35 +1,22 @@
-﻿// ******************************************************************
-// 概  述：
-// 作  者：
-// 创建日期：
-// 版本号：V1.0
-// 版本信息：
-// V1.0 新建
-// ******************************************************************
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Data.OleDb;
+﻿using System;
 using System.Data;
 using LibCommon;
 using LibEntity;
 using Excel = Microsoft.Office.Interop.Excel;
 using Microsoft.Office.Interop.Excel;
-using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace LibBusiness
 {
     public class PreWarningExcelBLL
     {
-        private static string _excelFilePath = 
-            System.Windows.Forms.Application.StartupPath + "\\" + 
+        private static string _excelFilePath =
+            System.Windows.Forms.Application.StartupPath + "\\" +
             "PreWarningRules.xlsx";
 
         public static bool ImportExcelRules2Db(string excelPath)
         {
-            string[] sheetNames = 
+            string[] sheetNames =
                 PreWarningExcelBLL.GetExcelSheetNames(excelPath);
             if (sheetNames != null)
             {
@@ -37,8 +24,8 @@ namespace LibBusiness
                 int n = sheetNames.Length;
                 for (int i = 0; i < n; i++)
                 {
-                    DataSet dsSheet = 
-                        LibExcelHelper.importExcelSheetToDataSet(excelPath, 
+                    DataSet dsSheet =
+                        LibExcelHelper.importExcelSheetToDataSet(excelPath,
                         sheetNames[i]);
                     if (dsSheet == null)
                     {
@@ -47,14 +34,14 @@ namespace LibBusiness
                     for (int j = 0; j < dsSheet.Tables[0].Rows.Count; j++)
                     {
                         string errorMsg = "";
-                        PreWarningRules ent = 
+                        PreWarningRules ent =
                             PreWarningExcelBLL.ConvertExcelDataRow2PreWarningEntity(dsSheet.Tables[0].Rows[j],
                             out errorMsg);
                         if (errorMsg != "")
                         {
-                            if (DialogResult.Yes == 
-                                MessageBox.Show("导入Excel预警规则失败：" + errorMsg + 
-                                "\r\n是否继续？", "Sheet：" + sheetNames[i] + " 行:" + 
+                            if (DialogResult.Yes ==
+                                MessageBox.Show("导入Excel预警规则失败：" + errorMsg +
+                                "\r\n是否继续？", "Sheet：" + sheetNames[i] + " 行:" +
                                 (j + 1).ToString(), MessageBoxButtons.YesNo))
                             {
                                 continue;
@@ -64,12 +51,12 @@ namespace LibBusiness
                                 return false;
                             }
                         }
-                        if 
+                        if
                             (!PreWarningRulesBLL.InsertPreWarningRulesInfo(ent))
                         {
-                            if (DialogResult.Yes == 
-                                MessageBox.Show("写入Excel预警规则至数据库失败!\r\n是否继续？", 
-                                "Sheet：" + sheetNames[i] + " 行:" + (j + 
+                            if (DialogResult.Yes ==
+                                MessageBox.Show("写入Excel预警规则至数据库失败!\r\n是否继续？",
+                                "Sheet：" + sheetNames[i] + " 行:" + (j +
                                 1).ToString(), MessageBoxButtons.YesNo))
                             {
                                 continue;
@@ -101,7 +88,7 @@ namespace LibBusiness
             {
                 objExcelApp = new Excel.ApplicationClass();
                 objExcelWorkBooks = objExcelApp.Workbooks;
-                objExcelWorkBook = objExcelWorkBooks.Open(excelPath, 0, 
+                objExcelWorkBook = objExcelWorkBooks.Open(excelPath, 0,
                     true, 5, "", "", true,
                     Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "",
                         true, false, 0, true, false, false);
@@ -110,7 +97,7 @@ namespace LibBusiness
                 //注：Excel索引是从1开始的
                 for (int i = 1; i <= n; i++)
                 {
-                    Excel.Worksheet objExcelWorkSheet = 
+                    Excel.Worksheet objExcelWorkSheet =
                         (Worksheet)objExcelWorkBook.Worksheets[i]; //(Worksheet)objExcelWorkBook.Sheets[i];
                     ret[i - 1] = objExcelWorkSheet.Name;
                 }
@@ -138,8 +125,8 @@ namespace LibBusiness
         /// <param name="dr"></param>
         /// <param name="success">是否处理成功</param>
         /// <returns></returns>
-        public static PreWarningRules 
-            ConvertExcelDataRow2PreWarningEntity(DataRow dr, out string 
+        public static PreWarningRules
+            ConvertExcelDataRow2PreWarningEntity(DataRow dr, out string
             errorMsg)
         {
             PreWarningRules ret = new PreWarningRules();
@@ -149,7 +136,7 @@ namespace LibBusiness
             {
                 if (dr[0].ToString().Trim() == "")
                 {
-                    errorMsg = 
+                    errorMsg =
                         "预警规则Excel表中规则编码为空，请检查并删除Excel表中的空行等无效数据！";//删除方法：光标移至数据的最后一行，然后按Ctrl+Shift+End选择空行数据，右键鼠标-删除
                     return null;
                 }
@@ -176,7 +163,7 @@ namespace LibBusiness
                 }
                 catch
                 {
-                    errorMsg = "预警规则Excel表中指定的修改日期格式不正确，将使用当前日期！【规则编码:" + 
+                    errorMsg = "预警规则Excel表中指定的修改日期格式不正确，将使用当前日期！【规则编码:" +
                         dr[0].ToString() + "】";
                     ret.ModifyDate = DateTime.Now;
                 }
@@ -202,7 +189,7 @@ namespace LibBusiness
             }
             return ret;
         }
-       
+
         /// <summary>
         /// ！！！！！！！！！！！！！！！！！！！
         /// 注意：该函数存在问题！未进行完善
@@ -211,7 +198,7 @@ namespace LibBusiness
         /// <param name="ent">预警规则实体</param>
         /// <param name="selectedRowID">选择行编号</param>
         /// <returns>是否插入成功?true:false</returns>
-        public static bool updateInfoToExcelSheet(PreWarningRules ent, int 
+        public static bool updateInfoToExcelSheet(PreWarningRules ent, int
             selectedRowID, string sheetName)
         {
             bool ret = false;
@@ -228,31 +215,31 @@ namespace LibBusiness
                     false, 5, "", "", true,
                     Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "",
                         true, false, 0, true, false, false);
-                objExcelWorkSheet = 
+                objExcelWorkSheet =
                     (Worksheet)objExcelWorkBook.Worksheets[sheetName];
                 objExcelWorkSheet.Select(Type.Missing);
 
-                Worksheet objExcelWorkSheetTemp = 
+                Worksheet objExcelWorkSheetTemp =
                     (Worksheet)objExcelApp.ActiveSheet;
-                objExcelWorkSheetTemp.Cells[selectedRowID + 1, 1] = 
+                objExcelWorkSheetTemp.Cells[selectedRowID + 1, 1] =
                     ent.RuleCode;
-                objExcelWorkSheetTemp.Cells[selectedRowID + 1, 2] = 
+                objExcelWorkSheetTemp.Cells[selectedRowID + 1, 2] =
                     ent.RuleType;
-                objExcelWorkSheetTemp.Cells[selectedRowID + 1, 3] = 
+                objExcelWorkSheetTemp.Cells[selectedRowID + 1, 3] =
                     ent.WarningType;
-                objExcelWorkSheetTemp.Cells[selectedRowID + 1, 4] = 
+                objExcelWorkSheetTemp.Cells[selectedRowID + 1, 4] =
                     ent.WarningLevel;
-                objExcelWorkSheetTemp.Cells[selectedRowID + 1, 5] = 
+                objExcelWorkSheetTemp.Cells[selectedRowID + 1, 5] =
                     ent.SuitableLocation;
-                objExcelWorkSheetTemp.Cells[selectedRowID + 1, 6] = 
+                objExcelWorkSheetTemp.Cells[selectedRowID + 1, 6] =
                     ent.RuleDescription;
-                objExcelWorkSheetTemp.Cells[selectedRowID + 1, 7] = 
+                objExcelWorkSheetTemp.Cells[selectedRowID + 1, 7] =
                     ent.IndicatorType;
-                objExcelWorkSheetTemp.Cells[selectedRowID + 1, 8] = 
+                objExcelWorkSheetTemp.Cells[selectedRowID + 1, 8] =
                     ent.Operator;
-                objExcelWorkSheetTemp.Cells[selectedRowID + 1, 9] = 
+                objExcelWorkSheetTemp.Cells[selectedRowID + 1, 9] =
                     ent.ModifyDate.ToString();
-                objExcelWorkSheetTemp.Cells[selectedRowID + 1, 10] = 
+                objExcelWorkSheetTemp.Cells[selectedRowID + 1, 10] =
                     ent.Remarks;//MARK FIELD
                 //objExcelApp.Visible = true;
                 objExcelApp.DisplayAlerts = false;
