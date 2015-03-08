@@ -1,6 +1,6 @@
-﻿namespace _5.WarningManagement
+﻿namespace sys5
 {
-    partial class MainForm_WM
+    partial class MainFormWm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm_WM));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainFormWm));
             this.toolBar_WM = new ESRI.ArcGIS.Controls.AxToolbarControl();
             this.tocControl_WM = new ESRI.ArcGIS.Controls.AxTOCControl();
             this.mapControl_WM = new ESRI.ArcGIS.Controls.AxMapControl();
@@ -1448,7 +1448,7 @@
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "MainForm_WM";
+            this.Name = "MainFormWm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "KJGEW114 工作面预警管理系统";
             this.WindowState = System.Windows.Forms.FormWindowState.Minimized;

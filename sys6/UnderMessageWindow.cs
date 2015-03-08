@@ -60,7 +60,7 @@ namespace UnderTerminal
             //--------end heart beat code.-----------------------------------------------------------------------------------------------
 
             //注册更新预警结果事件
-            _clientSocket.OnMsgUpdateWarningResult += UpdateWarningResultUI;
+            _clientSocket.OnMsgUpdateWarningResult += UpdateWarningResultUi;
         }
 
         /// <summary>
@@ -197,11 +197,11 @@ namespace UnderTerminal
         /// 预警结果更新响应函数,参数无用
         /// </summary>
         /// <param name="data"></param>
-        private void UpdateWarningResultUI(UpdateWarningResultMessage data)
+        private void UpdateWarningResultUi(UpdateWarningResultMessage data)
         {
             if (this.InvokeRequired)
             {
-                ShowDelegate sd = UpdateWarningResultUI;
+                ShowDelegate sd = UpdateWarningResultUi;
                 lblWarning.Invoke(sd, data);
             }
             else

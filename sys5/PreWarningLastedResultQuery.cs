@@ -21,21 +21,21 @@ namespace sys5
 {
     public partial class PreWarningLastedResultQuery : Form
     {
-        public GIS.Warning.FlashWarningPoints flashGis = new GIS.Warning.FlashWarningPoints();
+        public GIS.Warning.FlashWarningPoints FlashGis = new GIS.Warning.FlashWarningPoints();
 
-        private MySpeech speaker = MySpeech.Instance();
+        private readonly MySpeech _speaker = MySpeech.Instance();
 
-        private static List<LibEntity.PreWarningResultQuery> WarningRecord = new List<LibEntity.PreWarningResultQuery>();
+        private static List<LibEntity.PreWarningResultQuery> _warningRecord = new List<LibEntity.PreWarningResultQuery>();
 
         //传出结构体，更改时请查找（设置传出值）
-        private static EarlyWarningResult _outInfo = new EarlyWarningResult();
+        private static EarlyWarningResult OutInfo = new EarlyWarningResult();
         /// <summary>
         /// 获取传出的值
         /// </summary>
         /// <returns></returns>
         public static EarlyWarningResult GetOutInfo()
         {
-            return _outInfo;
+            return OutInfo;
         }
 
         //定义提醒语音字符串
@@ -102,7 +102,7 @@ namespace sys5
             _fpPreWaringLastedValue.ActiveSheet.Columns[COLUMN_COUNT - 4].Visible = false;
             _fpPreWaringLastedValue.ActiveSheet.Columns[COLUMN_COUNT - 5].Visible = false;
 
-            WarningRecord = LibBusiness.PreWarningLastedResultQueryBLL.QueryHoldWarningResult();
+            _warningRecord = LibBusiness.PreWarningLastedResultQueryBLL.QueryHoldWarningResult();
 
         }
 
@@ -112,19 +112,19 @@ namespace sys5
         public void LoadValue(string strTime)
         {
             // 所有绿色预警
-            _ents1 = LibBusiness.PreWarningLastedResultQueryBLL.QueryLastedPreWarningResult(strTime);
+            _ents1 = PreWarningLastedResultQueryBLL.QueryLastedPreWarningResult(strTime);
             // 所有红色和黄色预警
-            _ents2 = LibBusiness.PreWarningLastedResultQueryBLL.QueryHoldWarningResult();
+            _ents2 = PreWarningLastedResultQueryBLL.QueryHoldWarningResult();
 
             //List<PreWarningResultEntity>     LibBusiness.PreWarningLastedResultQueryBLL.MergePreWarningInfo(_ents1);
-            if (_ents2.Count > WarningRecord.Count)
+            if (_ents2.Count > _warningRecord.Count)
             {
                 DataSet ds = UserInformationDetailsManagementBLL.GetNeedSendMessageUsers();
 
                 foreach (var i in _ents2)
                 {
                     bool sign = true;
-                    foreach (var j in WarningRecord)
+                    foreach (var j in _warningRecord)
                     {
                         if (i.TunnelID == j.TunnelID)
                         {
@@ -172,12 +172,12 @@ namespace sys5
 
 
 
-                WarningRecord = new List<LibEntity.PreWarningResultQuery>(_ents2);
+                _warningRecord = new List<LibEntity.PreWarningResultQuery>(_ents2);
                 //SetShortMessage.Sms_Send(phoneNumber, "预警测试信息");
             }
             else
             {
-                WarningRecord = new List<LibEntity.PreWarningResultQuery>(_ents2);
+                _warningRecord = new List<LibEntity.PreWarningResultQuery>(_ents2);
             }
 
 
@@ -239,7 +239,7 @@ namespace sys5
 
             try
             {
-                speaker.Stop();
+                _speaker.Stop();
                 if (_strPreWarningTxt == "")
                 {
                     return;
@@ -546,17 +546,17 @@ namespace sys5
 
                 //设置传出值
                 //工作面名称
-                _outInfo.WarkingFaceName = workface;
+                OutInfo.WarkingFaceName = workface;
                 //日期
-                _outInfo.DateTime = dateTime;
+                OutInfo.DateTime = dateTime;
                 //班次
-                _outInfo.DateShift = shift;
+                OutInfo.DateShift = shift;
                 //巷道ID
-                _outInfo.TunnelId = tunnelId;
+                OutInfo.TunnelId = tunnelId;
 
-                _outInfo.WarningIdList = warningIdList;
+                OutInfo.WarningIdList = warningIdList;
 
-                PreWarningResultDetailsQuery pwrdq = new PreWarningResultDetailsQuery(_outInfo, false);
+                PreWarningResultDetailsQuery pwrdq = new PreWarningResultDetailsQuery(OutInfo, false);
                 pwrdq.ShowDialog();
                 //pwrdq.Show();//不能用Show，否则点击详细信息按钮时会弹回至实时预警
             }
@@ -571,7 +571,7 @@ namespace sys5
         {
             if (!_chkAddPreWarningVoice.Checked)
             {
-                this.speaker.Stop();
+                this._speaker.Stop();
             }
         }
 
@@ -580,7 +580,7 @@ namespace sys5
             try
             {
                 // do any background work
-                speaker.Speak();
+                _speaker.Speak();
             }
             catch (Exception ex)
             {
@@ -590,7 +590,7 @@ namespace sys5
 
         private void PreWarningLastedResultQuery_FormClosing(object sender, FormClosingEventArgs e)
         {
-            MainForm_WM.GetLatestWarningResultInstance().Hide();
+            MainFormWm.GetLatestWarningResultInstance().Hide();
             e.Cancel = true;
         }
 
@@ -607,7 +607,7 @@ namespace sys5
         private void Exit()
         {
             //设置最新预警结果窗体为null
-            MainForm_WM.CleanLatestWarningResult();
+            MainFormWm.CleanLatestWarningResult();
 
             this.Close();
             this.Dispose();

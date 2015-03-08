@@ -16,17 +16,16 @@ using GIS.Warning;
 using LibAbout;
 using LibBusiness;
 using LibCommon;
-using LibCommonControl;
 using LibCommonForm;
 using LibDatabase;
 using LibPanels;
 using LibSocket;
 using sys2;
-using sys5;
+using _5.WarningManagement;
 
-namespace _5.WarningManagement
+namespace sys5
 {
-    public partial class MainForm_WM : Form
+    public partial class MainFormWm : Form
     {
         //最新预警结果
         private static PreWarningLastedResultQuery _latestWarningResult;
@@ -36,7 +35,7 @@ namespace _5.WarningManagement
         private FlashWarningPoints m_flashWarningPoints; //预警点闪烁command类
 
 
-        public MainForm_WM()
+        public MainFormWm()
         {
             RuntimeManager.Bind(ProductCode.EngineOrDesktop);
             IAoInitialize aoini = new AoInitializeClass();
@@ -48,6 +47,7 @@ namespace _5.WarningManagement
             }
             InitializeComponent();
 
+
             //////////////////////////////////////////////////////
             ///文件菜单
             mapControl_WM.LoadMxFile(Application.StartupPath + "\\" + GIS_Const.DEFAULT_MXD_FILE);
@@ -57,8 +57,8 @@ namespace _5.WarningManagement
 
 
             //////////////////////////////////////////////////////
-            ///绘制基本图元工具条
-            ///加载测试数 
+            //绘制基本图元工具条
+            //加载测试数 
             var mapControl = (IMapControl3)mapControl_WM.Object;
             var toolbarControl = (IToolbarControl)toolBar_WM.Object;
 
@@ -103,11 +103,7 @@ namespace _5.WarningManagement
         public static PreWarningLastedResultQuery GetLatestWarningResultInstance()
         {
             //单例模式
-            if (_latestWarningResult == null)
-            {
-                _latestWarningResult = new PreWarningLastedResultQuery();
-            }
-            return _latestWarningResult;
+            return _latestWarningResult ?? (_latestWarningResult = new PreWarningLastedResultQuery());
         }
 
         public static void ReleaseLatestWarningResultInstance()
@@ -121,11 +117,11 @@ namespace _5.WarningManagement
         ///     预警结果更新响应函数,参数无用
         /// </summary>
         /// <param name="data"></param>
-        private static void UpdateWarningResultUI(UpdateWarningResultMessage data)
+        private static void UpdateWarningResultUi(UpdateWarningResultMessage data)
         {
             if (GetLatestWarningResultInstance().InvokeRequired)
             {
-                GetLatestWarningResultInstance().Invoke(new ShowDelegate(UpdateWarningResultUI), data);
+                GetLatestWarningResultInstance().Invoke(new ShowDelegate(UpdateWarningResultUi), data);
             }
             else
             {
@@ -152,6 +148,7 @@ namespace _5.WarningManagement
         {
             //注册更新预警结果事件
             SocketUtil.DoInitilization();
+            SocketUtil.GetClientSocketInstance().OnMsgUpdateWarningResult += UpdateWarningResultUi;
             var msg = new SocketMessage(COMMAND_ID.REGISTER_WARNING_RESULT_NOTIFICATION_ALL, DateTime.Now);
             SocketUtil.SendMsg2Server(msg);
 

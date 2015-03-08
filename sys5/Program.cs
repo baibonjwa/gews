@@ -36,7 +36,7 @@ namespace sys5
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            var mf = new MainForm_WM();
+            var mf = new MainFormWm();
             Log.Debug("[WM]....Main Form Construction Finished...");
             var lf = new LoginForm(mf);
             Application.Run(lf);
