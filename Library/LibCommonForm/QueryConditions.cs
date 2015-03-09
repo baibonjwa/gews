@@ -45,13 +45,13 @@ namespace LibCommonForm
 
         private void _btnSearch_Click(object sender, EventArgs e)
         {
-            if (selectTunnelSimple1.ITunnelId == -1)
+            if (selectTunnelSimple1.SelectedTunnel == null)
             {
                 Alert.alert("请选择巷道");
             }
             else
             {
-                TunnelId = selectTunnelSimple1.ITunnelId;
+                TunnelId = selectTunnelSimple1.SelectedTunnel.TunnelId;
                 if (String.IsNullOrEmpty(DefaultStartTime))
                 {
                     DefaultStartTime = DateTime.Now.ToString("yyyy-MM-dd") + " 00:00:00";

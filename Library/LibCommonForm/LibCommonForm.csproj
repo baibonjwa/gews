@@ -243,7 +243,6 @@
     <Compile Include="TunnelInfoEntering.Designer.cs">
       <DependentUpon>TunnelInfoEntering.cs</DependentUpon>
     </Compile>
-    <Compile Include="TunnelSimple.cs" />
     <Compile Include="SelectWorkingFaceControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
