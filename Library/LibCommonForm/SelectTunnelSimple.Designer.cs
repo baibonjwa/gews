@@ -34,12 +34,14 @@
             // 
             // cbxTunnel
             // 
+            this.cbxTunnel.DisplayMember = "TunnelName";
             this.cbxTunnel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxTunnel.FormattingEnabled = true;
             this.cbxTunnel.Location = new System.Drawing.Point(3, 9);
             this.cbxTunnel.Name = "cbxTunnel";
             this.cbxTunnel.Size = new System.Drawing.Size(119, 20);
             this.cbxTunnel.TabIndex = 1;
+            this.cbxTunnel.ValueMember = "TunnelId";
             this.cbxTunnel.SelectedIndexChanged += new System.EventHandler(this.cbxTunnel_SelectedIndexChanged);
             this.cbxTunnel.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cbxTunnel_KeyDown);
             // 

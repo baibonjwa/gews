@@ -23,7 +23,7 @@ namespace LibCommonForm
         public SelectTunnelDlg()
         {
             InitializeComponent();
-
+            selectTunnelUserControl1.LoadData();
             // 设置窗体默认属性
             FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_GE.CHOOSE_TUNNEL);
         }

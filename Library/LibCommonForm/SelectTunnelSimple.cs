@@ -52,13 +52,11 @@ namespace LibCommonForm
                     {
                         var selectSingleNode = node.SelectSingleNode("ID");
                         if (selectSingleNode == null) continue;
-                        string id = selectSingleNode.InnerText;
+                        var id = Convert.ToInt32(selectSingleNode.InnerText);
                         var tunnel = Tunnel.Find(id);
                         cbxTunnel.Items.Add(tunnel);
                     }
             }
-
-            cbxTunnel.SelectedIndex = 0;
         }
 
         /**
@@ -70,6 +68,7 @@ namespace LibCommonForm
             if (DialogResult.OK != dlg.ShowDialog()) return;
             var tunnel = dlg.SelectedTunnel;
             cbxTunnel.Items.Add(tunnel);
+            cbxTunnel.SelectedItem = tunnel;
             WriteRecentTunnelXml();
         }
 

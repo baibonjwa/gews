@@ -216,10 +216,7 @@ namespace sys3
         private void btnChooseTunnel_Click(object sender, EventArgs e)
         {
             //巷道选择窗体
-            SelectTunnelDlg tunnelChoose;
-
-            tunnelChoose = new SelectTunnelDlg();
-
+            var tunnelChoose = new SelectTunnelDlg();
             //巷道选择完毕
             if (DialogResult.OK != tunnelChoose.ShowDialog()) return;
             //巷道选择按钮Text改变
