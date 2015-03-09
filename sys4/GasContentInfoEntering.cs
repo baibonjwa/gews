@@ -180,7 +180,7 @@ namespace _4.OutburstPrevention
             // 测定时间
             gasContentEntity.MeasureDateTime = this.dtpMeasureDateTime.Value;
             // 巷道编号
-            gasContentEntity.Tunnel.TunnelId = this.selectTunnelSimple1.ITunnelId;
+            gasContentEntity.Tunnel = selectTunnelSimple1.SelectedTunnel;
             // 煤层编号
             int iCoalSeamsId = 0;
             string mc = gasContentEntity.CoalSeams.ToString();//修改时用到改前的信息删除feature
@@ -230,7 +230,7 @@ namespace _4.OutburstPrevention
         private bool check()
         {
             // 判断是否选择所属巷道
-            if (this.selectTunnelSimple1.ITunnelId == Const.INVALID_ID)
+            if (this.selectTunnelSimple1.SelectedTunnel == null)
             {
                 Alert.alert(Const_OP.TUNNEL_NAME_MUST_INPUT);
                 return false;
@@ -343,18 +343,7 @@ namespace _4.OutburstPrevention
                 if (int.TryParse(ds.Tables[0].Rows[0][GasContentDbConstNames.TUNNEL_ID].ToString(), out iTunnelID))
                 {
                     Tunnel tunnelEntity = Tunnel.Find(iTunnelID);// TunnelInfoBLL.selectTunnelInfoByTunnelID(iTunnelID);
-                    TunnelSimple ts = new TunnelSimple(tunnelEntity.TunnelId, tunnelEntity.TunnelName);
-                    selectTunnelSimple1.SelectTunnelItemWithoutHistory(ts);
-                    //if (tunnelEntity != null)
-                    //{
-                    //    int[] intArr = new int[5];
-                    //    intArr[0] = tunnelEntity.WorkingFace.MiningArea.Horizontal.Mine.MineId;
-                    //    intArr[1] = tunnelEntity.WorkingFace.MiningArea.Horizontal.HorizontalId;
-                    //    intArr[2] = tunnelEntity.WorkingFace.MiningArea.MiningAreaId;
-                    //    intArr[3] = tunnelEntity.WorkingFace.WorkingFaceID;
-                    //    intArr[4] = tunnelEntity.Tunnel;
-                    //    _intArr = intArr;
-                    //}
+                    selectTunnelSimple1.SetTunnel(tunnelEntity);
                 }
             }
         }

@@ -138,7 +138,7 @@ namespace LibPanels
             }
 
             // 判断所属是否选择
-            if (selectTunnelSimple1.ITunnelId == Const.INVALID_ID)
+            if (selectTunnelSimple1.SelectedTunnel != null)
             {
                 Alert.alert(Const_GE.TUNNEL_NAME_MUST_INPUT);
                 return false;
@@ -147,10 +147,13 @@ namespace LibPanels
             // 探头类型编号
             int iProbeTypeId;
             int.TryParse(Convert.ToString(cboProbeType.SelectedValue), out iProbeTypeId);
-            var probeExist = Probe.FindFirstByProbeTypeIdAndProbeNameAndTunnelId(iProbeTypeId,
-                cmbProbeName.SelectedItem.ToString(),
-                selectTunnelSimple1.ITunnelId);
-            if (probeExist == null) return true;
+            if (selectTunnelSimple1.SelectedTunnel != null)
+            {
+                var probeExist = Probe.FindFirstByProbeTypeIdAndProbeNameAndTunnelId(iProbeTypeId,
+                    cmbProbeName.SelectedItem.ToString(),
+                    selectTunnelSimple1.SelectedTunnel.TunnelId);
+                if (probeExist == null) return true;
+            }
             if (!Alert.confirm("该巷道下已经存在" + cboProbeType.Text + "探头，确认提交将重新设定" + cboProbeType.Text + "探头。"))
                 return false;
             // 重置探头类型
@@ -193,7 +196,7 @@ namespace LibPanels
             }
 
             // 巷道编号
-            _probe.Tunnel = Tunnel.Find(selectTunnelSimple1.ITunnelId);
+            _probe.Tunnel = selectTunnelSimple1.SelectedTunnel;
 
             // 探头描述
             _probe.ProbeDescription = txtProbeDescription.Text.Trim();
@@ -282,8 +285,7 @@ namespace LibPanels
             if (_probe.Tunnel != null)
             {
                 //if(
-                var ts = new TunnelSimple(_probe.Tunnel.TunnelId, _probe.Tunnel.TunnelName);
-                selectTunnelSimple1.SelectTunnelItemWithoutHistory(ts);
+                selectTunnelSimple1.SetTunnel(_probe.Tunnel);
             }
         }
 

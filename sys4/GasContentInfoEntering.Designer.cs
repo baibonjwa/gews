@@ -337,7 +337,6 @@
             // 
             // selectTunnelSimple1
             // 
-            this.selectTunnelSimple1.ITunnelId = -1;
             this.selectTunnelSimple1.Location = new System.Drawing.Point(14, 20);
             this.selectTunnelSimple1.Name = "selectTunnelSimple1";
             this.selectTunnelSimple1.Size = new System.Drawing.Size(219, 38);

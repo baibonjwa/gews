@@ -282,7 +282,6 @@ namespace LibPanels
             // 
             // selectTunnelSimple1
             // 
-            this.selectTunnelSimple1.ITunnelId = 0;
             this.selectTunnelSimple1.Location = new System.Drawing.Point(14, 12);
             this.selectTunnelSimple1.Name = "selectTunnelSimple1";
             this.selectTunnelSimple1.Size = new System.Drawing.Size(302, 38);

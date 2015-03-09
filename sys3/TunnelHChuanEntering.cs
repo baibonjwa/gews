@@ -599,18 +599,18 @@ namespace _3.GeologyMeasure
             if (DialogResult.OK == tunnelChoose.ShowDialog())
             {
                 //巷道选择按钮Text改变
-                btnTunnelChoose2.Text = tunnelChoose.tunnelName;
+                btnTunnelChoose2.Text = tunnelChoose.SelectedTunnel.TunnelName;
                 //实体赋值
                 if (this.Text == Const_GM.TUNNEL_HCHUAN_CHANGE)
                 {
-                    tmpTunnelHChuanEntity.TunnelId2 = tunnelChoose.tunnelId;
+                    tmpTunnelHChuanEntity.TunnelId2 = tunnelChoose.SelectedTunnel.TunnelId;
                 }
                 if (this.Text == Const_GM.TUNNEL_HCHUAN_ADD)
                 {
-                    tunnelHChuanEntity.TunnelId2 = tunnelChoose.tunnelId;
+                    tunnelHChuanEntity.TunnelId2 = tunnelChoose.SelectedTunnel.TunnelId;
                 }
                 //巷道实体赋值，用于下次巷道选择
-                tunnelEntity = Tunnel.Find(tunnelChoose.tunnelId);
+                tunnelEntity = tunnelChoose.SelectedTunnel;
             }
         }
         /// <summary>
@@ -773,18 +773,18 @@ namespace _3.GeologyMeasure
             if (DialogResult.OK == tunnelChoose.ShowDialog())
             {
                 //巷道选择按钮Text改变
-                btnTunnelChoose1.Text = tunnelChoose.tunnelName;
+                btnTunnelChoose1.Text = tunnelChoose.SelectedTunnel.TunnelName;
                 //实体赋值
                 if (this.Text == Const_GM.TUNNEL_HCHUAN_CHANGE)
                 {
-                    tmpTunnelHChuanEntity.TunnelId1 = tunnelChoose.tunnelId;
+                    tmpTunnelHChuanEntity.TunnelId1 = tunnelChoose.SelectedTunnel.TunnelId;
                 }
                 if (this.Text == Const_GM.TUNNEL_HCHUAN_ADD)
                 {
-                    tunnelHChuanEntity.TunnelId1 = tunnelChoose.tunnelId;
+                    tunnelHChuanEntity.TunnelId1 = tunnelChoose.SelectedTunnel.TunnelId;
                 }
                 //巷道实体赋值，用于下次巷道选择
-                tunnelEntity = Tunnel.Find(tunnelChoose.tunnelId);
+                tunnelEntity = tunnelChoose.SelectedTunnel;
             }
         }
 

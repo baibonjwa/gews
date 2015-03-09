@@ -103,10 +103,10 @@ namespace _5.WarningManagement
         /// <param name="e"></param>
         private void btnApply_Click(object sender, EventArgs e)
         {
-            if (this.selectTunnelSimple1.ITunnelId != Const.INVALID_ID)
+            if (this.selectTunnelSimple1.SelectedTunnel != null)
             {
                 _preWarningRulesPanel.ApplyParamsValues();
-                if (!_preWarningRulesPanel.UpdateTunnelBindingRuleCodeAndParamsInfo(this.selectTunnelSimple1.ITunnelId))
+                if (!_preWarningRulesPanel.UpdateTunnelBindingRuleCodeAndParamsInfo(this.selectTunnelSimple1.SelectedTunnel.TunnelId))
                 {
                     MessageBox.Show(@"更新巷道绑定的规则参数失败！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
@@ -115,7 +115,7 @@ namespace _5.WarningManagement
                     Alert.noteMsg("应用成功!");
                     // TODO, 需要修改日期
                     //通知服务器预警数据已更新
-                    ResetTunnelRulesMsg msg = new ResetTunnelRulesMsg(Const.INVALID_ID, this.selectTunnelSimple1.ITunnelId,
+                    var msg = new ResetTunnelRulesMsg(Const.INVALID_ID, this.selectTunnelSimple1.SelectedTunnel.TunnelId,
                         TunnelInfoDbConstNames.TABLE_NAME, DateTime.Now);
                     SocketUtil.SendMsg2Server(msg);
                 }

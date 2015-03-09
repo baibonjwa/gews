@@ -158,8 +158,9 @@ namespace sys3
 
             foreach (Tunnel i in otherTunnelList)
             {
-                listBox_Browse.Items.Add(new TunnelSimple(i.TunnelId, i.TunnelName));
+                listBox_Browse.Items.Add(i);
             }
+            //TODO:这块有些问题
             listBox_Browse.DisplayMember = "Name";
             listBox_Browse.ValueMember = "WirePointName";
             //其它巷道
@@ -211,7 +212,7 @@ namespace sys3
         {
             var sArray = new string[10];
 
-            if ((p != null) && (p != ""))
+            if (!string.IsNullOrEmpty(p))
             {
                 sArray = p.Split(',');
             }
@@ -268,7 +269,7 @@ namespace sys3
                 return;
             }
 
-            var tunnelChoose = new SelectTunnelDlg(intArr, 2);
+            var tunnelChoose = new SelectTunnelDlg();
 
             //巷道选择完毕
             if (DialogResult.OK == tunnelChoose.ShowDialog())
@@ -281,9 +282,9 @@ namespace sys3
                 }
 
                 //巷道选择按钮Text改变
-                btnChooseZY.Text = tunnelChoose.tunnelName;
+                btnChooseZY.Text = tunnelChoose.SelectedTunnel.TunnelName;
                 //实体赋值
-                tunnelZY = Tunnel.Find(tunnelChoose.tunnelId);
+                tunnelZY = Tunnel.Find(tunnelChoose.SelectedTunnel.TunnelId);
                 if (tunnelZY != null)
                 {
                     tunnelZY.TunnelType = TunnelTypeEnum.STOPING_ZY;
@@ -306,7 +307,7 @@ namespace sys3
             }
 
             //巷道选择窗体
-            var tunnelChoose = new SelectTunnelDlg(intArr, 2);
+            var tunnelChoose = new SelectTunnelDlg();
 
             //巷道选择完毕
             if (DialogResult.OK == tunnelChoose.ShowDialog())
@@ -319,15 +320,13 @@ namespace sys3
                 }
 
                 //巷道选择按钮Text改变
-                btnChooseFY.Text = tunnelChoose.tunnelName;
+                btnChooseFY.Text = tunnelChoose.SelectedTunnel.TunnelName;
                 //实体赋值
 
-                tunnelFY = Tunnel.Find(tunnelChoose.tunnelId);
-                if (tunnelFY != null)
-                {
-                    tunnelFY.TunnelType = TunnelTypeEnum.STOPING_FY;
-                    tunnelSet.Add(tunnelFY);
-                }
+                tunnelFY = Tunnel.Find(tunnelChoose.SelectedTunnel.TunnelId);
+                if (tunnelFY == null) return;
+                tunnelFY.TunnelType = TunnelTypeEnum.STOPING_FY;
+                tunnelSet.Add(tunnelFY);
             }
         }
 
@@ -345,7 +344,7 @@ namespace sys3
             }
 
             //巷道选择窗体
-            var tunnelChoose = new SelectTunnelDlg(intArr, 2);
+            var tunnelChoose = new SelectTunnelDlg();
 
             //巷道选择完毕
             if (DialogResult.OK == tunnelChoose.ShowDialog())
@@ -358,9 +357,9 @@ namespace sys3
                 }
 
                 //巷道选择按钮Text改变
-                btnChooseQY.Text = tunnelChoose.tunnelName;
+                btnChooseQY.Text = tunnelChoose.SelectedTunnel.TunnelName;
                 //实体赋值
-                tunnelQY = Tunnel.Find(tunnelChoose.tunnelId);
+                tunnelQY = Tunnel.Find(tunnelChoose.SelectedTunnel.TunnelId);
                 if (tunnelQY != null)
                 {
                     tunnelQY.TunnelType = TunnelTypeEnum.STOPING_QY;
@@ -690,29 +689,28 @@ namespace sys3
             if (DialogResult.OK == tunnelChoose.ShowDialog())
             {
                 //添加信息到listBox
-                var ts = new TunnelSimple(tunnelChoose.tunnelId, tunnelChoose.tunnelName);
-                listBox_Browse.Items.Add(ts);
-                Tunnel ent = Tunnel.Find(tunnelChoose.tunnelId);
-                if (ent != null)
+                var tunnel = tunnelChoose.SelectedTunnel;
+                if (tunnel != null)
                 {
-                    ent.TunnelType = TunnelTypeEnum.STOPING_OTHER;
-                    ent.WorkingFace = workingFace;
-                    tunnelSet.Add(ent);
+                    listBox_Browse.Items.Add(tunnel);
+                    tunnel.TunnelType = TunnelTypeEnum.STOPING_OTHER;
+                    tunnel.WorkingFace = workingFace;
+                    tunnelSet.Add(tunnel);
                 }
             }
         }
 
         private void listBox_Browse_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Delete)
+            if (e.KeyCode != Keys.Delete) return;
+            var tunnel = listBox_Browse.SelectedItem as Tunnel;
+            if (tunnel != null)
             {
-                Tunnel ent =
-                    Tunnel.Find(Convert.ToInt32(((TunnelSimple)listBox_Browse.SelectedItem).Id));
-                ent.TunnelType = TunnelTypeEnum.OTHER;
-                tunnelSet.Add(ent);
-
-                listBox_Browse.Items.Remove(listBox_Browse.SelectedItem);
+                tunnel.TunnelType = TunnelTypeEnum.OTHER;
+                tunnelSet.Add(tunnel);
             }
+
+            listBox_Browse.Items.Remove(listBox_Browse.SelectedItem);
         }
     }
 }

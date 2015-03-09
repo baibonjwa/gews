@@ -128,43 +128,14 @@ namespace LibPanels
             DialogResult = DialogResult.OK;
 
             //通用信息
-            mineDataEntity.Tunnel.TunnelId = selectTunnelSimple1.ITunnelId;
-            if (txtCoordinateX.Text == "")
-            {
-                mineDataEntity.CoordinateX = 0;
-            }
-            else
-            {
-                mineDataEntity.CoordinateX = Convert.ToDouble(txtCoordinateX.Text);
-            }
+            mineDataEntity.Tunnel = selectTunnelSimple1.SelectedTunnel;
+            mineDataEntity.CoordinateX = txtCoordinateX.Text == "" ? 0 : Convert.ToDouble(txtCoordinateX.Text);
 
-            if (txtCoordinateY.Text == "")
-            {
-                mineDataEntity.CoordinateY = 0;
-            }
-            else
-            {
-                mineDataEntity.CoordinateY = Convert.ToDouble(txtCoordinateY.Text);
-            }
-            if (txtCoordinateZ.Text == "")
-            {
-                mineDataEntity.CoordinateZ = 0;
-            }
-            else
-            {
-                mineDataEntity.CoordinateZ = Convert.ToDouble(txtCoordinateZ.Text);
-            }
-
+            mineDataEntity.CoordinateY = txtCoordinateY.Text == "" ? 0 : Convert.ToDouble(txtCoordinateY.Text);
+            mineDataEntity.CoordinateZ = txtCoordinateZ.Text == "" ? 0 : Convert.ToDouble(txtCoordinateZ.Text);
             mineDataEntity.Datetime = dtpDateTime.Value;
 
-            if (rbtn38.Checked)
-            {
-                mineDataEntity.WorkStyle = Const_MS.WORK_TIME_38;
-            }
-            else
-            {
-                mineDataEntity.WorkStyle = Const_MS.WORK_TIME_46;
-            }
+            mineDataEntity.WorkStyle = rbtn38.Checked ? Const_MS.WORK_TIME_38 : Const_MS.WORK_TIME_46;
             mineDataEntity.WorkTime = cboWorkTime.Text;
             mineDataEntity.TeamName = cboTeamName.Text;
             mineDataEntity.Submitter = cboSubmitter.Text;
@@ -235,7 +206,7 @@ namespace LibPanels
                 viEntity.SaveAndFlush();
                 bResult = true;
                 Log.Debug("发送添加通风信息的Socket信息");
-                var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.ITunnelId,
+                var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.SelectedTunnel.TunnelId,
                     Ventilation.TableName, OPERATION_TYPE.ADD, dtpDateTime.Value);
                 SocketUtil.SendMsg2Server(msg);
                 Log.Debug("发送添加通风信息的Socket信息完成");
@@ -245,7 +216,7 @@ namespace LibPanels
                 viEntity.SaveAndFlush();
                 bResult = true;
                 Log.Debug("发送修改通风信息的Socket信息");
-                var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.ITunnelId,
+                var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.SelectedTunnel.TunnelId,
                     Ventilation.TableName, OPERATION_TYPE.UPDATE, dtpDateTime.Value);
                 SocketUtil.SendMsg2Server(msg);
                 Log.Debug("发送修改通风信息的Socket信息完成");
@@ -283,13 +254,13 @@ namespace LibPanels
                 ceEntity.SaveAndFlush();
                 if (Text == new LibPanels(MineDataPanelName.CoalExistence).panelFormName)
                 {
-                    var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.ITunnelId,
+                    var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.SelectedTunnel.TunnelId,
                         LibEntity.CoalExistence.TableName, OPERATION_TYPE.ADD, dtpDateTime.Value);
                     SocketUtil.SendMsg2Server(msg);
                 }
                 else if (Text == new LibPanels(MineDataPanelName.CoalExistence_Change).panelFormName)
                 {
-                    var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.ITunnelId,
+                    var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.SelectedTunnel.TunnelId,
                         LibEntity.CoalExistence.TableName, OPERATION_TYPE.UPDATE, dtpDateTime.Value);
                     SocketUtil.SendMsg2Server(msg);
                 }
@@ -325,7 +296,7 @@ namespace LibPanels
                 gdEntity.SaveAndFlush();
                 bResult = true;
                 Log.Debug("发送添加瓦斯信息的Socket信息");
-                var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.ITunnelId,
+                var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.SelectedTunnel.TunnelId,
                     GasData.TableName, OPERATION_TYPE.ADD, dtpDateTime.Value);
                 SocketUtil.SendMsg2Server(msg);
                 Log.Debug("发送添加瓦斯信息的Socket信息完成");
@@ -333,7 +304,7 @@ namespace LibPanels
             else if (Text == new LibPanels(MineDataPanelName.GasData_Change).panelFormName)
             {
                 Log.Debug("发送修改瓦斯信息的Socket信息");
-                var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.ITunnelId,
+                var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.SelectedTunnel.TunnelId,
                     GasData.TableName, OPERATION_TYPE.UPDATE, dtpDateTime.Value);
                 SocketUtil.SendMsg2Server(msg);
                 gdEntity.SaveAndFlush();
@@ -358,13 +329,13 @@ namespace LibPanels
             {
                 bResult = UsualForecastBLL.insertUsualForecastInfo(ufEntity);
 
-                var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.ITunnelId,
+                var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.SelectedTunnel.TunnelId,
                     UsualForecastDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, dtpDateTime.Value);
                 SocketUtil.SendMsg2Server(msg);
             }
             else if (Text == new LibPanels(MineDataPanelName.UsualForecast_Change).panelFormName)
             {
-                var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.ITunnelId,
+                var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.SelectedTunnel.TunnelId,
                     UsualForecastDbConstNames.TABLE_NAME, OPERATION_TYPE.UPDATE, dtpDateTime.Value);
                 SocketUtil.SendMsg2Server(msg);
                 bResult = UsualForecastBLL.updateUsualForecastInfo(ufEntity);
@@ -400,7 +371,7 @@ namespace LibPanels
                 mEntity.SaveAndFlush();
                 bResult = true;
                 Log.Debug("发送添加管理信息的Socket信息");
-                var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.ITunnelId,
+                var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.SelectedTunnel.TunnelId,
                     Management.TableName, OPERATION_TYPE.ADD, dtpDateTime.Value);
                 SocketUtil.SendMsg2Server(msg);
                 Log.Debug("发送添加管理信息的Socket信息完成");
@@ -410,7 +381,7 @@ namespace LibPanels
                 mEntity.SaveAndFlush();
                 bResult = true;
                 Log.Debug("发送修改管理信息的Socket信息");
-                var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.ITunnelId,
+                var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.SelectedTunnel.TunnelId,
                     Management.TableName, OPERATION_TYPE.UPDATE, mEntity.Datetime);
                 SocketUtil.SendMsg2Server(msg);
                 Log.Debug("发送修改管理信息的Socket信息完成");
@@ -442,7 +413,7 @@ namespace LibPanels
                 _geologicStructureEntity.SaveAndFlush();
                 bResult = true;
                 Log.Debug("发送添加地址构造信息的Socket信息");
-                var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.ITunnelId,
+                var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.SelectedTunnel.TunnelId,
                      GeologicStructure.TableName, OPERATION_TYPE.ADD, dtpDateTime.Value);
                 SocketUtil.SendMsg2Server(msg);
                 Log.Debug("发送添加地址构造信息的Socket信息完成");
@@ -452,7 +423,7 @@ namespace LibPanels
                 _geologicStructureEntity.SaveAndFlush();
                 bResult = true;
                 Log.Debug("发送修改地址构造信息的Socket信息");
-                var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.ITunnelId,
+                var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.SelectedTunnel.TunnelId,
                      GeologicStructure.TableName, OPERATION_TYPE.UPDATE, dtpDateTime.Value);
                 SocketUtil.SendMsg2Server(msg);
                 Log.Debug("发送修改地址构造信息的Socket信息完成");
@@ -460,7 +431,7 @@ namespace LibPanels
             return bResult;
         }
 
-        /// <summary>
+        /// <summary>selectTunnelSimple1.SelectedTunnel.TunnelId
         ///     验证
         /// </summary>
         /// <returns></returns>
@@ -468,7 +439,7 @@ namespace LibPanels
         {
             // 判断巷道信息是否选择
             //矿井名称
-            if (selectTunnelSimple1.ITunnelId == -1)
+            if (selectTunnelSimple1.SelectedTunnel != null)
             {
                 Alert.alert("请选择巷道信息");
                 return false;

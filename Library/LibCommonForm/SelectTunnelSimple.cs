@@ -16,6 +16,21 @@ namespace LibCommonForm
 
         public Tunnel SelectedTunnel { get; set; }
 
+        public void SetTunnel(Tunnel tunnel)
+        {
+            SelectedTunnel = tunnel;
+            foreach (Tunnel i in cbxTunnel.Items)
+            {
+                if (i.TunnelId == tunnel.TunnelId)
+                {
+                    cbxTunnel.SelectedItem = i;
+                    return;
+                }
+            }
+            cbxTunnel.Items.Add(tunnel);
+            cbxTunnel.SelectedItem = tunnel;
+        }
+
         private void SelectTunnelSimple_Load(object sender, EventArgs e)
         {
             if (!System.IO.File.Exists(@"RecentTunnels.xml")) return;
@@ -90,6 +105,8 @@ namespace LibCommonForm
                 }
             }
         }
+
+
 
 
         private void WriteRecentTunnelXml()

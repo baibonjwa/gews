@@ -135,8 +135,7 @@
             this.btnStartAnalysis.Click += new System.EventHandler(this.btnStartAnalysis_Click);
             // 
             // selectTunnelSimple1
-            // 
-            this.selectTunnelSimple1.ITunnelId = 0;
+            //
             this.selectTunnelSimple1.Location = new System.Drawing.Point(36, 19);
             this.selectTunnelSimple1.Name = "selectTunnelSimple1";
             this.selectTunnelSimple1.Size = new System.Drawing.Size(219, 38);

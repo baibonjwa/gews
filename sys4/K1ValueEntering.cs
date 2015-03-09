@@ -173,8 +173,7 @@ namespace _4.OutburstPrevention
                     dgrdvK1Value.Rows[i].Selected = true;
                 }
                 Tunnel tunnelEntity = k1Entitys[i].Tunnel; // TunnelInfoBLL.selectTunnelInfoByTunnelID(iTunnelID);
-                TunnelSimple ts = new TunnelSimple(tunnelEntity.TunnelId, tunnelEntity.TunnelName);
-                selectTunnelSimple1.SelectTunnelItemWithoutHistory(ts);
+                selectTunnelSimple1.SetTunnel(tunnelEntity);
 
             }
         }
@@ -207,7 +206,7 @@ namespace _4.OutburstPrevention
             this.DialogResult = DialogResult.OK;
 
             //tunnelEntity.Tunnel = selectTunnelSimple1.ITunnelId;
-            tunnelEntity = Tunnel.Find(selectTunnelSimple1.ITunnelId);
+            tunnelEntity = selectTunnelSimple1.SelectedTunnel;
             //TunnelInfoBLL.selectTunnelInfoByTunnelID(tunnelEntity.Tunnel);
             //添加
             if (this.Text == Const_OP.K1_VALUE_ADD)
@@ -569,7 +568,7 @@ namespace _4.OutburstPrevention
         private bool check()
         {
             //巷道是否选择
-            if (selectTunnelSimple1.ITunnelId == -1)
+            if (selectTunnelSimple1.SelectedTunnel == null)
             {
                 Alert.alert(Const.MSG_PLEASE_CHOOSE + Const_GM.TUNNEL + Const.SIGN_EXCLAMATION_MARK);
                 return false;

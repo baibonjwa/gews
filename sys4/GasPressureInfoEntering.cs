@@ -176,7 +176,7 @@ namespace _4.OutburstPrevention
             // 测定时间
             gasPressureEntity.MeasureDateTime = this.dtpMeasureDateTime.Value;
             // 巷道编号
-            gasPressureEntity.Tunnel.TunnelId = this.selectTunnelSimple1.ITunnelId;
+            gasPressureEntity.Tunnel = this.selectTunnelSimple1.SelectedTunnel;
             // 煤层编号
             int iCoalSeamsId = 0;
             string mc = gasPressureEntity.CoalSeams.ToString();//修改时用到改前的信息删除feature
@@ -241,7 +241,7 @@ namespace _4.OutburstPrevention
         private bool check()
         {
             // 判断是否选择所属巷道
-            if (this.selectTunnelSimple1.ITunnelId == Const.INVALID_ID)
+            if (this.selectTunnelSimple1.SelectedTunnel == null)
             {
                 Alert.alert(Const_OP.TUNNEL_NAME_MUST_INPUT);
                 return false;
@@ -353,9 +353,8 @@ namespace _4.OutburstPrevention
                 int iTunnelID = 0;
                 if (int.TryParse(ds.Tables[0].Rows[0][GasPressureDbConstNames.TUNNEL_ID].ToString(), out iTunnelID))
                 {
-                    Tunnel tunnelEntity = Tunnel.Find(iTunnelID); // TunnelInfoBLL.selectTunnelInfoByTunnelID(iTunnelID);
-                    TunnelSimple ts = new TunnelSimple(tunnelEntity.TunnelId, tunnelEntity.TunnelName);
-                    selectTunnelSimple1.SelectTunnelItemWithoutHistory(ts);
+                    Tunnel tunnel = Tunnel.Find(iTunnelID); // TunnelInfoBLL.selectTunnelInfoByTunnelID(iTunnelID);
+                    selectTunnelSimple1.SetTunnel(tunnel);
 
                     //if (tunnelEntity != null)
                     //{

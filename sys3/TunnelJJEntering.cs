@@ -218,16 +218,14 @@ namespace sys3
             //巷道选择窗体
             SelectTunnelDlg tunnelChoose;
 
-            tunnelChoose = new SelectTunnelDlg(TunnelTypeEnum.TUNNELLING, TunnelTypeEnum.OTHER);
+            tunnelChoose = new SelectTunnelDlg();
 
             //巷道选择完毕
-            if (DialogResult.OK == tunnelChoose.ShowDialog())
-            {
-                //巷道选择按钮Text改变
-                btnChooseTunnel.Text = tunnelChoose.tunnelName;
-                //实体赋值
-                tunnelEntity = Tunnel.Find(tunnelChoose.tunnelId);
-            }
+            if (DialogResult.OK != tunnelChoose.ShowDialog()) return;
+            //巷道选择按钮Text改变
+            btnChooseTunnel.Text = tunnelChoose.SelectedTunnel.TunnelName;
+            //实体赋值
+            tunnelEntity = tunnelChoose.SelectedTunnel;
         }
 
         /// <summary>
