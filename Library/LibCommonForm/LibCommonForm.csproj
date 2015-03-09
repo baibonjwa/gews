@@ -310,7 +310,6 @@
     <Compile Include="UserLoginInformationManagement.Designer.cs">
       <DependentUpon>UserLoginInformationManagement.cs</DependentUpon>
     </Compile>
-    <Compile Include="WorkingfaceSimple.cs" />
     <Compile Include="SelectWorkingfaceSimple.cs">
       <SubType>UserControl</SubType>
     </Compile>

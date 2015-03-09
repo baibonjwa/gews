@@ -1,6 +1,6 @@
 ﻿namespace sys2
 {
-    partial class DayReportJJEntering
+    partial class DayReportJjEntering
     {
         /// <summary>
         /// Required designer variable.
@@ -269,7 +269,6 @@
             // 
             // selectWorkingfaceSimple1
             // 
-            this.selectWorkingfaceSimple1.IWorkingfaceId = 0;
             this.selectWorkingfaceSimple1.Location = new System.Drawing.Point(131, 15);
             this.selectWorkingfaceSimple1.Name = "selectWorkingfaceSimple1";
             this.selectWorkingfaceSimple1.Size = new System.Drawing.Size(219, 38);
@@ -293,7 +292,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "DayReportJJEntering";
+            this.Name = "DayReportJjEntering";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "掘进进尺日报";

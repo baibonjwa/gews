@@ -19,7 +19,7 @@ using TunnelDefaultSelect = LibBusiness.TunnelDefaultSelect;
 
 namespace sys2
 {
-    public partial class DayReportJJEntering : Form
+    public partial class DayReportJjEntering : Form
     {
         #region ******变量声明******
 
@@ -42,7 +42,7 @@ namespace sys2
         /// <summary>
         ///     构造方法
         /// </summary>
-        public DayReportJJEntering()
+        public DayReportJjEntering()
         {
             InitializeComponent();
 
@@ -83,7 +83,7 @@ namespace sys2
         /// </summary>
         /// <param name="array">巷道编号数组</param>
         /// <param name="dayReportHCEntity">回采进尺日报实体</param>
-        public DayReportJJEntering(DayReportJj dayReportJJEntity)
+        public DayReportJjEntering(DayReportJj dayReportJJEntity)
         {
             _dayReportJJEntity = dayReportJJEntity;
             InitializeComponent();
@@ -128,9 +128,9 @@ namespace sys2
         {
             if (workingFace != null)
             {
-                var ws = new WorkingfaceSimple(workingFace.WorkingFaceId, workingFace.WorkingFaceName,
-                    workingFace.WorkingfaceTypeEnum);
-                selectWorkingfaceSimple1.SelectTunnelItemWithoutHistory(ws);
+                //var ws = new WorkingfaceSimple(workingFace.WorkingFaceId, workingFace.WorkingFaceName,
+                //    workingFace.WorkingfaceTypeEnum);
+                //selectWorkingfaceSimple1.SelectTunnelItemWithoutHistory(ws);
             }
         }
 
@@ -322,14 +322,11 @@ namespace sys2
             //巷道掘进的参数
             if (Text == Const_MS.DAY_REPORT_JJ_ADD)
             {
-                TunnelDefaultSelect.InsertDefaultTunnel(DayReportJj.TableName, workingFace.WorkingFaceId);
                 insertDayReportJJInfo();
             }
             if (Text == Const_MS.DAY_REPORT_JJ_CHANGE)
             {
-                DayReportJj oldDayReportJJEntity = _dayReportJJEntity; //修改之前的实体
-                TunnelDefaultSelect.UpdateDefaultTunnel(DayReportJj.TableName, workingFace.WorkingFaceId);
-                DayReportJj newDayReportJJEntity = _dayReportJJEntity; //修改后的掘进信息实体               
+
             }
         }
 
@@ -544,7 +541,7 @@ namespace sys2
         private bool check()
         {
             //巷道是否选择
-            if (selectWorkingfaceSimple1.IWorkingfaceId <= 0)
+            if (selectWorkingfaceSimple1.SelectedWorkingFace != null)
             {
                 Alert.alert(Const.MSG_PLEASE_CHOOSE + Const_MS.TUNNEL + Const.SIGN_EXCLAMATION_MARK);
                 return false;

@@ -12,46 +12,46 @@ namespace LibCommonForm
 {
     public partial class SelectWorkingFaceDlg : Form
     {
-        /** 存放矿井名称，水平，采区，工作面，巷道编号的数组  **/
-        private int[] _intArr = new int[5];
 
-        public int workFaceId;
-        public string workFaceName;
-        public WorkingfaceTypeEnum workFaceType;
+        //public int workFaceId;
+        //public string workFaceName;
+        //public WorkingfaceTypeEnum workFaceType;
+        public WorkingFace SelectedWorkingFace { get; set; }
 
         public SelectWorkingFaceDlg()
         {
             InitializeComponent();
-            this.selectWorkingFaceControl1.LoadData();
+            selectWorkingFaceControl1.LoadData();
         }
 
-        public SelectWorkingFaceDlg(params WorkingfaceTypeEnum[] workingfaceTypes)
-        {
-            InitializeComponent();
-            SetFilterOn(workingfaceTypes);
-            this.selectWorkingFaceControl1.LoadData();
-        }
+        //public SelectWorkingFaceDlg(params WorkingfaceTypeEnum[] workingfaceTypes)
+        //{
+        //    InitializeComponent();
+        //    //SetFilterOn(workingfaceTypes);
+        //    this.selectWorkingFaceControl1.LoadData();
+        //}
 
         //private void SetFilterOn(WorkingfaceTypeEnum workingfaceType)
         //{
         //    this.selectWorkingFaceControl1.SetFilterOn(workingfaceType);
         //}
 
-        private void SetFilterOn(params WorkingfaceTypeEnum[] types)
-        {
-            //this.selectWorkingFaceControl1.SetFilterOn(types);
-        }
+        //private void SetFilterOn(params WorkingfaceTypeEnum[] types)
+        //{
+        //    //this.selectWorkingFaceControl1.SetFilterOn(types);
+        //}
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.OK;
+            SelectedWorkingFace = selectWorkingFaceControl1.SelectedWorkingFace;
+            DialogResult = DialogResult.OK;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.None;
+            DialogResult = DialogResult.None;
             // 关闭窗口
-            this.Close();
+            Close();
         }
 
 

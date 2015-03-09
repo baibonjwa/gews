@@ -229,7 +229,7 @@ namespace sys3
             //巷道选择窗体
             SelectWorkingFaceDlg wfChoose = null;
 
-            wfChoose = new SelectWorkingFaceDlg(WorkingfaceTypeEnum.HC, WorkingfaceTypeEnum.OTHER);
+            wfChoose = new SelectWorkingFaceDlg();
             //第一次选择巷道
             //if (workingFace == null)
             //{
@@ -245,9 +245,9 @@ namespace sys3
             if (DialogResult.OK == wfChoose.ShowDialog())
             {
                 //巷道选择按钮Text改变
-                btnChooseWF.Text = wfChoose.workFaceName;
+                btnChooseWF.Text = wfChoose.SelectedWorkingFace.WorkingFaceName;
                 //实体赋值
-                workingFace = WorkingFace.Find(wfChoose.workFaceId);
+                workingFace = wfChoose.SelectedWorkingFace;
                 intArr[0] = workingFace.MiningArea.Horizontal.Mine.MineId;
                 intArr[1] = workingFace.MiningArea.Horizontal.HorizontalId;
                 intArr[2] = workingFace.MiningArea.MiningAreaId;

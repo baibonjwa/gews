@@ -196,15 +196,15 @@ namespace sys3
         private void btnChooseWorkFace_Click(object sender, EventArgs e)
         {
             //工作面选择窗体
-            SelectWorkingFaceDlg selectWF = new SelectWorkingFaceDlg(WorkingfaceTypeEnum.JJ, WorkingfaceTypeEnum.OTHER);
+            SelectWorkingFaceDlg selectWF = new SelectWorkingFaceDlg();
 
             //巷道选择完毕
             if (DialogResult.OK == selectWF.ShowDialog())
             {
                 //巷道选择按钮Text改变
-                btnChooseWorkFace.Text = selectWF.workFaceName;
+                btnChooseWorkFace.Text = selectWF.SelectedWorkingFace.WorkingFaceName;
                 //实体赋值
-                jjWorkFaceEntity = WorkingFace.Find(selectWF.workFaceId);
+                jjWorkFaceEntity = selectWF.SelectedWorkingFace;
             }
         }
 

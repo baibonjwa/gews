@@ -50,7 +50,7 @@ namespace sys2
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.selectWorkingfaceSimple1 = new LibCommonForm.SelectWorkingfaceSimple(WorkingfaceTypeEnum.HC, WorkingfaceTypeEnum.OTHER);
+            this.selectWorkingfaceSimple1 = new LibCommonForm.SelectWorkingfaceSimple();
             ((System.ComponentModel.ISupportInitialize)(this.dgrdvDayReportHC)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -273,8 +273,7 @@ namespace sys2
             this.label3.Text = "请选择回采工作面：";
             // 
             // selectWorkingfaceSimple1
-            // 
-            this.selectWorkingfaceSimple1.IWorkingfaceId = 0;
+            //
             this.selectWorkingfaceSimple1.Location = new System.Drawing.Point(129, 17);
             this.selectWorkingfaceSimple1.Name = "selectWorkingfaceSimple1";
             this.selectWorkingfaceSimple1.Size = new System.Drawing.Size(219, 38);

@@ -1,74 +1,40 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
+using System.Globalization;
 using System.Windows.Forms;
-using LibCommon;
 using System.Xml;
-using LibCommonControl;
 using LibEntity;
 
 namespace LibCommonForm
 {
     public partial class SelectWorkingfaceSimple : UserControl
     {
-        // 工作面编号，无效巷道ID均使用
-        private int _iWorkingfaceId = Const.INVALID_ID;
-        private WorkingfaceTypeEnum[] types;
-        //在其他类当中如果需要对巷道名称改变事件进行处理可按下列方式实现：
-        //1,在其他类当中定义事件处理函数，如：void InheritTunnelNameChanged(object sender, TunnelEventArgs e);
-        //2,注册方法,如：_selectTunnelUserControl.TunnelNameChanged += new TunnelNameChangedEventHandler(InheritTunnelNameChanged);
-
         public SelectWorkingfaceSimple()
         {
             InitializeComponent();
         }
 
-
-        public SelectWorkingfaceSimple(params WorkingfaceTypeEnum[] types)
-        {
-            this.types = types;
-            InitializeComponent();
-        }
-
-        /// <summary>
-        /// 获取选择的巷道的ID，如果没有获取到巷道ID，则返回0。
-        /// </summary>
-        public int IWorkingfaceId { get; set; }
+        public WorkingFace SelectedWorkingFace { get; set; }
 
         private void SelectTunnelSimple_Load(object sender, EventArgs e)
         {
             if (System.IO.File.Exists(@"RecentWorkingfaces.xml"))
             {
-                XmlDocument doc = new XmlDocument();
+                var doc = new XmlDocument();
                 doc.Load(@"RecentWorkingfaces.xml");
 
-                XmlNodeList nodes = doc.DocumentElement.SelectNodes("/Workingfaces/Workingface");
-
-                //List<TunnelSimple> tunnels = new List<TunnelSimple>();
-
-                WorkingfaceSimple firstWS = new WorkingfaceSimple(-1, "已选择的工作面", WorkingfaceTypeEnum.OTHER);
-                cbxWorkingface.Items.Add(firstWS);
-
-                foreach (XmlNode node in nodes)
+                if (doc.DocumentElement != null)
                 {
-                    string id = node.SelectSingleNode("ID").InnerText;
-                    string name = node.SelectSingleNode("Name").InnerText;
-                    if (node.SelectSingleNode("Type") != null && !String.IsNullOrEmpty(node.SelectSingleNode("Type").InnerText))
-                    {
-                        WorkingfaceTypeEnum type =
-                            (WorkingfaceTypeEnum)
-                                Enum.Parse(typeof(WorkingfaceTypeEnum), node.SelectSingleNode("Type").InnerText);
-                        WorkingfaceSimple tunnel = new WorkingfaceSimple(int.Parse(id), name, type);
-                        //types为空表示选择全部工作面
-                        if (types == null || types.Contains(type))
+                    var nodes = doc.DocumentElement.SelectNodes("/Workingfaces/Workingface");
+
+                    if (nodes != null)
+                        foreach (XmlNode node in nodes)
                         {
-                            cbxWorkingface.Items.Add(tunnel);
+                            var selectSingleNode = node.SelectSingleNode("ID");
+                            if (selectSingleNode == null) continue;
+                            string id = selectSingleNode.InnerText;
+                            var workingface = WorkingFace.Find(id);
+                            cbxWorkingface.Items.Add(workingface);
                         }
-                    }
                 }
 
                 cbxWorkingface.SelectedIndex = 0;
@@ -80,75 +46,16 @@ namespace LibCommonForm
          */
         private void btnChooseTunnel_Click(object sender, EventArgs e)
         {
-            SelectWorkingFaceDlg dlg = null;
-            if (types != null && types.Length > 0)
-            {
-                dlg = new SelectWorkingFaceDlg(types);
-            }
-            else
-            {
-                dlg = new SelectWorkingFaceDlg();
-            }
-
-            if (DialogResult.OK == dlg.ShowDialog())
-            {
-                int index = -1;
-                bool alreadyExist = false;
-                foreach (WorkingfaceSimple workingface in this.cbxWorkingface.Items)
-                {
-                    index++;
-                    if (workingface.Id == dlg.workFaceId)
-                    {
-                        alreadyExist = true;
-                        break;
-                    }
-                }
-
-                // remove the tunnel that already exists.
-                if (alreadyExist)
-                    cbxWorkingface.Items.RemoveAt(index);
-
-                WorkingfaceSimple ts = new WorkingfaceSimple(dlg.workFaceId, dlg.workFaceName, dlg.workFaceType);
-                // Set the new selected tunnel.
-                if (ts.Name != null)
-                {
-                    index = cbxWorkingface.Items.Add(ts);
-                    cbxWorkingface.SelectedIndex = index;
-                }
-
-                // Write the recent used tunnel to XML
-                XmlWriterSettings settings = new XmlWriterSettings();
-                settings.Indent = true;
-
-                XmlWriter writer = XmlWriter.Create("RecentWorkingfaces.xml", settings);
-                writer.WriteStartDocument();
-                writer.WriteComment("This file is generated by the program.");
-
-                writer.WriteStartElement("Workingfaces");
-
-                for (int i = 1; i < this.cbxWorkingface.Items.Count; i++)
-                {
-                    WorkingfaceSimple workingface = this.cbxWorkingface.Items[i] as WorkingfaceSimple;
-                    writer.WriteStartElement("Workingface");
-
-                    writer.WriteElementString("ID", workingface.Id.ToString());   // <-- These are new
-                    writer.WriteElementString("Name", workingface.Name);
-                    writer.WriteElementString("Type", workingface.Type.ToString());
-                    writer.WriteEndElement();
-                }
-
-                writer.WriteEndElement();
-                writer.WriteEndDocument();
-
-                writer.Flush();
-                writer.Close();
-            }
+            var dlg = new SelectWorkingFaceDlg();
+            if (DialogResult.OK != dlg.ShowDialog()) return;
+            var workingFace = dlg.SelectedWorkingFace;
+            cbxWorkingface.Items.Add(workingFace);
+            WriteRecentWorkingFaceXml();
         }
 
         private void cbxTunnel_SelectedIndexChanged(object sender, EventArgs e)
         {
-            WorkingfaceSimple ws = this.cbxWorkingface.SelectedItem as WorkingfaceSimple;
-            IWorkingfaceId = ws.Id;
+            SelectedWorkingFace = cbxWorkingface.SelectedItem as WorkingFace;
         }
 
         // 按delete键，删除选中的tunnel
@@ -158,66 +65,48 @@ namespace LibCommonForm
             {
                 try
                 {
-                    int currentItem = this.cbxWorkingface.SelectedIndex;
+                    int currentItem = cbxWorkingface.SelectedIndex;
                     if (currentItem > 0)
                     {
                         cbxWorkingface.Items.RemoveAt(currentItem);
-                        if (this.cbxWorkingface.Items.Count > 0)
-                            this.cbxWorkingface.SelectedIndex = (currentItem > 0) ? currentItem - 1 : currentItem;
-
-
-                        // 覆盖RecentTunnels.xml
-                        // Write the recent used tunnel to XML
-                        XmlWriterSettings settings = new XmlWriterSettings();
-                        settings.Indent = true;
-
-                        XmlWriter writer = XmlWriter.Create("RecentWorkingfaces.xml", settings);
-                        writer.WriteStartDocument();
-                        writer.WriteComment("This file is generated by the program.");
-
-                        writer.WriteStartElement("Workingfaces");
-
-                        for (int i = 1; i < this.cbxWorkingface.Items.Count; i++)
-                        {
-                            WorkingfaceSimple workingface = this.cbxWorkingface.Items[i] as WorkingfaceSimple;
-                            writer.WriteStartElement("Workingface");
-
-                            writer.WriteElementString("ID", workingface.Id.ToString());   // <-- These are new
-                            writer.WriteElementString("Name", workingface.Name);
-                            writer.WriteEndElement();
-                        }
-
-                        writer.WriteEndElement();
-                        writer.WriteEndDocument();
-
-                        writer.Flush();
-                        writer.Close();
+                        if (cbxWorkingface.Items.Count > 0)
+                            cbxWorkingface.SelectedIndex = (currentItem > 0) ? currentItem - 1 : currentItem;
+                        WriteRecentWorkingFaceXml();
                     }
                 }
                 catch (Exception ex)
                 {
                     //Console.WriteLine(ex.ToString());
-                    MessageBox.Show("删除错误: " + ex.Message);
+                    MessageBox.Show(@"删除错误: " + ex.Message);
                 }
             }
         }
 
-        /// <summary>
-        /// 添加临时的巷道选择选项
-        /// </summary>
-        /// <param name="ts"></param>
-        public void SelectTunnelItemWithoutHistory(WorkingfaceSimple ws)
+        private void WriteRecentWorkingFaceXml()
         {
-            foreach (var item in this.cbxWorkingface.Items)
+            var settings = new XmlWriterSettings { Indent = true };
+
+            var writer = XmlWriter.Create("RecentWorkingfaces.xml", settings);
+            writer.WriteStartDocument();
+            writer.WriteComment("This file is generated by the program.");
+
+            writer.WriteStartElement("Workingfaces");
+
+            for (var i = 1; i < cbxWorkingface.Items.Count; i++)
             {
-                if (((WorkingfaceSimple)item).Name == ws.Name)
-                {
-                    this.cbxWorkingface.SelectedItem = item;
-                    return;
-                }
+                var toWriteWorkingFace = cbxWorkingface.Items[i] as WorkingFace;
+                if (toWriteWorkingFace == null) continue;
+                writer.WriteStartElement("Workingface");
+                writer.WriteElementString("ID", toWriteWorkingFace.WorkingFaceId.ToString(CultureInfo.InvariantCulture));   // <-- These are new
+                //writer.WriteElementString("Name", toWriteWorkingFace.WorkingFaceName);
+                //writer.WriteElementString("Type", toWriteWorkingFace.WorkingfaceTypeEnum.ToString());
+                writer.WriteEndElement();
             }
-            this.cbxWorkingface.Items.Add(ws);
-            this.cbxWorkingface.SelectedItem = ws;
+            writer.WriteEndElement();
+            writer.WriteEndDocument();
+
+            writer.Flush();
+            writer.Close();
         }
     }
 }

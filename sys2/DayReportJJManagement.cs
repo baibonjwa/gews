@@ -46,7 +46,7 @@ namespace sys2
         /// <param name="e"></param>
         private void tsBtnAdd_Click(object sender, EventArgs e)
         {
-            var dayReportJjForm = new DayReportJJEntering();
+            var dayReportJjForm = new DayReportJjEntering();
             if (DialogResult.OK == dayReportJjForm.ShowDialog())
             {
                 RefreshData();
@@ -60,7 +60,7 @@ namespace sys2
         /// <param name="e"></param>
         private void tsBtnModify_Click(object sender, EventArgs e)
         {
-            var dayReportJjForm = new DayReportJJEntering((DayReportJj)gridView1.GetFocusedRow());
+            var dayReportJjForm = new DayReportJjEntering((DayReportJj)gridView1.GetFocusedRow());
             if (DialogResult.OK == dayReportJjForm.ShowDialog())
             {
                 RefreshData();

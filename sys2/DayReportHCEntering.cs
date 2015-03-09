@@ -110,9 +110,9 @@ namespace sys2
         {
             if (workingFace != null)
             {
-                var ws = new WorkingfaceSimple(workingFace.WorkingFaceId, workingFace.WorkingFaceName,
-                    workingFace.WorkingfaceTypeEnum);
-                selectWorkingfaceSimple1.SelectTunnelItemWithoutHistory(ws);
+                //var ws = new WorkingfaceSimple(workingFace.WorkingFaceId, workingFace.WorkingFaceName,
+                //    workingFace.WorkingfaceTypeEnum);
+                //selectWorkingfaceSimple1.SelectTunnelItemWithoutHistory(ws);
 
 
                 tunnelZY = workingFace.Tunnels.First(u => u.TunnelType == TunnelTypeEnum.STOPING_ZY);
@@ -311,16 +311,11 @@ namespace sys2
             }
             if (Text == Const_MS.DAY_REPORT_HC_ADD)
             {
-                TunnelDefaultSelect.InsertDefaultTunnel(DayReportHc.TableName, selectWorkingfaceSimple1.IWorkingfaceId);
                 insertDayReportHCInfo();
             }
             else if (Text == Const_MS.DAY_REPORT_HC_CHANGE)
             {
-                DayReportHc oldDayReportHCEntity = _dayReportHCEntity; //修改前实体
-                TunnelDefaultSelect.UpdateDefaultTunnel(DayReportHc.TableName, selectWorkingfaceSimple1.IWorkingfaceId);
                 updateDayReportHCInfo();
-
-                DayReportHc newDayReportHCEntity = _dayReportHCEntity; //修改后实体
             }
         }
 
@@ -461,14 +456,14 @@ namespace sys2
                     {
                         GeoStruct tmp = geoinfos[i];
 
-                        var geologyspaceEntity = new GeologySpace();
-                        geologyspaceEntity.WorkingFace =
-                            WorkingFace.Find(selectWorkingfaceSimple1.IWorkingfaceId);
-                        geologyspaceEntity.TectonicType = Convert.ToInt32(key);
-
-                        geologyspaceEntity.TectonicId = tmp.geoinfos[GIS_Const.FIELD_BID];
-                        geologyspaceEntity.Distance = tmp.dist;
-                        geologyspaceEntity.OnDateTime = DateTime.Now.ToShortDateString();
+                        var geologyspaceEntity = new GeologySpace
+                        {
+                            WorkingFace = selectWorkingfaceSimple1.SelectedWorkingFace,
+                            TectonicType = Convert.ToInt32(key),
+                            TectonicId = tmp.geoinfos[GIS_Const.FIELD_BID],
+                            Distance = tmp.dist,
+                            OnDateTime = DateTime.Now.ToShortDateString()
+                        };
 
                         geologyspaceEntity.Save();
                     }
@@ -495,7 +490,7 @@ namespace sys2
                 //队别名称
                 dayReportHCEntity.Team = Team.Find(cboTeamName.SelectedValue);
                 //绑定回采面编号
-                dayReportHCEntity.WorkingFace.WorkingFaceId = selectWorkingfaceSimple1.IWorkingfaceId;
+                dayReportHCEntity.WorkingFace = selectWorkingfaceSimple1.SelectedWorkingFace;
 
                 DataGridViewCellCollection cells = dgrdvDayReportHC.Rows[i].Cells;
 
@@ -581,7 +576,7 @@ namespace sys2
                 // 工作面坐标已经改变，需要更新工作面信息
                 Log.Debug("发送地址构造消息------开始");
                 // 通知服务端回采进尺已经添加
-                var msg = new UpdateWarningDataMsg(selectWorkingfaceSimple1.IWorkingfaceId,
+                var msg = new UpdateWarningDataMsg(selectWorkingfaceSimple1.SelectedWorkingFace.WorkingFaceId,
                     Const.INVALID_ID,
                     DayReportHc.TableName, OPERATION_TYPE.ADD, DateTime.Now);
                 SocketUtil.SendMsg2Server(msg);
@@ -595,7 +590,7 @@ namespace sys2
         private void updateDayReportHCInfo()
         {
             //绑定回采面编号
-            _dayReportHCEntity.WorkingFace.WorkingFaceId = selectWorkingfaceSimple1.IWorkingfaceId;
+            _dayReportHCEntity.WorkingFace.WorkingFaceId = selectWorkingfaceSimple1.SelectedWorkingFace.WorkingFaceId;
             //队别名称
             _dayReportHCEntity.Team.TeamId = Convert.ToInt32(cboTeamName.SelectedValue);
             //日期
@@ -687,7 +682,7 @@ namespace sys2
         private bool check()
         {
             //工作面是否选择
-            if (selectWorkingfaceSimple1.IWorkingfaceId == 0)
+            if (selectWorkingfaceSimple1.SelectedWorkingFace != null)
             {
                 Alert.alert(Const.MSG_PLEASE_CHOOSE + Const_MS.WORKINGFACE + Const.SIGN_EXCLAMATION_MARK);
                 return false;
