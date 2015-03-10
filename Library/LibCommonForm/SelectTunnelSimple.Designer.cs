@@ -70,7 +70,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox cbxTunnel;
+        public System.Windows.Forms.ComboBox cbxTunnel;
         private System.Windows.Forms.Button btnChooseTunnel;
     }
 }

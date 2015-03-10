@@ -59,7 +59,8 @@ namespace LibPanels
         /// </summary>
         private void addInfo()
         {
-            bindTeamInfo();
+            DataBindUtil.LoadTeam(cboTeamName);
+            DataBindUtil.LoadTeamMemberByTeamName(cboSubmitter, cboTeamName.Text);
             DataBindUtil.LoadWorkTime(cboWorkTime,
                 rbtn38.Checked ? Const_MS.WORK_GROUP_ID_38 : Const_MS.WORK_GROUP_ID_46);
 
@@ -102,15 +103,15 @@ namespace LibPanels
         /// <summary>
         ///     绑定队别名称
         /// </summary>
-        private void bindTeamInfo()
-        {
-            cboTeamName.Items.Clear();
-            Team[] team = Team.FindAll();
-            foreach (Team t in team)
-            {
-                cboTeamName.Items.Add(t.TeamName);
-            }
-        }
+        //private void bindTeamInfo()
+        //{
+        //    cboTeamName.Items.Clear();
+        //    Team[] team = Team.FindAll();
+        //    foreach (Team t in team)
+        //    {
+        //        cboTeamName.Items.Add(t.TeamName);
+        //    }
+        //}
 
         /// <summary>
         ///     绑定班次
@@ -498,13 +499,11 @@ namespace LibPanels
             if (rbtn38.Checked)
             {
                 cboWorkTime.Text = "";
-                cboWorkTime.Items.Clear();
                 DataBindUtil.LoadWorkTime(cboWorkTime, Const_MS.WORK_GROUP_ID_38);
             }
             else
             {
                 cboWorkTime.Text = "";
-                cboWorkTime.Items.Clear();
                 DataBindUtil.LoadWorkTime(cboWorkTime, Const_MS.WORK_GROUP_ID_46);
             }
 
