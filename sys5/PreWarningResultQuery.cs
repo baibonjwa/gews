@@ -1,25 +1,13 @@
-﻿// ******************************************************************
-// 概  述：预警信息结果查询
-// 作  者：秦凯
-// 创建日期：2014/03/23
-// 版本号：V1.0
-// 版本信息:
-// V1.0 新建
-// ******************************************************************
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Linq;
-using System.Text;
+using System.Drawing;
 using System.Windows.Forms;
 using LibBusiness;
-using LibEntity;
 using LibCommon;
-using LibCommonControl;
-using System.Drawing;
+using LibEntity;
+using _5.WarningManagement;
 
-namespace _5.WarningManagement
+namespace sys5
 {
     public partial class PreWarningResultQuery : Form
     {
@@ -204,11 +192,11 @@ namespace _5.WarningManagement
         {
             //获取选择的时间范围
             string dateStartYear = _dtpStartTime.Value.Year.ToString();
-            string dateStartMonth = _dtpStartTime.Value.Month < 10 ? "0" + _dtpStartTime.Value.Month.ToString() : _dtpStartTime.Value.Month.ToString();
-            string dateStartDay = _dtpStartTime.Value.Day < 10 ? "0" + _dtpStartTime.Value.Day.ToString() : _dtpStartTime.Value.Day.ToString();
+            string dateStartMonth = _dtpStartTime.Value.Month < 10 ? "0" + _dtpStartTime.Value.Month : _dtpStartTime.Value.Month.ToString();
+            string dateStartDay = _dtpStartTime.Value.Day < 10 ? "0" + _dtpStartTime.Value.Day : _dtpStartTime.Value.Day.ToString();
             string dateEndYear = _dtpEndTime.Value.Year.ToString();
-            string dateEndMonth = _dtpEndTime.Value.Month < 10 ? "0" + _dtpEndTime.Value.Month.ToString() : _dtpEndTime.Value.Month.ToString();
-            string dateEndDay = _dtpEndTime.Value.Day < 10 ? "0" + _dtpEndTime.Value.Day.ToString() : _dtpEndTime.Value.Day.ToString();
+            string dateEndMonth = _dtpEndTime.Value.Month < 10 ? "0" + _dtpEndTime.Value.Month : _dtpEndTime.Value.Month.ToString();
+            string dateEndDay = _dtpEndTime.Value.Day < 10 ? "0" + _dtpEndTime.Value.Day : _dtpEndTime.Value.Day.ToString();
 
             //自行转换成数据库中合适的类型
             string dateStart = dateStartYear + "-" + dateStartMonth + "-" + dateStartDay + " 00:00:00";
@@ -222,14 +210,6 @@ namespace _5.WarningManagement
             PreWarningResultQueryBLL.PreWarningResultSort(dateStart, dateEnd, _tsProgressBar, workingFace, cbWarningType.SelectedItem.ToString());
             //调取填充Farpoint的事件
             LoadTunelInformation();
-            //}
-            //else
-            //{
-            //    Alert.alert("请先选择工作面");
-            //}
-
-
-
         }
 
         /// <summary>

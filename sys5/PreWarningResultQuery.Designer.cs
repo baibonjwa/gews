@@ -1,4 +1,4 @@
-﻿namespace _5.WarningManagement
+﻿namespace sys5
 {
     partial class PreWarningResultQuery
     {

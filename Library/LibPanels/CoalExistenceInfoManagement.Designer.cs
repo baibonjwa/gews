@@ -42,14 +42,8 @@ namespace LibPanels
             this.tsBtnExit = new System.Windows.Forms.ToolStripButton();
             this.gcCoalExistence = new DevExpress.XtraGrid.GridControl();
             this.bandedGridView1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridView();
-            this.gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.bandedGridColumn1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn17 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.gridBand2 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.bandedGridColumn18 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.bandedGridColumn19 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.bandedGridColumn20 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.gridBand7 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.bandedGridColumn22 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn23 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn24 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
@@ -57,7 +51,6 @@ namespace LibPanels
             this.bandedGridColumn25 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn27 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn32 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.gridBand15 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.bandedGridColumn21 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn30 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn31 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
@@ -65,6 +58,9 @@ namespace LibPanels
             this.bandedGridColumn28 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.controlNavigator1 = new DevExpress.XtraEditors.ControlNavigator();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.gridBand7 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.gridBand15 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcCoalExistence)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bandedGridView1)).BeginInit();
@@ -72,10 +68,9 @@ namespace LibPanels
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 653);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 557);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1111, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(952, 22);
             this.statusStrip1.TabIndex = 79;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -92,7 +87,7 @@ namespace LibPanels
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1111, 24);
+            this.toolStrip1.Size = new System.Drawing.Size(952, 24);
             this.toolStrip1.TabIndex = 80;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -165,10 +160,10 @@ namespace LibPanels
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gcCoalExistence.Cursor = System.Windows.Forms.Cursors.Default;
-            this.gcCoalExistence.Location = new System.Drawing.Point(12, 27);
+            this.gcCoalExistence.Location = new System.Drawing.Point(10, 23);
             this.gcCoalExistence.MainView = this.bandedGridView1;
             this.gcCoalExistence.Name = "gcCoalExistence";
-            this.gcCoalExistence.Size = new System.Drawing.Size(1087, 593);
+            this.gcCoalExistence.Size = new System.Drawing.Size(932, 508);
             this.gcCoalExistence.TabIndex = 81;
             this.gcCoalExistence.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.bandedGridView1});
@@ -177,14 +172,10 @@ namespace LibPanels
             // 
             this.bandedGridView1.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
             this.gridBand1,
-            this.gridBand2,
             this.gridBand7,
             this.gridBand15});
             this.bandedGridView1.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] {
             this.bandedGridColumn17,
-            this.bandedGridColumn18,
-            this.bandedGridColumn19,
-            this.bandedGridColumn20,
             this.bandedGridColumn21,
             this.bandedGridColumn22,
             this.bandedGridColumn23,
@@ -200,18 +191,8 @@ namespace LibPanels
             this.bandedGridColumn1});
             this.bandedGridView1.GridControl = this.gcCoalExistence;
             this.bandedGridView1.Name = "bandedGridView1";
+            this.bandedGridView1.OptionsBehavior.Editable = false;
             this.bandedGridView1.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.bandedGridView1_CustomColumnDisplayText);
-            // 
-            // gridBand1
-            // 
-            this.gridBand1.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridBand1.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridBand1.Caption = "巷道信息";
-            this.gridBand1.Columns.Add(this.bandedGridColumn1);
-            this.gridBand1.Columns.Add(this.bandedGridColumn17);
-            this.gridBand1.Name = "gridBand1";
-            this.gridBand1.VisibleIndex = 0;
-            this.gridBand1.Width = 145;
             // 
             // bandedGridColumn1
             // 
@@ -228,58 +209,6 @@ namespace LibPanels
             this.bandedGridColumn17.Name = "bandedGridColumn17";
             this.bandedGridColumn17.Visible = true;
             this.bandedGridColumn17.Width = 78;
-            // 
-            // gridBand2
-            // 
-            this.gridBand2.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridBand2.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridBand2.Caption = "坐标";
-            this.gridBand2.Columns.Add(this.bandedGridColumn18);
-            this.gridBand2.Columns.Add(this.bandedGridColumn19);
-            this.gridBand2.Columns.Add(this.bandedGridColumn20);
-            this.gridBand2.Name = "gridBand2";
-            this.gridBand2.VisibleIndex = 1;
-            this.gridBand2.Width = 106;
-            // 
-            // bandedGridColumn18
-            // 
-            this.bandedGridColumn18.Caption = "X";
-            this.bandedGridColumn18.FieldName = "CoordinateX";
-            this.bandedGridColumn18.Name = "bandedGridColumn18";
-            this.bandedGridColumn18.Visible = true;
-            this.bandedGridColumn18.Width = 28;
-            // 
-            // bandedGridColumn19
-            // 
-            this.bandedGridColumn19.Caption = "Y";
-            this.bandedGridColumn19.FieldName = "CoordinateY";
-            this.bandedGridColumn19.Name = "bandedGridColumn19";
-            this.bandedGridColumn19.Visible = true;
-            this.bandedGridColumn19.Width = 28;
-            // 
-            // bandedGridColumn20
-            // 
-            this.bandedGridColumn20.Caption = "Z";
-            this.bandedGridColumn20.FieldName = "CoordinateZ";
-            this.bandedGridColumn20.Name = "bandedGridColumn20";
-            this.bandedGridColumn20.Visible = true;
-            this.bandedGridColumn20.Width = 50;
-            // 
-            // gridBand7
-            // 
-            this.gridBand7.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridBand7.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridBand7.Caption = "煤层赋存预警指标";
-            this.gridBand7.Columns.Add(this.bandedGridColumn22);
-            this.gridBand7.Columns.Add(this.bandedGridColumn23);
-            this.gridBand7.Columns.Add(this.bandedGridColumn24);
-            this.gridBand7.Columns.Add(this.bandedGridColumn26);
-            this.gridBand7.Columns.Add(this.bandedGridColumn25);
-            this.gridBand7.Columns.Add(this.bandedGridColumn27);
-            this.gridBand7.Columns.Add(this.bandedGridColumn32);
-            this.gridBand7.Name = "gridBand7";
-            this.gridBand7.VisibleIndex = 2;
-            this.gridBand7.Width = 665;
             // 
             // bandedGridColumn22
             // 
@@ -336,20 +265,6 @@ namespace LibPanels
             this.bandedGridColumn32.Visible = true;
             this.bandedGridColumn32.Width = 25;
             // 
-            // gridBand15
-            // 
-            this.gridBand15.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridBand15.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridBand15.Caption = "提交信息";
-            this.gridBand15.Columns.Add(this.bandedGridColumn21);
-            this.gridBand15.Columns.Add(this.bandedGridColumn30);
-            this.gridBand15.Columns.Add(this.bandedGridColumn31);
-            this.gridBand15.Columns.Add(this.bandedGridColumn29);
-            this.gridBand15.Columns.Add(this.bandedGridColumn28);
-            this.gridBand15.Name = "gridBand15";
-            this.gridBand15.VisibleIndex = 3;
-            this.gridBand15.Width = 178;
-            // 
             // bandedGridColumn21
             // 
             this.bandedGridColumn21.Caption = "提交日期";
@@ -394,20 +309,61 @@ namespace LibPanels
             // controlNavigator1
             // 
             this.controlNavigator1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.controlNavigator1.Location = new System.Drawing.Point(12, 626);
+            this.controlNavigator1.Location = new System.Drawing.Point(10, 537);
             this.controlNavigator1.Name = "controlNavigator1";
             this.controlNavigator1.NavigatableControl = this.gcCoalExistence;
-            this.controlNavigator1.Size = new System.Drawing.Size(311, 24);
+            this.controlNavigator1.Size = new System.Drawing.Size(267, 21);
             this.controlNavigator1.TabIndex = 82;
             this.controlNavigator1.Text = "controlNavigator1";
             this.controlNavigator1.TextLocation = DevExpress.XtraEditors.NavigatorButtonsTextLocation.Center;
             this.controlNavigator1.TextStringFormat = "记录 {0} / {1}";
             // 
+            // gridBand1
+            // 
+            this.gridBand1.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridBand1.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridBand1.Caption = "巷道信息";
+            this.gridBand1.Columns.Add(this.bandedGridColumn1);
+            this.gridBand1.Columns.Add(this.bandedGridColumn17);
+            this.gridBand1.Name = "gridBand1";
+            this.gridBand1.VisibleIndex = 0;
+            this.gridBand1.Width = 145;
+            // 
+            // gridBand7
+            // 
+            this.gridBand7.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridBand7.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridBand7.Caption = "煤层赋存预警指标";
+            this.gridBand7.Columns.Add(this.bandedGridColumn22);
+            this.gridBand7.Columns.Add(this.bandedGridColumn23);
+            this.gridBand7.Columns.Add(this.bandedGridColumn24);
+            this.gridBand7.Columns.Add(this.bandedGridColumn26);
+            this.gridBand7.Columns.Add(this.bandedGridColumn25);
+            this.gridBand7.Columns.Add(this.bandedGridColumn27);
+            this.gridBand7.Columns.Add(this.bandedGridColumn32);
+            this.gridBand7.Name = "gridBand7";
+            this.gridBand7.VisibleIndex = 1;
+            this.gridBand7.Width = 665;
+            // 
+            // gridBand15
+            // 
+            this.gridBand15.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridBand15.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridBand15.Caption = "提交信息";
+            this.gridBand15.Columns.Add(this.bandedGridColumn21);
+            this.gridBand15.Columns.Add(this.bandedGridColumn30);
+            this.gridBand15.Columns.Add(this.bandedGridColumn31);
+            this.gridBand15.Columns.Add(this.bandedGridColumn29);
+            this.gridBand15.Columns.Add(this.bandedGridColumn28);
+            this.gridBand15.Name = "gridBand15";
+            this.gridBand15.VisibleIndex = 2;
+            this.gridBand15.Width = 178;
+            // 
             // CoalExistenceInfoManagement
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1111, 675);
+            this.ClientSize = new System.Drawing.Size(952, 579);
             this.Controls.Add(this.controlNavigator1);
             this.Controls.Add(this.gcCoalExistence);
             this.Controls.Add(this.toolStrip1);
@@ -443,9 +399,6 @@ namespace LibPanels
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridView bandedGridView1;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn17;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn21;
-        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn18;
-        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn19;
-        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn20;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn24;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn23;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn26;
@@ -458,10 +411,9 @@ namespace LibPanels
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn31;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn32;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand2;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand7;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand15;
-        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }

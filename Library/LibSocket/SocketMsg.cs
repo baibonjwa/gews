@@ -369,8 +369,11 @@ namespace LibSocket
         // 更新地质构造信息 
         UPDATE_GEOLOG_DATA = ConstIndexs.C2S_SOCKET_ID_START_IDX + 6,
 
+        UPDATE_WARNING_RESULT = ConstIndexs.C2S_SOCKET_ID_START_IDX + 7
+
         // 更新传感器
-        UPDATE_TRANSDUCER = ConstIndexs.C2S_SOCKET_ID_START_IDX + 7
+        // UPDATE_TRANSDUCER = ConstIndexs.C2S_SOCKET_ID_START_IDX + 7
+
 
         #endregion
     }

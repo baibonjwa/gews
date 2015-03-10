@@ -15,6 +15,7 @@ using System.Windows.Forms;
 using LibBusiness;
 using LibCommon;
 using LibEntity;
+using LibSocket;
 using _5.WarningManagement;
 
 namespace sys5
@@ -637,6 +638,8 @@ namespace sys5
         private void PreWarningLastedResultQuery_Load(object sender, EventArgs e)
         {
             //timer1.Enabled = true;
+            var msg = new SocketMessage(COMMAND_ID.UPDATE_WARNING_RESULT, DateTime.Now);
+            SocketUtil.SendMsg2Server(msg);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
