@@ -106,6 +106,10 @@ namespace LibEntity
         [Property("BINDINGID")]
         public string BindingId { get; set; }
 
+
+        [Property("RULE_IDS")]
+        public string RuleIds { get; set; }
+
         /// <summary>
         ///     巷道使用次数，用来缓存信息，此外无实际意义。
         /// </summary>
@@ -150,6 +154,15 @@ namespace LibEntity
             var criterion = new ICriterion[]
             {
                 Restrictions.Eq("TunnelType", tunnelType)
+            };
+            return FindAll(criterion);
+        }
+
+        public static Tunnel[] FindAllWithHasRules()
+        {
+            var criterion = new ICriterion[]
+            {
+                Restrictions.IsNotNull("RuleIds")
             };
             return FindAll(criterion);
         }

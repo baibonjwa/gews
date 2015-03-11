@@ -384,8 +384,6 @@ namespace sys5
                 FpUtil.setCellImg(summaryCells[i, _iOverLimitVentilation], _ents[i].OverLimitWarningResult.Ventilation);
                 //管理
                 FpUtil.setCellImg(summaryCells[i, _iOverLimitManagement], _ents[i].OverLimitWarningResult.Management);
-                //其他
-                FpUtil.setCellImg(summaryCells[i, _iOverLimitManagement], _ents[i].OverLimitWarningResult.Other);
 
                 //瓦斯
                 FpUtil.setCellImg(summaryCells[i, _iOutBurstGas], _ents[i].OutBrustWarningResult.Gas);
@@ -397,8 +395,6 @@ namespace sys5
                 FpUtil.setCellImg(summaryCells[i, _iOutBurstVentilation], _ents[i].OutBrustWarningResult.Ventilation);
                 //管理
                 FpUtil.setCellImg(summaryCells[i, _iOutBurstManagement], _ents[i].OutBrustWarningResult.Management);
-                //其他
-                FpUtil.setCellImg(summaryCells[i, _iOverLimitManagement], _ents[i].OutBrustWarningResult.Other);
 
                 //记录巷道ID
                 summaryCells[i, COLUMN_TUNNEL_ID].Text = _ents[i].TunnelID.ToString().Trim();
@@ -408,63 +404,6 @@ namespace sys5
             //传入默认值，使得右侧详细信息随之改变
             _fpTunelInfo_SelectionChanged(null, null);
 
-        }
-
-        /// <summary>
-        /// 转换数据库中列名为中文显示
-        /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        private string ConvertDatabaseColumnNameToDisPlayColumnsName(string name)
-        {
-            switch (name)
-            {
-                case "TUNNEL_NAME":
-                    return "巷道名称";
-                case "date_shift":
-                    return "班次";
-                case "data_time":
-                    return "日期";
-                case "warning_type":
-                    return "预警类型";
-                case "warning_result":
-                    return "预警结果";
-            }
-            return "";
-        }
-
-        /// <summary>
-        /// 添加巷道名称
-        /// </summary>
-        /// <param name="ents"></param>
-        private void AddTunelNames()
-        {
-            _cbxSelWorkSurface.Items.Clear();
-            _cbxSelWorkSurface.Items.Add("<全部>");
-
-        }
-
-        /// <summary>
-        /// 添加预警类型
-        /// </summary>
-        //private void AddWarningType()
-        //{
-        //    _cbxWarningType.Items.Clear();
-        //    _cbxWarningType.Items.Add("<全部>");
-        //    _cbxWarningType.Items.Add(LibCommon.WarningResultCHN.红色预警.ToString());
-        //    _cbxWarningType.Items.Add(LibCommon.WarningResultCHN.黄色预警.ToString());
-        //    _cbxWarningType.Items.Add(LibCommon.WarningResultCHN.正常.ToString());
-        //    _cbxWarningType.SelectedIndex = 0;
-        //}
-
-        /// <summary>
-        /// 测试用
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button1_Click(object sender, EventArgs e)
-        {
-            LoadTunelInformation();
         }
 
         /// <summary>

@@ -1,13 +1,4 @@
-﻿// ******************************************************************
-// 概  述：最新预警结果查询
-// 作  者：秦凯
-// 创建日期：2014/03/18
-// 版本号：V1.0
-// 版本信息:
-// V1.0 新建
-// ******************************************************************
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -170,11 +161,7 @@ namespace sys5
                         }
                     }
                 }
-
-
-
                 _warningRecord = new List<LibEntity.PreWarningResultQuery>(_ents2);
-                //SetShortMessage.Sms_Send(phoneNumber, "预警测试信息");
             }
             else
             {

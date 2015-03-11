@@ -87,17 +87,8 @@ namespace LibEntity
         }
 
         /// <summary>
-        ///     其他
-        /// </summary>
-        public int Other
-        {
-            get { return _iOther; }
-            set { _iOther = value; }
-        }
-
-        /// <summary>
         ///     处理状态
         /// </summary>
-        public string HandleStatus { get; set; }
+        public int HandleStatus { get; set; }
     }
 }
