@@ -1,5 +1,6 @@
 ﻿
 using Castle.ActiveRecord;
+using NHibernate.Criterion;
 
 namespace LibEntity
 {
@@ -50,5 +51,15 @@ namespace LibEntity
         /// </summary>
         [Property("DATE_TIME")]
         public string OnDateTime { get; set; }
+
+        public static GeologySpace FindOneByWorkingFaceIdAndTeconicId(int workingFaceId, string teconicId)
+        {
+            var criterion = new ICriterion[]
+            {
+                Restrictions.Eq("TectonicId", teconicId),
+                Restrictions.Eq("WorkingFace.WorkingFaceId", workingFaceId)
+            };
+            return FindOne(criterion);
+        }
     }
 }

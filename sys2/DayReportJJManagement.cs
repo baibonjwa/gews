@@ -79,9 +79,10 @@ namespace sys2
             var entity = (DayReportJj)gridView1.GetFocusedRow();
             // 掘进工作面，只有一条巷道
             var tunnel = Tunnel.FindFirstByWorkingFaceId(entity.WorkingFace.WorkingFaceId);
-            //删除操作
-            entity.Delete();
             DelJJCD(tunnel.TunnelId.ToString(CultureInfo.InvariantCulture), entity.BindingId, entity.WorkingFace.WorkingFaceId);
+            entity.Delete();
+            RefreshData();
+
             // 向server端发送更新预警数据
             var msg = new UpdateWarningDataMsg(entity.WorkingFace.WorkingFaceId,
                 Const.INVALID_ID,
@@ -131,16 +132,23 @@ namespace sys2
                     //string geoType = key;
                     foreach (var tmp in geoinfos)
                     {
-                        var geologyspaceEntity = new GeologySpace
+                        var geologySpace = GeologySpace.FindOneByWorkingFaceIdAndTeconicId(workingfaceid,
+                             tmp.geoinfos[GIS.GIS_Const.FIELD_BID]);
+                        if (geologySpace != null)
                         {
-                            WorkingFace = WorkingFace.Find(workingfaceid),
-                            TectonicType = Convert.ToInt32(key),
-                            TectonicId = tmp.geoinfos[GIS.GIS_Const.FIELD_BID],
-                            Distance = tmp.dist,
-                            OnDateTime = DateTime.Now.ToShortDateString()
-                        };
+                            geologySpace.Distance = tmp.dist;
+                            geologySpace.OnDateTime = DateTime.Now.ToShortDateString();
 
-                        geologyspaceEntity.Save();
+                            //var geologyspaceEntity = new GeologySpace
+                            //{
+                            //    WorkingFace = WorkingFace.Find(workingfaceid),
+                            //    TectonicType = Convert.ToInt32(key),
+                            //    TectonicId = ,
+                            //    Distance = tmp.dist,
+                            //    OnDateTime = DateTime.Now.ToShortDateString()
+                            //};
+                            geologySpace.Save();
+                        }
                     }
                 }
 

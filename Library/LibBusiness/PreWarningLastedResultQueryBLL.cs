@@ -1,18 +1,7 @@
-﻿// ******************************************************************
-// 概  述：最新预警结果查询业务逻辑
-// 作  者：秦凯
-// 创建日期：2014/03/18
-// 版本号：V1.0
-// 版本信息:
-// V1.0 新建
-// ******************************************************************
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
-using System.Windows.Forms.VisualStyles;
 using LibBusiness.CommonBLL;
 using LibEntity;
 using LibDatabase;
@@ -41,7 +30,7 @@ namespace LibBusiness
                 DateTime = Convert.ToDateTime(time),
                 Date_Shift = shift,
                 TunnelID = tunnel.TunnelId,
-                TunelName = tunnel.TunnelName,
+                TunelName = GetTunelNameByTunelID(tunnel.TunnelId),
                 WorkingfaceId = tunnel.WorkingFace.WorkingFaceId,
                 WorkingfaceName = tunnel.WorkingFace.WorkingFaceName,
                 OutBrustWarningResult = new WarningResultEnt
