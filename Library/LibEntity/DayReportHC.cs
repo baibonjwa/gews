@@ -30,6 +30,11 @@ namespace LibEntity
         [Property("ISDEL")]
         public int IsDel { get; set; }
 
+        public static DayReportHc[] FindAll()
+        {
+            return (DayReportHc[])FindAll(typeof(DayReportHc));
+        }
+
         public static DayReportHc FindByBid(string bid)
         {
             var criterion = new List<ICriterion>

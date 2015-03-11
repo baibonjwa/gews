@@ -69,7 +69,7 @@
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1136, 24);
+            this.toolStrip1.Size = new System.Drawing.Size(974, 24);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.TabStop = true;
             this.toolStrip1.Text = "toolStrip1";
@@ -139,10 +139,9 @@
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 715);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 610);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1136, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(974, 22);
             this.statusStrip1.TabIndex = 10;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -156,10 +155,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gcDayReportHc.Cursor = System.Windows.Forms.Cursors.Default;
-            this.gcDayReportHc.Location = new System.Drawing.Point(12, 27);
+            this.gcDayReportHc.Location = new System.Drawing.Point(10, 23);
             this.gcDayReportHc.MainView = this.gridView1;
             this.gcDayReportHc.Name = "gcDayReportHc";
-            this.gcDayReportHc.Size = new System.Drawing.Size(1108, 655);
+            this.gcDayReportHc.Size = new System.Drawing.Size(950, 561);
             this.gcDayReportHc.TabIndex = 11;
             this.gcDayReportHc.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -190,7 +189,7 @@
             // gridColumn2
             // 
             this.gridColumn2.Caption = "工作面名称";
-            this.gridColumn2.FieldName = "WorkingFace.WorkinFaceName";
+            this.gridColumn2.FieldName = "WorkingFace.WorkingFaceName";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 1;
@@ -254,10 +253,10 @@
             // controlNavigator1
             // 
             this.controlNavigator1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.controlNavigator1.Location = new System.Drawing.Point(12, 688);
+            this.controlNavigator1.Location = new System.Drawing.Point(10, 590);
             this.controlNavigator1.Name = "controlNavigator1";
             this.controlNavigator1.NavigatableControl = this.gcDayReportHc;
-            this.controlNavigator1.Size = new System.Drawing.Size(311, 24);
+            this.controlNavigator1.Size = new System.Drawing.Size(267, 21);
             this.controlNavigator1.TabIndex = 88;
             this.controlNavigator1.Text = "controlNavigator1";
             this.controlNavigator1.TextLocation = DevExpress.XtraEditors.NavigatorButtonsTextLocation.Center;
@@ -265,9 +264,9 @@
             // 
             // DayReportHcManagement
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1136, 737);
+            this.ClientSize = new System.Drawing.Size(974, 632);
             this.Controls.Add(this.controlNavigator1);
             this.Controls.Add(this.gcDayReportHc);
             this.Controls.Add(this.statusStrip1);
