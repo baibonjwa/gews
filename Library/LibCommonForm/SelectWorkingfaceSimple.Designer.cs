@@ -34,12 +34,14 @@
             // 
             // cbxWorkingface
             // 
+            this.cbxWorkingface.DisplayMember = "WorkingFaceName";
             this.cbxWorkingface.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxWorkingface.FormattingEnabled = true;
             this.cbxWorkingface.Location = new System.Drawing.Point(3, 9);
             this.cbxWorkingface.Name = "cbxWorkingface";
             this.cbxWorkingface.Size = new System.Drawing.Size(119, 20);
             this.cbxWorkingface.TabIndex = 1;
+            this.cbxWorkingface.ValueMember = "WorkingFaceId";
             this.cbxWorkingface.SelectedIndexChanged += new System.EventHandler(this.cbxTunnel_SelectedIndexChanged);
             this.cbxWorkingface.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cbxTunnel_KeyDown);
             // 
@@ -53,13 +55,13 @@
             this.btnChooseWorkingface.UseVisualStyleBackColor = true;
             this.btnChooseWorkingface.Click += new System.EventHandler(this.btnChooseTunnel_Click);
             // 
-            // SelectTunnelWorkingfaceSimple
+            // SelectWorkingfaceSimple
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.btnChooseWorkingface);
             this.Controls.Add(this.cbxWorkingface);
-            this.Name = "SelectTunnelWorkingfaceSimple";
+            this.Name = "SelectWorkingfaceSimple";
             this.Size = new System.Drawing.Size(219, 38);
             this.Load += new System.EventHandler(this.SelectTunnelSimple_Load);
             this.ResumeLayout(false);

@@ -50,6 +50,7 @@ namespace LibCommonForm
             if (DialogResult.OK != dlg.ShowDialog()) return;
             var workingFace = dlg.SelectedWorkingFace;
             cbxWorkingface.Items.Add(workingFace);
+            cbxWorkingface.SelectedItem = workingFace;
             WriteRecentWorkingFaceXml();
         }
 
