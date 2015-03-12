@@ -10,12 +10,10 @@ using GIS.HdProc;
 using LibBusiness;
 using LibBusiness.CommonBLL;
 using LibCommon;
-using LibCommonForm;
 using LibEntity;
 using LibPanels;
 using LibSocket;
 using Point = System.Drawing.Point;
-using TunnelDefaultSelect = LibBusiness.TunnelDefaultSelect;
 
 namespace sys2
 {
@@ -35,7 +33,6 @@ namespace sys2
         private readonly DateTimePicker dtp = new DateTimePicker(); //这里实例化一个DateTimePicker控件
         private Rectangle _Rectangle;
         private int[] _arr;
-        private WorkingFace workingFace;
 
         #endregion
 
@@ -56,26 +53,6 @@ namespace sys2
             addInfo();
             //设置窗体格式
             FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_MS.DAY_REPORT_JJ_ADD);
-
-            //自定义控件初始化
-            //WorkingFaceSelectEntity workingFaceSelectEntity = WorkingFaceSelect.SelectWorkingFace(DayReportHCDbConstNames.TABLE_NAME);
-
-            //if (workingFaceSelectEntity != null)
-            //{
-            //    _arr = new int[5];
-            //    _arr[0] = workingFaceSelectEntity.MineID;
-            //    _arr[1] = workingFaceSelectEntity.HorizontalID;
-            //    _arr[2] = workingFaceSelectEntity.MiningAreaID;
-
-            //    this.selectWorkingFaceControl1.setCurSelectedID(_arr);
-            //}
-            //else
-            //{
-
-            //this.selectWorkingFaceControl1.loadMineName();
-            //}
-
-            //注册事件 
         }
 
         /// <summary>
@@ -100,38 +77,17 @@ namespace sys2
 
             dgrdvDayReportJJ.DataError += delegate { };
 
-            workingFace = WorkingFace.Find(
-                Convert.ToInt32(_arr[3]));
-
-
-            //自定义控件初始化
-            //WorkingFaceSelectEntity workingFaceSelectEntity = WorkingFaceSelect.SelectWorkingFace(DayReportHCDbConstNames.TABLE_NAME);
-            //if (workingFaceSelectEntity != null)
-            //{
-            //    _arr = new int[5];
-            //    _arr[0] = workingFaceSelectEntity.MineID;
-            //    _arr[1] = workingFaceSelectEntity.HorizontalID;
-            //    _arr[2] = workingFaceSelectEntity.MiningAreaID;
-
-            //this.selectWorkingFaceControl1.setCurSelectedID(_arr);
-
-            //}
-            //else
-            //{
-            //    this.selectWorkingFaceControl1.loadMineName();
-            //}
-            //注册事件
+            selectWorkingfaceSimple1.SelectedWorkingFace = dayReportJJEntity.WorkingFace;
         }
 
 
         private void DayReportJJEntering_Load(object sender, EventArgs e)
         {
-            if (workingFace != null)
-            {
-                //var ws = new WorkingfaceSimple(workingFace.WorkingFaceId, workingFace.WorkingFaceName,
-                //    workingFace.WorkingfaceTypeEnum);
-                //selectWorkingfaceSimple1.SelectTunnelItemWithoutHistory(ws);
-            }
+
+            //var ws = new WorkingfaceSimple(workingFace.WorkingFaceId, workingFace.WorkingFaceName,
+            //    workingFace.WorkingfaceTypeEnum);
+            //selectWorkingfaceSimple1.SelectTunnelItemWithoutHistory(ws);
+
         }
 
         /// <summary>
@@ -139,11 +95,8 @@ namespace sys2
         /// </summary>
         private void addInfo()
         {
-            //绑定队别名称
-            bindTeamInfo();
-            ////初始化班次
-            //this.bindWorkTimeFirstTime();
-            //设置为默认工作制式
+            DataBindUtil.LoadTeam(cboTeamName);
+            DataBindUtil.LoadTeamMemberByTeamName(cboSubmitter, cboTeamName.Text);
             if (WorkingTimeDefault.FindFirst().DefaultWorkTimeGroupId == Const_MS.WORK_GROUP_ID_38)
             {
                 rbtn38.Checked = true;
@@ -152,12 +105,7 @@ namespace sys2
             {
                 rbtn46.Checked = true;
             }
-            // 设置班次名称
             setWorkTimeName();
-
-            ////设置班次为当前时间对应的班次
-            //dgrdvDayReportJJ[0, 0].Value = WorkTime.returnSysWorkTime(rbtn38.Checked ? Const_MS.WORK_TIME_38 : Const_MS.WORK_TIME_46);
-
             dgrdvDayReportJJ[C_WORK_CONTENT, 0].Value = Const_MS.JJ;
         }
 
@@ -177,7 +125,7 @@ namespace sys2
                 strWorkTimeName = MineDataSimpleBLL.selectWorkTimeNameByWorkTimeGroupIdAndSysTime(2, sysDateTime);
             }
 
-            if (strWorkTimeName != null && strWorkTimeName != "")
+            if (!string.IsNullOrEmpty(strWorkTimeName))
             {
                 dgrdvDayReportJJ[C_WORK_TIME, 0].Value = strWorkTimeName;
             }
@@ -225,19 +173,6 @@ namespace sys2
             dgrdvDayReportJJ[C_COMMENTS, 0].Value = _dayReportJJEntity.Remarks;
         }
 
-        /// <summary>
-        ///     绑定队别名称
-        /// </summary>
-        private void bindTeamInfo()
-        {
-            cboTeamName.Items.Clear();
-            Team[] team = Team.FindAll();
-            foreach (Team t in team)
-            {
-                cboTeamName.Items.Add(t.TeamName);
-            }
-        }
-
 
         /// <summary>
         ///     添加队别
@@ -253,20 +188,17 @@ namespace sys2
             }
             else
             {
-                var teamEntity = new Team();
-                teamEntity.TeamId = Convert.ToInt32(cboTeamName.SelectedValue);
+                var teamEntity = new Team { TeamId = Convert.ToInt32(cboTeamName.SelectedValue) };
                 teamEntity = Team.Find(teamEntity.TeamId);
                 teamInfoForm = new TeamInfoEntering(teamEntity);
             }
 
-            if (DialogResult.OK == teamInfoForm.ShowDialog())
-            {
-                bindTeamInfo();
-                cboTeamName.Text = teamInfoForm.returnTeamName();
-                var ds = new DataSet();
+            if (DialogResult.OK != teamInfoForm.ShowDialog()) return;
+            DataBindUtil.LoadTeam(cboTeamName);
+            cboTeamName.Text = teamInfoForm.returnTeamName();
+            var ds = new DataSet();
 
-                DataBindUtil.LoadTeamMemberByTeamName(cboSubmitter, teamInfoForm.returnTeamName());
-            }
+            DataBindUtil.LoadTeamMemberByTeamName(cboSubmitter, teamInfoForm.returnTeamName());
         }
 
         /// <summary>
@@ -340,12 +272,12 @@ namespace sys2
             var workfacepos = pos[0].geo as IPoint;
             if (workfacepos != null)
             {
-                workingFace.Coordinate = new Coordinate(workfacepos.X, workfacepos.Y, 0.0);
-                workingFace.Save();
+                selectWorkingfaceSimple1.SelectedWorkingFace.Coordinate = new Coordinate(workfacepos.X, workfacepos.Y, 0.0);
+                selectWorkingfaceSimple1.SelectedWorkingFace.Save();
             }
             //查询地质结构信息
             geostructsinfos.Remove("LAST");
-            GeologySpaceBll.DeleteGeologySpaceEntityInfos(workingFace.WorkingFaceId); //删除工作面ID对应的地质构造信息
+            GeologySpaceBll.DeleteGeologySpaceEntityInfos(selectWorkingfaceSimple1.SelectedWorkingFace.WorkingFaceId); //删除工作面ID对应的地质构造信息
             foreach (string key in geostructsinfos.Keys)
             {
                 List<GeoStruct> geoinfos = geostructsinfos[key];
@@ -354,12 +286,14 @@ namespace sys2
                 {
                     GeoStruct tmp = geoinfos[i];
 
-                    var geologyspaceEntity = new GeologySpace();
-                    geologyspaceEntity.WorkingFace = workingFace;
-                    geologyspaceEntity.TectonicType = Convert.ToInt32(key);
-                    geologyspaceEntity.TectonicId = tmp.geoinfos[GIS_Const.FIELD_BID];
-                    geologyspaceEntity.Distance = tmp.dist;
-                    geologyspaceEntity.OnDateTime = DateTime.Now.ToShortDateString();
+                    var geologyspaceEntity = new GeologySpace
+                    {
+                        WorkingFace = selectWorkingfaceSimple1.SelectedWorkingFace,
+                        TectonicType = Convert.ToInt32(key),
+                        TectonicId = tmp.geoinfos[GIS_Const.FIELD_BID],
+                        Distance = tmp.dist,
+                        OnDateTime = DateTime.Now.ToShortDateString()
+                    };
 
                     geologyspaceEntity.Save();
                 }
@@ -377,20 +311,20 @@ namespace sys2
 
             //更新地质结构信息表
             IPoint pnt = new PointClass();
-            pnt.X = workingFace.Coordinate.X + xdelta;
-            pnt.Y = workingFace.Coordinate.Y + ydelta;
-            pnt.Z = workingFace.Coordinate.Z;
+            pnt.X = selectWorkingfaceSimple1.SelectedWorkingFace.Coordinate.X + xdelta;
+            pnt.Y = selectWorkingfaceSimple1.SelectedWorkingFace.Coordinate.Y + ydelta;
+            pnt.Z = selectWorkingfaceSimple1.SelectedWorkingFace.Coordinate.Z;
             pnt.SpatialReference = Global.spatialref;
 
             //修改工作面信息表中对应的X Y Z坐标信息
-            workingFace.Coordinate = new Coordinate(pnt.X, pnt.Y, 0.0);
-            workingFace.Save();
+            selectWorkingfaceSimple1.SelectedWorkingFace.Coordinate = new Coordinate(pnt.X, pnt.Y, 0.0);
+            selectWorkingfaceSimple1.SelectedWorkingFace.Save();
 
             //查询地质结构信息
             var hd_ids = new List<int>();
             hd_ids.Add(Convert.ToInt16(hdid));
             Dictionary<string, List<GeoStruct>> geostructsinfos = Global.commonclss.GetStructsInfos(pnt, hd_ids);
-            GeologySpaceBll.DeleteGeologySpaceEntityInfos(workingFace.WorkingFaceId); //删除对应工作面ID的地质构造信息
+            GeologySpaceBll.DeleteGeologySpaceEntityInfos(selectWorkingfaceSimple1.SelectedWorkingFace.WorkingFaceId); //删除对应工作面ID的地质构造信息
             foreach (string key in geostructsinfos.Keys)
             {
                 List<GeoStruct> geoinfos = geostructsinfos[key];
@@ -399,12 +333,14 @@ namespace sys2
                 {
                     GeoStruct tmp = geoinfos[i];
 
-                    var geologyspaceEntity = new GeologySpace();
-                    geologyspaceEntity.WorkingFace = workingFace;
-                    geologyspaceEntity.TectonicType = Convert.ToInt32(key);
-                    geologyspaceEntity.TectonicId = tmp.geoinfos[GIS_Const.FIELD_BID];
-                    geologyspaceEntity.Distance = tmp.dist;
-                    geologyspaceEntity.OnDateTime = DateTime.Now.ToShortDateString();
+                    var geologyspaceEntity = new GeologySpace
+                    {
+                        WorkingFace = selectWorkingfaceSimple1.SelectedWorkingFace,
+                        TectonicType = Convert.ToInt32(key),
+                        TectonicId = tmp.geoinfos[GIS_Const.FIELD_BID],
+                        Distance = tmp.dist,
+                        OnDateTime = DateTime.Now.ToShortDateString()
+                    };
 
                     geologyspaceEntity.Save();
                 }
@@ -429,9 +365,9 @@ namespace sys2
 
                 /**回采日报实体赋值**/
                 //队别名称
-                _dayReportJJEntity.Team.TeamId = Convert.ToInt32(cboTeamName.SelectedValue);
+                _dayReportJJEntity.Team = (Team)cboTeamName.SelectedItem;
                 //绑定巷道编号
-                _dayReportJJEntity.WorkingFace.WorkingFaceId = workingFace.WorkingFaceId;
+                _dayReportJJEntity.WorkingFace = selectWorkingfaceSimple1.SelectedWorkingFace;
 
                 DataGridViewCellCollection cells = dgrdvDayReportJJ.Rows[i].Cells;
                 //日期
@@ -478,7 +414,7 @@ namespace sys2
                 dayReportJJEntityList.Add(_dayReportJJEntity);
             }
 
-            Tunnel tunnel = Tunnel.FindFirstByWorkingFaceId(workingFace.WorkingFaceId);
+            Tunnel tunnel = Tunnel.FindFirstByWorkingFaceId(selectWorkingfaceSimple1.SelectedWorkingFace.WorkingFaceId);
 
             //循环添加
             foreach (DayReportJj dayReportJJEntity in dayReportJJEntityList)
@@ -498,7 +434,7 @@ namespace sys2
 
             Log.Debug("添加进尺数据发送Socket消息");
             // 通知服务器掘进进尺已经更新
-            var msg = new UpdateWarningDataMsg(workingFace.WorkingFaceId, tunnel.TunnelId,
+            var msg = new UpdateWarningDataMsg(selectWorkingfaceSimple1.SelectedWorkingFace.WorkingFaceId, tunnel.TunnelId,
                 DayReportJj.TableName, OPERATION_TYPE.ADD, DateTime.Now);
             SocketUtil.SendMsg2Server(msg);
             Log.Debug("添加进尺数据Socket消息发送完成");
@@ -541,7 +477,7 @@ namespace sys2
         private bool check()
         {
             //巷道是否选择
-            if (selectWorkingfaceSimple1.SelectedWorkingFace != null)
+            if (selectWorkingfaceSimple1.SelectedWorkingFace == null)
             {
                 Alert.alert(Const.MSG_PLEASE_CHOOSE + Const_MS.TUNNEL + Const.SIGN_EXCLAMATION_MARK);
                 return false;
