@@ -74,6 +74,7 @@ namespace sys3
             var tunnel = (Tunnel)gridView1.GetFocusedRow();
             tunnel.TunnelType = TunnelTypeEnum.OTHER;
             tunnel.Save();
+            RefreshData();
         }
 
         private void tsBtnExit_Click(object sender, EventArgs e)
