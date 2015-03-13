@@ -34,9 +34,9 @@ namespace sys2
         private int[] _arr;
         private DayReportHc _dayReportHCEntity = new DayReportHc();
         private DateTimePicker dtp = new DateTimePicker(); //这里实例化一个DateTimePicker控件
-        private Tunnel tunnelFY = null; // 辅运顺槽
-        private Tunnel tunnelQY = null; // 切眼
-        private Tunnel tunnelZY = null; // 主运
+        private Tunnel _tunnelFy; // 辅运顺槽
+        private Tunnel _tunnelQy; // 切眼
+        private Tunnel _tunnelZy; // 主运
         private WorkingFace workingFace = null; // 工作面
 
         #endregion
@@ -93,9 +93,9 @@ namespace sys2
             {
                 workingFace = WorkingFace.Find(workingFaceId);
 
-                tunnelZY = workingFace.Tunnels.First(u => u.TunnelType == TunnelTypeEnum.STOPING_ZY);
-                tunnelFY = workingFace.Tunnels.First(u => u.TunnelType == TunnelTypeEnum.STOPING_FY);
-                tunnelQY = workingFace.Tunnels.First(u => u.TunnelType == TunnelTypeEnum.STOPING_QY);
+                _tunnelZy = workingFace.Tunnels.First(u => u.TunnelType == TunnelTypeEnum.STOPING_ZY);
+                _tunnelFy = workingFace.Tunnels.First(u => u.TunnelType == TunnelTypeEnum.STOPING_FY);
+                _tunnelQy = workingFace.Tunnels.First(u => u.TunnelType == TunnelTypeEnum.STOPING_QY);
 
                 if (null == workingFace)
                 {
@@ -115,9 +115,9 @@ namespace sys2
                 //selectWorkingfaceSimple1.SelectTunnelItemWithoutHistory(ws);
 
 
-                tunnelZY = workingFace.Tunnels.First(u => u.TunnelType == TunnelTypeEnum.STOPING_ZY);
-                tunnelFY = workingFace.Tunnels.First(u => u.TunnelType == TunnelTypeEnum.STOPING_FY);
-                tunnelQY = workingFace.Tunnels.First(u => u.TunnelType == TunnelTypeEnum.STOPING_QY);
+                _tunnelZy = workingFace.Tunnels.First(u => u.TunnelType == TunnelTypeEnum.STOPING_ZY);
+                _tunnelFy = workingFace.Tunnels.First(u => u.TunnelType == TunnelTypeEnum.STOPING_FY);
+                _tunnelQy = workingFace.Tunnels.First(u => u.TunnelType == TunnelTypeEnum.STOPING_QY);
             }
         }
 
@@ -304,7 +304,7 @@ namespace sys2
                 return;
             }
             DialogResult = DialogResult.OK;
-            if (tunnelZY == null || tunnelFY == null || tunnelQY == null)
+            if (_tunnelZy == null || _tunnelFy == null || _tunnelQy == null)
             {
                 Alert.alert("所选工作面缺少主运、辅运或切眼巷道");
                 return;
@@ -555,8 +555,8 @@ namespace sys2
                     double hcjc = dayReportHCEntity.JinChi;
                     string bid = dayReportHCEntity.BindingId;
 
-                    AddHcjc(tunnelZY.TunnelId, tunnelFY.TunnelId, tunnelQY.TunnelId, tunnelZY.TunnelWid,
-                        tunnelFY.TunnelWid, tunnelQY.TunnelWid,
+                    AddHcjc(_tunnelZy.TunnelId, _tunnelFy.TunnelId, _tunnelQy.TunnelId, _tunnelZy.TunnelWid,
+                        _tunnelFy.TunnelWid, _tunnelQy.TunnelWid,
                         hcjc, bid);
                 }
                 else
@@ -646,13 +646,13 @@ namespace sys2
             double hcjc = _dayReportHCEntity.JinChi;
             string bid = _dayReportHCEntity.BindingId;
 
-            UpdateHcjc(tunnelZY.TunnelId, tunnelFY.TunnelId, tunnelQY.TunnelId, hcjc, bid, tunnelZY.TunnelWid,
-                tunnelFY.TunnelWid, tunnelQY.TunnelWid);
+            UpdateHcjc(_tunnelZy.TunnelId, _tunnelFy.TunnelId, _tunnelQy.TunnelId, hcjc, bid, _tunnelZy.TunnelWid,
+                _tunnelFy.TunnelWid, _tunnelQy.TunnelWid);
 
 
 
             // 通知服务器数据已经修改
-            var msg = new UpdateWarningDataMsg(workingFace.WorkingFaceId, tunnelQY.TunnelId,
+            var msg = new UpdateWarningDataMsg(workingFace.WorkingFaceId, _tunnelQy.TunnelId,
                 DayReportHc.TableName, OPERATION_TYPE.UPDATE, DateTime.Now);
             SocketUtil.SendMsg2Server(msg);
         }
@@ -682,7 +682,7 @@ namespace sys2
         private bool check()
         {
             //工作面是否选择
-            if (selectWorkingfaceSimple1.SelectedWorkingFace != null)
+            if (selectWorkingfaceSimple1.SelectedWorkingFace == null)
             {
                 Alert.alert(Const.MSG_PLEASE_CHOOSE + Const_MS.WORKINGFACE + Const.SIGN_EXCLAMATION_MARK);
                 return false;
@@ -914,20 +914,6 @@ namespace sys2
         //    else
         //        dtp.Visible = false;
         //}
-
-        /***********当列的宽度变化时，时间控件先隐藏起来，不然单元格变大时间控件无法跟着变大哦***********/
-
-        private void dataGridView1_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
-        {
-            dtp.Visible = false;
-        }
-
-        /***********滚动条滚动时，单元格位置发生变化，也得隐藏时间控件，不然时间控件位置不动就乱了********/
-
-        private void dataGridView1_Scroll(object sender, ScrollEventArgs e)
-        {
-            dtp.Visible = false;
-        }
 
         private void dgrdvDayReportHC_CellEnter(object sender, DataGridViewCellEventArgs e)
         {

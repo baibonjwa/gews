@@ -47,10 +47,8 @@
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -74,7 +72,7 @@
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1106, 24);
+            this.toolStrip1.Size = new System.Drawing.Size(948, 24);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.TabStop = true;
             this.toolStrip1.Text = "toolStrip1";
@@ -144,10 +142,9 @@
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 608);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 518);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1106, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(948, 22);
             this.statusStrip1.TabIndex = 6;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -157,10 +154,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gcTunnelHc.Cursor = System.Windows.Forms.Cursors.Default;
-            this.gcTunnelHc.Location = new System.Drawing.Point(12, 27);
+            this.gcTunnelHc.Location = new System.Drawing.Point(10, 23);
             this.gcTunnelHc.MainView = this.gridView1;
             this.gcTunnelHc.Name = "gcTunnelHc";
-            this.gcTunnelHc.Size = new System.Drawing.Size(1082, 548);
+            this.gcTunnelHc.Size = new System.Drawing.Size(927, 470);
             this.gcTunnelHc.TabIndex = 7;
             this.gcTunnelHc.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -175,19 +172,19 @@
             this.gridColumn5,
             this.gridColumn6,
             this.gridColumn7,
-            this.gridColumn8,
             this.gridColumn9,
             this.gridColumn10,
-            this.gridColumn11,
             this.gridColumn12,
             this.gridColumn13,
             this.gridColumn14});
             this.gridView1.GridControl = this.gcTunnelHc;
             this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsBehavior.Editable = false;
             // 
             // gridColumn1
             // 
             this.gridColumn1.Caption = "矿井名称";
+            this.gridColumn1.FieldName = "WorkingFace.MiningArea.Horizontal.Mine.MineName";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 0;
@@ -195,6 +192,7 @@
             // gridColumn2
             // 
             this.gridColumn2.Caption = "水平";
+            this.gridColumn2.FieldName = "WorkingFace.MiningArea.Horizontal.HorizontalName";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 1;
@@ -202,6 +200,7 @@
             // gridColumn3
             // 
             this.gridColumn3.Caption = "采区";
+            this.gridColumn3.FieldName = "WorkingFace.MiningArea.MiningAreaName";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 2;
@@ -209,6 +208,7 @@
             // gridColumn4
             // 
             this.gridColumn4.Caption = "工作面";
+            this.gridColumn4.FieldName = "WorkingFace.WorkingFaceName";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 3;
@@ -216,6 +216,7 @@
             // gridColumn5
             // 
             this.gridColumn5.Caption = "主运顺槽";
+            this.gridColumn5.FieldName = "TunnelZy.TunnelName";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
             this.gridColumn5.VisibleIndex = 4;
@@ -223,6 +224,7 @@
             // gridColumn6
             // 
             this.gridColumn6.Caption = "辅运顺槽";
+            this.gridColumn6.FieldName = "TunnelFy.TunnelName";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
             this.gridColumn6.VisibleIndex = 5;
@@ -230,66 +232,58 @@
             // gridColumn7
             // 
             this.gridColumn7.Caption = "开切眼";
+            this.gridColumn7.FieldName = "TunnelQy.TunnelName";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
             this.gridColumn7.VisibleIndex = 6;
             // 
-            // gridColumn8
-            // 
-            this.gridColumn8.Caption = "关联巷道";
-            this.gridColumn8.Name = "gridColumn8";
-            this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 7;
-            // 
             // gridColumn9
             // 
             this.gridColumn9.Caption = "队别";
+            this.gridColumn9.FieldName = "WorkingFace.Team.TeamName";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 8;
+            this.gridColumn9.VisibleIndex = 7;
             // 
             // gridColumn10
             // 
             this.gridColumn10.Caption = "开工日期";
+            this.gridColumn10.FieldName = "WorkingFace.StartDate";
             this.gridColumn10.Name = "gridColumn10";
             this.gridColumn10.Visible = true;
-            this.gridColumn10.VisibleIndex = 9;
-            // 
-            // gridColumn11
-            // 
-            this.gridColumn11.Caption = "是否掘进完毕";
-            this.gridColumn11.Name = "gridColumn11";
-            this.gridColumn11.Visible = true;
-            this.gridColumn11.VisibleIndex = 10;
+            this.gridColumn10.VisibleIndex = 8;
             // 
             // gridColumn12
             // 
             this.gridColumn12.Caption = "停工日期";
+            this.gridColumn12.FieldName = "WorkingFace.StopDate";
             this.gridColumn12.Name = "gridColumn12";
             this.gridColumn12.Visible = true;
-            this.gridColumn12.VisibleIndex = 11;
+            this.gridColumn12.VisibleIndex = 9;
             // 
             // gridColumn13
             // 
             this.gridColumn13.Caption = "工作制式";
+            this.gridColumn13.FieldName = "WorkingFace.WorkStyle";
             this.gridColumn13.Name = "gridColumn13";
             this.gridColumn13.Visible = true;
-            this.gridColumn13.VisibleIndex = 12;
+            this.gridColumn13.VisibleIndex = 10;
             // 
             // gridColumn14
             // 
             this.gridColumn14.Caption = "班次";
+            this.gridColumn14.FieldName = "WorkingFace.WorkTime";
             this.gridColumn14.Name = "gridColumn14";
             this.gridColumn14.Visible = true;
-            this.gridColumn14.VisibleIndex = 13;
+            this.gridColumn14.VisibleIndex = 11;
             // 
             // controlNavigator1
             // 
             this.controlNavigator1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.controlNavigator1.Location = new System.Drawing.Point(12, 581);
+            this.controlNavigator1.Location = new System.Drawing.Point(10, 498);
             this.controlNavigator1.Name = "controlNavigator1";
             this.controlNavigator1.NavigatableControl = this.gcTunnelHc;
-            this.controlNavigator1.Size = new System.Drawing.Size(311, 24);
+            this.controlNavigator1.Size = new System.Drawing.Size(267, 21);
             this.controlNavigator1.TabIndex = 90;
             this.controlNavigator1.Text = "controlNavigator1";
             this.controlNavigator1.TextLocation = DevExpress.XtraEditors.NavigatorButtonsTextLocation.Center;
@@ -297,9 +291,9 @@
             // 
             // TunnelHcManagement
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1106, 630);
+            this.ClientSize = new System.Drawing.Size(948, 540);
             this.Controls.Add(this.controlNavigator1);
             this.Controls.Add(this.gcTunnelHc);
             this.Controls.Add(this.statusStrip1);
@@ -339,10 +333,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;

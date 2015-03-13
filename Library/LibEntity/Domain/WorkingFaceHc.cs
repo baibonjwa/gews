@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Castle.ActiveRecord;
 
 namespace LibEntity.Domain
 {
@@ -19,23 +20,52 @@ namespace LibEntity.Domain
 
         public static List<WorkingFaceHc> FindAll()
         {
-            var workingFaces = WorkingFace.FindAll();
-            var tunnels = Tunnel.FindAll();
-            var tunnelByGroup = tunnels.GroupBy(u => u.WorkingFace.WorkingFaceId);
-            var result = new List<WorkingFaceHc>();
-            //TODO：还未实现
-            foreach (var t in tunnelByGroup)
+            var results = new List<WorkingFaceHc>();
+            using (new SessionScope())
             {
-                foreach (var i in t)
-                {
-
-                }
-                var item = new WorkingFace()
-                {
-
-                };
+                var workingFaces = WorkingFace.FindAll();
+                results.AddRange(from workingFace in workingFaces
+                                 let tunnelZy = workingFace.Tunnels.FirstOrDefault(u => u.TunnelType == TunnelTypeEnum.STOPING_ZY)
+                                 let tunnelFy = workingFace.Tunnels.FirstOrDefault(u => u.TunnelType == TunnelTypeEnum.STOPING_FY)
+                                 let tunnelQy = workingFace.Tunnels.FirstOrDefault(u => u.TunnelType == TunnelTypeEnum.STOPING_QY)
+                                 let tunnelOther = workingFace.Tunnels.Where(u => u.TunnelType == TunnelTypeEnum.OTHER).ToList()
+                                 where tunnelZy != null && tunnelFy != null && tunnelQy != null
+                                 select new WorkingFaceHc
+                                 {
+                                     WorkingFace = workingFace,
+                                     TunnelZy = tunnelZy,
+                                     TunnelFy = tunnelFy,
+                                     TunnelQy = tunnelQy,
+                                     TunnelOther = tunnelOther
+                                 });
             }
+            return results;
+        }
+
+        public static WorkingFaceHc FindByWorkingFace(WorkingFace workingFace)
+        {
+            
+            var tunnelZy = workingFace.Tunnels.FirstOrDefault(u => u.TunnelType == TunnelTypeEnum.STOPING_ZY);
+            var tunnelFy = workingFace.Tunnels.FirstOrDefault(u => u.TunnelType == TunnelTypeEnum.STOPING_FY);
+            var tunnelQy = workingFace.Tunnels.FirstOrDefault(u => u.TunnelType == TunnelTypeEnum.STOPING_QY);
+            var tunnelOther = workingFace.Tunnels.Where(u => u.TunnelType == TunnelTypeEnum.OTHER).ToList()
+            var result = new WorkingFaceHc
+            {
+                WorkingFace = workingFace,
+                TunnelZy = tunnelZy,
+                TunnelFy = tunnelFy,
+                TunnelQy = tunnelQy,
+                TunnelOther = tunnelOther
+            };
             return result;
+        }
+
+        public static bool JudgeWorkingFaceIsAssociated(WorkingFace workingFace)
+        {
+            var tunnelZy = workingFace.Tunnels.FirstOrDefault(u => u.TunnelType == TunnelTypeEnum.STOPING_ZY);
+            var tunnelFy = workingFace.Tunnels.FirstOrDefault(u => u.TunnelType == TunnelTypeEnum.STOPING_FY);
+            var tunnelQy = workingFace.Tunnels.FirstOrDefault(u => u.TunnelType == TunnelTypeEnum.STOPING_QY);
+            return tunnelZy != null && tunnelFy != null && tunnelQy != null;
         }
 
         public void Delete()
