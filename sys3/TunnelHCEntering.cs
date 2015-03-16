@@ -493,7 +493,7 @@ namespace sys3
                 if (pos == null)
                     return;
 
-                workingFace.Coordinate = new Coordinate(pos.X, pos.Y, 0.0);
+                workingFace.SetCoordinate(pos.X, pos.Y, 0.0);
                 workingFace.Save();
 
                 //添加地质构造信息到数据库表中
@@ -550,7 +550,7 @@ namespace sys3
                 }
 
                 //工作面信息提交
-                workingFace.Coordinate = new Coordinate(pos.X, pos.Y, 0.0);
+                workingFace.SetCoordinate(pos.X, pos.Y, 0.0);
                 workingFace.Save();
 
                 //更新地质构造表

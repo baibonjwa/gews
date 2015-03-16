@@ -59,9 +59,9 @@ namespace sys2
             // dgrdvDayReportHC
             // 
             this.dgrdvDayReportHC.AllowUserToResizeColumns = false;
-            this.dgrdvDayReportHC.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgrdvDayReportHC.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgrdvDayReportHC.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgrdvDayReportHC.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column_CreateDate,
@@ -273,13 +273,14 @@ namespace sys2
             this.label3.Text = "请选择回采工作面：";
             // 
             // selectWorkingfaceSimple1
-            //
+            // 
             this.selectWorkingfaceSimple1.Location = new System.Drawing.Point(129, 17);
             this.selectWorkingfaceSimple1.Name = "selectWorkingfaceSimple1";
+            this.selectWorkingfaceSimple1.SelectedWorkingFace = null;
             this.selectWorkingfaceSimple1.Size = new System.Drawing.Size(219, 38);
             this.selectWorkingfaceSimple1.TabIndex = 17;
             // 
-            // DayReportHCEntering
+            // DayReportHcEntering
             // 
             this.AcceptButton = this.btnSubmit;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -301,7 +302,6 @@ namespace sys2
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "回采日报";
-            this.Load += new System.EventHandler(this.DayReportHCEntering_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgrdvDayReportHC)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();

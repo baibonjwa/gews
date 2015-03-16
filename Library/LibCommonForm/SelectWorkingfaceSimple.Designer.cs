@@ -70,7 +70,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox cbxWorkingface;
+        public System.Windows.Forms.ComboBox cbxWorkingface;
         private System.Windows.Forms.Button btnChooseWorkingface;
     }
 }

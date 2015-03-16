@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Castle.ActiveRecord;
+using NHibernate.Engine;
 
 namespace LibEntity.Domain
 {
@@ -44,28 +45,37 @@ namespace LibEntity.Domain
 
         public static WorkingFaceHc FindByWorkingFace(WorkingFace workingFace)
         {
-            
-            var tunnelZy = workingFace.Tunnels.FirstOrDefault(u => u.TunnelType == TunnelTypeEnum.STOPING_ZY);
-            var tunnelFy = workingFace.Tunnels.FirstOrDefault(u => u.TunnelType == TunnelTypeEnum.STOPING_FY);
-            var tunnelQy = workingFace.Tunnels.FirstOrDefault(u => u.TunnelType == TunnelTypeEnum.STOPING_QY);
-            var tunnelOther = workingFace.Tunnels.Where(u => u.TunnelType == TunnelTypeEnum.OTHER).ToList()
-            var result = new WorkingFaceHc
+            using (new SessionScope())
             {
-                WorkingFace = workingFace,
-                TunnelZy = tunnelZy,
-                TunnelFy = tunnelFy,
-                TunnelQy = tunnelQy,
-                TunnelOther = tunnelOther
-            };
-            return result;
+                var workingFaceLazy = WorkingFace.Find(workingFace.WorkingFaceId);
+                var tunnelZy = workingFaceLazy.Tunnels.FirstOrDefault(u => u.TunnelType == TunnelTypeEnum.STOPING_ZY);
+                var tunnelFy = workingFaceLazy.Tunnels.FirstOrDefault(u => u.TunnelType == TunnelTypeEnum.STOPING_FY);
+                var tunnelQy = workingFaceLazy.Tunnels.FirstOrDefault(u => u.TunnelType == TunnelTypeEnum.STOPING_QY);
+                var tunnelOther = workingFaceLazy.Tunnels.Where(u => u.TunnelType == TunnelTypeEnum.OTHER).ToList();
+                var result = new WorkingFaceHc
+                {
+                    WorkingFace = workingFace,
+                    TunnelZy = tunnelZy,
+                    TunnelFy = tunnelFy,
+                    TunnelQy = tunnelQy,
+                    TunnelOther = tunnelOther
+                };
+                return result;
+            }
+
         }
 
         public static bool JudgeWorkingFaceIsAssociated(WorkingFace workingFace)
         {
-            var tunnelZy = workingFace.Tunnels.FirstOrDefault(u => u.TunnelType == TunnelTypeEnum.STOPING_ZY);
-            var tunnelFy = workingFace.Tunnels.FirstOrDefault(u => u.TunnelType == TunnelTypeEnum.STOPING_FY);
-            var tunnelQy = workingFace.Tunnels.FirstOrDefault(u => u.TunnelType == TunnelTypeEnum.STOPING_QY);
-            return tunnelZy != null && tunnelFy != null && tunnelQy != null;
+            using (new SessionScope())
+            {
+                var workingFaceLazy = WorkingFace.Find(workingFace.WorkingFaceId);
+                var tunnelZy = workingFace.Tunnels.FirstOrDefault(u => u.TunnelType == TunnelTypeEnum.STOPING_ZY);
+                var tunnelFy = workingFace.Tunnels.FirstOrDefault(u => u.TunnelType == TunnelTypeEnum.STOPING_FY);
+                var tunnelQy = workingFace.Tunnels.FirstOrDefault(u => u.TunnelType == TunnelTypeEnum.STOPING_QY);
+                return tunnelZy != null && tunnelFy != null && tunnelQy != null;
+            }
+
         }
 
         public void Delete()

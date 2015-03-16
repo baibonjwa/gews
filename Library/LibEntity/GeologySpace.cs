@@ -42,7 +42,7 @@ namespace LibEntity
         /// <summary>
         ///     类型
         /// </summary>
-        [Property("TECTONIC_DISTANCE")]
+        [Property("TECTONIC_TYPE")]
         public int TectonicType { get; set; }
 
         //时间 

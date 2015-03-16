@@ -30,8 +30,23 @@ namespace LibEntity
         [Property("WORKINGFACE_NAME")]
         public string WorkingFaceName { get; set; }
 
-        // 坐标
-        public Coordinate Coordinate { get; set; }
+        /// <summary>
+        ///     坐标X
+        /// </summary>
+        [Property("COORDINATE_X")]
+        public double CoordinateX { get; set; }
+
+        /// <summary>
+        ///     坐标X
+        /// </summary>
+        [Property("COORDINATE_Y")]
+        public double CoordinateY { get; set; }
+
+        /// <summary>
+        ///     坐标X
+        /// </summary>
+        [Property("COORDINATE_Z")]
+        public double CoordinateZ { get; set; }
 
         // 开工日期
 
@@ -94,6 +109,13 @@ namespace LibEntity
         public string WorkTime { get; set; }
 
         // 用于暂存关联巷道信息
+
+        public void SetCoordinate(double xx, double yy, double zz)
+        {
+            CoordinateX = xx;
+            CoordinateY = yy;
+            CoordinateZ = zz;
+        }
 
         /// <summary>
         ///     巷道类型

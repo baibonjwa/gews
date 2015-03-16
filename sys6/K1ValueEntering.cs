@@ -63,9 +63,9 @@ namespace UnderTerminal
             this.mainWin = win;
             Tunnel entTunnel = Tunnel.Find(tunnelId);
 
-            X = entTunnel.WorkingFace.Coordinate.X.ToString();
-            Y = entTunnel.WorkingFace.Coordinate.Y.ToString();
-            Z = entTunnel.WorkingFace.Coordinate.Z.ToString();
+            X = entTunnel.WorkingFace.CoordinateX.ToString();
+            Y = entTunnel.WorkingFace.CoordinateY.ToString();
+            Z = entTunnel.WorkingFace.CoordinateZ.ToString();
 
             tbCoordinateX.Text = X;
             tbCoordinateY.Text = Y;

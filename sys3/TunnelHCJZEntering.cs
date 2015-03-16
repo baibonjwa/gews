@@ -397,7 +397,7 @@ namespace sys3
                 var workingFace = selectWorkingFaceControl1.SelectedWorkingFace;
                 if (prevPnt != null)
                 {
-                    workingFace.Coordinate = new Coordinate(prevPnt.X, prevPnt.Y, 0.0);
+                    workingFace.SetCoordinate(prevPnt.X, prevPnt.Y, 0.0);
                     workingFace.Save();
                 }
                 //根据点查询60米范围内的地质构造的信息

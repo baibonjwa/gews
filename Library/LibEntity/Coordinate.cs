@@ -1,4 +1,5 @@
 ﻿using System;
+using Castle.ActiveRecord;
 
 namespace LibEntity
 {
@@ -17,16 +18,19 @@ namespace LibEntity
         /// <summary>
         ///     坐标X
         /// </summary>
+        [Property("COORDINATE_X")]
         public double X { get; private set; }
 
         /// <summary>
         ///     坐标X
         /// </summary>
+        [Property("COORDINATE_Y")]
         public double Y { get; private set; }
 
         /// <summary>
         ///     坐标X
         /// </summary>
+        [Property("COORDINATE_Y")]
         public double Z { get; private set; }
     }
 }

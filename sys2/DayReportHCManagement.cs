@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Windows.Forms;
 using Castle.ActiveRecord;
 using ESRI.ArcGIS.Geometry;
@@ -9,6 +8,7 @@ using GIS.HdProc;
 using LibBusiness;
 using LibCommon;
 using LibEntity;
+using LibEntity.Domain;
 using LibSocket;
 
 namespace sys2
@@ -88,14 +88,12 @@ namespace sys2
                 var entity = (DayReportHc)gridView1.GetFocusedRow();
                 var workingFace = WorkingFace.Find(entity.WorkingFace.WorkingFaceId);
                 // 掘进工作面，只有一条巷道
-                var tunnelZy = workingFace.Tunnels.FirstOrDefault(u => u.TunnelType == TunnelTypeEnum.STOPING_ZY);
-                var tunnelFy = workingFace.Tunnels.FirstOrDefault(u => u.TunnelType == TunnelTypeEnum.STOPING_FY);
-                var tunnelQy = workingFace.Tunnels.FirstOrDefault(u => u.TunnelType == TunnelTypeEnum.STOPING_QY);
-                if (tunnelZy != null && tunnelFy != null && tunnelQy != null)
+                var workingFaceHc = WorkingFaceHc.FindByWorkingFace(workingFace);
+                if (workingFaceHc != null)
                 {
-                    DelHcjc(tunnelZy.TunnelId, tunnelFy.TunnelId, tunnelQy.TunnelId, entity.BindingId,
+                    DelHcjc(workingFaceHc.TunnelZy.TunnelId, workingFaceHc.TunnelFy.TunnelId, workingFaceHc.TunnelQy.TunnelId, entity.BindingId,
                         workingFace,
-                        tunnelZy.TunnelWid, tunnelFy.TunnelWid);
+                        workingFaceHc.TunnelZy.TunnelWid, workingFaceHc.TunnelFy.TunnelWid);
                     entity.Delete();
                     RefreshData();
                     // 向server端发送更新预警数据
@@ -137,7 +135,7 @@ namespace sys2
                 double x = results[key].X;
                 double y = results[key].Y;
                 double z = results[key].Z;
-                wfEntity.Coordinate = new Coordinate(x, y, z);
+                wfEntity.SetCoordinate(x, y, z);
                 wfEntity.Save();
 
                 index += 1;

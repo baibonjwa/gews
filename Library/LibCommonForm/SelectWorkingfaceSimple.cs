@@ -54,7 +54,7 @@ namespace LibCommonForm
             WriteRecentWorkingFaceXml();
         }
 
-        private void cbxTunnel_SelectedIndexChanged(object sender, EventArgs e)
+        public void cbxTunnel_SelectedIndexChanged(object sender, EventArgs e)
         {
             SelectedWorkingFace = cbxWorkingface.SelectedItem as WorkingFace;
         }

@@ -139,13 +139,13 @@ namespace sys2
             //绑定默认信息
             addInfo();
             //绑定修改数据
-            bindInfo();
+            BindInfo();
         }
 
         /// <summary>
         ///     datagridview绑定信息
         /// </summary>
-        private void bindInfo()
+        private void BindInfo()
         {
             //工作制式
             if (_dayReportJJEntity.WorkTimeStyle == Const_MS.WORK_TIME_38)
@@ -202,21 +202,6 @@ namespace sys2
         }
 
         /// <summary>
-        ///     添加队别
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnAddTeamMemberInfo_Click(object sender, EventArgs e)
-        {
-            var t = new TeamInfoEntering();
-            if (DialogResult.OK == t.ShowDialog())
-            {
-                DataBindUtil.LoadTeamMemberByTeamName(cboSubmitter, cboTeamName.Text);
-                cboSubmitter.Text = t.returnTeamName();
-            }
-        }
-
-        /// <summary>
         ///     队别选择事件（根据队别绑定队员）
         /// </summary>
         /// <param name="sender"></param>
@@ -263,7 +248,7 @@ namespace sys2
         }
 
         //添加巷道掘进
-        private void addHdJc(string hdid, double jjcd, string bid, double hdwid)
+        private void AddHdJc(string hdid, double jjcd, string bid, double hdwid)
         {
             Dictionary<string, List<GeoStruct>> geostructsinfos = Global.cons.DrawJJCD(hdid, bid, hdwid, null, jjcd, 0,
                 Global.searchlen, Global.sxjl, 0);
@@ -272,7 +257,7 @@ namespace sys2
             var workfacepos = pos[0].geo as IPoint;
             if (workfacepos != null)
             {
-                selectWorkingfaceSimple1.SelectedWorkingFace.Coordinate = new Coordinate(workfacepos.X, workfacepos.Y, 0.0);
+                selectWorkingfaceSimple1.SelectedWorkingFace.SetCoordinate(workfacepos.X, workfacepos.Y, 0.0);
                 selectWorkingfaceSimple1.SelectedWorkingFace.Save();
             }
             //查询地质结构信息
@@ -311,13 +296,13 @@ namespace sys2
 
             //更新地质结构信息表
             IPoint pnt = new PointClass();
-            pnt.X = selectWorkingfaceSimple1.SelectedWorkingFace.Coordinate.X + xdelta;
-            pnt.Y = selectWorkingfaceSimple1.SelectedWorkingFace.Coordinate.Y + ydelta;
-            pnt.Z = selectWorkingfaceSimple1.SelectedWorkingFace.Coordinate.Z;
+            pnt.X = selectWorkingfaceSimple1.SelectedWorkingFace.CoordinateX + xdelta;
+            pnt.Y = selectWorkingfaceSimple1.SelectedWorkingFace.CoordinateY + ydelta;
+            pnt.Z = selectWorkingfaceSimple1.SelectedWorkingFace.CoordinateZ;
             pnt.SpatialReference = Global.spatialref;
 
             //修改工作面信息表中对应的X Y Z坐标信息
-            selectWorkingfaceSimple1.SelectedWorkingFace.Coordinate = new Coordinate(pnt.X, pnt.Y, 0.0);
+            selectWorkingfaceSimple1.SelectedWorkingFace.SetCoordinate(pnt.X, pnt.Y, 0.0);
             selectWorkingfaceSimple1.SelectedWorkingFace.Save();
 
             //查询地质结构信息
@@ -429,7 +414,7 @@ namespace sys2
                 string hdid = tunnel.TunnelId.ToString();
                 string bid = dayReportJJEntity.BindingId;
 
-                addHdJc(hdid, dist, bid, tunnel.TunnelWid);
+                AddHdJc(hdid, dist, bid, tunnel.TunnelWid);
             }
 
             Log.Debug("添加进尺数据发送Socket消息");

@@ -39,7 +39,7 @@ namespace LibEntity
         {
             var criterion = new List<ICriterion>
             {
-                Restrictions.Eq("Bid", bid)
+                Restrictions.Eq("BindingId", bid)
             };
             return (DayReportHc)FindFirst(typeof(DayReportHc), criterion.ToArray());
         }

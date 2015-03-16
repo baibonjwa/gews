@@ -45,9 +45,9 @@ namespace UnderTerminal
             //this.Text += "-" + tunnelName;
             Tunnel entTunnel = Tunnel.Find(tunnelId);
             WorkingFace entWorkingFace = WorkingFace.Find(entTunnel.WorkingFace.WorkingFaceId);
-            txtCoordinateX.Text = entWorkingFace.Coordinate.X.ToString();
-            txtCoordinateY.Text = entWorkingFace.Coordinate.Y.ToString();
-            txtCoordinateZ.Text = entWorkingFace.Coordinate.Z.ToString();
+            txtCoordinateX.Text = entWorkingFace.CoordinateX.ToString();
+            txtCoordinateY.Text = entWorkingFace.CoordinateY.ToString();
+            txtCoordinateZ.Text = entWorkingFace.CoordinateZ.ToString();
             this.mainWin = win;
             addInfo();
         }
