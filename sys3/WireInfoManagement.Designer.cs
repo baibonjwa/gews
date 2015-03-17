@@ -68,7 +68,7 @@
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1176, 24);
+            this.toolStrip1.Size = new System.Drawing.Size(1008, 24);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.TabStop = true;
             this.toolStrip1.Text = "toolStrip1";
@@ -147,10 +147,9 @@
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 830);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 708);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1176, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1008, 22);
             this.statusStrip1.TabIndex = 8;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -164,10 +163,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gcWireInfo.Cursor = System.Windows.Forms.Cursors.Default;
-            this.gcWireInfo.Location = new System.Drawing.Point(12, 27);
+            this.gcWireInfo.Location = new System.Drawing.Point(10, 23);
             this.gcWireInfo.MainView = this.gridView1;
             this.gcWireInfo.Name = "gcWireInfo";
-            this.gcWireInfo.Size = new System.Drawing.Size(1152, 770);
+            this.gcWireInfo.Size = new System.Drawing.Size(987, 660);
             this.gcWireInfo.TabIndex = 9;
             this.gcWireInfo.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -184,6 +183,7 @@
             this.gridView1.GridControl = this.gcWireInfo;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsBehavior.Editable = false;
+            this.gridView1.OptionsSelection.MultiSelect = true;
             // 
             // gridColumn1
             // 
@@ -236,10 +236,10 @@
             // controlNavigator1
             // 
             this.controlNavigator1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.controlNavigator1.Location = new System.Drawing.Point(12, 803);
+            this.controlNavigator1.Location = new System.Drawing.Point(10, 688);
             this.controlNavigator1.Name = "controlNavigator1";
             this.controlNavigator1.NavigatableControl = this.gcWireInfo;
-            this.controlNavigator1.Size = new System.Drawing.Size(311, 24);
+            this.controlNavigator1.Size = new System.Drawing.Size(267, 21);
             this.controlNavigator1.TabIndex = 90;
             this.controlNavigator1.Text = "controlNavigator1";
             this.controlNavigator1.TextLocation = DevExpress.XtraEditors.NavigatorButtonsTextLocation.Center;
@@ -247,9 +247,9 @@
             // 
             // WireInfoManagement
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1176, 852);
+            this.ClientSize = new System.Drawing.Size(1008, 730);
             this.Controls.Add(this.controlNavigator1);
             this.Controls.Add(this.gcWireInfo);
             this.Controls.Add(this.statusStrip1);

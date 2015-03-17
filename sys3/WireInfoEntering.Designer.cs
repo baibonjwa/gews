@@ -64,6 +64,14 @@
             this.btnMoveDown = new System.Windows.Forms.Button();
             this.btnTxt = new System.Windows.Forms.Button();
             this.btnMultTxt = new System.Windows.Forms.Button();
+            this.pbCount = new System.Windows.Forms.ProgressBar();
+            this.lbl2 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lblTotal = new System.Windows.Forms.Label();
+            this.lblError = new System.Windows.Forms.Label();
+            this.lblSuccessed = new System.Windows.Forms.Label();
+            this.btnDetails = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgrdvWire)).BeginInit();
             this.SuspendLayout();
             // 
@@ -414,6 +422,75 @@
             this.btnMultTxt.UseVisualStyleBackColor = true;
             this.btnMultTxt.Click += new System.EventHandler(this.btnMultTxt_Click);
             // 
+            // pbCount
+            // 
+            this.pbCount.Location = new System.Drawing.Point(11, 489);
+            this.pbCount.Name = "pbCount";
+            this.pbCount.Size = new System.Drawing.Size(186, 23);
+            this.pbCount.TabIndex = 38;
+            // 
+            // lbl2
+            // 
+            this.lbl2.Location = new System.Drawing.Point(248, 494);
+            this.lbl2.Name = "lbl2";
+            this.lbl2.Size = new System.Drawing.Size(56, 16);
+            this.lbl2.TabIndex = 39;
+            this.lbl2.Text = "已导入:";
+            // 
+            // label2
+            // 
+            this.label2.Location = new System.Drawing.Point(203, 494);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(40, 16);
+            this.label2.TabIndex = 39;
+            this.label2.Text = "共:";
+            // 
+            // label3
+            // 
+            this.label3.Location = new System.Drawing.Point(315, 494);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(40, 16);
+            this.label3.TabIndex = 39;
+            this.label3.Text = "错误:";
+            // 
+            // lblTotal
+            // 
+            this.lblTotal.AutoSize = true;
+            this.lblTotal.Location = new System.Drawing.Point(226, 494);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(11, 12);
+            this.lblTotal.TabIndex = 40;
+            this.lblTotal.Text = "0";
+            // 
+            // lblError
+            // 
+            this.lblError.AutoSize = true;
+            this.lblError.Location = new System.Drawing.Point(349, 494);
+            this.lblError.Name = "lblError";
+            this.lblError.Size = new System.Drawing.Size(11, 12);
+            this.lblError.TabIndex = 40;
+            this.lblError.Text = "0";
+            // 
+            // lblSuccessed
+            // 
+            this.lblSuccessed.AutoSize = true;
+            this.lblSuccessed.Location = new System.Drawing.Point(293, 494);
+            this.lblSuccessed.Name = "lblSuccessed";
+            this.lblSuccessed.Size = new System.Drawing.Size(11, 12);
+            this.lblSuccessed.TabIndex = 40;
+            this.lblSuccessed.Text = "0";
+            // 
+            // btnDetails
+            // 
+            this.btnDetails.Enabled = false;
+            this.btnDetails.Location = new System.Drawing.Point(372, 489);
+            this.btnDetails.Name = "btnDetails";
+            this.btnDetails.Size = new System.Drawing.Size(48, 23);
+            this.btnDetails.TabIndex = 41;
+            this.btnDetails.Text = "详细";
+            this.btnDetails.UseVisualStyleBackColor = true;
+            this.btnDetails.Click += new System.EventHandler(this.btnDetails_Click);
+            // 
             // WireInfoEntering
             // 
             this.AcceptButton = this.btnSubmit;
@@ -421,6 +498,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(886, 524);
+            this.Controls.Add(this.btnDetails);
+            this.Controls.Add(this.lblSuccessed);
+            this.Controls.Add(this.lblError);
+            this.Controls.Add(this.lblTotal);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lbl2);
+            this.Controls.Add(this.pbCount);
             this.Controls.Add(this.btnMultTxt);
             this.Controls.Add(this.btnTxt);
             this.Controls.Add(this.btnMoveDown);
@@ -501,5 +586,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn txtDistanceFromTheRight;
         private System.Windows.Forms.DataGridViewTextBoxColumn txtDistanceFromTop;
         private System.Windows.Forms.DataGridViewTextBoxColumn txtDistanceFromBottom;
+        private System.Windows.Forms.ProgressBar pbCount;
+        private System.Windows.Forms.Label lbl2;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblTotal;
+        private System.Windows.Forms.Label lblError;
+        private System.Windows.Forms.Label lblSuccessed;
+        private System.Windows.Forms.Button btnDetails;
     }
 }

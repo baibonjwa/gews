@@ -756,7 +756,7 @@ namespace GIS.HdProc
             }
             catch (Exception ei)
             {
-                Alert.alert("服务器繁忙！请稍候再试");
+                throw;
             }
 
             //}

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Windows.Forms;
+using DevExpress.XtraGrid.Views.Grid;
 using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Geodatabase;
 using GIS;
@@ -84,9 +86,13 @@ namespace sys3
         {
             //是否删除导线点
             if (!Alert.confirm(Const.DEL_CONFIRM_MSG)) return;
-            var wire = (Wire)gridView1.GetFocusedRow();
-            GisHelper.DelHdByHdId(wire.Tunnel.TunnelId.ToString(CultureInfo.InvariantCulture));
-            wire.Delete();
+            var selectedIndex = gridView1.GetSelectedRows();
+            foreach (var wire in selectedIndex.Select(index => (Wire)gridView1.GetRow(index)))
+            {
+                GisHelper.DelHdByHdId(wire.Tunnel.TunnelId.ToString(CultureInfo.InvariantCulture));
+                wire.Delete();
+            }
+
             RefreshData();
         }
 
@@ -164,9 +170,9 @@ namespace sys3
             {
                 MyMapHelp.Jump(MyMapHelp.GetGeoFromFeature(list));
                 DataEditCommon.g_pMap.ClearSelection();
-                for (int i = 0; i < list.Count; i++)
+                foreach (IFeature t in list)
                 {
-                    DataEditCommon.g_pMap.SelectFeature(pLayer, list[i]);
+                    DataEditCommon.g_pMap.SelectFeature(pLayer, t);
                 }
                 WindowState = FormWindowState.Normal;
                 Location = DataEditCommon.g_axTocControl.Location;

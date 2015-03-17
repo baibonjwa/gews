@@ -27,6 +27,7 @@ namespace sys3
         /**********变量声明***********/
         private double _tmpDouble;
         private int _tmpRowIndex = -1;
+        private String _errorMsg = "";
 
 
         private Wire Wire { get; set; }
@@ -189,7 +190,7 @@ namespace sys3
                         _dics = ConstructDics(selectTunnelUserControl1.SelectedTunnel, out hdwid);
                         if (selectTunnelUserControl1.SelectedTunnel != null)
                         {
-                            UpdateHdbyPnts(wirePoints, _dics, hdwid);
+                            UpdateHdbyPnts(selectTunnelUserControl1.SelectedTunnel.TunnelId, wirePoints, _dics, hdwid);
                         }
                     }
                     else
@@ -235,12 +236,11 @@ namespace sys3
         private Dictionary<string, string> ConstructDics(Tunnel tunnel, out double hdwid)
         {
             //巷道信息赋值
-            hdwid = 0.0;
             var flds = new Dictionary<string, string>
             {
                 {
                     GIS_Const.FIELD_HDID,
-                    selectTunnelUserControl1.SelectedTunnel.TunnelId.ToString(CultureInfo.InvariantCulture)
+                    tunnel.TunnelId.ToString(CultureInfo.InvariantCulture)
                 }
             };
             List<Tuple<IFeature, IGeometry, Dictionary<string, string>>> selobjs =
@@ -249,15 +249,11 @@ namespace sys3
             int xh = 0;
             if (selobjs.Count > 0)
                 xh = Convert.ToInt16(selobjs[0].Item3[GIS_Const.FIELD_XH]) + 1;
-            string bid = "", hdname = "";
-            if (tunnel != null)
-            {
-                bid = tunnel.BindingId;
-                hdname = tunnel.TunnelName;
-                hdwid = tunnel.TunnelWid;
-            }
+            string bid = tunnel.BindingId;
+            string hdname = tunnel.TunnelName;
+            hdwid = tunnel.TunnelWid;
             _dics.Clear();
-            _dics.Add(GIS_Const.FIELD_HDID, selectTunnelUserControl1.SelectedTunnel.TunnelId.ToString(CultureInfo.InvariantCulture));
+            _dics.Add(GIS_Const.FIELD_HDID, tunnel.TunnelId.ToString(CultureInfo.InvariantCulture));
             _dics.Add(GIS_Const.FIELD_ID, "0");
             _dics.Add(GIS_Const.FIELD_BS, "1");
             _dics.Add(GIS_Const.FIELD_BID, bid);
@@ -727,73 +723,99 @@ namespace sys3
         private void btnTXT_Click(object sender, EventArgs e)
         {
             var ofd = new OpenFileDialog { RestoreDirectory = true, Filter = @"文本文件(*.txt)|*.txt|所有文件(*.*)|*.*" };
-            if (ofd.ShowDialog() == DialogResult.OK)
+            if (ofd.ShowDialog() != DialogResult.OK) return;
+            string fileName = ofd.SafeFileName;
+            if (fileName != null)
             {
-                string fileName = ofd.SafeFileName;
-                if (fileName != null)
+                string[] strs = fileName.Split('-');
+                string miningAreaName = strs[0];
+                string workingFaceName = strs[1];
+                string tunnelName = strs[2].Split('.')[0];
+                using (new SessionScope())
                 {
-                    string[] strs = fileName.Split('-');
-                    string workingFaceName = strs[0];
-                    string tunnelName = strs[1].Split('.')[0];
-                    using (new SessionScope())
+                    var workingFace = WorkingFace.FindByWorkingFaceName(workingFaceName);
+                    var miningArea = MiningArea.FindOneByMiningAreaName(miningAreaName);
+                    if (miningArea == null)
                     {
-                        WorkingFace workingFace = WorkingFace.FindByWorkingFaceName(workingFaceName);
-                        var tunnel = workingFace.Tunnels.FirstOrDefault(u => u.TunnelName == tunnelName);
-                        if (tunnel != null)
+                        Alert.confirm("该采区不存在，请先添加采区");
+                        return;
+                    }
+                    if (workingFace == null)
+                    {
+                        if (Alert.confirm("该工作面不存在，是否创建该工作面？"))
                         {
-                            selectTunnelUserControl1.LoadData(tunnel);
-                        }
-                        else
-                        {
-                            if (Alert.confirm("该巷道不存在，是否创建该巷道？"))
-                            {
-                                if (Tunnel.ExistsByTunnelNameAndWorkingFaceId(tunnelName, workingFace.WorkingFaceId))
-                                {
-                                    Alert.alert("该巷道已经存在");
-                                    return;
-                                }
-                                var type = tunnelName.Contains("横川") ? TunnelTypeEnum.HENGCHUAN : TunnelTypeEnum.OTHER;
-                                tunnel = new Tunnel
-                                {
-                                    TunnelName = tunnelName,
-                                    WorkingFace = workingFace,
-                                    TunnelWid = 5,
-                                    BindingId = IDGenerator.NewBindingID(),
-                                    TunnelType = type
-                                };
-                                tunnel.Save();
-                                selectTunnelUserControl1.LoadData(tunnel);
-                            }
-                            else
-                            {
-                                return;
-                            }
+                            workingFace = AddWorkingFace(miningArea, workingFaceName);
                         }
                     }
-                    txtWireName.Text = tunnelName.Split('.').Length > 0 ? tunnelName.Split('.')[0] + "导线点" : tunnelName + "导线点";
+                    if (workingFace == null) return;
+                    if (workingFace.Tunnels != null && workingFace.Tunnels.FirstOrDefault(u => u.TunnelName == tunnelName) != null)
+                    {
+                        var tunnel = workingFace.Tunnels.FirstOrDefault(u => u.TunnelName == tunnelName);
+                        selectTunnelUserControl1.LoadData(tunnel);
+                    }
+                    else
+                    {
+                        if (Alert.confirm("该巷道不存在，是否创建该巷道？"))
+                        {
+                            if (Tunnel.ExistsByTunnelNameAndWorkingFaceId(tunnelName, workingFace.WorkingFaceId))
+                            {
+                                Alert.alert("该巷道已经存在");
+                                return;
+                            }
+                            var tunnel = AddTunnel(workingFace, tunnelName);
+                            selectTunnelUserControl1.LoadData(tunnel);
+                        }
+                    }
                 }
+                txtWireName.Text = tunnelName.Split('.').Length > 0 ? tunnelName.Split('.')[0] + "导线点" : tunnelName + "导线点";
+            }
 
-                var sr = new StreamReader(ofd.FileName, Encoding.GetEncoding("GB2312"));
-                string duqu;
-                while ((duqu = sr.ReadLine()) != null)
-                {
-                    string[] temp1 = duqu.Split('|');
-                    string daoxianname = temp1[0];
-                    string daoxianx = temp1[1];
-                    string daoxiany = temp1[2];
-                    dgrdvWire.Rows.Add(1);
-                    dgrdvWire[0, dgrdvWire.Rows.Count - 2].Value = daoxianname;
-                    dgrdvWire[1, dgrdvWire.Rows.Count - 2].Value = daoxianx;
-                    dgrdvWire[2, dgrdvWire.Rows.Count - 2].Value = daoxiany;
-                    dgrdvWire[3, dgrdvWire.Rows.Count - 2].Value = "0";
-                    dgrdvWire[4, dgrdvWire.Rows.Count - 2].Value = "2.5";
-                    dgrdvWire[5, dgrdvWire.Rows.Count - 2].Value = "2.5";
-                }
+            var sr = new StreamReader(ofd.FileName, Encoding.GetEncoding("GB2312"));
+            string duqu;
+            while ((duqu = sr.ReadLine()) != null)
+            {
+                string[] temp1 = duqu.Split('|');
+                string daoxianname = temp1[0];
+                string daoxianx = temp1[1];
+                string daoxiany = temp1[2];
+                dgrdvWire.Rows.Add(1);
+                dgrdvWire[0, dgrdvWire.Rows.Count - 2].Value = daoxianname;
+                dgrdvWire[1, dgrdvWire.Rows.Count - 2].Value = daoxianx;
+                dgrdvWire[2, dgrdvWire.Rows.Count - 2].Value = daoxiany;
+                dgrdvWire[3, dgrdvWire.Rows.Count - 2].Value = "0";
+                dgrdvWire[4, dgrdvWire.Rows.Count - 2].Value = "2.5";
+                dgrdvWire[5, dgrdvWire.Rows.Count - 2].Value = "2.5";
             }
         }
 
         #region 绘制导线点和巷道图形
 
+        private Tunnel AddTunnel(WorkingFace workingFace, string tunnelName)
+        {
+            var type = tunnelName.Contains("横川") ? TunnelTypeEnum.HENGCHUAN : TunnelTypeEnum.OTHER;
+            var tunnel = new Tunnel
+            {
+                TunnelName = tunnelName,
+                WorkingFace = workingFace,
+                TunnelWid = 5,
+                BindingId = IDGenerator.NewBindingID(),
+                TunnelType = type
+            };
+            tunnel.Save();
+            return tunnel;
+        }
+
+        private WorkingFace AddWorkingFace(MiningArea miningArea, String workingFaceName)
+        {
+            var workingFace = new WorkingFace
+            {
+                WorkingFaceName = workingFaceName,
+                MiningArea = miningArea,
+                WorkingfaceTypeEnum = WorkingfaceTypeEnum.HC
+            };
+            workingFace.Save();
+            return workingFace;
+        }
         private Dictionary<string, string> _dics = new Dictionary<string, string>(); //属性字典
         private List<IPoint> _leftpts = new List<IPoint>(); //记录左侧平行线坐标
         private List<IPoint> _rightpts = new List<IPoint>(); //记录右侧平行线坐标
@@ -848,7 +870,8 @@ namespace sys3
         /// <param name="wirepntcols"></param>
         /// <param name="dics"></param>
         /// <param name="hdwid"></param>
-        private void UpdateHdbyPnts(List<WirePoint> wirepntcols, Dictionary<string, string> dics, double hdwid)
+        /// <param name="tunnelId"></param>
+        private void UpdateHdbyPnts(int tunnelId, List<WirePoint> wirepntcols, Dictionary<string, string> dics, double hdwid)
         {
             if (wirepntcols == null || wirepntcols.Count == 0)
                 return;
@@ -863,7 +886,7 @@ namespace sys3
                 pntcols.Add(pnt);
             }
             //清除图层上对应的信息
-            string sql = "\"" + GIS_Const.FIELD_HDID + "\"='" + selectTunnelUserControl1.SelectedTunnel.TunnelId + "'";
+            string sql = "\"" + GIS_Const.FIELD_HDID + "\"='" + tunnelId + "'";
             Global.commonclss.DelFeatures(Global.pntlyr, sql);
             Global.commonclss.DelFeatures(Global.pntlinlyr, sql);
             Global.commonclss.DelFeatures(Global.centerlyr, sql);
@@ -1039,7 +1062,130 @@ namespace sys3
 
         private void btnMultTxt_Click(object sender, EventArgs e)
         {
+            var ofd = new OpenFileDialog { RestoreDirectory = true, Multiselect = true, Filter = @"文本文件(*.txt)|*.txt|所有文件(*.*)|*.*" };
+            _errorMsg = @"失败文件名：";
+            if (ofd.ShowDialog() != DialogResult.OK) return;
+            var fileCount = ofd.FileNames.Length;
+            pbCount.Maximum = fileCount * 2;
+            pbCount.Value = 0;
+            foreach (var fileName in ofd.FileNames)
+            {
+                lblTotal.Text = fileCount.ToString(CultureInfo.InvariantCulture);
+                string safeFileName = null;
+                try
+                {
+                    using (new SessionScope())
+                    {
+                        safeFileName = fileName.Substring(fileName.LastIndexOf(@"\", StringComparison.Ordinal) + 1);
+                        string[] strs = safeFileName.Split('-');
+                        string miningAreaName = strs[0];
+                        string workingFaceName = strs[1];
+                        string tunnelName = strs[2].Split('.')[0];
+                        var workingFace = WorkingFace.FindByWorkingFaceName(workingFaceName);
+                        var miningArea = MiningArea.FindOneByMiningAreaName(miningAreaName);
+                        if (miningArea == null)
+                        {
+                            Alert.confirm("该采区不存在，请先添加采区");
+                            return;
+                        }
+                        if (workingFace == null)
+                        {
+                            workingFace = AddWorkingFace(miningArea, workingFaceName);
+                        }
+                        if (workingFace == null) return;
+                        Tunnel tunnel;
+                        if (workingFace.Tunnels != null &&
+                            workingFace.Tunnels.FirstOrDefault(u => u.TunnelName == tunnelName) != null)
+                        {
+                            tunnel = workingFace.Tunnels.FirstOrDefault(u => u.TunnelName == tunnelName);
+                        }
+                        else
+                        {
+                            tunnel = AddTunnel(workingFace, tunnelName);
+                        }
 
+                        var sr = new StreamReader(fileName, Encoding.GetEncoding("GB2312"));
+                        string fileContent;
+                        var wirePoints = new List<WirePoint>();
+                        while ((fileContent = sr.ReadLine()) != null)
+                        {
+                            if (String.IsNullOrEmpty(fileContent)) continue;
+                            var temp1 = fileContent.Split('|');
+                            var pointName = temp1[0];
+                            var pointX = temp1[1];
+                            var pointY = temp1[2];
+
+                            wirePoints.Add(new WirePoint
+                            {
+                                BindingId = IDGenerator.NewBindingID(),
+                                WirePointName = pointName,
+                                CoordinateX = Convert.ToDouble(pointX),
+                                CoordinateY = Convert.ToDouble(pointY),
+                                CoordinateZ = 0,
+                                LeftDis = 2.5,
+                                RightDis = 2.5,
+                                TopDis = 0,
+                                BottomDis = 0
+                            });
+                        }
+                        if (wirePoints.Count < 2)
+                        {
+                            Alert.alert(Const_GM.WIRE_INFO_MSG_POINT_MUST_MORE_THAN_TWO);
+                            throw new Exception();
+                        }
+                        var wire = Wire.FindOneByTunnelId(tunnel.TunnelId);
+
+                        if (wire != null)
+                        {
+                            wire.WireName = tunnelName.Split('.').Length > 0
+                                ? tunnelName.Split('.')[0] + "导线点"
+                                : tunnelName + "导线点";
+                            wire.WirePoints = wirePoints;
+                        }
+                        else
+                        {
+                            wire = new Wire
+                            {
+                                Tunnel = tunnel,
+                                CheckDate = DateTime.Now,
+                                MeasureDate = DateTime.Now,
+                                CountDate = DateTime.Now,
+                                WireName =
+                                    tunnelName.Split('.').Length > 0
+                                        ? tunnelName.Split('.')[0] + "导线点"
+                                        : tunnelName + "导线点",
+                                WirePoints = wirePoints
+                            };
+                        }
+                        wire.Save();
+                        pbCount.Value++;
+                        DrawWirePoint(wirePoints, "CHANGE");
+                        double hdwid;
+                        _dics = ConstructDics(tunnel, out hdwid);
+                        UpdateHdbyPnts(tunnel.TunnelId, wirePoints, _dics, hdwid);
+                        pbCount.Value++;
+                        lblSuccessed.Text =
+                            (Convert.ToInt32(lblSuccessed.Text) + 1).ToString(CultureInfo.InvariantCulture);
+                    }
+                }
+                catch
+                {
+                    pbCount.Value++;
+                    lblError.Text =
+                        (Convert.ToInt32(lblError.Text) + 1).ToString(CultureInfo.InvariantCulture);
+                    _errorMsg += safeFileName + "\n";
+                    btnDetails.Enabled = true;
+                }
+            }
+            var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.SelectedTunnel.TunnelId,
+                Wire.TableName, OPERATION_TYPE.ADD, DateTime.Now);
+            SocketUtil.SendMsg2Server(msg);
+            Alert.alert("导入完成");
+        }
+
+        private void btnDetails_Click(object sender, EventArgs e)
+        {
+            Alert.alert(_errorMsg);
         }
     }
 }

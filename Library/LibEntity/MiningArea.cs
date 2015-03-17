@@ -46,5 +46,14 @@ namespace LibEntity
             };
             return FindAll(criterion);
         }
+
+        public static MiningArea FindOneByMiningAreaName(string miningAreaName)
+        {
+            var criterion = new ICriterion[]
+            {
+                Restrictions.Eq("MiningAreaName", miningAreaName)
+            };
+            return FindOne(criterion);
+        }
     }
 }

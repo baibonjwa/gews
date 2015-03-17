@@ -764,9 +764,9 @@ namespace GIS.HdProc
                 workspace.StopEditing(true);
 
             }
-            catch (Exception)
+            catch (Exception ei)
             {
-                Alert.alert("服务器繁忙，请稍候再试！");
+                throw;
             }
 
             System.Runtime.InteropServices.Marshal.ReleaseComObject(qfilter);

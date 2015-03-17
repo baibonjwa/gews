@@ -985,11 +985,13 @@ namespace sys3
 
         private void btnReadMultTxt_Click(object sender, EventArgs e)
         {
-            var ofd = new OpenFileDialog();
-            ofd.InitialDirectory = @"C:\";
-            ofd.RestoreDirectory = true;
-            ofd.Filter = "文本文件(*.txt)|*.txt|所有文件(*.*)|*.*";
-            ofd.Multiselect = true;
+            var ofd = new OpenFileDialog
+            {
+                InitialDirectory = @"C:\",
+                RestoreDirectory = true,
+                Filter = @"文本文件(*.txt)|*.txt|所有文件(*.*)|*.*",
+                Multiselect = true
+            };
             //ofd.ShowDialog();
             if (ofd.ShowDialog() == DialogResult.OK)
             {
@@ -1065,7 +1067,7 @@ namespace sys3
 
                         // 添加/修改成功的场合
 
-                        if (breholeEntity.BindingId == null || breholeEntity.BindingId == "")
+                        if (string.IsNullOrEmpty(breholeEntity.BindingId))
                             return; //若BID值为空，则不绘制钻孔
 
                         DrawZuanKong(breholeEntity, boreholeLithologyEntity);
@@ -1085,9 +1087,8 @@ namespace sys3
             //ofd.ShowDialog();
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                for (int i = 0; i < ofd.FileNames.Length; i++)
+                foreach (string aa in ofd.FileNames)
                 {
-                    string aa = ofd.FileNames[i];
                     Encoding encoder = TxtFileEncoding.GetEncoding(aa, Encoding.GetEncoding("GB2312"));
                     var sr = new StreamReader(@aa, encoder);
                     string duqu;
