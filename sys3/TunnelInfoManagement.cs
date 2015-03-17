@@ -81,14 +81,15 @@ namespace sys3
         /// <param name="e"></param>
         private void tsBtnDel_Click(object sender, EventArgs e)
         {
-            if (Alert.confirm(Const_GM.TUNNEL_INFO_MSG_DEL))
+            if (!Alert.confirm(Const_GM.TUNNEL_INFO_MSG_DEL)) return;
+            //掘进ID
+            var selectedIndex = gridView1.GetSelectedRows();
+            foreach (var tunnel in selectedIndex.Select(i => (Tunnel)gridView1.GetRow(i)))
             {
-                //掘进ID
-                var tunnel = (Tunnel)gridView1.GetFocusedRow();
                 GisHelper.DelHdByHdId(tunnel.TunnelId.ToString(CultureInfo.InvariantCulture));
                 tunnel.Delete();
-                RefreshData();
             }
+            RefreshData();
         }
 
         /// <summary>

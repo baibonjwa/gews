@@ -956,14 +956,12 @@ namespace sys3
                 }
             }
 
-            foreach (WirePoint t in lstWpie)
+            foreach (var t in lstWpie)
             {
-                wirePtInfo = t;
-                pt.X = wirePtInfo.CoordinateX;
-                pt.Y = wirePtInfo.CoordinateY;
-                pt.Z = wirePtInfo.CoordinateZ;
-
-                drawWirePt.CreatePoint(featureLayer, pt, wirePtInfo.BindingId);
+                pt.X = t.CoordinateX;
+                pt.Y = t.CoordinateY;
+                pt.Z = t.CoordinateZ;
+                drawWirePt.CreatePoint(featureLayer, pt, t.BindingId, t);
             }
         }
 

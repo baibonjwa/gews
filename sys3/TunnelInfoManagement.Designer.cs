@@ -89,7 +89,7 @@ namespace sys3
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1094, 24);
+            this.toolStrip1.Size = new System.Drawing.Size(938, 24);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.TabStop = true;
             this.toolStrip1.Text = "toolStrip1";
@@ -168,10 +168,9 @@ namespace sys3
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 588);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 501);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1094, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(938, 22);
             this.statusStrip1.TabIndex = 6;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -189,9 +188,9 @@ namespace sys3
             // 
             this.btnNoWire.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnNoWire.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNoWire.Location = new System.Drawing.Point(65, 14);
+            this.btnNoWire.Location = new System.Drawing.Point(56, 12);
             this.btnNoWire.Name = "btnNoWire";
-            this.btnNoWire.Size = new System.Drawing.Size(14, 14);
+            this.btnNoWire.Size = new System.Drawing.Size(12, 12);
             this.btnNoWire.TabIndex = 32;
             this.btnNoWire.UseVisualStyleBackColor = true;
             // 
@@ -199,9 +198,9 @@ namespace sys3
             // 
             this.btnWired.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnWired.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnWired.Location = new System.Drawing.Point(169, 14);
+            this.btnWired.Location = new System.Drawing.Point(145, 12);
             this.btnWired.Name = "btnWired";
-            this.btnWired.Size = new System.Drawing.Size(14, 14);
+            this.btnWired.Size = new System.Drawing.Size(12, 12);
             this.btnWired.TabIndex = 33;
             this.btnWired.UseVisualStyleBackColor = true;
             // 
@@ -209,9 +208,9 @@ namespace sys3
             // 
             this.btnTunnelJJ.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnTunnelJJ.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTunnelJJ.Location = new System.Drawing.Point(259, 14);
+            this.btnTunnelJJ.Location = new System.Drawing.Point(222, 12);
             this.btnTunnelJJ.Name = "btnTunnelJJ";
-            this.btnTunnelJJ.Size = new System.Drawing.Size(14, 14);
+            this.btnTunnelJJ.Size = new System.Drawing.Size(12, 12);
             this.btnTunnelJJ.TabIndex = 34;
             this.btnTunnelJJ.UseVisualStyleBackColor = true;
             // 
@@ -219,9 +218,9 @@ namespace sys3
             // 
             this.btnTunnelHC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnTunnelHC.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTunnelHC.Location = new System.Drawing.Point(349, 14);
+            this.btnTunnelHC.Location = new System.Drawing.Point(299, 12);
             this.btnTunnelHC.Name = "btnTunnelHC";
-            this.btnTunnelHC.Size = new System.Drawing.Size(14, 14);
+            this.btnTunnelHC.Size = new System.Drawing.Size(12, 12);
             this.btnTunnelHC.TabIndex = 35;
             this.btnTunnelHC.UseVisualStyleBackColor = true;
             // 
@@ -229,9 +228,9 @@ namespace sys3
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(86, 14);
+            this.label1.Location = new System.Drawing.Point(74, 12);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(67, 14);
+            this.label1.Size = new System.Drawing.Size(65, 12);
             this.label1.TabIndex = 36;
             this.label1.Text = "未绑定导线";
             // 
@@ -239,9 +238,9 @@ namespace sys3
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(190, 14);
+            this.label2.Location = new System.Drawing.Point(163, 12);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(55, 14);
+            this.label2.Size = new System.Drawing.Size(53, 12);
             this.label2.TabIndex = 37;
             this.label2.Text = "绑定导线";
             // 
@@ -249,9 +248,9 @@ namespace sys3
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(280, 14);
+            this.label3.Location = new System.Drawing.Point(240, 12);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(55, 14);
+            this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 38;
             this.label3.Text = "掘进巷道";
             // 
@@ -259,9 +258,9 @@ namespace sys3
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(370, 14);
+            this.label4.Location = new System.Drawing.Point(317, 12);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(67, 14);
+            this.label4.Size = new System.Drawing.Size(65, 12);
             this.label4.TabIndex = 39;
             this.label4.Text = "回采工作面";
             // 
@@ -277,18 +276,18 @@ namespace sys3
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.btnTunnelJJ);
             this.groupBox1.Controls.Add(this.btnTunnelHC);
-            this.groupBox1.Location = new System.Drawing.Point(640, 551);
+            this.groupBox1.Location = new System.Drawing.Point(549, 472);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(442, 34);
+            this.groupBox1.Size = new System.Drawing.Size(379, 29);
             this.groupBox1.TabIndex = 40;
             this.groupBox1.TabStop = false;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(10, 14);
+            this.label5.Location = new System.Drawing.Point(9, 12);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(43, 14);
+            this.label5.Size = new System.Drawing.Size(41, 12);
             this.label5.TabIndex = 40;
             this.label5.Text = "图例：";
             // 
@@ -298,10 +297,10 @@ namespace sys3
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gcTunnel.Cursor = System.Windows.Forms.Cursors.Default;
-            this.gcTunnel.Location = new System.Drawing.Point(12, 27);
+            this.gcTunnel.Location = new System.Drawing.Point(10, 23);
             this.gcTunnel.MainView = this.gridView1;
             this.gcTunnel.Name = "gcTunnel";
-            this.gcTunnel.Size = new System.Drawing.Size(1070, 528);
+            this.gcTunnel.Size = new System.Drawing.Size(917, 453);
             this.gcTunnel.TabIndex = 41;
             this.gcTunnel.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -326,6 +325,7 @@ namespace sys3
             this.gridView1.GridControl = this.gcTunnel;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsBehavior.Editable = false;
+            this.gridView1.OptionsSelection.MultiSelect = true;
             this.gridView1.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.gridView1_CustomColumnDisplayText);
             // 
             // gridColumn1
@@ -442,10 +442,10 @@ namespace sys3
             // controlNavigator1
             // 
             this.controlNavigator1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.controlNavigator1.Location = new System.Drawing.Point(12, 561);
+            this.controlNavigator1.Location = new System.Drawing.Point(10, 481);
             this.controlNavigator1.Name = "controlNavigator1";
             this.controlNavigator1.NavigatableControl = this.gcTunnel;
-            this.controlNavigator1.Size = new System.Drawing.Size(311, 24);
+            this.controlNavigator1.Size = new System.Drawing.Size(267, 21);
             this.controlNavigator1.TabIndex = 88;
             this.controlNavigator1.Text = "controlNavigator1";
             this.controlNavigator1.TextLocation = DevExpress.XtraEditors.NavigatorButtonsTextLocation.Center;
@@ -453,9 +453,9 @@ namespace sys3
             // 
             // TunnelInfoManagement
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1094, 610);
+            this.ClientSize = new System.Drawing.Size(938, 523);
             this.Controls.Add(this.controlNavigator1);
             this.Controls.Add(this.gcTunnel);
             this.Controls.Add(this.groupBox1);

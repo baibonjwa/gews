@@ -7,6 +7,7 @@ using ESRI.ArcGIS.Geometry;
 using ESRI.ArcGIS.Geodatabase;
 using System.Windows.Forms;
 using GIS.Common;
+using LibEntity;
 
 namespace GIS.SpecialGraphic
 {
@@ -23,7 +24,9 @@ namespace GIS.SpecialGraphic
         /// </summary>
         /// <param name="featureLayer"></param>
         /// <param name="point"></param>
-        public void CreatePoint(IFeatureLayer featureLayer, IPoint point, string ID)
+        /// <param name="id"></param>
+        /// <param name="wirePoint"></param>
+        public void CreatePoint(IFeatureLayer featureLayer, IPoint point, string id, WirePoint wirePoint)
         {
             try
             {
@@ -42,8 +45,10 @@ namespace GIS.SpecialGraphic
                     DrawCommon.HandleZMValue(feature, geometry);//几何图形Z值处理
 
                     feature.Shape = point;
-                    int iFieldID = feature.Fields.FindField(GIS_Const.FIELD_BID);
-                    feature.Value[iFieldID] = ID;
+                    feature.Value[feature.Fields.FindField(GIS_Const.FIELD_BID)] = id;
+                    feature.Value[feature.Fields.FindField(GIS_Const.FIELD_HDID)] = wirePoint.Wire.Tunnel.TunnelId;
+                    feature.Value[feature.Fields.FindField(GIS_Const.FIELD_NAME)] = wirePoint.WirePointName;
+                    feature.Value[feature.Fields.FindField(GIS_Const.FIELD_ID)] = wirePoint.WirePointId;
                     feature.Store();
                     workspaceEdit.StopEditOperation();
 
@@ -72,56 +77,56 @@ namespace GIS.SpecialGraphic
         {
             //try
             //{
-                IFeatureClass featureClass = featureLayer.FeatureClass;
-                if (featureClass.ShapeType == esriGeometryType.esriGeometryPolyline)
+            IFeatureClass featureClass = featureLayer.FeatureClass;
+            if (featureClass.ShapeType == esriGeometryType.esriGeometryPolyline)
+            {
+                IPointCollection multipoint = new MultipointClass();
+                if (lstPoint.Count < 2)
                 {
-                    IPointCollection multipoint = new MultipointClass();
-                    if (lstPoint.Count < 2)
-                    {
-                        MessageBox.Show(@"请选择两个及两个以上点数。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        return;
-                    }
-                    ISegmentCollection pPath = new PathClass();
-                    ILine pLine;
-                    ISegment pSegment;
-                    object o = Type.Missing;
-                    for (int i = 0; i < lstPoint.Count - 1; i++)
-                    {
-                        pLine = new LineClass();
-                        pLine.PutCoords(lstPoint[i], lstPoint[i + 1]);
-                        pSegment = pLine as ISegment;
-                        pPath.AddSegment(pSegment, ref o, ref o);
-                    }
-                    IGeometryCollection pPolyline = new PolylineClass();
-                    pPolyline.AddGeometry(pPath as IGeometry, ref o, ref o);
-
-                    IDataset dataset = (IDataset)featureClass;
-                    IWorkspace workspace = dataset.Workspace;
-                    IWorkspaceEdit workspaceEdit = workspace as IWorkspaceEdit;
-
-                    workspaceEdit.StartEditing(true);
-                    workspaceEdit.StartEditOperation();
-
-                    IFeature feature = featureClass.CreateFeature();
-
-                    IGeometry geometry = pPolyline as IGeometry;
-                    DrawCommon.HandleZMValue(feature, geometry);//几何图形Z值处理
-
-                    feature.Shape = pPolyline as PolylineClass;
-                    int iFieldID = feature.Fields.FindField(GIS_Const.FIELD_BID);
-                    feature.Value[iFieldID] = ID.ToString();
-                    feature.Store();
-                    workspaceEdit.StopEditOperation();
-                    workspaceEdit.StopEditing(false);
-
-                    IEnvelope envelop = feature.Shape.Envelope;
-                    DataEditCommon.g_pMyMapCtrl.ActiveView.Extent = envelop;
-                    DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewBackground, null, null);
+                    MessageBox.Show(@"请选择两个及两个以上点数。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
                 }
-                else
+                ISegmentCollection pPath = new PathClass();
+                ILine pLine;
+                ISegment pSegment;
+                object o = Type.Missing;
+                for (int i = 0; i < lstPoint.Count - 1; i++)
                 {
-                    MessageBox.Show(@"请选择线图层。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    pLine = new LineClass();
+                    pLine.PutCoords(lstPoint[i], lstPoint[i + 1]);
+                    pSegment = pLine as ISegment;
+                    pPath.AddSegment(pSegment, ref o, ref o);
                 }
+                IGeometryCollection pPolyline = new PolylineClass();
+                pPolyline.AddGeometry(pPath as IGeometry, ref o, ref o);
+
+                IDataset dataset = (IDataset)featureClass;
+                IWorkspace workspace = dataset.Workspace;
+                IWorkspaceEdit workspaceEdit = workspace as IWorkspaceEdit;
+
+                workspaceEdit.StartEditing(true);
+                workspaceEdit.StartEditOperation();
+
+                IFeature feature = featureClass.CreateFeature();
+
+                IGeometry geometry = pPolyline as IGeometry;
+                DrawCommon.HandleZMValue(feature, geometry);//几何图形Z值处理
+
+                feature.Shape = pPolyline as PolylineClass;
+                int iFieldID = feature.Fields.FindField(GIS_Const.FIELD_BID);
+                feature.Value[iFieldID] = ID.ToString();
+                feature.Store();
+                workspaceEdit.StopEditOperation();
+                workspaceEdit.StopEditing(false);
+
+                IEnvelope envelop = feature.Shape.Envelope;
+                DataEditCommon.g_pMyMapCtrl.ActiveView.Extent = envelop;
+                DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewBackground, null, null);
+            }
+            else
+            {
+                MessageBox.Show(@"请选择线图层。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
             //}
             //catch
             //{
