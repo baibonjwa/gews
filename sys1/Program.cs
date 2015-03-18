@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using AutoUpdaterDotNET;
@@ -9,11 +7,8 @@ using Castle.ActiveRecord.Framework;
 using Castle.ActiveRecord.Framework.Config;
 using DevExpress.XtraBars;
 using LibLoginForm;
-using LibCommonForm;
-using LibCommon;
-using sys1;
 
-namespace _1.GasEmission
+namespace sys1
 {
     static class Program
     {
@@ -36,10 +31,10 @@ namespace _1.GasEmission
 
             ActiveRecordStarter.Initialize(asm, config);
 
-            //AutoUpdater.Start("http://rbsoft.org/updates/right-click-enhancer.xml");
+            AutoUpdater.Start("http://rbsoft.org/updates/right-click-enhancer.xml");
 
-            MainFormGe mf = new MainFormGe(new BarButtonItem());
-            LoginForm lf = new LoginForm(mf);
+            var mf = new MainFormGe(new BarButtonItem());
+            var lf = new LoginForm(mf);
             Application.Run(lf);
         }
     }

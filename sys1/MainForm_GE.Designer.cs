@@ -122,10 +122,9 @@ namespace sys1
             // 
             // ss_GE
             // 
-            this.ss_GE.Location = new System.Drawing.Point(0, 719);
+            this.ss_GE.Location = new System.Drawing.Point(0, 613);
             this.ss_GE.Name = "ss_GE";
-            this.ss_GE.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
-            this.ss_GE.Size = new System.Drawing.Size(1356, 22);
+            this.ss_GE.Size = new System.Drawing.Size(1162, 22);
             this.ss_GE.TabIndex = 1;
             this.ss_GE.Text = "statusStrip1";
             // 
@@ -402,28 +401,28 @@ namespace sys1
             this.barDockControlTop.CausesValidation = false;
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlTop.Size = new System.Drawing.Size(1356, 55);
+            this.barDockControlTop.Size = new System.Drawing.Size(1162, 55);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 741);
-            this.barDockControlBottom.Size = new System.Drawing.Size(1356, 0);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 635);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1162, 0);
             // 
             // barDockControlLeft
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 55);
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 686);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 580);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1356, 55);
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 686);
+            this.barDockControlRight.Location = new System.Drawing.Point(1162, 55);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 580);
             // 
             // imageList1
             // 
@@ -460,12 +459,12 @@ namespace sys1
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBox1.Controls.Add(this._dgvData);
-            this.groupBox1.Location = new System.Drawing.Point(17, 446);
+            this.groupBox1.Location = new System.Drawing.Point(15, 382);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(254, 214);
+            this.groupBox1.Size = new System.Drawing.Size(218, 172);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             // 
@@ -490,12 +489,12 @@ namespace sys1
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this._dgvData.DefaultCellStyle = dataGridViewCellStyle1;
             this._dgvData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._dgvData.Location = new System.Drawing.Point(3, 18);
+            this._dgvData.Location = new System.Drawing.Point(3, 17);
             this._dgvData.Name = "_dgvData";
             this._dgvData.ReadOnly = true;
             this._dgvData.RowHeadersVisible = false;
             this._dgvData.RowTemplate.Height = 23;
-            this._dgvData.Size = new System.Drawing.Size(248, 193);
+            this._dgvData.Size = new System.Drawing.Size(212, 152);
             this._dgvData.TabIndex = 0;
             // 
             // _Value
@@ -520,9 +519,9 @@ namespace sys1
             this.gbTunnel.Controls.Add(this._lstProbeName);
             this.gbTunnel.Controls.Add(this._lstProbeStyle);
             this.gbTunnel.Controls.Add(this._lblProbeStyle);
-            this.gbTunnel.Location = new System.Drawing.Point(17, 70);
+            this.gbTunnel.Location = new System.Drawing.Point(15, 60);
             this.gbTunnel.Name = "gbTunnel";
-            this.gbTunnel.Size = new System.Drawing.Size(255, 176);
+            this.gbTunnel.Size = new System.Drawing.Size(219, 151);
             this.gbTunnel.TabIndex = 8;
             this.gbTunnel.TabStop = false;
             this.gbTunnel.Text = "【传感器选择】";
@@ -530,63 +529,64 @@ namespace sys1
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(118, 114);
+            this.label7.Location = new System.Drawing.Point(101, 98);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(25, 14);
+            this.label7.Size = new System.Drawing.Size(17, 12);
             this.label7.TabIndex = 23;
             this.label7.Text = ">>";
             // 
             // selectTunnelSimple1
             // 
-            this.selectTunnelSimple1.Location = new System.Drawing.Point(13, 17);
+            this.selectTunnelSimple1.Location = new System.Drawing.Point(11, 15);
             this.selectTunnelSimple1.Name = "selectTunnelSimple1";
-            this.selectTunnelSimple1.Size = new System.Drawing.Size(238, 38);
+            this.selectTunnelSimple1.SelectedTunnel = null;
+            this.selectTunnelSimple1.Size = new System.Drawing.Size(204, 33);
             this.selectTunnelSimple1.TabIndex = 0;
             // 
             // _lblProbeName
             // 
             this._lblProbeName.AutoSize = true;
-            this._lblProbeName.Location = new System.Drawing.Point(142, 59);
+            this._lblProbeName.Location = new System.Drawing.Point(122, 51);
             this._lblProbeName.Name = "_lblProbeName";
-            this._lblProbeName.Size = new System.Drawing.Size(67, 14);
+            this._lblProbeName.Size = new System.Drawing.Size(65, 12);
             this._lblProbeName.TabIndex = 21;
             this._lblProbeName.Text = "传感器名称";
             // 
             // _lstProbeName
             // 
             this._lstProbeName.FormattingEnabled = true;
-            this._lstProbeName.ItemHeight = 14;
-            this._lstProbeName.Location = new System.Drawing.Point(152, 76);
+            this._lstProbeName.ItemHeight = 12;
+            this._lstProbeName.Location = new System.Drawing.Point(130, 65);
             this._lstProbeName.Name = "_lstProbeName";
-            this._lstProbeName.Size = new System.Drawing.Size(91, 88);
+            this._lstProbeName.Size = new System.Drawing.Size(79, 76);
             this._lstProbeName.TabIndex = 22;
             this._lstProbeName.MouseUp += new System.Windows.Forms.MouseEventHandler(this._lstProbeName_SelectedIndexChanged);
             // 
             // _lstProbeStyle
             // 
             this._lstProbeStyle.FormattingEnabled = true;
-            this._lstProbeStyle.ItemHeight = 14;
-            this._lstProbeStyle.Location = new System.Drawing.Point(19, 76);
+            this._lstProbeStyle.ItemHeight = 12;
+            this._lstProbeStyle.Location = new System.Drawing.Point(16, 65);
             this._lstProbeStyle.Name = "_lstProbeStyle";
-            this._lstProbeStyle.Size = new System.Drawing.Size(93, 88);
+            this._lstProbeStyle.Size = new System.Drawing.Size(80, 76);
             this._lstProbeStyle.TabIndex = 20;
             this._lstProbeStyle.MouseUp += new System.Windows.Forms.MouseEventHandler(this._lstProbeStyle_SelectedIndexChanged);
             // 
             // _lblProbeStyle
             // 
             this._lblProbeStyle.AutoSize = true;
-            this._lblProbeStyle.Location = new System.Drawing.Point(21, 59);
+            this._lblProbeStyle.Location = new System.Drawing.Point(18, 51);
             this._lblProbeStyle.Name = "_lblProbeStyle";
-            this._lblProbeStyle.Size = new System.Drawing.Size(67, 14);
+            this._lblProbeStyle.Size = new System.Drawing.Size(65, 12);
             this._lblProbeStyle.TabIndex = 19;
             this._lblProbeStyle.Text = "传感器类型";
             // 
             // _btnQuery
             // 
             this._btnQuery.Enabled = false;
-            this._btnQuery.Location = new System.Drawing.Point(172, 110);
+            this._btnQuery.Location = new System.Drawing.Point(147, 94);
             this._btnQuery.Name = "_btnQuery";
-            this._btnQuery.Size = new System.Drawing.Size(74, 24);
+            this._btnQuery.Size = new System.Drawing.Size(63, 21);
             this._btnQuery.TabIndex = 5;
             this._btnQuery.Text = "查询";
             this._btnQuery.UseVisualStyleBackColor = true;
@@ -595,27 +595,27 @@ namespace sys1
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 52);
+            this.label3.Location = new System.Drawing.Point(11, 45);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(67, 14);
+            this.label3.Size = new System.Drawing.Size(65, 12);
             this.label3.TabIndex = 3;
             this.label3.Text = "结束时间：";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 18);
+            this.label1.Location = new System.Drawing.Point(11, 15);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(67, 14);
+            this.label1.Size = new System.Drawing.Size(65, 12);
             this.label1.TabIndex = 1;
             this.label1.Text = "开始时间：";
             // 
             // _rbtnHistory
             // 
             this._rbtnHistory.AutoSize = true;
-            this._rbtnHistory.Location = new System.Drawing.Point(143, 13);
+            this._rbtnHistory.Location = new System.Drawing.Point(123, 11);
             this._rbtnHistory.Name = "_rbtnHistory";
-            this._rbtnHistory.Size = new System.Drawing.Size(97, 18);
+            this._rbtnHistory.Size = new System.Drawing.Size(95, 16);
             this._rbtnHistory.TabIndex = 0;
             this._rbtnHistory.Text = "历史数据查询";
             this._rbtnHistory.UseVisualStyleBackColor = true;
@@ -632,9 +632,9 @@ namespace sys1
             this.gb03.Controls.Add(this.label1);
             this.gb03.Controls.Add(this.label3);
             this.gb03.Controls.Add(this._btnQuery);
-            this.gb03.Location = new System.Drawing.Point(17, 301);
+            this.gb03.Location = new System.Drawing.Point(15, 258);
             this.gb03.Name = "gb03";
-            this.gb03.Size = new System.Drawing.Size(254, 139);
+            this.gb03.Size = new System.Drawing.Size(218, 119);
             this.gb03.TabIndex = 23;
             this.gb03.TabStop = false;
             // 
@@ -642,9 +642,9 @@ namespace sys1
             // 
             this._lblLoading.AutoSize = true;
             this._lblLoading.ForeColor = System.Drawing.Color.Red;
-            this._lblLoading.Location = new System.Drawing.Point(35, 115);
+            this._lblLoading.Location = new System.Drawing.Point(30, 99);
             this._lblLoading.Name = "_lblLoading";
-            this._lblLoading.Size = new System.Drawing.Size(79, 14);
+            this._lblLoading.Size = new System.Drawing.Size(83, 12);
             this._lblLoading.TabIndex = 9;
             this._lblLoading.Text = "数据加载中...";
             this._lblLoading.Visible = false;
@@ -652,9 +652,9 @@ namespace sys1
             // _btnAfterDay
             // 
             this._btnAfterDay.Enabled = false;
-            this._btnAfterDay.Location = new System.Drawing.Point(172, 78);
+            this._btnAfterDay.Location = new System.Drawing.Point(147, 67);
             this._btnAfterDay.Name = "_btnAfterDay";
-            this._btnAfterDay.Size = new System.Drawing.Size(74, 24);
+            this._btnAfterDay.Size = new System.Drawing.Size(63, 21);
             this._btnAfterDay.TabIndex = 8;
             this._btnAfterDay.Text = "后一天>>";
             this._btnAfterDay.UseVisualStyleBackColor = true;
@@ -663,9 +663,9 @@ namespace sys1
             // _btnNow
             // 
             this._btnNow.Enabled = false;
-            this._btnNow.Location = new System.Drawing.Point(97, 78);
+            this._btnNow.Location = new System.Drawing.Point(83, 67);
             this._btnNow.Name = "_btnNow";
-            this._btnNow.Size = new System.Drawing.Size(69, 24);
+            this._btnNow.Size = new System.Drawing.Size(59, 21);
             this._btnNow.TabIndex = 8;
             this._btnNow.Text = "当前日期";
             this._btnNow.UseVisualStyleBackColor = true;
@@ -674,9 +674,9 @@ namespace sys1
             // _btnBeforeDay
             // 
             this._btnBeforeDay.Enabled = false;
-            this._btnBeforeDay.Location = new System.Drawing.Point(16, 78);
+            this._btnBeforeDay.Location = new System.Drawing.Point(14, 67);
             this._btnBeforeDay.Name = "_btnBeforeDay";
-            this._btnBeforeDay.Size = new System.Drawing.Size(75, 24);
+            this._btnBeforeDay.Size = new System.Drawing.Size(64, 21);
             this._btnBeforeDay.TabIndex = 8;
             this._btnBeforeDay.Text = "<<前一天";
             this._btnBeforeDay.UseVisualStyleBackColor = true;
@@ -687,9 +687,9 @@ namespace sys1
             this._dateTimeEnd.CustomFormat = "yyyy/MM/dd   HH:mm:ss";
             this._dateTimeEnd.Enabled = false;
             this._dateTimeEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this._dateTimeEnd.Location = new System.Drawing.Point(71, 50);
+            this._dateTimeEnd.Location = new System.Drawing.Point(61, 43);
             this._dateTimeEnd.Name = "_dateTimeEnd";
-            this._dateTimeEnd.Size = new System.Drawing.Size(175, 22);
+            this._dateTimeEnd.Size = new System.Drawing.Size(151, 21);
             this._dateTimeEnd.TabIndex = 7;
             this._dateTimeEnd.Value = new System.DateTime(2014, 5, 7, 23, 59, 59, 0);
             // 
@@ -698,9 +698,9 @@ namespace sys1
             this._dateTimeStart.CustomFormat = "yyyy/MM/dd   HH:mm:ss";
             this._dateTimeStart.Enabled = false;
             this._dateTimeStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this._dateTimeStart.Location = new System.Drawing.Point(71, 16);
+            this._dateTimeStart.Location = new System.Drawing.Point(61, 14);
             this._dateTimeStart.Name = "_dateTimeStart";
-            this._dateTimeStart.Size = new System.Drawing.Size(175, 22);
+            this._dateTimeStart.Size = new System.Drawing.Size(151, 21);
             this._dateTimeStart.TabIndex = 6;
             this._dateTimeStart.Value = new System.DateTime(2014, 5, 7, 0, 0, 0, 0);
             // 
@@ -709,17 +709,17 @@ namespace sys1
             this.gb01.Controls.Add(this.groupBox3);
             this.gb01.Controls.Add(this._rbtnHistory);
             this.gb01.Controls.Add(this._rbtnRealtime);
-            this.gb01.Location = new System.Drawing.Point(17, 252);
+            this.gb01.Location = new System.Drawing.Point(15, 216);
             this.gb01.Name = "gb01";
-            this.gb01.Size = new System.Drawing.Size(254, 37);
+            this.gb01.Size = new System.Drawing.Size(218, 32);
             this.gb01.TabIndex = 21;
             this.gb01.TabStop = false;
             // 
             // groupBox3
             // 
-            this.groupBox3.Location = new System.Drawing.Point(3, 47);
+            this.groupBox3.Location = new System.Drawing.Point(3, 40);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(258, 51);
+            this.groupBox3.Size = new System.Drawing.Size(221, 44);
             this.groupBox3.TabIndex = 24;
             this.groupBox3.TabStop = false;
             // 
@@ -727,9 +727,9 @@ namespace sys1
             // 
             this._rbtnRealtime.AutoSize = true;
             this._rbtnRealtime.Checked = true;
-            this._rbtnRealtime.Location = new System.Drawing.Point(17, 13);
+            this._rbtnRealtime.Location = new System.Drawing.Point(15, 11);
             this._rbtnRealtime.Name = "_rbtnRealtime";
-            this._rbtnRealtime.Size = new System.Drawing.Size(97, 18);
+            this._rbtnRealtime.Size = new System.Drawing.Size(95, 16);
             this._rbtnRealtime.TabIndex = 0;
             this._rbtnRealtime.TabStop = true;
             this._rbtnRealtime.Text = "实时数据监控";
@@ -738,12 +738,12 @@ namespace sys1
             // 
             // picBoxLogo
             // 
-            this.picBoxLogo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.picBoxLogo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.picBoxLogo.Image = ((System.Drawing.Image)(resources.GetObject("picBoxLogo.Image")));
             this.picBoxLogo.Location = new System.Drawing.Point(3, 3);
             this.picBoxLogo.Name = "picBoxLogo";
-            this.picBoxLogo.Size = new System.Drawing.Size(1352, 66);
+            this.picBoxLogo.Size = new System.Drawing.Size(1159, 57);
             this.picBoxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picBoxLogo.TabIndex = 20;
             this.picBoxLogo.TabStop = false;
@@ -764,17 +764,17 @@ namespace sys1
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 55);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1356, 664);
+            this.panel1.Size = new System.Drawing.Size(1162, 558);
             this.panel1.TabIndex = 2;
             // 
             // _ckbSetMarks3
             // 
-            this._ckbSetMarks3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this._ckbSetMarks3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this._ckbSetMarks3.AutoSize = true;
-            this._ckbSetMarks3.Location = new System.Drawing.Point(1242, 277);
+            this._ckbSetMarks3.Location = new System.Drawing.Point(1065, 237);
             this._ckbSetMarks3.Name = "_ckbSetMarks3";
-            this._ckbSetMarks3.Size = new System.Drawing.Size(98, 18);
+            this._ckbSetMarks3.Size = new System.Drawing.Size(96, 16);
             this._ckbSetMarks3.TabIndex = 27;
             this._ckbSetMarks3.Text = "显示数据标记";
             this._ckbSetMarks3.UseVisualStyleBackColor = true;
@@ -782,12 +782,12 @@ namespace sys1
             // 
             // _ckbSetMarks2
             // 
-            this._ckbSetMarks2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this._ckbSetMarks2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this._ckbSetMarks2.AutoSize = true;
-            this._ckbSetMarks2.Location = new System.Drawing.Point(1242, 87);
+            this._ckbSetMarks2.Location = new System.Drawing.Point(1065, 75);
             this._ckbSetMarks2.Name = "_ckbSetMarks2";
-            this._ckbSetMarks2.Size = new System.Drawing.Size(98, 18);
+            this._ckbSetMarks2.Size = new System.Drawing.Size(96, 16);
             this._ckbSetMarks2.TabIndex = 27;
             this._ckbSetMarks2.Text = "显示数据标记";
             this._ckbSetMarks2.UseVisualStyleBackColor = true;
@@ -795,12 +795,12 @@ namespace sys1
             // 
             // _ckbSetMarks1
             // 
-            this._ckbSetMarks1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            this._ckbSetMarks1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this._ckbSetMarks1.AutoSize = true;
-            this._ckbSetMarks1.Location = new System.Drawing.Point(1242, 490);
+            this._ckbSetMarks1.Location = new System.Drawing.Point(1065, 409);
             this._ckbSetMarks1.Name = "_ckbSetMarks1";
-            this._ckbSetMarks1.Size = new System.Drawing.Size(98, 18);
+            this._ckbSetMarks1.Size = new System.Drawing.Size(96, 16);
             this._ckbSetMarks1.TabIndex = 27;
             this._ckbSetMarks1.Text = "显示数据标记";
             this._ckbSetMarks1.UseVisualStyleBackColor = true;
@@ -808,7 +808,7 @@ namespace sys1
             // 
             // tChartN
             // 
-            this.tChartN.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.tChartN.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             // 
             // 
@@ -895,7 +895,7 @@ namespace sys1
             // 
             this.tChartN.Legend.Shadow.Brush.Color = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.tChartN.Legend.Visible = false;
-            this.tChartN.Location = new System.Drawing.Point(278, 268);
+            this.tChartN.Location = new System.Drawing.Point(238, 230);
             this.tChartN.Name = "tChartN";
             // 
             // 
@@ -918,7 +918,7 @@ namespace sys1
             this.tChartN.Panel.Shadow.Height = 0;
             this.tChartN.Panel.Shadow.Width = 0;
             this.tChartN.Series.Add(this.fastLine3);
-            this.tChartN.Size = new System.Drawing.Size(1068, 167);
+            this.tChartN.Size = new System.Drawing.Size(915, 143);
             this.tChartN.TabIndex = 6;
             // 
             // 
@@ -965,7 +965,7 @@ namespace sys1
             // 
             // tChartT2
             // 
-            this.tChartT2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.tChartT2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             // 
             // 
@@ -1099,7 +1099,7 @@ namespace sys1
             // 
             this.tChartT2.Legend.Symbol.Pen.Visible = false;
             this.tChartT2.Legend.Visible = false;
-            this.tChartT2.Location = new System.Drawing.Point(277, 78);
+            this.tChartT2.Location = new System.Drawing.Point(237, 67);
             this.tChartT2.Name = "tChartT2";
             // 
             // 
@@ -1128,7 +1128,7 @@ namespace sys1
             this.tChartT2.Panel.Shadow.Height = 0;
             this.tChartT2.Panel.Shadow.Width = 0;
             this.tChartT2.Series.Add(this.fastLine2);
-            this.tChartT2.Size = new System.Drawing.Size(1068, 180);
+            this.tChartT2.Size = new System.Drawing.Size(915, 154);
             this.tChartT2.TabIndex = 6;
             // 
             // 
@@ -1175,7 +1175,7 @@ namespace sys1
             // 
             // tChartM
             // 
-            this.tChartM.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.tChartM.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             // 
             // 
@@ -1262,7 +1262,7 @@ namespace sys1
             // 
             this.tChartM.Legend.Shadow.Brush.Color = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.tChartM.Legend.Visible = false;
-            this.tChartM.Location = new System.Drawing.Point(278, 483);
+            this.tChartM.Location = new System.Drawing.Point(238, 414);
             this.tChartM.Name = "tChartM";
             // 
             // 
@@ -1285,7 +1285,7 @@ namespace sys1
             this.tChartM.Panel.Shadow.Height = 0;
             this.tChartM.Panel.Shadow.Width = 0;
             this.tChartM.Series.Add(this.fastLine1);
-            this.tChartM.Size = new System.Drawing.Size(1068, 174);
+            this.tChartM.Size = new System.Drawing.Size(915, 149);
             this.tChartM.TabIndex = 26;
             // 
             // 
@@ -1343,9 +1343,9 @@ namespace sys1
             // 
             // MainFormGe
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1356, 741);
+            this.ClientSize = new System.Drawing.Size(1162, 635);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.ss_GE);
             this.Controls.Add(this.barDockControlLeft);

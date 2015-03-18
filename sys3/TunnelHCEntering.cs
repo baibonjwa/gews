@@ -75,7 +75,7 @@ namespace sys3
         private void Form_TunnelHCEntering_Load(object sender, EventArgs e)
         {
             //绑定队别名称
-            bindTeamInfo();
+            DataBindUtil.LoadTeam(cboTeamName);
 
             if (Text == Const_GM.TUNNEL_HC_CHANGE)
             {
@@ -282,7 +282,7 @@ namespace sys3
             }
 
             //巷道选择窗体
-            var tunnelChoose = new SelectTunnelDlg();
+            var tunnelChoose = new SelectTunnelDlg(_workingFace);
 
             //巷道选择完毕
             if (DialogResult.OK != tunnelChoose.ShowDialog()) return;
@@ -317,7 +317,7 @@ namespace sys3
             }
 
             //巷道选择窗体
-            var tunnelChoose = new SelectTunnelDlg();
+            var tunnelChoose = new SelectTunnelDlg(_workingFace);
 
             //巷道选择完毕
             if (DialogResult.OK == tunnelChoose.ShowDialog())
@@ -377,19 +377,6 @@ namespace sys3
             }
             //班次
             _workingFace.WorkTime = cboWorkTime.Text;
-        }
-
-        /// <summary>
-        ///     绑定队别名称
-        /// </summary>
-        private void bindTeamInfo()
-        {
-            cboTeamName.Items.Clear();
-            Team[] team = Team.FindAll();
-            foreach (Team t in team)
-            {
-                cboTeamName.Items.Add(t.TeamName);
-            }
         }
 
         /// <summary>
