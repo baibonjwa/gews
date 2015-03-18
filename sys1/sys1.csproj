@@ -389,6 +389,10 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AutoUpdater.NET\AutoUpdater.NET.csproj">
+      <Project>{fb9e7e6b-b19f-4f37-a708-2996190cef13}</Project>
+      <Name>AutoUpdater.NET</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Library\LibAbout\LibAbout.csproj">
       <Project>{9ec74138-a934-432d-a3b6-42ec84052ff8}</Project>
       <Name>LibAbout</Name>

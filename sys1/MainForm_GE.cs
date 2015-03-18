@@ -1,13 +1,4 @@
-﻿// ******************************************************************
-// 概  述：系统一主界面
-// 作  者：伍鑫
-// 创建日期：
-// 版本号：V1.0
-// 版本信息：
-// V1.0 新建
-// ******************************************************************
-
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
@@ -23,6 +14,7 @@ using LibEntity;
 using LibPanels;
 using Steema.TeeChart;
 using TeeChartWrapper;
+using AutoUpdaterDotNET;
 
 namespace sys1
 {
@@ -119,7 +111,7 @@ namespace sys1
 
         private void MainForm_GE_Load(object sender, EventArgs e)
         {
-
+            AutoUpdater.Start("http://bltmld.vicp.cc:8090/sys1/update.xml");
             //monitoringDataAnalysisForm.MdiParent = this;
             //this.panel1.Controls.Add(monitoringDataAnalysisForm);
             //monitoringDataAnalysisForm.WindowState = FormWindowState.Maximized;
@@ -141,7 +133,7 @@ namespace sys1
 
         private void MainForm_GE_FormClosing(object sender, FormClosingEventArgs e)
         {
-            e.Cancel = DialogResult.Yes != MessageBox.Show(@"您确定要退出系统吗?", @"系统提示", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            //e.Cancel = DialogResult.Yes != MessageBox.Show(@"您确定要退出系统吗?", @"系统提示", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
         }
 
         private void MainForm_GE_FormClosed(object sender, FormClosedEventArgs e)
@@ -1246,6 +1238,12 @@ namespace sys1
                 }
             }
             tChart.Series[0].GetVertAxis.SetMinMax(minVertValue - 1, maxVertValue + 1);
+        }
+
+        private void barButtonItem1_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            AutoUpdater.CheckAtOnce = true;
+            AutoUpdater.Start("http://bltmld.vicp.cc:8090/sys1/update.xml");
         }
     }
 }

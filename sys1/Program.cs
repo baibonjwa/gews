@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Reflection;
 using System.Windows.Forms;
-using AutoUpdaterDotNET;
 using Castle.ActiveRecord;
 using Castle.ActiveRecord.Framework;
 using Castle.ActiveRecord.Framework.Config;
@@ -31,7 +30,6 @@ namespace sys1
 
             ActiveRecordStarter.Initialize(asm, config);
 
-            AutoUpdater.Start("http://rbsoft.org/updates/right-click-enhancer.xml");
 
             var mf = new MainFormGe(new BarButtonItem());
             var lf = new LoginForm(mf);
