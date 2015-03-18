@@ -40,6 +40,14 @@ namespace LibCommonForm
             SelectedTunnel = tunnel;
         }
 
+        public SelectTunnelDlg(WorkingFace workingFace)
+        {
+            InitializeComponent();
+            //窗体属性设置
+            FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_GM.TUNNEL_CHOOSE);
+            selectTunnelUserControl1.LoadData(workingFace);
+        }
+
         /// <summary>
         /// 提交
         /// </summary>

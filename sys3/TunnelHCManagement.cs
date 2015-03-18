@@ -59,7 +59,7 @@ namespace sys3
         private void tsBtnAdd_Click(object sender, EventArgs e)
         {
             //TunnelHCEntering tunnelHCForm = new TunnelHCEntering();
-            var tunnelHcForm = new TunnelHCEntering();
+            var tunnelHcForm = new TunnelHcEntering();
 
             if (DialogResult.OK == tunnelHcForm.ShowDialog())
             {
@@ -74,7 +74,7 @@ namespace sys3
         /// <param name="e"></param>
         private void tsBtnModify_Click(object sender, EventArgs e)
         {
-            var tunnelHcForm = new TunnelHCEntering(((WorkingFaceHc)gridView1.GetFocusedRow()).WorkingFace);
+            var tunnelHcForm = new TunnelHcEntering(((WorkingFaceHc)gridView1.GetFocusedRow()).WorkingFace);
             if (DialogResult.OK == tunnelHcForm.ShowDialog())
             {
                 RefreshData();

@@ -1,6 +1,6 @@
 ﻿namespace sys3
 {
-    partial class TunnelHCEntering
+    partial class TunnelHcEntering
     {
         /// <summary>
         /// Required designer variable.
@@ -421,7 +421,7 @@
             this.Controls.Add(this.lblStartDate);
             this.Controls.Add(this.cboTeamName);
             this.Controls.Add(this.lblTeamName);
-            this.Name = "TunnelHCEntering";
+            this.Name = "TunnelHcEntering";
             this.Text = "回采面关联";
             this.Load += new System.EventHandler(this.Form_TunnelHCEntering_Load);
             this.gbxWorkStyle.ResumeLayout(false);

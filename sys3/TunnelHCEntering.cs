@@ -7,7 +7,6 @@ using GIS.HdProc;
 using LibBusiness;
 using LibBusiness.CommonBLL;
 using LibCommon;
-using LibCommonControl;
 using LibCommonForm;
 using LibEntity;
 
@@ -16,25 +15,24 @@ namespace sys3
     /// <summary>
     ///     回采面
     /// </summary>
-    public partial class TunnelHCEntering : Form
+    public partial class TunnelHcEntering : Form
     {
         #region ******变量声明******;
 
         // 主运
         // 辅运
-        private readonly int[] intArr = new int[5];
-        private readonly List<Tunnel> otherTunnelList = new List<Tunnel>();
-        private readonly HashSet<Tunnel> tunnelSet = new HashSet<Tunnel>();
-        private Tunnel tunnelFY;
+        private readonly List<Tunnel> _otherTunnelList = new List<Tunnel>();
+        private readonly HashSet<Tunnel> _tunnelSet = new HashSet<Tunnel>();
+        private Tunnel _tunnelFy;
         // 切眼
-        private Tunnel tunnelQY;
-        private Tunnel tunnelZY;
+        private Tunnel _tunnelQy;
+        private Tunnel _tunnelZy;
 
-        private WorkingFace workingFace;
+        private WorkingFace _workingFace;
 
         #endregion ******变量声明******
 
-        public TunnelHCEntering()
+        public TunnelHcEntering()
         {
 
             InitializeComponent();
@@ -57,7 +55,7 @@ namespace sys3
             ////返回当前
             //cboWorkTime.Text = WorkTime.returnSysWorkTime(rbtn38.Checked ? Const_MS.WORK_TIME_38 : Const_MS.WORK_TIME_46);
             // 设置班次名称
-            setWorkTimeName();
+            SetWorkTimeName();
         }
 
 
@@ -65,9 +63,9 @@ namespace sys3
         ///     构造方法
         /// </summary>
         /// <param name="tunnelHcEntity">回采面实体</param>
-        public TunnelHCEntering(WorkingFace tunnelHcEntity)
+        public TunnelHcEntering(WorkingFace tunnelHcEntity)
         {
-            workingFace = ObjectCopier.Clone(tunnelHcEntity);
+            _workingFace = ObjectCopier.Clone(tunnelHcEntity);
             Text = Const_GM.TUNNEL_HC_CHANGE;
             InitializeComponent();
 
@@ -81,7 +79,7 @@ namespace sys3
 
             if (Text == Const_GM.TUNNEL_HC_CHANGE)
             {
-                bindInfo();
+                BindInfo();
             }
             if (rbtnHCN.Checked)
             {
@@ -98,20 +96,13 @@ namespace sys3
         /// <summary>
         ///     设置班次名称
         /// </summary>
-        private void setWorkTimeName()
+        private void SetWorkTimeName()
         {
             string strWorkTimeName = "";
             string sysDateTime = DateTime.Now.ToString("HH:mm:ss");
-            if (rbtn38.Checked)
-            {
-                strWorkTimeName = MineDataSimpleBLL.selectWorkTimeNameByWorkTimeGroupIdAndSysTime(1, sysDateTime);
-            }
-            else
-            {
-                strWorkTimeName = MineDataSimpleBLL.selectWorkTimeNameByWorkTimeGroupIdAndSysTime(2, sysDateTime);
-            }
+            strWorkTimeName = MineDataSimpleBLL.selectWorkTimeNameByWorkTimeGroupIdAndSysTime(rbtn38.Checked ? 1 : 2, sysDateTime);
 
-            if (strWorkTimeName != null && strWorkTimeName != "")
+            if (!string.IsNullOrEmpty(strWorkTimeName))
             {
                 cboWorkTime.Text = strWorkTimeName;
             }
@@ -120,43 +111,36 @@ namespace sys3
         /// <summary>
         ///     绑定修改信息
         /// </summary>
-        private void bindInfo()
+        private void BindInfo()
         {
-            intArr[0] = workingFace.MiningArea.Horizontal.Mine.MineId;
-            intArr[1] = workingFace.MiningArea.Horizontal.HorizontalId;
-            intArr[2] = workingFace.MiningArea.MiningAreaId;
-            intArr[3] = workingFace.WorkingFaceId;
-
-            string otherTunnel = "";
-            foreach (Tunnel tunnel in workingFace.Tunnels)
+            foreach (Tunnel tunnel in _workingFace.Tunnels)
             {
                 if (tunnel.TunnelType == TunnelTypeEnum.STOPING_ZY)
-                    tunnelZY = tunnel; //主运顺槽
+                    _tunnelZy = tunnel; //主运顺槽
                 else if (tunnel.TunnelType == TunnelTypeEnum.STOPING_FY)
-                    tunnelFY = tunnel; //辅运顺槽
+                    _tunnelFy = tunnel; //辅运顺槽
                 else if (tunnel.TunnelType == TunnelTypeEnum.STOPING_QY)
-                    tunnelQY = tunnel; //开切眼
+                    _tunnelQy = tunnel; //开切眼
                 else
                 {
                     if (tunnel.TunnelType == TunnelTypeEnum.STOPING_OTHER)
                     {
-                        otherTunnelList.Add(tunnel);
-                        otherTunnel += " " + tunnel.TunnelName; //其他关联巷道
+                        _otherTunnelList.Add(tunnel);
                     }
                 }
             }
 
-            btnChooseWF.Text = workingFace.WorkingFaceName;
+            btnChooseWF.Text = _workingFace.WorkingFaceName;
 
             //主运顺槽
-            btnChooseZY.Text = tunnelZY != null ? tunnelZY.TunnelName : "";
+            btnChooseZY.Text = _tunnelZy != null ? _tunnelZy.TunnelName : "";
             //辅运顺槽
-            btnChooseFY.Text = tunnelFY != null ? tunnelFY.TunnelName : "";
+            btnChooseFY.Text = _tunnelFy != null ? _tunnelFy.TunnelName : "";
             //开切眼
-            btnChooseQY.Text = tunnelQY != null ? tunnelQY.TunnelName : "";
+            btnChooseQY.Text = _tunnelQy != null ? _tunnelQy.TunnelName : "";
 
 
-            foreach (Tunnel i in otherTunnelList)
+            foreach (Tunnel i in _otherTunnelList)
             {
                 listBox_Browse.Items.Add(i);
             }
@@ -176,13 +160,13 @@ namespace sys3
             //}
 
             //队别名称
-            cboTeamName.Text = workingFace.Team.TeamName;
+            cboTeamName.Text = _workingFace.Team.TeamName;
 
             //开始日期
-            dtpStartDate.Value = DateTimeUtil.validateDTPDateTime((DateTime)workingFace.StartDate);
+            dtpStartDate.Value = DateTimeUtil.validateDTPDateTime((DateTime)_workingFace.StartDate);
 
             //是否回采完毕
-            if (workingFace.IsFinish == 1)
+            if (_workingFace.IsFinish == 1)
             {
                 rbtnHCY.Checked = true;
             }
@@ -191,12 +175,12 @@ namespace sys3
                 rbtnHCN.Checked = true;
             }
             //停工日期
-            if (workingFace.IsFinish == 1)
+            if (_workingFace.IsFinish == 1)
             {
-                dtpStopDate.Value = (DateTime)workingFace.StopDate;
+                dtpStopDate.Value = (DateTime)_workingFace.StopDate;
             }
             //工作制式
-            if (workingFace.WorkStyle == rbtn38.Text)
+            if (_workingFace.WorkStyle == rbtn38.Text)
             {
                 rbtn38.Checked = true;
             }
@@ -205,7 +189,7 @@ namespace sys3
                 rbtn46.Checked = true;
             }
             //班次
-            cboWorkTime.Text = workingFace.WorkTime;
+            cboWorkTime.Text = _workingFace.WorkTime;
         }
 
         private string[] SplitString(string p)
@@ -248,11 +232,7 @@ namespace sys3
                 //巷道选择按钮Text改变
                 btnChooseWF.Text = wfChoose.SelectedWorkingFace.WorkingFaceName;
                 //实体赋值
-                workingFace = wfChoose.SelectedWorkingFace;
-                intArr[0] = workingFace.MiningArea.Horizontal.Mine.MineId;
-                intArr[1] = workingFace.MiningArea.Horizontal.HorizontalId;
-                intArr[2] = workingFace.MiningArea.MiningAreaId;
-                intArr[3] = workingFace.WorkingFaceId;
+                _workingFace = wfChoose.SelectedWorkingFace;
             }
         }
 
@@ -263,34 +243,29 @@ namespace sys3
         /// <param name="e"></param>
         private void btnChooseZY_Click(object sender, EventArgs e)
         {
-            if (workingFace == null)
+            if (_workingFace == null)
             {
                 Alert.alert("请先选择工作面");
                 return;
             }
 
-            var tunnelChoose = new SelectTunnelDlg();
-
+            var tunnelChoose = new SelectTunnelDlg(_workingFace);
             //巷道选择完毕
-            if (DialogResult.OK == tunnelChoose.ShowDialog())
+            if (DialogResult.OK != tunnelChoose.ShowDialog()) return;
+            if (_tunnelZy != null)
             {
-                if (tunnelZY != null)
-                {
-                    Tunnel ent = Tunnel.Find(tunnelZY.TunnelId);
-                    ent.TunnelType = TunnelTypeEnum.OTHER;
-                    tunnelSet.Add(ent);
-                }
-
-                //巷道选择按钮Text改变
-                btnChooseZY.Text = tunnelChoose.SelectedTunnel.TunnelName;
-                //实体赋值
-                tunnelZY = Tunnel.Find(tunnelChoose.SelectedTunnel.TunnelId);
-                if (tunnelZY != null)
-                {
-                    tunnelZY.TunnelType = TunnelTypeEnum.STOPING_ZY;
-                    tunnelSet.Add(tunnelZY);
-                }
+                var ent = Tunnel.Find(_tunnelZy.TunnelId);
+                ent.TunnelType = TunnelTypeEnum.OTHER;
+                _tunnelSet.Add(ent);
             }
+
+            //巷道选择按钮Text改变
+            btnChooseZY.Text = tunnelChoose.SelectedTunnel.TunnelName;
+            //实体赋值
+            _tunnelZy = Tunnel.Find(tunnelChoose.SelectedTunnel.TunnelId);
+            if (_tunnelZy == null) return;
+            _tunnelZy.TunnelType = TunnelTypeEnum.STOPING_ZY;
+            _tunnelSet.Add(_tunnelZy);
         }
 
         /// <summary>
@@ -300,7 +275,7 @@ namespace sys3
         /// <param name="e"></param>
         private void btnChooseFY_Click(object sender, EventArgs e)
         {
-            if (workingFace == null)
+            if (_workingFace == null)
             {
                 Alert.alert("请先选择工作面");
                 return;
@@ -310,24 +285,22 @@ namespace sys3
             var tunnelChoose = new SelectTunnelDlg();
 
             //巷道选择完毕
-            if (DialogResult.OK == tunnelChoose.ShowDialog())
+            if (DialogResult.OK != tunnelChoose.ShowDialog()) return;
+            if (_tunnelFy != null)
             {
-                if (tunnelFY != null)
-                {
-                    Tunnel ent = Tunnel.Find(tunnelFY.TunnelId);
-                    ent.TunnelType = TunnelTypeEnum.OTHER;
-                    tunnelSet.Add(ent);
-                }
-
-                //巷道选择按钮Text改变
-                btnChooseFY.Text = tunnelChoose.SelectedTunnel.TunnelName;
-                //实体赋值
-
-                tunnelFY = Tunnel.Find(tunnelChoose.SelectedTunnel.TunnelId);
-                if (tunnelFY == null) return;
-                tunnelFY.TunnelType = TunnelTypeEnum.STOPING_FY;
-                tunnelSet.Add(tunnelFY);
+                Tunnel ent = Tunnel.Find(_tunnelFy.TunnelId);
+                ent.TunnelType = TunnelTypeEnum.OTHER;
+                _tunnelSet.Add(ent);
             }
+
+            //巷道选择按钮Text改变
+            btnChooseFY.Text = tunnelChoose.SelectedTunnel.TunnelName;
+            //实体赋值
+
+            _tunnelFy = Tunnel.Find(tunnelChoose.SelectedTunnel.TunnelId);
+            if (_tunnelFy == null) return;
+            _tunnelFy.TunnelType = TunnelTypeEnum.STOPING_FY;
+            _tunnelSet.Add(_tunnelFy);
         }
 
         /// <summary>
@@ -337,7 +310,7 @@ namespace sys3
         /// <param name="e"></param>
         private void btnChooseQY_Click(object sender, EventArgs e)
         {
-            if (workingFace == null)
+            if (_workingFace == null)
             {
                 Alert.alert("请先选择工作面");
                 return;
@@ -349,21 +322,21 @@ namespace sys3
             //巷道选择完毕
             if (DialogResult.OK == tunnelChoose.ShowDialog())
             {
-                if (tunnelQY != null)
+                if (_tunnelQy != null)
                 {
-                    Tunnel ent = Tunnel.Find(tunnelQY.TunnelId);
+                    Tunnel ent = Tunnel.Find(_tunnelQy.TunnelId);
                     ent.TunnelType = TunnelTypeEnum.OTHER;
-                    tunnelSet.Add(ent);
+                    _tunnelSet.Add(ent);
                 }
 
                 //巷道选择按钮Text改变
                 btnChooseQY.Text = tunnelChoose.SelectedTunnel.TunnelName;
                 //实体赋值
-                tunnelQY = Tunnel.Find(tunnelChoose.SelectedTunnel.TunnelId);
-                if (tunnelQY != null)
+                _tunnelQy = Tunnel.Find(tunnelChoose.SelectedTunnel.TunnelId);
+                if (_tunnelQy != null)
                 {
-                    tunnelQY.TunnelType = TunnelTypeEnum.STOPING_QY;
-                    tunnelSet.Add(tunnelQY);
+                    _tunnelQy.TunnelType = TunnelTypeEnum.STOPING_QY;
+                    _tunnelSet.Add(_tunnelQy);
                 }
             }
         }
@@ -373,37 +346,37 @@ namespace sys3
         /// </summary>
         private void bindTunnelHCEntity()
         {
-            if (workingFace == null) return;
+            if (_workingFace == null) return;
 
             //队别
-            workingFace.Team = Team.Find(cboTeamName.SelectedValue);
+            _workingFace.Team = Team.Find(cboTeamName.SelectedValue);
             //开工日期
-            workingFace.StartDate = dtpStartDate.Value;
+            _workingFace.StartDate = dtpStartDate.Value;
             //是否停工
             if (rbtnHCY.Checked)
             {
-                workingFace.IsFinish = 1;
+                _workingFace.IsFinish = 1;
             }
             if (rbtnHCN.Checked)
             {
-                workingFace.IsFinish = 0;
+                _workingFace.IsFinish = 0;
             }
             //停工日期
             if (rbtnHCY.Checked)
             {
-                workingFace.StopDate = dtpStopDate.Value;
+                _workingFace.StopDate = dtpStopDate.Value;
             }
             //工作制式
             if (rbtn38.Checked)
             {
-                workingFace.WorkStyle = rbtn38.Text;
+                _workingFace.WorkStyle = rbtn38.Text;
             }
             if (rbtn46.Checked)
             {
-                workingFace.WorkStyle = rbtn46.Text;
+                _workingFace.WorkStyle = rbtn46.Text;
             }
             //班次
-            workingFace.WorkTime = cboWorkTime.Text;
+            _workingFace.WorkTime = cboWorkTime.Text;
         }
 
         /// <summary>
@@ -437,8 +410,8 @@ namespace sys3
                 bindTunnelHCEntity();
 
 
-                workingFace.Save();
-                foreach (var i in tunnelSet)
+                _workingFace.Save();
+                foreach (var i in _tunnelSet)
                 {
                     i.Save();
                 }
@@ -447,16 +420,16 @@ namespace sys3
                 if (Text == Const_GM.TUNNEL_HC_ADD)
                 {
                     //添加回采进尺图上显示信息
-                    AddHcjc(tunnelZY.TunnelId, tunnelFY.TunnelId, tunnelQY.TunnelId, tunnelZY.TunnelWid,
-                        tunnelFY.TunnelWid, tunnelQY.TunnelWid);
+                    AddHcjc(_tunnelZy.TunnelId, _tunnelFy.TunnelId, _tunnelQy.TunnelId, _tunnelZy.TunnelWid,
+                        _tunnelFy.TunnelWid, _tunnelQy.TunnelWid);
                 }
 
                 //修改
                 if (Text == Const_GM.TUNNEL_HC_CHANGE)
                 {
                     //修改回采进尺图上显示信息，更新工作面信息表
-                    UpdateHcjc(tunnelZY.TunnelId, tunnelFY.TunnelId, tunnelQY.TunnelId, tunnelFY.TunnelWid,
-                        tunnelFY.TunnelWid, tunnelQY.TunnelWid);
+                    UpdateHcjc(_tunnelZy.TunnelId, _tunnelFy.TunnelId, _tunnelQy.TunnelId, _tunnelFy.TunnelWid,
+                        _tunnelFy.TunnelWid, _tunnelQy.TunnelWid);
                 }
 
                 Alert.alert("回采工作面关联成功！");
@@ -493,13 +466,13 @@ namespace sys3
                 if (pos == null)
                     return;
 
-                workingFace.SetCoordinate(pos.X, pos.Y, 0.0);
-                workingFace.Save();
+                _workingFace.SetCoordinate(pos.X, pos.Y, 0.0);
+                _workingFace.Save();
 
                 //添加地质构造信息到数据库表中
                 if (dzxlist.Count > 0)
                 {
-                    GeologySpaceBll.DeleteGeologySpaceEntityInfos(workingFace.WorkingFaceId); //删除工作面ID对应的地质构造信息
+                    GeologySpaceBll.DeleteGeologySpaceEntityInfos(_workingFace.WorkingFaceId); //删除工作面ID对应的地质构造信息
                     foreach (string key in dzxlist.Keys)
                     {
                         List<GeoStruct> geoinfos = dzxlist[key];
@@ -509,7 +482,7 @@ namespace sys3
                             GeoStruct tmp = geoinfos[i];
 
                             var geologyspaceEntity = new GeologySpace();
-                            geologyspaceEntity.WorkingFace = workingFace;
+                            geologyspaceEntity.WorkingFace = _workingFace;
                             geologyspaceEntity.TectonicType = Convert.ToInt32(key);
                             geologyspaceEntity.TectonicId = tmp.geoinfos[GIS_Const.FIELD_BID];
                             geologyspaceEntity.Distance = tmp.dist;
@@ -550,13 +523,13 @@ namespace sys3
                 }
 
                 //工作面信息提交
-                workingFace.SetCoordinate(pos.X, pos.Y, 0.0);
-                workingFace.Save();
+                _workingFace.SetCoordinate(pos.X, pos.Y, 0.0);
+                _workingFace.Save();
 
                 //更新地质构造表
                 if (dzxlist.Count > 0)
                 {
-                    GeologySpaceBll.DeleteGeologySpaceEntityInfos(workingFace.WorkingFaceId); //删除对应工作面ID的地质构造信息
+                    GeologySpaceBll.DeleteGeologySpaceEntityInfos(_workingFace.WorkingFaceId); //删除对应工作面ID的地质构造信息
                     foreach (string key in dzxlist.Keys)
                     {
                         List<GeoStruct> geoinfos = dzxlist[key];
@@ -566,7 +539,7 @@ namespace sys3
                             GeoStruct tmp = geoinfos[i];
 
                             var geologyspaceEntity = new GeologySpace();
-                            geologyspaceEntity.WorkingFace = workingFace;
+                            geologyspaceEntity.WorkingFace = _workingFace;
                             geologyspaceEntity.TectonicType = Convert.ToInt32(key);
                             geologyspaceEntity.TectonicId = tmp.geoinfos[GIS_Const.FIELD_BID];
                             geologyspaceEntity.Distance = tmp.dist;
@@ -589,7 +562,7 @@ namespace sys3
             DataBindUtil.LoadWorkTime(cboWorkTime,
                 rbtn38.Checked ? Const_MS.WORK_GROUP_ID_38 : Const_MS.WORK_GROUP_ID_46);
             // 设置班次名称
-            setWorkTimeName();
+            SetWorkTimeName();
         }
 
         /// <summary>
@@ -603,7 +576,7 @@ namespace sys3
             DataBindUtil.LoadWorkTime(cboWorkTime,
                 rbtn38.Checked ? Const_MS.WORK_GROUP_ID_38 : Const_MS.WORK_GROUP_ID_46);
             // 设置班次名称
-            setWorkTimeName();
+            SetWorkTimeName();
         }
 
         /// <summary>
@@ -619,19 +592,19 @@ namespace sys3
             //    return false;
             //}
             //主运顺槽选择
-            if (tunnelZY == null)
+            if (_tunnelZy == null)
             {
                 Alert.alert(Const.MSG_PLEASE_CHOOSE + Const_GM.MAIN_TUNNEL + Const.SIGN_EXCLAMATION_MARK);
                 return false;
             }
             //辅运顺槽选择
-            if (tunnelFY == null)
+            if (_tunnelFy == null)
             {
                 Alert.alert(Const.MSG_PLEASE_CHOOSE + Const_GM.SECOND_TUNNEL + Const.SIGN_EXCLAMATION_MARK);
                 return false;
             }
             //开切眼选择
-            if (tunnelQY == null)
+            if (_tunnelQy == null)
             {
                 Alert.alert(Const.MSG_PLEASE_CHOOSE + Const_GM.OOC_TUNNEL + Const.SIGN_EXCLAMATION_MARK);
                 return false;
@@ -694,8 +667,8 @@ namespace sys3
                 {
                     listBox_Browse.Items.Add(tunnel);
                     tunnel.TunnelType = TunnelTypeEnum.STOPING_OTHER;
-                    tunnel.WorkingFace = workingFace;
-                    tunnelSet.Add(tunnel);
+                    tunnel.WorkingFace = _workingFace;
+                    _tunnelSet.Add(tunnel);
                 }
             }
         }
@@ -707,7 +680,7 @@ namespace sys3
             if (tunnel != null)
             {
                 tunnel.TunnelType = TunnelTypeEnum.OTHER;
-                tunnelSet.Add(tunnel);
+                _tunnelSet.Add(tunnel);
             }
 
             listBox_Browse.Items.Remove(listBox_Browse.SelectedItem);
