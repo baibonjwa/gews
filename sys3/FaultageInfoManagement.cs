@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using ESRI.ArcGIS.Carto;
 using GIS.Common;
@@ -61,12 +62,17 @@ namespace sys3
         private void btnDelete_Click(object sender, EventArgs e)
         {
             if (!Alert.confirm(Const_GM.DEL_CONFIRM_MSG_FAULTAGE)) return;
-            var faultage = (Faultage)gridView1.GetFocusedRow();
-            faultage.Delete();
+            //var faultage = (Faultage)gridView1.GetFocusedRow();
+            var selectedIndex = gridView1.GetSelectedRows();
+            foreach (var faultage in selectedIndex.Select(i => (Faultage)gridView1.GetRow(i)))
+            {
+                DeleteJLDCByBID(new[] { faultage.BindingId });
+                faultage.Delete();
+            }
             SendMessengToServer();
-            DeleteJLDCByBID(new[] { faultage.BindingId });
             RefreshData();
         }
+
 
         /// <summary>
         /// 根据揭露断层绑定ID删除揭露断层图元
