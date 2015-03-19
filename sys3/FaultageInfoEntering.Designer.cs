@@ -62,7 +62,7 @@
             this.pnlType = new System.Windows.Forms.Panel();
             this.gbImage = new System.Windows.Forms.GroupBox();
             this.btnDetails = new System.Windows.Forms.Button();
-            this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.pbCount = new System.Windows.Forms.ProgressBar();
             this.lblSuccessed = new System.Windows.Forms.Label();
             this.btnMultTxt = new System.Windows.Forms.Button();
             this.lblError = new System.Windows.Forms.Label();
@@ -390,7 +390,7 @@
             // gbImage
             // 
             this.gbImage.Controls.Add(this.btnDetails);
-            this.gbImage.Controls.Add(this.progressBar);
+            this.gbImage.Controls.Add(this.pbCount);
             this.gbImage.Controls.Add(this.lblSuccessed);
             this.gbImage.Controls.Add(this.btnMultTxt);
             this.gbImage.Controls.Add(this.lblError);
@@ -414,13 +414,14 @@
             this.btnDetails.TabIndex = 48;
             this.btnDetails.Text = "错误详细信息";
             this.btnDetails.UseVisualStyleBackColor = true;
+            this.btnDetails.Click += new System.EventHandler(this.btnDetails_Click);
             // 
-            // progressBar
+            // pbCount
             // 
-            this.progressBar.Location = new System.Drawing.Point(14, 41);
-            this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(158, 23);
-            this.progressBar.TabIndex = 22;
+            this.pbCount.Location = new System.Drawing.Point(14, 41);
+            this.pbCount.Name = "pbCount";
+            this.pbCount.Size = new System.Drawing.Size(158, 23);
+            this.pbCount.TabIndex = 22;
             // 
             // lblSuccessed
             // 
@@ -608,7 +609,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnReadTxt;
-        private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.ProgressBar pbCount;
         private System.Windows.Forms.Button btnMultTxt;
         private System.Windows.Forms.Button btnDetails;
         private System.Windows.Forms.Label lblSuccessed;

@@ -42,7 +42,7 @@ namespace LibEntity
         ///     走向
         /// </summary>
         [Property("TREND")]
-        public string Trend { get; set; }
+        public double Trend { get; set; }
 
         /// <summary>
         ///     断距
@@ -87,6 +87,15 @@ namespace LibEntity
                 Restrictions.Eq("FaultageName", faultageName)
             };
             return Exists(criterion.ToArray());
+        }
+
+        public static Faultage FindByFaultageName(string faultageName)
+        {
+            var criterion = new List<ICriterion>
+            {
+                Restrictions.Eq("FaultageName", faultageName)
+            };
+            return FindOne(criterion.ToArray());
         }
     }
 }

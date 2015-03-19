@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Windows.Forms;
 using ESRI.ArcGIS.ADF;
 using ESRI.ArcGIS.ADF.COMSupport;
@@ -26,7 +27,7 @@ namespace sys3
     {
         /** 主键  **/
         /** 业务逻辑类型：添加/修改  **/
-        private double _dLength; //长度
+        public string ErrorMsg { get; private set; }
 
 
         private Faultage Faultage { get; set; }
@@ -69,7 +70,7 @@ namespace sys3
                 rbtnOppositeFaultage.Checked = true;
             }
             // 走向
-            txtTrend.Text = Faultage.Trend;
+            txtTrend.Text = Faultage.Trend.ToString(CultureInfo.InvariantCulture);
             // 断距
             txtSeparation.Text = Faultage.Separation;
             // 坐标X
@@ -117,7 +118,7 @@ namespace sys3
             faultageEnt.FaultageName = txtFaultageName.Text.Trim();
             faultageEnt.Gap = txtGap.Text.Trim();
             faultageEnt.Type = rbtnFrontFaultage.Checked ? Const_GM.FRONT_FAULTAGE : Const_GM.OPPOSITE_FAULTAGE;
-            faultageEnt.Trend = txtTrend.Text.Trim();
+            faultageEnt.Trend = Convert.ToDouble(txtTrend.Text);
             faultageEnt.Separation = txtSeparation.Text.Trim();
 
             double dAngle;
@@ -146,14 +147,12 @@ namespace sys3
             {
                 faultageEnt.CoordinateZ = dCoordinateZ;
             }
-            _dLength = 0;
-            if (double.TryParse(txtLength.Text.Trim(), out _dLength))
+            double dLength;
+            if (double.TryParse(txtLength.Text.Trim(), out dLength))
             {
-                faultageEnt.Length = _dLength;
+                faultageEnt.Length = dLength;
             }
 
-            faultageEnt.Save();
-            SendMessengToServer();
             if (Faultage == null)
             {
                 DrawJldc(faultageEnt);
@@ -165,7 +164,7 @@ namespace sys3
             faultageEnt.Save();
             // 断层信息修改
             SendMessengToServer();
-            Close();
+            DialogResult = DialogResult.OK;
         }
 
         /// <summary>
@@ -311,7 +310,7 @@ namespace sys3
             DataEditCommon.PickUpPoint(txtCoordinateX, txtCoordinateY);
         }
 
-        private void SendMessengToServer()
+        private static void SendMessengToServer()
         {
             Log.Debug("更新服务端断层Map------开始");
             // 通知服务端回采进尺已经添加
@@ -324,7 +323,6 @@ namespace sys3
         {
             var ofd = new OpenFileDialog
             {
-                InitialDirectory = @"C:\",
                 RestoreDirectory = true,
                 Filter = @"文本文件(*.txt)|*.txt|所有文件(*.*)|*.*"
             };
@@ -368,18 +366,14 @@ namespace sys3
 
             //2.删除原来图元，重新绘制新图元
             DataEditCommon.DeleteFeatureByBId(featureLayer, faultageEntity.BindingId);
-            //if (bIsDeleteOldFeature)
-            {
-                //绘制图元
-                DrawJldc(faultageEntity);
-            }
+            DrawJldc(faultageEntity);
         }
 
         /// <summary>
         ///     绘制揭露断层图元
         /// </summary>
-        /// <param name="faultageEntity"></param>
-        private void DrawJldc(Faultage faultageEntity)
+        /// <param name="faultage"></param>
+        private void DrawJldc(Faultage faultage)
         {
             ////1.获得当前编辑图层
             //DrawSpecialCommon drawspecial = new DrawSpecialCommon();
@@ -442,7 +436,7 @@ namespace sys3
 
             ////要素ID字段赋值（对应属性表中BindingID）
             //int iFieldID = pFeature.Fields.FindField(GIS_Const.FIELD_BID);
-            //pFeature.Value[iFieldID] = faultageEntity.BindingId.ToString();
+            //pFeature.Value[iFieldID] = faultage.BindingId.ToString();
 
             //pFeature.Store();
             //DataEditCommon.g_CurWorkspaceEdit.StopEditOperation();
@@ -488,12 +482,12 @@ namespace sys3
             //2.生成要素（要根据中心点获取起止点）
             //中心点
             IPoint centrePt = new PointClass();
-            centrePt.X = faultageEntity.CoordinateX;
-            centrePt.Y = faultageEntity.CoordinateY;
-            centrePt.Z = faultageEntity.CoordinateZ;
+            centrePt.X = faultage.CoordinateX;
+            centrePt.Y = faultage.CoordinateY;
+            centrePt.Z = faultage.CoordinateZ;
 
-            double trend = Convert.ToDouble(txtTrend.Text); //走向
-            double length = _dLength / 2; //默认长度为20，左右各10
+            double trend = faultage.Trend; //走向
+            double length = faultage.Length / 2; //默认长度为20，左右各10
 
             //计算起止点
             IPoint fromPt = new PointClass();
@@ -510,14 +504,14 @@ namespace sys3
 
             var list = new List<ziduan>
             {
-                new ziduan("bid", faultageEntity.BindingId),
-                new ziduan("FAULTAGE_NAME", faultageEntity.FaultageName),
+                new ziduan("bid", faultage.BindingId),
+                new ziduan("FAULTAGE_NAME", faultage.FaultageName),
                 new ziduan("addtime", DateTime.Now.ToString(CultureInfo.InvariantCulture)),
-                new ziduan("GAP", faultageEntity.Gap),
-                new ziduan("ANGLE", faultageEntity.Angle.ToString(CultureInfo.InvariantCulture)),
-                new ziduan("TREND", faultageEntity.Trend),
-                new ziduan("SEPARATION", faultageEntity.Separation),
-                new ziduan("type", faultageEntity.Type)
+                new ziduan("GAP", faultage.Gap),
+                new ziduan("ANGLE", faultage.Angle.ToString(CultureInfo.InvariantCulture)),
+                new ziduan("TREND", faultage.Trend.ToString(CultureInfo.InvariantCulture)),
+                new ziduan("SEPARATION", faultage.Separation),
+                new ziduan("type", faultage.Type)
             };
 
             var pfeature = DataEditCommon.CreateNewFeature(featureLayer, polyline, list);
@@ -737,7 +731,84 @@ namespace sys3
 
         private void btnMultTxt_Click(object sender, EventArgs e)
         {
+            var ofd = new OpenFileDialog
+            {
+                RestoreDirectory = true,
+                Filter = @"文本文件(*.txt)|*.txt|所有文件(*.*)|*.*",
+                Multiselect = true
+            };
+            ErrorMsg = @"失败文件名：";
 
+
+            if (ofd.ShowDialog() != DialogResult.OK) return;
+            var fileCount = ofd.FileNames.Length;
+            lblTotal.Text = fileCount.ToString();
+            pbCount.Maximum = fileCount;
+            pbCount.Value = 0;
+            foreach (var fileName in ofd.FileNames)
+            {
+                try
+                {
+                    var sr = new StreamReader(fileName, Encoding.GetEncoding("GB2312"));
+                    string duqu;
+                    while ((duqu = sr.ReadLine()) != null)
+                    {
+                        var str = duqu.Split('|');
+                        var faultage = Faultage.FindByFaultageName(str[0]);
+                        if (faultage == null)
+                        {
+                            faultage = new Faultage
+                            {
+                                FaultageName = str[0],
+                                CoordinateX = Convert.ToDouble(str[1].Split(',')[0]),
+                                CoordinateY = Convert.ToDouble(str[1].Split(',')[1]),
+                                CoordinateZ = 0.0,
+                                Separation = str[2],
+                                Gap = str[2],
+                                Trend = String.IsNullOrWhiteSpace(str[4]) ? 0.0 : Convert.ToDouble(str[4]),
+                                Angle = String.IsNullOrWhiteSpace(str[5]) ? 0.0 : Convert.ToDouble(str[5]),
+                                Length = String.IsNullOrWhiteSpace(str[6]) ? 0.0 : Convert.ToDouble(str[6]),
+                                Type = str[3],
+                                BindingId = IDGenerator.NewBindingID()
+                            };
+                            DrawJldc(faultage);
+                        }
+                        else
+                        {
+                            faultage.FaultageName = str[0];
+                            faultage.CoordinateX = Convert.ToDouble(str[1].Split(',')[0]);
+                            faultage.CoordinateY = Convert.ToDouble(str[1].Split(',')[1]);
+                            faultage.CoordinateZ = 0.0;
+                            faultage.Separation = str[2];
+                            faultage.Gap = str[2];
+                            faultage.Trend = String.IsNullOrWhiteSpace(str[4]) ? 0.0 : Convert.ToDouble(str[4]);
+                            faultage.Angle = String.IsNullOrWhiteSpace(str[5]) ? 0.0 : Convert.ToDouble(str[5]);
+                            faultage.Length = String.IsNullOrWhiteSpace(str[6]) ? 0.0 : Convert.ToDouble(str[6]);
+                            faultage.Type = str[3];
+                            ModifyJldc(faultage);
+                        }
+                        faultage.Save();
+                        pbCount.Value++;
+                        lblSuccessed.Text = lblSuccessed.Text =
+                            (Convert.ToInt32(lblSuccessed.Text) + 1).ToString(CultureInfo.InvariantCulture);
+                    }
+                }
+                catch (Exception)
+                {
+                    lblError.Text =
+                      (Convert.ToInt32(lblError.Text) + 1).ToString(CultureInfo.InvariantCulture);
+                    ErrorMsg += fileName.Substring(fileName.LastIndexOf(@"\", StringComparison.Ordinal) + 1) + "\n";
+                    btnDetails.Enabled = true;
+                }
+
+            }
+            SendMessengToServer();
+            Alert.alert("导入完成");
+        }
+
+        private void btnDetails_Click(object sender, EventArgs e)
+        {
+            Alert.alert(ErrorMsg);
         }
     }
 }

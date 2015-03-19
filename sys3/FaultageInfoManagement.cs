@@ -34,7 +34,9 @@ namespace sys3
         private void btnAdd_Click(object sender, EventArgs e)
         {
             var faultageInfoEnteringForm = new FaultageInfoEntering();
-            if (faultageInfoEnteringForm.ShowDialog() == DialogResult.OK)
+            var result = faultageInfoEnteringForm.ShowDialog();
+
+            if (result == DialogResult.OK || result == DialogResult.Cancel)
             {
                 RefreshData();
             }
