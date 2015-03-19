@@ -112,10 +112,10 @@
             // toolBar_MS
             // 
             this.toolBar_MS.Dock = System.Windows.Forms.DockStyle.Top;
-            this.toolBar_MS.Location = new System.Drawing.Point(0, 78);
+            this.toolBar_MS.Location = new System.Drawing.Point(0, 86);
             this.toolBar_MS.Name = "toolBar_MS";
             this.toolBar_MS.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("toolBar_MS.OcxState")));
-            this.toolBar_MS.Size = new System.Drawing.Size(1159, 28);
+            this.toolBar_MS.Size = new System.Drawing.Size(993, 28);
             this.toolBar_MS.TabIndex = 1;
             // 
             // barManager2
@@ -404,6 +404,7 @@
             this.mniTCX.ImageIndex = 12;
             this.mniTCX.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T));
             this.mniTCX.Name = "mniTCX";
+            this.mniTCX.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.mniTCX.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniTCX_ItemClick);
             // 
             // mniHCJDTGL
@@ -413,6 +414,7 @@
             this.mniHCJDTGL.ImageIndex = 9;
             this.mniHCJDTGL.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.U));
             this.mniHCJDTGL.Name = "mniHCJDTGL";
+            this.mniHCJDTGL.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.mniHCJDTGL.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniHCJDTGL_ItemClick);
             // 
             // mniCXJJJCYBB
@@ -700,28 +702,28 @@
             this.barDockControl1.CausesValidation = false;
             this.barDockControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControl1.Location = new System.Drawing.Point(0, 0);
-            this.barDockControl1.Size = new System.Drawing.Size(1159, 78);
+            this.barDockControl1.Size = new System.Drawing.Size(993, 86);
             // 
             // barDockControl2
             // 
             this.barDockControl2.CausesValidation = false;
             this.barDockControl2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControl2.Location = new System.Drawing.Point(0, 560);
-            this.barDockControl2.Size = new System.Drawing.Size(1159, 0);
+            this.barDockControl2.Location = new System.Drawing.Point(0, 480);
+            this.barDockControl2.Size = new System.Drawing.Size(993, 0);
             // 
             // barDockControl3
             // 
             this.barDockControl3.CausesValidation = false;
             this.barDockControl3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.barDockControl3.Location = new System.Drawing.Point(0, 78);
-            this.barDockControl3.Size = new System.Drawing.Size(0, 482);
+            this.barDockControl3.Location = new System.Drawing.Point(0, 86);
+            this.barDockControl3.Size = new System.Drawing.Size(0, 394);
             // 
             // barDockControl4
             // 
             this.barDockControl4.CausesValidation = false;
             this.barDockControl4.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControl4.Location = new System.Drawing.Point(1159, 78);
-            this.barDockControl4.Size = new System.Drawing.Size(0, 482);
+            this.barDockControl4.Location = new System.Drawing.Point(993, 86);
+            this.barDockControl4.Size = new System.Drawing.Size(0, 394);
             // 
             // imageList1
             // 
@@ -783,45 +785,45 @@
             // 
             this.statusStrip1.AxMap = null;
             this.statusStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.statusStrip1.Location = new System.Drawing.Point(0, 538);
-            this.statusStrip1.MaximumSize = new System.Drawing.Size(0, 22);
-            this.statusStrip1.MinimumSize = new System.Drawing.Size(0, 22);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 461);
+            this.statusStrip1.MaximumSize = new System.Drawing.Size(0, 19);
+            this.statusStrip1.MinimumSize = new System.Drawing.Size(0, 19);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1159, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(993, 19);
             this.statusStrip1.TabIndex = 18;
             // 
             // tocControl_MS
             // 
             this.tocControl_MS.Dock = System.Windows.Forms.DockStyle.Left;
-            this.tocControl_MS.Location = new System.Drawing.Point(0, 106);
+            this.tocControl_MS.Location = new System.Drawing.Point(0, 114);
             this.tocControl_MS.Name = "tocControl_MS";
             this.tocControl_MS.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("tocControl_MS.OcxState")));
-            this.tocControl_MS.Size = new System.Drawing.Size(287, 432);
+            this.tocControl_MS.Size = new System.Drawing.Size(287, 347);
             this.tocControl_MS.TabIndex = 24;
             this.tocControl_MS.OnMouseDown += new ESRI.ArcGIS.Controls.ITOCControlEvents_Ax_OnMouseDownEventHandler(this.tocControl_MS_OnMouseDown);
             // 
             // splitter1
             // 
-            this.splitter1.Location = new System.Drawing.Point(287, 106);
+            this.splitter1.Location = new System.Drawing.Point(287, 114);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 432);
+            this.splitter1.Size = new System.Drawing.Size(3, 347);
             this.splitter1.TabIndex = 25;
             this.splitter1.TabStop = false;
             // 
             // mapControl_MS
             // 
             this.mapControl_MS.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mapControl_MS.Location = new System.Drawing.Point(290, 106);
+            this.mapControl_MS.Location = new System.Drawing.Point(290, 114);
             this.mapControl_MS.Name = "mapControl_MS";
             this.mapControl_MS.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("mapControl_MS.OcxState")));
-            this.mapControl_MS.Size = new System.Drawing.Size(869, 432);
+            this.mapControl_MS.Size = new System.Drawing.Size(703, 347);
             this.mapControl_MS.TabIndex = 26;
             // 
             // MainForm_MS
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1159, 560);
+            this.ClientSize = new System.Drawing.Size(993, 480);
             this.Controls.Add(this.axLicenseControl1);
             this.Controls.Add(this.mapControl_MS);
             this.Controls.Add(this.splitter1);

@@ -255,18 +255,6 @@ namespace sys1
         #region 实时监控
 
         /// <summary>
-        /// 巷道选择事件
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        //private void TunnelNameChanged(object sender, TunnelEventArgs e)
-        //{
-        //    _lstProbeName.DataSource = null;
-        //    _currentTunnelId = selectTunnelSimple1.ITunnelId;
-        //    _t2Id = Probe.GetT2Id(_currentTunnelId);
-        //}
-
-        /// <summary>
         /// 加载探头类型信息
         /// </summary>
         private void LoadProbeTypeInfo()
@@ -492,6 +480,7 @@ namespace sys1
         /// </summary>
         /// <param name="tChart">TeeChart图表</param>
         /// <param name="ds">数据集</param>
+        /// <param name="datas"></param>
         private void AddDataToTeeChartM(TChart tChart, GasConcentrationProbeData[] datas)
         {
             int sqlCnt = datas.Length;
@@ -548,7 +537,7 @@ namespace sys1
         /// 添加同一工序条件下瓦斯浓度变化值N
         /// </summary>
         /// <param name="tChart"></param>
-        /// <param name="ds"></param>
+        /// <param name="datas"></param>
         private void addDataToTeeChartN(TChart tChart, GasConcentrationProbeData[] datas)
         {
             int sqlCnt = datas.Length;
@@ -935,115 +924,6 @@ namespace sys1
             return true;
         }
 
-        /// 根据探头编号和开始结束时间，获取特定探头和特定时间段内的【瓦斯浓度探头数据】
-        /// 
-        /// <param name="strProbeId">探头编号</param>
-        /// <param name="dtStartTime">开始时间</param>
-        /// <returns>特定探头和特定时间段内的【瓦斯浓度探头数据】</returns>
-        //public static DataSet SelectAllGasDataByProbeIdAndStartTime(string strProbeId, DateTime dtStartTime)
-        //{
-        //    var sqlStr = new StringBuilder();
-        //    sqlStr.Append("SELECT * FROM " + GasConcentrationProbeDataDbConstNames.TABLE_NAME);
-        //    sqlStr.Append(" WHERE ");
-        //    sqlStr.Append(GasConcentrationProbeDataDbConstNames.PROBE_ID + " ='" + strProbeId + "'");
-        //    sqlStr.Append(" AND ");
-        //    sqlStr.Append(GasConcentrationProbeDataDbConstNames.RECORD_TIME + " >= '" + dtStartTime + "'");
-
-        //    var db = new ManageDataBase(DATABASE_TYPE.GasEmissionDB);
-        //    var ds = db.ReturnDS(sqlStr.ToString());
-        //    return ds;
-        //}
-
-        // Database Operation
-        /// <summary>
-        /// 获取指定探头的最新实时数据
-        /// </summary>
-        /// <returns></returns>
-        //public static string GetT2Id(int tunnelId)
-        //{
-        //    var sqlStr = new StringBuilder();
-        //    sqlStr.Append("SELECT [PROBE_ID] FROM " + ProbeManageDbConstNames.TABLE_NAME);
-        //    sqlStr.Append(" WHERE ");
-        //    sqlStr.Append("TUNNEL_ID = " + tunnelId);
-        //    sqlStr.Append(" AND [PROBE_NAME]='T2'");
-
-        //    var db = new ManageDataBase(DATABASE_TYPE.GasEmissionDB);
-        //    var ds = db.ReturnDS(sqlStr.ToString());
-        //    return ds.Tables[0].Rows.Count <= 0 ? string.Empty : ds.Tables[0].Rows[0][0].ToString();
-        //}
-
-        /// <summary>
-        /// 获取指定探头的最新2行实时数据
-        /// </summary>
-        /// <param name="iProbeId"></param>
-        /// <returns></returns>
-        //public static DataSet GetLatest2RowsData(string iProbeId)
-        //{
-        //    var sqlStr = new StringBuilder();
-        //    sqlStr.Append("SELECT TOP 2 * FROM " + GasConcentrationProbeDataDbConstNames.TABLE_NAME);
-        //    sqlStr.Append(" WHERE " + GasConcentrationProbeDataDbConstNames.PROBE_ID + " = " + iProbeId);
-        //    sqlStr.Append(" ORDER BY " + GasConcentrationProbeDataDbConstNames.PROBE_DATA_ID + " DESC");
-
-        //    var db = new ManageDataBase(DATABASE_TYPE.GasEmissionDB);
-        //    var ds = db.ReturnDS(sqlStr.ToString());
-        //    return ds;
-        //}
-
-        /// <summary>
-        /// 获取瓦斯浓度数据
-        /// @param probeId - 探头ID
-        /// @param startTime - 开始时间
-        /// @param endTime - 结束时间
-        /// </summary>
-        /// <returns></returns>
-        //private DataSet getHistoryData(string probeId, string startTime, string endTime)
-        //{
-        //    var ds = new DataSet();
-        //    if (String.IsNullOrEmpty(probeId)) return ds;
-        //    var sqlStr = new StringBuilder();
-        //    sqlStr.Append("SELECT ");
-        //    sqlStr.Append("* ");
-        //    sqlStr.Append("FROM ");
-        //    sqlStr.Append(GasConcentrationProbeDataDbConstNames.TABLE_NAME + " ");
-        //    sqlStr.Append("WHERE ");
-        //    sqlStr.Append(GasConcentrationProbeDataDbConstNames.PROBE_ID + " = " + probeId + " ");
-        //    sqlStr.Append("AND ");
-        //    sqlStr.Append(GasConcentrationProbeDataDbConstNames.RECORD_TIME + " >= '" + startTime + "' ");
-        //    sqlStr.Append("AND ");
-        //    sqlStr.Append(GasConcentrationProbeDataDbConstNames.RECORD_TIME + " <= '" + endTime + "' ");
-        //    sqlStr.Append("ORDER BY RECORD_TIME ");
-
-        //    var db = new ManageDataBase(DATABASE_TYPE.GasEmissionDB);
-        //    ds = db.ReturnDS(sqlStr.ToString());
-        //    return ds;
-        //}
-
-        /// <summary>
-        /// 获取指定探头过去一段时间的若干数据
-        /// </summary>
-        /// <param name="probeId">探头Id</param>
-        /// <returns></returns>
-        //private DataSet GetOldDataByProbeId(string probeId)
-        //{
-        //    var sqlStr = new StringBuilder();
-        //    sqlStr.Append("SELECT ");
-        //    sqlStr.Append("TOP " + (DataCountPerFrame - 1) + "* ");
-        //    sqlStr.Append("FROM ");
-        //    sqlStr.Append(GasConcentrationProbeDataDbConstNames.TABLE_NAME + " ");
-        //    sqlStr.Append("WHERE ");
-        //    sqlStr.Append(GasConcentrationProbeDataDbConstNames.PROBE_ID + " = " + probeId + " ");
-        //    sqlStr.Append("AND ");
-        //    //sqlStr.Append(GasConcentrationProbeDataDbConstNames.RECORD_TIME + " >= '" + this._dateTimeStart.Text + "' ");
-        //    //sqlStr.Append("AND ");
-        //    sqlStr.Append(GasConcentrationProbeDataDbConstNames.RECORD_TIME + " <= '" + DateTime.Now.ToString(CultureInfo.InvariantCulture) + "' ");
-        //    sqlStr.Append("ORDER BY RECORD_TIME DESC");
-
-        //    var db = new ManageDataBase(DATABASE_TYPE.GasEmissionDB);
-        //    var ds = db.ReturnDS(sqlStr.ToString());
-
-        //    return ds;
-        //}
-
         // 监控系统参数设置
         private void bbiMonitorSetting_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -1063,74 +943,6 @@ namespace sys1
             var bdd = new BadDataDelete();
             bdd.ShowDialog();
         }
-
-        //void ReceiveData(IAsyncResult iar)
-        //{
-        //    // Create temporary remote end Point
-        //    IPEndPoint sender = new IPEndPoint(IPAddress.Any, 0);
-        //    EndPoint tempRemoteEP = (EndPoint)sender;
-
-        //    // Get the SocketUtil
-        //    SocketUtil remote = (SocketUtil)iar.AsyncState;
-
-        //    // Call EndReceiveFrom to get the received Data
-        //    int recv = remote.EndReceiveFrom(iar, ref tempRemoteEP);
-
-        //    // Get the Data from the buffer to a string
-        //    string stringData = Encoding.ASCII.GetString(buffer, 0, recv);
-        //    Console.WriteLine(stringData);
-
-        //    // update Timestamp
-        //    lastUpdate = DateTime.Now.ToUniversalTime();
-
-        //    // Restart receiving
-        //    if (!this.IsDisposed)
-        //    {
-        //        udpServerSocket.BeginReceiveFrom(buffer, 0, 1024, SocketFlags.None, ref ep, new AsyncCallback(ReceiveData), udpServerSocket);
-        //    }
-        //}
-
-
-
-        //private void checkTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-        //{
-        //    // Calculate the Timespan since the Last Update from the Client.
-        //    TimeSpan timeSinceLastHeartbeat = DateTime.Now.ToUniversalTime() - lastUpdate;
-
-        //    // Set Lable Text depending of the Timespan
-        //    if (timeSinceLastHeartbeat > TimeSpan.FromSeconds(4))
-        //    {
-
-        //        //UpdateInfo("离线", Color.Red);
-        //        this.online = false;
-
-        //        // Clear data.
-        //        //this.tunnelIdWarning = -1;
-        //        //this.tunnelNameWarning = string.Empty;
-        //        if (_lblStatus.InvokeRequired)
-        //        {
-        //            this.Invoke(new MethodInvoker(delegate
-        //            {
-        //                _lblStatus.Text = "离线（单击连接）";
-        //                _lblStatus.ForeColor = Color.Red;
-        //            }));
-        //        }
-        //    }
-        //    else
-        //    {
-        //        //this.Invoke(new MethodInvoker(delegate
-        //        //{
-        //        if (_lblStatus.InvokeRequired)
-        //        {
-        //            this.Invoke(new MethodInvoker(delegate
-        //            {
-        //                _lblStatus.Text = "联机";
-        //            }));
-        //        }
-        //        //UpdateInfo("联机", Color.Green);
-        //        this.online = true;
-        //    }
-        //}
 
         private void _lstProbeName_SelectedIndexChanged(object sender, EventArgs e)
         {
