@@ -52,6 +52,7 @@
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.controlNavigator1 = new DevExpress.XtraEditors.ControlNavigator();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcFaultage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -174,6 +175,7 @@
             // 
             this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumn1,
+            this.gridColumn10,
             this.gridColumn2,
             this.gridColumn3,
             this.gridColumn4,
@@ -200,7 +202,7 @@
             this.gridColumn2.Caption = "落差";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 1;
+            this.gridColumn2.VisibleIndex = 2;
             // 
             // gridColumn3
             // 
@@ -208,7 +210,7 @@
             this.gridColumn3.FieldName = "Angle";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 2;
+            this.gridColumn3.VisibleIndex = 3;
             // 
             // gridColumn4
             // 
@@ -216,14 +218,14 @@
             this.gridColumn4.FieldName = "Type";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 3;
+            this.gridColumn4.VisibleIndex = 4;
             // 
             // gridColumn5
             // 
             this.gridColumn5.Caption = "走向";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 4;
+            this.gridColumn5.VisibleIndex = 5;
             // 
             // gridColumn6
             // 
@@ -231,7 +233,7 @@
             this.gridColumn6.FieldName = "Separation";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 5;
+            this.gridColumn6.VisibleIndex = 6;
             // 
             // gridColumn7
             // 
@@ -239,7 +241,7 @@
             this.gridColumn7.FieldName = "CoordinateX";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 6;
+            this.gridColumn7.VisibleIndex = 7;
             // 
             // gridColumn8
             // 
@@ -247,7 +249,7 @@
             this.gridColumn8.FieldName = "CoordinateY";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 7;
+            this.gridColumn8.VisibleIndex = 8;
             // 
             // gridColumn9
             // 
@@ -255,12 +257,12 @@
             this.gridColumn9.FieldName = "CoordinateZ";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 8;
+            this.gridColumn9.VisibleIndex = 9;
             // 
             // controlNavigator1
             // 
             this.controlNavigator1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.controlNavigator1.Location = new System.Drawing.Point(10, 538);
+            this.controlNavigator1.Location = new System.Drawing.Point(10, 534);
             this.controlNavigator1.Name = "controlNavigator1";
             this.controlNavigator1.NavigatableControl = this.gcFaultage;
             this.controlNavigator1.Size = new System.Drawing.Size(267, 21);
@@ -268,6 +270,14 @@
             this.controlNavigator1.Text = "controlNavigator1";
             this.controlNavigator1.TextLocation = DevExpress.XtraEditors.NavigatorButtonsTextLocation.Center;
             this.controlNavigator1.TextStringFormat = "记录 {0} / {1}";
+            // 
+            // gridColumn10
+            // 
+            this.gridColumn10.Caption = "长度";
+            this.gridColumn10.FieldName = "Length";
+            this.gridColumn10.Name = "gridColumn10";
+            this.gridColumn10.Visible = true;
+            this.gridColumn10.VisibleIndex = 1;
             // 
             // FaultageInfoManagement
             // 
@@ -319,5 +329,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
         private DevExpress.XtraEditors.ControlNavigator controlNavigator1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
     }
 }
