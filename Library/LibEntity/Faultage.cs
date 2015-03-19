@@ -51,6 +51,12 @@ namespace LibEntity
         public string Separation { get; set; }
 
         /// <summary>
+        /// 长度
+        /// </summary>
+        [Property("LENGTH")]
+        public double Length { get; set; }
+
+        /// <summary>
         ///     坐标X
         /// </summary>
         [Property("COORDINATE_X")]
