@@ -126,7 +126,18 @@ namespace LibBusiness
                 "LithologyName", "LithologyId", selectedText);
         }
 
-        public static void LoadTeam(ListControl lb, String selectedText = "")
+        public static void LoadLithology(DataGridViewComboBoxColumn dgvcbc)
+        {
+            var lithologys = Lithology.FindAll();
+            if (lithologys == null) return;
+            foreach (var li in lithologys)
+            {
+                dgvcbc.Items.Add(li.LithologyName);
+            }
+        }
+
+        public static
+            void LoadTeam(ListControl lb, String selectedText = "")
         {
             var teams = Team.FindAll();
             if (teams != null)
