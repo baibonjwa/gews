@@ -13,6 +13,10 @@ namespace LibEntity
         [PrimaryKey(PrimaryKeyType.Identity, "BOREHOLE_ID")]
         public int BoreholeId { get; set; }
 
+        [HasMany(typeof(BoreholeLithology), Table = "T_BOREHOLE_LITHOLOGY", ColumnKey = "BOREHOLE_ID",
+Cascade = ManyRelationCascadeEnum.SaveUpdate, Lazy = true)]
+        public IList<BoreholeLithology> BoreholeLithologys { get; set; }
+
         /// <summary>
         ///     孔号
         /// </summary>
@@ -25,15 +29,11 @@ namespace LibEntity
         [Property("GROUND_ELEVATION")]
         public double GroundElevation { get; set; }
 
-        /** 坐标X **/
-
         /// <summary>
         ///     坐标X
         /// </summary>
         [Property("COORDINATE_X")]
         public double CoordinateX { get; set; }
-
-        /** 坐标Y **/
 
         /// <summary>
         ///     坐标Y
@@ -41,23 +41,17 @@ namespace LibEntity
         [Property("COORDINATE_Y")]
         public double CoordinateY { get; set; }
 
-        /** 坐标Z **/
-
         /// <summary>
         ///     坐标Z
         /// </summary>
         [Property("COORDINATE_Z")]
         public double CoordinateZ { get; set; }
 
-        /** 煤层结构 **/
-
         /// <summary>
         ///     煤层结构
         /// </summary>
         [Property("COAL_SEAMS_TEXTURE")]
         public string CoalSeamsTexture { get; set; }
-
-        /** BID **/
 
         /// <summary>
         ///     BID

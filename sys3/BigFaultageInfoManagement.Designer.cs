@@ -176,6 +176,8 @@
             this.gridColumn5});
             this.gridView1.GridControl = this.gcBigFaultage;
             this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsBehavior.Editable = false;
+            this.gridView1.OptionsSelection.MultiSelect = true;
             // 
             // gridColumn1
             // 

@@ -40,18 +40,17 @@
             this.btnExit = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.gcBorehole = new DevExpress.XtraGrid.GridControl();
-            this.bandedGridView1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridView();
-            this.gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.bandedGridColumn1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.bandedGridColumn2 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.bandedGridColumn3 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.bandedGridColumn4 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.bandedGridColumn5 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.controlNavigator1 = new DevExpress.XtraEditors.ControlNavigator();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.bandedGridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.bandedGridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.bandedGridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.bandedGridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.bandedGridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcBorehole)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bandedGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -69,7 +68,7 @@
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(448, 24);
+            this.toolStrip1.Size = new System.Drawing.Size(417, 24);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.TabStop = true;
             this.toolStrip1.Text = "toolStrip1";
@@ -161,39 +160,37 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gcBorehole.Cursor = System.Windows.Forms.Cursors.Default;
             this.gcBorehole.Location = new System.Drawing.Point(12, 27);
-            this.gcBorehole.MainView = this.bandedGridView1;
+            this.gcBorehole.MainView = this.gridView1;
             this.gcBorehole.Name = "gcBorehole";
             this.gcBorehole.Size = new System.Drawing.Size(1259, 495);
             this.gcBorehole.TabIndex = 7;
             this.gcBorehole.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.bandedGridView1});
+            this.gridView1});
             // 
-            // bandedGridView1
+            // controlNavigator1
             // 
-            this.bandedGridView1.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
-            this.gridBand1});
-            this.bandedGridView1.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] {
+            this.controlNavigator1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.controlNavigator1.Location = new System.Drawing.Point(12, 528);
+            this.controlNavigator1.Name = "controlNavigator1";
+            this.controlNavigator1.NavigatableControl = this.gcBorehole;
+            this.controlNavigator1.Size = new System.Drawing.Size(311, 24);
+            this.controlNavigator1.TabIndex = 85;
+            this.controlNavigator1.Text = "controlNavigator1";
+            this.controlNavigator1.TextLocation = DevExpress.XtraEditors.NavigatorButtonsTextLocation.Center;
+            this.controlNavigator1.TextStringFormat = "记录 {0} / {1}";
+            // 
+            // gridView1
+            // 
+            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.bandedGridColumn1,
             this.bandedGridColumn2,
             this.bandedGridColumn3,
             this.bandedGridColumn4,
             this.bandedGridColumn5});
-            this.bandedGridView1.GridControl = this.gcBorehole;
-            this.bandedGridView1.Name = "bandedGridView1";
-            // 
-            // gridBand1
-            // 
-            this.gridBand1.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridBand1.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridBand1.Caption = "钻孔信息";
-            this.gridBand1.Columns.Add(this.bandedGridColumn1);
-            this.gridBand1.Columns.Add(this.bandedGridColumn2);
-            this.gridBand1.Columns.Add(this.bandedGridColumn3);
-            this.gridBand1.Columns.Add(this.bandedGridColumn4);
-            this.gridBand1.Columns.Add(this.bandedGridColumn5);
-            this.gridBand1.Name = "gridBand1";
-            this.gridBand1.VisibleIndex = 0;
-            this.gridBand1.Width = 375;
+            this.gridView1.GridControl = this.gcBorehole;
+            this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsBehavior.Editable = false;
+            this.gridView1.OptionsSelection.MultiSelect = true;
             // 
             // bandedGridColumn1
             // 
@@ -201,6 +198,7 @@
             this.bandedGridColumn1.FieldName = "BoreholeNumber";
             this.bandedGridColumn1.Name = "bandedGridColumn1";
             this.bandedGridColumn1.Visible = true;
+            this.bandedGridColumn1.VisibleIndex = 0;
             // 
             // bandedGridColumn2
             // 
@@ -208,6 +206,7 @@
             this.bandedGridColumn2.FieldName = "GroundElevation";
             this.bandedGridColumn2.Name = "bandedGridColumn2";
             this.bandedGridColumn2.Visible = true;
+            this.bandedGridColumn2.VisibleIndex = 1;
             // 
             // bandedGridColumn3
             // 
@@ -215,6 +214,7 @@
             this.bandedGridColumn3.FieldName = "CoordinateX";
             this.bandedGridColumn3.Name = "bandedGridColumn3";
             this.bandedGridColumn3.Visible = true;
+            this.bandedGridColumn3.VisibleIndex = 2;
             // 
             // bandedGridColumn4
             // 
@@ -222,23 +222,14 @@
             this.bandedGridColumn4.FieldName = "CoordinateY";
             this.bandedGridColumn4.Name = "bandedGridColumn4";
             this.bandedGridColumn4.Visible = true;
+            this.bandedGridColumn4.VisibleIndex = 3;
             // 
             // bandedGridColumn5
             // 
             this.bandedGridColumn5.Caption = "勘探钻孔坐标Z";
             this.bandedGridColumn5.Name = "bandedGridColumn5";
             this.bandedGridColumn5.Visible = true;
-            // 
-            // controlNavigator1
-            // 
-            this.controlNavigator1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.controlNavigator1.Location = new System.Drawing.Point(12, 528);
-            this.controlNavigator1.Name = "controlNavigator1";
-            this.controlNavigator1.Size = new System.Drawing.Size(311, 24);
-            this.controlNavigator1.TabIndex = 85;
-            this.controlNavigator1.Text = "controlNavigator1";
-            this.controlNavigator1.TextLocation = DevExpress.XtraEditors.NavigatorButtonsTextLocation.Center;
-            this.controlNavigator1.TextStringFormat = "记录 {0} / {1}";
+            this.bandedGridColumn5.VisibleIndex = 4;
             // 
             // BoreholeInfoManagement
             // 
@@ -258,7 +249,7 @@
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcBorehole)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bandedGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -277,14 +268,13 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripButton btnMap;
         private DevExpress.XtraGrid.GridControl gcBorehole;
-        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridView bandedGridView1;
-        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn1;
-        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn2;
-        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn3;
-        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn4;
         private DevExpress.XtraEditors.ControlNavigator controlNavigator1;
-        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn5;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private DevExpress.XtraGrid.Columns.GridColumn bandedGridColumn1;
+        private DevExpress.XtraGrid.Columns.GridColumn bandedGridColumn2;
+        private DevExpress.XtraGrid.Columns.GridColumn bandedGridColumn3;
+        private DevExpress.XtraGrid.Columns.GridColumn bandedGridColumn4;
+        private DevExpress.XtraGrid.Columns.GridColumn bandedGridColumn5;
     }
 }

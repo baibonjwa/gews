@@ -34,7 +34,7 @@ namespace sys1
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainFormGe));
             this.ss_GE = new System.Windows.Forms.StatusStrip();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
@@ -54,6 +54,7 @@ namespace sys1
             this.mniUserLoginInfoMana = new DevExpress.XtraBars.BarButtonItem();
             this.mniUserGroupInfoMana = new DevExpress.XtraBars.BarButtonItem();
             this.barSubItem3 = new DevExpress.XtraBars.BarSubItem();
+            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.mniHelpFile = new DevExpress.XtraBars.BarButtonItem();
             this._DXbtAbout = new DevExpress.XtraBars.BarButtonItem();
             this.mniSystemSet = new DevExpress.XtraBars.Bar();
@@ -108,7 +109,6 @@ namespace sys1
             this.fastLine1 = new Steema.TeeChart.Styles.FastLine();
             this.barButtonItem6 = new DevExpress.XtraBars.BarButtonItem();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemHyperLinkEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemFontEdit1)).BeginInit();
@@ -323,6 +323,13 @@ namespace sys1
             new DevExpress.XtraBars.LinkPersistInfo(this._DXbtAbout)});
             this.barSubItem3.Name = "barSubItem3";
             // 
+            // barButtonItem1
+            // 
+            this.barButtonItem1.Caption = "检查更新";
+            this.barButtonItem1.Id = 45;
+            this.barButtonItem1.Name = "barButtonItem1";
+            this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
+            // 
             // mniHelpFile
             // 
             this.mniHelpFile.Caption = "帮助文件(&H)...";
@@ -483,14 +490,14 @@ namespace sys1
             this._dgvData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this._Value,
             this._Time});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 9F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(31)))), ((int)(((byte)(53)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this._dgvData.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 9F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(31)))), ((int)(((byte)(53)))));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this._dgvData.DefaultCellStyle = dataGridViewCellStyle1;
             this._dgvData.Dock = System.Windows.Forms.DockStyle.Fill;
             this._dgvData.Location = new System.Drawing.Point(3, 17);
             this._dgvData.Name = "_dgvData";
@@ -1343,13 +1350,6 @@ namespace sys1
             // 
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // barButtonItem1
-            // 
-            this.barButtonItem1.Caption = "检查更新";
-            this.barButtonItem1.Id = 45;
-            this.barButtonItem1.Name = "barButtonItem1";
-            this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
             // 
             // MainFormGe
             // 

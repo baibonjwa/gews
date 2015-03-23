@@ -326,7 +326,6 @@ namespace sys3
                 RestoreDirectory = true,
                 Filter = @"文本文件(*.txt)|*.txt|所有文件(*.*)|*.*"
             };
-            //ofd.ShowDialog();
             if (ofd.ShowDialog() != DialogResult.OK) return;
             string aa = ofd.FileName;
             var sr = new StreamReader(@aa);

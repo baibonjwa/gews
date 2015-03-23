@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Geodatabase;
@@ -47,7 +48,7 @@ namespace sys3
         /// <param name="e"></param>
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            var m = new BoreholeInfoEntering(((Borehole)bandedGridView1.GetFocusedRow()).BoreholeId);
+            var m = new BoreholeInfoEntering(((Borehole)gridView1.GetFocusedRow()));
             if (DialogResult.OK == m.ShowDialog())
             {
                 RefreshData();
@@ -62,15 +63,14 @@ namespace sys3
         /// <param name="e"></param>
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (Alert.confirm(Const_GM.DEL_CONFIRM_MSG_BOREHOLE))
+            if (!Alert.confirm(Const_GM.DEL_CONFIRM_MSG_BOREHOLE)) return;
+            var selectedIndex = gridView1.GetSelectedRows();
+            foreach (var borehole in selectedIndex.Select(i => (Borehole)gridView1.GetRow(i)))
             {
-                // 钻孔数据删除
-                var borehole = (Borehole)bandedGridView1.GetFocusedRow();
-                borehole.Delete();
-                //20140428 lyf 根据钻孔绑定ID删除图元
                 DeleteZuanKongByBid(new[] { borehole.BindingId });
-                RefreshData();
+                borehole.Delete();
             }
+            RefreshData();
         }
 
         /// <summary>
@@ -161,7 +161,7 @@ namespace sys3
             }
             var pFeatureLayer = (IFeatureLayer)pLayer;
             string str = "";
-            string bid = ((Borehole)bandedGridView1.GetFocusedRow()).BindingId;
+            string bid = ((Borehole)gridView1.GetFocusedRow()).BindingId;
             if (bid != "")
             {
                 if (true)
