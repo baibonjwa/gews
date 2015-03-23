@@ -48,12 +48,7 @@
             this.delete = new System.Windows.Forms.DataGridViewButtonColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.插入ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.复制ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.剪切ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.粘贴ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.上移ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.下移ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -77,6 +72,15 @@
             this.label9 = new System.Windows.Forms.Label();
             this.btnReadMultTxt = new System.Windows.Forms.Button();
             this.btnReadTxt = new System.Windows.Forms.Button();
+            this.上移ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblSuccessed = new System.Windows.Forms.Label();
+            this.lblError = new System.Windows.Forms.Label();
+            this.lblTotal = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.lbl2 = new System.Windows.Forms.Label();
+            this.pbCount = new System.Windows.Forms.ProgressBar();
+            this.btnDetails = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gvCoalSeamsTexture)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -237,66 +241,28 @@
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.插入ToolStripMenuItem,
-            this.toolStripSeparator1,
-            this.复制ToolStripMenuItem,
-            this.剪切ToolStripMenuItem,
-            this.粘贴ToolStripMenuItem,
             this.toolStripSeparator2,
             this.上移ToolStripMenuItem,
             this.下移ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(101, 148);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(101, 76);
             // 
             // 插入ToolStripMenuItem
             // 
             this.插入ToolStripMenuItem.Name = "插入ToolStripMenuItem";
-            this.插入ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.插入ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.插入ToolStripMenuItem.Text = "插入";
             this.插入ToolStripMenuItem.Click += new System.EventHandler(this.插入ToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(97, 6);
-            // 
-            // 复制ToolStripMenuItem
-            // 
-            this.复制ToolStripMenuItem.Name = "复制ToolStripMenuItem";
-            this.复制ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
-            this.复制ToolStripMenuItem.Text = "复制";
-            this.复制ToolStripMenuItem.Click += new System.EventHandler(this.复制ToolStripMenuItem_Click);
-            // 
-            // 剪切ToolStripMenuItem
-            // 
-            this.剪切ToolStripMenuItem.Name = "剪切ToolStripMenuItem";
-            this.剪切ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
-            this.剪切ToolStripMenuItem.Text = "剪切";
-            this.剪切ToolStripMenuItem.Click += new System.EventHandler(this.剪切ToolStripMenuItem_Click);
-            // 
-            // 粘贴ToolStripMenuItem
-            // 
-            this.粘贴ToolStripMenuItem.Name = "粘贴ToolStripMenuItem";
-            this.粘贴ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
-            this.粘贴ToolStripMenuItem.Text = "粘贴";
-            this.粘贴ToolStripMenuItem.Visible = false;
-            this.粘贴ToolStripMenuItem.Click += new System.EventHandler(this.粘贴ToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(97, 6);
-            // 
-            // 上移ToolStripMenuItem
-            // 
-            this.上移ToolStripMenuItem.Name = "上移ToolStripMenuItem";
-            this.上移ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
-            this.上移ToolStripMenuItem.Text = "上移";
-            this.上移ToolStripMenuItem.Click += new System.EventHandler(this.上移ToolStripMenuItem_Click);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
             // 
             // 下移ToolStripMenuItem
             // 
             this.下移ToolStripMenuItem.Name = "下移ToolStripMenuItem";
-            this.下移ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.下移ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.下移ToolStripMenuItem.Text = "下移";
             this.下移ToolStripMenuItem.Click += new System.EventHandler(this.下移ToolStripMenuItem_Click);
             // 
@@ -506,7 +472,6 @@
             // btnReadMultTxt
             // 
             this.btnReadMultTxt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnReadMultTxt.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnReadMultTxt.Location = new System.Drawing.Point(595, 416);
             this.btnReadMultTxt.Name = "btnReadMultTxt";
             this.btnReadMultTxt.Size = new System.Drawing.Size(106, 23);
@@ -526,6 +491,82 @@
             this.btnReadTxt.UseVisualStyleBackColor = true;
             this.btnReadTxt.Click += new System.EventHandler(this.btnReadTxt_Click);
             // 
+            // 上移ToolStripMenuItem
+            // 
+            this.上移ToolStripMenuItem.Name = "上移ToolStripMenuItem";
+            this.上移ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.上移ToolStripMenuItem.Text = "上移";
+            this.上移ToolStripMenuItem.Click += new System.EventHandler(this.上移ToolStripMenuItem_Click);
+            // 
+            // lblSuccessed
+            // 
+            this.lblSuccessed.AutoSize = true;
+            this.lblSuccessed.Location = new System.Drawing.Point(354, 421);
+            this.lblSuccessed.Name = "lblSuccessed";
+            this.lblSuccessed.Size = new System.Drawing.Size(11, 12);
+            this.lblSuccessed.TabIndex = 45;
+            this.lblSuccessed.Text = "0";
+            // 
+            // lblError
+            // 
+            this.lblError.AutoSize = true;
+            this.lblError.Location = new System.Drawing.Point(410, 421);
+            this.lblError.Name = "lblError";
+            this.lblError.Size = new System.Drawing.Size(11, 12);
+            this.lblError.TabIndex = 46;
+            this.lblError.Text = "0";
+            // 
+            // lblTotal
+            // 
+            this.lblTotal.AutoSize = true;
+            this.lblTotal.Location = new System.Drawing.Point(287, 421);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(11, 12);
+            this.lblTotal.TabIndex = 47;
+            this.lblTotal.Text = "0";
+            // 
+            // label10
+            // 
+            this.label10.Location = new System.Drawing.Point(264, 421);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(40, 16);
+            this.label10.TabIndex = 42;
+            this.label10.Text = "共:";
+            // 
+            // label11
+            // 
+            this.label11.Location = new System.Drawing.Point(376, 421);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(40, 16);
+            this.label11.TabIndex = 43;
+            this.label11.Text = "错误:";
+            // 
+            // lbl2
+            // 
+            this.lbl2.Location = new System.Drawing.Point(309, 421);
+            this.lbl2.Name = "lbl2";
+            this.lbl2.Size = new System.Drawing.Size(56, 16);
+            this.lbl2.TabIndex = 44;
+            this.lbl2.Text = "已导入:";
+            // 
+            // pbCount
+            // 
+            this.pbCount.Location = new System.Drawing.Point(72, 416);
+            this.pbCount.Name = "pbCount";
+            this.pbCount.Size = new System.Drawing.Size(186, 23);
+            this.pbCount.TabIndex = 41;
+            // 
+            // btnDetails
+            // 
+            this.btnDetails.Enabled = false;
+            this.btnDetails.Location = new System.Drawing.Point(427, 416);
+            this.btnDetails.Name = "btnDetails";
+            this.btnDetails.Size = new System.Drawing.Size(56, 23);
+            this.btnDetails.TabIndex = 48;
+            this.btnDetails.Text = "详细";
+            this.btnDetails.UseVisualStyleBackColor = true;
+            this.btnDetails.Click += new System.EventHandler(this.btnDetails_Click);
+            // 
             // BoreholeInfoEntering
             // 
             this.AcceptButton = this.btnSubmit;
@@ -533,6 +574,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(880, 451);
+            this.Controls.Add(this.btnDetails);
+            this.Controls.Add(this.lblSuccessed);
+            this.Controls.Add(this.lblError);
+            this.Controls.Add(this.lblTotal);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.lbl2);
+            this.Controls.Add(this.pbCount);
             this.Controls.Add(this.btnReadTxt);
             this.Controls.Add(this.btnReadMultTxt);
             this.Controls.Add(this.label9);
@@ -592,12 +641,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 插入ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 上移ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 下移ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 复制ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 粘贴ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 剪切ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.DataGridViewComboBoxColumn LITHOLOGY;
         private System.Windows.Forms.DataGridViewTextBoxColumn FLOOR_ELEVATION;
@@ -613,5 +657,14 @@
         private System.Windows.Forms.Button btnQD;
         private System.Windows.Forms.Button btnReadMultTxt;
         private System.Windows.Forms.Button btnReadTxt;
+        private System.Windows.Forms.ToolStripMenuItem 上移ToolStripMenuItem;
+        private System.Windows.Forms.Label lblSuccessed;
+        private System.Windows.Forms.Label lblError;
+        private System.Windows.Forms.Label lblTotal;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label lbl2;
+        private System.Windows.Forms.ProgressBar pbCount;
+        private System.Windows.Forms.Button btnDetails;
     }
 }

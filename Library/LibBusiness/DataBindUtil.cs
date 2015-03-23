@@ -129,12 +129,10 @@ namespace LibBusiness
         public static void LoadLithology(DataGridViewComboBoxColumn dgvcbc)
         {
             var lithologys = Lithology.FindAll();
-            dgvcbc.DisplayMember = "LithologyName";
-            dgvcbc.ValueMember = "LithologyId;";
             if (lithologys == null) return;
             foreach (var li in lithologys)
             {
-                dgvcbc.Items.Add(li);
+                dgvcbc.Items.Add(li.LithologyName);
             }
         }
 

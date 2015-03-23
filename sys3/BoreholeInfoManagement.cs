@@ -35,7 +35,8 @@ namespace sys3
         private void btnAdd_Click(object sender, EventArgs e)
         {
             var m = new BoreholeInfoEntering();
-            if (DialogResult.OK == m.ShowDialog())
+            var result = m.ShowDialog();
+            if (result == DialogResult.OK || result == DialogResult.Cancel)
             {
                 RefreshData();
             }

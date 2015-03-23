@@ -18,6 +18,8 @@ namespace sys3
 {
     public partial class BoreholeInfoEntering : Form
     {
+        private string _errorMsg;
+
         /// <summary>
         ///     构造方法
         /// </summary>
@@ -117,6 +119,35 @@ namespace sys3
                 DialogResult = DialogResult.None;
                 return;
             }
+
+            Borehole borehole;
+
+            if (Borehole != null)
+            {
+                borehole = Borehole;
+                borehole.BoreholeNumber = txtBoreholeNumber.Text.Trim();
+                borehole.GroundElevation = Convert.ToDouble(txtGroundElevation.Text.Trim());
+                borehole.CoordinateX = Convert.ToDouble(txtCoordinateX.Text.Trim());
+                borehole.CoordinateY = Convert.ToDouble(txtCoordinateY.Text.Trim());
+                borehole.CoordinateZ = Convert.ToDouble(txtCoordinateZ.Text.Trim());
+                borehole.CoalSeamsTexture = string.Empty;
+                borehole.BindingId = IDGenerator.NewBindingID();
+            }
+            else
+            {
+                borehole = new Borehole
+                {
+                    BoreholeNumber = txtBoreholeNumber.Text.Trim(),
+                    GroundElevation = Convert.ToDouble(txtGroundElevation.Text.Trim()),
+                    CoordinateX = Convert.ToDouble(txtCoordinateX.Text.Trim()),
+                    CoordinateY = Convert.ToDouble(txtCoordinateY.Text.Trim()),
+                    CoordinateZ = Convert.ToDouble(txtCoordinateZ.Text.Trim()),
+                    CoalSeamsTexture = string.Empty,
+                    BindingId = IDGenerator.NewBindingID()
+                };
+            }
+
+
             var boreholeLithologys = new List<BoreholeLithology>();
             for (var i = 0; i < gvCoalSeamsTexture.RowCount; i++)
             {
@@ -134,38 +165,12 @@ namespace sys3
                     CoordinateX = Convert.ToDouble(gvCoalSeamsTexture.Rows[i].Cells[4].Value),
                     CoordinateY = Convert.ToDouble(gvCoalSeamsTexture.Rows[i].Cells[5].Value),
                     CoordinateZ = Convert.ToDouble(gvCoalSeamsTexture.Rows[i].Cells[6].Value),
-                    Lithology = gvCoalSeamsTexture.Rows[i].Cells[0].Value.ToString()
+                    Lithology = Lithology.FindOneByLithologyName(gvCoalSeamsTexture.Rows[i].Cells[0].Value.ToString()),
+                    Borehole = borehole
                 };
                 boreholeLithologys.Add(boreholeLithology);
             }
-
-            Borehole borehole;
-            if (Borehole != null)
-            {
-                borehole = Borehole;
-                borehole.BoreholeNumber = txtBoreholeNumber.Text.Trim();
-                borehole.GroundElevation = Convert.ToDouble(txtGroundElevation.Text.Trim());
-                borehole.CoordinateX = Convert.ToDouble(txtCoordinateX.Text.Trim());
-                borehole.CoordinateY = Convert.ToDouble(txtCoordinateY.Text.Trim());
-                borehole.CoordinateZ = Convert.ToDouble(txtCoordinateZ.Text.Trim());
-                borehole.CoalSeamsTexture = string.Empty;
-                borehole.BoreholeLithologys = boreholeLithologys;
-                borehole.BindingId = IDGenerator.NewBindingID();
-            }
-            else
-            {
-                borehole = new Borehole
-                {
-                    BoreholeNumber = txtBoreholeNumber.Text.Trim(),
-                    GroundElevation = Convert.ToDouble(txtGroundElevation.Text.Trim()),
-                    CoordinateX = Convert.ToDouble(txtCoordinateX.Text.Trim()),
-                    CoordinateY = Convert.ToDouble(txtCoordinateY.Text.Trim()),
-                    CoordinateZ = Convert.ToDouble(txtCoordinateZ.Text.Trim()),
-                    CoalSeamsTexture = string.Empty,
-                    BoreholeLithologys = boreholeLithologys,
-                    BindingId = IDGenerator.NewBindingID()
-                };
-            }
+            borehole.BoreholeLithologys = boreholeLithologys;
             borehole.Save();
 
             //    var dlgResult = MessageBox.Show(@"是：见煤钻孔，否：未见煤钻孔，取消：不绘制钻孔", @"绘制钻孔",
@@ -661,90 +666,6 @@ namespace sys3
         }
 
         /// <summary>
-        ///     复制
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void 复制ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (gvCoalSeamsTexture.CurrentRow != null)
-            {
-                var iNowIndex = gvCoalSeamsTexture.CurrentRow.Index;
-
-                var objArrRowData = new object[7];
-
-                var index = -1;
-                var n = -1;
-                objArrRowData[++n] = gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
-                objArrRowData[++n] = gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
-                objArrRowData[++n] = gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
-                objArrRowData[++n] = gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
-                objArrRowData[++n] = gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
-                objArrRowData[++n] = gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
-                objArrRowData[++n] = gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
-            }
-
-            //MessageBox.Show("复制成功！");
-
-            contextMenuStrip1.Items["粘贴ToolStripMenuItem"].Visible = true;
-        }
-
-        /// <summary>
-        ///     粘贴
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void 粘贴ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (gvCoalSeamsTexture.CurrentRow != null)
-            {
-                var iNowIndex = gvCoalSeamsTexture.CurrentRow.Index;
-
-                if (iNowIndex == gvCoalSeamsTexture.Rows.Count - 1)
-                {
-                    gvCoalSeamsTexture.Rows.Add();
-                }
-            }
-
-            contextMenuStrip1.Items["粘贴ToolStripMenuItem"].Visible = false;
-        }
-
-        /// <summary>
-        ///     剪切
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void 剪切ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (gvCoalSeamsTexture.CurrentRow != null)
-            {
-                var iNowIndex = gvCoalSeamsTexture.CurrentRow.Index;
-
-                var objArrRowData = new object[7];
-
-                var index = -1;
-                var n = -1;
-                objArrRowData[++n] = gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
-                objArrRowData[++n] = gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
-                objArrRowData[++n] = gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
-                objArrRowData[++n] = gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
-                objArrRowData[++n] = gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
-                objArrRowData[++n] = gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
-                objArrRowData[++n] = gvCoalSeamsTexture.Rows[iNowIndex].Cells[++index].Value;
-            }
-            gvCoalSeamsTexture.Rows.Remove(gvCoalSeamsTexture.CurrentRow);
-
-
-
-
-
-
-            //MessageBox.Show("剪切成功！");
-
-            contextMenuStrip1.Items["粘贴ToolStripMenuItem"].Visible = true;
-        }
-
-        /// <summary>
         ///     插入
         /// </summary>
         /// <param name="sender"></param>
@@ -787,80 +708,62 @@ namespace sys3
                 Filter = @"文本文件(*.txt)|*.txt|所有文件(*.*)|*.*",
                 Multiselect = true
             };
-            //ofd.ShowDialog();
             if (ofd.ShowDialog() != DialogResult.OK) return;
-            foreach (var aa in ofd.FileNames)
+            _errorMsg = @"失败文件名：";
+            pbCount.Maximum = ofd.FileNames.Length;
+            pbCount.Value = 0;
+            lblTotal.Text = ofd.FileNames.Length.ToString(CultureInfo.InvariantCulture);
+            foreach (var fileName in ofd.FileNames)
             {
-                var encoder = TxtFileEncoding.GetEncoding(aa, Encoding.GetEncoding("GB2312"));
-                var sr = new StreamReader(@aa, encoder);
+                var encoder = TxtFileEncoding.GetEncoding(fileName, Encoding.GetEncoding("GB2312"));
+
+                var sr = new StreamReader(fileName, encoder);
                 string duqu;
                 while ((duqu = sr.ReadLine()) != null)
                 {
-                    var str = duqu.Split('|');
-
-                    var breholeEntity = new Borehole
+                    try
                     {
-                        BoreholeNumber = str[0],
-                        GroundElevation = Convert.ToDouble(str[3]),
-                        CoordinateX = Convert.ToDouble(str[1].Split(',')[0]),
-                        CoordinateY = Convert.ToDouble(str[1].Split(',')[1]),
-                        CoordinateZ = 0,
-                        CoalSeamsTexture = String.Empty
-                    };
+                        var str = duqu.Split('|');
 
-                    // 孔号
-                    // 地面标高
+                        var borehole = new Borehole
+                        {
+                            BoreholeNumber = str[0],
+                            GroundElevation = Convert.ToDouble(str[3]),
+                            CoordinateX = Convert.ToDouble(str[1].Split(',')[0]),
+                            CoordinateY = Convert.ToDouble(str[1].Split(',')[1]),
+                            CoordinateZ = 0,
+                            CoalSeamsTexture = String.Empty
+                        };
+                        // 创建钻孔岩性实体
+                        var boreholeLithology = new BoreholeLithology
+                        {
+                            Borehole = borehole,
+                            Lithology = Lithology.FindOneByCoal(),
+                            FloorElevation = Convert.ToDouble(str[4]),
+                            Thickness = Convert.ToDouble(str[2]),
+                            CoordinateX = Convert.ToDouble(str[1].Split(',')[0]),
+                            CoordinateY = Convert.ToDouble(str[1].Split(',')[1]),
+                            CoordinateZ = 0
+                        };
 
-                    // X坐标
-
-
-
-
-                    // 创建钻孔岩性实体
-                    var boreholeLithologyEntity = new BoreholeLithology
+                        borehole.BindingId = IDGenerator.NewBindingID();
+                        borehole.BoreholeLithologys = new[] { boreholeLithology };
+                        DrawZuanKong(borehole, boreholeLithology);
+                        borehole.Save();
+                        lblSuccessed.Text =
+                           (Convert.ToInt32(lblSuccessed.Text) + 1).ToString(CultureInfo.InvariantCulture);
+                    }
+                    catch (Exception)
                     {
-                        Borehole = { BoreholeId = breholeEntity.BoreholeId },
-                        Lithology = Lithology.FindOneByCoal(),
-                        FloorElevation = Convert.ToDouble(str[4]),
-                        Thickness = Convert.ToDouble(str[2]),
-                        CoalSeamsName = "3#",
-                        CoordinateX = Convert.ToDouble(str[1].Split(',')[0]),
-                        CoordinateY = Convert.ToDouble(str[1].Split(',')[1]),
-                        CoordinateZ = 0
-                    };
-                    // 钻孔编号
-                    // 岩性编号
-                    // 底板标高
-
-                    // 厚度
-
-
-                    // 煤层名称
-
-
-
-
-
-
-                    // 执行结果
-                    // 只有当添加新钻孔信息的时候才去判断孔号是否重复
-
-                    breholeEntity.BindingId = IDGenerator.NewBindingID();
-
-                    // 钻孔信息登录
-                    breholeEntity.Save();
-                    // 钻孔岩性信息登录
-
-                    boreholeLithologyEntity.Save();
-
-                    // 添加/修改成功的场合
-
-                    if (string.IsNullOrEmpty(breholeEntity.BindingId))
-                        return; //若BID值为空，则不绘制钻孔
-
-                    DrawZuanKong(breholeEntity, boreholeLithologyEntity);
+                        lblError.Text =
+                          (Convert.ToInt32(lblError.Text) + 1).ToString(CultureInfo.InvariantCulture);
+                        _errorMsg += fileName.Substring(fileName.LastIndexOf(@"\", StringComparison.Ordinal) + 1) + "\n";
+                        btnDetails.Enabled = true;
+                    }
                 }
+                pbCount.Value++;
             }
+            Alert.alert("导入成功！");
         }
 
         private void btnReadTxt_Click(object sender, EventArgs e)
@@ -1067,6 +970,11 @@ namespace sys3
         }
 
         #endregion
+
+        private void btnDetails_Click(object sender, EventArgs e)
+        {
+            Alert.alert(_errorMsg);
+        }
     }
 
     // **************************************************************************
