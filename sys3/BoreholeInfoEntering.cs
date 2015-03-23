@@ -750,17 +750,20 @@ namespace sys3
                         borehole.BoreholeLithologys = new[] { boreholeLithology };
                         DrawZuanKong(borehole, boreholeLithology);
                         borehole.Save();
-                        lblSuccessed.Text =
-                           (Convert.ToInt32(lblSuccessed.Text) + 1).ToString(CultureInfo.InvariantCulture);
+
                     }
                     catch (Exception)
                     {
                         lblError.Text =
                           (Convert.ToInt32(lblError.Text) + 1).ToString(CultureInfo.InvariantCulture);
+                        lblSuccessed.Text =
+                            (Convert.ToInt32(lblSuccessed.Text) - 1).ToString(CultureInfo.InvariantCulture);
                         _errorMsg += fileName.Substring(fileName.LastIndexOf(@"\", StringComparison.Ordinal) + 1) + "\n";
                         btnDetails.Enabled = true;
                     }
                 }
+                lblSuccessed.Text =
+                        (Convert.ToInt32(lblSuccessed.Text) + 1).ToString(CultureInfo.InvariantCulture);
                 pbCount.Value++;
             }
             Alert.alert("导入成功！");
