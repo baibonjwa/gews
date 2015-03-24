@@ -101,6 +101,7 @@
             this.tocControl_MS = new ESRI.ArcGIS.Controls.AxTOCControl();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.mapControl_MS = new ESRI.ArcGIS.Controls.AxMapControl();
+            this.bbiCheckUpdate = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.toolBar_MS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).BeginInit();
@@ -185,9 +186,10 @@
             this.barBtnItemHengChuan,
             this.barButtonItem1,
             this.mniSkinSetting,
-            this.mniDCShape});
+            this.mniDCShape,
+            this.bbiCheckUpdate});
             this.barManager2.MainMenu = this.bar2;
-            this.barManager2.MaxItemId = 66;
+            this.barManager2.MaxItemId = 67;
             this.barManager2.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemTextEdit1});
             // 
@@ -534,6 +536,7 @@
             this.barSubItem4.Id = 7;
             this.barSubItem4.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.H));
             this.barSubItem4.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.bbiCheckUpdate),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniHelpFile, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniAbout, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.barSubItem4.Name = "barSubItem4";
@@ -819,6 +822,13 @@
             this.mapControl_MS.Size = new System.Drawing.Size(703, 347);
             this.mapControl_MS.TabIndex = 26;
             // 
+            // bbiCheckUpdate
+            // 
+            this.bbiCheckUpdate.Caption = "检查更新";
+            this.bbiCheckUpdate.Id = 66;
+            this.bbiCheckUpdate.Name = "bbiCheckUpdate";
+            this.bbiCheckUpdate.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbiCheckUpdate_ItemClick);
+            // 
             // MainForm_MS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -927,5 +937,6 @@
         private System.Windows.Forms.Splitter splitter1;
         private ESRI.ArcGIS.Controls.AxTOCControl tocControl_MS;
         private DevExpress.XtraBars.BarButtonItem mniDCShape;
+        private DevExpress.XtraBars.BarButtonItem bbiCheckUpdate;
     }
 }

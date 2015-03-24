@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using AutoUpdaterDotNET;
 using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Controls;
 using ESRI.ArcGIS.Display;
@@ -80,6 +81,7 @@ namespace sys2
         private void MainForm_MS_Load(object sender, EventArgs e)
         {
             //浮动工具条中文设置
+            AutoUpdater.Start("http://bltmld.vicp.cc:8090/sys2/update.xml");
             DXSeting.floatToolsLoadSet();
         }
 
@@ -471,6 +473,12 @@ namespace sys2
                 this.mapControl_MS.ActiveView.Refresh();
                 this.tocControl_MS.Refresh();
             }
+        }
+
+        private void bbiCheckUpdate_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            AutoUpdater.CheckAtOnce = true;
+            AutoUpdater.Start("http://bltmld.vicp.cc:8090/sys1/update.xml");
         }
     }
 }
