@@ -58,11 +58,11 @@ namespace sys4
 
 
             //添加Toolbar
-            this.toolbar_OP.AddToolbarDef(new GIS_ToolbarView());
-            this.toolbar_OP.AddToolbarDef(new GIS_ToolbarEdit(this.mapControl_OP, mapControl, toolbarControl, DataEditCommon.g_pCurrentWorkSpace));
-            this.toolbar_OP.AddToolbarDef(new GIS_ToolbarModify());
-            this.toolbar_OP.AddToolbarDef(new GIS_ToolbarBasic());
-
+            //this.toolbar_OP.AddToolbarDef(new GIS_ToolbarView());
+            //this.toolbar_OP.AddToolbarDef(new GIS_ToolbarEdit(this.mapControl_OP, mapControl, toolbarControl, DataEditCommon.g_pCurrentWorkSpace));
+            //this.toolbar_OP.AddToolbarDef(new GIS_ToolbarModify());
+            //this.toolbar_OP.AddToolbarDef(new GIS_ToolbarBasic());
+            AddToolBar.Addtool(this.mapControl_OP, mapControl, toolbarControl, DataEditCommon.g_pCurrentWorkSpace);
         }
         #region 窗体事件
         private void MainForm_OP_Load(object sender, EventArgs e)

@@ -65,11 +65,12 @@ namespace sys3
             DataEditCommon.load();
 
             //添加Toolbar
-            this.toolBar_GM.AddToolbarDef(new GIS_ToolbarView());
-            this.toolBar_GM.AddToolbarDef(new GIS_ToolbarEdit(this.mapControl_GM, mapControl, toolbarControl, DataEditCommon.g_pCurrentWorkSpace));
-            //this.toolBar_GM.AddToolbarDef(new GIS_ToolbarSpecial());
-            this.toolBar_GM.AddToolbarDef(new GIS_ToolbarModify());
-            this.toolBar_GM.AddToolbarDef(new GIS_ToolbarBasic());
+            //this.toolBar_GM.AddToolbarDef(new GIS_ToolbarView());
+            //this.toolBar_GM.AddToolbarDef(new GIS_ToolbarEdit(this.mapControl_GM, mapControl, toolbarControl, DataEditCommon.g_pCurrentWorkSpace));
+            ////this.toolBar_GM.AddToolbarDef(new GIS_ToolbarSpecial());
+            //this.toolBar_GM.AddToolbarDef(new GIS_ToolbarModify());
+            //this.toolBar_GM.AddToolbarDef(new GIS_ToolbarBasic());
+            AddToolBar.Addtool(this.mapControl_GM, mapControl, toolbarControl, DataEditCommon.g_pCurrentWorkSpace);
 
             //给GIS工程的全局变量赋值
             Global.SetInitialParams(this.mapControl_GM.ActiveView);

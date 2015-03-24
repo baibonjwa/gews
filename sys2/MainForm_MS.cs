@@ -67,11 +67,12 @@ namespace sys2
             DataEditCommon.load();
 
             //添加Toolbar
-            this.toolBar_MS.AddToolbarDef(new GIS_ToolbarView());
-            this.toolBar_MS.AddToolbarDef(new GIS_ToolbarEdit(this.mapControl_MS, mapControl, toolbarControl, DataEditCommon.g_pCurrentWorkSpace));
-            //this.toolBar_GM.AddToolbarDef(new GIS_ToolbarSpecial());
-            this.toolBar_MS.AddToolbarDef(new GIS_ToolbarModify());
-            this.toolBar_MS.AddToolbarDef(new GIS_ToolbarBasic());
+            //this.toolBar_MS.AddToolbarDef(new GIS_ToolbarView());
+            //this.toolBar_MS.AddToolbarDef(new GIS_ToolbarEdit(this.mapControl_MS, mapControl, toolbarControl, DataEditCommon.g_pCurrentWorkSpace));
+            ////this.toolBar_GM.AddToolbarDef(new GIS_ToolbarSpecial());
+            //this.toolBar_MS.AddToolbarDef(new GIS_ToolbarModify());
+            //this.toolBar_MS.AddToolbarDef(new GIS_ToolbarBasic());
+            AddToolBar.Addtool(this.mapControl_MS, mapControl, toolbarControl, DataEditCommon.g_pCurrentWorkSpace);
             //地图操作初始化
             Global.SetInitialParams(this.mapControl_MS.ActiveView);
 

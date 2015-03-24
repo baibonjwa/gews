@@ -233,6 +233,7 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddToolBar.cs" />
     <Compile Include="GisHelper.cs" />
     <Compile Include="MainFrm.cs" />
     <Compile Include="SpecialGraphic\DrawBigFaultageInfo.cs" />

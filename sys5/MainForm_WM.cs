@@ -84,12 +84,13 @@ namespace sys5
             DataEditCommon.load();
 
             //添加Toolbar
-            toolBar_WM.AddToolbarDef(new GIS_ToolbarView());
-            toolBar_WM.AddToolbarDef(new GIS_ToolbarEdit(mapControl_WM, mapControl, toolbarControl,
-                DataEditCommon.g_pCurrentWorkSpace));
-            //this.toolBar_WM.AddToolbarDef(new GIS_ToolbarSpecial());
-            toolBar_WM.AddToolbarDef(new GIS_ToolbarModify());
-            toolBar_WM.AddToolbarDef(new GIS_ToolbarBasic());
+            //toolBar_WM.AddToolbarDef(new GIS_ToolbarView());
+            //toolBar_WM.AddToolbarDef(new GIS_ToolbarEdit(mapControl_WM, mapControl, toolbarControl,
+            //    DataEditCommon.g_pCurrentWorkSpace));
+            ////this.toolBar_WM.AddToolbarDef(new GIS_ToolbarSpecial());
+            //toolBar_WM.AddToolbarDef(new GIS_ToolbarModify());
+            //toolBar_WM.AddToolbarDef(new GIS_ToolbarBasic());
+            AddToolBar.Addtool(mapControl_WM, mapControl, toolbarControl, DataEditCommon.g_pCurrentWorkSpace);
 
             Global.SetInitialParams(mapControl_WM.ActiveView);
         }
