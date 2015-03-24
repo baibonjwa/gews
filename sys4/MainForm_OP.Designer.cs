@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm_OP));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsBtnWSYLD = new System.Windows.Forms.ToolStripButton();
@@ -44,8 +43,8 @@
             this.mapControl_OP = new ESRI.ArcGIS.Controls.AxMapControl();
             this.tocControl_OP = new ESRI.ArcGIS.Controls.AxTOCControl();
             this.toolbar_OP = new ESRI.ArcGIS.Controls.AxToolbarControl();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
+            this.imageList1 = new System.Windows.Forms.ImageList();
+            this.barManager1 = new DevExpress.XtraBars.BarManager();
             this.bar1 = new DevExpress.XtraBars.Bar();
             this.mniOpenMineMapFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniSaveFloat = new DevExpress.XtraBars.BarButtonItem();
@@ -146,6 +145,7 @@
             this.barButtonItem5 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
             this.axLicenseControl2 = new ESRI.ArcGIS.Controls.AxLicenseControl();
+            this.bbiCheckUpdate = new DevExpress.XtraBars.BarButtonItem();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.axLicenseControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mapControl_OP)).BeginInit();
@@ -166,9 +166,9 @@
             this.tsBtnWSYLDZX,
             this.tsBtnWSHLDZX,
             this.tsBtnWSYCLDZX});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 136);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 117);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1053, 29);
+            this.toolStrip1.Size = new System.Drawing.Size(903, 25);
             this.toolStrip1.TabIndex = 9;
             this.toolStrip1.Text = "tsSpecialDraw";
             this.toolStrip1.Visible = false;
@@ -179,7 +179,7 @@
             this.tsBtnWSYLD.Image = ((System.Drawing.Image)(resources.GetObject("tsBtnWSYLD.Image")));
             this.tsBtnWSYLD.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsBtnWSYLD.Name = "tsBtnWSYLD";
-            this.tsBtnWSYLD.Size = new System.Drawing.Size(72, 26);
+            this.tsBtnWSYLD.Size = new System.Drawing.Size(72, 22);
             this.tsBtnWSYLD.Text = "瓦斯压力点";
             this.tsBtnWSYLD.Click += new System.EventHandler(this.tsBtnWSYLD_Click);
             // 
@@ -189,7 +189,7 @@
             this.tsBtnWSHLD.Image = ((System.Drawing.Image)(resources.GetObject("tsBtnWSHLD.Image")));
             this.tsBtnWSHLD.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsBtnWSHLD.Name = "tsBtnWSHLD";
-            this.tsBtnWSHLD.Size = new System.Drawing.Size(72, 26);
+            this.tsBtnWSHLD.Size = new System.Drawing.Size(72, 22);
             this.tsBtnWSHLD.Text = "瓦斯含量点";
             this.tsBtnWSHLD.Click += new System.EventHandler(this.tsBtnWSHLD_Click);
             // 
@@ -199,7 +199,7 @@
             this.tsBtnWSYCLD.Image = ((System.Drawing.Image)(resources.GetObject("tsBtnWSYCLD.Image")));
             this.tsBtnWSYCLD.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsBtnWSYCLD.Name = "tsBtnWSYCLD";
-            this.tsBtnWSYCLD.Size = new System.Drawing.Size(84, 26);
+            this.tsBtnWSYCLD.Size = new System.Drawing.Size(84, 22);
             this.tsBtnWSYCLD.Text = "瓦斯涌出量点";
             this.tsBtnWSYCLD.Click += new System.EventHandler(this.tsBtnWSYCLD_Click);
             // 
@@ -209,7 +209,7 @@
             this.tsBtnWSYLDZX.Image = ((System.Drawing.Image)(resources.GetObject("tsBtnWSYLDZX.Image")));
             this.tsBtnWSYLDZX.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsBtnWSYLDZX.Name = "tsBtnWSYLDZX";
-            this.tsBtnWSYLDZX.Size = new System.Drawing.Size(96, 26);
+            this.tsBtnWSYLDZX.Size = new System.Drawing.Size(96, 22);
             this.tsBtnWSYLDZX.Text = "瓦斯压力等值线";
             this.tsBtnWSYLDZX.Click += new System.EventHandler(this.tsBtnWSYLDZX_Click);
             // 
@@ -219,7 +219,7 @@
             this.tsBtnWSHLDZX.Image = ((System.Drawing.Image)(resources.GetObject("tsBtnWSHLDZX.Image")));
             this.tsBtnWSHLDZX.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsBtnWSHLDZX.Name = "tsBtnWSHLDZX";
-            this.tsBtnWSHLDZX.Size = new System.Drawing.Size(96, 26);
+            this.tsBtnWSHLDZX.Size = new System.Drawing.Size(96, 22);
             this.tsBtnWSHLDZX.Text = "瓦斯含量等值线";
             this.tsBtnWSHLDZX.Click += new System.EventHandler(this.tsBtnWSHLDZX_Click);
             // 
@@ -229,7 +229,7 @@
             this.tsBtnWSYCLDZX.Image = ((System.Drawing.Image)(resources.GetObject("tsBtnWSYCLDZX.Image")));
             this.tsBtnWSYCLDZX.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsBtnWSYCLDZX.Name = "tsBtnWSYCLDZX";
-            this.tsBtnWSYCLDZX.Size = new System.Drawing.Size(108, 26);
+            this.tsBtnWSYCLDZX.Size = new System.Drawing.Size(108, 22);
             this.tsBtnWSYCLDZX.Text = "瓦斯涌出量等值线";
             this.tsBtnWSYCLDZX.Click += new System.EventHandler(this.tsBtnWSYCLDZX_Click);
             // 
@@ -246,11 +246,11 @@
             // 
             this.statusStrip1.AxMap = null;
             this.statusStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.statusStrip1.Location = new System.Drawing.Point(0, 620);
-            this.statusStrip1.MaximumSize = new System.Drawing.Size(0, 22);
-            this.statusStrip1.MinimumSize = new System.Drawing.Size(0, 22);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 531);
+            this.statusStrip1.MaximumSize = new System.Drawing.Size(0, 19);
+            this.statusStrip1.MinimumSize = new System.Drawing.Size(0, 19);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1053, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(903, 19);
             this.statusStrip1.TabIndex = 11;
             // 
             // toolLabelBLC
@@ -263,7 +263,7 @@
             // 
             this.splitter1.Location = new System.Drawing.Point(200, 114);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 506);
+            this.splitter1.Size = new System.Drawing.Size(3, 417);
             this.splitter1.TabIndex = 12;
             this.splitter1.TabStop = false;
             // 
@@ -273,7 +273,7 @@
             this.mapControl_OP.Location = new System.Drawing.Point(203, 114);
             this.mapControl_OP.Name = "mapControl_OP";
             this.mapControl_OP.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("mapControl_OP.OcxState")));
-            this.mapControl_OP.Size = new System.Drawing.Size(850, 506);
+            this.mapControl_OP.Size = new System.Drawing.Size(700, 417);
             this.mapControl_OP.TabIndex = 8;
             this.mapControl_OP.OnMouseDown += new ESRI.ArcGIS.Controls.IMapControlEvents2_Ax_OnMouseDownEventHandler(this.mapControl_OP_OnMouseDown);
             this.mapControl_OP.OnMouseMove += new ESRI.ArcGIS.Controls.IMapControlEvents2_Ax_OnMouseMoveEventHandler(this.mapControl_OP_OnMouseMove);
@@ -285,7 +285,7 @@
             this.tocControl_OP.Location = new System.Drawing.Point(0, 114);
             this.tocControl_OP.Name = "tocControl_OP";
             this.tocControl_OP.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("tocControl_OP.OcxState")));
-            this.tocControl_OP.Size = new System.Drawing.Size(200, 506);
+            this.tocControl_OP.Size = new System.Drawing.Size(200, 417);
             this.tocControl_OP.TabIndex = 7;
             this.tocControl_OP.OnMouseDown += new ESRI.ArcGIS.Controls.ITOCControlEvents_Ax_OnMouseDownEventHandler(this.tocControl_OP_OnMouseDown);
             this.tocControl_OP.OnDoubleClick += new ESRI.ArcGIS.Controls.ITOCControlEvents_Ax_OnDoubleClickEventHandler(this.tocControl_OP_OnDoubleClick);
@@ -296,7 +296,7 @@
             this.toolbar_OP.Location = new System.Drawing.Point(0, 86);
             this.toolbar_OP.Name = "toolbar_OP";
             this.toolbar_OP.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("toolbar_OP.OcxState")));
-            this.toolbar_OP.Size = new System.Drawing.Size(1053, 28);
+            this.toolbar_OP.Size = new System.Drawing.Size(903, 28);
             this.toolbar_OP.TabIndex = 6;
             // 
             // imageList1
@@ -432,9 +432,10 @@
             this.barButtonItem1,
             this.barButtonItem4,
             this.barButtonItem5,
-            this.mniDCShape});
+            this.mniDCShape,
+            this.bbiCheckUpdate});
             this.barManager1.MainMenu = this.bar2;
-            this.barManager1.MaxItemId = 91;
+            this.barManager1.MaxItemId = 94;
             // 
             // bar1
             // 
@@ -546,7 +547,7 @@
             // 
             this.mniSaveAs.Caption = "另存为(&A)...";
             this.mniSaveAs.Id = 9;
-            this.mniSaveAs.ItemShortcut = new DevExpress.XtraBars.BarShortcut(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
+            this.mniSaveAs.ItemShortcut = new DevExpress.XtraBars.BarShortcut(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
                 | System.Windows.Forms.Keys.S));
             this.mniSaveAs.Name = "mniSaveAs";
             this.mniSaveAs.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniSaveAs_ItemClick);
@@ -698,7 +699,7 @@
             // 
             this.mniWSYLDHZ.Caption = "瓦斯压力点绘制(&W)";
             this.mniWSYLDHZ.Id = 22;
-            this.mniWSYLDHZ.ItemShortcut = new DevExpress.XtraBars.BarShortcut(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
+            this.mniWSYLDHZ.ItemShortcut = new DevExpress.XtraBars.BarShortcut(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
                 | System.Windows.Forms.Keys.D0));
             this.mniWSYLDHZ.Name = "mniWSYLDHZ";
             this.mniWSYLDHZ.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniWSYLDHZ_ItemClick);
@@ -707,7 +708,7 @@
             // 
             this.mniWSHLDHZ.Caption = "瓦斯含量点绘制(&H)";
             this.mniWSHLDHZ.Id = 23;
-            this.mniWSHLDHZ.ItemShortcut = new DevExpress.XtraBars.BarShortcut(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
+            this.mniWSHLDHZ.ItemShortcut = new DevExpress.XtraBars.BarShortcut(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
                 | System.Windows.Forms.Keys.D1));
             this.mniWSHLDHZ.Name = "mniWSHLDHZ";
             this.mniWSHLDHZ.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniWSHLDHZ_ItemClick);
@@ -716,7 +717,7 @@
             // 
             this.mniWSYCLDHZ.Caption = "瓦斯涌出量点绘制(&Y)";
             this.mniWSYCLDHZ.Id = 24;
-            this.mniWSYCLDHZ.ItemShortcut = new DevExpress.XtraBars.BarShortcut(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
+            this.mniWSYCLDHZ.ItemShortcut = new DevExpress.XtraBars.BarShortcut(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
                 | System.Windows.Forms.Keys.D2));
             this.mniWSYCLDHZ.Name = "mniWSYCLDHZ";
             this.mniWSYCLDHZ.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniWSYCLDHZ_ItemClick);
@@ -867,7 +868,7 @@
             this.mniDatabaseSet.Caption = "数据库设置(&S)...";
             this.mniDatabaseSet.Id = 37;
             this.mniDatabaseSet.ImageIndex = 10;
-            this.mniDatabaseSet.ItemShortcut = new DevExpress.XtraBars.BarShortcut(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
+            this.mniDatabaseSet.ItemShortcut = new DevExpress.XtraBars.BarShortcut(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
                 | System.Windows.Forms.Keys.J));
             this.mniDatabaseSet.Name = "mniDatabaseSet";
             this.mniDatabaseSet.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniDatabaseSet_ItemClick);
@@ -913,6 +914,7 @@
             this.mniHelp.Caption = "帮助(&H)";
             this.mniHelp.Id = 6;
             this.mniHelp.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.bbiCheckUpdate),
             new DevExpress.XtraBars.LinkPersistInfo(this.mniHelpFile),
             new DevExpress.XtraBars.LinkPersistInfo(this.mniAbout)});
             this.mniHelp.Name = "mniHelp";
@@ -990,6 +992,11 @@
             this.mniK1Float.ImageIndex = 0;
             this.mniK1Float.Name = "mniK1Float";
             this.mniK1Float.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniK1Float_ItemClick);
+            // 
+            // mniSFloat
+            // 
+            this.mniSFloat.Id = 92;
+            this.mniSFloat.Name = "mniSFloat";
             // 
             // bar4
             // 
@@ -1242,28 +1249,28 @@
             this.barDockControlTop.CausesValidation = false;
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlTop.Size = new System.Drawing.Size(1053, 86);
+            this.barDockControlTop.Size = new System.Drawing.Size(903, 86);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 642);
-            this.barDockControlBottom.Size = new System.Drawing.Size(1053, 0);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 550);
+            this.barDockControlBottom.Size = new System.Drawing.Size(903, 0);
             // 
             // barDockControlLeft
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 86);
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 556);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 464);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1053, 86);
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 556);
+            this.barDockControlRight.Location = new System.Drawing.Point(903, 86);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 464);
             // 
             // mniExport3
             // 
@@ -1272,6 +1279,11 @@
             this.mniExport3.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E));
             this.mniExport3.Name = "mniExport3";
             this.mniExport3.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniExport_ItemClick);
+            // 
+            // mniS
+            // 
+            this.mniS.Id = 91;
+            this.mniS.Name = "mniS";
             // 
             // barButtonItem1
             // 
@@ -1305,11 +1317,18 @@
             this.axLicenseControl2.Size = new System.Drawing.Size(32, 32);
             this.axLicenseControl2.TabIndex = 17;
             // 
+            // bbiCheckUpdate
+            // 
+            this.bbiCheckUpdate.Caption = "检查更新";
+            this.bbiCheckUpdate.Id = 93;
+            this.bbiCheckUpdate.Name = "bbiCheckUpdate";
+            this.bbiCheckUpdate.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbiCheckUpdate_ItemClick);
+            // 
             // MainForm_OP
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1053, 642);
+            this.ClientSize = new System.Drawing.Size(903, 550);
             this.Controls.Add(this.axLicenseControl2);
             this.Controls.Add(this.mapControl_OP);
             this.Controls.Add(this.axLicenseControl1);
@@ -1461,5 +1480,6 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItem5;
         private DevExpress.XtraBars.BarButtonItem barButtonItem4;
         private DevExpress.XtraBars.BarButtonItem mniDCShape;
+        private DevExpress.XtraBars.BarButtonItem bbiCheckUpdate;
     }
 }

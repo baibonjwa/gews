@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using AutoUpdaterDotNET;
 using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Controls;
 using ESRI.ArcGIS.esriSystem;
@@ -66,7 +67,7 @@ namespace sys4
         #region 窗体事件
         private void MainForm_OP_Load(object sender, EventArgs e)
         {
-            //浮动工具条中文设置
+            AutoUpdater.Start("http://bltmld.vicp.cc:8090/sys4/update.xml");
             DXSeting.floatToolsLoadSet();
         }
 
@@ -1052,5 +1053,11 @@ namespace sys4
             this.mniCFBXX_ItemClick(null, null);
         }
         #endregion
+
+        private void bbiCheckUpdate_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            AutoUpdater.CheckAtOnce = true;
+            AutoUpdater.Start("http://bltmld.vicp.cc:8090/sys4/update.xml");
+        }
     }
 }
