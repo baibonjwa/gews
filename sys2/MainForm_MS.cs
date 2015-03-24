@@ -478,7 +478,7 @@ namespace sys2
         private void bbiCheckUpdate_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             AutoUpdater.CheckAtOnce = true;
-            AutoUpdater.Start("http://bltmld.vicp.cc:8090/sys1/update.xml");
+            AutoUpdater.Start("http://bltmld.vicp.cc:8090/sys2/update.xml");
         }
     }
 }

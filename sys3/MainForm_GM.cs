@@ -2,6 +2,7 @@
 
 using System;
 using System.Windows.Forms;
+using AutoUpdaterDotNET;
 using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Controls;
 using ESRI.ArcGIS.esriSystem;
@@ -79,6 +80,7 @@ namespace sys3
         private void MainForm_GM_Load(object sender, EventArgs e)
         {
             //浮动工具条中文设置
+            AutoUpdater.Start("http://bltmld.vicp.cc:8090/sys3/update.xml");
             DXSeting.floatToolsLoadSet();
 
             Log.Debug("[GM]....Loading finished.");
@@ -1102,5 +1104,11 @@ namespace sys3
             mniColor_ItemClick(sender, e);
         }
         #endregion
+
+        private void bbiCheckUpdate_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            AutoUpdater.CheckAtOnce = true;
+            AutoUpdater.Start("http://bltmld.vicp.cc:8090/sys3/update.xml");
+        }
     }
 }
