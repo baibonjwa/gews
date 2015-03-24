@@ -494,6 +494,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AutoUpdater.NET\AutoUpdater.NET.csproj">
+      <Project>{fb9e7e6b-b19f-4f37-a708-2996190cef13}</Project>
+      <Name>AutoUpdater.NET</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Library\GIS\GIS.csproj">
       <Project>{7ff2375e-9594-4ee8-a3cd-40cf245e47fa}</Project>
       <Name>GIS</Name>

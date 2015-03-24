@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows.Forms;
+using AutoUpdaterDotNET;
 using DevExpress.XtraBars;
 using ESRI.ArcGIS;
 using ESRI.ArcGIS.Carto;
@@ -146,6 +147,7 @@ namespace sys5
 
         private void MainForm_WM_Load(object sender, EventArgs e)
         {
+            AutoUpdater.Start("http://bltmld.vicp.cc:8090/sys5/update.xml");
             //注册更新预警结果事件
             SocketUtil.DoInitilization();
             SocketUtil.GetClientSocketInstance().OnMsgUpdateWarningResult += UpdateWarningResultUi;
@@ -937,5 +939,11 @@ namespace sys5
         #endregion
 
         private delegate void ShowDelegate(UpdateWarningResultMessage data);
+
+        private void bbiCheckUpdate_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            AutoUpdater.CheckAtOnce = true;
+            AutoUpdater.Start("http://bltmld.vicp.cc:8090/sys5/update.xml");
+        }
     }
 }
