@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using ESRI.ArcGIS.Carto;
 using GIS;
 using GIS.Common;
+using GIS.SpecialGraphic;
 using LibCommon;
 using LibEntity;
 
@@ -24,7 +25,7 @@ namespace sys3
 
         private void RefreshData()
         {
-            gcCollapsePillars.DataSource = CollapsePillarsEnt.FindAll();
+            gcCollapsePillars.DataSource = CollapsePillars.FindAll();
         }
 
         /// <summary>
@@ -58,7 +59,7 @@ namespace sys3
         /// <param name="e"></param>
         private void tsBtnModify_Click(object sender, EventArgs e)
         {
-            var c = new CollapsePillarsEntering((CollapsePillarsEnt)gridView1.GetFocusedRow());
+            var c = new CollapsePillarsEntering((CollapsePillars)gridView1.GetFocusedRow());
             if (DialogResult.OK == c.ShowDialog())
             {
                 RefreshData();
@@ -73,7 +74,7 @@ namespace sys3
         private void tsBtnDel_Click(object sender, EventArgs e)
         {
             if (!Alert.confirm(Const.DEL_CONFIRM_MSG)) return;
-            var collapsePillarsEnt = (CollapsePillarsEnt)gridView1.GetFocusedRow();
+            var collapsePillarsEnt = (CollapsePillars)gridView1.GetFocusedRow();
             DeleteyXLZ(collapsePillarsEnt.Id.ToString(CultureInfo.InvariantCulture));
             collapsePillarsEnt.Delete();
             RefreshData();
@@ -138,7 +139,7 @@ namespace sys3
             }
             var pFeatureLayer = (IFeatureLayer)pLayer;
             string str = "";
-            string bid = ((CollapsePillarsEnt)gridView1.GetFocusedRow()).Id.ToString(CultureInfo.InvariantCulture);
+            string bid = ((CollapsePillars)gridView1.GetFocusedRow()).Id.ToString(CultureInfo.InvariantCulture);
             if (bid != "")
             {
                 if (true)

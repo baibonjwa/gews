@@ -220,7 +220,7 @@ namespace GIS.SpecialGraphic
                 return;
             }
             //DrawFeatureByShape(m_pCurrentLayer, pGeometry);
-            GIS.CollapsePillarsEntering form = new CollapsePillarsEntering(pointCollection);
+            CollapsePillarsEntering form = new CollapsePillarsEntering(pointCollection);
             form.ShowDialog();
         }
 

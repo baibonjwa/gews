@@ -11,24 +11,20 @@ using ESRI.ArcGIS.Geodatabase;
 using ESRI.ArcGIS.Geometry;
 using GIS.Common;
 using LibCommon;
-using LibCommonControl;
 using LibEntity;
 using LibSocket;
 using Path = System.IO.Path;
 
-namespace GIS
+namespace GIS.SpecialGraphic
 {
     public partial class CollapsePillarsEntering : Form
     {
         //陷落柱实体
-        public static ClientSocket _clientSocket = null;
-        private readonly CollapsePillarsEnt collapsePillarsEnt = new CollapsePillarsEnt();
-        private readonly SocketHelper mainFrm;
+        private readonly CollapsePillars _collapsePillars = new CollapsePillars();
         private CollapsePillarsKeyPointEnt[] _dsCollapsePillarsPoint;
         private int _itemCount;
         private int _rowIndex = -1;
         private int _rowsCount;
-        private string collapsePillarsName = "";
         //客户端
 
         /// <summary>
@@ -37,7 +33,6 @@ namespace GIS
         public CollapsePillarsEntering()
         {
             InitializeComponent();
-            mainFrm = mainFrm;
             //设置窗体属性
             FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_GM.COLLAPSEPILLARE_ADD);
         }
@@ -67,33 +62,18 @@ namespace GIS
         /// <summary>
         ///     构造方法
         /// </summary>
-        /// <param name="collapsePillarsEnt">陷落柱实体</param>
-        public CollapsePillarsEntering(CollapsePillarsEnt collapsePillarsEnt)
+        /// <param name="_collapsePillars">陷落柱实体</param>
+        public CollapsePillarsEntering(CollapsePillars _collapsePillars)
         {
-            this.collapsePillarsEnt = collapsePillarsEnt;
-
-            collapsePillarsName = collapsePillarsEnt.CollapsePillarsName;
-
+            this._collapsePillars = _collapsePillars;
             InitializeComponent();
 
-            //绑定修改数据
-            changeInfo();
-
-            //设置窗体属性
-            FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_GM.COLLAPSEPILLARE_CHANGE);
-        }
-
-        /// <summary>
-        ///     绑定修改数据
-        /// </summary>
-        private void changeInfo()
-        {
             _itemCount = 0;
 
-            txtCollapsePillarsName.Text = collapsePillarsEnt.CollapsePillarsName;
-            if (collapsePillarsEnt.Xtype == "1")
+            txtCollapsePillarsName.Text = _collapsePillars.CollapsePillarsName;
+            if (_collapsePillars.Xtype == "1")
                 radioBtnS.Checked = true;
-            _dsCollapsePillarsPoint = CollapsePillarsKeyPointEnt.FindAllByCollapsePillarsId(collapsePillarsEnt.Id);
+            _dsCollapsePillarsPoint = CollapsePillarsKeyPointEnt.FindAllByCollapsePillarsId(_collapsePillars.Id);
 
             _rowsCount = _dsCollapsePillarsPoint.Length;
             dgrdvCoordinate.RowCount = _rowsCount + 1;
@@ -104,7 +84,10 @@ namespace GIS
                 dgrdvCoordinate[2, i].Value = _dsCollapsePillarsPoint[i].CoordinateZ;
                 _itemCount++;
             }
-            txtDescribe.Text = collapsePillarsEnt.Discribe;
+            txtDescribe.Text = _collapsePillars.Discribe;
+
+            //设置窗体属性
+            FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_GM.COLLAPSEPILLARE_CHANGE);
         }
 
         /// <summary>
@@ -136,12 +119,12 @@ namespace GIS
                 }
             }
             //实体赋值
-            collapsePillarsEnt.CollapsePillarsName = txtCollapsePillarsName.Text;
-            collapsePillarsEnt.Discribe = txtDescribe.Text;
+            _collapsePillars.CollapsePillarsName = txtCollapsePillarsName.Text;
+            _collapsePillars.Discribe = txtDescribe.Text;
             if (radioBtnX.Checked)
-                collapsePillarsEnt.Xtype = "0";
+                _collapsePillars.Xtype = "0";
             else
-                collapsePillarsEnt.Xtype = "1";
+                _collapsePillars.Xtype = "1";
             //验证
             if (!check())
             {
@@ -157,21 +140,21 @@ namespace GIS
             if (Text == Const_GM.COLLAPSEPILLARE_ADD)
             {
                 //添加陷落柱
-                collapsePillarsEnt.Save();
+                _collapsePillars.Save();
             }
 
             //20140509 lyf
             //存储陷落柱关键点实体
-            //CollapsePillarsEnt collapsePillarsEnt
-            var lstCollapsePillarsEntKeyPts = new List<CollapsePillarsEnt>();
-            var collapse = new CollapsePillarsEnt();
+            //CollapsePillars CollapsePillars
+            var lstCollapsePillarsEntKeyPts = new List<CollapsePillars>();
+            var collapse = new CollapsePillars();
             //根据陷落柱名称获得陷落柱ID（作为陷落柱绑定ID）
-            string sCollapseID = collapsePillarsEnt.Id.ToString(CultureInfo.InvariantCulture);
+            string sCollapseID = _collapsePillars.Id.ToString(CultureInfo.InvariantCulture);
 
             //添加关键点
             for (int i = 0; i < dgrdvCoordinate.RowCount - 1; i++)
             {
-                collapse = new CollapsePillarsEnt();
+                collapse = new CollapsePillars();
                 if (Text == Const_GM.COLLAPSEPILLARE_CHANGE)
                 {
                     if (i < _dsCollapsePillarsPoint.Length)
@@ -405,7 +388,7 @@ namespace GIS
         {
             Log.Debug("更新服务端断层Map------开始");
             // 通知服务端回采进尺已经添加
-            var msg = new GeologyMsg(0, 0, CollapsePillarsEnt.TableName, DateTime.Now,
+            var msg = new GeologyMsg(0, 0, CollapsePillars.TableName, DateTime.Now,
                 COMMAND_ID.UPDATE_GEOLOG_DATA);
             var socket = new SocketHelper4gis();
             socket.GetClientSocketInstance().SendSocketMsg2Server(msg);
@@ -423,7 +406,7 @@ namespace GIS
         /// </summary>
         /// <param name="lstCollapsePillarsEntKeyPts"></param>
         /// <param name="sCollapseID"></param>
-        private void ModifyXLZ(List<CollapsePillarsEnt> lstCollapsePillarsEntKeyPts, string sCollapseID)
+        private void ModifyXLZ(List<CollapsePillars> lstCollapsePillarsEntKeyPts, string sCollapseID)
         {
             //1.获得当前编辑图层
             var drawspecial = new DrawSpecialCommon();
@@ -450,7 +433,7 @@ namespace GIS
         /// <param name="lstCollapsePillarsEntKeyPts"></param>
         /// <param name="txtPath"></param>
         /// <returns></returns>
-        private bool WritePtsInfo2Txt(List<CollapsePillarsEnt> lstCollapsePillarsEntKeyPts, string txtPath)
+        private bool WritePtsInfo2Txt(List<CollapsePillars> lstCollapsePillarsEntKeyPts, string txtPath)
         {
             if (lstCollapsePillarsEntKeyPts.Count == 0) return false;
 
@@ -470,7 +453,7 @@ namespace GIS
                 var fs = new FileStream(txtPath, FileMode.OpenOrCreate, FileAccess.Write); //zwy modify 0527
                 var sw = new StreamWriter(fs);
 
-                var collapsePillarsKeyPt = new CollapsePillarsEnt();
+                var collapsePillarsKeyPt = new CollapsePillars();
                 for (int i = 0; i < lstCollapsePillarsEntKeyPts.Count; i++)
                 {
                     collapsePillarsKeyPt = lstCollapsePillarsEntKeyPts[i];
@@ -499,7 +482,7 @@ namespace GIS
             }
         }
 
-        private void DrawXLZ(List<CollapsePillarsEnt> lstCollapsePillarsEntKeyPts, string sCollapseID)
+        private void DrawXLZ(List<CollapsePillars> lstCollapsePillarsEntKeyPts, string sCollapseID)
         {
             ILayer m_pCurrentLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap,
                 LayerNames.LAYER_ALIAS_MR_XianLuoZhu1);

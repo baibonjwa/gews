@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Castle.ActiveRecord;
 
@@ -16,6 +17,11 @@ namespace LibEntity
         /// </summary>
         [PrimaryKey(PrimaryKeyType.Identity, "FAULTAGE_ID")]
         public int FaultageId { get; set; }
+
+
+        [HasMany(typeof(BigFaultagePoint), Table = "T_BIG_FAULTAGE_POINT", ColumnKey = "BIG_FAULTAGE_ID",
+    Cascade = ManyRelationCascadeEnum.SaveUpdate, Lazy = true)]
+        public IList<BigFaultagePoint> BigFaultagePoints { get; set; }
 
         /// <summary>
         ///     断层名称

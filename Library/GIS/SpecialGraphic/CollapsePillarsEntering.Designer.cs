@@ -1,4 +1,4 @@
-﻿namespace GIS
+﻿namespace GIS.SpecialGraphic
 {
     partial class CollapsePillarsEntering
     {
@@ -45,15 +45,17 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btnImport = new System.Windows.Forms.Button();
-            this.btnMirror = new System.Windows.Forms.Button();
             this.radioBtnX = new System.Windows.Forms.RadioButton();
             this.radioBtnS = new System.Windows.Forms.RadioButton();
-            this.txtCZ = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtDz = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
+            this.btnMultImport = new System.Windows.Forms.Button();
+            this.btnDetails = new System.Windows.Forms.Button();
+            this.lblSuccessed = new System.Windows.Forms.Label();
+            this.lblError = new System.Windows.Forms.Label();
+            this.lbl2 = new System.Windows.Forms.Label();
+            this.lblTotal = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.pbCount = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.dgrdvCoordinate)).BeginInit();
             this.SuspendLayout();
             // 
@@ -82,12 +84,12 @@
             // 
             // txtDescribe
             // 
-            this.txtDescribe.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtDescribe.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtDescribe.Location = new System.Drawing.Point(84, 299);
             this.txtDescribe.Multiline = true;
             this.txtDescribe.Name = "txtDescribe";
-            this.txtDescribe.Size = new System.Drawing.Size(362, 81);
+            this.txtDescribe.Size = new System.Drawing.Size(362, 52);
             this.txtDescribe.TabIndex = 5;
             // 
             // lblDiscribe
@@ -102,18 +104,18 @@
             // 
             // dgrdvCoordinate
             // 
-            this.dgrdvCoordinate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgrdvCoordinate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgrdvCoordinate.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgrdvCoordinate.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.coordinateX,
             this.coordinateY,
             this.coordinateZ,
             this.btnDelete});
-            this.dgrdvCoordinate.Location = new System.Drawing.Point(83, 65);
+            this.dgrdvCoordinate.Location = new System.Drawing.Point(83, 33);
             this.dgrdvCoordinate.Name = "dgrdvCoordinate";
             this.dgrdvCoordinate.RowTemplate.Height = 23;
-            this.dgrdvCoordinate.Size = new System.Drawing.Size(362, 228);
+            this.dgrdvCoordinate.Size = new System.Drawing.Size(362, 260);
             this.dgrdvCoordinate.TabIndex = 3;
             this.dgrdvCoordinate.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgrdvCoordinate_CellContentClick);
             this.dgrdvCoordinate.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgrdvCoordinate_RowPostPaint);
@@ -158,7 +160,7 @@
             // 
             this.lblCoordinate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblCoordinate.AutoSize = true;
-            this.lblCoordinate.Location = new System.Drawing.Point(12, 65);
+            this.lblCoordinate.Location = new System.Drawing.Point(12, 58);
             this.lblCoordinate.Name = "lblCoordinate";
             this.lblCoordinate.Size = new System.Drawing.Size(77, 12);
             this.lblCoordinate.TabIndex = 2;
@@ -192,11 +194,11 @@
             // 
             // label1
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(165, 69);
+            this.label1.Location = new System.Drawing.Point(168, 38);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(11, 12);
             this.label1.TabIndex = 18;
@@ -204,11 +206,11 @@
             // 
             // label2
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(252, 69);
+            this.label2.Location = new System.Drawing.Point(255, 38);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(11, 12);
             this.label2.TabIndex = 19;
@@ -216,11 +218,11 @@
             // 
             // label3
             // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(335, 69);
+            this.label3.Location = new System.Drawing.Point(338, 38);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(11, 12);
             this.label3.TabIndex = 20;
@@ -235,18 +237,6 @@
             this.btnImport.Text = "导入关键点";
             this.btnImport.UseVisualStyleBackColor = true;
             this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
-            // 
-            // btnMirror
-            // 
-            this.btnMirror.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnMirror.Location = new System.Drawing.Point(208, 386);
-            this.btnMirror.Name = "btnMirror";
-            this.btnMirror.Size = new System.Drawing.Size(75, 23);
-            this.btnMirror.TabIndex = 22;
-            this.btnMirror.Text = "翻转图形";
-            this.btnMirror.UseVisualStyleBackColor = true;
-            this.btnMirror.Visible = false;
-            this.btnMirror.Click += new System.EventHandler(this.btnMirror_Click);
             // 
             // radioBtnX
             // 
@@ -272,57 +262,82 @@
             this.radioBtnS.Text = "实线";
             this.radioBtnS.UseVisualStyleBackColor = true;
             // 
-            // txtCZ
+            // btnMultImport
             // 
-            this.txtCZ.Location = new System.Drawing.Point(83, 33);
-            this.txtCZ.Name = "txtCZ";
-            this.txtCZ.Size = new System.Drawing.Size(100, 21);
-            this.txtCZ.TabIndex = 26;
+            this.btnMultImport.Location = new System.Drawing.Point(208, 386);
+            this.btnMultImport.Name = "btnMultImport";
+            this.btnMultImport.Size = new System.Drawing.Size(75, 23);
+            this.btnMultImport.TabIndex = 31;
+            this.btnMultImport.Text = "批量导入";
+            this.btnMultImport.UseVisualStyleBackColor = true;
             // 
-            // label4
+            // btnDetails
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 36);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(41, 12);
-            this.label4.TabIndex = 25;
-            this.label4.Text = "长轴：";
+            this.btnDetails.Enabled = false;
+            this.btnDetails.Location = new System.Drawing.Point(408, 359);
+            this.btnDetails.Name = "btnDetails";
+            this.btnDetails.Size = new System.Drawing.Size(37, 23);
+            this.btnDetails.TabIndex = 56;
+            this.btnDetails.Text = "详细";
+            this.btnDetails.UseVisualStyleBackColor = true;
             // 
-            // txtDz
+            // lblSuccessed
             // 
-            this.txtDz.Location = new System.Drawing.Point(272, 33);
-            this.txtDz.Name = "txtDz";
-            this.txtDz.Size = new System.Drawing.Size(100, 21);
-            this.txtDz.TabIndex = 28;
+            this.lblSuccessed.AutoSize = true;
+            this.lblSuccessed.Location = new System.Drawing.Point(341, 364);
+            this.lblSuccessed.Name = "lblSuccessed";
+            this.lblSuccessed.Size = new System.Drawing.Size(11, 12);
+            this.lblSuccessed.TabIndex = 53;
+            this.lblSuccessed.Text = "0";
             // 
-            // label5
+            // lblError
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(201, 36);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(41, 12);
-            this.label5.TabIndex = 27;
-            this.label5.Text = "短轴：";
+            this.lblError.AutoSize = true;
+            this.lblError.Location = new System.Drawing.Point(393, 364);
+            this.lblError.Name = "lblError";
+            this.lblError.Size = new System.Drawing.Size(11, 12);
+            this.lblError.TabIndex = 54;
+            this.lblError.Text = "0";
             // 
-            // label7
+            // lbl2
             // 
-            this.label7.AutoSize = true;
-            this.label7.ForeColor = System.Drawing.Color.Red;
-            this.label7.Location = new System.Drawing.Point(189, 36);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(11, 12);
-            this.label7.TabIndex = 29;
-            this.label7.Text = "*";
+            this.lbl2.Location = new System.Drawing.Point(293, 364);
+            this.lbl2.Name = "lbl2";
+            this.lbl2.Size = new System.Drawing.Size(63, 16);
+            this.lbl2.TabIndex = 52;
+            this.lbl2.Text = "已导入:";
             // 
-            // label8
+            // lblTotal
             // 
-            this.label8.AutoSize = true;
-            this.label8.ForeColor = System.Drawing.Color.Red;
-            this.label8.Location = new System.Drawing.Point(378, 36);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(11, 12);
-            this.label8.TabIndex = 30;
-            this.label8.Text = "*";
+            this.lblTotal.AutoSize = true;
+            this.lblTotal.Location = new System.Drawing.Point(273, 364);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(11, 12);
+            this.lblTotal.TabIndex = 55;
+            this.lblTotal.Text = "0";
+            // 
+            // label12
+            // 
+            this.label12.Location = new System.Drawing.Point(358, 364);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(47, 16);
+            this.label12.TabIndex = 51;
+            this.label12.Text = "错误:";
+            // 
+            // label11
+            // 
+            this.label11.Location = new System.Drawing.Point(249, 364);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(47, 16);
+            this.label11.TabIndex = 50;
+            this.label11.Text = "共:";
+            // 
+            // pbCount
+            // 
+            this.pbCount.Location = new System.Drawing.Point(83, 359);
+            this.pbCount.Name = "pbCount";
+            this.pbCount.Size = new System.Drawing.Size(158, 23);
+            this.pbCount.TabIndex = 49;
             // 
             // CollapsePillarsEntering
             // 
@@ -331,15 +346,17 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(457, 415);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.txtDz);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.txtCZ);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.btnDetails);
+            this.Controls.Add(this.pbCount);
+            this.Controls.Add(this.lblSuccessed);
+            this.Controls.Add(this.lblError);
+            this.Controls.Add(this.lbl2);
+            this.Controls.Add(this.lblTotal);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.btnMultImport);
             this.Controls.Add(this.radioBtnS);
             this.Controls.Add(this.radioBtnX);
-            this.Controls.Add(this.btnMirror);
             this.Controls.Add(this.btnImport);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
@@ -383,14 +400,16 @@
         private System.Windows.Forms.DataGridViewButtonColumn btnDelete;
         private System.Windows.Forms.DataGridView dgrdvCoordinate;
         private System.Windows.Forms.Button btnImport;
-        private System.Windows.Forms.Button btnMirror;
         private System.Windows.Forms.RadioButton radioBtnX;
         private System.Windows.Forms.RadioButton radioBtnS;
-        private System.Windows.Forms.TextBox txtCZ;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtDz;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button btnMultImport;
+        private System.Windows.Forms.Button btnDetails;
+        private System.Windows.Forms.Label lblSuccessed;
+        private System.Windows.Forms.Label lblError;
+        private System.Windows.Forms.Label lbl2;
+        private System.Windows.Forms.Label lblTotal;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ProgressBar pbCount;
     }
 }

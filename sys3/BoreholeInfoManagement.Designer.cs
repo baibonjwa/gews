@@ -40,14 +40,14 @@
             this.btnExit = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.gcBorehole = new DevExpress.XtraGrid.GridControl();
-            this.controlNavigator1 = new DevExpress.XtraEditors.ControlNavigator();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.bandedGridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bandedGridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bandedGridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bandedGridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bandedGridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.controlNavigator1 = new DevExpress.XtraEditors.ControlNavigator();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcBorehole)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -68,7 +68,7 @@
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(417, 24);
+            this.toolStrip1.Size = new System.Drawing.Size(448, 24);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.TabStop = true;
             this.toolStrip1.Text = "toolStrip1";
@@ -107,6 +107,7 @@
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(52, 21);
             this.btnUpdate.Text = "修改";
+            this.btnUpdate.Visible = false;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // btnDelete
@@ -167,18 +168,6 @@
             this.gcBorehole.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
             // 
-            // controlNavigator1
-            // 
-            this.controlNavigator1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.controlNavigator1.Location = new System.Drawing.Point(12, 528);
-            this.controlNavigator1.Name = "controlNavigator1";
-            this.controlNavigator1.NavigatableControl = this.gcBorehole;
-            this.controlNavigator1.Size = new System.Drawing.Size(311, 24);
-            this.controlNavigator1.TabIndex = 85;
-            this.controlNavigator1.Text = "controlNavigator1";
-            this.controlNavigator1.TextLocation = DevExpress.XtraEditors.NavigatorButtonsTextLocation.Center;
-            this.controlNavigator1.TextStringFormat = "记录 {0} / {1}";
-            // 
             // gridView1
             // 
             this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
@@ -230,6 +219,18 @@
             this.bandedGridColumn5.Name = "bandedGridColumn5";
             this.bandedGridColumn5.Visible = true;
             this.bandedGridColumn5.VisibleIndex = 4;
+            // 
+            // controlNavigator1
+            // 
+            this.controlNavigator1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.controlNavigator1.Location = new System.Drawing.Point(12, 528);
+            this.controlNavigator1.Name = "controlNavigator1";
+            this.controlNavigator1.NavigatableControl = this.gcBorehole;
+            this.controlNavigator1.Size = new System.Drawing.Size(311, 24);
+            this.controlNavigator1.TabIndex = 85;
+            this.controlNavigator1.Text = "controlNavigator1";
+            this.controlNavigator1.TextLocation = DevExpress.XtraEditors.NavigatorButtonsTextLocation.Center;
+            this.controlNavigator1.TextStringFormat = "记录 {0} / {1}";
             // 
             // BoreholeInfoManagement
             // 

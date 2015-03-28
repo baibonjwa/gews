@@ -7,7 +7,7 @@ using NHibernate.Criterion;
 namespace LibEntity
 {
     [ActiveRecord("T_COLLAPSE_PILLARS_INFO")]
-    public class CollapsePillarsEnt : ActiveRecordBase<CollapsePillarsEnt>
+    public class CollapsePillars : ActiveRecordBase<CollapsePillars>
     {
         public const String TableName = "T_COLLAPSE_PILLARS_INFO";
 
@@ -94,7 +94,7 @@ namespace LibEntity
         ///     设置或获取陷落柱ID
         /// </summary>
         [BelongsTo("COLLAPSE_PILLARS_ID")]
-        public CollapsePillarsEnt CollapsePillars { get; set; }
+        public CollapsePillars CollapsePillars { get; set; }
 
         //关键点坐标X
 

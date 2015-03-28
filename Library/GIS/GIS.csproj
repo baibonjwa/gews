@@ -236,6 +236,12 @@
     <Compile Include="AddToolBar.cs" />
     <Compile Include="GisHelper.cs" />
     <Compile Include="MainFrm.cs" />
+    <Compile Include="SpecialGraphic\CollapsePillarsEntering.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SpecialGraphic\CollapsePillarsEntering.Designer.cs">
+      <DependentUpon>CollapsePillarsEntering.cs</DependentUpon>
+    </Compile>
     <Compile Include="SpecialGraphic\DrawBigFaultageInfo.cs" />
     <Compile Include="SpecialGraphic\FrmNewXZZ.cs">
       <SubType>Form</SubType>
@@ -394,12 +400,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="SpecialGraphic\AddDongshi.cs" />
-    <Compile Include="SpecialGraphic\CollapsePillarsEntering.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SpecialGraphic\CollapsePillarsEntering.Designer.cs">
-      <DependentUpon>CollapsePillarsEntering.cs</DependentUpon>
-    </Compile>
     <Compile Include="SpecialGraphic\DrawContours.cs">
       <SubType>Code</SubType>
     </Compile>

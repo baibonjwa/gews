@@ -112,8 +112,7 @@
     <Compile Include="WorkingTime.cs" />
     <Compile Include="Borehole.cs" />
     <Compile Include="BoreholeLithology.cs" />
-    <Compile Include="CollapsePillarsEnt.cs" />
-    <Compile Include="CollapsePillarsEntity.cs" />
+    <Compile Include="CollapsePillars.cs" />
     <Compile Include="DayReportJJ.cs" />
     <Compile Include="Coordinate.cs" />
     <Compile Include="BigFaultagePoint.cs" />
