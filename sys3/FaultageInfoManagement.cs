@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using ESRI.ArcGIS.Carto;
+using GIS;
 using GIS.Common;
 using LibBusiness;
 using LibCommon;
-using LibCommonControl;
 using LibEntity;
 using LibSocket;
 
@@ -86,7 +86,7 @@ namespace sys3
 
             //1.获得当前编辑图层
             var drawspecial = new DrawSpecialCommon();
-            const string sLayerAliasName = GIS.LayerNames.DEFALUT_EXPOSE_FAULTAGE; //“默认_揭露断层”图层
+            const string sLayerAliasName = LayerNames.DEFALUT_EXPOSE_FAULTAGE; //“默认_揭露断层”图层
             var featureLayer = drawspecial.GetFeatureLayerByName(sLayerAliasName);
             if (featureLayer == null)
             {
@@ -150,7 +150,7 @@ namespace sys3
         {
             var faultage = (Faultage)gridView1.GetFocusedRow();
             string bid = faultage.BindingId;
-            ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, GIS.LayerNames.DEFALUT_EXPOSE_FAULTAGE);
+            ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.DEFALUT_EXPOSE_FAULTAGE);
             if (pLayer == null)
             {
                 MessageBox.Show(@"未发现揭露断层图层！");
@@ -168,10 +168,10 @@ namespace sys3
                 //    str += " or bid='" + bid + "'";
             }
             //}
-            var list = GIS.MyMapHelp.FindFeatureListByWhereClause(pFeatureLayer, str);
+            var list = MyMapHelp.FindFeatureListByWhereClause(pFeatureLayer, str);
             if (list.Count > 0)
             {
-                GIS.MyMapHelp.Jump(GIS.MyMapHelp.GetGeoFromFeature(list));
+                MyMapHelp.Jump(MyMapHelp.GetGeoFromFeature(list));
                 DataEditCommon.g_pMap.ClearSelection();
                 foreach (var t in list)
                 {
