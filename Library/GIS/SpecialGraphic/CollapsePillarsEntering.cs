@@ -157,9 +157,6 @@ namespace GIS.SpecialGraphic
             collapsePillars.CollapsePillarsPoints = collapsePillarsPoints;
             collapsePillars.Save();
             ModifyXlz(collapsePillarses, collapsePillars.Id.ToString());
-
-
-
             SendMessengToServer();
             DialogResult = DialogResult.OK;
         }
@@ -488,5 +485,22 @@ namespace GIS.SpecialGraphic
         }
 
         #endregion
+
+        private void btnMultImport_Click(object sender, EventArgs e)
+        {
+            var open = new OpenFileDialog { Filter = @"陷落柱数据(*.txt)|*.txt", Multiselect = true };
+            if (open.ShowDialog(this) == DialogResult.Cancel)
+                return;
+            var filename = open.FileName;
+            var file = File.ReadAllLines(filename);
+            dgrdvCoordinate.RowCount = file.Length;
+            if (open.SafeFileName != null) txtCollapsePillarsName.Text = open.SafeFileName.Split('.')[0];
+            for (var i = 0; i < file.Length; i++)
+            {
+                dgrdvCoordinate[0, i].Value = file[i].Split(',')[0];
+                dgrdvCoordinate[1, i].Value = file[i].Split(',')[1];
+                dgrdvCoordinate[2, i].Value = 0;
+            }
+        }
     }
 }

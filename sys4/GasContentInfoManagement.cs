@@ -6,24 +6,21 @@
 // 版本信息：
 // V1.0 新建
 // ******************************************************************
+
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
+using ESRI.ArcGIS.Carto;
+using ESRI.ArcGIS.Geometry;
+using GIS.Common;
 using LibBusiness;
 using LibCommon;
-using System.Collections;
-using LibCommonControl;
 using LibEntity;
-using ESRI.ArcGIS.Carto;
-using GIS.Common;
-using ESRI.ArcGIS.Geometry;
+using _4.OutburstPrevention;
 
-namespace _4.OutburstPrevention
+namespace sys4
 {
     public partial class GasContentInfoManagement : Form
     {

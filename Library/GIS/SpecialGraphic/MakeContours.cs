@@ -30,7 +30,7 @@ namespace GIS.SpecialGraphic
             public double Y;
             public double TheValue;
         };
-        ManageDataBase TheManage = new ManageDataBase(LibDatabase.DATABASE_TYPE.WarningManagementDB);
+        ManageDataBase TheManage = new ManageDataBase(DATABASE_TYPE.WarningManagementDB);
         public static string m_MakeContoursFolder = "";
         string m_strDataFilePath;
         //传入图层名和图层别名
@@ -47,7 +47,7 @@ namespace GIS.SpecialGraphic
         private void MakeContours_Load(object sender, EventArgs e)
         {
             //不同插值法生成等值线
-            m_MakeContoursFolder = System.Windows.Forms.Application.StartupPath + "\\MakeContours";
+            m_MakeContoursFolder = Application.StartupPath + "\\MakeContours";
             if (Directory.Exists(m_MakeContoursFolder))
             {
                 try

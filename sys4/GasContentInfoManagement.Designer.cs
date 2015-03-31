@@ -1,4 +1,4 @@
-﻿namespace _4.OutburstPrevention
+﻿namespace sys4
 {
     partial class GasContentInfoManagement
     {

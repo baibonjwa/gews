@@ -9,6 +9,7 @@ using GIS;
 using GIS.Common;
 using GIS.SpecialGraphic;
 using LibAbout;
+using LibBusiness;
 using LibCommon;
 using LibCommonForm;
 using _4.OutburstPrevention;
@@ -67,6 +68,7 @@ namespace sys4
         #region 窗体事件
         private void MainForm_OP_Load(object sender, EventArgs e)
         {
+            SocketUtil.DoInitilization();
             AutoUpdater.Start("http://bltmld.vicp.cc:8090/sys4/update.xml");
             DXSeting.floatToolsLoadSet();
         }

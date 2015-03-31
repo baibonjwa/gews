@@ -270,6 +270,7 @@
             this.btnMultImport.TabIndex = 31;
             this.btnMultImport.Text = "批量导入";
             this.btnMultImport.UseVisualStyleBackColor = true;
+            this.btnMultImport.Click += new System.EventHandler(this.btnMultImport_Click);
             // 
             // btnDetails
             // 
