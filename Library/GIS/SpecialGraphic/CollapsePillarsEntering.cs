@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 using Castle.ActiveRecord;
 using ESRI.ArcGIS.Carto;
@@ -18,6 +19,9 @@ namespace GIS.SpecialGraphic
 {
     public partial class CollapsePillarsEntering : Form
     {
+        private string _errorMsg;
+
+
         /// <summary>
         ///     构造方法
         /// </summary>
@@ -488,19 +492,65 @@ namespace GIS.SpecialGraphic
 
         private void btnMultImport_Click(object sender, EventArgs e)
         {
-            var open = new OpenFileDialog { Filter = @"陷落柱数据(*.txt)|*.txt", Multiselect = true };
-            if (open.ShowDialog(this) == DialogResult.Cancel)
-                return;
-            var filename = open.FileName;
-            var file = File.ReadAllLines(filename);
-            dgrdvCoordinate.RowCount = file.Length;
-            if (open.SafeFileName != null) txtCollapsePillarsName.Text = open.SafeFileName.Split('.')[0];
-            for (var i = 0; i < file.Length; i++)
+            var ofd = new OpenFileDialog
             {
-                dgrdvCoordinate[0, i].Value = file[i].Split(',')[0];
-                dgrdvCoordinate[1, i].Value = file[i].Split(',')[1];
-                dgrdvCoordinate[2, i].Value = 0;
+                RestoreDirectory = true,
+                Filter = @"文本文件(*.txt)|*.txt|所有文件(*.*)|*.*",
+                Multiselect = true
+            };
+            if (ofd.ShowDialog() != DialogResult.OK) return;
+            _errorMsg = @"失败文件名：";
+            pbCount.Maximum = ofd.FileNames.Length;
+            pbCount.Value = 0;
+            lblTotal.Text = ofd.FileNames.Length.ToString(CultureInfo.InvariantCulture);
+            foreach (var fileName in ofd.FileNames)
+            {
+                var encoder = TxtFileEncoding.GetEncoding(fileName, Encoding.GetEncoding("GB2312"));
+
+                var sr = new StreamReader(fileName, encoder);
+                string duqu;
+                while ((duqu = sr.ReadLine()) != null)
+                {
+                    try
+                    {
+                        var collapsePillarsName = ofd.SafeFileName.Split('.')[0];
+                        CollapsePillars collapsePillars = CollapsePillars.FindOneByCollapsePillarsName(collapsePillarsName);
+                        if (collapsePillars == null)
+                        {
+                            collapsePillars = new CollapsePillars
+                            {
+                                Xtype = "0",
+                                BindingId = IDGenerator.NewBindingID(),
+                                CollapsePillarsName = collapsePillarsName
+                            };
+                        }
+                        else
+                        {
+                            collapsePillars.CollapsePillarsName = collapsePillarsName;
+                        }
+
+
+
+                        
+
+
+
+                    }
+                    catch (Exception)
+                    {
+                        lblError.Text =
+                          (Convert.ToInt32(lblError.Text) + 1).ToString(CultureInfo.InvariantCulture);
+                        lblSuccessed.Text =
+                            (Convert.ToInt32(lblSuccessed.Text) - 1).ToString(CultureInfo.InvariantCulture);
+                        _errorMsg += fileName.Substring(fileName.LastIndexOf(@"\", StringComparison.Ordinal) + 1) + "\n";
+                        btnDetails.Enabled = true;
+                    }
+                }
+                lblSuccessed.Text =
+                        (Convert.ToInt32(lblSuccessed.Text) + 1).ToString(CultureInfo.InvariantCulture);
+                pbCount.Value++;
             }
+            Alert.alert("导入成功！");
         }
     }
 }
