@@ -15,6 +15,7 @@ using LibPanels;
 using Steema.TeeChart;
 using TeeChartWrapper;
 using AutoUpdaterDotNET;
+using LibSocket;
 
 namespace sys1
 {

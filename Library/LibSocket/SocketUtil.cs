@@ -1,14 +1,13 @@
 ﻿using System.Windows.Forms;
 using LibCommon;
 using LibConfig;
-using LibSocket;
 
-namespace LibBusiness
+namespace LibSocket
 {
     public class SocketUtil
     {
         //客户端
-        public static ClientSocket ClientSocket = null;
+        public static ClientSocket ClientSocket;
 
         public static void DoInitilization()
         {

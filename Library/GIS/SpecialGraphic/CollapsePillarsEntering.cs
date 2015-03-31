@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
-using System.Text;
+using System.Linq;
 using System.Windows.Forms;
 using Castle.ActiveRecord;
 using ESRI.ArcGIS.Carto;
@@ -134,19 +134,10 @@ namespace GIS.SpecialGraphic
                 return;
             }
 
-            var collapsePillarses = new List<CollapsePillars>();
             var collapsePillarsPoints = new List<CollapsePillarsPoint>();
             //添加关键点
             for (int i = 0; i < dgrdvCoordinate.RowCount - 1; i++)
             {
-                var collapse = new CollapsePillars
-                {
-                    CoordinateX = Convert.ToDouble(dgrdvCoordinate[0, i].Value),
-                    CoordinateY = Convert.ToDouble(dgrdvCoordinate[1, i].Value),
-                    CoordinateZ = Convert.ToDouble(dgrdvCoordinate[2, i].Value),
-                    BindingId = IDGenerator.NewBindingID()
-                };
-                collapsePillarses.Add(collapse);
 
                 var collapsePillarsPoint = new CollapsePillarsPoint
                 {
@@ -160,7 +151,7 @@ namespace GIS.SpecialGraphic
             }
             collapsePillars.CollapsePillarsPoints = collapsePillarsPoints;
             collapsePillars.Save();
-            ModifyXlz(collapsePillarses, collapsePillars.Id.ToString());
+            ModifyXlz(collapsePillarsPoints, collapsePillars.Id.ToString());
             SendMessengToServer();
             DialogResult = DialogResult.OK;
         }
@@ -313,10 +304,8 @@ namespace GIS.SpecialGraphic
         {
             Log.Debug("更新服务端断层Map------开始");
             // 通知服务端回采进尺已经添加
-            var msg = new GeologyMsg(0, 0, CollapsePillars.TableName, DateTime.Now,
-                COMMAND_ID.UPDATE_GEOLOG_DATA);
-            var socket = new SocketHelper4gis();
-            socket.GetClientSocketInstance().SendSocketMsg2Server(msg);
+            var msg = new GeologyMsg(0, 0, "", DateTime.Now, COMMAND_ID.UPDATE_GEOLOG_DATA);
+            SocketUtil.SendMsg2Server(msg);
             Log.Debug("服务端断层Map------完成" + msg);
         }
 
@@ -327,7 +316,7 @@ namespace GIS.SpecialGraphic
         /// </summary>
         /// <param name="lstCollapsePillarsEntKeyPts"></param>
         /// <param name="sCollapseId"></param>
-        private void ModifyXlz(List<CollapsePillars> lstCollapsePillarsEntKeyPts, string sCollapseId)
+        private void ModifyXlz(List<CollapsePillarsPoint> lstCollapsePillarsEntKeyPts, string sCollapseId)
         {
             //1.获得当前编辑图层
             var drawspecial = new DrawSpecialCommon();
@@ -349,7 +338,7 @@ namespace GIS.SpecialGraphic
         }
 
 
-        private void DrawXlz(List<CollapsePillars> lstCollapsePillarsEntKeyPts, string sCollapseId)
+        private void DrawXlz(List<CollapsePillarsPoint> lstCollapsePillarsEntKeyPts, string sCollapseId)
         {
             ILayer mPCurrentLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap,
                 LayerNames.LAYER_ALIAS_MR_XianLuoZhu1);
@@ -429,7 +418,7 @@ namespace GIS.SpecialGraphic
             IPolygon pPolygon = DataEditCommon.PolylineToPolygon(polyline);
             var list = new List<ziduan>
             {
-                new ziduan("COLLAPSE_PILLAR_NAME", txtCollapsePillarsName.Text),
+                new ziduan("COLLAPSE_PILLAR_NAME", lstCollapsePillarsEntKeyPts.First().CollapsePillars.CollapsePillarsName),
                 new ziduan("BID", sCollapseId),
                 radioBtnX.Checked ? new ziduan("XTYPE", "0") : new ziduan("XTYPE", "1")
             };
@@ -505,52 +494,65 @@ namespace GIS.SpecialGraphic
             lblTotal.Text = ofd.FileNames.Length.ToString(CultureInfo.InvariantCulture);
             foreach (var fileName in ofd.FileNames)
             {
-                var encoder = TxtFileEncoding.GetEncoding(fileName, Encoding.GetEncoding("GB2312"));
-
-                var sr = new StreamReader(fileName, encoder);
-                string duqu;
-                while ((duqu = sr.ReadLine()) != null)
+                try
                 {
-                    try
+                    string[] file = File.ReadAllLines(fileName);
+                    var collapsePillarsName =
+                        fileName.Substring(fileName.LastIndexOf(@"\", StringComparison.Ordinal) + 1).Split('.')[0];
+                    CollapsePillars collapsePillars = CollapsePillars.FindOneByCollapsePillarsName(collapsePillarsName);
+                    if (collapsePillars == null)
                     {
-                        var collapsePillarsName = ofd.SafeFileName.Split('.')[0];
-                        CollapsePillars collapsePillars = CollapsePillars.FindOneByCollapsePillarsName(collapsePillarsName);
-                        if (collapsePillars == null)
+                        collapsePillars = new CollapsePillars
                         {
-                            collapsePillars = new CollapsePillars
-                            {
-                                Xtype = "0",
-                                BindingId = IDGenerator.NewBindingID(),
-                                CollapsePillarsName = collapsePillarsName
-                            };
-                        }
-                        else
-                        {
-                            collapsePillars.CollapsePillarsName = collapsePillarsName;
-                        }
-
-
-
-                        
-
-
-
+                            Xtype = "0",
+                            BindingId = IDGenerator.NewBindingID(),
+                            CollapsePillarsName = collapsePillarsName
+                        };
                     }
-                    catch (Exception)
+                    else
                     {
-                        lblError.Text =
-                          (Convert.ToInt32(lblError.Text) + 1).ToString(CultureInfo.InvariantCulture);
-                        lblSuccessed.Text =
-                            (Convert.ToInt32(lblSuccessed.Text) - 1).ToString(CultureInfo.InvariantCulture);
-                        _errorMsg += fileName.Substring(fileName.LastIndexOf(@"\", StringComparison.Ordinal) + 1) + "\n";
-                        btnDetails.Enabled = true;
+                        collapsePillars.CollapsePillarsName = collapsePillarsName;
                     }
-                }
-                lblSuccessed.Text =
+
+                    var collapsePillarsPoints = new List<CollapsePillarsPoint>();
+                    //添加关键点
+                    for (int i = 0; i < file.Length - 1; i++)
+                    {
+                        var collapsePillarsPoint = new CollapsePillarsPoint
+                        {
+                            CoordinateX = Convert.ToDouble(file[i].Split(',')[0]),
+                            CoordinateY = Convert.ToDouble(file[i].Split(',')[1]),
+                            CoordinateZ = 0.0,
+                            BindingId = IDGenerator.NewBindingID(),
+                            CollapsePillars = collapsePillars
+                        };
+                        collapsePillarsPoints.Add(collapsePillarsPoint);
+                    }
+                    collapsePillars.CollapsePillarsPoints = collapsePillarsPoints;
+                    collapsePillars.Save();
+                    ModifyXlz(collapsePillarsPoints, collapsePillars.Id.ToString());
+                    lblSuccessed.Text = lblSuccessed.Text =
                         (Convert.ToInt32(lblSuccessed.Text) + 1).ToString(CultureInfo.InvariantCulture);
-                pbCount.Value++;
+                    pbCount.Value++;
+                }
+                catch (Exception)
+                {
+                    lblError.Text =
+                      (Convert.ToInt32(lblError.Text) + 1).ToString(CultureInfo.InvariantCulture);
+                    lblSuccessed.Text =
+                        (Convert.ToInt32(lblSuccessed.Text) - 1).ToString(CultureInfo.InvariantCulture);
+                    _errorMsg += fileName.Substring(fileName.LastIndexOf(@"\", StringComparison.Ordinal) + 1) + "\n";
+                    btnDetails.Enabled = true;
+                }
+
             }
+            SendMessengToServer();
             Alert.alert("导入成功！");
+        }
+
+        private void btnDetails_Click(object sender, EventArgs e)
+        {
+            Alert.alert(_errorMsg);
         }
     }
 }

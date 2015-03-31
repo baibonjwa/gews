@@ -61,10 +61,9 @@
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 695);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 593);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1094, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(938, 22);
             this.statusStrip1.TabIndex = 6;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -109,7 +108,7 @@
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1094, 24);
+            this.toolStrip1.Size = new System.Drawing.Size(938, 24);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.TabStop = true;
             this.toolStrip1.Text = "toolStrip1";
@@ -156,10 +155,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gcCollapsePillars.Cursor = System.Windows.Forms.Cursors.Default;
-            this.gcCollapsePillars.Location = new System.Drawing.Point(12, 27);
+            this.gcCollapsePillars.Location = new System.Drawing.Point(10, 23);
             this.gcCollapsePillars.MainView = this.gridView1;
             this.gcCollapsePillars.Name = "gcCollapsePillars";
-            this.gcCollapsePillars.Size = new System.Drawing.Size(1070, 635);
+            this.gcCollapsePillars.Size = new System.Drawing.Size(917, 544);
             this.gcCollapsePillars.TabIndex = 7;
             this.gcCollapsePillars.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -171,6 +170,8 @@
             this.gridColumn2});
             this.gridView1.GridControl = this.gcCollapsePillars;
             this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsBehavior.Editable = false;
+            this.gridView1.OptionsSelection.MultiSelect = true;
             // 
             // gridColumn1
             // 
@@ -191,10 +192,10 @@
             // controlNavigator1
             // 
             this.controlNavigator1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.controlNavigator1.Location = new System.Drawing.Point(12, 668);
+            this.controlNavigator1.Location = new System.Drawing.Point(10, 573);
             this.controlNavigator1.Name = "controlNavigator1";
             this.controlNavigator1.NavigatableControl = this.gcCollapsePillars;
-            this.controlNavigator1.Size = new System.Drawing.Size(311, 24);
+            this.controlNavigator1.Size = new System.Drawing.Size(267, 21);
             this.controlNavigator1.TabIndex = 86;
             this.controlNavigator1.Text = "controlNavigator1";
             this.controlNavigator1.TextLocation = DevExpress.XtraEditors.NavigatorButtonsTextLocation.Center;
@@ -202,9 +203,9 @@
             // 
             // CollapsePillarsManagement
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1094, 717);
+            this.ClientSize = new System.Drawing.Size(938, 615);
             this.Controls.Add(this.controlNavigator1);
             this.Controls.Add(this.gcCollapsePillars);
             this.Controls.Add(this.statusStrip1);

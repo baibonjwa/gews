@@ -281,6 +281,7 @@
             this.btnDetails.TabIndex = 56;
             this.btnDetails.Text = "详细";
             this.btnDetails.UseVisualStyleBackColor = true;
+            this.btnDetails.Click += new System.EventHandler(this.btnDetails_Click);
             // 
             // lblSuccessed
             // 

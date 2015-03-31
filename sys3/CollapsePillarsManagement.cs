@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 using System.Windows.Forms;
 using ESRI.ArcGIS.Carto;
 using GIS;
 using GIS.Common;
 using GIS.SpecialGraphic;
+using LibBusiness;
 using LibCommon;
 using LibEntity;
+using LibSocket;
 
 namespace sys3
 {
@@ -74,10 +77,14 @@ namespace sys3
         private void tsBtnDel_Click(object sender, EventArgs e)
         {
             if (!Alert.confirm(Const.DEL_CONFIRM_MSG)) return;
-            var collapsePillarsEnt = (CollapsePillars)gridView1.GetFocusedRow();
-            DeleteyXLZ(collapsePillarsEnt.Id.ToString(CultureInfo.InvariantCulture));
-            collapsePillarsEnt.Delete();
+            var selectedIndex = gridView1.GetSelectedRows();
+            foreach (var collapsePillars in selectedIndex.Select(i => (CollapsePillars)gridView1.GetRow(i)))
+            {
+                DeleteyXLZ(collapsePillars.Id.ToString());
+                collapsePillars.Delete();
+            }
             RefreshData();
+            SendMessengToServer();
         }
 
         /// <summary>
@@ -189,6 +196,14 @@ namespace sys3
 
             //2.删除原来图元，重新绘制新图元
             DataEditCommon.DeleteFeatureByBId(featureLayer, sCollapseId);
+        }
+        private void SendMessengToServer()
+        {
+            Log.Debug("更新服务端断层Map------开始");
+            // 通知服务端回采进尺已经添加
+            var msg = new GeologyMsg(0, 0, "", DateTime.Now, COMMAND_ID.UPDATE_GEOLOG_DATA);
+            SocketUtil.SendMsg2Server(msg);
+            Log.Debug("服务端断层Map------完成" + msg);
         }
 
         #endregion

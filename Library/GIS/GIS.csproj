@@ -881,7 +881,7 @@
       <Name>LibGeometry</Name>
     </ProjectReference>
     <ProjectReference Include="..\LibSocket\LibSocket.csproj">
-      <Project>{93547539-03E2-49C3-88FC-3CCD81942D5F}</Project>
+      <Project>{93547539-03e2-49c3-88fc-3ccd81942d5f}</Project>
       <Name>LibSocket</Name>
     </ProjectReference>
   </ItemGroup>

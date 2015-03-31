@@ -87,11 +87,16 @@
     <Compile Include="SocketMsg.cs" />
     <Compile Include="ClientSocket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SocketUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LibCommon\LibCommon.csproj">
       <Project>{2EBCDE4B-A244-4CCA-A1AE-1A884D81772B}</Project>
       <Name>LibCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LibConfig\LibConfig.csproj">
+      <Project>{697eed3c-3244-494d-b663-296cc80d4022}</Project>
+      <Name>LibConfig</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

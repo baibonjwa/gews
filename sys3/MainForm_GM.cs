@@ -22,6 +22,7 @@ using LibBusiness;
 using LibCommon;
 using LibCommonForm;
 using LibDatabase;
+using LibSocket;
 using _3.GeologyMeasure;
 
 namespace sys3
