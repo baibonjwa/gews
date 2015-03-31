@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
@@ -12,6 +13,8 @@ namespace sys3
 {
     public partial class BigFaultageInfoEntering : Form
     {
+        private string _errorMsg;
+
         /// <summary>
         ///     构造方法
         /// </summary>
@@ -183,7 +186,112 @@ namespace sys3
 
         private void btnReadMultTxt_Click(object sender, EventArgs e)
         {
+            var ofd = new OpenFileDialog
+            {
+                RestoreDirectory = true,
+                Filter = @"文本文件(*.txt)|*.txt|所有文件(*.*)|*.*",
+                Multiselect = true
+            };
+            if (ofd.ShowDialog() != DialogResult.OK) return;
+            _errorMsg = @"失败文件名：";
+            pbCount.Maximum = ofd.FileNames.Length;
+            pbCount.Value = 0;
+            lblTotal.Text = ofd.FileNames.Length.ToString(CultureInfo.InvariantCulture);
+            foreach (var fileName in ofd.FileNames)
+            {
+                try
+                {
+                    string[] strs = File.ReadAllLines(fileName, Encoding.GetEncoding("GB2312"));
+                    string type = "";
+                    string[] split = strs[0].Split('|');
+                    var bigFaultage = BigFaultage.FindOneByBigFaultageName(split[0]);
+                    var bigFaultagePoints = new List<BigFaultagePoint>();
+                    if (bigFaultage == null)
+                    {
+                        bigFaultage = new BigFaultage
+                        {
+                            BigFaultageName = split[0],
+                            Gap = split[1],
+                            Type = split[2],
+                            Angle = split[3],
+                            BindingId = IDGenerator.NewBindingID()
+                        };
+                    }
+                    else
+                    {
+                        bigFaultage.BigFaultageName = split[0];
+                        bigFaultage.Gap = split[1];
+                        bigFaultage.Type = split[2];
+                        bigFaultage.Angle = split[3];
+                    }
 
+
+                    for (int i = 1; i < strs.Length; i++)
+                    {
+                        if (strs[i] == "上盘")
+                        {
+                            type = "上盘";
+                            continue;
+                        }
+                        if (strs[i] == "下盘")
+                        {
+                            type = "下盘";
+                            continue;
+                        }
+                        if (strs[i].Equals(""))
+                        {
+                            continue;
+                        }
+                        if (type == "上盘")
+                        {
+                            bigFaultagePoints.Add(new BigFaultagePoint
+                            {
+                                Bid = IDGenerator.NewBindingID(),
+                                BigFaultage = bigFaultage,
+                                CoordinateX = Convert.ToDouble(strs[i].Split(',')[0]),
+                                CoordinateY = Convert.ToDouble(strs[i].Split(',')[1]),
+                                CoordinateZ = 0.0,
+                                UpOrDown = "上盘"
+                            });
+                        }
+                        if (type == "下盘")
+                        {
+                            bigFaultagePoints.Add(new BigFaultagePoint
+                            {
+                                Bid = IDGenerator.NewBindingID(),
+                                BigFaultage = bigFaultage,
+                                CoordinateX = Convert.ToDouble(strs[i].Split(',')[0]),
+                                CoordinateY = Convert.ToDouble(strs[i].Split(',')[1]),
+                                CoordinateZ = 0.0,
+                                UpOrDown = "下盘"
+                            });
+                        }
+                    }
+                    bigFaultage.BigFaultagePoints = bigFaultagePoints;
+                    var title = bigFaultage.BigFaultageName + "  " + bigFaultage.Angle + "  " +
+                             bigFaultage.Gap;
+                    DrawBigFaultageInfo.DrawTddc(title, bigFaultagePoints, bigFaultage.BindingId);
+                    bigFaultage.Save();
+                    lblSuccessed.Text =
+                             (Convert.ToInt32(lblSuccessed.Text) + 1).ToString(CultureInfo.InvariantCulture);
+                    pbCount.Value++;
+                }
+                catch (Exception)
+                {
+                    lblError.Text =
+                      (Convert.ToInt32(lblError.Text) + 1).ToString(CultureInfo.InvariantCulture);
+                    lblSuccessed.Text =
+                        (Convert.ToInt32(lblSuccessed.Text) - 1).ToString(CultureInfo.InvariantCulture);
+                    _errorMsg += fileName.Substring(fileName.LastIndexOf(@"\", StringComparison.Ordinal) + 1) + "\n";
+                    btnDetails.Enabled = true;
+                }
+            }
+            Alert.alert("导入成功！");
+        }
+
+        private void btnDetails_Click(object sender, EventArgs e)
+        {
+            Alert.alert(_errorMsg);
         }
     }
 }

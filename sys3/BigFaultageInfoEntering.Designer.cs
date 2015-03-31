@@ -57,6 +57,14 @@
             this.label5 = new System.Windows.Forms.Label();
             this.btnReadTxt = new System.Windows.Forms.Button();
             this.btnReadMultTxt = new System.Windows.Forms.Button();
+            this.btnDetails = new System.Windows.Forms.Button();
+            this.lblSuccessed = new System.Windows.Forms.Label();
+            this.lblError = new System.Windows.Forms.Label();
+            this.lblTotal = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.lbl2 = new System.Windows.Forms.Label();
+            this.pbCount = new System.Windows.Forms.ProgressBar();
             this.pnlType.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgrdvUp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgrdvDown)).BeginInit();
@@ -345,6 +353,75 @@
             this.btnReadMultTxt.UseVisualStyleBackColor = true;
             this.btnReadMultTxt.Click += new System.EventHandler(this.btnReadMultTxt_Click);
             // 
+            // btnDetails
+            // 
+            this.btnDetails.Enabled = false;
+            this.btnDetails.Location = new System.Drawing.Point(438, 382);
+            this.btnDetails.Name = "btnDetails";
+            this.btnDetails.Size = new System.Drawing.Size(56, 23);
+            this.btnDetails.TabIndex = 56;
+            this.btnDetails.Text = "详细";
+            this.btnDetails.UseVisualStyleBackColor = true;
+            this.btnDetails.Click += new System.EventHandler(this.btnDetails_Click);
+            // 
+            // lblSuccessed
+            // 
+            this.lblSuccessed.AutoSize = true;
+            this.lblSuccessed.Location = new System.Drawing.Point(365, 387);
+            this.lblSuccessed.Name = "lblSuccessed";
+            this.lblSuccessed.Size = new System.Drawing.Size(11, 12);
+            this.lblSuccessed.TabIndex = 53;
+            this.lblSuccessed.Text = "0";
+            // 
+            // lblError
+            // 
+            this.lblError.AutoSize = true;
+            this.lblError.Location = new System.Drawing.Point(421, 387);
+            this.lblError.Name = "lblError";
+            this.lblError.Size = new System.Drawing.Size(11, 12);
+            this.lblError.TabIndex = 54;
+            this.lblError.Text = "0";
+            // 
+            // lblTotal
+            // 
+            this.lblTotal.AutoSize = true;
+            this.lblTotal.Location = new System.Drawing.Point(298, 387);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(11, 12);
+            this.lblTotal.TabIndex = 55;
+            this.lblTotal.Text = "0";
+            // 
+            // label10
+            // 
+            this.label10.Location = new System.Drawing.Point(275, 387);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(40, 16);
+            this.label10.TabIndex = 50;
+            this.label10.Text = "共:";
+            // 
+            // label11
+            // 
+            this.label11.Location = new System.Drawing.Point(387, 387);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(40, 16);
+            this.label11.TabIndex = 51;
+            this.label11.Text = "错误:";
+            // 
+            // lbl2
+            // 
+            this.lbl2.Location = new System.Drawing.Point(320, 387);
+            this.lbl2.Name = "lbl2";
+            this.lbl2.Size = new System.Drawing.Size(56, 16);
+            this.lbl2.TabIndex = 52;
+            this.lbl2.Text = "已导入:";
+            // 
+            // pbCount
+            // 
+            this.pbCount.Location = new System.Drawing.Point(83, 382);
+            this.pbCount.Name = "pbCount";
+            this.pbCount.Size = new System.Drawing.Size(186, 23);
+            this.pbCount.TabIndex = 49;
+            // 
             // BigFaultageInfoEntering
             // 
             this.AcceptButton = this.btnSubmit;
@@ -352,6 +429,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(927, 417);
+            this.Controls.Add(this.btnDetails);
+            this.Controls.Add(this.lblSuccessed);
+            this.Controls.Add(this.lblError);
+            this.Controls.Add(this.lblTotal);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.lbl2);
+            this.Controls.Add(this.pbCount);
             this.Controls.Add(this.btnReadMultTxt);
             this.Controls.Add(this.btnReadTxt);
             this.Controls.Add(this.tbTrend);
@@ -417,5 +502,13 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnReadTxt;
         private System.Windows.Forms.Button btnReadMultTxt;
+        private System.Windows.Forms.Button btnDetails;
+        private System.Windows.Forms.Label lblSuccessed;
+        private System.Windows.Forms.Label lblError;
+        private System.Windows.Forms.Label lblTotal;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label lbl2;
+        private System.Windows.Forms.ProgressBar pbCount;
     }
 }
