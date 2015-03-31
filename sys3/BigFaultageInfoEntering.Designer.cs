@@ -326,7 +326,6 @@
             // btnReadTxt
             // 
             this.btnReadTxt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnReadTxt.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnReadTxt.Location = new System.Drawing.Point(657, 382);
             this.btnReadTxt.Name = "btnReadTxt";
             this.btnReadTxt.Size = new System.Drawing.Size(75, 23);
@@ -338,13 +337,13 @@
             // btnReadMultTxt
             // 
             this.btnReadMultTxt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnReadMultTxt.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnReadMultTxt.Location = new System.Drawing.Point(563, 382);
             this.btnReadMultTxt.Name = "btnReadMultTxt";
             this.btnReadMultTxt.Size = new System.Drawing.Size(88, 23);
             this.btnReadMultTxt.TabIndex = 23;
             this.btnReadMultTxt.Text = "批量读取txt";
             this.btnReadMultTxt.UseVisualStyleBackColor = true;
+            this.btnReadMultTxt.Click += new System.EventHandler(this.btnReadMultTxt_Click);
             // 
             // BigFaultageInfoEntering
             // 

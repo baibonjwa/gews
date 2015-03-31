@@ -35,7 +35,7 @@ namespace LibEntity
 
         public static BigFaultagePoint[] FindAllByFaultageId(int bigFaultageId)
         {
-            var criterion = new List<ICriterion> { Restrictions.Eq("BigFaultage.FaultageId", bigFaultageId) };
+            var criterion = new List<ICriterion> { Restrictions.Eq("BigFaultage.BigFaultageId", bigFaultageId) };
             return FindAll(criterion.ToArray());
         }
     }

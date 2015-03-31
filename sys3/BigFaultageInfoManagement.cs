@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
+using System.Linq;
 using System.Windows.Forms;
 using ESRI.ArcGIS.Carto;
+using ESRI.ArcGIS.Geodatabase;
+using GIS;
+using GIS.Common;
 using GIS.HdProc;
 using LibCommon;
 using LibEntity;
@@ -46,7 +49,7 @@ namespace sys3
         /// <param name="e"></param>
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            var bigFaultageInfoEntering = new BigFaultageInfoEntering(((BigFaultage)gridView1.GetFocusedRow()).FaultageId.ToString(CultureInfo.InvariantCulture));
+            var bigFaultageInfoEntering = new BigFaultageInfoEntering(((BigFaultage)gridView1.GetFocusedRow()));
             if (DialogResult.OK == bigFaultageInfoEntering.ShowDialog())
             {
                 RefreshData();
@@ -61,10 +64,12 @@ namespace sys3
         private void btnDelete_Click(object sender, EventArgs e)
         {
             if (!Alert.confirm("确认删除数据吗？")) return;
-            var bigFaultage = (BigFaultage)gridView1.GetFocusedRow();
-            var delIds = new[] { bigFaultage.BindingId };
-            Global.tdclass.DelTdLyr(delIds);
-            bigFaultage.Delete();
+            var selectedIndex = gridView1.GetSelectedRows();
+            foreach (var bigFaultage in selectedIndex.Select(i => (BigFaultage)gridView1.GetRow(i)))
+            {
+                Global.tdclass.DelTdLyr(new[] { bigFaultage.BindingId });
+                bigFaultage.Delete();
+            }
             RefreshData();
         }
 
@@ -120,9 +125,9 @@ namespace sys3
         private void btnMap_Click(object sender, EventArgs e)
         {
             // 获取已选择明细行的索引
-            int[] iSelIdxsArr = { ((BigFaultage)gridView1.GetFocusedRow()).FaultageId };
+            int[] iSelIdxsArr = { ((BigFaultage)gridView1.GetFocusedRow()).BigFaultageId };
 
-            ILayer pLayer = GIS.Common.DataEditCommon.GetLayerByName(GIS.Common.DataEditCommon.g_pMap, GIS.LayerNames.DEFALUT_INFERRED_FAULTAGE);
+            ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.DEFALUT_INFERRED_FAULTAGE);
             if (pLayer == null)
             {
                 MessageBox.Show(@"未发现推断断层图层！");
@@ -139,20 +144,20 @@ namespace sys3
                 else
                     str += " or bid='" + bid + "'";
             }
-            List<ESRI.ArcGIS.Geodatabase.IFeature> list = GIS.MyMapHelp.FindFeatureListByWhereClause(pFeatureLayer, str);
+            List<IFeature> list = MyMapHelp.FindFeatureListByWhereClause(pFeatureLayer, str);
             if (list.Count > 0)
             {
-                GIS.MyMapHelp.Jump(GIS.MyMapHelp.GetGeoFromFeature(list));
-                GIS.Common.DataEditCommon.g_pMap.ClearSelection();
+                MyMapHelp.Jump(MyMapHelp.GetGeoFromFeature(list));
+                DataEditCommon.g_pMap.ClearSelection();
                 for (int i = 0; i < list.Count; i++)
                 {
-                    GIS.Common.DataEditCommon.g_pMap.SelectFeature(pLayer, list[i]);
+                    DataEditCommon.g_pMap.SelectFeature(pLayer, list[i]);
                 }
                 WindowState = FormWindowState.Normal;
-                Location = GIS.Common.DataEditCommon.g_axTocControl.Location;
-                Width = GIS.Common.DataEditCommon.g_axTocControl.Width;
-                Height = GIS.Common.DataEditCommon.g_axTocControl.Height;
-                GIS.Common.DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeoSelection, null, GIS.Common.DataEditCommon.g_pAxMapControl.Extent);
+                Location = DataEditCommon.g_axTocControl.Location;
+                Width = DataEditCommon.g_axTocControl.Width;
+                Height = DataEditCommon.g_axTocControl.Height;
+                DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeoSelection, null, DataEditCommon.g_pAxMapControl.Extent);
             }
             else
             {

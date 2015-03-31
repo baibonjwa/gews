@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Castle.ActiveRecord;
+using NHibernate.Criterion;
 
 namespace LibEntity
 {
@@ -10,24 +11,24 @@ namespace LibEntity
     {
 
         public const String TableName = "T_BIG_FAULTAGE";
-        public const String CFaultageName = "FaultageName";
+        public const String CFaultageName = "BigFaultageName";
 
         /// <summary>
         ///     断层编号
         /// </summary>
         [PrimaryKey(PrimaryKeyType.Identity, "FAULTAGE_ID")]
-        public int FaultageId { get; set; }
+        public int BigFaultageId { get; set; }
 
 
         [HasMany(typeof(BigFaultagePoint), Table = "T_BIG_FAULTAGE_POINT", ColumnKey = "BIG_FAULTAGE_ID",
-    Cascade = ManyRelationCascadeEnum.SaveUpdate, Lazy = true)]
+    Cascade = ManyRelationCascadeEnum.All, Lazy = true)]
         public IList<BigFaultagePoint> BigFaultagePoints { get; set; }
 
         /// <summary>
         ///     断层名称
         /// </summary>
         [Property("FAULTAGE_NAME")]
-        public string FaultageName { get; set; }
+        public string BigFaultageName { get; set; }
 
         /// <summary>
         ///     落差
@@ -59,11 +60,20 @@ namespace LibEntity
         [Property("BID")]
         public string BindingId { get; set; }
 
-        public override void Delete()
+        public static BigFaultage FindOneByBigFaultageName(string bigFaultageName)
         {
-            var bigFaultagePoints = BigFaultagePoint.FindAllByFaultageId(FaultageId);
-            BigFaultagePoint.DeleteAll(bigFaultagePoints.Select(u => u.Id));
-            base.Delete();
+            var criterion = new ICriterion[]
+            {
+                Restrictions.Eq("BigFaultageName", bigFaultageName)
+            };
+            return FindOne(criterion);
         }
+
+        //public override void Delete()
+        //{
+        //    var bigFaultagePoints = BigFaultagePoint.FindAllByFaultageId(BigFaultageId);
+        //    BigFaultagePoint.DeleteAll(bigFaultagePoints.Select(u => u.Id));
+        //    base.Delete();
+        //}
     }
 }
