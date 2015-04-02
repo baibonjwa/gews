@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Reflection;
 using System.Windows.Forms;
 using LibEntity;
@@ -170,8 +171,7 @@ namespace LibBusiness
         }
 
 
-        public static void LoadWorkTime(DataGridViewComboBoxColumn dgvcbc
-            , int timeGroupId, String selectedText = "")
+        public static void LoadWorkTime(DataGridViewComboBoxColumn dgvcbc, int timeGroupId, String selectedText = "")
         {
             var workingTimes =
                 WorkingTime.FindAllByWorkTimeGroupId(timeGroupId);
@@ -181,27 +181,39 @@ namespace LibBusiness
             }
         }
 
+        public static void LoadProbeType(ListControl lb, String selectedText = "")
+        {
+            var probeTypes = ProbeType.FindAll();
+            if (probeTypes != null)
+            {
+                DataBindListControl(lb, probeTypes, "ProbeTypeName",
+                    "ProbeTypeId", selectedText);
+            }
+        }
+
+
+
+
         public static string JudgeWorkTimeNow(string workStyle)
         {
             //获取班次
-            WorkingTime[] workingTimes;
-            workingTimes = workStyle == "三八制" ?
+            var workingTimes = workStyle == "三八制" ?
                 WorkingTime.FindAllBy38Times() :
                 WorkingTime.FindAllBy46Times();
             //小时
             int hour = DateTime.Now.Hour;
             string workTime = "";
-            for (int i = 0; i < workingTimes.Length; i++)
+            foreach (WorkingTime t in workingTimes)
             {
                 //对比小时
                 if (hour >
-                    Convert.ToInt32(workingTimes[i].WorkTimeFrom.ToString().Remove(2))
+                    Convert.ToInt32(t.WorkTimeFrom.ToString(CultureInfo.InvariantCulture).Remove(2))
                     &&
                     hour <=
-                        Convert.ToInt32(workingTimes[i].WorkTimeTo.ToString().Remove(2)))
+                    Convert.ToInt32(t.WorkTimeTo.ToString(CultureInfo.InvariantCulture).Remove(2)))
                 {
                     //获取当前时间对应班次
-                    workTime = workingTimes[i].WorkTimeName;
+                    workTime = t.WorkTimeName;
                 }
             }
             return workTime;
@@ -219,12 +231,12 @@ namespace LibBusiness
                     result.Columns.Add(pi.Name, pi.PropertyType);
                 }
 
-                for (int i = 0; i < list.Count; i++)
+                foreach (var t in list)
                 {
                     ArrayList tempList = new ArrayList();
                     foreach (PropertyInfo pi in propertys)
                     {
-                        object obj = pi.GetValue(list[i], null);
+                        object obj = pi.GetValue(t, null);
                         tempList.Add(obj);
                     }
                     object[] array = tempList.ToArray();

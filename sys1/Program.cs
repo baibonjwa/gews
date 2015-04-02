@@ -30,7 +30,6 @@ namespace sys1
 
             ActiveRecordStarter.Initialize(asm, config);
 
-
             var mf = new MainFormGe(new BarButtonItem());
             var lf = new LoginForm(mf);
             Application.Run(lf);

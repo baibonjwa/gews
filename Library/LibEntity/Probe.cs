@@ -98,13 +98,13 @@ namespace LibEntity
         /// <returns>存在与否：true存在，false不存在</returns>
         public static Probe FindFirstByProbeTypeIdAndProbeNameAndTunnelId(int iProbeTypeId, string sProbeName, int iTunnelId)
         {
-            var criterion = new List<ICriterion>
+            var criterion = new ICriterion[]
             {
                 Restrictions.Eq("ProbeName", sProbeName),
                 Restrictions.Eq("ProbeType.ProbeTypeId", iProbeTypeId),
                 Restrictions.Eq("Tunnel.TunnelId", iTunnelId)
             };
-            return FindFirst(criterion.ToArray());
+            return FindFirst(criterion);
         }
 
         /// <summary>
@@ -115,12 +115,12 @@ namespace LibEntity
         /// <returns>探头信息</returns>
         public static Probe[] FindAllByTunnelIdAndProbeTypeId(int iTunnelId, int iProbeTypeId)
         {
-            var criterion = new List<ICriterion>
+            var criterion = new ICriterion[]
             {
                 Restrictions.Eq("Tunnel.TunnelId", iTunnelId),
                 Restrictions.Eq("ProbeType.ProbeTypeId", iProbeTypeId)
             };
-            return FindAll(criterion.ToArray());
+            return FindAll(criterion);
         }
 
         /// <summary>
@@ -130,21 +130,21 @@ namespace LibEntity
         /// <returns>探头信息</returns>
         public static Probe[] FindAllByTunnelId(int iTunnelId)
         {
-            var criterion = new List<ICriterion>
+            var criterion = new ICriterion[]
             {
                 Restrictions.Eq("Tunnel.TunnelId", iTunnelId)
             };
-            return FindAll(criterion.ToArray());
+            return FindAll(criterion);
         }
 
         public static Probe[] FindAllWithGasOrVentilation()
         {
-            var criterion = new List<ICriterion>
+            var criterion = new ICriterion[]
             {
-                Restrictions.Or(Restrictions.Like("ProbeTypeDisplayName", "风速", MatchMode.Anywhere),
-                    Restrictions.Like("ProbeTypeDisplayName", "CH4", MatchMode.Anywhere))
+                Restrictions.Or(Restrictions.Or(Restrictions.Like("ProbeTypeDisplayName", "风速", MatchMode.Anywhere),
+                    Restrictions.Like("ProbeTypeDisplayName", "CH4", MatchMode.Anywhere)),Restrictions.Like("ProbeTypeDisplayName","甲烷"))
             };
-            return FindAll(criterion.ToArray());
+            return FindAll(criterion);
         }
 
         /// <summary>
@@ -154,12 +154,12 @@ namespace LibEntity
         /// <returns></returns>
         public static string GetT2Id(int iTunnelId)
         {
-            var criterion = new List<ICriterion>
+            var criterion = new ICriterion[]
             {
                 Restrictions.Eq("Tunnel.TunnelId", iTunnelId),
                  Restrictions.Eq("PROBE_NAME", "T2"),
             };
-            return FindFirst(criterion.ToArray()).ProbeId;
+            return FindFirst(criterion).ProbeId;
         }
     }
 }

@@ -60,9 +60,9 @@
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(227, 96);
+            this.label2.Location = new System.Drawing.Point(195, 82);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(14, 14);
+            this.label2.Size = new System.Drawing.Size(11, 12);
             this.label2.TabIndex = 9;
             this.label2.Text = "*";
             // 
@@ -70,9 +70,9 @@
             // 
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(227, 58);
+            this.label1.Location = new System.Drawing.Point(195, 50);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(14, 14);
+            this.label1.Size = new System.Drawing.Size(11, 12);
             this.label1.TabIndex = 6;
             this.label1.Text = "*";
             // 
@@ -81,9 +81,9 @@
             this.cboProbeType.BackColor = System.Drawing.SystemColors.Window;
             this.cboProbeType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboProbeType.FormattingEnabled = true;
-            this.cboProbeType.Location = new System.Drawing.Point(85, 92);
+            this.cboProbeType.Location = new System.Drawing.Point(73, 79);
             this.cboProbeType.Name = "cboProbeType";
-            this.cboProbeType.Size = new System.Drawing.Size(140, 22);
+            this.cboProbeType.Size = new System.Drawing.Size(121, 20);
             this.cboProbeType.TabIndex = 8;
             // 
             // groupBox1
@@ -91,28 +91,28 @@
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBox1.Controls.Add(this.txtProbeDescription);
             this.groupBox1.Controls.Add(this.lblProbeDescribe);
-            this.groupBox1.Location = new System.Drawing.Point(14, 239);
+            this.groupBox1.Location = new System.Drawing.Point(12, 205);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(678, 212);
+            this.groupBox1.Size = new System.Drawing.Size(581, 182);
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "位置描述";
             // 
             // txtProbeDescription
             // 
-            this.txtProbeDescription.Location = new System.Drawing.Point(85, 26);
+            this.txtProbeDescription.Location = new System.Drawing.Point(73, 22);
             this.txtProbeDescription.MaxLength = 200;
             this.txtProbeDescription.Multiline = true;
             this.txtProbeDescription.Name = "txtProbeDescription";
-            this.txtProbeDescription.Size = new System.Drawing.Size(387, 132);
+            this.txtProbeDescription.Size = new System.Drawing.Size(332, 114);
             this.txtProbeDescription.TabIndex = 8;
             // 
             // lblProbeDescribe
             // 
             this.lblProbeDescribe.AutoSize = true;
-            this.lblProbeDescribe.Location = new System.Drawing.Point(14, 29);
+            this.lblProbeDescribe.Location = new System.Drawing.Point(12, 25);
             this.lblProbeDescribe.Name = "lblProbeDescribe";
-            this.lblProbeDescribe.Size = new System.Drawing.Size(67, 14);
+            this.lblProbeDescribe.Size = new System.Drawing.Size(65, 12);
             this.lblProbeDescribe.TabIndex = 7;
             this.lblProbeDescribe.Text = "探头描述：";
             // 
@@ -120,9 +120,9 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(603, 470);
+            this.btnCancel.Location = new System.Drawing.Point(517, 403);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(87, 27);
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 14;
             this.btnCancel.Text = "取消";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -132,9 +132,9 @@
             // 
             this.btnSubmit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnSubmit.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnSubmit.Location = new System.Drawing.Point(510, 470);
+            this.btnSubmit.Location = new System.Drawing.Point(437, 403);
             this.btnSubmit.Name = "btnSubmit";
-            this.btnSubmit.Size = new System.Drawing.Size(87, 27);
+            this.btnSubmit.Size = new System.Drawing.Size(75, 23);
             this.btnSubmit.TabIndex = 13;
             this.btnSubmit.Text = "提交";
             this.btnSubmit.UseVisualStyleBackColor = true;
@@ -143,18 +143,18 @@
             // lbl
             // 
             this.lbl.AutoSize = true;
-            this.lbl.Location = new System.Drawing.Point(14, 96);
+            this.lbl.Location = new System.Drawing.Point(12, 82);
             this.lbl.Name = "lbl";
-            this.lbl.Size = new System.Drawing.Size(67, 14);
+            this.lbl.Size = new System.Drawing.Size(65, 12);
             this.lbl.TabIndex = 7;
             this.lbl.Text = "探头类型：";
             // 
             // lblProbeName
             // 
             this.lblProbeName.AutoSize = true;
-            this.lblProbeName.Location = new System.Drawing.Point(14, 58);
+            this.lblProbeName.Location = new System.Drawing.Point(12, 50);
             this.lblProbeName.Name = "lblProbeName";
-            this.lblProbeName.Size = new System.Drawing.Size(67, 14);
+            this.lblProbeName.Size = new System.Drawing.Size(65, 12);
             this.lblProbeName.TabIndex = 4;
             this.lblProbeName.Text = "探头名称：";
             // 
@@ -162,9 +162,9 @@
             // 
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(703, 254);
+            this.label3.Location = new System.Drawing.Point(603, 218);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(14, 14);
+            this.label3.Size = new System.Drawing.Size(11, 12);
             this.label3.TabIndex = 11;
             this.label3.Text = "*";
             // 
@@ -172,26 +172,26 @@
             // 
             this.label4.AutoSize = true;
             this.label4.ForeColor = System.Drawing.Color.Red;
-            this.label4.Location = new System.Drawing.Point(227, 23);
+            this.label4.Location = new System.Drawing.Point(195, 20);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(14, 14);
+            this.label4.Size = new System.Drawing.Size(11, 12);
             this.label4.TabIndex = 2;
             this.label4.Text = "*";
             // 
             // txtProbeId
             // 
-            this.txtProbeId.Location = new System.Drawing.Point(85, 20);
+            this.txtProbeId.Location = new System.Drawing.Point(73, 17);
             this.txtProbeId.MaxLength = 15;
             this.txtProbeId.Name = "txtProbeId";
-            this.txtProbeId.Size = new System.Drawing.Size(140, 22);
+            this.txtProbeId.Size = new System.Drawing.Size(121, 21);
             this.txtProbeId.TabIndex = 1;
             // 
             // lblProbeId
             // 
             this.lblProbeId.AutoSize = true;
-            this.lblProbeId.Location = new System.Drawing.Point(14, 23);
+            this.lblProbeId.Location = new System.Drawing.Point(12, 20);
             this.lblProbeId.Name = "lblProbeId";
-            this.lblProbeId.Size = new System.Drawing.Size(67, 14);
+            this.lblProbeId.Size = new System.Drawing.Size(65, 12);
             this.lblProbeId.TabIndex = 0;
             this.lblProbeId.Text = "探头编号：";
             // 
@@ -199,9 +199,9 @@
             // 
             this.label5.AutoSize = true;
             this.label5.ForeColor = System.Drawing.Color.Red;
-            this.label5.Location = new System.Drawing.Point(247, 23);
+            this.label5.Location = new System.Drawing.Point(212, 20);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(223, 14);
+            this.label5.Size = new System.Drawing.Size(221, 12);
             this.label5.TabIndex = 3;
             this.label5.Text = "探头编号录入后不可更改，请谨慎录入！";
             // 
@@ -212,9 +212,9 @@
             this.gbMove.Controls.Add(this.lblFarFromFrontal);
             this.gbMove.Controls.Add(this.rbtnNo);
             this.gbMove.Controls.Add(this.rbtnYes);
-            this.gbMove.Location = new System.Drawing.Point(14, 122);
+            this.gbMove.Location = new System.Drawing.Point(12, 105);
             this.gbMove.Name = "gbMove";
-            this.gbMove.Size = new System.Drawing.Size(357, 54);
+            this.gbMove.Size = new System.Drawing.Size(306, 46);
             this.gbMove.TabIndex = 10;
             this.gbMove.TabStop = false;
             this.gbMove.Text = "是否自动位移";
@@ -222,26 +222,26 @@
             // lblM
             // 
             this.lblM.AutoSize = true;
-            this.lblM.Location = new System.Drawing.Point(325, 23);
+            this.lblM.Location = new System.Drawing.Point(279, 20);
             this.lblM.Name = "lblM";
-            this.lblM.Size = new System.Drawing.Size(16, 14);
+            this.lblM.Size = new System.Drawing.Size(11, 12);
             this.lblM.TabIndex = 4;
             this.lblM.Text = "M";
             // 
             // txtM
             // 
             this.txtM.Enabled = false;
-            this.txtM.Location = new System.Drawing.Point(202, 20);
+            this.txtM.Location = new System.Drawing.Point(173, 17);
             this.txtM.Name = "txtM";
-            this.txtM.Size = new System.Drawing.Size(116, 22);
+            this.txtM.Size = new System.Drawing.Size(100, 21);
             this.txtM.TabIndex = 3;
             // 
             // lblFarFromFrontal
             // 
             this.lblFarFromFrontal.AutoSize = true;
-            this.lblFarFromFrontal.Location = new System.Drawing.Point(112, 23);
+            this.lblFarFromFrontal.Location = new System.Drawing.Point(96, 20);
             this.lblFarFromFrontal.Name = "lblFarFromFrontal";
-            this.lblFarFromFrontal.Size = new System.Drawing.Size(79, 14);
+            this.lblFarFromFrontal.Size = new System.Drawing.Size(77, 12);
             this.lblFarFromFrontal.TabIndex = 2;
             this.lblFarFromFrontal.Text = "距迎头距离：";
             // 
@@ -249,9 +249,9 @@
             // 
             this.rbtnNo.AutoSize = true;
             this.rbtnNo.Checked = true;
-            this.rbtnNo.Location = new System.Drawing.Point(64, 21);
+            this.rbtnNo.Location = new System.Drawing.Point(55, 18);
             this.rbtnNo.Name = "rbtnNo";
-            this.rbtnNo.Size = new System.Drawing.Size(37, 18);
+            this.rbtnNo.Size = new System.Drawing.Size(35, 16);
             this.rbtnNo.TabIndex = 1;
             this.rbtnNo.TabStop = true;
             this.rbtnNo.Text = "否";
@@ -261,9 +261,9 @@
             // rbtnYes
             // 
             this.rbtnYes.AutoSize = true;
-            this.rbtnYes.Location = new System.Drawing.Point(16, 21);
+            this.rbtnYes.Location = new System.Drawing.Point(14, 18);
             this.rbtnYes.Name = "rbtnYes";
-            this.rbtnYes.Size = new System.Drawing.Size(37, 18);
+            this.rbtnYes.Size = new System.Drawing.Size(35, 16);
             this.rbtnYes.TabIndex = 0;
             this.rbtnYes.TabStop = true;
             this.rbtnYes.Text = "是";
@@ -283,35 +283,36 @@
             "T6",
             "T7",
             "T8"});
-            this.cmbProbeName.Location = new System.Drawing.Point(85, 55);
+            this.cmbProbeName.Location = new System.Drawing.Point(73, 47);
             this.cmbProbeName.Name = "cmbProbeName";
-            this.cmbProbeName.Size = new System.Drawing.Size(140, 22);
+            this.cmbProbeName.Size = new System.Drawing.Size(121, 20);
             this.cmbProbeName.TabIndex = 5;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(14, 199);
+            this.label6.Location = new System.Drawing.Point(12, 171);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(67, 14);
+            this.label6.Size = new System.Drawing.Size(65, 12);
             this.label6.TabIndex = 17;
             this.label6.Text = "所属巷道：";
             // 
             // selectTunnelSimple1
             // 
-            this.selectTunnelSimple1.Location = new System.Drawing.Point(78, 188);
+            this.selectTunnelSimple1.Location = new System.Drawing.Point(76, 159);
             this.selectTunnelSimple1.Name = "selectTunnelSimple1";
-            this.selectTunnelSimple1.Size = new System.Drawing.Size(219, 38);
+            this.selectTunnelSimple1.SelectedTunnel = null;
+            this.selectTunnelSimple1.Size = new System.Drawing.Size(251, 33);
             this.selectTunnelSimple1.TabIndex = 16;
             this.selectTunnelSimple1.Load += new System.EventHandler(this.selectTunnelSimple1_Load);
             // 
             // ProbeInfoEntering
             // 
             this.AcceptButton = this.btnSubmit;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(728, 507);
+            this.ClientSize = new System.Drawing.Size(624, 435);
             this.Controls.Add(this.selectTunnelSimple1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.cmbProbeName);

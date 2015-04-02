@@ -124,6 +124,7 @@
             this.mniUserInfoMana = new DevExpress.XtraBars.BarButtonItem();
             this.mniUserGroupInfoMana = new DevExpress.XtraBars.BarButtonItem();
             this.barSubItem9 = new DevExpress.XtraBars.BarSubItem();
+            this.bbiCheckUpdate = new DevExpress.XtraBars.BarButtonItem();
             this.mniHelpFile = new DevExpress.XtraBars.BarButtonItem();
             this.mniAbout = new DevExpress.XtraBars.BarButtonItem();
             this.bar3 = new DevExpress.XtraBars.Bar();
@@ -223,7 +224,6 @@
             this.axLicenseControl2 = new ESRI.ArcGIS.Controls.AxLicenseControl();
             this.barButtonItem7 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem8 = new DevExpress.XtraBars.BarButtonItem();
-            this.bbiCheckUpdate = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.mapControl_GM)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tocControl_GM)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.toolBar_GM)).BeginInit();
@@ -859,7 +859,7 @@
             // 
             // mniSJHDGL
             // 
-            this.mniSJHDGL.Caption = "设计巷道管理(&P)...";
+            this.mniSJHDGL.Caption = "巷道及其他地点管理(&P)...";
             this.mniSJHDGL.Id = 32;
             this.mniSJHDGL.ImageIndex = 16;
             this.mniSJHDGL.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P));
@@ -1336,6 +1336,13 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.mniHelpFile),
             new DevExpress.XtraBars.LinkPersistInfo(this.mniAbout)});
             this.barSubItem9.Name = "barSubItem9";
+            // 
+            // bbiCheckUpdate
+            // 
+            this.bbiCheckUpdate.Caption = "检查更新";
+            this.bbiCheckUpdate.Id = 184;
+            this.bbiCheckUpdate.Name = "bbiCheckUpdate";
+            this.bbiCheckUpdate.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbiCheckUpdate_ItemClick);
             // 
             // mniHelpFile
             // 
@@ -2157,13 +2164,6 @@
             this.barButtonItem8.ImageIndex = 20;
             this.barButtonItem8.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G));
             this.barButtonItem8.Name = "barButtonItem8";
-            // 
-            // bbiCheckUpdate
-            // 
-            this.bbiCheckUpdate.Caption = "检查更新";
-            this.bbiCheckUpdate.Id = 184;
-            this.bbiCheckUpdate.Name = "bbiCheckUpdate";
-            this.bbiCheckUpdate.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbiCheckUpdate_ItemClick);
             // 
             // MainForm_GM
             // 

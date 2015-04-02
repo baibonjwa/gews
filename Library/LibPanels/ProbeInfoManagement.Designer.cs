@@ -1,6 +1,4 @@
-﻿using LibCommonControl;
-
-namespace LibPanels
+﻿namespace LibPanels
 {
     partial class ProbeInfoManagement 
     {
@@ -30,7 +28,6 @@ namespace LibPanels
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProbeInfoManagement));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsBtnPrint = new System.Windows.Forms.ToolStripButton();
@@ -42,7 +39,7 @@ namespace LibPanels
             this.tsBtnExit = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
+            this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -92,7 +89,7 @@ namespace LibPanels
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1486, 24);
+            this.toolStrip1.Size = new System.Drawing.Size(1274, 24);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.TabStop = true;
             this.toolStrip1.Text = "toolStrip1";
@@ -167,10 +164,9 @@ namespace LibPanels
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 695);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 593);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1486, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1274, 22);
             this.statusStrip1.TabIndex = 6;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -212,10 +208,10 @@ namespace LibPanels
             // controlNavigator1
             // 
             this.controlNavigator1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.controlNavigator1.Location = new System.Drawing.Point(12, 663);
+            this.controlNavigator1.Location = new System.Drawing.Point(10, 568);
             this.controlNavigator1.Name = "controlNavigator1";
             this.controlNavigator1.NavigatableControl = this.gcProbe;
-            this.controlNavigator1.Size = new System.Drawing.Size(311, 24);
+            this.controlNavigator1.Size = new System.Drawing.Size(271, 21);
             this.controlNavigator1.TabIndex = 11;
             this.controlNavigator1.Text = "controlNavigator1";
             this.controlNavigator1.TextLocation = DevExpress.XtraEditors.NavigatorButtonsTextLocation.Center;
@@ -230,7 +226,7 @@ namespace LibPanels
             this.gcProbe.Name = "gcProbe";
             this.gcProbe.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemCheckEdit1});
-            this.gcProbe.Size = new System.Drawing.Size(1458, 616);
+            this.gcProbe.Size = new System.Drawing.Size(1249, 527);
             this.gcProbe.TabIndex = 9;
             this.gcProbe.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.bandedGridView1});
@@ -254,6 +250,7 @@ namespace LibPanels
             this.bandedGridColumn20});
             this.bandedGridView1.GridControl = this.gcProbe;
             this.bandedGridView1.Name = "bandedGridView1";
+            this.bandedGridView1.OptionsBehavior.Editable = false;
             this.bandedGridView1.OptionsSelection.MultiSelect = true;
             this.bandedGridView1.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
             this.bandedGridView1.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.bandedGridView1_CustomColumnDisplayText);
@@ -391,17 +388,17 @@ namespace LibPanels
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelControl1.Controls.Add(this.gcProbe);
-            this.panelControl1.Location = new System.Drawing.Point(12, 39);
+            this.panelControl1.Location = new System.Drawing.Point(10, 33);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1462, 620);
+            this.panelControl1.Size = new System.Drawing.Size(1253, 531);
             this.panelControl1.TabIndex = 12;
             // 
             // sbtnUpdateProbe
             // 
             this.sbtnUpdateProbe.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.sbtnUpdateProbe.Location = new System.Drawing.Point(329, 663);
+            this.sbtnUpdateProbe.Location = new System.Drawing.Point(323, 568);
             this.sbtnUpdateProbe.Name = "sbtnUpdateProbe";
-            this.sbtnUpdateProbe.Size = new System.Drawing.Size(75, 23);
+            this.sbtnUpdateProbe.Size = new System.Drawing.Size(76, 20);
             this.sbtnUpdateProbe.TabIndex = 13;
             this.sbtnUpdateProbe.Text = "更新传感器";
             this.sbtnUpdateProbe.Click += new System.EventHandler(this.sbtnUpdateProbe_Click);
@@ -409,27 +406,27 @@ namespace LibPanels
             // checkButton1
             // 
             this.checkButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.checkButton1.Location = new System.Drawing.Point(410, 663);
+            this.checkButton1.Location = new System.Drawing.Point(405, 568);
             this.checkButton1.Name = "checkButton1";
-            this.checkButton1.Size = new System.Drawing.Size(96, 23);
+            this.checkButton1.Size = new System.Drawing.Size(92, 20);
             this.checkButton1.TabIndex = 14;
             this.checkButton1.Text = "调校全部传感器";
             // 
             // cbtnAll
             // 
             this.cbtnAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.cbtnAll.Location = new System.Drawing.Point(513, 663);
+            this.cbtnAll.Location = new System.Drawing.Point(503, 568);
             this.cbtnAll.Name = "cbtnAll";
-            this.cbtnAll.Size = new System.Drawing.Size(96, 23);
+            this.cbtnAll.Size = new System.Drawing.Size(97, 20);
             this.cbtnAll.TabIndex = 15;
             this.cbtnAll.Text = "查看全部传感器";
             this.cbtnAll.CheckedChanged += new System.EventHandler(this.cbtnAll_CheckedChanged);
             // 
             // ProbeInfoManagement
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1486, 717);
+            this.ClientSize = new System.Drawing.Size(1274, 615);
             this.Controls.Add(this.cbtnAll);
             this.Controls.Add(this.checkButton1);
             this.Controls.Add(this.sbtnUpdateProbe);

@@ -1,4 +1,5 @@
 ﻿using Castle.ActiveRecord;
+using NHibernate.Criterion;
 
 namespace LibEntity
 {
@@ -20,5 +21,14 @@ namespace LibEntity
         /// </summary>
         [Property("PROBE_TYPE_NAME")]
         public string ProbeTypeName { get; set; }
+
+        public static ProbeType FindProbeTypeByProbeTypeName(string probeTypeName)
+        {
+            var criterion = new ICriterion[]
+            {
+                Restrictions.Eq("ProbeTypeName", probeTypeName)
+            };
+            return FindOne(criterion);
+        }
     }
 }

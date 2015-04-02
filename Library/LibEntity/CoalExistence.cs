@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using Castle.ActiveRecord;
-using NHibernate.Criterion;
 
 namespace LibEntity
 {

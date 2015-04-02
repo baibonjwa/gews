@@ -1,19 +1,9 @@
-﻿// ******************************************************************
-// 概  述：探头数据管理
-// 作  者：伍鑫
-// 创建日期：2013/12/01
-// 版本号：V1.0
-// 版本信息：
-// V1.0 新建
-// ******************************************************************
-
-using System;
+﻿using System;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using DevExpress.XtraPrinting;
 using LibCommon;
-using LibCommonControl;
 using LibEntity;
 
 namespace LibPanels
@@ -24,7 +14,6 @@ namespace LibPanels
         public ProbeInfoManagement()
         {
             InitializeComponent();
-
         }
 
         private void RefreshData()
@@ -77,7 +66,6 @@ namespace LibPanels
         {
             var ofd = new OpenFileDialog
             {
-                InitialDirectory = @"C:\Desktop",
                 RestoreDirectory = true,
                 Filter = @"文本文件(*.txt)|*.txt|所有文件(*.*)|*.*",
                 Multiselect = true
@@ -89,19 +77,60 @@ namespace LibPanels
             for (var i = 1; i < strs.Length; i++)
             {
                 var line = strs[i].Split(',');
-                var probe = new Probe
-                {
-                    ProbeMeasureType = Convert.ToInt16(line[0]),
-                    ProbeId = line[1].Substring(3),
-                    ProbeDescription = line[2],
-                    ProbeTypeDisplayName = line[3]
-                };
-                probe.ProbeMeasureType = Convert.ToInt16(line[4]);
-                probe.ProbeUseType = line[5];
-                probe.Unit = line[6];
+                var probeId = line[1].Substring(3);
+                var probe = Probe.TryFind(probeId);
 
-                probe.SaveAndFlush();
+                ProbeType probeType;
+                if (line[3].Contains("CH4") || line[3].Contains("甲烷"))
+                {
+                    probeType = ProbeType.FindProbeTypeByProbeTypeName("甲烷");
+                }
+                else if (line[3].Contains("风速"))
+                {
+                    probeType = ProbeType.FindProbeTypeByProbeTypeName("风速");
+                }
+                else
+                {
+                    probeType = ProbeType.FindProbeTypeByProbeTypeName("其他");
+                }
+                Regex reg = new Regex(@"\(.*?\)");
+                Match m = reg.Match(line[2]);
+                string probeName = "";
+                if (m.Value.Contains("T"))
+                    probeName = m.Value.Trim('(', ')');
+
+
+                if (probe == null)
+                {
+                    probe = new Probe
+                    {
+                        ProbeMeasureType = Convert.ToInt16(line[0]),
+                        ProbeId = line[1].Substring(3),
+                        ProbeDescription = line[2],
+                        ProbeTypeDisplayName = line[3],
+                        ProbeUseType = line[5],
+                        Unit = line[6],
+                        ProbeType = probeType,
+                        ProbeName = probeName
+                    };
+                }
+                else
+                {
+                    probe.ProbeMeasureType = Convert.ToInt16(line[0]);
+                    probe.ProbeTypeDisplayName = line[3];
+                    probe.ProbeUseType = line[5];
+                    probe.Unit = line[6];
+                    probe.ProbeType = probeType;
+                    probe.ProbeName = probeName;
+                    if (probe.ProbeDescription != line[2])
+                    {
+                        probe.ProbeDescription = line[2];
+                        probe.Tunnel = null;
+                    }
+                }
+                probe.Save();
             }
+            RefreshData();
         }
 
         private void tsBtnExit_Click(object sender, EventArgs e)

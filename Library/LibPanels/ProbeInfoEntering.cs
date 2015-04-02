@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
-using LibBusiness;
 using LibCommon;
-using LibCommonControl;
-using LibCommonForm;
 using LibEntity;
 using LibSocket;
 
@@ -40,7 +36,6 @@ namespace LibPanels
         ///     带参数的构造方法
         /// </summary>
         /// <param name="strPrimaryKey">主键</param>
-        /// <param name="mainFrm"></param>
         public ProbeInfoEntering(string strPrimaryKey)
         {
             InitializeComponent();
@@ -138,7 +133,7 @@ namespace LibPanels
             }
 
             // 判断所属是否选择
-            if (selectTunnelSimple1.SelectedTunnel != null)
+            if (selectTunnelSimple1.SelectedTunnel == null)
             {
                 Alert.alert(Const_GE.TUNNEL_NAME_MUST_INPUT);
                 return false;

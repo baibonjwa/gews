@@ -24,9 +24,9 @@ namespace LibCommon
         /// </summary>
         public static void floatToolsLoadSet()
         {
-            DevExpress.XtraBars.Localization.BarLocalizer.Active = new BarLocalizer(); //DevExpress.LocalizationCHS.DevExpressXtraBarsLocalizationCHS();
-            DevExpress.XtraEditors.Controls.Localizer.Active = new EditResLocalizer(); //DevExpress.LocalizationCHS.DevExpressXtraEditorsLocalizationCHS();
-            DevExpress.XtraPrinting.Localization.PreviewLocalizer.Active = new PreviewLocalizer();// DevExpress.LocalizationCHS.DevExpressXtraPrintingLocalizationCHS();
+            BarLocalizer.Active = new BarLocalizer(); //DevExpress.LocalizationCHS.DevExpressXtraBarsLocalizationCHS();
+            Localizer.Active = new EditResLocalizer(); //DevExpress.LocalizationCHS.DevExpressXtraEditorsLocalizationCHS();
+            PreviewLocalizer.Active = new PreviewLocalizer();// DevExpress.LocalizationCHS.DevExpressXtraPrintingLocalizationCHS();
         }
 
         /// <summary>

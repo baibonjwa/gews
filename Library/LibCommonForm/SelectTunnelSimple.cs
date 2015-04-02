@@ -42,6 +42,7 @@ namespace LibCommonForm
 
             doc.Load(reader);
 
+
             if (doc.DocumentElement != null)
             {
                 XmlNodeList nodes = doc.DocumentElement.SelectNodes("/Tunnels/Tunnel");
@@ -53,8 +54,9 @@ namespace LibCommonForm
                         var selectSingleNode = node.SelectSingleNode("ID");
                         if (selectSingleNode == null) continue;
                         var id = Convert.ToInt32(selectSingleNode.InnerText);
-                        var tunnel = Tunnel.Find(id);
-                        cbxTunnel.Items.Add(tunnel);
+                        var tunnel = Tunnel.TryFind(id);
+                        if (tunnel != null)
+                            cbxTunnel.Items.Add(tunnel);
                     }
             }
         }

@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Threading;
 using System.Windows.Forms;
+using AutoUpdaterDotNET;
 using DevExpress.XtraBars;
 using LibAbout;
 using LibBusiness;
@@ -12,10 +13,9 @@ using LibCommonForm;
 using LibDatabase;
 using LibEntity;
 using LibPanels;
+using LibSocket;
 using Steema.TeeChart;
 using TeeChartWrapper;
-using AutoUpdaterDotNET;
-using LibSocket;
 
 namespace sys1
 {
@@ -23,9 +23,8 @@ namespace sys1
     {
         private int _updateFrequency; // 10s
 
-        private int _currentTunnelId = -1;
         private string _currentProbeId = string.Empty;
-        private string _t2Id = string.Empty;
+        private readonly string _t2Id = string.Empty;
 
         private DateTime _lastTimeT2; // T2的数据更新时间
         private DateTime _lastTimeMn; // M/N 的数据更新时间
@@ -66,7 +65,6 @@ namespace sys1
             InitializeComponent();
             SocketUtil.DoInitilization();
 
-
             var fp = new FileProperties(configFileName);
 
             int iValue;
@@ -82,59 +80,15 @@ namespace sys1
             double.TryParse(fp.Get("baddatathreshold"), out dValue);
             BadDataThreshold = dValue;
 
-            //初始化客户端Socket
-            //InitClientSocket();
-
-            //udpServerSocket = new SocketUtil(AddressFamily.InterNetwork,
-            //  SocketType.Dgram, ProtocolType.Udp);
-            //udpServerSocket.Bind(ep);//udpServerSocket.BeginReceiveFrom(buffer, 0, 1024, SocketFlags.None, ref ep, new AsyncCallback(ReceiveData), udpServerSocket);
-
-            //stateMonitor1.
-            //checkTimer.Interval = 4000;//checkTimer.AutoReset = true;
-            //checkTimer.Elapsed += new System.Timers.ElapsedEventHandler(checkTimer_Elapsed);
-            //checkTimer.Start();
-
-            // 注册事件（巷道选择自定义控件必须实装代码）
-            //selectTunnelSimple1.TunnelNameChanged += TunnelNameChanged;
-            //// 设置日期控件格式
-            _dateTimeStart.Text = DateTime.Now.ToString("yyyy-MM-dd") + @" 00:00:00";
-            _dateTimeEnd.Text = DateTime.Now.ToString("yyyy-MM-dd") + @" 23:59:59";
-            //this.tChart1.GetEnvironment().SetMouseWheelScroll(FALSE);
-            // 加载探头类型信息
-            LoadProbeTypeInfo();
-
-
-            //// 增加滚轮事件
-            //this.tChartM.MouseWheel += new System.Windows.Forms.MouseEventHandler(TeeChart_MouseWheel);
-            //this.tChartN.MouseWheel += new System.Windows.Forms.MouseEventHandler(TeeChart_MouseWheel);
-            //this.tChartT2.MouseWheel += new System.Windows.Forms.MouseEventHandler(TeeChart_MouseWheel);
+            dateTimeStart.Text = DateTime.Now.ToString("yyyy-MM-dd") + @" 00:00:00";
+            dateTimeEnd.Text = DateTime.Now.ToString("yyyy-MM-dd") + @" 23:59:59";
+            DataBindUtil.LoadProbeType(lstProbeType);
         }
 
         private void MainForm_GE_Load(object sender, EventArgs e)
         {
             AutoUpdater.Start("http://bltmld.vicp.cc:8090/sys1/update.xml");
-            //monitoringDataAnalysisForm.MdiParent = this;
-            //this.panel1.Controls.Add(monitoringDataAnalysisForm);
-            //monitoringDataAnalysisForm.WindowState = FormWindowState.Maximized;
-            //monitoringDataAnalysisForm.Dock = DockStyle.Fill;
-            //monitoringDataAnalysisForm.Show();
-            //monitoringDataAnalysisForm.Activate();
-
-            //浮动工具条中文设置
-
-            int height = panel1.ClientRectangle.Height - 66;
-            tChartT2.Height = Convert.ToInt32(Math.Round(height * 0.3));
-            tChartN.Height = Convert.ToInt32(Math.Round(height * 0.3));
-            //tChartN.Location = new Point(tChartN.Location.X, tChartN.Location.Y + 10);
-            tChartM.Height = height - tChartT2.ClientRectangle.Height - tChartN.ClientRectangle.Height;
-            //tChartM.Anchor = AnchorStyles.Bottom;
-
             DXSeting.floatToolsLoadSet();
-        }
-
-        private void MainForm_GE_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            //e.Cancel = DialogResult.Yes != MessageBox.Show(@"您确定要退出系统吗?", @"系统提示", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
         }
 
         private void MainForm_GE_FormClosed(object sender, FormClosedEventArgs e)
@@ -242,7 +196,7 @@ namespace sys1
             {
                 Alert.alert("帮助文件不存在或已损坏");
             }
-            
+
         }
 
 
@@ -253,23 +207,7 @@ namespace sys1
             libabout.ShowDialog();
         }
 
-        #region 实时监控
 
-        /// <summary>
-        /// 加载探头类型信息
-        /// </summary>
-        private void LoadProbeTypeInfo()
-        {
-            ProbeType[] probeTypes = ProbeType.FindAll();
-            if (probeTypes.Length > 0)
-            {
-                _lstProbeStyle.DataSource = probeTypes;
-                _lstProbeStyle.DisplayMember = "ProbeTypeName";
-                _lstProbeStyle.ValueMember = "ProbeTypeId";
-
-                _lstProbeStyle.SelectedIndex = -1;
-            }
-        }
 
         /// <summary>
         /// 开始实时监控
@@ -287,7 +225,7 @@ namespace sys1
             TeeChartUtil.resetTeeChart(tChartN); // tChart3, 同一工序条件下瓦斯浓度变化值N
 
             // 清空datagridview
-            _dgvData.Rows.Clear();
+            dgvData.Rows.Clear();
 
             // 获取指定探头的旧数据 ----------用来填充曲线。
             var dsData = GasConcentrationProbeData.FindHistaryData(_currentProbeId);
@@ -299,10 +237,10 @@ namespace sys1
                 AddDataSet2TeeChart(tChartT2, ds, "T2");
             }
 
-            if (_dgvData.Rows.Count > 0)
+            if (dgvData.Rows.Count > 0)
             {
                 // 定位滚动条
-                _dgvData.FirstDisplayedScrollingRowIndex = _dgvData.Rows.Count - 1;
+                dgvData.FirstDisplayedScrollingRowIndex = dgvData.Rows.Count - 1;
             }
             // 获取旧数据 ---------- End
 
@@ -316,8 +254,6 @@ namespace sys1
         {
             timer1.Enabled = false;
         }
-
-        #endregion
 
         /// <summary>
         /// 计时器
@@ -364,20 +300,20 @@ namespace sys1
                 _lastTimeMn = time;
 
                 // 往DGV中填充数据
-                _dgvData.Rows.Add(value + "%", time);
-                if (_dgvData.Rows.Count > 0)
+                dgvData.Rows.Add(value + "%", time);
+                if (dgvData.Rows.Count > 0)
                 {
                     // 定位滚动条
-                    _dgvData.FirstDisplayedScrollingRowIndex = _dgvData.Rows.Count - 1;
+                    dgvData.FirstDisplayedScrollingRowIndex = dgvData.Rows.Count - 1;
 
                     // 瓦斯浓度超过安全范围 
                     if (value >= YellowDataThreshold && value <= RedDataThreshold)
                     {
-                        _dgvData.Rows[_dgvData.Rows.Count - 1].DefaultCellStyle.BackColor = Color.Yellow;
+                        dgvData.Rows[dgvData.Rows.Count - 1].DefaultCellStyle.BackColor = Color.Yellow;
                     }
                     else if (value > RedDataThreshold)
                     {
-                        _dgvData.Rows[_dgvData.Rows.Count - 1].DefaultCellStyle.BackColor = Color.Red;
+                        dgvData.Rows[dgvData.Rows.Count - 1].DefaultCellStyle.BackColor = Color.Red;
                     }
                 }
 
@@ -398,7 +334,7 @@ namespace sys1
             {
                 int sqlCnt = datas.Length;
                 // 禁止自动生成列(※位置不可变)
-                _dgvData.AutoGenerateColumns = false;
+                dgvData.AutoGenerateColumns = false;
                 tChart.Series[0].Clear();
                 // 重绘
                 tChart.AutoRepaint = false;
@@ -480,7 +416,6 @@ namespace sys1
         /// 主要用于添加涌出量原始数据M
         /// </summary>
         /// <param name="tChart">TeeChart图表</param>
-        /// <param name="ds">数据集</param>
         /// <param name="datas"></param>
         private void AddDataToTeeChartM(TChart tChart, GasConcentrationProbeData[] datas)
         {
@@ -510,16 +445,16 @@ namespace sys1
 
 
                     // 往DGV中填充数据
-                    _dgvData.Rows.Add(value + "%", time);
+                    dgvData.Rows.Add(value + "%", time);
 
                     // 瓦斯浓度超过安全范围 
                     if (value >= YellowDataThreshold && value <= RedDataThreshold)
                     {
-                        _dgvData.Rows[_dgvData.Rows.Count - 1].DefaultCellStyle.BackColor = Color.Yellow;
+                        dgvData.Rows[dgvData.Rows.Count - 1].DefaultCellStyle.BackColor = Color.Yellow;
                     }
                     else if (value > RedDataThreshold)
                     {
-                        _dgvData.Rows[_dgvData.Rows.Count - 1].DefaultCellStyle.BackColor = Color.Red;
+                        dgvData.Rows[dgvData.Rows.Count - 1].DefaultCellStyle.BackColor = Color.Red;
                     }
                 }));
             }
@@ -573,40 +508,6 @@ namespace sys1
         }
 
         /// <summary>
-        /// 开始历史数据查询
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void _rbtnHistory_Click(object sender, EventArgs e)
-        {
-            // 选择巷道设为可用
-            selectTunnelSimple1.Enabled = true;
-            // 探头类型设为可用
-            _lstProbeStyle.Enabled = true;
-            // 探头名称设为可用
-            _lstProbeName.Enabled = true;
-
-            // 停止实时数据监控
-            StopRealTimeCurveMonitoring();
-
-            // 清空datagridview
-            _dgvData.Rows.Clear();
-            // 清空曲线1的fastline
-            tChartM.Series[0].Clear();
-            // 清空曲线2的fastline
-            tChartT2.Series[0].Clear();
-            // 清空曲线3的fastline
-            tChartN.Series[0].Clear();
-
-            _dateTimeStart.Enabled = true;
-            _dateTimeEnd.Enabled = true;
-            _btnBeforeDay.Enabled = true;
-            _btnNow.Enabled = true;
-            _btnAfterDay.Enabled = true;
-            _btnQuery.Enabled = true;
-        }
-
-        /// <summary>
         /// 执行历史数据查询
         /// </summary>
         /// <param name="sender"></param>
@@ -619,7 +520,7 @@ namespace sys1
             if (!Check())
                 return;
             // 清空datagridview
-            _dgvData.Rows.Clear();
+            dgvData.Rows.Clear();
 
             var t2 = new Thread(LoadAllHistoryData);
             t2.Start();
@@ -631,22 +532,21 @@ namespace sys1
         private void LoadAllHistoryData()
         {
             String probeName = "";
-            DateTime dateTimeStart = new DateTime();
-            DateTime datetimeEnd = new DateTime();
-            _lstProbeName.MouseUp -= _lstProbeName_SelectedIndexChanged;
+            DateTime startTime = new DateTime();
+            DateTime endTime = new DateTime();
 
             Invoke(new MethodInvoker(delegate
             {
-                _lblLoading.Visible = true;
-                _btnQuery.Text = @"查询中...";
-                _btnQuery.Enabled = false;
-                probeName = _lstProbeName.SelectedValue.ToString();
-                dateTimeStart = Convert.ToDateTime(_dateTimeStart.Text);
-                datetimeEnd = Convert.ToDateTime(_dateTimeEnd.Text);
-                _rbtnRealtime.Enabled = false;
-                _rbtnHistory.Enabled = false;
+                lblLoading.Visible = true;
+                btnQuery.Text = @"查询中...";
+                btnQuery.Enabled = false;
+                probeName = lstProbeName.SelectedValue.ToString();
+                startTime = Convert.ToDateTime(dateTimeStart.Text);
+                endTime = Convert.ToDateTime(dateTimeEnd.Text);
+                rbtnRealtime.Enabled = false;
+                rbtnHistory.Enabled = false;
             }));
-            GasConcentrationProbeData[] datas = GasConcentrationProbeData.FindHistaryData(probeName, dateTimeStart, datetimeEnd);
+            GasConcentrationProbeData[] datas = GasConcentrationProbeData.FindHistaryData(probeName, startTime, endTime);
 
             // load监控系统原始数据M历史数据
             LoadHistoryDataM(tChartM, datas);
@@ -657,13 +557,12 @@ namespace sys1
 
             Invoke(new MethodInvoker(delegate
             {
-                _lblLoading.Visible = false;
-                _btnQuery.Text = @"查询";
-                _btnQuery.Enabled = true;
-                _rbtnRealtime.Enabled = true;
-                _rbtnHistory.Enabled = true;
+                lblLoading.Visible = false;
+                btnQuery.Text = @"查询";
+                btnQuery.Enabled = true;
+                rbtnRealtime.Enabled = true;
+                rbtnHistory.Enabled = true;
             }));
-            _lstProbeName.MouseUp += _lstProbeName_SelectedIndexChanged;
         }
 
 
@@ -694,8 +593,8 @@ namespace sys1
         {
             GasConcentrationProbeData[] datas = GasConcentrationProbeData.FindHistaryData(
                 _t2Id,
-                Convert.ToDateTime(_dateTimeStart.Text),
-                Convert.ToDateTime(_dateTimeEnd.Text)
+                Convert.ToDateTime(dateTimeStart.Text),
+                Convert.ToDateTime(dateTimeEnd.Text)
                 );
             int sqlCnt = 0;
             if (datas.Length > 0)
@@ -812,7 +711,7 @@ namespace sys1
         private void _btnAfterDay_Click(object sender, EventArgs e)
         {
             // 清空datagridview
-            _dgvData.Rows.Clear();
+            dgvData.Rows.Clear();
             // 清空曲线1的fastline
             tChartM.Series[0].Clear();
             // 清空曲线2的fastline
@@ -822,15 +721,15 @@ namespace sys1
 
             timer1.Enabled = false;
             // 历史数据分析设为选中
-            _rbtnHistory.Checked = true;
+            rbtnHistory.Checked = true;
 
             if (Check())
             {
-                DateTime dtStart = Convert.ToDateTime(_dateTimeStart.Text).AddDays(1);
-                DateTime dtEnd = Convert.ToDateTime(_dateTimeEnd.Text).AddDays(1);
+                DateTime dtStart = Convert.ToDateTime(dateTimeStart.Text).AddDays(1);
+                DateTime dtEnd = Convert.ToDateTime(dateTimeEnd.Text).AddDays(1);
 
-                _dateTimeStart.Text = dtStart.ToString(CultureInfo.InvariantCulture);
-                _dateTimeEnd.Text = dtEnd.ToString(CultureInfo.InvariantCulture);
+                dateTimeStart.Text = dtStart.ToString(CultureInfo.InvariantCulture);
+                dateTimeEnd.Text = dtEnd.ToString(CultureInfo.InvariantCulture);
 
                 //this._dateTimeStart.Format = DateTimePickerFormat.Custom;
                 //this._dateTimeStart.CustomFormat = Const.DATE_FORMART_YYYY_MM_DD;
@@ -850,7 +749,7 @@ namespace sys1
         private void _btnBeforeDay_Click(object sender, EventArgs e)
         {
             // 清空datagridview
-            _dgvData.Rows.Clear();
+            dgvData.Rows.Clear();
             // 清空曲线1的fastline
             tChartM.Series[0].Clear();
             // 清空曲线2的fastline
@@ -860,15 +759,15 @@ namespace sys1
 
             timer1.Enabled = false;
             // 历史数据分析设为选中
-            _rbtnHistory.Checked = true;
+            rbtnHistory.Checked = true;
 
             if (Check())
             {
-                DateTime dtStart = Convert.ToDateTime(_dateTimeStart.Text).AddDays(-1);
-                DateTime dtEnd = Convert.ToDateTime(_dateTimeEnd.Text).AddDays(-1);
+                DateTime dtStart = Convert.ToDateTime(dateTimeStart.Text).AddDays(-1);
+                DateTime dtEnd = Convert.ToDateTime(dateTimeEnd.Text).AddDays(-1);
 
-                _dateTimeStart.Text = dtStart.ToString(CultureInfo.InvariantCulture);
-                _dateTimeEnd.Text = dtEnd.ToString(CultureInfo.InvariantCulture);
+                dateTimeStart.Text = dtStart.ToString(CultureInfo.InvariantCulture);
+                dateTimeEnd.Text = dtEnd.ToString(CultureInfo.InvariantCulture);
 
                 _btnQuery_Click(sender, e);
             }
@@ -882,7 +781,7 @@ namespace sys1
         private void _btnNow_Click(object sender, EventArgs e)
         {
             // 清空datagridview
-            _dgvData.Rows.Clear();
+            dgvData.Rows.Clear();
             // 清空曲线1的fastline
             tChartM.Series[0].Clear();
             // 清空曲线2的fastline
@@ -892,12 +791,12 @@ namespace sys1
 
             timer1.Enabled = false;
             // 历史数据分析设为选中
-            _rbtnHistory.Checked = true;
+            rbtnHistory.Checked = true;
 
             if (Check())
             {
-                _dateTimeStart.Text = DateTime.Now.ToString("yyyy-MM-dd") + @" 00:00:00";
-                _dateTimeEnd.Text = DateTime.Now.ToString("yyyy-MM-dd") + @" 23:59:59";
+                dateTimeStart.Text = DateTime.Now.ToString("yyyy-MM-dd") + @" 00:00:00";
+                dateTimeEnd.Text = DateTime.Now.ToString("yyyy-MM-dd") + @" 23:59:59";
 
                 _btnQuery_Click(sender, e);
             }
@@ -909,14 +808,14 @@ namespace sys1
         private bool Check()
         {
             // 没有选择巷道 
-            if (_currentTunnelId <= Const.INVALID_ID)
+            if (selectTunnelSimple1.SelectedTunnel == null)
             {
                 Alert.alert(Const_GE.TUNNEL_NAME_MUST_INPUT);
                 return false;
             }
 
             // 没有选择探头
-            if (_lstProbeName.SelectedItems.Count == 0)
+            if (lstProbeName.SelectedItems.Count == 0)
             {
                 Alert.alert(Const_GE.PROBE_MUST_CHOOSE);
                 return false;
@@ -945,85 +844,14 @@ namespace sys1
             bdd.ShowDialog();
         }
 
-        private void _lstProbeName_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            _rbtnRealtime.Checked = true;
-
-            _currentProbeId = _lstProbeName.SelectedValue == null ? "-1" : _lstProbeName.SelectedValue.ToString();
-
-
-            _dateTimeStart.Enabled = false;
-            _dateTimeEnd.Enabled = false;
-            _btnBeforeDay.Enabled = false;
-            _btnNow.Enabled = false;
-            _btnAfterDay.Enabled = false;
-            _btnQuery.Enabled = false;
-
-
-            // 开始实时数据监控
-            StartRealTimeCurveMonitoring();
-        }
-
-        private void _lstProbeStyle_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            _lstProbeName.DataSource = null;
-
-            // 没有选择巷道
-            if (_currentTunnelId <= Const.INVALID_ID)
-            {
-                Alert.alert(Const_GE.TUNNEL_NAME_MUST_INPUT);
-            }
-            else
-            {
-                // 根据巷道编号和探头类型编号获取探头信息
-                Probe[] probes = Probe.FindAllByTunnelIdAndProbeTypeId(_currentTunnelId,
-                Convert.ToInt32(this._lstProbeStyle.SelectedValue));
-
-                for (int i = 0; i < probes.Length; i++)
-                {
-                    _lstProbeName.Items.Add(probes);
-                }
-                _lstProbeName.DisplayMember = "ProbeName";
-                _lstProbeName.ValueMember = "ProbeId";
-
-                _lstProbeName.SelectedIndex = -1;
-            }
-        }
-
-        private void _rbtnRealtime_Click_1(object sender, EventArgs e)
-        {
-
-            // 停止实时数据监控
-
-            // 清空datagridview
-            _dgvData.Rows.Clear();
-            // 清空曲线1的fastline
-            tChartM.Series[0].Clear();
-            // 清空曲线2的fastline
-            tChartT2.Series[0].Clear();
-            // 清空曲线3的fastline
-            tChartN.Series[0].Clear();
-
-            _dateTimeStart.Enabled = false;
-            _dateTimeEnd.Enabled = false;
-            _btnBeforeDay.Enabled = false;
-            _btnNow.Enabled = false;
-            _btnAfterDay.Enabled = false;
-            _btnQuery.Enabled = false;
-
-            StartRealTimeCurveMonitoring();
-        }
-
         /// <summary>
         /// 添加T2瓦斯浓度平均增加值
         /// </summary>
         /// <param name="tChart"></param>
-        /// <param name="ds"></param>
+        /// <param name="datas"></param>
         private void addDataToTeeChartT2(TChart tChart, GasConcentrationProbeData[] datas)
         {
             int sqlCnt = datas.Length;
-            double value = 0;
-            DateTime time = new DateTime();
             double sumValue = 0;
 
             double maxVertValue = 0;
@@ -1034,8 +862,8 @@ namespace sys1
                 if ((i + 1) != datas.Length)
                 {
                     sumValue = sumValue + datas[i + 1].ProbeValue - datas[i].ProbeValue;
-                    value = sumValue / (i + 1);
-                    time = datas[i + 1].RecordTime;
+                    var value = sumValue / (i + 1);
+                    var time = datas[i + 1].RecordTime;
 
                     if (value > maxVertValue)
                     {
@@ -1057,6 +885,67 @@ namespace sys1
         {
             AutoUpdater.CheckAtOnce = true;
             AutoUpdater.Start("http://bltmld.vicp.cc:8090/sys1/update.xml");
+        }
+
+        private void rbtnRealtime_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!rbtnRealtime.Checked) return;
+            dateTimeStart.Enabled = false;
+            dateTimeEnd.Enabled = false;
+            btnBeforeDay.Enabled = false;
+            btnNow.Enabled = false;
+            btnAfterDay.Enabled = false;
+            btnQuery.Enabled = false;
+            StartRealTimeCurveMonitoring();
+        }
+
+        private void rbtnHistory_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!rbtnHistory.Checked) return;
+            selectTunnelSimple1.Enabled = true;
+            lstProbeType.Enabled = true;
+            lstProbeName.Enabled = true;
+            StopRealTimeCurveMonitoring();
+            dgvData.Rows.Clear();
+            tChartM.Series[0].Clear();
+            tChartT2.Series[0].Clear();
+            tChartN.Series[0].Clear();
+
+            dateTimeStart.Enabled = true;
+            dateTimeEnd.Enabled = true;
+            btnBeforeDay.Enabled = true;
+            btnNow.Enabled = true;
+            btnAfterDay.Enabled = true;
+            btnQuery.Enabled = true;
+        }
+
+        private void lstProbeType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (selectTunnelSimple1.SelectedTunnel == null) return;
+            lstProbeName.DataSource =
+                Probe.FindAllByTunnelIdAndProbeTypeId(selectTunnelSimple1.SelectedTunnel.TunnelId,
+                    Convert.ToInt32(lstProbeType.SelectedValue));
+            lstProbeName.DisplayMember = "ProbeName";
+            lstProbeName.ValueMember = "ProbeId";
+        }
+
+        private void lstProbeName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            rbtnRealtime.Checked = true;
+
+            _currentProbeId = lstProbeName.SelectedValue == null ? "-1" : lstProbeName.SelectedValue.ToString();
+
+
+            dateTimeStart.Enabled = false;
+            dateTimeEnd.Enabled = false;
+            btnBeforeDay.Enabled = false;
+            btnNow.Enabled = false;
+            btnAfterDay.Enabled = false;
+            btnQuery.Enabled = false;
+
+
+            // 开始实时数据监控
+            StartRealTimeCurveMonitoring();
         }
     }
 }
