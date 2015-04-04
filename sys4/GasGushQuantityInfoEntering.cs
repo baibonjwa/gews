@@ -43,29 +43,12 @@ namespace sys4
         /// 带参数的构造方法
         /// </summary>
         /// <param name="strPrimaryKey">主键</param>
-        public GasGushQuantityInfoEntering(string strPrimaryKey)
+        public GasGushQuantityInfoEntering(GasGushQuantity gasGushQuantity)
         {
             InitializeComponent();
+            // 设置窗体默认属性
+            FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_OP.UPDATE_GASGUSHQUANTITY_INFO);
 
-            // 主键
-            int iPK = 0;
-            if (int.TryParse(strPrimaryKey, out iPK))
-            {
-                this._iPK = iPK;
-
-                // 设置窗体默认属性
-                FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_OP.UPDATE_GASGUSHQUANTITY_INFO);
-
-                // 设置业务类型
-                this._bllType = "update";
-
-
-
-                //this.selectTunnelUserControl1.init(mainFrm);
-                // 调用选择巷道控件时需要调用的方法
-                //this.selectTunnelUserControl1.setCurSelectedID(_intArr);
-
-            }
         }
 
 

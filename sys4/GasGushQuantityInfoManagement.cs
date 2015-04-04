@@ -1,36 +1,17 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Geometry;
-using FarPoint.Win;
-using FarPoint.Win.Spread;
-using FarPoint.Win.Spread.CellType;
 using GIS;
 using GIS.Common;
-using LibBusiness;
 using LibCommon;
 using LibEntity;
-using _4.OutburstPrevention;
 
 namespace sys4
 {
     public partial class GasGushQuantityInfoManagement : Form
     {
-        /** 明细部开始index位置 **/
-        private const int _iRowDetailStartIndex = 4;
-        /** 保存所有用户选中的行的索引 **/
-        private Hashtable _htSelIdxs = new Hashtable();
-        /** 检索件数**/
-        private int _iRowCount = 0;
-        /** 主键index **/
-        private int _primaryKeyIndex = 14;
-        /** 绑定ID index **/
-        private int _BIDIndex = 15;
-        /** 需要过滤的列索引 **/
-        private int[] _filterColunmIdxs = null;
 
         /// <summary>
         /// 构造方法
@@ -41,174 +22,11 @@ namespace sys4
 
             // 设置窗体默认属性
             FormDefaultPropertiesSetter.SetManagementFormDefaultProperties(this, Const_OP.MANAGE_GASGUSHQUANTITY_INFO);
-
-            // 设置Farpoint默认属性
-            FarpointDefaultPropertiesSetter.SetFpDefaultProperties(this.fpGasGushQuantityInfo, Const_OP.MANAGE_GASGUSHQUANTITY_INFO, _iRowDetailStartIndex);
-
-            // 调用委托方法 （必须实装）
-            dataPager1.FrmChild_EventHandler += FrmParent_EventHandler;
-
-            // 加载瓦斯涌出量数据
-            loadGasGushQuantityInfo();
-
-            #region Farpoint自动过滤功能
-            //初始化需要过滤功能的列
-            _filterColunmIdxs = new int[]
-            {
-                7,
-                8,
-                9,
-                10,
-                11,
-                12,
-                13,
-
-            };
-            //禁用选择颜色相关控件
-            farpointFilter1.EnableChooseColorCtrls(false);
-            //设置自动隐藏过滤条件
-            FarpointDefaultPropertiesSetter.SetFpFilterHideProperties(this.fpGasGushQuantityInfo, _filterColunmIdxs);
-            #endregion
         }
 
-        /// <summary>
-        /// 调用委托方法 （必须实装）
-        /// </summary>
-        /// <param name="sender"></param>
-        private void FrmParent_EventHandler(object sender)
+        private void RefreshData()
         {
-            // 分页控件与Farpoint过滤绑定问题
-            FarpointFilterSetter.ClearFpFilter(this.fpGasGushQuantityInfo);
-
-            // 加载瓦斯涌出量数据
-            loadGasGushQuantityInfo();
-        }
-
-        /// <summary>
-        /// 加载瓦斯涌出量数据
-        /// </summary>
-        private void loadGasGushQuantityInfo()
-        {
-            // 修改按钮设为不可用（必须实装）
-            this.btnUpdate.Enabled = false;
-            // 删除按钮设为不可用（必须实装）
-            this.btnDelete.Enabled = false;
-            // 全选/全不选checkbox设为未选中（必须实装）
-            this.chkSelAll.Checked = false;
-
-            // 清空HashTable
-            _htSelIdxs.Clear();
-
-            // 删除farpoint明细部（必须实装）
-            // 解决修改、删除某条数据后，重新load的时候，选择列checkbox不恢复成默认（不选择）的BUG
-            // 解决删除全部数据后，再添加一行，报错的BUG
-            if (this.fpGasGushQuantityInfo.Sheets[0].Rows.Count != _iRowDetailStartIndex)
-            {
-                this.fpGasGushQuantityInfo.Sheets[0].Rows.Remove(_iRowDetailStartIndex, _iRowCount);
-            }
-            else
-            {
-                _iRowCount = 0;
-            }
-
-            // 获取全部数据件数（必须实装）
-            int iRecordCount = GasGushQuantityBLL.selectAllGasGushQuantityInfo().Tables[0].Rows.Count;
-
-            // 调用分页控件初始化方法（必须实装）
-            dataPager1.PageControlInit(iRecordCount);
-
-            // 获取要检索数据的开始位置和结束位置 （必须实装）
-            int iStartIndex = dataPager1.getStartIndex();
-            int iEndIndex = dataPager1.getEndIndex();
-
-            // 获取开始位置和结束位置之间的数据（必须实装）
-            // 说明：如果画面当前显示的件数是10，那么init时开始位置为1，结束位置为10，点击下一页后，开始位置变为11，结束位置变为20
-            DataSet ds = GasGushQuantityBLL.selectGasGushQuantityInfoForPage(iStartIndex, iEndIndex);
-
-            // 当前检索件数（必须实装）
-            int iSelCnt = ds.Tables[0].Rows.Count;
-
-            // 重新设定farpoint显示行数 （必须实装）
-            this.fpGasGushQuantityInfo.Sheets[0].Rows.Count = _iRowDetailStartIndex + iSelCnt;
-
-            Cells cells = this.fpGasGushQuantityInfo.Sheets[0].Cells;
-
-            // 检索件数 > 0 的场合
-            if (iSelCnt > 0)
-            {
-                // 当前检索件数（必须实装）
-                this._iRowCount = iSelCnt;
-
-                // 循环结果集
-                for (int i = 0; i < iSelCnt; i++)
-                {
-                    int index = 0;
-                    // 选择
-                    CheckBoxCellType objCheckCell = new CheckBoxCellType();
-                    this.fpGasGushQuantityInfo.Sheets[0].Cells[_iRowDetailStartIndex + i, index].CellType = objCheckCell;
-                    // 坐标X
-                    this.fpGasGushQuantityInfo.Sheets[0].Cells[_iRowDetailStartIndex + i, ++index].Text = ds.Tables[0].Rows[i][GasGushQuantityDbConstNames.X].ToString();
-                    // 坐标Y
-                    this.fpGasGushQuantityInfo.Sheets[0].Cells[_iRowDetailStartIndex + i, ++index].Text = ds.Tables[0].Rows[i][GasGushQuantityDbConstNames.Y].ToString();
-                    // 坐标Z
-                    this.fpGasGushQuantityInfo.Sheets[0].Cells[_iRowDetailStartIndex + i, ++index].Text = ds.Tables[0].Rows[i][GasGushQuantityDbConstNames.Z].ToString();
-                    // 绝对瓦斯涌出量
-                    this.fpGasGushQuantityInfo.Sheets[0].Cells[_iRowDetailStartIndex + i, ++index].Text = ds.Tables[0].Rows[i][GasGushQuantityDbConstNames.ABSOLUTE_GAS_GUSH_QUANTITY].ToString();
-                    // 相对瓦斯涌出量
-                    this.fpGasGushQuantityInfo.Sheets[0].Cells[_iRowDetailStartIndex + i, ++index].Text = ds.Tables[0].Rows[i][GasGushQuantityDbConstNames.RELATIVE_GAS_GUSH_QUANTITY].ToString();
-                    // 工作面日产量
-                    this.fpGasGushQuantityInfo.Sheets[0].Cells[_iRowDetailStartIndex + i, ++index].Text = ds.Tables[0].Rows[i][GasGushQuantityDbConstNames.WORKING_FACE_DAY_OUTPUT].ToString();
-                    // 回采年月
-                    this.fpGasGushQuantityInfo.Sheets[0].Cells[_iRowDetailStartIndex + i, ++index].Text = ds.Tables[0].Rows[i][GasGushQuantityDbConstNames.STOPE_DATE].ToString();
-
-                    // 巷道信息
-                    // 矿井名称
-                    this.fpGasGushQuantityInfo.Sheets[0].Cells[_iRowDetailStartIndex + i, ++index].Text = "";
-                    // 水平
-                    this.fpGasGushQuantityInfo.Sheets[0].Cells[_iRowDetailStartIndex + i, ++index].Text = "";
-                    // 采区
-                    this.fpGasGushQuantityInfo.Sheets[0].Cells[_iRowDetailStartIndex + i, ++index].Text = "";
-                    // 工作面
-                    this.fpGasGushQuantityInfo.Sheets[0].Cells[_iRowDetailStartIndex + i, ++index].Text = "";
-                    // 巷道名称
-                    this.fpGasGushQuantityInfo.Sheets[0].Cells[_iRowDetailStartIndex + i, ++index].Text = "";
-
-                    int iTunnelID = 0;
-                    if (int.TryParse(ds.Tables[0].Rows[i][GasGushQuantityDbConstNames.TUNNEL_ID].ToString(), out iTunnelID))
-                    {
-                        Tunnel tunnelEntity = Tunnel.Find(iTunnelID); // TunnelInfoBLL.selectTunnelInfoByTunnelID(iTunnelID);
-                        if (tunnelEntity != null)
-                        {
-                            // 矿井名称
-                            this.fpGasGushQuantityInfo.Sheets[0].Cells[_iRowDetailStartIndex + i, index - 4].Text = tunnelEntity.WorkingFace.MiningArea.Horizontal.Mine.MineName;
-                            // 水平
-                            this.fpGasGushQuantityInfo.Sheets[0].Cells[_iRowDetailStartIndex + i, index - 3].Text = tunnelEntity.WorkingFace.MiningArea.Horizontal.HorizontalName;
-                            // 采区
-                            this.fpGasGushQuantityInfo.Sheets[0].Cells[_iRowDetailStartIndex + i, index - 2].Text = tunnelEntity.WorkingFace.MiningArea.MiningAreaName;
-                            // 工作面
-                            this.fpGasGushQuantityInfo.Sheets[0].Cells[_iRowDetailStartIndex + i, index - 1].Text = tunnelEntity.WorkingFace.WorkingFaceName;
-                            // 巷道名称
-                            this.fpGasGushQuantityInfo.Sheets[0].Cells[_iRowDetailStartIndex + i, index].Text = tunnelEntity.TunnelName;
-                        }
-                    }
-
-                    // 煤层信息
-                    this.fpGasGushQuantityInfo.Sheets[0].Cells[_iRowDetailStartIndex + i, ++index].Text = "";
-                    int iCoalSeamsId = 0;
-                    if (int.TryParse(ds.Tables[0].Rows[i][GasGushQuantityDbConstNames.COAL_SEAMS_ID].ToString(), out iCoalSeamsId))
-                    {
-                        CoalSeams ent = CoalSeams.Find(iCoalSeamsId);
-                        cells[_iRowDetailStartIndex + i, index].Text = ent == null ? "" : ent.CoalSeamsName;
-                    }
-
-                    // 主键（隐藏列）
-                    this.fpGasGushQuantityInfo.Sheets[0].Cells[_iRowDetailStartIndex + i, ++index].Text = ds.Tables[0].Rows[i][GasGushQuantityDbConstNames.ID].ToString();
-                    this.fpGasGushQuantityInfo.Sheets[0].Columns[index].Visible = false;
-                    // 绑定ID（隐藏列）
-                    this.fpGasGushQuantityInfo.Sheets[0].Cells[_iRowDetailStartIndex + i, ++index].Text = ds.Tables[0].Rows[i][GasContentDbConstNames.BID].ToString();
-                    this.fpGasGushQuantityInfo.Sheets[0].Columns[index].Visible = false;
-                }
-            }
+            gcGasGushQuantity.DataSource = GasGushQuantity.FindAll();
         }
 
         /// <summary>
@@ -218,16 +36,10 @@ namespace sys4
         /// <param name="e"></param>
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            GasGushQuantityInfoEntering gasGushQuantityInfoEnteringForm = new GasGushQuantityInfoEntering();
+            var gasGushQuantityInfoEnteringForm = new GasGushQuantityInfoEntering();
             if (DialogResult.OK == gasGushQuantityInfoEnteringForm.ShowDialog())
             {
-                // 加载瓦斯涌出量数据
-                loadGasGushQuantityInfo();
-                // 跳转到尾页（必须实装）
-                this.dataPager1.btnLastPage_Click(sender, e);
-
-                // 设置farpoint焦点（必须实装）
-                this.fpGasGushQuantityInfo.Sheets[0].SetActiveCell(this.fpGasGushQuantityInfo.Sheets[0].Rows.Count, 0);
+                RefreshData();
             }
         }
 
@@ -238,19 +50,10 @@ namespace sys4
         /// <param name="e"></param>
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            // 获取已选择明细行的索引
-            int[] iSelIdxsArr = GetSelIdxs();
-            // 获取编号（主键）
-            string strPrimaryKey = this.fpGasGushQuantityInfo.Sheets[0].Cells[iSelIdxsArr[0], _primaryKeyIndex].Text;
-
-            GasGushQuantityInfoEntering gasGushQuantityInfoEnteringForm = new GasGushQuantityInfoEntering(strPrimaryKey);
+            var gasGushQuantityInfoEnteringForm = new GasGushQuantityInfoEntering((GasGushQuantity)gridView1.GetFocusedRow());
             if (DialogResult.OK == gasGushQuantityInfoEnteringForm.ShowDialog())
             {
-                // 加载瓦斯涌出量数据
-                loadGasGushQuantityInfo();
-
-                // 设置farpoint焦点（必须实装）
-                this.fpGasGushQuantityInfo.Sheets[0].SetActiveCell(iSelIdxsArr[0], 0);
+                RefreshData();
             }
         }
 
@@ -261,42 +64,19 @@ namespace sys4
         /// <param name="e"></param>
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (Alert.confirm(Const_OP.DEL_CONFIRM_MSG_GASGUSHQUANTITY))
+            if (!Alert.confirm(Const_OP.DEL_CONFIRM_MSG_GASGUSHQUANTITY)) return;
+            var selectedIndex = gridView1.GetSelectedRows();
+            foreach (var gasContent in selectedIndex.Select(i => (GasGushQuantity)gridView1.GetRow(i)))
             {
-                // 获取已选择明细行的索引
-                int[] iSelIdxsArr = GetSelIdxs();
-
-                // 存放主键的数组
-                int[] iPkIdxsArr = new int[iSelIdxsArr.Length];
-                string[] bidArr = new string[iSelIdxsArr.Length];
-                for (int i = 0; i < iSelIdxsArr.Length; i++)
-                {
-                    // 获取主键
-                    string iPk = this.fpGasGushQuantityInfo.Sheets[0].Cells[iSelIdxsArr[i], _primaryKeyIndex].Text;
-                    iPkIdxsArr[i] = Convert.ToInt32(iPk);
-                    bidArr[i] = this.fpGasGushQuantityInfo.Sheets[0].Cells[iSelIdxsArr[i], _BIDIndex].Text;
-                }
-
-                // 瓦斯涌出量数据删除
-                bool bResult = GasGushQuantityBLL.deleteGasGushQuantityInfo(iPkIdxsArr);
-
-                // 删除成功的场合
-                if (bResult)
-                {
-                    DelGasGushQuantityPt(bidArr);
-                    // 加载瓦斯涌出量数据
-                    loadGasGushQuantityInfo();
-
-                    // 设置farpoint焦点（必须实装）
-                    this.fpGasGushQuantityInfo.Sheets[0].SetActiveCell(iSelIdxsArr[0], 0);
-                }
+                DelGasGushQuantityPt(new[] { gasContent.BindingId });
+                gasContent.Delete();
             }
         }
+
         /// <summary>
         /// 删除瓦斯信息
         /// </summary>
         /// <param name="bid">绑定ID</param>
-        /// <param name="mc">煤层</param>
         private void DelGasGushQuantityPt(string[] bid)
         {
             ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.LAYER_ALIAS_MR_WSYLD);
@@ -311,190 +91,6 @@ namespace sys4
             }
             DataEditCommon.DeleteFeatureByWhereClause(pFeatureLayer, strsql);
         }
-        /// <summary>
-        /// 获取farpoint中选中的所有行（必须实装）
-        /// </summary>
-        /// <returns>注意，返回值可能是null，null则代表一个也没选中</returns>
-        private int[] GetSelIdxs()
-        {
-            if (this._htSelIdxs.Count == 0)
-            {
-                return null;
-            }
-            int[] retArr = new int[this._htSelIdxs.Count];
-            this._htSelIdxs.Keys.CopyTo(retArr, 0);
-            return retArr;
-        }
-
-        /// <summary>
-        /// farpoint的ButtonClicked事件（必须实装）
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void fpGasGushQuantityInfo_ButtonClicked(object sender, EditorNotifyEventArgs e)
-        {
-            // 判断点击的空间类型是否是.FpCheckBox)
-            if (e.EditingControl is FpCheckBox)
-            {
-                FpCheckBox fpChk = (FpCheckBox)e.EditingControl;
-                // 判断是否被选中
-                if (fpChk.Checked)
-                {
-                    // 保存索引号
-                    if (!_htSelIdxs.Contains(e.Row))
-                    {
-                        _htSelIdxs.Add(e.Row, true);
-
-                        // 点击每条记录知道全部选中的情况下，全选/全不选checkbox设为选中
-                        if (_htSelIdxs.Count == _iRowCount)
-                        {
-                            // 全选/全不选checkbox设为选中
-                            this.chkSelAll.Checked = true;
-                        }
-                    }
-                }
-                else
-                {
-                    // 移除索引号
-                    _htSelIdxs.Remove(e.Row);
-
-                    // 全选/全不选checkbox设为未选中
-                    this.chkSelAll.Checked = false;
-                }
-
-                // 如果保存索引号的Hashtable中保存的索引件数是1，则修改按钮设为可用，否则设为不可用
-                this.btnUpdate.Enabled = (_htSelIdxs.Count == 1) ? true : false;
-                // 删除按钮
-                this.btnDelete.Enabled = (_htSelIdxs.Count >= 1) ? true : false;
-            }
-        }
-
-        /// <summary>
-        /// 全选/全不选checkbox的click事件（必须实装）
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void chkSelAll_Click(object sender, EventArgs e)
-        {
-            // 全不选的情况下
-            if (_htSelIdxs.Count == _iRowCount)
-            {
-                // 循环明细
-                for (int i = 0; i < _iRowCount; i++)
-                {
-                    // 将所有明细的checkbox设为未选中
-                    this.fpGasGushQuantityInfo.Sheets[0].Cells[_iRowDetailStartIndex + i, 0].Value = ((CheckBox)sender).Checked;
-                    // 将存有选中项目的数组清空
-                    _htSelIdxs.Remove(_iRowDetailStartIndex + i);
-                }
-                // 删除按钮设为不可用
-                this.btnDelete.Enabled = false;
-            }
-            // 全选的情况下
-            else
-            {
-                // 循环明细
-                for (int i = 0; i < _iRowCount; i++)
-                {
-                    // 将所有明细设为全选中
-                    this.fpGasGushQuantityInfo.Sheets[0].Cells[_iRowDetailStartIndex + i, 0].Value = ((CheckBox)sender).Checked;
-                    // 将选中明细的索引添加到数组中，如果已经存在不要二次添加
-                    if (!_htSelIdxs.Contains(_iRowDetailStartIndex + i))
-                    {
-                        _htSelIdxs.Add(_iRowDetailStartIndex + i, true);
-                    }
-                }
-                // 删除按钮设为可用
-                this.btnDelete.Enabled = true;
-            }
-
-            // 如果保存索引号的Hashtable中保存的索引件数是1，则修改按钮设为可用，否则设为不可用
-            this.btnUpdate.Enabled = (_htSelIdxs.Count == 1) ? true : false;
-            // 删除按钮
-            this.btnDelete.Enabled = (_htSelIdxs.Count >= 1) ? true : false;
-        }
-
-        /// <summary>
-        /// farpointFilter1的OnCheckFilterChanged方法
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="arg"></param>
-        private void farpointFilter1_OnCheckFilterChanged(object sender, EventArgs arg)
-        {
-            CheckBox chk = (CheckBox)sender;
-            //当Checkbox选中时，筛选过程中则将不符合条件的数据隐藏
-            if (chk.Checked == true)
-            {
-                //禁用选择颜色相关控件
-                farpointFilter1.EnableChooseColorCtrls(false);
-                //设置自动隐藏过滤条件
-                FarpointDefaultPropertiesSetter.SetFpFilterHideProperties(this.fpGasGushQuantityInfo, _filterColunmIdxs);
-
-            }
-            //未选中时，根据用户自定义的颜色进行分类显示
-            else
-            {
-                //启用选择颜色相关控件
-                farpointFilter1.EnableChooseColorCtrls(true);
-                //设置自定义过滤条件
-                FarpointDefaultPropertiesSetter.SetFpCustomFilterProperties(this.fpGasGushQuantityInfo, farpointFilter1.GetSelectedFitColor(), farpointFilter1.GetSelectedNotFitColor(), _filterColunmIdxs);
-            }
-        }
-
-        /// <summary>
-        /// 清空过滤条件
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="arg"></param>
-        private void farpointFilter1_OnClickClearFilterBtn(object sender, EventArgs arg)
-        {
-            //清空过滤条件
-            this.fpGasGushQuantityInfo.ActiveSheet.RowFilter.ResetFilter();
-        }
-
-        /// <summary>
-        /// 根据新的颜色值设置自动隐藏过滤条件
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="arg"></param>
-        private void farpointFilter1_OnClickFitColorBtnOK(object sender, EventArgs arg)
-        {
-            //根据新的颜色值设置自动隐藏过滤条件
-            FarpointDefaultPropertiesSetter.SetFpCustomFilterProperties(this.fpGasGushQuantityInfo, farpointFilter1.GetSelectedFitColor(), farpointFilter1.GetSelectedNotFitColor(), _filterColunmIdxs);
-        }
-
-        /// <summary>
-        /// 根据新的颜色值设置自动隐藏过滤条件
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="arg"></param>
-        private void farpointFilter1_OnClickNotFitColorBtnOK(object sender, EventArgs arg)
-        {
-            //根据新的颜色值设置自动隐藏过滤条件
-            FarpointDefaultPropertiesSetter.SetFpCustomFilterProperties(this.fpGasGushQuantityInfo, farpointFilter1.GetSelectedFitColor(), farpointFilter1.GetSelectedNotFitColor(), _filterColunmIdxs);
-        }
-
-        /// <summary>
-        /// 确定
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnOK_Click(object sender, EventArgs e)
-        {
-            // 关闭窗口
-            this.Close();
-        }
-
-        /// <summary>
-        /// 取消
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            // 关闭窗口
-            this.Close();
-        }
 
         /// <summary>
         /// 导出
@@ -503,9 +99,9 @@ namespace sys4
         /// <param name="e"></param>
         private void tsBtnExport_Click(object sender, EventArgs e)
         {
-            if (FileExport.fileExport(fpGasGushQuantityInfo, true))
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                Alert.alert(Const.EXPORT_SUCCESS_MSG);
+                gcGasGushQuantity.ExportToXls(saveFileDialog1.FileName);
             }
         }
 
@@ -516,7 +112,7 @@ namespace sys4
         /// <param name="e"></param>
         private void tsBtnPrint_Click(object sender, EventArgs e)
         {
-            FilePrint.CommonPrint(this.fpGasGushQuantityInfo, 0);
+            DevUtil.DevPrint(gcGasGushQuantity, "瓦斯涌出量点信息报表");
         }
 
         /// <summary>
@@ -527,7 +123,7 @@ namespace sys4
         private void btnExit_Click(object sender, EventArgs e)
         {
             // 关闭窗口
-            this.Close();
+            Close();
         }
 
         /// <summary>
@@ -537,32 +133,17 @@ namespace sys4
         /// <param name="e"></param>
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            // 加载瓦斯涌出量数据
-            loadGasGushQuantityInfo();
+            RefreshData();
         }
 
         private void btnMap_Click(object sender, EventArgs e)
         {
-            // 获取已选择明细行的索引
-            int[] iSelIdxsArr = GetSelIdxs();
-            if (iSelIdxsArr == null)
+            var selectedIndex = gridView1.GetSelectedRows();
+            var list = selectedIndex.Select(i => (GasGushQuantity)gridView1.GetRow(i)).Select(gasGushQuantity => new PointClass
             {
-                MessageBox.Show("未选中数据行！");
-                return;
-            }
-            IPoint pt;
-            List<IPoint> list = new List<IPoint>();
-            for (int i = 0; i < iSelIdxsArr.Length; i++)
-            {
-                try
-                {
-                    pt = new PointClass();
-                    pt.X = Convert.ToDouble(this.fpGasGushQuantityInfo.Sheets[0].Cells[iSelIdxsArr[i], 1].Text);
-                    pt.Y = Convert.ToDouble(this.fpGasGushQuantityInfo.Sheets[0].Cells[iSelIdxsArr[i], 2].Text);
-                    list.Add(pt);
-                }
-                catch { }
-            }
+                X = gasGushQuantity.CoordinateX,
+                Y = gasGushQuantity.CoordinateY
+            }).Cast<IPoint>().ToList();
             MyMapHelp.Jump(MyMapHelp.GetGeoFromPoint(list));
         }
     }

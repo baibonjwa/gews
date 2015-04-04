@@ -29,47 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GasGushQuantityInfoManagement));
-            FarPoint.Win.ComplexBorder complexBorder1 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder2 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder3 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder4 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder5 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder6 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder7 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder8 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder9 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder10 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder11 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder12 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder13 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder14 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder15 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder16 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder17 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder18 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder19 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder20 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder21 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder22 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder23 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder24 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder25 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder26 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder27 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder28 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder29 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder30 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder31 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder32 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder33 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder34 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.Spread.CellType.TextCellType textCellType1 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.Spread.CellType.TextCellType textCellType2 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.Spread.CellType.TextCellType textCellType3 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.Spread.CellType.TextCellType textCellType4 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.Spread.CellType.TextCellType textCellType5 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.Spread.CellType.TextCellType textCellType6 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.Spread.CellType.TextCellType textCellType7 = new FarPoint.Win.Spread.CellType.TextCellType();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsBtnPrint = new System.Windows.Forms.ToolStripButton();
             this.tsBtnExport = new System.Windows.Forms.ToolStripButton();
@@ -79,13 +38,20 @@
             this.btnRefresh = new System.Windows.Forms.ToolStripButton();
             this.btnMap = new System.Windows.Forms.ToolStripButton();
             this.btnExit = new System.Windows.Forms.ToolStripButton();
-            this.fpGasGushQuantityInfo = new FarPoint.Win.Spread.FpSpread();
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1 = new FarPoint.Win.Spread.SheetView();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.gcGasGushQuantity = new DevExpress.XtraGrid.GridControl();
+            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.controlNavigator1 = new DevExpress.XtraEditors.ControlNavigator();
             this.toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fpGasGushQuantityInfo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gcGasGushQuantity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -181,283 +147,6 @@
             this.btnExit.Text = "退出";
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
-            // fpGasGushQuantityInfo
-            // 
-            this.fpGasGushQuantityInfo.AccessibleDescription = "fpGasGushQuantityInfo, Sheet1, Row 0, Column 0, 瓦斯涌出量信息";
-            this.fpGasGushQuantityInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.fpGasGushQuantityInfo.BorderCollapse = FarPoint.Win.Spread.BorderCollapse.Collapse;
-            this.fpGasGushQuantityInfo.ColumnSplitBoxPolicy = FarPoint.Win.Spread.SplitBoxPolicy.Never;
-            this.fpGasGushQuantityInfo.HorizontalScrollBarPolicy = FarPoint.Win.Spread.ScrollBarPolicy.AsNeeded;
-            this.fpGasGushQuantityInfo.Location = new System.Drawing.Point(12, 112);
-            this.fpGasGushQuantityInfo.Name = "fpGasGushQuantityInfo";
-            this.fpGasGushQuantityInfo.RowSplitBoxPolicy = FarPoint.Win.Spread.SplitBoxPolicy.Never;
-            this.fpGasGushQuantityInfo.Sheets.AddRange(new FarPoint.Win.Spread.SheetView[] {
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1});
-            this.fpGasGushQuantityInfo.Size = new System.Drawing.Size(905, 438);
-            this.fpGasGushQuantityInfo.TabIndex = 2;
-            this.fpGasGushQuantityInfo.ButtonClicked += new FarPoint.Win.Spread.EditorNotifyEventHandler(this.fpGasGushQuantityInfo_ButtonClicked);
-            this.fpGasGushQuantityInfo.SetViewportTopRow(0, 0, 3);
-            this.fpGasGushQuantityInfo.SetActiveViewport(0, -1, 0);
-            // 
-            // fpStopeWorkingFaceGasGushQuantityInfo_Sheet1
-            // 
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Reset();
-            fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.SheetName = "Sheet1";
-            // Formulas and custom names must be loaded with R1C1 reference style
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.ReferenceStyle = FarPoint.Win.Spread.Model.ReferenceStyle.R1C1;
-            fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.ColumnCount = 25;
-            fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.RowCount = 50;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(0, 0).Border = complexBorder1;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(0, 0).ColumnSpan = 14;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(0, 0).Font = new System.Drawing.Font("SimSun", 16F, System.Drawing.FontStyle.Bold);
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(0, 0).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(0, 0).Locked = true;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(0, 0).RowSpan = 2;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(0, 0).Value = "瓦斯涌出量数据一览";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(0, 0).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(0, 1).Border = complexBorder2;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(0, 1).Locked = false;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(0, 1).Value = "程序";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(0, 2).Border = complexBorder3;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(0, 2).Locked = false;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(0, 2).Value = "程序";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(0, 3).Border = complexBorder4;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(0, 3).Locked = false;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(0, 3).Value = "程序";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(0, 4).Border = complexBorder5;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(0, 4).Locked = false;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(0, 4).Value = "程序";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(0, 5).Border = complexBorder6;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(0, 5).Locked = false;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(0, 5).Value = "程序";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(0, 6).Locked = false;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(0, 6).Value = "程序";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(0, 7).Border = complexBorder7;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(0, 7).Locked = false;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(0, 7).Value = "程序";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(0, 8).Locked = false;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(0, 8).Value = "程序";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(0, 9).Locked = false;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(0, 9).Value = "程序";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(0, 10).Locked = false;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(0, 10).Value = "程序";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(0, 11).Locked = false;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(0, 11).Value = "程序";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(0, 12).Locked = false;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(0, 12).Value = "程序";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(0, 13).Locked = false;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(0, 13).Value = "程序";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(1, 0).Border = complexBorder8;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(1, 0).Locked = false;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(1, 0).Value = "程序";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(1, 1).Border = complexBorder9;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(1, 1).Locked = false;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(1, 1).Value = "程序";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(1, 2).Border = complexBorder10;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(1, 2).Locked = false;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(1, 2).Value = "程序";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(1, 3).Border = complexBorder11;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(1, 3).Locked = false;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(1, 3).Value = "程序";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(1, 4).Border = complexBorder12;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(1, 4).Locked = false;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(1, 4).Value = "程序";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(1, 5).Border = complexBorder13;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(1, 5).Locked = false;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(1, 5).Value = "程序";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(1, 6).Locked = false;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(1, 6).Value = "程序";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(1, 7).Border = complexBorder14;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(1, 7).Locked = false;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(1, 7).Value = "程序";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(1, 8).Locked = false;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(1, 8).Value = "程序";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(1, 9).Locked = false;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(1, 9).Value = "程序";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(1, 10).Locked = false;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(1, 10).Value = "程序";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(1, 11).Locked = false;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(1, 11).Value = "程序";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(1, 12).Locked = false;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(1, 12).Value = "程序";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(1, 13).Locked = false;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(1, 13).Value = "程序";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 0).Border = complexBorder15;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 0).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 0).Locked = true;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 0).RowSpan = 2;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 0).Value = "选择";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 0).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 1).Border = complexBorder16;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 1).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 1).Locked = true;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 1).RowSpan = 2;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 1).Value = "坐标X";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 1).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 2).Border = complexBorder17;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 2).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 2).Locked = true;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 2).RowSpan = 2;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 2).Value = "坐标Y";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 2).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 3).Border = complexBorder18;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 3).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 3).Locked = true;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 3).RowSpan = 2;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 3).Value = "坐标Z";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 3).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 4).Border = complexBorder19;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 4).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 4).Locked = true;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 4).RowSpan = 2;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 4).Value = "绝对瓦斯涌出量";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 4).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 5).Border = complexBorder20;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 5).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 5).Locked = true;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 5).RowSpan = 2;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 5).Value = "相对瓦斯涌出量";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 5).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 6).Border = complexBorder21;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 6).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 6).Locked = true;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 6).RowSpan = 2;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 6).Value = "工作面日产量";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 6).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 7).Border = complexBorder22;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 7).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 7).Locked = true;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 7).RowSpan = 2;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 7).Value = "回采年月";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 7).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 8).Border = complexBorder23;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 8).ColumnSpan = 5;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 8).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 8).Locked = true;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 8).Value = "所在巷道信息";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 8).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 9).Border = complexBorder24;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 9).Locked = false;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 9).Value = "程序";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 10).Border = complexBorder25;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 10).Locked = false;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 10).Value = "程序";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 11).Border = complexBorder26;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 11).Locked = false;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 11).Value = "程序";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 12).Border = complexBorder27;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 12).Locked = false;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 12).Value = "程序";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 13).Border = complexBorder28;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 13).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 13).Locked = true;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 13).RowSpan = 2;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 13).Value = "所在煤层";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(2, 13).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 0).Value = "程序";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 1).Locked = false;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 1).Value = "程序";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 2).Locked = false;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 2).Value = "程序";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 3).Locked = false;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 3).Value = "程序";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 4).Locked = false;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 4).Value = "程序";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 5).Locked = false;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 5).Value = "程序";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 6).Locked = false;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 6).Value = "程序";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 7).Locked = false;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 7).Value = "程序";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 8).Border = complexBorder29;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 8).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 8).Locked = true;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 8).Value = "矿井名称";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 8).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 9).Border = complexBorder30;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 9).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 9).Locked = true;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 9).Value = "水平名称";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 9).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 10).Border = complexBorder31;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 10).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 10).Locked = true;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 10).Value = "采区名称";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 10).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 11).Border = complexBorder32;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 11).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 11).Locked = true;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 11).Value = "工作面名称";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 11).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 12).Border = complexBorder33;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 12).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 12).Locked = true;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 12).Value = "巷道名称";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 12).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 13).Border = complexBorder34;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 13).Locked = false;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Cells.Get(3, 13).Value = "程序";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(0).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(0).Locked = false;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(0).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(0).Width = 41F;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(1).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(1).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(1).Width = 76F;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(2).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(2).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(2).Width = 76F;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(3).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(3).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(3).Width = 76F;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(4).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(4).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(4).Width = 109F;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(5).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(5).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(5).Width = 109F;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(6).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(6).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(6).Width = 109F;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(7).CellType = textCellType1;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(7).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(7).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(7).Width = 145F;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(8).CellType = textCellType2;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(8).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(8).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(8).Width = 109F;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(9).CellType = textCellType3;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(9).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(9).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(9).Width = 109F;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(10).CellType = textCellType4;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(10).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(10).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(10).Width = 109F;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(11).CellType = textCellType5;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(11).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(11).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(11).Width = 109F;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(12).CellType = textCellType6;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(12).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(12).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(12).Width = 109F;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(13).CellType = textCellType7;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(13).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Left;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(13).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.Columns.Get(13).Width = 109F;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.DefaultStyle.Locked = true;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.DefaultStyle.NoteIndicatorColor = System.Drawing.Color.Red;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.DefaultStyle.Parent = "DataAreaDefault";
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.FrozenRowCount = 3;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.RowHeader.Columns.Default.Resizable = false;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.RowHeader.Columns.Get(0).Width = 34F;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.SelectionUnit = FarPoint.Win.Spread.Model.SelectionUnit.Row;
-            this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1.ReferenceStyle = FarPoint.Win.Spread.Model.ReferenceStyle.A1;
-            // 
             // statusStrip1
             // 
             this.statusStrip1.Location = new System.Drawing.Point(0, 553);
@@ -470,13 +159,91 @@
             // 
             this.saveFileDialog1.Filter = "Excel 2007|*.xlsx|Excel 2003兼容|*.xls|PDF文档|*.pdf|TXT文档|*.txt";
             // 
+            // gcGasGushQuantity
+            // 
+            this.gcGasGushQuantity.Cursor = System.Windows.Forms.Cursors.Default;
+            this.gcGasGushQuantity.Location = new System.Drawing.Point(12, 27);
+            this.gcGasGushQuantity.MainView = this.gridView1;
+            this.gcGasGushQuantity.Name = "gcGasGushQuantity";
+            this.gcGasGushQuantity.Size = new System.Drawing.Size(905, 496);
+            this.gcGasGushQuantity.TabIndex = 7;
+            this.gcGasGushQuantity.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView1});
+            // 
+            // gridView1
+            // 
+            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn1,
+            this.gridColumn2,
+            this.gridColumn3,
+            this.gridColumn4,
+            this.gridColumn5,
+            this.gridColumn6});
+            this.gridView1.GridControl = this.gcGasGushQuantity;
+            this.gridView1.Name = "gridView1";
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "坐标X";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 0;
+            // 
+            // gridColumn2
+            // 
+            this.gridColumn2.Caption = "坐标Y";
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.VisibleIndex = 1;
+            // 
+            // gridColumn3
+            // 
+            this.gridColumn3.Caption = "绝对瓦斯涌出量";
+            this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.Visible = true;
+            this.gridColumn3.VisibleIndex = 2;
+            // 
+            // gridColumn4
+            // 
+            this.gridColumn4.Caption = "相对瓦斯涌出量";
+            this.gridColumn4.Name = "gridColumn4";
+            this.gridColumn4.Visible = true;
+            this.gridColumn4.VisibleIndex = 3;
+            // 
+            // gridColumn5
+            // 
+            this.gridColumn5.Caption = "工作面日产量";
+            this.gridColumn5.Name = "gridColumn5";
+            this.gridColumn5.Visible = true;
+            this.gridColumn5.VisibleIndex = 4;
+            // 
+            // gridColumn6
+            // 
+            this.gridColumn6.Caption = "回采年月";
+            this.gridColumn6.Name = "gridColumn6";
+            this.gridColumn6.Visible = true;
+            this.gridColumn6.VisibleIndex = 5;
+            // 
+            // controlNavigator1
+            // 
+            this.controlNavigator1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.controlNavigator1.Location = new System.Drawing.Point(12, 529);
+            this.controlNavigator1.Name = "controlNavigator1";
+            this.controlNavigator1.NavigatableControl = this.gcGasGushQuantity;
+            this.controlNavigator1.Size = new System.Drawing.Size(267, 21);
+            this.controlNavigator1.TabIndex = 88;
+            this.controlNavigator1.Text = "controlNavigator1";
+            this.controlNavigator1.TextLocation = DevExpress.XtraEditors.NavigatorButtonsTextLocation.Center;
+            this.controlNavigator1.TextStringFormat = "记录 {0} / {1}";
+            // 
             // GasGushQuantityInfoManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(929, 575);
+            this.Controls.Add(this.controlNavigator1);
+            this.Controls.Add(this.gcGasGushQuantity);
             this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.fpGasGushQuantityInfo);
             this.Controls.Add(this.statusStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "GasGushQuantityInfoManagement";
@@ -485,8 +252,8 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fpGasGushQuantityInfo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fpStopeWorkingFaceGasGushQuantityInfo_Sheet1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gcGasGushQuantity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -502,10 +269,17 @@
         private System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.ToolStripButton btnRefresh;
         private System.Windows.Forms.ToolStripButton btnExit;
-        private FarPoint.Win.Spread.FpSpread fpGasGushQuantityInfo;
-        private FarPoint.Win.Spread.SheetView fpStopeWorkingFaceGasGushQuantityInfo_Sheet1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.ToolStripButton btnMap;
+        private DevExpress.XtraGrid.GridControl gcGasGushQuantity;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
+        private DevExpress.XtraEditors.ControlNavigator controlNavigator1;
     }
 }
