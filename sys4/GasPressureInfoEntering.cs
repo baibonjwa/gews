@@ -1,31 +1,19 @@
-﻿// ******************************************************************
-// 概  述：瓦斯压力点数据录入
-// 作  者：伍鑫
-// 创建日期：2013/12/07
-// 版本号：V1.0
-// 版本信息：
-// V1.0 新建
-// ******************************************************************
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using LibCommon;
-using LibBusiness;
-using LibEntity;
 using ESRI.ArcGIS.Carto;
-using ESRI.ArcGIS.Geometry;
 using ESRI.ArcGIS.Geodatabase;
+using ESRI.ArcGIS.Geometry;
+using GIS;
 using GIS.Common;
 using GIS.SpecialGraphic;
-using LibCommonControl;
+using LibBusiness;
+using LibCommon;
 using LibCommonForm;
+using LibEntity;
 
-namespace _4.OutburstPrevention
+namespace sys4
 {
     public partial class GasPressureInfoEntering : Form
     {
@@ -55,27 +43,9 @@ namespace _4.OutburstPrevention
         /// 带参数的构造方法
         /// </summary>
         /// <param name="strPrimaryKey">主键</param>
-        public GasPressureInfoEntering(string strPrimaryKey)
+        public GasPressureInfoEntering(GasPressure gasPressure)
         {
             InitializeComponent();
-
-            // 主键
-            int iPK = 0;
-            if (int.TryParse(strPrimaryKey, out iPK))
-            {
-                this._iPK = iPK;
-
-                // 设置窗体默认属性
-                FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_OP.UPDATE_GASPRESSURE_INFO);
-
-                // 设置业务类型
-                this._bllType = "update";
-
-
-
-                // 调用选择巷道控件时需要调用的方法
-                //this.selectTunnelUserControl1.setCurSelectedID(_intArr);
-            }
         }
 
         /// <summary>
@@ -484,7 +454,7 @@ namespace _4.OutburstPrevention
             pt.X = dCoordinateX;
             pt.Y = dCoordinateY;
             pt.Z = dCoordinateZ;
-            ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, GIS.LayerNames.LAYER_ALIAS_MR_WSYLD);
+            ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.LAYER_ALIAS_MR_WSYLD);
             if (pLayer == null)
             {
                 MessageBox.Show("未找到瓦斯压力点图层,无法绘制瓦斯压力点图元。");
@@ -523,7 +493,7 @@ namespace _4.OutburstPrevention
             IFeature pfeature = DataEditCommon.CreateNewFeature(pFeatureLayer, geometry, list);
             if (pfeature != null)
             {
-                GIS.MyMapHelp.Jump(pt);
+                MyMapHelp.Jump(pt);
                 DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeography | esriViewDrawPhase.esriViewForeground, null, null);
             }
         }
@@ -534,7 +504,7 @@ namespace _4.OutburstPrevention
         /// <param name="mc">煤层</param>
         private void DelGasGushQuantityPt(string bid, string mc)
         {
-            ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, GIS.LayerNames.LAYER_ALIAS_MR_WSYLD);
+            ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.LAYER_ALIAS_MR_WSYLD);
             IFeatureLayer pFeatureLayer = (IFeatureLayer)pLayer;
             DataEditCommon.DeleteFeatureByWhereClause(pFeatureLayer, "bid='" + bid + "' and mc='" + mc + "'");
         }

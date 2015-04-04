@@ -142,7 +142,7 @@ namespace sys4
         private void btnMap_Click(object sender, EventArgs e)
         {
             var selectedIndex = gridView1.GetSelectedRows();
-            List<IPoint> list = selectedIndex.Select(i => (GasContent)gridView1.GetRow(i)).Select(gasContent => new PointClass
+            var list = selectedIndex.Select(i => (GasContent)gridView1.GetRow(i)).Select(gasContent => new PointClass
             {
                 X = gasContent.CoordinateX,
                 Y = gasContent.CoordinateY

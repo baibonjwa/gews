@@ -183,7 +183,7 @@ namespace sys4
                 // 瓦斯涌出量数据修改
                 if (GasGushQuantityBLL.updateGasGushQuantityInfo(gasGushQuantityEntity))
                 {
-                    DelGasGushQuantityPt(gasGushQuantityEntity.BindingId, mc);
+                    DelGasGushQuantityPt(gasGushQuantityEntity.BindingId, gasGushQuantityEntity.CoalSeams.CoalSeamsName);
                     DrawGasGushQuantityPt(gasGushQuantityEntity);
                 }
             }
