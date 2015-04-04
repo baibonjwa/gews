@@ -1,30 +1,21 @@
-﻿// ******************************************************************
-// 概  述：瓦斯涌出量点数据管理
-// 作  者：伍鑫
-// 创建日期：2013/12/10
-// 版本号：V1.0
-// 版本信息：
-// V1.0 新建
-// ******************************************************************
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Data;
+using System.Windows.Forms;
+using ESRI.ArcGIS.Carto;
+using ESRI.ArcGIS.Geometry;
+using FarPoint.Win;
+using FarPoint.Win.Spread;
+using FarPoint.Win.Spread.CellType;
+using GIS;
+using GIS.Common;
 using LibBusiness;
 using LibCommon;
-using LibCommonControl;
 using LibEntity;
-using ESRI.ArcGIS.Carto;
-using GIS.Common;
-using ESRI.ArcGIS.Geometry;
-using LibCommonForm;
+using _4.OutburstPrevention;
 
-namespace _4.OutburstPrevention
+namespace sys4
 {
     public partial class GasGushQuantityInfoManagement : Form
     {
@@ -49,10 +40,10 @@ namespace _4.OutburstPrevention
             InitializeComponent();
 
             // 设置窗体默认属性
-            LibCommon.FormDefaultPropertiesSetter.SetManagementFormDefaultProperties(this, Const_OP.MANAGE_GASGUSHQUANTITY_INFO);
+            FormDefaultPropertiesSetter.SetManagementFormDefaultProperties(this, Const_OP.MANAGE_GASGUSHQUANTITY_INFO);
 
             // 设置Farpoint默认属性
-            LibCommon.FarpointDefaultPropertiesSetter.SetFpDefaultProperties(this.fpGasGushQuantityInfo, Const_OP.MANAGE_GASGUSHQUANTITY_INFO, _iRowDetailStartIndex);
+            FarpointDefaultPropertiesSetter.SetFpDefaultProperties(this.fpGasGushQuantityInfo, Const_OP.MANAGE_GASGUSHQUANTITY_INFO, _iRowDetailStartIndex);
 
             // 调用委托方法 （必须实装）
             dataPager1.FrmChild_EventHandler += FrmParent_EventHandler;
@@ -140,7 +131,7 @@ namespace _4.OutburstPrevention
             // 重新设定farpoint显示行数 （必须实装）
             this.fpGasGushQuantityInfo.Sheets[0].Rows.Count = _iRowDetailStartIndex + iSelCnt;
 
-            FarPoint.Win.Spread.Cells cells = this.fpGasGushQuantityInfo.Sheets[0].Cells;
+            Cells cells = this.fpGasGushQuantityInfo.Sheets[0].Cells;
 
             // 检索件数 > 0 的场合
             if (iSelCnt > 0)
@@ -153,7 +144,7 @@ namespace _4.OutburstPrevention
                 {
                     int index = 0;
                     // 选择
-                    FarPoint.Win.Spread.CellType.CheckBoxCellType objCheckCell = new FarPoint.Win.Spread.CellType.CheckBoxCellType();
+                    CheckBoxCellType objCheckCell = new CheckBoxCellType();
                     this.fpGasGushQuantityInfo.Sheets[0].Cells[_iRowDetailStartIndex + i, index].CellType = objCheckCell;
                     // 坐标X
                     this.fpGasGushQuantityInfo.Sheets[0].Cells[_iRowDetailStartIndex + i, ++index].Text = ds.Tables[0].Rows[i][GasGushQuantityDbConstNames.X].ToString();
@@ -308,7 +299,7 @@ namespace _4.OutburstPrevention
         /// <param name="mc">煤层</param>
         private void DelGasGushQuantityPt(string[] bid)
         {
-            ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, GIS.LayerNames.LAYER_ALIAS_MR_WSYLD);
+            ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.LAYER_ALIAS_MR_WSYLD);
             IFeatureLayer pFeatureLayer = (IFeatureLayer)pLayer;
             string strsql = "";
             for (int i = 0; i < bid.Length; i++)
@@ -340,12 +331,12 @@ namespace _4.OutburstPrevention
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void fpGasGushQuantityInfo_ButtonClicked(object sender, FarPoint.Win.Spread.EditorNotifyEventArgs e)
+        private void fpGasGushQuantityInfo_ButtonClicked(object sender, EditorNotifyEventArgs e)
         {
             // 判断点击的空间类型是否是.FpCheckBox)
-            if (e.EditingControl is FarPoint.Win.FpCheckBox)
+            if (e.EditingControl is FpCheckBox)
             {
-                FarPoint.Win.FpCheckBox fpChk = (FarPoint.Win.FpCheckBox)e.EditingControl;
+                FpCheckBox fpChk = (FpCheckBox)e.EditingControl;
                 // 判断是否被选中
                 if (fpChk.Checked)
                 {
@@ -572,7 +563,7 @@ namespace _4.OutburstPrevention
                 }
                 catch { }
             }
-            GIS.MyMapHelp.Jump(GIS.MyMapHelp.GetGeoFromPoint(list));
+            MyMapHelp.Jump(MyMapHelp.GetGeoFromPoint(list));
         }
     }
 }

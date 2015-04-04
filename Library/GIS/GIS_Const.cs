@@ -7,7 +7,7 @@ namespace GIS
 {
     public static class GIS_Const
     {
-        public const string DEFAULT_MXD_FILE = "default.mxd";
+        public const string DEFAULT_MXD_FILE = "default_DEP.mxd";
 
         public const string FIELD_OBJECTID = "OBJECTID"; //
         public const string FIELD_BID      = "BID";      // Binding WirePointName.

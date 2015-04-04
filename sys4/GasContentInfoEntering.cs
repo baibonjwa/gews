@@ -1,31 +1,19 @@
-﻿// ******************************************************************
-// 概  述：瓦斯含量数据录入
-// 作  者：伍鑫
-// 创建日期：2013/12/08
-// 版本号：1.0
-// 版本信息：
-// V1.0 新建
-// ******************************************************************
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
+using ESRI.ArcGIS.Carto;
+using ESRI.ArcGIS.Geodatabase;
+using ESRI.ArcGIS.Geometry;
+using GIS;
+using GIS.Common;
+using GIS.SpecialGraphic;
 using LibBusiness;
 using LibCommon;
-using LibEntity;
-using GIS.Common;
-using ESRI.ArcGIS.Carto;
-using ESRI.ArcGIS.Geometry;
-using ESRI.ArcGIS.Geodatabase;
-using GIS.SpecialGraphic;
 using LibCommonForm;
-using LibCommonControl;
+using LibEntity;
 
-namespace _4.OutburstPrevention
+namespace sys4
 {
     public partial class GasContentInfoEntering : Form
     {
@@ -58,25 +46,10 @@ namespace _4.OutburstPrevention
         /// 带参数的构造方法
         /// </summary>
         /// <param name="strPrimaryKey">主键</param>
-        public GasContentInfoEntering(string strPrimaryKey)
+        public GasContentInfoEntering(GasContent gasContent)
         {
             InitializeComponent();
-
-            // 主键
-            int iPK = 0;
-            if (int.TryParse(strPrimaryKey, out iPK))
-            {
-                this._iPK = iPK;
-
-                // 设置窗体默认属性
-                FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_OP.UPDATE_GASCONTENT_INFO);
-
-                // 设置业务类型
-                this._bllType = "update";
-
-                // 设置日期控件格式
-
-            }
+            FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_OP.UPDATE_GASCONTENT_INFO);
         }
 
         /// <summary>
@@ -458,7 +431,7 @@ namespace _4.OutburstPrevention
             pt.X = dCoordinateX;
             pt.Y = dCoordinateY;
             pt.Z = dCoordinateZ;
-            ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, GIS.LayerNames.LAYER_ALIAS_MR_WSHLD);
+            ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.LAYER_ALIAS_MR_WSHLD);
             if (pLayer == null)
             {
                 MessageBox.Show("未找到瓦斯含量点图层,无法绘制瓦斯含量点图元。");
@@ -497,7 +470,7 @@ namespace _4.OutburstPrevention
             IFeature pfeature = DataEditCommon.CreateNewFeature(pFeatureLayer, geometry, list);
             if (pfeature != null)
             {
-                GIS.MyMapHelp.Jump(pt);
+                MyMapHelp.Jump(pt);
                 DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeography | esriViewDrawPhase.esriViewForeground, null, null);
             }
         }
@@ -509,7 +482,7 @@ namespace _4.OutburstPrevention
         /// <param name="mc">煤层</param>
         private void DelGasGushQuantityPt(string bid, string mc)
         {
-            ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, GIS.LayerNames.LAYER_ALIAS_MR_WSHLD);
+            ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.LAYER_ALIAS_MR_WSHLD);
             IFeatureLayer pFeatureLayer = (IFeatureLayer)pLayer;
             DataEditCommon.DeleteFeatureByWhereClause(pFeatureLayer, "bid='" + bid + "' and mc='" + mc + "'");
         }

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
+using DevExpress.XtraGrid.Views.Base;
 using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Geodatabase;
 using GIS;
 using GIS.Common;
 using LibCommon;
-using LibCommonControl;
 using LibCommonForm;
 using LibEntity;
 
@@ -178,7 +178,7 @@ namespace sys3
             }
         }
 
-        private void gridView1_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
+        private void gridView1_CustomColumnDisplayText(object sender, CustomColumnDisplayTextEventArgs e)
         {
             if (e.Column.FieldName == "TunnelType")
             {

@@ -1,31 +1,18 @@
-﻿// ******************************************************************
-// 概  述：瓦斯涌出量点数据录入
-// 作  者：伍鑫
-// 创建日期：2013/12/08
-// 版本号：1.0
-// 版本信息：
-// V1.0 新建
-// ******************************************************************
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using LibEntity;
-using LibBusiness;
-using LibCommon;
-using ESRI.ArcGIS.Geometry;
-using GIS.Common;
 using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Geodatabase;
-using GIS.SpecialGraphic;
+using ESRI.ArcGIS.Geometry;
+using GIS;
+using GIS.Common;
+using LibBusiness;
+using LibCommon;
 using LibCommonForm;
-using LibCommonControl;
+using LibEntity;
 
-namespace _4.OutburstPrevention
+namespace sys4
 {
     public partial class GasGushQuantityInfoEntering : Form
     {
@@ -420,7 +407,7 @@ namespace _4.OutburstPrevention
             pt.X = dCoordinateX;
             pt.Y = dCoordinateY;
             pt.Z = dCoordinateZ;
-            ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, GIS.LayerNames.LAYER_ALIAS_MR_HCGZMWSYCLD);
+            ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.LAYER_ALIAS_MR_HCGZMWSYCLD);
             if (pLayer == null)
             {
                 MessageBox.Show("未找到瓦斯涌出量点图层,无法绘制瓦斯涌出量点图元。");
@@ -476,7 +463,7 @@ namespace _4.OutburstPrevention
             IFeature pfeature = DataEditCommon.CreateNewFeature(pFeatureLayer, geometry, list);
             if (pfeature != null)
             {
-                GIS.MyMapHelp.Jump(pt);
+                MyMapHelp.Jump(pt);
                 DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeography | esriViewDrawPhase.esriViewForeground, null, null);
             }
         }
@@ -487,7 +474,7 @@ namespace _4.OutburstPrevention
         /// <param name="mc">煤层</param>
         private void DelGasGushQuantityPt(string bid, string mc)
         {
-            ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, GIS.LayerNames.LAYER_ALIAS_MR_HCGZMWSYCLD);
+            ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.LAYER_ALIAS_MR_HCGZMWSYCLD);
             IFeatureLayer pFeatureLayer = (IFeatureLayer)pLayer;
             DataEditCommon.DeleteFeatureByWhereClause(pFeatureLayer, "bid='" + bid + "' and mc='" + mc + "'");
         }
