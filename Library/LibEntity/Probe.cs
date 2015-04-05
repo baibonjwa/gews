@@ -13,7 +13,7 @@ namespace LibEntity
         /// <summary>
         ///     探头编号
         /// </summary>
-        [PrimaryKey(PrimaryKeyType.Native, "PROBE_ID")]
+        [PrimaryKey(PrimaryKeyType.Assigned, "PROBE_ID")]
         public string ProbeId { get; set; }
 
         /** 探头名称 **/

@@ -1,20 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using LibCommonForm;
-using LibEntity;
-using LibBusiness;
-using LibCommon;
-using LibSocket;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
-using LibCommonControl;
+using System.Text;
+using System.Timers;
+using System.Windows.Forms;
+using LibCommon;
 using LibConfig;
+using LibEntity;
+using LibPanels;
+using LibSocket;
+using Timer = System.Timers.Timer;
 
 namespace UnderTerminal
 {
@@ -82,8 +80,10 @@ namespace UnderTerminal
                 return;
             }
 
-            MineDataSimple m = new MineDataSimple(this.tunnelId, this.tunnelName, this);
-            m.Text = new LibPanels(MineDataPanelName.Management).panelFormName;
+            MineDataSimple m = new MineDataSimple
+            {
+                Text = new LibPanels.LibPanels(MineDataPanelName.Management).panelFormName
+            };
             m.ShowDialog();
         }
 
@@ -95,9 +95,8 @@ namespace UnderTerminal
                 return;
             }
 
-            MineDataSimple m = new MineDataSimple(this.tunnelId, this.tunnelName, this);
-            m.Text = new LibPanels(MineDataPanelName.CoalExistence).panelFormName;
-            string ThePath = System.Windows.Forms.Application.StartupPath;
+            MineDataSimple m = new MineDataSimple();
+            m.Text = new LibPanels.LibPanels(MineDataPanelName.CoalExistence).panelFormName;
             m.ShowDialog();
         }
 
@@ -109,8 +108,8 @@ namespace UnderTerminal
                 return;
             }
 
-            MineDataSimple m = new MineDataSimple(this.tunnelId, this.tunnelName, this);
-            m.Text = new LibPanels(MineDataPanelName.GasData).panelFormName;
+            MineDataSimple m = new MineDataSimple();
+            m.Text = new LibPanels.LibPanels(MineDataPanelName.GasData).panelFormName;
             m.ShowDialog();
         }
 
@@ -122,8 +121,8 @@ namespace UnderTerminal
                 return;
             }
 
-            MineDataSimple m = new MineDataSimple(this.tunnelId, this.tunnelName, this);
-            m.Text = new LibPanels(MineDataPanelName.Ventilation).panelFormName;
+            MineDataSimple m = new MineDataSimple();
+            m.Text = new LibPanels.LibPanels(MineDataPanelName.Ventilation).panelFormName;
             m.ShowDialog();
         }
 
@@ -148,8 +147,8 @@ namespace UnderTerminal
                 return;
             }
 
-            MineDataSimple m = new MineDataSimple(this.tunnelId, this.tunnelName, this);
-            m.Text = new LibPanels(MineDataPanelName.Management).panelFormName;
+            MineDataSimple m = new MineDataSimple();
+            m.Text = new LibPanels.LibPanels(MineDataPanelName.Management).panelFormName;
             m.ShowDialog();
         }
 
@@ -161,34 +160,11 @@ namespace UnderTerminal
                 return;
             }
 
-            MineDataSimple m = new MineDataSimple(this.tunnelId, this.tunnelName, this);
-            m.Text = new LibPanels(MineDataPanelName.GeologicStructure).panelFormName;
-            string ThePath = System.Windows.Forms.Application.StartupPath;
+            var m = new MineDataSimple
+            {
+                Text = new LibPanels.LibPanels(MineDataPanelName.GeologicStructure).panelFormName
+            };
             m.ShowDialog();
-        }
-
-        private void btnDayReportJJ_Click(object sender, EventArgs e)
-        {
-            if (this.tunnelId <= 0)
-            {
-                MessageBox.Show("请选择巷道!");
-                return;
-            }
-
-            DayReportJJEntering dayReportJJEntering = new DayReportJJEntering(this.tunnelId, this.tunnelName, this);
-            dayReportJJEntering.ShowDialog();
-        }
-
-        private void btnDayReportHC_Click(object sender, EventArgs e)
-        {
-            if (this.tunnelId <= 0)
-            {
-                MessageBox.Show("请选择巷道!");
-                return;
-            }
-
-            DayReportHCEntering dayReportHCEntering = new DayReportHCEntering(this.tunnelId, this.tunnelName, this);
-            dayReportHCEntering.ShowDialog();
         }
 
         private delegate void ShowDelegate(UpdateWarningResultMessage data);
@@ -263,13 +239,13 @@ namespace UnderTerminal
             }
             */
             string reportFile = "C:\\tmp\\report.xls";
-            if (!System.IO.File.Exists(reportFile))
+            if (!File.Exists(reportFile))
             {
                 MessageBox.Show(reportFile + "不存在。");
                 return;
             }
 
-            System.Diagnostics.Process.Start(reportFile);
+            Process.Start(reportFile);
         }
 
         // 系统1监控曲线
@@ -371,7 +347,7 @@ namespace UnderTerminal
         private DateTime lastUpdate;
         private Socket udpServerSocket;
         private EndPoint ep = new IPEndPoint(IPAddress.Any, 9876);
-        private System.Timers.Timer checkTimer = new System.Timers.Timer();
+        private Timer checkTimer = new Timer();
         private byte[] buffer = new byte[1024];
 
         private delegate void MyDelegate(String text, Color color);
@@ -396,7 +372,7 @@ namespace UnderTerminal
         /// </summary>
         /// <param name="sender">Sender of the Event; not used.</param>
         /// <param name="e">Parameter for the Event; not used.</param>
-        private void checkTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        private void checkTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
             // Calculate the Timespan since the Last Update from the Client.
             TimeSpan timeSinceLastHeartbeat = DateTime.Now.ToUniversalTime() - lastUpdate;
@@ -482,7 +458,7 @@ namespace UnderTerminal
                 string errMsg = cs.SendSocketMsg2Server(msg);
                 if (errMsg != "")
                 {
-                    Log.Error(Const.SEND_MSG_FAILED + Const.CONNECT_ARROW + msg.ToString());
+                    Log.Error(Const.SEND_MSG_FAILED + Const.CONNECT_ARROW + msg);
                 }
             }
             else

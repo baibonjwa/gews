@@ -35,8 +35,6 @@
             this.button5 = new System.Windows.Forms.Button();
             this.btnGeo = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.btnDayReportJJ = new System.Windows.Forms.Button();
-            this.btnDayReportHC = new System.Windows.Forms.Button();
             this.btnCloseSys = new System.Windows.Forms.Button();
             this.btnRestartSys = new System.Windows.Forms.Button();
             this.btnManagement = new System.Windows.Forms.Button();
@@ -135,34 +133,6 @@
             this.button1.Text = "管理因素";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // btnDayReportJJ
-            // 
-            this.btnDayReportJJ.BackColor = System.Drawing.Color.Transparent;
-            this.btnDayReportJJ.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnDayReportJJ.Font = new System.Drawing.Font("SimSun", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnDayReportJJ.Location = new System.Drawing.Point(203, 464);
-            this.btnDayReportJJ.Name = "btnDayReportJJ";
-            this.btnDayReportJJ.Size = new System.Drawing.Size(155, 65);
-            this.btnDayReportJJ.TabIndex = 11;
-            this.btnDayReportJJ.Text = "掘进进尺日报";
-            this.btnDayReportJJ.UseVisualStyleBackColor = false;
-            this.btnDayReportJJ.Visible = false;
-            this.btnDayReportJJ.Click += new System.EventHandler(this.btnDayReportJJ_Click);
-            // 
-            // btnDayReportHC
-            // 
-            this.btnDayReportHC.BackColor = System.Drawing.Color.Transparent;
-            this.btnDayReportHC.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnDayReportHC.Font = new System.Drawing.Font("SimSun", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnDayReportHC.Location = new System.Drawing.Point(377, 464);
-            this.btnDayReportHC.Name = "btnDayReportHC";
-            this.btnDayReportHC.Size = new System.Drawing.Size(155, 65);
-            this.btnDayReportHC.TabIndex = 12;
-            this.btnDayReportHC.Text = "回采进尺日报";
-            this.btnDayReportHC.UseVisualStyleBackColor = false;
-            this.btnDayReportHC.Visible = false;
-            this.btnDayReportHC.Click += new System.EventHandler(this.btnDayReportHC_Click);
             // 
             // btnCloseSys
             // 
@@ -386,8 +356,6 @@
             this.Controls.Add(this.btnManagement);
             this.Controls.Add(this.btnRestartSys);
             this.Controls.Add(this.btnCloseSys);
-            this.Controls.Add(this.btnDayReportHC);
-            this.Controls.Add(this.btnDayReportJJ);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnGeo);
             this.Controls.Add(this.btnMonitorCurve);
@@ -417,8 +385,6 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button btnGeo;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button btnDayReportJJ;
-        private System.Windows.Forms.Button btnDayReportHC;
         private System.Windows.Forms.Button btnCloseSys;
         private System.Windows.Forms.Button btnRestartSys;
         private System.Windows.Forms.Button btnManagement;

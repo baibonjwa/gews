@@ -1,22 +1,8 @@
-﻿// ******************************************************************
-// 概  述：井下数据窗体命名
-// 作  者：宋英杰
-// 创建日期：2014/3/11
-// 版本号：V1.0
-// 版本信息：
-// V1.0 新建
-// ******************************************************************
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Runtime.InteropServices;
-using System.Data.SqlClient;
-using System.Data;
-using System.Windows.Forms;
+﻿using System;
 using System.IO;
-using LibSocket;
-using LibCommon;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Windows.Forms;
 
 namespace LibPanels
 {
