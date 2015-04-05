@@ -88,6 +88,8 @@ namespace LibEntity
         [Property("FAR_FROM_FRONTAL")]
         public double FarFromFrontal { get; set; }
 
+        [Property("IS_DEBUG", Default = "0")]
+        public int IsDebug { get; set; }
 
         /// <summary>
         /// 判断【探头名称】是否存在
