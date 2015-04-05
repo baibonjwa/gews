@@ -1,4 +1,5 @@
-﻿using Castle.ActiveRecord;
+﻿using System;
+using Castle.ActiveRecord;
 
 namespace LibEntity
 {
@@ -67,7 +68,7 @@ namespace LibEntity
         ///     回采年月
         /// </summary>
         [Property("STOPE_DATE")]
-        public string StopeDate { get; set; }
+        public DateTime StopeDate { get; set; }
 
         // 巷道编号
 
