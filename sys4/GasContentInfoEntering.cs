@@ -85,7 +85,7 @@ namespace sys4
                     CoordinateY = Convert.ToDouble(txtCoordinateY.Text),
                     CoordinateZ = 0.0,
                     Depth = Convert.ToDouble(txtDepth.Text),
-                    GasContentValue = Convert.ToDouble(txtGasContentValue),
+                    GasContentValue = Convert.ToDouble(txtGasContentValue.Text),
                     MeasureDateTime = dtpMeasureDateTime.Value,
                     Tunnel = selectTunnelSimple1.SelectedTunnel,
                     CoalSeams = (CoalSeams)cboCoalSeams.SelectedValue,
@@ -101,7 +101,7 @@ namespace sys4
                 GasContent.CoordinateY = Convert.ToDouble(txtCoordinateY.Text);
                 GasContent.CoordinateZ = 0.0;
                 GasContent.Depth = Convert.ToDouble(txtDepth.Text);
-                GasContent.GasContentValue = Convert.ToDouble(txtGasContentValue);
+                GasContent.GasContentValue = Convert.ToDouble(txtGasContentValue.Text);
                 GasContent.MeasureDateTime = dtpMeasureDateTime.Value;
                 GasContent.Tunnel = selectTunnelSimple1.SelectedTunnel;
                 GasContent.CoalSeams = (CoalSeams)cboCoalSeams.SelectedValue;

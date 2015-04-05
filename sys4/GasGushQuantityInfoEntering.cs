@@ -51,12 +51,10 @@ namespace sys4
         /// <param name="e"></param>
         private void GasGushQuantityInfoEntering_Load(object sender, EventArgs e)
         {
-
             // 设置日期控件格式
             dtpStopeDate.Format = DateTimePickerFormat.Custom;
             dtpStopeDate.CustomFormat = Const.DATE_FORMART_YYYY_MM;
             DataBindUtil.LoadCoalSeamsName(cboCoalSeams);
-
             if (GasGushQuantity != null)
             {
                 txtCoordinateX.Text = GasGushQuantity.CoordinateX.ToString(CultureInfo.InvariantCulture);
