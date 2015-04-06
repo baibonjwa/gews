@@ -70,6 +70,7 @@ namespace sys4
                 DelGasGushQuantityPt(new[] { gasContent.BindingId });
                 gasContent.Delete();
             }
+            RefreshData();
         }
 
         /// <summary>
@@ -148,6 +149,11 @@ namespace sys4
                 Y = gasContent.CoordinateY
             }).Cast<IPoint>().ToList();
             MyMapHelp.Jump(MyMapHelp.GetGeoFromPoint(list));
+        }
+
+        private void GasContentInfoManagement_Load(object sender, EventArgs e)
+        {
+            RefreshData();
         }
     }
 }

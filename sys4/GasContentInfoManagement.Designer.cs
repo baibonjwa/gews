@@ -83,7 +83,6 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Enabled = false;
             this.btnUpdate.Image = ((System.Drawing.Image)(resources.GetObject("btnUpdate.Image")));
             this.btnUpdate.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnUpdate.Name = "btnUpdate";
@@ -102,7 +101,6 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Enabled = false;
             this.btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDelete.Name = "btnDelete";
@@ -184,6 +182,7 @@
             // gridColumn1
             // 
             this.gridColumn1.Caption = "坐标X";
+            this.gridColumn1.FieldName = "CoordinateX";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 0;
@@ -191,6 +190,7 @@
             // gridColumn2
             // 
             this.gridColumn2.Caption = "坐标Y";
+            this.gridColumn2.FieldName = "CoordinateY";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 1;
@@ -198,6 +198,7 @@
             // gridColumn3
             // 
             this.gridColumn3.Caption = "测点标高";
+            this.gridColumn3.FieldName = "CoordinateZ";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 2;
@@ -205,6 +206,7 @@
             // gridColumn4
             // 
             this.gridColumn4.Caption = "埋深";
+            this.gridColumn4.FieldName = "Depth";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 3;
@@ -212,6 +214,7 @@
             // gridColumn5
             // 
             this.gridColumn5.Caption = "瓦斯含量值";
+            this.gridColumn5.FieldName = "GasContentValue";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
             this.gridColumn5.VisibleIndex = 4;
@@ -219,6 +222,7 @@
             // gridColumn6
             // 
             this.gridColumn6.Caption = "测定时间";
+            this.gridColumn6.FieldName = "MeasureDateTime";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
             this.gridColumn6.VisibleIndex = 5;
@@ -249,6 +253,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "瓦斯含量数据管理";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.GasContentInfoManagement_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcGasContent)).EndInit();

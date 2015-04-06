@@ -83,7 +83,7 @@ namespace sys4
                 {
                     CoordinateX = Convert.ToDouble(txtCoordinateX.Text),
                     CoordinateY = Convert.ToDouble(txtCoordinateY.Text),
-                    CoordinateZ = 0.0,
+                    CoordinateZ = Convert.ToDouble(txtCoordinateZ.Text),
                     Depth = Convert.ToDouble(txtDepth.Text),
                     GasPressureValue = Convert.ToDouble(txtGasPressureValue.Text),
                     MeasureDateTime = dtpMeasureDateTime.Value,
@@ -99,7 +99,7 @@ namespace sys4
             {
                 GasPressure.CoordinateX = Convert.ToDouble(txtCoordinateX.Text);
                 GasPressure.CoordinateY = Convert.ToDouble(txtCoordinateY.Text);
-                GasPressure.CoordinateZ = 0.0;
+                GasPressure.CoordinateZ = Convert.ToDouble(txtCoordinateZ.Text);
                 GasPressure.Depth = Convert.ToDouble(txtDepth.Text);
                 GasPressure.GasPressureValue = Convert.ToDouble(txtGasPressureValue.Text);
                 GasPressure.MeasureDateTime = dtpMeasureDateTime.Value;
@@ -277,7 +277,7 @@ namespace sys4
             {
                 MyMapHelp.Jump(pt);
                 DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh(
-                    (esriViewDrawPhase) 34, null, null);
+                    (esriViewDrawPhase)34, null, null);
             }
         }
 

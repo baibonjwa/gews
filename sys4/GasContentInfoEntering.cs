@@ -83,7 +83,7 @@ namespace sys4
                 {
                     CoordinateX = Convert.ToDouble(txtCoordinateX.Text),
                     CoordinateY = Convert.ToDouble(txtCoordinateY.Text),
-                    CoordinateZ = 0.0,
+                    CoordinateZ = Convert.ToDouble(txtCoordinateZ.Text),
                     Depth = Convert.ToDouble(txtDepth.Text),
                     GasContentValue = Convert.ToDouble(txtGasContentValue.Text),
                     MeasureDateTime = dtpMeasureDateTime.Value,
@@ -99,12 +99,12 @@ namespace sys4
             {
                 GasContent.CoordinateX = Convert.ToDouble(txtCoordinateX.Text);
                 GasContent.CoordinateY = Convert.ToDouble(txtCoordinateY.Text);
-                GasContent.CoordinateZ = 0.0;
+                GasContent.CoordinateZ = Convert.ToDouble(txtCoordinateZ.Text);
                 GasContent.Depth = Convert.ToDouble(txtDepth.Text);
                 GasContent.GasContentValue = Convert.ToDouble(txtGasContentValue.Text);
                 GasContent.MeasureDateTime = dtpMeasureDateTime.Value;
                 GasContent.Tunnel = selectTunnelSimple1.SelectedTunnel;
-                GasContent.CoalSeams = (CoalSeams)cboCoalSeams.SelectedValue;
+                GasContent.CoalSeams = (CoalSeams)cboCoalSeams.SelectedItem;
                 GasContent.Save();
                 DelGasGushQuantityPt(GasContent.BindingId, GasContent.CoalSeams.CoalSeamsName);
                 DrawGasGushQuantityPt(GasContent);

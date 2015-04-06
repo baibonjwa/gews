@@ -17,8 +17,6 @@ namespace LibEntity
     {
         /** 编号 **/
 
-        private DateTime measureDateTime;
-
         /// <summary>
         ///     编号
         /// </summary>
@@ -71,11 +69,7 @@ namespace LibEntity
         ///     测定时间
         /// </summary>
         [Property("MEASURE_DATE_TIME")]
-        public DateTime MeasureDateTime
-        {
-            get { return measureDateTime; }
-            set { measureDateTime = value; }
-        }
+        public DateTime MeasureDateTime { get; set; }
 
         /// <summary>
         ///     巷道编号

@@ -21,7 +21,7 @@ using LibDatabase;
 
 namespace GIS.SpecialGraphic
 {
-   
+
     public partial class MakeContours : Form
     {
         struct XYValueStruct
@@ -40,7 +40,7 @@ namespace GIS.SpecialGraphic
         string SDELayerName;
         public MakeContours()
         {
-            
+
             InitializeComponent();
         }
 
@@ -52,9 +52,9 @@ namespace GIS.SpecialGraphic
             {
                 try
                 {
-                    Directory.Delete(m_MakeContoursFolder,true);
+                    Directory.Delete(m_MakeContoursFolder, true);
                 }
-                catch(Exception ex) 
+                catch (Exception ex)
                 { }
             }
             int d = 0;
@@ -247,7 +247,7 @@ namespace GIS.SpecialGraphic
                     }
                     else
                     {
-                        //MessageBox.Show(failInfo + "生成过程有误，请检查。");
+                        MessageBox.Show(failInfo + "生成过程有误，请检查。");
                     }
                 }
                 //this.Close();
@@ -268,7 +268,7 @@ namespace GIS.SpecialGraphic
             }
         }
 
-    
+
 
 
         /// <summary>
@@ -311,14 +311,14 @@ namespace GIS.SpecialGraphic
                     MessageBox.Show("请输入正确的等高距！", "提示!");
                     return false;
                 }
-                
+
                 string featurOut = m_MakeContoursFolder + "\\Cont.shp";
                 int k = 0;
                 while (System.IO.File.Exists(featurOut))
                 {
                     k++;
                     featurOut = m_MakeContoursFolder + "\\Cont" + k.ToString() + ".shp";
-                    
+
                 }
                 int countCont = System.IO.Directory.GetFiles(m_MakeContoursFolder, "Cont*").Length;
                 if (countCont > 0)
@@ -360,7 +360,7 @@ namespace GIS.SpecialGraphic
                 switch (CB_InterpolationMethod.Text)
                 {
                     case "样条函数插值法":
-                        suc=DrawContours.Interpolate2RasterSpline(GP, featurOut, ContourRaster, CB_SplineType.Text);
+                        suc = DrawContours.Interpolate2RasterSpline(GP, featurOut, ContourRaster, CB_SplineType.Text);
                         break;
                     case "自然邻域插值法":
                         suc = DrawContours.Interpolate2RasterNN(GP, featurOut, ContourRaster);
@@ -384,7 +384,7 @@ namespace GIS.SpecialGraphic
                 k = 1;
                 while (System.IO.File.Exists(R2Contour))
                 {
-                    R2Contour = m_MakeContoursFolder + "\\Contour"+ k.ToString() + ".shp";
+                    R2Contour = m_MakeContoursFolder + "\\Contour" + k.ToString() + ".shp";
                     k++;
                 }
                 int countContour = System.IO.Directory.GetFiles(m_MakeContoursFolder, "Contour*").Length;
@@ -401,10 +401,10 @@ namespace GIS.SpecialGraphic
                 k = 1;
                 while (System.IO.File.Exists(EvEContour))
                 {
-                    EvEContour =  m_MakeContoursFolder + "\\EvEContour" + k.ToString() + ".shp";
+                    EvEContour = m_MakeContoursFolder + "\\EvEContour" + k.ToString() + ".shp";
                     k++;
                 }
-                int countEvEContour=System.IO.Directory.GetFiles(m_MakeContoursFolder, "EvEContour*").Length;
+                int countEvEContour = System.IO.Directory.GetFiles(m_MakeContoursFolder, "EvEContour*").Length;
                 if (countEvEContour > 0)
                 {
                     EvEContour = m_MakeContoursFolder + "\\EvEContour" + countEvEContour.ToString() + ".shp";
@@ -417,11 +417,11 @@ namespace GIS.SpecialGraphic
                 IWorkspaceFactory workspaceFactory = new ShapefileWorkspaceFactory();
                 IWorkspace sourceworkspace = workspaceFactory.OpenFromFile(m_MakeContoursFolder, 0);
                 //裁切
-                IPolygon bianjie= GetPolygon();
-                
+                IPolygon bianjie = GetPolygon();
+
                 //导入等值线Shp文件到数据库中
                 DrawSpecialCommon drawspecial = new DrawSpecialCommon();
-                string nameOfsourceFeatureClass = EvEContour.Substring(EvEContour.LastIndexOf("\\")+1);
+                string nameOfsourceFeatureClass = EvEContour.Substring(EvEContour.LastIndexOf("\\") + 1);
                 nameOfsourceFeatureClass = nameOfsourceFeatureClass.Substring(0, nameOfsourceFeatureClass.LastIndexOf("."));
                 bool Import = false;
                 List<ziduan> list = new List<ziduan>();
@@ -431,16 +431,16 @@ namespace GIS.SpecialGraphic
                 list.Add(new ziduan("date", DateTime.Now.ToString()));
                 list.Add(new ziduan("type", CB_InterpolationMethod.Text));
                 IFeatureLayer pFeatureLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, EditLayerName) as IFeatureLayer;
-                string WhereClause = "mcid='" + this.cbCoalSeam.Text+"'";
+                string WhereClause = "mcid='" + this.cbCoalSeam.Text + "'";
 
-                DataEditCommon.DeleteFeatureByWhereClause(pFeatureLayer,WhereClause);
+                DataEditCommon.DeleteFeatureByWhereClause(pFeatureLayer, WhereClause);
                 if (radioBtnKJ.Checked && bianjie != null)
                     Import = IntersectAll(DataEditCommon.GetFeatureClassByName(sourceworkspace, nameOfsourceFeatureClass), bianjie, list);
                 else
-                    Import = drawspecial.ShapeImportGDB(sourceworkspace, targetworkspace, nameOfsourceFeatureClass, nameOftargetFeatureClass,list);
+                    Import = drawspecial.ShapeImportGDB(sourceworkspace, targetworkspace, nameOfsourceFeatureClass, nameOftargetFeatureClass, list);
                 this.progressBarControl1.PerformStep();
 
-                if (Import==false)
+                if (Import == false)
                 {
                     MessageBox.Show(sLayerAliasName + "导入数据库失败！");
                     DataEditCommon.g_axTocControl.Update();
@@ -448,7 +448,7 @@ namespace GIS.SpecialGraphic
                     failInfo = sLayerAliasName;
                     return false;
                 }
-                
+
                 //添加相应的渲染图
                 IRasterLayer newRasterLayer = new RasterLayerClass();
                 newRasterLayer.CreateFromFilePath(ContourRaster);
@@ -479,7 +479,7 @@ namespace GIS.SpecialGraphic
                 MessageBox.Show(ex.Message);
                 return false;
             }
- 
+
         }
 
         /// <summary>
@@ -602,11 +602,10 @@ namespace GIS.SpecialGraphic
                     MessageBox.Show("煤层矿界图层缺失！");
                     return false;
                 }
-                //linetype 保安煤柱边界  handle 56**
                 IFeatureLayer pFeatureLayer = (IFeatureLayer)pLayer;
                 IFeatureClass pFeatureClass = pFeatureLayer.FeatureClass;
                 IQueryFilter pFilter = new QueryFilterClass();
-                pFilter.WhereClause = "linetype='保安煤柱边界'";
+                pFilter.WhereClause = "layer='预警矿界'";
                 IFeatureCursor pCursor = pFeatureClass.Search(pFilter, false);
                 IFeature pFeature = pCursor.NextFeature();
                 List<IGeometry> list = new List<IGeometry>();
@@ -623,7 +622,7 @@ namespace GIS.SpecialGraphic
                 IPolyline pPolyline = pSegmentCollection as IPolyline;
 
                 IPolygon pPolygon = DataEditCommon.PolylineToPolygon(pPolyline);
-                
+
                 string[] liststr = System.IO.File.ReadAllLines(file);
                 list = new List<IGeometry>();
                 IPoint pt = new PointClass();
@@ -656,11 +655,11 @@ namespace GIS.SpecialGraphic
                         }
                     }
                 }
-                List<IGeometry> listrt=MyMapHelp.withIn(pPolygon, list);
+                List<IGeometry> listrt = MyMapHelp.withIn(pPolygon, list);
                 if (listrt.Count > 0)
                 {
                     within = false;
-                    DialogResult dr = MessageBox.Show("存在超边界的坐标，是否立即查看？","",MessageBoxButtons.YesNo);
+                    DialogResult dr = MessageBox.Show("存在超边界的坐标，是否立即查看？", "", MessageBoxButtons.YesNo);
                     if (dr == DialogResult.Yes)
                     {
                         string strlen = "";
@@ -670,7 +669,7 @@ namespace GIS.SpecialGraphic
                             strlen += pt.X.ToString() + "," + pt.Y.ToString() + " \r\n";
                         }
                         string filename = Application.StartupPath + "\\ContentError.txt";
-                        System.IO.File.WriteAllText(filename,strlen);
+                        System.IO.File.WriteAllText(filename, strlen);
                         System.Diagnostics.Process.Start(filename);
                     }
                 }
@@ -704,12 +703,12 @@ namespace GIS.SpecialGraphic
             IFeatureLayer polygonLayer = (IFeatureLayer)pLayer;
 
             IQueryFilter filter = new QueryFilterClass();
-            filter.WhereClause = "linetype = '保安煤柱边界'";
+            filter.WhereClause = "layer = '预警矿界'";
 
             IFeatureLayer featureLayer = polygonLayer as IFeatureLayer;
             IFeatureCursor featureCursor = featureLayer.Search(filter, false);
             ITopologicalOperator2 topologicalOperator = null;
-            
+
             //  获得矿界组合成面
             if (featureCursor != null)
             {
@@ -731,7 +730,7 @@ namespace GIS.SpecialGraphic
             }
             return polygon2;
         }
-        private bool IntersectAll(IFeatureClass lineLayer, IPolygon polygon2,List<ziduan> list)
+        private bool IntersectAll(IFeatureClass lineLayer, IPolygon polygon2, List<ziduan> list)
         {
             try
             {

@@ -4,7 +4,7 @@ namespace GIS
 {
     public class LayerNames
     {
-        public const string LAYER_ALIAS_MINE_BOUNDARY = "Polyline_成庄矿界5000";
+        public const string LAYER_ALIAS_MINE_BOUNDARY = "Polyline_矿界5000";
         public const string LAYER_ALIAS_TUNNEL = "默认_巷道";
         public const string LAYER_ALIAS_MR_WSYLD = "默认_瓦斯压力点";
         public const string LAYER_ALIAS_MR_WSHLD = "默认_瓦斯含量点";
