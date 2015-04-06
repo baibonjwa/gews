@@ -13,9 +13,9 @@ namespace sys3
     {
         /************变量定义*****************/
         // 掘进面
-        WorkingFace jjWorkFaceEntity = null;
+        WorkingFace jjWorkFaceEntity;
         // 巷道
-        Tunnel tunnelEntity = null;
+        Tunnel tunnelEntity;
         /*************************************/
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace sys3
             setWorkTimeName();
 
             //设置窗体属性
-            LibCommon.FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_GM.TUNNEL_JJ_ADD);
+            FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_GM.TUNNEL_JJ_ADD);
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace sys3
             //绑定修改信息
 
             //窗体属性设置
-            LibCommon.FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_GM.TUNNEL_JJ_CHANGE);
+            FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_GM.TUNNEL_JJ_CHANGE);
         }
 
         /// <summary>
@@ -69,8 +69,7 @@ namespace sys3
         /// <param name="e"></param>
         private void TunnelJJHC_Load(object sender, EventArgs e)
         {
-            //绑定队别名称
-            bindTeamInfo();
+            DataBindUtil.LoadTeam(cboTeamName);
 
             if (this.Text == Const_GM.TUNNEL_JJ_CHANGE)
             {
@@ -103,7 +102,7 @@ namespace sys3
                 strWorkTimeName = MineDataSimpleBLL.selectWorkTimeNameByWorkTimeGroupIdAndSysTime(2, sysDateTime);
             }
 
-            if (strWorkTimeName != null && strWorkTimeName != "")
+            if (!string.IsNullOrEmpty(strWorkTimeName))
             {
                 cboWorkTime.Text = strWorkTimeName;
             }
@@ -223,19 +222,6 @@ namespace sys3
             btnChooseTunnel.Text = tunnelChoose.SelectedTunnel.TunnelName;
             //实体赋值
             tunnelEntity = tunnelChoose.SelectedTunnel;
-        }
-
-        /// <summary>
-        /// 绑定队别名称
-        /// </summary>
-        private void bindTeamInfo()
-        {
-            cboTeamName.Items.Clear();
-            Team[] team = Team.FindAll();
-            foreach (Team t in team)
-            {
-                cboTeamName.Items.Add(t.TeamName);
-            }
         }
 
         /// <summary>

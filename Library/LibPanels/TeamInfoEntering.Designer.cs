@@ -37,8 +37,6 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnDel = new System.Windows.Forms.Button();
             this.lstTeamMate = new System.Windows.Forms.ListBox();
-            this.btnSelectAll = new System.Windows.Forms.Button();
-            this.btnInverse = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -134,32 +132,10 @@
             this.lstTeamMate.TabIndex = 0;
             this.lstTeamMate.SelectedValueChanged += new System.EventHandler(this.lstTeamMate_SelectedValueChanged);
             // 
-            // btnSelectAll
-            // 
-            this.btnSelectAll.Location = new System.Drawing.Point(165, 73);
-            this.btnSelectAll.Name = "btnSelectAll";
-            this.btnSelectAll.Size = new System.Drawing.Size(60, 23);
-            this.btnSelectAll.TabIndex = 3;
-            this.btnSelectAll.Text = "全选";
-            this.btnSelectAll.UseVisualStyleBackColor = true;
-            this.btnSelectAll.Click += new System.EventHandler(this.btnSelectAll_Click);
-            // 
-            // btnInverse
-            // 
-            this.btnInverse.Location = new System.Drawing.Point(165, 102);
-            this.btnInverse.Name = "btnInverse";
-            this.btnInverse.Size = new System.Drawing.Size(60, 23);
-            this.btnInverse.TabIndex = 4;
-            this.btnInverse.Text = "反选";
-            this.btnInverse.UseVisualStyleBackColor = true;
-            this.btnInverse.Click += new System.EventHandler(this.btnInverse_Click);
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.lstTeamMate);
-            this.groupBox1.Controls.Add(this.btnInverse);
-            this.groupBox1.Controls.Add(this.btnSelectAll);
             this.groupBox1.Controls.Add(this.btnAdd);
             this.groupBox1.Controls.Add(this.btnDel);
             this.groupBox1.Location = new System.Drawing.Point(14, 78);
@@ -199,7 +175,7 @@
             this.label2.TabIndex = 16;
             this.label2.Text = "*";
             // 
-            // Team
+            // TeamInfoEntering
             // 
             this.AcceptButton = this.btnSubmit;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -218,11 +194,10 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "TeamInfo";
+            this.Name = "TeamInfoEntering";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "队别信息添加";
-            this.Load += new System.EventHandler(this.TeamInfo_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -241,11 +216,9 @@
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnDel;
         private System.Windows.Forms.ListBox lstTeamMate;
-        private System.Windows.Forms.Button btnSelectAll;
-        private System.Windows.Forms.Button btnInverse;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }

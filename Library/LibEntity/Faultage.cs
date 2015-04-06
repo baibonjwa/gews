@@ -84,7 +84,7 @@ namespace LibEntity
         {
             var criterion = new List<ICriterion>
             {
-                Restrictions.Eq("BigFaultageName", faultageName)
+                Restrictions.Eq("FaultageName", faultageName)
             };
             return Exists(criterion.ToArray());
         }
@@ -93,7 +93,7 @@ namespace LibEntity
         {
             var criterion = new List<ICriterion>
             {
-                Restrictions.Eq("BigFaultageName", faultageName)
+                Restrictions.Eq("FaultageName", faultageName)
             };
             return FindOne(criterion.ToArray());
         }

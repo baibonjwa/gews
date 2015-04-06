@@ -135,8 +135,6 @@ namespace sys2
             if (DialogResult.OK == teamInfoForm.ShowDialog())
             {
                 DataBindUtil.LoadTeam(cboTeamName);
-                cboTeamName.Text = teamInfoForm.returnTeamName();
-                DataBindUtil.LoadTeamMemberByTeamName(cboSubmitter, teamInfoForm.returnTeamName());
             }
         }
 

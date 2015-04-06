@@ -867,8 +867,8 @@ namespace GIS.HdProc
                 //}
                 //else
                 //{ feature = listfea[0]; }
-                //if (listfea.Count == 1)
-                feature = listfea[0];
+                if (listfea.Count > 1)
+                    feature = listfea[0];
             }
             int m = feature.Fields.FindField(GIS.GIS_Const.FIELD_XH);
             int xh = Convert.ToInt16(feature.get_Value(m).ToString());
