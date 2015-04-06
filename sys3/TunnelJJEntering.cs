@@ -280,29 +280,11 @@ namespace sys3
         /// <returns></returns>
         private bool check()
         {
-            //添加特殊验证
-            if (this.Text == Const_GM.TUNNEL_JJ_ADD)
-            {
-                ////是否已为掘进巷道
-                //if (TunnelJJBLL.selectTunnelJJ(tunnelEntity))
-                //{
-                //    Alert.alert(Const_GM.TUNNEL_JJ_MSG_TUNNEL_IS_ALREADY_JJ);
-                //    return false;
-                //}
-
-            }
 
             //巷道是否选择
             if (tunnelEntity.TunnelId == 0)
             {
                 Alert.alert(Const.MSG_PLEASE_CHOOSE + Const_GM.TUNNEL + Const.SIGN_EXCLAMATION_MARK);
-                return false;
-            }
-
-            //是否已为回采巷道
-            if (tunnelEntity.WorkingFace.WorkingfaceTypeEnum == WorkingfaceTypeEnum.HC)
-            {
-                Alert.alert(Const_GM.TUNNEL_JJ_MSG_TUNNEL_IS_HC);
                 return false;
             }
 

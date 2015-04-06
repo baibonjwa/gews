@@ -159,7 +159,7 @@ namespace LibCommonForm
                         gridView1.Columns.Add(new GridColumn
                         {
                             Caption = @"编号",
-                            FieldName = "CoalSeamId",
+                            FieldName = "CoalSeamsId",
                             MaxWidth = 60,
                             VisibleIndex = gridView1.Columns.Count
                         });
@@ -167,11 +167,11 @@ namespace LibCommonForm
                         gridView1.Columns.Add(new GridColumn
                         {
                             Caption = @"煤层名称",
-                            FieldName = "CoalSeamName",
+                            FieldName = "CoalSeamsName",
                             VisibleIndex = gridView1.Columns.Count
                         });
                         AddDeleteButton();
-                        gridControl1.DataSource = CoalSeams.FindAll();
+                        gridControl1.DataSource = CollectionHelper.ConvertTo(CoalSeams.FindAll());
                     }
                     break;
             }
@@ -226,24 +226,8 @@ namespace LibCommonForm
         /// </summary>
         private void UpdateInfo<T>() where T : ActiveRecordBase
         {
-            //gridView1.UpdateCurrentRow();
             //TODO:此处需要优化强力优化！！！
             var dt = (DataTable)gridControl1.DataSource;
-
-            //var change = dt.GetChanges(DataRowState.Added | DataRowState.Modified);
-            //var dataRows = new List<DataRow>();
-
-            //for (int i = 0; i < change.Rows.Count; i++)
-            //{
-            //    dataRows.Add(change.Rows[i]);
-            //}
-            //for (var i = 0; i < dt.Rows.Count; i++)
-            //{
-            //    if (dt.Rows == DataViewRowState.Added)
-            //    {
-            //        dataRows.Add(dt.Rows[i]);
-            //    }
-            //}
             var list = CollectionHelper.ConvertTo<T>(dt);
             foreach (var t in list.Where(t => t != null))
             {

@@ -36,9 +36,6 @@ namespace sys4
 
             RuntimeManager.Bind(ProductCode.EngineOrDesktop);
 
-            //窗体风格改变
-            DXSeting.formSkinsSet();
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 

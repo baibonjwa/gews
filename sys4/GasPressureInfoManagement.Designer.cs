@@ -157,6 +157,9 @@
             // 
             // gcGasPressure
             // 
+            this.gcGasPressure.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gcGasPressure.Cursor = System.Windows.Forms.Cursors.Default;
             this.gcGasPressure.Location = new System.Drawing.Point(12, 30);
             this.gcGasPressure.MainView = this.gridView1;

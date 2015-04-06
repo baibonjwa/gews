@@ -1346,7 +1346,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "KJGEW113 工作面动态防突管理系统";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_OP_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_OP_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_OP_Load);
             this.toolStrip1.ResumeLayout(false);

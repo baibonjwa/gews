@@ -401,7 +401,7 @@ namespace sys2
             foreach (DayReportJj dayReportJJEntity in dayReportJJEntityList)
             {
                 //添加回采进尺日报
-                dayReportJJEntity.SaveAndFlush();
+                dayReportJJEntity.Save();
 
                 //巷道掘进绘图
                 double dist = dayReportJJEntity.JinChi;
