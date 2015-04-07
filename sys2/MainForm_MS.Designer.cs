@@ -28,10 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm_MS));
             this.toolBar_MS = new ESRI.ArcGIS.Controls.AxToolbarControl();
-            this.barManager2 = new DevExpress.XtraBars.BarManager(this.components);
+            this.barManager2 = new DevExpress.XtraBars.BarManager();
             this.bar1 = new DevExpress.XtraBars.Bar();
             this.mniOpenMineMapFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniSaveFloat = new DevExpress.XtraBars.BarButtonItem();
@@ -69,6 +68,7 @@
             this.mniShiftsSetting = new DevExpress.XtraBars.BarButtonItem();
             this.mniSkinSetting = new DevExpress.XtraBars.BarButtonItem();
             this.barSubItem4 = new DevExpress.XtraBars.BarSubItem();
+            this.bbiCheckUpdate = new DevExpress.XtraBars.BarButtonItem();
             this.mniHelpFile = new DevExpress.XtraBars.BarButtonItem();
             this.mniAbout = new DevExpress.XtraBars.BarButtonItem();
             this.bar3 = new DevExpress.XtraBars.Bar();
@@ -90,7 +90,7 @@
             this.barDockControl2 = new DevExpress.XtraBars.BarDockControl();
             this.barDockControl3 = new DevExpress.XtraBars.BarDockControl();
             this.barDockControl4 = new DevExpress.XtraBars.BarDockControl();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.imageList1 = new System.Windows.Forms.ImageList();
             this.barSubItem5 = new DevExpress.XtraBars.BarSubItem();
             this.barBtnTunnellingAnalysis = new DevExpress.XtraBars.BarButtonItem();
             this.barBtnStopingAnalysis = new DevExpress.XtraBars.BarButtonItem();
@@ -101,7 +101,6 @@
             this.tocControl_MS = new ESRI.ArcGIS.Controls.AxTOCControl();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.mapControl_MS = new ESRI.ArcGIS.Controls.AxMapControl();
-            this.bbiCheckUpdate = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.toolBar_MS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).BeginInit();
@@ -456,8 +455,7 @@
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniUserLoginInfoMana, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniUserGroupInfoMana, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniTeamManage, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniShiftsSetting, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.None, false, this.mniSkinSetting, false)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniShiftsSetting, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.barSubItem3.Name = "barSubItem3";
             // 
             // mniDatabaseSet
@@ -522,13 +520,7 @@
             this.mniShiftsSetting.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.B));
             this.mniShiftsSetting.Name = "mniShiftsSetting";
             this.mniShiftsSetting.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniShiftsSetting_ItemClick);
-            // 
-            // mniSkinSetting
-            // 
-            this.mniSkinSetting.Caption = "皮肤设置...";
-            this.mniSkinSetting.Id = 64;
-            this.mniSkinSetting.Name = "mniSkinSetting";
-            this.mniSkinSetting.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniSkinSetting_ItemClick);
+
             // 
             // barSubItem4
             // 
@@ -540,6 +532,13 @@
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniHelpFile, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniAbout, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.barSubItem4.Name = "barSubItem4";
+            // 
+            // bbiCheckUpdate
+            // 
+            this.bbiCheckUpdate.Caption = "检查更新";
+            this.bbiCheckUpdate.Id = 66;
+            this.bbiCheckUpdate.Name = "bbiCheckUpdate";
+            this.bbiCheckUpdate.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbiCheckUpdate_ItemClick);
             // 
             // mniHelpFile
             // 
@@ -821,13 +820,6 @@
             this.mapControl_MS.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("mapControl_MS.OcxState")));
             this.mapControl_MS.Size = new System.Drawing.Size(703, 347);
             this.mapControl_MS.TabIndex = 26;
-            // 
-            // bbiCheckUpdate
-            // 
-            this.bbiCheckUpdate.Caption = "检查更新";
-            this.bbiCheckUpdate.Id = 66;
-            this.bbiCheckUpdate.Name = "bbiCheckUpdate";
-            this.bbiCheckUpdate.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbiCheckUpdate_ItemClick);
             // 
             // MainForm_MS
             // 

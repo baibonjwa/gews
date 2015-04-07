@@ -21,5 +21,7 @@ namespace LibConfig
         public const string CONFIG_PORT = "PORT";
         public const string CONFIG_REST_PORT = "REST_PORT";
         public const string CONFIG_CURRENT_USER = "CURRENT_USER";
+        public const string CONFIG_MXD_FILE = "MXD_FILE";
+
     }
 }

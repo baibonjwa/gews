@@ -268,18 +268,6 @@
     <Compile Include="TeamManagement.Designer.cs">
       <DependentUpon>TeamManagement.cs</DependentUpon>
     </Compile>
-    <Compile Include="UsualForecast.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UsualForecast.Designer.cs">
-      <DependentUpon>UsualForecast.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UsualForecastManagement.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UsualForecastManagement.Designer.cs">
-      <DependentUpon>UsualForecastManagement.cs</DependentUpon>
-    </Compile>
     <Compile Include="VentilationInfoEntering.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -356,12 +344,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TeamManagement.resx">
       <DependentUpon>TeamManagement.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UsualForecast.resx">
-      <DependentUpon>UsualForecast.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UsualForecastManagement.resx">
-      <DependentUpon>UsualForecastManagement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VentilationInfoEntering.resx">
       <DependentUpon>VentilationInfoEntering.cs</DependentUpon>

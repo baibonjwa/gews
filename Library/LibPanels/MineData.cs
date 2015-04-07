@@ -94,8 +94,6 @@ namespace LibPanels
             coalExistence.Parent = panel2;
             gasData.MdiParent = this;
             gasData.Parent = panel2;
-            usualForecast.MdiParent = this;
-            usualForecast.Parent = panel2;
             management.MdiParent = this;
             management.Parent = panel2;
             geologicStructure.MdiParent = this;
@@ -105,7 +103,6 @@ namespace LibPanels
             panel2.Controls.Add(coalExistence);
             panel2.Controls.Add(ventilationInfoEntering);
             panel2.Controls.Add(gasData);
-            panel2.Controls.Add(usualForecast);
             panel2.Controls.Add(management);
             panel2.Controls.Add(geologicStructure);
 
@@ -165,16 +162,6 @@ namespace LibPanels
                 gasData.WindowState = FormWindowState.Maximized;
                 gasData.Show();
                 gasData.Activate();
-            }
-
-            //日常预测
-            if (this.Text == new LibPanels(MineDataPanelName.UsualForecast).panelFormName)
-            {
-                this.Height = formHeight + usualForecast.Height;
-                panel2.Height = usualForecast.Height;
-                usualForecast.WindowState = FormWindowState.Maximized;
-                usualForecast.Show();
-                usualForecast.Activate();
             }
 
             //管理
@@ -244,25 +231,6 @@ namespace LibPanels
                 gasData.Activate();
             }
 
-            //绑定日常预测修改初始信息
-            if (this.Text == new LibPanels(MineDataPanelName.UsualForecast_Change).panelFormName)
-            {
-                this.Height = formHeight + usualForecast.Height;
-                panel2.Height = usualForecast.Height;
-                changeMineCommonValue(ufEntity);
-
-                usualForecast.isRoofDown = ufEntity.IsRoofDown;
-                usualForecast.isSupportBroken = ufEntity.IsSupportBroken;
-                usualForecast.isCoalWallDrop = ufEntity.IsCoalWallDrop;
-                usualForecast.isPartRoolFall = ufEntity.IsPartRoolFall;
-                usualForecast.isBigRoofFall = ufEntity.IsBigRoofFall;
-                usualForecast.bindDefaultValue();
-
-                usualForecast.WindowState = FormWindowState.Maximized;
-                usualForecast.Show();
-                usualForecast.Activate();
-            }
-
             //绑定管理修改初始信息
             if (this.Text == new LibPanels(MineDataPanelName.Management_Change).panelFormName)
             {
@@ -328,7 +296,6 @@ namespace LibPanels
             coalExistence.WindowState = FormWindowState.Minimized;
             ventilationInfoEntering.WindowState = FormWindowState.Minimized;
             gasData.WindowState = FormWindowState.Minimized;
-            usualForecast.WindowState = FormWindowState.Minimized;
             management.WindowState = FormWindowState.Minimized;
             geologicStructure.WindowState = FormWindowState.Minimized;
         }
@@ -456,10 +423,6 @@ namespace LibPanels
             {
                 bResult = submitG();
             }
-            if (usualForecast.WindowState != FormWindowState.Minimized)         //提交日常预测特有信息
-            {
-                bResult = submitU();
-            }
             if (management.WindowState != FormWindowState.Minimized)         //提交管理特有信息
             {
                 bResult = submitM();
@@ -475,7 +438,6 @@ namespace LibPanels
                 ventilationInfoEntering.Close();
                 coalExistence.Close();
                 gasData.Close();
-                usualForecast.Close();
                 management.Close();
                 this.Close();
             }
@@ -580,39 +542,16 @@ namespace LibPanels
             gdEntity.GasThickness = gasData.GasDataEntity.GasThickness;
             bool bResult = false;
             //添加
-            if (this.Text == new LibPanels(MineDataPanelName.GasData).panelFormName)
+            if (Text == new LibPanels(MineDataPanelName.GasData).panelFormName)
             {
                 gdEntity.SaveAndFlush();
                 bResult = true;
             }
             //修改
-            else if (this.Text == new LibPanels(MineDataPanelName.GasData_Change).panelFormName)
+            else if (Text == new LibPanels(MineDataPanelName.GasData_Change).panelFormName)
             {
                 gdEntity.SaveAndFlush();
                 bResult = true;
-            }
-            return bResult;
-        }
-
-        /// <summary>
-        /// 提交日常预测特有信息
-        /// </summary>
-        private bool submitU()
-        {
-            ufEntity = mineDataEntity.changeToUsualForecastEntity();
-            ufEntity.IsRoofDown = usualForecast.isRoofDown;
-            ufEntity.IsSupportBroken = usualForecast.isSupportBroken;
-            ufEntity.IsCoalWallDrop = usualForecast.isCoalWallDrop;
-            ufEntity.IsPartRoolFall = usualForecast.isPartRoolFall;
-            ufEntity.IsBigRoofFall = usualForecast.isBigRoofFall;
-            bool bResult = false;
-            if (this.Text == new LibPanels(MineDataPanelName.UsualForecast).panelFormName)
-            {
-                bResult = UsualForecastBLL.insertUsualForecastInfo(ufEntity);
-            }
-            else if (this.Text == new LibPanels(MineDataPanelName.UsualForecast_Change).panelFormName)
-            {
-                bResult = UsualForecastBLL.updateUsualForecastInfo(ufEntity);
             }
             return bResult;
         }

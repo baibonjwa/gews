@@ -12,6 +12,7 @@ using LibAbout;
 using LibBusiness;
 using LibCommon;
 using LibCommonForm;
+using LibConfig;
 using LibDatabase;
 using LibPanels;
 using LibSocket;
@@ -32,20 +33,19 @@ namespace sys2
                 licenseStatus = (esriLicenseStatus)aoini.Initialize(esriLicenseProductCode.esriLicenseProductCodeStandard);
             }
             InitializeComponent();
+        }
 
+        private void MainForm_MS_Load(object sender, EventArgs e)
+        {
             SocketUtil.DoInitilization();
 
             //////////////////////////////////////////////////////
             Log.Debug("[MS]...Loading Mxd file......");
-            ///文件菜单
-            this.mapControl_MS.LoadMxFile(Application.StartupPath + "\\" + GIS_Const.DEFAULT_MXD_FILE);
+            this.mapControl_MS.LoadMxFile(Application.StartupPath + "\\" + ConfigManager.Instance.getValueByKey(ConfigConst.CONFIG_MXD_FILE));
             Log.Debug("[MS]...Finished loading Mxd file......");
             statusStrip1.AxMap = mapControl_MS;
             m_FileMenu.AxMapControl = this.mapControl_MS; //传入MapControl控件  
 
-            //////////////////////////////////////////////////////
-            ///绘制基本图元工具条
-            ///加载测试数据   
             IMapControl3 mapControl = (IMapControl3)this.mapControl_MS.Object;
             IToolbarControl toolbarControl = (IToolbarControl)this.toolBar_MS.Object;
 
@@ -77,12 +77,7 @@ namespace sys2
             //地图操作初始化
             Global.SetInitialParams(this.mapControl_MS.ActiveView);
 
-            Log.Debug("[MS]...Finished Constructing Main Form......");
-        }
-
-        private void MainForm_MS_Load(object sender, EventArgs e)
-        {
-            //浮动工具条中文设置
+            Log.Debug("[MS]...Finished Constructing Main Form......");//浮动工具条中文设置
             AutoUpdater.Start("http://bltmld.vicp.cc:8090/sys2/update.xml");
             DXSeting.floatToolsLoadSet();
         }
@@ -414,11 +409,6 @@ namespace sys2
         {
         }
 
-        private void mniSkinSetting_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            DXSkinSetting ss = new DXSkinSetting();
-            ss.ShowDialog();
-        }
 
         private void tocControl_MS_OnMouseDown(object sender, ITOCControlEvents_OnMouseDownEvent e)
         {

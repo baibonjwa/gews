@@ -21,6 +21,7 @@ using LibAbout;
 using LibBusiness;
 using LibCommon;
 using LibCommonForm;
+using LibConfig;
 using LibDatabase;
 using LibSocket;
 using _3.GeologyMeasure;
@@ -42,15 +43,14 @@ namespace sys3
             }
             InitializeComponent();
 
+        }
+        #region 窗体事件
+        private void MainForm_GM_Load(object sender, EventArgs e)
+        {
             SocketUtil.DoInitilization();
-
-            //defaultLookAndFeel1.LookAndFeel.UseWindowsXPTheme = false;
-            //defaultLookAndFeel1.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Skin;
-            //defaultLookAndFeel1.LookAndFeel.SkinName = 
-
             Log.Debug("[GM]....Ready to load MXD file.....");
             ///文件菜单
-            this.mapControl_GM.LoadMxFile(Application.StartupPath + "\\" + GIS_Const.DEFAULT_MXD_FILE);
+            this.mapControl_GM.LoadMxFile(Application.StartupPath + "\\" + ConfigManager.Instance.getValueByKey(ConfigConst.CONFIG_MXD_FILE));
             //this.mapControl_GM.LoadMxFile(Application.StartupPath + "\\local.mxd");
             Log.Debug("[GM]....Finished to load MXD file.....");
             statusStrip1.AxMap = mapControl_GM;
@@ -69,23 +69,13 @@ namespace sys3
             DataEditCommon.g_pAxMapControl = this.mapControl_GM;
             DataEditCommon.g_axTocControl = this.tocControl_GM;
             DataEditCommon.load();
-
-            //添加Toolbar
-            //this.toolBar_GM.AddToolbarDef(new GIS_ToolbarView());
-            //this.toolBar_GM.AddToolbarDef(new GIS_ToolbarEdit(this.mapControl_GM, mapControl, toolbarControl, DataEditCommon.g_pCurrentWorkSpace));
-            ////this.toolBar_GM.AddToolbarDef(new GIS_ToolbarSpecial());
-            //this.toolBar_GM.AddToolbarDef(new GIS_ToolbarModify());
-            //this.toolBar_GM.AddToolbarDef(new GIS_ToolbarBasic());
             AddToolBar.Addtool(this.mapControl_GM, mapControl, toolbarControl, DataEditCommon.g_pCurrentWorkSpace);
 
             //给GIS工程的全局变量赋值
             Global.SetInitialParams(this.mapControl_GM.ActiveView);
 
             Log.Debug("[GM]....Construction finished.");
-        }
-        #region 窗体事件
-        private void MainForm_GM_Load(object sender, EventArgs e)
-        {
+
             //浮动工具条中文设置
             AutoUpdater.Start("http://bltmld.vicp.cc:8090/sys3/update.xml");
             DXSeting.floatToolsLoadSet();

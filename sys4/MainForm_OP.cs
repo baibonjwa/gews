@@ -15,6 +15,7 @@ using GIS.SpecialGraphic;
 using LibAbout;
 using LibCommon;
 using LibCommonForm;
+using LibConfig;
 using LibDatabase;
 using LibSocket;
 
@@ -39,28 +40,6 @@ namespace sys4
             //LicenseInitializer license = new LicenseInitializer();
             //bool islicense=license.InitializeApplication();
             InitializeComponent();
-
-            ///文件菜单
-            mapControl_OP.LoadMxFile(Application.StartupPath + "\\" + GIS_Const.DEFAULT_MXD_FILE);
-            statusStrip1.AxMap = mapControl_OP;
-            m_FileMenu.AxMapControl = mapControl_OP; //传入MapControl控件    
-
-            ///绘制基本图元工具条
-            ///加载测试数据   
-            var mapControl = (IMapControl3)mapControl_OP.Object;
-            var toolbarControl = (IToolbarControl)toolbar_OP.Object;
-
-            //绑定控件
-            toolbar_OP.SetBuddyControl(mapControl);
-            tocControl_OP.SetBuddyControl(mapControl);
-
-
-            //给全局变量赋值
-            DataEditCommon.g_tbCtlEdit = toolbarControl;
-            DataEditCommon.g_pAxMapControl = mapControl_OP;
-            DataEditCommon.g_axTocControl = tocControl_OP;
-            DataEditCommon.load();
-            AddToolBar.Addtool(mapControl_OP, mapControl, toolbarControl, DataEditCommon.g_pCurrentWorkSpace);
         }
 
         private void bbiCheckUpdate_ItemClick(object sender, ItemClickEventArgs e)
@@ -74,6 +53,22 @@ namespace sys4
         private void MainForm_OP_Load(object sender, EventArgs e)
         {
             SocketUtil.DoInitilization();
+            mapControl_OP.LoadMxFile(Application.StartupPath + "\\" + ConfigManager.Instance.getValueByKey(ConfigConst.CONFIG_MXD_FILE));
+            statusStrip1.AxMap = mapControl_OP;
+            m_FileMenu.AxMapControl = mapControl_OP; //传入MapControl控件    
+            var mapControl = (IMapControl3)mapControl_OP.Object;
+            var toolbarControl = (IToolbarControl)toolbar_OP.Object;
+            //绑定控件
+            toolbar_OP.SetBuddyControl(mapControl);
+            tocControl_OP.SetBuddyControl(mapControl);
+            //给全局变量赋值
+            DataEditCommon.g_tbCtlEdit = toolbarControl;
+            DataEditCommon.g_pAxMapControl = mapControl_OP;
+            DataEditCommon.g_axTocControl = tocControl_OP;
+            DataEditCommon.load();
+            AddToolBar.Addtool(mapControl_OP, mapControl, toolbarControl, DataEditCommon.g_pCurrentWorkSpace);
+
+
             AutoUpdater.Start("http://bltmld.vicp.cc:8090/sys4/update.xml");
             DXSeting.floatToolsLoadSet();
         }

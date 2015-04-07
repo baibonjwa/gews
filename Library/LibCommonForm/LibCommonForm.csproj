@@ -182,12 +182,6 @@
     <Compile Include="DepartmentInformationManagement.designer.cs">
       <DependentUpon>DepartmentInformationManagement.cs</DependentUpon>
     </Compile>
-    <Compile Include="DXSkinSetting.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DXSkinSetting.Designer.cs">
-      <DependentUpon>DXSkinSetting.cs</DependentUpon>
-    </Compile>
     <Compile Include="PanelForTunnelEntering.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -329,9 +323,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DepartmentInformationManagement.resx">
       <DependentUpon>DepartmentInformationManagement.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DXSkinSetting.resx">
-      <DependentUpon>DXSkinSetting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PanelForTunnelEntering.resx">
       <DependentUpon>PanelForTunnelEntering.cs</DependentUpon>

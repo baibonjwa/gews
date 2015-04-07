@@ -87,10 +87,6 @@ namespace LibPanels
             {
                 bResult = submitG();
             }
-            if (_usualForecast.WindowState != FormWindowState.Minimized)         //提交日常预测特有信息
-            {
-                bResult = submitU();
-            }
             if (_management.WindowState != FormWindowState.Minimized)         //提交管理特有信息
             {
                 bResult = submitM();
@@ -105,7 +101,6 @@ namespace LibPanels
             _ventilationInfoEntering.Close();
             _coalExistenceInfoEntering.Close();
             _gasData.Close();
-            _usualForecast.Close();
             _management.Close();
             Close();
         }
@@ -242,35 +237,6 @@ namespace LibPanels
                 gdEntity.SaveAndFlush();
                 bResult = true;
                 Log.Debug("发送修改瓦斯信息的Socket信息完成");
-            }
-            return bResult;
-        }
-        /// <summary>
-        ///     提交日常预测特有信息
-        /// </summary>
-        private bool submitU()
-        {
-            ufEntity = mineDataEntity.changeToUsualForecastEntity();
-            ufEntity.IsRoofDown = _usualForecast.isRoofDown;
-            ufEntity.IsSupportBroken = _usualForecast.isSupportBroken;
-            ufEntity.IsCoalWallDrop = _usualForecast.isCoalWallDrop;
-            ufEntity.IsPartRoolFall = _usualForecast.isPartRoolFall;
-            ufEntity.IsBigRoofFall = _usualForecast.isBigRoofFall;
-            bool bResult = false;
-            if (Text == new LibPanels(MineDataPanelName.UsualForecast).panelFormName)
-            {
-                bResult = UsualForecastBLL.insertUsualForecastInfo(ufEntity);
-
-                var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.SelectedTunnel.TunnelId,
-                    UsualForecastDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, dtpDateTime.Value);
-                SocketUtil.SendMsg2Server(msg);
-            }
-            else if (Text == new LibPanels(MineDataPanelName.UsualForecast_Change).panelFormName)
-            {
-                var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.SelectedTunnel.TunnelId,
-                    UsualForecastDbConstNames.TABLE_NAME, OPERATION_TYPE.UPDATE, dtpDateTime.Value);
-                SocketUtil.SendMsg2Server(msg);
-                bResult = UsualForecastBLL.updateUsualForecastInfo(ufEntity);
             }
             return bResult;
         }
@@ -467,8 +433,6 @@ namespace LibPanels
             _coalExistenceInfoEntering.Parent = panel2;
             _gasData.MdiParent = this;
             _gasData.Parent = panel2;
-            _usualForecast.MdiParent = this;
-            _usualForecast.Parent = panel2;
             _management.MdiParent = this;
             _management.Parent = panel2;
             _geologicStructure.MdiParent = this;
@@ -478,7 +442,6 @@ namespace LibPanels
             panel2.Controls.Add(_coalExistenceInfoEntering);
             panel2.Controls.Add(_ventilationInfoEntering);
             panel2.Controls.Add(_gasData);
-            panel2.Controls.Add(_usualForecast);
             panel2.Controls.Add(_management);
             panel2.Controls.Add(_geologicStructure);
 
@@ -532,14 +495,6 @@ namespace LibPanels
                 _gasData.WindowState = FormWindowState.Maximized;
                 _gasData.Show();
                 _gasData.Activate();
-            }
-            //日常预测
-            if (Text == new LibPanels(MineDataPanelName.UsualForecast).panelFormName)
-            {
-                Height = formHeight + _usualForecast.Height;
-                _usualForecast.WindowState = FormWindowState.Maximized;
-                _usualForecast.Show();
-                _usualForecast.Activate();
             }
             //管理
             if (Text == new LibPanels(MineDataPanelName.Management).panelFormName)
@@ -600,23 +555,6 @@ namespace LibPanels
                 _gasData.WindowState = FormWindowState.Maximized;
                 _gasData.Show();
                 _gasData.Activate();
-            }
-            //绑定日常预测修改初始信息
-            if (Text == new LibPanels(MineDataPanelName.UsualForecast_Change).panelFormName)
-            {
-                Height = formHeight + _usualForecast.Height;
-                changeMineCommonValue(ufEntity);
-
-                _usualForecast.isRoofDown = ufEntity.IsRoofDown;
-                _usualForecast.isSupportBroken = ufEntity.IsSupportBroken;
-                _usualForecast.isCoalWallDrop = ufEntity.IsCoalWallDrop;
-                _usualForecast.isPartRoolFall = ufEntity.IsPartRoolFall;
-                _usualForecast.isBigRoofFall = ufEntity.IsBigRoofFall;
-                _usualForecast.bindDefaultValue();
-
-                _usualForecast.WindowState = FormWindowState.Maximized;
-                _usualForecast.Show();
-                _usualForecast.Activate();
             }
             //绑定管理修改初始信息
             if (Text == new LibPanels(MineDataPanelName.Management_Change).panelFormName)

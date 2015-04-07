@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using LibConfig;
 
 namespace GIS
 {
     public static class GIS_Const
     {
-        public const string DEFAULT_MXD_FILE = "default.mxd";
-
         public const string FIELD_OBJECTID = "OBJECTID"; //
         public const string FIELD_BID      = "BID";      // Binding WirePointName.
         public const string FIELD_SHAPE    = "SHAPE";    // 形状

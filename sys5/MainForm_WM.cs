@@ -18,6 +18,7 @@ using LibAbout;
 using LibBusiness;
 using LibCommon;
 using LibCommonForm;
+using LibConfig;
 using LibDatabase;
 using LibPanels;
 using LibSocket;
@@ -47,52 +48,6 @@ namespace sys5
                 licenseStatus = aoini.Initialize(esriLicenseProductCode.esriLicenseProductCodeStandard);
             }
             InitializeComponent();
-
-
-            //////////////////////////////////////////////////////
-            ///文件菜单
-            mapControl_WM.LoadMxFile(Application.StartupPath + "\\" + GIS_Const.DEFAULT_MXD_FILE);
-            //this.mapControl_WM.LoadMxFile(Application.StartupPath + "\\local.mxd");
-            toolStrip1.AxMap = mapControl_WM;
-            m_FileMenu.AxMapControl = mapControl_WM; //传入MapControl控件   
-
-
-            //////////////////////////////////////////////////////
-            //绘制基本图元工具条
-            //加载测试数 
-            var mapControl = (IMapControl3)mapControl_WM.Object;
-            var toolbarControl = (IToolbarControl)toolBar_WM.Object;
-
-            //绑定控件
-            toolBar_WM.SetBuddyControl(mapControl);
-            tocControl_WM.SetBuddyControl(mapControl);
-
-            //获得工作空间
-            //string strProvide = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source=";
-            //string strDataSource = Application.StartupPath + @"\GasWarning-ChengZhuang.mdb";
-            //MDBOperation.GetODbConnection(strProvide + strDataSource);
-            //IWorkspaceFactory workspaceFactory = new AccessWorkspaceFactory();
-            //IWorkspace workspace = workspaceFactory.OpenFromFile(strDataSource, 0);
-
-            //this.toolBar_WM.AddItem("esriControls.ControlsMapNavigationToolbar");
-            //this.toolBar_WM.AddItem("esriControls.ControlsMapRefreshViewCommand", 0, -1, false, 0, esriCommandStyles.esriCommandStyleIconOnly);
-
-            //给全局变量赋值
-            DataEditCommon.g_tbCtlEdit = toolbarControl;
-            DataEditCommon.g_pAxMapControl = mapControl_WM;
-            DataEditCommon.g_axTocControl = tocControl_WM;
-            DataEditCommon.load();
-
-            //添加Toolbar
-            //toolBar_WM.AddToolbarDef(new GIS_ToolbarView());
-            //toolBar_WM.AddToolbarDef(new GIS_ToolbarEdit(mapControl_WM, mapControl, toolbarControl,
-            //    DataEditCommon.g_pCurrentWorkSpace));
-            ////this.toolBar_WM.AddToolbarDef(new GIS_ToolbarSpecial());
-            //toolBar_WM.AddToolbarDef(new GIS_ToolbarModify());
-            //toolBar_WM.AddToolbarDef(new GIS_ToolbarBasic());
-            AddToolBar.Addtool(mapControl_WM, mapControl, toolbarControl, DataEditCommon.g_pCurrentWorkSpace);
-
-            Global.SetInitialParams(mapControl_WM.ActiveView);
         }
 
         public static void CleanLatestWarningResult()
@@ -148,9 +103,56 @@ namespace sys5
 
         private void MainForm_WM_Load(object sender, EventArgs e)
         {
+            SocketUtil.DoInitilization();
+            //////////////////////////////////////////////////////
+            ///文件菜单
+            mapControl_WM.LoadMxFile(Application.StartupPath + "\\" + ConfigManager.Instance.getValueByKey(ConfigConst.CONFIG_MXD_FILE));
+            //this.mapControl_WM.LoadMxFile(Application.StartupPath + "\\local.mxd");
+            toolStrip1.AxMap = mapControl_WM;
+            m_FileMenu.AxMapControl = mapControl_WM; //传入MapControl控件   
+
+
+            //////////////////////////////////////////////////////
+            //绘制基本图元工具条
+            //加载测试数 
+            var mapControl = (IMapControl3)mapControl_WM.Object;
+            var toolbarControl = (IToolbarControl)toolBar_WM.Object;
+
+            //绑定控件
+            toolBar_WM.SetBuddyControl(mapControl);
+            tocControl_WM.SetBuddyControl(mapControl);
+
+            //获得工作空间
+            //string strProvide = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source=";
+            //string strDataSource = Application.StartupPath + @"\GasWarning-ChengZhuang.mdb";
+            //MDBOperation.GetODbConnection(strProvide + strDataSource);
+            //IWorkspaceFactory workspaceFactory = new AccessWorkspaceFactory();
+            //IWorkspace workspace = workspaceFactory.OpenFromFile(strDataSource, 0);
+
+            //this.toolBar_WM.AddItem("esriControls.ControlsMapNavigationToolbar");
+            //this.toolBar_WM.AddItem("esriControls.ControlsMapRefreshViewCommand", 0, -1, false, 0, esriCommandStyles.esriCommandStyleIconOnly);
+
+            //给全局变量赋值
+            DataEditCommon.g_tbCtlEdit = toolbarControl;
+            DataEditCommon.g_pAxMapControl = mapControl_WM;
+            DataEditCommon.g_axTocControl = tocControl_WM;
+            DataEditCommon.load();
+
+            //添加Toolbar
+            //toolBar_WM.AddToolbarDef(new GIS_ToolbarView());
+            //toolBar_WM.AddToolbarDef(new GIS_ToolbarEdit(mapControl_WM, mapControl, toolbarControl,
+            //    DataEditCommon.g_pCurrentWorkSpace));
+            ////this.toolBar_WM.AddToolbarDef(new GIS_ToolbarSpecial());
+            //toolBar_WM.AddToolbarDef(new GIS_ToolbarModify());
+            //toolBar_WM.AddToolbarDef(new GIS_ToolbarBasic());
+            AddToolBar.Addtool(mapControl_WM, mapControl, toolbarControl, DataEditCommon.g_pCurrentWorkSpace);
+
+            Global.SetInitialParams(mapControl_WM.ActiveView);
+
+
             AutoUpdater.Start("http://bltmld.vicp.cc:8090/sys5/update.xml");
             //注册更新预警结果事件
-            SocketUtil.DoInitilization();
+          
             SocketUtil.GetClientSocketInstance().OnMsgUpdateWarningResult += UpdateWarningResultUi;
             var msg = new SocketMessage(COMMAND_ID.REGISTER_WARNING_RESULT_NOTIFICATION_ALL, DateTime.Now);
             SocketUtil.SendMsg2Server(msg);

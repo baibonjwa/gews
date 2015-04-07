@@ -353,7 +353,7 @@ namespace sys4
         {
             ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.LAYER_ALIAS_MR_WSHLD);
             IFeatureLayer pFeatureLayer = (IFeatureLayer)pLayer;
-            DataEditCommon.DeleteFeatureByWhereClause(pFeatureLayer, "bid='" + bid + "' and mc='" + mc + "'");
+            DataEditCommon.DeleteFeatureByWhereClause(pFeatureLayer, "bid='" + bid + "'");
         }
     }
 }

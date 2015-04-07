@@ -47,7 +47,7 @@ namespace GIS.Common
                 ////propertySet.SetProperty("Instance", "port:5151");
                 //propertySet.SetProperty("DATABASE", "GasEarlyWarningGIS");
                 //propertySet.SetProperty("USER", "sde");
-                //propertySet.SetProperty("PASSWORD", "sde");
+                //propertySet.SetProperty("PASSWORD", "sde");   
                 //propertySet.SetProperty("VERSION", "sde.DEFAULT");
 
                 ////通过以上设置的参数将数据库的数据通过SDE读入工作空间

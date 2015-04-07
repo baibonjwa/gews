@@ -72,12 +72,14 @@ namespace LibConfig
             string databaseGIS = config.Get(ConfigConst.CONFIG_DATABASE_GIS);
             string databaseUID = config.Get(ConfigConst.CONFIG_DATABASE_UID);
             string databasePwd = config.Get(ConfigConst.CONFIG_DATABASE_PASSWD);
+            string mxdFile = config.Get(ConfigConst.CONFIG_MXD_FILE);
 
             cfgMgr.add(ConfigConst.CONFIG_DATASOURCE, dataSource);
             cfgMgr.add(ConfigConst.CONFIG_DATABASE_MAIN, databaseMain);
             cfgMgr.add(ConfigConst.CONFIG_DATABASE_GIS, databaseGIS);
             cfgMgr.add(ConfigConst.CONFIG_DATABASE_UID, databaseUID);
             cfgMgr.add(ConfigConst.CONFIG_DATABASE_PASSWD, databasePwd);
+            cfgMgr.add(ConfigConst.CONFIG_MXD_FILE, mxdFile);
 
             return string.Empty;
         }
