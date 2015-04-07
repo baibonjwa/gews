@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProbeInfoManagement));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsBtnPrint = new System.Windows.Forms.ToolStripButton();
@@ -39,7 +40,7 @@
             this.tsBtnExit = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel();
+            this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -64,7 +65,6 @@
             this.bandedGridColumn17 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn18 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn19 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.sbtnUpdateProbe = new DevExpress.XtraEditors.SimpleButton();
             this.checkButton1 = new DevExpress.XtraEditors.CheckButton();
@@ -74,7 +74,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcProbe)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bandedGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             this.SuspendLayout();
@@ -229,7 +228,6 @@
             this.gcProbe.MainView = this.bandedGridView1;
             this.gcProbe.Name = "gcProbe";
             this.gcProbe.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.repositoryItemCheckEdit1,
             this.repositoryItemCheckEdit2});
             this.gcProbe.Size = new System.Drawing.Size(1249, 527);
             this.gcProbe.TabIndex = 9;
@@ -257,7 +255,6 @@
             this.bandedGridColumn2});
             this.bandedGridView1.GridControl = this.gcProbe;
             this.bandedGridView1.Name = "bandedGridView1";
-            this.bandedGridView1.OptionsBehavior.Editable = false;
             this.bandedGridView1.OptionsSelection.MultiSelect = true;
             this.bandedGridView1.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
             this.bandedGridView1.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.bandedGridView1_CustomColumnDisplayText);
@@ -271,7 +268,10 @@
             // 
             // bandedGridColumn2
             // 
+            this.bandedGridColumn2.AppearanceHeader.Options.UseTextOptions = true;
+            this.bandedGridColumn2.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.bandedGridColumn2.Caption = "调校";
+            this.bandedGridColumn2.ColumnEdit = this.repositoryItemCheckEdit2;
             this.bandedGridColumn2.FieldName = "IsDebug";
             this.bandedGridColumn2.Name = "bandedGridColumn2";
             this.bandedGridColumn2.Visible = true;
@@ -282,6 +282,9 @@
             this.repositoryItemCheckEdit2.AutoHeight = false;
             this.repositoryItemCheckEdit2.Caption = "Check";
             this.repositoryItemCheckEdit2.Name = "repositoryItemCheckEdit2";
+            this.repositoryItemCheckEdit2.ValueChecked = 1;
+            this.repositoryItemCheckEdit2.ValueUnchecked = 0;
+            this.repositoryItemCheckEdit2.CheckedChanged += new System.EventHandler(this.repositoryItemCheckEdit2_CheckedChanged);
             // 
             // gridBand1
             // 
@@ -303,6 +306,7 @@
             this.bandedGridColumn11.Caption = "传感器编号";
             this.bandedGridColumn11.FieldName = "ProbeId";
             this.bandedGridColumn11.Name = "bandedGridColumn11";
+            this.bandedGridColumn11.OptionsColumn.AllowEdit = false;
             this.bandedGridColumn11.OptionsFilter.AllowFilter = false;
             this.bandedGridColumn11.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(),
@@ -316,6 +320,7 @@
             this.bandedGridColumn12.Caption = "传感器名称";
             this.bandedGridColumn12.FieldName = "ProbeName";
             this.bandedGridColumn12.Name = "bandedGridColumn12";
+            this.bandedGridColumn12.OptionsColumn.AllowEdit = false;
             this.bandedGridColumn12.Visible = true;
             this.bandedGridColumn12.Width = 82;
             // 
@@ -324,6 +329,7 @@
             this.bandedGridColumn1.Caption = "传感器类型";
             this.bandedGridColumn1.FieldName = "ProbeType.ProbeTypeName";
             this.bandedGridColumn1.Name = "bandedGridColumn1";
+            this.bandedGridColumn1.OptionsColumn.AllowEdit = false;
             this.bandedGridColumn1.Visible = true;
             this.bandedGridColumn1.Width = 69;
             // 
@@ -332,6 +338,7 @@
             this.bandedGridColumn13.Caption = "传感器原始类型";
             this.bandedGridColumn13.FieldName = "ProbeTypeDisplayName";
             this.bandedGridColumn13.Name = "bandedGridColumn13";
+            this.bandedGridColumn13.OptionsColumn.AllowEdit = false;
             this.bandedGridColumn13.Visible = true;
             this.bandedGridColumn13.Width = 79;
             // 
@@ -340,6 +347,7 @@
             this.bandedGridColumn14.Caption = "传感器位置描述";
             this.bandedGridColumn14.FieldName = "ProbeDescription";
             this.bandedGridColumn14.Name = "bandedGridColumn14";
+            this.bandedGridColumn14.OptionsColumn.AllowEdit = false;
             this.bandedGridColumn14.Visible = true;
             this.bandedGridColumn14.Width = 453;
             // 
@@ -348,6 +356,7 @@
             this.bandedGridColumn20.Caption = "是否自动移位";
             this.bandedGridColumn20.FieldName = "IsMove";
             this.bandedGridColumn20.Name = "bandedGridColumn20";
+            this.bandedGridColumn20.OptionsColumn.AllowEdit = false;
             this.bandedGridColumn20.Visible = true;
             this.bandedGridColumn20.Width = 108;
             // 
@@ -370,6 +379,7 @@
             this.bandedGridColumn15.Caption = "矿井名称";
             this.bandedGridColumn15.FieldName = "Tunnel.WorkingFace.MiningArea.Horizontal.Mine.MineName";
             this.bandedGridColumn15.Name = "bandedGridColumn15";
+            this.bandedGridColumn15.OptionsColumn.AllowEdit = false;
             this.bandedGridColumn15.Visible = true;
             this.bandedGridColumn15.Width = 64;
             // 
@@ -378,6 +388,7 @@
             this.bandedGridColumn16.Caption = "水平名称";
             this.bandedGridColumn16.FieldName = "Tunnel.WorkingFace.MiningArea.Horizontal.HorizontalName";
             this.bandedGridColumn16.Name = "bandedGridColumn16";
+            this.bandedGridColumn16.OptionsColumn.AllowEdit = false;
             this.bandedGridColumn16.Visible = true;
             this.bandedGridColumn16.Width = 64;
             // 
@@ -386,6 +397,7 @@
             this.bandedGridColumn17.Caption = "采区名称";
             this.bandedGridColumn17.FieldName = "Tunnel.WorkingFace.MiningArea.MiningAreaName";
             this.bandedGridColumn17.Name = "bandedGridColumn17";
+            this.bandedGridColumn17.OptionsColumn.AllowEdit = false;
             this.bandedGridColumn17.Visible = true;
             this.bandedGridColumn17.Width = 67;
             // 
@@ -394,6 +406,7 @@
             this.bandedGridColumn18.Caption = "工作面名称";
             this.bandedGridColumn18.FieldName = "Tunnel.WorkingFace.WorkingFaceName";
             this.bandedGridColumn18.Name = "bandedGridColumn18";
+            this.bandedGridColumn18.OptionsColumn.AllowEdit = false;
             this.bandedGridColumn18.Visible = true;
             this.bandedGridColumn18.Width = 71;
             // 
@@ -402,14 +415,9 @@
             this.bandedGridColumn19.Caption = "巷道名称";
             this.bandedGridColumn19.FieldName = "Tunnel.TunnelName";
             this.bandedGridColumn19.Name = "bandedGridColumn19";
+            this.bandedGridColumn19.OptionsColumn.AllowEdit = false;
             this.bandedGridColumn19.Visible = true;
             this.bandedGridColumn19.Width = 62;
-            // 
-            // repositoryItemCheckEdit1
-            // 
-            this.repositoryItemCheckEdit1.AutoHeight = false;
-            this.repositoryItemCheckEdit1.Caption = "Check";
-            this.repositoryItemCheckEdit1.Name = "repositoryItemCheckEdit1";
             // 
             // panelControl1
             // 
@@ -425,7 +433,7 @@
             // sbtnUpdateProbe
             // 
             this.sbtnUpdateProbe.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.sbtnUpdateProbe.Location = new System.Drawing.Point(323, 568);
+            this.sbtnUpdateProbe.Location = new System.Drawing.Point(299, 568);
             this.sbtnUpdateProbe.Name = "sbtnUpdateProbe";
             this.sbtnUpdateProbe.Size = new System.Drawing.Size(76, 20);
             this.sbtnUpdateProbe.TabIndex = 13;
@@ -435,16 +443,17 @@
             // checkButton1
             // 
             this.checkButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.checkButton1.Location = new System.Drawing.Point(405, 568);
+            this.checkButton1.Location = new System.Drawing.Point(484, 568);
             this.checkButton1.Name = "checkButton1";
             this.checkButton1.Size = new System.Drawing.Size(92, 20);
             this.checkButton1.TabIndex = 14;
             this.checkButton1.Text = "调校全部传感器";
+            this.checkButton1.Visible = false;
             // 
             // cbtnAll
             // 
             this.cbtnAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.cbtnAll.Location = new System.Drawing.Point(503, 568);
+            this.cbtnAll.Location = new System.Drawing.Point(381, 568);
             this.cbtnAll.Name = "cbtnAll";
             this.cbtnAll.Size = new System.Drawing.Size(97, 20);
             this.cbtnAll.TabIndex = 15;
@@ -474,7 +483,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcProbe)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bandedGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -496,7 +504,6 @@
         private DevExpress.XtraEditors.ControlNavigator controlNavigator1;
         private DevExpress.XtraEditors.PanelControl panelControl1;
         private DevExpress.XtraGrid.GridControl gcProbe;
-        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit1;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridView bandedGridView1;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn11;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn12;

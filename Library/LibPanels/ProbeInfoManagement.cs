@@ -175,5 +175,12 @@ namespace LibPanels
         {
             RefreshData();
         }
+
+        private void repositoryItemCheckEdit2_CheckedChanged(object sender, EventArgs e)
+        {
+            var probe = (Probe)bandedGridView1.GetFocusedRow();
+            probe.IsDebug = probe.IsDebug == 0 ? 1 : 0;
+            probe.Save();
+        }
     }
 }
