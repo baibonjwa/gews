@@ -33,7 +33,6 @@ namespace sys1
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainFormGe));
             this.ss_GE = new System.Windows.Forms.StatusStrip();
@@ -72,7 +71,7 @@ namespace sys1
             this.tChartM = new Steema.TeeChart.TChart();
             this.fastLine1 = new Steema.TeeChart.Styles.FastLine();
             this.barButtonItem6 = new DevExpress.XtraBars.BarButtonItem();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timer1 = new System.Windows.Forms.Timer();
             this.repositoryItemHyperLinkEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
             this.repositoryItemFontEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemFontEdit();
             this.barSubItem1 = new DevExpress.XtraBars.BarSubItem();
@@ -105,7 +104,7 @@ namespace sys1
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-            this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
+            this.barManager1 = new DevExpress.XtraBars.BarManager();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.gbTunnel.SuspendLayout();
@@ -460,6 +459,8 @@ namespace sys1
             // 
             // 
             // 
+            this.tChartN.Aspect.ColorPaletteIndex = -1;
+            this.tChartN.Aspect.ThemeIndex = 2;
             this.tChartN.Aspect.View3D = false;
             // 
             // 
@@ -470,18 +471,46 @@ namespace sys1
             // 
             // 
             // 
+            this.tChartN.Axes.Bottom.AxisPen.Width = 1;
+            // 
+            // 
+            // 
+            this.tChartN.Axes.Bottom.Grid.Centered = true;
+            this.tChartN.Axes.Bottom.Grid.Color = System.Drawing.Color.Black;
+            this.tChartN.Axes.Bottom.Grid.Style = System.Drawing.Drawing2D.DashStyle.Solid;
+            // 
+            // 
+            // 
             this.tChartN.Axes.Bottom.Labels.CustomSize = 27;
             this.tChartN.Axes.Bottom.Labels.DateTimeFormat = "yyyy/MM/dd HH:mm:ss";
+            // 
+            // 
+            // 
+            this.tChartN.Axes.Bottom.Labels.Font.Name = "Times New Roman";
+            this.tChartN.Axes.Bottom.Labels.Font.Size = 10;
             this.tChartN.Axes.Bottom.Labels.MultiLine = true;
             this.tChartN.Axes.Bottom.Labels.RoundFirstLabel = false;
             this.tChartN.Axes.Bottom.Labels.Separation = 100;
             // 
             // 
             // 
-            this.tChartN.Axes.Bottom.Ticks.Length = 10;
+            this.tChartN.Axes.Bottom.MinorTicks.Visible = false;
             // 
             // 
             // 
+            this.tChartN.Axes.Bottom.Ticks.Color = System.Drawing.Color.Black;
+            this.tChartN.Axes.Bottom.Ticks.Length = 2;
+            // 
+            // 
+            // 
+            this.tChartN.Axes.Bottom.TicksInner.Visible = false;
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChartN.Axes.Bottom.Title.Font.Name = "Times New Roman";
             this.tChartN.Axes.Bottom.Title.Lines = new string[] {
         ""};
             // 
@@ -490,13 +519,81 @@ namespace sys1
             // 
             // 
             // 
+            this.tChartN.Axes.Depth.AxisPen.Width = 1;
+            // 
+            // 
+            // 
+            this.tChartN.Axes.Depth.Grid.Color = System.Drawing.Color.Black;
+            this.tChartN.Axes.Depth.Grid.Style = System.Drawing.Drawing2D.DashStyle.Solid;
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChartN.Axes.Depth.Labels.Font.Name = "Times New Roman";
+            this.tChartN.Axes.Depth.Labels.Font.Size = 10;
+            // 
+            // 
+            // 
+            this.tChartN.Axes.Depth.MinorTicks.Visible = false;
+            // 
+            // 
+            // 
+            this.tChartN.Axes.Depth.Ticks.Color = System.Drawing.Color.Black;
+            this.tChartN.Axes.Depth.Ticks.Length = 2;
+            // 
+            // 
+            // 
+            this.tChartN.Axes.Depth.TicksInner.Visible = false;
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChartN.Axes.Depth.Title.Font.Name = "Times New Roman";
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChartN.Axes.Left.AxisPen.Width = 1;
+            // 
+            // 
+            // 
+            this.tChartN.Axes.Left.Grid.Color = System.Drawing.Color.Black;
+            this.tChartN.Axes.Left.Grid.Style = System.Drawing.Drawing2D.DashStyle.Solid;
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChartN.Axes.Left.Labels.Font.Name = "Times New Roman";
+            this.tChartN.Axes.Left.Labels.Font.Size = 10;
             this.tChartN.Axes.Left.Labels.RoundFirstLabel = false;
             // 
             // 
             // 
+            this.tChartN.Axes.Left.MinorTicks.Visible = false;
             // 
             // 
             // 
+            this.tChartN.Axes.Left.Ticks.Color = System.Drawing.Color.Black;
+            this.tChartN.Axes.Left.Ticks.Length = 2;
+            // 
+            // 
+            // 
+            this.tChartN.Axes.Left.TicksInner.Visible = false;
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChartN.Axes.Left.Title.Font.Name = "Times New Roman";
             // 
             // 
             // 
@@ -513,7 +610,41 @@ namespace sys1
             // 
             // 
             // 
+            this.tChartN.Axes.Right.AxisPen.Width = 1;
+            // 
+            // 
+            // 
+            this.tChartN.Axes.Right.Grid.Color = System.Drawing.Color.Black;
+            this.tChartN.Axes.Right.Grid.Style = System.Drawing.Drawing2D.DashStyle.Solid;
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChartN.Axes.Right.Labels.Font.Name = "Times New Roman";
+            this.tChartN.Axes.Right.Labels.Font.Size = 10;
             this.tChartN.Axes.Right.Labels.RoundFirstLabel = false;
+            // 
+            // 
+            // 
+            this.tChartN.Axes.Right.MinorTicks.Visible = false;
+            // 
+            // 
+            // 
+            this.tChartN.Axes.Right.Ticks.Color = System.Drawing.Color.Black;
+            this.tChartN.Axes.Right.Ticks.Length = 2;
+            // 
+            // 
+            // 
+            this.tChartN.Axes.Right.TicksInner.Visible = false;
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChartN.Axes.Right.Title.Font.Name = "Times New Roman";
             this.tChartN.Axes.Right.Visible = false;
             // 
             // 
@@ -521,13 +652,56 @@ namespace sys1
             // 
             // 
             // 
+            this.tChartN.Axes.Top.AxisPen.Width = 1;
+            // 
+            // 
+            // 
+            this.tChartN.Axes.Top.Grid.Color = System.Drawing.Color.Black;
+            this.tChartN.Axes.Top.Grid.Style = System.Drawing.Drawing2D.DashStyle.Solid;
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChartN.Axes.Top.Labels.Font.Name = "Times New Roman";
+            this.tChartN.Axes.Top.Labels.Font.Size = 10;
             this.tChartN.Axes.Top.Labels.RoundFirstLabel = false;
+            // 
+            // 
+            // 
+            this.tChartN.Axes.Top.MinorTicks.Visible = false;
+            // 
+            // 
+            // 
+            this.tChartN.Axes.Top.Ticks.Color = System.Drawing.Color.Black;
+            this.tChartN.Axes.Top.Ticks.Length = 2;
+            // 
+            // 
+            // 
+            this.tChartN.Axes.Top.TicksInner.Visible = false;
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChartN.Axes.Top.Title.Font.Name = "Times New Roman";
             this.tChartN.Axes.Top.Visible = false;
             this.tChartN.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(236)))), ((int)(((byte)(239)))));
             this.tChartN.Cursor = System.Windows.Forms.Cursors.Default;
             // 
             // 
             // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChartN.Header.Font.Brush.Color = System.Drawing.Color.Black;
+            this.tChartN.Header.Font.Name = "Times New Roman";
+            this.tChartN.Header.Font.Size = 12;
             this.tChartN.Header.Lines = new string[] {
         "同一工序条件下瓦斯浓度变化值N"};
             // 
@@ -537,10 +711,30 @@ namespace sys1
             // 
             // 
             // 
+            this.tChartN.Legend.Font.Name = "Times New Roman";
+            this.tChartN.Legend.Font.Size = 10;
+            // 
+            // 
+            // 
+            this.tChartN.Legend.Pen.Visible = false;
+            // 
+            // 
+            // 
             // 
             // 
             // 
             this.tChartN.Legend.Shadow.Brush.Color = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.tChartN.Legend.Shadow.Height = 0;
+            this.tChartN.Legend.Shadow.Width = 0;
+            // 
+            // 
+            // 
+            this.tChartN.Legend.Symbol.DefaultPen = false;
+            // 
+            // 
+            // 
+            this.tChartN.Legend.Symbol.Pen.Visible = false;
+            this.tChartN.Legend.Transparent = true;
             this.tChartN.Legend.Visible = false;
             this.tChartN.Location = new System.Drawing.Point(238, 241);
             this.tChartN.Name = "tChartN";
@@ -554,7 +748,21 @@ namespace sys1
             // 
             // 
             // 
-            this.tChartN.Panel.Brush.Color = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(236)))), ((int)(((byte)(239)))));
+            this.tChartN.Panel.Bevel.Outer = Steema.TeeChart.Drawing.BevelStyles.None;
+            // 
+            // 
+            // 
+            this.tChartN.Panel.Brush.Color = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.tChartN.Panel.Gradient.EndColor = System.Drawing.Color.Yellow;
+            this.tChartN.Panel.Gradient.MiddleColor = System.Drawing.Color.Empty;
+            this.tChartN.Panel.Gradient.StartColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.tChartN.Panel.Pen.Visible = true;
             // 
             // 
             // 
@@ -573,22 +781,39 @@ namespace sys1
             // 
             // 
             // 
+            this.tChartN.Walls.Back.ApplyDark = false;
+            // 
+            // 
+            // 
+            this.tChartN.Walls.Back.Brush.Color = System.Drawing.Color.White;
+            this.tChartN.Walls.Back.Size = 8;
+            this.tChartN.Walls.Back.Transparent = false;
             this.tChartN.Walls.Back.Visible = false;
             // 
             // 
             // 
+            this.tChartN.Walls.Bottom.ApplyDark = false;
+            this.tChartN.Walls.Bottom.Size = 8;
             this.tChartN.Walls.Bottom.Visible = false;
             // 
             // 
             // 
+            this.tChartN.Walls.Left.ApplyDark = false;
+            // 
+            // 
+            // 
+            this.tChartN.Walls.Left.Brush.Color = System.Drawing.Color.White;
+            this.tChartN.Walls.Left.Size = 8;
             this.tChartN.Walls.Left.Visible = false;
             // 
             // 
             // 
+            this.tChartN.Walls.Right.ApplyDark = false;
             // 
             // 
             // 
-            this.tChartN.Walls.Right.Brush.Color = System.Drawing.Color.Silver;
+            this.tChartN.Walls.Right.Brush.Color = System.Drawing.Color.White;
+            this.tChartN.Walls.Right.Size = 8;
             this.tChartN.Walls.Right.Visible = false;
             this.tChartN.Walls.Visible = false;
             // 
@@ -597,11 +822,24 @@ namespace sys1
             // 
             // 
             // 
-            this.line1.Brush.Color = System.Drawing.Color.Red;
+            this.line1.Brush.Color = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             // 
             // 
             // 
             this.line1.LinePen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.line1.Marks.Arrow.Color = System.Drawing.Color.Black;
+            // 
+            // 
+            // 
+            this.line1.Marks.Font.Name = "Times New Roman";
+            this.line1.Marks.Font.Size = 10;
+            this.line1.Marks.Transparent = true;
             // 
             // 
             // 
@@ -629,6 +867,7 @@ namespace sys1
             // 
             // 
             this.tChartT2.Aspect.ColorPaletteIndex = -1;
+            this.tChartT2.Aspect.ThemeIndex = 2;
             this.tChartT2.Aspect.View3D = false;
             // 
             // 
@@ -639,22 +878,46 @@ namespace sys1
             // 
             // 
             // 
-            this.tChartT2.Axes.Bottom.Grid.Color = System.Drawing.Color.Gray;
+            this.tChartT2.Axes.Bottom.AxisPen.Width = 1;
+            // 
+            // 
+            // 
+            this.tChartT2.Axes.Bottom.Grid.Centered = true;
+            this.tChartT2.Axes.Bottom.Grid.Color = System.Drawing.Color.Black;
+            this.tChartT2.Axes.Bottom.Grid.Style = System.Drawing.Drawing2D.DashStyle.Solid;
             // 
             // 
             // 
             this.tChartT2.Axes.Bottom.Labels.CustomSize = 27;
             this.tChartT2.Axes.Bottom.Labels.DateTimeFormat = "yyyy/MM/dd HH:mm:ss";
+            // 
+            // 
+            // 
+            this.tChartT2.Axes.Bottom.Labels.Font.Name = "Times New Roman";
+            this.tChartT2.Axes.Bottom.Labels.Font.Size = 10;
             this.tChartT2.Axes.Bottom.Labels.MultiLine = true;
             this.tChartT2.Axes.Bottom.Labels.RoundFirstLabel = false;
             this.tChartT2.Axes.Bottom.Labels.Separation = 100;
             // 
             // 
             // 
+            this.tChartT2.Axes.Bottom.MinorTicks.Visible = false;
+            // 
+            // 
+            // 
+            this.tChartT2.Axes.Bottom.Ticks.Color = System.Drawing.Color.Black;
             this.tChartT2.Axes.Bottom.Ticks.Length = 2;
             // 
             // 
             // 
+            this.tChartT2.Axes.Bottom.TicksInner.Visible = false;
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChartT2.Axes.Bottom.Title.Font.Name = "Times New Roman";
             this.tChartT2.Axes.Bottom.Title.Lines = new string[] {
         ""};
             // 
@@ -663,32 +926,81 @@ namespace sys1
             // 
             // 
             // 
-            this.tChartT2.Axes.Depth.Grid.Color = System.Drawing.Color.Gray;
+            this.tChartT2.Axes.Depth.AxisPen.Width = 1;
             // 
             // 
             // 
+            this.tChartT2.Axes.Depth.Grid.Color = System.Drawing.Color.Black;
+            this.tChartT2.Axes.Depth.Grid.Style = System.Drawing.Drawing2D.DashStyle.Solid;
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChartT2.Axes.Depth.Labels.Font.Name = "Times New Roman";
+            this.tChartT2.Axes.Depth.Labels.Font.Size = 10;
+            // 
+            // 
+            // 
+            this.tChartT2.Axes.Depth.MinorTicks.Visible = false;
+            // 
+            // 
+            // 
+            this.tChartT2.Axes.Depth.Ticks.Color = System.Drawing.Color.Black;
             this.tChartT2.Axes.Depth.Ticks.Length = 2;
             // 
             // 
             // 
+            this.tChartT2.Axes.Depth.TicksInner.Visible = false;
             // 
             // 
             // 
-            this.tChartT2.Axes.Left.Grid.Color = System.Drawing.Color.Gray;
             // 
             // 
             // 
+            this.tChartT2.Axes.Depth.Title.Font.Name = "Times New Roman";
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChartT2.Axes.Left.AxisPen.Width = 1;
+            // 
+            // 
+            // 
+            this.tChartT2.Axes.Left.Grid.Color = System.Drawing.Color.Black;
+            this.tChartT2.Axes.Left.Grid.Style = System.Drawing.Drawing2D.DashStyle.Solid;
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChartT2.Axes.Left.Labels.Font.Name = "Times New Roman";
+            this.tChartT2.Axes.Left.Labels.Font.Size = 10;
             this.tChartT2.Axes.Left.Labels.RoundFirstLabel = false;
             // 
             // 
             // 
+            this.tChartT2.Axes.Left.MinorTicks.Visible = false;
+            // 
+            // 
+            // 
+            this.tChartT2.Axes.Left.Ticks.Color = System.Drawing.Color.Black;
             this.tChartT2.Axes.Left.Ticks.Length = 2;
             // 
             // 
             // 
+            this.tChartT2.Axes.Left.TicksInner.Visible = false;
             // 
             // 
             // 
+            // 
+            // 
+            // 
+            this.tChartT2.Axes.Left.Title.Font.Name = "Times New Roman";
             // 
             // 
             // 
@@ -705,15 +1017,41 @@ namespace sys1
             // 
             // 
             // 
-            this.tChartT2.Axes.Right.Grid.Color = System.Drawing.Color.Gray;
+            this.tChartT2.Axes.Right.AxisPen.Width = 1;
             // 
             // 
             // 
+            this.tChartT2.Axes.Right.Grid.Color = System.Drawing.Color.Black;
+            this.tChartT2.Axes.Right.Grid.Style = System.Drawing.Drawing2D.DashStyle.Solid;
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChartT2.Axes.Right.Labels.Font.Name = "Times New Roman";
+            this.tChartT2.Axes.Right.Labels.Font.Size = 10;
             this.tChartT2.Axes.Right.Labels.RoundFirstLabel = false;
             // 
             // 
             // 
+            this.tChartT2.Axes.Right.MinorTicks.Visible = false;
+            // 
+            // 
+            // 
+            this.tChartT2.Axes.Right.Ticks.Color = System.Drawing.Color.Black;
             this.tChartT2.Axes.Right.Ticks.Length = 2;
+            // 
+            // 
+            // 
+            this.tChartT2.Axes.Right.TicksInner.Visible = false;
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChartT2.Axes.Right.Title.Font.Name = "Times New Roman";
             this.tChartT2.Axes.Right.Visible = false;
             // 
             // 
@@ -721,21 +1059,56 @@ namespace sys1
             // 
             // 
             // 
-            this.tChartT2.Axes.Top.Grid.Color = System.Drawing.Color.Gray;
+            this.tChartT2.Axes.Top.AxisPen.Width = 1;
             // 
             // 
             // 
+            this.tChartT2.Axes.Top.Grid.Color = System.Drawing.Color.Black;
+            this.tChartT2.Axes.Top.Grid.Style = System.Drawing.Drawing2D.DashStyle.Solid;
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChartT2.Axes.Top.Labels.Font.Name = "Times New Roman";
+            this.tChartT2.Axes.Top.Labels.Font.Size = 10;
             this.tChartT2.Axes.Top.Labels.RoundFirstLabel = false;
             // 
             // 
             // 
+            this.tChartT2.Axes.Top.MinorTicks.Visible = false;
+            // 
+            // 
+            // 
+            this.tChartT2.Axes.Top.Ticks.Color = System.Drawing.Color.Black;
             this.tChartT2.Axes.Top.Ticks.Length = 2;
+            // 
+            // 
+            // 
+            this.tChartT2.Axes.Top.TicksInner.Visible = false;
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChartT2.Axes.Top.Title.Font.Name = "Times New Roman";
             this.tChartT2.Axes.Top.Visible = false;
             this.tChartT2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(236)))), ((int)(((byte)(239)))));
             this.tChartT2.Cursor = System.Windows.Forms.Cursors.Default;
             // 
             // 
             // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChartT2.Header.Font.Brush.Color = System.Drawing.Color.Black;
+            this.tChartT2.Header.Font.Name = "Times New Roman";
+            this.tChartT2.Header.Font.Size = 12;
             this.tChartT2.Header.Lines = new string[] {
         "T2瓦斯浓度平均增加值Q"};
             // 
@@ -745,17 +1118,30 @@ namespace sys1
             // 
             // 
             // 
+            this.tChartT2.Legend.Font.Name = "Times New Roman";
+            this.tChartT2.Legend.Font.Size = 10;
+            // 
+            // 
+            // 
+            this.tChartT2.Legend.Pen.Visible = false;
+            // 
+            // 
+            // 
             // 
             // 
             // 
             this.tChartT2.Legend.Shadow.Brush.Color = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.tChartT2.Legend.Shadow.Height = 0;
+            this.tChartT2.Legend.Shadow.Width = 0;
             // 
             // 
             // 
+            this.tChartT2.Legend.Symbol.DefaultPen = false;
             // 
             // 
             // 
             this.tChartT2.Legend.Symbol.Pen.Visible = false;
+            this.tChartT2.Legend.Transparent = true;
             this.tChartT2.Legend.Visible = false;
             this.tChartT2.Location = new System.Drawing.Point(238, 73);
             this.tChartT2.Name = "tChartT2";
@@ -769,13 +1155,21 @@ namespace sys1
             // 
             // 
             // 
-            this.tChartT2.Panel.Brush.Color = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(236)))), ((int)(((byte)(239)))));
+            this.tChartT2.Panel.Bevel.Outer = Steema.TeeChart.Drawing.BevelStyles.None;
+            // 
+            // 
+            // 
+            this.tChartT2.Panel.Brush.Color = System.Drawing.Color.White;
             // 
             // 
             // 
             this.tChartT2.Panel.Gradient.EndColor = System.Drawing.Color.Yellow;
             this.tChartT2.Panel.Gradient.MiddleColor = System.Drawing.Color.Empty;
             this.tChartT2.Panel.Gradient.StartColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.tChartT2.Panel.Pen.Visible = true;
             // 
             // 
             // 
@@ -794,22 +1188,39 @@ namespace sys1
             // 
             // 
             // 
+            this.tChartT2.Walls.Back.ApplyDark = false;
+            // 
+            // 
+            // 
+            this.tChartT2.Walls.Back.Brush.Color = System.Drawing.Color.White;
+            this.tChartT2.Walls.Back.Size = 8;
+            this.tChartT2.Walls.Back.Transparent = false;
             this.tChartT2.Walls.Back.Visible = false;
             // 
             // 
             // 
+            this.tChartT2.Walls.Bottom.ApplyDark = false;
+            this.tChartT2.Walls.Bottom.Size = 8;
             this.tChartT2.Walls.Bottom.Visible = false;
             // 
             // 
             // 
+            this.tChartT2.Walls.Left.ApplyDark = false;
+            // 
+            // 
+            // 
+            this.tChartT2.Walls.Left.Brush.Color = System.Drawing.Color.White;
+            this.tChartT2.Walls.Left.Size = 8;
             this.tChartT2.Walls.Left.Visible = false;
             // 
             // 
             // 
+            this.tChartT2.Walls.Right.ApplyDark = false;
             // 
             // 
             // 
-            this.tChartT2.Walls.Right.Brush.Color = System.Drawing.Color.Silver;
+            this.tChartT2.Walls.Right.Brush.Color = System.Drawing.Color.White;
+            this.tChartT2.Walls.Right.Size = 8;
             this.tChartT2.Walls.Right.Visible = false;
             this.tChartT2.Walls.Visible = false;
             // 
@@ -818,11 +1229,24 @@ namespace sys1
             // 
             // 
             // 
-            this.line2.Brush.Color = System.Drawing.Color.Red;
+            this.line2.Brush.Color = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             // 
             // 
             // 
             this.line2.LinePen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.line2.Marks.Arrow.Color = System.Drawing.Color.Black;
+            // 
+            // 
+            // 
+            this.line2.Marks.Font.Name = "Times New Roman";
+            this.line2.Marks.Font.Size = 10;
+            this.line2.Marks.Transparent = true;
             // 
             // 
             // 
@@ -850,6 +1274,8 @@ namespace sys1
             // 
             // 
             // 
+            this.tChartM.Aspect.ColorPaletteIndex = -1;
+            this.tChartM.Aspect.ThemeIndex = 2;
             this.tChartM.Aspect.View3D = false;
             // 
             // 
@@ -860,18 +1286,46 @@ namespace sys1
             // 
             // 
             // 
+            this.tChartM.Axes.Bottom.AxisPen.Width = 1;
+            // 
+            // 
+            // 
+            this.tChartM.Axes.Bottom.Grid.Centered = true;
+            this.tChartM.Axes.Bottom.Grid.Color = System.Drawing.Color.Black;
+            this.tChartM.Axes.Bottom.Grid.Style = System.Drawing.Drawing2D.DashStyle.Solid;
+            // 
+            // 
+            // 
             this.tChartM.Axes.Bottom.Labels.CustomSize = 27;
             this.tChartM.Axes.Bottom.Labels.DateTimeFormat = "yyyy/MM/dd HH:mm:ss";
+            // 
+            // 
+            // 
+            this.tChartM.Axes.Bottom.Labels.Font.Name = "Times New Roman";
+            this.tChartM.Axes.Bottom.Labels.Font.Size = 10;
             this.tChartM.Axes.Bottom.Labels.MultiLine = true;
             this.tChartM.Axes.Bottom.Labels.RoundFirstLabel = false;
             this.tChartM.Axes.Bottom.Labels.Separation = 100;
             // 
             // 
             // 
-            this.tChartM.Axes.Bottom.Ticks.Length = 10;
+            this.tChartM.Axes.Bottom.MinorTicks.Visible = false;
             // 
             // 
             // 
+            this.tChartM.Axes.Bottom.Ticks.Color = System.Drawing.Color.Black;
+            this.tChartM.Axes.Bottom.Ticks.Length = 2;
+            // 
+            // 
+            // 
+            this.tChartM.Axes.Bottom.TicksInner.Visible = false;
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChartM.Axes.Bottom.Title.Font.Name = "Times New Roman";
             this.tChartM.Axes.Bottom.Title.Lines = new string[] {
         ""};
             // 
@@ -880,13 +1334,81 @@ namespace sys1
             // 
             // 
             // 
+            this.tChartM.Axes.Depth.AxisPen.Width = 1;
+            // 
+            // 
+            // 
+            this.tChartM.Axes.Depth.Grid.Color = System.Drawing.Color.Black;
+            this.tChartM.Axes.Depth.Grid.Style = System.Drawing.Drawing2D.DashStyle.Solid;
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChartM.Axes.Depth.Labels.Font.Name = "Times New Roman";
+            this.tChartM.Axes.Depth.Labels.Font.Size = 10;
+            // 
+            // 
+            // 
+            this.tChartM.Axes.Depth.MinorTicks.Visible = false;
+            // 
+            // 
+            // 
+            this.tChartM.Axes.Depth.Ticks.Color = System.Drawing.Color.Black;
+            this.tChartM.Axes.Depth.Ticks.Length = 2;
+            // 
+            // 
+            // 
+            this.tChartM.Axes.Depth.TicksInner.Visible = false;
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChartM.Axes.Depth.Title.Font.Name = "Times New Roman";
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChartM.Axes.Left.AxisPen.Width = 1;
+            // 
+            // 
+            // 
+            this.tChartM.Axes.Left.Grid.Color = System.Drawing.Color.Black;
+            this.tChartM.Axes.Left.Grid.Style = System.Drawing.Drawing2D.DashStyle.Solid;
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChartM.Axes.Left.Labels.Font.Name = "Times New Roman";
+            this.tChartM.Axes.Left.Labels.Font.Size = 10;
             this.tChartM.Axes.Left.Labels.RoundFirstLabel = false;
             // 
             // 
             // 
+            this.tChartM.Axes.Left.MinorTicks.Visible = false;
             // 
             // 
             // 
+            this.tChartM.Axes.Left.Ticks.Color = System.Drawing.Color.Black;
+            this.tChartM.Axes.Left.Ticks.Length = 2;
+            // 
+            // 
+            // 
+            this.tChartM.Axes.Left.TicksInner.Visible = false;
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChartM.Axes.Left.Title.Font.Name = "Times New Roman";
             // 
             // 
             // 
@@ -903,7 +1425,41 @@ namespace sys1
             // 
             // 
             // 
+            this.tChartM.Axes.Right.AxisPen.Width = 1;
+            // 
+            // 
+            // 
+            this.tChartM.Axes.Right.Grid.Color = System.Drawing.Color.Black;
+            this.tChartM.Axes.Right.Grid.Style = System.Drawing.Drawing2D.DashStyle.Solid;
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChartM.Axes.Right.Labels.Font.Name = "Times New Roman";
+            this.tChartM.Axes.Right.Labels.Font.Size = 10;
             this.tChartM.Axes.Right.Labels.RoundFirstLabel = false;
+            // 
+            // 
+            // 
+            this.tChartM.Axes.Right.MinorTicks.Visible = false;
+            // 
+            // 
+            // 
+            this.tChartM.Axes.Right.Ticks.Color = System.Drawing.Color.Black;
+            this.tChartM.Axes.Right.Ticks.Length = 2;
+            // 
+            // 
+            // 
+            this.tChartM.Axes.Right.TicksInner.Visible = false;
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChartM.Axes.Right.Title.Font.Name = "Times New Roman";
             this.tChartM.Axes.Right.Visible = false;
             // 
             // 
@@ -911,13 +1467,56 @@ namespace sys1
             // 
             // 
             // 
+            this.tChartM.Axes.Top.AxisPen.Width = 1;
+            // 
+            // 
+            // 
+            this.tChartM.Axes.Top.Grid.Color = System.Drawing.Color.Black;
+            this.tChartM.Axes.Top.Grid.Style = System.Drawing.Drawing2D.DashStyle.Solid;
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChartM.Axes.Top.Labels.Font.Name = "Times New Roman";
+            this.tChartM.Axes.Top.Labels.Font.Size = 10;
             this.tChartM.Axes.Top.Labels.RoundFirstLabel = false;
+            // 
+            // 
+            // 
+            this.tChartM.Axes.Top.MinorTicks.Visible = false;
+            // 
+            // 
+            // 
+            this.tChartM.Axes.Top.Ticks.Color = System.Drawing.Color.Black;
+            this.tChartM.Axes.Top.Ticks.Length = 2;
+            // 
+            // 
+            // 
+            this.tChartM.Axes.Top.TicksInner.Visible = false;
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChartM.Axes.Top.Title.Font.Name = "Times New Roman";
             this.tChartM.Axes.Top.Visible = false;
             this.tChartM.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(236)))), ((int)(((byte)(239)))));
             this.tChartM.Cursor = System.Windows.Forms.Cursors.Default;
             // 
             // 
             // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChartM.Header.Font.Brush.Color = System.Drawing.Color.Black;
+            this.tChartM.Header.Font.Name = "Times New Roman";
+            this.tChartM.Header.Font.Size = 12;
             this.tChartM.Header.Lines = new string[] {
         "监控系统原始数据M"};
             // 
@@ -927,10 +1526,30 @@ namespace sys1
             // 
             // 
             // 
+            this.tChartM.Legend.Font.Name = "Times New Roman";
+            this.tChartM.Legend.Font.Size = 10;
+            // 
+            // 
+            // 
+            this.tChartM.Legend.Pen.Visible = false;
+            // 
+            // 
+            // 
             // 
             // 
             // 
             this.tChartM.Legend.Shadow.Brush.Color = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.tChartM.Legend.Shadow.Height = 0;
+            this.tChartM.Legend.Shadow.Width = 0;
+            // 
+            // 
+            // 
+            this.tChartM.Legend.Symbol.DefaultPen = false;
+            // 
+            // 
+            // 
+            this.tChartM.Legend.Symbol.Pen.Visible = false;
+            this.tChartM.Legend.Transparent = true;
             this.tChartM.Legend.Visible = false;
             this.tChartM.Location = new System.Drawing.Point(238, 407);
             this.tChartM.Name = "tChartM";
@@ -944,7 +1563,21 @@ namespace sys1
             // 
             // 
             // 
-            this.tChartM.Panel.Brush.Color = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(236)))), ((int)(((byte)(239)))));
+            this.tChartM.Panel.Bevel.Outer = Steema.TeeChart.Drawing.BevelStyles.None;
+            // 
+            // 
+            // 
+            this.tChartM.Panel.Brush.Color = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.tChartM.Panel.Gradient.EndColor = System.Drawing.Color.Yellow;
+            this.tChartM.Panel.Gradient.MiddleColor = System.Drawing.Color.Empty;
+            this.tChartM.Panel.Gradient.StartColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.tChartM.Panel.Pen.Visible = true;
             // 
             // 
             // 
@@ -963,22 +1596,39 @@ namespace sys1
             // 
             // 
             // 
+            this.tChartM.Walls.Back.ApplyDark = false;
+            // 
+            // 
+            // 
+            this.tChartM.Walls.Back.Brush.Color = System.Drawing.Color.White;
+            this.tChartM.Walls.Back.Size = 8;
+            this.tChartM.Walls.Back.Transparent = false;
             this.tChartM.Walls.Back.Visible = false;
             // 
             // 
             // 
+            this.tChartM.Walls.Bottom.ApplyDark = false;
+            this.tChartM.Walls.Bottom.Size = 8;
             this.tChartM.Walls.Bottom.Visible = false;
             // 
             // 
             // 
+            this.tChartM.Walls.Left.ApplyDark = false;
+            // 
+            // 
+            // 
+            this.tChartM.Walls.Left.Brush.Color = System.Drawing.Color.White;
+            this.tChartM.Walls.Left.Size = 8;
             this.tChartM.Walls.Left.Visible = false;
             // 
             // 
             // 
+            this.tChartM.Walls.Right.ApplyDark = false;
             // 
             // 
             // 
-            this.tChartM.Walls.Right.Brush.Color = System.Drawing.Color.Silver;
+            this.tChartM.Walls.Right.Brush.Color = System.Drawing.Color.White;
+            this.tChartM.Walls.Right.Size = 8;
             this.tChartM.Walls.Right.Visible = false;
             this.tChartM.Walls.Visible = false;
             // 
@@ -987,7 +1637,20 @@ namespace sys1
             // 
             // 
             // 
-            this.fastLine1.LinePen.Color = System.Drawing.Color.Red;
+            this.fastLine1.LinePen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.fastLine1.Marks.Arrow.Color = System.Drawing.Color.Black;
+            // 
+            // 
+            // 
+            this.fastLine1.Marks.Font.Name = "Times New Roman";
+            this.fastLine1.Marks.Font.Size = 10;
+            this.fastLine1.Marks.Transparent = true;
             this.fastLine1.Title = "快速线1";
             // 
             // 
