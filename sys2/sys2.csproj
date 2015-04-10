@@ -245,12 +245,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DayReport.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DayReport.Designer.cs">
-      <DependentUpon>DayReport.cs</DependentUpon>
-    </Compile>
     <Compile Include="DayReportHCEntering.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -296,9 +290,6 @@
     <Compile Include="StopLineManagement.Designer.cs">
       <DependentUpon>StopLineManagement.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="DayReport.resx">
-      <DependentUpon>DayReport.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="DayReportHCEntering.resx">
       <DependentUpon>DayReportHCEntering.cs</DependentUpon>
     </EmbeddedResource>
