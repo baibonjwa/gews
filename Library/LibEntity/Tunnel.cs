@@ -177,6 +177,11 @@ namespace LibEntity
             }
             DayReportJj.DeleteByWorkingFaceId(WorkingFace.WorkingFaceId);
             DayReportHc.DeleteByWorkingFaceId(WorkingFace.WorkingFaceId);
+            MineData.DeleteByTunnelId<CoalExistence>(TunnelId);
+            MineData.DeleteByTunnelId<GasData>(TunnelId);
+            MineData.DeleteByTunnelId<GeologicStructure>(TunnelId);
+            MineData.DeleteByTunnelId<Ventilation>(TunnelId);
+            MineData.DeleteByTunnelId<Management>(TunnelId);
             base.Delete();
         }
     }

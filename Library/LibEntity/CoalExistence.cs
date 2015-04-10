@@ -1,5 +1,6 @@
 ﻿using System;
 using Castle.ActiveRecord;
+using NHibernate.Criterion;
 
 namespace LibEntity
 {
@@ -73,28 +74,9 @@ namespace LibEntity
             return (CoalExistence)FindByPrimaryKey(typeof(CoalExistence), id);
         }
 
-
-
-        //public static CoalExistence[] SlicedFindByTunnelIdAndTime(int firstResult, int maxResult, int tunnelId,
-        //    DateTime startTime, DateTime endTime)
-        //{
-        //    CoalExistence[] results;
-        //    var criterion = new List<ICriterion> { Restrictions.Eq("Tunnel.TunnelId", tunnelId) };
-        //    if (startTime != DateTime.MinValue && endTime != DateTime.MinValue)
-        //    {
-        //        criterion.Add(Restrictions.Between("Datetime", startTime, endTime));
-        //    }
-        //    results = (CoalExistence[])SlicedFindAll(typeof(CoalExistence), firstResult, maxResult, criterion.ToArray());
-
-        //    return results;
-        //}
-
         public static CoalExistence[] FindAll()
         {
             return (CoalExistence[])FindAll(typeof(CoalExistence));
         }
-
-
-
     }
 }

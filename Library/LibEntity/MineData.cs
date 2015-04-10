@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections;
+using System.Linq;
 using Castle.ActiveRecord;
+using NHibernate.Criterion;
 
 namespace LibEntity
 {
@@ -217,5 +220,19 @@ namespace LibEntity
             geoLogicStructure.Submitter = Submitter;
             return geoLogicStructure;
         }
+
+
+        public static void DeleteByTunnelId<T>(int tunnelId) where T : MineData
+        {
+            var criterion = new ICriterion[]
+            {
+                Restrictions.Eq("Tunnel.TunnelId", tunnelId)
+            };
+            foreach (var i in FindAll(typeof(T), criterion))
+            {
+                Delete(i);
+            }
+        }
+
     }
 }

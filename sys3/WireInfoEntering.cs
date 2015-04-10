@@ -1175,8 +1175,17 @@ namespace sys3
                     btnDetails.Enabled = true;
                 }
             }
-            var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.SelectedTunnel.TunnelId,
-                Wire.TableName, OPERATION_TYPE.ADD, DateTime.Now);
+            UpdateWarningDataMsg msg;
+            if (selectTunnelUserControl1.SelectedTunnel != null)
+            {
+                msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.SelectedTunnel.TunnelId,
+                    Wire.TableName, OPERATION_TYPE.ADD, DateTime.Now);
+            }
+            else
+            {
+                msg = new UpdateWarningDataMsg(Const.INVALID_ID, 0,
+                   Wire.TableName, OPERATION_TYPE.ADD, DateTime.Now);
+            }
             SocketUtil.SendMsg2Server(msg);
             Alert.alert("导入完成");
         }
