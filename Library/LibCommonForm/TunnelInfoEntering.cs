@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Globalization;
+using System.Linq;
 using System.Windows.Forms;
 using LibBusiness;
 using LibCommon;
@@ -46,53 +48,46 @@ namespace LibCommonForm
             ChangeFormSize(null);
 
             DataBindUtil.LoadLithology(cboLithology, "煤层");
-            DataBindUtil.LoadCoalSeamsName(cboCoalLayer);
+
+
+            var hash = new Hashtable
+            {
+                {"主运顺槽", 0},
+                {"辅运顺槽", 1},
+                {"切眼", 2},
+                {"回采面其他关联巷道", 3},
+                {"掘进巷道", 4},
+                {"横川",6 },
+                {"其他地点",7},
+                {"其他", 5}
+            };
+            var list = new ArrayList();
+            foreach (DictionaryEntry entry in hash)
+            {
+                list.Add(entry);
+            }
+
+            cboTunnelType.DataSource = list;
+            cboTunnelType.DisplayMember = "Key";
+            cboTunnelType.ValueMember = "Value";
+
 
             if (Text == Const_GM.TUNNEL_INFO_ADD)
             {
                 selectWorkingFaceControl1.LoadData();
+                cboTunnelType.SelectedValue = (int)TunnelTypeEnum.OTHER;
             }
             else
             {
                 selectWorkingFaceControl1.LoadData(Tunnel.WorkingFace);
                 txtTunnelName.Text = Tunnel.TunnelName;
                 cboSupportPattern.Text = Tunnel.TunnelSupportPattern;
-                cboSupportPattern.Text = Tunnel.TunnelSupportPattern;
-                cboLithology.SelectedValue = Tunnel.Lithology.LithologyId;
-                cboFaultageType.Text = Tunnel.TunnelSectionType;
-
+                cboLithology.SelectedItem = Tunnel.Lithology;
                 txtDesignLength.Text = Tunnel.TunnelDesignLength.ToString(CultureInfo.InvariantCulture);
-                string[] param = { "", "", "", "", "" };
-                if (Tunnel.TunnelParam != null)
-                {
-                    string[] paramOld = Tunnel.TunnelParam.Split(',');
-                    for (int i = 0; i < paramOld.Length; i++)
-                    {
-                        param[i] = paramOld[i];
-                    }
-                }
-                txtParam1.Text = param[0];
-                txtParam2.Text = param[1];
-                txtParam3.Text = param[2];
-                txtParam4.Text = param[3];
-                txtParam5.Text = param[4];
-
                 cboCoalOrStone.Text = Tunnel.CoalOrStone;
-                if (cboCoalOrStone.Text == Const_GM.COAL_TUNNEL)
-                {
-                    cboCoalLayer.Visible = true;
-                    cboCoalLayer.Text = Tunnel.CoalSeams.CoalSeamsName;
-                }
-                else
-                {
-                    cboCoalLayer.Visible = false;
-                }
+                cboTunnelType.SelectedValue = (int)Tunnel.TunnelType;
             }
 
-            if (cboFaultageType.Text != "")
-            {
-                ShowParam();
-            }
         }
 
         private void AddTunnelInfo()
@@ -110,50 +105,14 @@ namespace LibCommonForm
                 TunnelName = txtTunnelName.Text,
                 TunnelSupportPattern = cboSupportPattern.Text,
                 WorkingFace = selectWorkingFaceControl1.SelectedWorkingFace,
-                Lithology = cboLithology.SelectedItem == null ? null : (Lithology)cboLithology.SelectedItem,
-                TunnelSectionType = cboFaultageType.Text,
-                TunnelType = TunnelTypeEnum.OTHER,
+                Lithology = (Lithology)cboLithology.SelectedItem,
+                TunnelType = (TunnelTypeEnum)cboTunnelType.SelectedValue,
                 CoalOrStone = cboCoalOrStone.Text,
-                CoalSeams = CoalSeams.Find(cboCoalLayer.SelectedValue),
+                CoalSeams = CoalSeams.FindAll().First(),
                 BindingId = IDGenerator.NewBindingID(),
                 TunnelWid = 5
             };
-            //巷道类型
-            //煤巷岩巷
-            //绑定煤层
-            //通过煤层ID获取煤层名称方法
 
-            //断面类型
-            //断面参数
-            string tunnelParam = "";
-            if (txtParam1.Visible)
-            {
-                tunnelParam += txtParam1.Text + ",";
-            }
-            if (txtParam2.Visible)
-            {
-                tunnelParam += txtParam2.Text + ",";
-            }
-            if (txtParam3.Visible)
-            {
-                tunnelParam += txtParam3.Text + ",";
-            }
-            if (cbotxtParam3.Visible)
-            {
-                tunnelParam += cbotxtParam3.Text + ",";
-            }
-            if (txtParam4.Visible)
-            {
-                tunnelParam += txtParam4.Text + ",";
-            }
-            if (txtParam5.Visible)
-            {
-                tunnelParam += txtParam5.Text + ",";
-            }
-            if (tunnelParam != "")
-            {
-                tunnel.TunnelParam = tunnelParam.Remove(tunnelParam.Length - 1);
-            }
             //设计长度
             if (txtDesignLength.Text != "")
             {
@@ -184,40 +143,9 @@ namespace LibCommonForm
             Tunnel.TunnelSupportPattern = cboSupportPattern.Text;
             //围岩类型
             Tunnel.Lithology = (Lithology)cboLithology.SelectedItem;
-
+            Tunnel.CoalSeams = CoalSeams.FindAll().First();
             Tunnel.TunnelWid = 5;
-            //断面类型
-            Tunnel.TunnelSectionType = cboFaultageType.Text;
-            //断面参数
-            string tunnelParam = "";
-            if (txtParam1.Visible)
-            {
-                tunnelParam += txtParam1.Text + ",";
-            }
-            if (txtParam2.Visible)
-            {
-                tunnelParam += txtParam2.Text + ",";
-            }
-            if (txtParam3.Visible)
-            {
-                tunnelParam += txtParam3.Text + ",";
-            }
-            if (cbotxtParam3.Visible)
-            {
-                tunnelParam += cbotxtParam3.Text + ",";
-            }
-            if (txtParam4.Visible)
-            {
-                tunnelParam += txtParam4.Text + ",";
-            }
-            if (txtParam5.Visible)
-            {
-                tunnelParam += txtParam5.Text + ",";
-            }
-            if (tunnelParam.Length > 0)
-            {
-                Tunnel.TunnelParam = tunnelParam.Remove(tunnelParam.Length - 1);
-            }
+
             //设计长度
             if (txtDesignLength.Text != "")
             {
@@ -232,11 +160,6 @@ namespace LibCommonForm
             {
                 Tunnel.CoalOrStone = cboCoalOrStone.Text;
             }
-            if (cboCoalLayer.Text != "")
-            {
-                Tunnel.CoalSeams = CoalSeams.Find(Convert.ToInt32(cboCoalLayer.SelectedValue));
-            }
-            //巷道信息登录
 
             Tunnel.Save();
             Alert.alert("提交成功！");
@@ -302,11 +225,6 @@ namespace LibCommonForm
             return true;
         }
 
-        private void cboFaultageType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ShowParam();
-        }
-
         //改变窗体大小
         private void ChangeFormSize(Object gbx)
         {
@@ -320,112 +238,9 @@ namespace LibCommonForm
             }
         }
 
-        //控制显示框体
-        private void ShowParam()
-        {
-            //初使化是否显示
-            gbxSquare.Visible = false;
-            gbxSemicircle.Visible = false;
-            gbxLadderShape.Visible = false;
-            gbxArc.Visible = false;
-            gbxThreePoint.Visible = false;
-            gbxOther.Visible = false;
-            txtParam1.Visible = false;
-            txtParam2.Visible = false;
-            txtParam3.Visible = false;
-            txtParam4.Visible = false;
-            txtParam5.Visible = false;
-            cbotxtParam3.Visible = false;
-            if (cboFaultageType.Text == @"矩形")
-            {
-                gbxSquare.Visible = true;
-                txtParam1.Visible = true;
-                txtParam2.Visible = true;
-                ChangeFormSize(gbxSquare);
-            }
-            if (cboFaultageType.Text == @"梯形")
-            {
-                gbxLadderShape.Visible = true;
-                txtParam1.Visible = true;
-                txtParam2.Visible = true;
-                txtParam3.Visible = true;
-                txtParam4.Visible = true;
-                txtParam5.Visible = true;
-                ChangeFormSize(gbxLadderShape);
-            }
-            if (cboFaultageType.Text == @"半圆拱")
-            {
-                gbxSemicircle.Visible = true;
-                txtParam1.Visible = true;
-                txtParam2.Visible = true;
-                ChangeFormSize(gbxSemicircle);
-            }
-            if (cboFaultageType.Text == @"三心拱")
-            {
-                gbxThreePoint.Visible = true;
-                txtParam1.Visible = true;
-                txtParam2.Visible = true;
-                cbotxtParam3.Visible = true;
-                ChangeFormSize(gbxThreePoint);
-            }
-            if (cboFaultageType.Text == @"圆形")
-            {
-                gbxArc.Visible = true;
-                txtParam1.Visible = true;
-                txtParam2.Visible = true;
-                txtParam3.Visible = true;
-                ChangeFormSize(gbxArc);
-            }
-            if (cboFaultageType.Text == @"其他")
-            {
-                gbxOther.Visible = true;
-                txtParam1.Visible = true;
-                txtParam2.Visible = true;
-                txtParam3.Visible = true;
-                txtParam4.Visible = true;
-                txtParam5.Visible = true;
-                ChangeFormSize(gbxOther);
-            }
-        }
-
-        private void cboFaultageType_TextChanged(object sender, EventArgs e)
-        {
-            if (cboFaultageType.Text == "")
-            {
-                ChangeFormSize(null);
-                gbxSquare.Visible = false;
-                gbxSemicircle.Visible = false;
-                gbxLadderShape.Visible = false;
-                gbxArc.Visible = false;
-                gbxThreePoint.Visible = false;
-                gbxOther.Visible = false;
-                txtParam1.Visible = false;
-                txtParam2.Visible = false;
-                txtParam3.Visible = false;
-                txtParam4.Visible = false;
-                txtParam5.Visible = false;
-                cbotxtParam3.Visible = false;
-            }
-        }
-
         private void cboLithology_SelectedIndexChanged(object sender, EventArgs e)
         {
             cboCoalOrStone.Text = cboLithology.Text == @"煤层" ? "煤巷" : "岩巷";
-        }
-
-        private void cboCoalOrStone_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cboCoalOrStone.Text == @"煤巷")
-            {
-                lblCoalLayer.Visible = true;
-                cboCoalLayer.Visible = true;
-            }
-            else
-            {
-                cboCoalLayer.Text = "";
-                lblCoalLayer.Visible = false;
-                cboCoalLayer.Visible = false;
-            }
         }
     }
 }

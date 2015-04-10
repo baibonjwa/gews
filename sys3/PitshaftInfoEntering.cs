@@ -108,9 +108,8 @@ namespace sys3
             DialogResult = DialogResult.OK;
 
             // 创建井筒实体
-            var pitshaftEntity = new Pitshaft();
+            var pitshaftEntity = new Pitshaft { PitshaftName = txtPitshaftName.Text.Trim() };
             // 井筒名称
-            pitshaftEntity.PitshaftName = txtPitshaftName.Text.Trim();
             // 井筒类型
             int iPitshaftTypeId = 0;
             if (int.TryParse(Convert.ToString(cobPitshaftType.SelectedValue), out iPitshaftTypeId))

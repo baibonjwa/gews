@@ -67,6 +67,11 @@ namespace sys3
         /// <param name="e"></param>
         private void tsBtnModify_Click(object sender, EventArgs e)
         {
+            if (gridView1.GetFocusedRow() == null)
+            {
+                Alert.alert("请选择要修改的信息");
+                return;
+            }
             var d = new TunnelInfoEntering((Tunnel)gridView1.GetFocusedRow());
             if (DialogResult.OK == d.ShowDialog())
             {
@@ -144,14 +149,13 @@ namespace sys3
                 return;
             }
             var pFeatureLayer = (IFeatureLayer)pLayer;
-            string str = "";
             //for (int i = 0; i < iSelIdxsArr.Length; i++)
             //{
             var tunnel = (Tunnel)gridView1.GetFocusedRow();
             //if (bid != "")
             //{
             //if (true)
-            str = "HdId='" + tunnel.TunnelId + "'";
+            var str = "HdId='" + tunnel.TunnelId + "'";
             //else
             //    str += " or HdId='" + bid + "'";
             //}
@@ -201,6 +205,9 @@ namespace sys3
                         break;
                     case "STOPING_ZY":
                         e.DisplayText = "主运顺槽";
+                        break;
+                    case "HENGCHUAN":
+                        e.DisplayText = "横川";
                         break;
                 }
             }

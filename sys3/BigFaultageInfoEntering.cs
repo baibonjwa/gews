@@ -51,7 +51,7 @@ namespace sys3
                     rbtnOppositeFaultage.Checked = true;
                 }
 
-                foreach (BigFaultagePoint i in bigFaultage.BigFaultagePoints)
+                foreach (var i in bigFaultage.BigFaultagePoints)
                 {
                     if (i.UpOrDown == "上盘")
                     {

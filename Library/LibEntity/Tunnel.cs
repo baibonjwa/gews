@@ -98,6 +98,9 @@ namespace LibEntity
         [BelongsTo("COAL_LAYER_ID")]
         public CoalSeams CoalSeams { get; set; }
 
+
+        public Wire Wire { get; set; }
+
         // BID
 
         /// <summary>

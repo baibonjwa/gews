@@ -1637,7 +1637,7 @@ namespace sys1
             // 
             // 
             // 
-            this.fastLine1.LinePen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.fastLine1.LinePen.Color = System.Drawing.Color.Red;
             // 
             // 
             // 

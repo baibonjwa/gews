@@ -49,6 +49,11 @@ namespace sys3
         /// <param name="e"></param>
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            if (gridView1.GetFocusedRow() == null)
+            {
+                Alert.alert("请选择要修改的信息");
+                return;
+            }
             var faultageInfoEnteringForm = new FaultageInfoEntering((Faultage)gridView1.GetFocusedRow());
             if (faultageInfoEnteringForm.ShowDialog() == DialogResult.OK)
             {

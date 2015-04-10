@@ -62,10 +62,8 @@ namespace sys3
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.controlNavigator1 = new DevExpress.XtraEditors.ControlNavigator();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
@@ -317,10 +315,8 @@ namespace sys3
             this.gridColumn7,
             this.gridColumn8,
             this.gridColumn9,
-            this.gridColumn10,
             this.gridColumn11,
             this.gridColumn12,
-            this.gridColumn13,
             this.gridColumn14});
             this.gridView1.GridControl = this.gcTunnel;
             this.gridView1.Name = "gridView1";
@@ -400,21 +396,13 @@ namespace sys3
             this.gridColumn9.Visible = true;
             this.gridColumn9.VisibleIndex = 8;
             // 
-            // gridColumn10
-            // 
-            this.gridColumn10.Caption = "断面参数";
-            this.gridColumn10.FieldName = "TunnelParam";
-            this.gridColumn10.Name = "gridColumn10";
-            this.gridColumn10.Visible = true;
-            this.gridColumn10.VisibleIndex = 9;
-            // 
             // gridColumn11
             // 
             this.gridColumn11.Caption = "煤巷岩巷";
             this.gridColumn11.FieldName = "CoalOrStone";
             this.gridColumn11.Name = "gridColumn11";
             this.gridColumn11.Visible = true;
-            this.gridColumn11.VisibleIndex = 10;
+            this.gridColumn11.VisibleIndex = 9;
             // 
             // gridColumn12
             // 
@@ -422,14 +410,7 @@ namespace sys3
             this.gridColumn12.FieldName = "CoalSeams.CoalSeamsName";
             this.gridColumn12.Name = "gridColumn12";
             this.gridColumn12.Visible = true;
-            this.gridColumn12.VisibleIndex = 11;
-            // 
-            // gridColumn13
-            // 
-            this.gridColumn13.Caption = "绑定导线名称";
-            this.gridColumn13.Name = "gridColumn13";
-            this.gridColumn13.Visible = true;
-            this.gridColumn13.VisibleIndex = 12;
+            this.gridColumn12.VisibleIndex = 10;
             // 
             // gridColumn14
             // 
@@ -437,7 +418,7 @@ namespace sys3
             this.gridColumn14.FieldName = "TunnelType";
             this.gridColumn14.Name = "gridColumn14";
             this.gridColumn14.Visible = true;
-            this.gridColumn14.VisibleIndex = 13;
+            this.gridColumn14.VisibleIndex = 11;
             // 
             // controlNavigator1
             // 
@@ -513,10 +494,8 @@ namespace sys3
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
         private DevExpress.XtraEditors.ControlNavigator controlNavigator1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
