@@ -32,6 +32,7 @@ namespace sys3
             using (new SessionScope())
             {
                 // 设置窗体默认属性
+                bigFaultage = BigFaultage.Find(bigFaultage.BigFaultageId);
                 FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_GM.INSERT_BIG_FAULTAGE_INFO);
 
                 tbFaultageName.Text = bigFaultage.BigFaultageName;

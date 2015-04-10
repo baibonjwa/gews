@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using Castle.ActiveRecord;
 using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Geodatabase;
 using GIS;
@@ -49,6 +50,11 @@ namespace sys3
         /// <param name="e"></param>
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            if (gridView1.GetFocusedRow() == null)
+            {
+                Alert.alert("请选择要修改的信息");
+                return;
+            }
             var bigFaultageInfoEntering = new BigFaultageInfoEntering(((BigFaultage)gridView1.GetFocusedRow()));
             if (DialogResult.OK == bigFaultageInfoEntering.ShowDialog())
             {
