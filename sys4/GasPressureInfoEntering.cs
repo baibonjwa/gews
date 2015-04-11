@@ -128,12 +128,6 @@ namespace sys4
         /// <returns>验证结果：true 通过验证, false未通过验证</returns>
         private bool Check()
         {
-            // 判断是否选择所属巷道
-            if (selectTunnelSimple1.SelectedTunnel == null)
-            {
-                Alert.alert(Const_OP.TUNNEL_NAME_MUST_INPUT);
-                return false;
-            }
 
             // 判断所在煤层是否选择
             if (cboCoalSeams.SelectedValue == null)
