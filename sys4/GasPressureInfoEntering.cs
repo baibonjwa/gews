@@ -88,7 +88,7 @@ namespace sys4
                     GasPressureValue = Convert.ToDouble(txtGasPressureValue.Text),
                     MeasureDateTime = dtpMeasureDateTime.Value,
                     Tunnel = selectTunnelSimple1.SelectedTunnel,
-                    CoalSeams = (CoalSeams)cboCoalSeams.SelectedValue,
+                    CoalSeams = (CoalSeams)cboCoalSeams.SelectedItem,
                     BindingId = IDGenerator.NewBindingID()
                 };
                 // 坐标X

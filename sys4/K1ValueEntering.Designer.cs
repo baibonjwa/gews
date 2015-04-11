@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.dgrdvK1Value = new System.Windows.Forms.DataGridView();
@@ -41,16 +40,10 @@
             this.dtpTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dtpTypeInTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnDel = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip();
             this.btnDeleteCell = new System.Windows.Forms.ToolStripMenuItem();
             this.btnDeleteRow = new System.Windows.Forms.ToolStripMenuItem();
             this.label7 = new System.Windows.Forms.Label();
-            this.tbCoordinateZ = new System.Windows.Forms.TextBox();
-            this.tbCoordinateY = new System.Windows.Forms.TextBox();
-            this.tbCoordinateX = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.selectTunnelSimple1 = new LibCommonForm.SelectTunnelSimple();
             ((System.ComponentModel.ISupportInitialize)(this.dgrdvK1Value)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -82,9 +75,9 @@
             // 
             // dgrdvK1Value
             // 
-            this.dgrdvK1Value.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgrdvK1Value.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgrdvK1Value.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgrdvK1Value.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.valueK1Dry,
@@ -184,19 +177,19 @@
             this.btnDeleteCell,
             this.btnDeleteRow});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(131, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(137, 48);
             // 
             // btnDeleteCell
             // 
             this.btnDeleteCell.Name = "btnDeleteCell";
-            this.btnDeleteCell.Size = new System.Drawing.Size(130, 22);
+            this.btnDeleteCell.Size = new System.Drawing.Size(136, 22);
             this.btnDeleteCell.Text = "删除单元格";
             this.btnDeleteCell.Click += new System.EventHandler(this.btnDeleteCell_Click);
             // 
             // btnDeleteRow
             // 
             this.btnDeleteRow.Name = "btnDeleteRow";
-            this.btnDeleteRow.Size = new System.Drawing.Size(130, 22);
+            this.btnDeleteRow.Size = new System.Drawing.Size(136, 22);
             this.btnDeleteRow.Text = "删除行";
             this.btnDeleteRow.Click += new System.EventHandler(this.btnDeleteRow_Click);
             // 
@@ -210,61 +203,11 @@
             this.label7.TabIndex = 10;
             this.label7.Text = "*";
             // 
-            // tbCoordinateZ
-            // 
-            this.tbCoordinateZ.Location = new System.Drawing.Point(666, 46);
-            this.tbCoordinateZ.Name = "tbCoordinateZ";
-            this.tbCoordinateZ.Size = new System.Drawing.Size(100, 21);
-            this.tbCoordinateZ.TabIndex = 16;
-            this.tbCoordinateZ.Text = "0";
-            // 
-            // tbCoordinateY
-            // 
-            this.tbCoordinateY.Location = new System.Drawing.Point(493, 46);
-            this.tbCoordinateY.Name = "tbCoordinateY";
-            this.tbCoordinateY.Size = new System.Drawing.Size(100, 21);
-            this.tbCoordinateY.TabIndex = 17;
-            this.tbCoordinateY.Text = "0";
-            // 
-            // tbCoordinateX
-            // 
-            this.tbCoordinateX.Location = new System.Drawing.Point(320, 46);
-            this.tbCoordinateX.Name = "tbCoordinateX";
-            this.tbCoordinateX.Size = new System.Drawing.Size(100, 21);
-            this.tbCoordinateX.TabIndex = 18;
-            this.tbCoordinateX.Text = "0";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(613, 50);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(47, 12);
-            this.label9.TabIndex = 14;
-            this.label9.Text = "拾取点Z";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(440, 50);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(47, 12);
-            this.label10.TabIndex = 13;
-            this.label10.Text = "拾取点Y";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(267, 50);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(47, 12);
-            this.label11.TabIndex = 15;
-            this.label11.Text = "拾取点X";
-            // 
             // selectTunnelSimple1
             // 
             this.selectTunnelSimple1.Location = new System.Drawing.Point(14, 37);
             this.selectTunnelSimple1.Name = "selectTunnelSimple1";
+            this.selectTunnelSimple1.SelectedTunnel = null;
             this.selectTunnelSimple1.Size = new System.Drawing.Size(219, 38);
             this.selectTunnelSimple1.TabIndex = 19;
             // 
@@ -276,12 +219,6 @@
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(866, 371);
             this.Controls.Add(this.selectTunnelSimple1);
-            this.Controls.Add(this.tbCoordinateZ);
-            this.Controls.Add(this.tbCoordinateY);
-            this.Controls.Add(this.tbCoordinateX);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.label10);
-            this.Controls.Add(this.label11);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSubmit);
@@ -317,12 +254,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dtpTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn dtpTypeInTime;
         private System.Windows.Forms.DataGridViewButtonColumn btnDel;
-        private System.Windows.Forms.TextBox tbCoordinateZ;
-        private System.Windows.Forms.TextBox tbCoordinateY;
-        private System.Windows.Forms.TextBox tbCoordinateX;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label11;
         private LibCommonForm.SelectTunnelSimple selectTunnelSimple1;
     }
 }

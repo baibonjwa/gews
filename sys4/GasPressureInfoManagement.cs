@@ -72,6 +72,7 @@ namespace sys4
                 DelGasGushQuantityPt(new[] { gasPressure.BindingId });
                 gasPressure.Delete();
             }
+            RefreshData();
         }
 
         /// <summary>
@@ -146,6 +147,11 @@ namespace sys4
                 Y = gasPressure.CoordinateY
             }).Cast<IPoint>().ToList();
             MyMapHelp.Jump(MyMapHelp.GetGeoFromPoint(list));
+        }
+
+        private void GasPressureInfoManagement_Load(object sender, EventArgs e)
+        {
+            RefreshData();
         }
     }
 }

@@ -12,11 +12,9 @@ using Castle.ActiveRecord;
 
 namespace LibEntity
 {
-    [ActiveRecord("T_GAS_GUSH_QUANTITY")]
+    [ActiveRecord("T_GAS_PRESSURE")]
     public class GasPressure : ActiveRecordBase<GasPressure>
     {
-        private DateTime _measureDateTime;
-
         /// <summary>
         ///     编号
         /// </summary>
@@ -57,11 +55,7 @@ namespace LibEntity
         ///     测定时间
         /// </summary>
         [Property("MEASURE_DATE_TIME")]
-        public DateTime MeasureDateTime
-        {
-            get { return _measureDateTime; }
-            set { _measureDateTime = value; }
-        }
+        public DateTime MeasureDateTime { get; set; }
 
         /// <summary>
         ///     巷道编号

@@ -200,21 +200,21 @@ namespace _4.OutburstPrevention
             //验证
             if (!check())
             {
-                this.DialogResult = DialogResult.None;
+                DialogResult = DialogResult.None;
                 return;
             }
-            this.DialogResult = DialogResult.OK;
+            DialogResult = DialogResult.OK;
 
             //tunnelEntity.Tunnel = selectTunnelSimple1.ITunnelId;
             tunnelEntity = selectTunnelSimple1.SelectedTunnel;
             //TunnelInfoBLL.selectTunnelInfoByTunnelID(tunnelEntity.Tunnel);
             //添加
-            if (this.Text == Const_OP.K1_VALUE_ADD)
+            if (Text == Const_OP.K1_VALUE_ADD)
             {
                 insertK1Value();
             }
             //修改
-            if (this.Text == Const_OP.K1_VALUE_CHANGE)
+            if (Text == Const_OP.K1_VALUE_CHANGE)
             {
                 updateK1Value();
             }
@@ -227,29 +227,10 @@ namespace _4.OutburstPrevention
         {
             rowCount = dgrdvK1Value.Rows.Count - 1;
             groupCount = K1ValueBLL.selectValueK1GroupCount();
-            bool bResult = false;
             for (int i = 0; i < rowCount; i++)
             {
                 //K1分组ID
                 _k1ValueEntity.K1ValueId = groupCount + 1;
-                //拾取点X
-                if (double.TryParse(tbCoordinateX.Text, out tmpDouble))
-                {
-                    _k1ValueEntity.CoordinateX = tmpDouble;
-                    tmpDouble = 0;
-                }
-                //拾取点Y
-                if (double.TryParse(tbCoordinateY.Text, out tmpDouble))
-                {
-                    _k1ValueEntity.CoordinateY = tmpDouble;
-                    tmpDouble = 0;
-                }
-                //拾取点Z
-                if (double.TryParse(tbCoordinateZ.Text, out tmpDouble))
-                {
-                    _k1ValueEntity.CoordinateZ = tmpDouble;
-                    tmpDouble = 0;
-                }
                 //干煤K1值
                 if (dgrdvK1Value[0, i].Value == null || double.TryParse(dgrdvK1Value[0, i].Value.ToString(), out tmpDouble))
                 {
@@ -290,7 +271,7 @@ namespace _4.OutburstPrevention
                 //巷道ID
                 _k1ValueEntity.Tunnel = tunnelEntity;
                 //添加
-                bResult = K1ValueBLL.insertValueK1(_k1ValueEntity);
+                var bResult = K1ValueBLL.insertValueK1(_k1ValueEntity);
                 if (bResult)
                 {
                     //TODO:添加成功
@@ -321,24 +302,6 @@ namespace _4.OutburstPrevention
             {
                 //K1分组ID
                 _k1ValueEntity.K1ValueId = groupCount + 1;
-                //拾取点X
-                if (double.TryParse(tbCoordinateX.Text, out tmpDouble))
-                {
-                    _k1ValueEntity.CoordinateX = tmpDouble;
-                    tmpDouble = 0;
-                }
-                //拾取点Y
-                if (double.TryParse(tbCoordinateY.Text, out tmpDouble))
-                {
-                    _k1ValueEntity.CoordinateY = tmpDouble;
-                    tmpDouble = 0;
-                }
-                //拾取点Z
-                if (double.TryParse(tbCoordinateZ.Text, out tmpDouble))
-                {
-                    _k1ValueEntity.CoordinateZ = tmpDouble;
-                    tmpDouble = 0;
-                }
                 //干煤K1值
                 if (dgrdvK1Value[0, i].Value == null || double.TryParse(dgrdvK1Value[0, i].Value.ToString(), out tmpDouble))
                 {

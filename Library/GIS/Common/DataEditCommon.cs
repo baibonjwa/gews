@@ -755,11 +755,11 @@ namespace GIS.Common
 
                 if (list != null)
                 {
-                    for (int i = 0; i < list.Count; i++)
+                    foreach (ziduan t in list)
                     {
-                        if (feature.Fields.FindField(list[i].name) > 0)
+                        if (feature.Fields.FindField(t.name) > 0)
                         {
-                            feature.set_Value(feature.Fields.FindField(list[i].name), list[i].value);
+                            feature.set_Value(feature.Fields.FindField(t.name), t.value);
                         }
                     }
                 }

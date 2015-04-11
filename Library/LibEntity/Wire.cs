@@ -17,7 +17,7 @@ namespace LibEntity
         public int WireId { get; set; }
 
         [HasMany(typeof(WirePoint), Table = "T_WIRE_POINT", ColumnKey = "WIRE_INFO_ID",
-    Cascade = ManyRelationCascadeEnum.SaveUpdate, Lazy = true)]
+    Cascade = ManyRelationCascadeEnum.All, Lazy = true)]
         public IList<WirePoint> WirePoints { get; set; }
 
         /// <summary>
