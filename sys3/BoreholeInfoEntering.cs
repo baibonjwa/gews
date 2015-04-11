@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Castle.ActiveRecord;
 using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Geometry;
 using GIS;
@@ -56,55 +57,57 @@ namespace sys3
 
             // 设置窗体默认属性
             FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_GM.UPDATE_BOREHOLE_INFO);
-            Borehole = borehole;
-
-            // 孔号
-            txtBoreholeNumber.Text = borehole.BoreholeNumber;
-            // 地面标高
-            txtGroundElevation.Text = borehole.GroundElevation.ToString(CultureInfo.InvariantCulture);
-            // X坐标
-            txtCoordinateX.Text = borehole.CoordinateX.ToString(CultureInfo.InvariantCulture);
-            // Y坐标
-            txtCoordinateY.Text = borehole.CoordinateY.ToString(CultureInfo.InvariantCulture);
-            // Z坐标
-            txtCoordinateZ.Text = borehole.CoordinateZ.ToString(CultureInfo.InvariantCulture);
-
-            // 获取岩性信息
-
-            DataBindUtil.LoadLithology(LITHOLOGY);
-
-            // 明细
-            gvCoalSeamsTexture.RowCount = borehole.BoreholeLithologys.Count + 1;
-            for (var i = 0; i < borehole.BoreholeLithologys.Count; i++)
+            using (new SessionScope())
             {
-                // 岩性名称
-                var iLithologyId = borehole.BoreholeLithologys[i].Lithology.LithologyId;
+                borehole = Borehole.Find(borehole.BoreholeId);
+                // 孔号
+                txtBoreholeNumber.Text = borehole.BoreholeNumber;
+                // 地面标高
+                txtGroundElevation.Text = borehole.GroundElevation.ToString(CultureInfo.InvariantCulture);
+                // X坐标
+                txtCoordinateX.Text = borehole.CoordinateX.ToString(CultureInfo.InvariantCulture);
+                // Y坐标
+                txtCoordinateY.Text = borehole.CoordinateY.ToString(CultureInfo.InvariantCulture);
+                // Z坐标
+                txtCoordinateZ.Text = borehole.CoordinateZ.ToString(CultureInfo.InvariantCulture);
 
-                var lithology = Lithology.Find(iLithologyId);
+                // 获取岩性信息
 
-                gvCoalSeamsTexture[0, i].Value = lithology.LithologyName;
-                // 底板标高
-                gvCoalSeamsTexture[1, i].Value = borehole.BoreholeLithologys[i].FloorElevation;
-                // 厚度
-                gvCoalSeamsTexture[2, i].Value = borehole.BoreholeLithologys[i].Thickness;
-                // 煤层名称
-                gvCoalSeamsTexture[3, i].Value = borehole.BoreholeLithologys[i].CoalSeamsName;
+                DataBindUtil.LoadLithology(LITHOLOGY);
 
-                // 坐标X
-                gvCoalSeamsTexture[4, i].Value =
-                    borehole.BoreholeLithologys[i].CoordinateX.ToString(CultureInfo.InvariantCulture);
+                // 明细
 
-                // 坐标Y
-                gvCoalSeamsTexture[5, i].Value =
-                    borehole.BoreholeLithologys[i].CoordinateY.ToString(CultureInfo.InvariantCulture);
 
-                // 坐标Z
-                gvCoalSeamsTexture[6, i].Value =
-                    borehole.BoreholeLithologys[i].CoordinateX.ToString(CultureInfo.InvariantCulture);
+                gvCoalSeamsTexture.RowCount = borehole.BoreholeLithologys.Count + 1;
+                for (var i = 0; i < borehole.BoreholeLithologys.Count; i++)
+                {
+                    // 岩性名称
+                    var iLithologyId = borehole.BoreholeLithologys[i].Lithology.LithologyId;
+
+                    var lithology = Lithology.Find(iLithologyId);
+
+                    gvCoalSeamsTexture[0, i].Value = lithology.LithologyName;
+                    // 底板标高
+                    gvCoalSeamsTexture[1, i].Value = borehole.BoreholeLithologys[i].FloorElevation;
+                    // 厚度
+                    gvCoalSeamsTexture[2, i].Value = borehole.BoreholeLithologys[i].Thickness;
+                    // 煤层名称
+                    gvCoalSeamsTexture[3, i].Value = borehole.BoreholeLithologys[i].CoalSeamsName;
+
+                    // 坐标X
+                    gvCoalSeamsTexture[4, i].Value =
+                        borehole.BoreholeLithologys[i].CoordinateX.ToString(CultureInfo.InvariantCulture);
+
+                    // 坐标Y
+                    gvCoalSeamsTexture[5, i].Value =
+                        borehole.BoreholeLithologys[i].CoordinateY.ToString(CultureInfo.InvariantCulture);
+
+                    // 坐标Z
+                    gvCoalSeamsTexture[6, i].Value =
+                        borehole.BoreholeLithologys[i].CoordinateX.ToString(CultureInfo.InvariantCulture);
+                }
             }
         }
-
-        private Borehole Borehole { get; set; }
 
         /// <summary>
         ///     提  交
@@ -120,33 +123,14 @@ namespace sys3
                 return;
             }
 
-            Borehole borehole;
 
-            if (Borehole != null)
-            {
-                borehole = Borehole;
-                borehole.BoreholeNumber = txtBoreholeNumber.Text.Trim();
-                borehole.GroundElevation = Convert.ToDouble(txtGroundElevation.Text.Trim());
-                borehole.CoordinateX = Convert.ToDouble(txtCoordinateX.Text.Trim());
-                borehole.CoordinateY = Convert.ToDouble(txtCoordinateY.Text.Trim());
-                borehole.CoordinateZ = Convert.ToDouble(txtCoordinateZ.Text.Trim());
-                borehole.CoalSeamsTexture = string.Empty;
-                borehole.BindingId = IDGenerator.NewBindingID();
-            }
-            else
-            {
-                borehole = new Borehole
-                {
-                    BoreholeNumber = txtBoreholeNumber.Text.Trim(),
-                    GroundElevation = Convert.ToDouble(txtGroundElevation.Text.Trim()),
-                    CoordinateX = Convert.ToDouble(txtCoordinateX.Text.Trim()),
-                    CoordinateY = Convert.ToDouble(txtCoordinateY.Text.Trim()),
-                    CoordinateZ = Convert.ToDouble(txtCoordinateZ.Text.Trim()),
-                    CoalSeamsTexture = string.Empty,
-                    BindingId = IDGenerator.NewBindingID()
-                };
-            }
-
+            var borehole = Borehole.FindOneByBoreholeNum(txtBoreholeNumber.Text) ?? new Borehole { BindingId = IDGenerator.NewBindingID() };
+            borehole.BoreholeNumber = txtBoreholeNumber.Text.Trim();
+            borehole.GroundElevation = Convert.ToDouble(txtGroundElevation.Text.Trim());
+            borehole.CoordinateX = Convert.ToDouble(txtCoordinateX.Text.Trim());
+            borehole.CoordinateY = Convert.ToDouble(txtCoordinateY.Text.Trim());
+            borehole.CoordinateZ = Convert.ToDouble(txtCoordinateZ.Text.Trim());
+            borehole.CoalSeamsTexture = string.Empty;
 
             var boreholeLithologys = new List<BoreholeLithology>();
             for (var i = 0; i < gvCoalSeamsTexture.RowCount; i++)
@@ -724,29 +708,27 @@ namespace sys3
                     try
                     {
                         var str = duqu.Split('|');
+                        var borehole = Borehole.FindOneByBoreholeNum(str[0]) ?? new Borehole { BindingId = IDGenerator.NewBindingID() };
 
-                        var borehole = new Borehole
-                        {
-                            BoreholeNumber = str[0],
-                            GroundElevation = Convert.ToDouble(str[3]),
-                            CoordinateX = Convert.ToDouble(str[1].Split(',')[0]),
-                            CoordinateY = Convert.ToDouble(str[1].Split(',')[1]),
-                            CoordinateZ = 0,
-                            CoalSeamsTexture = String.Empty
-                        };
+                        borehole.BoreholeNumber = str[0];
+                        borehole.GroundElevation = Convert.ToDouble(str[3]);
+                        borehole.CoordinateX = Convert.ToDouble(str[1].Split(',')[0]);
+                        borehole.CoordinateY = Convert.ToDouble(str[1].Split(',')[1]);
+                        borehole.CoordinateZ = 0;
+                        borehole.CoalSeamsTexture = String.Empty;
                         // 创建钻孔岩性实体
                         var boreholeLithology = new BoreholeLithology
                         {
                             Borehole = borehole,
                             Lithology = Lithology.FindOneByCoal(),
                             FloorElevation = Convert.ToDouble(str[4]),
+                            CoalSeamsName = CoalSeams.FindAll().First().CoalSeamsName,
                             Thickness = Convert.ToDouble(str[2]),
                             CoordinateX = Convert.ToDouble(str[1].Split(',')[0]),
                             CoordinateY = Convert.ToDouble(str[1].Split(',')[1]),
                             CoordinateZ = 0
                         };
 
-                        borehole.BindingId = IDGenerator.NewBindingID();
                         borehole.BoreholeLithologys = new[] { boreholeLithology };
                         DrawZuanKong(borehole, boreholeLithology);
                         borehole.Save();
@@ -979,6 +961,4 @@ namespace sys3
             Alert.alert(_errorMsg);
         }
     }
-
-    // **************************************************************************
 }

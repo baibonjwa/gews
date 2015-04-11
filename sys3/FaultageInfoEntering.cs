@@ -113,55 +113,50 @@ namespace sys3
             DialogResult = DialogResult.OK;
 
             // 创建断层实体
-            var faultageEnt = Faultage ?? new Faultage { BindingId = IDGenerator.NewBindingID() };
+            Faultage = Faultage.FindByFaultageName(txtFaultageName.Text.Trim());
+            Faultage = Faultage ?? new Faultage { BindingId = IDGenerator.NewBindingID() };
 
-            faultageEnt.FaultageName = txtFaultageName.Text.Trim();
-            faultageEnt.Gap = txtGap.Text.Trim();
-            faultageEnt.Type = rbtnFrontFaultage.Checked ? Const_GM.FRONT_FAULTAGE : Const_GM.OPPOSITE_FAULTAGE;
-            faultageEnt.Trend = Convert.ToDouble(txtTrend.Text);
-            faultageEnt.Separation = txtSeparation.Text.Trim();
+            Faultage.FaultageName = txtFaultageName.Text.Trim();
+            Faultage.Gap = txtGap.Text.Trim();
+            Faultage.Type = rbtnFrontFaultage.Checked ? Const_GM.FRONT_FAULTAGE : Const_GM.OPPOSITE_FAULTAGE;
+            Faultage.Trend = Convert.ToDouble(txtTrend.Text);
+            Faultage.Separation = txtSeparation.Text.Trim();
 
             double dAngle;
             if (double.TryParse(txtAngle.Text.Trim(), out dAngle))
             {
-                faultageEnt.Angle = dAngle;
+                Faultage.Angle = dAngle;
             }
 
             // 坐标X
             double dCoordinateX;
             if (double.TryParse(txtCoordinateX.Text.Trim(), out dCoordinateX))
             {
-                faultageEnt.CoordinateX = dCoordinateX;
+                Faultage.CoordinateX = dCoordinateX;
             }
 
             // 坐标Y
             double dCoordinateY;
             if (double.TryParse(txtCoordinateY.Text.Trim(), out dCoordinateY))
             {
-                faultageEnt.CoordinateY = dCoordinateY;
+                Faultage.CoordinateY = dCoordinateY;
             }
 
             // 坐标Z
             double dCoordinateZ;
             if (double.TryParse(txtCoordinateZ.Text.Trim(), out dCoordinateZ))
             {
-                faultageEnt.CoordinateZ = dCoordinateZ;
+                Faultage.CoordinateZ = dCoordinateZ;
             }
             double dLength;
             if (double.TryParse(txtLength.Text.Trim(), out dLength))
             {
-                faultageEnt.Length = dLength;
+                Faultage.Length = dLength;
             }
 
-            if (Faultage == null)
-            {
-                DrawJldc(faultageEnt);
-            }
-            else
-            {
-                ModifyJldc(faultageEnt);
-            }
-            faultageEnt.Save();
+            ModifyJldc(Faultage);
+
+            Faultage.Save();
             // 断层信息修改
             SendMessengToServer();
             DialogResult = DialogResult.OK;
@@ -195,16 +190,6 @@ namespace sys3
             {
                 return false;
             }
-
-            // 判断探头名称是否存在
-            if (Faultage.ExistsByFaultageName(txtFaultageName.Text))
-            {
-                Alert.alert(Const_GM.FAULTAGE_EXIST_MSG); // 断层名称已存在，请重新录入！
-                txtFaultageName.BackColor = Const.ERROR_FIELD_COLOR;
-                txtFaultageName.Focus();
-                return false;
-            }
-
 
             // 判断落差是否录入
             if (!LibCommon.Check.isEmpty(txtGap, Const_GM.GAP))

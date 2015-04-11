@@ -63,15 +63,16 @@ namespace GIS.SpecialGraphic
             InitializeComponent();
             using (new SessionScope())
             {
+                collapsePillars = CollapsePillars.Find(collapsePillars.Id);
                 txtCollapsePillarsName.Text = collapsePillars.CollapsePillarsName;
                 if (collapsePillars.Xtype == "1")
                     radioBtnS.Checked = true;
                 txtDescribe.Text = collapsePillars.Discribe;
-                for (int i = 0; i < collapsePillars.CollapsePillarsPoints.Count; i++)
+                foreach (var t in collapsePillars.CollapsePillarsPoints)
                 {
-                    dgrdvCoordinate[0, i].Value = collapsePillars.CollapsePillarsPoints[i].CoordinateX;
-                    dgrdvCoordinate[1, i].Value = collapsePillars.CollapsePillarsPoints[i].CoordinateY;
-                    dgrdvCoordinate[2, i].Value = collapsePillars.CollapsePillarsPoints[i].CoordinateZ;
+                    dgrdvCoordinate.Rows.Add(t.CoordinateX,
+                        t.CoordinateY,
+                        t.CoordinateZ);
                 }
 
                 //设置窗体属性

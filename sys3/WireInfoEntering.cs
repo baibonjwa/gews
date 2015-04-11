@@ -14,7 +14,6 @@ using GIS;
 using GIS.Common;
 using GIS.HdProc;
 using GIS.SpecialGraphic;
-using LibBusiness;
 using LibCommon;
 using LibEntity;
 using LibSocket;
@@ -276,13 +275,6 @@ namespace sys3
             }
             // 创建导线点实体
             var wirePointInfoEntity = new WirePoint();
-            //if (Text == Const_GM.WIRE_INFO_CHANGE)
-            //{
-            //    if (i < _wirePoints.Length)
-            //    {
-            //        wirePointInfoEntity.WirePointId = _wirePoints[i].WirePointId;
-            //    }
-            //}
 
             //导线点编号
             if (dgrdvWire.Rows[i].Cells[0] != null)
@@ -931,7 +923,6 @@ namespace sys3
         /// <param name="addOrChange"></param>
         private void DrawWirePoint(List<WirePoint> lstWpie, string addOrChange)
         {
-            WirePoint wirePtInfo;
             IPoint pt = new Point();
 
             //找到导线点图层
@@ -951,7 +942,7 @@ namespace sys3
             {
                 foreach (WirePoint t in lstWpie)
                 {
-                    wirePtInfo = t;
+                    var wirePtInfo = t;
                     DataEditCommon.DeleteFeatureByBId(featureLayer, wirePtInfo.BindingId);
                 }
             }
@@ -1057,7 +1048,6 @@ namespace sys3
         //}
 
         #endregion 绘制导线点和巷道图形
-
         private void btnMultTxt_Click(object sender, EventArgs e)
         {
             var ofd = new OpenFileDialog { RestoreDirectory = true, Multiselect = true, Filter = @"文本文件(*.txt)|*.txt|所有文件(*.*)|*.*" };
@@ -1164,6 +1154,7 @@ namespace sys3
                         pbCount.Value++;
                         lblSuccessed.Text =
                             (Convert.ToInt32(lblSuccessed.Text) + 1).ToString(CultureInfo.InvariantCulture);
+
                     }
                 }
                 catch

@@ -75,7 +75,6 @@
             this.barSubItem4 = new DevExpress.XtraBars.BarSubItem();
             this.mniSJHDGL = new DevExpress.XtraBars.BarButtonItem();
             this.mniDXGL = new DevExpress.XtraBars.BarButtonItem();
-            this.mniCLRSJKDRDXSJK = new DevExpress.XtraBars.BarButtonItem();
             this.mniJJHDGL = new DevExpress.XtraBars.BarButtonItem();
             this.mniHCHDGL = new DevExpress.XtraBars.BarButtonItem();
             this.mniHENGCHUANHDGL = new DevExpress.XtraBars.BarButtonItem();
@@ -332,7 +331,6 @@
             this.mniHatch,
             this.mniSJHDGL,
             this.mniDXGL,
-            this.mniCLRSJKDRDXSJK,
             this.mniJJHDGL,
             this.mniHCHDGL,
             this.mniJT,
@@ -833,7 +831,6 @@
             this.barSubItem4.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.mniSJHDGL),
             new DevExpress.XtraBars.LinkPersistInfo(this.mniDXGL),
-            new DevExpress.XtraBars.LinkPersistInfo(this.mniCLRSJKDRDXSJK),
             new DevExpress.XtraBars.LinkPersistInfo(this.mniJJHDGL),
             new DevExpress.XtraBars.LinkPersistInfo(this.mniHCHDGL),
             new DevExpress.XtraBars.LinkPersistInfo(this.mniHENGCHUANHDGL),
@@ -875,14 +872,6 @@
             this.mniDXGL.Name = "mniDXGL";
             this.mniDXGL.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniDXGL_ItemClick);
             // 
-            // mniCLRSJKDRDXSJK
-            // 
-            this.mniCLRSJKDRDXSJK.Caption = "从龙软数据库导入导线数据(&F)...";
-            this.mniCLRSJKDRDXSJK.Id = 34;
-            this.mniCLRSJKDRDXSJK.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F));
-            this.mniCLRSJKDRDXSJK.Name = "mniCLRSJKDRDXSJK";
-            this.mniCLRSJKDRDXSJK.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniCLRSJKDRDXSJK_ItemClick);
-            // 
             // mniJJHDGL
             // 
             this.mniJJHDGL.Caption = "掘进面管理(&T)...";
@@ -906,6 +895,7 @@
             this.mniHENGCHUANHDGL.Caption = "横川管理";
             this.mniHENGCHUANHDGL.Id = 182;
             this.mniHENGCHUANHDGL.Name = "mniHENGCHUANHDGL";
+            this.mniHENGCHUANHDGL.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.mniHENGCHUANHDGL.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniHENGCHUANHDGL_ItemClick);
             // 
             // mniJT
@@ -915,6 +905,7 @@
             this.mniJT.ImageIndex = 8;
             this.mniJT.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D4));
             this.mniJT.Name = "mniJT";
+            this.mniJT.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.mniJT.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniJT_ItemClick);
             // 
             // mniDS
@@ -924,6 +915,7 @@
             this.mniDS.ImageIndex = 4;
             this.mniDS.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D5));
             this.mniDS.Name = "mniDS";
+            this.mniDS.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.mniDS.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniDS_ItemClick);
             // 
             // mniJLDC
@@ -968,6 +960,7 @@
             this.mniKTX.Id = 43;
             this.mniKTX.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D6));
             this.mniKTX.Name = "mniKTX";
+            this.mniKTX.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.mniKTX.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniKTX_ItemClick);
             // 
             // mniJXCCK
@@ -977,6 +970,7 @@
             this.mniJXCCK.ImageIndex = 9;
             this.mniJXCCK.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D7));
             this.mniJXCCK.Name = "mniJXCCK";
+            this.mniJXCCK.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.mniJXCCK.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniJXCCK_ItemClick);
             // 
             // mniXZZ
@@ -986,6 +980,7 @@
             this.mniXZZ.ImageIndex = 20;
             this.mniXZZ.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G));
             this.mniXZZ.Name = "mniXZZ";
+            this.mniXZZ.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.mniXZZ.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniXZZ_ItemClick);
             // 
             // mniDMCCK
@@ -994,6 +989,7 @@
             this.mniDMCCK.Id = 46;
             this.mniDMCCK.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.J));
             this.mniDMCCK.Name = "mniDMCCK";
+            this.mniDMCCK.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.mniDMCCK.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniDMCCK_ItemClick);
             // 
             // mniSMPMT
@@ -1002,6 +998,7 @@
             this.mniSMPMT.Id = 47;
             this.mniSMPMT.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L));
             this.mniSMPMT.Name = "mniSMPMT";
+            this.mniSMPMT.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.mniSMPMT.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniSMPMT_ItemClick);
             // 
             // mniHDPMT
@@ -1010,6 +1007,7 @@
             this.mniHDPMT.Id = 48;
             this.mniHDPMT.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.M));
             this.mniHDPMT.Name = "mniHDPMT";
+            this.mniHDPMT.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.mniHDPMT.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniHDPMT_ItemClick);
             // 
             // mniZHZZT
@@ -1018,6 +1016,7 @@
             this.mniZHZZT.Id = 49;
             this.mniZHZZT.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N));
             this.mniZHZZT.Name = "mniZHZZT";
+            this.mniZHZZT.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.mniZHZZT.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniZHZZT_ItemClick);
             // 
             // mniMCDBDGX
@@ -1027,6 +1026,7 @@
             this.mniMCDBDGX.ImageIndex = 14;
             this.mniMCDBDGX.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V));
             this.mniMCDBDGX.Name = "mniMCDBDGX";
+            this.mniMCDBDGX.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.mniMCDBDGX.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniMCDBDGX_ItemClick);
             // 
             // mniMSDGX
@@ -1036,6 +1036,7 @@
             this.mniMSDGX.ImageIndex = 13;
             this.mniMSDGX.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X));
             this.mniMSDGX.Name = "mniMSDGX";
+            this.mniMSDGX.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.mniMSDGX.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniMSDGX_ItemClick);
             // 
             // mniMCGL
@@ -1044,6 +1045,7 @@
             this.mniMCGL.Id = 170;
             this.mniMCGL.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D9));
             this.mniMCGL.Name = "mniMCGL";
+            this.mniMCGL.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.mniMCGL.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniMCGL_ItemClick);
             // 
             // miniJUEJINJZ
@@ -2235,7 +2237,6 @@
         private DevExpress.XtraBars.BarSubItem barSubItem4;
         private DevExpress.XtraBars.BarButtonItem mniSJHDGL;
         private DevExpress.XtraBars.BarButtonItem mniDXGL;
-        private DevExpress.XtraBars.BarButtonItem mniCLRSJKDRDXSJK;
         private DevExpress.XtraBars.BarButtonItem mniJJHDGL;
         private DevExpress.XtraBars.BarButtonItem mniHCHDGL;
         private DevExpress.XtraBars.BarButtonItem mniJT;

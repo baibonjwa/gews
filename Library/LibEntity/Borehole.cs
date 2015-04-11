@@ -14,7 +14,7 @@ namespace LibEntity
         public int BoreholeId { get; set; }
 
         [HasMany(typeof(BoreholeLithology), Table = "T_BOREHOLE_LITHOLOGY", ColumnKey = "BOREHOLE_ID",
-Cascade = ManyRelationCascadeEnum.SaveUpdate, Lazy = true)]
+Cascade = ManyRelationCascadeEnum.All, Lazy = true)]
         public IList<BoreholeLithology> BoreholeLithologys { get; set; }
 
         /// <summary>

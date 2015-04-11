@@ -60,7 +60,6 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnMoveUp = new System.Windows.Forms.Button();
             this.btnDel = new System.Windows.Forms.Button();
-            this.selectTunnelUserControl1 = new LibCommonForm.SelectTunnelUserControl();
             this.btnMoveDown = new System.Windows.Forms.Button();
             this.btnTxt = new System.Windows.Forms.Button();
             this.btnMultTxt = new System.Windows.Forms.Button();
@@ -72,6 +71,7 @@
             this.lblError = new System.Windows.Forms.Label();
             this.lblSuccessed = new System.Windows.Forms.Label();
             this.btnDetails = new System.Windows.Forms.Button();
+            this.selectTunnelUserControl1 = new LibCommonForm.SelectTunnelUserControl();
             ((System.ComponentModel.ISupportInitialize)(this.dgrdvWire)).BeginInit();
             this.SuspendLayout();
             // 
@@ -380,14 +380,6 @@
             this.btnDel.UseVisualStyleBackColor = true;
             this.btnDel.Click += new System.EventHandler(this.btnDel_Click);
             // 
-            // selectTunnelUserControl1
-            // 
-            this.selectTunnelUserControl1.Location = new System.Drawing.Point(12, 10);
-            this.selectTunnelUserControl1.Name = "selectTunnelUserControl1";
-            this.selectTunnelUserControl1.SelectedTunnel = null;
-            this.selectTunnelUserControl1.Size = new System.Drawing.Size(583, 187);
-            this.selectTunnelUserControl1.TabIndex = 36;
-            // 
             // btnMoveDown
             // 
             this.btnMoveDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -403,11 +395,11 @@
             // btnTxt
             // 
             this.btnTxt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnTxt.Location = new System.Drawing.Point(543, 489);
+            this.btnTxt.Location = new System.Drawing.Point(526, 489);
             this.btnTxt.Name = "btnTxt";
-            this.btnTxt.Size = new System.Drawing.Size(71, 23);
+            this.btnTxt.Size = new System.Drawing.Size(88, 23);
             this.btnTxt.TabIndex = 34;
-            this.btnTxt.Text = "从txt读取";
+            this.btnTxt.Text = "单文件导入";
             this.btnTxt.UseVisualStyleBackColor = true;
             this.btnTxt.Click += new System.EventHandler(this.btnTXT_Click);
             // 
@@ -416,9 +408,9 @@
             this.btnMultTxt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnMultTxt.Location = new System.Drawing.Point(426, 489);
             this.btnMultTxt.Name = "btnMultTxt";
-            this.btnMultTxt.Size = new System.Drawing.Size(111, 23);
+            this.btnMultTxt.Size = new System.Drawing.Size(94, 23);
             this.btnMultTxt.TabIndex = 37;
-            this.btnMultTxt.Text = "从txt读取并提交";
+            this.btnMultTxt.Text = "多文件导入";
             this.btnMultTxt.UseVisualStyleBackColor = true;
             this.btnMultTxt.Click += new System.EventHandler(this.btnMultTxt_Click);
             // 
@@ -490,6 +482,14 @@
             this.btnDetails.Text = "详细";
             this.btnDetails.UseVisualStyleBackColor = true;
             this.btnDetails.Click += new System.EventHandler(this.btnDetails_Click);
+            // 
+            // selectTunnelUserControl1
+            // 
+            this.selectTunnelUserControl1.Location = new System.Drawing.Point(12, 10);
+            this.selectTunnelUserControl1.Name = "selectTunnelUserControl1";
+            this.selectTunnelUserControl1.SelectedTunnel = null;
+            this.selectTunnelUserControl1.Size = new System.Drawing.Size(583, 187);
+            this.selectTunnelUserControl1.TabIndex = 36;
             // 
             // WireInfoEntering
             // 
