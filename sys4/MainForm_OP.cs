@@ -17,6 +17,7 @@ using LibCommon;
 using LibCommonForm;
 using LibConfig;
 using LibDatabase;
+using LibPanels;
 using LibSocket;
 
 namespace sys4

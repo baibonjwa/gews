@@ -6,7 +6,6 @@
 // 版本信息：
 // V1.0 新建
 // ******************************************************************
-
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -24,7 +23,6 @@ namespace LibPanels
         K1Value[] k1Entitys;
         Tunnel tunnelEntity = new Tunnel();
         //巷道控件用数组
-        int[] arr = new int[5];
         /// <summary>
         /// K1Value分组数
         /// </summary>
@@ -32,7 +30,7 @@ namespace LibPanels
         /// <summary>
         /// 数据行数
         /// </summary>
-        int rowCount = 0;
+        int rowCount;
         DateTimePicker dtp = new DateTimePicker();
         int pointX = -1;
         int pointY = -1;
@@ -46,13 +44,7 @@ namespace LibPanels
         public K1ValueEntering()
         {
             InitializeComponent();
-
-            //设置窗体属性
-            LibCommon.FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_OP.K1_VALUE_ADD);
-            //this.selectTunnelUserControl1.init(mainFrm);
-            //this.selectTunnelUserControl1.TunnelNameChanged += BindCoordinate;
-            //自定义控件设置
-            //this.selectTunnelUserControl1.loadMineName();
+            FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_OP.K1_VALUE_ADD);
 
 
         }
@@ -60,19 +52,13 @@ namespace LibPanels
         /// <summary>
         /// 修改
         /// </summary>
-        /// <param name="array"></param>
-        public K1ValueEntering(int[] array, int id)
+        /// <param name="k1Value"></param>
+        public K1ValueEntering(K1Value k1Value)
         {
-            arr = array;
-            _k1ValueEntity.Id = id;
-
             InitializeComponent();
 
             //窗体属性设置
-            LibCommon.FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_OP.K1_VALUE_CHANGE);
-            //this.selectTunnelUserControl1.init(mainFrm);
-            //自定义控件设置
-            //this.selectTunnelUserControl1.setCurSelectedID(arr); 
+            FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_OP.K1_VALUE_CHANGE);
         }
 
         /// <summary>
@@ -82,14 +68,12 @@ namespace LibPanels
         /// <param name="e"></param>
         private void K1Value_Load(object sender, EventArgs e)
         {
-            //this.selectTunnelSimple1.TunnelNameChanged += BindCoordinate;
-
             //设置Datagridview样式
             setDataGridViewStyle();
 
-            if (this.Text == Const_OP.K1_VALUE_CHANGE)
+            if (Text == Const_OP.K1_VALUE_CHANGE)
             {
-                change();
+                Change();
             }
             dtp.Visible = false;
             dtp.Format = DateTimePickerFormat.Custom;
@@ -101,7 +85,7 @@ namespace LibPanels
         /// <summary>
         /// 修改时绑定datagridview值
         /// </summary>
-        private void change()
+        private void Change()
         {
             //实体赋值
             _k1ValueEntity = K1ValueBLL.selectValueK1ByID(_k1ValueEntity.Id);

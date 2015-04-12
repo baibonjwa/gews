@@ -1,4 +1,4 @@
-﻿namespace _4.OutburstPrevention
+﻿namespace LibPanels
 {
     partial class K1DeleteMessageBox
     {

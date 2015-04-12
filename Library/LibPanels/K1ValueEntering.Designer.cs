@@ -89,12 +89,12 @@
             this.dtpTime,
             this.dtpTypeInTime,
             this.btnDel});
-            this.dgrdvK1Value.Location = new System.Drawing.Point(14, 97);
+            this.dgrdvK1Value.Location = new System.Drawing.Point(14, 56);
             this.dgrdvK1Value.MultiSelect = false;
             this.dgrdvK1Value.Name = "dgrdvK1Value";
             this.dgrdvK1Value.RowTemplate.Height = 23;
             this.dgrdvK1Value.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dgrdvK1Value.Size = new System.Drawing.Size(842, 233);
+            this.dgrdvK1Value.Size = new System.Drawing.Size(842, 274);
             this.dgrdvK1Value.TabIndex = 1;
             this.dgrdvK1Value.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dgrdvK1Value_CellBeginEdit);
             this.dgrdvK1Value.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgrdvK1Value_CellContentClick);
@@ -197,7 +197,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.ForeColor = System.Drawing.Color.Red;
-            this.label7.Location = new System.Drawing.Point(568, 120);
+            this.label7.Location = new System.Drawing.Point(570, 91);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(11, 12);
             this.label7.TabIndex = 10;
@@ -205,7 +205,7 @@
             // 
             // selectTunnelSimple1
             // 
-            this.selectTunnelSimple1.Location = new System.Drawing.Point(14, 37);
+            this.selectTunnelSimple1.Location = new System.Drawing.Point(14, 12);
             this.selectTunnelSimple1.Name = "selectTunnelSimple1";
             this.selectTunnelSimple1.SelectedTunnel = null;
             this.selectTunnelSimple1.Size = new System.Drawing.Size(219, 38);

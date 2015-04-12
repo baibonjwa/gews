@@ -97,7 +97,7 @@ namespace sys4
                     WorkingFaceDayOutput = Convert.ToDouble(txtWorkingFaceDayOutput.Text),
                     StopeDate = dtpStopeDate.Value,
                     Tunnel = selectTunnelSimple1.SelectedTunnel,
-                    CoalSeams = (CoalSeams) cboCoalSeams.SelectedValue,
+                    CoalSeams = (CoalSeams)cboCoalSeams.SelectedValue,
                     BindingId = IDGenerator.NewBindingID()
                 };
                 // 坐标X
@@ -114,7 +114,7 @@ namespace sys4
                 GasGushQuantity.WorkingFaceDayOutput = Convert.ToDouble(txtWorkingFaceDayOutput.Text);
                 GasGushQuantity.StopeDate = dtpStopeDate.Value;
                 GasGushQuantity.Tunnel = selectTunnelSimple1.SelectedTunnel;
-                GasGushQuantity.CoalSeams = (CoalSeams) cboCoalSeams.SelectedValue;
+                GasGushQuantity.CoalSeams = (CoalSeams)cboCoalSeams.SelectedValue;
                 GasGushQuantity.BindingId = IDGenerator.NewBindingID();
                 GasGushQuantity.Save();
                 DelGasGushQuantityPt(GasGushQuantity.BindingId, GasGushQuantity.CoalSeams.CoalSeamsName);
@@ -213,7 +213,7 @@ namespace sys4
             return true;
         }
 
-        public const string StopeWorkingFaceGasGushQuantityPt = "瓦斯涌出量点";
+        public const string STOPE_WORKING_FACE_GAS_GUSH_QUANTITY_PT = "瓦斯涌出量点";
         public IPoint GasGushQuantityPoint { get; set; }
 
         /// <summary>
@@ -234,7 +234,7 @@ namespace sys4
                 MessageBox.Show(@"未找到瓦斯涌出量点图层,无法绘制瓦斯涌出量点图元。");
                 return;
             }
-            var pFeatureLayer = (IFeatureLayer) pLayer;
+            var pFeatureLayer = (IFeatureLayer)pLayer;
             IGeometry geometry = pt;
             var list = new List<ziduan>
             {
@@ -287,7 +287,7 @@ namespace sys4
             if (pfeature != null)
             {
                 MyMapHelp.Jump(pt);
-                DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh((esriViewDrawPhase) 34, null, null);
+                DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh((esriViewDrawPhase)34, null, null);
             }
         }
 
@@ -299,7 +299,7 @@ namespace sys4
         private void DelGasGushQuantityPt(string bid, string mc)
         {
             var pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.LAYER_ALIAS_MR_HCGZMWSYCLD);
-            var pFeatureLayer = (IFeatureLayer) pLayer;
+            var pFeatureLayer = (IFeatureLayer)pLayer;
             DataEditCommon.DeleteFeatureByWhereClause(pFeatureLayer, "bid='" + bid + "' and mc='" + mc + "'");
         }
 

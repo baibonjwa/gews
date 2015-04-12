@@ -17,9 +17,6 @@ namespace LibEntity
     {
         //主键ID
 
-        private DateTime _time;
-        private DateTime _typeInTime;
-
         /// <summary>
         ///     主键ID
         /// </summary>
@@ -105,11 +102,7 @@ namespace LibEntity
         ///     记录时间
         /// </summary>
         [Property("TIME")]
-        public DateTime Time
-        {
-            get { return _time; }
-            set { _time = value; }
-        }
+        public DateTime Time { get; set; }
 
         //录入时间
 
@@ -117,13 +110,7 @@ namespace LibEntity
         ///     录入时间
         /// </summary>
         [Property("TYPE_IN_TIME")]
-        public DateTime TypeInTime
-        {
-            get { return _typeInTime; }
-            set { _typeInTime = value; }
-        }
-
-        //绑定巷道ID
+        public DateTime TypeInTime { get; set; }
 
         /// <summary>
         ///     绑定巷道ID

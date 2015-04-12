@@ -284,7 +284,7 @@ namespace LibBusiness
                     (TunnelTypeEnum)Convert.ToInt32(dr[TunnelInfoDbConstNames.TUNNEL_TYPE]);
                 try
                 {
-                    if (!TunnelUtils.isStoping(tunnelType))
+                    if (!TunnelUtils.IsStoping(tunnelType))
                         tunnelNames.Add(dr[TunnelInfoDbConstNames.ID],
                             dr[WorkingFaceDbConstNames.WORKINGFACE_NAME]);
                     else

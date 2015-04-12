@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DevExpress.Utils.CodedUISupport;
+using DevExpress.XtraBars.Ribbon.ViewInfo;
 using DevExpress.XtraGrid;
 using DevExpress.XtraPrinting;
 

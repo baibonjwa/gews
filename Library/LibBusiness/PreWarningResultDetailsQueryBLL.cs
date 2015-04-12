@@ -20,7 +20,7 @@ namespace LibBusiness
     public class PreWarningResultDetailsQueryBLL
     {
         //定义成员变量,避免数据库重复开启关闭
-        static ManageDataBase _database = new 
+        static ManageDataBase _database = new
             ManageDataBase(DATABASE_TYPE.WarningManagementDB);
 
         /// <summary>
@@ -45,11 +45,11 @@ namespace LibBusiness
         /// <param name="date_shift"></param>
         /// <param name="tunnel_ID"></param>
         /// <returns></returns>
-        public static List<PreWarningResultQuery> 
+        public static List<PreWarningResultQuery>
             SelectPreWarningResultInOneDateShift(string date, string date_shift,
             string tunnel_ID, string warning_type)
         {
-            List<PreWarningResultQuery> ents = new 
+            List<PreWarningResultQuery> ents = new
                 List<PreWarningResultQuery>();
             DateTime[] times = WorkingTime.GetDateShiftTimes(date_shift);
             if (times.Length != 2)
@@ -82,7 +82,7 @@ namespace LibBusiness
             strSql.Append((int)LibCommon.WarningResult.GREEN);
             strSql.Append(") )AS T");
 
-            DataSet ds = 
+            DataSet ds =
                 _database.ReturnDSNotOpenAndClose(strSql.ToString());
             if (ds != null)
             {
@@ -94,24 +94,24 @@ namespace LibBusiness
                     for (int i = 0; i < rowCount; i++)
                     {
                         #region 实体赋值
-                        PreWarningResultQuery ent = new 
+                        PreWarningResultQuery ent = new
                             PreWarningResultQuery();
                         ent.TunelName = GetTunelNameByTunelID(tunnel_ID);
-                        ent.DateTime = 
+                        ent.DateTime =
                             Convert.ToDateTime(dt.Rows[i][PreWarningResultDBConstNames.DATA_TIME]);
-                        ent.Date_Shift = 
+                        ent.Date_Shift =
                             dt.Rows[i][PreWarningResultDBConstNames.DATE_SHIFT].ToString();
 
                         int defultValue = (int)WarningResult.NULL;
-                        if 
-                            (dt.Rows[i][PreWarningResultDBConstNames.WARNING_TYPE].ToString() 
+                        if
+                            (dt.Rows[i][PreWarningResultDBConstNames.WARNING_TYPE].ToString()
                             == LibCommon.WarningType.OVER_LIMIT.ToString())
                         {
-                            ent.OverLimitWarningResult.ID = 
+                            ent.OverLimitWarningResult.ID =
                                 dt.Rows[i][PreWarningResultDBConstNames.ID].ToString();
                             int.TryParse(dt.Rows[i][LibBusiness.PreWarningResultDBConstNames.WARNING_RESULT].ToString(),
                                 out defultValue);
-                            ent.OverLimitWarningResult.WarningResult = 
+                            ent.OverLimitWarningResult.WarningResult =
                                 defultValue;
                             defultValue = (int)WarningResult.NULL;
                             int.TryParse(dt.Rows[i][LibBusiness.PreWarningResultDBConstNames.GAS].ToString(),
@@ -124,28 +124,28 @@ namespace LibBusiness
                             defultValue = (int)WarningResult.NULL;
                             int.TryParse(dt.Rows[i][LibBusiness.PreWarningResultDBConstNames.GEOLOGY].ToString(),
                                 out defultValue);
-                            ent.OverLimitWarningResult.Geology = 
+                            ent.OverLimitWarningResult.Geology =
                                 defultValue;
                             defultValue = (int)WarningResult.NULL;
                             int.TryParse(dt.Rows[i][LibBusiness.PreWarningResultDBConstNames.VENTILATION].ToString(),
                                 out defultValue);
-                            ent.OverLimitWarningResult.Ventilation = 
+                            ent.OverLimitWarningResult.Ventilation =
                                 defultValue;
                             defultValue = (int)WarningResult.NULL;
                             int.TryParse(dt.Rows[i][LibBusiness.PreWarningResultDBConstNames.MANAGEMENT].ToString(),
                                 out defultValue);
-                            ent.OverLimitWarningResult.Management = 
+                            ent.OverLimitWarningResult.Management =
                                 defultValue;
                         }
-                        if 
-                            (dt.Rows[i][PreWarningResultDBConstNames.WARNING_TYPE].ToString() 
+                        if
+                            (dt.Rows[i][PreWarningResultDBConstNames.WARNING_TYPE].ToString()
                             == LibCommon.WarningType.OUTBURST.ToString())
                         {
-                            ent.OutBrustWarningResult.ID = 
+                            ent.OutBrustWarningResult.ID =
                                 dt.Rows[i][PreWarningResultDBConstNames.ID].ToString();
                             int.TryParse(dt.Rows[i][LibBusiness.PreWarningResultDBConstNames.WARNING_RESULT].ToString(),
                                 out defultValue);
-                            ent.OutBrustWarningResult.WarningResult = 
+                            ent.OutBrustWarningResult.WarningResult =
                                 defultValue;
                             defultValue = (int)WarningResult.NULL;
                             int.TryParse(dt.Rows[i][LibBusiness.PreWarningResultDBConstNames.GAS].ToString(),
@@ -158,17 +158,17 @@ namespace LibBusiness
                             defultValue = (int)WarningResult.NULL;
                             int.TryParse(dt.Rows[i][LibBusiness.PreWarningResultDBConstNames.GEOLOGY].ToString(),
                                 out defultValue);
-                            ent.OutBrustWarningResult.Geology = 
+                            ent.OutBrustWarningResult.Geology =
                                 defultValue;
                             defultValue = (int)WarningResult.NULL;
                             int.TryParse(dt.Rows[i][LibBusiness.PreWarningResultDBConstNames.VENTILATION].ToString(),
                                 out defultValue);
-                            ent.OutBrustWarningResult.Ventilation = 
+                            ent.OutBrustWarningResult.Ventilation =
                                 defultValue;
                             defultValue = (int)WarningResult.NULL;
                             int.TryParse(dt.Rows[i][LibBusiness.PreWarningResultDBConstNames.MANAGEMENT].ToString(),
                                 out defultValue);
-                            ent.OutBrustWarningResult.Management = 
+                            ent.OutBrustWarningResult.Management =
                                 defultValue;
                         }
                         ents.Add(ent);
@@ -194,9 +194,9 @@ namespace LibBusiness
         /// <param name="date_shift"></param>
         /// <param name="tunnel_ID"></param>
         /// <returns></returns>
-        public static int SelectPreWarningResultCountInOneDateShift(string 
+        public static int SelectPreWarningResultCountInOneDateShift(string
             date,
-            string date_shift, string tunnel_ID, string warning_type, bool 
+            string date_shift, string tunnel_ID, string warning_type, bool
                 addWarningFilter)
         {
             int rowCount = 0;
@@ -206,7 +206,7 @@ namespace LibBusiness
             if (addWarningFilter)
             {
                 strSql = new StringBuilder();
-                DateTime[] times = 
+                DateTime[] times =
                     WorkingTime.GetDateShiftTimes(date_shift);
                 if (times.Length != 2)
                 {
@@ -259,7 +259,7 @@ namespace LibBusiness
                 strSql.Append(" < ");
                 strSql.Append((int)LibCommon.WarningResult.GREEN);
             }
-            DataSet ds = 
+            DataSet ds =
                 _database.ReturnDSNotOpenAndClose(strSql.ToString());
             if (ds != null)
             {
@@ -328,21 +328,21 @@ namespace LibBusiness
             strSql.Append(TunnelInfoDbConstNames.ID);
             strSql.Append(" = ");
             strSql.Append(tunelId);
-            DataTable dt = 
+            DataTable dt =
                 _database.ReturnDSNotOpenAndClose(strSql.ToString()).Tables[0];
             if (dt != null)
             {
                 if (dt.Rows.Count > 0)
                 {
                     //判断是否属于回采巷道
-                    if 
-                        (TunnelUtils.isStoping((TunnelTypeEnum)Convert.ToInt32(dt.Rows[0][LibBusiness.TunnelInfoDbConstNames.TUNNEL_TYPE])))
+                    if
+                        (TunnelUtils.IsStoping((TunnelTypeEnum)Convert.ToInt32(dt.Rows[0][LibBusiness.TunnelInfoDbConstNames.TUNNEL_TYPE])))
                     {
                         //获取工作面名称
                         int workFaceId;
                         int.TryParse(dt.Rows[0][TunnelInfoDbConstNames.WORKINGFACE_ID].ToString(),
                             out workFaceId);
-                        WorkingFace workingFace = 
+                        WorkingFace workingFace =
                             WorkingFace.Find(workFaceId);
                         if (workingFace != null)
                         {
@@ -351,7 +351,7 @@ namespace LibBusiness
                     }
                     else
                     {
-                        return 
+                        return
                             dt.Rows[0][LibBusiness.TunnelInfoDbConstNames.TUNNEL_NAME].ToString();
                     }
                 }
@@ -363,7 +363,7 @@ namespace LibBusiness
         /// 根据规则ID获取预警规则实体
         /// <param name="ruleId">规则Id</param>
         /// </summary>
-        public static PreWarningRules 
+        public static PreWarningRules
             GetPreWarningRulesEntityByRuleId(string ruleId)
         {
             try
@@ -380,7 +380,7 @@ namespace LibBusiness
                     PreWarningRulesDbConstNames.MODIFY_DATE + "," +
                     PreWarningRulesDbConstNames.REMARKS + " FROM " +
                     PreWarningRulesDbConstNames.TABLE_NAME + " WHERE " +
-                    PreWarningRulesDbConstNames.RULE_ID + "=" + 
+                    PreWarningRulesDbConstNames.RULE_ID + "=" +
                         ruleId.ToString();
                 DataSet ds = _database.ReturnDSNotOpenAndClose(sql);
                 int n = ds.Tables[0].Rows.Count;
@@ -397,31 +397,31 @@ namespace LibBusiness
                 int iRuleID = -1;
                 int.TryParse(ruleId, out iRuleID);
                 PreWarningRules ret = new PreWarningRules(iRuleID);
-                ret.RuleCode = 
+                ret.RuleCode =
                     ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.RULE_CODE].ToString();
-                ret.RuleType = 
+                ret.RuleType =
                     ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.RULE_TYPE].ToString();
-                ret.WarningType = 
+                ret.WarningType =
                     ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.WARNING_TYPE].ToString();
-                ret.WarningLevel = 
+                ret.WarningLevel =
                     ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.WARNING_LEVEL].ToString();
-                ret.SuitableLocation = 
+                ret.SuitableLocation =
                     ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.SUITABLE_LOCATION].ToString();
-                ret.RuleDescription = 
+                ret.RuleDescription =
                     ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.RULE_DESCRIPTION].ToString();
-                ret.IndicatorType = 
+                ret.IndicatorType =
                     ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.INDICATOR_TYPE].ToString();
-                ret.Operator = 
+                ret.Operator =
                     ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.OPERATOR].ToString();
-                ret.ModifyDate = 
+                ret.ModifyDate =
                     Convert.ToDateTime(ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.MODIFY_DATE].ToString());
-                ret.Remarks = 
+                ret.Remarks =
                     ds.Tables[0].Rows[0][PreWarningRulesDbConstNames.REMARKS].ToString();
                 return ret;
             }
             catch (Exception ex)
             {
-                Alert.alert(ex.Message + 
+                Alert.alert(ex.Message +
                     " 函数名：GetPreWarningRulesEntityByRuleCode");
                 return null;
             }
@@ -433,7 +433,7 @@ namespace LibBusiness
         /// <param name="tunnelID">巷道ID</param>
         /// <param name="ruleId">规则ID</param>
         /// <returns>当巷道未绑定规则编码时，返回null</returns>
-        public static RuleInfo GetTunnelBindingParamsByRuleId(int tunnelID, 
+        public static RuleInfo GetTunnelBindingParamsByRuleId(int tunnelID,
             int ruleId)
         {
             RuleInfo[] all = GetTunnelBindingRuleIdsAndParams(tunnelID);
@@ -458,7 +458,7 @@ namespace LibBusiness
         /// <param name="preWarningParamsInDB">数据库中保存的预警规则参数</param>
         /// <returns>规则参数与编码单元</returns>
         /// <summary>
-        public static RuleInfo[] GetTunnelBindingRuleIdsAndParams(int 
+        public static RuleInfo[] GetTunnelBindingRuleIdsAndParams(int
             tunnelID)
         {
             //获取巷道绑定的规则编码字符串和预警参数字符串
@@ -476,9 +476,9 @@ namespace LibBusiness
                 //Alert.alert("数据库中无对应巷道！");
                 return null;
             }
-            allRuleIds = 
+            allRuleIds =
                 ds.Tables[0].Rows[0][TunnelInfoDbConstNames.RULE_IDS].ToString();
-            string allParams = 
+            string allParams =
                 ds.Tables[0].Rows[0][TunnelInfoDbConstNames.PRE_WARNING_PARAMS].ToString();
 
             if (allRuleIds == "")//未绑定规则编码
@@ -495,7 +495,7 @@ namespace LibBusiness
         /// <param name="ruleCodes">规则编码字符串</param>
         /// <param name="preWarningParams">预警参数字符串</param>
         /// <returns>规则编码与参数单元,无规则编码和参数则返回null；注意有规则编码但无参数的情况！(此时返回值当中规则编码含有值，但预警参数为null)</returns>
-        private static RuleInfo[] ParseRuleIdsAndParams(string ruleIds, 
+        private static RuleInfo[] ParseRuleIdsAndParams(string ruleIds,
             string preWarningParams)
         {
             //规则编码为空
@@ -506,7 +506,7 @@ namespace LibBusiness
             try
             {
 
-                char[] seperator = 
+                char[] seperator =
                     Const_WM.GetPreWarningRuleIdAndParamsSeperatorArr();
 
                 string[] rules = ruleIds.Split(seperator);
@@ -518,7 +518,7 @@ namespace LibBusiness
                     ret[i] = new RuleInfo(int.Parse(rules[i]));
                     if (warningParams[i] != "")//该规则编码含有参数
                     {
-                        ret[i].PreWarningParams = 
+                        ret[i].PreWarningParams =
                             PreWarningRules.ParseRuleDescriptionOfOneRuleId(warningParams[i]);
                     }
                     else//该规则编码无对应参数
