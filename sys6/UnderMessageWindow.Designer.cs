@@ -28,22 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UnderMessageWindow));
             this.btnUnderCoal = new System.Windows.Forms.Button();
             this.btnUnderGas = new System.Windows.Forms.Button();
             this.btnUnderVen = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.btnGeo = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnUnderManage = new System.Windows.Forms.Button();
             this.btnCloseSys = new System.Windows.Forms.Button();
             this.btnRestartSys = new System.Windows.Forms.Button();
             this.btnManagement = new System.Windows.Forms.Button();
             this.btnOpenReport = new System.Windows.Forms.Button();
             this.btnMonitorCurve = new System.Windows.Forms.Button();
-            this.lblWarning = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer();
-            this.btnChooseWarningTunnel = new System.Windows.Forms.Button();
-            this.btnServerStatus = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.btnSetDefaultValue = new System.Windows.Forms.Button();
             this.lbWorkStyle = new System.Windows.Forms.Label();
             this.lbWorkTime = new System.Windows.Forms.Label();
@@ -53,7 +51,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.selectTunnelSimple1 = new UnderTerminal.SelectTunnelSimple();
+            this.selectTunnelSimple1 = new LibCommonForm.SelectTunnelSimple();
             this.SuspendLayout();
             // 
             // btnUnderCoal
@@ -121,18 +119,18 @@
             this.btnGeo.UseVisualStyleBackColor = false;
             this.btnGeo.Click += new System.EventHandler(this.btnGeo_Click);
             // 
-            // button1
+            // btnUnderManage
             // 
-            this.button1.BackColor = System.Drawing.Color.Transparent;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Font = new System.Drawing.Font("SimSun", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button1.Location = new System.Drawing.Point(29, 369);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(155, 65);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "管理因素";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnUnderManage.BackColor = System.Drawing.Color.Transparent;
+            this.btnUnderManage.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnUnderManage.Font = new System.Drawing.Font("SimSun", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnUnderManage.Location = new System.Drawing.Point(29, 369);
+            this.btnUnderManage.Name = "btnUnderManage";
+            this.btnUnderManage.Size = new System.Drawing.Size(155, 65);
+            this.btnUnderManage.TabIndex = 10;
+            this.btnUnderManage.Text = "管理因素";
+            this.btnUnderManage.UseVisualStyleBackColor = false;
+            this.btnUnderManage.Click += new System.EventHandler(this.btnUnderManage_Click);
             // 
             // btnCloseSys
             // 
@@ -196,50 +194,15 @@
             this.btnMonitorCurve.UseVisualStyleBackColor = false;
             this.btnMonitorCurve.Click += new System.EventHandler(this.btnMonitorCurve_Click);
             // 
-            // lblWarning
-            // 
-            this.lblWarning.AutoSize = true;
-            this.lblWarning.BackColor = System.Drawing.Color.Transparent;
-            this.lblWarning.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblWarning.Location = new System.Drawing.Point(634, 57);
-            this.lblWarning.Name = "lblWarning";
-            this.lblWarning.Size = new System.Drawing.Size(56, 16);
-            this.lblWarning.TabIndex = 17;
-            this.lblWarning.Text = "label1";
-            // 
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // btnChooseWarningTunnel
-            // 
-            this.btnChooseWarningTunnel.BackColor = System.Drawing.Color.Transparent;
-            this.btnChooseWarningTunnel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnChooseWarningTunnel.Location = new System.Drawing.Point(633, 13);
-            this.btnChooseWarningTunnel.Name = "btnChooseWarningTunnel";
-            this.btnChooseWarningTunnel.Size = new System.Drawing.Size(114, 31);
-            this.btnChooseWarningTunnel.TabIndex = 18;
-            this.btnChooseWarningTunnel.Text = "查看预警情况";
-            this.btnChooseWarningTunnel.UseVisualStyleBackColor = false;
-            this.btnChooseWarningTunnel.Click += new System.EventHandler(this.btnChooseWarningTunnel_Click);
-            // 
-            // btnServerStatus
-            // 
-            this.btnServerStatus.BackColor = System.Drawing.Color.Transparent;
-            this.btnServerStatus.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnServerStatus.Location = new System.Drawing.Point(29, 541);
-            this.btnServerStatus.Name = "btnServerStatus";
-            this.btnServerStatus.Size = new System.Drawing.Size(75, 23);
-            this.btnServerStatus.TabIndex = 19;
-            this.btnServerStatus.Text = "联机";
-            this.btnServerStatus.UseVisualStyleBackColor = false;
-            this.btnServerStatus.Click += new System.EventHandler(this.btnServerStatus_Click);
             // 
             // btnSetDefaultValue
             // 
             this.btnSetDefaultValue.BackColor = System.Drawing.Color.Transparent;
             this.btnSetDefaultValue.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnSetDefaultValue.Location = new System.Drawing.Point(239, 28);
+            this.btnSetDefaultValue.Location = new System.Drawing.Point(263, 28);
             this.btnSetDefaultValue.Name = "btnSetDefaultValue";
             this.btnSetDefaultValue.Size = new System.Drawing.Size(95, 23);
             this.btnSetDefaultValue.TabIndex = 20;
@@ -251,7 +214,7 @@
             // 
             this.lbWorkStyle.AutoSize = true;
             this.lbWorkStyle.BackColor = System.Drawing.Color.Transparent;
-            this.lbWorkStyle.Location = new System.Drawing.Point(406, 28);
+            this.lbWorkStyle.Location = new System.Drawing.Point(441, 25);
             this.lbWorkStyle.Name = "lbWorkStyle";
             this.lbWorkStyle.Size = new System.Drawing.Size(0, 12);
             this.lbWorkStyle.TabIndex = 21;
@@ -260,7 +223,7 @@
             // 
             this.lbWorkTime.AutoSize = true;
             this.lbWorkTime.BackColor = System.Drawing.Color.Transparent;
-            this.lbWorkTime.Location = new System.Drawing.Point(406, 47);
+            this.lbWorkTime.Location = new System.Drawing.Point(441, 44);
             this.lbWorkTime.Name = "lbWorkTime";
             this.lbWorkTime.Size = new System.Drawing.Size(0, 12);
             this.lbWorkTime.TabIndex = 21;
@@ -269,7 +232,7 @@
             // 
             this.lbTeamName.AutoSize = true;
             this.lbTeamName.BackColor = System.Drawing.Color.Transparent;
-            this.lbTeamName.Location = new System.Drawing.Point(523, 28);
+            this.lbTeamName.Location = new System.Drawing.Point(558, 25);
             this.lbTeamName.Name = "lbTeamName";
             this.lbTeamName.Size = new System.Drawing.Size(0, 12);
             this.lbTeamName.TabIndex = 21;
@@ -278,7 +241,7 @@
             // 
             this.lbSubmitter.AutoSize = true;
             this.lbSubmitter.BackColor = System.Drawing.Color.Transparent;
-            this.lbSubmitter.Location = new System.Drawing.Point(523, 47);
+            this.lbSubmitter.Location = new System.Drawing.Point(558, 44);
             this.lbSubmitter.Name = "lbSubmitter";
             this.lbSubmitter.Size = new System.Drawing.Size(0, 12);
             this.lbSubmitter.TabIndex = 21;
@@ -287,7 +250,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Location = new System.Drawing.Point(340, 28);
+            this.label1.Location = new System.Drawing.Point(375, 25);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 12);
             this.label1.TabIndex = 22;
@@ -297,7 +260,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Location = new System.Drawing.Point(341, 47);
+            this.label2.Location = new System.Drawing.Point(376, 44);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 12);
             this.label2.TabIndex = 22;
@@ -307,7 +270,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Location = new System.Drawing.Point(458, 28);
+            this.label3.Location = new System.Drawing.Point(493, 25);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 12);
             this.label3.TabIndex = 22;
@@ -317,7 +280,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Location = new System.Drawing.Point(458, 47);
+            this.label4.Location = new System.Drawing.Point(493, 44);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(65, 12);
             this.label4.TabIndex = 22;
@@ -326,12 +289,11 @@
             // selectTunnelSimple1
             // 
             this.selectTunnelSimple1.BackColor = System.Drawing.Color.Transparent;
-            this.selectTunnelSimple1.ITunnelId = 0;
-            this.selectTunnelSimple1.ITunnelName = "";
-            this.selectTunnelSimple1.Location = new System.Drawing.Point(27, 21);
+            this.selectTunnelSimple1.Location = new System.Drawing.Point(29, 21);
             this.selectTunnelSimple1.Name = "selectTunnelSimple1";
+            this.selectTunnelSimple1.SelectedTunnel = null;
             this.selectTunnelSimple1.Size = new System.Drawing.Size(219, 38);
-            this.selectTunnelSimple1.TabIndex = 16;
+            this.selectTunnelSimple1.TabIndex = 23;
             // 
             // UnderMessageWindow
             // 
@@ -339,7 +301,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(794, 571);
-            this.ControlBox = false;
+            this.Controls.Add(this.btnSetDefaultValue);
+            this.Controls.Add(this.selectTunnelSimple1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -348,15 +311,10 @@
             this.Controls.Add(this.lbTeamName);
             this.Controls.Add(this.lbWorkTime);
             this.Controls.Add(this.lbWorkStyle);
-            this.Controls.Add(this.btnSetDefaultValue);
-            this.Controls.Add(this.btnServerStatus);
-            this.Controls.Add(this.btnChooseWarningTunnel);
-            this.Controls.Add(this.lblWarning);
-            this.Controls.Add(this.selectTunnelSimple1);
             this.Controls.Add(this.btnManagement);
             this.Controls.Add(this.btnRestartSys);
             this.Controls.Add(this.btnCloseSys);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnUnderManage);
             this.Controls.Add(this.btnGeo);
             this.Controls.Add(this.btnMonitorCurve);
             this.Controls.Add(this.btnOpenReport);
@@ -384,17 +342,13 @@
         private System.Windows.Forms.Button btnUnderVen;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button btnGeo;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnUnderManage;
         private System.Windows.Forms.Button btnCloseSys;
         private System.Windows.Forms.Button btnRestartSys;
         private System.Windows.Forms.Button btnManagement;
-        private SelectTunnelSimple selectTunnelSimple1;
         private System.Windows.Forms.Button btnOpenReport;
         private System.Windows.Forms.Button btnMonitorCurve;
-        private System.Windows.Forms.Label lblWarning;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Button btnChooseWarningTunnel;
-        private System.Windows.Forms.Button btnServerStatus;
         private System.Windows.Forms.Button btnSetDefaultValue;
         private System.Windows.Forms.Label lbWorkStyle;
         private System.Windows.Forms.Label lbWorkTime;
@@ -404,5 +358,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private LibCommonForm.SelectTunnelSimple selectTunnelSimple1;
     }
 }

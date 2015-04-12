@@ -39,7 +39,7 @@ namespace LibPanels
             InitializeComponent();
             selectTunnelUserControl1.LoadData();
 
-            addInfo();
+            AddInfo();
         }
 
         /// <summary>
@@ -58,26 +58,14 @@ namespace LibPanels
             }
             else
             {
-                setArrValue(tunnelEntity.TunnelId);
                 InitializeComponent();
             }
-            addInfo();
+            AddInfo();
         }
 
-        /// <summary>
-        /// 设置自定义控件用数组
-        /// </summary>
-        /// <param name="tunnelID"></param>
-        private void setArrValue(int tunnelID)
+        public MineData(Tunnel tunnel)
         {
-            //tunnelEntity.Tunnel = tunnelID;
-            tunnelEntity = Tunnel.Find(tunnelID);
-            //tunnelEntity = TunnelInfoBLL.selectTunnelInfoByTunnelID(tunnelEntity.Tunnel);
-            arr[0] = tunnelEntity.WorkingFace.MiningArea.Horizontal.Mine.MineId;
-            arr[1] = tunnelEntity.WorkingFace.MiningArea.Horizontal.HorizontalId;//HorizontalID;
-            arr[2] = tunnelEntity.WorkingFace.MiningArea.MiningAreaId;//MiningAreaID;
-            arr[3] = tunnelEntity.WorkingFace.WorkingFaceId;//WorkingFaceID;
-            arr[4] = tunnelEntity.TunnelId;
+            selectTunnelUserControl1.SelectedTunnel = tunnel;
         }
 
         /// <summary>
@@ -303,9 +291,9 @@ namespace LibPanels
         /// <summary>
         /// 添加时初始化
         /// </summary>
-        private void addInfo()
+        private void AddInfo()
         {
-            this.bindTeamInfo();
+            bindTeamInfo();
             DataBindUtil.LoadWorkTime(cboWorkTime, rbtn38.Checked ? Const_MS.WORK_GROUP_ID_38 : Const_MS.WORK_GROUP_ID_46);
             if (WorkingTimeDefault.FindFirst().DefaultWorkTimeGroupId == Const_MS.WORK_GROUP_ID_38)
             {
@@ -320,7 +308,7 @@ namespace LibPanels
 
         private void changeInfo()
         {
-            addInfo();
+            AddInfo();
         }
 
 

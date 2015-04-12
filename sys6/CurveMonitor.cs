@@ -20,7 +20,6 @@ namespace UnderTerminal
         /** 显示最大数据数 **/
         private int DEFAULT_DATA_SHOW_COUNT = 20;
         private int MAX_SECONDS_INTERVAL = 6*60*60; // 6 个小时
-        private MonitoringDataAnalysis monitoringDataAnalysisForm = new MonitoringDataAnalysis();
         private Random rnd = new Random();
         private double t2DeltaSumValue;
 
@@ -163,7 +162,7 @@ namespace UnderTerminal
             if (result == DialogResult.OK)
             {
                 timer1.Enabled = false;
-                mainWin.cm = null;
+                mainWin.Cm = null;
                 Close();
             }
         }
