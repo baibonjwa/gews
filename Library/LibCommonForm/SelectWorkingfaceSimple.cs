@@ -36,8 +36,6 @@ namespace LibCommonForm
                             cbxWorkingface.Items.Add(workingface);
                         }
                 }
-
-                cbxWorkingface.SelectedIndex = 0;
             }
         }
 

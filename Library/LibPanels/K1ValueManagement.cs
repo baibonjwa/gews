@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Data;
-using System.Drawing;
 using System.Windows.Forms;
-using LibBusiness;
 using LibCommon;
 using LibEntity;
 
@@ -22,16 +19,7 @@ namespace LibPanels
 
         private void RefreshData()
         {
-            try
-            {
-                gcK1AndSValue.DataSource = K1Value.FindAll();
-            }
-            catch (Exception ex)
-            {
-                
-                throw;
-            }
-        
+            gcK1AndSValue.DataSource = K1Value.FindAll();
         }
 
         /// <summary>

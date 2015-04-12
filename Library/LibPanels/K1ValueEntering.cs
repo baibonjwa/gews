@@ -2,13 +2,18 @@
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using LibBusiness;
 using LibCommon;
 using LibEntity;
+using LibSocket;
 
 namespace LibPanels
 {
     public partial class K1ValueEntering : Form
     {
+
+        private K1Value K1Value { get; set; }
+
         /// <summary>
         /// 添加
         /// </summary>
@@ -25,9 +30,15 @@ namespace LibPanels
         public K1ValueEntering(K1Value k1Value)
         {
             InitializeComponent();
+            K1Value = k1Value;
 
-            //窗体属性设置
             FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_OP.K1_VALUE_CHANGE);
+            var k1ValueList = K1Value.FindAllByK1ValueId(k1Value.K1ValueId);
+            selectTunnelSimple1.SetTunnel(K1Value.Tunnel);
+            foreach (var k1 in k1ValueList)
+            {
+                dgrdvK1Value.Rows.Add(k1.ValueK1Dry, k1.ValueK1Wet, k1.Sg, k1.Sv, k1.Q, k1.BoreholeDeep, k1.Time);
+            }
         }
 
         /// <summary>
@@ -52,27 +63,63 @@ namespace LibPanels
         private void btnSubmit_Click(object sender, EventArgs e)
         {
             if (!Check()) return;
-            var groupId = K1Value.GetMaxGroupId();
-            var k1List = (from DataGridViewRow row in dgrdvK1Value.Rows
-                          where row.Cells[5] != null && row.Cells[5].Value != null
-                          select new K1Value
-                          {
-                              K1ValueId = groupId + 1,
-                              ValueK1Dry = Convert.ToDouble(row.Cells[0].Value),
-                              ValueK1Wet = Convert.ToDouble(row.Cells[1].Value),
-                              Sg = Convert.ToDouble(row.Cells[2].Value),
-                              Sv = Convert.ToDouble(row.Cells[3].Value),
-                              Q = Convert.ToDouble(row.Cells[4].Value),
-                              BoreholeDeep = Convert.ToDouble(row.Cells[5].Value),
-                              Time = Convert.ToDateTime(row.Cells[6].Value),
-                              TypeInTime = DateTime.Now,
-                              Tunnel = selectTunnelSimple1.SelectedTunnel
-                          }).ToList();
-
-            foreach (var k1Value in k1List)
+            if (K1Value != null)
             {
-                k1Value.Save();
+                var k1ValueList = K1Value.FindAllByK1ValueId(K1Value.K1ValueId);
+                int i = 0;
+                foreach (var k1 in k1ValueList)
+                {
+                    if (dgrdvK1Value.Rows[i].Cells[5].Value == null)
+                    {
+                        k1.Delete();
+                        continue;
+                    }
+                    k1.ValueK1Dry = Convert.ToDouble(dgrdvK1Value.Rows[i].Cells[0].Value);
+                    k1.ValueK1Wet = Convert.ToDouble(dgrdvK1Value.Rows[i].Cells[1].Value);
+                    k1.Sg = Convert.ToDouble(dgrdvK1Value.Rows[i].Cells[2].Value);
+                    k1.Sv = Convert.ToDouble(dgrdvK1Value.Rows[i].Cells[3].Value);
+                    k1.Q = Convert.ToDouble(dgrdvK1Value.Rows[i].Cells[4].Value);
+                    k1.BoreholeDeep = Convert.ToDouble(dgrdvK1Value.Rows[i].Cells[5].Value);
+                    k1.Time = Convert.ToDateTime(dgrdvK1Value.Rows[i].Cells[6].Value);
+                    k1.TypeInTime = DateTime.Now;
+                    k1.Tunnel = selectTunnelSimple1.SelectedTunnel;
+                    k1.CoordinateX = selectTunnelSimple1.SelectedTunnel.WorkingFace.CoordinateX;
+                    k1.CoordinateY = selectTunnelSimple1.SelectedTunnel.WorkingFace.CoordinateY;
+                    k1.CoordinateZ = selectTunnelSimple1.SelectedTunnel.WorkingFace.CoordinateZ;
+                    k1.Save();
+                    i++;
+                }
             }
+            else
+            {
+                var groupId = K1Value.GetMaxGroupId();
+                var k1List = (from DataGridViewRow row in dgrdvK1Value.Rows
+                              where row.Cells[5] != null && row.Cells[5].Value != null
+                              select new K1Value
+                              {
+                                  K1ValueId = groupId + 1,
+                                  ValueK1Dry = Convert.ToDouble(row.Cells[0].Value),
+                                  ValueK1Wet = Convert.ToDouble(row.Cells[1].Value),
+                                  Sg = Convert.ToDouble(row.Cells[2].Value),
+                                  Sv = Convert.ToDouble(row.Cells[3].Value),
+                                  Q = Convert.ToDouble(row.Cells[4].Value),
+                                  BoreholeDeep = Convert.ToDouble(row.Cells[5].Value),
+                                  Time = Convert.ToDateTime(row.Cells[6].Value),
+                                  TypeInTime = DateTime.Now,
+                                  Tunnel = selectTunnelSimple1.SelectedTunnel,
+                                  CoordinateX = selectTunnelSimple1.SelectedTunnel.WorkingFace.CoordinateX,
+                                  CoordinateY = selectTunnelSimple1.SelectedTunnel.WorkingFace.CoordinateY,
+                                  CoordinateZ = selectTunnelSimple1.SelectedTunnel.WorkingFace.CoordinateZ
+                              }).ToList();
+
+                foreach (var k1Value in k1List)
+                {
+                    k1Value.Save();
+                }
+            }
+            //TODO:添加成功
+            UpdateWarningDataMsg msg = new UpdateWarningDataMsg(selectTunnelSimple1.SelectedTunnel.WorkingFace.WorkingFaceId, selectTunnelSimple1.SelectedTunnel.TunnelId, K1ValueDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, DateTime.Now);
+            SocketUtil.SendMsg2Server(msg);
         }
 
         /// <summary>

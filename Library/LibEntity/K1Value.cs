@@ -1,17 +1,6 @@
-﻿// ******************************************************************
-// 概  述：K1值实体
-// 作  者：宋英杰
-// 创建日期：2014/4/15
-// 版本号：V1.0
-// 版本信息：
-// V1.0 新建
-// ******************************************************************
-
-using System;
+﻿using System;
 using Castle.ActiveRecord;
 using NHibernate.Criterion;
-using NHibernate.Hql.Ast.ANTLR;
-using NHibernate.SqlCommand;
 
 namespace LibEntity
 {
@@ -125,6 +114,11 @@ namespace LibEntity
         {
             var obj = FindFirst(new Order("Id", false));
             return obj == null ? 0 : obj.K1ValueId;
+        }
+
+        public static K1Value[] FindAllByK1ValueId(int k1ValueId)
+        {
+            return FindAllByProperty("K1ValueId", k1ValueId);
         }
     }
 }
