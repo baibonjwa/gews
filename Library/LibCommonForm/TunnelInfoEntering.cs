@@ -3,6 +3,7 @@ using System.Collections;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
+using Castle.ActiveRecord;
 using LibBusiness;
 using LibCommon;
 using LibEntity;
@@ -100,6 +101,19 @@ namespace LibCommonForm
             }
             DialogResult = DialogResult.OK;
             //创建巷道实体
+
+            var workingFace = selectWorkingFaceControl1.SelectedWorkingFace;
+            using (new SessionScope())
+            {
+                workingFace = WorkingFace.Find(workingFace.WorkingFaceId);
+                if (workingFace.Tunnels.FirstOrDefault(u => u.TunnelName == txtTunnelName.Text) != null)
+                {
+                    Alert.alert("该工作面下已有同名巷道！");
+                    return;
+                }
+            }
+
+
             var tunnel = new Tunnel
             {
                 TunnelName = txtTunnelName.Text,

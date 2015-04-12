@@ -95,16 +95,8 @@ namespace sys2
         /// </summary>
         private void SetWorkTimeName()
         {
-            string strWorkTimeName = "";
-            string sysDateTime = DateTime.Now.ToLongTimeString();
-            if (rbtn38.Checked == true)
-            {
-                strWorkTimeName = MineDataSimpleBLL.selectWorkTimeNameByWorkTimeGroupIdAndSysTime(1, sysDateTime);
-            }
-            else
-            {
-                strWorkTimeName = MineDataSimpleBLL.selectWorkTimeNameByWorkTimeGroupIdAndSysTime(2, sysDateTime);
-            }
+            string sysDateTime = DateTime.Now.ToString("HH:mm:ss");
+            var strWorkTimeName = MineDataSimpleBLL.selectWorkTimeNameByWorkTimeGroupIdAndSysTime(rbtn38.Checked ? 1 : 2, sysDateTime);
 
             if (!string.IsNullOrEmpty(strWorkTimeName))
             {
@@ -174,20 +166,23 @@ namespace sys2
             }
             DialogResult = DialogResult.OK;
             var workingFaceHc = WorkingFaceHc.FindByWorkingFace(selectWorkingfaceSimple1.SelectedWorkingFace);
-            if (workingFaceHc == null)
+            if (workingFaceHc == null || workingFaceHc.TunnelZy == null || workingFaceHc.TunnelFy == null ||
+                workingFaceHc.TunnelQy == null)
             {
                 Alert.alert("所选工作面缺少主运、辅运或切眼巷道");
-                return;
+            }
+            else
+            {
+                if (Text == Const_MS.DAY_REPORT_HC_ADD)
+                {
+                    insertDayReportHCInfo();
+                }
+                else if (Text == Const_MS.DAY_REPORT_HC_CHANGE)
+                {
+                    UpdateDayReportHcInfo();
+                }
             }
 
-            if (Text == Const_MS.DAY_REPORT_HC_ADD)
-            {
-                insertDayReportHCInfo();
-            }
-            else if (Text == Const_MS.DAY_REPORT_HC_CHANGE)
-            {
-                UpdateDayReportHcInfo();
-            }
         }
 
         /// <summary>
@@ -625,10 +620,7 @@ namespace sys2
                     Alert.alert(Const_MS.JC + Const.MSG_NOT_NULL + Const_MS.SIGN_EXCLAMATION_MARK);
                     return false;
                 }
-                else
-                {
-                    cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                }
+                cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
                 //进尺不为数字
                 if (!Validator.IsNumeric(cell.Value.ToString()))
                 {
@@ -636,26 +628,7 @@ namespace sys2
                     Alert.alert(Const_MS.JC + Const.MSG_MUST_NUMBER + Const_MS.SIGN_EXCLAMATION_MARK);
                     return false;
                 }
-                else
-                {
-                    cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                }
-
-                cell = cells[C_COMMENTS] as DataGridViewTextBoxCell;
-                //备注不能含特殊字符
-                if (cell.Value != null)
-                {
-                    if (Validator.checkSpecialCharacters(cell.Value.ToString()))
-                    {
-                        cell.Style.BackColor = Const.ERROR_FIELD_COLOR;
-                        Alert.alert(Const_MS.OTHER + Const.MSG_SP_CHAR + Const_MS.SIGN_EXCLAMATION_MARK);
-                        return false;
-                    }
-                    else
-                    {
-                        cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                    }
-                }
+                cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
             }
 
             //验证成功
@@ -764,23 +737,9 @@ namespace sys2
 
         private void dtp_TextChange(object sender, EventArgs e)
         {
-            dgrdvDayReportHC.Rows[dgrdvDayReportHC.CurrentCell.RowIndex].Cells[C_DATE].Value = dtp.Text.ToString();
+            dgrdvDayReportHC.Rows[dgrdvDayReportHC.CurrentCell.RowIndex].Cells[C_DATE].Value = dtp.Text;
             //时间控件选择时间时，就把时间赋给所在的单元格
         }
-
-        /****************单元格被单击，判断是否是放时间控件的那一列*******************/
-        //private void dgrdvDayReportHC_CellClick(object sender, DataGridViewCellEventArgs e)
-        //{
-        //    if (e.ColumnIndex == C_DATE)
-        //    {
-        //        _Rectangle = dgrdvDayReportHC.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true); //得到所在单元格位置和大小
-        //        dtp.Size = new Size(_Rectangle.Width, _Rectangle.Height); //把单元格大小赋给时间控件
-        //        dtp.Location = new System.Drawing.Point(_Rectangle.X, _Rectangle.Y); //把单元格位置赋给时间控件
-        //        dtp.Visible = true;   //可以显示控件了
-        //    }
-        //    else
-        //        dtp.Visible = false;
-        //}
 
         private void dgrdvDayReportHC_CellEnter(object sender, DataGridViewCellEventArgs e)
         {

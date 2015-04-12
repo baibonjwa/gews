@@ -398,16 +398,6 @@ namespace sys3
             wm.Show();
         }
 
-        //从龙软数据库导入
-        private void mniCLRSJKDRDXSJK_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            //TunnelInfoManagement tim = new TunnelInfoManagement();
-            //tim.Show();
-            //ImportLRData ilrd = new ImportLRData();
-            //ilrd.Show();
-
-        }
-
         //掘进面管理
         private void mniJJHDGL_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -883,11 +873,6 @@ namespace sys3
         private void mniDXGLFloat_ItemClick(object sender, ItemClickEventArgs e)
         {
             this.mniDXGL_ItemClick(null, null);
-        }
-        //从龙软数据库导入导线数据浮动工具条
-        private void mniCLRSJKDRDXSJKFloat_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            this.mniCLRSJKDRDXSJK_ItemClick(null, null);
         }
         //掘进巷道管理浮动工具条
         private void mniJJHDGLFloat_ItemClick(object sender, ItemClickEventArgs e)

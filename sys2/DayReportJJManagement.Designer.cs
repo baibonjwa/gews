@@ -137,6 +137,7 @@
             this.btnMap.Name = "btnMap";
             this.btnMap.Size = new System.Drawing.Size(52, 21);
             this.btnMap.Text = "图显";
+            this.btnMap.Visible = false;
             this.btnMap.Click += new System.EventHandler(this.btnMap_Click);
             // 
             // tsBtnExit

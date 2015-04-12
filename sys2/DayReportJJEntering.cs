@@ -4,6 +4,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Castle.ActiveRecord;
 using ESRI.ArcGIS.Geometry;
 using GIS;
 using GIS.HdProc;
@@ -50,7 +51,7 @@ namespace sys2
             dtp.Format = DateTimePickerFormat.Custom; //设置日期格式为2010-08-05
             dtp.TextChanged += dtp_TextChange; //为时间控件加入事件dtp_TextChange
 
-            addInfo();
+            AddInfo();
             //设置窗体格式
             FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_MS.DAY_REPORT_JJ_ADD);
         }
@@ -65,7 +66,7 @@ namespace sys2
             _dayReportJJEntity = dayReportJJEntity;
             InitializeComponent();
             //修改初始化
-            changeInfo();
+            ChangeInfo();
             //设置窗体格式
             FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_MS.DAY_REPORT_JJ_CHANGE);
             dgrdvDayReportJJ.AllowUserToAddRows = false;
@@ -84,16 +85,13 @@ namespace sys2
         private void DayReportJJEntering_Load(object sender, EventArgs e)
         {
 
-            //var ws = new WorkingfaceSimple(workingFace.WorkingFaceId, workingFace.WorkingFaceName,
-            //    workingFace.WorkingfaceTypeEnum);
-            //selectWorkingfaceSimple1.SelectTunnelItemWithoutHistory(ws);
 
         }
 
         /// <summary>
         ///     添加时加载初始化设置
         /// </summary>
-        private void addInfo()
+        private void AddInfo()
         {
             DataBindUtil.LoadTeam(cboTeamName);
             DataBindUtil.LoadTeamMemberByTeamName(cboSubmitter, cboTeamName.Text);
@@ -105,25 +103,17 @@ namespace sys2
             {
                 rbtn46.Checked = true;
             }
-            setWorkTimeName();
+            SetWorkTimeName();
             dgrdvDayReportJJ[C_WORK_CONTENT, 0].Value = Const_MS.JJ;
         }
 
         /// <summary>
         ///     设置班次名称
         /// </summary>
-        private void setWorkTimeName()
+        private void SetWorkTimeName()
         {
-            string strWorkTimeName = "";
-            string sysDateTime = DateTime.Now.ToLongTimeString();
-            if (rbtn38.Checked)
-            {
-                strWorkTimeName = MineDataSimpleBLL.selectWorkTimeNameByWorkTimeGroupIdAndSysTime(1, sysDateTime);
-            }
-            else
-            {
-                strWorkTimeName = MineDataSimpleBLL.selectWorkTimeNameByWorkTimeGroupIdAndSysTime(2, sysDateTime);
-            }
+            string sysDateTime = DateTime.Now.ToString("HH:mm:ss");
+            var strWorkTimeName = MineDataSimpleBLL.selectWorkTimeNameByWorkTimeGroupIdAndSysTime(rbtn38.Checked ? 1 : 2, sysDateTime);
 
             if (!string.IsNullOrEmpty(strWorkTimeName))
             {
@@ -134,10 +124,10 @@ namespace sys2
         /// <summary>
         ///     修改时加载初始化设置
         /// </summary>
-        private void changeInfo()
+        private void ChangeInfo()
         {
             //绑定默认信息
-            addInfo();
+            AddInfo();
             //绑定修改数据
             BindInfo();
         }
@@ -443,7 +433,7 @@ namespace sys2
             }
 
             // 设置班次名称
-            setWorkTimeName();
+            SetWorkTimeName();
 
             for (int i = 0; i < dgrdvDayReportJJ.RowCount; i++)
             {
@@ -463,6 +453,20 @@ namespace sys2
                 Alert.alert(Const.MSG_PLEASE_CHOOSE + Const_MS.TUNNEL + Const.SIGN_EXCLAMATION_MARK);
                 return false;
             }
+
+            if (selectWorkingfaceSimple1.SelectedWorkingFace != null)
+            {
+                using (new SessionScope())
+                {
+                    var workingFace = WorkingFace.Find(selectWorkingfaceSimple1.SelectedWorkingFace.WorkingFaceId);
+                    if (workingFace.Tunnels.Count > 1)
+                    {
+                        Alert.alert("您选择的巷道不是掘进巷道");
+                        return false;
+                    }
+                }
+            }
+
             //队别为空
             if (Validator.IsEmpty(cboTeamName.Text))
             {
@@ -546,17 +550,6 @@ namespace sys2
                 cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
 
                 cell = dgrdvDayReportJJ.Rows[i].Cells[C_COMMENTS] as DataGridViewTextBoxCell;
-                //备注不能含特殊字符
-                if (cell.Value != null)
-                {
-                    if (Validator.checkSpecialCharacters(cell.Value.ToString()))
-                    {
-                        cell.Style.BackColor = Const.ERROR_FIELD_COLOR;
-                        Alert.alert(Const_MS.OTHER + Const.MSG_SP_CHAR + Const.SIGN_EXCLAMATION_MARK);
-                        return false;
-                    }
-                    cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                }
             }
             //验证成功
             return true;

@@ -28,13 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm_GM));
             this.statusStrip1 = new GIS.BasicGraphic.UToolStatus();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.mapControl_GM = new ESRI.ArcGIS.Controls.AxMapControl();
             this.tocControl_GM = new ESRI.ArcGIS.Controls.AxTOCControl();
             this.toolBar_GM = new ESRI.ArcGIS.Controls.AxToolbarControl();
-            this.barManager1 = new DevExpress.XtraBars.BarManager();
+            this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar1 = new DevExpress.XtraBars.Bar();
             this.mniOpenFileFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniSaveFloat = new DevExpress.XtraBars.BarButtonItem();
@@ -193,7 +194,7 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-            this.imageList1 = new System.Windows.Forms.ImageList();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.barSubItem7 = new DevExpress.XtraBars.BarSubItem();
             this.mniObjectSnaps = new DevExpress.XtraBars.BarButtonItem();
             this.mniCompass = new DevExpress.XtraBars.BarButtonItem();
@@ -879,6 +880,7 @@
             this.mniJJHDGL.ImageIndex = 11;
             this.mniJJHDGL.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T));
             this.mniJJHDGL.Name = "mniJJHDGL";
+            this.mniJJHDGL.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.mniJJHDGL.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniJJHDGL_ItemClick);
             // 
             // mniHCHDGL
@@ -1545,7 +1547,6 @@
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniTDDCFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniXLZFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniKTZKFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniKTXFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniMCDBDGXFloat, "", false, true, false, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniMSDGXFloat, "", false, true, false, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(this.mniMCGLFloat)});
@@ -1568,19 +1569,13 @@
             this.mniDXGLFloat.Name = "mniDXGLFloat";
             this.mniDXGLFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniDXGLFloat_ItemClick);
             // 
-            // mniCLRSJKDRDXSJKFloat
-            // 
-            this.mniCLRSJKDRDXSJKFloat.Caption = "从龙软数据库导入导线数据";
-            this.mniCLRSJKDRDXSJKFloat.Id = 124;
-            this.mniCLRSJKDRDXSJKFloat.Name = "mniCLRSJKDRDXSJKFloat";
-            this.mniCLRSJKDRDXSJKFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniCLRSJKDRDXSJKFloat_ItemClick);
-            // 
             // mniJJHDGLFloat
             // 
             this.mniJJHDGLFloat.Caption = "掘进工作面管理";
             this.mniJJHDGLFloat.Id = 125;
             this.mniJJHDGLFloat.ImageIndex = 11;
             this.mniJJHDGLFloat.Name = "mniJJHDGLFloat";
+            this.mniJJHDGLFloat.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.mniJJHDGLFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniJJHDGLFloat_ItemClick);
             // 
             // mniHCHDGLFloat
@@ -1597,6 +1592,7 @@
             this.mniHCHUANGLFloat.Id = 126;
             this.mniHCHUANGLFloat.ImageIndex = 6;
             this.mniHCHUANGLFloat.Name = "mniHCHUANGLFloat";
+            this.mniHCHUANGLFloat.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.mniHCHUANGLFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniHCHUANGLFloat_ItemClick);
             // 
             // mniJTFloat
@@ -1605,6 +1601,7 @@
             this.mniJTFloat.Id = 127;
             this.mniJTFloat.ImageIndex = 8;
             this.mniJTFloat.Name = "mniJTFloat";
+            this.mniJTFloat.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.mniJTFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniJTFloat_ItemClick);
             // 
             // mniDSFloat
@@ -1613,6 +1610,7 @@
             this.mniDSFloat.Id = 128;
             this.mniDSFloat.ImageIndex = 4;
             this.mniDSFloat.Name = "mniDSFloat";
+            this.mniDSFloat.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.mniDSFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniDSFloat_ItemClick);
             // 
             // mniXZZFloat
@@ -1621,6 +1619,7 @@
             this.mniXZZFloat.Id = 199;
             this.mniXZZFloat.ImageIndex = 20;
             this.mniXZZFloat.Name = "mniXZZFloat";
+            this.mniXZZFloat.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.mniXZZFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniXZZFloat_ItemClick);
             // 
             // mniJLDCFloat
@@ -1660,6 +1659,7 @@
             this.mniKTXFloat.Caption = "勘探线";
             this.mniKTXFloat.Id = 133;
             this.mniKTXFloat.Name = "mniKTXFloat";
+            this.mniKTXFloat.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.mniKTXFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniKTXFloat_ItemClick);
             // 
             // mniMCDBDGXFloat
