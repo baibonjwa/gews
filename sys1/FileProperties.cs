@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace sys1
 {
     public class FileProperties
     {
-        private Dictionary<String, String> _list;
         private String _filename;
+        private Dictionary<String, String> _list;
 
         public FileProperties(String file)
         {
@@ -18,6 +19,7 @@ namespace sys1
         {
             return (Get(field) == null) ? (defValue) : (Get(field));
         }
+
         public String Get(String field)
         {
             return (_list.ContainsKey(field)) ? (_list[field]) : (null);
@@ -40,10 +42,10 @@ namespace sys1
         {
             _filename = filename;
 
-            if (!System.IO.File.Exists(filename))
-                System.IO.File.Create(filename);
+            if (!File.Exists(filename))
+                File.Create(filename);
 
-            var file = new System.IO.StreamWriter(filename);
+            var file = new StreamWriter(filename);
 
             foreach (var prop in _list.Keys.ToArray().Where(prop => !String.IsNullOrWhiteSpace(_list[prop])))
                 file.WriteLine(prop + "=" + _list[prop]);
@@ -61,15 +63,15 @@ namespace sys1
             _filename = filename;
             _list = new Dictionary<String, String>();
 
-            if (System.IO.File.Exists(filename))
+            if (File.Exists(filename))
                 LoadFromFile(filename);
             else
-                System.IO.File.Create(filename);
+                File.Create(filename);
         }
 
         private void LoadFromFile(String file)
         {
-            foreach (String line in System.IO.File.ReadAllLines(file))
+            foreach (var line in File.ReadAllLines(file))
             {
                 if ((!String.IsNullOrEmpty(line)) &&
                     (!line.StartsWith(";")) &&
@@ -77,9 +79,9 @@ namespace sys1
                     (!line.StartsWith("'")) &&
                     (line.Contains('=')))
                 {
-                    int index = line.IndexOf('=');
-                    String key = line.Substring(0, index).Trim();
-                    String value = line.Substring(index + 1).Trim();
+                    var index = line.IndexOf('=');
+                    var key = line.Substring(0, index).Trim();
+                    var value = line.Substring(index + 1).Trim();
 
                     if ((value.StartsWith("\"") && value.EndsWith("\"")) ||
                         (value.StartsWith("'") && value.EndsWith("'")))

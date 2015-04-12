@@ -7,7 +7,6 @@ using Castle.ActiveRecord;
 using Castle.ActiveRecord.Framework;
 using Castle.ActiveRecord.Framework.Config;
 using ESRI.ArcGIS;
-using LibCommon;
 using LibLoginForm;
 
 namespace sys4
@@ -15,12 +14,11 @@ namespace sys4
     internal static class Program
     {
         /// <summary>
-        /// 应用程序的主入口点。
+        ///     应用程序的主入口点。
         /// </summary>
         [STAThread]
         private static void Main()
         {
-
             Thread.CurrentThread.CurrentUICulture =
                 new CultureInfo("zh-Hans");
 
@@ -30,7 +28,7 @@ namespace sys4
 
             IConfigurationSource config = new XmlConfigurationSource("ARConfig.xml");
 
-            Assembly asm = Assembly.Load("LibEntity");
+            var asm = Assembly.Load("LibEntity");
 
             ActiveRecordStarter.Initialize(asm, config);
 
@@ -39,8 +37,8 @@ namespace sys4
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            MainForm_OP mf = new MainForm_OP();
-            LoginForm lf = new LoginForm(mf);
+            var mf = new MainForm_OP();
+            var lf = new LoginForm(mf);
             Application.Run(lf);
         }
     }

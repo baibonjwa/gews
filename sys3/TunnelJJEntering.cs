@@ -3,7 +3,6 @@ using System.Windows.Forms;
 using LibBusiness;
 using LibBusiness.CommonBLL;
 using LibCommon;
-using LibCommonControl;
 using LibCommonForm;
 using LibEntity;
 
@@ -13,13 +12,13 @@ namespace sys3
     {
         /************变量定义*****************/
         // 掘进面
-        WorkingFace jjWorkFaceEntity;
+        private WorkingFace jjWorkFaceEntity;
         // 巷道
-        Tunnel tunnelEntity;
+        private Tunnel tunnelEntity;
         /*************************************/
 
         /// <summary>
-        /// 构造方法
+        ///     构造方法
         /// </summary>
         public TunnelJjEntering()
         {
@@ -46,12 +45,11 @@ namespace sys3
         }
 
         /// <summary>
-        /// 构造方法
+        ///     构造方法
         /// </summary>
         /// <param name="tunnelEntity"></param>
         public TunnelJjEntering(Tunnel tunnelEntity)
         {
-
             this.tunnelEntity = tunnelEntity;
 
             InitializeComponent();
@@ -63,7 +61,7 @@ namespace sys3
         }
 
         /// <summary>
-        /// 初始化
+        ///     初始化
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -71,7 +69,7 @@ namespace sys3
         {
             DataBindUtil.LoadTeam(cboTeamName);
 
-            if (this.Text == Const_GM.TUNNEL_JJ_CHANGE)
+            if (Text == Const_GM.TUNNEL_JJ_CHANGE)
             {
                 bindInfo();
             }
@@ -87,13 +85,13 @@ namespace sys3
         }
 
         /// <summary>
-        /// 设置班次名称
+        ///     设置班次名称
         /// </summary>
         private void setWorkTimeName()
         {
-            string strWorkTimeName = "";
-            string sysDateTime = DateTime.Now.ToString("HH:mm:ss");
-            if (this.rbtn38.Checked == true)
+            var strWorkTimeName = "";
+            var sysDateTime = DateTime.Now.ToString("HH:mm:ss");
+            if (rbtn38.Checked)
             {
                 strWorkTimeName = MineDataSimpleBLL.selectWorkTimeNameByWorkTimeGroupIdAndSysTime(1, sysDateTime);
             }
@@ -109,7 +107,7 @@ namespace sys3
         }
 
         /// <summary>
-        /// 绑定已有信息
+        ///     绑定已有信息
         /// </summary>
         private void bindInfo()
         {
@@ -121,7 +119,7 @@ namespace sys3
             cboTeamName.Text = jjWorkFaceEntity.Team.TeamName;
 
             //开工日期
-            dtpStartDate.Value = DateTimeUtil.validateDTPDateTime((System.DateTime)this.jjWorkFaceEntity.StartDate);
+            dtpStartDate.Value = DateTimeUtil.validateDTPDateTime(jjWorkFaceEntity.StartDate);
 
             //是否掘进完毕
             if (jjWorkFaceEntity.IsFinish == Const.FINISHED)
@@ -135,7 +133,7 @@ namespace sys3
             //停工日期
             if (jjWorkFaceEntity.IsFinish == Const.FINISHED)
             {
-                dtpStopDate.Value = (System.DateTime)jjWorkFaceEntity.StopDate;
+                dtpStopDate.Value = jjWorkFaceEntity.StopDate;
             }
 
             //工作制式
@@ -152,7 +150,7 @@ namespace sys3
         }
 
         /// <summary>
-        /// 掘进面实体赋值
+        ///     掘进面实体赋值
         /// </summary>
         private void bindTunnelJJEntity()
         {
@@ -172,7 +170,7 @@ namespace sys3
             {
                 jjWorkFaceEntity.IsFinish = Const.NOT_FINISHED;
             }
-            if (rbtnJJY.Checked == true)
+            if (rbtnJJY.Checked)
             {
                 jjWorkFaceEntity.StopDate = dtpStopDate.Value;
             }
@@ -188,14 +186,14 @@ namespace sys3
         }
 
         /// <summary>
-        /// 掘进面选择
+        ///     掘进面选择
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnChooseWorkFace_Click(object sender, EventArgs e)
         {
             //工作面选择窗体
-            SelectWorkingFaceDlg selectWF = new SelectWorkingFaceDlg();
+            var selectWF = new SelectWorkingFaceDlg();
 
             //巷道选择完毕
             if (DialogResult.OK == selectWF.ShowDialog())
@@ -208,7 +206,7 @@ namespace sys3
         }
 
         /// <summary>
-        /// 巷道选择
+        ///     巷道选择
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -225,7 +223,7 @@ namespace sys3
         }
 
         /// <summary>
-        /// 提交按钮事件
+        ///     提交按钮事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -249,7 +247,7 @@ namespace sys3
         }
 
         /// <summary>
-        /// 工作制式选择
+        ///     工作制式选择
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -262,7 +260,7 @@ namespace sys3
         }
 
         /// <summary>
-        /// 工作制式选择
+        ///     工作制式选择
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -275,12 +273,11 @@ namespace sys3
         }
 
         /// <summary>
-        /// 验证
+        ///     验证
         /// </summary>
         /// <returns></returns>
         private bool check()
         {
-
             //巷道是否选择
             if (tunnelEntity.TunnelId == 0)
             {
@@ -297,14 +294,14 @@ namespace sys3
         }
 
         /// <summary>
-        /// 取消
+        ///     取消
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnCancel_Click(object sender, EventArgs e)
         {
             // 关闭窗口
-            this.Close();
+            Close();
         }
 
         private void rbtnJJY_CheckedChanged(object sender, EventArgs e)

@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 using ESRI.ArcGIS.Carto;
-using ESRI.ArcGIS.Geodatabase;
+using GIS;
+using GIS.Common;
 using LibCommon;
-using LibCommonControl;
 using LibEntity;
 
 namespace sys3
@@ -12,7 +11,7 @@ namespace sys3
     public partial class TunnelJjManagement : Form
     {
         /// <summary>
-        /// 构造方法
+        ///     构造方法
         /// </summary>
         public TunnelJjManagement()
         {
@@ -25,7 +24,7 @@ namespace sys3
         }
 
         /// <summary>
-        /// 初始化
+        ///     初始化
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -35,7 +34,7 @@ namespace sys3
         }
 
         /// <summary>
-        /// 添加按钮响应
+        ///     添加按钮响应
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -49,13 +48,13 @@ namespace sys3
         }
 
         /// <summary>
-        /// 修改按钮响应
+        ///     修改按钮响应
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void tsBtnModify_Click(object sender, EventArgs e)
         {
-            var d = new TunnelJjEntering((Tunnel)gridView1.GetFocusedRow());
+            var d = new TunnelJjEntering((Tunnel) gridView1.GetFocusedRow());
             if (DialogResult.OK == d.ShowDialog())
             {
                 RefreshData();
@@ -63,7 +62,7 @@ namespace sys3
         }
 
         /// <summary>
-        /// 删除按钮响应
+        ///     删除按钮响应
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -71,7 +70,7 @@ namespace sys3
         {
             if (!Alert.confirm(Const.DEL_CONFIRM_MSG)) return;
             //掘进ID
-            var tunnel = (Tunnel)gridView1.GetFocusedRow();
+            var tunnel = (Tunnel) gridView1.GetFocusedRow();
             tunnel.TunnelType = TunnelTypeEnum.OTHER;
             tunnel.Save();
             RefreshData();
@@ -101,23 +100,23 @@ namespace sys3
         }
 
         /// <summary>
-        /// 图显按钮事件
+        ///     图显按钮事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnMap_Click(object sender, EventArgs e)
         {
-            ILayer pLayer = GIS.Common.DataEditCommon.GetLayerByName(GIS.Common.DataEditCommon.g_pMap, GIS.LayerNames.LAYER_ALIAS_MR_STOPING_AREA);
+            var pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.LAYER_ALIAS_MR_STOPING_AREA);
             if (pLayer == null)
             {
                 MessageBox.Show(@"未发现采掘区图层！");
                 return;
             }
-            var pFeatureLayer = (IFeatureLayer)pLayer;
-            string str = "";
+            var pFeatureLayer = (IFeatureLayer) pLayer;
+            var str = "";
             //for (int i = 0; i < iSelIdxsArr.Length; i++)
             //{
-            string bid = ((Tunnel)gridView1.GetFocusedRow()).BindingId;
+            var bid = ((Tunnel) gridView1.GetFocusedRow()).BindingId;
             if (bid != "")
             {
                 if (true)
@@ -126,20 +125,21 @@ namespace sys3
                 //    str += " or bid='" + bid + "'";
             }
             //}
-            List<IFeature> list = GIS.MyMapHelp.FindFeatureListByWhereClause(pFeatureLayer, str);
+            var list = MyMapHelp.FindFeatureListByWhereClause(pFeatureLayer, str);
             if (list.Count > 0)
             {
-                GIS.MyMapHelp.Jump(GIS.MyMapHelp.GetGeoFromFeature(list));
-                GIS.Common.DataEditCommon.g_pMap.ClearSelection();
-                foreach (IFeature t in list)
+                MyMapHelp.Jump(MyMapHelp.GetGeoFromFeature(list));
+                DataEditCommon.g_pMap.ClearSelection();
+                foreach (var t in list)
                 {
-                    GIS.Common.DataEditCommon.g_pMap.SelectFeature(pLayer, t);
+                    DataEditCommon.g_pMap.SelectFeature(pLayer, t);
                 }
                 WindowState = FormWindowState.Normal;
-                Location = GIS.Common.DataEditCommon.g_axTocControl.Location;
-                Width = GIS.Common.DataEditCommon.g_axTocControl.Width;
-                Height = GIS.Common.DataEditCommon.g_axTocControl.Height;
-                GIS.Common.DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeoSelection, null, GIS.Common.DataEditCommon.g_pAxMapControl.Extent);
+                Location = DataEditCommon.g_axTocControl.Location;
+                Width = DataEditCommon.g_axTocControl.Width;
+                Height = DataEditCommon.g_axTocControl.Height;
+                DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeoSelection, null,
+                    DataEditCommon.g_pAxMapControl.Extent);
             }
             else
             {

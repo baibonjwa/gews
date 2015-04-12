@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
-using DevExpress.XtraGrid.Views.Grid;
 using ESRI.ArcGIS.Carto;
-using ESRI.ArcGIS.Geodatabase;
 using GIS;
 using GIS.Common;
 using LibCommon;
@@ -25,7 +22,6 @@ namespace sys3
             //设置窗体属性
             FormDefaultPropertiesSetter.SetManagementFormDefaultProperties(this, Const_GM.WIRE_INFO_MANAGEMENT);
         }
-
 
         private void RefreshData()
         {
@@ -64,7 +60,7 @@ namespace sys3
         /// <param name="e"></param>
         private void tsBtnModify_Click(object sender, EventArgs e)
         {
-            var wire = (Wire)gridView1.GetFocusedRow();
+            var wire = (Wire) gridView1.GetFocusedRow();
             if (wire == null)
             {
                 Alert.alert("请选择要修改的巷道");
@@ -87,7 +83,7 @@ namespace sys3
             //是否删除导线点
             if (!Alert.confirm(Const.DEL_CONFIRM_MSG)) return;
             var selectedIndex = gridView1.GetSelectedRows();
-            foreach (var wire in selectedIndex.Select(index => (Wire)gridView1.GetRow(index)))
+            foreach (var wire in selectedIndex.Select(index => (Wire) gridView1.GetRow(index)))
             {
                 GisHelper.DelHdByHdId(wire.Tunnel.TunnelId.ToString(CultureInfo.InvariantCulture));
                 wire.Delete();
@@ -95,7 +91,6 @@ namespace sys3
 
             RefreshData();
         }
-
 
         /// <summary>
         ///     刷新按钮响应
@@ -116,7 +111,6 @@ namespace sys3
         {
             Close();
         }
-
 
         /// <summary>
         ///     导出按钮
@@ -149,15 +143,15 @@ namespace sys3
         private void btnMap_Click(object sender, EventArgs e)
         {
             // 获取已选择明细行的索引
-            ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.DEFALUT_WIRE_PT);
+            var pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.DEFALUT_WIRE_PT);
             if (pLayer == null)
             {
                 MessageBox.Show(@"未发现导线点图层！");
                 return;
             }
-            var pFeatureLayer = (IFeatureLayer)pLayer;
-            string str = "";
-            string bid = ((Wire)gridView1.GetFocusedRow()).Tunnel.BindingId;
+            var pFeatureLayer = (IFeatureLayer) pLayer;
+            var str = "";
+            var bid = ((Wire) gridView1.GetFocusedRow()).Tunnel.BindingId;
             if (bid != "")
             {
                 if (true)
@@ -165,12 +159,12 @@ namespace sys3
                 //else
                 //    str += " or bid='" + bid + "'";
             }
-            List<IFeature> list = MyMapHelp.FindFeatureListByWhereClause(pFeatureLayer, str);
+            var list = MyMapHelp.FindFeatureListByWhereClause(pFeatureLayer, str);
             if (list.Count > 0)
             {
                 MyMapHelp.Jump(MyMapHelp.GetGeoFromFeature(list));
                 DataEditCommon.g_pMap.ClearSelection();
-                foreach (IFeature t in list)
+                foreach (var t in list)
                 {
                     DataEditCommon.g_pMap.SelectFeature(pLayer, t);
                 }

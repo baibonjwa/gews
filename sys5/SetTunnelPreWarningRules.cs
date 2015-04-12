@@ -4,34 +4,24 @@
 // 创建日期：2013/12/28
 // 版本号：1.0
 // ******************************************************************
+
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using LibEntity;
 using LibBusiness;
 using LibCommon;
-using LibCommonControl;
-using LibCommonForm;
 using LibSocket;
 
 namespace _5.WarningManagement
 {
     public partial class SetTunnelPreWarningRules : Form
     {
-        SocketHelper mainForm;
-
+        private SocketHelper mainForm;
         // 创建预警规则管理界面
-        PreWarningRulesPanel _preWarningRulesPanel = new PreWarningRulesPanel();
-
-        private RULE_TYPE_WARNING_TYPE_FILTER _warningTypeFilter = RULE_TYPE_WARNING_TYPE_FILTER.ALL;
+        private readonly PreWarningRulesPanel _preWarningRulesPanel = new PreWarningRulesPanel();
+        private readonly RULE_TYPE_WARNING_TYPE_FILTER _warningTypeFilter = RULE_TYPE_WARNING_TYPE_FILTER.ALL;
 
         /// <summary>
-        /// 根据过滤条件显示预警规则
+        ///     根据过滤条件显示预警规则
         /// </summary>
         /// <param name="ruleTypeFilter"></param>
         public SetTunnelPreWarningRules(RULE_TYPE_WARNING_TYPE_FILTER warningTypeFilter)
@@ -40,26 +30,26 @@ namespace _5.WarningManagement
             _warningTypeFilter = warningTypeFilter;
             _warningTypeFilter = RULE_TYPE_WARNING_TYPE_FILTER.ALL;
 
-            this.Text = Const_WM.TUNNEL_RULES_SETTING;
+            Text = Const_WM.TUNNEL_RULES_SETTING;
         }
 
         /// <summary>
-        /// 根据过滤条件显示预警规则
+        ///     根据过滤条件显示预警规则
         /// </summary>
         /// <param name="ruleTypeFilter"></param>
         public SetTunnelPreWarningRules(RULE_TYPE_WARNING_TYPE_FILTER warningTypeFilter, SocketHelper mainFrm)
         {
-            this.mainForm = mainFrm;
+            mainForm = mainFrm;
 
             InitializeComponent();
             _warningTypeFilter = warningTypeFilter;
             _warningTypeFilter = RULE_TYPE_WARNING_TYPE_FILTER.ALL;
 
-            this.Text = Const_WM.TUNNEL_RULES_SETTING;
+            Text = Const_WM.TUNNEL_RULES_SETTING;
         }
 
         /// <summary>
-        /// load事件
+        ///     load事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -69,7 +59,7 @@ namespace _5.WarningManagement
 
             // 设置显示位置
             _preWarningRulesPanel.MdiParent = this;
-            this._panelRules.Controls.Add(_preWarningRulesPanel);
+            _panelRules.Controls.Add(_preWarningRulesPanel);
             _preWarningRulesPanel.WindowState = FormWindowState.Maximized;
             //规则显示前先设置加载规则内容
             _preWarningRulesPanel.SetInitWarningTypeFilter(_warningTypeFilter);
@@ -87,7 +77,8 @@ namespace _5.WarningManagement
             lblMessage.Text = Const_WM.MSG03;
             if (selectTunnelSimple1.SelectedTunnel != null)
             {
-                _preWarningRulesPanel.SetTunnelSelectedRuleIdsAndUpdateParams(selectTunnelSimple1.SelectedTunnel.TunnelId);
+                _preWarningRulesPanel.SetTunnelSelectedRuleIdsAndUpdateParams(
+                    selectTunnelSimple1.SelectedTunnel.TunnelId);
             }
             else
             {
@@ -96,17 +87,19 @@ namespace _5.WarningManagement
         }
 
         /// <summary>
-        /// 应用
-        /// 注意：在预警规则管理界面更改预警参数值时，不会将预警参数值应用至绑定的巷道。
+        ///     应用
+        ///     注意：在预警规则管理界面更改预警参数值时，不会将预警参数值应用至绑定的巷道。
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnApply_Click(object sender, EventArgs e)
         {
-            if (this.selectTunnelSimple1.SelectedTunnel != null)
+            if (selectTunnelSimple1.SelectedTunnel != null)
             {
                 _preWarningRulesPanel.ApplyParamsValues();
-                if (!_preWarningRulesPanel.UpdateTunnelBindingRuleCodeAndParamsInfo(this.selectTunnelSimple1.SelectedTunnel.TunnelId))
+                if (
+                    !_preWarningRulesPanel.UpdateTunnelBindingRuleCodeAndParamsInfo(
+                        selectTunnelSimple1.SelectedTunnel.TunnelId))
                 {
                     MessageBox.Show(@"更新巷道绑定的规则参数失败！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
@@ -115,7 +108,7 @@ namespace _5.WarningManagement
                     Alert.noteMsg("应用成功!");
                     // TODO, 需要修改日期
                     //通知服务器预警数据已更新
-                    var msg = new ResetTunnelRulesMsg(Const.INVALID_ID, this.selectTunnelSimple1.SelectedTunnel.TunnelId,
+                    var msg = new ResetTunnelRulesMsg(Const.INVALID_ID, selectTunnelSimple1.SelectedTunnel.TunnelId,
                         TunnelInfoDbConstNames.TABLE_NAME, DateTime.Now);
                     SocketUtil.SendMsg2Server(msg);
                 }
@@ -123,7 +116,7 @@ namespace _5.WarningManagement
         }
 
         /// <summary>
-        /// 全选所有规则
+        ///     全选所有规则
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -133,7 +126,7 @@ namespace _5.WarningManagement
         }
 
         /// <summary>
-        /// 取消全选所有规则
+        ///     取消全选所有规则
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -145,7 +138,7 @@ namespace _5.WarningManagement
         private void btnExit_Click(object sender, EventArgs e)
         {
             //关闭窗体
-            this.Close();
+            Close();
         }
     }
 }

@@ -297,24 +297,6 @@
     <Compile Include="GasPressureInfoManagement.Designer.cs">
       <DependentUpon>GasPressureInfoManagement.cs</DependentUpon>
     </Compile>
-    <Compile Include="K1DeleteMessageBox.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="K1DeleteMessageBox.Designer.cs">
-      <DependentUpon>K1DeleteMessageBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="K1ValueEntering.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="K1ValueEntering.Designer.cs">
-      <DependentUpon>K1ValueEntering.cs</DependentUpon>
-    </Compile>
-    <Compile Include="K1ValueManagement.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="K1ValueManagement.Designer.cs">
-      <DependentUpon>K1ValueManagement.cs</DependentUpon>
-    </Compile>
     <Compile Include="MainForm_OP.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -346,15 +328,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GasPressureInfoManagement.resx">
       <DependentUpon>GasPressureInfoManagement.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="K1DeleteMessageBox.resx">
-      <DependentUpon>K1DeleteMessageBox.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="K1ValueEntering.resx">
-      <DependentUpon>K1ValueEntering.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="K1ValueManagement.resx">
-      <DependentUpon>K1ValueManagement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm_OP.resx">
       <DependentUpon>MainForm_OP.cs</DependentUpon>

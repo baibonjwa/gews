@@ -53,11 +53,12 @@ namespace sys4
         private void MainForm_OP_Load(object sender, EventArgs e)
         {
             SocketUtil.DoInitilization();
-            mapControl_OP.LoadMxFile(Application.StartupPath + "\\" + ConfigManager.Instance.getValueByKey(ConfigConst.CONFIG_MXD_FILE));
+            mapControl_OP.LoadMxFile(Application.StartupPath + "\\" +
+                                     ConfigManager.Instance.getValueByKey(ConfigConst.CONFIG_MXD_FILE));
             statusStrip1.AxMap = mapControl_OP;
             m_FileMenu.AxMapControl = mapControl_OP; //传入MapControl控件    
-            var mapControl = (IMapControl3)mapControl_OP.Object;
-            var toolbarControl = (IToolbarControl)toolbar_OP.Object;
+            var mapControl = (IMapControl3) mapControl_OP.Object;
+            var toolbarControl = (IToolbarControl) toolbar_OP.Object;
             //绑定控件
             toolbar_OP.SetBuddyControl(mapControl);
             tocControl_OP.SetBuddyControl(mapControl);
@@ -110,7 +111,7 @@ namespace sys4
         {
             m_currentButton = 0; //点击其他菜单或按钮时，设置该值为0，避免点击MapControl响应mapControl_OP_OnMouseDown事件
 
-            var frmMakeContours = new MakeContours { m_layerName = "GAS_PRESSURE_CONTOUR", m_layerAliasName = "瓦斯压力等值线" };
+            var frmMakeContours = new MakeContours {m_layerName = "GAS_PRESSURE_CONTOUR", m_layerAliasName = "瓦斯压力等值线"};
             frmMakeContours.Show();
         }
 
@@ -118,7 +119,7 @@ namespace sys4
         {
             m_currentButton = 0;
 
-            var frmMakeContours = new MakeContours { m_layerName = "GAS_CONTENT_CONTOUR", m_layerAliasName = "瓦斯含量等值线" };
+            var frmMakeContours = new MakeContours {m_layerName = "GAS_CONTENT_CONTOUR", m_layerAliasName = "瓦斯含量等值线"};
             frmMakeContours.Show();
         }
 
@@ -149,12 +150,12 @@ namespace sys4
                 switch (m_currentButton)
                 {
                     case 1:
-                        var gasPressureInfoEnteringForm = new GasPressureInfoEntering { GasPressurePoint = pt };
+                        var gasPressureInfoEnteringForm = new GasPressureInfoEntering {GasPressurePoint = pt};
                         gasPressureInfoEnteringForm.ShowDialog(); //绘制瓦斯压力点
                         m_currentButton = 0; //解除当前按钮
                         break;
                     case 2:
-                        var gasContentInfoEnteringForm = new GasContentInfoEntering { GasContentPoint = pt };
+                        var gasContentInfoEnteringForm = new GasContentInfoEntering {GasContentPoint = pt};
                         gasContentInfoEnteringForm.ShowDialog(); //绘制瓦斯含量点
                         m_currentButton = 0; //解除当前按钮
                         break;
@@ -393,7 +394,7 @@ namespace sys4
         {
             m_currentButton = 0;
 
-            var frmMakeContours = new MakeContours { m_layerName = "GAS_PRESSURE_CONTOUR", m_layerAliasName = "瓦斯压力等值线" };
+            var frmMakeContours = new MakeContours {m_layerName = "GAS_PRESSURE_CONTOUR", m_layerAliasName = "瓦斯压力等值线"};
             frmMakeContours.Show();
         }
 
@@ -402,7 +403,7 @@ namespace sys4
         {
             m_currentButton = 0;
 
-            var frmMakeContours = new MakeContours { m_layerName = "GAS_CONTENT_CONTOUR", m_layerAliasName = "瓦斯含量等值线" };
+            var frmMakeContours = new MakeContours {m_layerName = "GAS_CONTENT_CONTOUR", m_layerAliasName = "瓦斯含量等值线"};
             frmMakeContours.Show();
         }
 

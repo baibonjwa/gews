@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
-using LibBusiness;
 using LibCommon;
-using LibCommonControl;
-using LibCommonForm;
 using LibEntity;
 using LibSocket;
-using _1.GasEmission;
 
 namespace sys1
 {
@@ -85,7 +81,7 @@ namespace sys1
         {
             if (!Validator.IsEmpty(strPrimaryKey))
             {
-                GasConcentrationProbeData data = GasConcentrationProbeData.TryFind(strPrimaryKey);
+                var data = GasConcentrationProbeData.TryFind(strPrimaryKey);
                 // 数值
                 if (data != null)
                 {
@@ -102,21 +98,12 @@ namespace sys1
         ///     委托事件
         /// </summary>
         /// <param name="sender"></param>
-        //private void InheritTunnelNameChanged(object sender, TunnelEventArgs e)
-        //{
-        //    _lstProbeStyle.DataSource = null;
-        //    _lstProbeName.DataSource = null;
-
-        //    // 加载探头类型信息
-        //    loadProbeTypeInfo();
-        //}
-
         /// <summary>
         ///     加载探头类型信息
         /// </summary>
         private void loadProbeTypeInfo()
         {
-            ProbeType[] probeTypes = ProbeType.FindAll();
+            var probeTypes = ProbeType.FindAll();
             if (probeTypes.Length > 0)
             {
                 _lstProbeStyle.DataSource = probeTypes;
@@ -144,10 +131,10 @@ namespace sys1
             else
             {
                 // 根据巷道编号和探头类型编号获取探头信息
-                Probe[] probes = Probe.FindAllByTunnelIdAndProbeTypeId(selectTunnelUserControl1.SelectedTunnel.TunnelId,
-                    Convert.ToInt32(this._lstProbeStyle.SelectedValue));
+                var probes = Probe.FindAllByTunnelIdAndProbeTypeId(selectTunnelUserControl1.SelectedTunnel.TunnelId,
+                    Convert.ToInt32(_lstProbeStyle.SelectedValue));
 
-                for (int i = 0; i < probes.Length; i++)
+                for (var i = 0; i < probes.Length; i++)
                 {
                     _lstProbeName.Items.Add(probes);
                 }
@@ -167,10 +154,10 @@ namespace sys1
             _lstProbeName.DataSource = null;
 
             // 根据巷道编号和探头类型编号获取探头信息
-            Probe[] probes = Probe.FindAllByTunnelIdAndProbeTypeId(iTunnelId,
-                Convert.ToInt32(this._lstProbeStyle.SelectedValue));
+            var probes = Probe.FindAllByTunnelIdAndProbeTypeId(iTunnelId,
+                Convert.ToInt32(_lstProbeStyle.SelectedValue));
 
-            for (int i = 0; i < probes.Length; i++)
+            for (var i = 0; i < probes.Length; i++)
             {
                 _lstProbeName.Items.Add(probes);
             }
@@ -225,7 +212,7 @@ namespace sys1
             gasConcentrationProbeDataEntity.RecordType = Const_GE.RECORDTYPE_PEOPLE;
 
             OPERATION_TYPE opType;
-            bool bResult = false;
+            var bResult = false;
             if (_bllType == "add")
             {
                 // 瓦斯浓度探头数据登录
@@ -237,8 +224,9 @@ namespace sys1
                 {
                     #region 通知服务器预警数据已更新
 
-                    WorkingFace workingfaceEnt = selectTunnelUserControl1.SelectedTunnel.WorkingFace;
-                    var msg = new UpdateWarningDataMsg(workingfaceEnt.WorkingFaceId, selectTunnelUserControl1.SelectedTunnel.TunnelId,
+                    var workingfaceEnt = selectTunnelUserControl1.SelectedTunnel.WorkingFace;
+                    var msg = new UpdateWarningDataMsg(workingfaceEnt.WorkingFaceId,
+                        selectTunnelUserControl1.SelectedTunnel.TunnelId,
                         DayReportHc.TableName, opType, gasConcentrationProbeDataEntity.RecordTime);
                     SocketUtil.SendMsg2Server(msg);
 
@@ -255,8 +243,9 @@ namespace sys1
 
                 #region 通知服务器预警数据已更新
 
-                WorkingFace workingfaceEnt = selectTunnelUserControl1.SelectedTunnel.WorkingFace;
-                var msg = new UpdateWarningDataMsg(workingfaceEnt.WorkingFaceId, selectTunnelUserControl1.SelectedTunnel.TunnelId,
+                var workingfaceEnt = selectTunnelUserControl1.SelectedTunnel.WorkingFace;
+                var msg = new UpdateWarningDataMsg(workingfaceEnt.WorkingFaceId,
+                    selectTunnelUserControl1.SelectedTunnel.TunnelId,
                     DayReportHc.TableName, opType, gasConcentrationProbeDataEntity.RecordTime);
                 SocketUtil.SendMsg2Server(msg);
 

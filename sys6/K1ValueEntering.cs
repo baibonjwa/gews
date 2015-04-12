@@ -6,62 +6,29 @@
 // 版本信息：
 // V1.0 新建
 // ******************************************************************
+
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using LibCommonForm;
-using LibEntity;
 using LibBusiness;
 using LibCommon;
+using LibEntity;
 using LibSocket;
 
 namespace UnderTerminal
 {
     public partial class K1ValueEntering : Form
     {
-        #region ******各种变量定义******
-        UnderMessageWindow mainWin;
-        K1Value _k1ValueEntity = new K1Value();
-        K1Value[] k1Entitys;
-        Tunnel tunnelEntity = new Tunnel();
-        //巷道控件用数组
-        int[] arr = new int[5];
         /// <summary>
-        /// K1Value分组数
-        /// </summary>
-        int groupCount = 0;
-        /// <summary>
-        /// 数据行数
-        /// </summary>
-        int rowCount = 0;
-        DateTimePicker dtp = new DateTimePicker();
-        int pointX = -1;
-        int pointY = -1;
-        double tmpDouble = 0;
-        int nowDoing = 0;
-        int tunnelId = -1;
-        #endregion
-
-        public String X { get; set; }
-        public String Y { get; set; }
-        public String Z { get; set; }
-
-        /// <summary>
-        /// 添加
-        /// <param name="tunnelId">巷道id</param>
+        ///     添加
+        ///     <param name="tunnelId">巷道id</param>
         /// </summary>
         public K1ValueEntering(int tunnelId, string tunnelName, UnderMessageWindow win)
         {
             InitializeComponent();
             this.tunnelId = tunnelId;
-            this.Text = tunnelName;
-            this.mainWin = win;
-            Tunnel entTunnel = Tunnel.Find(tunnelId);
+            Text = tunnelName;
+            mainWin = win;
+            var entTunnel = Tunnel.Find(tunnelId);
 
             X = entTunnel.WorkingFace.CoordinateX.ToString();
             Y = entTunnel.WorkingFace.CoordinateY.ToString();
@@ -76,8 +43,12 @@ namespace UnderTerminal
             //txtCoordinateZ.Text = entWorkingFace.CoordinateZ.ToString();
         }
 
+        public String X { get; set; }
+        public String Y { get; set; }
+        public String Z { get; set; }
+
         /// <summary>
-        /// 初始化
+        ///     初始化
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -94,18 +65,20 @@ namespace UnderTerminal
         }
 
         #region ******控制datagridview样式******
+
         /// <summary>
-        /// 设置Datagridview样式
+        ///     设置Datagridview样式
         /// </summary>
         private void setDataGridViewStyle()
         {
             dgrdvK1Value.AutoGenerateColumns = true;
             dgrdvK1Value.AllowUserToAddRows = true;
         }
+
         #endregion
 
         /// <summary>
-        /// 提交按钮事件
+        ///     提交按钮事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -114,12 +87,12 @@ namespace UnderTerminal
             //验证
             if (!check())
             {
-                this.DialogResult = DialogResult.None;
+                DialogResult = DialogResult.None;
                 return;
             }
-            this.DialogResult = DialogResult.OK;
+            DialogResult = DialogResult.OK;
 
-            tunnelEntity.TunnelId = this.tunnelId;
+            tunnelEntity.TunnelId = tunnelId;
             tunnelEntity = Tunnel.Find(tunnelId);
             //添加
             //if (this.Text == Const_OP.K1_VALUE_ADD)
@@ -129,16 +102,15 @@ namespace UnderTerminal
         }
 
         /// <summary>
-        /// 添加K1Value值
+        ///     添加K1Value值
         /// </summary>
         private void insertK1Value()
         {
             rowCount = dgrdvK1Value.Rows.Count - 1;
             groupCount = K1ValueBLL.selectValueK1GroupCount();
-            bool bResult = false;
-            for (int i = 0; i < rowCount; i++)
+            var bResult = false;
+            for (var i = 0; i < rowCount; i++)
             {
-
                 _k1ValueEntity.K1ValueId = groupCount + 1;
 
                 if (!String.IsNullOrEmpty(tbCoordinateX.Text))
@@ -209,16 +181,21 @@ namespace UnderTerminal
                 }
 
                 //记录时间
-                _k1ValueEntity.Time = dgrdvK1Value[6, i].Value != null ? Convert.ToDateTime(dgrdvK1Value[6, i].Value) : DateTime.Now;
+                _k1ValueEntity.Time = dgrdvK1Value[6, i].Value != null
+                    ? Convert.ToDateTime(dgrdvK1Value[6, i].Value)
+                    : DateTime.Now;
                 //录入时间
-                _k1ValueEntity.TypeInTime = dgrdvK1Value[7, i].Value != null ? Convert.ToDateTime(dgrdvK1Value[7, i].Value) : DateTime.Now;
+                _k1ValueEntity.TypeInTime = dgrdvK1Value[7, i].Value != null
+                    ? Convert.ToDateTime(dgrdvK1Value[7, i].Value)
+                    : DateTime.Now;
                 //巷道ID
                 _k1ValueEntity.Tunnel.TunnelId = tunnelEntity.TunnelId;
                 //添加
                 bResult = K1ValueBLL.insertValueK1(_k1ValueEntity);
                 if (bResult)
                 {
-                    UpdateWarningDataMsg msg = new UpdateWarningDataMsg(this.mainWin.workingfaceId, this.tunnelId, K1ValueDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, DateTime.Now);
+                    var msg = new UpdateWarningDataMsg(mainWin.workingfaceId, tunnelId, K1ValueDbConstNames.TABLE_NAME,
+                        OPERATION_TYPE.ADD, DateTime.Now);
                     mainWin.SendMsg2Server(msg);
                     Alert.noteMsg("提交成功!");
                 }
@@ -230,18 +207,18 @@ namespace UnderTerminal
         }
 
         /// <summary>
-        /// 取消按钮事件
+        ///     取消按钮事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnCancel_Click(object sender, EventArgs e)
         {
             //关闭窗口
-            this.Close();
+            Close();
         }
 
         /// <summary>
-        /// 自动填充
+        ///     自动填充
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -253,7 +230,7 @@ namespace UnderTerminal
                 if (e.ColumnIndex == 6 || e.ColumnIndex == 7)
                 {
                     //datetimepicker控件位置大小
-                    Rectangle rect = dgrdvK1Value.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false);
+                    var rect = dgrdvK1Value.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false);
                     dtp.Visible = true;
                     dtp.Top = rect.Top;
                     dtp.Left = rect.Left;
@@ -275,7 +252,7 @@ namespace UnderTerminal
         }
 
         /// <summary>
-        /// 日期赋值
+        ///     日期赋值
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -286,7 +263,7 @@ namespace UnderTerminal
         }
 
         /// <summary>
-        /// 控制日期控件隐藏显示
+        ///     控制日期控件隐藏显示
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -296,7 +273,7 @@ namespace UnderTerminal
         }
 
         /// <summary>
-        /// 控制日期控件隐藏显示
+        ///     控制日期控件隐藏显示
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -333,7 +310,7 @@ namespace UnderTerminal
         }
 
         /// <summary>
-        /// 删除单元格
+        ///     删除单元格
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -344,7 +321,7 @@ namespace UnderTerminal
         }
 
         /// <summary>
-        /// 获取鼠标点击行列
+        ///     获取鼠标点击行列
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -356,7 +333,7 @@ namespace UnderTerminal
         }
 
         /// <summary>
-        /// 删除行
+        ///     删除行
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -367,13 +344,13 @@ namespace UnderTerminal
         }
 
         /// <summary>
-        /// 验证
+        ///     验证
         /// </summary>
         /// <returns></returns>
         private bool check()
         {
             //巷道是否选择
-            if (this.tunnelId <= 0)
+            if (tunnelId <= 0)
             {
                 Alert.alert(Const.MSG_PLEASE_CHOOSE + Const_GM.TUNNEL + Const.SIGN_EXCLAMATION_MARK);
                 return false;
@@ -384,9 +361,9 @@ namespace UnderTerminal
                 Alert.alert(Const_OP.K1_VALUE_MSG_ADD_MORE_THAN_ONE);
                 return false;
             }
-            for (int i = 0; i < this.dgrdvK1Value.RowCount - 1; i++)
+            for (var i = 0; i < dgrdvK1Value.RowCount - 1; i++)
             {
-                DataGridViewTextBoxCell cell = dgrdvK1Value.Rows[i].Cells[3] as DataGridViewTextBoxCell;
+                var cell = dgrdvK1Value.Rows[i].Cells[3] as DataGridViewTextBoxCell;
 
                 // 孔深
                 cell = dgrdvK1Value.Rows[i].Cells[5] as DataGridViewTextBoxCell;
@@ -396,20 +373,14 @@ namespace UnderTerminal
                     Alert.alert(Const.rowNotNull(i, Const_OP.K1_VALUE_BOREHOLE_DEEP));
                     return false;
                 }
-                else
-                {
-                    cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                }
+                cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
                 if (!Validator.IsNumeric(cell.Value.ToString()))
                 {
                     Alert.alert(Const.rowMustBeNumber(i, Const_OP.K1_VALUE_BOREHOLE_DEEP));
                     cell.Style.BackColor = Const.ERROR_FIELD_COLOR;
                     return false;
                 }
-                else
-                {
-                    cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
-                }
+                cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
             }
             return true;
         }
@@ -421,9 +392,9 @@ namespace UnderTerminal
             {
                 //// 最后一行为空行时，跳出循环
                 // 最后一行删除按钮设为不可
-                if (dgrdvK1Value.RowCount - 1 != this.dgrdvK1Value.CurrentRow.Index)
+                if (dgrdvK1Value.RowCount - 1 != dgrdvK1Value.CurrentRow.Index)
                 {
-                    this.dgrdvK1Value.Rows.Remove(this.dgrdvK1Value.CurrentRow);
+                    dgrdvK1Value.Rows.Remove(dgrdvK1Value.CurrentRow);
                     dgrdvK1Value.AllowUserToAddRows = true;
                 }
             }
@@ -448,5 +419,33 @@ namespace UnderTerminal
                 dgrdvK1Value.Rows[dgrdvK1Value.NewRowIndex].ReadOnly = false;
             }
         }
+
+        #region ******各种变量定义******
+
+        private readonly UnderMessageWindow mainWin;
+        private readonly K1Value _k1ValueEntity = new K1Value();
+        private K1Value[] k1Entitys;
+        private Tunnel tunnelEntity = new Tunnel();
+        //巷道控件用数组
+        private int[] arr = new int[5];
+
+        /// <summary>
+        ///     K1Value分组数
+        /// </summary>
+        private int groupCount;
+
+        /// <summary>
+        ///     数据行数
+        /// </summary>
+        private int rowCount;
+
+        private readonly DateTimePicker dtp = new DateTimePicker();
+        private int pointX = -1;
+        private int pointY = -1;
+        private double tmpDouble;
+        private int nowDoing = 0;
+        private readonly int tunnelId = -1;
+
+        #endregion
     }
 }

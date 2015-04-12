@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
-using ESRI.ArcGIS.Geodatabase;
 using ESRI.ArcGIS.Geometry;
 using GIS;
 using GIS.HdProc;
 using LibBusiness;
 using LibCommon;
-using LibCommonControl;
-using LibCommonForm;
 using LibEntity;
 
 namespace sys3
@@ -20,8 +17,6 @@ namespace sys3
     /// </summary>
     public partial class TunnelHCJZEntering : Form
     {
-        /**********变量声明***********/
-        private readonly Wire wireEntity = new Wire();
         private int[] _arr = new int[5];
         private DataSet _dsWirePoint = new DataSet();
         private int _itemCount = 0;
@@ -33,6 +28,8 @@ namespace sys3
         private int doing = 0;
         private string[] dr = new string[8];
         private WirePoint[] wpiEntity;
+        /**********变量声明***********/
+        private readonly Wire wireEntity = new Wire();
         /*****************************/
 
         public TunnelHCJZEntering()
@@ -95,7 +92,7 @@ namespace sys3
                 return false;
             }
             //dgrdvWire内部判断
-            for (int i = 0; i < dgrdvWire.RowCount; i++)
+            for (var i = 0; i < dgrdvWire.RowCount; i++)
             {
                 // 最后一行为空行时，跳出循环
                 if (i == dgrdvWire.RowCount - 1)
@@ -125,7 +122,7 @@ namespace sys3
                     cell.Style.BackColor = Const.NO_ERROR_FIELD_COLOR;
                 }
                 //判断导线点编号是否有输入重复
-                for (int j = 0; j < i; j++)
+                for (var j = 0; j < i; j++)
                 {
                     if (dgrdvWire[0, j].Value.ToString() == dgrdvWire[0, i].Value.ToString())
                     {
@@ -269,11 +266,11 @@ namespace sys3
                 return;
             }
             var coordinates = new List<IPoint>();
-            for (int i = 0; i < dgrdvWire.Rows.Count - 1; i++)
+            for (var i = 0; i < dgrdvWire.Rows.Count - 1; i++)
             {
-                double x = Convert.ToDouble(dgrdvWire.Rows[i].Cells[1].Value);
-                double y = Convert.ToDouble(dgrdvWire.Rows[i].Cells[2].Value);
-                double z = Convert.ToDouble(dgrdvWire.Rows[i].Cells[3].Value);
+                var x = Convert.ToDouble(dgrdvWire.Rows[i].Cells[1].Value);
+                var y = Convert.ToDouble(dgrdvWire.Rows[i].Cells[2].Value);
+                var z = Convert.ToDouble(dgrdvWire.Rows[i].Cells[3].Value);
                 IPoint pnt = new PointClass();
                 pnt.X = x;
                 pnt.Y = y;
@@ -301,35 +298,35 @@ namespace sys3
             //查询对应的巷道信息
             var hdids = new Dictionary<string, string>();
             hdids.Add(GIS_Const.FIELD_HDID, hd1);
-            List<Tuple<IFeature, IGeometry, Dictionary<string, string>>> selobjs1 =
+            var selobjs1 =
                 Global.commonclss.SearchFeaturesByGeoAndText(Global.centerlyr, hdids);
             var pline1 = selobjs1[0].Item2 as IPolyline;
 
             hdids[GIS_Const.FIELD_HDID] = hd2;
-            List<Tuple<IFeature, IGeometry, Dictionary<string, string>>> selobjs2 =
+            var selobjs2 =
                 Global.commonclss.SearchFeaturesByGeoAndText(Global.centerlyr, hdids);
             var pline2 = selobjs2[0].Item2 as IPolyline;
 
             hdids[GIS_Const.FIELD_HDID] = hd3;
-            List<Tuple<IFeature, IGeometry, Dictionary<string, string>>> selobjs3 =
+            var selobjs3 =
                 Global.commonclss.SearchFeaturesByGeoAndText(Global.centerlyr, hdids);
             var pline3 = selobjs3[0].Item2 as IPolyline;
 
             //删除原来的采掘区
             hdids[GIS_Const.FIELD_HDID] = hd1 + "_" + hd2;
-            string sql = "\"" + GIS_Const.FIELD_HDID + "\"='" + hd1 + "_" + hd2 + "' AND \"" + GIS_Const.FIELD_BS +
-                         "\"=0";
+            var sql = "\"" + GIS_Const.FIELD_HDID + "\"='" + hd1 + "_" + hd2 + "' AND \"" + GIS_Const.FIELD_BS +
+                      "\"=0";
             Global.commonclss.DelFeatures(Global.hcqlyr, sql);
             //查询对应的回采区
-            for (int k = 0; k < pnts.Count; k++)
+            for (var k = 0; k < pnts.Count; k++)
             {
                 //导线点
-                IPoint pnt = pnts[k];
-                double jzx = pnt.X;
-                double jzy = pnt.Y;
+                var pnt = pnts[k];
+                var jzx = pnt.X;
+                var jzy = pnt.Y;
                 //构造采掘区对象
-                int xh = 0;
-                List<Tuple<IFeature, IGeometry, Dictionary<string, string>>> selobjshcqs =
+                var xh = 0;
+                var selobjshcqs =
                     Global.commonclss.SearchFeaturesByGeoAndText(Global.hcqlyr, hdids);
                 Dictionary<string, List<IPoint>> oldpnts = null;
                 if (selobjshcqs.Count != 0)
@@ -343,9 +340,9 @@ namespace sys3
                 {
                     //计算校正点距离切眼的距离
                     IPoint outp = new PointClass();
-                    double distancealong = 0.0;
-                    double distancefrom = 0.0;
-                    bool bres = false;
+                    var distancealong = 0.0;
+                    var distancefrom = 0.0;
+                    var bres = false;
                     pline3.QueryPointAndDistance(esriSegmentExtension.esriNoExtension, pnt, false, outp,
                         ref distancealong, ref distancefrom, ref bres);
                     //根据距离绘制回采面
@@ -358,12 +355,12 @@ namespace sys3
                     //Dictionary<string, List<IPoint>> fourpnts = Global.commonclss.getCoordinates(hcreg, pline1, pline2, pline3, Global.linespace, Global.linespace);
                     //List<IPoint> listpnts = fourpnts["1"];
                     IPoint pntcenter = new PointClass();
-                    pntcenter.PutCoords((oldpnts["1"][0].X + oldpnts["1"][1].X) / 2,
-                        (oldpnts["1"][0].Y + oldpnts["1"][1].Y) / 2);
+                    pntcenter.PutCoords((oldpnts["1"][0].X + oldpnts["1"][1].X)/2,
+                        (oldpnts["1"][0].Y + oldpnts["1"][1].Y)/2);
                     pntcenter.Z = 0;
                     //double hccd1 = Math.Sqrt(Math.Pow((pnt.X - pntcenter.X), 2) + Math.Pow((pnt.Y - pntcenter.Y), 2));
                     //查询回采方向 这里没有设置传入的切眼 可能会出错 需要调试2014-9-23
-                    int dirflag = 0;
+                    var dirflag = 0;
                     dirflag = Global.commonclss.GetDirectionByPnt(pline3, pntcenter);
                     pline3 = new PolylineClass();
                     if (oldpnts == null)
@@ -372,9 +369,9 @@ namespace sys3
                     pline3.ToPoint = oldpnts["1"][0];
                     //计算校正点距离切眼的距离
                     IPoint outp = new PointClass();
-                    double distancealong = 0.0;
-                    double distancefrom = 0.0;
-                    bool bres = false;
+                    var distancealong = 0.0;
+                    var distancefrom = 0.0;
+                    var bres = false;
                     pline3.QueryPointAndDistance(esriSegmentExtension.esriNoExtension, pnt, false, outp,
                         ref distancealong, ref distancefrom, ref bres);
                     //根据距离绘制回采面
@@ -382,7 +379,7 @@ namespace sys3
                         distancefrom, dirflag);
                 }
                 var pnthccols = new List<IPoint>();
-                for (int i = 0; i < pntcol.PointCount - 1; i++)
+                for (var i = 0; i < pntcol.PointCount - 1; i++)
                 {
                     pnthccols.Add(pntcol.get_Point(i));
                 }
@@ -393,7 +390,7 @@ namespace sys3
                 dics[GIS_Const.FIELD_XH] = (xh + 1).ToString();
                 Global.cons.AddHangdaoToLayer(pnthccols, dics, Global.hcqlyr);
                 //将当前点写入到对应的工作面表中
-                IPoint prevPnt = pntcol.get_Point(pntcol.PointCount - 1);
+                var prevPnt = pntcol.get_Point(pntcol.PointCount - 1);
                 var workingFace = selectWorkingFaceControl1.SelectedWorkingFace;
                 if (prevPnt != null)
                 {
@@ -405,16 +402,16 @@ namespace sys3
                 hd_ids.Add(Convert.ToInt16(hd1));
                 hd_ids.Add(Convert.ToInt16(hd2));
                 hd_ids.Add(Convert.ToInt16(hd3));
-                Dictionary<string, List<GeoStruct>> geostructs = Global.commonclss.GetStructsInfos(prevPnt, hd_ids);
+                var geostructs = Global.commonclss.GetStructsInfos(prevPnt, hd_ids);
                 if (geostructs == null) return;
                 GeologySpaceBll.DeleteGeologySpaceEntityInfos(workingFace.WorkingFaceId); //删除对应工作面ID的地质构造信息
-                foreach (string key in geostructs.Keys)
+                foreach (var key in geostructs.Keys)
                 {
-                    List<GeoStruct> geoinfos = geostructs[key];
-                    string geo_type = key;
-                    for (int i = 0; i < geoinfos.Count; i++)
+                    var geoinfos = geostructs[key];
+                    var geo_type = key;
+                    for (var i = 0; i < geoinfos.Count; i++)
                     {
-                        GeoStruct tmp = geoinfos[i];
+                        var tmp = geoinfos[i];
 
                         var geologyspaceEntity = new GeologySpace();
                         geologyspaceEntity.WorkingFace = workingFace;

@@ -9,15 +9,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Windows.Forms;
-using ESRI.ArcGIS.Geodatabase;
-using ESRI.ArcGIS.Geometry;
 using GIS.HdProc;
-using LibBusiness;
 using LibCommon;
-using LibCommonControl;
-using LibEntity;
 using LibEntity.Domain;
 
 namespace sys3
@@ -25,7 +19,7 @@ namespace sys3
     public partial class TunnelHcManagement : Form
     {
         /// <summary>
-        /// 构造方法
+        ///     构造方法
         /// </summary>
         public TunnelHcManagement()
         {
@@ -40,9 +34,8 @@ namespace sys3
             gcTunnelHc.DataSource = WorkingFaceHc.FindAll();
         }
 
-
         /// <summary>
-        /// 初始化
+        ///     初始化
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -52,7 +45,7 @@ namespace sys3
         }
 
         /// <summary>
-        /// 添加按钮响应
+        ///     添加按钮响应
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -68,13 +61,13 @@ namespace sys3
         }
 
         /// <summary>
-        /// 修改按钮响应
+        ///     修改按钮响应
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void tsBtnModify_Click(object sender, EventArgs e)
         {
-            var tunnelHcForm = new TunnelHcEntering(((WorkingFaceHc)gridView1.GetFocusedRow()).WorkingFace);
+            var tunnelHcForm = new TunnelHcEntering(((WorkingFaceHc) gridView1.GetFocusedRow()).WorkingFace);
             if (DialogResult.OK == tunnelHcForm.ShowDialog())
             {
                 RefreshData();
@@ -82,21 +75,21 @@ namespace sys3
         }
 
         /// <summary>
-        /// 删除按钮响应
+        ///     删除按钮响应
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void tsBtnDel_Click(object sender, EventArgs e)
         {
             if (!Alert.confirm(Const.DEL_CONFIRM_MSG)) return;
-            var tunnelHcEntity = (WorkingFaceHc)gridView1.GetFocusedRow();
+            var tunnelHcEntity = (WorkingFaceHc) gridView1.GetFocusedRow();
             tunnelHcEntity.Delete();
             DelHcjc(tunnelHcEntity.TunnelZy.TunnelId, tunnelHcEntity.TunnelFy.TunnelId);
             RefreshData();
         }
 
         /// <summary>
-        /// 回采删除信息
+        ///     回采删除信息
         /// </summary>
         /// <param name="hd1"></param>
         /// <param name="hd2"></param>
@@ -107,16 +100,16 @@ namespace sys3
             var selcjqs = Global.commonclss.SearchFeaturesByGeoAndText(Global.hcqlyr, hdids);
             if (selcjqs.Count > 0)
             {
-                foreach (Tuple<IFeature, IGeometry, Dictionary<string, string>> t in selcjqs)
+                foreach (var t in selcjqs)
                 {
-                    IFeature fea = t.Item1;
+                    var fea = t.Item1;
                     Global.commonclss.DelFeature(Global.hcqlyr, fea);
                 }
             }
         }
 
         /// <summary>
-        /// 退出
+        ///     退出
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -127,7 +120,7 @@ namespace sys3
         }
 
         /// <summary>
-        /// 刷新
+        ///     刷新
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -137,7 +130,7 @@ namespace sys3
         }
 
         /// <summary>
-        /// 导出
+        ///     导出
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -150,7 +143,7 @@ namespace sys3
         }
 
         /// <summary>
-        /// 打印
+        ///     打印
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

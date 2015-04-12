@@ -12,9 +12,8 @@ namespace sys4
 {
     public partial class GasGushQuantityInfoManagement : Form
     {
-
         /// <summary>
-        /// 构造方法
+        ///     构造方法
         /// </summary>
         public GasGushQuantityInfoManagement()
         {
@@ -30,7 +29,7 @@ namespace sys4
         }
 
         /// <summary>
-        /// 添加（必须实装）
+        ///     添加（必须实装）
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -44,13 +43,14 @@ namespace sys4
         }
 
         /// <summary>
-        /// 修改（必须实装）
+        ///     修改（必须实装）
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            var gasGushQuantityInfoEnteringForm = new GasGushQuantityInfoEntering((GasGushQuantity)gridView1.GetFocusedRow());
+            var gasGushQuantityInfoEnteringForm =
+                new GasGushQuantityInfoEntering((GasGushQuantity) gridView1.GetFocusedRow());
             if (DialogResult.OK == gasGushQuantityInfoEnteringForm.ShowDialog())
             {
                 RefreshData();
@@ -58,7 +58,7 @@ namespace sys4
         }
 
         /// <summary>
-        /// 删除按钮（必须实装）
+        ///     删除按钮（必须实装）
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -66,23 +66,23 @@ namespace sys4
         {
             if (!Alert.confirm(Const_OP.DEL_CONFIRM_MSG_GASGUSHQUANTITY)) return;
             var selectedIndex = gridView1.GetSelectedRows();
-            foreach (var gasContent in selectedIndex.Select(i => (GasGushQuantity)gridView1.GetRow(i)))
+            foreach (var gasContent in selectedIndex.Select(i => (GasGushQuantity) gridView1.GetRow(i)))
             {
-                DelGasGushQuantityPt(new[] { gasContent.BindingId });
+                DelGasGushQuantityPt(new[] {gasContent.BindingId});
                 gasContent.Delete();
             }
         }
 
         /// <summary>
-        /// 删除瓦斯信息
+        ///     删除瓦斯信息
         /// </summary>
         /// <param name="bid">绑定ID</param>
         private void DelGasGushQuantityPt(string[] bid)
         {
-            ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.LAYER_ALIAS_MR_WSYLD);
-            IFeatureLayer pFeatureLayer = (IFeatureLayer)pLayer;
-            string strsql = "";
-            for (int i = 0; i < bid.Length; i++)
+            var pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.LAYER_ALIAS_MR_WSYLD);
+            var pFeatureLayer = (IFeatureLayer) pLayer;
+            var strsql = "";
+            for (var i = 0; i < bid.Length; i++)
             {
                 if (i == 0)
                     strsql = "bid='" + bid[i] + "'";
@@ -93,7 +93,7 @@ namespace sys4
         }
 
         /// <summary>
-        /// 导出
+        ///     导出
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -106,7 +106,7 @@ namespace sys4
         }
 
         /// <summary>
-        /// 打印
+        ///     打印
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -116,7 +116,7 @@ namespace sys4
         }
 
         /// <summary>
-        /// 退出
+        ///     退出
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -127,7 +127,7 @@ namespace sys4
         }
 
         /// <summary>
-        /// 刷新
+        ///     刷新
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -139,11 +139,13 @@ namespace sys4
         private void btnMap_Click(object sender, EventArgs e)
         {
             var selectedIndex = gridView1.GetSelectedRows();
-            var list = selectedIndex.Select(i => (GasGushQuantity)gridView1.GetRow(i)).Select(gasGushQuantity => new PointClass
-            {
-                X = gasGushQuantity.CoordinateX,
-                Y = gasGushQuantity.CoordinateY
-            }).Cast<IPoint>().ToList();
+            var list =
+                selectedIndex.Select(i => (GasGushQuantity) gridView1.GetRow(i))
+                    .Select(gasGushQuantity => new PointClass
+                    {
+                        X = gasGushQuantity.CoordinateX,
+                        Y = gasGushQuantity.CoordinateY
+                    }).Cast<IPoint>().ToList();
             MyMapHelp.Jump(MyMapHelp.GetGeoFromPoint(list));
         }
     }

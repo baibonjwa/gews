@@ -7,8 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Castle.ActiveRecord;
-using ESRI.ArcGIS.Carto;
-using ESRI.ArcGIS.Geodatabase;
 using ESRI.ArcGIS.Geometry;
 using GIS;
 using GIS.Common;
@@ -23,13 +21,10 @@ namespace sys3
 {
     public partial class WireInfoEntering : Form
     {
+        private String _errorMsg = "";
         /**********变量声明***********/
         private double _tmpDouble;
         private int _tmpRowIndex = -1;
-        private String _errorMsg = "";
-
-
-        private Wire Wire { get; set; }
 
         /// <summary>
         ///     构造方法
@@ -83,7 +78,7 @@ namespace sys3
             var wirePoints = WirePoint.FindAllByWireId(wire.WireId);
             if (wirePoints.Length > 0)
             {
-                for (int i = 0; i < wirePoints.Length; i++)
+                for (var i = 0; i < wirePoints.Length; i++)
                 {
                     dgrdvWire.Rows.Add();
                     dgrdvWire[0, i].Value = wirePoints[i].WirePointName;
@@ -140,6 +135,8 @@ namespace sys3
             //dics.Add(GIS_Const.FIELD_HDNAME, hdname);
             //dics.Add(GIS_Const.FIELD_XH, (xh + 1).ToString());
         }
+
+        private Wire Wire { get; set; }
 
         /// <summary>
         ///     提交
@@ -227,7 +224,7 @@ namespace sys3
             }
 
             var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelUserControl1.SelectedTunnel.TunnelId,
-                    Wire.TableName, OPERATION_TYPE.ADD, DateTime.Now);
+                Wire.TableName, OPERATION_TYPE.ADD, DateTime.Now);
             SocketUtil.SendMsg2Server(msg);
             DialogResult = DialogResult.OK;
         }
@@ -242,14 +239,14 @@ namespace sys3
                     tunnel.TunnelId.ToString(CultureInfo.InvariantCulture)
                 }
             };
-            List<Tuple<IFeature, IGeometry, Dictionary<string, string>>> selobjs =
+            var selobjs =
                 Global.commonclss.SearchFeaturesByGeoAndText(Global.centerfdlyr, flds);
 
-            int xh = 0;
+            var xh = 0;
             if (selobjs.Count > 0)
                 xh = Convert.ToInt16(selobjs[0].Item3[GIS_Const.FIELD_XH]) + 1;
-            string bid = tunnel.BindingId;
-            string hdname = tunnel.TunnelName;
+            var bid = tunnel.BindingId;
+            var hdname = tunnel.TunnelName;
             hdwid = tunnel.TunnelWid;
             _dics.Clear();
             _dics.Add(GIS_Const.FIELD_HDID, tunnel.TunnelId.ToString(CultureInfo.InvariantCulture));
@@ -383,7 +380,7 @@ namespace sys3
         /// <returns>验证结果：true 通过验证, false未通过验证</returns>
         private bool Check()
         {
-            for (int i = 0; i < dgrdvWire.Rows.Count; i++)
+            for (var i = 0; i < dgrdvWire.Rows.Count; i++)
             {
                 dgrdvWire.BackgroundColor = Const.NO_ERROR_FIELD_COLOR;
             }
@@ -407,7 +404,7 @@ namespace sys3
                 return false;
             }
             //dgrdvWire内部判断
-            for (int i = 0; i < dgrdvWire.RowCount; i++)
+            for (var i = 0; i < dgrdvWire.RowCount; i++)
             {
                 // 最后一行为空行时，跳出循环
                 if (i == dgrdvWire.RowCount - 1)
@@ -649,7 +646,8 @@ namespace sys3
             {
                 dgrdvWire.Rows.Insert(dgrdvWire.CurrentRow.Index, 1);
                 dgrdvWire.Focus();
-                if (dgrdvWire.CurrentRow != null) dgrdvWire.Rows[dgrdvWire.CurrentRow.Index - 1].Cells[0].Selected = true;
+                if (dgrdvWire.CurrentRow != null)
+                    dgrdvWire.Rows[dgrdvWire.CurrentRow.Index - 1].Cells[0].Selected = true;
             }
         }
 
@@ -660,7 +658,8 @@ namespace sys3
         /// <param name="e"></param>
         private void btnDel_Click(object sender, EventArgs e)
         {
-            if (dgrdvWire.CurrentRow != null && (dgrdvWire.Rows.Count > 1 && dgrdvWire.CurrentRow.Index < dgrdvWire.Rows.Count - 1))
+            if (dgrdvWire.CurrentRow != null &&
+                (dgrdvWire.Rows.Count > 1 && dgrdvWire.CurrentRow.Index < dgrdvWire.Rows.Count - 1))
                 dgrdvWire.Rows.RemoveAt(_tmpRowIndex);
         }
 
@@ -671,13 +670,13 @@ namespace sys3
         /// <param name="e"></param>
         private void btnMoveUp_Click(object sender, EventArgs e)
         {
-            bool isLast = _tmpRowIndex == dgrdvWire.Rows.Count - 2;
+            var isLast = _tmpRowIndex == dgrdvWire.Rows.Count - 2;
             if (_tmpRowIndex == dgrdvWire.Rows.Count - 1)
             {
                 _tmpRowIndex = dgrdvWire.SelectedRows[0].Index;
             }
 
-            DataGridViewRow dgvr = dgrdvWire.Rows[_tmpRowIndex];
+            var dgvr = dgrdvWire.Rows[_tmpRowIndex];
             dgrdvWire.Rows.RemoveAt(_tmpRowIndex);
 
             if (_tmpRowIndex == 0)
@@ -703,7 +702,7 @@ namespace sys3
         private void btnMoveDown_Click(object sender, EventArgs e)
         {
             _tmpRowIndex = dgrdvWire.SelectedRows[0].Index;
-            DataGridViewRow dgvr = dgrdvWire.Rows[_tmpRowIndex];
+            var dgvr = dgrdvWire.Rows[_tmpRowIndex];
             dgrdvWire.Rows.RemoveAt(_tmpRowIndex);
             dgrdvWire.Rows[_tmpRowIndex].Selected = true;
             dgrdvWire.Rows.Insert(_tmpRowIndex + 1, dgvr);
@@ -714,15 +713,15 @@ namespace sys3
 
         private void btnTXT_Click(object sender, EventArgs e)
         {
-            var ofd = new OpenFileDialog { RestoreDirectory = true, Filter = @"文本文件(*.txt)|*.txt|所有文件(*.*)|*.*" };
+            var ofd = new OpenFileDialog {RestoreDirectory = true, Filter = @"文本文件(*.txt)|*.txt|所有文件(*.*)|*.*"};
             if (ofd.ShowDialog() != DialogResult.OK) return;
-            string fileName = ofd.SafeFileName;
+            var fileName = ofd.SafeFileName;
             if (fileName != null)
             {
-                string[] strs = fileName.Split('-');
-                string miningAreaName = strs[0];
-                string workingFaceName = strs[1];
-                string tunnelName = strs[2].Split('.')[0];
+                var strs = fileName.Split('-');
+                var miningAreaName = strs[0];
+                var workingFaceName = strs[1];
+                var tunnelName = strs[2].Split('.')[0];
                 using (new SessionScope())
                 {
                     var workingFace = WorkingFace.FindByWorkingFaceName(workingFaceName);
@@ -740,7 +739,8 @@ namespace sys3
                         }
                     }
                     if (workingFace == null) return;
-                    if (workingFace.Tunnels != null && workingFace.Tunnels.FirstOrDefault(u => u.TunnelName == tunnelName) != null)
+                    if (workingFace.Tunnels != null &&
+                        workingFace.Tunnels.FirstOrDefault(u => u.TunnelName == tunnelName) != null)
                     {
                         var tunnel = workingFace.Tunnels.FirstOrDefault(u => u.TunnelName == tunnelName);
                         selectTunnelUserControl1.LoadData(tunnel);
@@ -759,17 +759,19 @@ namespace sys3
                         }
                     }
                 }
-                txtWireName.Text = tunnelName.Split('.').Length > 0 ? tunnelName.Split('.')[0] + "导线点" : tunnelName + "导线点";
+                txtWireName.Text = tunnelName.Split('.').Length > 0
+                    ? tunnelName.Split('.')[0] + "导线点"
+                    : tunnelName + "导线点";
             }
 
             var sr = new StreamReader(ofd.FileName, Encoding.GetEncoding("GB2312"));
             string duqu;
             while ((duqu = sr.ReadLine()) != null)
             {
-                string[] temp1 = duqu.Split('|');
-                string daoxianname = temp1[0];
-                string daoxianx = temp1[1];
-                string daoxiany = temp1[2];
+                var temp1 = duqu.Split('|');
+                var daoxianname = temp1[0];
+                var daoxianx = temp1[1];
+                var daoxiany = temp1[2];
                 dgrdvWire.Rows.Add(1);
                 dgrdvWire[0, dgrdvWire.Rows.Count - 2].Value = daoxianname;
                 dgrdvWire[1, dgrdvWire.Rows.Count - 2].Value = daoxianx;
@@ -778,6 +780,11 @@ namespace sys3
                 dgrdvWire[4, dgrdvWire.Rows.Count - 2].Value = "2.5";
                 dgrdvWire[5, dgrdvWire.Rows.Count - 2].Value = "2.5";
             }
+        }
+
+        private void btnDetails_Click(object sender, EventArgs e)
+        {
+            Alert.alert(_errorMsg);
         }
 
         #region 绘制导线点和巷道图形
@@ -808,6 +815,7 @@ namespace sys3
             workingFace.Save();
             return workingFace;
         }
+
         private Dictionary<string, string> _dics = new Dictionary<string, string>(); //属性字典
         private List<IPoint> _leftpts = new List<IPoint>(); //记录左侧平行线坐标
         private List<IPoint> _rightpts = new List<IPoint>(); //记录右侧平行线坐标
@@ -824,7 +832,7 @@ namespace sys3
                 return;
 
             var pntcols = new List<IPoint>();
-            foreach (WirePoint t in wirepntcols)
+            foreach (var t in wirepntcols)
             {
                 IPoint pnt = new PointClass();
                 pnt.X = t.CoordinateX;
@@ -845,7 +853,7 @@ namespace sys3
             //rightresults = Global.cons.CalculateRegPnts(rightpts);
             //leftresults = Global.cons.CalculateRegPnts(leftpts);
             //results = Global.cons.ConstructPnts(rightresults, leftresults);
-            List<IPoint> results = Global.cons.ConstructPnts(_rightpts, _leftpts);
+            var results = Global.cons.ConstructPnts(_rightpts, _leftpts);
 
             ////在巷道面显示面中绘制巷道面  
             Global.cons.AddHangdaoToLayer(results, dics, Global.hdfdfulllyr); //添加巷道到巷道图层中
@@ -863,13 +871,14 @@ namespace sys3
         /// <param name="dics"></param>
         /// <param name="hdwid"></param>
         /// <param name="tunnelId"></param>
-        private void UpdateHdbyPnts(int tunnelId, List<WirePoint> wirepntcols, Dictionary<string, string> dics, double hdwid)
+        private void UpdateHdbyPnts(int tunnelId, List<WirePoint> wirepntcols, Dictionary<string, string> dics,
+            double hdwid)
         {
             if (wirepntcols == null || wirepntcols.Count == 0)
                 return;
 
             var pntcols = new List<IPoint>();
-            foreach (WirePoint t in wirepntcols)
+            foreach (var t in wirepntcols)
             {
                 IPoint pnt = new PointClass();
                 pnt.X = t.CoordinateX;
@@ -878,7 +887,7 @@ namespace sys3
                 pntcols.Add(pnt);
             }
             //清除图层上对应的信息
-            string sql = "\"" + GIS_Const.FIELD_HDID + "\"='" + tunnelId + "'";
+            var sql = "\"" + GIS_Const.FIELD_HDID + "\"='" + tunnelId + "'";
             Global.commonclss.DelFeatures(Global.pntlyr, sql);
             Global.commonclss.DelFeatures(Global.pntlinlyr, sql);
             Global.commonclss.DelFeatures(Global.centerlyr, sql);
@@ -906,7 +915,7 @@ namespace sys3
             //results = Global.cons.ConstructPnts(rightresults, leftresults);
             //Global.cons.AddHangdaoToLayer(rightpts, dics, Global.pntlyr);
             //Global.cons.AddHangdaoToLayer(leftpts, dics, Global.pntlyr);
-            List<IPoint> results = Global.cons.ConstructPnts(_rightpts, _leftpts);
+            var results = Global.cons.ConstructPnts(_rightpts, _leftpts);
             //在巷道面显示面中绘制巷道面  
             //Global.cons.AddHangdaoToLayer(rightpts, dics, Global.pntlyr);
             //Global.cons.AddHangdaoToLayer(leftpts, dics, Global.pntlyr);
@@ -926,9 +935,9 @@ namespace sys3
             IPoint pt = new Point();
 
             //找到导线点图层
-            IMap map = DataEditCommon.g_pMap;
+            var map = DataEditCommon.g_pMap;
             const string layerName = LayerNames.DEFALUT_WIRE_PT; //“默认_导线点”图层
-            IFeatureLayer featureLayer = LayerHelper.GetLayerByName(map, layerName);
+            var featureLayer = LayerHelper.GetLayerByName(map, layerName);
 
             if (featureLayer == null)
             {
@@ -940,7 +949,7 @@ namespace sys3
             //修改导线点操作，要先删除原有导线点要素
             if (addOrChange == "CHANGE")
             {
-                foreach (WirePoint t in lstWpie)
+                foreach (var t in lstWpie)
                 {
                     var wirePtInfo = t;
                     DataEditCommon.DeleteFeatureByBId(featureLayer, wirePtInfo.BindingId);
@@ -956,67 +965,13 @@ namespace sys3
             }
         }
 
+        ///// <param name="verticesBtmRet">Vector3_DW数据</param>
         /// <summary>
         ///     根据导线点坐标绘制巷道
         /// </summary>
-        ///// <param name="lstWPIE"></param>
-        //private void DrawTunnel(List<WirePoint> lstWPIE, string addOrChange)
-        //{
-        //    ///根据导线点计算巷道边线点
-        //    WirePoint[] arrayWPt = { };
-        //    arrayWPt = lstWPIE.ToArray();
-        //    Vector3_DW[] verticesLeftBtmRet = null;
-        //    Vector3_DW[] verticesRightBtmRet = null;
-
-        //    var tunnelPtsCal = new TunnelPointsCalculation();
-        //    bool isCalSuccess = tunnelPtsCal.CalcLeftAndRightVertics(arrayWPt, ref verticesLeftBtmRet,
-        //        ref verticesRightBtmRet);
-
-        //    if (!isCalSuccess)
-        //    {
-        //        MessageBox.Show("根据导线点计算巷道未成功！");
-        //    }
-        //    else
-        //    {
-        //        //找到巷道图层
-        //        IMap map = new MapClass();
-        //        map = DataEditCommon.g_pMap;
-        //        string layerName = LayerNames.DEFALUT_TUNNEL; //“默认_巷道”图层
-        //        IFeatureLayer featureLayer = new FeatureLayerClass();
-        //        featureLayer = LayerHelper.GetLayerByName(map, layerName); //获得图层
-
-        //        if (featureLayer == null)
-        //        {
-        //            MessageBox.Show("没有找到" + layerName + "图层，将不能绘制巷道。", "提示", MessageBoxButtons.OK);
-        //            return;
-        //        }
-
-        //        var drawWirePt = new DrawTunnels();
-        //        //修改导线点操作，要先删除依据原有导线点所生成的巷道要素
-        //        if (addOrChange == "CHANGE")
-        //        {
-        //            DataEditCommon.DeleteFeatureByBId(featureLayer, selectTunnelUserControl1.SelectedTunnel.TunnelId.ToString());
-        //        }
-
-        //        //绘制巷道左边线
-        //        var lstLeftBtmRet = new List<IPoint>();
-        //        lstLeftBtmRet = GetTunnelPts(verticesLeftBtmRet);
-
-        //        if (lstLeftBtmRet == null) return;
-
-        //        drawWirePt.CreateLine(featureLayer, lstLeftBtmRet, selectTunnelUserControl1.SelectedTunnel.TunnelId);
-
-        //        //绘制巷道右边线
-        //        var lstRightBtmRet = new List<IPoint>();
-        //        lstRightBtmRet = GetTunnelPts(verticesRightBtmRet);
-        //        drawWirePt.CreateLine(featureLayer, lstRightBtmRet, selectTunnelUserControl1.SelectedTunnel.TunnelId);
-        //    }
-        //}
-
         /// <summary>
         ///     获得导线边线点坐标集
         /// </summary>
-        ///// <param name="verticesBtmRet">Vector3_DW数据</param>
         /// <returns>导线边线点坐标集List</returns>
         //private List<IPoint> GetTunnelPts(Vector3_DW[] verticesBtmRet)
         //{
@@ -1050,11 +1005,16 @@ namespace sys3
         #endregion 绘制导线点和巷道图形
         private void btnMultTxt_Click(object sender, EventArgs e)
         {
-            var ofd = new OpenFileDialog { RestoreDirectory = true, Multiselect = true, Filter = @"文本文件(*.txt)|*.txt|所有文件(*.*)|*.*" };
+            var ofd = new OpenFileDialog
+            {
+                RestoreDirectory = true,
+                Multiselect = true,
+                Filter = @"文本文件(*.txt)|*.txt|所有文件(*.*)|*.*"
+            };
             _errorMsg = @"失败文件名：";
             if (ofd.ShowDialog() != DialogResult.OK) return;
             var fileCount = ofd.FileNames.Length;
-            pbCount.Maximum = fileCount * 2;
+            pbCount.Maximum = fileCount*2;
             pbCount.Value = 0;
             foreach (var fileName in ofd.FileNames)
             {
@@ -1065,10 +1025,10 @@ namespace sys3
                     using (new SessionScope())
                     {
                         safeFileName = fileName.Substring(fileName.LastIndexOf(@"\", StringComparison.Ordinal) + 1);
-                        string[] strs = safeFileName.Split('-');
-                        string miningAreaName = strs[0];
-                        string workingFaceName = strs[1];
-                        string tunnelName = strs[2].Split('.')[0];
+                        var strs = safeFileName.Split('-');
+                        var miningAreaName = strs[0];
+                        var workingFaceName = strs[1];
+                        var tunnelName = strs[2].Split('.')[0];
                         var workingFace = WorkingFace.FindByWorkingFaceName(workingFaceName);
                         var miningArea = MiningArea.FindOneByMiningAreaName(miningAreaName);
                         if (miningArea == null)
@@ -1154,7 +1114,6 @@ namespace sys3
                         pbCount.Value++;
                         lblSuccessed.Text =
                             (Convert.ToInt32(lblSuccessed.Text) + 1).ToString(CultureInfo.InvariantCulture);
-
                     }
                 }
                 catch
@@ -1175,15 +1134,10 @@ namespace sys3
             else
             {
                 msg = new UpdateWarningDataMsg(Const.INVALID_ID, 0,
-                   Wire.TableName, OPERATION_TYPE.ADD, DateTime.Now);
+                    Wire.TableName, OPERATION_TYPE.ADD, DateTime.Now);
             }
             SocketUtil.SendMsg2Server(msg);
             Alert.alert("导入完成");
-        }
-
-        private void btnDetails_Click(object sender, EventArgs e)
-        {
-            Alert.alert(_errorMsg);
         }
     }
 }

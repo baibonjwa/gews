@@ -1,43 +1,39 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using LibBusiness;
 using LibEntity;
 
 namespace _5.WarningManagement
 {
     public partial class TunnelPreWarningCalc : Form
     {
-        PreWarningResultTable _table = new PreWarningResultTable();
+        private readonly PreWarningResultTable _table = new PreWarningResultTable();
+        private readonly Tunnel tunnelEntity = new Tunnel();
 
         public TunnelPreWarningCalc()
         {
             InitializeComponent();
         }
 
-        void InitControls()
+        private void InitControls()
         {
             _dateTimePickerEnd.Value = DateTime.Now;
             _dateTimePickerStart.Value = _dateTimePickerEnd.Value.Subtract(new TimeSpan(24, 0, 0));
-            TimeSpan ts = _dateTimePickerEnd.Value.Subtract(_dateTimePickerStart.Value);
-            _txtInterval.Text = ts.Days.ToString() + "天 " + ts.Hours.ToString() + "小时 " + ts.Minutes.ToString() + "分 " + ts.Seconds.ToString() + "秒";
-            
+            var ts = _dateTimePickerEnd.Value.Subtract(_dateTimePickerStart.Value);
+            _txtInterval.Text = ts.Days + "天 " + ts.Hours + "小时 " + ts.Minutes + "分 " + ts.Seconds + "秒";
+
             _table.MdiParent = this;
             _splitContainer.Panel2.Controls.Add(_table);
             _table.Dock = DockStyle.Fill;
             _table.Show();
             _table.Activate();
         }
+
         private void TunnelPreWarningCalc_Load(object sender, EventArgs e)
         {
             InitControls();
             bindMineName();
         }
+
         private void bindMineName()
         {
             //DataSet ds = TunnelInfoBLL.cboAddMineName();
@@ -47,6 +43,7 @@ namespace _5.WarningManagement
             //    cboMineName.Items.Add(ds.Tables[0].Rows[recordIdx]["MINE_NAME"].ToString());
             //}
         }
+
         private void _btnCalc_Click(object sender, EventArgs e)
         {
             //PreWarningCalculationBLL calc = new PreWarningCalculationBLL();
@@ -62,8 +59,6 @@ namespace _5.WarningManagement
             //PreWarningResultTableEntity tblEnt = PreWarningResultTableEntity.Convert2WarningResultTableEntity(result);
             //_table.UpdateTableContents(tblEnt, tunnelID);
         }
-
-        Tunnel tunnelEntity = new Tunnel();
 
         private void cboMineName_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -113,6 +108,5 @@ namespace _5.WarningManagement
         {
             tunnelEntity.TunnelName = cboTunnelName.Text;
         }
-        
     }
 }

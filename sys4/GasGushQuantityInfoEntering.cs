@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Windows.Forms;
 using ESRI.ArcGIS.Carto;
-using ESRI.ArcGIS.Geodatabase;
 using ESRI.ArcGIS.Geometry;
 using GIS;
 using GIS.Common;
@@ -16,10 +15,8 @@ namespace sys4
 {
     public partial class GasGushQuantityInfoEntering : Form
     {
-        private GasGushQuantity GasGushQuantity { get; set; }
-
         /// <summary>
-        /// 构造方法
+        ///     构造方法
         /// </summary>
         public GasGushQuantityInfoEntering()
         {
@@ -30,7 +27,7 @@ namespace sys4
         }
 
         /// <summary>
-        /// 带参数的构造方法
+        ///     带参数的构造方法
         /// </summary>
         /// <param name="gasGushQuantity"></param>
         public GasGushQuantityInfoEntering(GasGushQuantity gasGushQuantity)
@@ -40,12 +37,12 @@ namespace sys4
             // 设置窗体默认属性
             GasGushQuantity = gasGushQuantity;
             FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_OP.UPDATE_GASGUSHQUANTITY_INFO);
-
         }
 
+        private GasGushQuantity GasGushQuantity { get; set; }
 
         /// <summary>
-        /// 20140311 lyf 加载窗体时传入拾取点的坐标值
+        ///     20140311 lyf 加载窗体时传入拾取点的坐标值
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -73,7 +70,7 @@ namespace sys4
         }
 
         /// <summary>
-        /// 提交
+        ///     提交
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -100,7 +97,7 @@ namespace sys4
                     WorkingFaceDayOutput = Convert.ToDouble(txtWorkingFaceDayOutput.Text),
                     StopeDate = dtpStopeDate.Value,
                     Tunnel = selectTunnelSimple1.SelectedTunnel,
-                    CoalSeams = (CoalSeams)cboCoalSeams.SelectedValue,
+                    CoalSeams = (CoalSeams) cboCoalSeams.SelectedValue,
                     BindingId = IDGenerator.NewBindingID()
                 };
                 // 坐标X
@@ -117,7 +114,7 @@ namespace sys4
                 GasGushQuantity.WorkingFaceDayOutput = Convert.ToDouble(txtWorkingFaceDayOutput.Text);
                 GasGushQuantity.StopeDate = dtpStopeDate.Value;
                 GasGushQuantity.Tunnel = selectTunnelSimple1.SelectedTunnel;
-                GasGushQuantity.CoalSeams = (CoalSeams)cboCoalSeams.SelectedValue;
+                GasGushQuantity.CoalSeams = (CoalSeams) cboCoalSeams.SelectedValue;
                 GasGushQuantity.BindingId = IDGenerator.NewBindingID();
                 GasGushQuantity.Save();
                 DelGasGushQuantityPt(GasGushQuantity.BindingId, GasGushQuantity.CoalSeams.CoalSeamsName);
@@ -126,7 +123,7 @@ namespace sys4
         }
 
         /// <summary>
-        /// 取消
+        ///     取消
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -137,7 +134,7 @@ namespace sys4
         }
 
         /// <summary>
-        /// 验证画面入力数据
+        ///     验证画面入力数据
         /// </summary>
         /// <returns>验证结果：true 通过验证, false未通过验证</returns>
         private bool Check()
@@ -216,70 +213,67 @@ namespace sys4
             return true;
         }
 
-
-        #region 绘制瓦斯涌出量点图元
-
         public const string StopeWorkingFaceGasGushQuantityPt = "瓦斯涌出量点";
         public IPoint GasGushQuantityPoint { get; set; }
 
         /// <summary>
-        /// 20140801SDE中添加瓦斯涌出量点
+        ///     20140801SDE中添加瓦斯涌出量点
         /// </summary>
         private void DrawGasGushQuantityPt(GasGushQuantity gasGushQuantityEntity)
         {
-            double dCoordinateX = Convert.ToDouble(txtCoordinateX.Text);
-            double dCoordinateY = Convert.ToDouble(txtCoordinateY.Text);
-            double dCoordinateZ = Convert.ToDouble(txtCoordinateZ.Text);
+            var dCoordinateX = Convert.ToDouble(txtCoordinateX.Text);
+            var dCoordinateY = Convert.ToDouble(txtCoordinateY.Text);
+            var dCoordinateZ = Convert.ToDouble(txtCoordinateZ.Text);
             IPoint pt = new PointClass();
             pt.X = dCoordinateX;
             pt.Y = dCoordinateY;
             pt.Z = dCoordinateZ;
-            ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.LAYER_ALIAS_MR_HCGZMWSYCLD);
+            var pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.LAYER_ALIAS_MR_HCGZMWSYCLD);
             if (pLayer == null)
             {
                 MessageBox.Show(@"未找到瓦斯涌出量点图层,无法绘制瓦斯涌出量点图元。");
                 return;
             }
-            IFeatureLayer pFeatureLayer = (IFeatureLayer)pLayer;
+            var pFeatureLayer = (IFeatureLayer) pLayer;
             IGeometry geometry = pt;
-            List<ziduan> list = new List<ziduan>
+            var list = new List<ziduan>
             {
                 new ziduan("bid", gasGushQuantityEntity.BindingId),
                 new ziduan("mc", gasGushQuantityEntity.CoalSeams.ToString()),
                 new ziduan("addtime", DateTime.Now.ToString(CultureInfo.InvariantCulture))
             };
-            string hcny = gasGushQuantityEntity.StopeDate.ToLongDateString();
-            string ydwsycl = gasGushQuantityEntity.AbsoluteGasGushQuantity.ToString(CultureInfo.InvariantCulture);
-            string xdwsycl = gasGushQuantityEntity.RelativeGasGushQuantity.ToString(CultureInfo.InvariantCulture);
-            string gzmrcl = gasGushQuantityEntity.WorkingFaceDayOutput.ToString(CultureInfo.InvariantCulture);
+            var hcny = gasGushQuantityEntity.StopeDate.ToLongDateString();
+            var ydwsycl = gasGushQuantityEntity.AbsoluteGasGushQuantity.ToString(CultureInfo.InvariantCulture);
+            var xdwsycl = gasGushQuantityEntity.RelativeGasGushQuantity.ToString(CultureInfo.InvariantCulture);
+            var gzmrcl = gasGushQuantityEntity.WorkingFaceDayOutput.ToString(CultureInfo.InvariantCulture);
             if (DataEditCommon.strLen(ydwsycl) < DataEditCommon.strLen(xdwsycl))
             {
-                int count = DataEditCommon.strLen(xdwsycl) - DataEditCommon.strLen(ydwsycl);
-                for (int i = 0; i < count; i++)
+                var count = DataEditCommon.strLen(xdwsycl) - DataEditCommon.strLen(ydwsycl);
+                for (var i = 0; i < count; i++)
                 {
                     ydwsycl += " ";
                 }
             }
             else if (DataEditCommon.strLen(ydwsycl) > DataEditCommon.strLen(xdwsycl))
             {
-                int count = DataEditCommon.strLen(ydwsycl) - DataEditCommon.strLen(xdwsycl);
-                for (int i = 0; i < count; i++)
+                var count = DataEditCommon.strLen(ydwsycl) - DataEditCommon.strLen(xdwsycl);
+                for (var i = 0; i < count; i++)
                 {
                     xdwsycl += " ";
                 }
             }
             if (DataEditCommon.strLen(gzmrcl) < DataEditCommon.strLen(hcny))
             {
-                int count = DataEditCommon.strLen(hcny) - DataEditCommon.strLen(gzmrcl);
-                for (int i = 0; i < count; i++)
+                var count = DataEditCommon.strLen(hcny) - DataEditCommon.strLen(gzmrcl);
+                for (var i = 0; i < count; i++)
                 {
                     gzmrcl = " " + gzmrcl;
                 }
             }
             else if (DataEditCommon.strLen(gzmrcl) > DataEditCommon.strLen(hcny))
             {
-                int count = DataEditCommon.strLen(gzmrcl) - DataEditCommon.strLen(hcny);
-                for (int i = 0; i < count; i++)
+                var count = DataEditCommon.strLen(gzmrcl) - DataEditCommon.strLen(hcny);
+                for (var i = 0; i < count; i++)
                 {
                     hcny += " ";
                 }
@@ -289,90 +283,31 @@ namespace sys4
             list.Add(new ziduan("xdwsycl", xdwsycl));
             list.Add(new ziduan("gzmrcl", gzmrcl));
 
-            IFeature pfeature = DataEditCommon.CreateNewFeature(pFeatureLayer, geometry, list);
+            var pfeature = DataEditCommon.CreateNewFeature(pFeatureLayer, geometry, list);
             if (pfeature != null)
             {
                 MyMapHelp.Jump(pt);
-                DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh((esriViewDrawPhase)34, null, null);
+                DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh((esriViewDrawPhase) 34, null, null);
             }
         }
+
         /// <summary>
-        /// 删除瓦斯信息
+        ///     删除瓦斯信息
         /// </summary>
         /// <param name="bid">绑定ID</param>
         /// <param name="mc">煤层</param>
         private void DelGasGushQuantityPt(string bid, string mc)
         {
-            ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.LAYER_ALIAS_MR_HCGZMWSYCLD);
-            IFeatureLayer pFeatureLayer = (IFeatureLayer)pLayer;
+            var pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.LAYER_ALIAS_MR_HCGZMWSYCLD);
+            var pFeatureLayer = (IFeatureLayer) pLayer;
             DataEditCommon.DeleteFeatureByWhereClause(pFeatureLayer, "bid='" + bid + "' and mc='" + mc + "'");
         }
+
         /// <summary>
-        /// 20140311 lyf 绘制瓦斯涌出量点图元
+        ///     20140311 lyf 绘制瓦斯涌出量点图元
         /// </summary>
-        //private void DrawGasGushQuantityPt(string coalseamNO)
-        //{
-        //    DrawSpecialCommon drawspecial = new DrawSpecialCommon();
-        //    ////获得当前编辑图层
-        //    //IFeatureLayer featureLayer = (IFeatureLayer)DataEditCommon.g_pLayer;
-
-        //    ///1.获得对应瓦斯涌出量点图层
-        //    string sLayerAliasName = coalseamNO + "号煤层-" + STOPE_WORKING_FACE_GAS_GUSH_QUANTITY_PT;            
-        //    IFeatureLayer featureLayer = drawspecial.GetFeatureLayerByName(sLayerAliasName);
-
-        //    if (featureLayer == null)
-        //    {
-        //        //如果对应图层不存在，要自动创建图层
-        //        IWorkspace workspace = DataEditCommon.g_pCurrentWorkSpace;
-        //        string layerName = "STOPE_WORKING_FACE_GAS_GUSH_QUANTITY_PT" + "_NO" + coalseamNO;
-        //        //若MapControl不存在该图层，但数据库中存在该图层，则先删除之，再重新生成
-        //        IDataset dataset = drawspecial.GetDatasetByName(workspace, layerName);
-        //        if (dataset != null) dataset.Delete();
-        //        //自动创建图层
-        //        IMap map = DataEditCommon.g_pMap;                
-        //        featureLayer = drawspecial.CreateFeatureLayer(map, workspace, layerName, sLayerAliasName);
-        //        if (featureLayer == null)
-        //        {
-        //            MessageBox.Show("未成功创建" + sLayerAliasName + "图层,无法绘制瓦斯涌出量点图元。");
-        //            return;
-        //        }
-        //    }
-
-        //    ///2.绘制瓦斯涌出量点   
-        //    double dCoordinateX = Convert.ToDouble(this.txtCoordinateX.Text.ToString());
-        //    double dCoordinateY = Convert.ToDouble(this.txtCoordinateY.Text.ToString());
-        //    double dCoordinateZ = Convert.ToDouble(this.txtCoordinateZ.Text.ToString());
-        //    IPoint pt = new PointClass();
-        //    pt.X = dCoordinateX;
-        //    pt.Y = dCoordinateY;
-        //    pt.Z = dCoordinateZ;         
-
-        //    DrawWSYCLD pDrawWSYLD = new DrawWSYCLD(this.txtAbsoluteGasGushQuantity.Text.ToString(),
-        //                                            this.txtRelativeGasGushQuantity.Text.ToString(),
-        //                                            this.txtWorkingFaceDayOutput.Text.ToString(),
-        //                                            this.dtpStopeDate.Text.ToString());
-
-        //    IFeature feature = featureLayer.FeatureClass.CreateFeature();
-
-        //    IGeometry geometry = pt;
-        //    DrawCommon.HandleZMValue(feature, geometry);//几何图形Z值处理
-        //    feature.Shape = pt;
-        //    feature.Store();
-
-        //    string strValue = feature.get_Value(feature.Fields.FindField("OBJECTID")).ToString();
-        //    DataEditCommon.SpecialPointRenderer(featureLayer, "OBJECTID", strValue, pDrawWSYLD.m_Bitmap);
-
-        //    ///3.显示瓦斯涌出量点图层
-        //    if (featureLayer.Visible == false)
-        //        featureLayer.Visible = true;
-
-        //    DataEditCommon.g_pMyMapCtrl.ActiveView.Refresh();
-        //}
-
-        #endregion 绘制瓦斯涌出量点图元
-
         /// <summary>
-        /// 煤层信息添加管理
+        ///     煤层信息添加管理
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -385,6 +320,5 @@ namespace sys4
                 DataBindUtil.LoadCoalSeamsName(cboCoalSeams);
             }
         }
-
     }
 }

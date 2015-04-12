@@ -6,27 +6,16 @@
 // 版本信息：
 // V1.0 新建
 // ******************************************************************
+
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Globalization;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using LibEntity;
 using LibBusiness;
 using LibCommon;
-using ESRI.ArcGIS.Geometry;
-using GIS.Common;
-using ESRI.ArcGIS.Carto;
-using ESRI.ArcGIS.Geodatabase;
-using LibCommonForm;
-using LibCommonControl;
+using LibEntity;
 using LibSocket;
 
-namespace _4.OutburstPrevention
+namespace LibPanels
 {
     public partial class K1ValueEntering : Form
     {
@@ -67,14 +56,6 @@ namespace _4.OutburstPrevention
 
 
         }
-
-        //private void BindCoordinate(object sender, TunnelEventArgs e)
-        //{
-        //    Tunnel tunnel = Tunnel.Find(selectTunnelSimple1.ITunnelId);
-        //    tbCoordinateX.Text = tunnel.WorkingFace.Coordinate.X.ToString(CultureInfo.InvariantCulture);
-        //    tbCoordinateY.Text = tunnel.WorkingFace.Coordinate.Y.ToString(CultureInfo.InvariantCulture);
-        //    tbCoordinateZ.Text = tunnel.WorkingFace.Coordinate.Z.ToString(CultureInfo.InvariantCulture);
-        //}
 
         /// <summary>
         /// 修改

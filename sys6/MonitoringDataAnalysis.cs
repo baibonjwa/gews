@@ -6,69 +6,59 @@
 // 版本信息：
 // V1.0 新建
 // ******************************************************************
+
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.Windows.Forms.DataVisualization.Charting;
-using LibCommonForm;
-using LibDatabase;
-using System.Data.SqlClient;
-using LibBusiness;
-using LibEntity;
 using LibCommon;
+using LibDatabase;
+using LibEntity;
+using Steema.TeeChart;
 
 namespace UnderTerminal
 {
     public partial class MonitoringDataAnalysis : Form
     {
-        /** 探头数据更新频率(单位：秒) **/
-        private int _xInterval = 5;
-
         /** 显示最大数据数 **/
         private const int DEFAULT_DATA_SHOW_COUNT = 110;
-
-        private double _WarnValue = Const.WARN_VALUE;
-
-        Random rnd = new Random();
+        /** 探头数据更新频率(单位：秒) **/
+        private int _xInterval = 5;
+        private readonly double _WarnValue = Const.WARN_VALUE;
+        private readonly Random rnd = new Random();
 
         /// <summary>
-        /// 构造方法
+        ///     构造方法
         /// </summary>
         public MonitoringDataAnalysis()
         {
             InitializeComponent();
 
             // 调用选择巷道控件时需要调用的方法
-            this.selectTunnelUserControl1.loadMineName();
+            selectTunnelUserControl1.loadMineName();
 
             // 注册委托事件
-            this.selectTunnelUserControl1.TunnelNameChanged += InheritTunnelNameChanged;
+            selectTunnelUserControl1.TunnelNameChanged += InheritTunnelNameChanged;
         }
 
         /// <summary>
-        /// 委托事件
+        ///     委托事件
         /// </summary>
         /// <param name="sender"></param>
         private void InheritTunnelNameChanged(object sender, TunnelEventArgs e)
         {
-            this._lstProbeStyle.DataSource = null;
-            this._lstProbeName.DataSource = null;
+            _lstProbeStyle.DataSource = null;
+            _lstProbeName.DataSource = null;
 
             // 加载探头类型信息
             loadProbeTypeInfo();
         }
 
         /// <summary>
-        /// 加载探头类型信息
+        ///     加载探头类型信息
         /// </summary>
         private void loadProbeTypeInfo()
         {
-            ProbeType[] probeTypes = ProbeType.FindAll();
+            var probeTypes = ProbeType.FindAll();
             if (probeTypes.Length > 0)
             {
                 _lstProbeStyle.DataSource = probeTypes;
@@ -80,26 +70,26 @@ namespace UnderTerminal
         }
 
         /// <summary>
-        /// 探头类型选择事件
+        ///     探头类型选择事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void _lstProbeStyle_MouseUp(object sender, MouseEventArgs e)
         {
-            this._lstProbeName.DataSource = null;
+            _lstProbeName.DataSource = null;
 
             // 没有选择巷道
-            if (this.selectTunnelUserControl1.ITunnelId == Const.INVALID_ID)
+            if (selectTunnelUserControl1.ITunnelId == Const.INVALID_ID)
             {
                 Alert.alert(Const_GE.TUNNEL_NAME_MUST_INPUT);
             }
             else
             {
                 // 根据巷道编号和探头类型编号获取探头信息
-                Probe[] probes = Probe.FindAllByTunnelIdAndProbeTypeId(selectTunnelUserControl1.ITunnelId,
-                     Convert.ToInt32(_lstProbeStyle.SelectedValue));
+                var probes = Probe.FindAllByTunnelIdAndProbeTypeId(selectTunnelUserControl1.ITunnelId,
+                    Convert.ToInt32(_lstProbeStyle.SelectedValue));
 
-                for (int i = 0; i < probes.Length; i++)
+                for (var i = 0; i < probes.Length; i++)
                 {
                     _lstProbeName.Items.Add(probes);
                 }
@@ -111,26 +101,21 @@ namespace UnderTerminal
         }
 
         /// <summary>
-        /// 探头名称选择事件
+        ///     探头名称选择事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void _lstProbeName_MouseUp(object sender, MouseEventArgs e)
         {
             // 没有选择巷道
-            if (this.selectTunnelUserControl1.ITunnelId == Const.INVALID_ID)
+            if (selectTunnelUserControl1.ITunnelId == Const.INVALID_ID)
             {
                 Alert.alert(Const_GE.TUNNEL_NAME_MUST_INPUT);
-                return;
-            }
-            else
-            {
-                // TODO:方法待实装
             }
         }
 
         /// <summary>
-        /// 实时数据监控
+        ///     实时数据监控
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -138,15 +123,15 @@ namespace UnderTerminal
         {
             /** 历史数据分析 **/
             // 历史数据分析按钮
-            this._rbtnHistory.Checked = false;
-            this._rbtnHistory.Enabled = true;
+            _rbtnHistory.Checked = false;
+            _rbtnHistory.Enabled = true;
 
             // 开始时间
-            this._dateTimeStart.Enabled = false;
+            _dateTimeStart.Enabled = false;
             // 结束时间
-            this._dateTimeEnd.Enabled = false;
+            _dateTimeEnd.Enabled = false;
             // 查询
-            this._btnQuery.Enabled = false;
+            _btnQuery.Enabled = false;
 
             /** 实时数据监控 **/
             // 数据传输频率
@@ -156,22 +141,22 @@ namespace UnderTerminal
         }
 
         /// <summary>
-        /// 历史数据分析
+        ///     历史数据分析
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void _rbtnHistory_Click(object sender, EventArgs e)
         {
             // 实时数据监控按钮
-            this._rbtnRealtime.Checked = false;
-            this._rbtnRealtime.Enabled = true;
+            _rbtnRealtime.Checked = false;
+            _rbtnRealtime.Enabled = true;
 
             // 开始时间
-            this._dateTimeStart.Enabled = true;
+            _dateTimeStart.Enabled = true;
             // 结束时间
-            this._dateTimeEnd.Enabled = true;
+            _dateTimeEnd.Enabled = true;
             // 查询
-            this._btnQuery.Enabled = true;
+            _btnQuery.Enabled = true;
 
             /** 实时数据监控 **/
             // 数据传输频率
@@ -179,26 +164,26 @@ namespace UnderTerminal
             // 开始按钮
             _btnStart.Enabled = false;
 
-            this._btnStart.Text = "开始";
-            this.timer1.Enabled = false;
+            _btnStart.Text = "开始";
+            timer1.Enabled = false;
 
             // 清空datagridview
-            this._dgvData.Rows.Clear();
+            _dgvData.Rows.Clear();
             // 清空fastline
-            this.fastLine1.Clear();
+            fastLine1.Clear();
         }
 
         /// <summary>
-        /// 计时器
+        ///     计时器
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void timer1_Tick(object sender, EventArgs e)
         {
-            AnimateSeries(this.tChart1);
+            AnimateSeries(tChart1);
         }
 
-        private void AnimateSeries(Steema.TeeChart.TChart chart)
+        private void AnimateSeries(TChart chart)
         {
             double newY;
             DateTime newX;
@@ -208,10 +193,10 @@ namespace UnderTerminal
             /// <summary>
             /// 绘画坐标点超过50个时将实时更新X时间坐标
             /// </summary>
-            while (this.fastLine1.Count > DEFAULT_DATA_SHOW_COUNT)
+            while (fastLine1.Count > DEFAULT_DATA_SHOW_COUNT)
             {
                 // 删除第一个点
-                this.fastLine1.Delete(0);
+                fastLine1.Delete(0);
                 // 重新设置X轴的最大值和最小值
                 fastLine1.GetHorizAxis.SetMinMax(DateTime.Now.AddSeconds(-110), DateTime.Now.AddSeconds(10));
             }
@@ -219,20 +204,20 @@ namespace UnderTerminal
             newX = DateTime.Now;
             newY = rnd.Next(500);
             if (Math.Abs(newY) > 1.0e+4) newY = 0.0;
-            fastLine1.Add(newX, newY / 100);
+            fastLine1.Add(newX, newY/100);
 
             // 往DGV中填充数据
-            this._dgvData.Rows.Add(newY / 100 + "%", DateTime.Now);
+            _dgvData.Rows.Add(newY/100 + "%", DateTime.Now);
             // 预警值
-            double dWarnValue = _WarnValue;
+            var dWarnValue = _WarnValue;
 
             // 当某点的Y坐标超过某一值时
-            if (newY / 100 > dWarnValue)
+            if (newY/100 > dWarnValue)
             {
-                this._dgvData.Rows[this._dgvData.Rows.Count - 1].DefaultCellStyle.BackColor = Color.Red;
+                _dgvData.Rows[_dgvData.Rows.Count - 1].DefaultCellStyle.BackColor = Color.Red;
             }
             // 定位滚动条
-            this._dgvData.FirstDisplayedScrollingRowIndex = this._dgvData.Rows.Count - 1;
+            _dgvData.FirstDisplayedScrollingRowIndex = _dgvData.Rows.Count - 1;
 
             // 重绘
             chart.AutoRepaint = true;
@@ -240,7 +225,7 @@ namespace UnderTerminal
         }
 
         /// <summary>
-        /// load数据
+        ///     load数据
         /// </summary>
         private void loadData()
         {
@@ -248,128 +233,124 @@ namespace UnderTerminal
             teechartInit();
 
             // 重绘
-            this.tChart1.AutoRepaint = false;
+            tChart1.AutoRepaint = false;
 
-            string sqlStr = "SELECT * FROM T_GAS_CONCENTRATION_PROBE_DATA WHERE RECORD_TIME > '" +
-            this._dateTimeStart.Text + "' AND RECORD_TIME < '" + this._dateTimeEnd.Text + "' ORDER BY RECORD_TIME";
-            ManageDataBase db = new ManageDataBase(DATABASE_TYPE.GasEmissionDB);
-            DataSet ds = db.ReturnDS(sqlStr);
+            var sqlStr = "SELECT * FROM T_GAS_CONCENTRATION_PROBE_DATA WHERE RECORD_TIME > '" +
+                         _dateTimeStart.Text + "' AND RECORD_TIME < '" + _dateTimeEnd.Text + "' ORDER BY RECORD_TIME";
+            var db = new ManageDataBase(DATABASE_TYPE.GasEmissionDB);
+            var ds = db.ReturnDS(sqlStr);
 
             // 禁止自动生成列(※位置不可变)
-            this._dgvData.AutoGenerateColumns = false;
+            _dgvData.AutoGenerateColumns = false;
 
-            int sqlCnt = ds.Tables[0].Rows.Count;
+            var sqlCnt = ds.Tables[0].Rows.Count;
 
             if (sqlCnt > 0)
             {
-
                 // 重新设置X轴的最大值和最小值
                 fastLine1.GetHorizAxis.SetMinMax(Convert.ToDateTime(ds.Tables[0].Rows[0]["RECORD_TIME"]).ToOADate(),
                     Convert.ToDateTime(ds.Tables[0].Rows[0]["RECORD_TIME"]).AddSeconds(120).ToOADate());
 
-                for (int i = 0; i < sqlCnt; i++)
+                for (var i = 0; i < sqlCnt; i++)
                 {
-                    double value = Convert.ToDouble(ds.Tables[0].Rows[i]["PROBE_VALUE"]);
-                    DateTime time = Convert.ToDateTime(ds.Tables[0].Rows[i]["RECORD_TIME"]);
+                    var value = Convert.ToDouble(ds.Tables[0].Rows[i]["PROBE_VALUE"]);
+                    var time = Convert.ToDateTime(ds.Tables[0].Rows[i]["RECORD_TIME"]);
 
                     //fastLine1.Add(time, value);
                     fastLine1.Add(time, value);
 
                     // 往DGV中填充数据
-                    this._dgvData.Rows.Add(value + "%", time);
+                    _dgvData.Rows.Add(value + "%", time);
                     // 预警值
-                    double dWarnValue = _WarnValue;
+                    var dWarnValue = _WarnValue;
 
                     // 当某点的Y坐标超过某一值时
                     if (value > dWarnValue)
                     {
-                        this._dgvData.Rows[this._dgvData.Rows.Count - 1].DefaultCellStyle.BackColor = Color.Red;
+                        _dgvData.Rows[_dgvData.Rows.Count - 1].DefaultCellStyle.BackColor = Color.Red;
                     }
                 }
-
             }
 
             // 重绘
-            this.tChart1.AutoRepaint = true;
-            this.tChart1.Refresh();
-
+            tChart1.AutoRepaint = true;
+            tChart1.Refresh();
         }
 
         /// <summary>
-        /// TeeChart初期化
+        ///     TeeChart初期化
         /// </summary>
         private void teechartInit()
         {
             // 初始化
-            this.tChart1.Series[0].Clear();
+            tChart1.Series[0].Clear();
 
             //fastLine1.Add(DateTime.Now.ToOADate(), 2.5);
 
             // 设置Y轴的最小值和最大值
             fastLine1.GetVertAxis.SetMinMax(0, 6);
             // 设置Y轴间距
-            this.tChart1.Axes.Left.Increment = 0.25;
+            tChart1.Axes.Left.Increment = 0.25;
         }
 
         /// <summary>
-        /// 设置Marks显示与否
+        ///     设置Marks显示与否
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void _ckbSetMarks_Click(object sender, EventArgs e)
         {
-            if (this._ckbSetMarks.Checked == true)
+            if (_ckbSetMarks.Checked)
             {
                 // Mark显示
-                this.fastLine1.Marks.Visible = true;
+                fastLine1.Marks.Visible = true;
             }
             else
             {
                 // Mark隐藏
-                this.fastLine1.Marks.Visible = false;
+                fastLine1.Marks.Visible = false;
             }
         }
 
         /// <summary>
-        /// 开始按钮Click事件
+        ///     开始按钮Click事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void _btnStart_Click(object sender, EventArgs e)
         {
             // 没有选择巷道 
-            if (this.selectTunnelUserControl1.ITunnelId == Const.INVALID_ID)
+            if (selectTunnelUserControl1.ITunnelId == Const.INVALID_ID)
             {
                 Alert.alert(Const_GE.TUNNEL_NAME_MUST_INPUT);
                 return;
             }
 
             // 没有选择探头
-            if (this._lstProbeName.SelectedItems.Count == 0)
+            if (_lstProbeName.SelectedItems.Count == 0)
             {
                 Alert.alert(Const_GE.PROBE_MUST_CHOOSE);
                 return;
             }
 
-            if (this.selectTunnelUserControl1.ITunnelId != Const.INVALID_ID
-                && this._lstProbeName.SelectedItems.Count > 0)
+            if (selectTunnelUserControl1.ITunnelId != Const.INVALID_ID
+                && _lstProbeName.SelectedItems.Count > 0)
             {
-
-                if (this._btnStart.Text == "开始")
+                if (_btnStart.Text == "开始")
                 {
-                    int iInterva = 0;
+                    var iInterva = 0;
 
-                    if (this._txtSpeed.Text != "")
+                    if (_txtSpeed.Text != "")
                     {
-                        iInterva = Convert.ToInt32(this._txtSpeed.Text) * 1000;
+                        iInterva = Convert.ToInt32(_txtSpeed.Text)*1000;
                     }
                     else
                     {
                         iInterva = 5000;
                     }
-                    _xInterval = Convert.ToInt32(this._txtSpeed.Text);
+                    _xInterval = Convert.ToInt32(_txtSpeed.Text);
 
-                    this.timer1.Interval = iInterva;
+                    timer1.Interval = iInterva;
 
                     // TeeChart初期化
                     teechartInit();
@@ -377,50 +358,49 @@ namespace UnderTerminal
                     // 设置X轴最小值和最大值
                     fastLine1.GetHorizAxis.SetMinMax(DateTime.Now, DateTime.Now.AddSeconds(120));
 
-                    this._btnStart.Text = "停止";
-                    this.timer1.Enabled = true;
+                    _btnStart.Text = "停止";
+                    timer1.Enabled = true;
 
                     // 清空datagridview
-                    this._dgvData.Rows.Clear();
+                    _dgvData.Rows.Clear();
                 }
                 else
                 {
-                    this._btnStart.Text = "开始";
-                    this.timer1.Enabled = false;
+                    _btnStart.Text = "开始";
+                    timer1.Enabled = false;
                 }
             }
         }
 
         /// <summary>
-        /// 查询
+        ///     查询
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void _btnQuery_Click(object sender, EventArgs e)
         {
             // 没有选择巷道 
-            if (this.selectTunnelUserControl1.ITunnelId == Const.INVALID_ID)
+            if (selectTunnelUserControl1.ITunnelId == Const.INVALID_ID)
             {
                 Alert.alert(Const_GE.TUNNEL_NAME_MUST_INPUT);
                 return;
             }
 
             // 没有选择探头
-            if (this._lstProbeName.SelectedItems.Count == 0)
+            if (_lstProbeName.SelectedItems.Count == 0)
             {
                 Alert.alert(Const_GE.PROBE_MUST_CHOOSE);
                 return;
             }
 
-            if (this.selectTunnelUserControl1.ITunnelId != Const.INVALID_ID
-                && this._lstProbeName.SelectedItems.Count > 0)
+            if (selectTunnelUserControl1.ITunnelId != Const.INVALID_ID
+                && _lstProbeName.SelectedItems.Count > 0)
             {
                 // 清空datagridview
-                this._dgvData.Rows.Clear();
+                _dgvData.Rows.Clear();
 
                 loadData();
             }
-
         }
     }
 }

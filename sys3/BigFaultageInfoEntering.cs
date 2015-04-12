@@ -76,14 +76,14 @@ namespace sys3
             //ofd.ShowDialog();
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                string aa = ofd.FileName;
-                string[] strs = File.ReadAllLines(aa, Encoding.GetEncoding("GB2312"));
-                string type = "";
-                for (int i = 0; i < strs.Length; i++)
+                var aa = ofd.FileName;
+                var strs = File.ReadAllLines(aa, Encoding.GetEncoding("GB2312"));
+                var type = "";
+                for (var i = 0; i < strs.Length; i++)
                 {
                     if (i == 0)
                     {
-                        string[] line1 = strs[i].Split('|');
+                        var line1 = strs[i].Split('|');
                         tbFaultageName.Text = line1[0];
                         tbGap.Text = line1[1];
                         if (line1[2] == "正断层")
@@ -141,7 +141,7 @@ namespace sys3
                 };
                 for (var i = 0; i < dgrdvUp.Rows.Count; i++)
                 {
-                    var point = new BigFaultagePoint { UpOrDown = "上盘" };
+                    var point = new BigFaultagePoint {UpOrDown = "上盘"};
                     if (dgrdvUp.Rows[i].Cells[0].Value == null) continue;
                     point.CoordinateX = Convert.ToDouble(dgrdvUp.Rows[i].Cells[0].Value);
                     point.CoordinateY = Convert.ToDouble(dgrdvUp.Rows[i].Cells[1].Value);
@@ -162,7 +162,7 @@ namespace sys3
                 }
                 bigFaultage.Save();
                 var title = bigFaultage.BigFaultageName + "  " + bigFaultage.Angle + "  " +
-                               bigFaultage.Gap;
+                            bigFaultage.Gap;
                 DrawBigFaultageInfo.DrawTddc(title, bigFaultagePoingList, bigFaultage.BindingId);
             }
             else
@@ -202,9 +202,9 @@ namespace sys3
             {
                 try
                 {
-                    string[] strs = File.ReadAllLines(fileName, Encoding.GetEncoding("GB2312"));
-                    string type = "";
-                    string[] split = strs[0].Split('|');
+                    var strs = File.ReadAllLines(fileName, Encoding.GetEncoding("GB2312"));
+                    var type = "";
+                    var split = strs[0].Split('|');
                     var bigFaultage = BigFaultage.FindOneByBigFaultageName(split[0]);
                     var bigFaultagePoints = new List<BigFaultagePoint>();
                     if (bigFaultage == null)
@@ -227,7 +227,7 @@ namespace sys3
                     }
 
 
-                    for (int i = 1; i < strs.Length; i++)
+                    for (var i = 1; i < strs.Length; i++)
                     {
                         if (strs[i] == "上盘")
                         {
@@ -270,17 +270,17 @@ namespace sys3
                     }
                     bigFaultage.BigFaultagePoints = bigFaultagePoints;
                     var title = bigFaultage.BigFaultageName + "  " + bigFaultage.Angle + "  " +
-                             bigFaultage.Gap;
+                                bigFaultage.Gap;
                     DrawBigFaultageInfo.DrawTddc(title, bigFaultagePoints, bigFaultage.BindingId);
                     bigFaultage.Save();
                     lblSuccessed.Text =
-                             (Convert.ToInt32(lblSuccessed.Text) + 1).ToString(CultureInfo.InvariantCulture);
+                        (Convert.ToInt32(lblSuccessed.Text) + 1).ToString(CultureInfo.InvariantCulture);
                     pbCount.Value++;
                 }
                 catch (Exception)
                 {
                     lblError.Text =
-                      (Convert.ToInt32(lblError.Text) + 1).ToString(CultureInfo.InvariantCulture);
+                        (Convert.ToInt32(lblError.Text) + 1).ToString(CultureInfo.InvariantCulture);
                     lblSuccessed.Text =
                         (Convert.ToInt32(lblSuccessed.Text) - 1).ToString(CultureInfo.InvariantCulture);
                     _errorMsg += fileName.Substring(fileName.LastIndexOf(@"\", StringComparison.Ordinal) + 1) + "\n";

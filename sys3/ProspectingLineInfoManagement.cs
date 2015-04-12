@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using ESRI.ArcGIS.Carto;
+using GIS;
 using GIS.Common;
 using LibCommon;
 using LibEntity;
@@ -9,7 +10,6 @@ namespace sys3
 {
     public partial class ProspectingLineInfoManagement : Form
     {
-
         // 构造方法
         public ProspectingLineInfoManagement()
         {
@@ -25,7 +25,7 @@ namespace sys3
         }
 
         /// <summary>
-        /// 添加（必须实装）
+        ///     添加（必须实装）
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -39,13 +39,14 @@ namespace sys3
         }
 
         /// <summary>
-        /// 修改（必须实装）
+        ///     修改（必须实装）
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            var prospectingLineInfoEnteringForm = new ProspectingLineInfoEntering((ProspectingLine)gridView1.GetFocusedRow());
+            var prospectingLineInfoEnteringForm =
+                new ProspectingLineInfoEntering((ProspectingLine) gridView1.GetFocusedRow());
             if (DialogResult.OK == prospectingLineInfoEnteringForm.ShowDialog())
             {
                 RefreshData();
@@ -53,7 +54,7 @@ namespace sys3
         }
 
         /// <summary>
-        /// 删除按钮（必须实装）
+        ///     删除按钮（必须实装）
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -61,16 +62,17 @@ namespace sys3
         {
             if (Alert.confirm(Const_GM.DEL_CONFIRM_MSG_PROSPECTING_LINE))
             {
-                var prospectingLine = (ProspectingLine)gridView1.GetFocusedRow();
-                DeleteJLDCByBID(new[] { prospectingLine.BindingId });
+                var prospectingLine = (ProspectingLine) gridView1.GetFocusedRow();
+                DeleteJLDCByBID(new[] {prospectingLine.BindingId});
                 prospectingLine.Delete();
                 RefreshData();
             }
         }
+
         #region 删除勘探线图元
 
         /// <summary>
-        /// 根据勘探线层绑定ID删除勘探线层图元
+        ///     根据勘探线层绑定ID删除勘探线层图元
         /// </summary>
         /// <param name="sfpFaultageBidArray">要删除勘探线层的绑定ID</param>
         private void DeleteJLDCByBID(string[] sfpFaultageBidArray)
@@ -79,8 +81,8 @@ namespace sys3
 
             //1.获得当前编辑图层
             var drawspecial = new DrawSpecialCommon();
-            const string sLayerAliasName = GIS.LayerNames.DEFALUT_KANTANXIAN; //“默认_勘探线层”图层
-            IFeatureLayer featureLayer = drawspecial.GetFeatureLayerByName(sLayerAliasName);
+            const string sLayerAliasName = LayerNames.DEFALUT_KANTANXIAN; //“默认_勘探线层”图层
+            var featureLayer = drawspecial.GetFeatureLayerByName(sLayerAliasName);
             if (featureLayer == null)
             {
                 MessageBox.Show(@"未找到" + sLayerAliasName + @"图层,无法删除揭露断层图元。");
@@ -93,10 +95,11 @@ namespace sys3
                 DataEditCommon.DeleteFeatureByBId(featureLayer, sfpFaultageBid);
             }
         }
+
         #endregion
 
         /// <summary>
-        /// 退出
+        ///     退出
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -107,7 +110,7 @@ namespace sys3
         }
 
         /// <summary>
-        /// 导出
+        ///     导出
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -120,7 +123,7 @@ namespace sys3
         }
 
         /// <summary>
-        /// 打印
+        ///     打印
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -130,7 +133,7 @@ namespace sys3
         }
 
         /// <summary>
-        /// 刷新
+        ///     刷新
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -139,22 +142,21 @@ namespace sys3
             RefreshData();
         }
 
-
         /// <summary>
-        /// 图显按钮事件
+        ///     图显按钮事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnMap_Click(object sender, EventArgs e)
         {
-            var bid = ((ProspectingLine)gridView1.GetFocusedRow()).BindingId;
-            var pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, GIS.LayerNames.DEFALUT_KANTANXIAN);
+            var bid = ((ProspectingLine) gridView1.GetFocusedRow()).BindingId;
+            var pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.DEFALUT_KANTANXIAN);
             if (pLayer == null)
             {
                 MessageBox.Show(@"未发现勘探线图层！");
                 return;
             }
-            var pFeatureLayer = (IFeatureLayer)pLayer;
+            var pFeatureLayer = (IFeatureLayer) pLayer;
             var str = "";
             //for (int i = 0; i < iSelIdxsArr.Length; i++)
             //{
@@ -167,10 +169,10 @@ namespace sys3
                 //    str += " or bid='" + bid + "'";
             }
             //}
-            var list = GIS.MyMapHelp.FindFeatureListByWhereClause(pFeatureLayer, str);
+            var list = MyMapHelp.FindFeatureListByWhereClause(pFeatureLayer, str);
             if (list.Count > 0)
             {
-                GIS.MyMapHelp.Jump(GIS.MyMapHelp.GetGeoFromFeature(list));
+                MyMapHelp.Jump(MyMapHelp.GetGeoFromFeature(list));
                 DataEditCommon.g_pMap.ClearSelection();
                 foreach (var t in list)
                 {
@@ -180,7 +182,8 @@ namespace sys3
                 Location = DataEditCommon.g_axTocControl.Location;
                 Width = DataEditCommon.g_axTocControl.Width;
                 Height = DataEditCommon.g_axTocControl.Height;
-                DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeoSelection, null, DataEditCommon.g_pAxMapControl.Extent);
+                DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeoSelection, null,
+                    DataEditCommon.g_pAxMapControl.Extent);
             }
             else
             {
@@ -193,5 +196,4 @@ namespace sys3
             RefreshData();
         }
     }
-
 }

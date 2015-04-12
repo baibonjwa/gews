@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 namespace UnderTerminal
 {
     public enum ExitWindows : uint
     {
-        LogOff = 0x00,      //注销
-        ShutDown = 0x01,    //关机
-        Reboot = 0x02,      //重启
+        LogOff = 0x00, //注销
+        ShutDown = 0x01, //关机
+        Reboot = 0x02, //重启
         Force = 0x04,
         PowerOff = 0x08,
         ForceIfHung = 0x10
@@ -56,20 +54,32 @@ namespace UnderTerminal
         FlagPlanned = 0x80000000
     }
 
-    class SysHelper
+    internal class SysHelper
     {
+        internal const int SE_PRIVILEGE_ENABLED = 0x00000002;
+        internal const int TOKEN_QUERY = 0x00000008;
+        internal const int TOKEN_ADJUST_PRIVILEGES = 0x00000020;
+        internal const string SE_SHUTDOWN_NAME = "SeShutdownPrivilege";
+        internal const int EWX_LOGOFF = 0x00000000;
+        internal const int EWX_SHUTDOWN = 0x00000001;
+        internal const int EWX_REBOOT = 0x00000002;
+        internal const int EWX_FORCE = 0x00000004;
+        internal const int EWX_POWEROFF = 0x00000008;
+        internal const int EWX_FORCEIFHUNG = 0x00000010;
+
         [DllImport("user32.dll")]
-        public static extern int FindWindow(String className, String captionName);   //获得句柄
+        public static extern int FindWindow(String className, String captionName); //获得句柄
+
         [DllImport("user32.dll")]
-        public static extern bool ShowWindow(int hwnd, int nCmdShow);//—————-任务栏
+        public static extern bool ShowWindow(int hwnd, int nCmdShow); //—————-任务栏
 
         [DllImport("user32.dll")]
         public static extern bool ExitWindowsEx(ExitWindows uFlags, ShutdownReason dwReason);
 
         public static void TaskmgrHide()
         {
-            System.Diagnostics.Process[] proc = System.Diagnostics.Process.GetProcesses();
-            foreach (System.Diagnostics.Process thisproc in proc)
+            var proc = Process.GetProcesses();
+            foreach (var thisproc in proc)
             {
                 if (thisproc.ProcessName.Equals("taskmgr"))
                 {
@@ -77,22 +87,13 @@ namespace UnderTerminal
                     break;
                 }
             }
-            System.Diagnostics.Process pro = new System.Diagnostics.Process();
+            var pro = new Process();
             pro.StartInfo.WorkingDirectory = Environment.GetFolderPath(Environment.SpecialFolder.System);
             pro.StartInfo.FileName = "taskmgr.exe";
             pro.StartInfo.CreateNoWindow = true;
-            pro.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            pro.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             pro.Start();
         }
-
-        //C#关机代码  
-        [StructLayout(LayoutKind.Sequential, Pack = 1)]
-        internal struct TokPriv1Luid
-        {
-            public int Count;
-            public long Luid;
-            public int Attr;
-        }   
 
         //C#关机代码  
         [DllImport("kernel32.dll", ExactSpelling = true)]
@@ -106,28 +107,18 @@ namespace UnderTerminal
 
         [DllImport("advapi32.dll", ExactSpelling = true, SetLastError = true)]
         internal static extern bool AdjustTokenPrivileges(IntPtr htok, bool disall,
-         ref TokPriv1Luid newst, int len, IntPtr prev, IntPtr relen);
+            ref TokPriv1Luid newst, int len, IntPtr prev, IntPtr relen);
 
         [DllImport("user32.dll", ExactSpelling = true, SetLastError = true)]
         internal static extern bool ExitWindowsEx(int flg, int rea);
 
-        internal const int SE_PRIVILEGE_ENABLED = 0x00000002;
-        internal const int TOKEN_QUERY = 0x00000008;
-        internal const int TOKEN_ADJUST_PRIVILEGES = 0x00000020;
-        internal const string SE_SHUTDOWN_NAME = "SeShutdownPrivilege";
-        internal const int EWX_LOGOFF = 0x00000000;
-        internal const int EWX_SHUTDOWN = 0x00000001;
-        internal const int EWX_REBOOT = 0x00000002;
-        internal const int EWX_FORCE = 0x00000004;
-        internal const int EWX_POWEROFF = 0x00000008;
-        internal const int EWX_FORCEIFHUNG = 0x00000010;
         //C#关机代码  
         public static void DoExitWin(int flg)
         {
             bool ok;
             TokPriv1Luid tp;
-            IntPtr hproc = GetCurrentProcess();
-            IntPtr htok = IntPtr.Zero;
+            var hproc = GetCurrentProcess();
+            var htok = IntPtr.Zero;
             ok = OpenProcessToken(hproc, TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, ref htok);
             tp.Count = 1;
             tp.Luid = 0;
@@ -140,6 +131,15 @@ namespace UnderTerminal
         public static void Reboot()
         {
             DoExitWin(EWX_REBOOT);
-        }   
+        }
+
+        //C#关机代码  
+        [StructLayout(LayoutKind.Sequential, Pack = 1)]
+        internal struct TokPriv1Luid
+        {
+            public int Count;
+            public long Luid;
+            public int Attr;
+        }
     }
 }

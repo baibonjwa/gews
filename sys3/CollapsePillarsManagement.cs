@@ -6,7 +6,6 @@ using ESRI.ArcGIS.Carto;
 using GIS;
 using GIS.Common;
 using GIS.SpecialGraphic;
-using LibBusiness;
 using LibCommon;
 using LibEntity;
 using LibSocket;
@@ -62,7 +61,7 @@ namespace sys3
         /// <param name="e"></param>
         private void tsBtnModify_Click(object sender, EventArgs e)
         {
-            var c = new CollapsePillarsEntering((CollapsePillars)gridView1.GetFocusedRow());
+            var c = new CollapsePillarsEntering((CollapsePillars) gridView1.GetFocusedRow());
             if (DialogResult.OK == c.ShowDialog())
             {
                 RefreshData();
@@ -78,7 +77,7 @@ namespace sys3
         {
             if (!Alert.confirm(Const.DEL_CONFIRM_MSG)) return;
             var selectedIndex = gridView1.GetSelectedRows();
-            foreach (var collapsePillars in selectedIndex.Select(i => (CollapsePillars)gridView1.GetRow(i)))
+            foreach (var collapsePillars in selectedIndex.Select(i => (CollapsePillars) gridView1.GetRow(i)))
             {
                 DeleteyXLZ(collapsePillars.Id.ToString());
                 collapsePillars.Delete();
@@ -138,15 +137,15 @@ namespace sys3
         /// <param name="e"></param>
         private void btnMap_Click(object sender, EventArgs e)
         {
-            ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.LAYER_ALIAS_MR_XianLuoZhu1);
+            var pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.LAYER_ALIAS_MR_XianLuoZhu1);
             if (pLayer == null)
             {
                 MessageBox.Show(@"未发现陷落柱图层！");
                 return;
             }
-            var pFeatureLayer = (IFeatureLayer)pLayer;
-            string str = "";
-            string bid = ((CollapsePillars)gridView1.GetFocusedRow()).Id.ToString(CultureInfo.InvariantCulture);
+            var pFeatureLayer = (IFeatureLayer) pLayer;
+            var str = "";
+            var bid = ((CollapsePillars) gridView1.GetFocusedRow()).Id.ToString(CultureInfo.InvariantCulture);
             if (bid != "")
             {
                 if (true)
@@ -187,7 +186,7 @@ namespace sys3
             //1.获得当前编辑图层
             var drawspecial = new DrawSpecialCommon();
             const string sLayerAliasName = LayerNames.LAYER_ALIAS_MR_XianLuoZhu1; //“默认_陷落柱_1”图层
-            IFeatureLayer featureLayer = drawspecial.GetFeatureLayerByName(sLayerAliasName);
+            var featureLayer = drawspecial.GetFeatureLayerByName(sLayerAliasName);
             if (featureLayer == null)
             {
                 MessageBox.Show(@"未找到" + sLayerAliasName + @"图层,无法删除陷落柱图元。");
@@ -197,6 +196,7 @@ namespace sys3
             //2.删除原来图元，重新绘制新图元
             DataEditCommon.DeleteFeatureByBId(featureLayer, sCollapseId);
         }
+
         private void SendMessengToServer()
         {
             Log.Debug("更新服务端断层Map------开始");

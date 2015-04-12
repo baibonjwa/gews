@@ -10,26 +10,17 @@ namespace UnderTerminal
     public partial class CurveMonitor : Form
     {
         private static int t2DataCount = 1;
-        private readonly string _T2Id = string.Empty;
-
-        private readonly UnderMessageWindow mainWin;
-
-        /** 显示最大数据数 **/
-        private int DEFAULT_DATA_SHOW_COUNT = 20;
-        private int MAX_SECONDS_INTERVAL = 6*60*60; // 6 个小时
-
         private DateTime _LastTime;
-
         //private double _WarnValue = Const.WARN_VALUE;
         private DateTime _LastTimeMN; // M/N 的数据更新时间
         private DateTime _LastTimeT2; // T2的数据更新时间
-
         // 获取点击开始按钮时候的系统时间
         private DateTime _StartTime;
         private string currentProbeId = string.Empty;
-
+        /** 显示最大数据数 **/
+        private int DEFAULT_DATA_SHOW_COUNT = 20;
+        private int MAX_SECONDS_INTERVAL = 6*60*60; // 6 个小时
         private MonitoringDataAnalysis monitoringDataAnalysisForm = new MonitoringDataAnalysis();
-        private double redDataThreshold = 10;
         private Random rnd = new Random();
         private double t2DeltaSumValue;
 
@@ -38,7 +29,10 @@ namespace UnderTerminal
         private int tunnelId = -1;
 
         private string tunnelName = string.Empty;
-        private double yellowDataThreshold = 0.75;
+        private readonly string _T2Id = string.Empty;
+        private readonly UnderMessageWindow mainWin;
+        private readonly double redDataThreshold = 10;
+        private readonly double yellowDataThreshold = 0.75;
 
         public CurveMonitor(int tunnelId, string tunnelName, UnderMessageWindow mainW)
         {
@@ -164,7 +158,7 @@ namespace UnderTerminal
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show(@"确认退出监控系统", "井下终端录入系统", MessageBoxButtons.OKCancel,
+            var result = MessageBox.Show(@"确认退出监控系统", "井下终端录入系统", MessageBoxButtons.OKCancel,
                 MessageBoxIcon.Question);
             if (result == DialogResult.OK)
             {
@@ -246,16 +240,16 @@ namespace UnderTerminal
                 return;
             }
 
-            GasConcentrationProbeData[] datas = GasConcentrationProbeData.FindNewRealData(_T2Id, 2);
-            DateTime time = datas[0].RecordTime;
-            double value0 = datas[0].ProbeValue;
-            double value1 = datas[1].ProbeValue;
+            var datas = GasConcentrationProbeData.FindNewRealData(_T2Id, 2);
+            var time = datas[0].RecordTime;
+            var value0 = datas[0].ProbeValue;
+            var value1 = datas[1].ProbeValue;
             // 判断是否是最新数据
             if (time != _LastTimeT2)
             {
                 _LastTimeT2 = time;
 
-                double value = value1 - value0;
+                var value = value1 - value0;
                 t2DeltaSumValue += value;
                 value = t2DeltaSumValue/++t2DataCount;
                 TeeChartUtil.addSingleData2TeeChart(tChartT2, DEFAULT_DATA_SHOW_COUNT, time, value);
@@ -266,13 +260,13 @@ namespace UnderTerminal
         // 同一工序下，瓦斯浓度变化值N
         private void updateMNData()
         {
-            GasConcentrationProbeData[] datas = GasConcentrationProbeData.FindNewRealData(currentProbeId, 2);
-            DateTime time = datas[0].RecordTime;
-            DateTime time1 = datas[1].RecordTime;
-            double value = datas[0].ProbeValue;
-            double value1 = datas[1].ProbeValue;
+            var datas = GasConcentrationProbeData.FindNewRealData(currentProbeId, 2);
+            var time = datas[0].RecordTime;
+            var time1 = datas[1].RecordTime;
+            var value = datas[0].ProbeValue;
+            var value1 = datas[1].ProbeValue;
 
-            double valueN = value - value1;
+            var valueN = value - value1;
 
             // 判断是否是最新数据
             if (time != _LastTimeMN)

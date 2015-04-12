@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using Castle.ActiveRecord;
 using ESRI.ArcGIS.Carto;
-using ESRI.ArcGIS.Geodatabase;
 using GIS;
 using GIS.Common;
 using GIS.HdProc;
@@ -15,7 +12,6 @@ namespace sys3
 {
     public partial class BigFaultageInfoManagement : Form
     {
-
         // 构造方法
         public BigFaultageInfoManagement()
         {
@@ -29,7 +25,7 @@ namespace sys3
         }
 
         /// <summary>
-        /// 添加（必须实装）
+        ///     添加（必须实装）
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -44,7 +40,7 @@ namespace sys3
         }
 
         /// <summary>
-        /// 修改（必须实装）
+        ///     修改（必须实装）
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -55,7 +51,7 @@ namespace sys3
                 Alert.alert("请选择要修改的信息");
                 return;
             }
-            var bigFaultageInfoEntering = new BigFaultageInfoEntering(((BigFaultage)gridView1.GetFocusedRow()));
+            var bigFaultageInfoEntering = new BigFaultageInfoEntering(((BigFaultage) gridView1.GetFocusedRow()));
             if (DialogResult.OK == bigFaultageInfoEntering.ShowDialog())
             {
                 RefreshData();
@@ -63,7 +59,7 @@ namespace sys3
         }
 
         /// <summary>
-        /// 删除按钮（必须实装）
+        ///     删除按钮（必须实装）
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -71,17 +67,16 @@ namespace sys3
         {
             if (!Alert.confirm("确认删除数据吗？")) return;
             var selectedIndex = gridView1.GetSelectedRows();
-            foreach (var bigFaultage in selectedIndex.Select(i => (BigFaultage)gridView1.GetRow(i)))
+            foreach (var bigFaultage in selectedIndex.Select(i => (BigFaultage) gridView1.GetRow(i)))
             {
-                Global.tdclass.DelTdLyr(new[] { bigFaultage.BindingId });
+                Global.tdclass.DelTdLyr(new[] {bigFaultage.BindingId});
                 bigFaultage.Delete();
             }
             RefreshData();
         }
 
-
         /// <summary>
-        /// 退出
+        ///     退出
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -91,7 +86,7 @@ namespace sys3
         }
 
         /// <summary>
-        /// 导出
+        ///     导出
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -104,7 +99,7 @@ namespace sys3
         }
 
         /// <summary>
-        /// 打印
+        ///     打印
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -114,7 +109,7 @@ namespace sys3
         }
 
         /// <summary>
-        /// 刷新
+        ///     刷新
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -124,38 +119,38 @@ namespace sys3
         }
 
         /// <summary>
-        /// 图显按钮事件
+        ///     图显按钮事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnMap_Click(object sender, EventArgs e)
         {
             // 获取已选择明细行的索引
-            int[] iSelIdxsArr = { ((BigFaultage)gridView1.GetFocusedRow()).BigFaultageId };
+            int[] iSelIdxsArr = {((BigFaultage) gridView1.GetFocusedRow()).BigFaultageId};
 
-            ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.DEFALUT_INFERRED_FAULTAGE);
+            var pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.DEFALUT_INFERRED_FAULTAGE);
             if (pLayer == null)
             {
                 MessageBox.Show(@"未发现推断断层图层！");
                 return;
             }
-            IFeatureLayer pFeatureLayer = (IFeatureLayer)pLayer;
-            string str = "";
-            for (int i = 0; i < iSelIdxsArr.Length; i++)
+            var pFeatureLayer = (IFeatureLayer) pLayer;
+            var str = "";
+            for (var i = 0; i < iSelIdxsArr.Length; i++)
             {
-                string bid = ((BigFaultage)gridView1.GetFocusedRow()).BindingId;
+                var bid = ((BigFaultage) gridView1.GetFocusedRow()).BindingId;
                 if (bid == "") continue;
                 if (i == 0)
                     str = "bid='" + bid + "'";
                 else
                     str += " or bid='" + bid + "'";
             }
-            List<IFeature> list = MyMapHelp.FindFeatureListByWhereClause(pFeatureLayer, str);
+            var list = MyMapHelp.FindFeatureListByWhereClause(pFeatureLayer, str);
             if (list.Count > 0)
             {
                 MyMapHelp.Jump(MyMapHelp.GetGeoFromFeature(list));
                 DataEditCommon.g_pMap.ClearSelection();
-                for (int i = 0; i < list.Count; i++)
+                for (var i = 0; i < list.Count; i++)
                 {
                     DataEditCommon.g_pMap.SelectFeature(pLayer, list[i]);
                 }
@@ -163,7 +158,8 @@ namespace sys3
                 Location = DataEditCommon.g_axTocControl.Location;
                 Width = DataEditCommon.g_axTocControl.Width;
                 Height = DataEditCommon.g_axTocControl.Height;
-                DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeoSelection, null, DataEditCommon.g_pAxMapControl.Extent);
+                DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeoSelection, null,
+                    DataEditCommon.g_pAxMapControl.Extent);
             }
             else
             {

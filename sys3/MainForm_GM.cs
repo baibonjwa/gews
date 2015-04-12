@@ -18,7 +18,6 @@ using GIS.LayersManager;
 using GIS.SpecialGraphic;
 using GIS.View;
 using LibAbout;
-using LibBusiness;
 using LibCommon;
 using LibCommonForm;
 using LibConfig;
@@ -30,49 +29,58 @@ namespace sys3
 {
     public partial class MainForm_GM : Form
     {
-        private GIS_FileMenu m_FileMenu = new GIS_FileMenu();
         private string m_mapDocumentName = string.Empty;
+        private readonly GIS_FileMenu m_FileMenu = new GIS_FileMenu();
+
         public MainForm_GM()
         {
             RuntimeManager.Bind(ProductCode.EngineOrDesktop);
             IAoInitialize aoini = new AoInitializeClass();
-            esriLicenseStatus licenseStatus = (esriLicenseStatus)aoini.IsProductCodeAvailable(esriLicenseProductCode.esriLicenseProductCodeStandard);
+            var licenseStatus = aoini.IsProductCodeAvailable(esriLicenseProductCode.esriLicenseProductCodeStandard);
             if (licenseStatus == esriLicenseStatus.esriLicenseAvailable)
             {
-                licenseStatus = (esriLicenseStatus)aoini.Initialize(esriLicenseProductCode.esriLicenseProductCodeStandard);
+                licenseStatus = aoini.Initialize(esriLicenseProductCode.esriLicenseProductCodeStandard);
             }
             InitializeComponent();
-
         }
+
+        private void bbiCheckUpdate_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            AutoUpdater.CheckAtOnce = true;
+            AutoUpdater.Start("http://bltmld.vicp.cc:8090/sys3/update.xml");
+        }
+
         #region 窗体事件
+
         private void MainForm_GM_Load(object sender, EventArgs e)
         {
             SocketUtil.DoInitilization();
             Log.Debug("[GM]....Ready to load MXD file.....");
             ///文件菜单
-            this.mapControl_GM.LoadMxFile(Application.StartupPath + "\\" + ConfigManager.Instance.getValueByKey(ConfigConst.CONFIG_MXD_FILE));
+            mapControl_GM.LoadMxFile(Application.StartupPath + "\\" +
+                                     ConfigManager.Instance.getValueByKey(ConfigConst.CONFIG_MXD_FILE));
             //this.mapControl_GM.LoadMxFile(Application.StartupPath + "\\local.mxd");
             Log.Debug("[GM]....Finished to load MXD file.....");
             statusStrip1.AxMap = mapControl_GM;
-            m_FileMenu.AxMapControl = this.mapControl_GM; //传入MapControl控件                      
+            m_FileMenu.AxMapControl = mapControl_GM; //传入MapControl控件                      
 
             ///加载数据   
-            IMapControl3 mapControl = (IMapControl3)this.mapControl_GM.Object;
-            IToolbarControl toolbarControl = (IToolbarControl)toolBar_GM.Object;
+            var mapControl = (IMapControl3) mapControl_GM.Object;
+            var toolbarControl = (IToolbarControl) toolBar_GM.Object;
 
             //绑定控件
-            this.toolBar_GM.SetBuddyControl(mapControl);
-            this.tocControl_GM.SetBuddyControl(mapControl);
+            toolBar_GM.SetBuddyControl(mapControl);
+            tocControl_GM.SetBuddyControl(mapControl);
 
             //给全局变量赋值
             DataEditCommon.g_tbCtlEdit = toolbarControl;
-            DataEditCommon.g_pAxMapControl = this.mapControl_GM;
-            DataEditCommon.g_axTocControl = this.tocControl_GM;
+            DataEditCommon.g_pAxMapControl = mapControl_GM;
+            DataEditCommon.g_axTocControl = tocControl_GM;
             DataEditCommon.load();
-            AddToolBar.Addtool(this.mapControl_GM, mapControl, toolbarControl, DataEditCommon.g_pCurrentWorkSpace);
+            AddToolBar.Addtool(mapControl_GM, mapControl, toolbarControl, DataEditCommon.g_pCurrentWorkSpace);
 
             //给GIS工程的全局变量赋值
-            Global.SetInitialParams(this.mapControl_GM.ActiveView);
+            Global.SetInitialParams(mapControl_GM.ActiveView);
 
             Log.Debug("[GM]....Construction finished.");
 
@@ -87,7 +95,8 @@ namespace sys3
         {
             if (DataEditCommon.hasEdit())
             {
-                if (DialogResult.Yes == MessageBox.Show(@"您有未保存的编辑，确定要退出系统吗?", "系统提示", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                if (DialogResult.Yes ==
+                    MessageBox.Show(@"您有未保存的编辑，确定要退出系统吗?", "系统提示", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                 {
                     e.Cancel = false;
                 }
@@ -97,7 +106,8 @@ namespace sys3
                 }
                 return;
             }
-            if (DialogResult.Yes == MessageBox.Show(@"您确定要退出系统吗?", "系统提示", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+            if (DialogResult.Yes ==
+                MessageBox.Show(@"您确定要退出系统吗?", "系统提示", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
             {
                 e.Cancel = false;
             }
@@ -111,24 +121,30 @@ namespace sys3
         {
             Application.Exit();
         }
+
         #endregion
+
         #region MAPControls点击事件
 
         private void mapControl_GM_OnSelectionChanged(object sender, EventArgs e)
         {
             mapControl_GM.Focus();
         }
+
         private void mapControl_GM_OnKeyUp(object sender, IMapControlEvents2_OnKeyUpEvent e)
         {
-            if (e.keyCode == (int)Keys.Delete && mapControl_GM.CurrentTool != null && !mapControl_GM.CurrentTool.GetType().FullName.Equals("ESRI.ArcGIS.Controls.ControlsEditingEditToolClass"))
+            if (e.keyCode == (int) Keys.Delete && mapControl_GM.CurrentTool != null &&
+                !mapControl_GM.CurrentTool.GetType()
+                    .FullName.Equals("ESRI.ArcGIS.Controls.ControlsEditingEditToolClass"))
             {
                 DataEditCommon.DeleteAllSelection();
             }
         }
+
         private void mapControl_GM_OnMapReplaced(object sender, IMapControlEvents2_OnMapReplacedEvent e)
         {
             //获得当前地图文档
-            m_mapDocumentName = this.mapControl_GM.DocumentFilename;
+            m_mapDocumentName = mapControl_GM.DocumentFilename;
 
             //如果没有地图文档，保存按钮不可用并清除状态栏
             //if (m_mapDocumentName == string.Empty)
@@ -145,48 +161,50 @@ namespace sys3
         }
 
         #endregion
+
         #region TOCControls点击事件
 
         /// <summary>
-        /// 右键弹出图层管理菜单，进行图层管理
+        ///     右键弹出图层管理菜单，进行图层管理
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void tocControl_GM_OnMouseDown(object sender, ITOCControlEvents_OnMouseDownEvent e)
         {
-            if (e.button != 2) return;//左键则跳出
+            if (e.button != 2) return; //左键则跳出
 
-            esriTOCControlItem item = esriTOCControlItem.esriTOCControlItemNone;
+            var item = esriTOCControlItem.esriTOCControlItemNone;
             IBasicMap map = null;
             ILayer layer = null;
-            object unk = null; object data = null;
+            object unk = null;
+            object data = null;
 
             //判断选择类型，确定右键菜单的位置
-            this.tocControl_GM.HitTest(e.x, e.y, ref item, ref map, ref layer, ref unk, ref data);
+            tocControl_GM.HitTest(e.x, e.y, ref item, ref map, ref layer, ref unk, ref data);
             if (layer == null)
                 return;
             //确认所选项 
             if (item == esriTOCControlItem.esriTOCControlItemMap)
-                this.tocControl_GM.SelectItem(map, null);
+                tocControl_GM.SelectItem(map, null);
             else
-                this.tocControl_GM.SelectItem(layer, null);//20140224 有bug
+                tocControl_GM.SelectItem(layer, null); //20140224 有bug
 
             //设置图层的CustomProperty（在自定义图层命令中使用）
-            this.mapControl_GM.CustomProperty = layer;
+            mapControl_GM.CustomProperty = layer;
 
             //弹出菜单
-            LayersManagerMap menuMap = new LayersManagerMap();
-            menuMap.SetHook(this.mapControl_GM);
-            LayersManagerLayer menuLayer = new LayersManagerLayer();
-            menuLayer.SetHook(this.mapControl_GM);
+            var menuMap = new LayersManagerMap();
+            menuMap.SetHook(mapControl_GM);
+            var menuLayer = new LayersManagerLayer();
+            menuLayer.SetHook(mapControl_GM);
             if (item == esriTOCControlItem.esriTOCControlItemMap) //选中的为地图
-                menuMap.PopupMenu(e.x, e.y, this.tocControl_GM.hWnd);
+                menuMap.PopupMenu(e.x, e.y, tocControl_GM.hWnd);
             if (item == esriTOCControlItem.esriTOCControlItemLayer) //选中的为图层
-                menuLayer.PopupMenu(e.x, e.y, this.tocControl_GM.hWnd);
+                menuLayer.PopupMenu(e.x, e.y, tocControl_GM.hWnd);
         }
 
         /// <summary>
-        /// 双击图层符号，修改整个图层符号类型
+        ///     双击图层符号，修改整个图层符号类型
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -228,7 +246,9 @@ namespace sys3
         }
 
         #endregion
+
         #region******文件******
+
         //打开矿图
         private void mniOpenFile_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -240,15 +260,18 @@ namespace sys3
         {
             m_FileMenu.Save();
         }
+
         //另存为
         private void mniSaveAs_ItemClick(object sender, ItemClickEventArgs e)
         {
             m_FileMenu.SaveAs();
         }
+
         private void mniDCShape_ItemClick(object sender, ItemClickEventArgs e)
         {
             m_FileMenu.ExportShape();
         }
+
         //导出CAD文件
         private void mniDCCAD_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -260,16 +283,20 @@ namespace sys3
         {
             m_FileMenu.ExportPicPdf();
         }
+
         private void mniPrint_ItemClick(object sender, ItemClickEventArgs e)
         {
             m_FileMenu.Print();
         }
+
         //退出
         private void mniQuit_ItemClick(object sender, ItemClickEventArgs e)
         {
             m_FileMenu.Exit();
         }
+
         #endregion
+
         #region ******编辑******
 
         //撤销
@@ -287,31 +314,31 @@ namespace sys3
         //查看属性
         private void mniPropertyInspector_ItemClick(object sender, ItemClickEventArgs e)
         {
-            MyMapHelp.SetCurrentTool((ICommand)new AttributeQueryEdit());
+            MyMapHelp.SetCurrentTool(new AttributeQueryEdit());
         }
 
         //点选
         private void mniClick_ItemClick(object sender, ItemClickEventArgs e)
         {
-            MyMapHelp.SetCurrentTool((ICommand)new FeatureSelect());
+            MyMapHelp.SetCurrentTool(new FeatureSelect());
         }
 
         //框选
         private void mniRegion_ItemClick(object sender, ItemClickEventArgs e)
         {
-            MyMapHelp.SetCurrentTool((ICommand)new FeatureSelect());
+            MyMapHelp.SetCurrentTool(new FeatureSelect());
         }
 
         //查询距离
         private void mniDist_ItemClick(object sender, ItemClickEventArgs e)
         {
-            MyMapHelp.SetCurrentTool((ICommand)new MeasureDistance());
+            MyMapHelp.SetCurrentTool(new MeasureDistance());
         }
 
         //查询面积
         private void mniArea_ItemClick(object sender, ItemClickEventArgs e)
         {
-            MyMapHelp.SetCurrentTool((ICommand)new MeasureArea());
+            MyMapHelp.SetCurrentTool(new MeasureArea());
         }
 
         //对象捕捉
@@ -319,108 +346,115 @@ namespace sys3
         {
             //MyMapHelp.SetCurrentTool((ICommand)new GIS.GraphicEdit.SnapSetting());
             toolBar_GM.GetItem(toolBar_GM.Find("GIS.GraphicEdit.SnapSetting")).Command.OnClick();
-
         }
+
         #endregion
+
         #region ******基础图元绘制******
+
         //点
         private void mniPoint_ItemClick(object sender, ItemClickEventArgs e)
         {
-            MyMapHelp.SetCurrentTool((ICommand)new AddPoint());
+            MyMapHelp.SetCurrentTool(new AddPoint());
         }
 
         //直线
         private void mniLine_ItemClick(object sender, ItemClickEventArgs e)
         {
-            MyMapHelp.SetCurrentTool((ICommand)new AddStraightFeatureLine());
+            MyMapHelp.SetCurrentTool(new AddStraightFeatureLine());
         }
 
         //多段线
         private void mniPolyline_ItemClick(object sender, ItemClickEventArgs e)
         {
-            MyMapHelp.SetCurrentTool((ICommand)new AddFeatureLine());
+            MyMapHelp.SetCurrentTool(new AddFeatureLine());
         }
 
         //样条线
         private void mniSpline_ItemClick(object sender, ItemClickEventArgs e)
         {
-            MyMapHelp.SetCurrentTool((ICommand)new AddBezierCurve());
+            MyMapHelp.SetCurrentTool(new AddBezierCurve());
         }
 
         //矩形
         private void mniRect_ItemClick(object sender, ItemClickEventArgs e)
         {
-            MyMapHelp.SetCurrentTool((ICommand)new AddRectangle());
+            MyMapHelp.SetCurrentTool(new AddRectangle());
         }
 
         //文字
         private void mniText_ItemClick(object sender, ItemClickEventArgs e)
         {
-            MyMapHelp.SetCurrentTool((ICommand)new AddText());
+            MyMapHelp.SetCurrentTool(new AddText());
         }
 
         //圆
         private void mniCircle_ItemClick(object sender, ItemClickEventArgs e)
         {
-            MyMapHelp.SetCurrentTool((ICommand)new AddCircle());
+            MyMapHelp.SetCurrentTool(new AddCircle());
         }
 
         //圆弧
         private void mniArc_ItemClick(object sender, ItemClickEventArgs e)
         {
-            MyMapHelp.SetCurrentTool((ICommand)new AddArc());
+            MyMapHelp.SetCurrentTool(new AddArc());
         }
 
         //椭圆
         private void mniEllipse_ItemClick(object sender, ItemClickEventArgs e)
         {
-            MyMapHelp.SetCurrentTool((ICommand)new AddEllipse());
+            MyMapHelp.SetCurrentTool(new AddEllipse());
         }
 
         //填充图案
         private void mniHatch_ItemClick(object sender, ItemClickEventArgs e)
         {
-            MyMapHelp.SetCurrentTool((ICommand)new AddPolygon());
+            MyMapHelp.SetCurrentTool(new AddPolygon());
         }
+
         #endregion
+
         #region ******专业图元绘制******
+
         //设计巷道管理
         private void mniSJHDGL_ItemClick(object sender, ItemClickEventArgs e)
         {
-            TunnelInfoManagement tm = new TunnelInfoManagement();
+            var tm = new TunnelInfoManagement();
             tm.Show();
         }
 
         //导线管理
         private void mniDXGL_ItemClick(object sender, ItemClickEventArgs e)
         {
-            WireInfoManagement wm = new WireInfoManagement();
+            var wm = new WireInfoManagement();
             wm.Show();
         }
 
         //掘进面管理
         private void mniJJHDGL_ItemClick(object sender, ItemClickEventArgs e)
         {
-            TunnelJjManagement tjjm = new TunnelJjManagement();
+            var tjjm = new TunnelJjManagement();
             tjjm.Show();
         }
 
         //回采面管理
         private void mniHCHDGL_ItemClick(object sender, ItemClickEventArgs e)
         {
-            TunnelHcManagement thcm = new TunnelHcManagement();
+            var thcm = new TunnelHcManagement();
             thcm.Show();
         }
+
         //横川
         private void mniHENGCHUANHDGL_ItemClick(object sender, ItemClickEventArgs e)
         {
-            TunnelHChuanManagement formHChuanManagement = new TunnelHChuanManagement();
+            var formHChuanManagement = new TunnelHChuanManagement();
             formHChuanManagement.Show(this);
         }
+
         //井筒
         private void mniJT_ItemClick(object sender, ItemClickEventArgs e)
         {
-            PitshaftInfoManagement pitshaftInfoManagementForm = new PitshaftInfoManagement();
+            var pitshaftInfoManagementForm = new PitshaftInfoManagement();
             pitshaftInfoManagementForm.Show(this);
         }
 
@@ -428,129 +462,127 @@ namespace sys3
         private void mniDS_ItemClick(object sender, ItemClickEventArgs e)
         {
             //在地图上绘制硐室
-            AddDongshi addDongshiTool = new AddDongshi();
-            addDongshiTool.OnCreate(this.mapControl_GM.Object);
-            this.mapControl_GM.CurrentTool = addDongshiTool;
+            var addDongshiTool = new AddDongshi();
+            addDongshiTool.OnCreate(mapControl_GM.Object);
+            mapControl_GM.CurrentTool = addDongshiTool;
         }
 
         //揭露断层
         private void mniJLDC_ItemClick(object sender, ItemClickEventArgs e)
         {
-            FaultageInfoManagement fim = new FaultageInfoManagement();
+            var fim = new FaultageInfoManagement();
             fim.Show();
         }
 
         //推断断层
         private void mniTDDC_ItemClick(object sender, ItemClickEventArgs e)
         {
-            BigFaultageInfoManagement bfim = new BigFaultageInfoManagement();
+            var bfim = new BigFaultageInfoManagement();
             bfim.Show(this);
         }
 
         //陷落柱
         private void mniXLZ_ItemClick(object sender, ItemClickEventArgs e)
         {
-            CollapsePillarsManagement cpm = new CollapsePillarsManagement();
+            var cpm = new CollapsePillarsManagement();
             cpm.Show();
         }
 
         //勘探钻孔
         private void mniKTZK_ItemClick(object sender, ItemClickEventArgs e)
         {
-            BoreholeInfoManagement bim = new BoreholeInfoManagement();
+            var bim = new BoreholeInfoManagement();
             bim.Show(this);
         }
 
         //勘探线
         private void mniKTX_ItemClick(object sender, ItemClickEventArgs e)
         {
-            ProspectingLineInfoManagement prospectingLineInfoManagementForm = new ProspectingLineInfoManagement();
+            var prospectingLineInfoManagementForm = new ProspectingLineInfoManagement();
             prospectingLineInfoManagementForm.Show();
         }
 
         //井下抽采孔
         private void mniJXCCK_ItemClick(object sender, ItemClickEventArgs e)
         {
-
         }
 
         //小柱状
         private void mniXZZ_ItemClick(object sender, ItemClickEventArgs e)
         {
-            FrmNewXZZ frm = new FrmNewXZZ();
+            var frm = new FrmNewXZZ();
             frm.Show(this);
         }
 
         //地面抽采孔
         private void mniDMCCK_ItemClick(object sender, ItemClickEventArgs e)
         {
-
         }
 
         //石门剖面图
         private void mniSMPMT_ItemClick(object sender, ItemClickEventArgs e)
         {
-
         }
 
         //巷道剖面图
         private void mniHDPMT_ItemClick(object sender, ItemClickEventArgs e)
         {
-
         }
 
         //综合柱状图
         private void mniZHZZT_ItemClick(object sender, ItemClickEventArgs e)
         {
-            FrmZhzzt frm = new FrmZhzzt();
+            var frm = new FrmZhzzt();
             frm.Show(this);
         }
 
         //煤层底板等高线
         private void mniMCDBDGX_ItemClick(object sender, ItemClickEventArgs e)
         {
-
         }
 
         //埋深等高线
         private void mniMSDGX_ItemClick(object sender, ItemClickEventArgs e)
         {
-
         }
 
         //煤层管理
         private void mniMCGL_ItemClick(object sender, ItemClickEventArgs e)
         {
-            CommonManagement commonManagementForm = new CommonManagement(5, 0);
+            var commonManagementForm = new CommonManagement(5, 0);
             if (DialogResult.OK == commonManagementForm.ShowDialog())
             {
-
             }
         }
+
         //掘进巷道校正
         private void miniJUEJINJZ_ItemClick(object sender, ItemClickEventArgs e)
         {
-            TunnelJZEntering tunnelJzEntering = new TunnelJZEntering();
+            var tunnelJzEntering = new TunnelJZEntering();
             tunnelJzEntering.ShowDialog();
         }
+
         //回采巷道校正
         private void miniHCHDJZ_ItemClick(object sender, ItemClickEventArgs e)
         {
-            TunnelHCJZEntering tunnelHcJzEntering = new TunnelHCJZEntering();
+            var tunnelHcJzEntering = new TunnelHCJZEntering();
             tunnelHcJzEntering.ShowDialog();
         }
+
         #endregion
+
         #region ******修改******
+
         //移动
         private void mniMove_ItemClick(object sender, ItemClickEventArgs e)
         {
-            MyMapHelp.SetCurrentTool((ICommand)new FeatureMoveEdit());
+            MyMapHelp.SetCurrentTool(new FeatureMoveEdit());
         }
 
         //旋转
         private void mniRotate_ItemClick(object sender, ItemClickEventArgs e)
         {
-            MyMapHelp.SetCurrentTool((ICommand)new RotateTool());
+            MyMapHelp.SetCurrentTool(new RotateTool());
         }
 
         //复制
@@ -563,7 +595,7 @@ namespace sys3
         //镜像
         private void mniMirror_ItemClick(object sender, ItemClickEventArgs e)
         {
-            MyMapHelp.SetCurrentTool((ICommand)new MirrorFeature());
+            MyMapHelp.SetCurrentTool(new MirrorFeature());
         }
 
         //删除
@@ -576,44 +608,44 @@ namespace sys3
         //裁剪
         private void mniTailor_ItemClick(object sender, ItemClickEventArgs e)
         {
-            MyMapHelp.SetCurrentTool((ICommand)new TrimLineTool());
+            MyMapHelp.SetCurrentTool(new TrimLineTool());
         }
 
         //延伸
         private void mniExtend_ItemClick(object sender, ItemClickEventArgs e)
         {
-            MyMapHelp.SetCurrentTool((ICommand)new ExtendTool());
+            MyMapHelp.SetCurrentTool(new ExtendTool());
         }
 
         //线型
         private void mniLineType_ItemClick(object sender, ItemClickEventArgs e)
         {
-
         }
 
         //线宽
         private void mniLineWeight_ItemClick(object sender, ItemClickEventArgs e)
         {
-
         }
 
         //颜色
         private void mniColor_ItemClick(object sender, ItemClickEventArgs e)
         {
-
         }
+
         #endregion
+
         #region ******视图******
+
         //放大
         private void mniMagnify_ItemClick(object sender, ItemClickEventArgs e)
         {
-            MyMapHelp.SetCurrentTool((ICommand)new ZoomInTool());
+            MyMapHelp.SetCurrentTool(new ZoomInTool());
         }
 
         //缩小
         private void mniShrink_ItemClick(object sender, ItemClickEventArgs e)
         {
-            MyMapHelp.SetCurrentTool((ICommand)new ZoomOutTool());
+            MyMapHelp.SetCurrentTool(new ZoomOutTool());
         }
 
         //全局显示
@@ -638,13 +670,13 @@ namespace sys3
         //平移
         private void mniOffset_ItemClick(object sender, ItemClickEventArgs e)
         {
-            MyMapHelp.SetCurrentTool((ICommand)new PanTool());
+            MyMapHelp.SetCurrentTool(new PanTool());
         }
 
         //局部视图
         private void mniBrokenView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            MyMapHelp.SetCurrentTool((ICommand)new LocalView());
+            MyMapHelp.SetCurrentTool(new LocalView());
         }
 
         //全局视图
@@ -652,52 +684,58 @@ namespace sys3
         {
             toolBar_GM.GetItem(toolBar_GM.Find("GIS.View.ClearView")).Command.OnClick();
         }
+
         #endregion
+
         #region ******出图******
 
         #endregion
+
         #region ******系统设置******
+
         //数据库设置
         private void mniDatabaseSet_ItemClick(object sender, ItemClickEventArgs e)
         {
-            DatabaseManagement databaseManagementForm = new DatabaseManagement(DATABASE_TYPE.GasEmissionDB);
+            var databaseManagementForm = new DatabaseManagement(DATABASE_TYPE.GasEmissionDB);
             databaseManagementForm.ShowDialog();
         }
 
         //人员信息管理
         private void mniEmployeeInfoMan_ItemClick(object sender, ItemClickEventArgs e)
         {
-            UserInformationDetailsManagementFather uidmf = new UserInformationDetailsManagementFather();
+            var uidmf = new UserInformationDetailsManagementFather();
             uidmf.ShowDialog();
         }
 
         //部门信息管理
         private void mniDepartmentInfoMana_ItemClick(object sender, ItemClickEventArgs e)
         {
-            DepartmentInformation di = new DepartmentInformation();
+            var di = new DepartmentInformation();
             di.ShowDialog();
         }
 
         //用户信息管理
         private void mniUserInfoMana_ItemClick(object sender, ItemClickEventArgs e)
         {
-            UserLoginInformationManagement ulim = new UserLoginInformationManagement();
+            var ulim = new UserLoginInformationManagement();
             ulim.ShowDialog();
         }
 
         //用户组信息管理
         private void mniUserGroupInfoMana_ItemClick(object sender, ItemClickEventArgs e)
         {
-            UserGroupInformationManagement ugm = new UserGroupInformationManagement();
+            var ugm = new UserGroupInformationManagement();
             ugm.ShowDialog();
         }
+
         #endregion
+
         #region ******帮助******
 
         //帮助文件
         private void mniHelpFile_ItemClick(object sender, ItemClickEventArgs e)
         {
-            string strHelpFilePath = Application.StartupPath + Const_GM.System3_Help_File;
+            var strHelpFilePath = Application.StartupPath + Const_GM.System3_Help_File;
             try
             {
                 Process.Start(strHelpFilePath);
@@ -712,48 +750,54 @@ namespace sys3
         private void mniAbout_ItemClick(object sender, ItemClickEventArgs e)
         {
             Const.strPicturepath = Application.StartupPath + Const_GM.Picture_Name;
-            About libabout = new About(this.ProductName, this.ProductVersion);
+            var libabout = new About(ProductName, ProductVersion);
             libabout.ShowDialog();
         }
+
         #endregion
+
         #region ******文件浮动工具条******
+
         //打开矿图浮动工具条
         private void mniOpenFileFloat_ItemClick(object sender, ItemClickEventArgs e)
         {
-            this.mniOpenFile_ItemClick(null, null);
+            mniOpenFile_ItemClick(null, null);
         }
 
         //保存浮动工具条
         private void mniSaveFloat_ItemClick(object sender, ItemClickEventArgs e)
         {
-            this.mniSave_ItemClick(null, null);
+            mniSave_ItemClick(null, null);
         }
 
         //另存为浮动工具条
         private void mniSaveAsFloat_ItemClick(object sender, ItemClickEventArgs e)
         {
-            this.mniSaveAs_ItemClick(null, null);
+            mniSaveAs_ItemClick(null, null);
         }
 
         //导出为CAD浮动工具条
         private void mniDCCADFloat_ItemClick(object sender, ItemClickEventArgs e)
         {
-            this.mniDCCAD_ItemClick(null, null);
+            mniDCCAD_ItemClick(null, null);
         }
 
         //导出为图片或Pdf
         private void mniDCTPPDFFloat_ItemClick(object sender, ItemClickEventArgs e)
         {
-            this.mniDCTPPDF_ItemClick(null, null);
+            mniDCTPPDF_ItemClick(null, null);
         }
 
         //退出浮动工具条
         private void mniQuitFloat_ItemClick(object sender, ItemClickEventArgs e)
         {
-            this.mniQuit_ItemClick(null, null);
+            mniQuit_ItemClick(null, null);
         }
+
         #endregion
+
         #region ******编辑浮动工具条******
+
         //撤销浮动工具条
         private void mniUndoFloat_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -801,8 +845,11 @@ namespace sys3
         {
             mniObjectSnaps_ItemClick(sender, e);
         }
+
         #endregion
+
         #region ******基础图元绘制浮动工具条******
+
         //点浮动工具条
         private void mniPointFloat_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -862,56 +909,63 @@ namespace sys3
         {
             mniHatch_ItemClick(sender, e);
         }
+
         #endregion
+
         #region ******专业图元管理浮动工具条******
+
         //设计巷道管理浮动工具条
         private void mniSJHDGLFloat_ItemClick(object sender, ItemClickEventArgs e)
         {
-            this.mniSJHDGL_ItemClick(null, null);
+            mniSJHDGL_ItemClick(null, null);
         }
+
         //导线管理浮动工具条
         private void mniDXGLFloat_ItemClick(object sender, ItemClickEventArgs e)
         {
-            this.mniDXGL_ItemClick(null, null);
+            mniDXGL_ItemClick(null, null);
         }
+
         //掘进巷道管理浮动工具条
         private void mniJJHDGLFloat_ItemClick(object sender, ItemClickEventArgs e)
         {
-            this.mniJJHDGL_ItemClick(null, null);
+            mniJJHDGL_ItemClick(null, null);
         }
 
         //回采巷道管理浮动工具条
         private void mniHCHDGLFloat_ItemClick(object sender, ItemClickEventArgs e)
         {
-            this.mniHCHDGL_ItemClick(null, null);
+            mniHCHDGL_ItemClick(null, null);
         }
+
         //横川
         private void mniHCHUANGLFloat_ItemClick(object sender, ItemClickEventArgs e)
         {
-            this.mniHENGCHUANHDGL_ItemClick(null, null);
+            mniHENGCHUANHDGL_ItemClick(null, null);
         }
+
         //井筒管理浮动工具条
         private void mniJTFloat_ItemClick(object sender, ItemClickEventArgs e)
         {
-            this.mniJT_ItemClick(null, null);
+            mniJT_ItemClick(null, null);
         }
 
         //硐室浮动工具条
         private void mniDSFloat_ItemClick(object sender, ItemClickEventArgs e)
         {
-            this.mniDS_ItemClick(null, null);
+            mniDS_ItemClick(null, null);
         }
 
         //揭露断层浮动工具条
         private void mniJLDCFloat_ItemClick(object sender, ItemClickEventArgs e)
         {
-            this.mniJLDC_ItemClick(null, null);
+            mniJLDC_ItemClick(null, null);
         }
 
         //推断断层浮动工具条
         private void mniTDDCFloat_ItemClick(object sender, ItemClickEventArgs e)
         {
-            this.mniTDDC_ItemClick(null, null);
+            mniTDDC_ItemClick(null, null);
         }
 
         //陷落柱浮动工具条
@@ -921,14 +975,13 @@ namespace sys3
             ICommand command = new DrawXLZ();
             command.OnCreate(mapControl_GM.Object);
             if (command.Enabled)
-                mapControl_GM.CurrentTool = (ITool)command;
+                mapControl_GM.CurrentTool = (ITool) command;
         }
 
         //勘探钻孔浮动工具条
         private void mniKTZKFloat_ItemClick(object sender, ItemClickEventArgs e)
         {
             mniKTZK_ItemClick(sender, e);
-            return;
             //ICommand command = new GIS.SpecialGraphic.DrawPoint();
             //command.OnCreate(mapControl_GM.Object);
             //if (command.Enabled)
@@ -938,13 +991,15 @@ namespace sys3
         //勘探线浮动工具条
         private void mniKTXFloat_ItemClick(object sender, ItemClickEventArgs e)
         {
-            this.mniKTX_ItemClick(null, null);
+            mniKTX_ItemClick(null, null);
         }
+
         //小柱状浮动工具条
         private void mniXZZFloat_ItemClick(object sender, ItemClickEventArgs e)
         {
-            this.mniXZZ_ItemClick(null, null);
+            mniXZZ_ItemClick(null, null);
         }
+
         //煤层底板等高线浮动工具条
         private void mniMCDBDGXFloat_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -960,41 +1015,47 @@ namespace sys3
         //煤层管理浮动工具条
         private void mniMCGLFloat_ItemClick(object sender, ItemClickEventArgs e)
         {
-            this.mniMCGL_ItemClick(null, null);
+            mniMCGL_ItemClick(null, null);
         }
+
         #endregion
+
         #region ******系统设置浮动工具条******
+
         //数据库设置浮动工具条
         private void mniDatabaseSetFloat_ItemClick(object sender, ItemClickEventArgs e)
         {
-            this.mniDatabaseSet_ItemClick(null, null);
+            mniDatabaseSet_ItemClick(null, null);
         }
 
         //人员信息管理浮动工具条
         private void mniEmployeeInfoManFloat_ItemClick(object sender, ItemClickEventArgs e)
         {
-            this.mniEmployeeInfoMan_ItemClick(null, null);
+            mniEmployeeInfoMan_ItemClick(null, null);
         }
 
         //部门信息管理浮动工具条
         private void mniDepartmentInfoManaFloat_ItemClick(object sender, ItemClickEventArgs e)
         {
-            this.mniDepartmentInfoMana_ItemClick(null, null);
+            mniDepartmentInfoMana_ItemClick(null, null);
         }
 
         //用户信息管理浮动工具条
         private void mniUserInfoManaFloat_ItemClick(object sender, ItemClickEventArgs e)
         {
-            this.mniUserInfoMana_ItemClick(null, null);
+            mniUserInfoMana_ItemClick(null, null);
         }
 
         //用户组信息管理浮动工具条
         private void mniUserGroupInfoManaFloat_ItemClick(object sender, ItemClickEventArgs e)
         {
-            this.mniUserGroupInfoMana_ItemClick(null, null);
+            mniUserGroupInfoMana_ItemClick(null, null);
         }
+
         #endregion
+
         #region ******视图浮动工具条******
+
         private void mniMagnifyFloat_ItemClick(object sender, ItemClickEventArgs e)
         {
             mniMagnify_ItemClick(sender, e);
@@ -1034,8 +1095,11 @@ namespace sys3
         {
             mniOverallView_ItemClick(sender, e);
         }
+
         #endregion
+
         #region ******修改浮动工具条******
+
         private void mniMoveFloat_ItemClick(object sender, ItemClickEventArgs e)
         {
             mniMove_ItemClick(sender, e);
@@ -1085,12 +1149,7 @@ namespace sys3
         {
             mniColor_ItemClick(sender, e);
         }
-        #endregion
 
-        private void bbiCheckUpdate_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            AutoUpdater.CheckAtOnce = true;
-            AutoUpdater.Start("http://bltmld.vicp.cc:8090/sys3/update.xml");
-        }
+        #endregion
     }
 }

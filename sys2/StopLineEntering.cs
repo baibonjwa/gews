@@ -13,7 +13,6 @@ using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Geometry;
 using GIS;
 using GIS.Common;
-using LibBusiness;
 using LibCommon;
 using LibEntity;
 
@@ -21,12 +20,13 @@ namespace sys2
 {
     public partial class StopLineEntering : Form
     {
+        private StopLine _oldStopLineEntity; //更新前的停采线实体
+
         #region ******变量声明******
 
         private readonly StopLine stopLineEntity = new StopLine();
 
         #endregion
-        private StopLine _oldStopLineEntity; //更新前的停采线实体
 
         /// <summary>
         ///     构造方法
@@ -252,10 +252,10 @@ namespace sys2
         private IFeatureLayer GetStopLineFeatureLayer()
         {
             //找到图层
-            IMap map = DataEditCommon.g_pMap;
-            string layerName = LayerNames.STOP_LINE; //“停采线”图层
+            var map = DataEditCommon.g_pMap;
+            var layerName = LayerNames.STOP_LINE; //“停采线”图层
             var drawSpecialCom = new DrawSpecialCommon();
-            IFeatureLayer featureLayer = drawSpecialCom.GetFeatureLayerByName(layerName);
+            var featureLayer = drawSpecialCom.GetFeatureLayerByName(layerName);
 
             //ILayer layer = GIS.Common.DataEditCommon.GetLayerByName(map, layerName);///获得图层IFeatureLayer featureLayer 
             if (featureLayer == null)
@@ -277,7 +277,7 @@ namespace sys2
             if (stopLineEntity == null)
                 return false;
 
-            IFeatureLayer featureLayer = GetStopLineFeatureLayer();
+            var featureLayer = GetStopLineFeatureLayer();
             if (featureLayer == null)
                 return false;
 
@@ -293,7 +293,7 @@ namespace sys2
             polyline.FromPoint = startPoint;
             polyline.ToPoint = endPoint;
 
-            bool bSuccess = GIS.SpecialGraphic.DrawStopLine.CreateLineFeature(featureLayer, polyline, stopLineEntity);
+            var bSuccess = GIS.SpecialGraphic.DrawStopLine.CreateLineFeature(featureLayer, polyline, stopLineEntity);
             return bSuccess;
         }
 
@@ -305,7 +305,7 @@ namespace sys2
         /// <returns>成功返回true</returns>
         private bool UpdateStopLineOnMap(StopLine oldEntity, StopLine newEntity)
         {
-            IFeatureLayer featureLayer = GetStopLineFeatureLayer();
+            var featureLayer = GetStopLineFeatureLayer();
             if (featureLayer == null)
                 return false;
 
@@ -313,7 +313,7 @@ namespace sys2
             GIS.SpecialGraphic.DrawStopLine.DeleteLineFeature(featureLayer, oldEntity.BindingId);
 
             //重新绘制一条新的停采线
-            bool bSuccess = DrawStopLine(newEntity);
+            var bSuccess = DrawStopLine(newEntity);
             return bSuccess;
         }
 

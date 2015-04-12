@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Globalization;
 using System.Reflection;
+using System.Threading;
 using System.Windows.Forms;
 using Castle.ActiveRecord;
 using Castle.ActiveRecord.Framework;
@@ -9,24 +11,24 @@ using LibLoginForm;
 
 namespace sys1
 {
-    static class Program
+    internal static class Program
     {
         /// <summary>
-        /// 应用程序的主入口点。
+        ///     应用程序的主入口点。
         /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main()
         {
-            System.Threading.Thread.CurrentThread.CurrentUICulture =
-                new System.Globalization.CultureInfo("zh-Hans");
+            Thread.CurrentThread.CurrentUICulture =
+                new CultureInfo("zh-Hans");
 
             // The following line provides localization for data formats. 
-            System.Threading.Thread.CurrentThread.CurrentCulture =
-                new System.Globalization.CultureInfo("zh-Hans");
+            Thread.CurrentThread.CurrentCulture =
+                new CultureInfo("zh-Hans");
 
             IConfigurationSource config = new XmlConfigurationSource("ARConfig.xml");
 
-            Assembly asm = Assembly.Load("LibEntity");
+            var asm = Assembly.Load("LibEntity");
 
             ActiveRecordStarter.Initialize(asm, config);
 

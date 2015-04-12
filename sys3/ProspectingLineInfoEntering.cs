@@ -1,24 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Geometry;
 using GIS;
 using GIS.Common;
-using LibBusiness;
 using LibCommon;
 using LibEntity;
-using Point = System.Drawing.Point;
 
 namespace sys3
 {
     public partial class ProspectingLineInfoEntering : Form
     {
+        private int _iPK;
         /** 主键  **/
         /** 业务逻辑类型：添加/修改  **/
         private readonly string _bllType = "add";
-        private int _iPK;
-
         //public event EventHandler<ItemClickEventArgs> ListBoxItemClick;
 
         //public class ItemClickEventArgs : EventArgs
@@ -80,7 +76,7 @@ namespace sys3
         /// <param name="e"></param>
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < lstProspectingBoreholeAll.SelectedItems.Count; )
+            for (var i = 0; i < lstProspectingBoreholeAll.SelectedItems.Count;)
             {
                 // 将左侧ListBox中选择的数据添加到右侧ListBox中
                 lstProspectingBoreholeSelected.Items.Add(lstProspectingBoreholeAll.SelectedItems[i].ToString());
@@ -96,7 +92,7 @@ namespace sys3
         /// <param name="e"></param>
         private void btnDeltete_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < lstProspectingBoreholeSelected.SelectedItems.Count; )
+            for (var i = 0; i < lstProspectingBoreholeSelected.SelectedItems.Count;)
             {
                 // 将右侧ListBox中选择移除的数据恢复到左侧ListBox中
                 lstProspectingBoreholeAll.Items.Add(lstProspectingBoreholeSelected.SelectedItems[i].ToString());
@@ -125,11 +121,11 @@ namespace sys3
             // 勘探线名称
             prospectingLineEntity.ProspectingLineName = txtProspectingLineName.Text.Trim();
             // 勘探线钻孔
-            int cnt = lstProspectingBoreholeSelected.Items.Count;
+            var cnt = lstProspectingBoreholeSelected.Items.Count;
             var lstProspectingBoreholePts = new List<IPoint>(); //20140505 lyf 存储选择的钻孔点要素
-            for (int i = 0; i < cnt; i++)
+            for (var i = 0; i < cnt; i++)
             {
-                String strDisplayName = lstProspectingBoreholeSelected.Items[i].ToString();
+                var strDisplayName = lstProspectingBoreholeSelected.Items[i].ToString();
                 if (Validator.IsEmpty(prospectingLineEntity.ProspectingBorehole))
                 {
                     prospectingLineEntity.ProspectingBorehole = strDisplayName;
@@ -150,7 +146,7 @@ namespace sys3
                 }
             }
 
-            bool bResult = false;
+            var bResult = false;
             if (_bllType == "add")
             {
                 // BIDID
@@ -171,7 +167,7 @@ namespace sys3
                 prospectingLineEntity.Save();
                 //20140506 lyf 
                 //获取勘探线的BID
-                string sBid = ProspectingLine.Find(_iPK).BindingId;
+                var sBid = ProspectingLine.Find(_iPK).BindingId;
                 if (sBid != "")
                 {
                     prospectingLineEntity.BindingId = sBid;
@@ -234,7 +230,7 @@ namespace sys3
             {
                 /* 修改的时候，首先要获取UI输入的钻孔名称到DB中去检索，
                 如果检索件数 > 0 并且该断层ID还不是传过来的主键，那么视为输入了已存在的钻孔名称 */
-                int boreholeId = -1;
+                var boreholeId = -1;
                 if (ProspectingLine.ExistsByProspectingLineName(txtProspectingLineName.Text.Trim()))
                 {
                     txtProspectingLineName.BackColor = Const.ERROR_FIELD_COLOR;
@@ -265,9 +261,9 @@ namespace sys3
         {
             if (e.Button == MouseButtons.Right) //判断是否右键点击
             {
-                Point p = e.Location; //获取点击的位置
+                var p = e.Location; //获取点击的位置
 
-                int index = lstProspectingBoreholeSelected.IndexFromPoint(p); //根据位置获取右键点击项的索引
+                var index = lstProspectingBoreholeSelected.IndexFromPoint(p); //根据位置获取右键点击项的索引
 
                 lstProspectingBoreholeSelected.ClearSelected();
 
@@ -283,7 +279,7 @@ namespace sys3
         private void 上移ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // 当前下标
-            int iNowIndex = lstProspectingBoreholeSelected.SelectedIndex;
+            var iNowIndex = lstProspectingBoreholeSelected.SelectedIndex;
 
             if (iNowIndex == 0)
             {
@@ -291,7 +287,7 @@ namespace sys3
                 return;
             }
 
-            string strTemp = lstProspectingBoreholeSelected.SelectedItem.ToString();
+            var strTemp = lstProspectingBoreholeSelected.SelectedItem.ToString();
 
             lstProspectingBoreholeSelected.Items[iNowIndex] = lstProspectingBoreholeSelected.Items[iNowIndex - 1];
 
@@ -310,7 +306,7 @@ namespace sys3
         private void 下移ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // 当前下标
-            int iNowIndex = lstProspectingBoreholeSelected.SelectedIndex;
+            var iNowIndex = lstProspectingBoreholeSelected.SelectedIndex;
 
             if (iNowIndex == lstProspectingBoreholeSelected.Items.Count - 1)
             {
@@ -318,7 +314,7 @@ namespace sys3
                 return;
             }
 
-            string strTemp = lstProspectingBoreholeSelected.SelectedItem.ToString();
+            var strTemp = lstProspectingBoreholeSelected.SelectedItem.ToString();
 
             lstProspectingBoreholeSelected.Items[iNowIndex] = lstProspectingBoreholeSelected.Items[iNowIndex + 1];
 
@@ -340,8 +336,8 @@ namespace sys3
         {
             //1.获得当前编辑图层
             var drawspecial = new DrawSpecialCommon();
-            string sLayerAliasName = LayerNames.DEFALUT_KANTANXIAN; //“默认_勘探线”图层
-            IFeatureLayer featureLayer = drawspecial.GetFeatureLayerByName(sLayerAliasName);
+            var sLayerAliasName = LayerNames.DEFALUT_KANTANXIAN; //“默认_勘探线”图层
+            var featureLayer = drawspecial.GetFeatureLayerByName(sLayerAliasName);
             if (featureLayer == null)
             {
                 MessageBox.Show("未找到" + sLayerAliasName + "图层,无法修改勘探线图元。");
@@ -349,7 +345,7 @@ namespace sys3
             }
 
             //2.删除原来图元，重新绘制新图元
-            bool bIsDeleteOldFeature = DataEditCommon.DeleteFeatureByBId(featureLayer, prospectingLineEntity.BindingId);
+            var bIsDeleteOldFeature = DataEditCommon.DeleteFeatureByBId(featureLayer, prospectingLineEntity.BindingId);
             if (bIsDeleteOldFeature)
             {
                 //绘制图元
@@ -366,7 +362,7 @@ namespace sys3
         {
             try
             {
-                Borehole brehole = Borehole.FindOneByBoreholeNum(strDisplayName);
+                var brehole = Borehole.FindOneByBoreholeNum(strDisplayName);
 
                 IPoint pt = new PointClass();
                 if (brehole != null)
@@ -393,8 +389,8 @@ namespace sys3
         {
             //1.获得当前编辑图层
             var drawspecial = new DrawSpecialCommon();
-            string sLayerAliasName = LayerNames.DEFALUT_KANTANXIAN; //“默认_勘探线”图层
-            IFeatureLayer featureLayer = drawspecial.GetFeatureLayerByName(sLayerAliasName);
+            var sLayerAliasName = LayerNames.DEFALUT_KANTANXIAN; //“默认_勘探线”图层
+            var featureLayer = drawspecial.GetFeatureLayerByName(sLayerAliasName);
             if (featureLayer == null)
             {
                 MessageBox.Show("未找到" + sLayerAliasName + "图层,无法绘制勘探线图元。");
@@ -404,7 +400,7 @@ namespace sys3
             //2.绘制图元
             if (lstProspectingBoreholePts.Count == 0) return;
 
-            string prospectingLineID = prospectingLineEntity.BindingId;
+            var prospectingLineID = prospectingLineEntity.BindingId;
             //绘制推断断层
             PointsFit2Polyline.CreateLine(featureLayer, lstProspectingBoreholePts, prospectingLineID);
         }

@@ -1,42 +1,40 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using ESRI.ArcGIS.Carto;
+using FarPoint.Win;
+using FarPoint.Win.Spread;
+using FarPoint.Win.Spread.CellType;
+using GIS;
 using GIS.Common;
-using LibCommon;
-using LibCommonControl;
-using LibEntity;
-using LibBusiness;
 using GIS.HdProc;
+using LibBusiness;
+using LibCommon;
+using LibEntity;
 
 namespace _3.GeologyMeasure
 {
     public partial class TunnelHChuanManagement : Form
     {
+        private int _checkCount; //选择行数
+        private DataSet _ds = new DataSet();
         //****************变量声明***************
-        private int _iRecordCount = 0;
-        int _rowsCount = 0;      //数据行数
-        int _checkCount = 0;     //选择行数
-        int _rowDetailStartIndex = 4;
-        int _tmpRowIndex = 0;
+        private int _iRecordCount;
+        private int _rowsCount; //数据行数
+        private int _tmpRowIndex;
+        private int tmpInt;
+        private readonly int _BIDIndex = 18;
         //需要过滤的列索引
-        private int[] _filterColunmIdxs = null;
-        TunnelHChuan tunnelHChuanEntity = new TunnelHChuan();
-        DataSet _ds = new DataSet();
-        int tmpInt = 0;
-        private int _BIDIndex = 18;
+        private readonly int[] _filterColunmIdxs;
         /** 保存所有用户选中的行的索引 **/
-        private Hashtable _htSelIdxs = new Hashtable();
+        private readonly Hashtable _htSelIdxs = new Hashtable();
+        private readonly int _rowDetailStartIndex = 4;
+        private readonly TunnelHChuan tunnelHChuanEntity = new TunnelHChuan();
         //****************************************
 
         /// <summary>
-        /// 构造方法
+        ///     构造方法
         /// </summary>
         public TunnelHChuanManagement()
         {
@@ -46,12 +44,13 @@ namespace _3.GeologyMeasure
             dataPager1.FrmChild_EventHandler += FrmParent_EventHandler;
 
             //窗体属性设置
-            LibCommon.FormDefaultPropertiesSetter.SetManagementFormDefaultProperties(this, Const_GM.TUNNEL_HCHUAN_MANAGEMENT);
+            FormDefaultPropertiesSetter.SetManagementFormDefaultProperties(this, Const_GM.TUNNEL_HCHUAN_MANAGEMENT);
 
             //Farpoint属性设置
-            LibCommon.FarpointDefaultPropertiesSetter.SetFpDefaultProperties(fpDayReportHChuan, LibCommon.Const_GM.TUNNEL_HCHUAN_FARPOINT_TITLE, _rowDetailStartIndex);
+            FarpointDefaultPropertiesSetter.SetFpDefaultProperties(fpDayReportHChuan,
+                Const_GM.TUNNEL_HCHUAN_FARPOINT_TITLE, _rowDetailStartIndex);
 
-            _filterColunmIdxs = new int[]
+            _filterColunmIdxs = new[]
             {
                 1,
                 2,
@@ -69,37 +68,38 @@ namespace _3.GeologyMeasure
             //禁用选择颜色相关控件
             farpointFilter1.EnableChooseColorCtrls(false);
             //设置自动隐藏过滤条件
-            FarpointDefaultPropertiesSetter.SetFpFilterHideProperties(this.fpDayReportHChuan, _filterColunmIdxs);
+            FarpointDefaultPropertiesSetter.SetFpFilterHideProperties(fpDayReportHChuan, _filterColunmIdxs);
         }
 
         /// <summary>
-        /// 初始化
+        ///     初始化
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void TunnelHChuanManagement_Load(object sender, EventArgs e)
         {
-            this.bindFpTunnelHChuanInfo();
+            bindFpTunnelHChuanInfo();
         }
 
         /// <summary>
-        /// 分页委托
+        ///     分页委托
         /// </summary>
         /// <param name="sender"></param>
         private void FrmParent_EventHandler(object sender)
         {
             bindFpTunnelHChuanInfo();
         }
+
         /// <summary>
-        /// farpoint中checkbox选中对全选反选的影响
+        ///     farpoint中checkbox选中对全选反选的影响
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void fpStopLineInfo_ButtonClicked(object sender, FarPoint.Win.Spread.EditorNotifyEventArgs e)
+        private void fpStopLineInfo_ButtonClicked(object sender, EditorNotifyEventArgs e)
         {
-            if (e.EditingControl is FarPoint.Win.FpCheckBox)
+            if (e.EditingControl is FpCheckBox)
             {
-                FarPoint.Win.FpCheckBox fpChk = (FarPoint.Win.FpCheckBox)e.EditingControl;
+                var fpChk = (FpCheckBox) e.EditingControl;
                 if (fpChk.Checked)
                 {
                     // 保存索引号
@@ -111,7 +111,7 @@ namespace _3.GeologyMeasure
                         if (_htSelIdxs.Count == _checkCount)
                         {
                             // 全选/全不选checkbox设为选中
-                            this.chkSelAll.Checked = true;
+                            chkSelAll.Checked = true;
                         }
                     }
 
@@ -123,7 +123,7 @@ namespace _3.GeologyMeasure
                     _htSelIdxs.Remove(e.Row);
 
                     // 全选/全不选checkbox设为未选中
-                    this.chkSelAll.Checked = false;
+                    chkSelAll.Checked = false;
 
                     _checkCount--;
                 }
@@ -142,7 +142,7 @@ namespace _3.GeologyMeasure
         }
 
         /// <summary>
-        /// 设置按钮可操作性
+        ///     设置按钮可操作性
         /// </summary>
         private void setButtenEnable()
         {
@@ -165,25 +165,26 @@ namespace _3.GeologyMeasure
         }
 
         /// <summary>
-        /// 为变量StopLineEntity赋值
+        ///     为变量StopLineEntity赋值
         /// </summary>
         private void setTunnelHCEntityValue()
         {
-            int searchCount = _rowsCount;
-            int rowDetailStartIndex = 4;
-            for (int i = 0; i < _rowsCount; i++)
+            var searchCount = _rowsCount;
+            var rowDetailStartIndex = 4;
+            for (var i = 0; i < _rowsCount; i++)
             {
-
-                if (fpDayReportHChuan.Sheets[0].Cells[rowDetailStartIndex + i, 0].Value != null && (bool)fpDayReportHChuan.Sheets[0].Cells[rowDetailStartIndex + i, 0].Value == true)
+                if (fpDayReportHChuan.Sheets[0].Cells[rowDetailStartIndex + i, 0].Value != null &&
+                    (bool) fpDayReportHChuan.Sheets[0].Cells[rowDetailStartIndex + i, 0].Value)
                 {
                     _tmpRowIndex = rowDetailStartIndex + i;
-                    int index = 14;
-                    int tmp = 0;
+                    var index = 14;
+                    var tmp = 0;
                     //主键
                     tunnelHChuanEntity.Id = Convert.ToInt32(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.ID]);
                     var HChuanName = _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.NAME_HCHUAN];
                     tunnelHChuanEntity.NameHChuan = HChuanName == null ? "" : HChuanName.ToString();
-                    tunnelHChuanEntity.Width = Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_WIDTH]);
+                    tunnelHChuanEntity.Width =
+                        Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_WIDTH]);
                     //关联巷道1
                     if (int.TryParse(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_ID1].ToString(), out tmp))
                     {
@@ -197,19 +198,26 @@ namespace _3.GeologyMeasure
                         tmp = 0;
                     }
                     //x1
-                    tunnelHChuanEntity.X1 = Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_X1].ToString());
+                    tunnelHChuanEntity.X1 =
+                        Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_X1].ToString());
                     //y1
-                    tunnelHChuanEntity.Y1 = Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_Y1].ToString());
+                    tunnelHChuanEntity.Y1 =
+                        Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_Y1].ToString());
                     //z1
-                    tunnelHChuanEntity.Z1 = Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_Z1].ToString());
+                    tunnelHChuanEntity.Z1 =
+                        Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_Z1].ToString());
                     //x2
-                    tunnelHChuanEntity.X2 = Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_X2].ToString());
+                    tunnelHChuanEntity.X2 =
+                        Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_X2].ToString());
                     //y2
-                    tunnelHChuanEntity.Y2 = Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_Y2].ToString());
+                    tunnelHChuanEntity.Y2 =
+                        Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_Y2].ToString());
                     //z2
-                    tunnelHChuanEntity.Z2 = Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_Z2].ToString());
+                    tunnelHChuanEntity.Z2 =
+                        Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_Z2].ToString());
                     //azimuth
-                    tunnelHChuanEntity.Azimuth = Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_AZIMUTH].ToString());
+                    tunnelHChuanEntity.Azimuth =
+                        Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_AZIMUTH].ToString());
 
                     //队别
                     if (int.TryParse(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TEAM_NAME_ID].ToString(), out tmp))
@@ -218,7 +226,8 @@ namespace _3.GeologyMeasure
                         tmp = 0;
                     }
                     DateTime _dateTime;
-                    if (DateTime.TryParse(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.START_DATE].ToString(), out _dateTime))
+                    if (DateTime.TryParse(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.START_DATE].ToString(),
+                        out _dateTime))
                     {
                         //开工日期
                         tunnelHChuanEntity.StartDate = _dateTime;
@@ -236,7 +245,8 @@ namespace _3.GeologyMeasure
                     //停工日期
                     if (_finish > 0)
                     {
-                        tunnelHChuanEntity.StopDate = Convert.ToDateTime(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.STOP_DATE].ToString());
+                        tunnelHChuanEntity.StopDate =
+                            Convert.ToDateTime(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.STOP_DATE].ToString());
                     }
                     //工作制式
                     tunnelHChuanEntity.WorkStyle = _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.WORK_STYLE].ToString();
@@ -247,6 +257,7 @@ namespace _3.GeologyMeasure
                 }
             }
         }
+
         private void tsBtnPrint_Click(object sender, EventArgs e)
         {
             //打印
@@ -259,22 +270,23 @@ namespace _3.GeologyMeasure
             {
                 Alert.alert(Const.EXPORT_SUCCESS_MSG);
             }
-            return;
         }
 
         private void tsBtnAdd_Click(object sender, EventArgs e)
         {
-            TunnelHChuanEntering tunnelHCForm = new TunnelHChuanEntering(this);
+            var tunnelHCForm = new TunnelHChuanEntering(this);
             tunnelHCForm.Show(this);
         }
+
         public void refreshAdd()
         {
             bindFpTunnelHChuanInfo();
-            this.dataPager1.btnLastPage_Click(null, null);
+            dataPager1.btnLastPage_Click(null, null);
             FarPointOperate.farPointFocusSetAdd(fpDayReportHChuan, _rowDetailStartIndex, _rowsCount);
         }
+
         /// <summary>
-        /// farpoint数据绑定
+        ///     farpoint数据绑定
         /// </summary>
         private void bindFpTunnelHChuanInfo()
         {
@@ -293,8 +305,8 @@ namespace _3.GeologyMeasure
             // ※分页必须
             dataPager1.PageControlInit(_iRecordCount);
 
-            int iStartIndex = dataPager1.getStartIndex();
-            int iEndIndex = dataPager1.getEndIndex();
+            var iStartIndex = dataPager1.getStartIndex();
+            var iEndIndex = dataPager1.getEndIndex();
 
             _ds = TunnelHChuanBLL.selectTunnelHChuan(iStartIndex, iEndIndex);
 
@@ -305,56 +317,79 @@ namespace _3.GeologyMeasure
 
             if (_rowsCount > 0)
             {
-                FarPoint.Win.Spread.CellType.CheckBoxCellType ckbxcell = new FarPoint.Win.Spread.CellType.CheckBoxCellType();
+                var ckbxcell = new CheckBoxCellType();
                 //取消三选
                 ckbxcell.ThreeState = false;
 
-                for (int i = 0; i < _ds.Tables[0].Rows.Count; i++)
+                for (var i = 0; i < _ds.Tables[0].Rows.Count; i++)
                 {
-                    int index = 0;
-                    this.fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, index].CellType = ckbxcell;
+                    var index = 0;
+                    fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, index].CellType = ckbxcell;
                     //主运顺槽
-                    int tunnelID1 = Convert.ToInt32(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_ID1]);
+                    var tunnelID1 = Convert.ToInt32(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_ID1]);
                     //辅运顺槽
-                    int tunnelID2 = Convert.ToInt32(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_ID2]);
+                    var tunnelID2 = Convert.ToInt32(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_ID2]);
 
-                    int tmpTunnelID = (tunnelID1 == 0 ? (tunnelID2 == 0 ? 0 : tunnelID2) : tunnelID1);
+                    var tmpTunnelID = (tunnelID1 == 0 ? (tunnelID2 == 0 ? 0 : tunnelID2) : tunnelID1);
 
                     //矿井名称
-                    this.fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text = _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.NAME_HCHUAN].ToString(); ;
+                    fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
+                        _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.NAME_HCHUAN].ToString();
+                    ;
                     //关联巷道1
-                    this.fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text = _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_ID1].ToString(); ;
+                    fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
+                        _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_ID1].ToString();
+                    ;
                     //关联巷道2
-                    this.fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text = _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_ID2].ToString(); ;
+                    fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
+                        _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_ID2].ToString();
+                    ;
 
                     //x1
-                    this.fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text = _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_X1].ToString();
+                    fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
+                        _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_X1].ToString();
                     //y1
-                    this.fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text = _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_Y1].ToString();
+                    fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
+                        _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_Y1].ToString();
                     //z1
-                    this.fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text = _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_Z1].ToString();
+                    fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
+                        _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_Z1].ToString();
                     //x2
-                    this.fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text = _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_X2].ToString();
+                    fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
+                        _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_X2].ToString();
                     //y2
-                    this.fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text = _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_Y2].ToString();
+                    fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
+                        _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_Y2].ToString();
                     //z2
-                    this.fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text = _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_Z2].ToString();
+                    fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
+                        _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_Z2].ToString();
                     //azimuth
-                    this.fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text = _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_AZIMUTH].ToString();
+                    fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
+                        _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_AZIMUTH].ToString();
                     //队别
                     if (int.TryParse(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TEAM_NAME_ID].ToString(), out tmpInt))
                     {
-                        this.fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text = Team.Find(tmpInt).TeamName;
+                        fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
+                            Team.Find(tmpInt).TeamName;
                         tmpInt = 0;
                     }
                     //开工日期
-                    this.fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text = _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.START_DATE].ToString().Substring(0, _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.START_DATE].ToString().IndexOf(' '));
+                    fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
+                        _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.START_DATE].ToString()
+                            .Substring(0,
+                                _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.START_DATE].ToString().IndexOf(' '));
                     //是否回采完毕
-                    this.fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text = Convert.ToInt32(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.IS_FINISH].ToString()) == 1 ? Const.MSG_YES : Const.MSG_NO;
+                    fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
+                        Convert.ToInt32(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.IS_FINISH].ToString()) == 1
+                            ? Const.MSG_YES
+                            : Const.MSG_NO;
                     //停工日期
                     if (Convert.ToInt32(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.IS_FINISH].ToString()) == 1)
                     {
-                        this.fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text = _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.STOP_DATE].ToString().Substring(0, _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.STOP_DATE].ToString().IndexOf(' '));
+                        fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
+                            _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.STOP_DATE].ToString()
+                                .Substring(0,
+                                    _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.STOP_DATE].ToString().IndexOf(' '));
                     }
                     else
                     {
@@ -362,13 +397,17 @@ namespace _3.GeologyMeasure
                     }
 
                     //工作制式
-                    this.fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text = _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.WORK_STYLE].ToString();
+                    fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
+                        _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.WORK_STYLE].ToString();
                     //班次
-                    this.fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text = _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.WORK_TIME].ToString();
+                    fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
+                        _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.WORK_TIME].ToString();
                     //状态
-                    this.fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text = _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_STATE].ToString();
+                    fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
+                        _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_STATE].ToString();
                     //bid
-                    this.fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text = _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.ID].ToString();
+                    fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
+                        _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.ID].ToString();
                     fpDayReportHChuan.Sheets[0].Columns[_BIDIndex].Visible = false;
                 }
             }
@@ -377,7 +416,7 @@ namespace _3.GeologyMeasure
         }
 
         /// <summary>
-        /// 删除按钮响应
+        ///     删除按钮响应
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -385,17 +424,18 @@ namespace _3.GeologyMeasure
         {
             if (Alert.confirm(Const.DEL_CONFIRM_MSG))
             {
-                int searchCount = _rowsCount;
-                bool bResult = false;
-                for (int i = 0; i < _rowsCount; i++)
+                var searchCount = _rowsCount;
+                var bResult = false;
+                for (var i = 0; i < _rowsCount; i++)
                 {
-                    _tmpRowIndex = this.fpDayReportHChuan.Sheets[0].ActiveRowIndex;
+                    _tmpRowIndex = fpDayReportHChuan.Sheets[0].ActiveRowIndex;
                     //遍历“选择”是否选中
-                    if (fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, 0].Value != null && (bool)fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, 0].Value == true)
+                    if (fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, 0].Value != null &&
+                        (bool) fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, 0].Value)
                     {
                         //主键
                         tunnelHChuanEntity.Id = Convert.ToInt32(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.ID]);
-                        int tmp = 0;
+                        var tmp = 0;
                         //主运顺槽
                         if (int.TryParse(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_ID1].ToString(), out tmp))
                         {
@@ -428,19 +468,14 @@ namespace _3.GeologyMeasure
                     DelHChuanjc(tunnelHChuanEntity.TunnelId1, tunnelHChuanEntity.TunnelId2);
                     //删除工作面中对应的回采信息
                     /////Mark
-
                 }
                 bindFpTunnelHChuanInfo();
-                FarPointOperate.farPointFocusSetDel(this.fpDayReportHChuan, _tmpRowIndex);
-            }
-            else
-            {
-                return;
+                FarPointOperate.farPointFocusSetDel(fpDayReportHChuan, _tmpRowIndex);
             }
         }
 
         /// <summary>
-        /// 回采删除信息
+        ///     回采删除信息
         /// </summary>
         /// <param name="hd1"></param>
         /// <param name="hd2"></param>
@@ -448,8 +483,8 @@ namespace _3.GeologyMeasure
         private void DelHChuanjc(int hd1, int hd2)
         {
             // 获取已选择明细行的索引
-            int[] iSelIdxsArr = GetSelIdxs();
-            string bid = "";
+            var iSelIdxsArr = GetSelIdxs();
+            var bid = "";
             //ILayer pLayer = GIS.Common.DataEditCommon.GetLayerByName(GIS.Common.DataEditCommon.g_pMap, GIS.LayerNames.DEFALUT_HENGCHUAN);
             //if (pLayer == null)
             //{
@@ -457,10 +492,10 @@ namespace _3.GeologyMeasure
             //    return;
             //}
             //IFeatureLayer pFeatureLayer = (IFeatureLayer)pLayer;
-            string str = "";
-            for (int i = 0; i < iSelIdxsArr.Length; i++)
+            var str = "";
+            for (var i = 0; i < iSelIdxsArr.Length; i++)
             {
-                bid = this.fpDayReportHChuan.Sheets[0].Cells[iSelIdxsArr[i], _BIDIndex].Text.Trim();
+                bid = fpDayReportHChuan.Sheets[0].Cells[iSelIdxsArr[i], _BIDIndex].Text.Trim();
                 if (bid != "")
                 {
                     if (i == 0)
@@ -478,7 +513,7 @@ namespace _3.GeologyMeasure
         }
 
         /// <summary>
-        /// 全选反选
+        ///     全选反选
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -488,7 +523,7 @@ namespace _3.GeologyMeasure
             if (_rowsCount > 0)
             {
                 //遍历数据
-                for (int i = 0; i < _rowsCount; i++)
+                for (var i = 0; i < _rowsCount; i++)
                 {
                     //checkbox选中
                     if (chkSelAll.Checked)
@@ -497,14 +532,16 @@ namespace _3.GeologyMeasure
                         {
                             _htSelIdxs.Add(_rowDetailStartIndex + i, true);
                         }
-                        this.fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, 0].Value = ((CheckBox)sender).Checked;
+                        fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, 0].Value =
+                            ((CheckBox) sender).Checked;
                         _checkCount = _ds.Tables[0].Rows.Count;
                     }
                     //checkbox未选中
                     else
                     {
                         _htSelIdxs.Remove(_rowDetailStartIndex + i);
-                        this.fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, 0].Value = ((CheckBox)sender).Checked;
+                        fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, 0].Value =
+                            ((CheckBox) sender).Checked;
                         _checkCount = 0;
                     }
                 }
@@ -512,77 +549,80 @@ namespace _3.GeologyMeasure
             //设置按钮可操作性
             setButtenEnable();
         }
+
         /// <summary>
-        /// 刷新
+        ///     刷新
         /// </summary>
         /// <param name="sender"></param>
-        /// <param name="e"></param>       
+        /// <param name="e"></param>
         private void tsBtnRefresh_Click(object sender, EventArgs e)
         {
             //绑定数据
-            this.bindFpTunnelHChuanInfo();
+            bindFpTunnelHChuanInfo();
         }
 
         private void tsBtnExit_Click(object sender, EventArgs e)
         {
             //关闭窗体
-            this.Close();
+            Close();
         }
 
         private void tsBtnModify_Click(object sender, EventArgs e)
         {
             setTunnelHCEntityValue();
 
-            TunnelHChuanEntering tunnelHChuanForm = new TunnelHChuanEntering(tunnelHChuanEntity, this);
+            var tunnelHChuanForm = new TunnelHChuanEntering(tunnelHChuanEntity, this);
             tunnelHChuanForm.Show(this);
         }
+
         public void refreshUpdate()
         {
             bindFpTunnelHChuanInfo();
-            FarPointOperate.farPointFocusSetChange(this.fpDayReportHChuan, _tmpRowIndex);
+            FarPointOperate.farPointFocusSetChange(fpDayReportHChuan, _tmpRowIndex);
         }
+
         private void btnOK_Click(object sender, EventArgs e)
         {
             //关闭窗体
-            this.Close();
+            Close();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             //关闭窗体
-            this.Close();
+            Close();
         }
 
         /// <summary>
-        /// 获取farpoint中选中的所有行（必须实装）
+        ///     获取farpoint中选中的所有行（必须实装）
         /// </summary>
         /// <returns>注意，返回值可能是null，null则代表一个也没选中</returns>
         private int[] GetSelIdxs()
         {
-            if (this._htSelIdxs.Count == 0)
+            if (_htSelIdxs.Count == 0)
             {
                 return null;
             }
-            int[] retArr = new int[this._htSelIdxs.Count];
-            this._htSelIdxs.Keys.CopyTo(retArr, 0);
+            var retArr = new int[_htSelIdxs.Count];
+            _htSelIdxs.Keys.CopyTo(retArr, 0);
             return retArr;
         }
 
         /// <summary>
-        /// 图显按钮事件
+        ///     图显按钮事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnMap_Click(object sender, EventArgs e)
         {
             // 获取已选择明细行的索引
-            int[] iSelIdxsArr = GetSelIdxs();
+            var iSelIdxsArr = GetSelIdxs();
             if (iSelIdxsArr == null)
             {
                 MessageBox.Show("未选中数据行！");
                 return;
             }
-            string bid = "";
+            var bid = "";
             //ILayer pLayer = GIS.Common.DataEditCommon.GetLayerByName(GIS.Common.DataEditCommon.g_pMap, GIS.LayerNames.DEFALUT_HENGCHUAN);
             //if (pLayer == null)
             //{
@@ -590,10 +630,10 @@ namespace _3.GeologyMeasure
             //    return;
             //}
             //IFeatureLayer pFeatureLayer = (IFeatureLayer)pLayer;
-            string str = "";
-            for (int i = 0; i < iSelIdxsArr.Length; i++)
+            var str = "";
+            for (var i = 0; i < iSelIdxsArr.Length; i++)
             {
-                bid = this.fpDayReportHChuan.Sheets[0].Cells[iSelIdxsArr[i], _BIDIndex].Text.Trim();
+                bid = fpDayReportHChuan.Sheets[0].Cells[iSelIdxsArr[i], _BIDIndex].Text.Trim();
                 if (bid != "")
                 {
                     if (i == 0)
@@ -602,20 +642,21 @@ namespace _3.GeologyMeasure
                         str += " or bid='" + bid + "'";
                 }
             }
-            List<ESRI.ArcGIS.Geodatabase.IFeature> list = GIS.MyMapHelp.FindFeatureListByWhereClause(Global.hdfdfulllyr, str);
+            var list = MyMapHelp.FindFeatureListByWhereClause(Global.hdfdfulllyr, str);
             if (list.Count > 0)
             {
-                GIS.MyMapHelp.Jump(GIS.MyMapHelp.GetGeoFromFeature(list));
-                GIS.Common.DataEditCommon.g_pMap.ClearSelection();
-                for (int i = 0; i < list.Count; i++)
+                MyMapHelp.Jump(MyMapHelp.GetGeoFromFeature(list));
+                DataEditCommon.g_pMap.ClearSelection();
+                for (var i = 0; i < list.Count; i++)
                 {
-                    GIS.Common.DataEditCommon.g_pMap.SelectFeature(Global.hdfdfulllyr, list[i]);
+                    DataEditCommon.g_pMap.SelectFeature(Global.hdfdfulllyr, list[i]);
                 }
-                this.WindowState = FormWindowState.Normal;
-                this.Location = GIS.Common.DataEditCommon.g_axTocControl.Location;
-                this.Width = GIS.Common.DataEditCommon.g_axTocControl.Width;
-                this.Height = GIS.Common.DataEditCommon.g_axTocControl.Height;
-                GIS.Common.DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeoSelection, null, GIS.Common.DataEditCommon.g_pAxMapControl.Extent);
+                WindowState = FormWindowState.Normal;
+                Location = DataEditCommon.g_axTocControl.Location;
+                Width = DataEditCommon.g_axTocControl.Width;
+                Height = DataEditCommon.g_axTocControl.Height;
+                DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeoSelection, null,
+                    DataEditCommon.g_pAxMapControl.Extent);
             }
             else
             {

@@ -5,19 +5,33 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 //PS：也可以通过将[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System] 下的DisableTaskmgr项的值设为"1”来屏蔽任务管理器。
+
 namespace UnderTerminal
 {
     /// <summary>
-    /// Description: Hook Helper类，可以屏蔽一些热键并屏蔽任务管理器
-    /// Author: ZhangRongHua
-    /// Create DateTime: 2009-6-19 20:21
-    /// UpdateHistory:
+    ///     Description: Hook Helper类，可以屏蔽一些热键并屏蔽任务管理器
+    ///     Author: ZhangRongHua
+    ///     Create DateTime: 2009-6-19 20:21
+    ///     UpdateHistory:
     /// </summary>
     public class HookHelper
     {
         #region Delegates
 
         public delegate int HookProc(int nCode, Int32 wParam, IntPtr lParam);
+
+        #endregion
+
+        #region Nested type: KeyMSG
+
+        public struct KeyMSG
+        {
+            public int dwExtraInfo;
+            public int flags;
+            public int scanCode;
+            public int time;
+            public int vkCode;
+        }
 
         #endregion
 
@@ -54,7 +68,7 @@ namespace UnderTerminal
         private const int WM_RBUTTONUP = 0x205;
         private const int WM_SYSKEYDOWN = 0x104;
         private const int WM_SYSKEYUP = 0x105;
-        private static int hKeyboardHook = 0;
+        private static int hKeyboardHook;
 
         #endregion
 
@@ -86,12 +100,12 @@ namespace UnderTerminal
         #region 方法
 
         /// <summary>
-        /// 钩子回调函数，在这里屏蔽热键。
-        /// <remark> 
-        /// Author:ZhangRongHua 
-        /// Create DateTime: 2009-6-19 20:19
-        /// Update History:     
-        ///  </remark>
+        ///     钩子回调函数，在这里屏蔽热键。
+        ///     <remark>
+        ///         Author:ZhangRongHua
+        ///         Create DateTime: 2009-6-19 20:19
+        ///         Update History:
+        ///     </remark>
         /// </summary>
         /// <param name="nCode">The n code.</param>
         /// <param name="wParam">The w param.</param>
@@ -99,9 +113,9 @@ namespace UnderTerminal
         /// <returns></returns>
         private int KeyboardHookProc(int nCode, Int32 wParam, IntPtr lParam)
         {
-            KeyMSG m = (KeyMSG)Marshal.PtrToStructure(lParam, typeof(KeyMSG));
+            var m = (KeyMSG) Marshal.PtrToStructure(lParam, typeof (KeyMSG));
 
-            if (((Keys)m.vkCode == Keys.LWin) || ((Keys)m.vkCode == Keys.RWin) ||
+            if (((Keys) m.vkCode == Keys.LWin) || ((Keys) m.vkCode == Keys.RWin) ||
                 ((m.vkCode == VK_TAB) && ((m.flags & LLKHF_ALTDOWN) != 0)) ||
                 ((m.vkCode == VK_ESCAPE) && ((m.flags & LLKHF_ALTDOWN) != 0)) ||
                 ((m.vkCode == VK_F4) && ((m.flags & LLKHF_ALTDOWN) != 0)) ||
@@ -117,12 +131,12 @@ namespace UnderTerminal
 
 
         /// <summary>
-        /// 启动Hook，并用流屏蔽任务管理器
-        /// <remark> 
-        /// Author:ZhangRongHua 
-        /// Create DateTime: 2009-6-19 20:20
-        /// Update History:     
-        ///  </remark>
+        ///     启动Hook，并用流屏蔽任务管理器
+        ///     <remark>
+        ///         Author:ZhangRongHua
+        ///         Create DateTime: 2009-6-19 20:20
+        ///         Update History:
+        ///     </remark>
         /// </summary>
         public void HookStart()
         {
@@ -133,9 +147,9 @@ namespace UnderTerminal
                 KeyboardHookProcedure = KeyboardHookProc;
 
                 hKeyboardHook = SetWindowsHookEx(WH_KEYBOARD,
-                                                 KeyboardHookProcedure,
-                                                 Marshal.GetHINSTANCE(Assembly.GetExecutingAssembly().GetModules()[0]),
-                                                 0);
+                    KeyboardHookProcedure,
+                    Marshal.GetHINSTANCE(Assembly.GetExecutingAssembly().GetModules()[0]),
+                    0);
 
                 //   如果设置钩子失败  
 
@@ -148,25 +162,24 @@ namespace UnderTerminal
 
                 //用二进制流的方法打开任务管理器。而且不关闭流.这样任务管理器就打开不了
                 MyFs = new FileStream(Environment.ExpandEnvironmentVariables("%windir%\\system32\\taskmgr.exe"),
-                                      FileMode.Open);
-                byte[] MyByte = new byte[(int)MyFs.Length];
-                MyFs.Write(MyByte, 0, (int)MyFs.Length);
+                    FileMode.Open);
+                var MyByte = new byte[(int) MyFs.Length];
+                MyFs.Write(MyByte, 0, (int) MyFs.Length);
             }
         }
 
 
-
         /// <summary>
-        /// 卸载hook,并关闭流，取消屏蔽任务管理器。
-        /// <remark> 
-        /// Author:ZhangRongHua 
-        /// Create DateTime: 2009-6-19 20:21
-        /// Update History:     
-        ///  </remark>
+        ///     卸载hook,并关闭流，取消屏蔽任务管理器。
+        ///     <remark>
+        ///         Author:ZhangRongHua
+        ///         Create DateTime: 2009-6-19 20:21
+        ///         Update History:
+        ///     </remark>
         /// </summary>
         public void HookStop()
         {
-            bool retKeyboard = true;
+            var retKeyboard = true;
 
             if (hKeyboardHook != 0)
             {
@@ -184,20 +197,6 @@ namespace UnderTerminal
             {
                 throw new Exception("UnhookWindowsHookEx     failedsssss.");
             }
-        }
-
-        #endregion
-
-        #region Nested type: KeyMSG
-
-        public struct KeyMSG
-        {
-            public int dwExtraInfo;
-            public int flags;
-            public int scanCode;
-
-            public int time;
-            public int vkCode;
         }
 
         #endregion

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using ESRI.ArcGIS.Carto;
@@ -13,9 +12,8 @@ namespace sys4
 {
     public partial class GasContentInfoManagement : Form
     {
-
         /// <summary>
-        /// 构造方法
+        ///     构造方法
         /// </summary>
         public GasContentInfoManagement()
         {
@@ -29,7 +27,7 @@ namespace sys4
         }
 
         /// <summary>
-        /// 添加（必须实装）
+        ///     添加（必须实装）
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -43,13 +41,13 @@ namespace sys4
         }
 
         /// <summary>
-        /// 修改（必须实装）
+        ///     修改（必须实装）
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            var gasContentInfoEnteringForm = new GasContentInfoEntering((GasContent)gridView1.GetFocusedRow());
+            var gasContentInfoEnteringForm = new GasContentInfoEntering((GasContent) gridView1.GetFocusedRow());
             if (DialogResult.OK == gasContentInfoEnteringForm.ShowDialog())
             {
                 RefreshData();
@@ -57,7 +55,7 @@ namespace sys4
         }
 
         /// <summary>
-        /// 删除按钮（必须实装）
+        ///     删除按钮（必须实装）
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -65,24 +63,24 @@ namespace sys4
         {
             if (!Alert.confirm(Const_OP.DEL_CONFIRM_MSG_GASCONTENT)) return;
             var selectedIndex = gridView1.GetSelectedRows();
-            foreach (var gasContent in selectedIndex.Select(i => (GasContent)gridView1.GetRow(i)))
+            foreach (var gasContent in selectedIndex.Select(i => (GasContent) gridView1.GetRow(i)))
             {
-                DelGasGushQuantityPt(new[] { gasContent.BindingId });
+                DelGasGushQuantityPt(new[] {gasContent.BindingId});
                 gasContent.Delete();
             }
             RefreshData();
         }
 
         /// <summary>
-        /// 删除瓦斯信息
+        ///     删除瓦斯信息
         /// </summary>
         /// <param name="bid">绑定ID</param>
         private void DelGasGushQuantityPt(string[] bid)
         {
-            ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.LAYER_ALIAS_MR_WSHLD);
-            IFeatureLayer pFeatureLayer = (IFeatureLayer)pLayer;
-            string strsql = "";
-            for (int i = 0; i < bid.Length; i++)
+            var pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.LAYER_ALIAS_MR_WSHLD);
+            var pFeatureLayer = (IFeatureLayer) pLayer;
+            var strsql = "";
+            for (var i = 0; i < bid.Length; i++)
             {
                 if (i == 0)
                     strsql = "bid='" + bid[i] + "'";
@@ -93,7 +91,7 @@ namespace sys4
         }
 
         /// <summary>
-        /// 导出
+        ///     导出
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -106,7 +104,7 @@ namespace sys4
         }
 
         /// <summary>
-        /// 打印
+        ///     打印
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -116,7 +114,7 @@ namespace sys4
         }
 
         /// <summary>
-        /// 退出
+        ///     退出
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -127,7 +125,7 @@ namespace sys4
         }
 
         /// <summary>
-        /// 刷新
+        ///     刷新
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -135,15 +133,16 @@ namespace sys4
         {
             RefreshData();
         }
+
         /// <summary>
-        /// 跳转到地图上所在的位置
+        ///     跳转到地图上所在的位置
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnMap_Click(object sender, EventArgs e)
         {
             var selectedIndex = gridView1.GetSelectedRows();
-            var list = selectedIndex.Select(i => (GasContent)gridView1.GetRow(i)).Select(gasContent => new PointClass
+            var list = selectedIndex.Select(i => (GasContent) gridView1.GetRow(i)).Select(gasContent => new PointClass
             {
                 X = gasContent.CoordinateX,
                 Y = gasContent.CoordinateY

@@ -1,25 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using LibBusiness;
 using LibCommon;
-using LibSocket;
 
 namespace _5.WarningManagement
 {
     public partial class PreWarningRulesManagement : Form
     {
-        PreWarningRulesPanel _preWarningRulesPanel = new PreWarningRulesPanel();
+        private readonly PreWarningRulesPanel _preWarningRulesPanel = new PreWarningRulesPanel();
+
         public PreWarningRulesManagement()
         {
             InitializeComponent();
         }
-        void InitFormProperty()
+
+        private void InitFormProperty()
         {
             _preWarningRulesPanel.MdiParent = this;
             _panel.Controls.Add(_preWarningRulesPanel);
@@ -35,23 +30,21 @@ namespace _5.WarningManagement
             InitFormProperty();
         }
 
-
-
         private void btnExit_Click(object sender, EventArgs e)
         {
             //关闭窗体
-            this.Close();
+            Close();
         }
 
         private void btnImport_Click(object sender, EventArgs e)
         {
-            OpenFileDialog d = new OpenFileDialog();
+            var d = new OpenFileDialog();
             d.CheckFileExists = true;
             d.Filter = "Microsoft Excel 工作表.xlsx|*.xlsx";
             d.Multiselect = false;
             if (DialogResult.OK == d.ShowDialog())
             {
-                string path = d.FileName;
+                var path = d.FileName;
                 if (PreWarningExcelBLL.ImportExcelRules2Db(path))
                 {
                     //清空数据库
@@ -68,15 +61,15 @@ namespace _5.WarningManagement
         }
 
         /// <summary>
-        /// 导出
+        ///     导出
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
             //saveFileDialog1.ShowDialog();
-            string fileName = saveFileDialog1.FileName;
-            bool bResult = _preWarningRulesPanel.returnExportInfo(fileName);
+            var fileName = saveFileDialog1.FileName;
+            var bResult = _preWarningRulesPanel.returnExportInfo(fileName);
             {
                 //addColumn();
                 if (bResult)

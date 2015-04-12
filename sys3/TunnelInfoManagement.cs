@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraGrid.Views.Base;
 using ESRI.ArcGIS.Carto;
-using ESRI.ArcGIS.Geodatabase;
 using GIS;
 using GIS.Common;
 using LibCommon;
@@ -16,7 +14,6 @@ namespace sys3
 {
     public partial class TunnelInfoManagement : Form
     {
-
         /// <summary>
         ///     构造方法
         /// </summary>
@@ -72,7 +69,7 @@ namespace sys3
                 Alert.alert("请选择要修改的信息");
                 return;
             }
-            var d = new TunnelInfoEntering((Tunnel)gridView1.GetFocusedRow());
+            var d = new TunnelInfoEntering((Tunnel) gridView1.GetFocusedRow());
             if (DialogResult.OK == d.ShowDialog())
             {
                 RefreshData();
@@ -89,7 +86,7 @@ namespace sys3
             if (!Alert.confirm(Const_GM.TUNNEL_INFO_MSG_DEL)) return;
             //掘进ID
             var selectedIndex = gridView1.GetSelectedRows();
-            foreach (var tunnel in selectedIndex.Select(i => (Tunnel)gridView1.GetRow(i)))
+            foreach (var tunnel in selectedIndex.Select(i => (Tunnel) gridView1.GetRow(i)))
             {
                 GisHelper.DelHdByHdId(tunnel.TunnelId.ToString(CultureInfo.InvariantCulture));
                 tunnel.Delete();
@@ -106,6 +103,7 @@ namespace sys3
         {
             Close();
         }
+
         /// <summary>
         ///     导出按钮事件
         /// </summary>
@@ -148,10 +146,10 @@ namespace sys3
                 MessageBox.Show(@"未发现巷道全图层！");
                 return;
             }
-            var pFeatureLayer = (IFeatureLayer)pLayer;
+            var pFeatureLayer = (IFeatureLayer) pLayer;
             //for (int i = 0; i < iSelIdxsArr.Length; i++)
             //{
-            var tunnel = (Tunnel)gridView1.GetFocusedRow();
+            var tunnel = (Tunnel) gridView1.GetFocusedRow();
             //if (bid != "")
             //{
             //if (true)
@@ -160,7 +158,7 @@ namespace sys3
             //    str += " or HdId='" + bid + "'";
             //}
             //}
-            List<IFeature> list = MyMapHelp.FindFeatureListByWhereClause(pFeatureLayer, str);
+            var list = MyMapHelp.FindFeatureListByWhereClause(pFeatureLayer, str);
             if (list.Count > 0)
             {
                 MyMapHelp.Jump(MyMapHelp.GetGeoFromFeature(list));

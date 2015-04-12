@@ -21,42 +21,11 @@ namespace sys1
 {
     public partial class MainFormGe
     {
-        private int _updateFrequency; // 10s
-
         private string _currentProbeId = string.Empty;
-        private readonly string _t2Id = string.Empty;
-
-        private DateTime _lastTimeT2; // T2的数据更新时间
         private DateTime _lastTimeMn; // M/N 的数据更新时间
-
-        public bool OnLine { get; set; }
-        // 配置文件
-        public string ConfigFileName
-        {
-            get { return configFileName; }
-        }
-
-        // 曲线更新频率
-        public int UpdateFrequency
-        {
-            get { return _updateFrequency; }
-            set
-            {
-                _updateFrequency = value;
-                timer1.Interval = value * 1000;
-            }
-        }
-
-        // 曲线每一帧显示的数据个数
-        public int DataCountPerFrame { get; set; }
-
-        public double RedDataThreshold { get; set; }
-
-        public double YellowDataThreshold { get; set; }
-
-        public double BadDataThreshold { get; set; }
-
-        public bool EnableDeleteAndModifyBtn { get; set; }
+        private DateTime _lastTimeT2; // T2的数据更新时间
+        private int _updateFrequency; // 10s
+        private readonly string _t2Id = string.Empty;
 
         public MainFormGe(BarButtonItem mniAbout)
         {
@@ -85,6 +54,31 @@ namespace sys1
             DataBindUtil.LoadProbeType(lstProbeType);
         }
 
+        public bool OnLine { get; set; }
+        // 配置文件
+        public string ConfigFileName
+        {
+            get { return configFileName; }
+        }
+
+        // 曲线更新频率
+        public int UpdateFrequency
+        {
+            get { return _updateFrequency; }
+            set
+            {
+                _updateFrequency = value;
+                timer1.Interval = value*1000;
+            }
+        }
+
+        // 曲线每一帧显示的数据个数
+        public int DataCountPerFrame { get; set; }
+        public double RedDataThreshold { get; set; }
+        public double YellowDataThreshold { get; set; }
+        public double BadDataThreshold { get; set; }
+        public bool EnableDeleteAndModifyBtn { get; set; }
+
         private void MainForm_GE_Load(object sender, EventArgs e)
         {
             AutoUpdater.Start("http://bltmld.vicp.cc:8090/sys1/update.xml");
@@ -104,7 +98,7 @@ namespace sys1
         }
 
         /// <summary>
-        /// 数据库设置
+        ///     数据库设置
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -196,9 +190,7 @@ namespace sys1
             {
                 Alert.alert("帮助文件不存在或已损坏");
             }
-
         }
-
 
         private void _DXbtAbout_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -207,10 +199,8 @@ namespace sys1
             libabout.ShowDialog();
         }
 
-
-
         /// <summary>
-        /// 开始实时监控
+        ///     开始实时监控
         /// </summary>
         private void StartRealTimeCurveMonitoring()
         {
@@ -248,7 +238,7 @@ namespace sys1
         }
 
         /// <summary>
-        /// 开始实时监控
+        ///     开始实时监控
         /// </summary>
         private void StopRealTimeCurveMonitoring()
         {
@@ -256,13 +246,13 @@ namespace sys1
         }
 
         /// <summary>
-        /// 计时器
+        ///     计时器
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void timer1_Tick(object sender, EventArgs e)
         {
-            UpdateMnData();  // Update raw data curve.
+            UpdateMnData(); // Update raw data curve.
             UpdateT2Data(); // Update T2 curve.
         }
 
@@ -279,7 +269,7 @@ namespace sys1
             if (time == _lastTimeT2) return;
             _lastTimeT2 = time;
 
-            double value = value1 - value0;
+            var value = value1 - value0;
             TeeChartUtil.addSingleData2TeeChart(tChartT2, DataCountPerFrame, time, value);
         }
 
@@ -288,11 +278,11 @@ namespace sys1
         private void UpdateMnData()
         {
             var datas = GasConcentrationProbeData.FindNewRealData(_currentProbeId, 2);
-            DateTime time = datas[0].RecordTime;
-            double value = datas[0].ProbeValue;
-            double value1 = datas[1].ProbeValue;
+            var time = datas[0].RecordTime;
+            var value = datas[0].ProbeValue;
+            var value1 = datas[1].ProbeValue;
 
-            double valueN = value - value1;
+            var valueN = value - value1;
 
             // 判断是否是最新数据
             if (time != _lastTimeMn && _lastTimeMn != DateTime.MinValue)
@@ -328,11 +318,11 @@ namespace sys1
 
         private void AddDataSet2TeeChart(TChart tChart, GasConcentrationProbeData[] datas, string type)
         {
-            bool bReturn = false;
+            var bReturn = false;
 
             if (datas.Length > 0)
             {
-                int sqlCnt = datas.Length;
+                var sqlCnt = datas.Length;
                 // 禁止自动生成列(※位置不可变)
                 dgvData.AutoGenerateColumns = false;
                 tChart.Series[0].Clear();
@@ -348,8 +338,8 @@ namespace sys1
 
                 // 重新设置X轴的最大值和最小值
                 // 如果数据量非常大的时候，一屏的数据将会非常密集，影响观察效果，因此需要设置合适的时间轴范围。
-                DateTime startTime = datas[0].RecordTime;
-                DateTime endTime = datas[sqlCnt - 1].RecordTime;
+                var startTime = datas[0].RecordTime;
+                var endTime = datas[sqlCnt - 1].RecordTime;
 
                 var ts1 = new TimeSpan(startTime.Ticks);
                 var ts2 = new TimeSpan(endTime.Ticks);
@@ -360,18 +350,18 @@ namespace sys1
                 {
                     var tmpTime = endTime.AddSeconds(-7200); // 7200seconds = 2 hours.
                     tChart.Series[0].GetHorizAxis.SetMinMax
-                    (
-                        tmpTime.ToOADate(),
-                        endTime.ToOADate()
-                    );
+                        (
+                            tmpTime.ToOADate(),
+                            endTime.ToOADate()
+                        );
                 }
                 else
                 {
                     tChart.Series[0].GetHorizAxis.SetMinMax
-                                      (
-                                          startTime.ToOADate(),
-                                          endTime.ToOADate()
-                                      );
+                        (
+                            startTime.ToOADate(),
+                            endTime.ToOADate()
+                        );
                 }
 
                 //// 设置Y轴的最小值和最大值
@@ -412,23 +402,22 @@ namespace sys1
         }
 
         /// <summary>
-        /// 将DataSet中的数据添加到TeeChart中。
-        /// 主要用于添加涌出量原始数据M
+        ///     将DataSet中的数据添加到TeeChart中。
+        ///     主要用于添加涌出量原始数据M
         /// </summary>
         /// <param name="tChart">TeeChart图表</param>
         /// <param name="datas"></param>
         private void AddDataToTeeChartM(TChart tChart, GasConcentrationProbeData[] datas)
         {
-            int sqlCnt = datas.Length;
+            var sqlCnt = datas.Length;
 
             double maxVertValue = 0;
             double minVertValue = 0;
 
-            for (int i = sqlCnt - 1; i >= 0; i--)
+            for (var i = sqlCnt - 1; i >= 0; i--)
             {
-
-                double value = datas[i].ProbeValue;
-                DateTime time = datas[i].RecordTime;
+                var value = datas[i].ProbeValue;
+                var time = datas[i].RecordTime;
 
                 if (value > maxVertValue)
                 {
@@ -465,28 +454,28 @@ namespace sys1
             }
             else
             {
-                tChart.Series[0].GetVertAxis.SetMinMax(minVertValue - minVertValue * 0.1, maxVertValue + maxVertValue * 0.1);
+                tChart.Series[0].GetVertAxis.SetMinMax(minVertValue - minVertValue*0.1, maxVertValue + maxVertValue*0.1);
             }
         }
 
         /// <summary>
-        /// 添加同一工序条件下瓦斯浓度变化值N
+        ///     添加同一工序条件下瓦斯浓度变化值N
         /// </summary>
         /// <param name="tChart"></param>
         /// <param name="datas"></param>
         private void addDataToTeeChartN(TChart tChart, GasConcentrationProbeData[] datas)
         {
-            int sqlCnt = datas.Length;
+            var sqlCnt = datas.Length;
 
             double maxVertValue = 0;
             double minVertValue = 0;
 
-            for (int i = 0; i < sqlCnt; i++)
+            for (var i = 0; i < sqlCnt; i++)
             {
                 if ((i + 1) != datas.Length)
                 {
-                    double value = datas[i + 1].ProbeValue - datas[i].ProbeValue;
-                    DateTime time = datas[i + 1].RecordTime;
+                    var value = datas[i + 1].ProbeValue - datas[i].ProbeValue;
+                    var time = datas[i + 1].RecordTime;
 
                     if (value > maxVertValue)
                     {
@@ -500,15 +489,13 @@ namespace sys1
 
                     tChart.Series[0].Add(time, value);
                 }
-
             }
 
             tChart.Series[0].GetVertAxis.SetMinMax(minVertValue - 1, maxVertValue + 1);
-
         }
 
         /// <summary>
-        /// 执行历史数据查询
+        ///     执行历史数据查询
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -531,9 +518,9 @@ namespace sys1
 
         private void LoadAllHistoryData()
         {
-            String probeName = "";
-            DateTime startTime = new DateTime();
-            DateTime endTime = new DateTime();
+            var probeName = "";
+            var startTime = new DateTime();
+            var endTime = new DateTime();
 
             Invoke(new MethodInvoker(delegate
             {
@@ -546,7 +533,7 @@ namespace sys1
                 rbtnRealtime.Enabled = false;
                 rbtnHistory.Enabled = false;
             }));
-            GasConcentrationProbeData[] datas = GasConcentrationProbeData.FindHistaryData(probeName, startTime, endTime);
+            var datas = GasConcentrationProbeData.FindHistaryData(probeName, startTime, endTime);
 
             // load监控系统原始数据M历史数据
             LoadHistoryDataM(tChartM, datas);
@@ -565,14 +552,12 @@ namespace sys1
             }));
         }
 
-
-
         /// <summary>
-        /// load瓦斯浓度历史数据--监控系统原始数据M
+        ///     load瓦斯浓度历史数据--监控系统原始数据M
         /// </summary>
         private void LoadHistoryDataM(TChart tChart, GasConcentrationProbeData[] datas)
         {
-            int sqlCnt = datas.Length;
+            var sqlCnt = datas.Length;
 
             if (sqlCnt > 0)
             {
@@ -587,16 +572,16 @@ namespace sys1
         }
 
         /// <summary>
-        /// loadT2瓦斯浓度平均增加值Q历史数据
+        ///     loadT2瓦斯浓度平均增加值Q历史数据
         /// </summary>
         private void LoadHistoryDataT2(TChart tChart)
         {
-            GasConcentrationProbeData[] datas = GasConcentrationProbeData.FindHistaryData(
+            var datas = GasConcentrationProbeData.FindHistaryData(
                 _t2Id,
                 Convert.ToDateTime(dateTimeStart.Text),
                 Convert.ToDateTime(dateTimeEnd.Text)
                 );
-            int sqlCnt = 0;
+            var sqlCnt = 0;
             if (datas.Length > 0)
             {
                 sqlCnt = datas.Length;
@@ -611,15 +596,14 @@ namespace sys1
                 //Alert.alert("没有T2瓦斯浓度数据！");
                 tChart.Header.Text = "没有T2瓦斯浓度数据！";
             }
-
         }
 
         /// <summary>
-        /// 同一工序条件下瓦斯浓度变化值N
+        ///     同一工序条件下瓦斯浓度变化值N
         /// </summary>
         private void LoadHistoryDataN(TChart tChart, GasConcentrationProbeData[] datas)
         {
-            int sqlCnt = datas.Length;
+            var sqlCnt = datas.Length;
 
             if (sqlCnt > 0)
             {
@@ -634,7 +618,7 @@ namespace sys1
         }
 
         /// <summary>
-        /// 设置曲线1的Marks显示与否
+        ///     设置曲线1的Marks显示与否
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -645,9 +629,8 @@ namespace sys1
 
         #region T2瓦斯浓度平均增加值Q
 
-
         /// <summary>
-        /// 设置曲线2的Marks显示与否
+        ///     设置曲线2的Marks显示与否
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -661,7 +644,7 @@ namespace sys1
         #region 同一工序条件下瓦斯浓度变化值N
 
         /// <summary>
-        /// 设置曲线3的Marks显示与否
+        ///     设置曲线3的Marks显示与否
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -704,7 +687,7 @@ namespace sys1
         //}
 
         /// <summary>
-        /// 后一天
+        ///     后一天
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -725,8 +708,8 @@ namespace sys1
 
             if (Check())
             {
-                DateTime dtStart = Convert.ToDateTime(dateTimeStart.Text).AddDays(1);
-                DateTime dtEnd = Convert.ToDateTime(dateTimeEnd.Text).AddDays(1);
+                var dtStart = Convert.ToDateTime(dateTimeStart.Text).AddDays(1);
+                var dtEnd = Convert.ToDateTime(dateTimeEnd.Text).AddDays(1);
 
                 dateTimeStart.Text = dtStart.ToString(CultureInfo.InvariantCulture);
                 dateTimeEnd.Text = dtEnd.ToString(CultureInfo.InvariantCulture);
@@ -742,7 +725,7 @@ namespace sys1
         }
 
         /// <summary>
-        /// 前一天
+        ///     前一天
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -763,8 +746,8 @@ namespace sys1
 
             if (Check())
             {
-                DateTime dtStart = Convert.ToDateTime(dateTimeStart.Text).AddDays(-1);
-                DateTime dtEnd = Convert.ToDateTime(dateTimeEnd.Text).AddDays(-1);
+                var dtStart = Convert.ToDateTime(dateTimeStart.Text).AddDays(-1);
+                var dtEnd = Convert.ToDateTime(dateTimeEnd.Text).AddDays(-1);
 
                 dateTimeStart.Text = dtStart.ToString(CultureInfo.InvariantCulture);
                 dateTimeEnd.Text = dtEnd.ToString(CultureInfo.InvariantCulture);
@@ -774,7 +757,7 @@ namespace sys1
         }
 
         /// <summary>
-        /// 当前时间
+        ///     当前时间
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -803,7 +786,7 @@ namespace sys1
         }
 
         /// <summary>
-        /// 检验
+        ///     检验
         /// </summary>
         private bool Check()
         {
@@ -845,24 +828,24 @@ namespace sys1
         }
 
         /// <summary>
-        /// 添加T2瓦斯浓度平均增加值
+        ///     添加T2瓦斯浓度平均增加值
         /// </summary>
         /// <param name="tChart"></param>
         /// <param name="datas"></param>
         private void addDataToTeeChartT2(TChart tChart, GasConcentrationProbeData[] datas)
         {
-            int sqlCnt = datas.Length;
+            var sqlCnt = datas.Length;
             double sumValue = 0;
 
             double maxVertValue = 0;
             double minVertValue = 0;
 
-            for (int i = 0; i < sqlCnt; i++)
+            for (var i = 0; i < sqlCnt; i++)
             {
                 if ((i + 1) != datas.Length)
                 {
                     sumValue = sumValue + datas[i + 1].ProbeValue - datas[i].ProbeValue;
-                    var value = sumValue / (i + 1);
+                    var value = sumValue/(i + 1);
                     var time = datas[i + 1].RecordTime;
 
                     if (value > maxVertValue)

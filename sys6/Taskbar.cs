@@ -5,41 +5,52 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Runtime.InteropServices;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.Text;
 
 namespace UnderTerminal
 {
     /// <summary>
-    /// Helper class for hiding/showing the taskbar and startmenu on
-    /// Windows XP and Vista.
+    ///     Helper class for hiding/showing the taskbar and startmenu on
+    ///     Windows XP and Vista.
     /// </summary>
     public static class Taskbar
     {
+        private const int SW_HIDE = 0;
+        private const int SW_SHOW = 5;
+        private const string VistaStartMenuCaption = "Start";
+        private static IntPtr vistaStartMenuWnd = IntPtr.Zero;
+
+        /// <summary>
+        ///     Sets the visibility of the taskbar.
+        /// </summary>
+        public static bool Visible
+        {
+            set { SetVisibility(value); }
+        }
+
         [DllImport("user32.dll")]
         private static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int count);
+
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern bool EnumThreadWindows(int threadId, EnumThreadProc pfnEnum, IntPtr lParam);
+
         [DllImport("user32.dll", SetLastError = true)]
-        private static extern System.IntPtr FindWindow(string lpClassName, string lpWindowName);
+        private static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+
         [DllImport("user32.dll", SetLastError = true)]
-        private static extern IntPtr FindWindowEx(IntPtr parentHandle, IntPtr childAfter, string className, string windowTitle);
+        private static extern IntPtr FindWindowEx(IntPtr parentHandle, IntPtr childAfter, string className,
+            string windowTitle);
+
         [DllImport("user32.dll")]
         private static extern int ShowWindow(IntPtr hwnd, int nCmdShow);
+
         [DllImport("user32.dll")]
         private static extern uint GetWindowThreadProcessId(IntPtr hwnd, out int lpdwProcessId);
 
-        private const int SW_HIDE = 0;
-        private const int SW_SHOW = 5;
-
-        private const string VistaStartMenuCaption = "Start";
-        private static IntPtr vistaStartMenuWnd = IntPtr.Zero;
-        private delegate bool EnumThreadProc(IntPtr hwnd, IntPtr lParam);
-
         /// <summary>
-        /// Show the taskbar.
+        ///     Show the taskbar.
         /// </summary>
         public static void Show()
         {
@@ -47,7 +58,7 @@ namespace UnderTerminal
         }
 
         /// <summary>
-        /// Hide the taskbar.
+        ///     Hide the taskbar.
         /// </summary>
         public static void Hide()
         {
@@ -55,24 +66,16 @@ namespace UnderTerminal
         }
 
         /// <summary>
-        /// Sets the visibility of the taskbar.
-        /// </summary>
-        public static bool Visible
-        {
-            set { SetVisibility(value); }
-        }
-
-        /// <summary>
-        /// Hide or show the Windows taskbar and startmenu.
+        ///     Hide or show the Windows taskbar and startmenu.
         /// </summary>
         /// <param name="show">true to show, false to hide</param>
         private static void SetVisibility(bool show)
         {
             // get taskbar window
-            IntPtr taskBarWnd = FindWindow("Shell_TrayWnd", null);
+            var taskBarWnd = FindWindow("Shell_TrayWnd", null);
 
             // try it the WinXP way first...
-            IntPtr startWnd = FindWindowEx(taskBarWnd, IntPtr.Zero, "Button", "Start");
+            var startWnd = FindWindowEx(taskBarWnd, IntPtr.Zero, "Button", "Start");
             if (startWnd == IntPtr.Zero)
             {
                 // ok, let's try the Vista easy way...
@@ -90,7 +93,7 @@ namespace UnderTerminal
         }
 
         /// <summary>
-        /// Returns the window handle of the Vista start menu orb.
+        ///     Returns the window handle of the Vista start menu orb.
         /// </summary>
         /// <param name="taskBarWnd">windo handle of taskbar</param>
         /// <returns>window handle of start menu</returns>
@@ -100,7 +103,7 @@ namespace UnderTerminal
             int procId;
             GetWindowThreadProcessId(taskBarWnd, out procId);
 
-            Process p = Process.GetProcessById(procId);
+            var p = Process.GetProcessById(procId);
             if (p != null)
             {
                 // enumerate all threads of that process...
@@ -113,14 +116,14 @@ namespace UnderTerminal
         }
 
         /// <summary>
-        /// Callback method that is called from 'EnumThreadWindows' in 'GetVistaStartMenuWnd'.
+        ///     Callback method that is called from 'EnumThreadWindows' in 'GetVistaStartMenuWnd'.
         /// </summary>
         /// <param name="hWnd">window handle</param>
         /// <param name="lParam">parameter</param>
         /// <returns>true to continue enumeration, false to stop it</returns>
         private static bool MyEnumThreadWindowsProc(IntPtr hWnd, IntPtr lParam)
         {
-            StringBuilder buffer = new StringBuilder(256);
+            var buffer = new StringBuilder(256);
             if (GetWindowText(hWnd, buffer, buffer.Capacity) > 0)
             {
                 Console.WriteLine(buffer);
@@ -132,5 +135,7 @@ namespace UnderTerminal
             }
             return true;
         }
+
+        private delegate bool EnumThreadProc(IntPtr hwnd, IntPtr lParam);
     }
 }

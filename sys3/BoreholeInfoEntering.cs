@@ -124,7 +124,8 @@ namespace sys3
             }
 
 
-            var borehole = Borehole.FindOneByBoreholeNum(txtBoreholeNumber.Text) ?? new Borehole { BindingId = IDGenerator.NewBindingID() };
+            var borehole = Borehole.FindOneByBoreholeNum(txtBoreholeNumber.Text) ??
+                           new Borehole {BindingId = IDGenerator.NewBindingID()};
             borehole.BoreholeNumber = txtBoreholeNumber.Text.Trim();
             borehole.GroundElevation = Convert.ToDouble(txtGroundElevation.Text.Trim());
             borehole.CoordinateX = Convert.ToDouble(txtCoordinateX.Text.Trim());
@@ -386,7 +387,6 @@ namespace sys3
                                 return false;
                             }
                         }
-
                     }
                 }
 
@@ -424,6 +424,7 @@ namespace sys3
             // 验证通过
             return true;
         }
+
         /// <summary>
         ///     岩性选择事件
         /// </summary>
@@ -708,7 +709,8 @@ namespace sys3
                     try
                     {
                         var str = duqu.Split('|');
-                        var borehole = Borehole.FindOneByBoreholeNum(str[0]) ?? new Borehole { BindingId = IDGenerator.NewBindingID() };
+                        var borehole = Borehole.FindOneByBoreholeNum(str[0]) ??
+                                       new Borehole {BindingId = IDGenerator.NewBindingID()};
 
                         borehole.BoreholeNumber = str[0];
                         borehole.GroundElevation = Convert.ToDouble(str[3]);
@@ -729,15 +731,14 @@ namespace sys3
                             CoordinateZ = 0
                         };
 
-                        borehole.BoreholeLithologys = new[] { boreholeLithology };
+                        borehole.BoreholeLithologys = new[] {boreholeLithology};
                         DrawZuanKong(borehole, boreholeLithology);
                         borehole.Save();
-
                     }
                     catch (Exception)
                     {
                         lblError.Text =
-                          (Convert.ToInt32(lblError.Text) + 1).ToString(CultureInfo.InvariantCulture);
+                            (Convert.ToInt32(lblError.Text) + 1).ToString(CultureInfo.InvariantCulture);
                         lblSuccessed.Text =
                             (Convert.ToInt32(lblSuccessed.Text) - 1).ToString(CultureInfo.InvariantCulture);
                         _errorMsg += fileName.Substring(fileName.LastIndexOf(@"\", StringComparison.Ordinal) + 1) + "\n";
@@ -745,7 +746,7 @@ namespace sys3
                     }
                 }
                 lblSuccessed.Text =
-                        (Convert.ToInt32(lblSuccessed.Text) + 1).ToString(CultureInfo.InvariantCulture);
+                    (Convert.ToInt32(lblSuccessed.Text) + 1).ToString(CultureInfo.InvariantCulture);
                 pbCount.Value++;
             }
             Alert.alert("导入成功！");
@@ -776,6 +777,11 @@ namespace sys3
                     txtGroundElevation.Text = str[3];
                 }
             }
+        }
+
+        private void btnDetails_Click(object sender, EventArgs e)
+        {
+            Alert.alert(_errorMsg);
         }
 
         #region 绘制钻孔
@@ -848,7 +854,7 @@ namespace sys3
                 MessageBox.Show(@"未找到钻孔图层,无法绘制钻孔图元。");
                 return;
             }
-            var pFeatureLayer = (IFeatureLayer)pLayer;
+            var pFeatureLayer = (IFeatureLayer) pLayer;
             IGeometry geometry = pt;
             var list = new List<ziduan>
             {
@@ -867,7 +873,7 @@ namespace sys3
             {
                 MyMapHelp.Jump(pt);
                 DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh(
-                    (esriViewDrawPhase)34, null, null);
+                    (esriViewDrawPhase) 34, null, null);
             }
         }
 
@@ -933,7 +939,7 @@ namespace sys3
                 MessageBox.Show(@"未找到钻孔图层,无法绘制钻孔图元。");
                 return;
             }
-            var pFeatureLayer = (IFeatureLayer)pLayer;
+            var pFeatureLayer = (IFeatureLayer) pLayer;
             IGeometry geometry = pt;
             var list = new List<ziduan>
             {
@@ -951,14 +957,9 @@ namespace sys3
             if (pfeature == null) return;
             MyMapHelp.Jump(pt);
             DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh(
-                (esriViewDrawPhase)34, null, null);
+                (esriViewDrawPhase) 34, null, null);
         }
 
         #endregion
-
-        private void btnDetails_Click(object sender, EventArgs e)
-        {
-            Alert.alert(_errorMsg);
-        }
     }
 }

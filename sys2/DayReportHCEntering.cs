@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using ESRI.ArcGIS.Geodatabase;
 using ESRI.ArcGIS.Geometry;
 using GIS;
 using GIS.HdProc;
@@ -18,24 +17,6 @@ namespace sys2
 {
     public partial class DayReportHcEntering : Form
     {
-        #region ******变量声明******
-
-        /**回采日报实体**/
-
-        //各列索引
-        private const int C_DATE = 0; // 选择日期
-        private const int C_WORK_TIME = 1; // 班次
-        private const int C_WORK_CONTENT = 2; // 工作内容
-        private const int C_WORK_PROGRESS = 3; // 进尺
-        private const int C_COMMENTS = 4; // 备注
-        private Rectangle _Rectangle;
-        private int[] _arr;
-        private DateTimePicker dtp = new DateTimePicker(); //这里实例化一个DateTimePicker控件
-
-        private readonly DayReportHc _dayReportHc;
-
-        #endregion
-
         /// <summary>
         ///     构造方法
         /// </summary>
@@ -95,8 +76,9 @@ namespace sys2
         /// </summary>
         private void SetWorkTimeName()
         {
-            string sysDateTime = DateTime.Now.ToString("HH:mm:ss");
-            var strWorkTimeName = MineDataSimpleBLL.selectWorkTimeNameByWorkTimeGroupIdAndSysTime(rbtn38.Checked ? 1 : 2, sysDateTime);
+            var sysDateTime = DateTime.Now.ToString("HH:mm:ss");
+            var strWorkTimeName = MineDataSimpleBLL.selectWorkTimeNameByWorkTimeGroupIdAndSysTime(
+                rbtn38.Checked ? 1 : 2, sysDateTime);
 
             if (!string.IsNullOrEmpty(strWorkTimeName))
             {
@@ -118,8 +100,7 @@ namespace sys2
             }
             else
             {
-                var teamEntity = new Team();
-                teamEntity.TeamId = Convert.ToInt32(cboTeamName.SelectedValue);
+                var teamEntity = new Team {TeamId = Convert.ToInt32(cboTeamName.SelectedValue)};
                 teamEntity = Team.Find(teamEntity.TeamId);
                 teamInfoForm = new TeamInfoEntering(teamEntity);
             }
@@ -182,7 +163,6 @@ namespace sys2
                     UpdateDayReportHcInfo();
                 }
             }
-
         }
 
         /// <summary>
@@ -210,19 +190,16 @@ namespace sys2
 
             dics[GIS_Const.FIELD_HDID] = hd1 + "_" + hd2;
             //已经存在回采进尺的，计算回采进尺点，保存到工作面表中，同时将绘制回采
-            List<Tuple<IFeature, IGeometry, Dictionary<string, string>>> selcjqs =
+            var selcjqs =
                 Global.commonclss.SearchFeaturesByGeoAndText(Global.hcqlyr, dics);
-            int xh = 0;
-            if (selcjqs.Count == 0)
-                xh = 0;
-            else
-                xh = Convert.ToInt32(selcjqs[0].Item3[GIS_Const.FIELD_XH]);
+            var xh = 0;
+            xh = selcjqs.Count == 0 ? 0 : Convert.ToInt32(selcjqs[0].Item3[GIS_Const.FIELD_XH]);
             dics[GIS_Const.FIELD_ID] = "0";
             dics[GIS_Const.FIELD_BS] = "0";
             dics[GIS_Const.FIELD_BID] = bid;
             dics[GIS_Const.FIELD_XH] = (xh + 1).ToString();
             IPoint pos = new PointClass();
-            Dictionary<string, List<GeoStruct>> dzxlist =
+            var dzxlist =
                 Global.cons.DrawHDHC(hd1.ToString(), hd2.ToString(), qy.ToString(), hcjc, zywid, fywid, qywid, 1,
                     Global.searchlen, dics, true, prevPnt, out pos);
             // 更新工作面信息（预警点坐标）
@@ -236,17 +213,17 @@ namespace sys2
             if (null != dzxlist && dzxlist.Count > 0)
             {
                 GeologySpaceBll.DeleteGeologySpaceEntityInfos(workingFace.WorkingFaceId); //删除工作面ID对应的地质构造信息
-                foreach (string key in dzxlist.Keys)
+                foreach (var key in dzxlist.Keys)
                 {
-                    List<GeoStruct> geoinfos = dzxlist[key];
-                    string geo_type = key;
-                    foreach (GeoStruct tmp in geoinfos)
+                    var geoinfos = dzxlist[key];
+                    var geo_type = key;
+                    foreach (var tmp in geoinfos)
                     {
                         var geologyspaceEntity = new GeologySpace
                         {
                             WorkingFace = workingFace,
                             TectonicType = Convert.ToInt32(key),
-                            TectonicId = tmp.geoinfos[GIS_Const.FIELD_BID].ToString(),
+                            TectonicId = tmp.geoinfos[GIS_Const.FIELD_BID],
                             Distance = tmp.dist,
                             OnDateTime = DateTime.Now.ToShortDateString()
                         };
@@ -272,19 +249,19 @@ namespace sys2
 
             //已经存在回采进尺的，计算回采进尺点，保存到工作面表中，同时将绘制回采
             var dics = new Dictionary<string, string>();
-            dics.Add(GIS_Const.FIELD_HDID, hd1.ToString() + "_" + hd2.ToString());
+            dics.Add(GIS_Const.FIELD_HDID, hd1 + "_" + hd2);
             dics.Add(GIS_Const.FIELD_BS, "0");
             dics.Add(GIS_Const.FIELD_BID, bid);
-            List<Tuple<IFeature, IGeometry, Dictionary<string, string>>> selcjqs =
+            var selcjqs =
                 Global.commonclss.SearchFeaturesByGeoAndText(Global.hcqlyr, dics);
-            Dictionary<string, IPoint> results_pts = Global.cons.UpdateHCCD(hd1.ToString(), hd2.ToString(),
+            var results_pts = Global.cons.UpdateHCCD(hd1.ToString(), hd2.ToString(),
                 qy.ToString(), bid, hcjc, zywid, fywid, qywid, Global.searchlen);
             if (results_pts == null) return;
             //更新当前修改的回采进尺对应的工作面信息表记录
-            int index = 0;
+            var index = 0;
             IPoint pnt = new PointClass();
 
-            foreach (string key in results_pts.Keys)
+            foreach (var key in results_pts.Keys)
             {
                 workingFace.SetCoordinate(results_pts[key].X, results_pts[key].Y, results_pts[key].Z);
                 workingFace.Save();
@@ -307,17 +284,17 @@ namespace sys2
             hd_ids.Add(hd1);
             hd_ids.Add(hd2);
             hd_ids.Add(qy);
-            Dictionary<string, List<GeoStruct>> geostructsinfos = Global.commonclss.GetStructsInfos(pnt, hd_ids);
+            var geostructsinfos = Global.commonclss.GetStructsInfos(pnt, hd_ids);
             if (geostructsinfos.Count > 0)
             {
                 GeologySpaceBll.DeleteGeologySpaceEntityInfos(workingFace.WorkingFaceId); //删除工作面ID对应的地质构造信息
-                foreach (string key in geostructsinfos.Keys)
+                foreach (var key in geostructsinfos.Keys)
                 {
-                    List<GeoStruct> geoinfos = geostructsinfos[key];
-                    string geo_type = key;
-                    for (int i = 0; i < geoinfos.Count; i++)
+                    var geoinfos = geostructsinfos[key];
+                    var geo_type = key;
+                    for (var i = 0; i < geoinfos.Count; i++)
                     {
-                        GeoStruct tmp = geoinfos[i];
+                        var tmp = geoinfos[i];
 
                         var geologyspaceEntity = new GeologySpace
                         {
@@ -341,7 +318,7 @@ namespace sys2
         {
             var workingFace = selectWorkingfaceSimple1.SelectedWorkingFace;
             var dayReportHCEntityList = new List<DayReportHc>();
-            for (int i = 0; i < dgrdvDayReportHC.RowCount; i++)
+            for (var i = 0; i < dgrdvDayReportHC.RowCount; i++)
             {
                 var dayReportHCEntity = new DayReportHc();
                 // 最后一行为空行时，跳出循环
@@ -352,11 +329,11 @@ namespace sys2
 
                 /**回采日报实体赋值**/
                 //队别名称
-                dayReportHCEntity.Team = (Team)cboTeamName.SelectedItem;
+                dayReportHCEntity.Team = (Team) cboTeamName.SelectedItem;
                 //绑定回采面编号
                 dayReportHCEntity.WorkingFace = selectWorkingfaceSimple1.SelectedWorkingFace;
 
-                DataGridViewCellCollection cells = dgrdvDayReportHC.Rows[i].Cells;
+                var cells = dgrdvDayReportHC.Rows[i].Cells;
 
                 //日期
                 if (cells[C_DATE].Value != null)
@@ -404,18 +381,19 @@ namespace sys2
                 dayReportHCEntityList.Add(dayReportHCEntity);
             }
 
-            bool bResult = false;
+            var bResult = false;
 
             //循环添加
-            foreach (DayReportHc dayReportHCEntity in dayReportHCEntityList)
+            foreach (var dayReportHCEntity in dayReportHCEntityList)
             {
                 // 在图中绘制回采进尺
                 if (workingFace != null)
                 {
-                    double hcjc = dayReportHCEntity.JinChi;
-                    string bid = dayReportHCEntity.BindingId;
+                    var hcjc = dayReportHCEntity.JinChi;
+                    var bid = dayReportHCEntity.BindingId;
                     var workingFaceHc = WorkingFaceHc.FindByWorkingFace(workingFace);
-                    AddHcjc(workingFaceHc.TunnelZy.TunnelId, workingFaceHc.TunnelFy.TunnelId, workingFaceHc.TunnelQy.TunnelId, workingFaceHc.TunnelZy.TunnelWid,
+                    AddHcjc(workingFaceHc.TunnelZy.TunnelId, workingFaceHc.TunnelFy.TunnelId,
+                        workingFaceHc.TunnelQy.TunnelId, workingFaceHc.TunnelZy.TunnelWid,
                         workingFaceHc.TunnelFy.TunnelWid, workingFaceHc.TunnelQy.TunnelWid,
                         hcjc, bid);
                     dayReportHCEntity.SaveAndFlush();
@@ -431,7 +409,6 @@ namespace sys2
             if (!bResult)
             {
                 Alert.alert(Const_MS.MSG_UPDATE_FAILURE);
-                return;
             }
             else
             {
@@ -442,7 +419,7 @@ namespace sys2
                     Const.INVALID_ID,
                     DayReportHc.TableName, OPERATION_TYPE.ADD, DateTime.Now);
                 SocketUtil.SendMsg2Server(msg);
-                Log.Debug("发送地址构造消息------完成" + msg.ToString());
+                Log.Debug("发送地址构造消息------完成" + msg);
             }
         }
 
@@ -468,7 +445,7 @@ namespace sys2
                 _dayReportHc.WorkTimeStyle = rbtn46.Text;
             }
 
-            DataGridViewCellCollection cells = dgrdvDayReportHC.Rows[0].Cells;
+            var cells = dgrdvDayReportHC.Rows[0].Cells;
 
             //创建日期
             if (cells[C_DATE].Value != null)
@@ -501,16 +478,16 @@ namespace sys2
 
             //提交修改
             _dayReportHc.SaveAndFlush();
-            bool bResult = true;
+            var bResult = true;
 
             //绘制回采进尺图形
-            double hcjc = _dayReportHc.JinChi;
-            string bid = _dayReportHc.BindingId;
+            var hcjc = _dayReportHc.JinChi;
+            var bid = _dayReportHc.BindingId;
             var workingFace = selectWorkingfaceSimple1.SelectedWorkingFace;
             var workingFaceHc = WorkingFaceHc.FindByWorkingFace(workingFace);
-            UpdateHcjc(workingFaceHc.TunnelZy.TunnelId, workingFaceHc.TunnelFy.TunnelId, workingFaceHc.TunnelQy.TunnelId, hcjc, bid, workingFaceHc.TunnelZy.TunnelWid,
+            UpdateHcjc(workingFaceHc.TunnelZy.TunnelId, workingFaceHc.TunnelFy.TunnelId, workingFaceHc.TunnelQy.TunnelId,
+                hcjc, bid, workingFaceHc.TunnelZy.TunnelWid,
                 workingFaceHc.TunnelFy.TunnelWid, workingFaceHc.TunnelQy.TunnelWid);
-
 
 
             // 通知服务器数据已经修改
@@ -531,7 +508,7 @@ namespace sys2
                 rbtn38.Checked ? Const_MS.WORK_GROUP_ID_38 : Const_MS.WORK_GROUP_ID_46);
             // 设置班次名称
             SetWorkTimeName();
-            for (int i = 0; i < dgrdvDayReportHC.RowCount; i++)
+            for (var i = 0; i < dgrdvDayReportHC.RowCount; i++)
             {
                 dgrdvDayReportHC[0, i].Value = dgrdvDayReportHC[0, 0].Value;
             }
@@ -579,9 +556,9 @@ namespace sys2
                     return false;
                 }
                 //修改时
-                bool bResult = false;
+                var bResult = false;
                 //为空返回false，不数据时跳出循环
-                for (int i = 0; i < dgrdvDayReportHC.ColumnCount; i++)
+                for (var i = 0; i < dgrdvDayReportHC.ColumnCount; i++)
                 {
                     if (dgrdvDayReportHC[3, i].Value == null)
                     {
@@ -600,7 +577,7 @@ namespace sys2
                 }
             }
 
-            for (int i = 0; i < dgrdvDayReportHC.RowCount; i++)
+            for (var i = 0; i < dgrdvDayReportHC.RowCount; i++)
             {
                 // 最后一行为空行时，跳出循环
                 if (i == dgrdvDayReportHC.RowCount - 1)
@@ -608,7 +585,7 @@ namespace sys2
                     break;
                 }
 
-                DataGridViewCellCollection cells = dgrdvDayReportHC.Rows[i].Cells;
+                var cells = dgrdvDayReportHC.Rows[i].Cells;
 
                 var cell = cells[C_DATE] as DataGridViewTextBoxCell;
                 //工作面是否选择
@@ -697,18 +674,15 @@ namespace sys2
 
         private void cboTeamName_TextChanged(object sender, EventArgs e)
         {
-            for (int i = 0; i < cboTeamName.Items.Count; i++)
+            for (var i = 0; i < cboTeamName.Items.Count; i++)
             {
                 if (cboTeamName.Text == cboTeamName.GetItemText(cboTeamName.Items[i]))
                 {
                     DataBindUtil.LoadTeamMemberByTeamName(cboSubmitter, cboTeamName.Text);
                     break;
                 }
-                else
-                {
-                    cboSubmitter.Items.Clear();
-                    cboSubmitter.Text = "";
-                }
+                cboSubmitter.Items.Clear();
+                cboSubmitter.Text = "";
             }
         }
 
@@ -747,7 +721,7 @@ namespace sys2
             if (e.ColumnIndex == C_DATE)
             {
                 //datetimepicker控件位置大小
-                Rectangle rect = dgrdvDayReportHC.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false);
+                var rect = dgrdvDayReportHC.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false);
                 dtp.Visible = true;
                 dtp.Top = rect.Top;
                 dtp.Left = rect.Left;
@@ -766,5 +740,23 @@ namespace sys2
                 }
             }
         }
+
+        #region ******变量声明******
+
+        /**回采日报实体**/
+
+        //各列索引
+        private const int C_DATE = 0; // 选择日期
+        private const int C_WORK_TIME = 1; // 班次
+        private const int C_WORK_CONTENT = 2; // 工作内容
+        private const int C_WORK_PROGRESS = 3; // 进尺
+        private const int C_COMMENTS = 4; // 备注
+        private Rectangle _Rectangle;
+        private int[] _arr;
+        private readonly DateTimePicker dtp = new DateTimePicker(); //这里实例化一个DateTimePicker控件
+
+        private readonly DayReportHc _dayReportHc;
+
+        #endregion
     }
 }

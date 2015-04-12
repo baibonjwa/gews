@@ -15,7 +15,6 @@ using GIS.HdProc;
 using GIS.LayersManager;
 using GIS.Warning;
 using LibAbout;
-using LibBusiness;
 using LibCommon;
 using LibCommonForm;
 using LibConfig;
@@ -31,17 +30,14 @@ namespace sys5
     {
         //最新预警结果
         private static PreWarningLastedResultQuery _latestWarningResult;
-
-        private readonly GIS_FileMenu m_FileMenu = new GIS_FileMenu();
-
         private FlashWarningPoints m_flashWarningPoints; //预警点闪烁command类
-
+        private readonly GIS_FileMenu m_FileMenu = new GIS_FileMenu();
 
         public MainFormWm()
         {
             RuntimeManager.Bind(ProductCode.EngineOrDesktop);
             IAoInitialize aoini = new AoInitializeClass();
-            esriLicenseStatus licenseStatus =
+            var licenseStatus =
                 aoini.IsProductCodeAvailable(esriLicenseProductCode.esriLicenseProductCodeStandard);
             if (licenseStatus == esriLicenseStatus.esriLicenseAvailable)
             {
@@ -106,7 +102,8 @@ namespace sys5
             SocketUtil.DoInitilization();
             //////////////////////////////////////////////////////
             ///文件菜单
-            mapControl_WM.LoadMxFile(Application.StartupPath + "\\" + ConfigManager.Instance.getValueByKey(ConfigConst.CONFIG_MXD_FILE));
+            mapControl_WM.LoadMxFile(Application.StartupPath + "\\" +
+                                     ConfigManager.Instance.getValueByKey(ConfigConst.CONFIG_MXD_FILE));
             //this.mapControl_WM.LoadMxFile(Application.StartupPath + "\\local.mxd");
             toolStrip1.AxMap = mapControl_WM;
             m_FileMenu.AxMapControl = mapControl_WM; //传入MapControl控件   
@@ -115,8 +112,8 @@ namespace sys5
             //////////////////////////////////////////////////////
             //绘制基本图元工具条
             //加载测试数 
-            var mapControl = (IMapControl3)mapControl_WM.Object;
-            var toolbarControl = (IToolbarControl)toolBar_WM.Object;
+            var mapControl = (IMapControl3) mapControl_WM.Object;
+            var toolbarControl = (IToolbarControl) toolBar_WM.Object;
 
             //绑定控件
             toolBar_WM.SetBuddyControl(mapControl);
@@ -152,7 +149,7 @@ namespace sys5
 
             AutoUpdater.Start("http://bltmld.vicp.cc:8090/sys5/update.xml");
             //注册更新预警结果事件
-          
+
             SocketUtil.GetClientSocketInstance().OnMsgUpdateWarningResult += UpdateWarningResultUi;
             var msg = new SocketMessage(COMMAND_ID.REGISTER_WARNING_RESULT_NOTIFICATION_ALL, DateTime.Now);
             SocketUtil.SendMsg2Server(msg);
@@ -292,14 +289,14 @@ namespace sys5
                 ILegendGroup pLG = new LegendGroupClass();
                 if (unk is ILegendGroup)
                 {
-                    pLG = (ILegendGroup)unk;
+                    pLG = (ILegendGroup) unk;
                 }
-                pLC = pLG.get_Class((int)data);
+                pLC = pLG.get_Class((int) data);
                 ISymbol pSym;
                 pSym = pLC.Symbol;
                 ISymbolSelector pSS = new
                     SymbolSelectorClass();
-                bool bOK = false;
+                var bOK = false;
                 pSS.AddSymbol(pSym);
                 bOK = pSS.SelectSymbol(0);
                 if (bOK)
@@ -312,6 +309,14 @@ namespace sys5
         }
 
         #endregion
+
+        private void bbiCheckUpdate_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            AutoUpdater.CheckAtOnce = true;
+            AutoUpdater.Start("http://bltmld.vicp.cc:8090/sys5/update.xml");
+        }
+
+        private delegate void ShowDelegate(UpdateWarningResultMessage data);
 
         #region ******文件******
 
@@ -437,7 +442,7 @@ namespace sys5
         public void EnableLayer(string strLayerName, bool visible)
         {
             //设置图层名称
-            for (int intI = 0; intI < mapControl_WM.LayerCount; intI++)
+            for (var intI = 0; intI < mapControl_WM.LayerCount; intI++)
             {
                 if (mapControl_WM.Map.Layer[intI].Name == strLayerName)
                 {
@@ -657,7 +662,7 @@ namespace sys5
         //帮助文件
         private void mniHelpFile_ItemClick(object sender, ItemClickEventArgs e)
         {
-            string strHelpFilePath = Application.StartupPath + Const_WM.System5_Help_File;
+            var strHelpFilePath = Application.StartupPath + Const_WM.System5_Help_File;
             try
             {
                 Process.Start(strHelpFilePath);
@@ -940,13 +945,5 @@ namespace sys5
         }
 
         #endregion
-
-        private delegate void ShowDelegate(UpdateWarningResultMessage data);
-
-        private void bbiCheckUpdate_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            AutoUpdater.CheckAtOnce = true;
-            AutoUpdater.Start("http://bltmld.vicp.cc:8090/sys5/update.xml");
-        }
     }
 }

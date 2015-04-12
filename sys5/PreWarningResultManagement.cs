@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using LibBusiness;
-using LibEntity;
 using LibCommon;
-using LibCommonControl;
+
 namespace _5.WarningManagement
 {
     public partial class PreWarningResultManagement : Form
@@ -27,9 +19,7 @@ namespace _5.WarningManagement
         private void btnExit_Click(object sender, EventArgs e)
         {
             //关闭窗体
-            this.Close();
-
+            Close();
         }
-
     }
 }

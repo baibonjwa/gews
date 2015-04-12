@@ -6,13 +6,8 @@
 // 版本信息：
 // V1.0 新建
 // ******************************************************************
+
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using LibCommon;
 using LibEntity;
@@ -21,13 +16,8 @@ namespace UnderTerminal
 {
     public partial class GasInfoEntering : Form
     {
-        #region ******变量声明******
-        public GasData gasDataEntity = new GasData();
-        double tmpDouble = 0;
-        #endregion ******变量声明******
-
         /// <summary>
-        /// 构造方法
+        ///     构造方法
         /// </summary>
         public GasInfoEntering()
         {
@@ -35,7 +25,7 @@ namespace UnderTerminal
         }
 
         /// <summary>
-        /// 瓦斯探头断电次数
+        ///     瓦斯探头断电次数
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -49,7 +39,7 @@ namespace UnderTerminal
         }
 
         /// <summary>
-        /// 吸钻预兆次数
+        ///     吸钻预兆次数
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -63,7 +53,7 @@ namespace UnderTerminal
         }
 
         /// <summary>
-        /// 瓦斯忽大忽小预兆次数
+        ///     瓦斯忽大忽小预兆次数
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -77,7 +67,7 @@ namespace UnderTerminal
         }
 
         /// <summary>
-        /// 气温下降预兆次数
+        ///     气温下降预兆次数
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -91,7 +81,7 @@ namespace UnderTerminal
         }
 
         /// <summary>
-        /// 煤炮频繁预兆次数
+        ///     煤炮频繁预兆次数
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -105,7 +95,7 @@ namespace UnderTerminal
         }
 
         /// <summary>
-        /// 喷孔次数
+        ///     喷孔次数
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -119,7 +109,7 @@ namespace UnderTerminal
         }
 
         /// <summary>
-        /// 顶钻次数
+        ///     顶钻次数
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -133,7 +123,7 @@ namespace UnderTerminal
         }
 
         /// <summary>
-        /// 瓦斯浓度
+        ///     瓦斯浓度
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -145,8 +135,9 @@ namespace UnderTerminal
                 tmpDouble = 0;
             }
         }
+
         /// <summary>
-        /// 绑定修改数据
+        ///     绑定修改数据
         /// </summary>
         /// <param name="gasDataEntity"></param>
         public void bindDefaultValue(GasData gasDataEntity)
@@ -170,7 +161,7 @@ namespace UnderTerminal
         }
 
         /// <summary>
-        /// 验证
+        ///     验证
         /// </summary>
         /// <returns></returns>
         public bool check()
@@ -213,6 +204,11 @@ namespace UnderTerminal
             return true;
         }
 
-        
+        #region ******变量声明******
+
+        public GasData gasDataEntity = new GasData();
+        private double tmpDouble;
+
+        #endregion ******变量声明******
     }
 }

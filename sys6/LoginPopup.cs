@@ -1,36 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using LibBusiness;
-using LibEntity;
 using System.IO;
+using System.Windows.Forms;
+using LibEntity;
 
 namespace UnderTerminal
 {
     public partial class LoginPopup : Form
     {
-        private UserLogin[] ents = null;
+        private readonly UserLogin[] ents;
 
         public LoginPopup(string title)
         {
             InitializeComponent();
             ents = UserLogin.FindAll();
-            this.DialogResult = DialogResult.None;
-            this.Text = title;
+            DialogResult = DialogResult.None;
+            Text = title;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         /// <summary>
-        /// 登录成功
+        ///     登录成功
         /// </summary>
         /// <param name="userName">用户名</param>
         /// <param name="password">密码</param>
@@ -38,16 +31,16 @@ namespace UnderTerminal
         private bool LoginSuccess(string userName, string password)
         {
             //定义记录登录成功与否的值
-            bool isLogin = false;
-            int n = ents.Length;
-            for (int i = 0; i < n; i++)
+            var isLogin = false;
+            var n = ents.Length;
+            for (var i = 0; i < n; i++)
             {
                 //验证帐号密码是否正确
                 if (ents[i].LoginName == userName && ents[i].PassWord == password)
                 {
                     CurrentUser.CurLoginUserInfo = ents[i];
                     //记录最后一次登录用户
-                    StreamWriter sw = new StreamWriter(Application.StartupPath + "\\DefaultUser.txt", false);
+                    var sw = new StreamWriter(Application.StartupPath + "\\DefaultUser.txt", false);
                     sw.WriteLine(userName);
                     sw.Close();
 
@@ -66,8 +59,8 @@ namespace UnderTerminal
         {
             if (LoginSuccess(tbUserName.Text, tbPassword.Text))
             {
-                this.DialogResult = DialogResult.OK;
-                this.Close();
+                DialogResult = DialogResult.OK;
+                Close();
             }
             else
             {

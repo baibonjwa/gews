@@ -5,7 +5,6 @@ using System.Windows.Forms;
 using ESRI.ArcGIS.Carto;
 using GIS;
 using GIS.Common;
-using LibBusiness;
 using LibCommon;
 using LibEntity;
 using LibSocket;
@@ -27,7 +26,7 @@ namespace sys3
         }
 
         /// <summary>
-        /// 添加（必须实装）
+        ///     添加（必须实装）
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -43,7 +42,7 @@ namespace sys3
         }
 
         /// <summary>
-        /// 修改（必须实装）
+        ///     修改（必须实装）
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -54,7 +53,7 @@ namespace sys3
                 Alert.alert("请选择要修改的信息");
                 return;
             }
-            var faultageInfoEnteringForm = new FaultageInfoEntering((Faultage)gridView1.GetFocusedRow());
+            var faultageInfoEnteringForm = new FaultageInfoEntering((Faultage) gridView1.GetFocusedRow());
             if (faultageInfoEnteringForm.ShowDialog() == DialogResult.OK)
             {
                 RefreshData();
@@ -62,7 +61,7 @@ namespace sys3
         }
 
         /// <summary>
-        /// 删除按钮（必须实装）
+        ///     删除按钮（必须实装）
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -71,18 +70,17 @@ namespace sys3
             if (!Alert.confirm(Const_GM.DEL_CONFIRM_MSG_FAULTAGE)) return;
             //var faultage = (Faultage)gridView1.GetFocusedRow();
             var selectedIndex = gridView1.GetSelectedRows();
-            foreach (var faultage in selectedIndex.Select(i => (Faultage)gridView1.GetRow(i)))
+            foreach (var faultage in selectedIndex.Select(i => (Faultage) gridView1.GetRow(i)))
             {
-                DeleteJLDCByBID(new[] { faultage.BindingId });
+                DeleteJLDCByBID(new[] {faultage.BindingId});
                 faultage.Delete();
             }
             SendMessengToServer();
             RefreshData();
         }
 
-
         /// <summary>
-        /// 根据揭露断层绑定ID删除揭露断层图元
+        ///     根据揭露断层绑定ID删除揭露断层图元
         /// </summary>
         /// <param name="sfpFaultageBidArray">要删除揭露断层的绑定ID</param>
         private void DeleteJLDCByBID(ICollection<string> sfpFaultageBidArray)
@@ -106,9 +104,8 @@ namespace sys3
             }
         }
 
-
         /// <summary>
-        /// 退出
+        ///     退出
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -119,7 +116,7 @@ namespace sys3
         }
 
         /// <summary>
-        /// 导出
+        ///     导出
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -132,7 +129,7 @@ namespace sys3
         }
 
         /// <summary>
-        /// 打印
+        ///     打印
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -142,7 +139,7 @@ namespace sys3
         }
 
         /// <summary>
-        /// 刷新
+        ///     刷新
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -153,16 +150,16 @@ namespace sys3
 
         private void btnMap_Click(object sender, EventArgs e)
         {
-            var faultage = (Faultage)gridView1.GetFocusedRow();
-            string bid = faultage.BindingId;
-            ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.DEFALUT_EXPOSE_FAULTAGE);
+            var faultage = (Faultage) gridView1.GetFocusedRow();
+            var bid = faultage.BindingId;
+            var pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.DEFALUT_EXPOSE_FAULTAGE);
             if (pLayer == null)
             {
                 MessageBox.Show(@"未发现揭露断层图层！");
                 return;
             }
-            var pFeatureLayer = (IFeatureLayer)pLayer;
-            string str = "";
+            var pFeatureLayer = (IFeatureLayer) pLayer;
+            var str = "";
             //for (int i = 0; i < iSelIdxsArr.Length; i++)
             //{
             if (bid != "")
@@ -186,7 +183,8 @@ namespace sys3
                 Location = DataEditCommon.g_axTocControl.Location;
                 Width = DataEditCommon.g_axTocControl.Width;
                 Height = DataEditCommon.g_axTocControl.Height;
-                DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeoSelection, null, DataEditCommon.g_pAxMapControl.Extent);
+                DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeoSelection, null,
+                    DataEditCommon.g_pAxMapControl.Extent);
             }
             else
             {

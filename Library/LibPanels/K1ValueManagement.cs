@@ -14,6 +14,7 @@ using System.Windows.Forms;
 using LibBusiness;
 using LibCommon;
 using LibEntity;
+using LibPanels;
 using _4.OutburstPrevention;
 
 namespace sys4

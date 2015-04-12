@@ -8,7 +8,8 @@ namespace UnderTerminal
 {
     public partial class SetDefaultValue : Form
     {
-        private UnderMessageWindow superForm;
+        private readonly UnderMessageWindow superForm;
+
         public SetDefaultValue(UnderMessageWindow form)
         {
             InitializeComponent();
@@ -16,15 +17,14 @@ namespace UnderTerminal
             addInfo();
         }
 
-
         /// <summary>
-        /// 添加时初始化
+        ///     添加时初始化
         /// </summary>
         private void addInfo()
         {
-            this.bindTeamInfo();
+            bindTeamInfo();
             DataBindUtil.LoadWorkTime(cboWorkTime,
-      rbtn38.Checked ? Const_MS.WORK_GROUP_ID_38 : Const_MS.WORK_GROUP_ID_46);
+                rbtn38.Checked ? Const_MS.WORK_GROUP_ID_38 : Const_MS.WORK_GROUP_ID_46);
             if (WorkingTimeDefault.FindFirst().DefaultWorkTimeGroupId == Const_MS.WORK_GROUP_ID_38)
             {
                 rbtn38.Checked = true;
@@ -33,18 +33,18 @@ namespace UnderTerminal
             {
                 rbtn46.Checked = true;
             }
-            cboWorkTime.Text = DataBindUtil.JudgeWorkTimeNow(rbtn38.Checked ? Const_MS.WORK_TIME_38 : Const_MS.WORK_TIME_46);
-
+            cboWorkTime.Text =
+                DataBindUtil.JudgeWorkTimeNow(rbtn38.Checked ? Const_MS.WORK_TIME_38 : Const_MS.WORK_TIME_46);
         }
 
         /// <summary>
-        /// 绑定队别名称
+        ///     绑定队别名称
         /// </summary>
         private void bindTeamInfo()
         {
             cboTeamName.Items.Clear();
-            Team[] team = Team.FindAll();
-            foreach (Team t in team)
+            var team = Team.FindAll();
+            foreach (var t in team)
             {
                 cboTeamName.Items.Add(t.TeamName);
             }
@@ -63,13 +63,11 @@ namespace UnderTerminal
             DataBindUtil.LoadTeamMemberByTeamName(cboSubmitter, cboTeamName.Text);
         }
 
-
         /// <summary>
-        /// 返回班次名
+        ///     返回班次名
         /// </summary>
         /// <param name="workStyle">工作制式名</param>
         /// <returns>班次名</returns>
-
         private void btnOK_Click(object sender, EventArgs e)
         {
             superForm.DefaultWorkTime = cboWorkTime.SelectedItem != null ? cboWorkTime.SelectedItem.ToString() : "";
@@ -78,7 +76,7 @@ namespace UnderTerminal
             superForm.DefaultSubmitter = cboSubmitter.SelectedItem != null ? cboSubmitter.SelectedItem.ToString() : "";
             superForm.RefreshDefaultValue();
 
-            this.Close();
+            Close();
         }
     }
 }

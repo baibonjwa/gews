@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using LibCommonControl;
+﻿using System.Windows.Forms;
 
 namespace UnderTerminal
 {
@@ -18,7 +13,7 @@ namespace UnderTerminal
             switch (message.Msg)
             {
                 case WM_SYSCOMMAND:
-                    int command = message.WParam.ToInt32() & 0xfff0;
+                    var command = message.WParam.ToInt32() & 0xfff0;
                     if (command == SC_MOVE)
                         return;
                     break;

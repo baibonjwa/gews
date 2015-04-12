@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -20,23 +19,6 @@ namespace sys2
 {
     public partial class DayReportJjEntering : Form
     {
-        #region ******变量声明******
-
-        /**掘进面实体**/
-
-        //各列索引
-        private const int C_DATE = 0; // 选择日期
-        private const int C_WORK_TIME = 1; // 班次
-        private const int C_WORK_CONTENT = 2; // 工作内容
-        private const int C_WORK_PROGRESS = 3; // 进尺
-        private const int C_COMMENTS = 4; // 备注
-        private readonly DayReportJj _dayReportJJEntity = new DayReportJj();
-        private readonly DateTimePicker dtp = new DateTimePicker(); //这里实例化一个DateTimePicker控件
-        private Rectangle _Rectangle;
-        private int[] _arr;
-
-        #endregion
-
         /// <summary>
         ///     构造方法
         /// </summary>
@@ -81,11 +63,8 @@ namespace sys2
             selectWorkingfaceSimple1.SelectedWorkingFace = dayReportJJEntity.WorkingFace;
         }
 
-
         private void DayReportJJEntering_Load(object sender, EventArgs e)
         {
-
-
         }
 
         /// <summary>
@@ -112,8 +91,9 @@ namespace sys2
         /// </summary>
         private void SetWorkTimeName()
         {
-            string sysDateTime = DateTime.Now.ToString("HH:mm:ss");
-            var strWorkTimeName = MineDataSimpleBLL.selectWorkTimeNameByWorkTimeGroupIdAndSysTime(rbtn38.Checked ? 1 : 2, sysDateTime);
+            var sysDateTime = DateTime.Now.ToString("HH:mm:ss");
+            var strWorkTimeName = MineDataSimpleBLL.selectWorkTimeNameByWorkTimeGroupIdAndSysTime(
+                rbtn38.Checked ? 1 : 2, sysDateTime);
 
             if (!string.IsNullOrEmpty(strWorkTimeName))
             {
@@ -163,7 +143,6 @@ namespace sys2
             dgrdvDayReportJJ[C_COMMENTS, 0].Value = _dayReportJJEntity.Remarks;
         }
 
-
         /// <summary>
         ///     添加队别
         /// </summary>
@@ -178,7 +157,7 @@ namespace sys2
             }
             else
             {
-                var teamEntity = new Team { TeamId = Convert.ToInt32(cboTeamName.SelectedValue) };
+                var teamEntity = new Team {TeamId = Convert.ToInt32(cboTeamName.SelectedValue)};
                 teamEntity = Team.Find(teamEntity.TeamId);
                 teamInfoForm = new TeamInfoEntering(teamEntity);
             }
@@ -229,17 +208,16 @@ namespace sys2
             }
             if (Text == Const_MS.DAY_REPORT_JJ_CHANGE)
             {
-
             }
         }
 
         //添加巷道掘进
         private void AddHdJc(string hdid, double jjcd, string bid, double hdwid)
         {
-            Dictionary<string, List<GeoStruct>> geostructsinfos = Global.cons.DrawJJCD(hdid, bid, hdwid, null, jjcd, 0,
+            var geostructsinfos = Global.cons.DrawJJCD(hdid, bid, hdwid, null, jjcd, 0,
                 Global.searchlen, Global.sxjl, 0);
             //修改工作面信息表中对应的X Y Z坐标信息
-            List<GeoStruct> pos = geostructsinfos.Last().Value;
+            var pos = geostructsinfos.Last().Value;
             var workfacepos = pos[0].geo as IPoint;
             if (workfacepos != null)
             {
@@ -248,14 +226,15 @@ namespace sys2
             }
             //查询地质结构信息
             geostructsinfos.Remove("LAST");
-            GeologySpaceBll.DeleteGeologySpaceEntityInfos(selectWorkingfaceSimple1.SelectedWorkingFace.WorkingFaceId); //删除工作面ID对应的地质构造信息
-            foreach (string key in geostructsinfos.Keys)
+            GeologySpaceBll.DeleteGeologySpaceEntityInfos(selectWorkingfaceSimple1.SelectedWorkingFace.WorkingFaceId);
+                //删除工作面ID对应的地质构造信息
+            foreach (var key in geostructsinfos.Keys)
             {
-                List<GeoStruct> geoinfos = geostructsinfos[key];
-                string geo_type = key;
-                for (int i = 0; i < geoinfos.Count; i++)
+                var geoinfos = geostructsinfos[key];
+                var geo_type = key;
+                for (var i = 0; i < geoinfos.Count; i++)
                 {
-                    GeoStruct tmp = geoinfos[i];
+                    var tmp = geoinfos[i];
 
                     var geologyspaceEntity = new GeologySpace
                     {
@@ -274,11 +253,11 @@ namespace sys2
         //修改巷道
         private void UpdateHdJc(string hdid, string bid, double jjcd)
         {
-            Dictionary<string, string> deltas = Global.cons.UpdateJJCD(hdid, bid, jjcd, 0, Global.searchlen, Global.sxjl,
+            var deltas = Global.cons.UpdateJJCD(hdid, bid, jjcd, 0, Global.searchlen, Global.sxjl,
                 0);
-            string xydeltas = deltas[bid];
-            double xdelta = Convert.ToDouble(xydeltas.Split('|')[0]);
-            double ydelta = Convert.ToDouble(xydeltas.Split('|')[1]);
+            var xydeltas = deltas[bid];
+            var xdelta = Convert.ToDouble(xydeltas.Split('|')[0]);
+            var ydelta = Convert.ToDouble(xydeltas.Split('|')[1]);
 
             //更新地质结构信息表
             IPoint pnt = new PointClass();
@@ -294,15 +273,16 @@ namespace sys2
             //查询地质结构信息
             var hd_ids = new List<int>();
             hd_ids.Add(Convert.ToInt16(hdid));
-            Dictionary<string, List<GeoStruct>> geostructsinfos = Global.commonclss.GetStructsInfos(pnt, hd_ids);
-            GeologySpaceBll.DeleteGeologySpaceEntityInfos(selectWorkingfaceSimple1.SelectedWorkingFace.WorkingFaceId); //删除对应工作面ID的地质构造信息
-            foreach (string key in geostructsinfos.Keys)
+            var geostructsinfos = Global.commonclss.GetStructsInfos(pnt, hd_ids);
+            GeologySpaceBll.DeleteGeologySpaceEntityInfos(selectWorkingfaceSimple1.SelectedWorkingFace.WorkingFaceId);
+                //删除对应工作面ID的地质构造信息
+            foreach (var key in geostructsinfos.Keys)
             {
-                List<GeoStruct> geoinfos = geostructsinfos[key];
-                string geo_type = key;
-                for (int i = 0; i < geoinfos.Count; i++)
+                var geoinfos = geostructsinfos[key];
+                var geo_type = key;
+                for (var i = 0; i < geoinfos.Count; i++)
                 {
-                    GeoStruct tmp = geoinfos[i];
+                    var tmp = geoinfos[i];
 
                     var geologyspaceEntity = new GeologySpace
                     {
@@ -325,7 +305,7 @@ namespace sys2
         {
             var dayReportJJEntityList = new List<DayReportJj>();
 
-            for (int i = 0; i < dgrdvDayReportJJ.RowCount; i++)
+            for (var i = 0; i < dgrdvDayReportJJ.RowCount; i++)
             {
                 var _dayReportJJEntity = new DayReportJj();
                 // 最后一行为空行时，跳出循环
@@ -336,11 +316,11 @@ namespace sys2
 
                 /**回采日报实体赋值**/
                 //队别名称
-                _dayReportJJEntity.Team = (Team)cboTeamName.SelectedItem;
+                _dayReportJJEntity.Team = (Team) cboTeamName.SelectedItem;
                 //绑定巷道编号
                 _dayReportJJEntity.WorkingFace = selectWorkingfaceSimple1.SelectedWorkingFace;
 
-                DataGridViewCellCollection cells = dgrdvDayReportJJ.Rows[i].Cells;
+                var cells = dgrdvDayReportJJ.Rows[i].Cells;
                 //日期
                 if (cells[C_DATE].Value != null)
                 {
@@ -385,27 +365,28 @@ namespace sys2
                 dayReportJJEntityList.Add(_dayReportJJEntity);
             }
 
-            Tunnel tunnel = Tunnel.FindFirstByWorkingFaceId(selectWorkingfaceSimple1.SelectedWorkingFace.WorkingFaceId);
+            var tunnel = Tunnel.FindFirstByWorkingFaceId(selectWorkingfaceSimple1.SelectedWorkingFace.WorkingFaceId);
 
             //循环添加
-            foreach (DayReportJj dayReportJJEntity in dayReportJJEntityList)
+            foreach (var dayReportJJEntity in dayReportJJEntityList)
             {
                 //添加回采进尺日报
                 dayReportJJEntity.Save();
 
                 //巷道掘进绘图
-                double dist = dayReportJJEntity.JinChi;
+                var dist = dayReportJJEntity.JinChi;
 
                 // 巷道id                
-                string hdid = tunnel.TunnelId.ToString();
-                string bid = dayReportJJEntity.BindingId;
+                var hdid = tunnel.TunnelId.ToString();
+                var bid = dayReportJJEntity.BindingId;
 
                 AddHdJc(hdid, dist, bid, tunnel.TunnelWid);
             }
 
             Log.Debug("添加进尺数据发送Socket消息");
             // 通知服务器掘进进尺已经更新
-            var msg = new UpdateWarningDataMsg(selectWorkingfaceSimple1.SelectedWorkingFace.WorkingFaceId, tunnel.TunnelId,
+            var msg = new UpdateWarningDataMsg(selectWorkingfaceSimple1.SelectedWorkingFace.WorkingFaceId,
+                tunnel.TunnelId,
                 DayReportJj.TableName, OPERATION_TYPE.ADD, DateTime.Now);
             SocketUtil.SendMsg2Server(msg);
             Log.Debug("添加进尺数据Socket消息发送完成");
@@ -435,7 +416,7 @@ namespace sys2
             // 设置班次名称
             SetWorkTimeName();
 
-            for (int i = 0; i < dgrdvDayReportJJ.RowCount; i++)
+            for (var i = 0; i < dgrdvDayReportJJ.RowCount; i++)
             {
                 dgrdvDayReportJJ[C_WORK_TIME, i].Value = dgrdvDayReportJJ[C_WORK_TIME, 0].Value;
             }
@@ -496,9 +477,9 @@ namespace sys2
                     return false;
                 }
                 //修改时
-                bool bResult = false;
+                var bResult = false;
                 //为空返回false，不数据时跳出循环
-                for (int i = 0; i < dgrdvDayReportJJ.ColumnCount; i++)
+                for (var i = 0; i < dgrdvDayReportJJ.ColumnCount; i++)
                 {
                     if (dgrdvDayReportJJ[i, 0].Value == null)
                     {
@@ -516,7 +497,7 @@ namespace sys2
                     return bResult;
                 }
             }
-            for (int i = 0; i < dgrdvDayReportJJ.RowCount; i++)
+            for (var i = 0; i < dgrdvDayReportJJ.RowCount; i++)
             {
                 // 最后一行为空行时，跳出循环
                 if (i == dgrdvDayReportJJ.RowCount - 1)
@@ -557,7 +538,7 @@ namespace sys2
 
         private void cboTeamName_TextChanged(object sender, EventArgs e)
         {
-            for (int i = 0; i < cboTeamName.Items.Count; i++)
+            for (var i = 0; i < cboTeamName.Items.Count; i++)
             {
                 if (cboTeamName.Text == cboTeamName.GetItemText(cboTeamName.Items[i]))
                 {
@@ -691,7 +672,7 @@ namespace sys2
             if (e.ColumnIndex == C_DATE)
             {
                 //datetimepicker控件位置大小
-                Rectangle rect = dgrdvDayReportJJ.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false);
+                var rect = dgrdvDayReportJJ.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false);
                 dtp.Visible = true;
                 dtp.Top = rect.Top;
                 dtp.Left = rect.Left;
@@ -710,5 +691,22 @@ namespace sys2
                 }
             }
         }
+
+        #region ******变量声明******
+
+        /**掘进面实体**/
+
+        //各列索引
+        private const int C_DATE = 0; // 选择日期
+        private const int C_WORK_TIME = 1; // 班次
+        private const int C_WORK_CONTENT = 2; // 工作内容
+        private const int C_WORK_PROGRESS = 3; // 进尺
+        private const int C_COMMENTS = 4; // 备注
+        private readonly DayReportJj _dayReportJJEntity = new DayReportJj();
+        private readonly DateTimePicker dtp = new DateTimePicker(); //这里实例化一个DateTimePicker控件
+        private Rectangle _Rectangle;
+        private int[] _arr;
+
+        #endregion
     }
 }

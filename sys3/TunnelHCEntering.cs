@@ -17,24 +17,8 @@ namespace sys3
     /// </summary>
     public partial class TunnelHcEntering : Form
     {
-        #region ******变量声明******;
-
-        // 主运
-        // 辅运
-        private readonly List<Tunnel> _otherTunnelList = new List<Tunnel>();
-        private readonly HashSet<Tunnel> _tunnelSet = new HashSet<Tunnel>();
-        private Tunnel _tunnelFy;
-        // 切眼
-        private Tunnel _tunnelQy;
-        private Tunnel _tunnelZy;
-
-        private WorkingFace _workingFace;
-
-        #endregion ******变量声明******
-
         public TunnelHcEntering()
         {
-
             InitializeComponent();
 
             //窗体属性设置
@@ -57,7 +41,6 @@ namespace sys3
             // 设置班次名称
             SetWorkTimeName();
         }
-
 
         /// <summary>
         ///     构造方法
@@ -98,9 +81,10 @@ namespace sys3
         /// </summary>
         private void SetWorkTimeName()
         {
-            string strWorkTimeName = "";
-            string sysDateTime = DateTime.Now.ToString("HH:mm:ss");
-            strWorkTimeName = MineDataSimpleBLL.selectWorkTimeNameByWorkTimeGroupIdAndSysTime(rbtn38.Checked ? 1 : 2, sysDateTime);
+            var strWorkTimeName = "";
+            var sysDateTime = DateTime.Now.ToString("HH:mm:ss");
+            strWorkTimeName = MineDataSimpleBLL.selectWorkTimeNameByWorkTimeGroupIdAndSysTime(rbtn38.Checked ? 1 : 2,
+                sysDateTime);
 
             if (!string.IsNullOrEmpty(strWorkTimeName))
             {
@@ -113,7 +97,7 @@ namespace sys3
         /// </summary>
         private void BindInfo()
         {
-            foreach (Tunnel tunnel in _workingFace.Tunnels)
+            foreach (var tunnel in _workingFace.Tunnels)
             {
                 if (tunnel.TunnelType == TunnelTypeEnum.STOPING_ZY)
                     _tunnelZy = tunnel; //主运顺槽
@@ -140,7 +124,7 @@ namespace sys3
             btnChooseQY.Text = _tunnelQy != null ? _tunnelQy.TunnelName : "";
 
 
-            foreach (Tunnel i in _otherTunnelList)
+            foreach (var i in _otherTunnelList)
             {
                 listBox_Browse.Items.Add(i);
             }
@@ -163,7 +147,7 @@ namespace sys3
             cboTeamName.Text = _workingFace.Team.TeamName;
 
             //开始日期
-            dtpStartDate.Value = DateTimeUtil.validateDTPDateTime((DateTime)_workingFace.StartDate);
+            dtpStartDate.Value = DateTimeUtil.validateDTPDateTime(_workingFace.StartDate);
 
             //是否回采完毕
             if (_workingFace.IsFinish == 1)
@@ -177,7 +161,7 @@ namespace sys3
             //停工日期
             if (_workingFace.IsFinish == 1)
             {
-                dtpStopDate.Value = (DateTime)_workingFace.StopDate;
+                dtpStopDate.Value = _workingFace.StopDate;
             }
             //工作制式
             if (_workingFace.WorkStyle == rbtn38.Text)
@@ -288,7 +272,7 @@ namespace sys3
             if (DialogResult.OK != tunnelChoose.ShowDialog()) return;
             if (_tunnelFy != null)
             {
-                Tunnel ent = Tunnel.Find(_tunnelFy.TunnelId);
+                var ent = Tunnel.Find(_tunnelFy.TunnelId);
                 ent.TunnelType = TunnelTypeEnum.OTHER;
                 _tunnelSet.Add(ent);
             }
@@ -324,7 +308,7 @@ namespace sys3
             {
                 if (_tunnelQy != null)
                 {
-                    Tunnel ent = Tunnel.Find(_tunnelQy.TunnelId);
+                    var ent = Tunnel.Find(_tunnelQy.TunnelId);
                     ent.TunnelType = TunnelTypeEnum.OTHER;
                     _tunnelSet.Add(ent);
                 }
@@ -420,7 +404,6 @@ namespace sys3
                 }
 
                 Alert.alert("回采工作面关联成功！");
-
             }
             catch (Exception)
             {
@@ -434,7 +417,7 @@ namespace sys3
         private void AddHcjc(int hd1, int hd2, int qy, double zywid, double fywid, double qywid)
         {
             //已经存在回采进尺的，计算回采进尺点，保存到工作面表中，同时将绘制回采
-            double initialHc = 0.0;
+            var initialHc = 0.0;
             if (InitialHCLen.Text != "")
                 double.TryParse(InitialHCLen.Text, out initialHc);
             if (initialHc > 0)
@@ -446,7 +429,7 @@ namespace sys3
                 dics[GIS_Const.FIELD_XH] = "1";
                 dics[GIS_Const.FIELD_BID] = IDGenerator.NewBindingID();
                 IPoint pos = new PointClass();
-                Dictionary<string, List<GeoStruct>> dzxlist = Global.cons.DrawHDHC(hd1.ToString(), hd2.ToString(),
+                var dzxlist = Global.cons.DrawHDHC(hd1.ToString(), hd2.ToString(),
                     qy.ToString(), initialHc, zywid, fywid, qywid, 1, Global.searchlen, dics, true, null, out pos);
 
                 //工作面信息提交
@@ -460,13 +443,13 @@ namespace sys3
                 if (dzxlist.Count > 0)
                 {
                     GeologySpaceBll.DeleteGeologySpaceEntityInfos(_workingFace.WorkingFaceId); //删除工作面ID对应的地质构造信息
-                    foreach (string key in dzxlist.Keys)
+                    foreach (var key in dzxlist.Keys)
                     {
-                        List<GeoStruct> geoinfos = dzxlist[key];
-                        string geo_type = key;
-                        for (int i = 0; i < geoinfos.Count; i++)
+                        var geoinfos = dzxlist[key];
+                        var geo_type = key;
+                        for (var i = 0; i < geoinfos.Count; i++)
                         {
-                            GeoStruct tmp = geoinfos[i];
+                            var tmp = geoinfos[i];
 
                             var geologyspaceEntity = new GeologySpace();
                             geologyspaceEntity.WorkingFace = _workingFace;
@@ -488,7 +471,7 @@ namespace sys3
         private void UpdateHcjc(int hd1, int hd2, int qy, double zywid, double fywid, double qywid)
         {
             //已经存在回采进尺的，计算回采进尺点，保存到工作面表中，同时将绘制回采
-            double initialHc = 0.0;
+            var initialHc = 0.0;
 
             if (InitialHCLen.Text != "")
                 double.TryParse(InitialHCLen.Text, out initialHc);
@@ -500,7 +483,7 @@ namespace sys3
                 dics[GIS_Const.FIELD_HDID] = hd1 + "_" + hd2;
                 dics[GIS_Const.FIELD_XH] = "1";
                 IPoint pos = new PointClass();
-                Dictionary<string, List<GeoStruct>> dzxlist = Global.cons.DrawHDHC(hd1.ToString(), hd2.ToString(),
+                var dzxlist = Global.cons.DrawHDHC(hd1.ToString(), hd2.ToString(),
                     qy.ToString(), initialHc, zywid, fywid, qywid, 1, Global.searchlen, dics, false, null, out pos);
 
                 if (null == pos)
@@ -517,13 +500,13 @@ namespace sys3
                 if (dzxlist.Count > 0)
                 {
                     GeologySpaceBll.DeleteGeologySpaceEntityInfos(_workingFace.WorkingFaceId); //删除对应工作面ID的地质构造信息
-                    foreach (string key in dzxlist.Keys)
+                    foreach (var key in dzxlist.Keys)
                     {
-                        List<GeoStruct> geoinfos = dzxlist[key];
-                        string geo_type = key;
-                        for (int i = 0; i < geoinfos.Count; i++)
+                        var geoinfos = dzxlist[key];
+                        var geo_type = key;
+                        for (var i = 0; i < geoinfos.Count; i++)
                         {
-                            GeoStruct tmp = geoinfos[i];
+                            var tmp = geoinfos[i];
 
                             var geologyspaceEntity = new GeologySpace();
                             geologyspaceEntity.WorkingFace = _workingFace;
@@ -672,5 +655,20 @@ namespace sys3
 
             listBox_Browse.Items.Remove(listBox_Browse.SelectedItem);
         }
+
+        #region ******变量声明******;
+
+        // 主运
+        // 辅运
+        private readonly List<Tunnel> _otherTunnelList = new List<Tunnel>();
+        private readonly HashSet<Tunnel> _tunnelSet = new HashSet<Tunnel>();
+        private Tunnel _tunnelFy;
+        // 切眼
+        private Tunnel _tunnelQy;
+        private Tunnel _tunnelZy;
+
+        private WorkingFace _workingFace;
+
+        #endregion ******变量声明******
     }
 }

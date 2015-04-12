@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Windows.Forms;
 using ESRI.ArcGIS.Carto;
+using ESRI.ArcGIS.Geometry;
+using GIS;
+using GIS.Common;
 using GIS.HdProc;
 using LibBusiness;
 using LibCommon;
@@ -14,7 +17,7 @@ namespace sys2
     public partial class DayReportJjManagement : Form
     {
         /// <summary>
-        /// 构造方法
+        ///     构造方法
         /// </summary>
         public DayReportJjManagement()
         {
@@ -30,7 +33,7 @@ namespace sys2
         }
 
         /// <summary>
-        /// 初始化
+        ///     初始化
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -40,7 +43,7 @@ namespace sys2
         }
 
         /// <summary>
-        /// 添加按钮事件
+        ///     添加按钮事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -54,13 +57,13 @@ namespace sys2
         }
 
         /// <summary>
-        /// 修改按钮事件
+        ///     修改按钮事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void tsBtnModify_Click(object sender, EventArgs e)
         {
-            var dayReportJjForm = new DayReportJjEntering((DayReportJj)gridView1.GetFocusedRow());
+            var dayReportJjForm = new DayReportJjEntering((DayReportJj) gridView1.GetFocusedRow());
             if (DialogResult.OK == dayReportJjForm.ShowDialog())
             {
                 RefreshData();
@@ -68,7 +71,7 @@ namespace sys2
         }
 
         /// <summary>
-        /// 删除按钮事件
+        ///     删除按钮事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -76,10 +79,11 @@ namespace sys2
         {
             //确认删除
             if (!Alert.confirm(Const.DEL_CONFIRM_MSG)) return;
-            var entity = (DayReportJj)gridView1.GetFocusedRow();
+            var entity = (DayReportJj) gridView1.GetFocusedRow();
             // 掘进工作面，只有一条巷道
             var tunnel = Tunnel.FindFirstByWorkingFaceId(entity.WorkingFace.WorkingFaceId);
-            DelJJCD(tunnel.TunnelId.ToString(CultureInfo.InvariantCulture), entity.BindingId, entity.WorkingFace.WorkingFaceId);
+            DelJJCD(tunnel.TunnelId.ToString(CultureInfo.InvariantCulture), entity.BindingId,
+                entity.WorkingFace.WorkingFaceId);
             entity.Delete();
             RefreshData();
 
@@ -91,7 +95,7 @@ namespace sys2
         }
 
         /// <summary>
-        /// 删除掘进进尺日报对应的地图信息
+        ///     删除掘进进尺日报对应的地图信息
         /// </summary>
         /// <param name="hdid">巷道ID</param>
         /// <param name="bid">绑定ID</param>
@@ -101,39 +105,39 @@ namespace sys2
             Global.cons.DelJJCD(hdid, bid);
             //计算地质构造距离
             //var sql = "\"" + GIS.GIS_Const.FIELD_HDID + "\"='" + hdid + "'";
-            var dics = new Dictionary<string, string> { { GIS.GIS_Const.FIELD_HDID, hdid } };
-            List<Tuple<ESRI.ArcGIS.Geodatabase.IFeature, ESRI.ArcGIS.Geometry.IGeometry, Dictionary<string, string>>> objs = Global.commonclss.SearchFeaturesByGeoAndText(Global.hdfdlyr, dics);
+            var dics = new Dictionary<string, string> {{GIS_Const.FIELD_HDID, hdid}};
+            var objs = Global.commonclss.SearchFeaturesByGeoAndText(Global.hdfdlyr, dics);
             if (objs.Count > 0)
             {
-                var poly0 = objs[0].Item2 as ESRI.ArcGIS.Geometry.IPointCollection;
+                var poly0 = objs[0].Item2 as IPointCollection;
                 //var poly1 = objs[1].Item2 as ESRI.ArcGIS.Geometry.IPointCollection;
-                ESRI.ArcGIS.Geometry.IPoint pline = new ESRI.ArcGIS.Geometry.PointClass();
-                if (poly0 != null && poly0.Point[0].X - poly0.Point[1].X > 0)//向右掘进
+                IPoint pline = new PointClass();
+                if (poly0 != null && poly0.Point[0].X - poly0.Point[1].X > 0) //向右掘进
                 {
-                    pline.X = (poly0.Point[0].X + poly0.Point[3].X) / 2;
-                    pline.Y = (poly0.Point[0].Y + poly0.Point[3].Y) / 2;
+                    pline.X = (poly0.Point[0].X + poly0.Point[3].X)/2;
+                    pline.Y = (poly0.Point[0].Y + poly0.Point[3].Y)/2;
                 }
-                else//向左掘进
+                else //向左掘进
                 {
                     if (poly0 != null)
                     {
-                        pline.X = (poly0.Point[1].X + poly0.Point[2].X) / 2;
-                        pline.Y = (poly0.Point[1].Y + poly0.Point[2].Y) / 2;
+                        pline.X = (poly0.Point[1].X + poly0.Point[2].X)/2;
+                        pline.Y = (poly0.Point[1].Y + poly0.Point[2].Y)/2;
                     }
                 }
                 //查询地质构造信息
-                var hdids = new List<int> { Convert.ToInt32(hdid) };
-                Dictionary<string, List<GeoStruct>> dzxlist = Global.commonclss.GetStructsInfosNew(pline, hdids);
-                GeologySpaceBll.DeleteGeologySpaceEntityInfos(workingfaceid);//删除工作面ID对应的地质构造信息
+                var hdids = new List<int> {Convert.ToInt32(hdid)};
+                var dzxlist = Global.commonclss.GetStructsInfosNew(pline, hdids);
+                GeologySpaceBll.DeleteGeologySpaceEntityInfos(workingfaceid); //删除工作面ID对应的地质构造信息
 
-                foreach (string key in dzxlist.Keys)
+                foreach (var key in dzxlist.Keys)
                 {
-                    List<GeoStruct> geoinfos = dzxlist[key];
+                    var geoinfos = dzxlist[key];
                     //string geoType = key;
                     foreach (var tmp in geoinfos)
                     {
                         var geologySpace = GeologySpace.FindOneByWorkingFaceIdAndTeconicId(workingfaceid,
-                             tmp.geoinfos[GIS.GIS_Const.FIELD_BID]);
+                            tmp.geoinfos[GIS_Const.FIELD_BID]);
                         if (geologySpace != null)
                         {
                             geologySpace.Distance = tmp.dist;
@@ -151,12 +155,11 @@ namespace sys2
                         }
                     }
                 }
-
             }
         }
 
         /// <summary>
-        /// 退出按钮事件
+        ///     退出按钮事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -167,7 +170,7 @@ namespace sys2
         }
 
         /// <summary>
-        /// 刷新按钮事件
+        ///     刷新按钮事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -176,9 +179,8 @@ namespace sys2
             RefreshData();
         }
 
-
         /// <summary>
-        /// 导出按钮事件
+        ///     导出按钮事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -191,7 +193,7 @@ namespace sys2
         }
 
         /// <summary>
-        /// 打印按钮事件
+        ///     打印按钮事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -200,26 +202,24 @@ namespace sys2
             DevUtil.DevPrint(gcDayReportJj, "掘进进尺信息报表");
         }
 
-
-
         /// <summary>
-        /// 图显按钮事件
+        ///     图显按钮事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnMap_Click(object sender, EventArgs e)
         {
-            ILayer pLayer = GIS.Common.DataEditCommon.GetLayerByName(GIS.Common.DataEditCommon.g_pMap, GIS.LayerNames.LAYER_ALIAS_MR_TUNNEL_FD);
+            var pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.LAYER_ALIAS_MR_TUNNEL_FD);
             if (pLayer == null)
             {
                 MessageBox.Show(@"未发现掘进进尺图层！");
                 return;
             }
-            var pFeatureLayer = (IFeatureLayer)pLayer;
-            string str = "";
+            var pFeatureLayer = (IFeatureLayer) pLayer;
+            var str = "";
             //for (int i = 0; i < iSelIdxsArr.Length; i++)
             //{
-            string bid = ((DayReportJj)gridView1.GetFocusedRow()).BindingId;
+            var bid = ((DayReportJj) gridView1.GetFocusedRow()).BindingId;
             if (bid != "")
             {
                 if (true)
@@ -228,10 +228,10 @@ namespace sys2
                 //    str += " or bid='" + bid + "'";
             }
             //}
-            List<ESRI.ArcGIS.Geodatabase.IFeature> list = GIS.MyMapHelp.FindFeatureListByWhereClause(pFeatureLayer, str);
+            var list = MyMapHelp.FindFeatureListByWhereClause(pFeatureLayer, str);
             if (list.Count > 0)
             {
-                GIS.MyMapHelp.Jump(GIS.MyMapHelp.GetGeoFromFeature(list));
+                MyMapHelp.Jump(MyMapHelp.GetGeoFromFeature(list));
             }
             else
             {

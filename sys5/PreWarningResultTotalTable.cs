@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using FarPoint.Win.Spread.CellType;
 using LibCommon;
 
 namespace _5.WarningManagement
@@ -38,7 +31,6 @@ namespace _5.WarningManagement
             ////this.fpPreWarningResultTotalTable.Sheets[0].Cells[8, 0].Text = "test";
         }
 
-
         private void tsbPrint_Click(object sender, EventArgs e)
         {
             FilePrint.CommonPrint(fpPreWarningResultTotalTable, 0);
@@ -47,7 +39,7 @@ namespace _5.WarningManagement
         private void btnExit_Click(object sender, EventArgs e)
         {
             //关闭窗体
-            this.Close();
+            Close();
         }
     }
 }

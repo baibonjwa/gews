@@ -18,18 +18,18 @@ namespace UnderTerminal
 {
     public partial class UnderMessageWindow : Form
     {
-        private int tunnelId = -1;
-        public int workingfaceId = -1;
-        private string tunnelName = String.Empty;
-        private int tunnelIdWarning = -1;
-        private string tunnelNameWarning = string.Empty;
+        public static ClientSocket _clientSocket;
         public CurveMonitor cm; // 监控曲线
-        public static ClientSocket _clientSocket = null;
-
-        public String DefaultWorkStyle { get; set; }
-        public String DefaultWorkTime { get; set; }
-        public String DefaultTeamName { get; set; }
-        public String DefaultSubmitter { get; set; }
+        private EndPoint ep = new IPEndPoint(IPAddress.Any, 9876);
+        private DateTime lastUpdate;
+        private int tunnelId = -1;
+        private int tunnelIdWarning = -1;
+        private string tunnelName = String.Empty;
+        private string tunnelNameWarning = string.Empty;
+        public int workingfaceId = -1;
+        private readonly byte[] buffer = new byte[1024];
+        private readonly Timer checkTimer = new Timer();
+        private readonly Socket udpServerSocket;
 
         public UnderMessageWindow()
         {
@@ -38,7 +38,7 @@ namespace UnderTerminal
             InitializeComponent();
 
             // 注册委托事件
-            this.selectTunnelSimple1.TunnelNameChanged +=
+            selectTunnelSimple1.TunnelNameChanged +=
                 InheritTunnelNameChanged;
 
             lblWarning.Text = string.Empty;
@@ -61,26 +61,32 @@ namespace UnderTerminal
             _clientSocket.OnMsgUpdateWarningResult += UpdateWarningResultUi;
         }
 
+        public String DefaultWorkStyle { get; set; }
+        public String DefaultWorkTime { get; set; }
+        public String DefaultTeamName { get; set; }
+        public String DefaultSubmitter { get; set; }
+        public bool OnLine { get; set; }
+
         /// <summary>
-        /// 委托事件
+        ///     委托事件
         /// </summary>
         /// <param name="sender"></param>
         private void InheritTunnelNameChanged(object sender, TunnelEventArgs e)
         {
-            this.tunnelId = this.selectTunnelSimple1.ITunnelId;
-            this.tunnelName = this.selectTunnelSimple1.ITunnelName;
+            tunnelId = selectTunnelSimple1.ITunnelId;
+            tunnelName = selectTunnelSimple1.ITunnelName;
             workingfaceId = Tunnel.Find(tunnelId).WorkingFace.WorkingFaceId;
         }
 
         private void btnUnderManage_Click(object sender, EventArgs e)
         {
-            if (this.tunnelId <= 0)
+            if (tunnelId <= 0)
             {
                 MessageBox.Show("请选择巷道!");
                 return;
             }
 
-            MineDataSimple m = new MineDataSimple
+            var m = new MineDataSimple
             {
                 Text = new LibPanels.LibPanels(MineDataPanelName.Management).panelFormName
             };
@@ -89,72 +95,72 @@ namespace UnderTerminal
 
         private void btnUnderCoal_Click(object sender, EventArgs e)
         {
-            if (this.tunnelId <= 0)
+            if (tunnelId <= 0)
             {
                 MessageBox.Show("请选择巷道!");
                 return;
             }
 
-            MineDataSimple m = new MineDataSimple();
+            var m = new MineDataSimple();
             m.Text = new LibPanels.LibPanels(MineDataPanelName.CoalExistence).panelFormName;
             m.ShowDialog();
         }
 
         private void btnUnderGas_Click(object sender, EventArgs e)
         {
-            if (this.tunnelId <= 0)
+            if (tunnelId <= 0)
             {
                 MessageBox.Show("请选择巷道!");
                 return;
             }
 
-            MineDataSimple m = new MineDataSimple();
+            var m = new MineDataSimple();
             m.Text = new LibPanels.LibPanels(MineDataPanelName.GasData).panelFormName;
             m.ShowDialog();
         }
 
         private void btnUnderVen_Click(object sender, EventArgs e)
         {
-            if (this.tunnelId <= 0)
+            if (tunnelId <= 0)
             {
                 MessageBox.Show("请选择巷道!");
                 return;
             }
 
-            MineDataSimple m = new MineDataSimple();
+            var m = new MineDataSimple();
             m.Text = new LibPanels.LibPanels(MineDataPanelName.Ventilation).panelFormName;
             m.ShowDialog();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            if (this.tunnelId <= 0)
+            if (tunnelId <= 0)
             {
                 MessageBox.Show("请选择巷道!");
                 return;
             }
 
-            K1ValueEntering k = new K1ValueEntering(this.tunnelId, this.tunnelName, this);
+            var k = new K1ValueEntering(tunnelId, tunnelName, this);
             k.ShowDialog();
         }
 
         // 弹出管理界面
         private void button1_Click(object sender, EventArgs e)
         {
-            if (this.tunnelId <= 0)
+            if (tunnelId <= 0)
             {
                 MessageBox.Show("请选择巷道!");
                 return;
             }
 
-            MineDataSimple m = new MineDataSimple();
+            var m = new MineDataSimple();
             m.Text = new LibPanels.LibPanels(MineDataPanelName.Management).panelFormName;
             m.ShowDialog();
         }
 
         private void btnGeo_Click(object sender, EventArgs e)
         {
-            if (this.tunnelId <= 0)
+            if (tunnelId <= 0)
             {
                 MessageBox.Show("请选择巷道!");
                 return;
@@ -167,15 +173,13 @@ namespace UnderTerminal
             m.ShowDialog();
         }
 
-        private delegate void ShowDelegate(UpdateWarningResultMessage data);
-
         /// <summary>
-        /// 预警结果更新响应函数,参数无用
+        ///     预警结果更新响应函数,参数无用
         /// </summary>
         /// <param name="data"></param>
         private void UpdateWarningResultUi(UpdateWarningResultMessage data)
         {
-            if (this.InvokeRequired)
+            if (InvokeRequired)
             {
                 ShowDelegate sd = UpdateWarningResultUi;
                 lblWarning.Invoke(sd, data);
@@ -187,7 +191,7 @@ namespace UnderTerminal
                 // 2 绿色
                 if (data.WarningLevel == "2")
                 {
-                    lblWarning.Text = this.tunnelNameWarning + "--绿色";
+                    lblWarning.Text = tunnelNameWarning + "--绿色";
                     lblWarning.BackColor = Color.Green;
                     timer1.Stop();
                 }
@@ -199,7 +203,7 @@ namespace UnderTerminal
                     //else if (data.WarningType == "OUTBURST")
                     //    type = "突出";
                     // 0 代表“红色预警”
-                    lblWarning.Text = this.tunnelNameWarning + "--红色预警";
+                    lblWarning.Text = tunnelNameWarning + "--红色预警";
                     lblWarning.BackColor = Color.Red;
                     lblWarning.Tag = data.WarningReason;
                     //lblWarning.Image=
@@ -213,7 +217,7 @@ namespace UnderTerminal
                     //else if (data.WarningType == "OUTBURST")
                     //    type = "突出";
                     // 1 代表“黄色预警”
-                    lblWarning.Text = this.tunnelNameWarning + "--黄色预警";
+                    lblWarning.Text = tunnelNameWarning + "--黄色预警";
                     lblWarning.BackColor = Color.Yellow;
                     lblWarning.Tag = data.WarningReason;
                     timer1.Start();
@@ -238,7 +242,7 @@ namespace UnderTerminal
                 System.Diagnostics.Process.Start(file);
             }
             */
-            string reportFile = "C:\\tmp\\report.xls";
+            var reportFile = "C:\\tmp\\report.xls";
             if (!File.Exists(reportFile))
             {
                 MessageBox.Show(reportFile + "不存在。");
@@ -251,7 +255,7 @@ namespace UnderTerminal
         // 系统1监控曲线
         private void btnMonitorCurve_Click(object sender, EventArgs e)
         {
-            if (this.tunnelId <= 0)
+            if (tunnelId <= 0)
             {
                 MessageBox.Show("请选择巷道!");
                 return;
@@ -259,13 +263,13 @@ namespace UnderTerminal
 
             if (null == cm)
             {
-                cm = new CurveMonitor(this.tunnelId, this.tunnelName, this);
+                cm = new CurveMonitor(tunnelId, tunnelName, this);
                 cm.ShowDialog();
             }
             else
             {
-                cm.TunnelId = this.tunnelId;
-                cm.TunnelName = this.tunnelName;
+                cm.TunnelId = tunnelId;
+                cm.TunnelName = tunnelName;
                 cm.Visible = true;
             }
         }
@@ -277,11 +281,11 @@ namespace UnderTerminal
 
         private void btnChooseWarningTunnel_Click(object sender, EventArgs e)
         {
-            SelectTunnelDlg dlg = new SelectTunnelDlg();
+            var dlg = new SelectTunnelDlg();
             if (DialogResult.OK == dlg.ShowDialog())
             {
-                this.tunnelIdWarning = dlg.tunnelId;
-                this.tunnelNameWarning = dlg.tunnelName;
+                tunnelIdWarning = dlg.tunnelId;
+                tunnelNameWarning = dlg.tunnelName;
                 lblWarning.Text = dlg.tunnelName;
 
                 // Register warning notification from server.
@@ -291,8 +295,8 @@ namespace UnderTerminal
 
         private void registerWarningNotification()
         {
-            SocketMessage msg = new SocketMessage(COMMAND_ID.REGISTER_WARNING_RESULT_NOTIFICATION_SINGLE, DateTime.Now);
-            msg.TunnelId = this.tunnelIdWarning;
+            var msg = new SocketMessage(COMMAND_ID.REGISTER_WARNING_RESULT_NOTIFICATION_SINGLE, DateTime.Now);
+            msg.TunnelId = tunnelIdWarning;
             SendMsg2Server(msg);
         }
 
@@ -300,7 +304,7 @@ namespace UnderTerminal
         private void btnCloseSys_Click(object sender, EventArgs e)
         {
             // DialogResult result = MessageBox.Show("确认关机", "井下终端录入系统", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-            LoginPopup popup = new LoginPopup("确认关机");
+            var popup = new LoginPopup("确认关机");
             if (popup.ShowDialog() == DialogResult.OK)
             {
                 SysHelper.DoExitWin(SysHelper.EWX_SHUTDOWN);
@@ -311,7 +315,7 @@ namespace UnderTerminal
         private void btnRestartSys_Click(object sender, EventArgs e)
         {
             //DialogResult result = MessageBox.Show("确认重启", "井下终端录入系统", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-            LoginPopup popup = new LoginPopup("确认重启");
+            var popup = new LoginPopup("确认重启");
             if (popup.ShowDialog() == DialogResult.OK)
             {
                 SysHelper.Reboot();
@@ -321,36 +325,20 @@ namespace UnderTerminal
         // 维护本程序
         private void btnManagement_Click(object sender, EventArgs e)
         {
-            SysMgr mgr = new SysMgr();
+            var mgr = new SysMgr();
             mgr.ShowDialog();
         }
 
         // server network connection status
         private void btnServerStatus_Click(object sender, EventArgs e)
         {
-            Button btn = sender as Button;
+            var btn = sender as Button;
             if (btn.Text == "离线")
             {
                 // 重新连接server
                 InitClientSocket();
             }
         }
-
-        private bool online;
-
-        public bool OnLine
-        {
-            get { return this.online; }
-            set { this.online = value; }
-        }
-
-        private DateTime lastUpdate;
-        private Socket udpServerSocket;
-        private EndPoint ep = new IPEndPoint(IPAddress.Any, 9876);
-        private Timer checkTimer = new Timer();
-        private byte[] buffer = new byte[1024];
-
-        private delegate void MyDelegate(String text, Color color);
 
         private void UpdateInfo(String text, Color color)
         {
@@ -367,65 +355,61 @@ namespace UnderTerminal
         }
 
         /// <summary>
-        /// Timer event handler. Checks if the last Heartbeat was more than 3 seconds
-        /// ago and sets the lable to the Alarm message.
+        ///     Timer event handler. Checks if the last Heartbeat was more than 3 seconds
+        ///     ago and sets the lable to the Alarm message.
         /// </summary>
         /// <param name="sender">Sender of the Event; not used.</param>
         /// <param name="e">Parameter for the Event; not used.</param>
         private void checkTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
             // Calculate the Timespan since the Last Update from the Client.
-            TimeSpan timeSinceLastHeartbeat = DateTime.Now.ToUniversalTime() - lastUpdate;
+            var timeSinceLastHeartbeat = DateTime.Now.ToUniversalTime() - lastUpdate;
 
             // Set Lable Text depending of the Timespan
             if (timeSinceLastHeartbeat > TimeSpan.FromSeconds(4))
             {
-
                 UpdateInfo("离线", Color.Red);
-                this.online = false;
+                OnLine = false;
 
                 // Clear data.
-                this.tunnelIdWarning = -1;
-                this.tunnelNameWarning = string.Empty;
-                this.Invoke(new MethodInvoker(delegate
-                {
-                    lblWarning.Text = string.Empty;
-                }));
+                tunnelIdWarning = -1;
+                tunnelNameWarning = string.Empty;
+                Invoke(new MethodInvoker(delegate { lblWarning.Text = string.Empty; }));
             }
             else
             {
                 UpdateInfo("联机", Color.Green);
-                this.online = true;
+                OnLine = true;
             }
         }
 
         /// <summary>
-        /// Callback function for the BeginReceiveFrom Function.
-        /// Receives the data from the buffer, sets the lastUpdate Variable
-        /// and starts a new BeginReceiveFrom.
+        ///     Callback function for the BeginReceiveFrom Function.
+        ///     Receives the data from the buffer, sets the lastUpdate Variable
+        ///     and starts a new BeginReceiveFrom.
         /// </summary>
         /// <param name="iar">The result of the asynchronous operation.</param>
-        void ReceiveData(IAsyncResult iar)
+        private void ReceiveData(IAsyncResult iar)
         {
             // Create temporary remote end Point
-            IPEndPoint sender = new IPEndPoint(IPAddress.Any, 0);
-            EndPoint tempRemoteEP = (EndPoint)sender;
+            var sender = new IPEndPoint(IPAddress.Any, 0);
+            EndPoint tempRemoteEP = sender;
 
             // Get the SocketUtil
-            Socket remote = (Socket)iar.AsyncState;
+            var remote = (Socket) iar.AsyncState;
 
             // Call EndReceiveFrom to get the received Data
-            int recv = remote.EndReceiveFrom(iar, ref tempRemoteEP);
+            var recv = remote.EndReceiveFrom(iar, ref tempRemoteEP);
 
             // Get the Data from the buffer to a string
-            string stringData = Encoding.ASCII.GetString(buffer, 0, recv);
+            var stringData = Encoding.ASCII.GetString(buffer, 0, recv);
             Console.WriteLine(stringData);
 
             // update Timestamp
             lastUpdate = DateTime.Now.ToUniversalTime();
 
             // Restart receiving
-            if (!this.IsDisposed)
+            if (!IsDisposed)
             {
                 udpServerSocket.BeginReceiveFrom(buffer, 0, 1024, SocketFlags.None, ref ep, ReceiveData, udpServerSocket);
             }
@@ -433,11 +417,11 @@ namespace UnderTerminal
 
         public void InitClientSocket()
         {
-            string serverIp = ConfigManager.Instance.getValueByKey(ConfigConst.CONFIG_SERVER_IP);
-            int port = int.Parse(ConfigManager.Instance.getValueByKey(ConfigConst.CONFIG_PORT));
+            var serverIp = ConfigManager.Instance.getValueByKey(ConfigConst.CONFIG_SERVER_IP);
+            var port = int.Parse(ConfigManager.Instance.getValueByKey(ConfigConst.CONFIG_PORT));
 
             //初始化客户端Socket，连接服务器
-            string errorMsg = SocketHelper.InitClientSocket(serverIp, port, out _clientSocket);
+            var errorMsg = SocketHelper.InitClientSocket(serverIp, port, out _clientSocket);
             if (errorMsg != "")
             {
                 Alert.alert(Const.CONNECT_SOCKET_ERROR, Const.NOTES, MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -452,10 +436,10 @@ namespace UnderTerminal
 
         public void SendMsg2Server(SocketMessage msg)
         {
-            ClientSocket cs = GetClientSocketInstance();
+            var cs = GetClientSocketInstance();
             if (cs != null)
             {
-                string errMsg = cs.SendSocketMsg2Server(msg);
+                var errMsg = cs.SendSocketMsg2Server(msg);
                 if (errMsg != "")
                 {
                     Log.Error(Const.SEND_MSG_FAILED + Const.CONNECT_ARROW + msg);
@@ -478,7 +462,7 @@ namespace UnderTerminal
 
         private void btnSetDefaultValue_Click(object sender, EventArgs e)
         {
-            SetDefaultValue form = new SetDefaultValue(this);
+            var form = new SetDefaultValue(this);
             form.Show();
         }
 
@@ -490,20 +474,8 @@ namespace UnderTerminal
             lbWorkTime.Text = DefaultWorkTime;
         }
 
-        //public void doInitilization()
-        //{
-        //    // Initialize configuration manager.
-        //    ConfigManager cfgMgr = ConfigManager.Instance;
-        //    string msg = cfgMgr.init(Application.StartupPath);
+        private delegate void ShowDelegate(UpdateWarningResultMessage data);
 
-        //    if (msg != string.Empty)
-        //    {
-        //        MessageBox.Show(msg);
-        //        Application.Exit();
-        //    }
-
-        //    //初始化客户端Socket
-        //    InitClientSocket();
-        //}
+        private delegate void MyDelegate(String text, Color color);
     }
 }

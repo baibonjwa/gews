@@ -14,7 +14,6 @@ using ESRI.ArcGIS.Geodatabase;
 using ESRI.ArcGIS.Geometry;
 using GIS;
 using GIS.Common;
-using LibBusiness;
 using LibCommon;
 using LibEntity;
 using LibSocket;
@@ -25,13 +24,6 @@ namespace sys3
 {
     public partial class FaultageInfoEntering : Form
     {
-        /** 主键  **/
-        /** 业务逻辑类型：添加/修改  **/
-        public string ErrorMsg { get; private set; }
-
-
-        private Faultage Faultage { get; set; }
-
         /// <summary>
         ///     构造方法
         /// </summary>
@@ -80,22 +72,27 @@ namespace sys3
             // 坐标Z
             txtCoordinateZ.Text = Faultage.CoordinateZ.ToString(CultureInfo.InvariantCulture);
             //长度
-            string bid = Faultage.BindingId;
-            ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.DEFALUT_EXPOSE_FAULTAGE);
-            var featureLayer = (IFeatureLayer)pLayer;
+            var bid = Faultage.BindingId;
+            var pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.DEFALUT_EXPOSE_FAULTAGE);
+            var featureLayer = (IFeatureLayer) pLayer;
             if (pLayer == null)
             {
                 txtLength.Text = @"0";
                 return;
             }
-            IFeature pFeature = MyMapHelp.FindFeatureByWhereClause(featureLayer, "BID='" + bid + "'");
+            var pFeature = MyMapHelp.FindFeatureByWhereClause(featureLayer, "BID='" + bid + "'");
             if (pFeature != null)
             {
-                var pline = (IPolyline)pFeature.Shape;
+                var pline = (IPolyline) pFeature.Shape;
                 if (pline == null) return;
                 txtLength.Text = Math.Round(pline.Length).ToString(CultureInfo.InvariantCulture);
             }
         }
+
+        /** 主键  **/
+        /** 业务逻辑类型：添加/修改  **/
+        public string ErrorMsg { get; private set; }
+        private Faultage Faultage { get; set; }
 
         /// <summary>
         ///     提  交
@@ -114,7 +111,7 @@ namespace sys3
 
             // 创建断层实体
             Faultage = Faultage.FindByFaultageName(txtFaultageName.Text.Trim());
-            Faultage = Faultage ?? new Faultage { BindingId = IDGenerator.NewBindingID() };
+            Faultage = Faultage ?? new Faultage {BindingId = IDGenerator.NewBindingID()};
 
             Faultage.FaultageName = txtFaultageName.Text.Trim();
             Faultage.Gap = txtGap.Text.Trim();
@@ -312,12 +309,12 @@ namespace sys3
                 Filter = @"文本文件(*.txt)|*.txt|所有文件(*.*)|*.*"
             };
             if (ofd.ShowDialog() != DialogResult.OK) return;
-            string aa = ofd.FileName;
+            var aa = ofd.FileName;
             var sr = new StreamReader(@aa);
             string duqu;
             while ((duqu = sr.ReadLine()) != null)
             {
-                String[] str = duqu.Split('|');
+                var str = duqu.Split('|');
                 txtFaultageName.Text = str[0];
                 txtCoordinateX.Text = str[1].Split(',')[0];
                 txtCoordinateY.Text = str[1].Split(',')[1];
@@ -328,6 +325,87 @@ namespace sys3
                 txtAngle.Text = str[5];
                 txtLength.Text = str[6];
             }
+        }
+
+        private void btnMultTxt_Click(object sender, EventArgs e)
+        {
+            var ofd = new OpenFileDialog
+            {
+                RestoreDirectory = true,
+                Filter = @"文本文件(*.txt)|*.txt|所有文件(*.*)|*.*",
+                Multiselect = true
+            };
+            ErrorMsg = @"失败文件名：";
+
+
+            if (ofd.ShowDialog() != DialogResult.OK) return;
+            var fileCount = ofd.FileNames.Length;
+            lblTotal.Text = fileCount.ToString();
+            pbCount.Maximum = fileCount;
+            pbCount.Value = 0;
+            foreach (var fileName in ofd.FileNames)
+            {
+                try
+                {
+                    var sr = new StreamReader(fileName, Encoding.GetEncoding("GB2312"));
+                    string duqu;
+                    while ((duqu = sr.ReadLine()) != null)
+                    {
+                        var str = duqu.Split('|');
+                        var faultage = Faultage.FindByFaultageName(str[0]);
+                        if (faultage == null)
+                        {
+                            faultage = new Faultage
+                            {
+                                FaultageName = str[0],
+                                CoordinateX = Convert.ToDouble(str[1].Split(',')[0]),
+                                CoordinateY = Convert.ToDouble(str[1].Split(',')[1]),
+                                CoordinateZ = 0.0,
+                                Separation = str[2],
+                                Gap = str[2],
+                                Trend = String.IsNullOrWhiteSpace(str[4]) ? 0.0 : Convert.ToDouble(str[4]),
+                                Angle = String.IsNullOrWhiteSpace(str[5]) ? 0.0 : Convert.ToDouble(str[5]),
+                                Length = String.IsNullOrWhiteSpace(str[6]) ? 0.0 : Convert.ToDouble(str[6]),
+                                Type = str[3],
+                                BindingId = IDGenerator.NewBindingID()
+                            };
+                            DrawJldc(faultage);
+                        }
+                        else
+                        {
+                            faultage.FaultageName = str[0];
+                            faultage.CoordinateX = Convert.ToDouble(str[1].Split(',')[0]);
+                            faultage.CoordinateY = Convert.ToDouble(str[1].Split(',')[1]);
+                            faultage.CoordinateZ = 0.0;
+                            faultage.Separation = str[2];
+                            faultage.Gap = str[2];
+                            faultage.Trend = String.IsNullOrWhiteSpace(str[4]) ? 0.0 : Convert.ToDouble(str[4]);
+                            faultage.Angle = String.IsNullOrWhiteSpace(str[5]) ? 0.0 : Convert.ToDouble(str[5]);
+                            faultage.Length = String.IsNullOrWhiteSpace(str[6]) ? 0.0 : Convert.ToDouble(str[6]);
+                            faultage.Type = str[3];
+                            ModifyJldc(faultage);
+                        }
+                        faultage.Save();
+                        pbCount.Value++;
+                        lblSuccessed.Text = lblSuccessed.Text =
+                            (Convert.ToInt32(lblSuccessed.Text) + 1).ToString(CultureInfo.InvariantCulture);
+                    }
+                }
+                catch (Exception)
+                {
+                    lblError.Text =
+                        (Convert.ToInt32(lblError.Text) + 1).ToString(CultureInfo.InvariantCulture);
+                    ErrorMsg += fileName.Substring(fileName.LastIndexOf(@"\", StringComparison.Ordinal) + 1) + "\n";
+                    btnDetails.Enabled = true;
+                }
+            }
+            SendMessengToServer();
+            Alert.alert("导入完成");
+        }
+
+        private void btnDetails_Click(object sender, EventArgs e)
+        {
+            Alert.alert(ErrorMsg);
         }
 
         #region 绘制图元
@@ -456,8 +534,8 @@ namespace sys3
             //GIS.Common.DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewAll, null, null);
 
 
-            ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.DEFALUT_EXPOSE_FAULTAGE);
-            var featureLayer = (IFeatureLayer)pLayer;
+            var pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.DEFALUT_EXPOSE_FAULTAGE);
+            var featureLayer = (IFeatureLayer) pLayer;
             if (pLayer == null)
             {
                 MessageBox.Show(@"未找到揭露断层图层,无法绘制揭露断层图元。");
@@ -470,8 +548,8 @@ namespace sys3
             centrePt.Y = faultage.CoordinateY;
             centrePt.Z = faultage.CoordinateZ;
 
-            double trend = faultage.Trend; //走向
-            double length = faultage.Length / 2; //默认长度为20，左右各10
+            var trend = faultage.Trend; //走向
+            var length = faultage.Length/2; //默认长度为20，左右各10
 
             //计算起止点
             IPoint fromPt = new PointClass();
@@ -481,10 +559,10 @@ namespace sys3
             ILine line = new LineClass();
             line.PutCoords(fromPt, toPt);
             var missing = Type.Missing;
-            var segment = (ISegment)line;
+            var segment = (ISegment) line;
             ISegmentCollection newLine = new PolylineClass();
             newLine.AddSegment(segment, ref missing, ref missing);
-            var polyline = (IPolyline)newLine;
+            var polyline = (IPolyline) newLine;
 
             var list = new List<ziduan>
             {
@@ -502,7 +580,7 @@ namespace sys3
             if (pfeature == null) return;
             MyMapHelp.Jump(polyline);
             DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh(
-                (esriViewDrawPhase)34, null, null);
+                (esriViewDrawPhase) 34, null, null);
         }
 
         /// <summary>
@@ -513,15 +591,16 @@ namespace sys3
         /// <param name="length">1/2长度</param>
         /// <param name="fromPt">起点</param>
         /// <param name="toPt">终点</param>
-        private static void CalculateEndpoints(IPoint centrePt, double angle, double length, ref IPoint fromPt, ref IPoint toPt)
+        private static void CalculateEndpoints(IPoint centrePt, double angle, double length, ref IPoint fromPt,
+            ref IPoint toPt)
         {
-            double radian = (Math.PI / 180) * angle; //角度转为弧度
+            var radian = (Math.PI/180)*angle; //角度转为弧度
 
-            fromPt.X = centrePt.X + length * Math.Cos(radian);
-            fromPt.Y = centrePt.Y + length * Math.Sin(radian);
+            fromPt.X = centrePt.X + length*Math.Cos(radian);
+            fromPt.Y = centrePt.Y + length*Math.Sin(radian);
 
-            toPt.X = centrePt.X - length * Math.Cos(radian);
-            toPt.Y = centrePt.Y - length * Math.Sin(radian);
+            toPt.X = centrePt.X - length*Math.Cos(radian);
+            toPt.Y = centrePt.Y - length*Math.Sin(radian);
 
             //给Z坐标赋值
             if (!double.IsNaN(centrePt.Z))
@@ -546,7 +625,7 @@ namespace sys3
         public static ILineSymbol GetSymbol(string sServerStylePath, string sGalleryClassName, string symbolName)
         {
             IStyleGallery pStyleGallery = new ServerStyleGalleryClass();
-            var pStyleGalleryStorage = (IStyleGalleryStorage)pStyleGallery;
+            var pStyleGalleryStorage = (IStyleGalleryStorage) pStyleGallery;
             ILineSymbol lineSymbol = new SimpleLineSymbolClass();
 
             //查找到符号
@@ -560,7 +639,7 @@ namespace sys3
             {
                 if (pStyleGalleryItem.Name == symbolName)
                 {
-                    lineSymbol = (ILineSymbol)pStyleGalleryItem.Item;
+                    lineSymbol = (ILineSymbol) pStyleGalleryItem.Item;
                     Marshal.ReleaseComObject(pEnumStyleGalleryItem);
                     break;
                 }
@@ -585,7 +664,7 @@ namespace sys3
             {
                 var fieldIndex = geoFeaLayer.FeatureClass.Fields.FindField(field);
 
-                var customSymbol = (ISymbol)lineSymbol;
+                var customSymbol = (ISymbol) lineSymbol;
 
                 var featureCursor = geoFeaLayer.FeatureClass.Search(queryFilter, true);
                 var feature = featureCursor.NextFeature();
@@ -618,16 +697,16 @@ namespace sys3
 
             uniValueRender.FieldCount = 1;
             uniValueRender.Field[0] = "OBJECTID";
-            var customSymbol = (ISymbol)lineSymbol;
+            var customSymbol = (ISymbol) lineSymbol;
 
             //选择某个字段作为渲染符号值            
             if (geoFeaLayer != null)
             {
-                IFeatureCursor featureCursor = geoFeaLayer.FeatureClass.Search(null, true);
-                IFeature feature = featureCursor.NextFeature();
+                var featureCursor = geoFeaLayer.FeatureClass.Search(null, true);
+                var feature = featureCursor.NextFeature();
                 while (feature != null)
                 {
-                    int nowId = feature.OID;
+                    var nowId = feature.OID;
 
                     if (nowId == id)
                     {
@@ -651,12 +730,12 @@ namespace sys3
             var pGeoLayer = layer as IGeoFeatureLayer;
             if (pGeoLayer != null)
             {
-                IAnnotateLayerPropertiesCollection ipalpColl = pGeoLayer.AnnotationProperties;
+                var ipalpColl = pGeoLayer.AnnotationProperties;
                 ipalpColl.Clear();
                 IColor fontColor = new RgbColor();
                 fontColor.RGB = 255; //字体颜色      
-                Font font = new Font("宋体", 10, FontStyle.Bold);
-                var dispFont = (IFontDisp)OLE.GetIFontDispFromFont(font);
+                var font = new Font("宋体", 10, FontStyle.Bold);
+                var dispFont = (IFontDisp) OLE.GetIFontDispFromFont(font);
 
                 ITextSymbol pTextSymbol = new TextSymbolClass
                 {
@@ -699,7 +778,7 @@ namespace sys3
                     Expression = "[" + fieldName + "]"
                 };
                 //设置标注的参考比例尺  
-                var pAnnoLyrPros = (IAnnotateLayerTransformationProperties)pLableEngine;
+                var pAnnoLyrPros = (IAnnotateLayerTransformationProperties) pLableEngine;
                 pAnnoLyrPros.ReferenceScale = 2500000;
                 //设置标注可见的最大最小比例尺       
                 var pAnnoPros = pLableEngine as IAnnotateLayerProperties;
@@ -712,87 +791,5 @@ namespace sys3
         }
 
         #endregion
-
-        private void btnMultTxt_Click(object sender, EventArgs e)
-        {
-            var ofd = new OpenFileDialog
-            {
-                RestoreDirectory = true,
-                Filter = @"文本文件(*.txt)|*.txt|所有文件(*.*)|*.*",
-                Multiselect = true
-            };
-            ErrorMsg = @"失败文件名：";
-
-
-            if (ofd.ShowDialog() != DialogResult.OK) return;
-            var fileCount = ofd.FileNames.Length;
-            lblTotal.Text = fileCount.ToString();
-            pbCount.Maximum = fileCount;
-            pbCount.Value = 0;
-            foreach (var fileName in ofd.FileNames)
-            {
-                try
-                {
-                    var sr = new StreamReader(fileName, Encoding.GetEncoding("GB2312"));
-                    string duqu;
-                    while ((duqu = sr.ReadLine()) != null)
-                    {
-                        var str = duqu.Split('|');
-                        var faultage = Faultage.FindByFaultageName(str[0]);
-                        if (faultage == null)
-                        {
-                            faultage = new Faultage
-                            {
-                                FaultageName = str[0],
-                                CoordinateX = Convert.ToDouble(str[1].Split(',')[0]),
-                                CoordinateY = Convert.ToDouble(str[1].Split(',')[1]),
-                                CoordinateZ = 0.0,
-                                Separation = str[2],
-                                Gap = str[2],
-                                Trend = String.IsNullOrWhiteSpace(str[4]) ? 0.0 : Convert.ToDouble(str[4]),
-                                Angle = String.IsNullOrWhiteSpace(str[5]) ? 0.0 : Convert.ToDouble(str[5]),
-                                Length = String.IsNullOrWhiteSpace(str[6]) ? 0.0 : Convert.ToDouble(str[6]),
-                                Type = str[3],
-                                BindingId = IDGenerator.NewBindingID()
-                            };
-                            DrawJldc(faultage);
-                        }
-                        else
-                        {
-                            faultage.FaultageName = str[0];
-                            faultage.CoordinateX = Convert.ToDouble(str[1].Split(',')[0]);
-                            faultage.CoordinateY = Convert.ToDouble(str[1].Split(',')[1]);
-                            faultage.CoordinateZ = 0.0;
-                            faultage.Separation = str[2];
-                            faultage.Gap = str[2];
-                            faultage.Trend = String.IsNullOrWhiteSpace(str[4]) ? 0.0 : Convert.ToDouble(str[4]);
-                            faultage.Angle = String.IsNullOrWhiteSpace(str[5]) ? 0.0 : Convert.ToDouble(str[5]);
-                            faultage.Length = String.IsNullOrWhiteSpace(str[6]) ? 0.0 : Convert.ToDouble(str[6]);
-                            faultage.Type = str[3];
-                            ModifyJldc(faultage);
-                        }
-                        faultage.Save();
-                        pbCount.Value++;
-                        lblSuccessed.Text = lblSuccessed.Text =
-                            (Convert.ToInt32(lblSuccessed.Text) + 1).ToString(CultureInfo.InvariantCulture);
-                    }
-                }
-                catch (Exception)
-                {
-                    lblError.Text =
-                      (Convert.ToInt32(lblError.Text) + 1).ToString(CultureInfo.InvariantCulture);
-                    ErrorMsg += fileName.Substring(fileName.LastIndexOf(@"\", StringComparison.Ordinal) + 1) + "\n";
-                    btnDetails.Enabled = true;
-                }
-
-            }
-            SendMessengToServer();
-            Alert.alert("导入完成");
-        }
-
-        private void btnDetails_Click(object sender, EventArgs e)
-        {
-            Alert.alert(ErrorMsg);
-        }
     }
 }

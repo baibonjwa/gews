@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using ESRI.ArcGIS.Carto;
-using ESRI.ArcGIS.Geodatabase;
 using ESRI.ArcGIS.Geometry;
 using GIS;
 using GIS.Common;
-using LibBusiness;
 using LibCommon;
 using LibEntity;
 
@@ -18,10 +15,10 @@ namespace sys3
 {
     public partial class PitshaftInfoEntering : Form
     {
+        private Rectangle _PropertyName;
         /** 业务逻辑类型：添加/修改  **/
         private readonly string _bllType = "add";
         private readonly int _iPk;
-        private Rectangle _PropertyName;
 
         /// <summary>
         ///     构造方法
@@ -53,7 +50,7 @@ namespace sys3
             LoadPitshaftTypeInfo();
             // 设置井筒信息
             // 通过主键获取断层信息
-            Pitshaft pitshaft = Pitshaft.Find(_iPk);
+            var pitshaft = Pitshaft.Find(_iPk);
 
             if (pitshaft != null)
             {
@@ -67,7 +64,7 @@ namespace sys3
                 txtWellbottomElevation.Text = pitshaft.WellbottomElevation.ToString(CultureInfo.InvariantCulture);
                 // 井筒坐标X
                 txtPitshaftCoordinateX.Text =
-                  pitshaft.PitshaftCoordinateX.ToString(CultureInfo.InvariantCulture);
+                    pitshaft.PitshaftCoordinateX.ToString(CultureInfo.InvariantCulture);
                 // 井筒坐标Y
                 txtPitshaftCoordinateY.Text = pitshaft.PitshaftCoordinateY.ToString(CultureInfo.InvariantCulture);
                 // 图形坐标X
@@ -84,7 +81,7 @@ namespace sys3
         /// </summary>
         private void LoadPitshaftTypeInfo()
         {
-            PitshaftType[] pitshaftTypes = PitshaftType.FindAll();
+            var pitshaftTypes = PitshaftType.FindAll();
 
             cobPitshaftType.DataSource = pitshaftTypes;
             cobPitshaftType.DisplayMember = "PitshaftTypeName";
@@ -108,10 +105,10 @@ namespace sys3
             DialogResult = DialogResult.OK;
 
             // 创建井筒实体
-            var pitshaftEntity = new Pitshaft { PitshaftName = txtPitshaftName.Text.Trim() };
+            var pitshaftEntity = new Pitshaft {PitshaftName = txtPitshaftName.Text.Trim()};
             // 井筒名称
             // 井筒类型
-            int iPitshaftTypeId = 0;
+            var iPitshaftTypeId = 0;
             if (int.TryParse(Convert.ToString(cobPitshaftType.SelectedValue), out iPitshaftTypeId))
             {
                 pitshaftEntity.PitshaftType.PitshaftTypeId = iPitshaftTypeId;
@@ -159,7 +156,7 @@ namespace sys3
                 pitshaftEntity.FigureCoordinateZ = dFigureCoordinateZ;
             }
 
-            bool bResult = false;
+            var bResult = false;
             if (_bllType == "add")
             {
                 // BID
@@ -178,7 +175,7 @@ namespace sys3
 
                 //20140428 lyf 
                 //获取井筒BID，为后面修改绘制井筒赋值所用
-                string sBID = "";
+                var sBID = "";
                 sBID = Pitshaft.Find(_iPk).BindingId;
                 pitshaftEntity.BindingId = sBID;
                 //修改图元
@@ -420,8 +417,8 @@ namespace sys3
 
             ////DataEditCommon.g_pMyMapCtrl.ActiveView.Refresh();
 
-            double X = Convert.ToDouble(txtFigureCoordinateX.Text);
-            double Y = Convert.ToDouble(txtFigureCoordinateY.Text);
+            var X = Convert.ToDouble(txtFigureCoordinateX.Text);
+            var Y = Convert.ToDouble(txtFigureCoordinateY.Text);
             IPoint pt = new PointClass();
             pt.X = X;
             pt.Y = Y;
@@ -432,13 +429,13 @@ namespace sys3
                 double.TryParse(txtFigureCoordinateZ.Text, out dZ);
             }
             pt.Z = dZ;
-            ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.DEFALUT_JINGTONG);
+            var pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.DEFALUT_JINGTONG);
             if (pLayer == null)
             {
                 MessageBox.Show("未找到井筒图层,无法绘制井筒图元。");
                 return;
             }
-            var pFeatureLayer = (IFeatureLayer)pLayer;
+            var pFeatureLayer = (IFeatureLayer) pLayer;
             IGeometry geometry = pt;
             var list = new List<ziduan>();
             list.Add(new ziduan("bid", pitshaftEntity.BindingId));
@@ -451,7 +448,7 @@ namespace sys3
             list.Add(new ziduan("y", pitshaftEntity.PitshaftCoordinateY.ToString()));
             list.Add(new ziduan("h", (pitshaftEntity.WellbottomElevation + pitshaftEntity.WellheadElevation).ToString()));
 
-            IFeature pfeature = DataEditCommon.CreateNewFeature(pFeatureLayer, geometry, list);
+            var pfeature = DataEditCommon.CreateNewFeature(pFeatureLayer, geometry, list);
             if (pfeature != null)
             {
                 MyMapHelp.Jump(pt);
@@ -468,8 +465,8 @@ namespace sys3
         {
             //1.获得当前编辑图层
             var drawspecial = new DrawSpecialCommon();
-            string sLayerAliasName = LayerNames.DEFALUT_JINGTONG; //“默认_井筒”图层
-            IFeatureLayer featureLayer = drawspecial.GetFeatureLayerByName(sLayerAliasName);
+            var sLayerAliasName = LayerNames.DEFALUT_JINGTONG; //“默认_井筒”图层
+            var featureLayer = drawspecial.GetFeatureLayerByName(sLayerAliasName);
             if (featureLayer == null)
             {
                 MessageBox.Show("未找到" + sLayerAliasName + "图层,无法修改井筒图元。");
@@ -477,7 +474,7 @@ namespace sys3
             }
 
             //2.删除原来图元，重新绘制新图元
-            bool bIsDeleteOldFeature = DataEditCommon.DeleteFeatureByWhereClause(featureLayer,
+            var bIsDeleteOldFeature = DataEditCommon.DeleteFeatureByWhereClause(featureLayer,
                 "BID='" + pitshaftEntity.BindingId + "'");
             //if (bIsDeleteOldFeature)
             {
@@ -497,7 +494,7 @@ namespace sys3
 
             if (!str.Contains('.')) return str;
 
-            string[] strArr = str.Split('.');
+            var strArr = str.Split('.');
             if (strArr[1].Length > 3)
             {
                 resultStr = strArr[0] + "." + strArr[1].Substring(0, 3);

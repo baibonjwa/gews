@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using ESRI.ArcGIS.Carto;
-using ESRI.ArcGIS.Geodatabase;
+using GIS;
 using GIS.Common;
 using LibCommon;
 using LibEntity;
@@ -13,7 +13,7 @@ namespace sys3
     public partial class BoreholeInfoManagement : Form
     {
         /// <summary>
-        /// 构造方法
+        ///     构造方法
         /// </summary>
         public BoreholeInfoManagement()
         {
@@ -22,13 +22,13 @@ namespace sys3
             FormDefaultPropertiesSetter.SetManagementFormDefaultProperties(this, Const_GM.MANAGE_BOREHOLE_INFO);
         }
 
-
         private void RefreshData()
         {
             gcBorehole.DataSource = Borehole.FindAll();
         }
+
         /// <summary>
-        /// 添加
+        ///     添加
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -43,7 +43,7 @@ namespace sys3
         }
 
         /// <summary>
-        /// 修改
+        ///     修改
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -54,16 +54,15 @@ namespace sys3
                 Alert.alert("请选择要修改的信息");
                 return;
             }
-            var m = new BoreholeInfoEntering(((Borehole)gridView1.GetFocusedRow()));
+            var m = new BoreholeInfoEntering(((Borehole) gridView1.GetFocusedRow()));
             if (DialogResult.OK == m.ShowDialog())
             {
                 RefreshData();
             }
-
         }
 
         /// <summary>
-        /// 删除按钮
+        ///     删除按钮
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -71,16 +70,16 @@ namespace sys3
         {
             if (!Alert.confirm(Const_GM.DEL_CONFIRM_MSG_BOREHOLE)) return;
             var selectedIndex = gridView1.GetSelectedRows();
-            foreach (var borehole in selectedIndex.Select(i => (Borehole)gridView1.GetRow(i)))
+            foreach (var borehole in selectedIndex.Select(i => (Borehole) gridView1.GetRow(i)))
             {
-                DeleteZuanKongByBid(new[] { borehole.BindingId });
+                DeleteZuanKongByBid(new[] {borehole.BindingId});
                 borehole.Delete();
             }
             RefreshData();
         }
 
         /// <summary>
-        /// 根据钻孔绑定ID删除钻孔图元
+        ///     根据钻孔绑定ID删除钻孔图元
         /// </summary>
         /// <param name="sBoreholeBidArray">要删除钻孔的绑定ID</param>
         private static void DeleteZuanKongByBid(ICollection<string> sBoreholeBidArray)
@@ -89,7 +88,7 @@ namespace sys3
 
             //1.获得当前编辑图层
             var drawspecial = new DrawSpecialCommon();
-            const string sLayerAliasName = GIS.LayerNames.DEFALUT_BOREHOLE; //“默认_钻孔”图层
+            const string sLayerAliasName = LayerNames.DEFALUT_BOREHOLE; //“默认_钻孔”图层
             var featureLayer = drawspecial.GetFeatureLayerByName(sLayerAliasName);
             if (featureLayer == null)
             {
@@ -105,7 +104,7 @@ namespace sys3
         }
 
         /// <summary>
-        /// 退出
+        ///     退出
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -115,9 +114,8 @@ namespace sys3
             Close();
         }
 
-
         /// <summary>
-        /// 导出
+        ///     导出
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -130,7 +128,7 @@ namespace sys3
         }
 
         /// <summary>
-        /// 打印
+        ///     打印
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -140,7 +138,7 @@ namespace sys3
         }
 
         /// <summary>
-        /// 刷新
+        ///     刷新
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -149,9 +147,8 @@ namespace sys3
             RefreshData();
         }
 
-
         /// <summary>
-        /// 图显按钮事件
+        ///     图显按钮事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -159,15 +156,15 @@ namespace sys3
         {
             // 获取已选择明细行的索引
 
-            ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, GIS.LayerNames.DEFALUT_BOREHOLE);
+            var pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.DEFALUT_BOREHOLE);
             if (pLayer == null)
             {
                 MessageBox.Show(@"未发现钻孔图层！");
                 return;
             }
-            var pFeatureLayer = (IFeatureLayer)pLayer;
-            string str = "";
-            string bid = ((Borehole)gridView1.GetFocusedRow()).BindingId;
+            var pFeatureLayer = (IFeatureLayer) pLayer;
+            var str = "";
+            var bid = ((Borehole) gridView1.GetFocusedRow()).BindingId;
             if (bid != "")
             {
                 if (true)
@@ -175,10 +172,10 @@ namespace sys3
                 //else
                 //    str += " or bid='" + bid + "'";
             }
-            List<IFeature> list = GIS.MyMapHelp.FindFeatureListByWhereClause(pFeatureLayer, str);
+            var list = MyMapHelp.FindFeatureListByWhereClause(pFeatureLayer, str);
             if (list.Count > 0)
             {
-                GIS.MyMapHelp.Jump(GIS.MyMapHelp.GetGeoFromFeature(list));
+                MyMapHelp.Jump(MyMapHelp.GetGeoFromFeature(list));
                 DataEditCommon.g_pMap.ClearSelection();
                 foreach (var t in list)
                 {
@@ -188,7 +185,8 @@ namespace sys3
                 Location = DataEditCommon.g_axTocControl.Location;
                 Width = DataEditCommon.g_axTocControl.Width;
                 Height = DataEditCommon.g_axTocControl.Height;
-                DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeoSelection, null, DataEditCommon.g_pAxMapControl.Extent);
+                DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeoSelection, null,
+                    DataEditCommon.g_pAxMapControl.Extent);
             }
             else
             {

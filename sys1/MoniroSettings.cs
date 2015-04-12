@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Windows.Forms;
-using _1.GasEmission;
 
 namespace sys1
 {
     public partial class MoniroSettings : Form
     {
-        MainFormGe mainWin;
+        private readonly MainFormGe mainWin;
+
         public MoniroSettings(MainFormGe win)
         {
             InitializeComponent();
@@ -20,12 +20,12 @@ namespace sys1
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            FileProperties fp = new FileProperties(mainWin.ConfigFileName);
+            var fp = new FileProperties(mainWin.ConfigFileName);
             fp.Set("redthreshold", tbRedThreshold.Text);
             fp.Set("yellowthreshold", tbYellowThreshold.Text);
             fp.Set("countperframe", tbDataCountPerFrame.Text);
@@ -46,10 +46,10 @@ namespace sys1
             double.TryParse(tbRedThreshold.Text, out dValue);
             mainWin.RedDataThreshold = dValue;
 
-            double.TryParse(tbBadDataThreshold.Text,out dValue);
+            double.TryParse(tbBadDataThreshold.Text, out dValue);
             mainWin.BadDataThreshold = dValue;
 
-            this.Close();
+            Close();
         }
     }
 }

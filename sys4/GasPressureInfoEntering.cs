@@ -88,7 +88,7 @@ namespace sys4
                     GasPressureValue = Convert.ToDouble(txtGasPressureValue.Text),
                     MeasureDateTime = dtpMeasureDateTime.Value,
                     Tunnel = selectTunnelSimple1.SelectedTunnel,
-                    CoalSeams = (CoalSeams)cboCoalSeams.SelectedItem,
+                    CoalSeams = (CoalSeams) cboCoalSeams.SelectedItem,
                     BindingId = IDGenerator.NewBindingID()
                 };
                 // 坐标X
@@ -104,7 +104,7 @@ namespace sys4
                 GasPressure.GasPressureValue = Convert.ToDouble(txtGasPressureValue.Text);
                 GasPressure.MeasureDateTime = dtpMeasureDateTime.Value;
                 GasPressure.Tunnel = selectTunnelSimple1.SelectedTunnel;
-                GasPressure.CoalSeams = (CoalSeams)cboCoalSeams.SelectedValue;
+                GasPressure.CoalSeams = (CoalSeams) cboCoalSeams.SelectedValue;
                 GasPressure.Save();
                 DelGasGushQuantityPt(GasPressure.BindingId, GasPressure.CoalSeams.CoalSeamsName);
                 DrawGasGushQuantityPt(GasPressure);
@@ -128,7 +128,6 @@ namespace sys4
         /// <returns>验证结果：true 通过验证, false未通过验证</returns>
         private bool Check()
         {
-
             // 判断所在煤层是否选择
             if (cboCoalSeams.SelectedValue == null)
             {
@@ -234,7 +233,7 @@ namespace sys4
                 MessageBox.Show(@"未找到瓦斯压力点图层,无法绘制瓦斯压力点图元。");
                 return;
             }
-            var pFeatureLayer = (IFeatureLayer)pLayer;
+            var pFeatureLayer = (IFeatureLayer) pLayer;
             IGeometry geometry = pt;
             var list = new List<ziduan>
             {
@@ -271,7 +270,7 @@ namespace sys4
             {
                 MyMapHelp.Jump(pt);
                 DataEditCommon.g_pMyMapCtrl.ActiveView.PartialRefresh(
-                    (esriViewDrawPhase)34, null, null);
+                    (esriViewDrawPhase) 34, null, null);
             }
         }
 
@@ -283,7 +282,7 @@ namespace sys4
         private void DelGasGushQuantityPt(string bid, string mc)
         {
             var pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, LayerNames.LAYER_ALIAS_MR_WSYLD);
-            var pFeatureLayer = (IFeatureLayer)pLayer;
+            var pFeatureLayer = (IFeatureLayer) pLayer;
             DataEditCommon.DeleteFeatureByWhereClause(pFeatureLayer, "bid='" + bid + "' and mc='" + mc + "'");
         }
 
