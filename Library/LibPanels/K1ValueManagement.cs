@@ -22,7 +22,16 @@ namespace LibPanels
 
         private void RefreshData()
         {
-            gcK1AndSValue.DataSource = K1Value.FindAll();
+            try
+            {
+                gcK1AndSValue.DataSource = K1Value.FindAll();
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+        
         }
 
         /// <summary>

@@ -31,7 +31,7 @@ namespace LibPanels
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(K1ValueManagement));
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
             this.btnRefresh = new System.Windows.Forms.ToolStripButton();
             this.btnExit = new System.Windows.Forms.ToolStripButton();
             this.tsBtnDel = new System.Windows.Forms.ToolStripButton();
@@ -54,6 +54,7 @@ namespace LibPanels
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.controlNavigator1 = new DevExpress.XtraEditors.ControlNavigator();
+            this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcK1AndSValue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -79,7 +80,6 @@ namespace LibPanels
             // 
             // tsBtnDel
             // 
-            this.tsBtnDel.Enabled = false;
             this.tsBtnDel.Image = ((System.Drawing.Image)(resources.GetObject("tsBtnDel.Image")));
             this.tsBtnDel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsBtnDel.Name = "tsBtnDel";
@@ -151,10 +151,13 @@ namespace LibPanels
             // 
             // gcK1AndSValue
             // 
+            this.gcK1AndSValue.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gcK1AndSValue.Cursor = System.Windows.Forms.Cursors.Default;
-            gridLevelNode2.RelationName = "Level1";
+            gridLevelNode1.RelationName = "Level1";
             this.gcK1AndSValue.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode2});
+            gridLevelNode1});
             this.gcK1AndSValue.Location = new System.Drawing.Point(12, 27);
             this.gcK1AndSValue.MainView = this.gridView1;
             this.gcK1AndSValue.Name = "gcK1AndSValue";
@@ -174,72 +177,92 @@ namespace LibPanels
             this.gridColumn6,
             this.gridColumn7,
             this.gridColumn8,
-            this.gridColumn9});
+            this.gridColumn9,
+            this.gridColumn10});
             this.gridView1.GridControl = this.gcK1AndSValue;
             this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsBehavior.Editable = false;
             // 
             // gridColumn1
             // 
             this.gridColumn1.Caption = "干煤K1";
+            this.gridColumn1.FieldName = "ValueK1Dry";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 0;
+            this.gridColumn1.VisibleIndex = 1;
+            this.gridColumn1.Width = 100;
             // 
             // gridColumn2
             // 
             this.gridColumn2.Caption = "湿煤K1";
+            this.gridColumn2.FieldName = "ValueK1Wet";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 1;
+            this.gridColumn2.VisibleIndex = 2;
+            this.gridColumn2.Width = 92;
             // 
             // gridColumn3
             // 
             this.gridColumn3.Caption = "Sg值";
+            this.gridColumn3.FieldName = "Sg";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 2;
+            this.gridColumn3.VisibleIndex = 3;
+            this.gridColumn3.Width = 100;
             // 
             // gridColumn4
             // 
             this.gridColumn4.Caption = "Sv值";
+            this.gridColumn4.FieldName = "Sv";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 3;
+            this.gridColumn4.VisibleIndex = 4;
+            this.gridColumn4.Width = 100;
             // 
             // gridColumn5
             // 
             this.gridColumn5.Caption = "q值";
+            this.gridColumn5.FieldName = "Q";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 4;
+            this.gridColumn5.VisibleIndex = 5;
+            this.gridColumn5.Width = 100;
             // 
             // gridColumn6
             // 
             this.gridColumn6.Caption = "孔深";
+            this.gridColumn6.FieldName = "BoreholeDeep";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 5;
+            this.gridColumn6.VisibleIndex = 6;
+            this.gridColumn6.Width = 100;
             // 
             // gridColumn7
             // 
             this.gridColumn7.Caption = "所属巷道";
+            this.gridColumn7.FieldName = "Tunnel.TunnelName";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 6;
+            this.gridColumn7.VisibleIndex = 7;
+            this.gridColumn7.Width = 100;
             // 
             // gridColumn8
             // 
             this.gridColumn8.Caption = "记录时间";
+            this.gridColumn8.FieldName = "Time";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 7;
+            this.gridColumn8.VisibleIndex = 8;
+            this.gridColumn8.Width = 100;
             // 
             // gridColumn9
             // 
             this.gridColumn9.Caption = "录入时间";
+            this.gridColumn9.FieldName = "TypeInTime";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 8;
+            this.gridColumn9.VisibleIndex = 9;
+            this.gridColumn9.Width = 119;
             // 
             // controlNavigator1
             // 
@@ -252,6 +275,15 @@ namespace LibPanels
             this.controlNavigator1.Text = "controlNavigator1";
             this.controlNavigator1.TextLocation = DevExpress.XtraEditors.NavigatorButtonsTextLocation.Center;
             this.controlNavigator1.TextStringFormat = "记录 {0} / {1}";
+            // 
+            // gridColumn10
+            // 
+            this.gridColumn10.Caption = "组";
+            this.gridColumn10.FieldName = "K1ValueId";
+            this.gridColumn10.Name = "gridColumn10";
+            this.gridColumn10.Visible = true;
+            this.gridColumn10.VisibleIndex = 0;
+            this.gridColumn10.Width = 41;
             // 
             // K1ValueManagement
             // 
@@ -299,5 +331,6 @@ namespace LibPanels
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private DevExpress.XtraEditors.ControlNavigator controlNavigator1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
     }
 }

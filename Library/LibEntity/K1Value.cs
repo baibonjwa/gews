@@ -9,6 +9,9 @@
 
 using System;
 using Castle.ActiveRecord;
+using NHibernate.Criterion;
+using NHibernate.Hql.Ast.ANTLR;
+using NHibernate.SqlCommand;
 
 namespace LibEntity
 {
@@ -117,5 +120,11 @@ namespace LibEntity
         /// </summary>
         [BelongsTo("TUNNEL_ID")]
         public Tunnel Tunnel { get; set; }
+
+        public static int GetMaxGroupId()
+        {
+            var obj = FindFirst(new Order("Id", false));
+            return obj == null ? 0 : obj.K1ValueId;
+        }
     }
 }

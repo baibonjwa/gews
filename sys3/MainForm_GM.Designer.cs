@@ -28,14 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm_GM));
             this.statusStrip1 = new GIS.BasicGraphic.UToolStatus();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.mapControl_GM = new ESRI.ArcGIS.Controls.AxMapControl();
             this.tocControl_GM = new ESRI.ArcGIS.Controls.AxTOCControl();
             this.toolBar_GM = new ESRI.ArcGIS.Controls.AxToolbarControl();
-            this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
+            this.barManager1 = new DevExpress.XtraBars.BarManager();
             this.bar1 = new DevExpress.XtraBars.Bar();
             this.mniOpenFileFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniSaveFloat = new DevExpress.XtraBars.BarButtonItem();
@@ -160,7 +159,6 @@
             this.mniTDDCFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniXLZFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniKTZKFloat = new DevExpress.XtraBars.BarButtonItem();
-            this.mniKTXFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniMCDBDGXFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniMSDGXFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniMCGLFloat = new DevExpress.XtraBars.BarButtonItem();
@@ -194,7 +192,7 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.imageList1 = new System.Windows.Forms.ImageList();
             this.barSubItem7 = new DevExpress.XtraBars.BarSubItem();
             this.mniObjectSnaps = new DevExpress.XtraBars.BarButtonItem();
             this.mniCompass = new DevExpress.XtraBars.BarButtonItem();
@@ -211,6 +209,7 @@
             this.barButtonItem5 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem6 = new DevExpress.XtraBars.BarButtonItem();
             this.mniObjectSnapsFloat = new DevExpress.XtraBars.BarButtonItem();
+            this.mniKTXFloat = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem19 = new DevExpress.XtraBars.BarButtonItem();
             this.mniCompassFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniTitleFloat = new DevExpress.XtraBars.BarButtonItem();
@@ -471,7 +470,7 @@
             this.mniDCShape,
             this.bbiCheckUpdate});
             this.barManager1.MainMenu = this.bar2;
-            this.barManager1.MaxItemId = 185;
+            this.barManager1.MaxItemId = 186;
             // 
             // bar1
             // 
@@ -1062,6 +1061,7 @@
             this.miniHCHDJZ.Caption = "回采巷道校正";
             this.miniHCHDJZ.Id = 181;
             this.miniHCHDJZ.Name = "miniHCHDJZ";
+            this.miniHCHDJZ.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.miniHCHDJZ.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.miniHCHDJZ_ItemClick);
             // 
             // barSubItem5
@@ -1569,6 +1569,11 @@
             this.mniDXGLFloat.Name = "mniDXGLFloat";
             this.mniDXGLFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniDXGLFloat_ItemClick);
             // 
+            // mniCLRSJKDRDXSJKFloat
+            // 
+            this.mniCLRSJKDRDXSJKFloat.Id = 185;
+            this.mniCLRSJKDRDXSJKFloat.Name = "mniCLRSJKDRDXSJKFloat";
+            // 
             // mniJJHDGLFloat
             // 
             this.mniJJHDGLFloat.Caption = "掘进工作面管理";
@@ -1653,14 +1658,6 @@
             this.mniKTZKFloat.ImageIndex = 12;
             this.mniKTZKFloat.Name = "mniKTZKFloat";
             this.mniKTZKFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniKTZKFloat_ItemClick);
-            // 
-            // mniKTXFloat
-            // 
-            this.mniKTXFloat.Caption = "勘探线";
-            this.mniKTXFloat.Id = 133;
-            this.mniKTXFloat.Name = "mniKTXFloat";
-            this.mniKTXFloat.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-            this.mniKTXFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniKTXFloat_ItemClick);
             // 
             // mniMCDBDGXFloat
             // 
@@ -2074,6 +2071,14 @@
             this.mniObjectSnapsFloat.Name = "mniObjectSnapsFloat";
             this.mniObjectSnapsFloat.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.mniObjectSnapsFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniObjectSnapsFloat_ItemClick);
+            // 
+            // mniKTXFloat
+            // 
+            this.mniKTXFloat.Caption = "勘探线";
+            this.mniKTXFloat.Id = 133;
+            this.mniKTXFloat.Name = "mniKTXFloat";
+            this.mniKTXFloat.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            this.mniKTXFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniKTXFloat_ItemClick);
             // 
             // barButtonItem19
             // 
