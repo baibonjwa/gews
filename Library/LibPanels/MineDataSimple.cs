@@ -12,30 +12,42 @@ namespace LibPanels
     public partial class MineDataSimple : Form
     {
         //******定义变量***********
-        private GasInfoEntering _gasData = new GasInfoEntering(); //瓦斯
-        private GeologicStructureInfoEntering _geologicStructure = new GeologicStructureInfoEntering();
-        private ManagementInfoEntering _management = new ManagementInfoEntering(); //管理
-        private object _obj = null;
-        private VentilationInfoEntering _ventilationInfoEntering = new VentilationInfoEntering(); //通风
+        private readonly GasInfoEntering _gasData = new GasInfoEntering(); //瓦斯
+        private readonly GeologicStructureInfoEntering _geologicStructure = new GeologicStructureInfoEntering();
+        private readonly ManagementInfoEntering _management = new ManagementInfoEntering(); //管理
+        private readonly object _obj = null;
+        private readonly VentilationInfoEntering _ventilationInfoEntering = new VentilationInfoEntering(); //通风
         private CoalExistence _ceEntity = new CoalExistence(); //煤层赋存实体
-        private CoalExistenceInfoEntering _coalExistenceInfoEntering = new CoalExistenceInfoEntering(); //煤层赋存
-        private int formHeight = 247;
-        private GasData gdEntity = new GasData(); //瓦斯实体
+        private readonly CoalExistenceInfoEntering _coalExistenceInfoEntering = new CoalExistenceInfoEntering(); //煤层赋存
+        private const int FormHeight = 247;
+        private GasData _gdEntity = new GasData(); //瓦斯实体
         private GeologicStructure _geologicStructureEntity = new GeologicStructure();
-        private Management mEntity = new Management(); //管理实体
-        private LibEntity.MineData mineDataEntity = new LibEntity.MineData();
-        private Ventilation viEntity = new Ventilation(); //通风实体
+        private Management _mEntity = new Management(); //管理实体
+        private MineData _mineDataEntity = new MineData();
+        private Ventilation _viEntity = new Ventilation(); //通风实体
 
         //*************************
+
+        private Tunnel Tunnel { get; set; }
+        private Team Team { get; set; }
+        private String Submitter { get; set; }
 
         public MineDataSimple()
         {
             InitializeComponent();
         }
 
-        public MineDataSimple(Tunnel tunnel)
+        public MineDataSimple(object obj)
         {
-            selectTunnelSimple1.SelectedTunnel = tunnel;
+
+        }
+
+        public MineDataSimple(Tunnel tunnel, Team team, String submitter)
+        {
+            InitializeComponent();
+            Tunnel = tunnel;
+            Team = team;
+            Submitter = submitter;
         }
 
         /// <summary>
@@ -43,11 +55,8 @@ namespace LibPanels
         /// </summary>
         private void SetWorkTimeName()
         {
-            string strWorkTimeName = "";
             string sysDateTime = DateTime.Now.ToString("HH:mm:ss");
-
-            strWorkTimeName = MineDataSimpleBLL.selectWorkTimeNameByWorkTimeGroupIdAndSysTime(rbtn38.Checked ? 1 : 2, sysDateTime);
-
+            var strWorkTimeName = MineDataSimpleBLL.selectWorkTimeNameByWorkTimeGroupIdAndSysTime(rbtn38.Checked ? 1 : 2, sysDateTime);
             if (!string.IsNullOrEmpty(strWorkTimeName))
             {
                 cboWorkTime.Text = strWorkTimeName;
@@ -58,7 +67,7 @@ namespace LibPanels
         private void btnSubmit_Click(object sender, EventArgs e)
         {
             //验证
-            if (!check())
+            if (!Check())
             {
                 DialogResult = DialogResult.None;
                 return;
@@ -66,19 +75,19 @@ namespace LibPanels
             DialogResult = DialogResult.OK;
 
             //通用信息
-            mineDataEntity.Tunnel = selectTunnelSimple1.SelectedTunnel;
-            mineDataEntity.CoordinateX = txtCoordinateX.Text == "" ? 0 : Convert.ToDouble(txtCoordinateX.Text);
+            _mineDataEntity.Tunnel = selectTunnelSimple1.SelectedTunnel;
+            _mineDataEntity.CoordinateX = txtCoordinateX.Text == "" ? 0 : Convert.ToDouble(txtCoordinateX.Text);
 
-            mineDataEntity.CoordinateY = txtCoordinateY.Text == "" ? 0 : Convert.ToDouble(txtCoordinateY.Text);
-            mineDataEntity.CoordinateZ = txtCoordinateZ.Text == "" ? 0 : Convert.ToDouble(txtCoordinateZ.Text);
-            mineDataEntity.Datetime = dtpDateTime.Value;
+            _mineDataEntity.CoordinateY = txtCoordinateY.Text == "" ? 0 : Convert.ToDouble(txtCoordinateY.Text);
+            _mineDataEntity.CoordinateZ = txtCoordinateZ.Text == "" ? 0 : Convert.ToDouble(txtCoordinateZ.Text);
+            _mineDataEntity.Datetime = dtpDateTime.Value;
 
-            mineDataEntity.WorkStyle = rbtn38.Checked ? Const_MS.WORK_TIME_38 : Const_MS.WORK_TIME_46;
-            mineDataEntity.WorkTime = cboWorkTime.Text;
-            mineDataEntity.TeamName = cboTeamName.Text;
-            mineDataEntity.Submitter = cboSubmitter.Text;
+            _mineDataEntity.WorkStyle = rbtn38.Checked ? Const_MS.WORK_TIME_38 : Const_MS.WORK_TIME_46;
+            _mineDataEntity.WorkTime = cboWorkTime.Text;
+            _mineDataEntity.TeamName = cboTeamName.Text;
+            _mineDataEntity.Submitter = cboSubmitter.Text;
 
-            bool bResult = false;
+            var bResult = false;
             if (_ventilationInfoEntering.WindowState != FormWindowState.Minimized)         //提交通风特有信息
             {
                 bResult = submitV();
@@ -115,26 +124,26 @@ namespace LibPanels
         private bool submitV()
         {
             //共通实体转化为通风实体
-            viEntity = mineDataEntity.ChangeToVentilationInfoEntity();
+            _viEntity = _mineDataEntity.ChangeToVentilationInfoEntity();
             //是否有无风区域
-            viEntity.IsNoWindArea = _ventilationInfoEntering.VentilationEntity.IsNoWindArea;
+            _viEntity.IsNoWindArea = _ventilationInfoEntering.VentilationEntity.IsNoWindArea;
             //是否有微风区域
-            viEntity.IsLightWindArea = _ventilationInfoEntering.VentilationEntity.IsLightWindArea;
+            _viEntity.IsLightWindArea = _ventilationInfoEntering.VentilationEntity.IsLightWindArea;
             //是否有风流反向区域
-            viEntity.IsReturnWindArea = _ventilationInfoEntering.VentilationEntity.IsReturnWindArea;
+            _viEntity.IsReturnWindArea = _ventilationInfoEntering.VentilationEntity.IsReturnWindArea;
             //是否通风断面小于设计断面的2/3
-            viEntity.IsSmall = _ventilationInfoEntering.VentilationEntity.IsSmall;
+            _viEntity.IsSmall = _ventilationInfoEntering.VentilationEntity.IsSmall;
             //是否工作面风量低于计划风量，风速与《煤矿安全规程》规定不符
-            viEntity.IsFollowRule = _ventilationInfoEntering.VentilationEntity.IsFollowRule;
+            _viEntity.IsFollowRule = _ventilationInfoEntering.VentilationEntity.IsFollowRule;
 
-            viEntity.FaultageArea = _ventilationInfoEntering.VentilationEntity.FaultageArea;
+            _viEntity.FaultageArea = _ventilationInfoEntering.VentilationEntity.FaultageArea;
 
-            viEntity.AirFlow = _ventilationInfoEntering.VentilationEntity.AirFlow;
+            _viEntity.AirFlow = _ventilationInfoEntering.VentilationEntity.AirFlow;
 
             bool bResult = false;
             if (Text == new LibPanels(MineDataPanelName.Ventilation).panelFormName)
             {
-                viEntity.SaveAndFlush();
+                _viEntity.SaveAndFlush();
                 bResult = true;
                 Log.Debug("发送添加通风信息的Socket信息");
                 var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.SelectedTunnel.TunnelId,
@@ -144,7 +153,7 @@ namespace LibPanels
             }
             else if (Text == new LibPanels(MineDataPanelName.Ventilation_Change).panelFormName)
             {
-                viEntity.SaveAndFlush();
+                _viEntity.SaveAndFlush();
                 bResult = true;
                 Log.Debug("发送修改通风信息的Socket信息");
                 var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.SelectedTunnel.TunnelId,
@@ -161,7 +170,7 @@ namespace LibPanels
         private bool submitC()
         {
             //共通实体转化为煤层赋存实体
-            _ceEntity = mineDataEntity.changeToCoalExistenceEntity();
+            _ceEntity = _mineDataEntity.changeToCoalExistenceEntity();
             //是否层理紊乱
             _ceEntity.IsLevelDisorder = _coalExistenceInfoEntering.coalExistenceEntity.IsLevelDisorder;
             //煤厚变化
@@ -211,20 +220,20 @@ namespace LibPanels
         /// </summary>
         private bool submitG()
         {
-            gdEntity = mineDataEntity.ChangeToGasDataEntity();
-            gdEntity.PowerFailure = _gasData.GasDataEntity.PowerFailure;
-            gdEntity.DrillTimes = _gasData.GasDataEntity.DrillTimes;
-            gdEntity.GasTimes = _gasData.GasDataEntity.GasTimes;
-            gdEntity.TempDownTimes = _gasData.GasDataEntity.TempDownTimes;
-            gdEntity.CoalBangTimes = _gasData.GasDataEntity.CoalBangTimes;
-            gdEntity.CraterTimes = _gasData.GasDataEntity.CraterTimes;
-            gdEntity.StoperTimes = _gasData.GasDataEntity.StoperTimes;
+            _gdEntity = _mineDataEntity.ChangeToGasDataEntity();
+            _gdEntity.PowerFailure = _gasData.GasDataEntity.PowerFailure;
+            _gdEntity.DrillTimes = _gasData.GasDataEntity.DrillTimes;
+            _gdEntity.GasTimes = _gasData.GasDataEntity.GasTimes;
+            _gdEntity.TempDownTimes = _gasData.GasDataEntity.TempDownTimes;
+            _gdEntity.CoalBangTimes = _gasData.GasDataEntity.CoalBangTimes;
+            _gdEntity.CraterTimes = _gasData.GasDataEntity.CraterTimes;
+            _gdEntity.StoperTimes = _gasData.GasDataEntity.StoperTimes;
             //瓦斯浓度
-            gdEntity.GasThickness = _gasData.GasDataEntity.GasThickness;
+            _gdEntity.GasThickness = _gasData.GasDataEntity.GasThickness;
             bool bResult = false;
             if (Text == new LibPanels(MineDataPanelName.GasData).panelFormName)
             {
-                gdEntity.SaveAndFlush();
+                _gdEntity.SaveAndFlush();
                 bResult = true;
                 Log.Debug("发送添加瓦斯信息的Socket信息");
                 var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.SelectedTunnel.TunnelId,
@@ -238,7 +247,7 @@ namespace LibPanels
                 var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.SelectedTunnel.TunnelId,
                     GasData.TableName, OPERATION_TYPE.UPDATE, dtpDateTime.Value);
                 SocketUtil.SendMsg2Server(msg);
-                gdEntity.SaveAndFlush();
+                _gdEntity.SaveAndFlush();
                 bResult = true;
                 Log.Debug("发送修改瓦斯信息的Socket信息完成");
             }
@@ -250,27 +259,27 @@ namespace LibPanels
         /// </summary>
         private bool submitM()
         {
-            mEntity = mineDataEntity.changeToManagementEntity();
-            mEntity.IsGasErrorNotReport = _management.managementEntity.IsGasErrorNotReport;
-            mEntity.IsWfNotReport = _management.managementEntity.IsWfNotReport;
-            mEntity.IsStrgasNotDoWell = _management.managementEntity.IsStrgasNotDoWell;
-            mEntity.IsRwmanagementNotDoWell = _management.managementEntity.IsRwmanagementNotDoWell;
-            mEntity.IsVfBrokenByPeople = _management.managementEntity.IsVfBrokenByPeople;
-            mEntity.IsElementPlaceNotGood = _management.managementEntity.IsElementPlaceNotGood;
-            mEntity.IsReporterFalseData = _management.managementEntity.IsReporterFalseData;
-            mEntity.IsDrillWrongBuild = _management.managementEntity.IsDrillWrongBuild;
-            mEntity.IsDrillNotDoWell = _management.managementEntity.IsDrillNotDoWell;
-            mEntity.IsOpNotDoWell = _management.managementEntity.IsOpNotDoWell;
-            mEntity.IsOpErrorNotReport = _management.managementEntity.IsOpErrorNotReport;
-            mEntity.IsPartWindSwitchError = _management.managementEntity.IsPartWindSwitchError;
-            mEntity.IsSafeCtrlUninstall = _management.managementEntity.IsSafeCtrlUninstall;
-            mEntity.IsCtrlStop = _management.managementEntity.IsCtrlStop;
-            mEntity.IsGasNotDowWell = _management.managementEntity.IsGasNotDowWell;
-            mEntity.IsMineNoChecker = _management.managementEntity.IsMineNoChecker;
+            _mEntity = _mineDataEntity.changeToManagementEntity();
+            _mEntity.IsGasErrorNotReport = _management.managementEntity.IsGasErrorNotReport;
+            _mEntity.IsWfNotReport = _management.managementEntity.IsWfNotReport;
+            _mEntity.IsStrgasNotDoWell = _management.managementEntity.IsStrgasNotDoWell;
+            _mEntity.IsRwmanagementNotDoWell = _management.managementEntity.IsRwmanagementNotDoWell;
+            _mEntity.IsVfBrokenByPeople = _management.managementEntity.IsVfBrokenByPeople;
+            _mEntity.IsElementPlaceNotGood = _management.managementEntity.IsElementPlaceNotGood;
+            _mEntity.IsReporterFalseData = _management.managementEntity.IsReporterFalseData;
+            _mEntity.IsDrillWrongBuild = _management.managementEntity.IsDrillWrongBuild;
+            _mEntity.IsDrillNotDoWell = _management.managementEntity.IsDrillNotDoWell;
+            _mEntity.IsOpNotDoWell = _management.managementEntity.IsOpNotDoWell;
+            _mEntity.IsOpErrorNotReport = _management.managementEntity.IsOpErrorNotReport;
+            _mEntity.IsPartWindSwitchError = _management.managementEntity.IsPartWindSwitchError;
+            _mEntity.IsSafeCtrlUninstall = _management.managementEntity.IsSafeCtrlUninstall;
+            _mEntity.IsCtrlStop = _management.managementEntity.IsCtrlStop;
+            _mEntity.IsGasNotDowWell = _management.managementEntity.IsGasNotDowWell;
+            _mEntity.IsMineNoChecker = _management.managementEntity.IsMineNoChecker;
             bool bResult = false;
             if (Text == new LibPanels(MineDataPanelName.Management).panelFormName)
             {
-                mEntity.SaveAndFlush();
+                _mEntity.SaveAndFlush();
                 bResult = true;
                 Log.Debug("发送添加管理信息的Socket信息");
                 var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.SelectedTunnel.TunnelId,
@@ -280,11 +289,11 @@ namespace LibPanels
             }
             else if (Text == new LibPanels(MineDataPanelName.Management_Change).panelFormName)
             {
-                mEntity.SaveAndFlush();
+                _mEntity.SaveAndFlush();
                 bResult = true;
                 Log.Debug("发送修改管理信息的Socket信息");
                 var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.SelectedTunnel.TunnelId,
-                    Management.TableName, OPERATION_TYPE.UPDATE, mEntity.Datetime);
+                    Management.TableName, OPERATION_TYPE.UPDATE, _mEntity.Datetime);
                 SocketUtil.SendMsg2Server(msg);
                 Log.Debug("发送修改管理信息的Socket信息完成");
             }
@@ -297,7 +306,7 @@ namespace LibPanels
         /// <returns></returns>
         private bool submitGeologicStructure()
         {
-            _geologicStructureEntity = mineDataEntity.changeToGeologicStructureEntity();
+            _geologicStructureEntity = _mineDataEntity.changeToGeologicStructureEntity();
             _geologicStructureEntity.NoPlanStructure = _geologicStructure.geoligicStructureEntity.NoPlanStructure;
             _geologicStructureEntity.PassedStructureRuleInvalid =
                 _geologicStructure.geoligicStructureEntity.PassedStructureRuleInvalid;
@@ -337,7 +346,7 @@ namespace LibPanels
         ///     验证
         /// </summary>
         /// <returns></returns>
-        private bool check()
+        private bool Check()
         {
             // 判断巷道信息是否选择
             //矿井名称
@@ -349,7 +358,7 @@ namespace LibPanels
             //坐标X是否为数字
             if (txtCoordinateX.Text != "")
             {
-                if (!Check.IsNumeric(txtCoordinateX, "坐标X"))
+                if (!LibCommon.Check.IsNumeric(txtCoordinateX, "坐标X"))
                 {
                     return false;
                 }
@@ -357,7 +366,7 @@ namespace LibPanels
             //坐标Y是否为数字
             if (txtCoordinateY.Text != "")
             {
-                if (!Check.IsNumeric(txtCoordinateY, "坐标Y"))
+                if (!LibCommon.Check.IsNumeric(txtCoordinateY, "坐标Y"))
                 {
                     return false;
                 }
@@ -365,7 +374,7 @@ namespace LibPanels
             //坐标Z是否为数字
             if (txtCoordinateY.Text != "")
             {
-                if (!Check.IsNumeric(txtCoordinateY, "坐标Y"))
+                if (!LibCommon.Check.IsNumeric(txtCoordinateY, "坐标Y"))
                 {
                     return false;
                 }
@@ -449,9 +458,13 @@ namespace LibPanels
             panel2.Controls.Add(_management);
             panel2.Controls.Add(_geologicStructure);
 
+            if (Tunnel != null) selectTunnelSimple1.SetTunnel(Tunnel);
+            if (Team != null) cboTeamName.SelectedText = Team.TeamName;
+            if (!String.IsNullOrWhiteSpace(Submitter)) cboSubmitter.Text = Submitter;
+
             if (Text == new LibPanels(MineDataPanelName.Ventilation_Change).panelFormName)
             {
-                viEntity = (Ventilation)_obj;
+                _viEntity = (Ventilation)_obj;
             }
             if (Text == new LibPanels(MineDataPanelName.CoalExistence_Change).panelFormName)
             {
@@ -459,11 +472,11 @@ namespace LibPanels
             }
             if (Text == new LibPanels(MineDataPanelName.GasData_Change).panelFormName)
             {
-                gdEntity = (GasData)_obj;
+                _gdEntity = (GasData)_obj;
             }
             if (Text == new LibPanels(MineDataPanelName.Management_Change).panelFormName)
             {
-                mEntity = (Management)_obj;
+                _mEntity = (Management)_obj;
             }
             if (Text == new LibPanels(MineDataPanelName.GeologicStructure_Change).panelFormName)
             {
@@ -475,7 +488,7 @@ namespace LibPanels
             //通风
             if (Text == new LibPanels(MineDataPanelName.Ventilation).panelFormName)
             {
-                Height = formHeight + _ventilationInfoEntering.Height;
+                Height = FormHeight + _ventilationInfoEntering.Height;
                 _ventilationInfoEntering.WindowState = FormWindowState.Maximized;
                 _ventilationInfoEntering.Show();
                 _ventilationInfoEntering.Activate();
@@ -483,7 +496,7 @@ namespace LibPanels
             //煤层赋存
             if (Text == new LibPanels(MineDataPanelName.CoalExistence).panelFormName)
             {
-                Height = formHeight + _coalExistenceInfoEntering.Height;
+                Height = FormHeight + _coalExistenceInfoEntering.Height;
                 _coalExistenceInfoEntering.WindowState = FormWindowState.Maximized;
                 _coalExistenceInfoEntering.Show();
                 _coalExistenceInfoEntering.Activate();
@@ -491,7 +504,7 @@ namespace LibPanels
             //瓦斯
             if (Text == new LibPanels(MineDataPanelName.GasData).panelFormName)
             {
-                Height = formHeight + _gasData.Height;
+                Height = FormHeight + _gasData.Height;
                 _gasData.WindowState = FormWindowState.Maximized;
                 _gasData.Show();
                 _gasData.Activate();
@@ -499,7 +512,7 @@ namespace LibPanels
             //管理
             if (Text == new LibPanels(MineDataPanelName.Management).panelFormName)
             {
-                Height = formHeight + _management.Height;
+                Height = FormHeight + _management.Height;
                 _management.WindowState = FormWindowState.Maximized;
                 _management.Show();
                 _management.Activate();
@@ -507,7 +520,7 @@ namespace LibPanels
             //地质构造
             if (Text == new LibPanels(MineDataPanelName.GeologicStructure).panelFormName)
             {
-                Height = formHeight + _geologicStructure.Height;
+                Height = FormHeight + _geologicStructure.Height;
                 _geologicStructure.WindowState = FormWindowState.Maximized;
                 _geologicStructure.Show();
                 _geologicStructure.Activate();
@@ -516,12 +529,12 @@ namespace LibPanels
             //绑定通风修改初始信息
             if (Text == new LibPanels(MineDataPanelName.Ventilation_Change).panelFormName)
             {
-                Height = formHeight + _ventilationInfoEntering.Height;
-                ChangeMineCommonValue(viEntity);
+                Height = FormHeight + _ventilationInfoEntering.Height;
+                ChangeMineCommonValue(_viEntity);
 
-                _ventilationInfoEntering.VentilationEntity = viEntity;
+                _ventilationInfoEntering.VentilationEntity = _viEntity;
 
-                _ventilationInfoEntering.bindDefaultValue(viEntity);
+                _ventilationInfoEntering.bindDefaultValue(_viEntity);
 
                 _ventilationInfoEntering.WindowState = FormWindowState.Maximized;
                 _ventilationInfoEntering.Show();
@@ -531,7 +544,7 @@ namespace LibPanels
             //绑定煤层赋存修改初始信息
             if (Text == new LibPanels(MineDataPanelName.CoalExistence_Change).panelFormName)
             {
-                Height = formHeight + _coalExistenceInfoEntering.Height;
+                Height = FormHeight + _coalExistenceInfoEntering.Height;
                 ChangeMineCommonValue(_ceEntity);
 
                 _coalExistenceInfoEntering.coalExistenceEntity = _ceEntity;
@@ -546,11 +559,11 @@ namespace LibPanels
             //绑定瓦斯修改初始信息
             if (Text == new LibPanels(MineDataPanelName.GasData_Change).panelFormName)
             {
-                Height = formHeight + _gasData.Height;
-                ChangeMineCommonValue(gdEntity);
+                Height = FormHeight + _gasData.Height;
+                ChangeMineCommonValue(_gdEntity);
 
-                _gasData.GasDataEntity = gdEntity;
-                _gasData.bindDefaultValue(gdEntity);
+                _gasData.GasDataEntity = _gdEntity;
+                _gasData.bindDefaultValue(_gdEntity);
 
                 _gasData.WindowState = FormWindowState.Maximized;
                 _gasData.Show();
@@ -559,12 +572,12 @@ namespace LibPanels
             //绑定管理修改初始信息
             if (Text == new LibPanels(MineDataPanelName.Management_Change).panelFormName)
             {
-                Height = formHeight + _management.Height;
-                ChangeMineCommonValue(mEntity);
+                Height = FormHeight + _management.Height;
+                ChangeMineCommonValue(_mEntity);
 
-                _management.managementEntity = mEntity;
+                _management.managementEntity = _mEntity;
 
-                _management.bindDefaultValue(mEntity);
+                _management.bindDefaultValue(_mEntity);
 
                 _management.WindowState = FormWindowState.Maximized;
                 _management.Show();
@@ -573,7 +586,7 @@ namespace LibPanels
             //绑定地质构造修改初始数据
             if (Text == new LibPanels(MineDataPanelName.GeologicStructure_Change).panelFormName)
             {
-                Height = formHeight + _management.Height;
+                Height = FormHeight + _management.Height;
                 ChangeMineCommonValue(_geologicStructureEntity);
 
                 _geologicStructure.geoligicStructureEntity = _geologicStructureEntity;
@@ -591,23 +604,23 @@ namespace LibPanels
         /// <param name="obj"></param>
         private void ChangeMineCommonValue(object obj)
         {
-            mineDataEntity = (LibEntity.MineData)obj;
-            txtCoordinateX.Text = mineDataEntity.CoordinateX.ToString(CultureInfo.InvariantCulture);
-            txtCoordinateY.Text = mineDataEntity.CoordinateY.ToString(CultureInfo.InvariantCulture);
-            txtCoordinateZ.Text = mineDataEntity.CoordinateZ.ToString(CultureInfo.InvariantCulture);
+            _mineDataEntity = (MineData)obj;
+            txtCoordinateX.Text = _mineDataEntity.CoordinateX.ToString(CultureInfo.InvariantCulture);
+            txtCoordinateY.Text = _mineDataEntity.CoordinateY.ToString(CultureInfo.InvariantCulture);
+            txtCoordinateZ.Text = _mineDataEntity.CoordinateZ.ToString(CultureInfo.InvariantCulture);
 
-            if (mineDataEntity.WorkStyle == Const_MS.WORK_TIME_38)
+            if (_mineDataEntity.WorkStyle == Const_MS.WORK_TIME_38)
             {
                 rbtn38.Checked = true;
             }
-            if (mineDataEntity.WorkStyle == Const_MS.WORK_TIME_46)
+            if (_mineDataEntity.WorkStyle == Const_MS.WORK_TIME_46)
             {
                 rbtn46.Checked = true;
             }
-            cboWorkTime.Text = mineDataEntity.WorkTime;
-            cboTeamName.Text = mineDataEntity.TeamName;
-            cboSubmitter.Text = mineDataEntity.Submitter;
-            dtpDateTime.Value = mineDataEntity.Datetime;
+            cboWorkTime.Text = _mineDataEntity.WorkTime;
+            cboTeamName.Text = _mineDataEntity.TeamName;
+            cboSubmitter.Text = _mineDataEntity.Submitter;
+            dtpDateTime.Value = _mineDataEntity.Datetime;
         }
 
         /// <summary>

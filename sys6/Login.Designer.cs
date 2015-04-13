@@ -81,7 +81,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(784, 561);
-            this.ControlBox = false;
             this.Controls.Add(this.tbCode);
             this.Controls.Add(this.tbPeople);
             this.Controls.Add(this.btnCancel);

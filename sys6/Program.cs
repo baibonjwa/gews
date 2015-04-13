@@ -18,12 +18,17 @@ namespace UnderTerminal
         private static void Main()
         {
             Thread.CurrentThread.CurrentUICulture =
-              new CultureInfo("zh-Hans");
+               new CultureInfo("zh-Hans");
+
             // The following line provides localization for data formats. 
             Thread.CurrentThread.CurrentCulture =
                 new CultureInfo("zh-Hans");
+
+
             IConfigurationSource config = new XmlConfigurationSource("ARConfig.xml");
+
             var asm = Assembly.Load("LibEntity");
+
             ActiveRecordStarter.Initialize(asm, config);
 
             Application.EnableVisualStyles();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 using System.Windows.Forms;
 using System.Xml;
 using LibEntity;
@@ -19,13 +20,10 @@ namespace LibCommonForm
         public void SetTunnel(Tunnel tunnel)
         {
             SelectedTunnel = tunnel;
-            foreach (Tunnel i in cbxTunnel.Items)
+            foreach (Tunnel i in from Tunnel i in cbxTunnel.Items where i.TunnelId == tunnel.TunnelId select i)
             {
-                if (i.TunnelId == tunnel.TunnelId)
-                {
-                    cbxTunnel.SelectedItem = i;
-                    return;
-                }
+                cbxTunnel.SelectedItem = i;
+                return;
             }
             cbxTunnel.Items.Add(tunnel);
             cbxTunnel.SelectedItem = tunnel;

@@ -67,7 +67,7 @@ namespace LibPanels
         private void tsBtnModify_Click(object sender, EventArgs e)
         {
 
-            var m = new MineData() { Text = new LibPanels(MineDataPanelName.CoalExistence_Change).panelFormName };
+            var m = new MineDataSimple() { Text = new LibPanels(MineDataPanelName.CoalExistence_Change).panelFormName };
 
             if (DialogResult.OK == m.ShowDialog())
             {

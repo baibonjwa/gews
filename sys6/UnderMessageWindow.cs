@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using LibCommon;
+using LibEntity;
 using LibPanels;
 
 namespace UnderTerminal
@@ -10,6 +11,9 @@ namespace UnderTerminal
     public partial class UnderMessageWindow : Form
     {
         public CurveMonitor Cm; // 监控曲线
+        public Team Team { get; set; }
+        public String Submitter { get; set; }
+
 
         public UnderMessageWindow()
         {
@@ -35,7 +39,7 @@ namespace UnderTerminal
                 return;
             }
 
-            var m = new MineDataSimple(selectTunnelSimple1.SelectedTunnel)
+            var m = new MineDataSimple(selectTunnelSimple1.SelectedTunnel, Team, Submitter)
             {
                 Text = new LibPanels.LibPanels(MineDataPanelName.Management).panelFormName
             };
@@ -50,7 +54,7 @@ namespace UnderTerminal
                 return;
             }
 
-            var m = new MineDataSimple(selectTunnelSimple1.SelectedTunnel)
+            var m = new MineDataSimple(selectTunnelSimple1.SelectedTunnel, Team, Submitter)
             {
                 Text = new LibPanels.LibPanels(MineDataPanelName.CoalExistence).panelFormName
             };
@@ -65,7 +69,7 @@ namespace UnderTerminal
                 return;
             }
 
-            var m = new MineDataSimple(selectTunnelSimple1.SelectedTunnel)
+            var m = new MineDataSimple(selectTunnelSimple1.SelectedTunnel, Team, Submitter)
             {
                 Text = new LibPanels.LibPanels(MineDataPanelName.GasData).panelFormName
             };
@@ -80,7 +84,7 @@ namespace UnderTerminal
                 return;
             }
 
-            var m = new MineDataSimple(selectTunnelSimple1.SelectedTunnel)
+            var m = new MineDataSimple(selectTunnelSimple1.SelectedTunnel, Team, Submitter)
             {
                 Text = new LibPanels.LibPanels(MineDataPanelName.Ventilation).panelFormName
             };
@@ -107,7 +111,7 @@ namespace UnderTerminal
                 return;
             }
 
-            var m = new MineDataSimple(selectTunnelSimple1.SelectedTunnel)
+            var m = new MineDataSimple(selectTunnelSimple1.SelectedTunnel, Team, Submitter)
             {
                 Text = new LibPanels.LibPanels(MineDataPanelName.GeologicStructure).panelFormName
             };

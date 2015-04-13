@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 using System.Windows.Forms;
 using System.Xml;
 using LibEntity;
@@ -27,12 +28,8 @@ namespace LibCommonForm
                     var nodes = doc.DocumentElement.SelectNodes("/Workingfaces/Workingface");
 
                     if (nodes != null)
-                        foreach (XmlNode node in nodes)
+                        foreach (var workingface in from XmlNode node in nodes select node.SelectSingleNode("ID") into selectSingleNode where selectSingleNode != null select selectSingleNode.InnerText into id select WorkingFace.Find(id))
                         {
-                            var selectSingleNode = node.SelectSingleNode("ID");
-                            if (selectSingleNode == null) continue;
-                            string id = selectSingleNode.InnerText;
-                            var workingface = WorkingFace.Find(id);
                             cbxWorkingface.Items.Add(workingface);
                         }
                 }

@@ -1054,6 +1054,7 @@
             this.miniJUEJINJZ.Caption = "掘进巷道校正";
             this.miniJUEJINJZ.Id = 180;
             this.miniJUEJINJZ.Name = "miniJUEJINJZ";
+            this.miniJUEJINJZ.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.miniJUEJINJZ.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.miniJUEJINJZ_ItemClick);
             // 
             // miniHCHDJZ

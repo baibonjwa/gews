@@ -8,21 +8,13 @@ namespace UnderTerminal
 {
     public partial class SetDefaultValue : Form
     {
-        private readonly UnderMessageWindow superForm;
+        private readonly UnderMessageWindow _superForm;
 
         public SetDefaultValue(UnderMessageWindow form)
         {
             InitializeComponent();
-            superForm = form;
-            addInfo();
-        }
-
-        /// <summary>
-        ///     添加时初始化
-        /// </summary>
-        private void addInfo()
-        {
-            bindTeamInfo();
+            _superForm = form;
+            DataBindUtil.LoadTeam(cboTeamName);
             DataBindUtil.LoadWorkTime(cboWorkTime,
                 rbtn38.Checked ? Const_MS.WORK_GROUP_ID_38 : Const_MS.WORK_GROUP_ID_46);
             if (WorkingTimeDefault.FindFirst().DefaultWorkTimeGroupId == Const_MS.WORK_GROUP_ID_38)
@@ -37,18 +29,6 @@ namespace UnderTerminal
                 DataBindUtil.JudgeWorkTimeNow(rbtn38.Checked ? Const_MS.WORK_TIME_38 : Const_MS.WORK_TIME_46);
         }
 
-        /// <summary>
-        ///     绑定队别名称
-        /// </summary>
-        private void bindTeamInfo()
-        {
-            cboTeamName.Items.Clear();
-            var team = Team.FindAll();
-            foreach (var t in team)
-            {
-                cboTeamName.Items.Add(t.TeamName);
-            }
-        }
 
         private void rbtn38_CheckedChanged(object sender, EventArgs e)
         {
@@ -66,16 +46,16 @@ namespace UnderTerminal
         /// <summary>
         ///     返回班次名
         /// </summary>
-        /// <param name="workStyle">工作制式名</param>
         /// <returns>班次名</returns>
         private void btnOK_Click(object sender, EventArgs e)
         {
-            superForm.DefaultWorkTime = cboWorkTime.SelectedItem != null ? cboWorkTime.SelectedItem.ToString() : "";
-            superForm.DefaultWorkStyle = rbtn38.Checked ? rbtn38.Text : rbtn46.Text;
-            superForm.DefaultTeamName = cboTeamName.SelectedItem != null ? cboTeamName.SelectedItem.ToString() : "";
-            superForm.DefaultSubmitter = cboSubmitter.SelectedItem != null ? cboSubmitter.SelectedItem.ToString() : "";
-            superForm.RefreshDefaultValue();
-
+            _superForm.DefaultWorkTime = cboWorkTime.SelectedItem != null ? ((WorkingTime)cboWorkTime.SelectedItem).WorkTimeName : "";
+            _superForm.DefaultWorkStyle = rbtn38.Checked ? rbtn38.Text : rbtn46.Text;
+            _superForm.DefaultTeamName = cboTeamName.SelectedItem != null ? ((Team)cboTeamName.SelectedItem).TeamName : "";
+            _superForm.DefaultSubmitter = cboSubmitter.Text;
+            _superForm.Team = (Team)cboTeamName.SelectedItem;
+            _superForm.Submitter = cboSubmitter.Text;
+            _superForm.RefreshDefaultValue();
             Close();
         }
     }

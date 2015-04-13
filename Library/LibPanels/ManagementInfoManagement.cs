@@ -46,7 +46,7 @@ namespace LibPanels
                 Alert.alert("请选择要修改的信息");
                 return;
             }
-            var m = new MineData(bandedGridView1.GetFocusedRow())
+            var m = new MineDataSimple(bandedGridView1.GetFocusedRow())
             {
                 Text = new LibPanels(MineDataPanelName.Management_Change).panelFormName
             };

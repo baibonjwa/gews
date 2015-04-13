@@ -249,12 +249,6 @@
     <Compile Include="ManagementInfoManagement.Designer.cs">
       <DependentUpon>ManagementInfoManagement.cs</DependentUpon>
     </Compile>
-    <Compile Include="MineData.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MineData.Designer.cs">
-      <DependentUpon>MineData.cs</DependentUpon>
-    </Compile>
     <Compile Include="MineDataSimple.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -342,9 +336,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ManagementInfoManagement.resx">
       <DependentUpon>ManagementInfoManagement.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MineData.resx">
-      <DependentUpon>MineData.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MineDataSimple.resx">
       <DependentUpon>MineDataSimple.cs</DependentUpon>

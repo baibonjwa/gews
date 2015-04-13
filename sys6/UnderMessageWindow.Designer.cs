@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UnderMessageWindow));
             this.btnUnderCoal = new System.Windows.Forms.Button();
             this.btnUnderGas = new System.Windows.Forms.Button();
@@ -41,7 +40,7 @@
             this.btnManagement = new System.Windows.Forms.Button();
             this.btnOpenReport = new System.Windows.Forms.Button();
             this.btnMonitorCurve = new System.Windows.Forms.Button();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timer1 = new System.Windows.Forms.Timer();
             this.btnSetDefaultValue = new System.Windows.Forms.Button();
             this.lbWorkStyle = new System.Windows.Forms.Label();
             this.lbWorkTime = new System.Windows.Forms.Label();
@@ -192,6 +191,7 @@
             this.btnMonitorCurve.TabIndex = 4;
             this.btnMonitorCurve.Text = "监控曲线";
             this.btnMonitorCurve.UseVisualStyleBackColor = false;
+            this.btnMonitorCurve.Visible = false;
             this.btnMonitorCurve.Click += new System.EventHandler(this.btnMonitorCurve_Click);
             // 
             // timer1

@@ -65,8 +65,10 @@ namespace LibPanels
         /// <param name="e"></param>
         private void tsBtnModify_Click(object sender, EventArgs e)
         {
-            var m = new MineData(bandedGridView1.GetFocusedRow());
-            m.Text = new LibPanels(MineDataPanelName.GeologicStructure_Change).panelFormName;
+            var m = new MineDataSimple(bandedGridView1.GetFocusedRow())
+            {
+                Text = new LibPanels(MineDataPanelName.GeologicStructure_Change).panelFormName
+            };
             if (DialogResult.OK == m.ShowDialog())
             {
                 RefreshData();
