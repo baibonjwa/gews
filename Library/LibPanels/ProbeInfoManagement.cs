@@ -155,7 +155,8 @@ namespace LibPanels
         private void tsBtnModify_Click(object sender, EventArgs e)
         {
             var probe = (Probe)bandedGridView1.GetFocusedRow();
-            var probeInfoEntering = new ProbeInfoEntering(probe.ProbeId);
+            if (probe == null) return;
+            var probeInfoEntering = new ProbeInfoEntering(probe);
             if (probeInfoEntering.ShowDialog() == DialogResult.OK)
             {
                 RefreshData();

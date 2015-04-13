@@ -191,6 +191,18 @@ namespace LibBusiness
             }
         }
 
+        public static void LoadProbe(ListControl lb, int tunnelId, int probeTypeId, String selectedText = "")
+        {
+            var probes = Probe.FindAllByTunnelIdAndProbeTypeId(tunnelId, probeTypeId);
+            if (probes != null)
+            {
+                DataBindListControl(lb, probes, "ProbeName",
+                   "ProbeId", selectedText);
+            }
+
+
+        }
+
 
 
 

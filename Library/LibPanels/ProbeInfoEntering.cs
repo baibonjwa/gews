@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Forms;
+using LibBusiness;
 using LibCommon;
 using LibEntity;
 using LibSocket;
@@ -9,15 +10,7 @@ namespace LibPanels
 {
     public partial class ProbeInfoEntering : Form
     {
-        /** 主键  **/
-        /** 业务逻辑类型：添加、修改  **/
-        private readonly string _bllType = "add";
-        private readonly string _iPk;
-
-        private readonly int _oldTunnelId;
-
-        private readonly Probe _probe;
-
+        private Probe Probe { get; set; }
         /// <summary>
         ///     构造方法
         /// </summary>
@@ -35,48 +28,51 @@ namespace LibPanels
         /// <summary>
         ///     带参数的构造方法
         /// </summary>
-        /// <param name="strPrimaryKey">主键</param>
-        public ProbeInfoEntering(string strPrimaryKey)
+        /// <param name="probe"></param>
+        public ProbeInfoEntering(Probe probe)
         {
             InitializeComponent();
-            _oldTunnelId = Convert.ToInt32(strPrimaryKey);
-            _iPk = strPrimaryKey;
-
-            // 设置窗体默认属性
+            Probe = probe;
             FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_GE.UPDATE_PROBE_INFO);
-
-            // 设置业务类型
-            _bllType = "update";
-
-            _probe = Probe.Find(strPrimaryKey);
-            // 调用选择巷道控件时需要调用的方法
-            //this.selectTunnelUserControl1.setCurSelectedID(_intArr);
         }
 
 
         private void selectTunnelSimple1_Load(object sender, EventArgs e)
         {
-            // 加载探头类型信息
-            LoadProbeTypeInfo();
+            DataBindUtil.LoadProbeType(cboProbeType);
+            if (Probe == null) return;
+            // 探头编号
+            txtProbeId.Text = Probe.ProbeId;
+            // 探头编号不可修改
+            txtProbeId.Enabled = false;
 
-            // 设置探头信息
-            if (_bllType == "update")
-                SetProbeInfo();
-        }
+            // 探头名称
+            cmbProbeName.Text = Probe.ProbeName;
 
-        /// <summary>
-        ///     加载探头类型信息
-        /// </summary>
-        private void LoadProbeTypeInfo()
-        {
-            ProbeType[] preoTypes = ProbeType.FindAll();
-            if (preoTypes.Length > 0)
+            // 探头类型
+            cboProbeType.SelectedValue = Probe.ProbeType != null ? Probe.ProbeType.ProbeTypeId : 0;
+
+            // 是否自动位移
+            if (Probe.IsMove == 1)
             {
-                cboProbeType.DataSource = preoTypes;
-                cboProbeType.DisplayMember = "ProbeTypeName";
-                cboProbeType.ValueMember = "ProbeTypeId";
+                rbtnYes.Checked = true;
 
-                cboProbeType.SelectedIndex = -1;
+                // 距迎头距离
+                txtM.Text = Probe.FarFromFrontal.ToString(CultureInfo.InvariantCulture);
+                txtM.Enabled = true;
+            }
+            else
+            {
+                rbtnNo.Checked = true;
+            }
+
+            // 探头描述
+            txtProbeDescription.Text = Probe.ProbeDescription;
+
+            // 所在巷道绑定
+            if (Probe.Tunnel != null)
+            {
+                selectTunnelSimple1.SetTunnel(Probe.Tunnel);
             }
         }
 
@@ -92,16 +88,13 @@ namespace LibPanels
                 return false;
             }
 
-            // 只有在添加窗口才做探头编号是否存在的判断
-            if (_bllType == "add")
-            {
-                // 判断探头编号是否存在
-                if (!LibCommon.Check.isExist(txtProbeId, Const_GE.PROBE_ID,
-                    Probe.Exists(txtProbeId.Text.Trim())))
-                {
-                    return false;
-                }
-            }
+            // 判断探头编号是否存在
+            //if (!LibCommon.Check.isExist(txtProbeId, Const_GE.PROBE_ID,
+            //    Probe.Exists(txtProbeId.Text.Trim())))
+            //{
+            //    return false;
+            //}
+
 
             // 判断探头名称是否录入
             if (!LibCommon.Check.isEmpty(cmbProbeName, Const_GE.PROBE_NAME))
@@ -152,8 +145,8 @@ namespace LibPanels
             if (!Alert.confirm("该巷道下已经存在" + cboProbeType.Text + "探头，确认提交将重新设定" + cboProbeType.Text + "探头。"))
                 return false;
             // 重置探头类型
-            _probe.ProbeType = null;
-            _probe.SaveAndFlush();
+            Probe.ProbeType = null;
+            Probe.SaveAndFlush();
             return true;
 
             // 验证通过
@@ -171,63 +164,37 @@ namespace LibPanels
 
             // 创建探头管理实体
 
-            _probe.ProbeName = cmbProbeName.Text.Trim();
-            _probe.ProbeType = ProbeType.Find(cboProbeType.SelectedValue);
+            Probe.ProbeName = cmbProbeName.Text.Trim();
+            Probe.ProbeType = ProbeType.Find(cboProbeType.SelectedValue);
 
 
             if (rbtnYes.Checked)
             {
                 // 是否自动位移
-                _probe.IsMove = 1;
+                Probe.IsMove = 1;
                 // 距迎头距离
                 double dFarFromFrontal;
                 double.TryParse(txtM.Text.Trim(), out dFarFromFrontal);
-                _probe.FarFromFrontal = dFarFromFrontal;
+                Probe.FarFromFrontal = dFarFromFrontal;
             }
             else
             {
                 // 是否自动位移
-                _probe.IsMove = 0;
+                Probe.IsMove = 0;
             }
 
             // 巷道编号
-            _probe.Tunnel = selectTunnelSimple1.SelectedTunnel;
+            Probe.Tunnel = selectTunnelSimple1.SelectedTunnel;
 
             // 探头描述
-            _probe.ProbeDescription = txtProbeDescription.Text.Trim();
-            OPERATION_TYPE opType;
+            Probe.ProbeDescription = txtProbeDescription.Text.Trim();
+            Probe.Save();
 
-            if (_bllType == "add")
-            {
-                // 探头管理信息登录
-                _probe.Save();
-                opType = OPERATION_TYPE.ADD;
-            }
-            else
-            {
-                // 主键
-                _probe.ProbeId = _iPk;
-                // 探头管理信息修改
-                _probe.Save();
-                opType = OPERATION_TYPE.UPDATE;
-            }
-            //通知服务器探头数据已更新
-            // Added by jhou, 2014/3/24
-            WorkingFace workingfaceEnt =
-               Tunnel.Find(_probe.Tunnel.TunnelId).WorkingFace;
-
-            if (_oldTunnelId != 0)
-            {
-                var msgUpdate = new UpdateWarningDataMsg(workingfaceEnt.WorkingFaceId,
-                    _probe.Tunnel.TunnelId,
-                    Probe.TableName, opType, DateTime.Now);
-                SocketUtil.SendMsg2Server(msgUpdate);
-            }
-
-            var msg = new UpdateWarningDataMsg(workingfaceEnt.WorkingFaceId,
-                _probe.Tunnel.TunnelId,
-                Probe.TableName, opType, DateTime.Now);
+            var msg = new UpdateWarningDataMsg(Probe.Tunnel.WorkingFace.WorkingFaceId,
+               Probe.Tunnel.TunnelId,
+                Probe.TableName, OPERATION_TYPE.UPDATE, DateTime.Now);
             SocketUtil.SendMsg2Server(msg);
+
         }
 
         /// <summary>
@@ -239,49 +206,6 @@ namespace LibPanels
         {
             // 关闭窗口
 
-        }
-
-        /// <summary>
-        ///     设置探头信息
-        /// </summary>
-        private void SetProbeInfo()
-        {
-            // 探头信息
-            if (_probe == null) return;
-            // 探头编号
-            txtProbeId.Text = _probe.ProbeId;
-            // 探头编号不可修改
-            txtProbeId.Enabled = false;
-
-            // 探头名称
-            cmbProbeName.Text = _probe.ProbeName;
-
-            // 探头类型
-            cboProbeType.SelectedValue = _probe.ProbeType != null ? _probe.ProbeType.ProbeTypeId : 0;
-
-            // 是否自动位移
-            if (_probe.IsMove == 1)
-            {
-                rbtnYes.Checked = true;
-
-                // 距迎头距离
-                txtM.Text = _probe.FarFromFrontal.ToString(CultureInfo.InvariantCulture);
-                txtM.Enabled = true;
-            }
-            else
-            {
-                rbtnNo.Checked = true;
-            }
-
-            // 探头描述
-            txtProbeDescription.Text = _probe.ProbeDescription;
-
-            // 所在巷道绑定
-            if (_probe.Tunnel != null)
-            {
-                //if(
-                selectTunnelSimple1.SetTunnel(_probe.Tunnel);
-            }
         }
 
         /// <summary>

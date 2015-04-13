@@ -33,7 +33,7 @@ namespace sys1
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainFormGe));
             this.ss_GE = new System.Windows.Forms.StatusStrip();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -96,9 +96,6 @@ namespace sys1
             this.mniUserLoginInfoManaFloat = new DevExpress.XtraBars.BarButtonItem();
             this.barSubItem4 = new DevExpress.XtraBars.BarSubItem();
             this.bbiExit = new DevExpress.XtraBars.BarButtonItem();
-            this.barSubItem5 = new DevExpress.XtraBars.BarSubItem();
-            this.bbiBadDataEdit = new DevExpress.XtraBars.BarButtonItem();
-            this.mniSystemSet = new DevExpress.XtraBars.Bar();
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
@@ -131,7 +128,7 @@ namespace sys1
             this.groupBox1.Controls.Add(this.dgvData);
             this.groupBox1.Location = new System.Drawing.Point(15, 382);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(218, 150);
+            this.groupBox1.Size = new System.Drawing.Size(218, 181);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             // 
@@ -147,21 +144,21 @@ namespace sys1
             this.dgvData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this._Value,
             this._Time});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 9F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(31)))), ((int)(((byte)(53)))));
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvData.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Tahoma", 9F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(31)))), ((int)(((byte)(53)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvData.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvData.Location = new System.Drawing.Point(3, 17);
             this.dgvData.Name = "dgvData";
             this.dgvData.ReadOnly = true;
             this.dgvData.RowHeadersVisible = false;
             this.dgvData.RowTemplate.Height = 23;
-            this.dgvData.Size = new System.Drawing.Size(212, 130);
+            this.dgvData.Size = new System.Drawing.Size(212, 161);
             this.dgvData.TabIndex = 0;
             // 
             // _Value
@@ -224,6 +221,7 @@ namespace sys1
             // 
             // selectTunnelSimple1
             // 
+            this.selectTunnelSimple1.BackColor = System.Drawing.Color.Transparent;
             this.selectTunnelSimple1.Location = new System.Drawing.Point(7, 15);
             this.selectTunnelSimple1.Name = "selectTunnelSimple1";
             this.selectTunnelSimple1.SelectedTunnel = null;
@@ -411,45 +409,48 @@ namespace sys1
             this.panel1.Controls.Add(this.gbTunnel);
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 55);
+            this.panel1.Location = new System.Drawing.Point(0, 24);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1162, 558);
+            this.panel1.Size = new System.Drawing.Size(1162, 589);
             this.panel1.TabIndex = 2;
             // 
             // _ckbSetMarks3
             // 
             this._ckbSetMarks3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this._ckbSetMarks3.AutoSize = true;
+            this._ckbSetMarks3.BackColor = System.Drawing.Color.White;
             this._ckbSetMarks3.Location = new System.Drawing.Point(1050, 250);
             this._ckbSetMarks3.Name = "_ckbSetMarks3";
             this._ckbSetMarks3.Size = new System.Drawing.Size(96, 16);
             this._ckbSetMarks3.TabIndex = 27;
             this._ckbSetMarks3.Text = "显示数据标记";
-            this._ckbSetMarks3.UseVisualStyleBackColor = true;
+            this._ckbSetMarks3.UseVisualStyleBackColor = false;
             this._ckbSetMarks3.Click += new System.EventHandler(this._ckbSetMarks3_Click);
             // 
             // _ckbSetMarks2
             // 
             this._ckbSetMarks2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this._ckbSetMarks2.AutoSize = true;
+            this._ckbSetMarks2.BackColor = System.Drawing.Color.White;
             this._ckbSetMarks2.Location = new System.Drawing.Point(1050, 80);
             this._ckbSetMarks2.Name = "_ckbSetMarks2";
             this._ckbSetMarks2.Size = new System.Drawing.Size(96, 16);
             this._ckbSetMarks2.TabIndex = 27;
             this._ckbSetMarks2.Text = "显示数据标记";
-            this._ckbSetMarks2.UseVisualStyleBackColor = true;
+            this._ckbSetMarks2.UseVisualStyleBackColor = false;
             this._ckbSetMarks2.Click += new System.EventHandler(this._ckbSetMarks2_Click);
             // 
             // _ckbSetMarks1
             // 
             this._ckbSetMarks1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this._ckbSetMarks1.AutoSize = true;
+            this._ckbSetMarks1.BackColor = System.Drawing.Color.White;
             this._ckbSetMarks1.Location = new System.Drawing.Point(1050, 416);
             this._ckbSetMarks1.Name = "_ckbSetMarks1";
             this._ckbSetMarks1.Size = new System.Drawing.Size(96, 16);
             this._ckbSetMarks1.TabIndex = 27;
             this._ckbSetMarks1.Text = "显示数据标记";
-            this._ckbSetMarks1.UseVisualStyleBackColor = true;
+            this._ckbSetMarks1.UseVisualStyleBackColor = false;
             this._ckbSetMarks1.Click += new System.EventHandler(this._ckbSetMarks1_Click);
             // 
             // tChartN
@@ -1588,7 +1589,7 @@ namespace sys1
             this.tChartM.Panel.Shadow.Height = 0;
             this.tChartM.Panel.Shadow.Width = 0;
             this.tChartM.Series.Add(this.fastLine1);
-            this.tChartM.Size = new System.Drawing.Size(915, 122);
+            this.tChartM.Size = new System.Drawing.Size(915, 153);
             this.tChartM.TabIndex = 26;
             // 
             // 
@@ -1875,40 +1876,6 @@ namespace sys1
             this.bbiExit.Name = "bbiExit";
             this.bbiExit.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbiExit_ItemClick);
             // 
-            // barSubItem5
-            // 
-            this.barSubItem5.Caption = "编辑";
-            this.barSubItem5.Id = 43;
-            this.barSubItem5.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.bbiBadDataEdit)});
-            this.barSubItem5.Name = "barSubItem5";
-            // 
-            // bbiBadDataEdit
-            // 
-            this.bbiBadDataEdit.Caption = "智能识别";
-            this.bbiBadDataEdit.Id = 44;
-            this.bbiBadDataEdit.Name = "bbiBadDataEdit";
-            this.bbiBadDataEdit.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbiBadDataEdit_ItemClick);
-            // 
-            // mniSystemSet
-            // 
-            this.mniSystemSet.BarName = "Custom 2";
-            this.mniSystemSet.DockCol = 0;
-            this.mniSystemSet.DockRow = 1;
-            this.mniSystemSet.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
-            this.mniSystemSet.FloatLocation = new System.Drawing.Point(32, 220);
-            this.mniSystemSet.FloatSize = new System.Drawing.Size(507, 31);
-            this.mniSystemSet.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniDatabaseSetFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniUserInfoManaFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniDepartmentFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniUserLoginInfoManaFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniUserGroupInfoManaFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
-            this.mniSystemSet.OptionsBar.AllowQuickCustomization = false;
-            this.mniSystemSet.OptionsBar.AllowRename = true;
-            this.mniSystemSet.Text = "系统设置";
-            this.mniSystemSet.DockChanged += new System.EventHandler(this.mniSystemSet_DockChanged);
-            // 
             // bar2
             // 
             this.bar2.BarName = "Main menu";
@@ -1917,7 +1884,6 @@ namespace sys1
             this.bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem4),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem5),
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem1),
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem2),
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem3)});
@@ -1932,7 +1898,7 @@ namespace sys1
             this.barDockControlTop.CausesValidation = false;
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlTop.Size = new System.Drawing.Size(1162, 55);
+            this.barDockControlTop.Size = new System.Drawing.Size(1162, 24);
             // 
             // barDockControlBottom
             // 
@@ -1945,21 +1911,20 @@ namespace sys1
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.barDockControlLeft.Location = new System.Drawing.Point(0, 55);
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 580);
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 24);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 611);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1162, 55);
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 580);
+            this.barDockControlRight.Location = new System.Drawing.Point(1162, 24);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 611);
             // 
             // barManager1
             // 
             this.barManager1.Bars.AddRange(new DevExpress.XtraBars.Bar[] {
-            this.bar2,
-            this.mniSystemSet});
+            this.bar2});
             this.barManager1.DockControls.Add(this.barDockControlTop);
             this.barManager1.DockControls.Add(this.barDockControlBottom);
             this.barManager1.DockControls.Add(this.barDockControlLeft);
@@ -1987,8 +1952,6 @@ namespace sys1
             this.bbiMonitorSetting,
             this.barSubItem4,
             this.bbiExit,
-            this.barSubItem5,
-            this.bbiBadDataEdit,
             this.barButtonItem1});
             this.barManager1.MainMenu = this.bar2;
             this.barManager1.MaxItemId = 46;
@@ -2092,9 +2055,6 @@ namespace sys1
         private DevExpress.XtraBars.BarButtonItem mniUserLoginInfoManaFloat;
         private DevExpress.XtraBars.BarSubItem barSubItem4;
         private DevExpress.XtraBars.BarButtonItem bbiExit;
-        private DevExpress.XtraBars.BarSubItem barSubItem5;
-        private DevExpress.XtraBars.BarButtonItem bbiBadDataEdit;
-        private DevExpress.XtraBars.Bar mniSystemSet;
         private DevExpress.XtraBars.Bar bar2;
         private DevExpress.XtraBars.BarDockControl barDockControlTop;
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;

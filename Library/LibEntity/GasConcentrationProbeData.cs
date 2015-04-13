@@ -100,7 +100,8 @@ namespace LibEntity
             var criterion = new List<ICriterion>
             {
                 Restrictions.Eq("Probe.ProbeId", probeId),
-                Restrictions.Le("RecordTime", DateTime.Now)
+                Restrictions.Le("RecordTime", DateTime.Now),
+                Restrictions.Ge("RecordTime", DateTime.Now.AddDays(-1))
             };
             return FindAll(criterion.ToArray());
         }

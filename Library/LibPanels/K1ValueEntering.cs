@@ -23,6 +23,12 @@ namespace LibPanels
             FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_OP.K1_VALUE_ADD);
         }
 
+        public K1ValueEntering(Tunnel tunnel)
+        {
+            InitializeComponent();
+            selectTunnelSimple1.SetTunnel(tunnel);
+        }
+
         /// <summary>
         /// 修改
         /// </summary>

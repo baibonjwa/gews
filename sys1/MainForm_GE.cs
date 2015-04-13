@@ -21,11 +21,12 @@ namespace sys1
 {
     public partial class MainFormGe
     {
-        private string _currentProbeId = string.Empty;
         private DateTime _lastTimeMn; // M/N 的数据更新时间
         private DateTime _lastTimeT2; // T2的数据更新时间
         private int _updateFrequency; // 10s
         private readonly string _t2Id = string.Empty;
+        private Probe CurrentProbe { get; set; }
+
 
         public MainFormGe(BarButtonItem mniAbout)
         {
@@ -68,7 +69,7 @@ namespace sys1
             set
             {
                 _updateFrequency = value;
-                timer1.Interval = value*1000;
+                timer1.Interval = value * 1000;
             }
         }
 
@@ -134,12 +135,6 @@ namespace sys1
         {
             var ugm = new UserGroupInformationManagement();
             ugm.ShowDialog();
-        }
-
-        //系统设置浮动工具条
-        private void mniSystemSet_DockChanged(object sender, EventArgs e)
-        {
-            //mniSystemSet.Text = null;
         }
 
         //数据库设置浮动工具条
@@ -218,7 +213,7 @@ namespace sys1
             dgvData.Rows.Clear();
 
             // 获取指定探头的旧数据 ----------用来填充曲线。
-            var dsData = GasConcentrationProbeData.FindHistaryData(_currentProbeId);
+            var dsData = GasConcentrationProbeData.FindHistaryData(CurrentProbe.ProbeId);
             AddDataSet2TeeChart(tChartM, dsData, "M");
             AddDataSet2TeeChart(tChartN, dsData, "N");
             if (!String.IsNullOrEmpty(_t2Id))
@@ -277,7 +272,8 @@ namespace sys1
         // 同一工序下，瓦斯浓度变化值N
         private void UpdateMnData()
         {
-            var datas = GasConcentrationProbeData.FindNewRealData(_currentProbeId, 2);
+            if (CurrentProbe == null) return;
+            var datas = GasConcentrationProbeData.FindNewRealData(CurrentProbe.ProbeId, 2);
             var time = datas[0].RecordTime;
             var value = datas[0].ProbeValue;
             var value1 = datas[1].ProbeValue;
@@ -454,7 +450,7 @@ namespace sys1
             }
             else
             {
-                tChart.Series[0].GetVertAxis.SetMinMax(minVertValue - minVertValue*0.1, maxVertValue + maxVertValue*0.1);
+                tChart.Series[0].GetVertAxis.SetMinMax(minVertValue - minVertValue * 0.1, maxVertValue + maxVertValue * 0.1);
             }
         }
 
@@ -820,13 +816,6 @@ namespace sys1
             Application.Exit();
         }
 
-        // 坏数据剔除
-        private void bbiBadDataEdit_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            var bdd = new BadDataDelete();
-            bdd.ShowDialog();
-        }
-
         /// <summary>
         ///     添加T2瓦斯浓度平均增加值
         /// </summary>
@@ -845,7 +834,7 @@ namespace sys1
                 if ((i + 1) != datas.Length)
                 {
                     sumValue = sumValue + datas[i + 1].ProbeValue - datas[i].ProbeValue;
-                    var value = sumValue/(i + 1);
+                    var value = sumValue / (i + 1);
                     var time = datas[i + 1].RecordTime;
 
                     if (value > maxVertValue)
@@ -905,18 +894,14 @@ namespace sys1
         private void lstProbeType_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (selectTunnelSimple1.SelectedTunnel == null) return;
-            lstProbeName.DataSource =
-                Probe.FindAllByTunnelIdAndProbeTypeId(selectTunnelSimple1.SelectedTunnel.TunnelId,
-                    Convert.ToInt32(lstProbeType.SelectedValue));
-            lstProbeName.DisplayMember = "ProbeName";
-            lstProbeName.ValueMember = "ProbeId";
+            DataBindUtil.LoadProbe(lstProbeName, selectTunnelSimple1.SelectedTunnel.TunnelId, Convert.ToInt32(lstProbeType.SelectedValue));
         }
 
         private void lstProbeName_SelectedIndexChanged(object sender, EventArgs e)
         {
             rbtnRealtime.Checked = true;
 
-            _currentProbeId = lstProbeName.SelectedValue == null ? "-1" : lstProbeName.SelectedValue.ToString();
+            CurrentProbe = (Probe)lstProbeName.SelectedItem;
 
 
             dateTimeStart.Enabled = false;

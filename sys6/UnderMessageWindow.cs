@@ -99,7 +99,7 @@ namespace UnderTerminal
                 return;
             }
 
-            var k = new K1ValueEntering();
+            var k = new K1ValueEntering(selectTunnelSimple1.SelectedTunnel);
             k.ShowDialog();
         }
 
