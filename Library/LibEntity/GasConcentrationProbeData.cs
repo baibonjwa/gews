@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Castle.ActiveRecord;
 using NHibernate.Criterion;
 
@@ -104,6 +105,21 @@ namespace LibEntity
                 Restrictions.Ge("RecordTime", DateTime.Now.AddDays(-1))
             };
             return FindAll(criterion.ToArray());
+        }
+
+        public static GasConcentrationProbeData[] FindHistaryDataTop(string probeId, int top)
+        {
+            var criterion = new List<ICriterion>
+            {
+                Restrictions.Eq("Probe.ProbeId", probeId),
+                Restrictions.Le("RecordTime", DateTime.Now),
+                Restrictions.Ge("RecordTime", DateTime.Now.AddDays(-1))
+            };
+            var order = new[]
+            {
+                new Order("RecordTime", false)
+            };
+            return SlicedFindAll(0, top, order, criterion.ToArray());
         }
 
         public static GasConcentrationProbeData[] FindHistaryData(string probeId, DateTime startTime, DateTime endTime)

@@ -52,7 +52,12 @@ namespace LibPanels
         /// <param name="e"></param>
         private void tsBtnModify_Click(object sender, EventArgs e)
         {
-            var m = new MineDataSimple(bandedGridView1.GetFocusedRow())
+            if (bandedGridView1.GetFocusedRow() == null)
+            {
+                Alert.alert("请选择要修改的信息");
+                return;
+            }
+            var m = new MineDataSimple((Ventilation)bandedGridView1.GetFocusedRow())
             {
                 Text = new LibPanels(MineDataPanelName.Ventilation_Change).panelFormName
             };

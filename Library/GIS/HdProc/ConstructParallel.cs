@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using ESRI.ArcGIS.Geometry;
-using ESRI.ArcGIS.Display;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
 using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Geodatabase;
-using System.Runtime.InteropServices;
-using GIS.HdProc;
+using ESRI.ArcGIS.Geometry;
 using LibCommon;
+using LibEntity;
 
 namespace GIS.HdProc
 {
@@ -299,7 +297,7 @@ namespace GIS.HdProc
         /// </summary>
         /// <param name="pnts"></param>
         /// <param name="layer"></param>
-        public void AddDxdLines(List<IPoint> pnts, Dictionary<string, string> dics, IFeatureLayer layer, List<LibEntity.WirePoint> cols = null)
+        public void AddDxdLines(List<IPoint> pnts, Dictionary<string, string> dics, IFeatureLayer layer, List<WirePoint> cols = null)
         {
             try
             {
@@ -347,7 +345,7 @@ namespace GIS.HdProc
         /// <param name="pnts">对象的点串</param>
         /// <param name="dics">属性字段</param>
         /// <param name="hdlayer">添加对象图层</param>
-        public void AddHangdaoToLayer(List<IPoint> pnts, Dictionary<string, string> dics, IFeatureLayer layer, List<LibEntity.WirePoint> pntinfos = null)
+        public void AddHangdaoToLayer(List<IPoint> pnts, Dictionary<string, string> dics, IFeatureLayer layer, List<WirePoint> pntinfos = null)
         {
             //try
             //{
@@ -532,12 +530,12 @@ namespace GIS.HdProc
                             int fldp = fealin.Fields.FindField(key);
                             if (fldp != -1)
                             {
-                                if (key == GIS.GIS_Const.FIELD_XH)
+                                if (key == GIS_Const.FIELD_XH)
                                 {
                                     int xh = Convert.ToInt16(sxzs[key]);
                                     fealin.set_Value(fealin.Fields.FindField(key), xh + i);
                                 }
-                                else if (key == GIS.GIS_Const.FIELD_ID)
+                                else if (key == GIS_Const.FIELD_ID)
                                 {
                                     fealin.set_Value(fealin.Fields.FindField(key), Idbs);
                                 }
@@ -552,12 +550,12 @@ namespace GIS.HdProc
                         fealin.Shape = line;
                         foreach (string key in sxzs.Keys)
                         {
-                            if (key == GIS.GIS_Const.FIELD_XH)
+                            if (key == GIS_Const.FIELD_XH)
                             {
                                 int xh = Convert.ToInt16(sxzs[key]);
                                 fealin.set_Value(fealin.Fields.FindField(key), xh + i);
                             }
-                            else if (key == GIS.GIS_Const.FIELD_ID)
+                            else if (key == GIS_Const.FIELD_ID)
                             {
                                 fealin.set_Value(fealin.Fields.FindField(key), Idbs);
                             }
@@ -601,7 +599,7 @@ namespace GIS.HdProc
                 }
                 polygon.Close();
                 IFeature fea = Featureclass.CreateFeature();
-                int index = fea.Fields.FindField(GIS.GIS_Const.FIELD_SHAPE);
+                int index = fea.Fields.FindField(GIS_Const.FIELD_SHAPE);
                 IGeometryDef geometryDef = fea.Fields.get_Field(index).GeometryDef as IGeometryDef;
                 if (geometryDef.HasZ)
                 {
@@ -692,7 +690,7 @@ namespace GIS.HdProc
                     plincenter.SpatialReference = Global.spatialref;
                     //int Idbs = Global.commonclss.SearchHdByLine(plincenter,sxzs["HdId"], Global.centerfdlyr);
                     //获取巷道分段所包含中心线的xh值
-                    string sql = "\"" + GIS.GIS_Const.FIELD_HDID + "\"='" + sxzs[GIS.GIS_Const.FIELD_HDID] + "'";
+                    string sql = "\"" + GIS_Const.FIELD_HDID + "\"='" + sxzs[GIS_Const.FIELD_HDID] + "'";
                     //int[] getAttr = GetCenterLineXH(polygon as IGeometry, sql, Global.centerfdlyr,hdwid);
                     int[] getAttr = GetCenterLineXHNew(polygon as IGeometry, sql, Global.centerfdlyr, hdwid);
                     int xh = getAttr[0];
@@ -710,12 +708,12 @@ namespace GIS.HdProc
                             fea.Shape = polygon;
                             foreach (string key in sxzs.Keys)
                             {
-                                if (key == GIS.GIS_Const.FIELD_XH)
+                                if (key == GIS_Const.FIELD_XH)
                                 {
                                     //int xh = Convert.ToInt16(sxzs[key]);
                                     fea.set_Value(fea.Fields.FindField(key), xh);
                                 }
-                                else if (key == GIS.GIS_Const.FIELD_ID)
+                                else if (key == GIS_Const.FIELD_ID)
                                 {
                                     fea.set_Value(fea.Fields.FindField(key), Idbs);
                                 }
@@ -733,12 +731,12 @@ namespace GIS.HdProc
                                 int fp = fea.Fields.FindField(key);
                                 if (fp != -1)
                                 {
-                                    if (key == GIS.GIS_Const.FIELD_XH)
+                                    if (key == GIS_Const.FIELD_XH)
                                     {
                                         //int xh = Convert.ToInt16(sxzs[key]);
                                         fea.set_Value(fea.Fields.FindField(key), xh);
                                     }
-                                    else if (key == GIS.GIS_Const.FIELD_ID)
+                                    else if (key == GIS_Const.FIELD_ID)
                                     {
                                         fea.set_Value(fea.Fields.FindField(key), Idbs);
                                     }
@@ -813,9 +811,9 @@ namespace GIS.HdProc
                 else
                 { feature = listfea[0]; }
             }
-            int m = feature.Fields.FindField(GIS.GIS_Const.FIELD_XH);
+            int m = feature.Fields.FindField(GIS_Const.FIELD_XH);
             int xh = Convert.ToInt16(feature.get_Value(m).ToString());
-            m = feature.Fields.FindField(GIS.GIS_Const.FIELD_ID);
+            m = feature.Fields.FindField(GIS_Const.FIELD_ID);
             int id = Convert.ToInt16(feature.get_Value(m).ToString());
             int[] result = new int[2] { xh, id };
             return result;
@@ -869,9 +867,9 @@ namespace GIS.HdProc
                 //{ feature = listfea[0]; }
                 feature = listfea[0];
             }
-            int m = feature.Fields.FindField(GIS.GIS_Const.FIELD_XH);
+            int m = feature.Fields.FindField(GIS_Const.FIELD_XH);
             int xh = Convert.ToInt16(feature.get_Value(m).ToString());
-            m = feature.Fields.FindField(GIS.GIS_Const.FIELD_ID);
+            m = feature.Fields.FindField(GIS_Const.FIELD_ID);
             int id = Convert.ToInt16(feature.get_Value(m).ToString());
             int[] result = new int[2] { xh, id };
             return result;
@@ -909,10 +907,10 @@ namespace GIS.HdProc
             plincenter.FromPoint = (geo as IPointCollection).get_Point(0);
             plincenter.ToPoint = (geo as IPointCollection).get_Point(1);
             plincenter.SpatialReference = Global.spatialref;
-            int Idbs = Global.commonclss.SearchHdByLine(plincenter, sxzs[GIS.GIS_Const.FIELD_HDID], Global.centerfdlyr);
+            int Idbs = Global.commonclss.SearchHdByLine(plincenter, sxzs[GIS_Const.FIELD_HDID], Global.centerfdlyr);
             //创建Feature
             IFeature fea = Featureclass.CreateFeature();
-            int index = fea.Fields.FindField(GIS.GIS_Const.FIELD_SHAPE);
+            int index = fea.Fields.FindField(GIS_Const.FIELD_SHAPE);
             if (index != -1)
             {
                 IGeometryDef geometryDef = fea.Fields.get_Field(index).GeometryDef as IGeometryDef;
@@ -923,12 +921,12 @@ namespace GIS.HdProc
                     fea.Shape = geo;
                     foreach (string key in sxzs.Keys)
                     {
-                        if (key == GIS.GIS_Const.FIELD_XH)
+                        if (key == GIS_Const.FIELD_XH)
                         {
                             int xh = Convert.ToInt16(sxzs[key]);
                             fea.set_Value(fea.Fields.FindField(key), xh + 1);
                         }
-                        else if (key == GIS.GIS_Const.FIELD_ID)
+                        else if (key == GIS_Const.FIELD_ID)
                         {
                             fea.set_Value(fea.Fields.FindField(key), Idbs);
                         }
@@ -943,12 +941,12 @@ namespace GIS.HdProc
                     fea.Shape = geo;
                     foreach (string key in sxzs.Keys)
                     {
-                        if (key == GIS.GIS_Const.FIELD_XH)
+                        if (key == GIS_Const.FIELD_XH)
                         {
                             int xh = Convert.ToInt16(sxzs[key]);
                             fea.set_Value(fea.Fields.FindField(key), xh + 1);
                         }
-                        else if (key == GIS.GIS_Const.FIELD_ID)
+                        else if (key == GIS_Const.FIELD_ID)
                         {
                             fea.set_Value(fea.Fields.FindField(key), Idbs);
                         }
@@ -1126,28 +1124,28 @@ namespace GIS.HdProc
             List<IPoint> results = null;
             //int xh = 0;
             Dictionary<string, string> fldvals = new Dictionary<string, string>();
-            fldvals.Add(GIS.GIS_Const.FIELD_HDID, HdId);
+            fldvals.Add(GIS_Const.FIELD_HDID, HdId);
             //查询指定id的巷道对应的中心线（用于计算的分段显示的中心线）
             List<Tuple<IFeature, IGeometry, Dictionary<string, string>>> selobjs = Global.commonclss.SearchFeaturesByGeoAndText(Global.centerfdlyr, fldvals);
             if (selobjs.Count == 0)
             {
-                System.Windows.Forms.MessageBox.Show("没有找到相应的巷道信息！", "系统提示");
+                MessageBox.Show("没有找到相应的巷道信息！", "系统提示");
                 return;
             }
-            int xh = Convert.ToInt16(selobjs[0].Item3[GIS.GIS_Const.FIELD_XH]);
+            int xh = Convert.ToInt16(selobjs[0].Item3[GIS_Const.FIELD_XH]);
             xh = xh + 1;
             Dictionary<string, string> fdlin_dics = new Dictionary<string, string>();
-            fdlin_dics.Add(GIS.GIS_Const.FIELD_HDID, HdId);
-            fdlin_dics.Add(GIS.GIS_Const.FIELD_XH, (xh).ToString());
-            fdlin_dics.Add(GIS.GIS_Const.FIELD_ID, "0");
-            fdlin_dics.Add(GIS.GIS_Const.FIELD_BS, "0");
+            fdlin_dics.Add(GIS_Const.FIELD_HDID, HdId);
+            fdlin_dics.Add(GIS_Const.FIELD_XH, (xh).ToString());
+            fdlin_dics.Add(GIS_Const.FIELD_ID, "0");
+            fdlin_dics.Add(GIS_Const.FIELD_BS, "0");
             //计算延长点的坐标
             IGeometry geosel = selobjs[0].Item2;
             IPolyline plin = (IPolyline)geosel;
             if (jjbs == 1)//根据导线点精确定位的
             {
                 //清除掘进信息
-                string sql = "\"" + GIS.GIS_Const.FIELD_HDID + "\"='" + HdId + "' AND \"" + GIS.GIS_Const.FIELD_BS + "\"=0";
+                string sql = "\"" + GIS_Const.FIELD_HDID + "\"='" + HdId + "' AND \"" + GIS_Const.FIELD_BS + "\"=0";
                 Global.commonclss.DelFeatures(Global.pntlyr, sql);
                 Global.commonclss.DelFeatures(Global.centerlyr, sql);
                 Global.commonclss.DelFeatures(Global.centerfdlyr, sql);
@@ -1162,10 +1160,10 @@ namespace GIS.HdProc
                 dpts.AddRange(xzpnts);
                 //
                 Dictionary<string, string> fdlin_dics1 = new Dictionary<string, string>();
-                fdlin_dics1.Add(GIS.GIS_Const.FIELD_HDID, HdId);
-                fdlin_dics1.Add(GIS.GIS_Const.FIELD_XH, xh.ToString());
-                fdlin_dics1.Add(GIS.GIS_Const.FIELD_ID, "0");
-                fdlin_dics1.Add(GIS.GIS_Const.FIELD_BS, "1");
+                fdlin_dics1.Add(GIS_Const.FIELD_HDID, HdId);
+                fdlin_dics1.Add(GIS_Const.FIELD_XH, xh.ToString());
+                fdlin_dics1.Add(GIS_Const.FIELD_ID, "0");
+                fdlin_dics1.Add(GIS_Const.FIELD_BS, "1");
                 AddHangdaoToLayer(dpts, fdlin_dics1, Global.pntlyr);//将导线点写到导线图层中
                 AddDxdLines(xzpnts, fdlin_dics1, Global.pntlinlyr);
                 AddFDLineToLayer(dpts, fdlin_dics1, Global.centerfdlyr, 1);//添加分段中心线到中心线图层
@@ -1305,21 +1303,21 @@ namespace GIS.HdProc
             List<IPoint> leftresults = null;
             List<IPoint> results = null;
             Dictionary<string, string> fldvals = new Dictionary<string, string>();
-            fldvals.Add(GIS.GIS_Const.FIELD_HDID, HdId);
+            fldvals.Add(GIS_Const.FIELD_HDID, HdId);
             //查询指定id的巷道对应的中心线（用于计算的分段显示的中心线）
             List<Tuple<IFeature, IGeometry, Dictionary<string, string>>> selobjs = Global.commonclss.SearchFeaturesByGeoAndText(Global.centerfdlyr, fldvals);
             if (selobjs.Count == 0)
             {
-                System.Windows.Forms.MessageBox.Show("没有找到相应的巷道信息！", "系统提示");
+                MessageBox.Show("没有找到相应的巷道信息！", "系统提示");
                 return null;
             }
-            int xh = Convert.ToInt32(selobjs[0].Item3[GIS.GIS_Const.FIELD_XH]) + 1;
+            int xh = Convert.ToInt32(selobjs[0].Item3[GIS_Const.FIELD_XH]) + 1;
             Dictionary<string, string> fdlin_dics = new Dictionary<string, string>();
-            fdlin_dics.Add(GIS.GIS_Const.FIELD_HDID, HdId);
-            fdlin_dics.Add(GIS.GIS_Const.FIELD_XH, xh.ToString());
-            fdlin_dics.Add(GIS.GIS_Const.FIELD_ID, "0");
-            fdlin_dics.Add(GIS.GIS_Const.FIELD_BS, "0");
-            fdlin_dics.Add(GIS.GIS_Const.FIELD_BID, bid);
+            fdlin_dics.Add(GIS_Const.FIELD_HDID, HdId);
+            fdlin_dics.Add(GIS_Const.FIELD_XH, xh.ToString());
+            fdlin_dics.Add(GIS_Const.FIELD_ID, "0");
+            fdlin_dics.Add(GIS_Const.FIELD_BS, "0");
+            fdlin_dics.Add(GIS_Const.FIELD_BID, bid);
             //计算延长点的坐标
             IGeometry geosel = selobjs[0].Item2;
             IPolyline plin = (IPolyline)geosel;
@@ -1336,9 +1334,9 @@ namespace GIS.HdProc
                 List<IPoint> dpts = new List<IPoint>();
                 dpts.Add(outP);
                 Dictionary<string, string> dics = new Dictionary<string, string>();
-                dics.Add(GIS.GIS_Const.FIELD_HDID, HdId);
-                dics.Add(GIS.GIS_Const.FIELD_BS, "0");
-                dics.Add(GIS.GIS_Const.FIELD_BID, bid);
+                dics.Add(GIS_Const.FIELD_HDID, HdId);
+                dics.Add(GIS_Const.FIELD_BS, "0");
+                dics.Add(GIS_Const.FIELD_BID, bid);
                 //AddHangdaoToLayer(dpts, dics, Global.pntlyr);
                 //将延长线添加到中线分段图层上
                 List<IPoint> fdlin_pts = new List<IPoint>();
@@ -1475,14 +1473,14 @@ namespace GIS.HdProc
                 {
 
                     //查找所有的序号大于当前对象序号的巷道分段图层记录，进行平移
-                    string sql = "\"" + GIS.GIS_Const.FIELD_BS + "\"=0 AND " + GIS.GIS_Const.FIELD_BID + "='" + key + "'";
+                    string sql = "\"" + GIS_Const.FIELD_BS + "\"=0 AND " + GIS_Const.FIELD_BID + "='" + key + "'";
                     IQueryFilter queryfilter = new QueryFilterClass();
                     queryfilter.WhereClause = sql;
                     IFeatureCursor dxdpnts_cursors = feaclss.Update(queryfilter, true);
                     IFeature currentpnts = dxdpnts_cursors.NextFeature();
                     if (currentpnts == null)
                     {
-                        System.Windows.Forms.MessageBox.Show("没有找到对应的导线点信息，请检查数据库和地图！", "系统提示");
+                        MessageBox.Show("没有找到对应的导线点信息，请检查数据库和地图！", "系统提示");
                         return;
                     }
                     else
@@ -1500,7 +1498,7 @@ namespace GIS.HdProc
                             pnt.X = (currentpnts.Shape as IPoint).X + xdeta;
                             pnt.Y = (currentpnts.Shape as IPoint).Y + ydeta;
                             pnt.Z = (currentpnts.Shape as IPoint).Z;
-                            int index = currentpnts.Fields.FindField(GIS.GIS_Const.FIELD_SHAPE);
+                            int index = currentpnts.Fields.FindField(GIS_Const.FIELD_SHAPE);
                             IGeometryDef geometryDef = currentpnts.Fields.get_Field(index).GeometryDef as IGeometryDef;
                             if (geometryDef.HasZ)
                             {
@@ -1543,7 +1541,7 @@ namespace GIS.HdProc
                 wks.StartEditing(false);
                 wks.StartEditOperation();
                 //查找所有的序号大于当前对象序号的巷道分段图层记录，进行平移
-                string sql = "\"" + GIS.GIS_Const.FIELD_HDID + "\"='" + HdId + "' AND \"" + GIS.GIS_Const.FIELD_BS + "\"=0 AND " + GIS.GIS_Const.FIELD_BID + "='" + Bid + "'";
+                string sql = "\"" + GIS_Const.FIELD_HDID + "\"='" + HdId + "' AND \"" + GIS_Const.FIELD_BS + "\"=0 AND " + GIS_Const.FIELD_BID + "='" + Bid + "'";
                 IQueryFilter queryfilter = new QueryFilterClass();
                 queryfilter.WhereClause = sql;
                 //更新中心线分段信息
@@ -1551,14 +1549,14 @@ namespace GIS.HdProc
                 IFeature currenthdfd = hdfd_cursors.NextFeature();
                 if (currenthdfd == null)
                 {
-                    System.Windows.Forms.MessageBox.Show("没有找到对应的巷道分段空间信息，请检查数据库和地图！", "系统提示");
+                    MessageBox.Show("没有找到对应的巷道分段空间信息，请检查数据库和地图！", "系统提示");
                     return;
                 }
                 else
                 {
                     IPolygon currenthdfdreg = currenthdfd.Shape as IPolygon;
                     IPointCollection pnts = currenthdfdreg as IPointCollection;
-                    int xhpos = currenthdfd.Fields.FindField(GIS.GIS_Const.FIELD_XH);
+                    int xhpos = currenthdfd.Fields.FindField(GIS_Const.FIELD_XH);
                     int xh = Convert.ToInt32(currenthdfd.get_Value(xhpos));
 
                     currenthdfd.Delete();
@@ -1569,7 +1567,7 @@ namespace GIS.HdProc
                     double ydeta1 = centerlin.FromPoint.Y - centerlin.ToPoint.Y;
                     /************************平移后续对象**************************/
 
-                    string sql_centerlin = "\"" + GIS.GIS_Const.FIELD_HDID + "\"='" + HdId + "' AND \"" + GIS.GIS_Const.FIELD_BS + "\"=0 AND " + GIS.GIS_Const.FIELD_XH + ">" + xh.ToString();
+                    string sql_centerlin = "\"" + GIS_Const.FIELD_HDID + "\"='" + HdId + "' AND \"" + GIS_Const.FIELD_BS + "\"=0 AND " + GIS_Const.FIELD_XH + ">" + xh.ToString();
                     IQueryFilter queryfilter1 = new QueryFilterClass();
                     queryfilter1.WhereClause = sql_centerlin;
                     //查找所有的序号大于当前对象序号的中心线图层上的记录，进行平移
@@ -1615,7 +1613,7 @@ namespace GIS.HdProc
                 wks.StartEditing(false);
                 wks.StartEditOperation();
                 //查找所有的序号大于当前对象序号的巷道分段图层记录，进行平移
-                string sql = "\"" + GIS.GIS_Const.FIELD_HDID + "\"='" + HdId + "' AND \"" + GIS.GIS_Const.FIELD_BS + "\"=0 AND " + GIS.GIS_Const.FIELD_BID + "='" + Bid + "'";
+                string sql = "\"" + GIS_Const.FIELD_HDID + "\"='" + HdId + "' AND \"" + GIS_Const.FIELD_BS + "\"=0 AND " + GIS_Const.FIELD_BID + "='" + Bid + "'";
                 IQueryFilter queryfilter = new QueryFilterClass();
                 queryfilter.WhereClause = sql;
                 //更新中心线分段信息
@@ -1623,14 +1621,14 @@ namespace GIS.HdProc
                 IFeature currenthdfull = hdfull_cursors.NextFeature();
                 if (currenthdfull == null)
                 {
-                    System.Windows.Forms.MessageBox.Show("没有找到对应的巷道全空间信息，请检查数据库和地图！", "系统提示");
+                    MessageBox.Show("没有找到对应的巷道全空间信息，请检查数据库和地图！", "系统提示");
                     return;
                 }
                 else
                 {
                     IPolygon currenthdfdreg = currenthdfull.Shape as IPolygon;
                     IPointCollection pnts = currenthdfdreg as IPointCollection;
-                    int xhpos = currenthdfull.Fields.FindField(GIS.GIS_Const.FIELD_XH);
+                    int xhpos = currenthdfull.Fields.FindField(GIS_Const.FIELD_XH);
                     int xh = Convert.ToInt32(currenthdfull.get_Value(xhpos));
                     currenthdfull.Delete();
 
@@ -1641,7 +1639,7 @@ namespace GIS.HdProc
                     //查找所有的序号大于当前对象序号的中心线图层上的记录，进行平移
                     /************************平移后续对象**************************/
 
-                    string sql_hdfull = "\"" + GIS.GIS_Const.FIELD_HDID + "\"='" + HdId + "' AND \"" + GIS.GIS_Const.FIELD_BS + "\"=0 AND " + GIS.GIS_Const.FIELD_XH + ">" + xh.ToString();
+                    string sql_hdfull = "\"" + GIS_Const.FIELD_HDID + "\"='" + HdId + "' AND \"" + GIS_Const.FIELD_BS + "\"=0 AND " + GIS_Const.FIELD_XH + ">" + xh.ToString();
                     IQueryFilter queryfilter1 = new QueryFilterClass();
                     queryfilter1.WhereClause = sql_hdfull;
                     IFeatureCursor hdfulls = feaclss.Update(queryfilter1, true);
@@ -1685,14 +1683,14 @@ namespace GIS.HdProc
                 wks.StartEditing(false);
                 wks.StartEditOperation();
 
-                string sql = "\"" + GIS.GIS_Const.FIELD_HDID + "\"='" + HdId + "' AND \"" + GIS.GIS_Const.FIELD_BS + "\"=0 AND " + GIS.GIS_Const.FIELD_BID + "='" + Bid + "'";
+                string sql = "\"" + GIS_Const.FIELD_HDID + "\"='" + HdId + "' AND \"" + GIS_Const.FIELD_BS + "\"=0 AND " + GIS_Const.FIELD_BID + "='" + Bid + "'";
                 IQueryFilter queryfilter = new QueryFilterClass();
                 queryfilter.WhereClause = sql;
                 IFeatureCursor centerlin_cursors = feaclss.Update(queryfilter, true);
                 IFeature currentlin = centerlin_cursors.NextFeature();
                 if (currentlin == null)
                 {
-                    System.Windows.Forms.MessageBox.Show("没有找到对应的中心线全空间信息，请检查数据库和地图！", "系统提示");
+                    MessageBox.Show("没有找到对应的中心线全空间信息，请检查数据库和地图！", "系统提示");
                     return null;
                 }
                 else//找到对应的信息
@@ -1700,9 +1698,9 @@ namespace GIS.HdProc
                     IPolyline lin_full = currentlin.Shape as IPolyline;
                     IPoint start_p = lin_full.FromPoint;
                     IPoint end_p = lin_full.ToPoint;
-                    int xhpos = currentlin.Fields.FindField(GIS.GIS_Const.FIELD_XH);
+                    int xhpos = currentlin.Fields.FindField(GIS_Const.FIELD_XH);
                     int xh = Convert.ToInt32(currentlin.get_Value(xhpos));
-                    int bidpos = centerlin_cursors.Fields.FindField(GIS.GIS_Const.FIELD_BID);
+                    int bidpos = centerlin_cursors.Fields.FindField(GIS_Const.FIELD_BID);
 
                     double xdeta = start_p.X - end_p.X;
                     double ydeta = start_p.Y - end_p.Y;
@@ -1716,7 +1714,7 @@ namespace GIS.HdProc
                     /************************平移后续对象**************************/
 
                     //查找所有的序号大于当前对象序号的中心线图层上的记录，进行平移
-                    string sql_centerlin = "\"" + GIS.GIS_Const.FIELD_HDID + "\"='" + HdId + "' AND \"" + GIS.GIS_Const.FIELD_BS + "\"=0 AND " + GIS.GIS_Const.FIELD_XH + ">" + xh.ToString();
+                    string sql_centerlin = "\"" + GIS_Const.FIELD_HDID + "\"='" + HdId + "' AND \"" + GIS_Const.FIELD_BS + "\"=0 AND " + GIS_Const.FIELD_XH + ">" + xh.ToString();
                     IQueryFilter queryfilter1 = new QueryFilterClass();
                     queryfilter1.WhereClause = sql_centerlin;
                     IFeatureCursor centerlin = feaclss.Update(queryfilter1, true);
@@ -1761,7 +1759,7 @@ namespace GIS.HdProc
                 workspace.StartEditOperation();
 
                 IFeatureClass Featureclass = Global.centerfdlyr.FeatureClass;
-                string sql = "\"" + GIS.GIS_Const.FIELD_HDID + "\"='" + HdId + "' AND \"" + GIS.GIS_Const.FIELD_BS + "\"=0 AND " + GIS.GIS_Const.FIELD_BID + "='" + Bid + "'";
+                string sql = "\"" + GIS_Const.FIELD_HDID + "\"='" + HdId + "' AND \"" + GIS_Const.FIELD_BS + "\"=0 AND " + GIS_Const.FIELD_BID + "='" + Bid + "'";
                 IQueryFilter queryfilter = new QueryFilterClass();
                 queryfilter.WhereClause = sql;
                 //更新中心线分段信息
@@ -1769,7 +1767,7 @@ namespace GIS.HdProc
                 IFeature currentlin = centerlin_cursors.NextFeature();
                 if (currentlin == null)
                 {
-                    System.Windows.Forms.MessageBox.Show("没有找到对应的中心线分段空间信息，请检查数据库和地图！", "系统提示");
+                    MessageBox.Show("没有找到对应的中心线分段空间信息，请检查数据库和地图！", "系统提示");
                     return null;
                 }
                 else//找到对应的信息
@@ -1778,7 +1776,7 @@ namespace GIS.HdProc
                     IPointCollection pts = lin_fd as IPointCollection;
                     IPoint start_p = lin_fd.FromPoint;
                     IPoint end_p = lin_fd.ToPoint;
-                    int xhpos = currentlin.Fields.FindField(GIS.GIS_Const.FIELD_XH);
+                    int xhpos = currentlin.Fields.FindField(GIS_Const.FIELD_XH);
                     int xh = Convert.ToInt32(currentlin.get_Value(xhpos));
                     /************************修改对应当前序号的中心线分段的对象********************/
                     //修改当前的中心线分段对象
@@ -1790,7 +1788,7 @@ namespace GIS.HdProc
                     /************************平移后续对象**************************/
                     //查找所有的序号大于当前对象序号的中心线分段图层的记录，进行平移
 
-                    string sql_centerlin_fd = "\"" + GIS.GIS_Const.FIELD_HDID + "\"='" + HdId + "' AND \"" + GIS.GIS_Const.FIELD_BS + "\"=0 AND " + GIS.GIS_Const.FIELD_XH + ">" + xh.ToString();
+                    string sql_centerlin_fd = "\"" + GIS_Const.FIELD_HDID + "\"='" + HdId + "' AND \"" + GIS_Const.FIELD_BS + "\"=0 AND " + GIS_Const.FIELD_XH + ">" + xh.ToString();
                     IQueryFilter queryfilter1 = new QueryFilterClass();
                     queryfilter1.WhereClause = sql_centerlin_fd;
                     IFeatureCursor centerlin_fds = Featureclass.Update(queryfilter1, true);
@@ -1805,7 +1803,7 @@ namespace GIS.HdProc
 
                         fea_centerlin_fd = centerlin_fds.NextFeature();
                     }
-                    System.Runtime.InteropServices.Marshal.ReleaseComObject(centerlin_fds);
+                    Marshal.ReleaseComObject(centerlin_fds);
                 }
 
                 Marshal.ReleaseComObject(centerlin_cursors);
@@ -1857,14 +1855,14 @@ namespace GIS.HdProc
                 foreach (string key in dxdpnts.Keys)
                 {
                     //查找所有的序号大于当前对象序号的巷道分段图层记录，进行平移
-                    string sql = "\"" + GIS.GIS_Const.FIELD_BS + "\"=0 AND " + GIS.GIS_Const.FIELD_BID + "='" + key + "'";
+                    string sql = "\"" + GIS_Const.FIELD_BS + "\"=0 AND " + GIS_Const.FIELD_BID + "='" + key + "'";
                     IQueryFilter queryfilter = new QueryFilterClass();
                     queryfilter.WhereClause = sql;
                     IFeatureCursor dxdpnts_cursors = feaclss.Update(queryfilter, true);
                     IFeature currentpnts = dxdpnts_cursors.NextFeature();
                     if (currentpnts == null)
                     {
-                        System.Windows.Forms.MessageBox.Show("没有找到对应的导线点空间信息，请检查数据库和地图！", "系统提示");
+                        MessageBox.Show("没有找到对应的导线点空间信息，请检查数据库和地图！", "系统提示");
                         return;
                     }
                     else
@@ -1876,7 +1874,7 @@ namespace GIS.HdProc
                         pnt.X = (currentpnts.Shape as IPoint).X + xdeta;
                         pnt.Y = (currentpnts.Shape as IPoint).Y + ydeta;
                         pnt.Z = (currentpnts.Shape as IPoint).Z;
-                        int index = currentpnts.Fields.FindField(GIS.GIS_Const.FIELD_SHAPE);
+                        int index = currentpnts.Fields.FindField(GIS_Const.FIELD_SHAPE);
                         IGeometryDef geometryDef = currentpnts.Fields.get_Field(index).GeometryDef as IGeometryDef;
                         if (geometryDef.HasZ)
                         {
@@ -1919,7 +1917,7 @@ namespace GIS.HdProc
                 wks.StartEditing(false);
                 wks.StartEditOperation();
                 //查找所有的序号大于当前对象序号的巷道分段图层记录，进行平移
-                string sql = "\"" + GIS.GIS_Const.FIELD_HDID + "\"='" + HdId + "' AND \"" + GIS.GIS_Const.FIELD_BS + "\"=0 AND " + GIS.GIS_Const.FIELD_BID + "='" + Bid + "'";
+                string sql = "\"" + GIS_Const.FIELD_HDID + "\"='" + HdId + "' AND \"" + GIS_Const.FIELD_BS + "\"=0 AND " + GIS_Const.FIELD_BID + "='" + Bid + "'";
                 IQueryFilter queryfilter = new QueryFilterClass();
                 queryfilter.WhereClause = sql;
                 //更新中心线分段信息
@@ -1927,7 +1925,7 @@ namespace GIS.HdProc
                 IFeature currenthdfull = hdfull_cursors.NextFeature();
                 if (currenthdfull == null)
                 {
-                    System.Windows.Forms.MessageBox.Show("没有找到对应的巷道全空间信息，请检查数据库和地图！", "系统提示");
+                    MessageBox.Show("没有找到对应的巷道全空间信息，请检查数据库和地图！", "系统提示");
                     return;
                 }
                 else
@@ -2010,9 +2008,9 @@ namespace GIS.HdProc
                     //double ydeta1 = pnt_right.Y - ptend1.Y;
                     //查找所有的序号大于当前对象序号的中心线图层上的记录，进行平移
                     /************************平移后续对象**************************/
-                    int xhpos = currenthdfull.Fields.FindField(GIS.GIS_Const.FIELD_XH);
+                    int xhpos = currenthdfull.Fields.FindField(GIS_Const.FIELD_XH);
                     int xh = Convert.ToInt32(currenthdfull.get_Value(xhpos));
-                    string sql_hdfull = "\"" + GIS.GIS_Const.FIELD_HDID + "\"='" + HdId + "' AND \"" + GIS.GIS_Const.FIELD_BS + "\"=0 AND " + GIS.GIS_Const.FIELD_XH + ">" + xh.ToString();
+                    string sql_hdfull = "\"" + GIS_Const.FIELD_HDID + "\"='" + HdId + "' AND \"" + GIS_Const.FIELD_BS + "\"=0 AND " + GIS_Const.FIELD_XH + ">" + xh.ToString();
                     IQueryFilter queryfilter1 = new QueryFilterClass();
                     queryfilter1.WhereClause = sql_hdfull;
                     IFeatureCursor hdfulls = feaclss.Update(queryfilter1, true);
@@ -2055,7 +2053,7 @@ namespace GIS.HdProc
                 wks.StartEditing(false);
                 wks.StartEditOperation();
                 //查找所有的序号大于当前对象序号的巷道分段图层记录，进行平移
-                string sql = "\"" + GIS.GIS_Const.FIELD_HDID + "\"='" + HdId + "' AND \"" + GIS.GIS_Const.FIELD_BS + "\"=0 AND " + GIS.GIS_Const.FIELD_BID + "='" + Bid + "'";
+                string sql = "\"" + GIS_Const.FIELD_HDID + "\"='" + HdId + "' AND \"" + GIS_Const.FIELD_BS + "\"=0 AND " + GIS_Const.FIELD_BID + "='" + Bid + "'";
                 IQueryFilter queryfilter = new QueryFilterClass();
                 queryfilter.WhereClause = sql;
                 //更新中心线分段信息
@@ -2063,7 +2061,7 @@ namespace GIS.HdProc
                 IFeature currenthdfd = hdfd_cursors.NextFeature();
                 if (currenthdfd == null)
                 {
-                    System.Windows.Forms.MessageBox.Show("没有找到对应的巷道分段空间信息，请检查数据库和地图！", "系统提示");
+                    MessageBox.Show("没有找到对应的巷道分段空间信息，请检查数据库和地图！", "系统提示");
                     return;
                 }
                 else
@@ -2139,9 +2137,9 @@ namespace GIS.HdProc
                     double offset_x = len_delta * Math.Cos(angle_lean);//X增量
                     double offset_y = len_delta * Math.Sin(angle_lean);//Y增量
 
-                    int xhpos = currenthdfd.Fields.FindField(GIS.GIS_Const.FIELD_XH);
+                    int xhpos = currenthdfd.Fields.FindField(GIS_Const.FIELD_XH);
                     int xh = Convert.ToInt32(currenthdfd.get_Value(xhpos));
-                    string sql_centerlin = "\"" + GIS.GIS_Const.FIELD_HDID + "\"='" + HdId + "' AND \"" + GIS.GIS_Const.FIELD_BS + "\"=0 AND " + GIS.GIS_Const.FIELD_XH + ">" + xh.ToString();
+                    string sql_centerlin = "\"" + GIS_Const.FIELD_HDID + "\"='" + HdId + "' AND \"" + GIS_Const.FIELD_BS + "\"=0 AND " + GIS_Const.FIELD_XH + ">" + xh.ToString();
                     IQueryFilter queryfilter1 = new QueryFilterClass();
                     queryfilter1.WhereClause = sql_centerlin;
                     //查找所有的序号大于当前对象序号的中心线图层上的记录，进行平移
@@ -2188,14 +2186,14 @@ namespace GIS.HdProc
                 wks.StartEditing(false);
                 wks.StartEditOperation();
 
-                string sql = "\"" + GIS.GIS_Const.FIELD_HDID + "\"='" + HdId + "' AND \"" + GIS.GIS_Const.FIELD_BS + "\"=0 AND " + GIS.GIS_Const.FIELD_BID + "='" + Bid + "'";
+                string sql = "\"" + GIS_Const.FIELD_HDID + "\"='" + HdId + "' AND \"" + GIS_Const.FIELD_BS + "\"=0 AND " + GIS_Const.FIELD_BID + "='" + Bid + "'";
                 IQueryFilter queryfilter = new QueryFilterClass();
                 queryfilter.WhereClause = sql;
                 IFeatureCursor centerlin_cursors = feaclss.Update(queryfilter, true);
                 IFeature currentlin = centerlin_cursors.NextFeature();
                 if (currentlin == null)
                 {
-                    System.Windows.Forms.MessageBox.Show("没有找到对应的中心线全空间信息，请检查数据库和地图！", "系统提示");
+                    MessageBox.Show("没有找到对应的中心线全空间信息，请检查数据库和地图！", "系统提示");
                     return null;
                 }
                 else//找到对应的信息
@@ -2215,14 +2213,14 @@ namespace GIS.HdProc
                     centerlin_cursors.UpdateFeature(currentlin);
                     double xdeta0 = lin_full.ToPoint.X - end_p.X;
                     double ydeta0 = lin_full.ToPoint.Y - end_p.Y;
-                    int bidpos = centerlin_cursors.Fields.FindField(GIS.GIS_Const.FIELD_BID);
+                    int bidpos = centerlin_cursors.Fields.FindField(GIS_Const.FIELD_BID);
 
                     results.Add(currentlin.get_Value(bidpos).ToString(), xdeta0.ToString() + "|" + ydeta0.ToString());
                     /************************平移后续对象**************************/
-                    int xhpos = currentlin.Fields.FindField(GIS.GIS_Const.FIELD_XH);
+                    int xhpos = currentlin.Fields.FindField(GIS_Const.FIELD_XH);
                     int xh = Convert.ToInt32(currentlin.get_Value(xhpos));
                     //查找所有的序号大于当前对象序号的中心线图层上的记录，进行平移
-                    string sql_centerlin = "\"" + GIS.GIS_Const.FIELD_HDID + "\"='" + HdId + "' AND \"" + GIS.GIS_Const.FIELD_BS + "\"=0 AND " + GIS.GIS_Const.FIELD_XH + ">" + xh.ToString();
+                    string sql_centerlin = "\"" + GIS_Const.FIELD_HDID + "\"='" + HdId + "' AND \"" + GIS_Const.FIELD_BS + "\"=0 AND " + GIS_Const.FIELD_XH + ">" + xh.ToString();
                     IQueryFilter queryfilter1 = new QueryFilterClass();
                     queryfilter1.WhereClause = sql_centerlin;
                     IFeatureCursor centerlin = feaclss.Update(queryfilter1, true);
@@ -2267,7 +2265,7 @@ namespace GIS.HdProc
                 workspace.StartEditOperation();
 
                 IFeatureClass Featureclass = Global.centerfdlyr.FeatureClass;
-                string sql = "\"" + GIS.GIS_Const.FIELD_HDID + "\"='" + HdId + "' AND \"" + GIS.GIS_Const.FIELD_BS + "\"=0 AND " + GIS.GIS_Const.FIELD_BID + "='" + Bid + "'";
+                string sql = "\"" + GIS_Const.FIELD_HDID + "\"='" + HdId + "' AND \"" + GIS_Const.FIELD_BS + "\"=0 AND " + GIS_Const.FIELD_BID + "='" + Bid + "'";
                 IQueryFilter queryfilter = new QueryFilterClass();
                 queryfilter.WhereClause = sql;
                 //更新中心线分段信息
@@ -2275,7 +2273,7 @@ namespace GIS.HdProc
                 IFeature currentlin = centerlin_cursors.NextFeature();
                 if (currentlin == null)
                 {
-                    System.Windows.Forms.MessageBox.Show("没有找到对应的中心线分段空间信息，请检查数据库和地图！", "系统提示");
+                    MessageBox.Show("没有找到对应的中心线分段空间信息，请检查数据库和地图！", "系统提示");
                     return null;
                 }
                 else//找到对应的信息
@@ -2298,9 +2296,9 @@ namespace GIS.HdProc
                     double ydeta0 = lin_fd.ToPoint.Y - end_p.Y;
                     /************************平移后续对象**************************/
                     //查找所有的序号大于当前对象序号的中心线分段图层的记录，进行平移
-                    int xhpos = currentlin.Fields.FindField(GIS.GIS_Const.FIELD_XH);
+                    int xhpos = currentlin.Fields.FindField(GIS_Const.FIELD_XH);
                     int xh = Convert.ToInt32(currentlin.get_Value(xhpos));
-                    string sql_centerlin_fd = "\"" + GIS.GIS_Const.FIELD_HDID + "\"='" + HdId + "' AND \"" + GIS.GIS_Const.FIELD_BS + "\"=0 AND " + GIS.GIS_Const.FIELD_XH + ">" + xh.ToString();
+                    string sql_centerlin_fd = "\"" + GIS_Const.FIELD_HDID + "\"='" + HdId + "' AND \"" + GIS_Const.FIELD_BS + "\"=0 AND " + GIS_Const.FIELD_XH + ">" + xh.ToString();
                     IQueryFilter queryfilter1 = new QueryFilterClass();
                     queryfilter1.WhereClause = sql_centerlin_fd;
                     IFeatureCursor centerlin_fds = Featureclass.Update(queryfilter1, true);
@@ -2315,7 +2313,7 @@ namespace GIS.HdProc
 
                         fea_centerlin_fd = centerlin_fds.NextFeature();
                     }
-                    System.Runtime.InteropServices.Marshal.ReleaseComObject(centerlin_fds);
+                    Marshal.ReleaseComObject(centerlin_fds);
                 }
 
                 Marshal.ReleaseComObject(centerlin_cursors);
@@ -2354,7 +2352,7 @@ namespace GIS.HdProc
             Dictionary<string, List<GeoStruct>> dzxlist = new Dictionary<string, List<GeoStruct>>();
 
             Dictionary<string, string> hdids = new Dictionary<string, string>();
-            hdids.Add(GIS.GIS_Const.FIELD_HDID, hd1);
+            hdids.Add(GIS_Const.FIELD_HDID, hd1);
             List<Tuple<IFeature, IGeometry, Dictionary<string, string>>> selobjs1 = Global.commonclss.SearchFeaturesByGeoAndText(Global.centerlyr, hdids);
 
             if (null == selobjs1 || selobjs1.Count < 0)
@@ -2365,14 +2363,14 @@ namespace GIS.HdProc
 
             IPolyline pline1 = selobjs1[0].Item2 as IPolyline;
 
-            hdids[GIS.GIS_Const.FIELD_HDID] = hd2;
+            hdids[GIS_Const.FIELD_HDID] = hd2;
             List<Tuple<IFeature, IGeometry, Dictionary<string, string>>> selobjs2 = Global.commonclss.SearchFeaturesByGeoAndText(Global.centerlyr, hdids);
             IPolyline pline2 = selobjs2[0].Item2 as IPolyline;
 
-            hdids[GIS.GIS_Const.FIELD_HDID] = hd3;
+            hdids[GIS_Const.FIELD_HDID] = hd3;
             List<Tuple<IFeature, IGeometry, Dictionary<string, string>>> selobjs3 = Global.commonclss.SearchFeaturesByGeoAndText(Global.centerlyr, hdids);
             IPolyline pline3 = selobjs3[0].Item2 as IPolyline;
-            hdids[GIS.GIS_Const.FIELD_HDID] = hd1 + "_" + hd2;
+            hdids[GIS_Const.FIELD_HDID] = hd1 + "_" + hd2;
 
             //设置回采移动的切眼
             int dirflag = 0;
@@ -2425,7 +2423,7 @@ namespace GIS.HdProc
                 double y = 0.0;// Convert.ToDouble(this.txtY.Text);
                 double hccd1 = Math.Sqrt(Math.Pow((x - prevHcPoint.X), 2) + Math.Pow((y - prevHcPoint.Y), 2));
                 //将BS为0的回采去删除，创建新的回采区
-                string sql = "\"" + GIS.GIS_Const.FIELD_HDID + "\"='" + hd1 + "_" + hd2 + "' AND \"" + GIS.GIS_Const.FIELD_BS + "\"=0";
+                string sql = "\"" + GIS_Const.FIELD_HDID + "\"='" + hd1 + "_" + hd2 + "' AND \"" + GIS_Const.FIELD_BS + "\"=0";
                 Global.commonclss.DelFeatures(Global.hcqlyr, sql);
                 //查询对应的采掘
                 pntcol = Global.hcjsclass.GetBackPolygonArea(pline1, pline2, pline3, hd1wid1, hd1wid1, hd1wid2, hccd1, dirflag);
@@ -2471,18 +2469,18 @@ namespace GIS.HdProc
             Dictionary<string, IPoint> respnts = new Dictionary<string, IPoint>();
 
             Dictionary<string, string> hdids = new Dictionary<string, string>();
-            hdids.Add(GIS.GIS_Const.FIELD_HDID, hd1);
+            hdids.Add(GIS_Const.FIELD_HDID, hd1);
             List<Tuple<IFeature, IGeometry, Dictionary<string, string>>> selobjs1 = Global.commonclss.SearchFeaturesByGeoAndText(Global.centerlyr, hdids);
             IPolyline pline1 = selobjs1[0].Item2 as IPolyline;
 
-            hdids[GIS.GIS_Const.FIELD_HDID] = hd2;
+            hdids[GIS_Const.FIELD_HDID] = hd2;
             List<Tuple<IFeature, IGeometry, Dictionary<string, string>>> selobjs2 = Global.commonclss.SearchFeaturesByGeoAndText(Global.centerlyr, hdids);
             IPolyline pline2 = selobjs2[0].Item2 as IPolyline;
 
-            hdids[GIS.GIS_Const.FIELD_HDID] = hd3;
+            hdids[GIS_Const.FIELD_HDID] = hd3;
             List<Tuple<IFeature, IGeometry, Dictionary<string, string>>> selobjs3 = Global.commonclss.SearchFeaturesByGeoAndText(Global.centerlyr, hdids);
             IPolyline pline3 = selobjs3[0].Item2 as IPolyline;
-            hdids[GIS.GIS_Const.FIELD_HDID] = hd1 + "_" + hd2;
+            hdids[GIS_Const.FIELD_HDID] = hd1 + "_" + hd2;
             IPointCollection pntcol = new PolygonClass();
 
             //查询对应的回采进尺的面
@@ -2491,14 +2489,14 @@ namespace GIS.HdProc
             wks.StartEditing(false);
             wks.StartEditOperation();
 
-            string sql = "\"" + GIS.GIS_Const.FIELD_HDID + "\"='" + hdids[GIS.GIS_Const.FIELD_HDID] + "' AND \"" + GIS.GIS_Const.FIELD_BS + "\"=0 AND " + GIS.GIS_Const.FIELD_BID + "='" + Bid + "'";
+            string sql = "\"" + GIS_Const.FIELD_HDID + "\"='" + hdids[GIS_Const.FIELD_HDID] + "' AND \"" + GIS_Const.FIELD_BS + "\"=0 AND " + GIS_Const.FIELD_BID + "='" + Bid + "'";
             IQueryFilter queryfilter = new QueryFilterClass();
             queryfilter.WhereClause = sql;
             IFeatureCursor hdhc_cursors = feaclss.Update(queryfilter, false);
             IFeature hdhc_fea = hdhc_cursors.NextFeature();
             if (hdhc_fea == null)
             {
-                System.Windows.Forms.MessageBox.Show("没有找到对应的回采进尺空间信息，请检查数据库和地图！", "系统提示");
+                MessageBox.Show("没有找到对应的回采进尺空间信息，请检查数据库和地图！", "系统提示");
                 return null;
             }
             else
@@ -2551,17 +2549,17 @@ namespace GIS.HdProc
                     //平移或缩放后面的回采进尺面
                     double xdeta = prevHcPoint.X - ptcenter1.X;
                     double ydeta = prevHcPoint.Y - ptcenter1.Y;
-                    int xhpos = hdhc_fea.Fields.FindField(GIS.GIS_Const.FIELD_XH);
+                    int xhpos = hdhc_fea.Fields.FindField(GIS_Const.FIELD_XH);
                     int xh = Convert.ToInt32(hdhc_fea.get_Value(xhpos));
                     Marshal.ReleaseComObject(hdhc_cursors);
                     //string sql_hdfull = "\""+GIS.GIS_Const.FIELD_HDID+"\"='" + hdids[GIS.GIS_Const.FIELD_HDID] + "' AND \""+GIS.GIS_Const.FIELD_BS+"\"=0 AND "+GIS.GIS_Const.FIELD_XH+">" + xh.ToString();
-                    string sql_hdfull = "\"HdId\"='" + hdids[GIS.GIS_Const.FIELD_HDID] + "' AND \"" + GIS.GIS_Const.FIELD_BS + "\"=0 AND " + GIS.GIS_Const.FIELD_XH + ">" + xh.ToString();
+                    string sql_hdfull = "\"HdId\"='" + hdids[GIS_Const.FIELD_HDID] + "' AND \"" + GIS_Const.FIELD_BS + "\"=0 AND " + GIS_Const.FIELD_XH + ">" + xh.ToString();
                     IQueryFilter queryfilter1 = new QueryFilterClass();
                     queryfilter1.WhereClause = sql_hdfull;
                     queryfilter1.SubFields = "*";
                     IFeatureCursor otherhcursor = feaclss.Update(queryfilter1, false);
                     IFeature fea_hc = otherhcursor.NextFeature();
-                    int bidpos = otherhcursor.FindField(GIS.GIS_Const.FIELD_BID);
+                    int bidpos = otherhcursor.FindField(GIS_Const.FIELD_BID);
                     while (fea_hc != null)
                     {
                         IPolygon reg = fea_hc.Shape as IPolygon;
@@ -2607,20 +2605,20 @@ namespace GIS.HdProc
             Dictionary<string, IPoint> respnts = new Dictionary<string, IPoint>();
 
             Dictionary<string, string> hdids = new Dictionary<string, string>();
-            hdids.Add(GIS.GIS_Const.FIELD_HDID, hd1);
+            hdids.Add(GIS_Const.FIELD_HDID, hd1);
             List<Tuple<IFeature, IGeometry, Dictionary<string, string>>> selobjs1 = Global.commonclss.SearchFeaturesByGeoAndText(Global.centerlyr, hdids);
             if (selobjs1.Count > 0)
             {
                 IPolyline pline1 = selobjs1[0].Item2 as IPolyline;
 
-                hdids[GIS.GIS_Const.FIELD_HDID] = hd2;
+                hdids[GIS_Const.FIELD_HDID] = hd2;
                 List<Tuple<IFeature, IGeometry, Dictionary<string, string>>> selobjs2 = Global.commonclss.SearchFeaturesByGeoAndText(Global.centerlyr, hdids);
                 IPolyline pline2 = selobjs2[0].Item2 as IPolyline;
 
-                hdids[GIS.GIS_Const.FIELD_HDID] = hd3;
+                hdids[GIS_Const.FIELD_HDID] = hd3;
                 List<Tuple<IFeature, IGeometry, Dictionary<string, string>>> selobjs3 = Global.commonclss.SearchFeaturesByGeoAndText(Global.centerlyr, hdids);
                 IPolyline pline3 = selobjs3[0].Item2 as IPolyline;
-                hdids[GIS.GIS_Const.FIELD_HDID] = hd1 + "_" + hd2;
+                hdids[GIS_Const.FIELD_HDID] = hd1 + "_" + hd2;
                 IPointCollection pntcol = new PolygonClass();
 
                 //查询对应的回采进尺的面
@@ -2629,17 +2627,17 @@ namespace GIS.HdProc
                 wks.StartEditing(false);
                 wks.StartEditOperation();
 
-                string sql = "\"" + GIS.GIS_Const.FIELD_HDID + "\"='" + hdids[GIS.GIS_Const.FIELD_HDID] + "' AND \"" + GIS.GIS_Const.FIELD_BS + "\"=0 AND " + GIS.GIS_Const.FIELD_BID + "='" + Bid + "'";
+                string sql = "\"" + GIS_Const.FIELD_HDID + "\"='" + hdids[GIS_Const.FIELD_HDID] + "' AND \"" + GIS_Const.FIELD_BS + "\"=0 AND " + GIS_Const.FIELD_BID + "='" + Bid + "'";
                 IQueryFilter queryfilter = new QueryFilterClass();
                 queryfilter.WhereClause = sql;
                 IFeatureCursor hdhc_cursors = feaclss.Update(queryfilter, true);
                 IFeature hdhc_fea = hdhc_cursors.NextFeature();
 
-                int bidpos = hdhc_cursors.FindField(GIS.GIS_Const.FIELD_BID);
+                int bidpos = hdhc_cursors.FindField(GIS_Const.FIELD_BID);
 
                 if (hdhc_fea == null)
                 {
-                    System.Windows.Forms.MessageBox.Show("没有找到对应的回采进尺空间信息，请检查数据库和地图！", "系统提示");
+                    MessageBox.Show("没有找到对应的回采进尺空间信息，请检查数据库和地图！", "系统提示");
                     return null;
                 }
                 else
@@ -2676,12 +2674,12 @@ namespace GIS.HdProc
                     respnts.Add(bidval0, centerpt);
 
                     //更新导线点图层中的点
-                    int xhpos = hdhc_fea.Fields.FindField(GIS.GIS_Const.FIELD_XH);
+                    int xhpos = hdhc_fea.Fields.FindField(GIS_Const.FIELD_XH);
                     int xh = Convert.ToInt32(hdhc_fea.get_Value(xhpos));
                     hdhc_fea.Delete();
 
 
-                    string sql_hdfull = "\"" + GIS.GIS_Const.FIELD_HDID + "\"='" + hdids[GIS.GIS_Const.FIELD_HDID] + "' AND \"" + GIS.GIS_Const.FIELD_BS + "\"=0 AND " + GIS.GIS_Const.FIELD_XH + ">" + xh.ToString();
+                    string sql_hdfull = "\"" + GIS_Const.FIELD_HDID + "\"='" + hdids[GIS_Const.FIELD_HDID] + "' AND \"" + GIS_Const.FIELD_BS + "\"=0 AND " + GIS_Const.FIELD_XH + ">" + xh.ToString();
                     IQueryFilter queryfilter1 = new QueryFilterClass();
                     queryfilter1.WhereClause = sql_hdfull;
                     IFeatureCursor otherhcursor = feaclss.Update(queryfilter1, true);

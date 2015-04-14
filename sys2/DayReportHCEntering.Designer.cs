@@ -170,7 +170,6 @@ namespace sys2
             // btnSubmit
             // 
             this.btnSubmit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSubmit.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnSubmit.Location = new System.Drawing.Point(498, 352);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(75, 23);
@@ -274,6 +273,7 @@ namespace sys2
             // 
             // selectWorkingfaceSimple1
             // 
+            this.selectWorkingfaceSimple1.BackColor = System.Drawing.Color.Transparent;
             this.selectWorkingfaceSimple1.Location = new System.Drawing.Point(129, 17);
             this.selectWorkingfaceSimple1.Name = "selectWorkingfaceSimple1";
             this.selectWorkingfaceSimple1.SelectedWorkingFace = null;

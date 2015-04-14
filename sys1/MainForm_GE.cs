@@ -213,12 +213,12 @@ namespace sys1
             dgvData.Rows.Clear();
 
             // 获取指定探头的旧数据 ----------用来填充曲线。
-            var dsData = GasConcentrationProbeData.FindHistaryData(CurrentProbe.ProbeId);
+            var dsData = GasConcentrationProbeData.FindHistaryDataTop(CurrentProbe.ProbeId, DataCountPerFrame);
             AddDataSet2TeeChart(tChartM, dsData, "M");
             AddDataSet2TeeChart(tChartN, dsData, "N");
             if (!String.IsNullOrEmpty(_t2Id))
             {
-                var ds = GasConcentrationProbeData.FindHistaryData(_t2Id);
+                var ds = GasConcentrationProbeData.FindHistaryDataTop(_t2Id, DataCountPerFrame);
                 AddDataSet2TeeChart(tChartT2, ds, "T2");
             }
 
@@ -247,6 +247,15 @@ namespace sys1
         /// <param name="e"></param>
         private void timer1_Tick(object sender, EventArgs e)
         {
+            //var dsData = GasConcentrationProbeData.FindHistaryDataTop(CurrentProbe.ProbeId, DataCountPerFrame);
+            //AddDataSet2TeeChart(tChartM, dsData, "M");
+            //AddDataSet2TeeChart(tChartN, dsData, "N");
+            //if (!String.IsNullOrEmpty(_t2Id))
+            //{
+            //    var ds = GasConcentrationProbeData.FindHistaryDataTop(_t2Id, DataCountPerFrame);
+            //    AddDataSet2TeeChart(tChartT2, ds, "T2");
+            //}
+
             UpdateMnData(); // Update raw data curve.
             UpdateT2Data(); // Update T2 curve.
         }
@@ -900,18 +909,13 @@ namespace sys1
         private void lstProbeName_SelectedIndexChanged(object sender, EventArgs e)
         {
             rbtnRealtime.Checked = true;
-
             CurrentProbe = (Probe)lstProbeName.SelectedItem;
-
-
             dateTimeStart.Enabled = false;
             dateTimeEnd.Enabled = false;
             btnBeforeDay.Enabled = false;
             btnNow.Enabled = false;
             btnAfterDay.Enabled = false;
             btnQuery.Enabled = false;
-
-
             // 开始实时数据监控
             StartRealTimeCurveMonitoring();
         }

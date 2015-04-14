@@ -36,14 +36,6 @@
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.barManager1 = new DevExpress.XtraBars.BarManager();
-            this.bar1 = new DevExpress.XtraBars.Bar();
-            this.mniOpenFloat = new DevExpress.XtraBars.BarButtonItem();
-            this.mniSaveFloat = new DevExpress.XtraBars.BarButtonItem();
-            this.mniSaveAsFloat = new DevExpress.XtraBars.BarButtonItem();
-            this.mniPrintFloat = new DevExpress.XtraBars.BarButtonItem();
-            this.mniDCCADFloat = new DevExpress.XtraBars.BarButtonItem();
-            this.mniDCTPPDFFloat = new DevExpress.XtraBars.BarButtonItem();
-            this.mniQuitFloat = new DevExpress.XtraBars.BarButtonItem();
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.mniFile = new DevExpress.XtraBars.BarSubItem();
             this.mniOpen = new DevExpress.XtraBars.BarButtonItem();
@@ -78,30 +70,20 @@
             this.mniCXHCJCYBB = new DevExpress.XtraBars.BarButtonItem();
             this.mniCGQGL = new DevExpress.XtraBars.BarSubItem();
             this.mniJJMCGQGL = new DevExpress.XtraBars.BarButtonItem();
-            this.mniShortMeassageMana = new DevExpress.XtraBars.BarSubItem();
-            this.mniSJRGL = new DevExpress.XtraBars.BarButtonItem();
-            this.mniSDFSDX = new DevExpress.XtraBars.BarButtonItem();
-            this.mniZDFSDX = new DevExpress.XtraBars.BarButtonItem();
             this.mniXTSZ = new DevExpress.XtraBars.BarSubItem();
-            this.mniDatabaseSet = new DevExpress.XtraBars.BarButtonItem();
-            this.mniStuffInfoMana = new DevExpress.XtraBars.BarButtonItem();
-            this.mniDepartmentInfoMana = new DevExpress.XtraBars.BarButtonItem();
             this.mniUserInfoMana = new DevExpress.XtraBars.BarButtonItem();
             this.mniUserGroupInfoMana = new DevExpress.XtraBars.BarButtonItem();
             this.mniTeamManage = new DevExpress.XtraBars.BarButtonItem();
             this.mniShiftsSetting = new DevExpress.XtraBars.BarButtonItem();
             this.mniHelp = new DevExpress.XtraBars.BarSubItem();
+            this.bbiCheckUpdate = new DevExpress.XtraBars.BarButtonItem();
             this.mniHelpFile = new DevExpress.XtraBars.BarButtonItem();
             this.mniAbout = new DevExpress.XtraBars.BarButtonItem();
             this.bar3 = new DevExpress.XtraBars.Bar();
             this.mniYJJGFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniLSYJJGCXFloat = new DevExpress.XtraBars.BarButtonItem();
-            this.mniQYYJTFloat = new DevExpress.XtraBars.BarButtonItem();
-            this.mniGZMYJTFloat = new DevExpress.XtraBars.BarButtonItem();
-            this.mniYJDSSFloat = new DevExpress.XtraBars.BarButtonItem();
             this.bar5 = new DevExpress.XtraBars.Bar();
             this.mniWSTCYJGZSZFloat = new DevExpress.XtraBars.BarButtonItem();
-            this.PreWarningRulesManagementFloat = new DevExpress.XtraBars.BarButtonItem();
             this.bar6 = new DevExpress.XtraBars.Bar();
             this.mniWSXXFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniDZGZXXFloat = new DevExpress.XtraBars.BarButtonItem();
@@ -111,18 +93,6 @@
             this.bar7 = new DevExpress.XtraBars.Bar();
             this.mniJJJCRBFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniHCJCRBFloat = new DevExpress.XtraBars.BarButtonItem();
-            this.mniHCFDTGLFloat = new DevExpress.XtraBars.BarButtonItem();
-            this.mniCXJJJCYBBFloat = new DevExpress.XtraBars.BarButtonItem();
-            this.mniCXHCJCYBBFloat = new DevExpress.XtraBars.BarButtonItem();
-            this.bar8 = new DevExpress.XtraBars.Bar();
-            this.mniJJMCGQGLFloat = new DevExpress.XtraBars.BarButtonItem();
-            this.mniHCMCGQGLFloat = new DevExpress.XtraBars.BarButtonItem();
-            this.mniQTDDCGQGLFloat = new DevExpress.XtraBars.BarButtonItem();
-            this.bar9 = new DevExpress.XtraBars.Bar();
-            this.mniSJRGLFloat = new DevExpress.XtraBars.BarButtonItem();
-            this.mniSDFSDXFloat = new DevExpress.XtraBars.BarButtonItem();
-            this.mniZDFSDXFloat = new DevExpress.XtraBars.BarButtonItem();
-            this.bar10 = new DevExpress.XtraBars.Bar();
             this.mniDatabaseSetFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniStuffInfoManaFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniDepartmentInfoManaFloat = new DevExpress.XtraBars.BarButtonItem();
@@ -141,12 +111,39 @@
             this.mniYJDSS1 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
+            this.mniShortMeassageMana = new DevExpress.XtraBars.BarSubItem();
+            this.mniSDFSDX = new DevExpress.XtraBars.BarButtonItem();
+            this.mniZDFSDX = new DevExpress.XtraBars.BarButtonItem();
             this.mniHCMCGQGL = new DevExpress.XtraBars.BarButtonItem();
             this.mniQTDDCGQGL = new DevExpress.XtraBars.BarButtonItem();
+            this.mniSJRGL = new DevExpress.XtraBars.BarButtonItem();
+            this.mniDatabaseSet = new DevExpress.XtraBars.BarButtonItem();
+            this.mniStuffInfoMana = new DevExpress.XtraBars.BarButtonItem();
+            this.mniDepartmentInfoMana = new DevExpress.XtraBars.BarButtonItem();
+            this.mniOpenFloat = new DevExpress.XtraBars.BarButtonItem();
+            this.mniSaveFloat = new DevExpress.XtraBars.BarButtonItem();
+            this.mniSaveAsFloat = new DevExpress.XtraBars.BarButtonItem();
+            this.mniPrintFloat = new DevExpress.XtraBars.BarButtonItem();
+            this.mniQuitFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniQYYJTFloat1 = new DevExpress.XtraBars.BarButtonItem();
             this.mniGZMYJTFloat1 = new DevExpress.XtraBars.BarButtonItem();
             this.mniYJDSSFloat1 = new DevExpress.XtraBars.BarButtonItem();
+            this.PreWarningRulesManagementFloat = new DevExpress.XtraBars.BarButtonItem();
+            this.mniHCFDTGLFloat = new DevExpress.XtraBars.BarButtonItem();
+            this.mniCXJJJCYBBFloat = new DevExpress.XtraBars.BarButtonItem();
+            this.mniCXHCJCYBBFloat = new DevExpress.XtraBars.BarButtonItem();
+            this.mniJJMCGQGLFloat = new DevExpress.XtraBars.BarButtonItem();
+            this.mniHCMCGQGLFloat = new DevExpress.XtraBars.BarButtonItem();
+            this.mniQTDDCGQGLFloat = new DevExpress.XtraBars.BarButtonItem();
+            this.mniSJRGLFloat = new DevExpress.XtraBars.BarButtonItem();
+            this.mniSDFSDXFloat = new DevExpress.XtraBars.BarButtonItem();
+            this.mniZDFSDXFloat = new DevExpress.XtraBars.BarButtonItem();
+            this.mniQYYJTFloat = new DevExpress.XtraBars.BarButtonItem();
+            this.mniGZMYJTFloat = new DevExpress.XtraBars.BarButtonItem();
             this.barCheckItem1 = new DevExpress.XtraBars.BarCheckItem();
+            this.mniYJDSSFloat = new DevExpress.XtraBars.BarButtonItem();
+            this.mniDCCADFloat = new DevExpress.XtraBars.BarButtonItem();
+            this.mniDCTPPDFFloat = new DevExpress.XtraBars.BarButtonItem();
             this.barSubItem1 = new DevExpress.XtraBars.BarSubItem();
             this.barBtnGasAnalysis = new DevExpress.XtraBars.BarButtonItem();
             this.barBtnCoalAnalysis = new DevExpress.XtraBars.BarButtonItem();
@@ -155,7 +152,9 @@
             this.barBtnManagementAnalysis = new DevExpress.XtraBars.BarButtonItem();
             this.barBtnWarningLift = new DevExpress.XtraBars.BarButtonItem();
             this.axLicenseControl1 = new ESRI.ArcGIS.Controls.AxLicenseControl();
-            this.bbiCheckUpdate = new DevExpress.XtraBars.BarButtonItem();
+            this.bar1 = new DevExpress.XtraBars.Bar();
+            this.bar8 = new DevExpress.XtraBars.Bar();
+            this.bar9 = new DevExpress.XtraBars.Bar();
             ((System.ComponentModel.ISupportInitialize)(this.toolBar_WM)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tocControl_WM)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mapControl_WM)).BeginInit();
@@ -166,7 +165,7 @@
             // toolBar_WM
             // 
             this.toolBar_WM.Dock = System.Windows.Forms.DockStyle.Top;
-            this.toolBar_WM.Location = new System.Drawing.Point(0, 117);
+            this.toolBar_WM.Location = new System.Drawing.Point(0, 55);
             this.toolBar_WM.Name = "toolBar_WM";
             this.toolBar_WM.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("toolBar_WM.OcxState")));
             this.toolBar_WM.Size = new System.Drawing.Size(1063, 28);
@@ -175,20 +174,20 @@
             // tocControl_WM
             // 
             this.tocControl_WM.Dock = System.Windows.Forms.DockStyle.Left;
-            this.tocControl_WM.Location = new System.Drawing.Point(0, 145);
+            this.tocControl_WM.Location = new System.Drawing.Point(0, 83);
             this.tocControl_WM.Name = "tocControl_WM";
             this.tocControl_WM.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("tocControl_WM.OcxState")));
-            this.tocControl_WM.Size = new System.Drawing.Size(265, 355);
+            this.tocControl_WM.Size = new System.Drawing.Size(265, 417);
             this.tocControl_WM.TabIndex = 2;
             this.tocControl_WM.OnMouseDown += new ESRI.ArcGIS.Controls.ITOCControlEvents_Ax_OnMouseDownEventHandler(this.tocControl_WM_OnMouseDown);
             // 
             // mapControl_WM
             // 
             this.mapControl_WM.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mapControl_WM.Location = new System.Drawing.Point(268, 145);
+            this.mapControl_WM.Location = new System.Drawing.Point(268, 83);
             this.mapControl_WM.Name = "mapControl_WM";
             this.mapControl_WM.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("mapControl_WM.OcxState")));
-            this.mapControl_WM.Size = new System.Drawing.Size(795, 355);
+            this.mapControl_WM.Size = new System.Drawing.Size(795, 417);
             this.mapControl_WM.TabIndex = 3;
             // 
             // toolStrip1
@@ -204,9 +203,9 @@
             // 
             // splitter1
             // 
-            this.splitter1.Location = new System.Drawing.Point(265, 145);
+            this.splitter1.Location = new System.Drawing.Point(265, 83);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 355);
+            this.splitter1.Size = new System.Drawing.Size(3, 417);
             this.splitter1.TabIndex = 5;
             this.splitter1.TabStop = false;
             // 
@@ -218,15 +217,11 @@
             // barManager1
             // 
             this.barManager1.Bars.AddRange(new DevExpress.XtraBars.Bar[] {
-            this.bar1,
             this.bar2,
             this.bar3,
             this.bar5,
             this.bar6,
-            this.bar7,
-            this.bar8,
-            this.bar9,
-            this.bar10});
+            this.bar7});
             this.barManager1.DockControls.Add(this.barDockControlTop);
             this.barManager1.DockControls.Add(this.barDockControlBottom);
             this.barManager1.DockControls.Add(this.barDockControlLeft);
@@ -342,74 +337,6 @@
             this.barManager1.MainMenu = this.bar2;
             this.barManager1.MaxItemId = 111;
             // 
-            // bar1
-            // 
-            this.bar1.BarName = "Tools";
-            this.bar1.DockCol = 2;
-            this.bar1.DockRow = 3;
-            this.bar1.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
-            this.bar1.FloatLocation = new System.Drawing.Point(933, 295);
-            this.bar1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniOpenFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniSaveFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniSaveAsFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniPrintFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(this.mniDCCADFloat),
-            new DevExpress.XtraBars.LinkPersistInfo(this.mniDCTPPDFFloat),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniQuitFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
-            this.bar1.Offset = 981;
-            this.bar1.Text = "文件";
-            this.bar1.Visible = false;
-            // 
-            // mniOpenFloat
-            // 
-            this.mniOpenFloat.Caption = "打开矿图";
-            this.mniOpenFloat.Id = 51;
-            this.mniOpenFloat.Name = "mniOpenFloat";
-            this.mniOpenFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniOpenFloat_ItemClick);
-            // 
-            // mniSaveFloat
-            // 
-            this.mniSaveFloat.Caption = "保存";
-            this.mniSaveFloat.Id = 52;
-            this.mniSaveFloat.Name = "mniSaveFloat";
-            this.mniSaveFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniSaveFloat_ItemClick);
-            // 
-            // mniSaveAsFloat
-            // 
-            this.mniSaveAsFloat.Caption = "另存为";
-            this.mniSaveAsFloat.Id = 53;
-            this.mniSaveAsFloat.Name = "mniSaveAsFloat";
-            this.mniSaveAsFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniSaveAsFloat_ItemClick);
-            // 
-            // mniPrintFloat
-            // 
-            this.mniPrintFloat.Caption = "打印";
-            this.mniPrintFloat.Id = 55;
-            this.mniPrintFloat.Name = "mniPrintFloat";
-            this.mniPrintFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniPrintFloat_ItemClick);
-            // 
-            // mniDCCADFloat
-            // 
-            this.mniDCCADFloat.Caption = "导出为CAD";
-            this.mniDCCADFloat.Id = 98;
-            this.mniDCCADFloat.Name = "mniDCCADFloat";
-            this.mniDCCADFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniDCCADFloat_ItemClick);
-            // 
-            // mniDCTPPDFFloat
-            // 
-            this.mniDCTPPDFFloat.Caption = "导出为图片或PDF";
-            this.mniDCTPPDFFloat.Id = 99;
-            this.mniDCTPPDFFloat.Name = "mniDCTPPDFFloat";
-            this.mniDCTPPDFFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniDCTPPDFFloat_ItemClick);
-            // 
-            // mniQuitFloat
-            // 
-            this.mniQuitFloat.Caption = "退出";
-            this.mniQuitFloat.Id = 56;
-            this.mniQuitFloat.Name = "mniQuitFloat";
-            this.mniQuitFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniQuitFloat_ItemClick);
-            // 
             // bar2
             // 
             this.bar2.BarName = "Main menu";
@@ -423,7 +350,6 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.mniYJSJGL),
             new DevExpress.XtraBars.LinkPersistInfo(this.mniCJJDSJ),
             new DevExpress.XtraBars.LinkPersistInfo(this.mniCGQGL),
-            new DevExpress.XtraBars.LinkPersistInfo(this.mniShortMeassageMana),
             new DevExpress.XtraBars.LinkPersistInfo(this.mniXTSZ),
             new DevExpress.XtraBars.LinkPersistInfo(this.mniHelp)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
@@ -528,8 +454,6 @@
             this.mniYJJGS.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.mniYJJG),
             new DevExpress.XtraBars.LinkPersistInfo(this.mniLSYJJGCX),
-            new DevExpress.XtraBars.LinkPersistInfo(this.mniQYYJT),
-            new DevExpress.XtraBars.LinkPersistInfo(this.mniGZMYJT),
             new DevExpress.XtraBars.LinkPersistInfo(this.mniYJDSS)});
             this.mniYJJGS.Name = "mniYJJGS";
             // 
@@ -574,6 +498,7 @@
             this.mniYJDSS.ImageIndex = 22;
             this.mniYJDSS.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T));
             this.mniYJDSS.Name = "mniYJDSS";
+            this.mniYJDSS.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.mniYJDSS.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniYJDSS_ItemClick);
             // 
             // mniYJGZSJ
@@ -697,6 +622,7 @@
             this.mniHCFDTGL.Id = 33;
             this.mniHCFDTGL.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.U));
             this.mniHCFDTGL.Name = "mniHCFDTGL";
+            this.mniHCFDTGL.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.mniHCFDTGL.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniHCFDTGL_ItemClick);
             // 
             // mniCXJJJCYBB
@@ -735,85 +661,15 @@
             this.mniJJMCGQGL.Name = "mniJJMCGQGL";
             this.mniJJMCGQGL.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniJJMCGQGL_ItemClick);
             // 
-            // mniShortMeassageMana
-            // 
-            this.mniShortMeassageMana.Caption = "短信管理(&M)";
-            this.mniShortMeassageMana.Id = 9;
-            this.mniShortMeassageMana.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.M));
-            this.mniShortMeassageMana.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.None, false, this.mniSJRGL, false),
-            new DevExpress.XtraBars.LinkPersistInfo(this.mniSDFSDX),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.None, false, this.mniZDFSDX, false)});
-            this.mniShortMeassageMana.Name = "mniShortMeassageMana";
-            // 
-            // mniSJRGL
-            // 
-            this.mniSJRGL.Caption = "收件人管理(&R)";
-            this.mniSJRGL.Id = 39;
-            this.mniSJRGL.ImageIndex = 12;
-            this.mniSJRGL.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D6));
-            this.mniSJRGL.Name = "mniSJRGL";
-            this.mniSJRGL.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniSJRGL_ItemClick);
-            // 
-            // mniSDFSDX
-            // 
-            this.mniSDFSDX.Caption = "手动发送短信(&H)";
-            this.mniSDFSDX.Id = 40;
-            this.mniSDFSDX.ImageIndex = 13;
-            this.mniSDFSDX.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D7));
-            this.mniSDFSDX.Name = "mniSDFSDX";
-            this.mniSDFSDX.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniSDFSDX_ItemClick);
-            // 
-            // mniZDFSDX
-            // 
-            this.mniZDFSDX.Caption = "自动发送短信(&S)";
-            this.mniZDFSDX.Id = 41;
-            this.mniZDFSDX.ImageIndex = 26;
-            this.mniZDFSDX.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D8));
-            this.mniZDFSDX.Name = "mniZDFSDX";
-            this.mniZDFSDX.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniZDFSDX_ItemClick);
-            // 
             // mniXTSZ
             // 
             this.mniXTSZ.Caption = "系统设置(&S)";
             this.mniXTSZ.Id = 10;
             this.mniXTSZ.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.S));
             this.mniXTSZ.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.mniDatabaseSet),
-            new DevExpress.XtraBars.LinkPersistInfo(this.mniStuffInfoMana),
-            new DevExpress.XtraBars.LinkPersistInfo(this.mniDepartmentInfoMana),
-            new DevExpress.XtraBars.LinkPersistInfo(this.mniUserInfoMana),
-            new DevExpress.XtraBars.LinkPersistInfo(this.mniUserGroupInfoMana),
             new DevExpress.XtraBars.LinkPersistInfo(this.mniTeamManage),
             new DevExpress.XtraBars.LinkPersistInfo(this.mniShiftsSetting)});
             this.mniXTSZ.Name = "mniXTSZ";
-            // 
-            // mniDatabaseSet
-            // 
-            this.mniDatabaseSet.Caption = "数据库设置(&D)...";
-            this.mniDatabaseSet.Id = 42;
-            this.mniDatabaseSet.ImageIndex = 14;
-            this.mniDatabaseSet.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D));
-            this.mniDatabaseSet.Name = "mniDatabaseSet";
-            this.mniDatabaseSet.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniDatabaseSet_ItemClick);
-            // 
-            // mniStuffInfoMana
-            // 
-            this.mniStuffInfoMana.Caption = "人员信息管理(&R)...";
-            this.mniStuffInfoMana.Id = 43;
-            this.mniStuffInfoMana.ImageIndex = 29;
-            this.mniStuffInfoMana.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D9));
-            this.mniStuffInfoMana.Name = "mniStuffInfoMana";
-            this.mniStuffInfoMana.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniStuffInfoMana_ItemClick);
-            // 
-            // mniDepartmentInfoMana
-            // 
-            this.mniDepartmentInfoMana.Caption = "部门信息管理(&P)";
-            this.mniDepartmentInfoMana.Id = 44;
-            this.mniDepartmentInfoMana.ImageIndex = 1;
-            this.mniDepartmentInfoMana.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D0));
-            this.mniDepartmentInfoMana.Name = "mniDepartmentInfoMana";
-            this.mniDepartmentInfoMana.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniDepartmentInfoMana_ItemClick);
             // 
             // mniUserInfoMana
             // 
@@ -866,6 +722,13 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.mniAbout)});
             this.mniHelp.Name = "mniHelp";
             // 
+            // bbiCheckUpdate
+            // 
+            this.bbiCheckUpdate.Caption = "检查更新";
+            this.bbiCheckUpdate.Id = 110;
+            this.bbiCheckUpdate.Name = "bbiCheckUpdate";
+            this.bbiCheckUpdate.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbiCheckUpdate_ItemClick);
+            // 
             // mniHelpFile
             // 
             this.mniHelpFile.Caption = "帮助文件(&V)";
@@ -893,10 +756,7 @@
             this.bar3.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar3.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniYJJGFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniLSYJJGCXFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniQYYJTFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniGZMYJTFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniYJDSSFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniLSYJJGCXFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar3.OptionsBar.AllowRename = true;
             this.bar3.Text = "结果显示";
             // 
@@ -915,29 +775,6 @@
             this.mniLSYJJGCXFloat.Name = "mniLSYJJGCXFloat";
             this.mniLSYJJGCXFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniLSYJJGCXFloat_ItemClick);
             // 
-            // mniQYYJTFloat
-            // 
-            this.mniQYYJTFloat.Caption = "区域预警图";
-            this.mniQYYJTFloat.Id = 91;
-            this.mniQYYJTFloat.ImageIndex = 11;
-            this.mniQYYJTFloat.Name = "mniQYYJTFloat";
-            this.mniQYYJTFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniQYYJTFloat_ItemClick_1);
-            // 
-            // mniGZMYJTFloat
-            // 
-            this.mniGZMYJTFloat.Caption = "工作面预警图";
-            this.mniGZMYJTFloat.Id = 92;
-            this.mniGZMYJTFloat.Name = "mniGZMYJTFloat";
-            this.mniGZMYJTFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniGZMYJTFloat_ItemClick_1);
-            // 
-            // mniYJDSSFloat
-            // 
-            this.mniYJDSSFloat.Caption = "预警点闪烁";
-            this.mniYJDSSFloat.Id = 94;
-            this.mniYJDSSFloat.ImageIndex = 22;
-            this.mniYJDSSFloat.Name = "mniYJDSSFloat";
-            this.mniYJDSSFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniYJDSSFloat_ItemClick_1);
-            // 
             // bar5
             // 
             this.bar5.BarName = "预警规则设置";
@@ -945,8 +782,7 @@
             this.bar5.DockRow = 1;
             this.bar5.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar5.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniWSTCYJGZSZFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.PreWarningRulesManagementFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniWSTCYJGZSZFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar5.OptionsBar.AllowRename = true;
             this.bar5.Text = "预警规则设置";
             // 
@@ -958,19 +794,11 @@
             this.mniWSTCYJGZSZFloat.Name = "mniWSTCYJGZSZFloat";
             this.mniWSTCYJGZSZFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniWSTCYJGZSZFloat_ItemClick);
             // 
-            // PreWarningRulesManagementFloat
-            // 
-            this.PreWarningRulesManagementFloat.Caption = "预警规则管理";
-            this.PreWarningRulesManagementFloat.Id = 64;
-            this.PreWarningRulesManagementFloat.ImageIndex = 23;
-            this.PreWarningRulesManagementFloat.Name = "PreWarningRulesManagementFloat";
-            this.PreWarningRulesManagementFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.PreWarningRulesManagementFloat_ItemClick);
-            // 
             // bar6
             // 
             this.bar6.BarName = "预警数据管理";
-            this.bar6.DockCol = 0;
-            this.bar6.DockRow = 2;
+            this.bar6.DockCol = 2;
+            this.bar6.DockRow = 1;
             this.bar6.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar6.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniWSXXFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
@@ -978,7 +806,6 @@
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniMCFCXXFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniTFXXFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniManagementInfoFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
-            this.bar6.Offset = 252;
             this.bar6.OptionsBar.AllowRename = true;
             this.bar6.Text = "预警数据管理";
             // 
@@ -1025,18 +852,13 @@
             // bar7
             // 
             this.bar7.BarName = "采掘进度数据";
-            this.bar7.DockCol = 0;
-            this.bar7.DockRow = 3;
+            this.bar7.DockCol = 3;
+            this.bar7.DockRow = 1;
             this.bar7.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar7.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniJJJCRBFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniHCJCRBFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniHCFDTGLFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniCXJJJCYBBFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniCXHCJCYBBFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
-            this.bar7.OptionsBar.AllowRename = true;
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniHCJCRBFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar7.Text = "采掘进度数据";
-            this.bar7.Visible = false;
             // 
             // mniJJJCRBFloat
             // 
@@ -1051,122 +873,6 @@
             this.mniHCJCRBFloat.Id = 71;
             this.mniHCJCRBFloat.Name = "mniHCJCRBFloat";
             this.mniHCJCRBFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniHCJCRBFloat_ItemClick);
-            // 
-            // mniHCFDTGLFloat
-            // 
-            this.mniHCFDTGLFloat.Caption = "回采进度图管理";
-            this.mniHCFDTGLFloat.Id = 72;
-            this.mniHCFDTGLFloat.Name = "mniHCFDTGLFloat";
-            this.mniHCFDTGLFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniHCFDTGLFloat_ItemClick);
-            // 
-            // mniCXJJJCYBBFloat
-            // 
-            this.mniCXJJJCYBBFloat.Caption = "查询掘进进尺月报表";
-            this.mniCXJJJCYBBFloat.Id = 73;
-            this.mniCXJJJCYBBFloat.Name = "mniCXJJJCYBBFloat";
-            this.mniCXJJJCYBBFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniCXJJJCYBBFloat_ItemClick);
-            // 
-            // mniCXHCJCYBBFloat
-            // 
-            this.mniCXHCJCYBBFloat.Caption = "查询回采进尺月报表";
-            this.mniCXHCJCYBBFloat.Id = 74;
-            this.mniCXHCJCYBBFloat.Name = "mniCXHCJCYBBFloat";
-            this.mniCXHCJCYBBFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniCXHCJCYBBFloat_ItemClick);
-            // 
-            // bar8
-            // 
-            this.bar8.BarName = "传感器管理";
-            this.bar8.DockCol = 1;
-            this.bar8.DockRow = 3;
-            this.bar8.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
-            this.bar8.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniJJMCGQGLFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniHCMCGQGLFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniQTDDCGQGLFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
-            this.bar8.OptionsBar.AllowRename = true;
-            this.bar8.Text = "传感器管理";
-            this.bar8.Visible = false;
-            // 
-            // mniJJMCGQGLFloat
-            // 
-            this.mniJJMCGQGLFloat.Caption = "掘进面传感器管理";
-            this.mniJJMCGQGLFloat.Id = 75;
-            this.mniJJMCGQGLFloat.ImageIndex = 7;
-            this.mniJJMCGQGLFloat.Name = "mniJJMCGQGLFloat";
-            this.mniJJMCGQGLFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniJJMCGQGLFloat_ItemClick);
-            // 
-            // mniHCMCGQGLFloat
-            // 
-            this.mniHCMCGQGLFloat.Caption = "回采面传感器管理";
-            this.mniHCMCGQGLFloat.Id = 76;
-            this.mniHCMCGQGLFloat.ImageIndex = 6;
-            this.mniHCMCGQGLFloat.Name = "mniHCMCGQGLFloat";
-            this.mniHCMCGQGLFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniHCMCGQGLFloat_ItemClick);
-            // 
-            // mniQTDDCGQGLFloat
-            // 
-            this.mniQTDDCGQGLFloat.Caption = "其它地点传感器管理";
-            this.mniQTDDCGQGLFloat.Id = 77;
-            this.mniQTDDCGQGLFloat.ImageIndex = 10;
-            this.mniQTDDCGQGLFloat.Name = "mniQTDDCGQGLFloat";
-            this.mniQTDDCGQGLFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniQTDDCGQGLFloat_ItemClick);
-            // 
-            // bar9
-            // 
-            this.bar9.BarName = "短信管理";
-            this.bar9.DockCol = 1;
-            this.bar9.DockRow = 2;
-            this.bar9.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
-            this.bar9.FloatLocation = new System.Drawing.Point(795, 314);
-            this.bar9.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniSJRGLFloat, "", false, true, false, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniSDFSDXFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniZDFSDXFloat, "", false, true, false, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
-            this.bar9.Offset = 511;
-            this.bar9.OptionsBar.AllowRename = true;
-            this.bar9.Text = "短信管理";
-            // 
-            // mniSJRGLFloat
-            // 
-            this.mniSJRGLFloat.Caption = "收件人管理";
-            this.mniSJRGLFloat.Id = 78;
-            this.mniSJRGLFloat.ImageIndex = 12;
-            this.mniSJRGLFloat.Name = "mniSJRGLFloat";
-            this.mniSJRGLFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniSJRGLFloat_ItemClick);
-            // 
-            // mniSDFSDXFloat
-            // 
-            this.mniSDFSDXFloat.Caption = "手动发送短信";
-            this.mniSDFSDXFloat.Id = 79;
-            this.mniSDFSDXFloat.ImageIndex = 13;
-            this.mniSDFSDXFloat.Name = "mniSDFSDXFloat";
-            this.mniSDFSDXFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniSDFSDXFloat_ItemClick);
-            // 
-            // mniZDFSDXFloat
-            // 
-            this.mniZDFSDXFloat.Caption = "自动发送短信";
-            this.mniZDFSDXFloat.Id = 80;
-            this.mniZDFSDXFloat.ImageIndex = 26;
-            this.mniZDFSDXFloat.Name = "mniZDFSDXFloat";
-            this.mniZDFSDXFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniZDFSDXFloat_ItemClick);
-            // 
-            // bar10
-            // 
-            this.bar10.BarName = "系统设置";
-            this.bar10.DockCol = 2;
-            this.bar10.DockRow = 2;
-            this.bar10.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
-            this.bar10.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniDatabaseSetFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniStuffInfoManaFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniDepartmentInfoManaFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniUserInfoManaFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniUserGroupInfoManaFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniTeamManageFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniShiftsSettingFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
-            this.bar10.Offset = 862;
-            this.bar10.OptionsBar.AllowRename = true;
-            this.bar10.Text = "系统设置";
             // 
             // mniDatabaseSetFloat
             // 
@@ -1229,7 +935,7 @@
             this.barDockControlTop.CausesValidation = false;
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlTop.Size = new System.Drawing.Size(1063, 117);
+            this.barDockControlTop.Size = new System.Drawing.Size(1063, 55);
             // 
             // barDockControlBottom
             // 
@@ -1242,15 +948,15 @@
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.barDockControlLeft.Location = new System.Drawing.Point(0, 117);
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 402);
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 55);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 464);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1063, 117);
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 402);
+            this.barDockControlRight.Location = new System.Drawing.Point(1063, 55);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 464);
             // 
             // imageList1
             // 
@@ -1329,6 +1035,34 @@
             this.barButtonItem2.Id = 6;
             this.barButtonItem2.Name = "barButtonItem2";
             // 
+            // mniShortMeassageMana
+            // 
+            this.mniShortMeassageMana.Caption = "短信管理(&M)";
+            this.mniShortMeassageMana.Id = 9;
+            this.mniShortMeassageMana.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.M));
+            this.mniShortMeassageMana.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.mniSDFSDX),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.None, false, this.mniZDFSDX, false)});
+            this.mniShortMeassageMana.Name = "mniShortMeassageMana";
+            // 
+            // mniSDFSDX
+            // 
+            this.mniSDFSDX.Caption = "手动发送短信(&H)";
+            this.mniSDFSDX.Id = 40;
+            this.mniSDFSDX.ImageIndex = 13;
+            this.mniSDFSDX.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D7));
+            this.mniSDFSDX.Name = "mniSDFSDX";
+            this.mniSDFSDX.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniSDFSDX_ItemClick);
+            // 
+            // mniZDFSDX
+            // 
+            this.mniZDFSDX.Caption = "自动发送短信(&S)";
+            this.mniZDFSDX.Id = 41;
+            this.mniZDFSDX.ImageIndex = 26;
+            this.mniZDFSDX.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D8));
+            this.mniZDFSDX.Name = "mniZDFSDX";
+            this.mniZDFSDX.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniZDFSDX_ItemClick);
+            // 
             // mniHCMCGQGL
             // 
             this.mniHCMCGQGL.Caption = "回采面传感器管理(&B)";
@@ -1346,6 +1080,77 @@
             this.mniQTDDCGQGL.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L));
             this.mniQTDDCGQGL.Name = "mniQTDDCGQGL";
             this.mniQTDDCGQGL.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniQTDDCGQGL_ItemClick);
+            // 
+            // mniSJRGL
+            // 
+            this.mniSJRGL.Caption = "收件人管理(&R)";
+            this.mniSJRGL.Id = 39;
+            this.mniSJRGL.ImageIndex = 12;
+            this.mniSJRGL.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D6));
+            this.mniSJRGL.Name = "mniSJRGL";
+            this.mniSJRGL.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniSJRGL_ItemClick);
+            // 
+            // mniDatabaseSet
+            // 
+            this.mniDatabaseSet.Caption = "数据库设置(&D)...";
+            this.mniDatabaseSet.Id = 42;
+            this.mniDatabaseSet.ImageIndex = 14;
+            this.mniDatabaseSet.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D));
+            this.mniDatabaseSet.Name = "mniDatabaseSet";
+            this.mniDatabaseSet.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniDatabaseSet_ItemClick);
+            // 
+            // mniStuffInfoMana
+            // 
+            this.mniStuffInfoMana.Caption = "人员信息管理(&R)...";
+            this.mniStuffInfoMana.Id = 43;
+            this.mniStuffInfoMana.ImageIndex = 29;
+            this.mniStuffInfoMana.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D9));
+            this.mniStuffInfoMana.Name = "mniStuffInfoMana";
+            this.mniStuffInfoMana.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniStuffInfoMana_ItemClick);
+            // 
+            // mniDepartmentInfoMana
+            // 
+            this.mniDepartmentInfoMana.Caption = "部门信息管理(&P)";
+            this.mniDepartmentInfoMana.Id = 44;
+            this.mniDepartmentInfoMana.ImageIndex = 1;
+            this.mniDepartmentInfoMana.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D0));
+            this.mniDepartmentInfoMana.Name = "mniDepartmentInfoMana";
+            this.mniDepartmentInfoMana.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniDepartmentInfoMana_ItemClick);
+            // 
+            // mniOpenFloat
+            // 
+            this.mniOpenFloat.Caption = "打开矿图";
+            this.mniOpenFloat.Id = 51;
+            this.mniOpenFloat.Name = "mniOpenFloat";
+            this.mniOpenFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniOpenFloat_ItemClick);
+            // 
+            // mniSaveFloat
+            // 
+            this.mniSaveFloat.Caption = "保存";
+            this.mniSaveFloat.Id = 52;
+            this.mniSaveFloat.Name = "mniSaveFloat";
+            this.mniSaveFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniSaveFloat_ItemClick);
+            // 
+            // mniSaveAsFloat
+            // 
+            this.mniSaveAsFloat.Caption = "另存为";
+            this.mniSaveAsFloat.Id = 53;
+            this.mniSaveAsFloat.Name = "mniSaveAsFloat";
+            this.mniSaveAsFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniSaveAsFloat_ItemClick);
+            // 
+            // mniPrintFloat
+            // 
+            this.mniPrintFloat.Caption = "打印";
+            this.mniPrintFloat.Id = 55;
+            this.mniPrintFloat.Name = "mniPrintFloat";
+            this.mniPrintFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniPrintFloat_ItemClick);
+            // 
+            // mniQuitFloat
+            // 
+            this.mniQuitFloat.Caption = "退出";
+            this.mniQuitFloat.Id = 56;
+            this.mniQuitFloat.Name = "mniQuitFloat";
+            this.mniQuitFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniQuitFloat_ItemClick);
             // 
             // mniQYYJTFloat1
             // 
@@ -1367,11 +1172,125 @@
             this.mniYJDSSFloat1.ImageIndex = 22;
             this.mniYJDSSFloat1.Name = "mniYJDSSFloat1";
             // 
+            // PreWarningRulesManagementFloat
+            // 
+            this.PreWarningRulesManagementFloat.Caption = "预警规则管理";
+            this.PreWarningRulesManagementFloat.Id = 64;
+            this.PreWarningRulesManagementFloat.ImageIndex = 23;
+            this.PreWarningRulesManagementFloat.Name = "PreWarningRulesManagementFloat";
+            this.PreWarningRulesManagementFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.PreWarningRulesManagementFloat_ItemClick);
+            // 
+            // mniHCFDTGLFloat
+            // 
+            this.mniHCFDTGLFloat.Caption = "回采进度图管理";
+            this.mniHCFDTGLFloat.Id = 72;
+            this.mniHCFDTGLFloat.Name = "mniHCFDTGLFloat";
+            this.mniHCFDTGLFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniHCFDTGLFloat_ItemClick);
+            // 
+            // mniCXJJJCYBBFloat
+            // 
+            this.mniCXJJJCYBBFloat.Caption = "查询掘进进尺月报表";
+            this.mniCXJJJCYBBFloat.Id = 73;
+            this.mniCXJJJCYBBFloat.Name = "mniCXJJJCYBBFloat";
+            this.mniCXJJJCYBBFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniCXJJJCYBBFloat_ItemClick);
+            // 
+            // mniCXHCJCYBBFloat
+            // 
+            this.mniCXHCJCYBBFloat.Caption = "查询回采进尺月报表";
+            this.mniCXHCJCYBBFloat.Id = 74;
+            this.mniCXHCJCYBBFloat.Name = "mniCXHCJCYBBFloat";
+            this.mniCXHCJCYBBFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniCXHCJCYBBFloat_ItemClick);
+            // 
+            // mniJJMCGQGLFloat
+            // 
+            this.mniJJMCGQGLFloat.Caption = "掘进面传感器管理";
+            this.mniJJMCGQGLFloat.Id = 75;
+            this.mniJJMCGQGLFloat.ImageIndex = 7;
+            this.mniJJMCGQGLFloat.Name = "mniJJMCGQGLFloat";
+            this.mniJJMCGQGLFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniJJMCGQGLFloat_ItemClick);
+            // 
+            // mniHCMCGQGLFloat
+            // 
+            this.mniHCMCGQGLFloat.Caption = "回采面传感器管理";
+            this.mniHCMCGQGLFloat.Id = 76;
+            this.mniHCMCGQGLFloat.ImageIndex = 6;
+            this.mniHCMCGQGLFloat.Name = "mniHCMCGQGLFloat";
+            this.mniHCMCGQGLFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniHCMCGQGLFloat_ItemClick);
+            // 
+            // mniQTDDCGQGLFloat
+            // 
+            this.mniQTDDCGQGLFloat.Caption = "其它地点传感器管理";
+            this.mniQTDDCGQGLFloat.Id = 77;
+            this.mniQTDDCGQGLFloat.ImageIndex = 10;
+            this.mniQTDDCGQGLFloat.Name = "mniQTDDCGQGLFloat";
+            this.mniQTDDCGQGLFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniQTDDCGQGLFloat_ItemClick);
+            // 
+            // mniSJRGLFloat
+            // 
+            this.mniSJRGLFloat.Caption = "收件人管理";
+            this.mniSJRGLFloat.Id = 78;
+            this.mniSJRGLFloat.ImageIndex = 12;
+            this.mniSJRGLFloat.Name = "mniSJRGLFloat";
+            this.mniSJRGLFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniSJRGLFloat_ItemClick);
+            // 
+            // mniSDFSDXFloat
+            // 
+            this.mniSDFSDXFloat.Caption = "手动发送短信";
+            this.mniSDFSDXFloat.Id = 79;
+            this.mniSDFSDXFloat.ImageIndex = 13;
+            this.mniSDFSDXFloat.Name = "mniSDFSDXFloat";
+            this.mniSDFSDXFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniSDFSDXFloat_ItemClick);
+            // 
+            // mniZDFSDXFloat
+            // 
+            this.mniZDFSDXFloat.Caption = "自动发送短信";
+            this.mniZDFSDXFloat.Id = 80;
+            this.mniZDFSDXFloat.ImageIndex = 26;
+            this.mniZDFSDXFloat.Name = "mniZDFSDXFloat";
+            this.mniZDFSDXFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniZDFSDXFloat_ItemClick);
+            // 
+            // mniQYYJTFloat
+            // 
+            this.mniQYYJTFloat.Caption = "区域预警图";
+            this.mniQYYJTFloat.Id = 91;
+            this.mniQYYJTFloat.ImageIndex = 11;
+            this.mniQYYJTFloat.Name = "mniQYYJTFloat";
+            this.mniQYYJTFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniQYYJTFloat_ItemClick_1);
+            // 
+            // mniGZMYJTFloat
+            // 
+            this.mniGZMYJTFloat.Caption = "工作面预警图";
+            this.mniGZMYJTFloat.Id = 92;
+            this.mniGZMYJTFloat.Name = "mniGZMYJTFloat";
+            this.mniGZMYJTFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniGZMYJTFloat_ItemClick_1);
+            // 
             // barCheckItem1
             // 
             this.barCheckItem1.Caption = "barCheckItem1";
             this.barCheckItem1.Id = 93;
             this.barCheckItem1.Name = "barCheckItem1";
+            // 
+            // mniYJDSSFloat
+            // 
+            this.mniYJDSSFloat.Caption = "预警点闪烁";
+            this.mniYJDSSFloat.Id = 94;
+            this.mniYJDSSFloat.ImageIndex = 22;
+            this.mniYJDSSFloat.Name = "mniYJDSSFloat";
+            this.mniYJDSSFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniYJDSSFloat_ItemClick_1);
+            // 
+            // mniDCCADFloat
+            // 
+            this.mniDCCADFloat.Caption = "导出为CAD";
+            this.mniDCCADFloat.Id = 98;
+            this.mniDCCADFloat.Name = "mniDCCADFloat";
+            this.mniDCCADFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniDCCADFloat_ItemClick);
+            // 
+            // mniDCTPPDFFloat
+            // 
+            this.mniDCTPPDFFloat.Caption = "导出为图片或PDF";
+            this.mniDCTPPDFFloat.Id = 99;
+            this.mniDCTPPDFFloat.Name = "mniDCTPPDFFloat";
+            this.mniDCTPPDFFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniDCTPPDFFloat_ItemClick);
             // 
             // barSubItem1
             // 
@@ -1434,12 +1353,53 @@
             this.axLicenseControl1.Size = new System.Drawing.Size(32, 32);
             this.axLicenseControl1.TabIndex = 10;
             // 
-            // bbiCheckUpdate
+            // bar1
             // 
-            this.bbiCheckUpdate.Caption = "检查更新";
-            this.bbiCheckUpdate.Id = 110;
-            this.bbiCheckUpdate.Name = "bbiCheckUpdate";
-            this.bbiCheckUpdate.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbiCheckUpdate_ItemClick);
+            this.bar1.BarName = "Tools";
+            this.bar1.DockCol = 3;
+            this.bar1.DockRow = 2;
+            this.bar1.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
+            this.bar1.FloatLocation = new System.Drawing.Point(933, 295);
+            this.bar1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniOpenFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniSaveFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniSaveAsFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniPrintFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(this.mniDCCADFloat),
+            new DevExpress.XtraBars.LinkPersistInfo(this.mniDCTPPDFFloat),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniQuitFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            this.bar1.Offset = 981;
+            this.bar1.Text = "文件";
+            this.bar1.Visible = false;
+            // 
+            // bar8
+            // 
+            this.bar8.BarName = "传感器管理";
+            this.bar8.DockCol = 2;
+            this.bar8.DockRow = 2;
+            this.bar8.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
+            this.bar8.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniJJMCGQGLFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniHCMCGQGLFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniQTDDCGQGLFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            this.bar8.OptionsBar.AllowRename = true;
+            this.bar8.Text = "传感器管理";
+            this.bar8.Visible = false;
+            // 
+            // bar9
+            // 
+            this.bar9.BarName = "短信管理";
+            this.bar9.DockCol = 0;
+            this.bar9.DockRow = 2;
+            this.bar9.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
+            this.bar9.FloatLocation = new System.Drawing.Point(795, 314);
+            this.bar9.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniSJRGLFloat, "", false, true, false, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniSDFSDXFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniZDFSDXFloat, "", false, true, false, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            this.bar9.Offset = 511;
+            this.bar9.OptionsBar.AllowRename = true;
+            this.bar9.Text = "短信管理";
             // 
             // MainFormWm
             // 
@@ -1482,7 +1442,6 @@
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private DevExpress.XtraBars.BarManager barManager1;
-        private DevExpress.XtraBars.Bar bar1;
         private DevExpress.XtraBars.Bar bar2;
         private DevExpress.XtraBars.BarSubItem mniFile;
         private DevExpress.XtraBars.BarSubItem mniYJJGS;
@@ -1564,15 +1523,12 @@
         private DevExpress.XtraBars.BarButtonItem mniHCFDTGLFloat;
         private DevExpress.XtraBars.BarButtonItem mniCXJJJCYBBFloat;
         private DevExpress.XtraBars.BarButtonItem mniCXHCJCYBBFloat;
-        private DevExpress.XtraBars.Bar bar8;
         private DevExpress.XtraBars.BarButtonItem mniJJMCGQGLFloat;
         private DevExpress.XtraBars.BarButtonItem mniHCMCGQGLFloat;
         private DevExpress.XtraBars.BarButtonItem mniQTDDCGQGLFloat;
-        private DevExpress.XtraBars.Bar bar9;
         private DevExpress.XtraBars.BarButtonItem mniSJRGLFloat;
         private DevExpress.XtraBars.BarButtonItem mniSDFSDXFloat;
         private DevExpress.XtraBars.BarButtonItem mniZDFSDXFloat;
-        private DevExpress.XtraBars.Bar bar10;
         private DevExpress.XtraBars.BarButtonItem mniDatabaseSetFloat;
         private DevExpress.XtraBars.BarButtonItem mniStuffInfoManaFloat;
         private DevExpress.XtraBars.BarButtonItem mniDepartmentInfoManaFloat;
@@ -1602,5 +1558,8 @@
         private DevExpress.XtraBars.BarButtonItem barBtnWarningLift;
         private DevExpress.XtraBars.BarButtonItem mniDCShape;
         private DevExpress.XtraBars.BarButtonItem bbiCheckUpdate;
+        private DevExpress.XtraBars.Bar bar1;
+        private DevExpress.XtraBars.Bar bar8;
+        private DevExpress.XtraBars.Bar bar9;
     }
 }

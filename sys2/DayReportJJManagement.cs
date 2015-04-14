@@ -63,7 +63,12 @@ namespace sys2
         /// <param name="e"></param>
         private void tsBtnModify_Click(object sender, EventArgs e)
         {
-            var dayReportJjForm = new DayReportJjEntering((DayReportJj) gridView1.GetFocusedRow());
+            if (gridView1.GetFocusedRow() == null)
+            {
+                Alert.alert("请选择要修改的信息");
+                return;
+            }
+            var dayReportJjForm = new DayReportJjEntering((DayReportJj)gridView1.GetFocusedRow());
             if (DialogResult.OK == dayReportJjForm.ShowDialog())
             {
                 RefreshData();
@@ -79,7 +84,7 @@ namespace sys2
         {
             //确认删除
             if (!Alert.confirm(Const.DEL_CONFIRM_MSG)) return;
-            var entity = (DayReportJj) gridView1.GetFocusedRow();
+            var entity = (DayReportJj)gridView1.GetFocusedRow();
             // 掘进工作面，只有一条巷道
             var tunnel = Tunnel.FindFirstByWorkingFaceId(entity.WorkingFace.WorkingFaceId);
             DelJJCD(tunnel.TunnelId.ToString(CultureInfo.InvariantCulture), entity.BindingId,
@@ -105,7 +110,7 @@ namespace sys2
             Global.cons.DelJJCD(hdid, bid);
             //计算地质构造距离
             //var sql = "\"" + GIS.GIS_Const.FIELD_HDID + "\"='" + hdid + "'";
-            var dics = new Dictionary<string, string> {{GIS_Const.FIELD_HDID, hdid}};
+            var dics = new Dictionary<string, string> { { GIS_Const.FIELD_HDID, hdid } };
             var objs = Global.commonclss.SearchFeaturesByGeoAndText(Global.hdfdlyr, dics);
             if (objs.Count > 0)
             {
@@ -114,19 +119,19 @@ namespace sys2
                 IPoint pline = new PointClass();
                 if (poly0 != null && poly0.Point[0].X - poly0.Point[1].X > 0) //向右掘进
                 {
-                    pline.X = (poly0.Point[0].X + poly0.Point[3].X)/2;
-                    pline.Y = (poly0.Point[0].Y + poly0.Point[3].Y)/2;
+                    pline.X = (poly0.Point[0].X + poly0.Point[3].X) / 2;
+                    pline.Y = (poly0.Point[0].Y + poly0.Point[3].Y) / 2;
                 }
                 else //向左掘进
                 {
                     if (poly0 != null)
                     {
-                        pline.X = (poly0.Point[1].X + poly0.Point[2].X)/2;
-                        pline.Y = (poly0.Point[1].Y + poly0.Point[2].Y)/2;
+                        pline.X = (poly0.Point[1].X + poly0.Point[2].X) / 2;
+                        pline.Y = (poly0.Point[1].Y + poly0.Point[2].Y) / 2;
                     }
                 }
                 //查询地质构造信息
-                var hdids = new List<int> {Convert.ToInt32(hdid)};
+                var hdids = new List<int> { Convert.ToInt32(hdid) };
                 var dzxlist = Global.commonclss.GetStructsInfosNew(pline, hdids);
                 GeologySpaceBll.DeleteGeologySpaceEntityInfos(workingfaceid); //删除工作面ID对应的地质构造信息
 
@@ -215,11 +220,11 @@ namespace sys2
                 MessageBox.Show(@"未发现掘进进尺图层！");
                 return;
             }
-            var pFeatureLayer = (IFeatureLayer) pLayer;
+            var pFeatureLayer = (IFeatureLayer)pLayer;
             var str = "";
             //for (int i = 0; i < iSelIdxsArr.Length; i++)
             //{
-            var bid = ((DayReportJj) gridView1.GetFocusedRow()).BindingId;
+            var bid = ((DayReportJj)gridView1.GetFocusedRow()).BindingId;
             if (bid != "")
             {
                 if (true)

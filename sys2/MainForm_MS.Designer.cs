@@ -31,14 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm_MS));
             this.toolBar_MS = new ESRI.ArcGIS.Controls.AxToolbarControl();
             this.barManager2 = new DevExpress.XtraBars.BarManager();
-            this.bar1 = new DevExpress.XtraBars.Bar();
-            this.mniOpenMineMapFloat = new DevExpress.XtraBars.BarButtonItem();
-            this.mniSaveFloat = new DevExpress.XtraBars.BarButtonItem();
-            this.mniSaveAsFloat = new DevExpress.XtraBars.BarButtonItem();
-            this.mniPrintFloat = new DevExpress.XtraBars.BarButtonItem();
-            this.mniDCCADFloat = new DevExpress.XtraBars.BarButtonItem();
-            this.mniDCTPPDFFloat = new DevExpress.XtraBars.BarButtonItem();
-            this.mniQuitFloat = new DevExpress.XtraBars.BarButtonItem();
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.barSubItem1 = new DevExpress.XtraBars.BarSubItem();
             this.mniOpenMineMap = new DevExpress.XtraBars.BarButtonItem();
@@ -58,15 +50,6 @@
             this.mniCXJJJCYBB = new DevExpress.XtraBars.BarButtonItem();
             this.mniCXHCJCYBB = new DevExpress.XtraBars.BarButtonItem();
             this.barBtnItemHengChuan = new DevExpress.XtraBars.BarButtonItem();
-            this.barSubItem3 = new DevExpress.XtraBars.BarSubItem();
-            this.mniDatabaseSet = new DevExpress.XtraBars.BarButtonItem();
-            this.mniUserInfoMana = new DevExpress.XtraBars.BarButtonItem();
-            this.mniDepartment = new DevExpress.XtraBars.BarButtonItem();
-            this.mniUserLoginInfoMana = new DevExpress.XtraBars.BarButtonItem();
-            this.mniUserGroupInfoMana = new DevExpress.XtraBars.BarButtonItem();
-            this.mniTeamManage = new DevExpress.XtraBars.BarButtonItem();
-            this.mniShiftsSetting = new DevExpress.XtraBars.BarButtonItem();
-            this.mniSkinSetting = new DevExpress.XtraBars.BarButtonItem();
             this.barSubItem4 = new DevExpress.XtraBars.BarSubItem();
             this.bbiCheckUpdate = new DevExpress.XtraBars.BarButtonItem();
             this.mniHelpFile = new DevExpress.XtraBars.BarButtonItem();
@@ -78,7 +61,24 @@
             this.mniHCJDTGLFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniCXJJJCYBBFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniCXHCJCYBBFloat = new DevExpress.XtraBars.BarButtonItem();
-            this.bar4 = new DevExpress.XtraBars.Bar();
+            this.barDockControl1 = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControl2 = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControl3 = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControl4 = new DevExpress.XtraBars.BarDockControl();
+            this.imageList1 = new System.Windows.Forms.ImageList();
+            this.barSubItem3 = new DevExpress.XtraBars.BarSubItem();
+            this.mniTeamManage = new DevExpress.XtraBars.BarButtonItem();
+            this.mniShiftsSetting = new DevExpress.XtraBars.BarButtonItem();
+            this.mniDatabaseSet = new DevExpress.XtraBars.BarButtonItem();
+            this.mniUserInfoMana = new DevExpress.XtraBars.BarButtonItem();
+            this.mniDepartment = new DevExpress.XtraBars.BarButtonItem();
+            this.mniUserLoginInfoMana = new DevExpress.XtraBars.BarButtonItem();
+            this.mniUserGroupInfoMana = new DevExpress.XtraBars.BarButtonItem();
+            this.mniOpenMineMapFloat = new DevExpress.XtraBars.BarButtonItem();
+            this.mniSaveFloat = new DevExpress.XtraBars.BarButtonItem();
+            this.mniSaveAsFloat = new DevExpress.XtraBars.BarButtonItem();
+            this.mniPrintFloat = new DevExpress.XtraBars.BarButtonItem();
+            this.mniQuitFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniDatabaseSetFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniUserInfoManaFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniDepartmentFloat = new DevExpress.XtraBars.BarButtonItem();
@@ -86,15 +86,13 @@
             this.mniUserGroupInfoManaFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniTeamManageFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniShiftsSettingFloat = new DevExpress.XtraBars.BarButtonItem();
-            this.barDockControl1 = new DevExpress.XtraBars.BarDockControl();
-            this.barDockControl2 = new DevExpress.XtraBars.BarDockControl();
-            this.barDockControl3 = new DevExpress.XtraBars.BarDockControl();
-            this.barDockControl4 = new DevExpress.XtraBars.BarDockControl();
-            this.imageList1 = new System.Windows.Forms.ImageList();
+            this.mniDCCADFloat = new DevExpress.XtraBars.BarButtonItem();
+            this.mniDCTPPDFFloat = new DevExpress.XtraBars.BarButtonItem();
             this.barSubItem5 = new DevExpress.XtraBars.BarSubItem();
             this.barBtnTunnellingAnalysis = new DevExpress.XtraBars.BarButtonItem();
             this.barBtnStopingAnalysis = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            this.mniSkinSetting = new DevExpress.XtraBars.BarButtonItem();
             this.repositoryItemTextEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.axLicenseControl1 = new ESRI.ArcGIS.Controls.AxLicenseControl();
             this.statusStrip1 = new GIS.BasicGraphic.UToolStatus();
@@ -112,7 +110,7 @@
             // toolBar_MS
             // 
             this.toolBar_MS.Dock = System.Windows.Forms.DockStyle.Top;
-            this.toolBar_MS.Location = new System.Drawing.Point(0, 86);
+            this.toolBar_MS.Location = new System.Drawing.Point(0, 55);
             this.toolBar_MS.Name = "toolBar_MS";
             this.toolBar_MS.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("toolBar_MS.OcxState")));
             this.toolBar_MS.Size = new System.Drawing.Size(993, 28);
@@ -121,10 +119,8 @@
             // barManager2
             // 
             this.barManager2.Bars.AddRange(new DevExpress.XtraBars.Bar[] {
-            this.bar1,
             this.bar2,
-            this.bar3,
-            this.bar4});
+            this.bar3});
             this.barManager2.DockControls.Add(this.barDockControl1);
             this.barManager2.DockControls.Add(this.barDockControl2);
             this.barManager2.DockControls.Add(this.barDockControl3);
@@ -188,77 +184,9 @@
             this.mniDCShape,
             this.bbiCheckUpdate});
             this.barManager2.MainMenu = this.bar2;
-            this.barManager2.MaxItemId = 67;
+            this.barManager2.MaxItemId = 68;
             this.barManager2.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemTextEdit1});
-            // 
-            // bar1
-            // 
-            this.bar1.BarName = "Tools";
-            this.bar1.DockCol = 0;
-            this.bar1.DockRow = 2;
-            this.bar1.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
-            this.bar1.FloatLocation = new System.Drawing.Point(339, 204);
-            this.bar1.FloatSize = new System.Drawing.Size(392, 29);
-            this.bar1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniOpenMineMapFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniSaveFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniSaveAsFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniPrintFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(this.mniDCCADFloat),
-            new DevExpress.XtraBars.LinkPersistInfo(this.mniDCTPPDFFloat),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniQuitFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
-            this.bar1.Text = "文件";
-            this.bar1.Visible = false;
-            // 
-            // mniOpenMineMapFloat
-            // 
-            this.mniOpenMineMapFloat.Caption = "打开矿图";
-            this.mniOpenMineMapFloat.Id = 30;
-            this.mniOpenMineMapFloat.Name = "mniOpenMineMapFloat";
-            this.mniOpenMineMapFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniOpenMineMapFloat_ItemClick);
-            // 
-            // mniSaveFloat
-            // 
-            this.mniSaveFloat.Caption = "保存";
-            this.mniSaveFloat.Id = 31;
-            this.mniSaveFloat.Name = "mniSaveFloat";
-            this.mniSaveFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniSaveFloat_ItemClick);
-            // 
-            // mniSaveAsFloat
-            // 
-            this.mniSaveAsFloat.Caption = "另存为";
-            this.mniSaveAsFloat.Id = 32;
-            this.mniSaveAsFloat.Name = "mniSaveAsFloat";
-            this.mniSaveAsFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniSaveAsFloat_ItemClick);
-            // 
-            // mniPrintFloat
-            // 
-            this.mniPrintFloat.Caption = "打印";
-            this.mniPrintFloat.Id = 34;
-            this.mniPrintFloat.Name = "mniPrintFloat";
-            this.mniPrintFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniPrintFloat_ItemClick);
-            // 
-            // mniDCCADFloat
-            // 
-            this.mniDCCADFloat.Caption = "导出为CAD";
-            this.mniDCCADFloat.Id = 54;
-            this.mniDCCADFloat.Name = "mniDCCADFloat";
-            this.mniDCCADFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniDCCADFloat_ItemClick);
-            // 
-            // mniDCTPPDFFloat
-            // 
-            this.mniDCTPPDFFloat.Caption = "导出为图片或PDF";
-            this.mniDCTPPDFFloat.Id = 55;
-            this.mniDCTPPDFFloat.Name = "mniDCTPPDFFloat";
-            this.mniDCTPPDFFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniDCTPPDFFloat_ItemClick);
-            // 
-            // mniQuitFloat
-            // 
-            this.mniQuitFloat.Caption = "退出";
-            this.mniQuitFloat.Id = 35;
-            this.mniQuitFloat.Name = "mniQuitFloat";
-            this.mniQuitFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniQuitFloat_ItemClick);
             // 
             // bar2
             // 
@@ -269,7 +197,6 @@
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem1),
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem2),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem3),
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem4)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawDragBorder = false;
@@ -376,8 +303,7 @@
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniTCX, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniHCJDTGL, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniCXJJJCYBB, "", false, true, false, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniCXHCJCYBB, "", false, true, false, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.None, false, this.barBtnItemHengChuan, false)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniCXHCJCYBB, "", false, true, false, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.barSubItem2.Name = "barSubItem2";
             // 
             // mniJJJCRB
@@ -442,85 +368,6 @@
             this.barBtnItemHengChuan.Id = 62;
             this.barBtnItemHengChuan.Name = "barBtnItemHengChuan";
             this.barBtnItemHengChuan.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBtnItemHengChuan_ItemClick);
-            // 
-            // barSubItem3
-            // 
-            this.barSubItem3.Caption = "系统设置(&S)";
-            this.barSubItem3.Id = 6;
-            this.barSubItem3.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.S));
-            this.barSubItem3.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniDatabaseSet, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniUserInfoMana, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniDepartment, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniUserLoginInfoMana, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniUserGroupInfoMana, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniTeamManage, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniShiftsSetting, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
-            this.barSubItem3.Name = "barSubItem3";
-            // 
-            // mniDatabaseSet
-            // 
-            this.mniDatabaseSet.Caption = "数据库设置(&D)...";
-            this.mniDatabaseSet.Id = 21;
-            this.mniDatabaseSet.ImageIndex = 11;
-            this.mniDatabaseSet.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D));
-            this.mniDatabaseSet.Name = "mniDatabaseSet";
-            this.mniDatabaseSet.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniDatabaseSet_ItemClick);
-            // 
-            // mniUserInfoMana
-            // 
-            this.mniUserInfoMana.Caption = "人员信息管理(&U)...";
-            this.mniUserInfoMana.Id = 22;
-            this.mniUserInfoMana.ImageIndex = 15;
-            this.mniUserInfoMana.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W));
-            this.mniUserInfoMana.Name = "mniUserInfoMana";
-            this.mniUserInfoMana.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniUserInfoMana_ItemClick);
-            // 
-            // mniDepartment
-            // 
-            this.mniDepartment.Caption = "部门信息管理(&R)...";
-            this.mniDepartment.Id = 23;
-            this.mniDepartment.ImageIndex = 2;
-            this.mniDepartment.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R));
-            this.mniDepartment.Name = "mniDepartment";
-            this.mniDepartment.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniDepartment_ItemClick);
-            // 
-            // mniUserLoginInfoMana
-            // 
-            this.mniUserLoginInfoMana.Caption = "用户信息管理(&W)...";
-            this.mniUserLoginInfoMana.Id = 24;
-            this.mniUserLoginInfoMana.ImageIndex = 13;
-            this.mniUserLoginInfoMana.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F));
-            this.mniUserLoginInfoMana.Name = "mniUserLoginInfoMana";
-            this.mniUserLoginInfoMana.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniUserLoginInfoMana_ItemClick);
-            // 
-            // mniUserGroupInfoMana
-            // 
-            this.mniUserGroupInfoMana.Caption = "用户组信息管理(&K)...";
-            this.mniUserGroupInfoMana.Id = 25;
-            this.mniUserGroupInfoMana.ImageIndex = 14;
-            this.mniUserGroupInfoMana.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.M));
-            this.mniUserGroupInfoMana.Name = "mniUserGroupInfoMana";
-            this.mniUserGroupInfoMana.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniUserGroupInfoMana_ItemClick);
-            // 
-            // mniTeamManage
-            // 
-            this.mniTeamManage.Caption = "队别管理(&T)...";
-            this.mniTeamManage.Id = 26;
-            this.mniTeamManage.ImageIndex = 5;
-            this.mniTeamManage.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G));
-            this.mniTeamManage.Name = "mniTeamManage";
-            this.mniTeamManage.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniTeamManage_ItemClick);
-            // 
-            // mniShiftsSetting
-            // 
-            this.mniShiftsSetting.Caption = "班次管理(&B)...";
-            this.mniShiftsSetting.Id = 27;
-            this.mniShiftsSetting.ImageIndex = 0;
-            this.mniShiftsSetting.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.B));
-            this.mniShiftsSetting.Name = "mniShiftsSetting";
-            this.mniShiftsSetting.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniShiftsSetting_ItemClick);
-
             // 
             // barSubItem4
             // 
@@ -597,6 +444,7 @@
             this.mniTCXFloat.Id = 40;
             this.mniTCXFloat.ImageIndex = 12;
             this.mniTCXFloat.Name = "mniTCXFloat";
+            this.mniTCXFloat.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.mniTCXFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniTCXFloat_ItemClick);
             // 
             // mniHCJDTGLFloat
@@ -605,6 +453,7 @@
             this.mniHCJDTGLFloat.Id = 41;
             this.mniHCJDTGLFloat.ImageIndex = 9;
             this.mniHCJDTGLFloat.Name = "mniHCJDTGLFloat";
+            this.mniHCJDTGLFloat.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.mniHCJDTGLFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniHCJDTGLFloat_ItemClick);
             // 
             // mniCXJJJCYBBFloat
@@ -625,23 +474,162 @@
             this.mniCXHCJCYBBFloat.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.mniCXHCJCYBBFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniCXHCJCYBBFloat_ItemClick);
             // 
-            // bar4
+            // barDockControl1
             // 
-            this.bar4.BarName = "系统设置";
-            this.bar4.DockCol = 1;
-            this.bar4.DockRow = 1;
-            this.bar4.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
-            this.bar4.FloatLocation = new System.Drawing.Point(100, 191);
-            this.bar4.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniDatabaseSetFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniUserInfoManaFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniDepartmentFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniUserLoginInfoManaFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniUserGroupInfoManaFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniTeamManageFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniShiftsSettingFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
-            this.bar4.OptionsBar.AllowRename = true;
-            this.bar4.Text = "系统设置";
+            this.barDockControl1.CausesValidation = false;
+            this.barDockControl1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.barDockControl1.Location = new System.Drawing.Point(0, 0);
+            this.barDockControl1.Size = new System.Drawing.Size(993, 55);
+            // 
+            // barDockControl2
+            // 
+            this.barDockControl2.CausesValidation = false;
+            this.barDockControl2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.barDockControl2.Location = new System.Drawing.Point(0, 480);
+            this.barDockControl2.Size = new System.Drawing.Size(993, 0);
+            // 
+            // barDockControl3
+            // 
+            this.barDockControl3.CausesValidation = false;
+            this.barDockControl3.Dock = System.Windows.Forms.DockStyle.Left;
+            this.barDockControl3.Location = new System.Drawing.Point(0, 55);
+            this.barDockControl3.Size = new System.Drawing.Size(0, 425);
+            // 
+            // barDockControl4
+            // 
+            this.barDockControl4.CausesValidation = false;
+            this.barDockControl4.Dock = System.Windows.Forms.DockStyle.Right;
+            this.barDockControl4.Location = new System.Drawing.Point(993, 55);
+            this.barDockControl4.Size = new System.Drawing.Size(0, 425);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "班次设置32X32.ico");
+            this.imageList1.Images.SetKeyName(1, "帮助.png");
+            this.imageList1.Images.SetKeyName(2, "部门信息管理32X32.ico");
+            this.imageList1.Images.SetKeyName(3, "查询回采进尺月报表32X32.ico");
+            this.imageList1.Images.SetKeyName(4, "查询掘进进尺月报表32X32.ico");
+            this.imageList1.Images.SetKeyName(5, "队别管理32X32.ico");
+            this.imageList1.Images.SetKeyName(6, "工作面采掘进度管理系统主程序32X32.ico");
+            this.imageList1.Images.SetKeyName(7, "关于.png");
+            this.imageList1.Images.SetKeyName(8, "回采进尺日报32X32.ico");
+            this.imageList1.Images.SetKeyName(9, "回采进度图管理32X32.ico");
+            this.imageList1.Images.SetKeyName(10, "掘进进尺日报32X32.ico");
+            this.imageList1.Images.SetKeyName(11, "数据库设置32X32.ico");
+            this.imageList1.Images.SetKeyName(12, "停采线32X32.ico");
+            this.imageList1.Images.SetKeyName(13, "用户信息管理32X32.ico");
+            this.imageList1.Images.SetKeyName(14, "用户组信息管理32X32.ico");
+            this.imageList1.Images.SetKeyName(15, "user_edit.png");
+            // 
+            // barSubItem3
+            // 
+            this.barSubItem3.Caption = "系统设置(&S)";
+            this.barSubItem3.Id = 6;
+            this.barSubItem3.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.S));
+            this.barSubItem3.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniTeamManage, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniShiftsSetting, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            this.barSubItem3.Name = "barSubItem3";
+            // 
+            // mniTeamManage
+            // 
+            this.mniTeamManage.Caption = "队别管理(&T)...";
+            this.mniTeamManage.Id = 26;
+            this.mniTeamManage.ImageIndex = 5;
+            this.mniTeamManage.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G));
+            this.mniTeamManage.Name = "mniTeamManage";
+            this.mniTeamManage.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniTeamManage_ItemClick);
+            // 
+            // mniShiftsSetting
+            // 
+            this.mniShiftsSetting.Caption = "班次管理(&B)...";
+            this.mniShiftsSetting.Id = 27;
+            this.mniShiftsSetting.ImageIndex = 0;
+            this.mniShiftsSetting.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.B));
+            this.mniShiftsSetting.Name = "mniShiftsSetting";
+            this.mniShiftsSetting.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniShiftsSetting_ItemClick);
+            // 
+            // mniDatabaseSet
+            // 
+            this.mniDatabaseSet.Caption = "数据库设置(&D)...";
+            this.mniDatabaseSet.Id = 21;
+            this.mniDatabaseSet.ImageIndex = 11;
+            this.mniDatabaseSet.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D));
+            this.mniDatabaseSet.Name = "mniDatabaseSet";
+            this.mniDatabaseSet.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniDatabaseSet_ItemClick);
+            // 
+            // mniUserInfoMana
+            // 
+            this.mniUserInfoMana.Caption = "人员信息管理(&U)...";
+            this.mniUserInfoMana.Id = 22;
+            this.mniUserInfoMana.ImageIndex = 15;
+            this.mniUserInfoMana.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W));
+            this.mniUserInfoMana.Name = "mniUserInfoMana";
+            this.mniUserInfoMana.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniUserInfoMana_ItemClick);
+            // 
+            // mniDepartment
+            // 
+            this.mniDepartment.Caption = "部门信息管理(&R)...";
+            this.mniDepartment.Id = 23;
+            this.mniDepartment.ImageIndex = 2;
+            this.mniDepartment.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R));
+            this.mniDepartment.Name = "mniDepartment";
+            this.mniDepartment.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniDepartment_ItemClick);
+            // 
+            // mniUserLoginInfoMana
+            // 
+            this.mniUserLoginInfoMana.Caption = "用户信息管理(&W)...";
+            this.mniUserLoginInfoMana.Id = 24;
+            this.mniUserLoginInfoMana.ImageIndex = 13;
+            this.mniUserLoginInfoMana.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F));
+            this.mniUserLoginInfoMana.Name = "mniUserLoginInfoMana";
+            this.mniUserLoginInfoMana.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniUserLoginInfoMana_ItemClick);
+            // 
+            // mniUserGroupInfoMana
+            // 
+            this.mniUserGroupInfoMana.Caption = "用户组信息管理(&K)...";
+            this.mniUserGroupInfoMana.Id = 25;
+            this.mniUserGroupInfoMana.ImageIndex = 14;
+            this.mniUserGroupInfoMana.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.M));
+            this.mniUserGroupInfoMana.Name = "mniUserGroupInfoMana";
+            this.mniUserGroupInfoMana.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniUserGroupInfoMana_ItemClick);
+            // 
+            // mniOpenMineMapFloat
+            // 
+            this.mniOpenMineMapFloat.Caption = "打开矿图";
+            this.mniOpenMineMapFloat.Id = 30;
+            this.mniOpenMineMapFloat.Name = "mniOpenMineMapFloat";
+            this.mniOpenMineMapFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniOpenMineMapFloat_ItemClick);
+            // 
+            // mniSaveFloat
+            // 
+            this.mniSaveFloat.Caption = "保存";
+            this.mniSaveFloat.Id = 31;
+            this.mniSaveFloat.Name = "mniSaveFloat";
+            this.mniSaveFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniSaveFloat_ItemClick);
+            // 
+            // mniSaveAsFloat
+            // 
+            this.mniSaveAsFloat.Caption = "另存为";
+            this.mniSaveAsFloat.Id = 32;
+            this.mniSaveAsFloat.Name = "mniSaveAsFloat";
+            this.mniSaveAsFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniSaveAsFloat_ItemClick);
+            // 
+            // mniPrintFloat
+            // 
+            this.mniPrintFloat.Caption = "打印";
+            this.mniPrintFloat.Id = 34;
+            this.mniPrintFloat.Name = "mniPrintFloat";
+            this.mniPrintFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniPrintFloat_ItemClick);
+            // 
+            // mniQuitFloat
+            // 
+            this.mniQuitFloat.Caption = "退出";
+            this.mniQuitFloat.Id = 35;
+            this.mniQuitFloat.Name = "mniQuitFloat";
+            this.mniQuitFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniQuitFloat_ItemClick);
             // 
             // mniDatabaseSetFloat
             // 
@@ -699,54 +687,19 @@
             this.mniShiftsSettingFloat.Name = "mniShiftsSettingFloat";
             this.mniShiftsSettingFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniShiftsSettingFloat_ItemClick);
             // 
-            // barDockControl1
+            // mniDCCADFloat
             // 
-            this.barDockControl1.CausesValidation = false;
-            this.barDockControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.barDockControl1.Location = new System.Drawing.Point(0, 0);
-            this.barDockControl1.Size = new System.Drawing.Size(993, 86);
+            this.mniDCCADFloat.Caption = "导出为CAD";
+            this.mniDCCADFloat.Id = 54;
+            this.mniDCCADFloat.Name = "mniDCCADFloat";
+            this.mniDCCADFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniDCCADFloat_ItemClick);
             // 
-            // barDockControl2
+            // mniDCTPPDFFloat
             // 
-            this.barDockControl2.CausesValidation = false;
-            this.barDockControl2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControl2.Location = new System.Drawing.Point(0, 480);
-            this.barDockControl2.Size = new System.Drawing.Size(993, 0);
-            // 
-            // barDockControl3
-            // 
-            this.barDockControl3.CausesValidation = false;
-            this.barDockControl3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.barDockControl3.Location = new System.Drawing.Point(0, 86);
-            this.barDockControl3.Size = new System.Drawing.Size(0, 394);
-            // 
-            // barDockControl4
-            // 
-            this.barDockControl4.CausesValidation = false;
-            this.barDockControl4.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControl4.Location = new System.Drawing.Point(993, 86);
-            this.barDockControl4.Size = new System.Drawing.Size(0, 394);
-            // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "班次设置32X32.ico");
-            this.imageList1.Images.SetKeyName(1, "帮助.png");
-            this.imageList1.Images.SetKeyName(2, "部门信息管理32X32.ico");
-            this.imageList1.Images.SetKeyName(3, "查询回采进尺月报表32X32.ico");
-            this.imageList1.Images.SetKeyName(4, "查询掘进进尺月报表32X32.ico");
-            this.imageList1.Images.SetKeyName(5, "队别管理32X32.ico");
-            this.imageList1.Images.SetKeyName(6, "工作面采掘进度管理系统主程序32X32.ico");
-            this.imageList1.Images.SetKeyName(7, "关于.png");
-            this.imageList1.Images.SetKeyName(8, "回采进尺日报32X32.ico");
-            this.imageList1.Images.SetKeyName(9, "回采进度图管理32X32.ico");
-            this.imageList1.Images.SetKeyName(10, "掘进进尺日报32X32.ico");
-            this.imageList1.Images.SetKeyName(11, "数据库设置32X32.ico");
-            this.imageList1.Images.SetKeyName(12, "停采线32X32.ico");
-            this.imageList1.Images.SetKeyName(13, "用户信息管理32X32.ico");
-            this.imageList1.Images.SetKeyName(14, "用户组信息管理32X32.ico");
-            this.imageList1.Images.SetKeyName(15, "user_edit.png");
+            this.mniDCTPPDFFloat.Caption = "导出为图片或PDF";
+            this.mniDCTPPDFFloat.Id = 55;
+            this.mniDCTPPDFFloat.Name = "mniDCTPPDFFloat";
+            this.mniDCTPPDFFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniDCTPPDFFloat_ItemClick);
             // 
             // barSubItem5
             // 
@@ -768,6 +721,11 @@
             this.barButtonItem1.Caption = "barButtonItem1";
             this.barButtonItem1.Id = 63;
             this.barButtonItem1.Name = "barButtonItem1";
+            // 
+            // mniSkinSetting
+            // 
+            this.mniSkinSetting.Id = 67;
+            this.mniSkinSetting.Name = "mniSkinSetting";
             // 
             // repositoryItemTextEdit1
             // 
@@ -797,28 +755,28 @@
             // tocControl_MS
             // 
             this.tocControl_MS.Dock = System.Windows.Forms.DockStyle.Left;
-            this.tocControl_MS.Location = new System.Drawing.Point(0, 114);
+            this.tocControl_MS.Location = new System.Drawing.Point(0, 83);
             this.tocControl_MS.Name = "tocControl_MS";
             this.tocControl_MS.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("tocControl_MS.OcxState")));
-            this.tocControl_MS.Size = new System.Drawing.Size(287, 347);
+            this.tocControl_MS.Size = new System.Drawing.Size(287, 378);
             this.tocControl_MS.TabIndex = 24;
             this.tocControl_MS.OnMouseDown += new ESRI.ArcGIS.Controls.ITOCControlEvents_Ax_OnMouseDownEventHandler(this.tocControl_MS_OnMouseDown);
             // 
             // splitter1
             // 
-            this.splitter1.Location = new System.Drawing.Point(287, 114);
+            this.splitter1.Location = new System.Drawing.Point(287, 83);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 347);
+            this.splitter1.Size = new System.Drawing.Size(3, 378);
             this.splitter1.TabIndex = 25;
             this.splitter1.TabStop = false;
             // 
             // mapControl_MS
             // 
             this.mapControl_MS.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mapControl_MS.Location = new System.Drawing.Point(290, 114);
+            this.mapControl_MS.Location = new System.Drawing.Point(290, 83);
             this.mapControl_MS.Name = "mapControl_MS";
             this.mapControl_MS.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("mapControl_MS.OcxState")));
-            this.mapControl_MS.Size = new System.Drawing.Size(703, 347);
+            this.mapControl_MS.Size = new System.Drawing.Size(703, 378);
             this.mapControl_MS.TabIndex = 26;
             // 
             // MainForm_MS
@@ -862,7 +820,6 @@
         private DevExpress.XtraBars.BarDockControl barDockControl2;
         private DevExpress.XtraBars.BarDockControl barDockControl1;
         private DevExpress.XtraBars.BarManager barManager2;
-        private DevExpress.XtraBars.Bar bar1;
         private DevExpress.XtraBars.Bar bar2;
         private System.Windows.Forms.ImageList imageList1;
         private DevExpress.XtraBars.BarSubItem barSubItem1;
@@ -902,7 +859,6 @@
         private DevExpress.XtraBars.BarButtonItem mniHCJDTGLFloat;
         private DevExpress.XtraBars.BarButtonItem mniCXJJJCYBBFloat;
         private DevExpress.XtraBars.BarButtonItem mniCXHCJCYBBFloat;
-        private DevExpress.XtraBars.Bar bar4;
         private DevExpress.XtraBars.BarButtonItem mniDatabaseSetFloat;
         private DevExpress.XtraBars.BarButtonItem mniUserInfoManaFloat;
         private DevExpress.XtraBars.BarButtonItem mniDepartmentFloat;

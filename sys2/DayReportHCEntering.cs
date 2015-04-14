@@ -100,7 +100,7 @@ namespace sys2
             }
             else
             {
-                var teamEntity = new Team {TeamId = Convert.ToInt32(cboTeamName.SelectedValue)};
+                var teamEntity = new Team { TeamId = Convert.ToInt32(cboTeamName.SelectedValue) };
                 teamEntity = Team.Find(teamEntity.TeamId);
                 teamInfoForm = new TeamInfoEntering(teamEntity);
             }
@@ -163,6 +163,7 @@ namespace sys2
                     UpdateDayReportHcInfo();
                 }
             }
+
         }
 
         /// <summary>
@@ -329,7 +330,7 @@ namespace sys2
 
                 /**回采日报实体赋值**/
                 //队别名称
-                dayReportHCEntity.Team = (Team) cboTeamName.SelectedItem;
+                dayReportHCEntity.Team = (Team)cboTeamName.SelectedItem;
                 //绑定回采面编号
                 dayReportHCEntity.WorkingFace = selectWorkingfaceSimple1.SelectedWorkingFace;
 
@@ -340,6 +341,13 @@ namespace sys2
                 {
                     dayReportHCEntity.DateTime = Convert.ToDateTime(cells[C_DATE].Value.ToString());
                 }
+                else
+                {
+                    Alert.alert("请录入进尺时间");
+                    DialogResult = DialogResult.None;
+                    return;
+                }
+
                 //填报人
                 dayReportHCEntity.Submitter = cboSubmitter.Text;
                 //工作制式
@@ -384,19 +392,19 @@ namespace sys2
             var bResult = false;
 
             //循环添加
-            foreach (var dayReportHCEntity in dayReportHCEntityList)
+            foreach (var dayReportHcEntity in dayReportHCEntityList)
             {
                 // 在图中绘制回采进尺
                 if (workingFace != null)
                 {
-                    var hcjc = dayReportHCEntity.JinChi;
-                    var bid = dayReportHCEntity.BindingId;
+                    var hcjc = dayReportHcEntity.JinChi;
+                    var bid = dayReportHcEntity.BindingId;
                     var workingFaceHc = WorkingFaceHc.FindByWorkingFace(workingFace);
                     AddHcjc(workingFaceHc.TunnelZy.TunnelId, workingFaceHc.TunnelFy.TunnelId,
                         workingFaceHc.TunnelQy.TunnelId, workingFaceHc.TunnelZy.TunnelWid,
                         workingFaceHc.TunnelFy.TunnelWid, workingFaceHc.TunnelQy.TunnelWid,
                         hcjc, bid);
-                    dayReportHCEntity.SaveAndFlush();
+                    dayReportHcEntity.SaveAndFlush();
                     bResult = true;
                 }
                 else

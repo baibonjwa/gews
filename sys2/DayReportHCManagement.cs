@@ -66,7 +66,12 @@ namespace sys2
         /// <param name="e"></param>
         private void tsBtnModify_Click(object sender, EventArgs e)
         {
-            var dayReportHc = (DayReportHc) gridView1.GetFocusedRow();
+            if (gridView1.GetFocusedRow() == null)
+            {
+                Alert.alert("请选择要修改的信息");
+                return;
+            }
+            var dayReportHc = (DayReportHc)gridView1.GetFocusedRow();
 
             var m = new DayReportHcEntering(dayReportHc);
             if (DialogResult.OK == m.ShowDialog())
@@ -86,7 +91,7 @@ namespace sys2
             if (!Alert.confirm(Const.DEL_CONFIRM_MSG)) return;
             using (new SessionScope())
             {
-                var entity = (DayReportHc) gridView1.GetFocusedRow();
+                var entity = (DayReportHc)gridView1.GetFocusedRow();
                 var workingFace = WorkingFace.Find(entity.WorkingFace.WorkingFaceId);
                 // 掘进工作面，只有一条巷道
                 var workingFaceHc = WorkingFaceHc.FindByWorkingFace(workingFace);
@@ -145,7 +150,7 @@ namespace sys2
                 index += 1;
                 if (index == count - 1)
                 {
-                    posnew = new PointClass {X = x, Y = y, Z = z};
+                    posnew = new PointClass { X = x, Y = y, Z = z };
                 }
             }
             //更新回采进尺表，将isdel设置0
@@ -157,7 +162,7 @@ namespace sys2
             //更新地质构造表中的信息
             if (posnew == null)
                 return;
-            var hdIds = new List<int> {hd1, hd2, qy};
+            var hdIds = new List<int> { hd1, hd2, qy };
             var dzxlist = Global.commonclss.GetStructsInfos(posnew, hdIds);
             if (dzxlist.Count > 0)
             {

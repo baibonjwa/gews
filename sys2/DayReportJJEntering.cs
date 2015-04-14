@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using Castle.ActiveRecord;
@@ -41,11 +42,10 @@ namespace sys2
         /// <summary>
         ///     构造方法
         /// </summary>
-        /// <param name="array">巷道编号数组</param>
-        /// <param name="dayReportHCEntity">回采进尺日报实体</param>
-        public DayReportJjEntering(DayReportJj dayReportJJEntity)
+        /// <param name="dayReportJjEntity"></param>
+        public DayReportJjEntering(DayReportJj dayReportJjEntity)
         {
-            _dayReportJJEntity = dayReportJJEntity;
+            _dayReportJJEntity = dayReportJjEntity;
             InitializeComponent();
             //修改初始化
             ChangeInfo();
@@ -60,7 +60,7 @@ namespace sys2
 
             dgrdvDayReportJJ.DataError += delegate { };
 
-            selectWorkingfaceSimple1.SelectedWorkingFace = dayReportJJEntity.WorkingFace;
+            selectWorkingfaceSimple1.SelectedWorkingFace = dayReportJjEntity.WorkingFace;
         }
 
         private void DayReportJJEntering_Load(object sender, EventArgs e)
@@ -136,7 +136,7 @@ namespace sys2
             //填报人
             cboSubmitter.Text = _dayReportJJEntity.Submitter;
             dgrdvDayReportJJ.Rows.Add();
-            dgrdvDayReportJJ[C_DATE, 0].Value = Convert.ToString(_dayReportJJEntity.DateTime);
+            dgrdvDayReportJJ[C_DATE, 0].Value = Convert.ToString(_dayReportJJEntity.DateTime, CultureInfo.InvariantCulture);
             dgrdvDayReportJJ[C_WORK_TIME, 0].Value = _dayReportJJEntity.WorkTime;
             dgrdvDayReportJJ[C_WORK_CONTENT, 0].Value = _dayReportJJEntity.WorkInfo;
             dgrdvDayReportJJ[C_WORK_PROGRESS, 0].Value = _dayReportJJEntity.JinChi;
@@ -157,7 +157,7 @@ namespace sys2
             }
             else
             {
-                var teamEntity = new Team {TeamId = Convert.ToInt32(cboTeamName.SelectedValue)};
+                var teamEntity = new Team { TeamId = Convert.ToInt32(cboTeamName.SelectedValue) };
                 teamEntity = Team.Find(teamEntity.TeamId);
                 teamInfoForm = new TeamInfoEntering(teamEntity);
             }
@@ -227,7 +227,7 @@ namespace sys2
             //查询地质结构信息
             geostructsinfos.Remove("LAST");
             GeologySpaceBll.DeleteGeologySpaceEntityInfos(selectWorkingfaceSimple1.SelectedWorkingFace.WorkingFaceId);
-                //删除工作面ID对应的地质构造信息
+            //删除工作面ID对应的地质构造信息
             foreach (var key in geostructsinfos.Keys)
             {
                 var geoinfos = geostructsinfos[key];
@@ -275,7 +275,7 @@ namespace sys2
             hd_ids.Add(Convert.ToInt16(hdid));
             var geostructsinfos = Global.commonclss.GetStructsInfos(pnt, hd_ids);
             GeologySpaceBll.DeleteGeologySpaceEntityInfos(selectWorkingfaceSimple1.SelectedWorkingFace.WorkingFaceId);
-                //删除对应工作面ID的地质构造信息
+            //删除对应工作面ID的地质构造信息
             foreach (var key in geostructsinfos.Keys)
             {
                 var geoinfos = geostructsinfos[key];
@@ -316,7 +316,7 @@ namespace sys2
 
                 /**回采日报实体赋值**/
                 //队别名称
-                _dayReportJJEntity.Team = (Team) cboTeamName.SelectedItem;
+                _dayReportJJEntity.Team = (Team)cboTeamName.SelectedItem;
                 //绑定巷道编号
                 _dayReportJJEntity.WorkingFace = selectWorkingfaceSimple1.SelectedWorkingFace;
 
@@ -325,6 +325,12 @@ namespace sys2
                 if (cells[C_DATE].Value != null)
                 {
                     _dayReportJJEntity.DateTime = Convert.ToDateTime(cells[C_DATE].Value.ToString());
+                }
+                else
+                {
+                    Alert.alert("请录入进尺时间");
+                    DialogResult = DialogResult.None;
+                    return;
                 }
 
                 //填报人
@@ -368,17 +374,17 @@ namespace sys2
             var tunnel = Tunnel.FindFirstByWorkingFaceId(selectWorkingfaceSimple1.SelectedWorkingFace.WorkingFaceId);
 
             //循环添加
-            foreach (var dayReportJJEntity in dayReportJJEntityList)
+            foreach (var dayReportJjEntity in dayReportJJEntityList)
             {
                 //添加回采进尺日报
-                dayReportJJEntity.Save();
+                dayReportJjEntity.Save();
 
                 //巷道掘进绘图
-                var dist = dayReportJJEntity.JinChi;
+                var dist = dayReportJjEntity.JinChi;
 
                 // 巷道id                
                 var hdid = tunnel.TunnelId.ToString();
-                var bid = dayReportJJEntity.BindingId;
+                var bid = dayReportJjEntity.BindingId;
 
                 AddHdJc(hdid, dist, bid, tunnel.TunnelWid);
             }

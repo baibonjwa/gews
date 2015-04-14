@@ -110,6 +110,7 @@
             this.tsBtnModify.Name = "tsBtnModify";
             this.tsBtnModify.Size = new System.Drawing.Size(52, 21);
             this.tsBtnModify.Text = "修改";
+            this.tsBtnModify.Visible = false;
             this.tsBtnModify.Click += new System.EventHandler(this.tsBtnModify_Click);
             // 
             // tsBtnDel

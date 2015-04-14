@@ -66,8 +66,15 @@ namespace LibPanels
         /// <param name="e"></param>
         private void tsBtnModify_Click(object sender, EventArgs e)
         {
-
-            var m = new MineDataSimple() { Text = new LibPanels(MineDataPanelName.CoalExistence_Change).panelFormName };
+            if (bandedGridView1.GetFocusedRow() == null)
+            {
+                Alert.alert("请选择要修改的信息");
+                return;
+            }
+            var m = new MineDataSimple((CoalExistence)bandedGridView1.GetFocusedRow())
+            {
+                Text = new LibPanels(MineDataPanelName.CoalExistence_Change).panelFormName
+            };
 
             if (DialogResult.OK == m.ShowDialog())
             {

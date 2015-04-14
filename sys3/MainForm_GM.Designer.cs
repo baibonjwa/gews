@@ -35,7 +35,6 @@
             this.tocControl_GM = new ESRI.ArcGIS.Controls.AxTOCControl();
             this.toolBar_GM = new ESRI.ArcGIS.Controls.AxToolbarControl();
             this.barManager1 = new DevExpress.XtraBars.BarManager();
-            this.bar1 = new DevExpress.XtraBars.Bar();
             this.mniOpenFileFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniSaveFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniSaveAsFloat = new DevExpress.XtraBars.BarButtonItem();
@@ -126,7 +125,6 @@
             this.bbiCheckUpdate = new DevExpress.XtraBars.BarButtonItem();
             this.mniHelpFile = new DevExpress.XtraBars.BarButtonItem();
             this.mniAbout = new DevExpress.XtraBars.BarButtonItem();
-            this.bar3 = new DevExpress.XtraBars.Bar();
             this.mniUndoFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniRedoFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniPropertyInspectorFloat = new DevExpress.XtraBars.BarButtonItem();
@@ -134,7 +132,6 @@
             this.mniRegionFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniDistFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniAreaFloat = new DevExpress.XtraBars.BarButtonItem();
-            this.bar4 = new DevExpress.XtraBars.Bar();
             this.mniPointFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniLineFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniPolylineFloat = new DevExpress.XtraBars.BarButtonItem();
@@ -162,7 +159,6 @@
             this.mniMCDBDGXFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniMSDGXFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniMCGLFloat = new DevExpress.XtraBars.BarButtonItem();
-            this.bar6 = new DevExpress.XtraBars.Bar();
             this.mniMoveFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniRotateFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniCopyFloat = new DevExpress.XtraBars.BarButtonItem();
@@ -173,7 +169,6 @@
             this.mniLineTypeFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniLineWeightFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniColorFloat = new DevExpress.XtraBars.BarButtonItem();
-            this.bar7 = new DevExpress.XtraBars.Bar();
             this.mniMagnifyFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniShrinkFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniGlobalFloat = new DevExpress.XtraBars.BarButtonItem();
@@ -182,7 +177,6 @@
             this.mniOffsetFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniBrokenViewFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniOverallViewFloat = new DevExpress.XtraBars.BarButtonItem();
-            this.bar9 = new DevExpress.XtraBars.Bar();
             this.mniDatabaseSetFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniEmployeeInfoManFloat = new DevExpress.XtraBars.BarButtonItem();
             this.mniDepartmentInfoManaFloat = new DevExpress.XtraBars.BarButtonItem();
@@ -238,24 +232,24 @@
             this.statusStrip1.MaximumSize = new System.Drawing.Size(0, 19);
             this.statusStrip1.MinimumSize = new System.Drawing.Size(0, 19);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1068, 19);
+            this.statusStrip1.Size = new System.Drawing.Size(1101, 19);
             this.statusStrip1.TabIndex = 7;
             // 
             // splitter1
             // 
-            this.splitter1.Location = new System.Drawing.Point(221, 145);
+            this.splitter1.Location = new System.Drawing.Point(221, 83);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 478);
+            this.splitter1.Size = new System.Drawing.Size(3, 540);
             this.splitter1.TabIndex = 8;
             this.splitter1.TabStop = false;
             // 
             // mapControl_GM
             // 
             this.mapControl_GM.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mapControl_GM.Location = new System.Drawing.Point(221, 145);
+            this.mapControl_GM.Location = new System.Drawing.Point(221, 83);
             this.mapControl_GM.Name = "mapControl_GM";
             this.mapControl_GM.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("mapControl_GM.OcxState")));
-            this.mapControl_GM.Size = new System.Drawing.Size(847, 478);
+            this.mapControl_GM.Size = new System.Drawing.Size(880, 540);
             this.mapControl_GM.TabIndex = 6;
             this.mapControl_GM.OnSelectionChanged += new System.EventHandler(this.mapControl_GM_OnSelectionChanged);
             this.mapControl_GM.OnKeyUp += new ESRI.ArcGIS.Controls.IMapControlEvents2_Ax_OnKeyUpEventHandler(this.mapControl_GM_OnKeyUp);
@@ -264,10 +258,10 @@
             // tocControl_GM
             // 
             this.tocControl_GM.Dock = System.Windows.Forms.DockStyle.Left;
-            this.tocControl_GM.Location = new System.Drawing.Point(0, 145);
+            this.tocControl_GM.Location = new System.Drawing.Point(0, 83);
             this.tocControl_GM.Name = "tocControl_GM";
             this.tocControl_GM.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("tocControl_GM.OcxState")));
-            this.tocControl_GM.Size = new System.Drawing.Size(221, 478);
+            this.tocControl_GM.Size = new System.Drawing.Size(221, 540);
             this.tocControl_GM.TabIndex = 5;
             this.tocControl_GM.OnMouseDown += new ESRI.ArcGIS.Controls.ITOCControlEvents_Ax_OnMouseDownEventHandler(this.tocControl_GM_OnMouseDown);
             this.tocControl_GM.OnDoubleClick += new ESRI.ArcGIS.Controls.ITOCControlEvents_Ax_OnDoubleClickEventHandler(this.tocControl_GM_OnDoubleClick);
@@ -275,23 +269,17 @@
             // toolBar_GM
             // 
             this.toolBar_GM.Dock = System.Windows.Forms.DockStyle.Top;
-            this.toolBar_GM.Location = new System.Drawing.Point(0, 117);
+            this.toolBar_GM.Location = new System.Drawing.Point(0, 55);
             this.toolBar_GM.Name = "toolBar_GM";
             this.toolBar_GM.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("toolBar_GM.OcxState")));
-            this.toolBar_GM.Size = new System.Drawing.Size(1068, 28);
+            this.toolBar_GM.Size = new System.Drawing.Size(1101, 28);
             this.toolBar_GM.TabIndex = 3;
             // 
             // barManager1
             // 
             this.barManager1.Bars.AddRange(new DevExpress.XtraBars.Bar[] {
-            this.bar1,
             this.bar2,
-            this.bar3,
-            this.bar4,
-            this.bar5,
-            this.bar6,
-            this.bar7,
-            this.bar9});
+            this.bar5});
             this.barManager1.DockControls.Add(this.barDockControlTop);
             this.barManager1.DockControls.Add(this.barDockControlBottom);
             this.barManager1.DockControls.Add(this.barDockControlLeft);
@@ -472,24 +460,6 @@
             this.barManager1.MainMenu = this.bar2;
             this.barManager1.MaxItemId = 186;
             // 
-            // bar1
-            // 
-            this.bar1.BarName = "Tools";
-            this.bar1.DockCol = 0;
-            this.bar1.DockRow = 3;
-            this.bar1.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
-            this.bar1.FloatLocation = new System.Drawing.Point(35, 210);
-            this.bar1.FloatSize = new System.Drawing.Size(46, 29);
-            this.bar1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniOpenFileFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniSaveFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniSaveAsFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniDCCADFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniDCTPPDFFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniQuitFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
-            this.bar1.Text = "文件";
-            this.bar1.Visible = false;
-            // 
             // mniOpenFileFloat
             // 
             this.mniOpenFileFloat.Caption = "打开矿图";
@@ -546,7 +516,6 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem4),
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem5),
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem6),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem8),
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem9)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawDragBorder = false;
@@ -1367,25 +1336,6 @@
             this.mniAbout.Name = "mniAbout";
             this.mniAbout.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniAbout_ItemClick);
             // 
-            // bar3
-            // 
-            this.bar3.BarName = "编辑";
-            this.bar3.DockCol = 1;
-            this.bar3.DockRow = 2;
-            this.bar3.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
-            this.bar3.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniUndoFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniRedoFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniPropertyInspectorFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniClickFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniRegionFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniDistFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniAreaFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
-            this.bar3.Offset = 447;
-            this.bar3.OptionsBar.AllowRename = true;
-            this.bar3.Text = "编辑";
-            this.bar3.Visible = false;
-            // 
             // mniUndoFloat
             // 
             this.mniUndoFloat.Caption = "撤销";
@@ -1434,29 +1384,6 @@
             this.mniAreaFloat.Id = 110;
             this.mniAreaFloat.Name = "mniAreaFloat";
             this.mniAreaFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniAreaFloat_ItemClick);
-            // 
-            // bar4
-            // 
-            this.bar4.BarName = "基础图元绘制";
-            this.bar4.DockCol = 1;
-            this.bar4.DockRow = 0;
-            this.bar4.DockStyle = DevExpress.XtraBars.BarDockStyle.Right;
-            this.bar4.FloatLocation = new System.Drawing.Point(1211, 602);
-            this.bar4.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniPointFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniLineFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniPolylineFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniSplineFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniRectFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniTextFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniCircleFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniArcFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniEllipseFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniHatchFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
-            this.bar4.Offset = 432;
-            this.bar4.OptionsBar.AllowRename = true;
-            this.bar4.Text = "基础图元绘制";
-            this.bar4.Visible = false;
             // 
             // mniPointFloat
             // 
@@ -1685,29 +1612,6 @@
             this.mniMCGLFloat.Name = "mniMCGLFloat";
             this.mniMCGLFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniMCGLFloat_ItemClick);
             // 
-            // bar6
-            // 
-            this.bar6.BarName = "修改";
-            this.bar6.DockCol = 0;
-            this.bar6.DockRow = 0;
-            this.bar6.DockStyle = DevExpress.XtraBars.BarDockStyle.Right;
-            this.bar6.FloatLocation = new System.Drawing.Point(1193, 275);
-            this.bar6.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniMoveFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniRotateFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniCopyFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniMirrorFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniDeleteFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniTailorFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniExtendFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniLineTypeFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniLineWeightFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniColorFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
-            this.bar6.Offset = 37;
-            this.bar6.OptionsBar.AllowRename = true;
-            this.bar6.Text = "修改";
-            this.bar6.Visible = false;
-            // 
             // mniMoveFloat
             // 
             this.mniMoveFloat.Caption = "移动";
@@ -1778,25 +1682,6 @@
             this.mniColorFloat.Name = "mniColorFloat";
             this.mniColorFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniColorFloat_ItemClick);
             // 
-            // bar7
-            // 
-            this.bar7.BarName = "视图";
-            this.bar7.DockCol = 0;
-            this.bar7.DockRow = 2;
-            this.bar7.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
-            this.bar7.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniMagnifyFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniShrinkFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniGlobalFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniPreviousViewFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniNextViewFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniOffsetFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniBrokenViewFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniOverallViewFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
-            this.bar7.OptionsBar.AllowRename = true;
-            this.bar7.Text = "视图";
-            this.bar7.Visible = false;
-            // 
             // mniMagnifyFloat
             // 
             this.mniMagnifyFloat.Caption = "放大";
@@ -1855,23 +1740,6 @@
             this.mniOverallViewFloat.Name = "mniOverallViewFloat";
             this.mniOverallViewFloat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniOverallViewFloat_ItemClick);
             // 
-            // bar9
-            // 
-            this.bar9.BarName = "系统设置";
-            this.bar9.DockCol = 2;
-            this.bar9.DockRow = 2;
-            this.bar9.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
-            this.bar9.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniDatabaseSetFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniEmployeeInfoManFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniDepartmentInfoManaFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniUserInfoManaFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.mniUserGroupInfoManaFloat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
-            this.bar9.Offset = 880;
-            this.bar9.OptionsBar.AllowRename = true;
-            this.bar9.Text = "系统设置";
-            this.bar9.Visible = false;
-            // 
             // mniDatabaseSetFloat
             // 
             this.mniDatabaseSetFloat.Caption = "数据库设置";
@@ -1917,7 +1785,7 @@
             this.barDockControlTop.CausesValidation = false;
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlTop.Size = new System.Drawing.Size(1101, 117);
+            this.barDockControlTop.Size = new System.Drawing.Size(1101, 55);
             // 
             // barDockControlBottom
             // 
@@ -1930,15 +1798,15 @@
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.barDockControlLeft.Location = new System.Drawing.Point(0, 117);
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 525);
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 55);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 587);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1068, 117);
-            this.barDockControlRight.Size = new System.Drawing.Size(33, 525);
+            this.barDockControlRight.Location = new System.Drawing.Point(1101, 55);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 587);
             // 
             // imageList1
             // 
@@ -2213,7 +2081,6 @@
         private GIS.BasicGraphic.UToolStatus statusStrip1;
         private System.Windows.Forms.Splitter splitter1;
         private DevExpress.XtraBars.BarManager barManager1;
-        private DevExpress.XtraBars.Bar bar1;
         private DevExpress.XtraBars.Bar bar2;
         private DevExpress.XtraBars.BarSubItem barSubItem1;
         private DevExpress.XtraBars.BarButtonItem mniOpenFile;
@@ -2319,7 +2186,6 @@
         private DevExpress.XtraBars.BarButtonItem mniDCCADFloat;
         private DevExpress.XtraBars.BarButtonItem mniDCTPPDFFloat;
         private DevExpress.XtraBars.BarButtonItem mniQuitFloat;
-        private DevExpress.XtraBars.Bar bar3;
         private DevExpress.XtraBars.BarButtonItem mniUndoFloat;
         private DevExpress.XtraBars.BarButtonItem mniRedoFloat;
         private DevExpress.XtraBars.BarButtonItem mniPropertyInspectorFloat;
@@ -2328,7 +2194,6 @@
         private DevExpress.XtraBars.BarButtonItem mniDistFloat;
         private DevExpress.XtraBars.BarButtonItem mniAreaFloat;
         private DevExpress.XtraBars.BarButtonItem mniObjectSnapsFloat;
-        private DevExpress.XtraBars.Bar bar4;
         private DevExpress.XtraBars.BarButtonItem mniPointFloat;
         private DevExpress.XtraBars.BarButtonItem mniLineFloat;
         private DevExpress.XtraBars.BarButtonItem mniPolylineFloat;
@@ -2356,7 +2221,6 @@
         private DevExpress.XtraBars.BarButtonItem mniXZZFloat;
         private DevExpress.XtraBars.BarButtonItem mniMCDBDGXFloat;
         private DevExpress.XtraBars.BarButtonItem mniMSDGXFloat;
-        private DevExpress.XtraBars.Bar bar6;
         private DevExpress.XtraBars.BarButtonItem mniMoveFloat;
         private DevExpress.XtraBars.BarButtonItem mniRotateFloat;
         private DevExpress.XtraBars.BarButtonItem mniCopyFloat;
@@ -2367,7 +2231,6 @@
         private DevExpress.XtraBars.BarButtonItem mniLineTypeFloat;
         private DevExpress.XtraBars.BarButtonItem mniLineWeightFloat;
         private DevExpress.XtraBars.BarButtonItem mniColorFloat;
-        private DevExpress.XtraBars.Bar bar7;
         private DevExpress.XtraBars.BarButtonItem mniMagnifyFloat;
         private DevExpress.XtraBars.BarButtonItem barButtonItem19;
         private DevExpress.XtraBars.BarButtonItem mniShrinkFloat;
@@ -2384,7 +2247,6 @@
         private DevExpress.XtraBars.BarButtonItem mniZoomInFloat;
         private DevExpress.XtraBars.BarButtonItem mniZoomOutFloat;
         private DevExpress.XtraBars.BarButtonItem mniPrintFloat;
-        private DevExpress.XtraBars.Bar bar9;
         private DevExpress.XtraBars.BarButtonItem mniDatabaseSetFloat;
         private DevExpress.XtraBars.BarButtonItem mniEmployeeInfoManFloat;
         private DevExpress.XtraBars.BarButtonItem mniDepartmentInfoManaFloat;

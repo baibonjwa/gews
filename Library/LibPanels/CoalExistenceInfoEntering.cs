@@ -6,13 +6,8 @@
 // 版本信息：
 // V1.0 新建
 // ******************************************************************
+
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using LibCommon;
 using LibEntity;
@@ -131,8 +126,8 @@ namespace LibPanels
         /// <param name="e"></param>
         private void rbtnTowardsChangeY_CheckedChanged(object sender, EventArgs e)
         {
-            if (rbtnTowardsChangeY.Checked == true)
-            coalExistenceEntity.IsTowardsChange = 1;
+            if (rbtnTowardsChangeY.Checked)
+                coalExistenceEntity.IsTowardsChange = 1;
         }
 
         /// <summary>
@@ -142,8 +137,8 @@ namespace LibPanels
         /// <param name="e"></param>
         private void rbtnTowardsChangeN_CheckedChanged(object sender, EventArgs e)
         {
-            if(rbtnTowardsChangeN.Checked == true)
-            coalExistenceEntity.IsTowardsChange = 0;
+            if (rbtnTowardsChangeN.Checked)
+                coalExistenceEntity.IsTowardsChange = 0;
         }
 
         /// <summary>
@@ -200,6 +195,6 @@ namespace LibPanels
                 return false;
             }
             return true;
-        }        
+        }
     }
 }
