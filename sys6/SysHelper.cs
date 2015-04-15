@@ -87,11 +87,16 @@ namespace UnderTerminal
                     break;
                 }
             }
-            var pro = new Process();
-            pro.StartInfo.WorkingDirectory = Environment.GetFolderPath(Environment.SpecialFolder.System);
-            pro.StartInfo.FileName = "taskmgr.exe";
-            pro.StartInfo.CreateNoWindow = true;
-            pro.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            var pro = new Process
+            {
+                StartInfo =
+                {
+                    WorkingDirectory = Environment.GetFolderPath(Environment.SpecialFolder.System),
+                    FileName = "taskmgr.exe",
+                    CreateNoWindow = true,
+                    WindowStyle = ProcessWindowStyle.Hidden
+                }
+            };
             pro.Start();
         }
 

@@ -162,30 +162,30 @@ namespace sys5
 
         private void MainForm_WM_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (DataEditCommon.hasEdit())
-            {
-                if (DialogResult.Yes ==
-                    MessageBox.Show(@"您有未保存的编辑，确定要退出系统吗?", "系统提示", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
-                {
-                    e.Cancel = false;
-                }
-                else
-                {
-                    e.Cancel = true;
-                }
-                return;
-            }
-            if (DialogResult.Yes ==
-                MessageBox.Show(@"您确定要退出系统吗?", "系统提示", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
-            {
-                e.Cancel = false;
-                Application.ExitThread();
-                Application.Exit();
-            }
-            else
-            {
-                e.Cancel = true;
-            }
+            //if (DataEditCommon.hasEdit())
+            //{
+            //    if (DialogResult.Yes ==
+            //        MessageBox.Show(@"您有未保存的编辑，确定要退出系统吗?", "系统提示", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+            //    {
+            //        e.Cancel = false;
+            //    }
+            //    else
+            //    {
+            //        e.Cancel = true;
+            //    }
+            //    return;
+            //}
+            //if (DialogResult.Yes ==
+            //    MessageBox.Show(@"您确定要退出系统吗?", "系统提示", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+            //{
+            //    e.Cancel = false;
+            //    Application.ExitThread();
+            //    Application.Exit();
+            //}
+            //else
+            //{
+            //    e.Cancel = true;
+            //}
         }
 
         private void MainForm_WM_FormClosed(object sender, FormClosedEventArgs e)

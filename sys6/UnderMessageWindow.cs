@@ -251,5 +251,11 @@ namespace UnderTerminal
             lbSubmitter.Text = DefaultSubmitter;
             lbWorkTime.Text = DefaultWorkTime;
         }
+
+        private void UnderMessageWindow_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.ExitThread();
+            Application.Exit();
+        }
     }
 }
