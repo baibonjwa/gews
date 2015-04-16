@@ -147,7 +147,7 @@ namespace LibPanels
             bool bResult = false;
             if (Text == new LibPanels(MineDataPanelName.Ventilation).panelFormName)
             {
-                _viEntity.SaveAndFlush();
+                _viEntity.Save();
                 bResult = true;
                 Log.Debug("发送添加通风信息的Socket信息");
                 var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.SelectedTunnel.TunnelId,
@@ -157,7 +157,7 @@ namespace LibPanels
             }
             else if (Text == new LibPanels(MineDataPanelName.Ventilation_Change).panelFormName)
             {
-                _viEntity.SaveAndFlush();
+                _viEntity.Save();
                 bResult = true;
                 Log.Debug("发送修改通风信息的Socket信息");
                 var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.SelectedTunnel.TunnelId,
@@ -195,7 +195,7 @@ namespace LibPanels
             _ceEntity.Datetime = DateTime.Now;
             try
             {
-                _ceEntity.SaveAndFlush();
+                _ceEntity.Save();
                 if (Text == new LibPanels(MineDataPanelName.CoalExistence).panelFormName)
                 {
                     var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.SelectedTunnel.TunnelId,
@@ -237,7 +237,7 @@ namespace LibPanels
             bool bResult = false;
             if (Text == new LibPanels(MineDataPanelName.GasData).panelFormName)
             {
-                _gdEntity.SaveAndFlush();
+                _gdEntity.Save();
                 bResult = true;
                 Log.Debug("发送添加瓦斯信息的Socket信息");
                 var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.SelectedTunnel.TunnelId,
@@ -251,7 +251,7 @@ namespace LibPanels
                 var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.SelectedTunnel.TunnelId,
                     GasData.TableName, OPERATION_TYPE.UPDATE, dtpDateTime.Value);
                 SocketUtil.SendMsg2Server(msg);
-                _gdEntity.SaveAndFlush();
+                _gdEntity.Save();
                 bResult = true;
                 Log.Debug("发送修改瓦斯信息的Socket信息完成");
             }
@@ -283,7 +283,7 @@ namespace LibPanels
             bool bResult = false;
             if (Text == new LibPanels(MineDataPanelName.Management).panelFormName)
             {
-                _mEntity.SaveAndFlush();
+                _mEntity.Save();
                 bResult = true;
                 Log.Debug("发送添加管理信息的Socket信息");
                 var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.SelectedTunnel.TunnelId,
@@ -293,7 +293,7 @@ namespace LibPanels
             }
             else if (Text == new LibPanels(MineDataPanelName.Management_Change).panelFormName)
             {
-                _mEntity.SaveAndFlush();
+                _mEntity.Save();
                 bResult = true;
                 Log.Debug("发送修改管理信息的Socket信息");
                 var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.SelectedTunnel.TunnelId,
@@ -325,7 +325,7 @@ namespace LibPanels
             bool bResult = false;
             if (Text == new LibPanels(MineDataPanelName.GeologicStructure).panelFormName)
             {
-                _geologicStructureEntity.SaveAndFlush();
+                _geologicStructureEntity.Save();
                 bResult = true;
                 Log.Debug("发送添加地址构造信息的Socket信息");
                 var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.SelectedTunnel.TunnelId,
@@ -335,7 +335,7 @@ namespace LibPanels
             }
             else if (Text == new LibPanels(MineDataPanelName.GeologicStructure_Change).panelFormName)
             {
-                _geologicStructureEntity.SaveAndFlush();
+                _geologicStructureEntity.Save();
                 bResult = true;
                 Log.Debug("发送修改地址构造信息的Socket信息");
                 var msg = new UpdateWarningDataMsg(Const.INVALID_ID, selectTunnelSimple1.SelectedTunnel.TunnelId,

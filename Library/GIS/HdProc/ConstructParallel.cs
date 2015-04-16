@@ -661,7 +661,7 @@ namespace GIS.HdProc
                 //if (count > centpnts.Count)
                 //    count = centpnts.Count;
                 int count = pnts0.Count;
-                pnts1.Reverse();
+                //pnts1.Reverse();
 
                 IFeatureClass Featureclass = hdlayer.FeatureClass;
                 IWorkspaceEdit workspace = (IWorkspaceEdit)(Featureclass as IDataset).Workspace;
@@ -1356,61 +1356,80 @@ namespace GIS.HdProc
                 IPolygon hdfd_polygon = (IPolygon)selhdfd[0].Item2;
                 IPointCollection hdfd_cols = hdfd_polygon as IPointCollection;
 
-                IPolyline plyleft = new PolylineClass();
-                plyleft.SpatialReference = Global.spatialref;
-                IPointCollection plinleftcols = plyleft as IPointCollection;
-                if (plin.FromPoint.X - plin.ToPoint.X > 0)
-                {
-                    plinleftcols.AddPoint(hdfd_cols.get_Point(0));
-                    plinleftcols.AddPoint(hdfd_cols.get_Point(1));
-                }
-                else
-                {
-                    plinleftcols.AddPoint(hdfd_cols.get_Point(1));
-                    plinleftcols.AddPoint(hdfd_cols.get_Point(0));
-                }
-                IPoint pntleft = new PointClass();
-                plyleft.QueryPoint(esriSegmentExtension.esriExtendAtTo, jjcd + plyleft.Length, false, pntleft);
+                IPolyline center_line = new PolylineClass();
+                center_line.FromPoint = plin.ToPoint;
+                center_line.ToPoint = outP;
+                IConstructCurve constructCurve = new PolylineClass();
+                constructCurve.ConstructOffset(center_line, -hdwid / 2);//左侧的线
+                IPolyline plyleft = constructCurve as IPolyline;
 
-
-                IPolyline plyright = new PolylineClass();
-                plyright.SpatialReference = Global.spatialref;
-                IPointCollection plinrightcols = plyright as IPointCollection;
-                if (plin.FromPoint.X - plin.ToPoint.X > 0)
-                {
-                    plinrightcols.AddPoint(hdfd_cols.get_Point(3));
-                    plinrightcols.AddPoint(hdfd_cols.get_Point(2));
-                }
-                else
-                {
-                    plinrightcols.AddPoint(hdfd_cols.get_Point(2));
-                    plinrightcols.AddPoint(hdfd_cols.get_Point(3));
-                }
-                IPoint pntright = new PointClass();
-                plyright.QueryPoint(esriSegmentExtension.esriExtendAtTo, jjcd + plyright.Length, false, pntright);
+                IConstructCurve constructCurveright = new PolylineClass();
+                constructCurveright.ConstructOffset(center_line, hdwid / 2);//左侧的线
+                IPolyline plyright = constructCurveright as IPolyline;
 
                 List<IPoint> hdfdjj_leftcols = new List<IPoint>();
-                if (plin.FromPoint.X - plin.ToPoint.X > 0)
-                {
-                    hdfdjj_leftcols.Add(pntleft);
-                    hdfdjj_leftcols.Add(hdfd_cols.get_Point(1));
-                }
-                else
-                {
-                    hdfdjj_leftcols.Add(pntleft);
-                    hdfdjj_leftcols.Add(hdfd_cols.get_Point(0));
-                }
+                hdfdjj_leftcols.Add(plyleft.FromPoint);
+                hdfdjj_leftcols.Add(plyleft.ToPoint);
+
                 List<IPoint> hdfdjj_rightcols = new List<IPoint>();
-                if (plin.FromPoint.X - plin.ToPoint.X > 0)
-                {
-                    hdfdjj_rightcols.Add(hdfd_cols.get_Point(2));
-                    hdfdjj_rightcols.Add(pntright);
-                }
-                else
-                {
-                    hdfdjj_rightcols.Add(hdfd_cols.get_Point(3));
-                    hdfdjj_rightcols.Add(pntright);
-                }
+                hdfdjj_rightcols.Add(plyright.FromPoint);
+                hdfdjj_rightcols.Add(plyright.ToPoint);
+
+                //IPolyline plyleft = new PolylineClass();
+                //plyleft.SpatialReference = Global.spatialref;
+                //IPointCollection plinleftcols = plyleft as IPointCollection;
+                //if (plin.FromPoint.X - plin.ToPoint.X > 0)
+                //{
+                //    plinleftcols.AddPoint(hdfd_cols.get_Point(0));
+                //    plinleftcols.AddPoint(hdfd_cols.get_Point(1));
+                //}
+                //else
+                //{
+                //    plinleftcols.AddPoint(hdfd_cols.get_Point(1));
+                //    plinleftcols.AddPoint(hdfd_cols.get_Point(0));
+                //}
+                //IPoint pntleft = new PointClass();
+                //plyleft.QueryPoint(esriSegmentExtension.esriExtendAtTo, jjcd + plyleft.Length, false, pntleft);
+
+
+                //IPolyline plyright = new PolylineClass();
+                //plyright.SpatialReference = Global.spatialref;
+                //IPointCollection plinrightcols = plyright as IPointCollection;
+                //if (plin.FromPoint.X - plin.ToPoint.X > 0)
+                //{
+                //    plinrightcols.AddPoint(hdfd_cols.get_Point(3));
+                //    plinrightcols.AddPoint(hdfd_cols.get_Point(2));
+                //}
+                //else
+                //{
+                //    plinrightcols.AddPoint(hdfd_cols.get_Point(2));
+                //    plinrightcols.AddPoint(hdfd_cols.get_Point(3));
+                //}
+                //IPoint pntright = new PointClass();
+                //plyright.QueryPoint(esriSegmentExtension.esriExtendAtTo, jjcd + plyright.Length, false, pntright);
+
+                //List<IPoint> hdfdjj_leftcols = new List<IPoint>();
+                //if (plin.FromPoint.X - plin.ToPoint.X > 0)
+                //{
+                //    hdfdjj_leftcols.Add(pntleft);
+                //    hdfdjj_leftcols.Add(hdfd_cols.get_Point(1));
+                //}
+                //else
+                //{
+                //    hdfdjj_leftcols.Add(pntleft);
+                //    hdfdjj_leftcols.Add(hdfd_cols.get_Point(0));
+                //}
+                //List<IPoint> hdfdjj_rightcols = new List<IPoint>();
+                //if (plin.FromPoint.X - plin.ToPoint.X > 0)
+                //{
+                //    hdfdjj_rightcols.Add(hdfd_cols.get_Point(2));
+                //    hdfdjj_rightcols.Add(pntright);
+                //}
+                //else
+                //{
+                //    hdfdjj_rightcols.Add(hdfd_cols.get_Point(3));
+                //    hdfdjj_rightcols.Add(pntright);
+                //}
                 AddFDRegToLayer(hdfdjj_leftcols, hdfdjj_rightcols, fdlin_pts, fdlin_dics, Global.hdfdlyr, hdwid);
                 //更新巷道全面
                 List<Tuple<IFeature, IGeometry, Dictionary<string, string>>> selhdfull = Global.commonclss.SearchFeaturesByGeoAndText(Global.hdfdfulllyr, fldvals);
@@ -1829,12 +1848,13 @@ namespace GIS.HdProc
         /// <param name="search">查询地质构造距离</param>
         /// <param name="checkval">判断距离</param>
         /// <param name="jjbs">掘进和掘进校正标识</param>
-        public Dictionary<string, string> UpdateJJCD(string HdId, string Bid, double jjcd = 0, int jjfx = 0, double search = 0, double checkval = 0, int jjbs = 0)
+        /// <param name="hdwid">掘进巷道宽度</param>
+        public Dictionary<string, string> UpdateJJCD(string HdId, string Bid,double hdwid, double jjcd = 0, int jjfx = 0, double search = 0, double checkval = 0, int jjbs = 0)
         {
             IPolyline centerlin = UpdateCenterlin_fd(HdId, Bid, jjcd);
             Dictionary<string, string> dxdpnts = UpdateCenterlin_full(HdId, Bid, jjcd);
-            UpdateHdFd(HdId, Bid, jjcd, centerlin);
-            UpdateHdFull(HdId, Bid, jjcd, centerlin);
+            UpdateHdFd(HdId, Bid, jjcd, centerlin,hdwid);
+            UpdateHdFull(HdId, Bid, jjcd, centerlin,hdwid);
             //UpdateDxdS(dxdpnts);
             Global.pActiveView.Refresh();
             return dxdpnts;
@@ -1908,7 +1928,8 @@ namespace GIS.HdProc
         /// <param name="Bid">BID</param>
         /// <param name="jjcd">掘进尺度</param>
         /// <param name="plin">中心线</param>
-        private void UpdateHdFull(string HdId, string Bid, double jjcd, IPolyline plin)
+        /// <param name="hdwid">巷道宽度</param>
+        private void UpdateHdFull(string HdId, string Bid, double jjcd, IPolyline plin,double hdwid)
         {
             try
             {
@@ -1943,65 +1964,88 @@ namespace GIS.HdProc
                     double offset_x = len_delta * Math.Cos(angle_lean);//X增量
                     double offset_y = len_delta * Math.Sin(angle_lean);//Y增量
                     //修改当前的巷道分段对象
-                    IPoint pnt_left = new PointClass();
-                    IPolyline plinleft = new PolylineClass();//左侧线求点
-                    plinleft.SpatialReference = Global.spatialref;
-                    if (plin.FromPoint.X - plin.ToPoint.X > 0)
-                    {
-                        plinleft.FromPoint = pnts.get_Point(0);
-                        plinleft.ToPoint = pnts.get_Point(1);
-                        plinleft.QueryPoint(esriSegmentExtension.esriExtendAtTo, jjcd, false, pnt_left);
-                    }
-                    else
-                    {
-                        plinleft.FromPoint = pnts.get_Point(1);
-                        plinleft.ToPoint = pnts.get_Point(0);
-                        plinleft.QueryPoint(esriSegmentExtension.esriExtendAtTo, jjcd, false, pnt_left);
-                    }
-                    IPoint pnt_right = new PointClass();
-                    IPolyline plinright = new PolylineClass();//右侧线求点
-                    plinright.SpatialReference = Global.spatialref;
-                    if (plin.FromPoint.X - plin.ToPoint.X > 0)
-                    {
-                        plinright.FromPoint = pnts.get_Point(3);
-                        plinright.ToPoint = pnts.get_Point(2);
-                        plinright.QueryPoint(esriSegmentExtension.esriExtendAtTo, jjcd, false, pnt_right);
-                    }
-                    else
-                    {
-                        plinright.FromPoint = pnts.get_Point(2);
-                        plinright.ToPoint = pnts.get_Point(3);
-                        plinright.QueryPoint(esriSegmentExtension.esriExtendAtTo, jjcd, false, pnt_right);
-                    }
+                    IConstructCurve constructCurve = new PolylineClass();
+                    constructCurve.ConstructOffset(plin, -hdwid / 2);//左侧的线
+                    IPolyline plyleft = constructCurve as IPolyline;
+
+                    IConstructCurve constructCurveright = new PolylineClass();
+                    constructCurveright.ConstructOffset(plin, hdwid / 2);//左侧的线
+                    IPolyline plyright = constructCurveright as IPolyline;
+
+                    List<IPoint> hdfdjj_leftcols = new List<IPoint>();
+                    hdfdjj_leftcols.Add(plyleft.FromPoint);
+                    hdfdjj_leftcols.Add(plyleft.ToPoint);
+
+                    List<IPoint> hdfdjj_rightcols = new List<IPoint>();
+                    hdfdjj_rightcols.Add(plyright.FromPoint);
+                    hdfdjj_rightcols.Add(plyright.ToPoint);
+                    ////修改当前的巷道分段对象
+                    //IPoint pnt_left = new PointClass();
+                    //IPolyline plinleft = new PolylineClass();//左侧线求点
+                    //plinleft.SpatialReference = Global.spatialref;
+                    //if (plin.FromPoint.X - plin.ToPoint.X > 0)
+                    //{
+                    //    plinleft.FromPoint = pnts.get_Point(0);
+                    //    plinleft.ToPoint = pnts.get_Point(1);
+                    //    plinleft.QueryPoint(esriSegmentExtension.esriExtendAtTo, jjcd, false, pnt_left);
+                    //}
+                    //else
+                    //{
+                    //    plinleft.FromPoint = pnts.get_Point(1);
+                    //    plinleft.ToPoint = pnts.get_Point(0);
+                    //    plinleft.QueryPoint(esriSegmentExtension.esriExtendAtTo, jjcd, false, pnt_left);
+                    //}
+                    //IPoint pnt_right = new PointClass();
+                    //IPolyline plinright = new PolylineClass();//右侧线求点
+                    //plinright.SpatialReference = Global.spatialref;
+                    //if (plin.FromPoint.X - plin.ToPoint.X > 0)
+                    //{
+                    //    plinright.FromPoint = pnts.get_Point(3);
+                    //    plinright.ToPoint = pnts.get_Point(2);
+                    //    plinright.QueryPoint(esriSegmentExtension.esriExtendAtTo, jjcd, false, pnt_right);
+                    //}
+                    //else
+                    //{
+                    //    plinright.FromPoint = pnts.get_Point(2);
+                    //    plinright.ToPoint = pnts.get_Point(3);
+                    //    plinright.QueryPoint(esriSegmentExtension.esriExtendAtTo, jjcd, false, pnt_right);
+                    //}
                     List<IPoint> respnts = new List<IPoint>();
-                    if (plin.FromPoint.X - plin.ToPoint.X > 0)
-                    {
-                        respnts.Add(pnts.get_Point(0));
-                        respnts.Add(pnt_left);
-                        respnts.Add(pnt_right);
-                        respnts.Add(pnts.get_Point(3));
-                    }
-                    else
-                    {
-                        respnts.Add(pnt_left);
-                        respnts.Add(pnts.get_Point(1));
-                        respnts.Add(pnts.get_Point(2));
-                        respnts.Add(pnt_right);
-                    }
+                    respnts.Add(hdfdjj_leftcols[0]);
+                    respnts.Add(hdfdjj_leftcols[1]);
+                    respnts.Add(hdfdjj_rightcols[1]);
+                    respnts.Add(hdfdjj_rightcols[0]);
+                    //List<IPoint> respnts = new List<IPoint>();
+                    //if (plin.FromPoint.X - plin.ToPoint.X > 0)
+                    //{
+                    //    respnts.Add(pnts.get_Point(0));
+                    //    respnts.Add(pnt_left);
+                    //    respnts.Add(pnt_right);
+                    //    respnts.Add(pnts.get_Point(3));
+                    //}
+                    //else
+                    //{
+                    //    respnts.Add(pnt_left);
+                    //    respnts.Add(pnts.get_Point(1));
+                    //    respnts.Add(pnts.get_Point(2));
+                    //    respnts.Add(pnt_right);
+                    //}
                     IPolygon polygon = Global.commonclss.CreatePolygonFromPnts(respnts, Global.spatialref);
                     currenthdfull.Shape = polygon;
                     hdfull_cursors.UpdateFeature(currenthdfull);
                     double xdeta0 = 0.0, ydeta0 = 0.0;
-                    if (plin.FromPoint.X - plin.ToPoint.X > 0)
-                    {
-                        xdeta0 = pnt_left.X - pnts.get_Point(1).X;
-                        ydeta0 = pnt_left.Y - pnts.get_Point(1).Y;
-                    }
-                    else
-                    {
-                        xdeta0 = pnt_left.X - pnts.get_Point(0).X;
-                        ydeta0 = pnt_left.Y - pnts.get_Point(0).Y;
-                    }
+                    xdeta0 = hdfdjj_leftcols[1].X - pnts.get_Point(1).X;
+                    ydeta0 = hdfdjj_leftcols[1].Y - pnts.get_Point(1).Y;
+                    //if (plin.FromPoint.X - plin.ToPoint.X > 0)
+                    //{
+                    //    xdeta0 = pnt_left.X - pnts.get_Point(1).X;
+                    //    ydeta0 = pnt_left.Y - pnts.get_Point(1).Y;
+                    //}
+                    //else
+                    //{
+                    //    xdeta0 = pnt_left.X - pnts.get_Point(0).X;
+                    //    ydeta0 = pnt_left.Y - pnts.get_Point(0).Y;
+                    //}
                     //double xdeta0 = pnt_left.X - ptend.X;
                     //double xdeta1 = pnt_right.X - ptend1.X;
                     //double ydeta0 = pnt_left.Y - ptend.Y;
@@ -2044,7 +2088,8 @@ namespace GIS.HdProc
         /// <param name="Bid">Bid</param>
         /// <param name="jjcd">掘进尺度</param>
         /// <param name="plin">中心线</param>
-        private void UpdateHdFd(string HdId, string Bid, double jjcd, IPolyline plin)
+        /// <param name="hdwid">巷道宽度</param>
+        private void UpdateHdFd(string HdId, string Bid, double jjcd, IPolyline plin,double hdwid)
         {
             try
             {
@@ -2069,62 +2114,85 @@ namespace GIS.HdProc
                     IPolygon currenthdfdreg = currenthdfd.Shape as IPolygon;
                     IPointCollection pnts = currenthdfdreg as IPointCollection;
                     //修改当前的巷道分段对象
-                    IPoint pnt_left = new PointClass();
-                    IPolyline plinleft = new PolylineClass();//左侧线求点
-                    plinleft.SpatialReference = Global.spatialref;
-                    if (plin.FromPoint.X - plin.ToPoint.X > 0)
-                    {
-                        plinleft.FromPoint = pnts.get_Point(0);
-                        plinleft.ToPoint = pnts.get_Point(1);
-                    }
-                    else
-                    {
-                        plinleft.FromPoint = pnts.get_Point(1);
-                        plinleft.ToPoint = pnts.get_Point(0);
-                    }
-                    plinleft.QueryPoint(esriSegmentExtension.esriExtendAtTo, jjcd, false, pnt_left);
+                    //修改当前的巷道分段对象
+                    IConstructCurve constructCurve = new PolylineClass();
+                    constructCurve.ConstructOffset(plin, -hdwid / 2);//左侧的线
+                    IPolyline plyleft = constructCurve as IPolyline;
 
-                    IPoint pnt_right = new PointClass();
-                    IPolyline plinright = new PolylineClass();//左侧线求点
-                    plinright.SpatialReference = Global.spatialref;
-                    if (plin.FromPoint.X - plin.ToPoint.X > 0)
-                    {
-                        plinright.FromPoint = pnts.get_Point(3);
-                        plinright.ToPoint = pnts.get_Point(2);
-                    }
-                    else
-                    {
-                        plinright.FromPoint = pnts.get_Point(2);
-                        plinright.ToPoint = pnts.get_Point(3);
-                    }
-                    plinright.QueryPoint(esriSegmentExtension.esriExtendAtTo, jjcd, false, pnt_right);
+                    IConstructCurve constructCurveright = new PolylineClass();
+                    constructCurveright.ConstructOffset(plin, hdwid / 2);//左侧的线
+                    IPolyline plyright = constructCurveright as IPolyline;
 
+                    List<IPoint> hdfdjj_leftcols = new List<IPoint>();
+                    hdfdjj_leftcols.Add(plyleft.FromPoint);
+                    hdfdjj_leftcols.Add(plyleft.ToPoint);
+
+                    List<IPoint> hdfdjj_rightcols = new List<IPoint>();
+                    hdfdjj_rightcols.Add(plyright.FromPoint);
+                    hdfdjj_rightcols.Add(plyright.ToPoint);
+                    //IPoint pnt_left = new PointClass();
+                    //IPolyline plinleft = new PolylineClass();//左侧线求点
+                    //plinleft.SpatialReference = Global.spatialref;
+                    //if (plin.FromPoint.X - plin.ToPoint.X > 0)
+                    //{
+                    //    plinleft.FromPoint = pnts.get_Point(0);
+                    //    plinleft.ToPoint = pnts.get_Point(1);
+                    //}
+                    //else
+                    //{
+                    //    plinleft.FromPoint = pnts.get_Point(1);
+                    //    plinleft.ToPoint = pnts.get_Point(0);
+                    //}
+                    //plinleft.QueryPoint(esriSegmentExtension.esriExtendAtTo, jjcd, false, pnt_left);
+
+                    //IPoint pnt_right = new PointClass();
+                    //IPolyline plinright = new PolylineClass();//左侧线求点
+                    //plinright.SpatialReference = Global.spatialref;
+                    //if (plin.FromPoint.X - plin.ToPoint.X > 0)
+                    //{
+                    //    plinright.FromPoint = pnts.get_Point(3);
+                    //    plinright.ToPoint = pnts.get_Point(2);
+                    //}
+                    //else
+                    //{
+                    //    plinright.FromPoint = pnts.get_Point(2);
+                    //    plinright.ToPoint = pnts.get_Point(3);
+                    //}
+                    //plinright.QueryPoint(esriSegmentExtension.esriExtendAtTo, jjcd, false, pnt_right);
                     List<IPoint> respnts = new List<IPoint>();
-                    if (plin.FromPoint.X - plin.ToPoint.X > 0)
-                    {
-                        respnts.Add(pnts.get_Point(0));
-                        respnts.Add(pnt_left);
-                        respnts.Add(pnt_right);
-                        respnts.Add(pnts.get_Point(3));
-                    }
-                    else
-                    {
-                        respnts.Add(pnt_left);
-                        respnts.Add(pnts.get_Point(1));
-                        respnts.Add(pnts.get_Point(2));
-                        respnts.Add(pnt_right);
-                    }
+                    respnts.Add(hdfdjj_leftcols[0]);
+                    respnts.Add(hdfdjj_leftcols[1]);
+                    respnts.Add(hdfdjj_rightcols[1]);
+                    respnts.Add(hdfdjj_rightcols[0]);
+                    //List<IPoint> respnts = new List<IPoint>();
+                    //if (plin.FromPoint.X - plin.ToPoint.X > 0)
+                    //{
+                    //    respnts.Add(pnts.get_Point(0));
+                    //    respnts.Add(pnt_left);
+                    //    respnts.Add(pnt_right);
+                    //    respnts.Add(pnts.get_Point(3));
+                    //}
+                    //else
+                    //{
+                    //    respnts.Add(pnt_left);
+                    //    respnts.Add(pnts.get_Point(1));
+                    //    respnts.Add(pnts.get_Point(2));
+                    //    respnts.Add(pnt_right);
+                    //}
+                    //double xdeta0 = 0.0, ydeta0 = 0.0;
                     double xdeta0 = 0.0, ydeta0 = 0.0;
-                    if (plin.FromPoint.X - plin.ToPoint.X > 0)
-                    {
-                        xdeta0 = pnt_left.X - pnts.get_Point(1).X;
-                        ydeta0 = pnt_left.Y - pnts.get_Point(1).Y;
-                    }
-                    else
-                    {
-                        xdeta0 = pnt_left.X - pnts.get_Point(0).X;
-                        ydeta0 = pnt_left.Y - pnts.get_Point(0).Y;
-                    }
+                    xdeta0 = hdfdjj_leftcols[1].X - pnts.get_Point(1).X;
+                    ydeta0 = hdfdjj_leftcols[1].Y - pnts.get_Point(1).Y;
+                    //if (plin.FromPoint.X - plin.ToPoint.X > 0)
+                    //{
+                    //    xdeta0 = pnt_left.X - pnts.get_Point(1).X;
+                    //    ydeta0 = pnt_left.Y - pnts.get_Point(1).Y;
+                    //}
+                    //else
+                    //{
+                    //    xdeta0 = pnt_left.X - pnts.get_Point(0).X;
+                    //    ydeta0 = pnt_left.Y - pnts.get_Point(0).Y;
+                    //}
                     IPolygon polygon = Global.commonclss.CreatePolygonFromPnts(respnts, Global.spatialref);
                     currenthdfd.Shape = polygon;
                     hdfd_cursors.UpdateFeature(currenthdfd);

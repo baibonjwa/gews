@@ -49,7 +49,6 @@
             this.mniHCJDTGL = new DevExpress.XtraBars.BarButtonItem();
             this.mniCXJJJCYBB = new DevExpress.XtraBars.BarButtonItem();
             this.mniCXHCJCYBB = new DevExpress.XtraBars.BarButtonItem();
-            this.barBtnItemHengChuan = new DevExpress.XtraBars.BarButtonItem();
             this.barSubItem4 = new DevExpress.XtraBars.BarSubItem();
             this.bbiCheckUpdate = new DevExpress.XtraBars.BarButtonItem();
             this.mniHelpFile = new DevExpress.XtraBars.BarButtonItem();
@@ -91,6 +90,7 @@
             this.barSubItem5 = new DevExpress.XtraBars.BarSubItem();
             this.barBtnTunnellingAnalysis = new DevExpress.XtraBars.BarButtonItem();
             this.barBtnStopingAnalysis = new DevExpress.XtraBars.BarButtonItem();
+            this.barBtnItemHengChuan = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.mniSkinSetting = new DevExpress.XtraBars.BarButtonItem();
             this.repositoryItemTextEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
@@ -184,7 +184,7 @@
             this.mniDCShape,
             this.bbiCheckUpdate});
             this.barManager2.MainMenu = this.bar2;
-            this.barManager2.MaxItemId = 68;
+            this.barManager2.MaxItemId = 69;
             this.barManager2.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemTextEdit1});
             // 
@@ -361,13 +361,6 @@
             this.mniCXHCJCYBB.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V));
             this.mniCXHCJCYBB.Name = "mniCXHCJCYBB";
             this.mniCXHCJCYBB.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mniCXHCJCYBB_ItemClick);
-            // 
-            // barBtnItemHengChuan
-            // 
-            this.barBtnItemHengChuan.Caption = "横川信息";
-            this.barBtnItemHengChuan.Id = 62;
-            this.barBtnItemHengChuan.Name = "barBtnItemHengChuan";
-            this.barBtnItemHengChuan.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBtnItemHengChuan_ItemClick);
             // 
             // barSubItem4
             // 
@@ -715,6 +708,13 @@
             // 
             this.barBtnStopingAnalysis.Id = 61;
             this.barBtnStopingAnalysis.Name = "barBtnStopingAnalysis";
+            // 
+            // barBtnItemHengChuan
+            // 
+            this.barBtnItemHengChuan.Caption = "横川信息";
+            this.barBtnItemHengChuan.Id = 62;
+            this.barBtnItemHengChuan.Name = "barBtnItemHengChuan";
+            this.barBtnItemHengChuan.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBtnItemHengChuan_ItemClick);
             // 
             // barButtonItem1
             // 

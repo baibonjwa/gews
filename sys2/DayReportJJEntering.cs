@@ -251,9 +251,9 @@ namespace sys2
         }
 
         //修改巷道
-        private void UpdateHdJc(string hdid, string bid, double jjcd)
+        private void UpdateHdJc(string hdid, string bid, double jjcd,double hdwid)
         {
-            var deltas = Global.cons.UpdateJJCD(hdid, bid, jjcd, 0, Global.searchlen, Global.sxjl,
+            var deltas = Global.cons.UpdateJJCD(hdid, bid, hdwid,jjcd, 0, Global.searchlen, Global.sxjl,
                 0);
             var xydeltas = deltas[bid];
             var xdelta = Convert.ToDouble(xydeltas.Split('|')[0]);
