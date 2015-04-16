@@ -171,7 +171,7 @@
             this.gcDayReportJj.Location = new System.Drawing.Point(10, 23);
             this.gcDayReportJj.MainView = this.gridView1;
             this.gcDayReportJj.Name = "gcDayReportJj";
-            this.gcDayReportJj.Size = new System.Drawing.Size(928, 548);
+            this.gcDayReportJj.Size = new System.Drawing.Size(928, 543);
             this.gcDayReportJj.TabIndex = 12;
             this.gcDayReportJj.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -266,8 +266,9 @@
             // controlNavigator1
             // 
             this.controlNavigator1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.controlNavigator1.Location = new System.Drawing.Point(10, 576);
+            this.controlNavigator1.Location = new System.Drawing.Point(10, 572);
             this.controlNavigator1.Name = "controlNavigator1";
+            this.controlNavigator1.NavigatableControl = this.gcDayReportJj;
             this.controlNavigator1.Size = new System.Drawing.Size(267, 21);
             this.controlNavigator1.TabIndex = 89;
             this.controlNavigator1.Text = "controlNavigator1";
