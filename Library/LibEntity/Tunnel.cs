@@ -178,8 +178,11 @@ namespace LibEntity
                 WirePoint.DeleteAll(WirePoint.FindAllByWireId(wire.WireId).Select(u => u.WirePointId));
                 wire.Delete();
             }
-            DayReportJj.DeleteByWorkingFaceId(WorkingFace.WorkingFaceId);
-            DayReportHc.DeleteByWorkingFaceId(WorkingFace.WorkingFaceId);
+            if (WorkingFace != null)
+            {
+                DayReportJj.DeleteByWorkingFaceId(WorkingFace.WorkingFaceId);
+                DayReportHc.DeleteByWorkingFaceId(WorkingFace.WorkingFaceId);
+            }
             MineData.DeleteByTunnelId<CoalExistence>(TunnelId);
             MineData.DeleteByTunnelId<GasData>(TunnelId);
             MineData.DeleteByTunnelId<GeologicStructure>(TunnelId);

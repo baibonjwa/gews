@@ -141,6 +141,16 @@ namespace LibEntity
             return FindOne(criterion);
         }
 
+        public static WorkingFace FindByWorkingFaceNameAndMiningAreaId(string workingFaceName, int miningAreaId)
+        {
+            var criterion = new ICriterion[]
+            {
+                Restrictions.Eq("WorkingFaceName", workingFaceName),
+                Restrictions.Eq("MiningArea.MiningAreaId",miningAreaId)
+            };
+            return FindOne(criterion);
+        }
+
         public static bool ExistsByWorkingFaceName(string workingFaceName)
         {
             var criterion = new List<ICriterion>

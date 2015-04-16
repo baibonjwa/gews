@@ -713,7 +713,7 @@ namespace sys3
 
         private void btnTXT_Click(object sender, EventArgs e)
         {
-            var ofd = new OpenFileDialog {RestoreDirectory = true, Filter = @"文本文件(*.txt)|*.txt|所有文件(*.*)|*.*"};
+            var ofd = new OpenFileDialog { RestoreDirectory = true, Filter = @"文本文件(*.txt)|*.txt|所有文件(*.*)|*.*" };
             if (ofd.ShowDialog() != DialogResult.OK) return;
             var fileName = ofd.SafeFileName;
             if (fileName != null)
@@ -724,13 +724,13 @@ namespace sys3
                 var tunnelName = strs[2].Split('.')[0];
                 using (new SessionScope())
                 {
-                    var workingFace = WorkingFace.FindByWorkingFaceName(workingFaceName);
                     var miningArea = MiningArea.FindOneByMiningAreaName(miningAreaName);
                     if (miningArea == null)
                     {
                         Alert.confirm("该采区不存在，请先添加采区");
                         return;
                     }
+                    var workingFace = WorkingFace.FindByWorkingFaceNameAndMiningAreaId(workingFaceName, miningArea.MiningAreaId);
                     if (workingFace == null)
                     {
                         if (Alert.confirm("该工作面不存在，是否创建该工作面？"))
@@ -769,6 +769,7 @@ namespace sys3
             while ((duqu = sr.ReadLine()) != null)
             {
                 var temp1 = duqu.Split('|');
+                if (temp1.Length == 1) continue;
                 var daoxianname = temp1[0];
                 var daoxianx = temp1[1];
                 var daoxiany = temp1[2];
@@ -1014,7 +1015,7 @@ namespace sys3
             _errorMsg = @"失败文件名：";
             if (ofd.ShowDialog() != DialogResult.OK) return;
             var fileCount = ofd.FileNames.Length;
-            pbCount.Maximum = fileCount*2;
+            pbCount.Maximum = fileCount * 2;
             pbCount.Value = 0;
             foreach (var fileName in ofd.FileNames)
             {
@@ -1029,13 +1030,14 @@ namespace sys3
                         var miningAreaName = strs[0];
                         var workingFaceName = strs[1];
                         var tunnelName = strs[2].Split('.')[0];
-                        var workingFace = WorkingFace.FindByWorkingFaceName(workingFaceName);
+
                         var miningArea = MiningArea.FindOneByMiningAreaName(miningAreaName);
                         if (miningArea == null)
                         {
                             Alert.confirm("该采区不存在，请先添加采区");
                             return;
                         }
+                        var workingFace = WorkingFace.FindByWorkingFaceNameAndMiningAreaId(workingFaceName, miningArea.MiningAreaId);
                         if (workingFace == null)
                         {
                             workingFace = AddWorkingFace(miningArea, workingFaceName);
