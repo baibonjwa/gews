@@ -221,6 +221,10 @@
             this.controlNavigator1.TextLocation = DevExpress.XtraEditors.NavigatorButtonsTextLocation.Center;
             this.controlNavigator1.TextStringFormat = "记录 {0} / {1}";
             // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.Filter = "Excel 2007|*.xlsx|Excel 2003兼容|*.xls|PDF文档|*.pdf|TXT文档|*.txt";
+            // 
             // BigFaultageInfoManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);

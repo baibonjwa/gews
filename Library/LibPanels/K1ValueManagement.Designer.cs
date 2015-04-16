@@ -52,9 +52,9 @@ namespace LibPanels
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.controlNavigator1 = new DevExpress.XtraEditors.ControlNavigator();
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.controlNavigator1 = new DevExpress.XtraEditors.ControlNavigator();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcK1AndSValue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -264,6 +264,15 @@ namespace LibPanels
             this.gridColumn9.VisibleIndex = 9;
             this.gridColumn9.Width = 119;
             // 
+            // gridColumn10
+            // 
+            this.gridColumn10.Caption = "组";
+            this.gridColumn10.FieldName = "K1ValueId";
+            this.gridColumn10.Name = "gridColumn10";
+            this.gridColumn10.Visible = true;
+            this.gridColumn10.VisibleIndex = 0;
+            this.gridColumn10.Width = 41;
+            // 
             // controlNavigator1
             // 
             this.controlNavigator1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -276,14 +285,9 @@ namespace LibPanels
             this.controlNavigator1.TextLocation = DevExpress.XtraEditors.NavigatorButtonsTextLocation.Center;
             this.controlNavigator1.TextStringFormat = "记录 {0} / {1}";
             // 
-            // gridColumn10
+            // saveFileDialog1
             // 
-            this.gridColumn10.Caption = "组";
-            this.gridColumn10.FieldName = "K1ValueId";
-            this.gridColumn10.Name = "gridColumn10";
-            this.gridColumn10.Visible = true;
-            this.gridColumn10.VisibleIndex = 0;
-            this.gridColumn10.Width = 41;
+            this.saveFileDialog1.Filter = "Excel 2007|*.xlsx|Excel 2003兼容|*.xls|PDF文档|*.pdf|TXT文档|*.txt";
             // 
             // K1ValueManagement
             // 
@@ -329,8 +333,8 @@ namespace LibPanels
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
-        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private DevExpress.XtraEditors.ControlNavigator controlNavigator1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }

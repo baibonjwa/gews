@@ -151,6 +151,9 @@
     <Reference Include="DevExpress.XtraScheduler.v14.1.Core, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
+    <Reference Include="DevExpress.XtraTreeList.v14.1, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="ESRI.ArcGIS.ADF.Connection.Local, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
       <Private>True</Private>
     </Reference>
@@ -390,7 +393,6 @@
     <EmbeddedResource Include="CollapsePillarsManagement.resx">
       <DependentUpon>CollapsePillarsManagement.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="TunnelHCEntering.resx">
       <DependentUpon>TunnelHCEntering.cs</DependentUpon>
     </EmbeddedResource>

@@ -68,7 +68,7 @@
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(448, 24);
+            this.toolStrip1.Size = new System.Drawing.Size(417, 24);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.TabStop = true;
             this.toolStrip1.Text = "toolStrip1";
@@ -231,6 +231,10 @@
             this.controlNavigator1.TextLocation = DevExpress.XtraEditors.NavigatorButtonsTextLocation.Center;
             this.controlNavigator1.TextStringFormat = "记录 {0} / {1}";
             // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.Filter = "Excel 2007|*.xlsx|Excel 2003兼容|*.xls|PDF文档|*.pdf|TXT文档|*.txt";
+            // 
             // BoreholeInfoManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -269,12 +273,12 @@
         private System.Windows.Forms.ToolStripButton btnMap;
         private DevExpress.XtraGrid.GridControl gcBorehole;
         private DevExpress.XtraEditors.ControlNavigator controlNavigator1;
-        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.XtraGrid.Columns.GridColumn bandedGridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn bandedGridColumn2;
         private DevExpress.XtraGrid.Columns.GridColumn bandedGridColumn3;
         private DevExpress.XtraGrid.Columns.GridColumn bandedGridColumn4;
         private DevExpress.XtraGrid.Columns.GridColumn bandedGridColumn5;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }

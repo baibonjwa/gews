@@ -39,8 +39,6 @@ namespace sys3
             this.btnMap = new System.Windows.Forms.ToolStripButton();
             this.tsBtnExit = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
-            this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.btnNoWire = new System.Windows.Forms.Button();
             this.btnWired = new System.Windows.Forms.Button();
             this.btnTunnelJJ = new System.Windows.Forms.Button();
@@ -171,16 +169,6 @@ namespace sys3
             this.statusStrip1.Size = new System.Drawing.Size(938, 22);
             this.statusStrip1.TabIndex = 6;
             this.statusStrip1.Text = "statusStrip1";
-            // 
-            // printPreviewDialog1
-            // 
-            this.printPreviewDialog1.AutoScrollMargin = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog1.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog1.ClientSize = new System.Drawing.Size(400, 300);
-            this.printPreviewDialog1.Enabled = true;
-            this.printPreviewDialog1.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog1.Icon")));
-            this.printPreviewDialog1.Name = "printPreviewDialog1";
-            this.printPreviewDialog1.Visible = false;
             // 
             // btnNoWire
             // 
@@ -432,6 +420,10 @@ namespace sys3
             this.controlNavigator1.TextLocation = DevExpress.XtraEditors.NavigatorButtonsTextLocation.Center;
             this.controlNavigator1.TextStringFormat = "¼ÇÂ¼ {0} / {1}";
             // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.Filter = "Excel 2007|*.xlsx|Excel 2003¼æÈÝ|*.xls|PDFÎÄµµ|*.pdf|TXTÎÄµµ|*.txt";
+            // 
             // TunnelInfoManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -470,8 +462,6 @@ namespace sys3
         private System.Windows.Forms.ToolStripButton tsBtnExit;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripButton tsBtnPrint;
-        private System.Windows.Forms.PageSetupDialog pageSetupDialog1;
-        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
         private System.Windows.Forms.Button btnNoWire;
         private System.Windows.Forms.Button btnWired;
         private System.Windows.Forms.Button btnTunnelJJ;
