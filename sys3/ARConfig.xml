@@ -17,7 +17,7 @@
       value="NHibernate.Connection.DriverConnectionProvider" />
     <add
       key="connection.connection_string"
-      value="Data Source=(local)\SQL2008R2,1433;Initial Catalog=GasWarningDatabase_DEP;Persist Security Info=True;User ID=sa;Password=Jcbsc8860" />
+      value="Data Source=192.168.1.110\SQL2008R2,1433;Initial Catalog=GasWarningDatabase;Persist Security Info=True;User ID=sa;Password=Jcbsc8860" />
   </config>
 
 </activerecord>

@@ -31,22 +31,9 @@ namespace sys2
             //设置窗体格式
             FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_MS.DAY_REPORT_HC_ADD);
 
-            DataBindUtil.LoadTeamMemberByTeamName(cboSubmitter, cboTeamName.Text);
             dgrdvDayReportHC[2, 0].Value = "回采";
             //绑定队别名称
-            DataBindUtil.LoadTeam(cboTeamName);
-            ////初始化班次   
-            //this.bindWorkTimeFirstTime();
-            //设置为默认工作制式
-            if (WorkingTimeDefault.FindFirst().DefaultWorkTimeGroupId == Const_MS.WORK_GROUP_ID_38)
-            {
-                rbtn38.Checked = true;
-            }
-            else
-            {
-                rbtn46.Checked = true;
-            }
-            SetWorkTimeName();
+
         }
 
         /// <summary>
@@ -118,7 +105,7 @@ namespace sys2
         /// <param name="e"></param>
         private void cboTeamName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //this.bindTeamMember();
+            DataBindUtil.LoadTeamMemberByTeamName(cboSubmitter, ((Team)cboTeamName.SelectedItem).TeamName);
         }
 
         /// <summary>
@@ -680,20 +667,6 @@ namespace sys2
             }
         }
 
-        private void cboTeamName_TextChanged(object sender, EventArgs e)
-        {
-            for (var i = 0; i < cboTeamName.Items.Count; i++)
-            {
-                if (cboTeamName.Text == cboTeamName.GetItemText(cboTeamName.Items[i]))
-                {
-                    DataBindUtil.LoadTeamMemberByTeamName(cboSubmitter, cboTeamName.Text);
-                    break;
-                }
-                cboSubmitter.Items.Clear();
-                cboSubmitter.Text = "";
-            }
-        }
-
         private void dgrdvDayReportHC_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             dgrdvDayReportHC[C_WORK_CONTENT, e.RowIndex].Value = "回采";
@@ -766,5 +739,20 @@ namespace sys2
         private readonly DayReportHc _dayReportHc;
 
         #endregion
+
+        private void DayReportHcEntering_Load(object sender, EventArgs e)
+        {
+            DataBindUtil.LoadTeam(cboTeamName);
+            DataBindUtil.LoadTeamMemberByTeamName(cboSubmitter, ((Team)cboTeamName.SelectedItem).TeamName);
+            if (WorkingTimeDefault.FindFirst().DefaultWorkTimeGroupId == Const_MS.WORK_GROUP_ID_38)
+            {
+                rbtn38.Checked = true;
+            }
+            else
+            {
+                rbtn46.Checked = true;
+            }
+            SetWorkTimeName();
+        }
     }
 }

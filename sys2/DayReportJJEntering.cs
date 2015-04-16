@@ -34,7 +34,6 @@ namespace sys2
             dtp.Format = DateTimePickerFormat.Custom; //设置日期格式为2010-08-05
             dtp.TextChanged += dtp_TextChange; //为时间控件加入事件dtp_TextChange
 
-            AddInfo();
             //设置窗体格式
             FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_MS.DAY_REPORT_JJ_ADD);
         }
@@ -48,7 +47,7 @@ namespace sys2
             _dayReportJJEntity = dayReportJjEntity;
             InitializeComponent();
             //修改初始化
-            ChangeInfo();
+            //ChangeInfo();
             //设置窗体格式
             FormDefaultPropertiesSetter.SetEnteringFormDefaultProperties(this, Const_MS.DAY_REPORT_JJ_CHANGE);
             dgrdvDayReportJJ.AllowUserToAddRows = false;
@@ -64,13 +63,6 @@ namespace sys2
         }
 
         private void DayReportJJEntering_Load(object sender, EventArgs e)
-        {
-        }
-
-        /// <summary>
-        ///     添加时加载初始化设置
-        /// </summary>
-        private void AddInfo()
         {
             DataBindUtil.LoadTeam(cboTeamName);
             DataBindUtil.LoadTeamMemberByTeamName(cboSubmitter, cboTeamName.Text);
@@ -104,13 +96,12 @@ namespace sys2
         /// <summary>
         ///     修改时加载初始化设置
         /// </summary>
-        private void ChangeInfo()
-        {
-            //绑定默认信息
-            AddInfo();
-            //绑定修改数据
-            BindInfo();
-        }
+        //private void ChangeInfo()
+        //{
+        //    //绑定默认信息
+        //    //绑定修改数据
+        //    BindInfo();
+        //}
 
         /// <summary>
         ///     datagridview绑定信息
@@ -251,9 +242,9 @@ namespace sys2
         }
 
         //修改巷道
-        private void UpdateHdJc(string hdid, string bid, double jjcd,double hdwid)
+        private void UpdateHdJc(string hdid, string bid, double jjcd, double hdwid)
         {
-            var deltas = Global.cons.UpdateJJCD(hdid, bid, hdwid,jjcd, 0, Global.searchlen, Global.sxjl,
+            var deltas = Global.cons.UpdateJJCD(hdid, bid, hdwid, jjcd, 0, Global.searchlen, Global.sxjl,
                 0);
             var xydeltas = deltas[bid];
             var xdelta = Convert.ToDouble(xydeltas.Split('|')[0]);

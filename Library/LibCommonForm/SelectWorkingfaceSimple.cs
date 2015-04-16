@@ -28,7 +28,13 @@ namespace LibCommonForm
                     var nodes = doc.DocumentElement.SelectNodes("/Workingfaces/Workingface");
 
                     if (nodes != null)
-                        foreach (var workingface in from XmlNode node in nodes select node.SelectSingleNode("ID") into selectSingleNode where selectSingleNode != null select selectSingleNode.InnerText into id select WorkingFace.Find(id))
+                        foreach (var workingface in (from XmlNode node in nodes
+                                                     select node.SelectSingleNode("ID")
+                                                         into selectSingleNode
+                                                         where selectSingleNode != null
+                                                         select selectSingleNode.InnerText
+                                                             into id
+                                                             select WorkingFace.TryFind(Convert.ToInt32(id))).Where(workingface => workingface != null))
                         {
                             cbxWorkingface.Items.Add(workingface);
                         }
@@ -88,9 +94,9 @@ namespace LibCommonForm
 
             writer.WriteStartElement("Workingfaces");
 
-            for (var i = 1; i < cbxWorkingface.Items.Count; i++)
+            foreach (var t in cbxWorkingface.Items)
             {
-                var toWriteWorkingFace = cbxWorkingface.Items[i] as WorkingFace;
+                var toWriteWorkingFace = t as WorkingFace;
                 if (toWriteWorkingFace == null) continue;
                 writer.WriteStartElement("Workingface");
                 writer.WriteElementString("ID", toWriteWorkingFace.WorkingFaceId.ToString(CultureInfo.InvariantCulture));   // <-- These are new

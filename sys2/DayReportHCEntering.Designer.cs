@@ -226,7 +226,6 @@ namespace sys2
             this.cboTeamName.Size = new System.Drawing.Size(101, 20);
             this.cboTeamName.TabIndex = 5;
             this.cboTeamName.SelectedIndexChanged += new System.EventHandler(this.cboTeamName_SelectedIndexChanged);
-            this.cboTeamName.TextChanged += new System.EventHandler(this.cboTeamName_TextChanged);
             // 
             // label4
             // 
@@ -302,6 +301,7 @@ namespace sys2
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "回采日报";
+            this.Load += new System.EventHandler(this.DayReportHcEntering_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgrdvDayReportHC)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();

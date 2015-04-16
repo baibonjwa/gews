@@ -47,14 +47,18 @@ namespace LibCommonForm
 
                 //List<TunnelSimple> tunnels = new List<TunnelSimple>();
                 if (nodes != null)
-                    foreach (XmlNode node in nodes)
+                    foreach (var tunnel in from XmlNode node in nodes
+                                           select node.SelectSingleNode("ID")
+                                               into selectSingleNode
+                                               where selectSingleNode != null
+                                               select Convert.ToInt32(selectSingleNode.InnerText)
+                                                   into id
+                                                   select Tunnel.TryFind(Convert.ToInt32(id))
+                                                       into tunnel
+                                                       where tunnel != null
+                                                       select tunnel)
                     {
-                        var selectSingleNode = node.SelectSingleNode("ID");
-                        if (selectSingleNode == null) continue;
-                        var id = Convert.ToInt32(selectSingleNode.InnerText);
-                        var tunnel = Tunnel.TryFind(id);
-                        if (tunnel != null)
-                            cbxTunnel.Items.Add(tunnel);
+                        cbxTunnel.Items.Add(tunnel);
                     }
             }
         }

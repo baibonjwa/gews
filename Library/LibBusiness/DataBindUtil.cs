@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using LibEntity;
@@ -152,8 +153,9 @@ namespace LibBusiness
             var team = Team.FindOneByTeamName(teamName);
             if (team != null)
             {
-                var teamMembers = team.TeamMember.Split(',');
-                DataBindListControl(lb, teamMembers, null, null,
+                var teamMembers = team.TeamMember.Split(',').ToList();
+                teamMembers.Insert(0, team.TeamLeader);
+                DataBindListControl(lb, teamMembers.ToArray(), null, null,
                     selectedText);
             }
         }
