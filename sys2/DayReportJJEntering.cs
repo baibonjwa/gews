@@ -164,7 +164,7 @@ namespace sys2
         /// <param name="e"></param>
         private void cboTeamName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //this.bindTeamMember();
+            DataBindUtil.LoadTeamMemberByTeamName(cboSubmitter, cboTeamName.Text);
         }
 
         /// <summary>
@@ -437,7 +437,7 @@ namespace sys2
                 using (new SessionScope())
                 {
                     var workingFace = WorkingFace.Find(selectWorkingfaceSimple1.SelectedWorkingFace.WorkingFaceId);
-                    if (workingFace.Tunnels.Count > 1)
+                    if (workingFace.Tunnels.Count != 1)
                     {
                         Alert.alert("您选择的巷道不是掘进巷道");
                         return false;
@@ -531,20 +531,6 @@ namespace sys2
             }
             //验证成功
             return true;
-        }
-
-        private void cboTeamName_TextChanged(object sender, EventArgs e)
-        {
-            for (var i = 0; i < cboTeamName.Items.Count; i++)
-            {
-                if (cboTeamName.Text == cboTeamName.GetItemText(cboTeamName.Items[i]))
-                {
-                    DataBindUtil.LoadTeamMemberByTeamName(cboSubmitter, cboTeamName.Text);
-                    break;
-                }
-                cboSubmitter.Items.Clear();
-                cboSubmitter.Text = "";
-            }
         }
 
         /// <summary>

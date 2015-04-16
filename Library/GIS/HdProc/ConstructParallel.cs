@@ -645,7 +645,125 @@ namespace GIS.HdProc
         /// <param name="hdtype">对象类型（针对巷道）</param>
         /// <param name="hdlayer">添加对象图层</param>
         /// <param name="centpnts">中心线上的点串</param>
-        public void AddFDRegToLayer(List<IPoint> pnts0, List<IPoint> pnts1, List<IPoint> centpnts, Dictionary<string, string> sxzs, IFeatureLayer hdlayer, double hdwid)
+        //public void AddFDRegToLayer(List<IPoint> pnts0, List<IPoint> pnts1, List<IPoint> centpnts, Dictionary<string, string> sxzs, IFeatureLayer hdlayer, double hdwid)
+        //{
+        //    try
+        //    {
+        //        //int count = 0;
+        //        //int num0 = pnts0.Count;
+        //        //int num1 = pnts1.Count;
+        //        //if (num0 == num1)
+        //        //    count = num0;
+        //        //else if (num0 > num1)
+        //        //    count = num1;
+        //        //else
+        //        //    count = num0;
+        //        //if (count > centpnts.Count)
+        //        //    count = centpnts.Count;
+        //        int count = pnts0.Count;
+        //        //pnts1.Reverse();
+
+        //        IFeatureClass Featureclass = hdlayer.FeatureClass;
+        //        IWorkspaceEdit workspace = (IWorkspaceEdit)(Featureclass as IDataset).Workspace;
+        //        workspace.StartEditing(false);
+        //        workspace.StartEditOperation();
+        //        //for (int i = 0; i < pnts0.Count-1; i++)
+        //        for (int i = 0; i < count - 1; i++)
+        //        {
+        //            IPolygon polygon = new PolygonClass();
+        //            polygon.SpatialReference = Global.spatialref;
+        //            IPointCollection regpntcols = (IPointCollection)polygon;
+        //            regpntcols.AddPoint(pnts0[i]);
+        //            regpntcols.AddPoint(pnts0[i + 1]);
+        //            regpntcols.AddPoint(pnts1[i + 1]);
+        //            regpntcols.AddPoint(pnts1[i]);
+
+        //            polygon.Close();
+        //            //拓扑检查一下
+        //            ITopologicalOperator4 tops = polygon as ITopologicalOperator4;
+        //            if (!tops.IsSimple)
+        //                tops.Simplify();
+        //            //查询附近的巷道，确定Id的值，确定对应的符号
+        //            IPolyline plincenter = new PolylineClass();
+        //            plincenter.FromPoint = centpnts[i];
+        //            plincenter.ToPoint = centpnts[i + 1];
+        //            plincenter.SpatialReference = Global.spatialref;
+        //            //int Idbs = Global.commonclss.SearchHdByLine(plincenter,sxzs["HdId"], Global.centerfdlyr);
+        //            //获取巷道分段所包含中心线的xh值
+        //            string sql = "\"" + GIS_Const.FIELD_HDID + "\"='" + sxzs[GIS_Const.FIELD_HDID] + "'";
+        //            //int[] getAttr = GetCenterLineXH(polygon as IGeometry, sql, Global.centerfdlyr,hdwid);
+        //            int[] getAttr = GetCenterLineXHNew(polygon as IGeometry, sql, Global.centerfdlyr, hdwid);
+        //            int xh = getAttr[0];
+        //            int Idbs = getAttr[1];
+        //            //创建Feature
+        //            IFeature fea = Featureclass.CreateFeature();
+        //            int index = fea.Fields.FindField(GIS_Const.FIELD_SHAPE);
+        //            if (index != -1)
+        //            {
+        //                IGeometryDef geometryDef = fea.Fields.get_Field(index).GeometryDef as IGeometryDef;
+        //                if (geometryDef.HasZ)
+        //                {
+        //                    IZAware pZAware = (IZAware)polygon;
+        //                    pZAware.ZAware = true;
+        //                    fea.Shape = polygon;
+        //                    foreach (string key in sxzs.Keys)
+        //                    {
+        //                        if (key == GIS_Const.FIELD_XH)
+        //                        {
+        //                            //int xh = Convert.ToInt16(sxzs[key]);
+        //                            fea.set_Value(fea.Fields.FindField(key), xh);
+        //                        }
+        //                        else if (key == GIS_Const.FIELD_ID)
+        //                        {
+        //                            fea.set_Value(fea.Fields.FindField(key), Idbs);
+        //                        }
+        //                        else
+
+        //                            fea.set_Value(fea.Fields.FindField(key), sxzs[key]);
+        //                    }
+        //                    fea.Store();
+        //                }
+        //                else
+        //                {
+        //                    fea.Shape = polygon;
+        //                    foreach (string key in sxzs.Keys)
+        //                    {
+        //                        int fp = fea.Fields.FindField(key);
+        //                        if (fp != -1)
+        //                        {
+        //                            if (key == GIS_Const.FIELD_XH)
+        //                            {
+        //                                //int xh = Convert.ToInt16(sxzs[key]);
+        //                                fea.set_Value(fea.Fields.FindField(key), xh);
+        //                            }
+        //                            else if (key == GIS_Const.FIELD_ID)
+        //                            {
+        //                                fea.set_Value(fea.Fields.FindField(key), Idbs);
+        //                            }
+        //                            else
+
+        //                                fea.set_Value(fea.Fields.FindField(key), sxzs[key]);
+        //                        }
+        //                    }
+        //                    fea.Store();
+        //                }
+        //            }
+        //        }
+        //        workspace.StopEditOperation();
+        //        workspace.StopEditing(true);
+        //    }
+        //    catch (Exception ei)
+        //    {
+        //        throw;
+        //    }
+
+        //    //}
+        //    //catch (Exception ei)
+        //    //{
+        //    //    throw new Exception();
+        //    //}
+        //}
+        public void AddFDRegToLayer_JC(List<IPoint> pnts0, List<IPoint> pnts1, List<IPoint> centpnts, Dictionary<string, string> sxzs, IFeatureLayer hdlayer, double hdwid)
         {
             try
             {
@@ -690,7 +808,7 @@ namespace GIS.HdProc
                     plincenter.SpatialReference = Global.spatialref;
                     //int Idbs = Global.commonclss.SearchHdByLine(plincenter,sxzs["HdId"], Global.centerfdlyr);
                     //获取巷道分段所包含中心线的xh值
-                    string sql = "\"" + GIS_Const.FIELD_HDID + "\"='" + sxzs[GIS_Const.FIELD_HDID] + "'";
+                    string sql = "\"" + GIS.GIS_Const.FIELD_HDID + "\"='" + sxzs[GIS.GIS_Const.FIELD_HDID] + "'";
                     //int[] getAttr = GetCenterLineXH(polygon as IGeometry, sql, Global.centerfdlyr,hdwid);
                     int[] getAttr = GetCenterLineXHNew(polygon as IGeometry, sql, Global.centerfdlyr, hdwid);
                     int xh = getAttr[0];
@@ -708,12 +826,12 @@ namespace GIS.HdProc
                             fea.Shape = polygon;
                             foreach (string key in sxzs.Keys)
                             {
-                                if (key == GIS_Const.FIELD_XH)
+                                if (key == GIS.GIS_Const.FIELD_XH)
                                 {
                                     //int xh = Convert.ToInt16(sxzs[key]);
                                     fea.set_Value(fea.Fields.FindField(key), xh);
                                 }
-                                else if (key == GIS_Const.FIELD_ID)
+                                else if (key == GIS.GIS_Const.FIELD_ID)
                                 {
                                     fea.set_Value(fea.Fields.FindField(key), Idbs);
                                 }
@@ -731,12 +849,12 @@ namespace GIS.HdProc
                                 int fp = fea.Fields.FindField(key);
                                 if (fp != -1)
                                 {
-                                    if (key == GIS_Const.FIELD_XH)
+                                    if (key == GIS.GIS_Const.FIELD_XH)
                                     {
                                         //int xh = Convert.ToInt16(sxzs[key]);
                                         fea.set_Value(fea.Fields.FindField(key), xh);
                                     }
-                                    else if (key == GIS_Const.FIELD_ID)
+                                    else if (key == GIS.GIS_Const.FIELD_ID)
                                     {
                                         fea.set_Value(fea.Fields.FindField(key), Idbs);
                                     }
@@ -763,6 +881,127 @@ namespace GIS.HdProc
             //    throw new Exception();
             //}
         }
+
+
+        public void AddFDRegToLayer(List<IPoint> pnts0, List<IPoint> pnts1, List<IPoint> centpnts, Dictionary<string, string> sxzs, IFeatureLayer hdlayer, double hdwid)
+        {
+            try
+            {
+                //int count = 0;
+                //int num0 = pnts0.Count;
+                //int num1 = pnts1.Count;
+                //if (num0 == num1)
+                //    count = num0;
+                //else if (num0 > num1)
+                //    count = num1;
+                //else
+                //    count = num0;
+                //if (count > centpnts.Count)
+                //    count = centpnts.Count;
+                int count = pnts0.Count;
+                pnts1.Reverse();
+
+                IFeatureClass Featureclass = hdlayer.FeatureClass;
+                IWorkspaceEdit workspace = (IWorkspaceEdit)(Featureclass as IDataset).Workspace;
+                workspace.StartEditing(false);
+                workspace.StartEditOperation();
+                //for (int i = 0; i < pnts0.Count-1; i++)
+                for (int i = 0; i < count - 1; i++)
+                {
+                    IPolygon polygon = new PolygonClass();
+                    polygon.SpatialReference = Global.spatialref;
+                    IPointCollection regpntcols = (IPointCollection)polygon;
+                    regpntcols.AddPoint(pnts0[i]);
+                    regpntcols.AddPoint(pnts0[i + 1]);
+                    regpntcols.AddPoint(pnts1[i + 1]);
+                    regpntcols.AddPoint(pnts1[i]);
+
+                    polygon.Close();
+                    //拓扑检查一下
+                    ITopologicalOperator4 tops = polygon as ITopologicalOperator4;
+                    if (!tops.IsSimple)
+                        tops.Simplify();
+                    //查询附近的巷道，确定Id的值，确定对应的符号
+                    IPolyline plincenter = new PolylineClass();
+                    plincenter.FromPoint = centpnts[i];
+                    plincenter.ToPoint = centpnts[i + 1];
+                    plincenter.SpatialReference = Global.spatialref;
+                    //int Idbs = Global.commonclss.SearchHdByLine(plincenter,sxzs["HdId"], Global.centerfdlyr);
+                    //获取巷道分段所包含中心线的xh值
+                    string sql = "\"" + GIS.GIS_Const.FIELD_HDID + "\"='" + sxzs[GIS.GIS_Const.FIELD_HDID] + "'";
+                    //int[] getAttr = GetCenterLineXH(polygon as IGeometry, sql, Global.centerfdlyr,hdwid);
+                    int[] getAttr = GetCenterLineXHNew(polygon as IGeometry, sql, Global.centerfdlyr, hdwid);
+                    int xh = getAttr[0];
+                    int Idbs = getAttr[1];
+                    //创建Feature
+                    IFeature fea = Featureclass.CreateFeature();
+                    int index = fea.Fields.FindField(GIS_Const.FIELD_SHAPE);
+                    if (index != -1)
+                    {
+                        IGeometryDef geometryDef = fea.Fields.get_Field(index).GeometryDef as IGeometryDef;
+                        if (geometryDef.HasZ)
+                        {
+                            IZAware pZAware = (IZAware)polygon;
+                            pZAware.ZAware = true;
+                            fea.Shape = polygon;
+                            foreach (string key in sxzs.Keys)
+                            {
+                                if (key == GIS.GIS_Const.FIELD_XH)
+                                {
+                                    //int xh = Convert.ToInt16(sxzs[key]);
+                                    fea.set_Value(fea.Fields.FindField(key), xh);
+                                }
+                                else if (key == GIS.GIS_Const.FIELD_ID)
+                                {
+                                    fea.set_Value(fea.Fields.FindField(key), Idbs);
+                                }
+                                else
+
+                                    fea.set_Value(fea.Fields.FindField(key), sxzs[key]);
+                            }
+                            fea.Store();
+                        }
+                        else
+                        {
+                            fea.Shape = polygon;
+                            foreach (string key in sxzs.Keys)
+                            {
+                                int fp = fea.Fields.FindField(key);
+                                if (fp != -1)
+                                {
+                                    if (key == GIS.GIS_Const.FIELD_XH)
+                                    {
+                                        //int xh = Convert.ToInt16(sxzs[key]);
+                                        fea.set_Value(fea.Fields.FindField(key), xh);
+                                    }
+                                    else if (key == GIS.GIS_Const.FIELD_ID)
+                                    {
+                                        fea.set_Value(fea.Fields.FindField(key), Idbs);
+                                    }
+                                    else
+
+                                        fea.set_Value(fea.Fields.FindField(key), sxzs[key]);
+                                }
+                            }
+                            fea.Store();
+                        }
+                    }
+                }
+                workspace.StopEditOperation();
+                workspace.StopEditing(true);
+            }
+            catch (Exception ei)
+            {
+                throw;
+            }
+
+            //}
+            //catch (Exception ei)
+            //{
+            //    throw new Exception();
+            //}
+        }
+
 
         /// <summary>
         /// 获得巷道分段面下的中心线的xh和id值
@@ -1430,7 +1669,7 @@ namespace GIS.HdProc
                 //    hdfdjj_rightcols.Add(hdfd_cols.get_Point(3));
                 //    hdfdjj_rightcols.Add(pntright);
                 //}
-                AddFDRegToLayer(hdfdjj_leftcols, hdfdjj_rightcols, fdlin_pts, fdlin_dics, Global.hdfdlyr, hdwid);
+                AddFDRegToLayer_JC(hdfdjj_leftcols, hdfdjj_rightcols, fdlin_pts, fdlin_dics, Global.hdfdlyr, hdwid);
                 //更新巷道全面
                 List<Tuple<IFeature, IGeometry, Dictionary<string, string>>> selhdfull = Global.commonclss.SearchFeaturesByGeoAndText(Global.hdfdfulllyr, fldvals);
                 IPolygon hdfull_polygon = selhdfull[0].Item2 as IPolygon;
@@ -1849,12 +2088,12 @@ namespace GIS.HdProc
         /// <param name="checkval">判断距离</param>
         /// <param name="jjbs">掘进和掘进校正标识</param>
         /// <param name="hdwid">掘进巷道宽度</param>
-        public Dictionary<string, string> UpdateJJCD(string HdId, string Bid,double hdwid, double jjcd = 0, int jjfx = 0, double search = 0, double checkval = 0, int jjbs = 0)
+        public Dictionary<string, string> UpdateJJCD(string HdId, string Bid, double hdwid, double jjcd = 0, int jjfx = 0, double search = 0, double checkval = 0, int jjbs = 0)
         {
             IPolyline centerlin = UpdateCenterlin_fd(HdId, Bid, jjcd);
             Dictionary<string, string> dxdpnts = UpdateCenterlin_full(HdId, Bid, jjcd);
-            UpdateHdFd(HdId, Bid, jjcd, centerlin,hdwid);
-            UpdateHdFull(HdId, Bid, jjcd, centerlin,hdwid);
+            UpdateHdFd(HdId, Bid, jjcd, centerlin, hdwid);
+            UpdateHdFull(HdId, Bid, jjcd, centerlin, hdwid);
             //UpdateDxdS(dxdpnts);
             Global.pActiveView.Refresh();
             return dxdpnts;
@@ -1929,7 +2168,7 @@ namespace GIS.HdProc
         /// <param name="jjcd">掘进尺度</param>
         /// <param name="plin">中心线</param>
         /// <param name="hdwid">巷道宽度</param>
-        private void UpdateHdFull(string HdId, string Bid, double jjcd, IPolyline plin,double hdwid)
+        private void UpdateHdFull(string HdId, string Bid, double jjcd, IPolyline plin, double hdwid)
         {
             try
             {
@@ -2089,7 +2328,7 @@ namespace GIS.HdProc
         /// <param name="jjcd">掘进尺度</param>
         /// <param name="plin">中心线</param>
         /// <param name="hdwid">巷道宽度</param>
-        private void UpdateHdFd(string HdId, string Bid, double jjcd, IPolyline plin,double hdwid)
+        private void UpdateHdFd(string HdId, string Bid, double jjcd, IPolyline plin, double hdwid)
         {
             try
             {

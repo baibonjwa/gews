@@ -220,7 +220,6 @@
             this.cboTeamName.Size = new System.Drawing.Size(101, 20);
             this.cboTeamName.TabIndex = 20;
             this.cboTeamName.SelectedIndexChanged += new System.EventHandler(this.cboTeamName_SelectedIndexChanged);
-            this.cboTeamName.TextChanged += new System.EventHandler(this.cboTeamName_TextChanged);
             // 
             // label1
             // 
