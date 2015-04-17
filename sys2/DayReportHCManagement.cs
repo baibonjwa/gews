@@ -89,8 +89,8 @@ namespace sys2
         {
             //确认删除
             if (!Alert.confirm(Const.DEL_CONFIRM_MSG)) return;
-            using (new SessionScope())
-            {
+            //using (new SessionScope())
+            //{
                 var entity = (DayReportHc)gridView1.GetFocusedRow();
                 var workingFace = WorkingFace.Find(entity.WorkingFace.WorkingFaceId);
                 // 掘进工作面，只有一条巷道
@@ -113,7 +113,7 @@ namespace sys2
                 {
                     Alert.alert("该工作面没有关联主运、辅运、切眼巷道");
                 }
-            }
+            //}
         }
 
         /// <summary>
