@@ -1,16 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Text;
+using System.Windows.Forms;
+using SpeechLib;
 
 namespace LibCommon
 {
     public class MySpeech
     {
         private static MySpeech _instance = null;
-        private SpeechLib.SpVoiceClass voice = null;
+        private SpVoiceClass voice = null;
         //private SpeechLib.SpVoice voice = null;
-        private System.IO.StreamReader _reader = null;
+        private StreamReader _reader = null;
 
         private MySpeech()
         {
@@ -28,15 +29,15 @@ namespace LibCommon
         {
             try
             {
-                voice = new SpeechLib.SpVoiceClass();
+                voice = new SpVoiceClass();
                 voice.EndStream += Voice_EndStream;
 
-                SpeechLib.ISpeechObjectTokens objTokens = voice.GetVoices("", "");
+                ISpeechObjectTokens objTokens = voice.GetVoices("", "");
                 const string useVoice = "ScanSoft Mei-Ling_Full_22kHz";
                 int useIndex = -1;
                 for (int i = 0; i < objTokens.Count; i++)
                 {
-                    SpeechLib.SpObjectToken sot = objTokens.Item(i);
+                    SpObjectToken sot = objTokens.Item(i);
                     if (sot.GetDescription(0) == useVoice)
                     {
                         useIndex = i;
@@ -51,7 +52,7 @@ namespace LibCommon
             }
             catch (Exception e)
             {
-                System.Windows.Forms.MessageBox.Show("Error:" + e.Message);
+                MessageBox.Show("Error:" + e.Message);
             }
         }
 
@@ -89,14 +90,14 @@ namespace LibCommon
         {
             try
             {
-                _reader = new System.IO.StreamReader
+                _reader = new StreamReader
                     (
-                    System.Windows.Forms.Application.StartupPath + "\\NoticeTxt.txt",
-                    System.Text.Encoding.Default
+                    Application.StartupPath + "\\NoticeTxt.txt",
+                    Encoding.Default
                     );
                 string text = _reader.ReadToEnd();
                 _reader.Close();
-                voice.Speak(text, SpeechLib.SpeechVoiceSpeakFlags.SVSFlagsAsync);
+                voice.Speak(text, SpeechVoiceSpeakFlags.SVSFlagsAsync);
             }
             catch (Exception err)
             {
@@ -107,7 +108,7 @@ namespace LibCommon
         public void Stop()
         {
             voice.Speak(string.Empty,
-                SpeechLib.SpeechVoiceSpeakFlags.SVSFPurgeBeforeSpeak);
+                SpeechVoiceSpeakFlags.SVSFPurgeBeforeSpeak);
         }
 
         public void Pause()
