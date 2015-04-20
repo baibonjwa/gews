@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using AutoUpdaterDotNET;
@@ -24,8 +25,8 @@ namespace sys1
         private DateTime _lastTimeMn; // M/N 的数据更新时间
         private DateTime _lastTimeT2; // T2的数据更新时间
         private int _updateFrequency; // 10s
-        private readonly string _t2Id = string.Empty;
         private Probe CurrentProbe { get; set; }
+        private Probe T2Probe { get; set; }
 
 
         public MainFormGe(BarButtonItem mniAbout)
@@ -216,9 +217,9 @@ namespace sys1
             var dsData = GasConcentrationProbeData.FindHistaryDataTop(CurrentProbe.ProbeId, DataCountPerFrame);
             AddDataSet2TeeChart(tChartM, dsData, "M");
             AddDataSet2TeeChart(tChartN, dsData, "N");
-            if (!String.IsNullOrEmpty(_t2Id))
+            if (!String.IsNullOrEmpty(T2Probe.ProbeId))
             {
-                var ds = GasConcentrationProbeData.FindHistaryDataTop(_t2Id, DataCountPerFrame);
+                var ds = GasConcentrationProbeData.FindHistaryDataTop(T2Probe.ProbeId, DataCountPerFrame);
                 AddDataSet2TeeChart(tChartT2, ds, "T2");
             }
 
@@ -262,9 +263,9 @@ namespace sys1
 
         private void UpdateT2Data()
         {
-            if (_t2Id == string.Empty)
+            if (T2Probe.ProbeId == string.Empty)
                 return;
-            var datas = GasConcentrationProbeData.FindNewRealData(_t2Id, 2);
+            var datas = GasConcentrationProbeData.FindNewRealData(T2Probe.ProbeId, 2);
             var time = datas[0].RecordTime;
             var value0 = datas[0].ProbeValue;
             var value1 = datas[1].ProbeValue;
@@ -343,8 +344,8 @@ namespace sys1
 
                 // 重新设置X轴的最大值和最小值
                 // 如果数据量非常大的时候，一屏的数据将会非常密集，影响观察效果，因此需要设置合适的时间轴范围。
-                var startTime = datas[0].RecordTime;
-                var endTime = datas[sqlCnt - 1].RecordTime;
+                var startTime = datas[sqlCnt - 1].RecordTime;
+                var endTime = datas[0].RecordTime;
 
                 var ts1 = new TimeSpan(startTime.Ticks);
                 var ts2 = new TimeSpan(endTime.Ticks);
@@ -582,7 +583,7 @@ namespace sys1
         private void LoadHistoryDataT2(TChart tChart)
         {
             var datas = GasConcentrationProbeData.FindHistaryData(
-                _t2Id,
+                T2Probe.ProbeId,
                 Convert.ToDateTime(dateTimeStart.Text),
                 Convert.ToDateTime(dateTimeEnd.Text)
                 );
@@ -910,6 +911,9 @@ namespace sys1
         {
             rbtnRealtime.Checked = true;
             CurrentProbe = (Probe)lstProbeName.SelectedItem;
+            T2Probe =
+                Probe.FindAllByTunnelIdAndProbeTypeId(selectTunnelSimple1.SelectedTunnel.TunnelId,
+                    Convert.ToInt32(lstProbeType.SelectedValue)).FirstOrDefault(u => u.ProbeName == "T2");
             dateTimeStart.Enabled = false;
             dateTimeEnd.Enabled = false;
             btnBeforeDay.Enabled = false;
