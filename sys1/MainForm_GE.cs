@@ -346,7 +346,6 @@ namespace sys1
                 // 如果数据量非常大的时候，一屏的数据将会非常密集，影响观察效果，因此需要设置合适的时间轴范围。
                 var startTime = datas[sqlCnt - 1].RecordTime;
                 var endTime = datas[0].RecordTime;
-
                 var ts1 = new TimeSpan(startTime.Ticks);
                 var ts2 = new TimeSpan(endTime.Ticks);
                 var ts = ts1.Subtract(ts2).Duration();

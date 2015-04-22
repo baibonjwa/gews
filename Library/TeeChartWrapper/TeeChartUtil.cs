@@ -35,13 +35,13 @@ namespace TeeChartWrapper
             double minVertValue = 0;
 
             // 绘画坐标点超过20个时将实时更新X时间坐标
-            while (tChart.Series[0].Count > 0 && tChart.Series[0].Count >= dataCountPerFrame - 1)
-            {
-                // 删除第一个点
-                tChart.Series[0].Delete(0);
-                // 重新设置X轴的最大值和最小值---x轴的时间间隔为20min.
-                tChart.Series[0].GetHorizAxis.SetMinMax(DateTime.Now.AddSeconds(-1000), DateTime.Now.AddSeconds(200));
-            }
+            //while (tChart.Series[0].Count > 0 && tChart.Series[0].Count >= dataCountPerFrame - 1)
+            //{
+            // 删除第一个点
+            //tChart.Series[0].Delete(0);
+            // 重新设置X轴的最大值和最小值---x轴的时间间隔为20min.
+            tChart.Series[0].GetHorizAxis.SetMinMax(DateTime.Now.AddSeconds(dataCountPerFrame * -1 * 10), DateTime.Now);
+            //}
 
             tChart.Series[0].Add(time, value);
 

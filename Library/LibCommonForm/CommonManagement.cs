@@ -229,10 +229,19 @@ namespace LibCommonForm
             //TODO:此处需要优化强力优化！！！
             var dt = (DataTable)gridControl1.DataSource;
             var list = CollectionHelper.ConvertTo<T>(dt);
-            foreach (var t in list.Where(t => t != null))
+            try
             {
-                t.Save();
+                foreach (var t in list.Where(t => t != null))
+                {
+                    t.Save();
+                }
             }
+            catch (Exception)
+            {
+                Alert.alert("输入信息有误，请检查信息是否输入正确");
+                return;
+            }
+
             Alert.alert(Const.SUCCESS_MSG);
         }
 
