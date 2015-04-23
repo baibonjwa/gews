@@ -80,7 +80,12 @@ namespace LibEntity.Domain
 
         public void Delete()
         {
-            //TODO:尚未实现
+            TunnelZy.TunnelType = TunnelTypeEnum.OTHER;
+            TunnelFy.TunnelType = TunnelTypeEnum.OTHER;
+            TunnelQy.TunnelType = TunnelTypeEnum.OTHER;
+            TunnelZy.Save();
+            TunnelFy.Save();
+            TunnelQy.Save();
         }
     }
 }
