@@ -7,6 +7,7 @@ using ESRI.ArcGIS.Analyst3DTools;
 using ESRI.ArcGIS.Analyst3D;
 using ESRI.ArcGIS.esriSystem;
 using System.Windows.Forms;
+using Castle.ActiveRecord.Linq;
 using ESRI.ArcGIS.Geodatabase;
 using ESRI.ArcGIS.DataSourcesFile;
 using ESRI.ArcGIS.GeoAnalyst;
@@ -356,12 +357,16 @@ namespace GIS.SpecialGraphic
         //features to 3D
         static public bool FeaturesTo3D(Geoprocessor gp, string pathIn, string pathOut)
         {
-            ESRI.ArcGIS.Analyst3DTools.FeatureTo3DByAttribute featureTo3D = new ESRI.ArcGIS.Analyst3DTools.FeatureTo3DByAttribute();
-            featureTo3D.in_features = pathIn;
-            featureTo3D.out_feature_class = pathOut;
-            featureTo3D.height_field = "Contour";
+            ESRI.ArcGIS.Analyst3DTools.FeatureTo3DByAttribute featureTo3D =
+                new ESRI.ArcGIS.Analyst3DTools.FeatureTo3DByAttribute
+                {
+                    in_features = pathIn,
+                    out_feature_class = pathOut,
+                    height_field = "Contour"
+                };
             return RunTool(gp, featureTo3D, null);
             //IGPProcess tools = null;
+            
         }
 
 

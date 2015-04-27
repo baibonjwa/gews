@@ -138,7 +138,7 @@ namespace LibPanels
             if (selectTunnelSimple1.SelectedTunnel != null)
             {
                 var probeExist = Probe.FindFirstByProbeTypeIdAndProbeNameAndTunnelId(iProbeTypeId,
-                    cmbProbeName.SelectedItem.ToString(),
+                    cmbProbeName.Text,
                     selectTunnelSimple1.SelectedTunnel.TunnelId);
                 if (probeExist == null) return true;
             }

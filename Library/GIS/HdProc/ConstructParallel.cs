@@ -335,7 +335,7 @@ namespace GIS.HdProc
             }
             catch
             {
-
+                throw;
             }
         }
 
@@ -481,7 +481,7 @@ namespace GIS.HdProc
             workspace.StopEditing(true);
             //}
             //catch(Exception ei)
-            //{
+            //{s
             //    throw new Exception();
             //}
         }
