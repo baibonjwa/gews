@@ -2688,9 +2688,7 @@ namespace GIS.HdProc
                 dirflag = Global.commonclss.GetDirectionByPnt(pline3, prevPoint);
                 //构造新的切眼巷道
                 Dictionary<string, List<IPoint>> regcoordinates = Global.commonclss.getCoordinates(selhcregs[0].Item2 as IPolygon, pline1, pline2, pline3, hd1wid1, hd1wid2);
-                pline3 = new PolylineClass();
-                pline3.FromPoint = regcoordinates["1"][1];
-                pline3.ToPoint = regcoordinates["1"][0];
+                pline3 = new PolylineClass { FromPoint = regcoordinates["1"][1], ToPoint = regcoordinates["1"][0] };
             }
             //查询采掘图层上是否包含了相应的回采区
             List<Tuple<IFeature, IGeometry, Dictionary<string, string>>> selcjqs = Global.commonclss.SearchFeaturesByGeoAndText(Global.hcqlyr, hdids);
