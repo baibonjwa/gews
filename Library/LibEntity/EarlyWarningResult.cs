@@ -3,16 +3,11 @@ using Castle.ActiveRecord;
 
 namespace LibEntity
 {
-    /// <summary>
-    ///     预警结果
-    /// </summary>
-
     public class EarlyWarningResult
     {
         /// <summary>
         ///     工作面名称
         /// </summary>
-        
         public string WarkingFaceName { get; set; }
 
         /// <summary>
