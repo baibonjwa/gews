@@ -93,7 +93,7 @@ namespace LibBusiness
                     //超限预警结果
                     if 
                         (dt.Rows[i][PreWarningResultDBConstNames.WARNING_TYPE].ToString() 
-                        == LibCommon.WarningType.OVER_LIMIT.ToString())
+                        == LibCommon.WarningType.OVERLIMIT.ToString())
                     {
                         WarningResultEnt overlimitEnt = new 
                             WarningResultEnt();

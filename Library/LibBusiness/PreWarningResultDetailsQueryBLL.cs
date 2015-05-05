@@ -105,7 +105,7 @@ namespace LibBusiness
                         int defultValue = (int)WarningResult.NULL;
                         if
                             (dt.Rows[i][PreWarningResultDBConstNames.WARNING_TYPE].ToString()
-                            == LibCommon.WarningType.OVER_LIMIT.ToString())
+                            == LibCommon.WarningType.OVERLIMIT.ToString())
                         {
                             ent.OverLimitWarningResult.ID =
                                 dt.Rows[i][PreWarningResultDBConstNames.ID].ToString();

@@ -3,6 +3,7 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using LibBusiness;
+using sys5;
 
 namespace _5.WarningManagement
 {

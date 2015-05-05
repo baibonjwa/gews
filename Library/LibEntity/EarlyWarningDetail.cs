@@ -1,11 +1,24 @@
-﻿namespace LibEntity
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Castle.ActiveRecord;
+
+namespace LibEntity
 {
-    public class WarningResultDetail
+    [ActiveRecord("T_EARLY_WARNING_DETAIL")]
+    public class EarlyWarningDetail : ActiveRecordBase<EarlyWarningDetail>
     {
-        // 应当对应数T_EARLY_WARNING_DETAIL据库表中的主键ID
+        [PrimaryKey(PrimaryKeyType.Identity, "ID")]
         public string Id { get; set; }
 
-        public string WarningId { get; set; }
+        [BelongsTo("WARNING_ID")]
+        public EarlyWarningResult EarlyWarningResult { get; set; }
+
+        [BelongsTo("RULE_ID")]
+        public PreWarningRules PreWarningRules { get; set; }
+
+        public string DataId { get; set; }
 
         public string HandleStatus { get; set; }
 
@@ -14,13 +27,6 @@
         public string WarningType { get; set; }
 
         public string WarningLevel { get; set; }
-
-        public string RuleCode { get; set; }
-
-        // 规则类型：瓦斯，地质构造，管理因素，煤层赋存，通风，其他
-        public string RuleType { get; set; }
-
-        public string RuleDescription { get; set; }
 
         public string Threshold { get; set; }
 
@@ -44,6 +50,5 @@
 
         public string RuleId { get; set; }
 
-        public string DataId { get; set; }
     }
 }

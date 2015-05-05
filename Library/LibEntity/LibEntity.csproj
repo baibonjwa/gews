@@ -101,6 +101,7 @@
   <ItemGroup>
     <Compile Include="CoalExistence.cs" />
     <Compile Include="Domain\WorkingFaceHc.cs" />
+    <Compile Include="EarlyWarningDetail.cs" />
     <Compile Include="WorkingTimeDefault.cs" />
     <Compile Include="MineData.cs" />
     <Compile Include="ProbeType.cs" />
@@ -127,7 +128,6 @@
     <Compile Include="PreWarningResultQueryWithWorkingface.cs" />
     <Compile Include="RuleInfo.cs" />
     <Compile Include="WarningImg.cs" />
-    <Compile Include="WarningResultDetail.cs" />
     <Compile Include="WarningResultEnt.cs" />
     <Compile Include="CoalSeams.cs" />
     <Compile Include="PitshaftType.cs" />

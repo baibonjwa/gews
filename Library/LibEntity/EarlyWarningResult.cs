@@ -1,33 +1,100 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using Castle.ActiveRecord;
+using NHibernate.Criterion;
 
 namespace LibEntity
 {
-    public class EarlyWarningResult
+    [ActiveRecord("T_EARLY_WARNING_RESULT")]
+    public class EarlyWarningResult : ActiveRecordBase<EarlyWarningResult>
     {
-        /// <summary>
-        ///     工作面名称
-        /// </summary>
-        public string WarkingFaceName { get; set; }
+        public EarlyWarningResult()
+        {
+            Gas = 2;
+            Coal = 2;
+            Geology = 2;
+            Ventilation = 2;
+            Management = 2;
+            WarningResult = 2;
+        }
+
+        [PrimaryKey(PrimaryKeyType.Identity, "ID")]
+        public int Id { get; set; }
 
         /// <summary>
-        ///     预警ID--对应预警结果表中的ID（主键）
+        ///     设置或获取巷道编号
         /// </summary>
-        public List<string> WarningIdList { get; set; }
-
-        /// <summary>
-        ///     巷道ID
-        /// </summary>
-        public string TunnelId { get; set; }
-
-        /// <summary>
-        ///     日期
-        /// </summary>
-        public string DateTime { get; set; }
+        [BelongsTo("TUNNEL_ID")]
+        public Tunnel Tunnel { get; set; }
 
         /// <summary>
         ///     班次
         /// </summary>
-        public string DateShift { get; set; }
+        [Property("SHIFT")]
+        public string Shift { get; set; }
+
+        /// <summary>
+        ///     时间
+        /// </summary>
+        [Property("DATE_TIME")]
+        public DateTime DateTime { get; set; }
+
+        /// <summary>
+        ///     预警类型
+        /// </summary>
+        [Property("WARNING_TYPE")]
+        public int WarningType { get; set; }
+
+        /// <summary>
+        ///     预警结果
+        /// </summary>
+        [Property("WARNING_RESULT")]
+        public int WarningResult { get; set; }
+
+        /// <summary>
+        ///     瓦斯
+        /// </summary>
+        [Property("GAS")]
+        public int Gas { get; set; }
+
+        /// <summary>
+        ///     煤层赋存
+        /// </summary>
+        [Property("COAL")]
+        public int Coal { get; set; }
+
+        /// <summary>
+        ///     地质构造
+        /// </summary>
+        [Property("GEOLOGY")]
+        public int Geology { get; set; }
+
+        /// <summary>
+        ///     通风
+        /// </summary>
+        [Property("VENTILATION")]
+        public int Ventilation { get; set; }
+
+        /// <summary>
+        ///     管理
+        /// </summary>
+        [Property("MANAGEMENT")]
+        public int Management { get; set; }
+
+        /// <summary>
+        ///     解除状态
+        /// </summary>
+        [Property("HANDLE_STATUS")]
+        public int HandleStatus { get; set; }
+
+        public static EarlyWarningResult[] FindAllByWarningResultsIsRedAndYellowAndHandleStatusLtThree()
+        {
+            var criterion = new ICriterion[]
+            {
+                Restrictions.Or(Restrictions.Eq("WarningResult", 0), Restrictions.Eq("WarningResult", 1)),
+                Restrictions.Lt("HandleStatus", 3)
+            };
+            return FindAll(criterion);
+        }
+
     }
 }

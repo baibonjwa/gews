@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading;
@@ -12,7 +13,6 @@ using LibBusiness;
 using LibCommon;
 using LibEntity;
 using LibSocket;
-using _5.WarningManagement;
 
 namespace sys5
 {
@@ -47,14 +47,6 @@ namespace sys5
         private const int COLUMN_INDEX_HIDE_OVERLIMIT_HANDLE_STATUS = 20; // Overlimit 处理状态
         private const int COLUMN_INDEX_HIDE_OUTBURST_HANDLE_STATUS = 21; // Outburst 处理状态
 
-        private static List<LibEntity.PreWarningResultQuery> _warningRecord =
-            new List<LibEntity.PreWarningResultQuery>();
-
-        //传出结构体，更改时请查找（设置传出值）
-        private static readonly EarlyWarningResult OutInfo = new EarlyWarningResult();
-        //查询的最新结果
-        private List<LibEntity.PreWarningResultQuery> _ents1 = new List<LibEntity.PreWarningResultQuery>();
-        private List<LibEntity.PreWarningResultQuery> _ents2 = new List<LibEntity.PreWarningResultQuery>();
         //定义提醒语音字符串
         private string _strPreWarningTxt = "";
         public FlashWarningPoints FlashGis = new FlashWarningPoints();
@@ -70,8 +62,6 @@ namespace sys5
 
             cells = _fpPreWaringLastedValue.ActiveSheet.Cells;
 
-            PreWarningLastedResultQueryBLL.loadTunnelNames();
-
             //定义fp显示的行列数
             _fpPreWaringLastedValue.ActiveSheet.Rows.Count = FROZEN_ROW_COUNT;
             _fpPreWaringLastedValue.ActiveSheet.Columns.Count = COLUMN_COUNT;
@@ -85,16 +75,6 @@ namespace sys5
             _fpPreWaringLastedValue.ActiveSheet.Columns[COLUMN_COUNT - 4].Visible = false;
             _fpPreWaringLastedValue.ActiveSheet.Columns[COLUMN_COUNT - 5].Visible = false;
 
-            _warningRecord = PreWarningLastedResultQueryBLL.QueryHoldWarningResult();
-        }
-
-        /// <summary>
-        ///     获取传出的值
-        /// </summary>
-        /// <returns></returns>
-        public static EarlyWarningResult GetOutInfo()
-        {
-            return OutInfo;
         }
 
         /// <summary>
@@ -102,91 +82,116 @@ namespace sys5
         /// </summary>
         public void LoadValue(string strTime)
         {
-            // 所有绿色预警
-            _ents1 = PreWarningLastedResultQueryBLL.QueryLastedPreWarningResult(strTime);
-            // 所有红色和黄色预警
-            _ents2 = PreWarningLastedResultQueryBLL.QueryHoldWarningResult();
-
-            //List<PreWarningResultEntity>     LibBusiness.PreWarningLastedResultQueryBLL.MergePreWarningInfo(_ents1);
-            if (_ents2.Count > _warningRecord.Count)
-            {
-                var ds = UserInformationDetailsManagementBLL.GetNeedSendMessageUsers();
-
-                foreach (var i in _ents2)
-                {
-                    var sign = true;
-                    foreach (var j in _warningRecord)
-                    {
-                        if (i.TunnelID == j.TunnelID)
-                        {
-                            sign = false;
-                        }
-                    }
-                    if (sign)
-                    {
-                        var outBrustStr = "";
-                        var overLimitStr = "";
-                        if (i.OutBrustWarningResult.WarningResult == 0)
-                        {
-                            outBrustStr = "红色突出预警";
-                        }
-                        else if (i.OutBrustWarningResult.WarningResult == 1)
-                        {
-                            outBrustStr = "黄色突出预警";
-                        }
-                        if (i.OverLimitWarningResult.WarningResult == 0)
-                        {
-                            overLimitStr = "红色超限预警";
-                        }
-                        else if (i.OverLimitWarningResult.WarningResult == 0)
-                        {
-                            overLimitStr = "黄色超限预警";
-                        }
-                        var message = i.TunelName + " " + i.DateTime + " " + i.Date_Shift + " " + outBrustStr + " " +
-                                      overLimitStr;
-
-                        var TypeStr = "";
-                        var CopyRightToCOMStr = "";
-                        var CopyRightStr = "//上海迅赛信息技术有限公司,网址www.xunsai.com//";
-                        short port = 11;
-                        var isture = SetShortMessage.Sms_Connection(CopyRightStr, port, Convert.ToInt16(9600), TypeStr,
-                            CopyRightToCOMStr);
-                        if (isture == 1)
-                        {
-                            for (var k = 0; k < ds.Tables[0].Rows.Count; k++)
-                            {
-                                var number =
-                                    ds.Tables[0].Rows[k][UserInformationDetailsManagementDbConstNames.USER_PHONENUMBER]
-                                        .ToString();
-                                SetShortMessage.Sms_Send(number, message);
-                            }
-                        }
-                    }
-                }
-                _warningRecord = new List<LibEntity.PreWarningResultQuery>(_ents2);
-            }
-            else
-            {
-                _warningRecord = new List<LibEntity.PreWarningResultQuery>(_ents2);
-            }
-
-
-            //var workingfaceEntNormal = new List<PreWarningResultQueryWithWorkingfaceEnt>();
-            //var workingfaceEntWarning = new List<PreWarningResultQueryWithWorkingfaceEnt>();
-
-            //workingfaceEntNormal = PreWarningLastedResultQueryBLL.MergePreWarningInfo(_ents1);
-            //workingfaceEntWarning = PreWarningLastedResultQueryBLL.MergePreWarningInfo(_ents2);
-
-            #region 删除垃圾数据
-
             while (_fpPreWaringLastedValue.ActiveSheet.Rows.Count > FROZEN_ROW_COUNT)
             {
                 _fpPreWaringLastedValue.ActiveSheet.Rows.Remove(FROZEN_ROW_COUNT, 1);
             }
-            //提醒语音字符串清空
-            _strPreWarningTxt = "";
 
-            #endregion
+
+            var earlyWarningResults = EarlyWarningResult.FindAllByWarningResultsIsRedAndYellowAndHandleStatusLtThree();
+            var earlyWarningResultGroup = earlyWarningResults.GroupBy(u => u.Tunnel, (u, v) => new
+            {
+                Tunnel = u,
+                EarlyWarningResultList = v
+            }).ToList();
+            int rowIdx = FROZEN_ROW_COUNT;
+            foreach (var item in earlyWarningResultGroup)
+            {
+                var first = item.EarlyWarningResultList.First();
+                _fpPreWaringLastedValue.ActiveSheet.Rows.Add(rowIdx, 1);
+                _fpPreWaringLastedValue.ActiveSheet.Rows[rowIdx].Height = 40;
+                _fpPreWaringLastedValue.ActiveSheet.Rows[rowIdx].Locked = true;
+
+                cells[rowIdx, COLUMN_INDEX_WORKFACE_NAME].Value = item.Tunnel.WorkingFace.WorkingFaceName + "--" + item.Tunnel.TunnelName;
+                cells[rowIdx, COLUMN_INDEX_DATETIME_SHIFT].Value = first.DateTime + first.Shift;
+
+                FpUtil.setCellImg(cells[rowIdx, COLUMN_INDEX_WANRING_RESULT_OUTBURST], (int)WarningResult.GREEN);
+                FpUtil.setCellImg(cells[rowIdx, COLUMN_INDEX_WANRING_RESULT_OVERLIMIT], (int)WarningResult.GREEN);
+
+                var theWorstEwrOutBurst = new EarlyWarningResult();
+                var theWorstEwrOverLimit = new EarlyWarningResult();
+
+                foreach (var j in item.EarlyWarningResultList)
+                {
+                    switch (j.WarningType)
+                    {
+                        case (int)WarningType.OUTBURST:
+                            theWorstEwrOutBurst.HandleStatus = j.HandleStatus;
+                            if (j.WarningResult < theWorstEwrOutBurst.WarningResult)
+                                theWorstEwrOutBurst.WarningResult = j.WarningResult;
+                            if (j.Gas < theWorstEwrOutBurst.Gas) theWorstEwrOutBurst.Gas = j.Gas;
+                            if (j.Coal < theWorstEwrOutBurst.Coal) theWorstEwrOutBurst.Coal = j.Coal;
+                            if (j.Geology < theWorstEwrOutBurst.Geology) theWorstEwrOutBurst.Geology = j.Geology;
+                            if (j.Ventilation < theWorstEwrOutBurst.Ventilation)
+                                theWorstEwrOutBurst.Ventilation = j.Ventilation;
+                            if (j.Management < theWorstEwrOutBurst.Management)
+                                theWorstEwrOutBurst.Management = j.Management;
+                            break;
+                        case (int)WarningType.OVERLIMIT:
+                            theWorstEwrOverLimit.HandleStatus = j.HandleStatus;
+                            if (j.WarningResult < theWorstEwrOverLimit.WarningResult)
+                                theWorstEwrOverLimit.WarningResult = j.WarningResult;
+                            if (j.Gas < theWorstEwrOverLimit.Gas) theWorstEwrOverLimit.Gas = j.Gas;
+                            if (j.Coal < theWorstEwrOverLimit.Coal) theWorstEwrOverLimit.Coal = j.Coal;
+                            if (j.Geology < theWorstEwrOverLimit.Geology) theWorstEwrOverLimit.Geology = j.Geology;
+                            if (j.Ventilation < theWorstEwrOverLimit.Ventilation)
+                                theWorstEwrOverLimit.Ventilation = j.Ventilation;
+                            if (j.Management < theWorstEwrOverLimit.Management)
+                                theWorstEwrOverLimit.Management = j.Management;
+                            break;
+                    }
+                }
+                FpUtil.setCellImg(cells[rowIdx, COLUMN_INDEX_WANRING_RESULT_OUTBURST], theWorstEwrOutBurst.WarningResult);
+                FpUtil.setCellImg(cells[rowIdx, COLUMN_INDEX_OUTBURST_GAS], theWorstEwrOutBurst.Gas);
+                FpUtil.setCellImg(cells[rowIdx, COLUMN_INDEX_OUTBURST_COAL], theWorstEwrOutBurst.Coal);
+                FpUtil.setCellImg(cells[rowIdx, COLUMN_INDEX_OUTBURST_GEOLOGY], theWorstEwrOutBurst.Geology);
+                FpUtil.setCellImg(cells[rowIdx, COLUMN_INDEX_OUTBURST_VENTILATION], theWorstEwrOutBurst.Ventilation);
+                FpUtil.setCellImg(cells[rowIdx, COLUMN_INDEX_OUTBURST_MANAGEMENT], theWorstEwrOutBurst.Management);
+
+                FpUtil.setCellImg(cells[rowIdx, COLUMN_INDEX_WANRING_RESULT_OVERLIMIT], theWorstEwrOverLimit.WarningResult);
+                FpUtil.setCellImg(cells[rowIdx, COLUMN_INDEX_OVERLIMIT_GAS], theWorstEwrOverLimit.Gas);
+                FpUtil.setCellImg(cells[rowIdx, COLUMN_INDEX_OVERLIMIT_COAL], theWorstEwrOverLimit.Coal);
+                FpUtil.setCellImg(cells[rowIdx, COLUMN_INDEX_OVERLIMIT_GEOLOGY], theWorstEwrOverLimit.Geology);
+                FpUtil.setCellImg(cells[rowIdx, COLUMN_INDEX_OVERLIMIT_VENTILATION], theWorstEwrOverLimit.Ventilation);
+                FpUtil.setCellImg(cells[rowIdx, COLUMN_INDEX_OVERLIMIT_MANAGEMENT], theWorstEwrOverLimit.Management);
+
+                var buttonCell = new ButtonCellType { Text = "···" };
+                if (theWorstEwrOutBurst.WarningResult > 1 && theWorstEwrOverLimit.WarningResult > 1)
+                {
+                    cells[rowIdx, COLUMN_INDEX_DETAIL_INFO_BUTTON].Locked = true;
+                    buttonCell.Text = "-";
+                }
+                cells[rowIdx, COLUMN_INDEX_DETAIL_INFO_BUTTON].CellType = buttonCell;
+
+                if (_chkAddPreWarningVoice.Checked)
+                {
+                    if (theWorstEwrOutBurst.WarningResult < (int)WarningResult.GREEN ||
+                        theWorstEwrOverLimit.WarningResult < (int)WarningResult.GREEN)
+                    {
+                        AddPreWarningTxt(first.Tunnel.WorkingFace.WorkingFaceName, theWorstEwrOverLimit.WarningResult,
+                            theWorstEwrOutBurst.WarningResult);
+                    }
+                }
+
+                ////超限预警记录的ID  列号15
+                //cells[rowIdx, COLUMN_INDEX_HIDE_OVERLIMIT_WARNING_ID].Value = entity.OverLimitWarningResult.ID;
+                ////突出预警记录的ID  列号16
+                //cells[rowIdx, COLUMN_INDEX_HIDE_OUTBURST_WARNING_ID].Value = entity.OutBrustWarningResult.ID;
+                //巷道ID  列号17                                            
+                cells[rowIdx, COLUMN_INDEX_HIDE_TUNNEL_ID].Value = first.Tunnel.TunnelId;
+                //日期  列号18                                              
+                cells[rowIdx, COLUMN_INDEX_HIDE_DATETIME].Value = first.DateTime;
+                //班次  列号19                                              
+                cells[rowIdx, COLUMN_INDEX_HIDE_SHIFT].Value = first.Shift;
+                //  列号20                                              
+                cells[rowIdx, COLUMN_INDEX_HIDE_OVERLIMIT_HANDLE_STATUS].Value = theWorstEwrOverLimit.HandleStatus;
+                //班次  列号21                                              
+                cells[rowIdx, COLUMN_INDEX_HIDE_OUTBURST_HANDLE_STATUS].Value = theWorstEwrOutBurst.HandleStatus;
+
+                rowIdx++;
+            }
+
+
 
             #region 添加标题数据
 
@@ -205,7 +210,8 @@ namespace sys5
 
             #endregion
 
-            //清空提示文档
+            //提醒语音字符串清空
+            _strPreWarningTxt = "";
             try
             {
                 var swnull = new StreamWriter(Application.StartupPath + "\\NoticeTxt.txt", false, Encoding.UTF8);
@@ -217,19 +223,21 @@ namespace sys5
                 Alert.alert(ex.ToString());
             }
 
-            var valueCount = _ents2.Count;
-            for (var i = 0; i < valueCount; i++)
-            {
-                addRow2Fp(FROZEN_ROW_COUNT + i, _ents2[i]);
-            }
+            //var valueCount = _ents2.Count;
+            //for (var i = 0; i < valueCount; i++)
+            //{
+            //    addRow2Fp(FROZEN_ROW_COUNT + i, _ents2[i]);
+            //}
 
-            valueCount = _ents1.Count;
-            var iTmpRowCount = FROZEN_ROW_COUNT + _ents2.Count;
+            //valueCount = _ents1.Count;
+            //var iTmpRowCount = FROZEN_ROW_COUNT + _ents2.Count;
 
-            for (var i = 0; i < valueCount; i++)
-            {
-                addRow2Fp(iTmpRowCount + i, _ents1[i]);
-            }
+            //for (var i = 0; i < valueCount; i++)
+            //{
+            //    addRow2Fp(iTmpRowCount + i, _ents1[i]);
+            //}
+
+
 
             try
             {
@@ -256,143 +264,6 @@ namespace sys5
         }
 
         /// <summary>
-        ///     向farpoint spread表单中添加一行数据.
-        /// </summary>
-        /// <param name="rowIdx"></param>
-        /// <param name="entity"></param>
-        private void addRow2Fp(int rowIdx, LibEntity.PreWarningResultQuery entity)
-        {
-            _fpPreWaringLastedValue.ActiveSheet.Rows.Add(rowIdx, 1);
-            _fpPreWaringLastedValue.ActiveSheet.Rows[rowIdx].Height = 40;
-            _fpPreWaringLastedValue.ActiveSheet.Rows[rowIdx].Locked = true;
-
-            cells[rowIdx, COLUMN_INDEX_WORKFACE_NAME].Value = entity.TunelName;
-            cells[rowIdx, COLUMN_INDEX_DATETIME_SHIFT].Value = entity.DateTime + " " + entity.Date_Shift;
-            FpUtil.setCellImg(cells[rowIdx, COLUMN_INDEX_WANRING_RESULT_OVERLIMIT],
-                entity.OverLimitWarningResult.WarningResult);
-            FpUtil.setCellImg(cells[rowIdx, COLUMN_INDEX_WANRING_RESULT_OUTBURST],
-                entity.OutBrustWarningResult.WarningResult);
-
-            //瓦斯
-            FpUtil.setCellImg(cells[rowIdx, COLUMN_INDEX_OVERLIMIT_GAS], entity.OverLimitWarningResult.Gas);
-            FpUtil.setCellImg(cells[rowIdx, COLUMN_INDEX_OUTBURST_GAS], entity.OutBrustWarningResult.Gas);
-
-            //煤层
-            FpUtil.setCellImg(cells[rowIdx, COLUMN_INDEX_OVERLIMIT_COAL], entity.OverLimitWarningResult.Coal);
-            FpUtil.setCellImg(cells[rowIdx, COLUMN_INDEX_OUTBURST_COAL], entity.OutBrustWarningResult.Coal);
-            //地质
-            FpUtil.setCellImg(cells[rowIdx, COLUMN_INDEX_OVERLIMIT_GEOLOGY], entity.OverLimitWarningResult.Geology);
-            FpUtil.setCellImg(cells[rowIdx, COLUMN_INDEX_OUTBURST_GEOLOGY], entity.OutBrustWarningResult.Geology);
-            //通风
-            FpUtil.setCellImg(cells[rowIdx, COLUMN_INDEX_OVERLIMIT_VENTILATION],
-                entity.OverLimitWarningResult.Ventilation);
-            FpUtil.setCellImg(cells[rowIdx, COLUMN_INDEX_OUTBURST_VENTILATION], entity.OutBrustWarningResult.Ventilation);
-            //管理
-            FpUtil.setCellImg(cells[rowIdx, COLUMN_INDEX_OVERLIMIT_MANAGEMENT], entity.OverLimitWarningResult.Management);
-            FpUtil.setCellImg(cells[rowIdx, COLUMN_INDEX_OUTBURST_MANAGEMENT], entity.OutBrustWarningResult.Management);
-
-            var buttonCell = new ButtonCellType();
-            buttonCell.Text = "···";
-            if (entity.OverLimitWarningResult.WarningResult > 1 && entity.OutBrustWarningResult.WarningResult > 1)
-            {
-                cells[rowIdx, COLUMN_INDEX_DETAIL_INFO_BUTTON].Locked = true;
-                buttonCell.Text = "-";
-            }
-            cells[rowIdx, COLUMN_INDEX_DETAIL_INFO_BUTTON].CellType = buttonCell;
-
-            if (_chkAddPreWarningVoice.Checked)
-            {
-                if (entity.OverLimitWarningResult.WarningResult < (int) WarningResult.GREEN ||
-                    entity.OutBrustWarningResult.WarningResult < (int) WarningResult.GREEN)
-                {
-                    AddPreWarningTxt(entity.TunelName, entity.OverLimitWarningResult.WarningResult,
-                        entity.OutBrustWarningResult.WarningResult);
-                }
-            }
-
-            //以下内容设置了隐藏，界面上无法看到
-            //超限预警记录的ID  列号15
-            cells[rowIdx, COLUMN_INDEX_HIDE_OVERLIMIT_WARNING_ID].Value = entity.OverLimitWarningResult.ID;
-            //突出预警记录的ID  列号16
-            cells[rowIdx, COLUMN_INDEX_HIDE_OUTBURST_WARNING_ID].Value = entity.OutBrustWarningResult.ID;
-            //巷道ID  列号17                                            
-            cells[rowIdx, COLUMN_INDEX_HIDE_TUNNEL_ID].Value = entity.TunnelID;
-            //日期  列号18                                              
-            cells[rowIdx, COLUMN_INDEX_HIDE_DATETIME].Value = entity.DateTime;
-            //班次  列号19                                              
-            cells[rowIdx, COLUMN_INDEX_HIDE_SHIFT].Value = entity.Date_Shift;
-            //  列号20                                              
-            cells[rowIdx, COLUMN_INDEX_HIDE_OVERLIMIT_HANDLE_STATUS].Value = entity.OverLimitWarningResult.HandleStatus;
-            //班次  列号21                                              
-            cells[rowIdx, COLUMN_INDEX_HIDE_OUTBURST_HANDLE_STATUS].Value = entity.OutBrustWarningResult.HandleStatus;
-        }
-
-        //private void addRow2Fp(int rowIdx, PreWarningResultQueryWithWorkingfaceEnt entity)
-        //{
-        //    this._fpPreWaringLastedValue.ActiveSheet.Rows.Add(rowIdx, 1);
-        //    this._fpPreWaringLastedValue.ActiveSheet.Rows[rowIdx].Height = 40;
-        //    this._fpPreWaringLastedValue.ActiveSheet.Rows[rowIdx].Locked = true;
-
-        //    this.cells[rowIdx, COLUMN_INDEX_WORKFACE_NAME].Value = entity.WorkingfaceName;
-        //    this.cells[rowIdx, COLUMN_INDEX_DATETIME_SHIFT].Value = entity.DateTime + " " + entity.Date_Shift;
-        //    FpUtil.setCellImg(this.cells[rowIdx, COLUMN_INDEX_WANRING_RESULT_OVERLIMIT],
-        //        entity.OverLimitWarningResult.WarningResult);
-        //    FpUtil.setCellImg(cells[rowIdx, COLUMN_INDEX_WANRING_RESULT_OUTBURST],
-        //        entity.OutBrustWarningResult.WarningResult);
-
-        //    //瓦斯
-        //    FpUtil.setCellImg(cells[rowIdx, COLUMN_INDEX_OVERLIMIT_GAS], entity.OverLimitWarningResult.Gas);
-        //    FpUtil.setCellImg(cells[rowIdx, COLUMN_INDEX_OUTBURST_GAS], entity.OutBrustWarningResult.Gas);
-
-        //    //煤层
-        //    FpUtil.setCellImg(cells[rowIdx, COLUMN_INDEX_OVERLIMIT_COAL], entity.OverLimitWarningResult.Coal);
-        //    FpUtil.setCellImg(cells[rowIdx, COLUMN_INDEX_OUTBURST_COAL], entity.OutBrustWarningResult.Coal);
-        //    //地质
-        //    FpUtil.setCellImg(cells[rowIdx, COLUMN_INDEX_OVERLIMIT_GEOLOGY], entity.OverLimitWarningResult.Geology);
-        //    FpUtil.setCellImg(cells[rowIdx, COLUMN_INDEX_OUTBURST_GEOLOGY], entity.OutBrustWarningResult.Geology);
-        //    //通风
-        //    FpUtil.setCellImg(cells[rowIdx, COLUMN_INDEX_OVERLIMIT_VENTILATION], entity.OverLimitWarningResult.Ventilation);
-        //    FpUtil.setCellImg(cells[rowIdx, COLUMN_INDEX_OUTBURST_VENTILATION], entity.OutBrustWarningResult.Ventilation);
-        //    //管理
-        //    FpUtil.setCellImg(cells[rowIdx, COLUMN_INDEX_OVERLIMIT_MANAGEMENT], entity.OverLimitWarningResult.Management);
-        //    FpUtil.setCellImg(cells[rowIdx, COLUMN_INDEX_OUTBURST_MANAGEMENT], entity.OutBrustWarningResult.Management);
-
-        //    FarPoint.Win.Spread.CellType.ButtonCellType buttonCell = new FarPoint.Win.Spread.CellType.ButtonCellType();
-        //    buttonCell.Text = "···";
-        //    if (entity.OverLimitWarningResult.WarningResult > 1 && entity.OutBrustWarningResult.WarningResult > 1)
-        //    {
-        //        cells[rowIdx, COLUMN_INDEX_DETAIL_INFO_BUTTON].Locked = true;
-        //        buttonCell.Text = "-";
-        //    }
-        //    cells[rowIdx, COLUMN_INDEX_DETAIL_INFO_BUTTON].CellType = buttonCell;
-
-        //    if (_chkAddPreWarningVoice.Checked)
-        //    {
-        //        if (entity.OverLimitWarningResult.WarningResult < (int)LibCommon.WarningResult.GREEN ||
-        //            entity.OutBrustWarningResult.WarningResult < (int)LibCommon.WarningResult.GREEN)
-        //        {
-        //            AddPreWarningTxt(entity.WorkingfaceName, entity.OverLimitWarningResult.WarningResult, entity.OutBrustWarningResult.WarningResult);
-        //        }
-        //    }
-
-        //    //以下内容设置了隐藏，界面上无法看到
-        //    //超限预警记录的ID  列号15
-        //    cells[rowIdx, COLUMN_INDEX_HIDE_OVERLIMIT_WARNING_ID].Value = entity.OverLimitWarningResult.ID;
-        //    //突出预警记录的ID  列号16
-        //    cells[rowIdx, COLUMN_INDEX_HIDE_OUTBURST_WARNING_ID].Value = entity.OutBrustWarningResult.ID;
-        //    //巷道ID  列号17                                            
-        //    cells[rowIdx, COLUMN_INDEX_HIDE_TUNNEL_ID].Value = entity.Tunnel;
-        //    //日期  列号18                                              
-        //    cells[rowIdx, COLUMN_INDEX_HIDE_DATETIME].Value = entity.DateTime;
-        //    //班次  列号19                                              
-        //    cells[rowIdx, COLUMN_INDEX_HIDE_SHIFT].Value = entity.Date_Shift;
-        //    //  列号20                                              
-        //    cells[rowIdx, COLUMN_INDEX_HIDE_OVERLIMIT_HANDLE_STATUS].Value = entity.OverLimitWarningResult.HandleStatus;
-        //    //班次  列号21                                              
-        //    cells[rowIdx, COLUMN_INDEX_HIDE_OUTBURST_HANDLE_STATUS].Value = entity.OutBrustWarningResult.HandleStatus;
-        //}
-
-        /// <summary>
         ///     语音提示文本
         /// </summary>
         /// <param name="strPreWarningTxt"></param>
@@ -404,12 +275,12 @@ namespace sys5
             //添加巷道名称
             _strPreWarningTxt += ChangeTunnelName(tunnelName) + new string(' ', 6);
 
-            if (OverLimitResult < (int) WarningResult.GREEN)
+            if (OverLimitResult < (int)WarningResult.GREEN)
             {
                 _strPreWarningTxt += ChangePreWarningIntValueToString(OverLimitResult) + "超限  预警" + new string(' ', 6);
             }
 
-            if (OutBurstResult < (int) WarningResult.GREEN)
+            if (OutBurstResult < (int)WarningResult.GREEN)
             {
                 _strPreWarningTxt += ChangePreWarningIntValueToString(OutBurstResult) + "突出  预警" + new string(' ', 15);
             }
@@ -493,11 +364,11 @@ namespace sys5
             }
         }
 
-        /// <summary>
-        ///     设置传出值，并启动详细信息
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        //<summary>
+        //    设置传出值，并启动详细信息
+        //</summary>
+        //<param name="sender"></param>
+        //<param name="e"></param>
         private void _fpPreWaringLastedValue_CellClick(object sender, CellClickEventArgs e)
         {
             //当选择行的数据是预警结果属于正常时，锁定单元格。检测到单元格锁定时，返回，屏蔽窗体弹出
@@ -524,10 +395,9 @@ namespace sys5
                 var shift = cells[e.Row, COLUMN_INDEX_HIDE_SHIFT].Text;
 
                 // 预警id
-                var warningIdList = new List<string>();
-                warningIdList = PreWarningLastedResultQueryBLL.GetWarningIdListWithTunnelId(tunnelId);
-                //warningIdList.Add(cells[e.Row, COLUMN_INDEX_HIDE_OVERLIMIT_WARNING_ID].Text);
-                //warningIdList.Add(cells[e.Row, COLUMN_INDEX_HIDE_OUTBURST_WARNING_ID].Text);
+                var earlyWarningResults = EarlyWarningResult.FindAllByProperty("Tunnel.TunnelId", Convert.ToInt32(tunnelId));
+
+                var warningIdList = earlyWarningResults.Select(item => item.Id.ToString()).ToList();
 
                 if (workface == "" || dateTime == "" || shift == "" || tunnelId == "")
                 {
@@ -539,17 +409,15 @@ namespace sys5
 
                 //设置传出值
                 //工作面名称
-                OutInfo.WarkingFaceName = workface;
-                //日期
-                OutInfo.DateTime = dateTime;
-                //班次
-                OutInfo.DateShift = shift;
-                //巷道ID
-                OutInfo.TunnelId = tunnelId;
-
-                OutInfo.WarningIdList = warningIdList;
-
-                var pwrdq = new PreWarningResultDetailsQuery(OutInfo, false);
+                dynamic outInfo = new
+                {
+                    WarkingFaceName = workface,
+                    DateTime = dateTime,
+                    DateShift = shift,
+                    TunnelId = tunnelId,
+                    WarningIdList = warningIdList
+                };
+                var pwrdq = new PreWarningResultDetailsQuery(outInfo, false);
                 pwrdq.ShowDialog();
                 //pwrdq.Show();//不能用Show，否则点击详细信息按钮时会弹回至实时预警
             }

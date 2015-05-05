@@ -84,7 +84,7 @@ namespace LibBusiness
         //        ent.TunelName = tunel_name1;
         //        ent.DateTime = date_time1;
         //        ent.Date_Shift = date_shift1;
-        //        if (warning_type == LibCommon.WarningType.OVER_LIMIT.ToString())
+        //        if (warning_type == LibCommon.WarningType.OVERLIMIT.ToString())
         //        {
         //            ent.OverLimitWarningResult.ID =
         //            ent.OverLimitWarningResult.WarningResult = warning_result;
@@ -197,7 +197,7 @@ namespace LibBusiness
 
                 var defultValue = (int) WarningResult.NULL;
                 if (warning_type ==
-                    WarningType.OVER_LIMIT.ToString())
+                    WarningType.OVERLIMIT.ToString())
                 {
                     ent.OverLimitWarningResult.ID =
                         dt.Rows[i][PreWarningResultDBConstNames.ID].ToString();
@@ -570,7 +570,7 @@ namespace LibBusiness
         //    //超限结果
         //    ent.OverLimitWarningResult.WarningResult =
         //        GetWarningTypeTunnelWorstPreWarningResultInOneDateshift(database, dateshift,
-        //            tunnelID, (int)LibCommon.WarningType.OVER_LIMIT,
+        //            tunnelID, (int)LibCommon.WarningType.OVERLIMIT,
         //            startTime, endTime);
         //    //突出结果
         //    ent.OutBrustWarningResult.WarningResult =
@@ -588,26 +588,26 @@ namespace LibBusiness
         //    //瓦斯
         //    ent.OverLimitWarningResult.Gas =
         //        GetGistTunnelWorstPreWarningResultInOneDateshift(database, PreWarningResultDBConstNames.GAS,
-        //            (int)LibCommon.WarningType.OVER_LIMIT, dateshift, tunnelID,
+        //            (int)LibCommon.WarningType.OVERLIMIT, dateshift, tunnelID,
         //            startTime, endTime);
         //    //煤层
         //    ent.OverLimitWarningResult.Coal =
         //        GetGistTunnelWorstPreWarningResultInOneDateshift(database, PreWarningResultDBConstNames.COAL,
-        //        (int)LibCommon.WarningType.OVER_LIMIT, dateshift, tunnelID,
+        //        (int)LibCommon.WarningType.OVERLIMIT, dateshift, tunnelID,
         //        startTime, endTime);
         //    //地质
         //    ent.OverLimitWarningResult.Geology =
         //        GetGistTunnelWorstPreWarningResultInOneDateshift(database, PreWarningResultDBConstNames.GEOLOGY,
-        //        (int)LibCommon.WarningType.OVER_LIMIT, dateshift, tunnelID,
+        //        (int)LibCommon.WarningType.OVERLIMIT, dateshift, tunnelID,
         //        startTime, endTime);
         //    //通风
         //    ent.OverLimitWarningResult.Ventilation =
         //        GetGistTunnelWorstPreWarningResultInOneDateshift(database, PreWarningResultDBConstNames.VENTILATION,
-        //        (int)LibCommon.WarningType.OVER_LIMIT, dateshift, tunnelID, startTime, endTime);
+        //        (int)LibCommon.WarningType.OVERLIMIT, dateshift, tunnelID, startTime, endTime);
         //    //管理
         //    ent.OverLimitWarningResult.Management =
         //        GetGistTunnelWorstPreWarningResultInOneDateshift(database, PreWarningResultDBConstNames.MANAGEMENT,
-        //        (int)LibCommon.WarningType.OVER_LIMIT, dateshift, tunnelID, startTime, endTime);
+        //        (int)LibCommon.WarningType.OVERLIMIT, dateshift, tunnelID, startTime, endTime);
 
         //    //瓦斯
         //    ent.OutBrustWarningResult.Gas =
@@ -651,7 +651,7 @@ namespace LibBusiness
         //    //超限结果
         //    ent.OverLimitWarningResult.WarningResult =
         //        GetWarningTypeTunnelWorstPreWarningResultInOneDateshift(database, dateshift,
-        //            workfaceName, (int)LibCommon.WarningType.OVER_LIMIT,
+        //            workfaceName, (int)LibCommon.WarningType.OVERLIMIT,
         //            startTime, endTime);
         //    //突出结果
         //    ent.OutBrustWarningResult.WarningResult =
@@ -669,26 +669,26 @@ namespace LibBusiness
         //    //瓦斯
         //    ent.OverLimitWarningResult.Gas =
         //        GetGistWorkingfaceWorstPreWarningResultInOneDateshift(database, PreWarningResultDBConstNames.GAS,
-        //            (int)LibCommon.WarningType.OVER_LIMIT, dateshift, workfaceName,
+        //            (int)LibCommon.WarningType.OVERLIMIT, dateshift, workfaceName,
         //            startTime, endTime);
         //    //煤层
         //    ent.OverLimitWarningResult.Coal =
         //        GetGistWorkingfaceWorstPreWarningResultInOneDateshift(database, PreWarningResultDBConstNames.COAL,
-        //        (int)LibCommon.WarningType.OVER_LIMIT, dateshift, workfaceName,
+        //        (int)LibCommon.WarningType.OVERLIMIT, dateshift, workfaceName,
         //        startTime, endTime);
         //    //地质
         //    ent.OverLimitWarningResult.Geology =
         //        GetGistWorkingfaceWorstPreWarningResultInOneDateshift(database, PreWarningResultDBConstNames.GEOLOGY,
-        //        (int)LibCommon.WarningType.OVER_LIMIT, dateshift, workfaceName,
+        //        (int)LibCommon.WarningType.OVERLIMIT, dateshift, workfaceName,
         //        startTime, endTime);
         //    //通风
         //    ent.OverLimitWarningResult.Ventilation =
         //        GetGistWorkingfaceWorstPreWarningResultInOneDateshift(database, PreWarningResultDBConstNames.VENTILATION,
-        //        (int)LibCommon.WarningType.OVER_LIMIT, dateshift, workfaceName, startTime, endTime);
+        //        (int)LibCommon.WarningType.OVERLIMIT, dateshift, workfaceName, startTime, endTime);
         //    //管理
         //    ent.OverLimitWarningResult.Management =
         //        GetGistWorkingfaceWorstPreWarningResultInOneDateshift(database, PreWarningResultDBConstNames.MANAGEMENT,
-        //        (int)LibCommon.WarningType.OVER_LIMIT, dateshift, workfaceName, startTime, endTime);
+        //        (int)LibCommon.WarningType.OVERLIMIT, dateshift, workfaceName, startTime, endTime);
 
         //    //瓦斯
         //    ent.OutBrustWarningResult.Gas =
@@ -770,7 +770,7 @@ namespace LibBusiness
 
             ent.OverLimitWarningResult.WarningResult =
                 DataTableFilterReturnWarningLevel(dtSelected,
-                    (int) WarningType.OVER_LIMIT,
+                    (int) WarningType.OVERLIMIT,
                     PreWarningResultDBConstNames.WARNING_RESULT);
 
             ent.OutBrustWarningResult.WarningResult =
@@ -812,27 +812,27 @@ namespace LibBusiness
             //瓦斯
             ent.OverLimitWarningResult.Gas =
                 DataTableFilterReturnWarningLevel(dtSelected,
-                    (int) WarningType.OVER_LIMIT,
+                    (int) WarningType.OVERLIMIT,
                     PreWarningResultDBConstNames.GAS);
             //煤层
             ent.OverLimitWarningResult.Coal =
                 DataTableFilterReturnWarningLevel(dtSelected,
-                    (int) WarningType.OVER_LIMIT,
+                    (int) WarningType.OVERLIMIT,
                     PreWarningResultDBConstNames.COAL);
             //地质
             ent.OverLimitWarningResult.Geology =
                 DataTableFilterReturnWarningLevel(dtSelected,
-                    (int) WarningType.OVER_LIMIT,
+                    (int) WarningType.OVERLIMIT,
                     PreWarningResultDBConstNames.GEOLOGY);
             //通风
             ent.OverLimitWarningResult.Ventilation =
                 DataTableFilterReturnWarningLevel(dtSelected,
-                    (int) WarningType.OVER_LIMIT,
+                    (int) WarningType.OVERLIMIT,
                     PreWarningResultDBConstNames.VENTILATION);
             //管理
             ent.OverLimitWarningResult.Management =
                 DataTableFilterReturnWarningLevel(dtSelected,
-                    (int) WarningType.OVER_LIMIT,
+                    (int) WarningType.OVERLIMIT,
                     PreWarningResultDBConstNames.MANAGEMENT);
 
             //瓦斯

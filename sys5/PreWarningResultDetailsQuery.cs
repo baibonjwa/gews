@@ -1,13 +1,4 @@
-﻿// ******************************************************************
-// 概  述：工作面预警详细结果查询
-// 作  者：秦凯
-// 创建日期：2014/03/25
-// 版本号：V1.0
-// 版本信息:
-// V1.0 新建
-// ******************************************************************
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -25,8 +16,9 @@ using LibCommon;
 using LibConfig;
 using LibEntity;
 using Newtonsoft.Json;
+using _5.WarningManagement;
 
-namespace _5.WarningManagement
+namespace sys5
 {
     public partial class PreWarningResultDetailsQuery : Form
     {
@@ -81,7 +73,6 @@ namespace _5.WarningManagement
         //需要过滤的列索引
         private readonly int[] _filterColunmIdxs;
         //其他窗体传入信息
-        private readonly EarlyWarningResult _inInfo;
         private readonly Cells cells;
         private readonly bool isHistory;
         private readonly string restPort = ConfigManager.Instance.getValueByKey(ConfigConst.CONFIG_REST_PORT);
@@ -158,7 +149,7 @@ namespace _5.WarningManagement
         /// </summary>
         /// <param name="inInfo">传入值</param>
         /// <param name="isHistory">是历史数据还是实时数据</param>
-        public PreWarningResultDetailsQuery(EarlyWarningResult inInfo, bool isHistory)
+        public PreWarningResultDetailsQuery(dynamic inInfo, bool isHistory)
         {
             InitializeComponent();
 
@@ -178,9 +169,6 @@ namespace _5.WarningManagement
 
             #endregion
 
-            //传入信息
-            _inInfo = inInfo;
-
             //设置窗体的样式及显示名称
             FormDefaultPropertiesSetter.SetManagementFormDefaultProperties(this,
                 Const_WM.PREWARNING_RESULT_DETAILS_QUERY);
@@ -190,11 +178,11 @@ namespace _5.WarningManagement
             _fpPreWarningResultDetials.ActiveSheet.Columns.Count = COULMN_COUNT;
 
             // 加载预警结果详细信息。
-            LoadWarningResultDetail(_inInfo.WarningIdList);
+            LoadWarningResultDetail(inInfo.WarningIdList);
 
-            _txtDateShift.Text = _inInfo.DateShift; // 班次
-            _txtDateTime.Text = _inInfo.DateTime; // 日期时间
-            _txtWorkingFace.Text = _inInfo.WarkingFaceName; // 工作面
+            _txtDateShift.Text = inInfo.DateShift; // 班次
+            _txtDateTime.Text = inInfo.DateTime; // 日期时间
+            _txtWorkingFace.Text = inInfo.WarkingFaceName; // 工作面
 
             _fpPreWarningResultDetials.Focus();
             _fpPreWarningResultDetials.SetCursor(CursorType.Normal, Cursors.Hand);
@@ -521,9 +509,9 @@ namespace _5.WarningManagement
             }
 
             //提取传入值
-            var date = _inInfo.DateTime;
-            var date_shift = _inInfo.DateShift;
-            var tunnelID = _inInfo.TunnelId;
+            //var date = _inInfo.DateTime;
+            //var date_shift = _inInfo.DateShift;
+            //var tunnelID = _inInfo.TunnelId;
 
             warningResultDetails = getHistoryWarningResultDetails(warningIds);
             // 向farpoint spread中添加数据。
@@ -608,14 +596,14 @@ namespace _5.WarningManagement
 
         private static byte[] GetBytes(string str)
         {
-            var bytes = new byte[str.Length*sizeof (char)];
+            var bytes = new byte[str.Length * sizeof(char)];
             Buffer.BlockCopy(str.ToCharArray(), 0, bytes, 0, bytes.Length);
             return bytes;
         }
 
         private static string GetString(byte[] bytes)
         {
-            var chars = new char[bytes.Length/sizeof (char)];
+            var chars = new char[bytes.Length / sizeof(char)];
             Buffer.BlockCopy(bytes, 0, chars, 0, bytes.Length);
             return new string(chars);
         }
@@ -794,11 +782,11 @@ namespace _5.WarningManagement
                 }
             }
             //返回数组赋值，与枚举对应
-            returnEnts[(int) WarningReasonItems.瓦斯] = gas;
-            returnEnts[(int) WarningReasonItems.煤层赋存] = coal;
-            returnEnts[(int) WarningReasonItems.地质构造] = geology;
-            returnEnts[(int) WarningReasonItems.通风] = venlation;
-            returnEnts[(int) WarningReasonItems.管理因素] = management;
+            returnEnts[(int)WarningReasonItems.瓦斯] = gas;
+            returnEnts[(int)WarningReasonItems.煤层赋存] = coal;
+            returnEnts[(int)WarningReasonItems.地质构造] = geology;
+            returnEnts[(int)WarningReasonItems.通风] = venlation;
+            returnEnts[(int)WarningReasonItems.管理因素] = management;
 
             return returnEnts;
         }
@@ -924,20 +912,20 @@ namespace _5.WarningManagement
 
         private void GetWarningId()
         {
-            if (String.IsNullOrEmpty(warningId))
-            {
-                if (_inInfo != null)
-                {
-                    for (var i = 0; i < _inInfo.WarningIdList.Count; i++)
-                    {
-                        warningId += _inInfo.WarningIdList[i] + ",";
-                    }
-                    if (!String.IsNullOrEmpty(warningId))
-                    {
-                        warningId = warningId.Substring(0, warningId.Length - 1);
-                    }
-                }
-            }
+            //if (String.IsNullOrEmpty(warningId))
+            //{
+            //    if (_inInfo != null)
+            //    {
+            //        for (var i = 0; i < _inInfo.WarningIdList.Count; i++)
+            //        {
+            //            warningId += _inInfo.WarningIdList[i] + ",";
+            //        }
+            //        if (!String.IsNullOrEmpty(warningId))
+            //        {
+            //            warningId = warningId.Substring(0, warningId.Length - 1);
+            //        }
+            //    }
+            //}
             //for (int i = FROZEN_ROW_COUNT; i < this._fpPreWarningResultDetials.ActiveSheet.RowCount; i++)
             //{
             //    warningId += cells[i, COLUMN_INDEX_HIDE_WARNING_ID].Text + ",";
@@ -952,7 +940,7 @@ namespace _5.WarningManagement
             {
                 using (var br = new BinaryReader(fs))
                 {
-                    photo_byte = br.ReadBytes((int) fs.Length);
+                    photo_byte = br.ReadBytes((int)fs.Length);
                 }
             }
             return photo_byte;
@@ -975,7 +963,7 @@ namespace _5.WarningManagement
         private void doSubmit(String submitType, String emptyString, String statusString)
         {
             var container = new PojoWarningContainer();
-            container.TunnelId = _inInfo.TunnelId;
+            //container.TunnelId = _inInfo.TunnelId;
 
 
             var warnings = new Dictionary<string, PojoWarning>();
@@ -989,28 +977,28 @@ namespace _5.WarningManagement
                 switch (submitType)
                 {
                     case "Actions":
-                    {
-                        detail.Actions = cells[i, COLUMN_INDEX_ACTIONS].Text;
-                        detail.ActionsPerson = ConfigManager.Instance.getValueByKey(ConfigConst.CONFIG_CURRENT_USER);
-                        detail.ActionsDateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                        break;
-                    }
+                        {
+                            detail.Actions = cells[i, COLUMN_INDEX_ACTIONS].Text;
+                            detail.ActionsPerson = ConfigManager.Instance.getValueByKey(ConfigConst.CONFIG_CURRENT_USER);
+                            detail.ActionsDateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                            break;
+                        }
                     case "Comments":
-                    {
-                        detail.Actions = cells[i, COLUMN_INDEX_ACTIONS].Text;
-                        detail.Comments = cells[i, COLUMN_INDEX_COMMENTS].Text;
-                        detail.CommentsPerson = ConfigManager.Instance.getValueByKey(ConfigConst.CONFIG_CURRENT_USER);
-                        detail.CommentsDateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                        break;
-                    }
+                        {
+                            detail.Actions = cells[i, COLUMN_INDEX_ACTIONS].Text;
+                            detail.Comments = cells[i, COLUMN_INDEX_COMMENTS].Text;
+                            detail.CommentsPerson = ConfigManager.Instance.getValueByKey(ConfigConst.CONFIG_CURRENT_USER);
+                            detail.CommentsDateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                            break;
+                        }
                     case "WarningLift":
-                    {
-                        detail.Actions = cells[i, COLUMN_INDEX_ACTIONS].Text;
-                        detail.Comments = cells[i, COLUMN_INDEX_COMMENTS].Text;
-                        detail.LiftPerson = ConfigManager.Instance.getValueByKey(ConfigConst.CONFIG_CURRENT_USER);
-                        detail.LiftDateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                        break;
-                    }
+                        {
+                            detail.Actions = cells[i, COLUMN_INDEX_ACTIONS].Text;
+                            detail.Comments = cells[i, COLUMN_INDEX_COMMENTS].Text;
+                            detail.LiftPerson = ConfigManager.Instance.getValueByKey(ConfigConst.CONFIG_CURRENT_USER);
+                            detail.LiftDateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                            break;
+                        }
                 }
 
                 detail.RuleId = warningResultDetails.Find(u => u.Id == detail.Id).RuleId;
@@ -1033,27 +1021,27 @@ namespace _5.WarningManagement
                 switch (submitType)
                 {
                     case "Actions":
-                    {
-                        if (isEmptyString(detail.Actions))
                         {
-                            MessageBox.Show(emptyString);
-                            return;
+                            if (isEmptyString(detail.Actions))
+                            {
+                                MessageBox.Show(emptyString);
+                                return;
+                            }
+                            break;
                         }
-                        break;
-                    }
                     case "Comments":
-                    {
-                        if (isEmptyString(detail.Comments))
                         {
-                            MessageBox.Show(emptyString);
-                            return;
+                            if (isEmptyString(detail.Comments))
+                            {
+                                MessageBox.Show(emptyString);
+                                return;
+                            }
+                            break;
                         }
-                        break;
-                    }
                     case "WarningLift":
-                    {
-                        break;
-                    }
+                        {
+                            break;
+                        }
                 }
             }
 
@@ -1065,25 +1053,26 @@ namespace _5.WarningManagement
             var client1 = new HttpClient();
             var postMethod =
                 new HttpPost(
-                    new Uri("http://" + serverIp + ":" + restPort + "/rest/tunnels/" + _inInfo.TunnelId + "/warninglift"));
+                //new Uri("http://" + serverIp + ":" + restPort + "/rest/tunnels/" + _inInfo.TunnelId + "/warninglift")
+                    );
             var nameValuePairList = new List<NameValuePair>();
             switch (submitType)
             {
                 case "Actions":
-                {
-                    nameValuePairList.Add(new NameValuePair(OPERATION, OPERATION_ACTION)); // 采取措施
-                    break;
-                }
+                    {
+                        nameValuePairList.Add(new NameValuePair(OPERATION, OPERATION_ACTION)); // 采取措施
+                        break;
+                    }
                 case "Comments":
-                {
-                    nameValuePairList.Add(new NameValuePair(OPERATION, OPERATION_COMMENTS)); // 采取措施
-                    break;
-                }
+                    {
+                        nameValuePairList.Add(new NameValuePair(OPERATION, OPERATION_COMMENTS)); // 采取措施
+                        break;
+                    }
                 case "WarningLift":
-                {
-                    nameValuePairList.Add(new NameValuePair(OPERATION, OPERATION_WARNING_LIFT)); // 采取措施
-                    break;
-                }
+                    {
+                        nameValuePairList.Add(new NameValuePair(OPERATION, OPERATION_WARNING_LIFT)); // 采取措施
+                        break;
+                    }
             }
             //nameValuePairList.Add(new NameValuePair(OPERATION, OPERATION_ACTION)); // 采取措施
             var jsonStr = JsonConvert.SerializeObject(container); // 措施详细描述

@@ -142,7 +142,7 @@ namespace UnderTerminal
         //        else if (data.WarningLevel == "0")
         //        {
         //            //string type = string.Empty;
-        //            //if (data.WarningType == "OVER_LIMIT")
+        //            //if (data.WarningType == "OVERLIMIT")
         //            //    type = "超限";
         //            //else if (data.WarningType == "OUTBURST")
         //            //    type = "突出";
@@ -156,7 +156,7 @@ namespace UnderTerminal
         //        else if (data.WarningLevel == "1")
         //        {
         //            //string type = string.Empty;
-        //            //if (data.WarningType == "OVER_LIMIT")
+        //            //if (data.WarningType == "OVERLIMIT")
         //            //    type = "超限";
         //            //else if (data.WarningType == "OUTBURST")
         //            //    type = "突出";

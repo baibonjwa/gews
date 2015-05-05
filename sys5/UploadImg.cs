@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using LibBusiness;
 using LibCommon;
 using LibEntity;
+using sys5;
 
 namespace _5.WarningManagement
 {

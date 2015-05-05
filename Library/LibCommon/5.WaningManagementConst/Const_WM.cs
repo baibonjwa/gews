@@ -237,7 +237,7 @@ namespace LibCommon
         public const string System5_Help_File = "\\瓦斯预警系统管理平台帮助文件.chm";
         /** 关于图片 **/
         public const string Picture_Name = "\\系统五关于图片.jpg";
-        
+
     }
 
     /// <summary>
@@ -245,15 +245,15 @@ namespace LibCommon
     /// </summary>
     public enum WarningType
     {
-        OVER_LIMIT = 0,
-        OUTBURST =1
+        OVERLIMIT = 0,
+        OUTBURST = 1
     }
 
     /// <summary>
     /// 定义预警类型枚举
     /// </summary>
     public enum WarningTypeCHN
-    {   
+    {
         超限预警,
         突出预警
     }
@@ -294,13 +294,13 @@ namespace LibCommon
         管理因素 = 4,
         其他 = 5
     }
-  
+
     /// <summary>
     /// 规则类型
     /// </summary>
     public enum RuleType
     {
         单一规则 = 0,
-        组合规则 = 1      
+        组合规则 = 1
     }
 }
