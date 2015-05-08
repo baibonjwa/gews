@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -9,7 +8,6 @@ using System.Windows.Forms;
 using FarPoint.Win.Spread;
 using FarPoint.Win.Spread.CellType;
 using GIS.Warning;
-using LibBusiness;
 using LibCommon;
 using LibEntity;
 using LibSocket;
@@ -395,9 +393,14 @@ namespace sys5
                 var shift = cells[e.Row, COLUMN_INDEX_HIDE_SHIFT].Text;
 
                 // 预警id
-                var earlyWarningResults = EarlyWarningResult.FindAllByProperty("Tunnel.TunnelId", Convert.ToInt32(tunnelId));
+                var earlyWarningResults = EarlyWarningResult.FindAllByProperty("Tunnel.TunnelId",
+                    Convert.ToInt32(tunnelId));
 
-                var warningIdList = earlyWarningResults.Select(item => item.Id.ToString()).ToList();
+                var warningIdList =
+                    earlyWarningResults.Where(
+                        u => u.DateTime == Convert.ToDateTime(dateTime) && u.Shift == shift && u.HandleStatus < 3)
+                        .Select(item => item.Id)
+                        .ToArray();
 
                 if (workface == "" || dateTime == "" || shift == "" || tunnelId == "")
                 {

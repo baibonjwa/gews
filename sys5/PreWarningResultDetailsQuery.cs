@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using CodeScales.Http;
@@ -48,9 +49,9 @@ namespace sys5
         private const int COLUMN_INDEX_HIDE_WARNING_ID = 18; // 预警ID
         // 操作类型
         private const string OPERATION = "operation";
-        private const string OPERATION_ACTION = "0"; // 采取措施
-        private const string OPERATION_COMMENTS = "1"; // 措施评价
-        private const string OPERATION_WARNING_LIFT = "2"; // 预警解除
+        private const int OPERATION_ACTION = 0; // 采取措施
+        private const int OPERATION_COMMENTS = 1; // 措施评价
+        private const int OPERATION_WARNING_LIFT = 2; // 预警解除
         public static List<String> ImgList = new List<string>();
         //设置背景颜色,背景颜色为白与RGB（200,250,160）交替设置
         private bool _bChangeBackClolor;
@@ -61,7 +62,7 @@ namespace sys5
         private HttpClient client = new HttpClient();
         private ImgPreview imgPreview;
         private bool isDirty = false;
-        private string sHandleStatus = ""; // 处理状态
+        private int sHandleStatus = 3; // 处理状态
         private UploadImg uploadImg;
         public String warningId;
         //UNHANDLED   (0, "未处理"),
@@ -69,7 +70,7 @@ namespace sys5
         //WAITING_LIFT(2, "待解除"),
         //HANDLED     (3, "评价通过,预警解除");
 
-        private List<WarningResultDetail> warningResultDetails;
+        private EarlyWarningDetail[] warningResultDetails;
         //需要过滤的列索引
         private readonly int[] _filterColunmIdxs;
         //其他窗体传入信息
@@ -89,9 +90,9 @@ namespace sys5
         /// <param name="sOutWarningItem">预警项目：瓦斯/地质构造/煤层赋存/通风/管理</param>
         /// <param name="isHistory"></param>
         public PreWarningResultDetailsQuery(string sOutTunnelId,
-            string sOutWorkface, string sOutDate, string sOutShift,
-            string sOutWarningResult, string sOutWarningType,
-            string sOutWarningItem, bool isHistory)
+            WorkingFace workingFace, DateTime dateTime, string shift,
+            int warningResult, string warningType,
+            string ruleType, bool isHistory)
         {
             InitializeComponent();
 
@@ -123,13 +124,13 @@ namespace sys5
             //LoadWarningResultDetail(sOutTunnelId,
             //            sOutWorkface, sOutDate, sOutShift,
             //            sOutWarningResult, sOutWarningType, sOutWarningItem);
-            LoadWarningResultDetail(sOutWorkface, sOutDate, sOutShift,
-                sOutWarningResult, sOutWarningType, sOutWarningItem);
+            LoadWarningResultDetail(workingFace.WorkingFaceId, dateTime, shift,
+                warningResult, warningType, ruleType);
 
 
-            _txtDateShift.Text = sOutShift; // 班次
-            _txtDateTime.Text = sOutDate; // 日期时间
-            _txtWorkingFace.Text = sOutWorkface; // 工作面
+            _txtDateShift.Text = shift; // 班次
+            _txtDateTime.Text = dateTime.ToString("yyyy-MM-dd"); // 日期时间
+            _txtWorkingFace.Text = workingFace.WorkingFaceName; // 工作面
 
             _fpPreWarningResultDetials.Focus();
             _fpPreWarningResultDetials.SetCursor(CursorType.Normal, Cursors.Hand);
@@ -196,100 +197,85 @@ namespace sys5
             RefreshImgListFromDb();
         }
 
-        private string getReadableHandleStatus(string status)
+        private string GetReadableHandleStatus(int status)
         {
-            if ("0" == status)
+            switch (status)
             {
-                btnDoIt.Text = "提交措施";
-                return "未处理, 请采取措施";
-            }
-            if ("1" == status)
-            {
-                btnDoIt.Text = "提交评价";
-                return "待评价";
-            }
-            if ("2" == status)
-            {
-                // 隐藏提交按钮
-                btnDoIt.Text = "解除预警";
-                return "评价通过,待解除";
-            }
-            if ("3" == status)
-            {
-                // 隐藏提交按钮
-                btnDoIt.Visible = false;
-                return "预警解除完毕";
+                case 0:
+                    btnDoIt.Text = @"提交措施";
+                    return "未处理, 请采取措施";
+                case 1:
+                    btnDoIt.Text = @"提交评价";
+                    return "待评价";
+                case 2:
+                    // 隐藏提交按钮
+                    btnDoIt.Text = @"解除预警";
+                    return "评价通过,待解除";
+                case 3:
+                    // 隐藏提交按钮
+                    btnDoIt.Visible = false;
+                    return "预警解除完毕";
             }
             return "";
         }
 
         private int getWarningLevel(string sWarningLevel)
         {
-            if ("红色预警" == sWarningLevel)
-                return 0;
-            if ("黄色预警" == sWarningLevel)
-                return 1;
+            switch (sWarningLevel)
+            {
+                case "红色预警":
+                    return 0;
+                case "黄色预警":
+                    return 1;
+            }
             return 2;
         }
 
         /// <summary>
         ///     向指定的FpSpread中添加一行
         /// </summary>
-        /// <param name="entity"></param>
-        /// <param name="rowType"></param>
-        private void addOneRowToFpSpread(int rowIdx, WarningResultDetail entity, FpSpread fp)
+        /// <param name="details"></param>
+        private void addOneRowToFpSpread(int rowIdx, EarlyWarningDetail details, FpSpread fp)
         {
             fp.ActiveSheet.Rows.Add(rowIdx, 1);
             fp.ActiveSheet.Rows[rowIdx].Height = 30;
             fp.ActiveSheet.Rows[rowIdx].Locked = true;
 
-            sHandleStatus = entity.HandleStatus;
-            lblStatus.Text = getReadableHandleStatus(entity.HandleStatus); // 处理状态
+            sHandleStatus = details.EarlyWarningResult.HandleStatus;
+            lblStatus.Text = GetReadableHandleStatus(sHandleStatus); // 处理状态
 
             // 编号合并信息
-            var idSpanInfo = new SpanCell(fp);
-            idSpanInfo.RowIdx = rowIdx;
-            idSpanInfo.ColIdx = COLUMN_INDEX_ID;
-            idSpanInfo.SpanColCnt = 1;
+            var idSpanInfo = new SpanCell(fp) { RowIdx = rowIdx, ColIdx = COLUMN_INDEX_ID, SpanColCnt = 1 };
             idSpanInfo.setText((rowIdx - 1).ToString());
 
             // 时间合并信息
-            var dateSpanInfo = new SpanCell(fp);
-            dateSpanInfo.RowIdx = rowIdx;
-            dateSpanInfo.ColIdx = COLUMN_INDEX_DATE_TIME;
-            dateSpanInfo.SpanColCnt = 1;
+            var dateSpanInfo = new SpanCell(fp) { RowIdx = rowIdx, ColIdx = COLUMN_INDEX_DATE_TIME, SpanColCnt = 1 };
 
-            //设置时间
-            string time = null;
-            if (entity.DateTime != null)
-                time = entity.DateTime.Split(' ')[1];
-            else
-                time = _txtDateTime.Text;
-            dateSpanInfo.setText(time);
+            dateSpanInfo.setText(details.EarlyWarningResult.DateTime.ToString("yyyy-MM-dd"));
 
             //预警类型合并信息
-            var warningTypeSpanInfo = new SpanCell(fp);
-            warningTypeSpanInfo.RowIdx = rowIdx;
-            warningTypeSpanInfo.ColIdx = COLUMN_INDEX_WANRING_TYPE; //超限/突出
-            warningTypeSpanInfo.SpanColCnt = 1;
-            if (entity.WarningType == "0")
+            var warningTypeSpanInfo = new SpanCell(fp)
+            {
+                RowIdx = rowIdx,
+                ColIdx = COLUMN_INDEX_WANRING_TYPE,
+                SpanColCnt = 1
+            };
+            //超限/突出
+            if (details.EarlyWarningResult.WarningType == 0)
             {
                 warningTypeSpanInfo.setText(WarningTypeCHN.超限预警.ToString());
             }
-            if (entity.WarningType == "1")
+            if (details.EarlyWarningResult.WarningType == 1)
             {
                 warningTypeSpanInfo.setText(WarningTypeCHN.突出预警.ToString());
             }
 
             // 规则类型/预警依据：瓦斯，煤层赋存......
-            var ruleTypeSpanInfo = new SpanCell(fp);
-            ruleTypeSpanInfo.RowIdx = rowIdx;
-            ruleTypeSpanInfo.ColIdx = COLUMN_INDEX_RULE_TYPE;
-            ruleTypeSpanInfo.SpanColCnt = 1;
-            ruleTypeSpanInfo.setText(entity.RuleType);
+            var ruleTypeSpanInfo = new SpanCell(fp) { RowIdx = rowIdx, ColIdx = COLUMN_INDEX_RULE_TYPE, SpanColCnt = 1 };
+            ruleTypeSpanInfo.setText(details.PreWarningRules.RuleType);
 
             // 预警级别/预警结果
-            FpUtil.setCellImg(cells[rowIdx, COLUMN_INDEX_WARNING_LEVEL], getWarningLevel(entity.WarningLevel));
+            FpUtil.setCellImg(cells[rowIdx, COLUMN_INDEX_WARNING_LEVEL], getWarningLevel(details.PreWarningRules.WarningLevel));
 
             //预警编号单元格样式
             cells[rowIdx, COLUMN_INDEX_ID].HorizontalAlignment = CellHorizontalAlignment.Center;
@@ -306,83 +292,83 @@ namespace sys5
             // 规则编码
             cells[rowIdx, COLUMN_INDEX_RULE_CODE].CellType = new TextCellType();
             cells[rowIdx, COLUMN_INDEX_RULE_CODE].Locked = true;
-            cells[rowIdx, COLUMN_INDEX_RULE_CODE].Text = entity.RuleCode;
+            cells[rowIdx, COLUMN_INDEX_RULE_CODE].Text = details.PreWarningRules.RuleCode;
             cells[rowIdx, COLUMN_INDEX_RULE_CODE].HorizontalAlignment = CellHorizontalAlignment.Center;
             cells[rowIdx, COLUMN_INDEX_RULE_CODE].VerticalAlignment = CellVerticalAlignment.Center;
 
             // 时间
             cells[rowIdx, COLUMN_INDEX_DATE_TIME].CellType = new TextCellType();
             cells[rowIdx, COLUMN_INDEX_DATE_TIME].Locked = true;
-            cells[rowIdx, COLUMN_INDEX_DATE_TIME].Text = entity.DateTime;
+            cells[rowIdx, COLUMN_INDEX_DATE_TIME].Text = details.EarlyWarningResult.DateTime.ToString("yyyy-MM-dd");
             cells[rowIdx, COLUMN_INDEX_DATE_TIME].HorizontalAlignment = CellHorizontalAlignment.Center;
             cells[rowIdx, COLUMN_INDEX_DATE_TIME].VerticalAlignment = CellVerticalAlignment.Center;
 
             //规则描述
             cells[rowIdx, COLUMN_INDEX_RULE_DESCRIPTION].CellType = new TextCellType();
             cells[rowIdx, COLUMN_INDEX_RULE_DESCRIPTION].Locked = true;
-            cells[rowIdx, COLUMN_INDEX_RULE_DESCRIPTION].Text = entity.RuleDescription;
+            cells[rowIdx, COLUMN_INDEX_RULE_DESCRIPTION].Text = details.PreWarningRules.RuleDescription;
             cells[rowIdx, COLUMN_INDEX_RULE_DESCRIPTION].HorizontalAlignment = CellHorizontalAlignment.Center;
             cells[rowIdx, COLUMN_INDEX_RULE_DESCRIPTION].VerticalAlignment = CellVerticalAlignment.Center;
 
             //标准值
             cells[rowIdx, COLUMN_INDEX_STANDARD_VALUE].CellType = new TextCellType();
             cells[rowIdx, COLUMN_INDEX_STANDARD_VALUE].Locked = true;
-            cells[rowIdx, COLUMN_INDEX_STANDARD_VALUE].Text = entity.Threshold;
+            cells[rowIdx, COLUMN_INDEX_STANDARD_VALUE].Text = details.Threshold;
             cells[rowIdx, COLUMN_INDEX_STANDARD_VALUE].HorizontalAlignment = CellHorizontalAlignment.Center;
             cells[rowIdx, COLUMN_INDEX_STANDARD_VALUE].VerticalAlignment = CellVerticalAlignment.Center;
 
             //实际值
             cells[rowIdx, COLUMN_INDEX_ACTUAL_VALUE].CellType = new TextCellType();
             cells[rowIdx, COLUMN_INDEX_ACTUAL_VALUE].Locked = true;
-            cells[rowIdx, COLUMN_INDEX_ACTUAL_VALUE].Text = entity.ActualValue;
+            cells[rowIdx, COLUMN_INDEX_ACTUAL_VALUE].Text = details.ActualValue;
             cells[rowIdx, COLUMN_INDEX_ACTUAL_VALUE].HorizontalAlignment = CellHorizontalAlignment.Center;
             cells[rowIdx, COLUMN_INDEX_ACTUAL_VALUE].VerticalAlignment = CellVerticalAlignment.Center;
 
             // 解除措施
             cells[rowIdx, COLUMN_INDEX_ACTIONS].CellType = new TextCellType();
             cells[rowIdx, COLUMN_INDEX_ACTIONS].Locked = isHistory;
-            cells[rowIdx, COLUMN_INDEX_ACTIONS].Text = entity.Actions;
+            cells[rowIdx, COLUMN_INDEX_ACTIONS].Text = details.Actions;
             cells[rowIdx, COLUMN_INDEX_ACTIONS].HorizontalAlignment = CellHorizontalAlignment.Center;
             cells[rowIdx, COLUMN_INDEX_ACTIONS].VerticalAlignment = CellVerticalAlignment.Center;
 
             // 解除措施录入人
             cells[rowIdx, COLUMN_INDEX_ACTIONS_PERSON].CellType = new TextCellType();
             cells[rowIdx, COLUMN_INDEX_ACTIONS_PERSON].Locked = true; //this.isHistory;
-            cells[rowIdx, COLUMN_INDEX_ACTIONS_PERSON].Text = entity.ActionsPerson;
+            cells[rowIdx, COLUMN_INDEX_ACTIONS_PERSON].Text = details.ActionsPerson;
             cells[rowIdx, COLUMN_INDEX_ACTIONS_PERSON].HorizontalAlignment = CellHorizontalAlignment.Center;
             cells[rowIdx, COLUMN_INDEX_ACTIONS_PERSON].VerticalAlignment = CellVerticalAlignment.Center;
 
             // 解除措施录入时间
             cells[rowIdx, COLUMN_INDEX_ACTIONS_DATE_TIME].CellType = new TextCellType();
             cells[rowIdx, COLUMN_INDEX_ACTIONS_DATE_TIME].Locked = true; //this.isHistory;
-            cells[rowIdx, COLUMN_INDEX_ACTIONS_DATE_TIME].Text = entity.ActionsDateTime;
+            cells[rowIdx, COLUMN_INDEX_ACTIONS_DATE_TIME].Text = details.ActionsDateTime.ToString();
             cells[rowIdx, COLUMN_INDEX_ACTIONS_DATE_TIME].HorizontalAlignment = CellHorizontalAlignment.Center;
             cells[rowIdx, COLUMN_INDEX_ACTIONS_DATE_TIME].VerticalAlignment = CellVerticalAlignment.Center;
 
             // 措施评价
             cells[rowIdx, COLUMN_INDEX_COMMENTS].CellType = new TextCellType();
             cells[rowIdx, COLUMN_INDEX_COMMENTS].Locked = isHistory;
-            cells[rowIdx, COLUMN_INDEX_COMMENTS].Text = entity.Comments;
+            cells[rowIdx, COLUMN_INDEX_COMMENTS].Text = details.Comments;
             cells[rowIdx, COLUMN_INDEX_COMMENTS].HorizontalAlignment = CellHorizontalAlignment.Center;
             cells[rowIdx, COLUMN_INDEX_COMMENTS].VerticalAlignment = CellVerticalAlignment.Center;
 
             // 措施评价人
             cells[rowIdx, COLUMN_INDEX_COMMENTS_PERSON].CellType = new TextCellType();
             cells[rowIdx, COLUMN_INDEX_COMMENTS_PERSON].Locked = true; //this.isHistory;
-            cells[rowIdx, COLUMN_INDEX_COMMENTS_PERSON].Text = entity.CommentsPerson;
+            cells[rowIdx, COLUMN_INDEX_COMMENTS_PERSON].Text = details.CommentsPerson;
             cells[rowIdx, COLUMN_INDEX_COMMENTS_PERSON].HorizontalAlignment = CellHorizontalAlignment.Center;
             cells[rowIdx, COLUMN_INDEX_COMMENTS_PERSON].VerticalAlignment = CellVerticalAlignment.Center;
 
             // 措施评价日期
             cells[rowIdx, COLUMN_INDEX_COMMENTS_DATE_TIME].CellType = new TextCellType();
             cells[rowIdx, COLUMN_INDEX_COMMENTS_DATE_TIME].Locked = true; //this.isHistory;
-            cells[rowIdx, COLUMN_INDEX_COMMENTS_DATE_TIME].Text = entity.CommentsDateTime;
+            cells[rowIdx, COLUMN_INDEX_COMMENTS_DATE_TIME].Text = details.CommentsDateTime.ToString();
             cells[rowIdx, COLUMN_INDEX_COMMENTS_DATE_TIME].HorizontalAlignment = CellHorizontalAlignment.Center;
             cells[rowIdx, COLUMN_INDEX_COMMENTS_DATE_TIME].VerticalAlignment = CellVerticalAlignment.Center;
 
             // DataId--此列隐藏
-            cells[rowIdx, COLUMN_INDEX_HIDE_DATA_ID].Text = entity.Id;
-            cells[rowIdx, COLUMN_INDEX_HIDE_WARNING_ID].Text = entity.WarningId;
+            cells[rowIdx, COLUMN_INDEX_HIDE_DATA_ID].Text = details.Id;
+            cells[rowIdx, COLUMN_INDEX_HIDE_WARNING_ID].Text = details.EarlyWarningResult.Id.ToString();
 
             ////合并预警类型, 设置预警依据       
             //warningTypeSpanInfo.applyCellsSpan();
@@ -419,10 +405,9 @@ namespace sys5
         /// <summary>
         ///     加载预警详细信息
         /// </summary>
-        /// <param name="warningIdList"></param>
-        private void LoadWarningResultDetail(string sOutWorkface, string sOutDate, string sOutShift,
-            string sOutWarningResult, string sOutWarningType,
-            string sOutWarningItem)
+        private void LoadWarningResultDetail(int workingFaceId, DateTime dateTime, string shift,
+            int warningResult, string warningType,
+            string ruleType)
         {
             //测试代码耗时
             var stopwatch = new Stopwatch();
@@ -436,12 +421,12 @@ namespace sys5
                 _fpPreWarningResultDetials.ActiveSheet.Rows.Remove(FROZEN_ROW_COUNT, 1);
             }
 
-            warningResultDetails = getHistoryWarningResultDetails(sOutWorkface,
-                sOutDate, sOutShift, sOutWarningResult, sOutWarningType, sOutWarningItem);
+            warningResultDetails = EarlyWarningDetail.FindAllByMutiCondition(workingFaceId,
+                dateTime, shift, warningResult, warningType, ruleType);
             // 向farpoint spread中添加数据。
-            for (var j = 0; j < warningResultDetails.Count; j++)
+            foreach (var t in warningResultDetails)
             {
-                addOneRowToFpSpread(_iRowCount++, warningResultDetails[j], _fpPreWarningResultDetials);
+                addOneRowToFpSpread(_iRowCount++, t, _fpPreWarningResultDetials);
             }
 
             //设置焦点
@@ -451,17 +436,14 @@ namespace sys5
             var list = new List<string>();
 
             warningId = "";
-            for (var i = 0; i < warningResultDetails.Count; i++)
+            foreach (var t in warningResultDetails.Where(t => !list.Contains(t.EarlyWarningResult.Id.ToString())))
             {
-                if (!list.Contains(warningResultDetails[i].WarningId))
-                {
-                    list.Add(warningResultDetails[i].WarningId);
-                }
+                list.Add(t.EarlyWarningResult.Id.ToString());
             }
 
-            for (var i = 0; i < list.Count; i++)
+            foreach (var t in list)
             {
-                warningId += list[i] + ",";
+                warningId += t + ",";
             }
             if (warningId.Length > 0)
                 warningId = warningId.Substring(0, warningId.Length - 1);
@@ -479,7 +461,7 @@ namespace sys5
         ///     加载预警详细信息
         /// </summary>
         /// <param name="warningIdList">对应预警信息表中的Id(T_EARLY_WARNING_RESULT的主键)</param>
-        private void LoadWarningResultDetail(List<string> warningIdList)
+        private void LoadWarningResultDetail(int[] warningIdList)
         {
             //测试代码耗时
             var stopwatch = new Stopwatch();
@@ -487,20 +469,6 @@ namespace sys5
 
             _iRowCount = 2;
 
-            var warningIds = "";
-
-            if (warningIdList.Count == 1)
-                warningIds = warningIdList[0];
-            else if (warningIdList.Count > 1)
-            {
-                for (var i = 0; i < warningIdList.Count - 1; i++)
-                    warningIds += warningIdList[i] + ",";
-                warningIds += warningIdList[warningIdList.Count - 1];
-            }
-            else
-            {
-                return;
-            }
 
             // 删除垃圾数据
             while (_fpPreWarningResultDetials.ActiveSheet.Rows.Count > FROZEN_ROW_COUNT)
@@ -513,11 +481,11 @@ namespace sys5
             //var date_shift = _inInfo.DateShift;
             //var tunnelID = _inInfo.TunnelId;
 
-            warningResultDetails = getHistoryWarningResultDetails(warningIds);
+            warningResultDetails = EarlyWarningDetail.FindAllByWarningId(warningIdList);
             // 向farpoint spread中添加数据。
-            for (var j = 0; j < warningResultDetails.Count; j++)
+            foreach (var t in warningResultDetails)
             {
-                addOneRowToFpSpread(_iRowCount++, warningResultDetails[j], _fpPreWarningResultDetials);
+                addOneRowToFpSpread(_iRowCount++, t, _fpPreWarningResultDetials);
             }
 
             //设置焦点
@@ -573,23 +541,23 @@ namespace sys5
 
         //    return null;
         //}
-        public List<WarningResultDetail> getHistoryWarningResultDetails(string sWorkingface,
-            string sDate, string sShift,
-            string sWarningResult, string sWarningType,
-            string sWarningItem)
-        {
-            return PreWarningDetailsBLL.getHistoryWarningResultDetails(sWorkingface, sDate, sShift, sWarningResult,
-                sWarningType, sWarningItem);
-        }
+        //public List<EarlyWarningResult> getHistoryWarningResultDetails(string sWorkingface,
+        //    string sDate, string sShift,
+        //    string sWarningResult, string sWarningType,
+        //    string sWarningItem)
+        //{
+        //    return PreWarningDetailsBLL.getHistoryWarningResultDetails(sWorkingface, sDate, sShift, sWarningResult,
+        //        sWarningType, sWarningItem);
+        //}
 
-        public List<WarningResultDetail> getHistoryWarningResultDetails(string warningId)
-        {
-            return PreWarningDetailsBLL.getHistoryWarningResultDetails(warningId);
-        }
+        //public List<WarningResultDetail> getHistoryWarningResultDetails(string warningId)
+        //{
+        //    return PreWarningDetailsBLL.getHistoryWarningResultDetails(warningId);
+        //}
 
         private bool isEmptyString(String str)
         {
-            if (null == str || str == string.Empty || str == "")
+            if (string.IsNullOrEmpty(str) || str == "")
                 return true;
             return false;
         }
@@ -970,8 +938,7 @@ namespace sys5
 
             for (var i = FROZEN_ROW_COUNT; i < _fpPreWarningResultDetials.ActiveSheet.RowCount; i++)
             {
-                var detail = new PojoWarningDetail();
-                detail.Id = cells[i, COLUMN_INDEX_HIDE_DATA_ID].Text;
+                var detail = new PojoWarningDetail { Id = cells[i, COLUMN_INDEX_HIDE_DATA_ID].Text };
 
 
                 switch (submitType)
@@ -1000,9 +967,9 @@ namespace sys5
                             break;
                         }
                 }
-
-                detail.RuleId = warningResultDetails.Find(u => u.Id == detail.Id).RuleId;
-                detail.DataId = warningResultDetails.Find(u => u.Id == detail.Id).DataId;
+                var warningss = warningResultDetails.ToList();
+                detail.RuleId = warningss.Find(u => u.Id == detail.Id).PreWarningRules.RuleId.ToString();
+                detail.DataId = warningss.Find(u => u.Id == detail.Id).DataId;
 
                 var warningId = cells[i, COLUMN_INDEX_HIDE_WARNING_ID].Text;
 
@@ -1060,17 +1027,17 @@ namespace sys5
             {
                 case "Actions":
                     {
-                        nameValuePairList.Add(new NameValuePair(OPERATION, OPERATION_ACTION)); // 采取措施
+                        nameValuePairList.Add(new NameValuePair(OPERATION, OPERATION_ACTION.ToString())); // 采取措施
                         break;
                     }
                 case "Comments":
                     {
-                        nameValuePairList.Add(new NameValuePair(OPERATION, OPERATION_COMMENTS)); // 采取措施
+                        nameValuePairList.Add(new NameValuePair(OPERATION, OPERATION_COMMENTS.ToString())); // 采取措施
                         break;
                     }
                 case "WarningLift":
                     {
-                        nameValuePairList.Add(new NameValuePair(OPERATION, OPERATION_WARNING_LIFT)); // 采取措施
+                        nameValuePairList.Add(new NameValuePair(OPERATION, OPERATION_WARNING_LIFT.ToString())); // 采取措施
                         break;
                     }
             }

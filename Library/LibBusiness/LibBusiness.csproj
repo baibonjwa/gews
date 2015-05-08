@@ -166,7 +166,6 @@
     <Compile Include="5.WaningManagementBLL\DbConstNames\WarningDatasCommonDbConstNames.cs" />
     <Compile Include="5.WaningManagementBLL\DbConstNames\PreWarningRulesDbConstNames.cs" />
     <Compile Include="5.WaningManagementBLL\DbConstNames\WarningImgDbConstNames.cs" />
-    <Compile Include="PreWarningDetailsBLL.cs" />
     <Compile Include="PreWarningResultDetailsQueryBLL.cs" />
     <Compile Include="PreWarningResultQueryBLL.cs" />
     <Compile Include="PreWarningRulesBLL.cs" />
@@ -187,7 +186,6 @@
     <Compile Include="CommonBLL\PropertyBLL\MineDataSimpleBLL.cs" />
     <Compile Include="CommonBLL\PropertyBLL\CoalSeamsBLL.cs" />
     <Compile Include="CommonBLL\PropertyBLL\DepartmentInformationManagementBLL.cs" />
-    <Compile Include="PreWarningLastedResultQueryBLL.cs" />
     <Compile Include="CommonBLL\PropertyBLL\TunnelDefaultSelect.cs" />
     <Compile Include="CommonBLL\PropertyBLL\UserGroupInformationManagementBLL.cs" />
     <Compile Include="CommonBLL\PropertyBLL\UserInformationDetailsManagementBLL.cs" />

@@ -24,7 +24,7 @@ namespace LibEntity
 
 
         /// <summary>
-        ///     设置或获取煤厚变化
+        ///     设置或获取煤厚变化   
         /// </summary>
         [Property("COAL_THICK_CHANGE")]
         public double CoalThickChange { get; set; }

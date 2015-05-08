@@ -7,7 +7,6 @@ using FarPoint.Win.Spread.CellType;
 using LibBusiness;
 using LibCommon;
 using LibEntity;
-using _5.WarningManagement;
 
 namespace sys5
 {
@@ -28,7 +27,7 @@ namespace sys5
         private readonly int[] _filterColunmIdxs;
         // 每个总结的简要信息
         private readonly Cells infoCells;
-        private readonly string sOutWarningResult = null; // 红色/黄色/绿色
+        private readonly int sOutWarningResult; // 红色/黄色/绿色
         // Summary of the query, 每个班次的查询总结
         private readonly Cells summaryCells;
 
@@ -112,13 +111,13 @@ namespace sys5
 
             //Mark By QinKai，若添加新的预警依据项，需要更改的内容
             //加载预警依据的类别
-            var WaringItemTypeNames = Enum.GetNames(typeof (WarningReasonItems));
+            var WaringItemTypeNames = Enum.GetNames(typeof(WarningReasonItems));
             cbWarningType.SelectedIndex = 0;
 
             for (var index = 0; index < WaringItemTypeNames.Length; index++)
             {
                 infoCells[_iDetailsRowHeaderCount + index, 0].Text = WaringItemTypeNames[index];
-                infoCells[WaringItemTypeNames.Length + _iDetailsRowHeaderCount*2 + index, 0].Text =
+                infoCells[WaringItemTypeNames.Length + _iDetailsRowHeaderCount * 2 + index, 0].Text =
                     WaringItemTypeNames[index];
             }
         }
@@ -179,9 +178,9 @@ namespace sys5
             try
             {
                 //超限预警
-                _picOverLimitResult.Image = (Image) summaryCells[rowIndex, 3].Value;
+                _picOverLimitResult.Image = (Image)summaryCells[rowIndex, 3].Value;
                 //突出预警
-                _picOurburstResult.Image = (Image) summaryCells[rowIndex, 4].Value;
+                _picOurburstResult.Image = (Image)summaryCells[rowIndex, 4].Value;
 
                 var imageCell = new ImageCellType();
                 imageCell.Style = RenderStyle.Normal;
@@ -191,80 +190,80 @@ namespace sys5
                 buttonCell.Text = "详细信息";
                 //超限预警
                 //瓦斯
-                infoCells[_iDetailsRowHeaderCount + (int) WarningReasonItems.瓦斯, 1].CellType = imageCell;
-                infoCells[_iDetailsRowHeaderCount + (int) WarningReasonItems.瓦斯, 1].Value =
+                infoCells[_iDetailsRowHeaderCount + (int)WarningReasonItems.瓦斯, 1].CellType = imageCell;
+                infoCells[_iDetailsRowHeaderCount + (int)WarningReasonItems.瓦斯, 1].Value =
                     summaryCells[rowIndex, _iOverLimitGas].Value;
-                infoCells[_iDetailsRowHeaderCount + (int) WarningReasonItems.瓦斯, 2].CellType = buttonCell;
+                infoCells[_iDetailsRowHeaderCount + (int)WarningReasonItems.瓦斯, 2].CellType = buttonCell;
                 //煤层
-                infoCells[_iDetailsRowHeaderCount + (int) WarningReasonItems.煤层赋存, 1].CellType = imageCell;
-                infoCells[_iDetailsRowHeaderCount + (int) WarningReasonItems.煤层赋存, 1].Value =
+                infoCells[_iDetailsRowHeaderCount + (int)WarningReasonItems.煤层赋存, 1].CellType = imageCell;
+                infoCells[_iDetailsRowHeaderCount + (int)WarningReasonItems.煤层赋存, 1].Value =
                     summaryCells[rowIndex, _iOverLimitCoal].Value;
-                infoCells[_iDetailsRowHeaderCount + (int) WarningReasonItems.煤层赋存, 2].CellType = buttonCell;
+                infoCells[_iDetailsRowHeaderCount + (int)WarningReasonItems.煤层赋存, 2].CellType = buttonCell;
                 //地质
-                infoCells[_iDetailsRowHeaderCount + (int) WarningReasonItems.地质构造, 1].CellType = imageCell;
-                infoCells[_iDetailsRowHeaderCount + (int) WarningReasonItems.地质构造, 1].Value =
+                infoCells[_iDetailsRowHeaderCount + (int)WarningReasonItems.地质构造, 1].CellType = imageCell;
+                infoCells[_iDetailsRowHeaderCount + (int)WarningReasonItems.地质构造, 1].Value =
                     summaryCells[rowIndex, _iOverLimitGeology].Value;
-                infoCells[_iDetailsRowHeaderCount + (int) WarningReasonItems.地质构造, 2].CellType = buttonCell;
+                infoCells[_iDetailsRowHeaderCount + (int)WarningReasonItems.地质构造, 2].CellType = buttonCell;
                 //通风
-                infoCells[_iDetailsRowHeaderCount + (int) WarningReasonItems.通风, 1].CellType = imageCell;
-                infoCells[_iDetailsRowHeaderCount + (int) WarningReasonItems.通风, 1].Value =
+                infoCells[_iDetailsRowHeaderCount + (int)WarningReasonItems.通风, 1].CellType = imageCell;
+                infoCells[_iDetailsRowHeaderCount + (int)WarningReasonItems.通风, 1].Value =
                     summaryCells[rowIndex, _iOverLimitVentilation].Value;
-                infoCells[_iDetailsRowHeaderCount + (int) WarningReasonItems.通风, 2].CellType = buttonCell;
+                infoCells[_iDetailsRowHeaderCount + (int)WarningReasonItems.通风, 2].CellType = buttonCell;
                 //管理
-                infoCells[_iDetailsRowHeaderCount + (int) WarningReasonItems.管理因素, 1].CellType = imageCell;
-                infoCells[_iDetailsRowHeaderCount + (int) WarningReasonItems.管理因素, 1].Value =
+                infoCells[_iDetailsRowHeaderCount + (int)WarningReasonItems.管理因素, 1].CellType = imageCell;
+                infoCells[_iDetailsRowHeaderCount + (int)WarningReasonItems.管理因素, 1].Value =
                     summaryCells[rowIndex, _iOverLimitManagement].Value;
-                infoCells[_iDetailsRowHeaderCount + (int) WarningReasonItems.管理因素, 2].CellType = buttonCell;
+                infoCells[_iDetailsRowHeaderCount + (int)WarningReasonItems.管理因素, 2].CellType = buttonCell;
                 //其他
-                infoCells[_iDetailsRowHeaderCount + (int) WarningReasonItems.其他, 1].CellType = imageCell;
-                infoCells[_iDetailsRowHeaderCount + (int) WarningReasonItems.其他, 1].Value =
+                infoCells[_iDetailsRowHeaderCount + (int)WarningReasonItems.其他, 1].CellType = imageCell;
+                infoCells[_iDetailsRowHeaderCount + (int)WarningReasonItems.其他, 1].Value =
                     summaryCells[rowIndex, _iOverLimitOther].Value;
-                infoCells[_iDetailsRowHeaderCount + (int) WarningReasonItems.其他, 2].CellType = buttonCell;
+                infoCells[_iDetailsRowHeaderCount + (int)WarningReasonItems.其他, 2].CellType = buttonCell;
 
                 //预警依据类型的数量
-                var warningItemTypeCount = Enum.GetNames(typeof (WarningReasonItems)).Length;
+                var warningItemTypeCount = Enum.GetNames(typeof(WarningReasonItems)).Length;
                 //超限预警
                 //瓦斯
-                infoCells[warningItemTypeCount + 2*_iDetailsRowHeaderCount + (int) WarningReasonItems.瓦斯, 1].CellType =
+                infoCells[warningItemTypeCount + 2 * _iDetailsRowHeaderCount + (int)WarningReasonItems.瓦斯, 1].CellType =
                     imageCell;
-                infoCells[warningItemTypeCount + 2*_iDetailsRowHeaderCount + (int) WarningReasonItems.瓦斯, 1].Value =
+                infoCells[warningItemTypeCount + 2 * _iDetailsRowHeaderCount + (int)WarningReasonItems.瓦斯, 1].Value =
                     (summaryCells[rowIndex, _iOutBurstGas]).Value;
-                infoCells[warningItemTypeCount + 2*_iDetailsRowHeaderCount + (int) WarningReasonItems.瓦斯, 2].CellType =
+                infoCells[warningItemTypeCount + 2 * _iDetailsRowHeaderCount + (int)WarningReasonItems.瓦斯, 2].CellType =
                     buttonCell;
                 //煤层
-                infoCells[warningItemTypeCount + 2*_iDetailsRowHeaderCount + (int) WarningReasonItems.煤层赋存, 1].CellType
+                infoCells[warningItemTypeCount + 2 * _iDetailsRowHeaderCount + (int)WarningReasonItems.煤层赋存, 1].CellType
                     = imageCell;
-                infoCells[warningItemTypeCount + 2*_iDetailsRowHeaderCount + (int) WarningReasonItems.煤层赋存, 1].Value =
+                infoCells[warningItemTypeCount + 2 * _iDetailsRowHeaderCount + (int)WarningReasonItems.煤层赋存, 1].Value =
                     summaryCells[rowIndex, _iOutBurstCoal].Value;
-                infoCells[warningItemTypeCount + 2*_iDetailsRowHeaderCount + (int) WarningReasonItems.煤层赋存, 2].CellType
+                infoCells[warningItemTypeCount + 2 * _iDetailsRowHeaderCount + (int)WarningReasonItems.煤层赋存, 2].CellType
                     = buttonCell;
                 //地质
-                infoCells[warningItemTypeCount + 2*_iDetailsRowHeaderCount + (int) WarningReasonItems.地质构造, 1].CellType
+                infoCells[warningItemTypeCount + 2 * _iDetailsRowHeaderCount + (int)WarningReasonItems.地质构造, 1].CellType
                     = imageCell;
-                infoCells[warningItemTypeCount + 2*_iDetailsRowHeaderCount + (int) WarningReasonItems.地质构造, 1].Value =
+                infoCells[warningItemTypeCount + 2 * _iDetailsRowHeaderCount + (int)WarningReasonItems.地质构造, 1].Value =
                     summaryCells[rowIndex, _iOutBurstGeology].Value;
-                infoCells[warningItemTypeCount + 2*_iDetailsRowHeaderCount + (int) WarningReasonItems.地质构造, 2].CellType
+                infoCells[warningItemTypeCount + 2 * _iDetailsRowHeaderCount + (int)WarningReasonItems.地质构造, 2].CellType
                     = buttonCell;
                 //通风
-                infoCells[warningItemTypeCount + 2*_iDetailsRowHeaderCount + (int) WarningReasonItems.通风, 1].CellType =
+                infoCells[warningItemTypeCount + 2 * _iDetailsRowHeaderCount + (int)WarningReasonItems.通风, 1].CellType =
                     imageCell;
-                infoCells[warningItemTypeCount + 2*_iDetailsRowHeaderCount + (int) WarningReasonItems.通风, 1].Value =
+                infoCells[warningItemTypeCount + 2 * _iDetailsRowHeaderCount + (int)WarningReasonItems.通风, 1].Value =
                     summaryCells[rowIndex, _iOutBurstVentilation].Value;
-                infoCells[warningItemTypeCount + 2*_iDetailsRowHeaderCount + (int) WarningReasonItems.通风, 2].CellType =
+                infoCells[warningItemTypeCount + 2 * _iDetailsRowHeaderCount + (int)WarningReasonItems.通风, 2].CellType =
                     buttonCell;
                 //管理
-                infoCells[warningItemTypeCount + 2*_iDetailsRowHeaderCount + (int) WarningReasonItems.管理因素, 1].CellType
+                infoCells[warningItemTypeCount + 2 * _iDetailsRowHeaderCount + (int)WarningReasonItems.管理因素, 1].CellType
                     = imageCell;
-                infoCells[warningItemTypeCount + 2*_iDetailsRowHeaderCount + (int) WarningReasonItems.管理因素, 1].Value =
+                infoCells[warningItemTypeCount + 2 * _iDetailsRowHeaderCount + (int)WarningReasonItems.管理因素, 1].Value =
                     summaryCells[rowIndex, _iOutBurstManagement].Value;
-                infoCells[warningItemTypeCount + 2*_iDetailsRowHeaderCount + (int) WarningReasonItems.管理因素, 2].CellType
+                infoCells[warningItemTypeCount + 2 * _iDetailsRowHeaderCount + (int)WarningReasonItems.管理因素, 2].CellType
                     = buttonCell;
                 //其他
-                infoCells[warningItemTypeCount + 2*_iDetailsRowHeaderCount + +(int) WarningReasonItems.其他, 1].CellType =
+                infoCells[warningItemTypeCount + 2 * _iDetailsRowHeaderCount + +(int)WarningReasonItems.其他, 1].CellType =
                     imageCell;
-                infoCells[warningItemTypeCount + 2*_iDetailsRowHeaderCount + +(int) WarningReasonItems.其他, 1].Value =
+                infoCells[warningItemTypeCount + 2 * _iDetailsRowHeaderCount + +(int)WarningReasonItems.其他, 1].Value =
                     summaryCells[rowIndex, _iOutBurstOther].Value;
-                infoCells[warningItemTypeCount + 2*_iDetailsRowHeaderCount + +(int) WarningReasonItems.其他, 2].CellType =
+                infoCells[warningItemTypeCount + 2 * _iDetailsRowHeaderCount + +(int)WarningReasonItems.其他, 2].CellType =
                     buttonCell;
             }
             catch (Exception ex)
@@ -478,7 +477,7 @@ namespace sys5
 
                 //取出选择的项对应的类型
                 //枚举中的项个数
-                var warningItemCount = Enum.GetNames(typeof (WarningReasonItems)).Length;
+                var warningItemCount = Enum.GetNames(typeof(WarningReasonItems)).Length;
 
                 #region 取出选择的项对应的值
 
@@ -486,40 +485,40 @@ namespace sys5
                 {
                     warningtype = WarningTypeCHN.超限预警.ToString();
                 }
-                else if (rowIndex >= 2*_iDetailsRowHeaderCount + warningItemCount &&
-                         rowIndex <= 2*_iDetailsRowHeaderCount + 2*warningItemCount)
+                else if (rowIndex >= 2 * _iDetailsRowHeaderCount + warningItemCount &&
+                         rowIndex <= 2 * _iDetailsRowHeaderCount + 2 * warningItemCount)
                 {
                     warningtype = WarningTypeCHN.突出预警.ToString();
                 }
-                if (rowIndex == (int) WarningReasonItems.瓦斯 + _iDetailsRowHeaderCount ||
-                    rowIndex == (int) WarningReasonItems.瓦斯 + _iDetailsRowHeaderCount*2 + warningItemCount)
+                if (rowIndex == (int)WarningReasonItems.瓦斯 + _iDetailsRowHeaderCount ||
+                    rowIndex == (int)WarningReasonItems.瓦斯 + _iDetailsRowHeaderCount * 2 + warningItemCount)
                 {
                     warningitem = WarningReasonItems.瓦斯.ToString();
                 }
-                else if (rowIndex == (int) WarningReasonItems.煤层赋存 + _iDetailsRowHeaderCount ||
-                         rowIndex == (int) WarningReasonItems.煤层赋存 + _iDetailsRowHeaderCount*2 + warningItemCount)
+                else if (rowIndex == (int)WarningReasonItems.煤层赋存 + _iDetailsRowHeaderCount ||
+                         rowIndex == (int)WarningReasonItems.煤层赋存 + _iDetailsRowHeaderCount * 2 + warningItemCount)
                 {
                     warningitem = WarningReasonItems.煤层赋存.ToString();
                 }
-                else if (rowIndex == (int) WarningReasonItems.地质构造 + _iDetailsRowHeaderCount ||
-                         rowIndex == (int) WarningReasonItems.地质构造 + _iDetailsRowHeaderCount*2 + warningItemCount)
+                else if (rowIndex == (int)WarningReasonItems.地质构造 + _iDetailsRowHeaderCount ||
+                         rowIndex == (int)WarningReasonItems.地质构造 + _iDetailsRowHeaderCount * 2 + warningItemCount)
                 {
                     warningitem = WarningReasonItems.地质构造.ToString();
                 }
-                else if (rowIndex == (int) WarningReasonItems.通风 + _iDetailsRowHeaderCount ||
-                         rowIndex == (int) WarningReasonItems.通风 + _iDetailsRowHeaderCount*2 + warningItemCount)
+                else if (rowIndex == (int)WarningReasonItems.通风 + _iDetailsRowHeaderCount ||
+                         rowIndex == (int)WarningReasonItems.通风 + _iDetailsRowHeaderCount * 2 + warningItemCount)
                 {
                     warningitem = WarningReasonItems.通风.ToString();
                 }
-                else if (rowIndex == (int) WarningReasonItems.管理因素 + _iDetailsRowHeaderCount ||
+                else if (rowIndex == (int)WarningReasonItems.管理因素 + _iDetailsRowHeaderCount ||
                          rowIndex ==
-                         (int) WarningReasonItems.管理因素 + _iDetailsRowHeaderCount*2 + warningItemCount)
+                         (int)WarningReasonItems.管理因素 + _iDetailsRowHeaderCount * 2 + warningItemCount)
                 {
                     warningitem = WarningReasonItems.管理因素.ToString();
                 }
-                else if (rowIndex == (int) WarningReasonItems.其他 + _iDetailsRowHeaderCount ||
+                else if (rowIndex == (int)WarningReasonItems.其他 + _iDetailsRowHeaderCount ||
                          rowIndex ==
-                         (int) WarningReasonItems.其他 + _iDetailsRowHeaderCount*2 + warningItemCount)
+                         (int)WarningReasonItems.其他 + _iDetailsRowHeaderCount * 2 + warningItemCount)
                 {
                     warningitem = WarningReasonItems.其他.ToString();
                 }
@@ -533,7 +532,8 @@ namespace sys5
                 //预警依据
                 sOutWarningItem = warningitem;
 
-                var pwrdq = new PreWarningResultDetailsQuery("-1", sOutWorkface, sOutDate, sOutShift, sOutWarningResult,
+                var workingFace = WorkingFace.FindByWorkingFaceName(sOutWorkface);
+                var pwrdq = new PreWarningResultDetailsQuery("-1", workingFace, Convert.ToDateTime(sOutDate), sOutShift, sOutWarningResult,
                     sOutWarningType, sOutWarningItem, true);
                 pwrdq.ShowDialog();
             }
@@ -569,7 +569,7 @@ namespace sys5
 
         private void farpointFilter1_OnCheckFilterChanged(object sender, EventArgs arg)
         {
-            var chk = (CheckBox) sender;
+            var chk = (CheckBox)sender;
             //当Checkbox选中时，筛选过程中则将不符合条件的数据隐藏
             if (chk.Checked)
             {
