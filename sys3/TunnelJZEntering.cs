@@ -6,7 +6,6 @@ using ESRI.ArcGIS.Geometry;
 using GIS.HdProc;
 using LibCommon;
 using LibEntity;
-using TunnelDefaultSelect = LibBusiness.TunnelDefaultSelect;
 
 namespace _3.GeologyMeasure
 {
@@ -42,8 +41,6 @@ namespace _3.GeologyMeasure
             //this.selectTunnelUserControl1.SetFilterOn(TunnelTypeEnum.TUNNELLING);
             //this.selectTunnelUserControl1.init(this.MainForm);
             //自定义控件初始化
-
-            var tunnelDefaultSelectEntity = TunnelDefaultSelect.selectDefaultTunnel(Wire.TableName);
 
             // 注册委托事件
             //this.selectTunnelUserControl1.TunnelNameChanged +=

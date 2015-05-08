@@ -61,6 +61,7 @@ namespace LibPanels
         {
             dgrdvK1Value.Rows[dgrdvK1Value.CurrentCell.RowIndex].Cells[6].Value = ((DateTimePicker)sender).Text;
         }
+
         /// <summary>
         /// 提交按钮事件
         /// </summary>
@@ -124,7 +125,10 @@ namespace LibPanels
                 }
             }
             //TODO:添加成功
-            UpdateWarningDataMsg msg = new UpdateWarningDataMsg(selectTunnelSimple1.SelectedTunnel.WorkingFace.WorkingFaceId, selectTunnelSimple1.SelectedTunnel.TunnelId, K1ValueDbConstNames.TABLE_NAME, OPERATION_TYPE.ADD, DateTime.Now);
+            UpdateWarningDataMsg msg =
+                new UpdateWarningDataMsg(selectTunnelSimple1.SelectedTunnel.WorkingFace.WorkingFaceId,
+                    selectTunnelSimple1.SelectedTunnel.TunnelId, K1Value.TABLE_NAME, OPERATION_TYPE.ADD,
+                    DateTime.Now);
             SocketUtil.SendMsg2Server(msg);
         }
 

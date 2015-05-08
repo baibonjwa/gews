@@ -58,7 +58,7 @@ namespace LibBusiness
             sb.Append(" END ");
             sb.Append("COMMIT TRANSACTION;");
 
-            Log.Debug("[Geology_Distance]" + sb.ToString());
+            Log.Debug("[Geology_Distance]" + sb);
 
             var bres = db.OperateDB(sb.ToString());
             return bres;

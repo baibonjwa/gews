@@ -7,7 +7,7 @@ namespace LibEntity
     [ActiveRecord("T_VALUE_K1")]
     public class K1Value : ActiveRecordBase<K1Value>
     {
-        //主键ID
+        public const String TABLE_NAME = "T_VALUE_K1";
 
         /// <summary>
         ///     主键ID
@@ -15,15 +15,11 @@ namespace LibEntity
         [PrimaryKey(PrimaryKeyType.Identity)]
         public int Id { get; set; }
 
-        //K1值分组ID
-
         /// <summary>
         ///     K1值分组ID
         /// </summary>
         [Property("VALUE_K1_ID")]
         public int K1ValueId { get; set; }
-
-        //坐标X
 
         /// <summary>
         ///     坐标X
@@ -31,15 +27,11 @@ namespace LibEntity
         [Property("COORDINATE_X")]
         public double CoordinateX { get; set; }
 
-        //坐标Y
-
         /// <summary>
         ///     坐标Y
         /// </summary>
         [Property("COORDINATE_Y")]
         public double CoordinateY { get; set; }
-
-        //坐标Z
 
         /// <summary>
         ///     坐标Z
@@ -47,15 +39,11 @@ namespace LibEntity
         [Property("COORDINATE_Z")]
         public double CoordinateZ { get; set; }
 
-        //干煤K1值
-
         /// <summary>
         ///     K1值
         /// </summary>
         [Property("VALUE_K1_DRY")]
         public double ValueK1Dry { get; set; }
-
-        //湿煤K1值
 
         /// <summary>
         ///     湿煤K1值
@@ -81,22 +69,17 @@ namespace LibEntity
         [Property("VALUE_Q")]
         public double Q { get; set; }
 
-
         /// <summary>
         ///     孔深
         /// </summary>
         [Property("BOREHOLE_DEEP")]
         public double BoreholeDeep { get; set; }
 
-        //记录时间
-
         /// <summary>
         ///     记录时间
         /// </summary>
         [Property("TIME")]
         public DateTime Time { get; set; }
-
-        //录入时间
 
         /// <summary>
         ///     录入时间
