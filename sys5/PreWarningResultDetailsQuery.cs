@@ -89,8 +89,7 @@ namespace sys5
         /// <param name="sOutWarningType">预警类型</param>
         /// <param name="sOutWarningItem">预警项目：瓦斯/地质构造/煤层赋存/通风/管理</param>
         /// <param name="isHistory"></param>
-        public PreWarningResultDetailsQuery(string sOutTunnelId,
-            WorkingFace workingFace, DateTime dateTime, string shift,
+        public PreWarningResultDetailsQuery(WorkingFace workingFace, DateTime dateTime, string shift,
             int warningResult, string warningType,
             string ruleType, bool isHistory)
         {
@@ -153,7 +152,7 @@ namespace sys5
         public PreWarningResultDetailsQuery(dynamic inInfo, bool isHistory)
         {
             InitializeComponent();
-
+            _tunnelId = inInfo.TunnelId;
             cells = _fpPreWarningResultDetials.ActiveSheet.Cells;
 
             this.isHistory = isHistory;
@@ -971,6 +970,7 @@ namespace sys5
                 detail.RuleId = warningss.Find(u => u.Id == detail.Id).PreWarningRules.RuleId.ToString();
                 detail.DataId = warningss.Find(u => u.Id == detail.Id).DataId;
 
+
                 var warningId = cells[i, COLUMN_INDEX_HIDE_WARNING_ID].Text;
 
                 PojoWarning warning = null;
@@ -978,8 +978,7 @@ namespace sys5
                     warning = warnings[warningId];
                 else
                 {
-                    warning = new PojoWarning();
-                    warning.WarningId = warningId;
+                    warning = new PojoWarning { WarningId = warningId };
                     warnings.Add(warningId, warning);
                 }
 
@@ -1020,7 +1019,7 @@ namespace sys5
             var client1 = new HttpClient();
             var postMethod =
                 new HttpPost(
-                //new Uri("http://" + serverIp + ":" + restPort + "/rest/tunnels/" + _inInfo.TunnelId + "/warninglift")
+                    new Uri("http://" + serverIp + ":" + restPort + "/rest/tunnels/" + _tunnelId + "/warninglift")
                     );
             var nameValuePairList = new List<NameValuePair>();
             switch (submitType)
@@ -1042,6 +1041,7 @@ namespace sys5
                     }
             }
             //nameValuePairList.Add(new NameValuePair(OPERATION, OPERATION_ACTION)); // 采取措施
+            container.TunnelId = _tunnelId.ToString();
             var jsonStr = JsonConvert.SerializeObject(container); // 措施详细描述
             nameValuePairList.Add(new NameValuePair(Const.JSON_MSG, jsonStr));
             var formEntity = new UrlEncodedFormEntity(nameValuePairList, Encoding.UTF8);

@@ -533,7 +533,7 @@ namespace sys5
                 sOutWarningItem = warningitem;
 
                 var workingFace = WorkingFace.FindByWorkingFaceName(sOutWorkface);
-                var pwrdq = new PreWarningResultDetailsQuery("-1", workingFace, Convert.ToDateTime(sOutDate), sOutShift, sOutWarningResult,
+                var pwrdq = new PreWarningResultDetailsQuery(workingFace, Convert.ToDateTime(sOutDate), sOutShift, sOutWarningResult,
                     sOutWarningType, sOutWarningItem, true);
                 pwrdq.ShowDialog();
             }
