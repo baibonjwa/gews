@@ -255,12 +255,6 @@
     <Compile Include="UserGroupInformationManagement.designer.cs">
       <DependentUpon>UserGroupInformationManagement.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserGroupManagementForAddUserIntoGroup.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UserGroupManagementForAddUserIntoGroup.designer.cs">
-      <DependentUpon>UserGroupManagementForAddUserIntoGroup.cs</DependentUpon>
-    </Compile>
     <Compile Include="UserInformationDetailsInput.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -370,9 +364,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserGroupInformationManagement.resx">
       <DependentUpon>UserGroupInformationManagement.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserGroupManagementForAddUserIntoGroup.resx">
-      <DependentUpon>UserGroupManagementForAddUserIntoGroup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserInformationDetailsInput.resx">
       <DependentUpon>UserInformationDetailsInput.cs</DependentUpon>

@@ -107,207 +107,161 @@ namespace LibBusiness
         ///     返回所有预警时间
         /// </summary>
         /// <returns></returns>
-        public static string[] GetAllPreWarningTimes()
-        {
-            string[] times = null;
-            var strSql = new StringBuilder();
-            strSql.Append("SELECT DISTINCT ");
-            strSql.Append(PreWarningResultDBConstNames.DATA_TIME);
-            strSql.Append(" FROM ");
-            strSql.Append(PreWarningResultDBConstNames.TABLE_NAME);
-            strSql.Append(" ORDER BY ");
-            strSql.Append(PreWarningResultDBConstNames.DATA_TIME);
-            strSql.Append(" DESC");
-            var database = new
-                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
-            var dt = new DataTable();
-            dt = database.ReturnDS(strSql.ToString()).Tables[0];
-            if (dt != null)
-            {
-                int rowCount = dt.Rows.Count;
-                if (rowCount > 0)
-                {
-                    times = new string[rowCount];
-                    for (int i = 0; i < rowCount; i++)
-                    {
-                        times[i] =
-                            dt.Rows[i][PreWarningResultDBConstNames.DATA_TIME].ToString();
-                    }
-                }
-            }
-            return times;
-        }
+        //public static string[] GetAllPreWarningTimes()
+        //{
+        //    string[] times = null;
+        //    var strSql = new StringBuilder();
+        //    strSql.Append("SELECT DISTINCT ");
+        //    strSql.Append(PreWarningResultDBConstNames.DATA_TIME);
+        //    strSql.Append(" FROM ");
+        //    strSql.Append(PreWarningResultDBConstNames.TABLE_NAME);
+        //    strSql.Append(" ORDER BY ");
+        //    strSql.Append(PreWarningResultDBConstNames.DATA_TIME);
+        //    strSql.Append(" DESC");
+        //    var database = new
+        //        ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+        //    var dt = new DataTable();
+        //    dt = database.ReturnDS(strSql.ToString()).Tables[0];
+        //    if (dt != null)
+        //    {
+        //        int rowCount = dt.Rows.Count;
+        //        if (rowCount > 0)
+        //        {
+        //            times = new string[rowCount];
+        //            for (int i = 0; i < rowCount; i++)
+        //            {
+        //                times[i] =
+        //                    dt.Rows[i][PreWarningResultDBConstNames.DATA_TIME].ToString();
+        //            }
+        //        }
+        //    }
+        //    return times;
+        //}
 
         //SELECT ROW_NUMBER() OVER (ORDER BY W.data_time DESC , W.tunnel_id , W.id) AS rowid,* 
         //FROM T_EARLY_WARNING_RESULT AS W
         //WHERE W.data_time IN (
         //SELECT DISTINCT T.data_time FROM T_EARLY_WARNING_RESULT AS T WHERE T.data_time 
         //BETWEEN '2014-03-08 11:29:55.000' AND '2014-03-08 11:31:00.000') 
-        public static List<PreWarningResultQuery>
-            GetPerWarningResult(string timeStart, string timeEnd)
-        {
-            var ents = new
-                List<PreWarningResultQuery>();
-            var strSql = new StringBuilder();
-            strSql.Append("SELECT ROW_NUMBER() OVER (ORDER BY ");
-            strSql.Append("W." + PreWarningResultDBConstNames.DATA_TIME +
-                          " DESC,");
-            strSql.Append("W." + PreWarningResultDBConstNames.TUNNEL_ID +
-                          ",");
-            strSql.Append("W." + PreWarningResultDBConstNames.ID + ")");
-            strSql.Append(" AS rowid , *");
-            strSql.Append(" FROM ");
-            strSql.Append(PreWarningResultDBConstNames.TABLE_NAME + " AS" +
-                          " W");
-            strSql.Append(" WHERE");
-            strSql.Append(" W." + PreWarningResultDBConstNames.DATA_TIME);
-            strSql.Append(" IN (");
-            strSql.Append("SELECT DISTINCT");
-            strSql.Append(" T." + PreWarningResultDBConstNames.DATA_TIME);
-            strSql.Append(" FROM ");
-            strSql.Append(PreWarningResultDBConstNames.TABLE_NAME);
-            strSql.Append(" AS T");
-            strSql.Append(" WHERE");
-            strSql.Append(" T." + PreWarningResultDBConstNames.DATA_TIME);
-            strSql.Append(" >= ");
-            strSql.Append("'" + timeStart + "'");
-            strSql.Append(" AND ");
-            strSql.Append(" T." + PreWarningResultDBConstNames.DATA_TIME);
-            strSql.Append(" < ");
-            strSql.Append("'" + timeEnd + "')");
-            var database = new
-                ManageDataBase(DATABASE_TYPE.WarningManagementDB);
-            DataTable dt = database.ReturnDS(strSql.ToString()).Tables[0];
-            int iRowCount = dt.Rows.Count;
-            var ent = new PreWarningResultQuery();
-            for (int i = 0; i < iRowCount; i++)
-            {
-                string warning_type =
-                    dt.Rows[i][PreWarningResultDBConstNames.WARNING_TYPE].ToString();
-                if (i%2 == 0)
-                {
-                    ent = new PreWarningResultQuery();
-                    ent.TunelName =
-                        Tunnel.Find(dt.Rows[i][PreWarningResultDBConstNames.TUNNEL_ID]).TunnelName;
-                    ent.DateTime =
-                        Convert.ToDateTime(dt.Rows[i][PreWarningResultDBConstNames.DATA_TIME]);
-                    ent.Date_Shift =
-                        dt.Rows[i][PreWarningResultDBConstNames.DATE_SHIFT].ToString();
-                }
+        //public static List<PreWarningResultQuery>
+        //    GetPerWarningResult(string timeStart, string timeEnd)
+        //{
+        //    var ents = new
+        //        List<PreWarningResultQuery>();
+        //    var strSql = new StringBuilder();
+        //    strSql.Append("SELECT ROW_NUMBER() OVER (ORDER BY ");
+        //    strSql.Append("W." + PreWarningResultDBConstNames.DATA_TIME +
+        //                  " DESC,");
+        //    strSql.Append("W." + PreWarningResultDBConstNames.TUNNEL_ID +
+        //                  ",");
+        //    strSql.Append("W." + PreWarningResultDBConstNames.ID + ")");
+        //    strSql.Append(" AS rowid , *");
+        //    strSql.Append(" FROM ");
+        //    strSql.Append(PreWarningResultDBConstNames.TABLE_NAME + " AS" +
+        //                  " W");
+        //    strSql.Append(" WHERE");
+        //    strSql.Append(" W." + PreWarningResultDBConstNames.DATA_TIME);
+        //    strSql.Append(" IN (");
+        //    strSql.Append("SELECT DISTINCT");
+        //    strSql.Append(" T." + PreWarningResultDBConstNames.DATA_TIME);
+        //    strSql.Append(" FROM ");
+        //    strSql.Append(PreWarningResultDBConstNames.TABLE_NAME);
+        //    strSql.Append(" AS T");
+        //    strSql.Append(" WHERE");
+        //    strSql.Append(" T." + PreWarningResultDBConstNames.DATA_TIME);
+        //    strSql.Append(" >= ");
+        //    strSql.Append("'" + timeStart + "'");
+        //    strSql.Append(" AND ");
+        //    strSql.Append(" T." + PreWarningResultDBConstNames.DATA_TIME);
+        //    strSql.Append(" < ");
+        //    strSql.Append("'" + timeEnd + "')");
+        //    var database = new
+        //        ManageDataBase(DATABASE_TYPE.WarningManagementDB);
+        //    DataTable dt = database.ReturnDS(strSql.ToString()).Tables[0];
+        //    int iRowCount = dt.Rows.Count;
+        //    var ent = new PreWarningResultQuery();
+        //    for (int i = 0; i < iRowCount; i++)
+        //    {
+        //        string warning_type =
+        //            dt.Rows[i][PreWarningResultDBConstNames.WARNING_TYPE].ToString();
+        //        if (i%2 == 0)
+        //        {
+        //            ent = new PreWarningResultQuery();
+        //            ent.TunelName =
+        //                Tunnel.Find(dt.Rows[i][PreWarningResultDBConstNames.TUNNEL_ID]).TunnelName;
+        //            ent.DateTime =
+        //                Convert.ToDateTime(dt.Rows[i][PreWarningResultDBConstNames.DATA_TIME]);
+        //            ent.Date_Shift =
+        //                dt.Rows[i][PreWarningResultDBConstNames.DATE_SHIFT].ToString();
+        //        }
 
-                var defultValue = (int) WarningResult.NULL;
-                if (warning_type ==
-                    WarningType.OVERLIMIT.ToString())
-                {
-                    ent.OverLimitWarningResult.ID =
-                        dt.Rows[i][PreWarningResultDBConstNames.ID].ToString();
-                    int.TryParse(dt.Rows[i][PreWarningResultDBConstNames.WARNING_RESULT].ToString(),
-                        out defultValue);
-                    ent.OverLimitWarningResult.WarningResult = defultValue;
-                    defultValue = (int) WarningResult.NULL;
-                    int.TryParse(dt.Rows[i][PreWarningResultDBConstNames.GAS].ToString(),
-                        out defultValue);
-                    ent.OverLimitWarningResult.Gas = defultValue;
-                    defultValue = (int) WarningResult.NULL;
-                    int.TryParse(dt.Rows[i][PreWarningResultDBConstNames.COAL].ToString(),
-                        out defultValue);
-                    ent.OverLimitWarningResult.Coal = defultValue;
-                    defultValue = (int) WarningResult.NULL;
-                    int.TryParse(dt.Rows[i][PreWarningResultDBConstNames.GEOLOGY].ToString(),
-                        out defultValue);
-                    ent.OverLimitWarningResult.Geology = defultValue;
-                    defultValue = (int) WarningResult.NULL;
-                    int.TryParse(dt.Rows[i][PreWarningResultDBConstNames.VENTILATION].ToString(),
-                        out defultValue);
-                    ent.OverLimitWarningResult.Ventilation = defultValue;
-                    defultValue = (int) WarningResult.NULL;
-                    int.TryParse(dt.Rows[i][PreWarningResultDBConstNames.MANAGEMENT].ToString(),
-                        out defultValue);
-                    ent.OverLimitWarningResult.Management = defultValue;
-                }
-                if (warning_type ==
-                    WarningType.OUTBURST.ToString())
-                {
-                    ent.OutBrustWarningResult.ID =
-                        dt.Rows[i][PreWarningResultDBConstNames.ID].ToString();
-                    int.TryParse(dt.Rows[i][PreWarningResultDBConstNames.WARNING_RESULT].ToString(),
-                        out defultValue);
-                    ent.OutBrustWarningResult.WarningResult = defultValue;
-                    defultValue = (int) WarningResult.NULL;
-                    int.TryParse(dt.Rows[i][PreWarningResultDBConstNames.GAS].ToString(),
-                        out defultValue);
-                    ent.OutBrustWarningResult.Gas = defultValue;
-                    defultValue = (int) WarningResult.NULL;
-                    int.TryParse(dt.Rows[i][PreWarningResultDBConstNames.COAL].ToString(),
-                        out defultValue);
-                    ent.OutBrustWarningResult.Coal = defultValue;
-                    defultValue = (int) WarningResult.NULL;
-                    int.TryParse(dt.Rows[i][PreWarningResultDBConstNames.GEOLOGY].ToString(),
-                        out defultValue);
-                    ent.OutBrustWarningResult.Geology = defultValue;
-                    defultValue = (int) WarningResult.NULL;
-                    int.TryParse(dt.Rows[i][PreWarningResultDBConstNames.VENTILATION].ToString(),
-                        out defultValue);
-                    ent.OutBrustWarningResult.Ventilation = defultValue;
-                    defultValue = (int) WarningResult.NULL;
-                    int.TryParse(dt.Rows[i][PreWarningResultDBConstNames.MANAGEMENT].ToString(),
-                        out defultValue);
-                    ent.OutBrustWarningResult.Management = defultValue;
-                }
+        //        var defultValue = (int) WarningResult.NULL;
+        //        if (warning_type ==
+        //            WarningType.OVERLIMIT.ToString())
+        //        {
+        //            ent.OverLimitWarningResult.ID =
+        //                dt.Rows[i][PreWarningResultDBConstNames.ID].ToString();
+        //            int.TryParse(dt.Rows[i][PreWarningResultDBConstNames.WARNING_RESULT].ToString(),
+        //                out defultValue);
+        //            ent.OverLimitWarningResult.WarningResult = defultValue;
+        //            defultValue = (int) WarningResult.NULL;
+        //            int.TryParse(dt.Rows[i][PreWarningResultDBConstNames.GAS].ToString(),
+        //                out defultValue);
+        //            ent.OverLimitWarningResult.Gas = defultValue;
+        //            defultValue = (int) WarningResult.NULL;
+        //            int.TryParse(dt.Rows[i][PreWarningResultDBConstNames.COAL].ToString(),
+        //                out defultValue);
+        //            ent.OverLimitWarningResult.Coal = defultValue;
+        //            defultValue = (int) WarningResult.NULL;
+        //            int.TryParse(dt.Rows[i][PreWarningResultDBConstNames.GEOLOGY].ToString(),
+        //                out defultValue);
+        //            ent.OverLimitWarningResult.Geology = defultValue;
+        //            defultValue = (int) WarningResult.NULL;
+        //            int.TryParse(dt.Rows[i][PreWarningResultDBConstNames.VENTILATION].ToString(),
+        //                out defultValue);
+        //            ent.OverLimitWarningResult.Ventilation = defultValue;
+        //            defultValue = (int) WarningResult.NULL;
+        //            int.TryParse(dt.Rows[i][PreWarningResultDBConstNames.MANAGEMENT].ToString(),
+        //                out defultValue);
+        //            ent.OverLimitWarningResult.Management = defultValue;
+        //        }
+        //        if (warning_type ==
+        //            WarningType.OUTBURST.ToString())
+        //        {
+        //            ent.OutBrustWarningResult.ID =
+        //                dt.Rows[i][PreWarningResultDBConstNames.ID].ToString();
+        //            int.TryParse(dt.Rows[i][PreWarningResultDBConstNames.WARNING_RESULT].ToString(),
+        //                out defultValue);
+        //            ent.OutBrustWarningResult.WarningResult = defultValue;
+        //            defultValue = (int) WarningResult.NULL;
+        //            int.TryParse(dt.Rows[i][PreWarningResultDBConstNames.GAS].ToString(),
+        //                out defultValue);
+        //            ent.OutBrustWarningResult.Gas = defultValue;
+        //            defultValue = (int) WarningResult.NULL;
+        //            int.TryParse(dt.Rows[i][PreWarningResultDBConstNames.COAL].ToString(),
+        //                out defultValue);
+        //            ent.OutBrustWarningResult.Coal = defultValue;
+        //            defultValue = (int) WarningResult.NULL;
+        //            int.TryParse(dt.Rows[i][PreWarningResultDBConstNames.GEOLOGY].ToString(),
+        //                out defultValue);
+        //            ent.OutBrustWarningResult.Geology = defultValue;
+        //            defultValue = (int) WarningResult.NULL;
+        //            int.TryParse(dt.Rows[i][PreWarningResultDBConstNames.VENTILATION].ToString(),
+        //                out defultValue);
+        //            ent.OutBrustWarningResult.Ventilation = defultValue;
+        //            defultValue = (int) WarningResult.NULL;
+        //            int.TryParse(dt.Rows[i][PreWarningResultDBConstNames.MANAGEMENT].ToString(),
+        //                out defultValue);
+        //            ent.OutBrustWarningResult.Management = defultValue;
+        //        }
 
-                if (i%2 == 1)
-                {
-                    ents.Add(ent);
-                }
-            }
-            return ents;
-        }
-
-        /// <summary>
-        ///     通过时间选择所有巷道
-        /// </summary>
-        /// <param name="startTime"></param>
-        /// <param name="endTime"></param>
-        /// <returns></returns>
-        public static string[] GetTunnleIDBetweenSelectTime(ManageDataBase
-            database, string startTime, string endTime)
-        {
-            string[] tunnelIDs = null;
-            var strSql = new StringBuilder();
-            strSql.Append("SELECT DISTINCT ");
-            strSql.Append(PreWarningResultDBConstNames.TUNNEL_ID);
-            strSql.Append(" FROM ");
-            strSql.Append(PreWarningResultDBConstNames.TABLE_NAME);
-            strSql.Append(" WHERE ");
-            strSql.Append(PreWarningResultDBConstNames.DATA_TIME);
-            strSql.Append(" >= ");
-            strSql.Append("'" + startTime + "' ");
-            strSql.Append(" AND ");
-            strSql.Append(PreWarningResultDBConstNames.DATA_TIME);
-            strSql.Append(" <= ");
-            strSql.Append("'" + endTime + "'");
-            DataTable dt =
-                database.ReturnDSNotOpenAndClose(strSql.ToString()).Tables[0];
-
-            #region 此处需要优化 marked by yanger
-
-            if (dt != null)
-            {
-                int rowCount = dt.Rows.Count;
-                if (rowCount > 0)
-                {
-                    tunnelIDs = new string[rowCount];
-                    for (int i = 0; i < rowCount; i++)
-                    {
-                        tunnelIDs[i] = dt.Rows[i][0].ToString();
-                    }
-                }
-            }
-
-            #endregion
-
-            return tunnelIDs;
-        }
+        //        if (i%2 == 1)
+        //        {
+        //            ents.Add(ent);
+        //        }
+        //    }
+        //    return ents;
+        //}
 
         /// <summary>
         ///     通过时间选择所有巷道
@@ -315,47 +269,93 @@ namespace LibBusiness
         /// <param name="startTime"></param>
         /// <param name="endTime"></param>
         /// <returns></returns>
-        public static string[] GetTunnleIDBetweenSelectTime(ManageDataBase
-            database, string startTime, string endTime, string workfaceName)
-        {
-            string[] tunnelIDs = null;
-            var strSql = new StringBuilder();
-            strSql.Append("SELECT DISTINCT " +
-                          PreWarningResultDBConstNames.TUNNEL_ID + " FROM " +
-                          PreWarningResultViewDbConstNames.VIEW_NAME);
-            strSql.Append(" WHERE " +
-                          WorkingFaceDbConstNames.WORKINGFACE_NAME);
-            strSql.Append(" = '" + workfaceName + "'");
-            strSql.Append(" AND ");
-            strSql.Append(PreWarningResultDBConstNames.DATA_TIME);
-            strSql.Append(" >= ");
-            strSql.Append("'" + startTime + "' ");
-            strSql.Append(" AND ");
-            strSql.Append(PreWarningResultDBConstNames.DATA_TIME);
-            strSql.Append(" <= ");
-            strSql.Append("'" + endTime + "'");
-            DataTable dt =
-                database.ReturnDSNotOpenAndClose(strSql.ToString()).Tables[0];
+        //public static string[] GetTunnleIDBetweenSelectTime(ManageDataBase
+        //    database, string startTime, string endTime)
+        //{
+        //    string[] tunnelIDs = null;
+        //    var strSql = new StringBuilder();
+        //    strSql.Append("SELECT DISTINCT ");
+        //    strSql.Append(PreWarningResultDBConstNames.TUNNEL_ID);
+        //    strSql.Append(" FROM ");
+        //    strSql.Append(PreWarningResultDBConstNames.TABLE_NAME);
+        //    strSql.Append(" WHERE ");
+        //    strSql.Append(PreWarningResultDBConstNames.DATA_TIME);
+        //    strSql.Append(" >= ");
+        //    strSql.Append("'" + startTime + "' ");
+        //    strSql.Append(" AND ");
+        //    strSql.Append(PreWarningResultDBConstNames.DATA_TIME);
+        //    strSql.Append(" <= ");
+        //    strSql.Append("'" + endTime + "'");
+        //    DataTable dt =
+        //        database.ReturnDSNotOpenAndClose(strSql.ToString()).Tables[0];
 
-            #region 此处需要优化 marked by yanger
+        //    #region 此处需要优化 marked by yanger
 
-            if (dt != null)
-            {
-                int rowCount = dt.Rows.Count;
-                if (rowCount > 0)
-                {
-                    tunnelIDs = new string[rowCount];
-                    for (int i = 0; i < rowCount; i++)
-                    {
-                        tunnelIDs[i] = dt.Rows[i][0].ToString();
-                    }
-                }
-            }
+        //    if (dt != null)
+        //    {
+        //        int rowCount = dt.Rows.Count;
+        //        if (rowCount > 0)
+        //        {
+        //            tunnelIDs = new string[rowCount];
+        //            for (int i = 0; i < rowCount; i++)
+        //            {
+        //                tunnelIDs[i] = dt.Rows[i][0].ToString();
+        //            }
+        //        }
+        //    }
 
-            #endregion
+        //    #endregion
 
-            return tunnelIDs;
-        }
+        //    return tunnelIDs;
+        //}
+
+        /// <summary>
+        ///     通过时间选择所有巷道
+        /// </summary>
+        /// <param name="startTime"></param>
+        /// <param name="endTime"></param>
+        /// <returns></returns>
+        //public static string[] GetTunnleIDBetweenSelectTime(ManageDataBase
+        //    database, string startTime, string endTime, string workfaceName)
+        //{
+        //    string[] tunnelIDs = null;
+        //    var strSql = new StringBuilder();
+        //    strSql.Append("SELECT DISTINCT " +
+        //                  PreWarningResultDBConstNames.TUNNEL_ID + " FROM " +
+        //                  PreWarningResultViewDbConstNames.VIEW_NAME);
+        //    strSql.Append(" WHERE " +
+        //                  WorkingFaceDbConstNames.WORKINGFACE_NAME);
+        //    strSql.Append(" = '" + workfaceName + "'");
+        //    strSql.Append(" AND ");
+        //    strSql.Append(PreWarningResultDBConstNames.DATA_TIME);
+        //    strSql.Append(" >= ");
+        //    strSql.Append("'" + startTime + "' ");
+        //    strSql.Append(" AND ");
+        //    strSql.Append(PreWarningResultDBConstNames.DATA_TIME);
+        //    strSql.Append(" <= ");
+        //    strSql.Append("'" + endTime + "'");
+        //    DataTable dt =
+        //        database.ReturnDSNotOpenAndClose(strSql.ToString()).Tables[0];
+
+        //    #region 此处需要优化 marked by yanger
+
+        //    if (dt != null)
+        //    {
+        //        int rowCount = dt.Rows.Count;
+        //        if (rowCount > 0)
+        //        {
+        //            tunnelIDs = new string[rowCount];
+        //            for (int i = 0; i < rowCount; i++)
+        //            {
+        //                tunnelIDs[i] = dt.Rows[i][0].ToString();
+        //            }
+        //        }
+        //    }
+
+        //    #endregion
+
+        //    return tunnelIDs;
+        //}
 
         public static DataTable
             GetWarningResultsWithCondition(ManageDataBase database, string

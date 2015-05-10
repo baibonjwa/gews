@@ -217,7 +217,9 @@ namespace sys2
             }
             //查询地质结构信息
             geostructsinfos.Remove("LAST");
-            GeologySpaceBll.DeleteGeologySpaceEntityInfos(selectWorkingfaceSimple1.SelectedWorkingFace.WorkingFaceId);
+            GeologySpace.DeleteAll(
+                GeologySpace.FindAllByProperty("WorkingFace.WorkingFaceId", selectWorkingfaceSimple1.SelectedWorkingFace.WorkingFaceId)
+                    .Select(u => u.WorkingFace.WorkingFaceId));
             //删除工作面ID对应的地质构造信息
             foreach (var key in geostructsinfos.Keys)
             {
@@ -265,7 +267,9 @@ namespace sys2
             var hd_ids = new List<int>();
             hd_ids.Add(Convert.ToInt16(hdid));
             var geostructsinfos = Global.commonclss.GetStructsInfos(pnt, hd_ids);
-            GeologySpaceBll.DeleteGeologySpaceEntityInfos(selectWorkingfaceSimple1.SelectedWorkingFace.WorkingFaceId);
+            GeologySpace.DeleteAll(
+                GeologySpace.FindAllByProperty("WorkingFace.WorkingFaceId", selectWorkingfaceSimple1.SelectedWorkingFace.WorkingFaceId)
+                    .Select(u => u.WorkingFace.WorkingFaceId));
             //删除对应工作面ID的地质构造信息
             foreach (var key in geostructsinfos.Keys)
             {

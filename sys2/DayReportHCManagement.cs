@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Windows.Forms;
 using Castle.ActiveRecord;
 using ESRI.ArcGIS.Geometry;
@@ -91,28 +92,28 @@ namespace sys2
             if (!Alert.confirm(Const.DEL_CONFIRM_MSG)) return;
             //using (new SessionScope())
             //{
-                var entity = (DayReportHc)gridView1.GetFocusedRow();
-                var workingFace = WorkingFace.Find(entity.WorkingFace.WorkingFaceId);
-                // 掘进工作面，只有一条巷道
-                var workingFaceHc = WorkingFaceHc.FindByWorkingFace(workingFace);
-                if (workingFaceHc != null)
-                {
-                    DelHcjc(workingFaceHc.TunnelZy.TunnelId, workingFaceHc.TunnelFy.TunnelId,
-                        workingFaceHc.TunnelQy.TunnelId, entity.BindingId,
-                        workingFace,
-                        workingFaceHc.TunnelZy.TunnelWid, workingFaceHc.TunnelFy.TunnelWid);
-                    entity.Delete();
-                    RefreshData();
-                    // 向server端发送更新预警数据
-                    var msg = new UpdateWarningDataMsg(entity.WorkingFace.WorkingFaceId,
-                        Const.INVALID_ID,
-                        DayReportHc.TableName, OPERATION_TYPE.DELETE, DateTime.Now);
-                    SocketUtil.SendMsg2Server(msg);
-                }
-                else
-                {
-                    Alert.alert("该工作面没有关联主运、辅运、切眼巷道");
-                }
+            var entity = (DayReportHc)gridView1.GetFocusedRow();
+            var workingFace = WorkingFace.Find(entity.WorkingFace.WorkingFaceId);
+            // 掘进工作面，只有一条巷道
+            var workingFaceHc = WorkingFaceHc.FindByWorkingFace(workingFace);
+            if (workingFaceHc != null)
+            {
+                DelHcjc(workingFaceHc.TunnelZy.TunnelId, workingFaceHc.TunnelFy.TunnelId,
+                    workingFaceHc.TunnelQy.TunnelId, entity.BindingId,
+                    workingFace,
+                    workingFaceHc.TunnelZy.TunnelWid, workingFaceHc.TunnelFy.TunnelWid);
+                entity.Delete();
+                RefreshData();
+                // 向server端发送更新预警数据
+                var msg = new UpdateWarningDataMsg(entity.WorkingFace.WorkingFaceId,
+                    Const.INVALID_ID,
+                    DayReportHc.TableName, OPERATION_TYPE.DELETE, DateTime.Now);
+                SocketUtil.SendMsg2Server(msg);
+            }
+            else
+            {
+                Alert.alert("该工作面没有关联主运、辅运、切眼巷道");
+            }
             //}
         }
 
@@ -166,7 +167,9 @@ namespace sys2
             var dzxlist = Global.commonclss.GetStructsInfos(posnew, hdIds);
             if (dzxlist.Count > 0)
             {
-                GeologySpaceBll.DeleteGeologySpaceEntityInfos(wfEntity.WorkingFaceId); //删除工作面ID对应的地质构造信息
+                GeologySpace.DeleteAll(
+                    GeologySpace.FindAllByProperty("WorkingFace.WorkingFaceId", wfEntity.WorkingFaceId)
+                        .Select(u => u.WorkingFace.WorkingFaceId));
                 foreach (var key in dzxlist.Keys)
                 {
                     var geoinfos = dzxlist[key];

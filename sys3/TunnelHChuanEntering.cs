@@ -11,12 +11,13 @@ using LibBusiness.CommonBLL;
 using LibCommon;
 using LibCommonForm;
 using LibEntity;
+using _3.GeologyMeasure;
 
-namespace _3.GeologyMeasure
+namespace sys3
 {
     public partial class TunnelHChuanEntering : Form
     {
-        private const double Deg2Rad = Math.PI/180.0;
+        private const double Deg2Rad = Math.PI / 180.0;
         private Tunnel tunnelEntity = new Tunnel();
         private readonly TunnelHChuanManagement frmStop;
         private readonly TunnelHChuan tmpTunnelHChuanEntity = new TunnelHChuan();
@@ -82,7 +83,7 @@ namespace _3.GeologyMeasure
 
             var bResult = false;
 
-            int id;
+            int id = 0;
 
             //检查导线点I与导线点II对应文本框中的数据是否有效
 
@@ -103,7 +104,7 @@ namespace _3.GeologyMeasure
             //添加
             if (Text == Const_GM.TUNNEL_HCHUAN_ADD)
             {
-                id = TunnelHChuanBLL.insertTunnelHChuan(tunnelHChuanEntity);
+                //id = TunnelHChuanBLL.insertTunnelHChuan(tunnelHChuanEntity);
                 bResult = id > -1;
                 //添加横穿
                 if (id > 0)
@@ -126,7 +127,7 @@ namespace _3.GeologyMeasure
                     tunnelHChuanEntity.TunnelId2 = tmpTunnelHChuanEntity.TunnelId2;
                 }
 
-                bResult = TunnelHChuanBLL.updateTunnelHChuan(tunnelHChuanEntity);
+                //bResult = TunnelHChuanBLL.updateTunnelHChuan(tunnelHChuanEntity);
                 //修改回采进尺图上显示信息，更新工作面信息表
                 if (bResult)
                 {
@@ -163,15 +164,15 @@ namespace _3.GeologyMeasure
                 return false;
             }
 
-            var point1 = new PointClass {X = entity.X1, Y = entity.Y1, Z = entity.Z1, ZAware = true};
-            var point2 = new PointClass {X = entity.X2, Y = entity.Y2, Z = entity.Z2, ZAware = true};
-            var line = new LineClass {FromPoint = point1, ToPoint = point2};
-            var polygon = new PolygonClass {ZAware = true};
-            var width = entity.Width/2;
-            polygon.AddPoint(ConstructPoint(point2, line.Angle/Deg2Rad + 90, width));
-            polygon.AddPoint(ConstructPoint(point2, line.Angle/Deg2Rad - 90, width));
-            polygon.AddPoint(ConstructPoint(point1, line.Angle/Deg2Rad + 180 + 90, width));
-            polygon.AddPoint(ConstructPoint(point1, line.Angle/Deg2Rad + 180 - 90, width));
+            var point1 = new PointClass { X = entity.X1, Y = entity.Y1, Z = entity.Z1, ZAware = true };
+            var point2 = new PointClass { X = entity.X2, Y = entity.Y2, Z = entity.Z2, ZAware = true };
+            var line = new LineClass { FromPoint = point1, ToPoint = point2 };
+            var polygon = new PolygonClass { ZAware = true };
+            var width = entity.Width / 2;
+            polygon.AddPoint(ConstructPoint(point2, line.Angle / Deg2Rad + 90, width));
+            polygon.AddPoint(ConstructPoint(point2, line.Angle / Deg2Rad - 90, width));
+            polygon.AddPoint(ConstructPoint(point1, line.Angle / Deg2Rad + 180 + 90, width));
+            polygon.AddPoint(ConstructPoint(point1, line.Angle / Deg2Rad + 180 - 90, width));
             polygon.SimplifyPreserveFromTo();
 
             var list = new List<ziduan>
@@ -202,15 +203,15 @@ namespace _3.GeologyMeasure
                 return false;
             }
 
-            var point1 = new PointClass {X = entity.X1, Y = entity.Y1, Z = entity.Z1, ZAware = true};
-            var point2 = new PointClass {X = entity.X2, Y = entity.Y2, Z = entity.Z2, ZAware = true};
-            var line = new LineClass {FromPoint = point1, ToPoint = point2};
-            var polygon = new PolygonClass {ZAware = true};
-            var width = entity.Width/2;
-            polygon.AddPoint(ConstructPoint(point2, line.Angle/Deg2Rad + 90, width));
-            polygon.AddPoint(ConstructPoint(point2, line.Angle/Deg2Rad - 90, width));
-            polygon.AddPoint(ConstructPoint(point1, line.Angle/Deg2Rad + 180 + 90, width));
-            polygon.AddPoint(ConstructPoint(point1, line.Angle/Deg2Rad + 180 - 90, width));
+            var point1 = new PointClass { X = entity.X1, Y = entity.Y1, Z = entity.Z1, ZAware = true };
+            var point2 = new PointClass { X = entity.X2, Y = entity.Y2, Z = entity.Z2, ZAware = true };
+            var line = new LineClass { FromPoint = point1, ToPoint = point2 };
+            var polygon = new PolygonClass { ZAware = true };
+            var width = entity.Width / 2;
+            polygon.AddPoint(ConstructPoint(point2, line.Angle / Deg2Rad + 90, width));
+            polygon.AddPoint(ConstructPoint(point2, line.Angle / Deg2Rad - 90, width));
+            polygon.AddPoint(ConstructPoint(point1, line.Angle / Deg2Rad + 180 + 90, width));
+            polygon.AddPoint(ConstructPoint(point1, line.Angle / Deg2Rad + 180 - 90, width));
             polygon.SimplifyPreserveFromTo();
 
             var list = new List<ziduan>
@@ -227,8 +228,8 @@ namespace _3.GeologyMeasure
 
         private IPoint ConstructPoint(IPoint point, double angle, double width)
         {
-            var point3 = new PointClass {ZAware = true};
-            point3.ConstructAngleDistance(point, angle*Deg2Rad, width);
+            var point3 = new PointClass { ZAware = true };
+            point3.ConstructAngleDistance(point, angle * Deg2Rad, width);
             return point3;
         }
 

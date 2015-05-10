@@ -107,7 +107,7 @@ namespace LibLoginForm
                 ent.PassWord = _txtPassword.Text;
 
                 //显示添加用户信息界面，确定后将新创建的用户名及密码自动填写到相应控件上
-                UserLoginInformationInput ulii = new UserLoginInformationInput(ent, true);
+                UserLoginInformationInput ulii = new UserLoginInformationInput(ent);
                 ulii.ShowDialog();
                 if (LibCommon.Const.FIRST_LOGIN_NAME != "")
                 {

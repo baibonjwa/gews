@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using ESRI.ArcGIS.Geometry;
 using GIS;
@@ -200,7 +201,9 @@ namespace sys2
             //更新地质构造表
             if (null != dzxlist && dzxlist.Count > 0)
             {
-                GeologySpaceBll.DeleteGeologySpaceEntityInfos(workingFace.WorkingFaceId); //删除工作面ID对应的地质构造信息
+                GeologySpace.DeleteAll(
+                  GeologySpace.FindAllByProperty("WorkingFace.WorkingFaceId", workingFace.WorkingFaceId)
+                      .Select(u => u.WorkingFace.WorkingFaceId));
                 foreach (var key in dzxlist.Keys)
                 {
                     var geoinfos = dzxlist[key];
@@ -275,7 +278,9 @@ namespace sys2
             var geostructsinfos = Global.commonclss.GetStructsInfos(pnt, hd_ids);
             if (geostructsinfos.Count > 0)
             {
-                GeologySpaceBll.DeleteGeologySpaceEntityInfos(workingFace.WorkingFaceId); //删除工作面ID对应的地质构造信息
+                GeologySpace.DeleteAll(
+                  GeologySpace.FindAllByProperty("WorkingFace.WorkingFaceId", workingFace.WorkingFaceId)
+                      .Select(u => u.WorkingFace.WorkingFaceId));
                 foreach (var key in geostructsinfos.Keys)
                 {
                     var geoinfos = geostructsinfos[key];

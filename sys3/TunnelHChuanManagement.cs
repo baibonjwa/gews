@@ -12,6 +12,7 @@ using GIS.HdProc;
 using LibBusiness;
 using LibCommon;
 using LibEntity;
+using sys3;
 
 namespace _3.GeologyMeasure
 {
@@ -169,93 +170,93 @@ namespace _3.GeologyMeasure
         /// </summary>
         private void setTunnelHCEntityValue()
         {
-            var searchCount = _rowsCount;
-            var rowDetailStartIndex = 4;
-            for (var i = 0; i < _rowsCount; i++)
-            {
-                if (fpDayReportHChuan.Sheets[0].Cells[rowDetailStartIndex + i, 0].Value != null &&
-                    (bool) fpDayReportHChuan.Sheets[0].Cells[rowDetailStartIndex + i, 0].Value)
-                {
-                    _tmpRowIndex = rowDetailStartIndex + i;
-                    var index = 14;
-                    var tmp = 0;
-                    //主键
-                    tunnelHChuanEntity.Id = Convert.ToInt32(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.ID]);
-                    var HChuanName = _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.NAME_HCHUAN];
-                    tunnelHChuanEntity.NameHChuan = HChuanName == null ? "" : HChuanName.ToString();
-                    tunnelHChuanEntity.Width =
-                        Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_WIDTH]);
-                    //关联巷道1
-                    if (int.TryParse(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_ID1].ToString(), out tmp))
-                    {
-                        tunnelHChuanEntity.TunnelId1 = tmp;
-                        tmp = 0;
-                    }
-                    //关联巷道2
-                    if (int.TryParse(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_ID2].ToString(), out tmp))
-                    {
-                        tunnelHChuanEntity.TunnelId2 = tmp;
-                        tmp = 0;
-                    }
-                    //x1
-                    tunnelHChuanEntity.X1 =
-                        Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_X1].ToString());
-                    //y1
-                    tunnelHChuanEntity.Y1 =
-                        Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_Y1].ToString());
-                    //z1
-                    tunnelHChuanEntity.Z1 =
-                        Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_Z1].ToString());
-                    //x2
-                    tunnelHChuanEntity.X2 =
-                        Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_X2].ToString());
-                    //y2
-                    tunnelHChuanEntity.Y2 =
-                        Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_Y2].ToString());
-                    //z2
-                    tunnelHChuanEntity.Z2 =
-                        Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_Z2].ToString());
-                    //azimuth
-                    tunnelHChuanEntity.Azimuth =
-                        Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_AZIMUTH].ToString());
+            //var searchCount = _rowsCount;
+            //var rowDetailStartIndex = 4;
+            //for (var i = 0; i < _rowsCount; i++)
+            //{
+            //    if (fpDayReportHChuan.Sheets[0].Cells[rowDetailStartIndex + i, 0].Value != null &&
+            //        (bool) fpDayReportHChuan.Sheets[0].Cells[rowDetailStartIndex + i, 0].Value)
+            //    {
+            //        _tmpRowIndex = rowDetailStartIndex + i;
+            //        var index = 14;
+            //        var tmp = 0;
+            //        //主键
+            //        tunnelHChuanEntity.Id = Convert.ToInt32(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.ID]);
+            //        var HChuanName = _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.NAME_HCHUAN];
+            //        tunnelHChuanEntity.NameHChuan = HChuanName == null ? "" : HChuanName.ToString();
+            //        tunnelHChuanEntity.Width =
+            //            Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_WIDTH]);
+            //        //关联巷道1
+            //        if (int.TryParse(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_ID1].ToString(), out tmp))
+            //        {
+            //            tunnelHChuanEntity.TunnelId1 = tmp;
+            //            tmp = 0;
+            //        }
+            //        //关联巷道2
+            //        if (int.TryParse(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_ID2].ToString(), out tmp))
+            //        {
+            //            tunnelHChuanEntity.TunnelId2 = tmp;
+            //            tmp = 0;
+            //        }
+            //        //x1
+            //        tunnelHChuanEntity.X1 =
+            //            Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_X1].ToString());
+            //        //y1
+            //        tunnelHChuanEntity.Y1 =
+            //            Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_Y1].ToString());
+            //        //z1
+            //        tunnelHChuanEntity.Z1 =
+            //            Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_Z1].ToString());
+            //        //x2
+            //        tunnelHChuanEntity.X2 =
+            //            Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_X2].ToString());
+            //        //y2
+            //        tunnelHChuanEntity.Y2 =
+            //            Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_Y2].ToString());
+            //        //z2
+            //        tunnelHChuanEntity.Z2 =
+            //            Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_Z2].ToString());
+            //        //azimuth
+            //        tunnelHChuanEntity.Azimuth =
+            //            Convert.ToDouble(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_AZIMUTH].ToString());
 
-                    //队别
-                    if (int.TryParse(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TEAM_NAME_ID].ToString(), out tmp))
-                    {
-                        tunnelHChuanEntity.Team.TeamId = tmp;
-                        tmp = 0;
-                    }
-                    DateTime _dateTime;
-                    if (DateTime.TryParse(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.START_DATE].ToString(),
-                        out _dateTime))
-                    {
-                        //开工日期
-                        tunnelHChuanEntity.StartDate = _dateTime;
-                    }
+            //        //队别
+            //        if (int.TryParse(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TEAM_NAME_ID].ToString(), out tmp))
+            //        {
+            //            tunnelHChuanEntity.Team.TeamId = tmp;
+            //            tmp = 0;
+            //        }
+            //        DateTime _dateTime;
+            //        if (DateTime.TryParse(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.START_DATE].ToString(),
+            //            out _dateTime))
+            //        {
+            //            //开工日期
+            //            tunnelHChuanEntity.StartDate = _dateTime;
+            //        }
 
-                    int _finish;
+            //        int _finish;
 
-                    if (int.TryParse(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.IS_FINISH].ToString(), out _finish))
-                    {
-                        //是否回采完毕
-                        tunnelHChuanEntity.IsFinish = _finish;
-                    }
+            //        if (int.TryParse(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.IS_FINISH].ToString(), out _finish))
+            //        {
+            //            //是否回采完毕
+            //            tunnelHChuanEntity.IsFinish = _finish;
+            //        }
 
-                    ++index;
-                    //停工日期
-                    if (_finish > 0)
-                    {
-                        tunnelHChuanEntity.StopDate =
-                            Convert.ToDateTime(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.STOP_DATE].ToString());
-                    }
-                    //工作制式
-                    tunnelHChuanEntity.WorkStyle = _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.WORK_STYLE].ToString();
-                    //班次
-                    tunnelHChuanEntity.WorkTime = _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.WORK_TIME].ToString();
-                    //状态
-                    tunnelHChuanEntity.State = _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_STATE].ToString();
-                }
-            }
+            //        ++index;
+            //        //停工日期
+            //        if (_finish > 0)
+            //        {
+            //            tunnelHChuanEntity.StopDate =
+            //                Convert.ToDateTime(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.STOP_DATE].ToString());
+            //        }
+            //        //工作制式
+            //        tunnelHChuanEntity.WorkStyle = _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.WORK_STYLE].ToString();
+            //        //班次
+            //        tunnelHChuanEntity.WorkTime = _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.WORK_TIME].ToString();
+            //        //状态
+            //        tunnelHChuanEntity.State = _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_STATE].ToString();
+            //    }
+            //}
         }
 
         private void tsBtnPrint_Click(object sender, EventArgs e)
@@ -291,128 +292,128 @@ namespace _3.GeologyMeasure
         private void bindFpTunnelHChuanInfo()
         {
             // 清空HashTabl（必须实装）
-            _htSelIdxs.Clear();
+            //_htSelIdxs.Clear();
 
-            //清空Farpoint
-            FarPointOperate.farPointClear(fpDayReportHChuan, _rowDetailStartIndex, _rowsCount);
+            ////清空Farpoint
+            //FarPointOperate.farPointClear(fpDayReportHChuan, _rowDetailStartIndex, _rowsCount);
 
-            _checkCount = 0;
+            //_checkCount = 0;
 
-            chkSelAll.Checked = false;
-            // ※分页必须
-            _iRecordCount = TunnelHChuanBLL.selectTunnelHChuan().Tables[0].Rows.Count;
+            //chkSelAll.Checked = false;
+            //// ※分页必须
+            //_iRecordCount = TunnelHChuanBLL.selectTunnelHChuan().Tables[0].Rows.Count;
 
-            // ※分页必须
-            dataPager1.PageControlInit(_iRecordCount);
+            //// ※分页必须
+            //dataPager1.PageControlInit(_iRecordCount);
 
-            var iStartIndex = dataPager1.getStartIndex();
-            var iEndIndex = dataPager1.getEndIndex();
+            //var iStartIndex = dataPager1.getStartIndex();
+            //var iEndIndex = dataPager1.getEndIndex();
 
-            _ds = TunnelHChuanBLL.selectTunnelHChuan(iStartIndex, iEndIndex);
+            //_ds = TunnelHChuanBLL.selectTunnelHChuan(iStartIndex, iEndIndex);
 
-            _rowsCount = _ds.Tables[0].Rows.Count;
+            //_rowsCount = _ds.Tables[0].Rows.Count;
 
-            //重绘Farpoint
-            FarPointOperate.farPointReAdd(fpDayReportHChuan, _rowDetailStartIndex, _rowsCount);
+            ////重绘Farpoint
+            //FarPointOperate.farPointReAdd(fpDayReportHChuan, _rowDetailStartIndex, _rowsCount);
 
-            if (_rowsCount > 0)
-            {
-                var ckbxcell = new CheckBoxCellType();
-                //取消三选
-                ckbxcell.ThreeState = false;
+            //if (_rowsCount > 0)
+            //{
+            //    var ckbxcell = new CheckBoxCellType();
+            //    //取消三选
+            //    ckbxcell.ThreeState = false;
 
-                for (var i = 0; i < _ds.Tables[0].Rows.Count; i++)
-                {
-                    var index = 0;
-                    fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, index].CellType = ckbxcell;
-                    //主运顺槽
-                    var tunnelID1 = Convert.ToInt32(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_ID1]);
-                    //辅运顺槽
-                    var tunnelID2 = Convert.ToInt32(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_ID2]);
+            //    for (var i = 0; i < _ds.Tables[0].Rows.Count; i++)
+            //    {
+            //        var index = 0;
+            //        fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, index].CellType = ckbxcell;
+            //        //主运顺槽
+            //        var tunnelID1 = Convert.ToInt32(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_ID1]);
+            //        //辅运顺槽
+            //        var tunnelID2 = Convert.ToInt32(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_ID2]);
 
-                    var tmpTunnelID = (tunnelID1 == 0 ? (tunnelID2 == 0 ? 0 : tunnelID2) : tunnelID1);
+            //        var tmpTunnelID = (tunnelID1 == 0 ? (tunnelID2 == 0 ? 0 : tunnelID2) : tunnelID1);
 
-                    //矿井名称
-                    fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
-                        _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.NAME_HCHUAN].ToString();
-                    ;
-                    //关联巷道1
-                    fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
-                        _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_ID1].ToString();
-                    ;
-                    //关联巷道2
-                    fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
-                        _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_ID2].ToString();
-                    ;
+            //        //矿井名称
+            //        fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
+            //            _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.NAME_HCHUAN].ToString();
+            //        ;
+            //        //关联巷道1
+            //        fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
+            //            _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_ID1].ToString();
+            //        ;
+            //        //关联巷道2
+            //        fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
+            //            _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_ID2].ToString();
+            //        ;
 
-                    //x1
-                    fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
-                        _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_X1].ToString();
-                    //y1
-                    fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
-                        _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_Y1].ToString();
-                    //z1
-                    fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
-                        _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_Z1].ToString();
-                    //x2
-                    fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
-                        _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_X2].ToString();
-                    //y2
-                    fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
-                        _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_Y2].ToString();
-                    //z2
-                    fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
-                        _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_Z2].ToString();
-                    //azimuth
-                    fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
-                        _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_AZIMUTH].ToString();
-                    //队别
-                    if (int.TryParse(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TEAM_NAME_ID].ToString(), out tmpInt))
-                    {
-                        fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
-                            Team.Find(tmpInt).TeamName;
-                        tmpInt = 0;
-                    }
-                    //开工日期
-                    fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
-                        _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.START_DATE].ToString()
-                            .Substring(0,
-                                _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.START_DATE].ToString().IndexOf(' '));
-                    //是否回采完毕
-                    fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
-                        Convert.ToInt32(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.IS_FINISH].ToString()) == 1
-                            ? Const.MSG_YES
-                            : Const.MSG_NO;
-                    //停工日期
-                    if (Convert.ToInt32(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.IS_FINISH].ToString()) == 1)
-                    {
-                        fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
-                            _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.STOP_DATE].ToString()
-                                .Substring(0,
-                                    _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.STOP_DATE].ToString().IndexOf(' '));
-                    }
-                    else
-                    {
-                        ++index;
-                    }
+            //        //x1
+            //        fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
+            //            _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_X1].ToString();
+            //        //y1
+            //        fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
+            //            _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_Y1].ToString();
+            //        //z1
+            //        fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
+            //            _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_Z1].ToString();
+            //        //x2
+            //        fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
+            //            _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_X2].ToString();
+            //        //y2
+            //        fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
+            //            _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_Y2].ToString();
+            //        //z2
+            //        fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
+            //            _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_Z2].ToString();
+            //        //azimuth
+            //        fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
+            //            _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_AZIMUTH].ToString();
+            //        //队别
+            //        if (int.TryParse(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TEAM_NAME_ID].ToString(), out tmpInt))
+            //        {
+            //            fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
+            //                Team.Find(tmpInt).TeamName;
+            //            tmpInt = 0;
+            //        }
+            //        //开工日期
+            //        fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
+            //            _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.START_DATE].ToString()
+            //                .Substring(0,
+            //                    _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.START_DATE].ToString().IndexOf(' '));
+            //        //是否回采完毕
+            //        fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
+            //            Convert.ToInt32(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.IS_FINISH].ToString()) == 1
+            //                ? Const.MSG_YES
+            //                : Const.MSG_NO;
+            //        //停工日期
+            //        if (Convert.ToInt32(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.IS_FINISH].ToString()) == 1)
+            //        {
+            //            fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
+            //                _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.STOP_DATE].ToString()
+            //                    .Substring(0,
+            //                        _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.STOP_DATE].ToString().IndexOf(' '));
+            //        }
+            //        else
+            //        {
+            //            ++index;
+            //        }
 
-                    //工作制式
-                    fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
-                        _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.WORK_STYLE].ToString();
-                    //班次
-                    fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
-                        _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.WORK_TIME].ToString();
-                    //状态
-                    fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
-                        _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_STATE].ToString();
-                    //bid
-                    fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
-                        _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.ID].ToString();
-                    fpDayReportHChuan.Sheets[0].Columns[_BIDIndex].Visible = false;
-                }
-            }
-            //设置按钮可操作性
-            setButtenEnable();
+            //        //工作制式
+            //        fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
+            //            _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.WORK_STYLE].ToString();
+            //        //班次
+            //        fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
+            //            _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.WORK_TIME].ToString();
+            //        //状态
+            //        fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
+            //            _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_STATE].ToString();
+            //        //bid
+            //        fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, ++index].Text =
+            //            _ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.ID].ToString();
+            //        fpDayReportHChuan.Sheets[0].Columns[_BIDIndex].Visible = false;
+            //    }
+            //}
+            ////设置按钮可操作性
+            //setButtenEnable();
         }
 
         /// <summary>
@@ -422,56 +423,56 @@ namespace _3.GeologyMeasure
         /// <param name="e"></param>
         private void tsBtnDel_Click(object sender, EventArgs e)
         {
-            if (Alert.confirm(Const.DEL_CONFIRM_MSG))
-            {
-                var searchCount = _rowsCount;
-                var bResult = false;
-                for (var i = 0; i < _rowsCount; i++)
-                {
-                    _tmpRowIndex = fpDayReportHChuan.Sheets[0].ActiveRowIndex;
-                    //遍历“选择”是否选中
-                    if (fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, 0].Value != null &&
-                        (bool) fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, 0].Value)
-                    {
-                        //主键
-                        tunnelHChuanEntity.Id = Convert.ToInt32(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.ID]);
-                        var tmp = 0;
-                        //主运顺槽
-                        if (int.TryParse(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_ID1].ToString(), out tmp))
-                        {
-                            tunnelHChuanEntity.TunnelId1 = tmp;
-                            tmp = 0;
-                        }
-                        //辅运顺槽
-                        if (int.TryParse(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_ID2].ToString(), out tmp))
-                        {
-                            tunnelHChuanEntity.TunnelId2 = tmp;
-                            tmp = 0;
-                        }
+            //if (Alert.confirm(Const.DEL_CONFIRM_MSG))
+            //{
+            //    var searchCount = _rowsCount;
+            //    var bResult = false;
+            //    for (var i = 0; i < _rowsCount; i++)
+            //    {
+            //        _tmpRowIndex = fpDayReportHChuan.Sheets[0].ActiveRowIndex;
+            //        //遍历“选择”是否选中
+            //        if (fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, 0].Value != null &&
+            //            (bool) fpDayReportHChuan.Sheets[0].Cells[_rowDetailStartIndex + i, 0].Value)
+            //        {
+            //            //主键
+            //            tunnelHChuanEntity.Id = Convert.ToInt32(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.ID]);
+            //            var tmp = 0;
+            //            //主运顺槽
+            //            if (int.TryParse(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_ID1].ToString(), out tmp))
+            //            {
+            //                tunnelHChuanEntity.TunnelId1 = tmp;
+            //                tmp = 0;
+            //            }
+            //            //辅运顺槽
+            //            if (int.TryParse(_ds.Tables[0].Rows[i][TunnelHChuanDbConstNames.TUNNEL_ID2].ToString(), out tmp))
+            //            {
+            //                tunnelHChuanEntity.TunnelId2 = tmp;
+            //                tmp = 0;
+            //            }
 
-                        //重设巷道类型
-                        var tunnel1 = Tunnel.Find(tunnelHChuanEntity.TunnelId1);
-                        tunnel1.TunnelType = TunnelTypeEnum.OTHER;
-                        tunnel1.Save();
-                        var tunnel2 = Tunnel.Find(tunnelHChuanEntity.TunnelId2);
-                        tunnel2.TunnelType = TunnelTypeEnum.OTHER;
-                        tunnel2.Save();
+            //            //重设巷道类型
+            //            var tunnel1 = Tunnel.Find(tunnelHChuanEntity.TunnelId1);
+            //            tunnel1.TunnelType = TunnelTypeEnum.OTHER;
+            //            tunnel1.Save();
+            //            var tunnel2 = Tunnel.Find(tunnelHChuanEntity.TunnelId2);
+            //            tunnel2.TunnelType = TunnelTypeEnum.OTHER;
+            //            tunnel2.Save();
 
-                        //删除回采巷道信息
-                        bResult = TunnelHChuanBLL.deleteTunnelHChuan(tunnelHChuanEntity);
-                    }
-                }
-                if (bResult)
-                {
-                    //TODO:删除后事件
-                    //将图层中对应的信息删除
-                    DelHChuanjc(tunnelHChuanEntity.TunnelId1, tunnelHChuanEntity.TunnelId2);
-                    //删除工作面中对应的回采信息
-                    /////Mark
-                }
-                bindFpTunnelHChuanInfo();
-                FarPointOperate.farPointFocusSetDel(fpDayReportHChuan, _tmpRowIndex);
-            }
+            //            //删除回采巷道信息
+            //            //bResult = TunnelHChuanBLL.deleteTunnelHChuan(tunnelHChuanEntity);
+            //        }
+            //    }
+            //    if (bResult)
+            //    {
+            //        //TODO:删除后事件
+            //        //将图层中对应的信息删除
+            //        DelHChuanjc(tunnelHChuanEntity.TunnelId1, tunnelHChuanEntity.TunnelId2);
+            //        //删除工作面中对应的回采信息
+            //        /////Mark
+            //    }
+            //    bindFpTunnelHChuanInfo();
+            //    FarPointOperate.farPointFocusSetDel(fpDayReportHChuan, _tmpRowIndex);
+            //}
         }
 
         /// <summary>

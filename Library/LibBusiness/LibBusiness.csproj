@@ -149,10 +149,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="2.MiningSchedulingBLL\DbConstNames\GeologySpaceDbConstNames.cs" />
-    <Compile Include="GeologySpaceBLL.cs" />
-    <Compile Include="3.GeologyMeasureBLL\DbConstNames\WorkingFaceDbConstNames.cs" />
-    <Compile Include="3.GeologyMeasureBLL\DbConstNames\TunnelInfoDbConstNames.cs" />
+    <Compile Include="WorkingFaceDbConstNames.cs" />
+    <Compile Include="TunnelInfoDbConstNames.cs" />
     <Compile Include="SaveDBXyz2Txt.cs" />
     <Compile Include="5.WaningManagementBLL\DbConstNames\PreWarningDetailsViewDbConstName.cs" />
     <Compile Include="5.WaningManagementBLL\DbConstNames\PreWarningHistroyResultQueryDBConstNames.cs" />
@@ -170,34 +168,19 @@
     <Compile Include="WarningImgBLL.cs" />
     <Compile Include="WarningResultsQuery.cs" />
     <Compile Include="CollectionHelper.cs" />
-    <Compile Include="CommonBLL\DbConstNames\CoalSeamsDbConstNames.cs" />
-    <Compile Include="CommonBLL\DbConstNames\CommonDbConsts.cs" />
-    <Compile Include="CommonBLL\DbConstNames\DepartmentInformationManagemetDbConstNames.cs" />
     <Compile Include="CommonBLL\DbConstNames\LoginFormDbConstNames.cs" />
     <Compile Include="CommonBLL\DbConstNames\MineDataSimpleDbConstNames.cs" />
     <Compile Include="CommonBLL\DbConstNames\TunnelDefaultSelectDbConstNames.cs" />
-    <Compile Include="CommonBLL\DbConstNames\UserGroupInformationMangementDbConstNames.cs" />
-    <Compile Include="CommonBLL\DbConstNames\UserInformationDetailsManagementDbConstNames.cs" />
-    <Compile Include="CommonBLL\DbConstNames\UserInformationManagementDbConstNames.cs" />
-    <Compile Include="CommonBLL\DbConstNames\UserLoginInformationManagementDbConstNames.cs" />
-    <Compile Include="CommonBLL\PropertyBLL\MineDataSimpleBLL.cs" />
-    <Compile Include="CommonBLL\PropertyBLL\DepartmentInformationManagementBLL.cs" />
-    <Compile Include="CommonBLL\PropertyBLL\UserGroupInformationManagementBLL.cs" />
-    <Compile Include="CommonBLL\PropertyBLL\UserInformationDetailsManagementBLL.cs" />
-    <Compile Include="CommonBLL\PropertyBLL\UserInformationManagementBLL.cs" />
+    <Compile Include="MineDataSimpleBLL.cs" />
     <Compile Include="DataBindUtil.cs" />
     <Compile Include="PreWarningAnalysisResultBLL.cs" />
-    <Compile Include="PreWarningDataCommonBLL.cs" />
-    <Compile Include="PreWarningDataDbConstNames.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="3.GeologyMeasureBLL\PropertyBLL\TunnelHChuanBLL.cs" />
-    <Compile Include="3.GeologyMeasureBLL\DbConstNames\TunnelHChuanDbConstNames.cs" />
     <Compile Include="TunnelUtils.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="3.GeologyMeasureBLL\GraphicBLL\" />
     <Folder Include="5.WaningManagementBLL\GraphicBLL\" />
     <Folder Include="CommonBLL\GraphicBLL\" />
+    <Folder Include="CommonBLL\PropertyBLL\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

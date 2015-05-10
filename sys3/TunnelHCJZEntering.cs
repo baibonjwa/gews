@@ -355,8 +355,8 @@ namespace sys3
                     //Dictionary<string, List<IPoint>> fourpnts = Global.commonclss.getCoordinates(hcreg, pline1, pline2, pline3, Global.linespace, Global.linespace);
                     //List<IPoint> listpnts = fourpnts["1"];
                     IPoint pntcenter = new PointClass();
-                    pntcenter.PutCoords((oldpnts["1"][0].X + oldpnts["1"][1].X)/2,
-                        (oldpnts["1"][0].Y + oldpnts["1"][1].Y)/2);
+                    pntcenter.PutCoords((oldpnts["1"][0].X + oldpnts["1"][1].X) / 2,
+                        (oldpnts["1"][0].Y + oldpnts["1"][1].Y) / 2);
                     pntcenter.Z = 0;
                     //double hccd1 = Math.Sqrt(Math.Pow((pnt.X - pntcenter.X), 2) + Math.Pow((pnt.Y - pntcenter.Y), 2));
                     //查询回采方向 这里没有设置传入的切眼 可能会出错 需要调试2014-9-23
@@ -404,7 +404,9 @@ namespace sys3
                 hd_ids.Add(Convert.ToInt16(hd3));
                 var geostructs = Global.commonclss.GetStructsInfos(prevPnt, hd_ids);
                 if (geostructs == null) return;
-                GeologySpaceBll.DeleteGeologySpaceEntityInfos(workingFace.WorkingFaceId); //删除对应工作面ID的地质构造信息
+                GeologySpace.DeleteAll(
+                    GeologySpace.FindAllByProperty("WorkingFace.WorkingFaceId", workingFace.WorkingFaceId)
+                        .Select(u => u.WorkingFace.WorkingFaceId));
                 foreach (var key in geostructs.Keys)
                 {
                     var geoinfos = geostructs[key];

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using ESRI.ArcGIS.Geometry;
 using GIS;
@@ -442,7 +443,9 @@ namespace sys3
                 //添加地质构造信息到数据库表中
                 if (dzxlist.Count > 0)
                 {
-                    GeologySpaceBll.DeleteGeologySpaceEntityInfos(_workingFace.WorkingFaceId); //删除工作面ID对应的地质构造信息
+                    GeologySpace.DeleteAll(
+                        GeologySpace.FindAllByProperty("WorkingFace.WorkingFaceId", _workingFace.WorkingFaceId)
+                            .Select(u => u.WorkingFace.WorkingFaceId));
                     foreach (var key in dzxlist.Keys)
                     {
                         var geoinfos = dzxlist[key];
@@ -499,7 +502,9 @@ namespace sys3
                 //更新地质构造表
                 if (dzxlist.Count > 0)
                 {
-                    GeologySpaceBll.DeleteGeologySpaceEntityInfos(_workingFace.WorkingFaceId); //删除对应工作面ID的地质构造信息
+                    GeologySpace.DeleteAll(
+                        GeologySpace.FindAllByProperty("WorkingFace.WorkingFaceId", _workingFace.WorkingFaceId)
+                            .Select(u => u.WorkingFace.WorkingFaceId));
                     foreach (var key in dzxlist.Keys)
                     {
                         var geoinfos = dzxlist[key];

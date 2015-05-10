@@ -29,29 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserLoginInformationManagement));
-            FarPoint.Win.ComplexBorder complexBorder1 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder2 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder3 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder4 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder5 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder6 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder7 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder8 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder9 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder10 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder11 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder12 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder13 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder14 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder15 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.ComplexBorder complexBorder16 = new FarPoint.Win.ComplexBorder(new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine), new FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine));
-            FarPoint.Win.Spread.CellType.TextCellType textCellType1 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.Spread.CellType.TextCellType textCellType2 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.Spread.CellType.TextCellType textCellType3 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.Spread.CellType.TextCellType textCellType4 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.Spread.CellType.TextCellType textCellType5 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.Spread.CellType.TextCellType textCellType6 = new FarPoint.Win.Spread.CellType.TextCellType();
-            FarPoint.Win.Spread.CellType.TextCellType textCellType7 = new FarPoint.Win.Spread.CellType.TextCellType();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsBtnPrint = new System.Windows.Forms.ToolStripButton();
             this.tsBtnExport = new System.Windows.Forms.ToolStripButton();
@@ -60,16 +37,20 @@
             this.tsBtnDel = new System.Windows.Forms.ToolStripButton();
             this.tsBtnRefresh = new System.Windows.Forms.ToolStripButton();
             this.tsBtnExit = new System.Windows.Forms.ToolStripButton();
-            this.fpUserLoginInformation = new FarPoint.Win.Spread.FpSpread();
-            this.fpUserLoginInformation_Sheet1 = new FarPoint.Win.Spread.SheetView();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.chkSelAll = new System.Windows.Forms.CheckBox();
-            this.buttonOK = new System.Windows.Forms.Button();
-            this.buttonCancel = new System.Windows.Forms.Button();
-            this.farpointFilter1 = new LibCommonControl.FarpointFilter();
+            this.gcUserLogin = new DevExpress.XtraGrid.GridControl();
+            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.controlNavigator2 = new DevExpress.XtraEditors.ControlNavigator();
             this.toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fpUserLoginInformation)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fpUserLoginInformation_Sheet1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gcUserLogin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -153,106 +134,6 @@
             this.tsBtnExit.Text = "退出";
             this.tsBtnExit.Click += new System.EventHandler(this.tsBtnExit_Click);
             // 
-            // fpUserLoginInformation
-            // 
-            this.fpUserLoginInformation.AccessibleDescription = "fpUserLoginInformation, Sheet1, Row 0, Column 0, 用户登录信息";
-            this.fpUserLoginInformation.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.fpUserLoginInformation.Location = new System.Drawing.Point(12, 27);
-            this.fpUserLoginInformation.Name = "fpUserLoginInformation";
-            this.fpUserLoginInformation.Sheets.AddRange(new FarPoint.Win.Spread.SheetView[] {
-            this.fpUserLoginInformation_Sheet1});
-            this.fpUserLoginInformation.Size = new System.Drawing.Size(977, 452);
-            this.fpUserLoginInformation.TabIndex = 0;
-            this.fpUserLoginInformation.ButtonClicked += new FarPoint.Win.Spread.EditorNotifyEventHandler(this.fpUserLoginInformation_ButtonClicked);
-            // 
-            // fpUserLoginInformation_Sheet1
-            // 
-            this.fpUserLoginInformation_Sheet1.Reset();
-            fpUserLoginInformation_Sheet1.SheetName = "Sheet1";
-            // Formulas and custom names must be loaded with R1C1 reference style
-            this.fpUserLoginInformation_Sheet1.ReferenceStyle = FarPoint.Win.Spread.Model.ReferenceStyle.R1C1;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(0, 0).Border = complexBorder1;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(0, 0).ColumnSpan = 8;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(0, 0).Font = new System.Drawing.Font("宋体", 16F, System.Drawing.FontStyle.Bold);
-            this.fpUserLoginInformation_Sheet1.Cells.Get(0, 0).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(0, 0).Locked = true;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(0, 0).Value = "用户登录信息";
-            this.fpUserLoginInformation_Sheet1.Cells.Get(0, 0).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(0, 1).Border = complexBorder2;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(0, 1).Locked = true;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(0, 2).Border = complexBorder3;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(0, 2).Locked = true;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(0, 3).Border = complexBorder4;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(0, 3).Locked = true;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(0, 4).Border = complexBorder5;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(0, 4).Locked = true;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(0, 5).Border = complexBorder6;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(0, 5).Locked = true;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(0, 6).Border = complexBorder7;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(0, 6).Locked = true;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(0, 7).Border = complexBorder8;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(0, 7).Locked = true;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(1, 0).Border = complexBorder9;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(1, 0).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(1, 0).Locked = true;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(1, 0).Value = "选择";
-            this.fpUserLoginInformation_Sheet1.Cells.Get(1, 0).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(1, 1).Border = complexBorder10;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(1, 1).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(1, 1).Locked = true;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(1, 1).Value = "用户登录名";
-            this.fpUserLoginInformation_Sheet1.Cells.Get(1, 1).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(1, 2).Border = complexBorder11;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(1, 2).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(1, 2).Locked = true;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(1, 2).Value = "用户密码";
-            this.fpUserLoginInformation_Sheet1.Cells.Get(1, 2).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(1, 3).Border = complexBorder12;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(1, 3).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(1, 3).Locked = true;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(1, 3).Value = "用户权限";
-            this.fpUserLoginInformation_Sheet1.Cells.Get(1, 3).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(1, 4).Border = complexBorder13;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(1, 4).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(1, 4).Locked = true;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(1, 4).Value = "所属用户组";
-            this.fpUserLoginInformation_Sheet1.Cells.Get(1, 4).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(1, 5).Border = complexBorder14;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(1, 5).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(1, 5).Locked = true;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(1, 5).Value = "记住密码";
-            this.fpUserLoginInformation_Sheet1.Cells.Get(1, 5).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(1, 6).Border = complexBorder15;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(1, 6).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(1, 6).Locked = true;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(1, 6).Value = "尚未登录";
-            this.fpUserLoginInformation_Sheet1.Cells.Get(1, 6).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(1, 7).Border = complexBorder16;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(1, 7).HorizontalAlignment = FarPoint.Win.Spread.CellHorizontalAlignment.Center;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(1, 7).Locked = true;
-            this.fpUserLoginInformation_Sheet1.Cells.Get(1, 7).Value = "备注";
-            this.fpUserLoginInformation_Sheet1.Cells.Get(1, 7).VerticalAlignment = FarPoint.Win.Spread.CellVerticalAlignment.Center;
-            this.fpUserLoginInformation_Sheet1.Columns.Get(0).Width = 34F;
-            this.fpUserLoginInformation_Sheet1.Columns.Get(1).CellType = textCellType1;
-            this.fpUserLoginInformation_Sheet1.Columns.Get(1).Width = 123F;
-            this.fpUserLoginInformation_Sheet1.Columns.Get(2).CellType = textCellType2;
-            this.fpUserLoginInformation_Sheet1.Columns.Get(2).Width = 111F;
-            this.fpUserLoginInformation_Sheet1.Columns.Get(3).CellType = textCellType3;
-            this.fpUserLoginInformation_Sheet1.Columns.Get(3).Width = 88F;
-            this.fpUserLoginInformation_Sheet1.Columns.Get(4).CellType = textCellType4;
-            this.fpUserLoginInformation_Sheet1.Columns.Get(4).Width = 85F;
-            this.fpUserLoginInformation_Sheet1.Columns.Get(5).CellType = textCellType5;
-            this.fpUserLoginInformation_Sheet1.Columns.Get(5).Width = 83F;
-            this.fpUserLoginInformation_Sheet1.Columns.Get(6).CellType = textCellType6;
-            this.fpUserLoginInformation_Sheet1.Columns.Get(6).Width = 80F;
-            this.fpUserLoginInformation_Sheet1.Columns.Get(7).CellType = textCellType7;
-            this.fpUserLoginInformation_Sheet1.Columns.Get(7).Width = 221F;
-            this.fpUserLoginInformation_Sheet1.RowHeader.Columns.Default.Resizable = false;
-            this.fpUserLoginInformation_Sheet1.Rows.Get(0).Height = 46F;
-            this.fpUserLoginInformation_Sheet1.ReferenceStyle = FarPoint.Win.Spread.Model.ReferenceStyle.A1;
-            // 
             // statusStrip1
             // 
             this.statusStrip1.Location = new System.Drawing.Point(0, 514);
@@ -261,68 +142,99 @@
             this.statusStrip1.TabIndex = 7;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // chkSelAll
+            // gcUserLogin
             // 
-            this.chkSelAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkSelAll.AutoSize = true;
-            this.chkSelAll.Location = new System.Drawing.Point(51, 485);
-            this.chkSelAll.Name = "chkSelAll";
-            this.chkSelAll.Size = new System.Drawing.Size(78, 16);
-            this.chkSelAll.TabIndex = 8;
-            this.chkSelAll.Text = "全选/不选";
-            this.chkSelAll.UseVisualStyleBackColor = true;
-            this.chkSelAll.CheckedChanged += new System.EventHandler(this.chkSelAll_CheckedChanged);
+            this.gcUserLogin.Cursor = System.Windows.Forms.Cursors.Default;
+            this.gcUserLogin.Location = new System.Drawing.Point(12, 27);
+            this.gcUserLogin.MainView = this.gridView1;
+            this.gcUserLogin.Name = "gcUserLogin";
+            this.gcUserLogin.Size = new System.Drawing.Size(977, 454);
+            this.gcUserLogin.TabIndex = 31;
+            this.gcUserLogin.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView1});
             // 
-            // buttonOK
+            // gridView1
             // 
-            this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.buttonOK.Location = new System.Drawing.Point(833, 485);
-            this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Size = new System.Drawing.Size(75, 23);
-            this.buttonOK.TabIndex = 28;
-            this.buttonOK.Text = "确定";
-            this.buttonOK.UseVisualStyleBackColor = true;
-            this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
+            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn1,
+            this.gridColumn2,
+            this.gridColumn3,
+            this.gridColumn4,
+            this.gridColumn5,
+            this.gridColumn6,
+            this.gridColumn7});
+            this.gridView1.GridControl = this.gcUserLogin;
+            this.gridView1.Name = "gridView1";
             // 
-            // buttonCancel
+            // gridColumn1
             // 
-            this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(914, 485);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 29;
-            this.buttonCancel.Text = "取消";
-            this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            this.gridColumn1.Caption = "用户登录名";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 0;
             // 
-            // farpointFilter1
+            // gridColumn2
             // 
-            this.farpointFilter1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.farpointFilter1.BackColor = System.Drawing.Color.Transparent;
-            this.farpointFilter1.Location = new System.Drawing.Point(318, 485);
-            this.farpointFilter1.Name = "farpointFilter1";
-            this.farpointFilter1.Size = new System.Drawing.Size(499, 23);
-            this.farpointFilter1.TabIndex = 30;
-            this.farpointFilter1.OnCheckFilterChanged += new LibCommonControl.FarpointFilter.CheckHideEventHandler(this.farpointFilter1_OnCheckFilterChanged);
-            this.farpointFilter1.OnClickFitColorBtnOK += new LibCommonControl.FarpointFilter.ClickFitColorBtnEventHandler(this.farpointFilter1_OnClickFitColorBtnOK);
-            this.farpointFilter1.OnClickNotFitColorBtnOK += new LibCommonControl.FarpointFilter.ClickFitColorBtnEventHandler(this.farpointFilter1_OnClickNotFitColorBtnOK);
-            this.farpointFilter1.OnClickClearFilterBtn += new LibCommonControl.FarpointFilter.ClickClearFilterBtnEventHandler(this.farpointFilter1_OnClickClearFilterBtn);
+            this.gridColumn2.Caption = "用户密码";
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.VisibleIndex = 1;
+            // 
+            // gridColumn3
+            // 
+            this.gridColumn3.Caption = "用户权限";
+            this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.Visible = true;
+            this.gridColumn3.VisibleIndex = 2;
+            // 
+            // gridColumn4
+            // 
+            this.gridColumn4.Caption = "所属用户组";
+            this.gridColumn4.Name = "gridColumn4";
+            this.gridColumn4.Visible = true;
+            this.gridColumn4.VisibleIndex = 3;
+            // 
+            // gridColumn5
+            // 
+            this.gridColumn5.Caption = "记住密码";
+            this.gridColumn5.Name = "gridColumn5";
+            this.gridColumn5.Visible = true;
+            this.gridColumn5.VisibleIndex = 4;
+            // 
+            // gridColumn6
+            // 
+            this.gridColumn6.Caption = "尚未登录";
+            this.gridColumn6.Name = "gridColumn6";
+            this.gridColumn6.Visible = true;
+            this.gridColumn6.VisibleIndex = 5;
+            // 
+            // gridColumn7
+            // 
+            this.gridColumn7.Caption = "备注";
+            this.gridColumn7.Name = "gridColumn7";
+            this.gridColumn7.Visible = true;
+            this.gridColumn7.VisibleIndex = 6;
+            // 
+            // controlNavigator2
+            // 
+            this.controlNavigator2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.controlNavigator2.Location = new System.Drawing.Point(12, 487);
+            this.controlNavigator2.Name = "controlNavigator2";
+            this.controlNavigator2.NavigatableControl = this.gcUserLogin;
+            this.controlNavigator2.Size = new System.Drawing.Size(311, 24);
+            this.controlNavigator2.TabIndex = 88;
+            this.controlNavigator2.Text = "controlNavigator2";
+            this.controlNavigator2.TextLocation = DevExpress.XtraEditors.NavigatorButtonsTextLocation.Center;
+            this.controlNavigator2.TextStringFormat = "记录 {0} / {1}";
             // 
             // UserLoginInformationManagement
             // 
-            this.AcceptButton = this.buttonOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.buttonCancel;
             this.ClientSize = new System.Drawing.Size(1001, 536);
-            this.Controls.Add(this.farpointFilter1);
-            this.Controls.Add(this.buttonOK);
-            this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.chkSelAll);
+            this.Controls.Add(this.controlNavigator2);
+            this.Controls.Add(this.gcUserLogin);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.fpUserLoginInformation);
             this.Controls.Add(this.toolStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "UserLoginInformationManagement";
@@ -330,8 +242,8 @@
             this.Load += new System.EventHandler(this.UserLoginInformationManagement_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fpUserLoginInformation)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fpUserLoginInformation_Sheet1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gcUserLogin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -347,12 +259,16 @@
         private System.Windows.Forms.ToolStripButton tsBtnDel;
         private System.Windows.Forms.ToolStripButton tsBtnRefresh;
         private System.Windows.Forms.ToolStripButton tsBtnExit;
-        private FarPoint.Win.Spread.FpSpread fpUserLoginInformation;
-        private FarPoint.Win.Spread.SheetView fpUserLoginInformation_Sheet1;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.CheckBox chkSelAll;
-        private System.Windows.Forms.Button buttonOK;
-        private System.Windows.Forms.Button buttonCancel;
-        private LibCommonControl.FarpointFilter farpointFilter1;
+        private DevExpress.XtraGrid.GridControl gcUserLogin;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
+        private DevExpress.XtraEditors.ControlNavigator controlNavigator2;
     }
 }

@@ -11,10 +11,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
-using LibDatabase;
 using LibBusiness.CommonBLL.DbConstNames;
+using LibDatabase;
 
-namespace LibBusiness.CommonBLL
+namespace LibBusiness
 {
     public class MineDataSimpleBLL
     {

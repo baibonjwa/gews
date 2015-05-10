@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Windows.Forms;
 using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Geometry;
@@ -133,7 +134,9 @@ namespace sys2
                 //查询地质构造信息
                 var hdids = new List<int> { Convert.ToInt32(hdid) };
                 var dzxlist = Global.commonclss.GetStructsInfosNew(pline, hdids);
-                GeologySpaceBll.DeleteGeologySpaceEntityInfos(workingfaceid); //删除工作面ID对应的地质构造信息
+                GeologySpace.DeleteAll(
+                    GeologySpace.FindAllByProperty("WorkingFace.WorkingFaceId", workingfaceid)
+                        .Select(u => u.WorkingFace.WorkingFaceId));
 
                 foreach (var key in dzxlist.Keys)
                 {

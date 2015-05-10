@@ -39,11 +39,6 @@ namespace LibCommonForm
         /// <param name="e"></param>
         private void UserInformationDetailsManagementFather_Load(object sender, EventArgs e)
         {
-            //注册事件
-            uidm.CloseExternal(true);
-            uidm.OnButtonClickHandle += uidm_OnButtonClickHandle;
-            uidm.OnCancleButtonClickHandle += uidm_OnButtonClickHandle;
-            uidm.OnExiteClickHandle += uidm_OnButtonClickHandle;
 
             //设置窗体能否接收子窗体
             this.IsMdiContainer = true;

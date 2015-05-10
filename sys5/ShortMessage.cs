@@ -8,7 +8,7 @@ using LibCommon;
 using LibCommonForm;
 using LibDatabase;
 
-namespace _5.WarningManagement
+namespace sys5
 {
     public partial class ShortMessage : Form
     {
@@ -27,11 +27,6 @@ namespace _5.WarningManagement
 
         private void ShortMessage_Load(object sender, EventArgs e)
         {
-            //注册事件
-            uidm.CloseExternal(true);
-            uidm.OnButtonClickHandle += uidm_OnButtonClickHandle;
-            uidm.OnCancleButtonClickHandle += uidm_OnButtonClickHandle;
-            uidm.OnExiteClickHandle += uidm_OnButtonClickHandle;
 
             //设置窗体能否接收子窗体
             IsMdiContainer = true;
@@ -53,13 +48,6 @@ namespace _5.WarningManagement
             combPort.SelectedIndex = 0;
             //波特率初值
             combBoteRate.SelectedIndex = 1;
-        }
-
-        private void uidm_OnButtonClickHandle(object sender, EventArgs e)
-        {
-            SetShortMessage.Sms_Disconnection();
-            //关闭窗体
-            Close();
         }
 
         /// <summary>
@@ -110,39 +98,39 @@ namespace _5.WarningManagement
         /// <param name="e"></param>
         private void btSendMessage_Click(object sender, EventArgs e)
         {
-            //检查tbMessageContent(短信内容)中是否为空
-            if (tbMessageContent.Text != "")
-            {
-                //检查是否选中用户
-                if (UserInformationDetailsManagement._userSel.Count > 0)
-                {
-                    //通过ID查询所选择用户的电话号码并发送短信
-                    foreach (var id in UserInformationDetailsManagement._userSel)
-                    {
-                        var phoneNumber = ReturnPhoneNumber(id);
-                        if (!String.IsNullOrEmpty(phoneNumber))
-                        {
-                            SetShortMessage.Sms_Send(phoneNumber, tbMessageContent.Text);
-                        }
-                        else
-                        {
-                            MessageBox.Show("选择的用户电话号码有误！", "提示！");
-                            return;
-                        }
-                    }
-                }
-                else
-                {
-                    //提示选择用户
-                    MessageBox.Show("请选择用户！", "提示");
-                }
-            }
-            else
-            {
-                //提示输入短信内容
-                MessageBox.Show("请输入短信内容！");
-                tbMessageContent.BackColor = Color.Red;
-            }
+            ////检查tbMessageContent(短信内容)中是否为空
+            //if (tbMessageContent.Text != "")
+            //{
+            //    //检查是否选中用户
+            //    if (UserInformationDetailsManagement._userSel.Count > 0)
+            //    {
+            //        //通过ID查询所选择用户的电话号码并发送短信
+            //        foreach (var id in UserInformationDetailsManagement._userSel)
+            //        {
+            //            var phoneNumber = ReturnPhoneNumber(id);
+            //            if (!String.IsNullOrEmpty(phoneNumber))
+            //            {
+            //                SetShortMessage.Sms_Send(phoneNumber, tbMessageContent.Text);
+            //            }
+            //            else
+            //            {
+            //                MessageBox.Show("选择的用户电话号码有误！", "提示！");
+            //                return;
+            //            }
+            //        }
+            //    }
+            //    else
+            //    {
+            //        //提示选择用户
+            //        MessageBox.Show("请选择用户！", "提示");
+            //    }
+            //}
+            //else
+            //{
+            //    //提示输入短信内容
+            //    MessageBox.Show("请输入短信内容！");
+            //    tbMessageContent.BackColor = Color.Red;
+            //}
         }
 
         /// <summary>
@@ -152,17 +140,17 @@ namespace _5.WarningManagement
         /// <returns></returns>
         public static string ReturnPhoneNumber(int id)
         {
-            var manaDB = new ManageDataBase(DATABASE_TYPE.GasEmissionDB);
-            var strBuilder = new StringBuilder();
-            strBuilder.Append("SELECT " + UserInformationDetailsManagementDbConstNames.USER_PHONENUMBER);
-            strBuilder.Append(" FROM " + UserInformationDetailsManagementDbConstNames.TABLE_NAME);
-            strBuilder.Append(" WHERE " + UserInformationDetailsManagementDbConstNames.ID + "=" + id);
-            var ds = manaDB.ReturnDS(strBuilder.ToString());
-            if (ds != null && ds.Tables[0].Rows.Count > 0)
-            {
-                return ds.Tables[0].Rows[0][0].ToString();
-            }
-            return "";
+            //var manaDB = new ManageDataBase(DATABASE_TYPE.GasEmissionDB);
+            //var strBuilder = new StringBuilder();
+            //strBuilder.Append("SELECT " + UserInformationDetailsManagementDbConstNames.USER_PHONENUMBER);
+            //strBuilder.Append(" FROM " + UserInformationDetailsManagementDbConstNames.TABLE_NAME);
+            //strBuilder.Append(" WHERE " + UserInformationDetailsManagementDbConstNames.ID + "=" + id);
+            //var ds = manaDB.ReturnDS(strBuilder.ToString());
+            //if (ds != null && ds.Tables[0].Rows.Count > 0)
+            //{
+            //    return ds.Tables[0].Rows[0][0].ToString();
+            //}
+            //return "";
 
             //if (double.TryParse(ds.Tables[0].Rows[0][0].ToString(), out douPhoneNumber) == false)
             //{
@@ -173,6 +161,7 @@ namespace _5.WarningManagement
             //    return true;
             //}
             //if(ds.count)
+            return "";
         }
 
         ///// <summary>
