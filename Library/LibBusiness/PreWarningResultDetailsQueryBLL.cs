@@ -315,49 +315,49 @@ namespace LibBusiness
         /// </summary>
         /// <param name="tunelId"></param>
         /// <returns></returns>
-        public static string GetTunelNameByTunelID(string tunelId)
-        {
-            StringBuilder strSql = new StringBuilder();
-            strSql.Append("SELECT ");
-            strSql.Append(TunnelInfoDbConstNames.TUNNEL_NAME + ",");
-            strSql.Append(TunnelInfoDbConstNames.TUNNEL_TYPE + ",");
-            strSql.Append(TunnelInfoDbConstNames.WORKINGFACE_ID);
-            strSql.Append(" FROM ");
-            strSql.Append(TunnelInfoDbConstNames.TABLE_NAME);
-            strSql.Append(" WHERE ");
-            strSql.Append(TunnelInfoDbConstNames.ID);
-            strSql.Append(" = ");
-            strSql.Append(tunelId);
-            DataTable dt =
-                _database.ReturnDSNotOpenAndClose(strSql.ToString()).Tables[0];
-            if (dt != null)
-            {
-                if (dt.Rows.Count > 0)
-                {
-                    //判断是否属于回采巷道
-                    if
-                        (TunnelUtils.IsStoping((TunnelTypeEnum)Convert.ToInt32(dt.Rows[0][LibBusiness.TunnelInfoDbConstNames.TUNNEL_TYPE])))
-                    {
-                        //获取工作面名称
-                        int workFaceId;
-                        int.TryParse(dt.Rows[0][TunnelInfoDbConstNames.WORKINGFACE_ID].ToString(),
-                            out workFaceId);
-                        WorkingFace workingFace =
-                            WorkingFace.Find(workFaceId);
-                        if (workingFace != null)
-                        {
-                            return workingFace.WorkingFaceName;
-                        }
-                    }
-                    else
-                    {
-                        return
-                            dt.Rows[0][LibBusiness.TunnelInfoDbConstNames.TUNNEL_NAME].ToString();
-                    }
-                }
-            }
-            return "";
-        }
+        //public static string GetTunelNameByTunelID(string tunelId)
+        //{
+        //    StringBuilder strSql = new StringBuilder();
+        //    strSql.Append("SELECT ");
+        //    strSql.Append(TunnelInfoDbConstNames.TUNNEL_NAME + ",");
+        //    strSql.Append(TunnelInfoDbConstNames.TUNNEL_TYPE + ",");
+        //    strSql.Append(TunnelInfoDbConstNames.WORKINGFACE_ID);
+        //    strSql.Append(" FROM ");
+        //    strSql.Append(TunnelInfoDbConstNames.TABLE_NAME);
+        //    strSql.Append(" WHERE ");
+        //    strSql.Append(TunnelInfoDbConstNames.ID);
+        //    strSql.Append(" = ");
+        //    strSql.Append(tunelId);
+        //    DataTable dt =
+        //        _database.ReturnDSNotOpenAndClose(strSql.ToString()).Tables[0];
+        //    if (dt != null)
+        //    {
+        //        if (dt.Rows.Count > 0)
+        //        {
+        //            //判断是否属于回采巷道
+        //            if
+        //                (TunnelUtils.IsStoping((TunnelTypeEnum)Convert.ToInt32(dt.Rows[0][LibBusiness.TunnelInfoDbConstNames.TUNNEL_TYPE])))
+        //            {
+        //                //获取工作面名称
+        //                int workFaceId;
+        //                int.TryParse(dt.Rows[0][TunnelInfoDbConstNames.WORKINGFACE_ID].ToString(),
+        //                    out workFaceId);
+        //                WorkingFace workingFace =
+        //                    WorkingFace.Find(workFaceId);
+        //                if (workingFace != null)
+        //                {
+        //                    return workingFace.WorkingFaceName;
+        //                }
+        //            }
+        //            else
+        //            {
+        //                return
+        //                    dt.Rows[0][LibBusiness.TunnelInfoDbConstNames.TUNNEL_NAME].ToString();
+        //            }
+        //        }
+        //    }
+        //    return "";
+        //}
 
         /// <summary>
         /// 根据规则ID获取预警规则实体

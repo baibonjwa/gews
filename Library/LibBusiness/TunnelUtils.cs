@@ -9,13 +9,13 @@ namespace LibBusiness
         /// </summary>
         /// <param name="tunnelType"></param>
         /// <returns></returns>
-        public static bool IsStoping(TunnelTypeEnum tunnelType)
-        {
-            return tunnelType == TunnelTypeEnum.STOPING_FY ||
-                   tunnelType == TunnelTypeEnum.STOPING_ZY ||
-                   tunnelType == TunnelTypeEnum.STOPING_QY ||
-                   tunnelType == TunnelTypeEnum.STOPING_OTHER;
-        }
+        //public static bool IsStoping(TunnelTypeEnum tunnelType)
+        //{
+        //    return tunnelType == TunnelTypeEnum.STOPING_FY ||
+        //           tunnelType == TunnelTypeEnum.STOPING_ZY ||
+        //           tunnelType == TunnelTypeEnum.STOPING_QY ||
+        //           tunnelType == TunnelTypeEnum.STOPING_OTHER;
+        //}
 
     }
 }

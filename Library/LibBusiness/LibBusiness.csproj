@@ -170,7 +170,6 @@
     <Compile Include="CollectionHelper.cs" />
     <Compile Include="CommonBLL\DbConstNames\LoginFormDbConstNames.cs" />
     <Compile Include="CommonBLL\DbConstNames\MineDataSimpleDbConstNames.cs" />
-    <Compile Include="CommonBLL\DbConstNames\TunnelDefaultSelectDbConstNames.cs" />
     <Compile Include="MineDataSimpleBLL.cs" />
     <Compile Include="DataBindUtil.cs" />
     <Compile Include="PreWarningAnalysisResultBLL.cs" />
@@ -179,8 +178,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="5.WaningManagementBLL\GraphicBLL\" />
-    <Folder Include="CommonBLL\GraphicBLL\" />
-    <Folder Include="CommonBLL\PropertyBLL\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
