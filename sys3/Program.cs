@@ -20,27 +20,12 @@ namespace sys3
         [STAThread]
         private static void Main()
         {
-            Thread.CurrentThread.CurrentUICulture =
-                new CultureInfo("zh-Hans");
-
-            // The following line provides localization for data formats. 
-            Thread.CurrentThread.CurrentCulture =
-                new CultureInfo("zh-Hans");
-
-            IConfigurationSource config = new XmlConfigurationSource("ARConfig.xml");
-
-            var asm = Assembly.Load("LibEntity");
-
-            ActiveRecordStarter.Initialize(asm, config);
-            Log.Debug("Starting ......");
             RuntimeManager.Bind(ProductCode.EngineOrDesktop); //RuntimeManager.Bind
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            Log.Debug("[GM] ......Constructing Main Form....");
             var mf = new MainForm_GM();
-            var lf = new LoginForm(mf);
-            Log.Debug("Logging ......");
+            var lf = new SelectCoalSeam(mf, "LoginBackground3.bmp");
             Application.Run(lf);
         }
     }

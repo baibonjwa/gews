@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using AutoUpdaterDotNET;
 using DevExpress.XtraBars;
+using DevExpress.XtraSplashScreen;
 using ESRI.ArcGIS;
 using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Controls;
@@ -14,10 +15,12 @@ using GIS.Common;
 using GIS.HdProc;
 using GIS.LayersManager;
 using LibAbout;
+using LibBusiness;
 using LibCommon;
 using LibCommonForm;
 using LibConfig;
 using LibDatabase;
+using LibLoginForm;
 using LibPanels;
 using LibSocket;
 
@@ -51,8 +54,8 @@ namespace sys2
             statusStrip1.AxMap = mapControl_MS;
             m_FileMenu.AxMapControl = mapControl_MS; //传入MapControl控件  
 
-            var mapControl = (IMapControl3) mapControl_MS.Object;
-            var toolbarControl = (IToolbarControl) toolBar_MS.Object;
+            var mapControl = (IMapControl3)mapControl_MS.Object;
+            var toolbarControl = (IToolbarControl)toolBar_MS.Object;
 
             //绑定控件
             toolBar_MS.SetBuddyControl(mapControl);
@@ -83,7 +86,7 @@ namespace sys2
             Global.SetInitialParams(mapControl_MS.ActiveView);
 
             Log.Debug("[MS]...Finished Constructing Main Form......"); //浮动工具条中文设置
-            AutoUpdater.Start("http://bltmld.vicp.cc:8090/sys2/update.xml");
+            AutoUpdater.Start(ConfigHelper.update_url + "/sys2/" + ConfigHelper.update_file);
             DXSeting.floatToolsLoadSet();
         }
 
@@ -460,9 +463,9 @@ namespace sys2
                 ILegendGroup pLG = new LegendGroupClass();
                 if (unk is ILegendGroup)
                 {
-                    pLG = (ILegendGroup) unk;
+                    pLG = (ILegendGroup)unk;
                 }
-                pLC = pLG.get_Class((int) data);
+                pLC = pLG.get_Class((int)data);
                 ISymbol pSym;
                 pSym = pLC.Symbol;
                 ISymbolSelector pSS = new
@@ -482,7 +485,7 @@ namespace sys2
         private void bbiCheckUpdate_ItemClick(object sender, ItemClickEventArgs e)
         {
             AutoUpdater.CheckAtOnce = true;
-            AutoUpdater.Start("http://bltmld.vicp.cc:8090/sys2/update.xml");
+            AutoUpdater.Start(ConfigHelper.update_url + "/sys2/" + ConfigHelper.update_file);
         }
     }
 }

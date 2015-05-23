@@ -20,7 +20,7 @@ namespace LibEntity
     ///     参数值全部能够转换为double，定性指标参数值为0或1
     /// </summary>
     [ActiveRecord("T_PRE_WARNING_RULES")]
-    public class PreWarningRules : ActiveRecordBase
+    public class PreWarningRules : ActiveRecordBase<PreWarningRules>
     {
         private DateTime _modifyDate;
         private string _strBindingSingleRuleName;

@@ -7,6 +7,7 @@ using Castle.ActiveRecord;
 using Castle.ActiveRecord.Framework;
 using Castle.ActiveRecord.Framework.Config;
 using DevExpress.XtraBars;
+using LibConfig;
 using LibLoginForm;
 
 namespace sys1
@@ -19,21 +20,8 @@ namespace sys1
         [STAThread]
         private static void Main()
         {
-            Thread.CurrentThread.CurrentUICulture =
-                new CultureInfo("zh-Hans");
-
-            // The following line provides localization for data formats. 
-            Thread.CurrentThread.CurrentCulture =
-                new CultureInfo("zh-Hans");
-
-            IConfigurationSource config = new XmlConfigurationSource("ARConfig.xml");
-
-            var asm = Assembly.Load("LibEntity");
-
-            ActiveRecordStarter.Initialize(asm, config);
-
             var mf = new MainFormGe(new BarButtonItem());
-            var lf = new LoginForm(mf);
+            var lf = new SelectCoalSeam(mf, "LoginBackground1.bmp");
             Application.Run(lf);
         }
     }

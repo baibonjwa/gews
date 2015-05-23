@@ -146,6 +146,9 @@
     <Reference Include="DevExpress.XtraGrid.v14.1, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
+    <Reference Include="DevExpress.XtraLayout.v14.1, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="DevExpress.XtraPrinting.v14.1, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
@@ -251,7 +254,6 @@
     <EmbeddedResource Include="MonitoringDataAnalysis.resx">
       <DependentUpon>MonitoringDataAnalysis.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -416,6 +418,10 @@
       <Project>{2ebcde4b-a244-4cca-a1ae-1a884d81772b}</Project>
       <Name>LibCommon</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Library\LibConfig\LibConfig.csproj">
+      <Project>{697EED3C-3244-494D-B663-296CC80D4022}</Project>
+      <Name>LibConfig</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Library\LibDatabase\LibDatabase.csproj">
       <Project>{38b3be6b-bd0c-4108-9414-a728f5990a0c}</Project>
       <Name>LibDatabase</Name>
@@ -435,10 +441,6 @@
     <ProjectReference Include="..\Library\LibSocket\LibSocket.csproj">
       <Project>{93547539-03e2-49c3-88fc-3ccd81942d5f}</Project>
       <Name>LibSocket</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Library\TeeChartWrapper\TeeChartWrapper.csproj">
-      <Project>{b074f430-12b3-4751-96ae-3949fe73ebb5}</Project>
-      <Name>TeeChartWrapper</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

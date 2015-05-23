@@ -157,7 +157,7 @@ namespace sys2
             //更新回采进尺表，将isdel设置0
             var entity = DayReportHc.FindByBid(bid);
             entity.IsDel = 0;
-            entity.SaveAndFlush();
+            entity.Save();
 
 
             //更新地质构造表中的信息
@@ -169,7 +169,7 @@ namespace sys2
             {
                 GeologySpace.DeleteAll(
                     GeologySpace.FindAllByProperty("WorkingFace.WorkingFaceId", wfEntity.WorkingFaceId)
-                        .Select(u => u.WorkingFace.WorkingFaceId));
+                        .Select(u => u.Id));
                 foreach (var key in dzxlist.Keys)
                 {
                     var geoinfos = dzxlist[key];

@@ -16,7 +16,6 @@ using LibEntity;
 using LibPanels;
 using LibSocket;
 using Steema.TeeChart;
-using TeeChartWrapper;
 
 namespace sys1
 {
@@ -34,26 +33,6 @@ namespace sys1
             EnableDeleteAndModifyBtn = true;
             this.mniAbout = mniAbout;
             InitializeComponent();
-            SocketUtil.DoInitilization();
-
-            var fp = new FileProperties(configFileName);
-
-            int iValue;
-            double dValue;
-            int.TryParse(fp.Get("countperframe"), out iValue);
-            DataCountPerFrame = iValue;
-            int.TryParse(fp.Get("updatefrequency"), out iValue);
-            _updateFrequency = iValue;
-            double.TryParse(fp.Get("redthreshold"), out dValue);
-            RedDataThreshold = dValue;
-            double.TryParse(fp.Get("yellowthreshold"), out dValue);
-            YellowDataThreshold = dValue;
-            double.TryParse(fp.Get("baddatathreshold"), out dValue);
-            BadDataThreshold = dValue;
-
-            dateTimeStart.Text = DateTime.Now.ToString("yyyy-MM-dd") + @" 00:00:00";
-            dateTimeEnd.Text = DateTime.Now.ToString("yyyy-MM-dd") + @" 23:59:59";
-            DataBindUtil.LoadProbeType(lstProbeType);
         }
 
         public bool OnLine { get; set; }
@@ -83,7 +62,29 @@ namespace sys1
 
         private void MainForm_GE_Load(object sender, EventArgs e)
         {
-            AutoUpdater.Start("http://bltmld.vicp.cc:8090/sys1/update.xml");
+            SocketUtil.DoInitilization();
+
+            var fp = new FileProperties(configFileName);
+
+            int iValue;
+            double dValue;
+            int.TryParse(fp.Get("countperframe"), out iValue);
+            DataCountPerFrame = iValue;
+            int.TryParse(fp.Get("updatefrequency"), out iValue);
+            _updateFrequency = iValue;
+            double.TryParse(fp.Get("redthreshold"), out dValue);
+            RedDataThreshold = dValue;
+            double.TryParse(fp.Get("yellowthreshold"), out dValue);
+            YellowDataThreshold = dValue;
+            double.TryParse(fp.Get("baddatathreshold"), out dValue);
+            BadDataThreshold = dValue;
+
+            dateTimeStart.Text = DateTime.Now.ToString("yyyy-MM-dd") + @" 00:00:00";
+            dateTimeEnd.Text = DateTime.Now.ToString("yyyy-MM-dd") + @" 23:59:59";
+            DataBindUtil.LoadProbeType(lstProbeType);
+
+
+            AutoUpdater.Start(ConfigHelper.update_url + "/sys1/" + ConfigHelper.update_file);
             DXSeting.floatToolsLoadSet();
         }
 
@@ -865,7 +866,7 @@ namespace sys1
         private void barButtonItem1_ItemClick(object sender, ItemClickEventArgs e)
         {
             AutoUpdater.CheckAtOnce = true;
-            AutoUpdater.Start("http://bltmld.vicp.cc:8090/sys1/update.xml");
+            AutoUpdater.Start(ConfigHelper.update_url + "/sys5/" + ConfigHelper.update_file);
         }
 
         private void rbtnRealtime_CheckedChanged(object sender, EventArgs e)

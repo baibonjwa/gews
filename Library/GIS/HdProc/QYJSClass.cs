@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using ESRI.ArcGIS.Geometry;
 
 namespace GIS.HdProc
@@ -227,42 +224,58 @@ namespace GIS.HdProc
         /// <returns>返回与回采方向相同的巷道线 </returns>
         private IPolyline GetPointPos(IPoint pnt1, IPoint pnt2, IPolyline pline, int iDirect)
         {
-            IPoint pntstart = pline.FromPoint;
-            if (pntstart == pnt1) //pline 起点与pnt1相同
-            {
-                return pline;
-            }
-            else if (pline.ToPoint == pnt1) //pline 终点与pnt1相同
-            {
+
+            var disStart = MyMapHelp.GetTwoPointDistance(pline.FromPoint,
+                MyMapHelp.GetTwoPointDistance(pline.FromPoint, pnt1) <
+                MyMapHelp.GetTwoPointDistance(pline.FromPoint, pnt2)
+                    ? pnt1
+                    : pnt2);
+
+            var disStop = MyMapHelp.GetTwoPointDistance(pline.ToPoint,
+                MyMapHelp.GetTwoPointDistance(pline.ToPoint, pnt1) <
+                MyMapHelp.GetTwoPointDistance(pline.ToPoint, pnt2)
+                    ? pnt1
+                    : pnt2);
+
+            if (disStart > disStop)
                 pline.ReverseOrientation();
-                //return pline;
-            }
-            else //非切眼状态
-            {
-                //(p2-p0)*(p1-p0)>0 则p0p1在p1点拐向右侧得到p1p2,(p2-p0)*(p1-p0)<0 则p0p1在p1点拐向左侧得到p1p2, p1为共同点
-                IPoint p1p0 = new PointClass();
-                //p1-p0
-                p1p0.X = pnt1.X - pnt2.X;
-                p1p0.Y = pnt1.Y - pnt2.Y;
-                IPoint p2p0 = new PointClass();
-                //p2-p0
-                p2p0.X = pntstart.X - pnt2.X;
-                p2p0.Y = pntstart.Y - pnt2.Y;
-                //(p2-p0)*(p1-p0)
-                double newrel = p2p0.X * p1p0.Y - p1p0.X * p2p0.Y;
-                if (newrel > 0)  //frompoint 在切眼右侧
-                {
-                    if (iDirect == -1)
-                        pline.ReverseOrientation();
-                }
-                else if (newrel < 0) //frompoint 在切眼左侧
-                {
-                    if (iDirect == 1)
-                        pline.ReverseOrientation();
-                    //return pline;
-                }
-            }
+
             return pline;
+            //if (pntstart == pnt1) //pline 起点与pnt1相同
+            //{
+            //    return pline;
+            //}
+            //else if (pline.ToPoint == pnt1) //pline 终点与pnt1相同
+            //{
+            //    pline.ReverseOrientation();
+            //    //return pline;
+            //}
+            //else //非切眼状态
+            //{
+            //    //(p2-p0)*(p1-p0)>0 则p0p1在p1点拐向右侧得到p1p2,(p2-p0)*(p1-p0)<0 则p0p1在p1点拐向左侧得到p1p2, p1为共同点
+            //    IPoint p1p0 = new PointClass();
+            //    //p1-p0
+            //    p1p0.X = pnt1.X - pnt2.X;
+            //    p1p0.Y = pnt1.Y - pnt2.Y;
+            //    IPoint p2p0 = new PointClass();
+            //    //p2-p0
+            //    p2p0.X = pntstart.X - pnt2.X;
+            //    p2p0.Y = pntstart.Y - pnt2.Y;
+            //    //(p2-p0)*(p1-p0)
+            //    double newrel = p2p0.X * p1p0.Y - p1p0.X * p2p0.Y;
+            //    if (newrel > 0)  //frompoint 在切眼右侧
+            //    {
+            //        if (iDirect == -1)
+            //            pline.ReverseOrientation();
+            //    }
+            //    else if (newrel < 0) //frompoint 在切眼左侧
+            //    {
+            //        if (iDirect == 1)
+            //            pline.ReverseOrientation();
+            //        //return pline;
+            //    }
+            //}
+            //return pline;
         }
 
         /// <summary>

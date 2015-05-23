@@ -98,10 +98,6 @@ namespace LibDatabase
                 strID = cfgMgr.getValueByKey(ConfigConst.CONFIG_DATABASE_UID);
                 strPW = cfgMgr.getValueByKey(ConfigConst.CONFIG_DATABASE_PASSWD);
 
-#if RELEASE_GWS
-                strID = DWEncryptDecryptClass.DecryptString(strID);
-                strPW = DWEncryptDecryptClass.DecryptString(strPW);
-#endif
                 string connectString = "Data Source=" + DataSource +
                     ";Initial Catalog=" + DataBase +
                     ";Persist Security Info=True;User ID=" + strID +

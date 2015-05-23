@@ -294,7 +294,7 @@ namespace sys5
             //维护查询结果的记录
             //List<PreWarningHistoryResultEnt> historyResultEnt = PreWarningResultQueryBLL.GetSortedPreWarningData();
             //int iRecordCount = historyResultEnt == null ? 0 : historyResultEnt.Count;
-            var iRecordCount = PreWarningResultQueryBLL.GetPreWarningDataCount();
+            var iRecordCount =  PreWarningResultQueryBLL.GetPreWarningDataCount();
 
             dataPager1.PageControlInit(iRecordCount);
             var iStartIndex = dataPager1.getStartIndex();

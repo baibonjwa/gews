@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using LibBusiness;
 using LibCommon;
 using LibEntity;
-using TeeChartWrapper;
 
 namespace UnderTerminal
 {

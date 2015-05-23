@@ -147,8 +147,17 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="TeeChart">
+      <HintPath>..\..\packages\TeeChart.dll</HintPath>
+    </Reference>
+    <Reference Include="YamlDotNet">
+      <HintPath>..\..\packages\YamlDotNet.3.6.0\lib\net35\YamlDotNet.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CoalSeam.cs" />
+    <Compile Include="ConfigHelper.cs" />
+    <Compile Include="TeeChartUtil.cs" />
     <Compile Include="WorkingFaceDbConstNames.cs" />
     <Compile Include="TunnelInfoDbConstNames.cs" />
     <Compile Include="SaveDBXyz2Txt.cs" />
@@ -161,7 +170,6 @@
     <Compile Include="5.WaningManagementBLL\DbConstNames\WarningDatasCommonDbConstNames.cs" />
     <Compile Include="5.WaningManagementBLL\DbConstNames\PreWarningRulesDbConstNames.cs" />
     <Compile Include="5.WaningManagementBLL\DbConstNames\WarningImgDbConstNames.cs" />
-    <Compile Include="PreWarningResultDetailsQueryBLL.cs" />
     <Compile Include="PreWarningResultQueryBLL.cs" />
     <Compile Include="PreWarningRulesBLL.cs" />
     <Compile Include="PreWarningExcelBLL.cs" />
@@ -174,7 +182,7 @@
     <Compile Include="DataBindUtil.cs" />
     <Compile Include="PreWarningAnalysisResultBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TunnelUtils.cs" />
+    <Compile Include="YamlHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="5.WaningManagementBLL\GraphicBLL\" />

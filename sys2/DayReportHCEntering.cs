@@ -203,7 +203,7 @@ namespace sys2
             {
                 GeologySpace.DeleteAll(
                   GeologySpace.FindAllByProperty("WorkingFace.WorkingFaceId", workingFace.WorkingFaceId)
-                      .Select(u => u.WorkingFace.WorkingFaceId));
+                      .Select(u => u.Id));
                 foreach (var key in dzxlist.Keys)
                 {
                     var geoinfos = dzxlist[key];

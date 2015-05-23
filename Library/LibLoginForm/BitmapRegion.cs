@@ -1,14 +1,3 @@
-//using System;
-//using System.Collections.Generic;
-//using System.Text;
-
-//namespace MainProgram
-//{
-//    class BitmapRegion
-//    {
-//    }
-//}
-
 
 /***************************************************************************************/
 //
@@ -18,8 +7,6 @@
 //  修改说明：2005.8.31 杨丹翻译和修改
 //
 /***************************************************************************************/
-
-
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;

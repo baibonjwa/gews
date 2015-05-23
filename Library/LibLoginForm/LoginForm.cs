@@ -1,11 +1,17 @@
 ﻿using System;
 using System.Drawing;
+using System.Globalization;
 using System.Windows.Forms;
 using LibEntity;
 using LibCommon;
 using LibCommonForm;
 using LibConfig;
 using System.IO;
+using System.Reflection;
+using System.Threading;
+using Castle.ActiveRecord;
+using Castle.ActiveRecord.Framework;
+using Castle.ActiveRecord.Framework.Config;
 
 namespace LibLoginForm
 {
@@ -17,15 +23,20 @@ namespace LibLoginForm
         //获取所有的用户信息
         private UserLogin[] ents = null;
 
+        private string Path { get; set; }
+
         Form _showForm = null;
+
         /// <summary>
         /// 构造函数
         /// </summary>
         /// <param name="form2ShowAfterLogin"></param>
-        public LoginForm(Form form2ShowAfterLogin)
+        /// <param name="path"></param>
+        public LoginForm(Form form2ShowAfterLogin, string path)
         {
             InitializeComponent();
             _showForm = form2ShowAfterLogin;
+            Path = path;
             //SkinReader sr = new SkinReader();
             //string sn = sr.ReadCurSkin();
             //skinEngine1.SkinFile = Application.StartupPath + "\\skin\\" + sn;
@@ -39,11 +50,15 @@ namespace LibLoginForm
         /// <param name="e"></param>
         private void Form1_Load(object sender, EventArgs e)
         {
-            //初始化调用不规则窗体生成代码
-            //此为生成不规则窗体和控件的类
-            BitmapRegion BitmapRegion = new BitmapRegion();
-            string path = Application.StartupPath + LibCommon.Const.LOGIN_BACKGROUND_BMP_PATH;
-            BitmapRegion.CreateControlRegion(this, new Bitmap(path));
+            Thread.CurrentThread.CurrentUICulture =
+             new CultureInfo("zh-Hans");
+            Thread.CurrentThread.CurrentCulture =
+                new CultureInfo("zh-Hans");
+            IConfigurationSource config = new XmlConfigurationSource("ARConfig.xml");
+            var asm = Assembly.Load("LibEntity");
+            ActiveRecordStarter.Initialize(asm, config);
+
+            BitmapRegion.CreateControlRegion(this, new Bitmap(Path));
 
             try
             {
@@ -133,6 +148,7 @@ namespace LibLoginForm
             {
                 this.Hide();
                 _showForm.WindowState = FormWindowState.Maximized;
+
                 _showForm.ShowDialog();
             }
 

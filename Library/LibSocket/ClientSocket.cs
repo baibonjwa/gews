@@ -27,7 +27,7 @@ namespace LibSocket
         //服务器IP
         private string _serverIP = "127.0.0.1";
         //端口号
-        private int _serverPort = 8888;
+        private int _serverPort = 0;
         //Socket
         private Socket _socketHandler = null;
         //是否启用重连线程

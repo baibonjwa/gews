@@ -290,7 +290,8 @@ key1.Close();
         {
             // Initialize configuration manager.
             var cfgMgr = ConfigManager.Instance;
-            var msg = cfgMgr.init(Application.StartupPath);
+            cfgMgr.load(Application.StartupPath);
+            var msg = cfgMgr.init();
 
             if (msg != string.Empty)
             {

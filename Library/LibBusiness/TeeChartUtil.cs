@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TeeChartWrapper
+namespace LibBusiness
 {
     public class TeeChartUtil
     {

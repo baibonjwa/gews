@@ -13,6 +13,7 @@ using GIS.GraphicEdit;
 using GIS.LayersManager;
 using GIS.SpecialGraphic;
 using LibAbout;
+using LibBusiness;
 using LibCommon;
 using LibCommonForm;
 using LibConfig;
@@ -46,7 +47,7 @@ namespace sys4
         private void bbiCheckUpdate_ItemClick(object sender, ItemClickEventArgs e)
         {
             AutoUpdater.CheckAtOnce = true;
-            AutoUpdater.Start("http://bltmld.vicp.cc:8090/sys4/update.xml");
+            AutoUpdater.Start(ConfigHelper.update_url + "/sys4/" + ConfigHelper.update_file);
         }
 
         #region 窗体事件
@@ -71,7 +72,7 @@ namespace sys4
             AddToolBar.Addtool(mapControl_OP, mapControl, toolbarControl, DataEditCommon.g_pCurrentWorkSpace);
 
 
-            AutoUpdater.Start("http://bltmld.vicp.cc:8090/sys4/update.xml");
+            AutoUpdater.Start(ConfigHelper.update_url + "/sys4/" + ConfigHelper.update_file);
             DXSeting.floatToolsLoadSet();
         }
 

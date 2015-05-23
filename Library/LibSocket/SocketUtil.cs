@@ -13,7 +13,7 @@ namespace LibSocket
         {
             // Initialize configuration manager.
             ConfigManager cfgMgr = ConfigManager.Instance;
-            string msg = cfgMgr.init(Application.StartupPath);
+            string msg = cfgMgr.init();
 
             if (msg != string.Empty)
             {

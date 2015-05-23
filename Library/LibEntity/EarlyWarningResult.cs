@@ -96,5 +96,15 @@ namespace LibEntity
             return FindAll(criterion);
         }
 
+        public static EarlyWarningResult[] FindAllByDateTimeAndWorkingfaceName(DateTime startTime, DateTime endTime,
+            string workingFaceName)
+        {
+            var criterion = new ICriterion[]
+            {
+                Restrictions.Between("DateTime", startTime, endTime),
+                Restrictions.Eq("WorkingFace.WorkingFaceName",workingFaceName)
+            };
+            return FindAll(criterion);
+        }
     }
 }

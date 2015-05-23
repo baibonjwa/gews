@@ -15,6 +15,7 @@ using GIS.HdProc;
 using GIS.LayersManager;
 using GIS.Warning;
 using LibAbout;
+using LibBusiness;
 using LibCommon;
 using LibCommonForm;
 using LibConfig;
@@ -101,7 +102,7 @@ namespace sys5
         {
             SocketUtil.DoInitilization();
             //////////////////////////////////////////////////////
-            ///文件菜单
+            //文件菜单
             mapControl_WM.LoadMxFile(Application.StartupPath + "\\" +
                                      ConfigManager.Instance.getValueByKey(ConfigConst.CONFIG_MXD_FILE));
             //this.mapControl_WM.LoadMxFile(Application.StartupPath + "\\local.mxd");
@@ -147,7 +148,7 @@ namespace sys5
             Global.SetInitialParams(mapControl_WM.ActiveView);
 
 
-            AutoUpdater.Start("http://bltmld.vicp.cc:8090/sys5/update.xml");
+            AutoUpdater.Start(ConfigHelper.update_url + "/sys5/" + ConfigHelper.update_file);
             //注册更新预警结果事件
 
             SocketUtil.GetClientSocketInstance().OnMsgUpdateWarningResult += UpdateWarningResultUi;
@@ -313,7 +314,7 @@ namespace sys5
         private void bbiCheckUpdate_ItemClick(object sender, ItemClickEventArgs e)
         {
             AutoUpdater.CheckAtOnce = true;
-            AutoUpdater.Start("http://bltmld.vicp.cc:8090/sys5/update.xml");
+            AutoUpdater.Start(ConfigHelper.update_url + "/sys5/" + ConfigHelper.update_file);
         }
 
         private delegate void ShowDelegate(UpdateWarningResultMessage data);

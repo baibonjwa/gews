@@ -219,16 +219,14 @@ namespace sys2
             geostructsinfos.Remove("LAST");
             GeologySpace.DeleteAll(
                 GeologySpace.FindAllByProperty("WorkingFace.WorkingFaceId", selectWorkingfaceSimple1.SelectedWorkingFace.WorkingFaceId)
-                    .Select(u => u.WorkingFace.WorkingFaceId));
+                    .Select(u => u.Id));
             //删除工作面ID对应的地质构造信息
             foreach (var key in geostructsinfos.Keys)
             {
                 var geoinfos = geostructsinfos[key];
                 var geo_type = key;
-                for (var i = 0; i < geoinfos.Count; i++)
+                foreach (var tmp in geoinfos)
                 {
-                    var tmp = geoinfos[i];
-
                     var geologyspaceEntity = new GeologySpace
                     {
                         WorkingFace = selectWorkingfaceSimple1.SelectedWorkingFace,

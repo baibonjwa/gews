@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-// Includes Nini namespace (don't forget to add the reference in your project)
 using Nini.Config;
 
 namespace LibConfig
@@ -18,7 +17,7 @@ namespace LibConfig
         private Hashtable ht = new Hashtable();
 
         private ConfigManager() { }
-
+        private string _configPath = "";
         public static ConfigManager Instance
         {
             get
@@ -38,20 +37,24 @@ namespace LibConfig
             }
         }
 
-        /// <summary>
-        /// Loads all configuration values into the UI controls.
-        /// </summary>
-        public string init(string path)
+        public string load(string path)
         {
             string configPath = path + "\\" + ConfigConst.CONFIG_FILE_NAME;
+            _configPath = configPath;
             if (!File.Exists(configPath))
             {
                 return "无法找到配置文件:" + ConfigConst.CONFIG_FILE_NAME;
             }
+            return string.Empty;
+        }
 
+        /// <summary>
+        /// Loads all configuration values into the UI controls.
+        /// </summary>
+        public string init()
+        {
             // Load the configuration source file
-            IConfigSource source = new IniConfigSource(configPath);
-
+            IConfigSource source = new IniConfigSource(_configPath);
             // Set the config to the Logging section of the INI file.
             IConfig config = source.Configs[ConfigConst.CONFIG_NETWORK];
 
@@ -92,6 +95,15 @@ namespace LibConfig
         public string getValueByKey(string key)
         {
             return ht[key].ToString();
+        }
+
+        public void SetValue(string section, string key, string value)
+        {
+            IConfigSource source = new IniConfigSource(_configPath);
+            // Set the config to the Logging section of the INI file.
+            IConfig config = source.Configs[section];
+            config.Set(key, value);
+            source.Save();
         }
     }
 }

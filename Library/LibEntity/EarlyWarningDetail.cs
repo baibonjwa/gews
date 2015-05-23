@@ -25,7 +25,6 @@ namespace LibEntity
         [Property("THRESHOLD")]
         public string Threshold { get; set; }
 
-
         [Property("ACTUAL_VALUE")]
         public string ActualValue { get; set; }
 
@@ -58,13 +57,14 @@ namespace LibEntity
         {
             var criterion = new ICriterion[]
             {
+                Restrictions.Eq("EarlyWarningResult.Shift", shift)
                 //Restrictions.Lt("EarlyWarningResult.HandleStatus", 3),
-                Restrictions.Eq("EarlyWarningResult.Tunnel.WorkingFace.WorkingFaceId", workingFaceId),
-                Restrictions.Eq("EarlyWarningResult.DateTime", dateTime),
-                Restrictions.Eq("EarlyWarningResult.Shift", shift),
-                Restrictions.Eq("EarlyWarningResult.WarningResult", warningResult),
-                Restrictions.Eq("PreWarningRules.WarningType", warningType),
-                Restrictions.Eq("PreWarningRules.RuleType", ruleType)
+                //Restrictions.Eq("EarlyWarningResult.Tunnel.WorkingFace.WorkingFaceId", workingFaceId),
+                //Restrictions.Eq("EarlyWarningResult.DateTime", dateTime),
+                //Restrictions.Eq("EarlyWarningResult.Shift", shift),
+                //Restrictions.Eq("EarlyWarningResult.WarningResult", warningResult),
+                //Restrictions.Eq("PreWarningRules.WarningType", warningType),
+                //Restrictions.Eq("PreWarningRules.RuleType", ruleType)
             };
             return FindAll(criterion);
         }
@@ -78,5 +78,6 @@ namespace LibEntity
             }
             return FindAll(criterion);
         }
+
     }
 }

@@ -26,23 +26,17 @@ namespace LibEntity
         [Property("SUPPORT_PATTERN")]
         public string TunnelSupportPattern { get; set; }
 
-        // 围岩类型
-
         /// <summary>
         ///     围岩类型
         /// </summary>
         [BelongsTo("LITHOLOGY_ID")]
         public Lithology Lithology { get; set; }
 
-        // 断面类型
-
         /// <summary>
         ///     断面类型
         /// </summary>
         [Property("SECTION_TYPE")]
         public string TunnelSectionType { get; set; }
-
-        // 断面参数
 
         /// <summary>
         ///     断面参数
@@ -82,15 +76,11 @@ namespace LibEntity
         [BelongsTo("WORKINGFACE_ID")]
         public WorkingFace WorkingFace { get; set; }
 
-        // 煤巷岩巷
-
         /// <summary>
         ///     煤巷岩巷
         /// </summary>
         [Property("COAL_OR_STONE")]
         public string CoalOrStone { get; set; }
-
-        // 绑定煤层ID
 
         /// <summary>
         ///     绑定煤层ID
@@ -109,9 +99,11 @@ namespace LibEntity
         [Property("BINDINGID")]
         public string BindingId { get; set; }
 
-
         [Property("RULE_IDS")]
         public string RuleIds { get; set; }
+
+        [Property("WARNING_STATUS")]
+        public int WarningStatus { get; set; }
 
         /// <summary>
         ///     巷道使用次数，用来缓存信息，此外无实际意义。
@@ -161,14 +153,17 @@ namespace LibEntity
             return FindAll(criterion);
         }
 
-        public static Tunnel[] FindAllWithHasRules()
+        public static Tunnel[] FindAllWithHasRulesAndWarningStatusNotEqOne()
         {
             var criterion = new ICriterion[]
             {
-                Restrictions.IsNotNull("RuleIds")
+                Restrictions.IsNotNull("RuleIds"),
+                Restrictions.Le("WarningStatus", 0)
             };
             return FindAll(criterion);
         }
+
+
 
         public override void Delete()
         {

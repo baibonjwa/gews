@@ -19,26 +19,12 @@ namespace sys4
         [STAThread]
         private static void Main()
         {
-            Thread.CurrentThread.CurrentUICulture =
-                new CultureInfo("zh-Hans");
-
-            // The following line provides localization for data formats. 
-            Thread.CurrentThread.CurrentCulture =
-                new CultureInfo("zh-Hans");
-
-            IConfigurationSource config = new XmlConfigurationSource("ARConfig.xml");
-
-            var asm = Assembly.Load("LibEntity");
-
-            ActiveRecordStarter.Initialize(asm, config);
-
             RuntimeManager.Bind(ProductCode.EngineOrDesktop);
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
             var mf = new MainForm_OP();
-            var lf = new LoginForm(mf);
+            var lf = new SelectCoalSeam(mf, "LoginBackground4.bmp");
             Application.Run(lf);
         }
     }

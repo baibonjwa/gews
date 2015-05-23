@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using FarPoint.Win.Spread;
 using FarPoint.Win.Spread.CellType;
 using GIS.Warning;
+using LibBusiness;
 using LibCommon;
 using LibEntity;
 using LibSocket;
@@ -72,6 +73,7 @@ namespace sys5
 
         }
 
+
         /// <summary>
         ///     加载预警数据
         /// </summary>
@@ -81,7 +83,6 @@ namespace sys5
             {
                 _fpPreWaringLastedValue.ActiveSheet.Rows.Remove(FROZEN_ROW_COUNT, 1);
             }
-
 
             var earlyWarningResults = EarlyWarningResult.FindAllByWarningResultsIsRedAndYellowAndHandleStatusLtThree();
             var earlyWarningResultGroup = earlyWarningResults.GroupBy(u => u.Tunnel, (u, v) => new
@@ -181,6 +182,38 @@ namespace sys5
                 rowIdx++;
             }
 
+            var tunnelHavedRules = Tunnel.FindAllWithHasRulesAndWarningStatusNotEqOne();
+            foreach (var tunnel in tunnelHavedRules)
+            {
+                _fpPreWaringLastedValue.ActiveSheet.Rows.Add(rowIdx, 1);
+                _fpPreWaringLastedValue.ActiveSheet.Rows[rowIdx].Height = 40;
+                _fpPreWaringLastedValue.ActiveSheet.Rows[rowIdx].Locked = true;
+
+                _cells[rowIdx, COLUMN_INDEX_WORKFACE_NAME].Value = tunnel.WorkingFace.WorkingFaceName + "--" + tunnel.TunnelName;
+                _cells[rowIdx, COLUMN_INDEX_DATETIME_SHIFT].Value = strTime + DataBindUtil.JudgeWorkTimeNow("四六制");
+
+                FpUtil.setCellImg(_cells[rowIdx, COLUMN_INDEX_WANRING_RESULT_OUTBURST], (int)WarningResult.GREEN);
+                FpUtil.setCellImg(_cells[rowIdx, COLUMN_INDEX_WANRING_RESULT_OVERLIMIT], (int)WarningResult.GREEN);
+                FpUtil.setCellImg(_cells[rowIdx, COLUMN_INDEX_WANRING_RESULT_OUTBURST], (int)WarningResult.GREEN);
+                FpUtil.setCellImg(_cells[rowIdx, COLUMN_INDEX_OUTBURST_GAS], (int)WarningResult.GREEN);
+                FpUtil.setCellImg(_cells[rowIdx, COLUMN_INDEX_OUTBURST_COAL], (int)WarningResult.GREEN);
+                FpUtil.setCellImg(_cells[rowIdx, COLUMN_INDEX_OUTBURST_GEOLOGY], (int)WarningResult.GREEN);
+                FpUtil.setCellImg(_cells[rowIdx, COLUMN_INDEX_OUTBURST_VENTILATION], (int)WarningResult.GREEN);
+                FpUtil.setCellImg(_cells[rowIdx, COLUMN_INDEX_OUTBURST_MANAGEMENT], (int)WarningResult.GREEN);
+
+                FpUtil.setCellImg(_cells[rowIdx, COLUMN_INDEX_WANRING_RESULT_OVERLIMIT], (int)WarningResult.GREEN);
+                FpUtil.setCellImg(_cells[rowIdx, COLUMN_INDEX_OVERLIMIT_GAS], (int)WarningResult.GREEN);
+                FpUtil.setCellImg(_cells[rowIdx, COLUMN_INDEX_OVERLIMIT_COAL], (int)WarningResult.GREEN);
+                FpUtil.setCellImg(_cells[rowIdx, COLUMN_INDEX_OVERLIMIT_GEOLOGY], (int)WarningResult.GREEN);
+                FpUtil.setCellImg(_cells[rowIdx, COLUMN_INDEX_OVERLIMIT_VENTILATION], (int)WarningResult.GREEN);
+                FpUtil.setCellImg(_cells[rowIdx, COLUMN_INDEX_OVERLIMIT_MANAGEMENT], (int)WarningResult.GREEN);
+
+                _cells[rowIdx, COLUMN_INDEX_DETAIL_INFO_BUTTON].Locked = true;
+                var buttonCell = new ButtonCellType { Text = "-" };
+                _cells[rowIdx, COLUMN_INDEX_DETAIL_INFO_BUTTON].CellType = buttonCell;
+
+                rowIdx++;
+            }
 
 
             #region 添加标题数据

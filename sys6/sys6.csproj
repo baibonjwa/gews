@@ -382,10 +382,6 @@
       <Project>{1238b891-86ad-4851-97a2-0c0302e24bd8}</Project>
       <Name>LibXPorperty</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Library\TeeChartWrapper\TeeChartWrapper.csproj">
-      <Project>{b074f430-12b3-4751-96ae-3949fe73ebb5}</Project>
-      <Name>TeeChartWrapper</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

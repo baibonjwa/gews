@@ -18,6 +18,7 @@ using GIS.LayersManager;
 using GIS.SpecialGraphic;
 using GIS.View;
 using LibAbout;
+using LibBusiness;
 using LibCommon;
 using LibCommonForm;
 using LibConfig;
@@ -47,7 +48,7 @@ namespace sys3
         private void bbiCheckUpdate_ItemClick(object sender, ItemClickEventArgs e)
         {
             AutoUpdater.CheckAtOnce = true;
-            AutoUpdater.Start("http://bltmld.vicp.cc:8090/sys3/update.xml");
+            AutoUpdater.Start(ConfigHelper.update_url + "/sys3/" + ConfigHelper.update_file);
         }
 
         #region 窗体事件
@@ -85,7 +86,7 @@ namespace sys3
             Log.Debug("[GM]....Construction finished.");
 
             //浮动工具条中文设置
-            AutoUpdater.Start("http://bltmld.vicp.cc:8090/sys3/update.xml");
+            AutoUpdater.Start(ConfigHelper.update_url + "/sys3/" + ConfigHelper.update_file);
             DXSeting.floatToolsLoadSet();
 
             Log.Debug("[GM]....Loading finished.");

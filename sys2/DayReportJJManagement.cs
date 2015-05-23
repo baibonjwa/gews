@@ -136,7 +136,7 @@ namespace sys2
                 var dzxlist = Global.commonclss.GetStructsInfosNew(pline, hdids);
                 GeologySpace.DeleteAll(
                     GeologySpace.FindAllByProperty("WorkingFace.WorkingFaceId", workingfaceid)
-                        .Select(u => u.WorkingFace.WorkingFaceId));
+                        .Select(u => u.Id));
 
                 foreach (var key in dzxlist.Keys)
                 {

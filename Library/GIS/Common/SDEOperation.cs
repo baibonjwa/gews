@@ -39,7 +39,7 @@ namespace GIS.Common
                 //Type factoryType = Type.GetTypeFromProgID("esriDataSourcesGDB.SdeWorkspaceFactory");
                 //IWorkspaceFactory workspaceFactory = (IWorkspaceFactory)Activator.CreateInstance(factoryType);
 
-                ////通过IPropertySet设置通过SDE连接数据库的各种参数
+                //通过IPropertySet设置通过SDE连接数据库的各种参数
                 //IPropertySet propertySet = new PropertySetClass();
                 //propertySet.SetProperty("SERVER", "10.64.192.51");
                 //propertySet.SetProperty("SERVICE", "esri_sde");
@@ -47,14 +47,14 @@ namespace GIS.Common
                 ////propertySet.SetProperty("Instance", "port:5151");
                 //propertySet.SetProperty("DATABASE", "GasEarlyWarningGIS");
                 //propertySet.SetProperty("USER", "sde");
-                //propertySet.SetProperty("PASSWORD", "sde");   
+                //propertySet.SetProperty("PASSWORD", "sde");
                 //propertySet.SetProperty("VERSION", "sde.DEFAULT");
 
                 ////通过以上设置的参数将数据库的数据通过SDE读入工作空间
                 //IWorkspace workspace = workspaceFactory.Open(propertySet, 0);
                 IWorkspace workspace = null;
 
-                ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap,"默认_点");
+                ILayer pLayer = DataEditCommon.GetLayerByName(DataEditCommon.g_pMap, "默认_点");
                 IFeatureLayer pFeatureLayer = (IFeatureLayer)pLayer;
                 IFeatureClass pFeatureClass = pFeatureLayer.FeatureClass;
                 IDataset pDataset = (IDataset)pFeatureClass;
@@ -63,8 +63,6 @@ namespace GIS.Common
                 //workspace = workspaceFactory.Open(ConnectSDE(true), 0);
                 return workspace;
 
-
-                
                 //return GetSDEWorkspace();
             }
             catch (Exception ex)

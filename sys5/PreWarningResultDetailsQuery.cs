@@ -420,6 +420,7 @@ namespace sys5
                 _fpPreWarningResultDetials.ActiveSheet.Rows.Remove(FROZEN_ROW_COUNT, 1);
             }
 
+            warningResultDetails = EarlyWarningDetail.FindAllByProperty("EarlyWarningResult.Gas", 1);
             warningResultDetails = EarlyWarningDetail.FindAllByMutiCondition(workingFaceId,
                 dateTime, shift, warningResult, warningType, ruleType);
             // 向farpoint spread中添加数据。
@@ -719,12 +720,11 @@ namespace sys5
                 if (ent.IsSingleRule())
                 {
                     var singleRule = ent.GetSingleRulesResultEnt();
-                    ruleEnt =
-                        PreWarningResultDetailsQueryBLL.GetPreWarningRulesEntityByRuleId(singleRule.SingleRuleCodeID);
+                    ruleEnt = PreWarningRules.Find(singleRule.SingleRuleCodeID);
                 }
                 else
                 {
-                    ruleEnt = PreWarningResultDetailsQueryBLL.GetPreWarningRulesEntityByRuleId(ent.MultiRuleCodeID);
+                    ruleEnt = PreWarningRules.Find(ent.MultiRuleCodeID);
                 }
 
                 if (ruleEnt.RuleType == WarningReasonItems.瓦斯.ToString())
