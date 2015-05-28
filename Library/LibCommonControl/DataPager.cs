@@ -26,7 +26,7 @@ namespace LibCommonControl
         // 数据总件数
         private int _RecordCount = 0;
         // 每页显示数据件数
-        private int _PageSize = 0;
+        public int PageSize;
         // 总共页数
         private int _TotalPages = 0;
         // 当前显示页数
@@ -83,17 +83,17 @@ namespace LibCommonControl
                     // 初期时
                     if (this.cboPageSize.Text == "")
                     {
-                        this._PageSize = _DefaultDisplayCount;
+                        this.PageSize = _DefaultDisplayCount;
                         this.cboPageSize.Text = _DefaultDisplayCount.ToString();
                     }
                     else
                     {
                         // 获取每页显示件数
-                        this._PageSize = Convert.ToInt32(this.cboPageSize.Text);
+                        this.PageSize = Convert.ToInt32(this.cboPageSize.Text);
                     }
 
                     // 计算出总页数
-                    this._TotalPages = (int)Math.Ceiling((decimal)(iRecordCount / (decimal)this._PageSize));
+                    this._TotalPages = (int)Math.Ceiling((decimal)(iRecordCount / (decimal)this.PageSize));
                     // 设置总页数
                     this.lblTotalPages.Text = _TotalPages.ToString();
                 }
@@ -367,8 +367,8 @@ namespace LibCommonControl
             this.btnFirstPage.Enabled = true;
 
             // <当前显示页数>文本框设为最大页数
-            this.txtCurrentPage.Text = _PageSize.ToString();
-            this._CurrentPage = _PageSize;
+            this.txtCurrentPage.Text = PageSize.ToString();
+            this._CurrentPage = PageSize;
 
             // 调用委托事件
             FrmChild_EventHandler(this);
@@ -403,17 +403,17 @@ namespace LibCommonControl
                 // 初期时
                 if (this.cboPageSize.Text == "")
                 {
-                    this._PageSize = _DefaultDisplayCount;
+                    this.PageSize = _DefaultDisplayCount;
                     this.cboPageSize.Text = _DefaultDisplayCount.ToString();
                 }
                 else
                 {
                     // 获取每页显示件数
-                    this._PageSize = Convert.ToInt32(this.cboPageSize.Text);
+                    this.PageSize = Convert.ToInt32(this.cboPageSize.Text);
                 }
 
                 // 计算出总页数
-                this._TotalPages = (int)Math.Ceiling((decimal)(_RecordCount / (decimal)this._PageSize));
+                this._TotalPages = (int)Math.Ceiling((decimal)(_RecordCount / (decimal)this.PageSize));
                 // 设置总页数
                 this.lblTotalPages.Text = this._TotalPages.ToString();
             }
@@ -460,7 +460,7 @@ namespace LibCommonControl
             }
 
             // 调用委托事件
-            FrmChild_EventHandler(this);
+            //FrmChild_EventHandler(this);
         }
         #endregion
 
@@ -495,17 +495,17 @@ namespace LibCommonControl
                 // 初期时
                 if (this.cboPageSize.Text == "")
                 {
-                    this._PageSize = _DefaultDisplayCount;
+                    this.PageSize = _DefaultDisplayCount;
                     this.cboPageSize.Text = _DefaultDisplayCount.ToString();
                 }
                 else
                 {
                     // 获取每页显示件数
-                    this._PageSize = Convert.ToInt32(this.cboPageSize.Text);
+                    this.PageSize = Convert.ToInt32(this.cboPageSize.Text);
                 }
 
                 // 计算出总页数
-                this._TotalPages = (int)Math.Ceiling((decimal)(_RecordCount / (decimal)_PageSize));
+                this._TotalPages = (int)Math.Ceiling((decimal)(_RecordCount / (decimal)PageSize));
                 // 设置总页数
                 this.lblTotalPages.Text = _TotalPages.ToString();
             }

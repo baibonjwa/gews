@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Castle.ActiveRecord;
 using NHibernate.Criterion;
 
@@ -99,12 +100,15 @@ namespace LibEntity
         public static EarlyWarningResult[] FindAllByDateTimeAndWorkingfaceName(DateTime startTime, DateTime endTime,
             string workingFaceName)
         {
-            var criterion = new ICriterion[]
+            var criterion = new List<ICriterion>
             {
                 Restrictions.Between("DateTime", startTime, endTime),
-                Restrictions.Eq("WorkingFace.WorkingFaceName",workingFaceName)
             };
-            return FindAll(criterion);
+            if (!string.IsNullOrWhiteSpace(workingFaceName))
+            {
+                criterion.Add(Restrictions.Eq("WorkingFace.WorkingFaceName", workingFaceName));
+            }
+            return FindAll(criterion.ToArray());
         }
     }
 }

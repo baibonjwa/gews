@@ -779,13 +779,13 @@ namespace LibBusiness
                     PreWarningResultDBConstNames.WARNING_RESULT);
 
             //过滤绿色的预警结果
-            if (ent.OverLimitWarningResult.WarningResult >=
-                (int) WarningResult.GREEN &&
-                ent.OutBrustWarningResult.WarningResult >=
-                (int) WarningResult.GREEN)
-            {
-                return;
-            }
+            //if (ent.OverLimitWarningResult.WarningResult >=
+            //    (int) WarningResult.GREEN &&
+            //    ent.OutBrustWarningResult.WarningResult >=
+            //    (int) WarningResult.GREEN)
+            //{
+            //    return;
+            //}
 
             if (warningRorY == "红色预警")
             {

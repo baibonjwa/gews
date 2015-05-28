@@ -7,7 +7,7 @@ using NHibernate.Criterion;
 
 namespace LibEntity
 {
-    [ActiveRecord("T_EARLY_WARNING_DETAIL")]
+    [ActiveRecord("T_EARLY_WARNING_DETAIL", Lazy = false)]
     public class EarlyWarningDetail : ActiveRecordBase<EarlyWarningDetail>
     {
         [PrimaryKey(PrimaryKeyType.Identity, "ID")]
@@ -75,6 +75,16 @@ namespace LibEntity
             foreach (var i in warningId)
             {
                 criterion.Add(Restrictions.Eq("EarlyWarningResult.Id", i));
+            }
+            return FindAll(criterion);
+        }
+
+        public static EarlyWarningDetail[] FindAllByWarningId(string[] warningId)
+        {
+            var criterion = new Disjunction();
+            foreach (var i in warningId.Where(i => !string.IsNullOrWhiteSpace(i)))
+            {
+                criterion.Add(Restrictions.Eq("EarlyWarningResult.Id", Convert.ToInt32(i)));
             }
             return FindAll(criterion);
         }

@@ -89,8 +89,7 @@ namespace sys5
         /// <param name="sOutWarningType">预警类型</param>
         /// <param name="sOutWarningItem">预警项目：瓦斯/地质构造/煤层赋存/通风/管理</param>
         /// <param name="isHistory"></param>
-        public PreWarningResultDetailsQuery(WorkingFace workingFace, DateTime dateTime, string shift,
-            int warningResult, string warningType,
+        public PreWarningResultDetailsQuery(string warningId, WorkingFace workingFace, DateTime dateTime, string shift, int warningType,
             string ruleType, bool isHistory)
         {
             InitializeComponent();
@@ -123,8 +122,7 @@ namespace sys5
             //LoadWarningResultDetail(sOutTunnelId,
             //            sOutWorkface, sOutDate, sOutShift,
             //            sOutWarningResult, sOutWarningType, sOutWarningItem);
-            LoadWarningResultDetail(workingFace.WorkingFaceId, dateTime, shift,
-                warningResult, warningType, ruleType);
+            LoadWarningResultDetail(warningId, warningType, ruleType);
 
 
             _txtDateShift.Text = shift; // 班次
@@ -404,8 +402,7 @@ namespace sys5
         /// <summary>
         ///     加载预警详细信息
         /// </summary>
-        private void LoadWarningResultDetail(int workingFaceId, DateTime dateTime, string shift,
-            int warningResult, string warningType,
+        private void LoadWarningResultDetail(string warningId, int warningType,
             string ruleType)
         {
             //测试代码耗时
@@ -420,9 +417,16 @@ namespace sys5
                 _fpPreWarningResultDetials.ActiveSheet.Rows.Remove(FROZEN_ROW_COUNT, 1);
             }
 
-            warningResultDetails = EarlyWarningDetail.FindAllByProperty("EarlyWarningResult.Gas", 1);
-            warningResultDetails = EarlyWarningDetail.FindAllByMutiCondition(workingFaceId,
-                dateTime, shift, warningResult, warningType, ruleType);
+            var warningList = warningId.Split(';');
+
+            warningResultDetails = EarlyWarningDetail.FindAllByWarningId(warningList);
+
+
+
+            warningResultDetails = warningResultDetails.Where(
+                u => u.PreWarningRules.RuleType == ruleType && u.EarlyWarningResult.WarningType == warningType).ToArray();
+            //warningResultDetails = EarlyWarningDetail.FindAllByMutiCondition(workingFaceId,
+            //    dateTime, shift, warningResult, warningType, ruleType);
             // 向farpoint spread中添加数据。
             foreach (var t in warningResultDetails)
             {

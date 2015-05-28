@@ -292,7 +292,7 @@ namespace LibCommon
         地质构造 = 2,
         通风 = 3,
         管理因素 = 4,
-        其他 = 5
+        //其他 = 5
     }
 
     /// <summary>
