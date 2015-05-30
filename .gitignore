@@ -14,6 +14,7 @@ x64/
 build/
 [Bb]in/
 [Oo]bj/
+packages/
 
 # MSTest test Results
 [Tt]est[Rr]esult/
@@ -80,3 +81,5 @@ sys6/ARConfig.xml
 sys6/Config.ini
 sys6/ConfigDatabaseGIS.ini
 sys6/default.mxd
+
+
